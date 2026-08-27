@@ -1,0 +1,14 @@
+\begin{lemma}
+For every edge restriction $G|F$,
+$\lceil\Gamma(G|F)\rceil\le\lceil\Gamma(G)\rceil$.
+\end{lemma}
+\begin{proof}
+Let $U$ be any eligible odd vertex set.  By
+\noderef{RestrictEdges}, forgetting the subtype witness injects the internal
+edges $E_{G|F}(U)$ into $E_G(U)$ and preserves their endpoint pairs.
+Consequently $|E_{G|F}(U)|\le |E_G(U)|$.  The common denominator
+$|U|-1$ is positive, so the density value of $U$ in $G|F$ is no larger than
+its value in $G$.  Taking the maximum over the same eligible vertex sets in
+\noderef{Density} yields $\Gamma(G|F)\le\Gamma(G)$.  Monotonicity of the
+natural ceiling from \noderef{DensityCeil} gives the asserted inequality.
+\end{proof}

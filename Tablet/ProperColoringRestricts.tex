@@ -1,0 +1,13 @@
+\begin{lemma}
+If $\varphi$ is a proper partial $k$-edge-coloring of $G$ and $F\subseteq
+E(G)$, then its restriction $e\mapsto\varphi(e)$ to the retained edge
+identities is a proper partial $k$-edge-coloring of $G|F$.
+\end{lemma}
+\begin{proof}
+Let $e$ and $f$ be distinct adjacent edges of $G|F$ that are both colored.
+By \noderef{RestrictEdges}, their underlying edge identities are distinct
+edges of $G$ with unchanged endpoint pairs.  Thus their adjacency in $G|F$
+implies their adjacency in $G$.  The properness condition of
+\noderef{IsProperEdgeColoring} for $\varphi$ in $G$ now says that their
+colors differ, which is precisely properness of the restricted coloring.
+\end{proof}

@@ -1,0 +1,13 @@
+\begin{lemma}
+If $F\subseteq E(G)$, then
+$\chi'(G|F)\le\chi'(G)$.
+\end{lemma}
+\begin{proof}
+By \noderef{ChromaticIndexSpec}, choose a full proper
+$\chi'(G)$-edge-coloring $\varphi$ of $G$.  Its restriction to the retained
+edge identities is proper by \noderef{ProperColoringRestricts}; it is full
+because every retained edge was colored by $\varphi$.  Hence $G|F$ has a
+$\chi'(G)$-edge-coloring.  The minimality clause of
+\noderef{ChromaticIndexSpec}, applied to $G|F$, gives
+$\chi'(G|F)\le\chi'(G)$.
+\end{proof}

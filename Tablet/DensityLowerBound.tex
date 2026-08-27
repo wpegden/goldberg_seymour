@@ -1,0 +1,23 @@
+\begin{lemma}
+Every finite multigraph $G$ satisfies
+$\lceil\Gamma(G)\rceil\le\chi'(G)$.
+\end{lemma}
+\begin{proof}
+Let $k=\chi'(G)$ and take a full proper $k$-edge-coloring from
+\noderef{ChromaticIndexSpec}.  Fix an eligible odd vertex set $U$ of size
+$n$.  Within $E_G(U)$, the edges of any fixed color form a matching: if two
+distinct edges of that color shared a vertex, they would be adjacent and
+properness would be violated.  A matching on the odd set $U$ covers two
+vertices per edge and therefore has at most $(n-1)/2$ edges.  Summing this
+bound over all $k$ color classes counts every edge of $E_G(U)$ exactly once
+and gives
+\[
+  2|E_G(U)|\le k(n-1).
+\]
+Because $n\ge3$, division by the positive number $n-1$ yields
+$2|E_G(U)|/(n-1)\le k$.  This holds for every eligible $U$, while the
+adjoined degenerate value $0$ is also at most $k$.  Taking the maximum in
+\noderef{Density} gives $\Gamma(G)\le k$.  Since $k$ is a natural number,
+the least natural upper bound in \noderef{DensityCeil} satisfies
+$\lceil\Gamma(G)\rceil\le k=\chi'(G)$.
+\end{proof}

@@ -1,0 +1,16 @@
+\begin{lemma}
+Every finite multigraph $G$ with
+$\chi'(G)\ge\Delta(G)+2$ is elementary.
+\end{lemma}
+\begin{proof}
+Choose from \noderef{CriticalCoreExists} an edge restriction $H=G|F$ that
+is critical and satisfies $\chi'(H)=\chi'(G)$.  By
+\noderef{MaximumDegreeRestrict}, $\Delta(H)\le\Delta(G)$.  Therefore
+\[
+ \chi'(H)=\chi'(G)\ge\Delta(G)+2\ge\Delta(H)+2.
+\]
+The critical theorem \noderef{ThmGS2} applies to $H$ and shows that $H$ is
+elementary.  Finally \noderef{ElementaryTransfer}, using the equality of
+chromatic indices supplied by the critical core, transfers elementariness
+from $H$ to $G$.
+\end{proof}

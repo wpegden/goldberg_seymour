@@ -1,0 +1,19 @@
+\begin{theorem}[Goldberg--Seymour]
+Every multigraph $G$ satisfies
+\[
+  \chi'(G)\le
+  \max\{\Delta(G)+1,\lceil\Gamma(G)\rceil\}.
+\]
+\end{theorem}
+\begin{proof}
+Let $G$ be a finite loopless multigraph.  If
+$\chi'(G)\le\Delta(G)+1$, then the desired inequality follows because
+$\Delta(G)+1$ is one of the two entries in the displayed maximum.
+
+Otherwise the integrality of the chromatic index gives
+$\chi'(G)\ge\Delta(G)+2$.  By
+\noderef{GeneralHighIndexElementary}, $G$ is elementary, so
+$\chi'(G)=\lceil\Gamma(G)\rceil$.  The latter number is the other entry in
+the displayed maximum, and the desired inequality follows in this case as
+well.  The two cases exhaust all natural-number values of $\chi'(G)$.
+\end{proof}

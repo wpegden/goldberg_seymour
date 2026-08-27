@@ -1,0 +1,14 @@
+\begin{lemma}
+Every finite loopless multigraph has a proper $k$-edge-coloring for some
+natural number $k$.
+\end{lemma}
+\begin{proof}
+Let $E$ be the finite edge set and take $k=|E|$.  Choose a bijection from
+$E$ to $[k]$ and give each edge its image under this bijection.  Every edge
+is colored, so the coloring is full in the sense of
+\noderef{IsFullEdgeColoring}.  If two distinct adjacent edges had the same
+color, injectivity of the chosen bijection would make the edge identities
+equal, a contradiction.  Thus the coloring is proper by
+\noderef{IsProperEdgeColoring}, and it witnesses the assertion of
+\noderef{HasKEdgeColoring}.
+\end{proof}

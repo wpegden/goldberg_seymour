@@ -1,0 +1,14 @@
+\begin{lemma}
+For every edge restriction $G|F$,
+$\Delta(G|F)\le\Delta(G)$.
+\end{lemma}
+\begin{proof}
+Fix a vertex $v$.  By \noderef{RestrictEdges}, the edges of $G|F$ incident
+with $v$ are retained edge identities whose endpoint pairs are unchanged.
+Forgetting the subtype witness is an injection from that incident-edge set
+into the set of edges of $G$ incident with $v$.  Hence
+$d_{G|F}(v)\le d_G(v)$.  Taking the maximum over the common vertex type in
+\noderef{MaximumDegree} proves
+$\Delta(G|F)\le\Delta(G)$, including the empty-vertex case where both sides
+use the value $0$.
+\end{proof}

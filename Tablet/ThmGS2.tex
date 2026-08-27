@@ -1,0 +1,25 @@
+\begin{theorem}[Critical Goldberg--Seymour theorem]
+Every critical multigraph $G$ with
+$\chi'(G)\ge\Delta(G)+2$ is elementary.
+\end{theorem}
+\begin{proof}
+Put $k=\chi'(G)-1$.  Criticality supplies, for each edge $e$, a proper
+$k$-edge-coloring of $G-e$.  Starting from such a colored edge deletion, the
+paper constructs a maximal Tashkinov series and its terminal extended
+Tashkinov tree.  The construction separates according to the order of the
+initial Tashkinov tree.  If that order is at most $10$, Scheide's theorem
+makes $G$ elementary.  Otherwise the six assertions of the paper's technical
+theorem apply successively along the rungs: the extension rules, extension
+base, interchangeability, and connecting-color control are established
+under the complete lower-rung package; good hierarchies then make the current
+tree elementary; and the final interchange argument closes the package.
+Strong induction therefore gives all six assertions at every rung.
+
+Apply that package to a lexicographically maximal finite Tashkinov series.
+Its terminal extended Tashkinov tree is elementary.  If a defective boundary
+color remained, the well-defined extension rule would produce a strictly
+larger admissible series, contrary to maximality; hence the terminal tree is
+strongly closed.  The elementary/strongly-closed characterization for a
+critical graph with $\chi'(G)=k+1$ and $k\ge\Delta(G)+1$ now yields
+$\chi'(G)=\lceil\Gamma(G)\rceil$.  Thus $G$ is elementary.
+\end{proof}

@@ -1,0 +1,18 @@
+\begin{lemma}
+Every finite multigraph $G$ has an edge restriction $H=G|F$ such that
+$\chi'(H)=\chi'(G)$ and $H$ is critical.
+\end{lemma}
+\begin{proof}
+Consider all subsets $F\subseteq E(G)$ for which
+$\chi'(G|F)=\chi'(G)$.  This finite family is nonempty because it contains
+$E(G)$.  Choose a member $F$ of minimum cardinality and put $H=G|F$.
+The chosen equality gives $\chi'(H)=\chi'(G)$.
+
+Let $e$ be an edge identity of $H$.  Deleting $e$ gives, up to the canonical
+identification of retained edge identities, the restriction
+$G|(F\setminus\{e\})$.  By \noderef{ChromaticIndexRestrict}, its chromatic
+index is at most $\chi'(H)$.  Equality would put
+$F\setminus\{e\}$ in the chosen family, contradicting its strictly smaller
+cardinality.  Thus $\chi'(H-e)<\chi'(H)$ for every edge $e$ of $H$, which is
+exactly criticality according to \noderef{Critical}.
+\end{proof}

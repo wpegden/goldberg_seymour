@@ -1,0 +1,18 @@
+\begin{lemma}
+Let $H=G|F$ be an edge restriction with $\chi'(H)=\chi'(G)$.  If $H$ is
+elementary, then $G$ is elementary.
+\end{lemma}
+\begin{proof}
+By \noderef{DensityLowerBound},
+$\lceil\Gamma(G)\rceil\le\chi'(G)$.  The assumed equality of chromatic
+indices and elementariness in \noderef{Elementary} give
+$\chi'(G)=\chi'(H)=\lceil\Gamma(H)\rceil$.  Finally,
+\noderef{DensityMonotone} gives
+$\lceil\Gamma(H)\rceil\le\lceil\Gamma(G)\rceil$.  Combining these relations,
+\[
+ \lceil\Gamma(G)\rceil\le\chi'(G)=\chi'(H)
+ =\lceil\Gamma(H)\rceil\le\lceil\Gamma(G)\rceil.
+\]
+Both inequalities are equalities, so
+$\chi'(G)=\lceil\Gamma(G)\rceil$; hence $G$ is elementary.
+\end{proof}
