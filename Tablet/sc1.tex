@@ -22,17 +22,25 @@ tree-incidence, tree-missing colors, and stability in
 Assume first $(i')$.  Its case in which
 $\varphi(f)\in\overline\varphi(T)\cup C$ is exactly condition (i) of
 stability.  We prove condition (ii).  Fix $v\in V(T)$.  Because both
-colorings are proper and leave exactly $e_0$ uncolored, their numbers of
-colored edges incident with $v$ are equal: this number is $d_G(v)$ if
-$e_0$ is not incident with $v$, and $d_G(v)-1$ if it is.  In a proper
-coloring, incident colored edges have pairwise distinct colors.  Hence the
-two present-color sets at $v$ have equal cardinality, and so do their
-complements in $[k]$, the missing-color sets of \noderef{MissingColors}.
+colorings leave exactly the same edge $e_0$ uncolored,
+\noderef{IsOneEdgeUncolored} says that each coloring colors every edge
+identity incident with $v$ except $e_0$ when $e_0$ is incident with $v$.
+By \noderef{Degree}, $d_G(v)$ is the number of incident edge identities.
+Thus each coloring colors $d_G(v)$ incident edges if $e_0$ is not incident
+with $v$, and $d_G(v)-1$ incident edges if it is.  By properness,
+\noderef{IsProperEdgeColoring} says that distinct incident colored edges
+have distinct colors.  Therefore the definition in \noderef{PresentColors}
+identifies each present color at $v$ with exactly one of those colored
+incident edges.  The two present-color sets at $v$ consequently have equal
+cardinality, and so do their complements in $[k]$, the missing-color sets
+of \noderef{MissingColors}.
 
 If those two missing-color sets were unequal, equal cardinality would give
 a color $c$ which is missing under $\varphi$ but present under $\pi$ at
-$v$.  Choose an incident edge $f$ with $\pi(f)=c$.  The edge $f$ is
-incident with $T$, and $c\in\overline\varphi(v)$ implies
+$v$.  By \noderef{PresentColors}, the fact that $c$ is present under
+$\pi$ supplies an edge identity $f$ incident with $v$ such that
+$\pi(f)=c$.  The edge $f$ is incident with $T$, and
+$c\in\overline\varphi(v)$ implies
 $c\in\overline\varphi(T)$.  Condition $(i')$ therefore gives
 $\varphi(f)=\pi(f)=c$, contradicting that $c$ is missing under $\varphi$
 at $v$.  Thus the missing-color sets agree at every vertex of $T$, proving
@@ -45,11 +53,13 @@ $c\in\overline\varphi(T)\cup C$, and suppose for contradiction that
 $\varphi(f)\ne c$.  Choose an end $v\in V(T)$ of $f$.  Stability condition
 (ii) makes the present-color sets of $\varphi$ and $\pi$ equal at $v$.
 Since $c$ is present under $\pi$, it is present under $\varphi$, so some
-edge $g$ incident with $v$ satisfies $\varphi(g)=c$.  Our supposition makes
-$g\ne f$.  The edge $g$ is incident with $T$ and its $\varphi$-color $c$
-lies in $\overline\varphi(T)\cup C$; stability condition (i) therefore
-gives $\pi(g)=\varphi(g)=c$.  The distinct adjacent edges $f,g$ now both
-have color $c$ under $\pi$, contradicting the properness condition of
+edge $g$ incident with $v$ satisfies $\varphi(g)=c$, by
+\noderef{PresentColors}.  Our supposition makes $g\ne f$.  The edge $g$ is
+incident with $T$ and its $\varphi$-color $c$ lies in
+$\overline\varphi(T)\cup C$; stability condition (i) therefore gives
+$\pi(g)=\varphi(g)=c$.  The distinct edges $f$ and $g$ share the vertex
+$v$, so they are adjacent by \noderef{AdjacentEdges}.  They now both have
+color $c$ under $\pi$, contradicting the properness condition of
 \noderef{IsProperEdgeColoring}.  Hence $\pi(f)=\varphi(f)$.  Combining the
 two cases proves $(i')$ and the equivalence.
 \end{proof}

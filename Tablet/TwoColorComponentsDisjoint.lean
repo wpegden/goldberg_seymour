@@ -8,4 +8,10 @@ theorem TwoColorComponentsDisjoint {V E : Type*} (G : LooplessMultigraph V E)
       Disjoint (TwoColorComponent G phi alpha beta z)
         (TwoColorComponent G phi alpha beta w) := by
 -- BODY
-  sorry
+  classical
+  let H := TwoColorIncidenceGraph G phi alpha beta
+  by_cases h : H.connectedComponentMk z = H.connectedComponentMk w
+  · left
+    simpa [TwoColorComponent, H, h]
+  · right
+    exact SimpleGraph.pairwise_disjoint_supp_connectedComponent H h

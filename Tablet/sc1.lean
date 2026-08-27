@@ -1,6 +1,9 @@
+import Tablet.AdjacentEdges
+import Tablet.Degree
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.MissingColors
+import Tablet.PresentColors
 import Tablet.StableColoring
 import Tablet.TreeIncidentEdge
 import Tablet.TreeMissingColors
