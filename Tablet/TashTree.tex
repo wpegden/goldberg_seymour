@@ -1,0 +1,231 @@
+\begin{theorem}[Tashkinov's theorem]
+Let $(G,e,\varphi)$ be a $k$-triple and let $T$ be a Tashkinov tree with
+respect to $e$ and $\varphi$.  Then $V(T)$ is elementary with respect to
+$\varphi$.
+\end{theorem}
+\begin{proof}
+We use the exact notions of a $k$-triple, tree-sequence, Tashkinov tree, and
+tree vertex set from \noderef{KTriple}, \noderef{TreeSequence},
+\noderef{TashkinovTree}, and \noderef{TreeSequenceVertexSet}; elementariness
+means \noderef{ColoredVertexSetElementary}, with missing colors as in
+\noderef{MissingColors}.  Write
+\[
+ T=(y_0,e_1,y_1,\ldots,e_n,y_n),\qquad e_1=e.
+\]
+The edge identities and vertices displayed here are pairwise distinct by the
+tree-sequence data, so no step below identifies parallel edges merely because
+their endpoints agree.
+
+We first record the coloring facts used in the argument.  In a proper partial
+coloring leaving just $e$ uncolored, the edges of any two fixed colors form
+components which are paths, even cycles, or isolated vertices: properness
+gives degree at most two, with at most one incident edge of either color at
+each vertex.  Swapping the two colors on one component preserves properness.
+At an internal vertex of a path the two incident colors are merely exchanged;
+at an end, the unique incident one becomes the other color; and no edge
+outside the component changes.  We call this a Kempe interchange.  A global
+permutation of the color names also preserves properness and every
+Tashkinov-witness relation.
+
+The two ends $y_0,y_1$ of $e$ each miss at least two colors: after $e$ is
+uncolored, at most $\Delta(G)-1$ colors are present there, while
+$k\geq\Delta(G)+1$.  Every other vertex misses at least one color, since at
+most $\Delta(G)$ colors are present.  Also $G$ has no proper full
+$k$-edge-coloring, because the $k$-triple equality is
+$\chi'(G)=k+1$.
+
+Suppose, for a contradiction, that the theorem fails.  Among all proper
+partial $k$-edge-colorings of $G$ leaving $e$ uncolored and all non-elementary
+Tashkinov trees for those colorings, choose a pair $(\varphi,T)$ of minimum
+rank as follows.  For a displayed tree-sequence
+$S=(z_0,f_1,z_1,\ldots,f_m,z_m)$, let $\rho(S)$ be the least
+$r\in\{1,\ldots,m\}$ for which the suffix
+$z_r,f_{r+1},z_{r+1},\ldots,f_m,z_m$ is a path in the displayed order; the
+choice $r=m$ always works.  Order pairs lexicographically by
+$(\rho(S),m)$.  The natural numbers are well ordered, so a minimum-rank bad
+pair exists.  Put $q=\rho(T)$.
+
+Every proper prefix $T_j=(y_0,e_1,y_1,\ldots,e_j,y_j)$ is elementary;
+otherwise it would be a bad Tashkinov tree of smaller rank.  It is still a
+Tashkinov tree because every edge and every earlier missing-color witness in
+the prefix is inherited from $T$.  The same prefix conclusion remains true
+after any recoloring that preserves $T$ as a bad Tashkinov tree with the same
+rank.
+
+We need two consequences of this minimality.
+
+First, every proper prefix $T_j$ has at least four colors which are missing
+on $V(T_j)$ and unused on its colored tree edges $e_2,\ldots,e_j$.  Indeed,
+the lower bounds above give at least
+\[
+  2+2+(j-1)=j+3
+\]
+missing-color incidences on its $j+1$ vertices.  Prefix elementariness makes
+all those colors distinct.  Only $j-1$ colored tree edges occur, so at most
+$j-1$ of the missing colors are used on them.  At least four remain unused.
+
+Second, consider $i<j<n$ and distinct colors $\alpha,\beta$ such that
+$\alpha$ is missing at $y_i$, $\beta$ is missing at $y_j$, and neither
+color is used on $e_2,\ldots,e_j$.  The $(\alpha,\beta)$-component through
+$y_j$ is a path ending at $y_i$.  To prove this, observe first that $y_j$
+has degree at most one in this two-colored component because it misses
+$\beta$.  If the other end were not $y_i$, interchange the two colors on
+the component.  The color $\alpha$ would then be missing at both $y_i$ and
+$y_j$, while no tree edge or witness in $T_j$ changes.  This would make the
+proper prefix $T_j$ non-elementary, a contradiction.  Thus the other end is
+$y_i$.
+
+After interchanging on this path, the missing statuses of $\alpha$ and
+$\beta$ are exchanged at $y_i,y_j$ and unchanged at every other tree
+vertex.  Edges through $T_j$ do not change.  A later tree edge with a color
+outside $\{\alpha,\beta\}$ keeps its witness.  If a later witness in those
+two colors is lost at one of $y_i,y_j$, the other vertex supplies the
+witness; both precede that later edge.  If the later edge itself changes
+color, $y_i$ or $y_j$ supplies the corresponding new witness.  Hence $T$
+remains Tashkinov.  The multiplicity with which either color is missing on
+$V(T)$ is unchanged, so $T$ remains non-elementary and has the same rank.
+We call this operation a controlled interchange.  Notice also that a
+two-colored path cannot have three distinct vertices at which one of its two
+colors is missing: each would have degree at most one, but a path has only
+two ends.
+
+We next show $q>2$.  If $n=1$, non-elementariness gives a color missing at
+both ends of $e$; assigning that color to $e$ would give a full proper
+$k$-edge-coloring, impossible.  Thus $n\geq2$.  If $q\leq2$, exchange the
+names of $y_0,y_1$ if necessary; then the whole displayed sequence is a
+path.  Since $T_{n-1}$ is elementary but $T$ is not, some color $\beta$ is
+missing at $y_n$ and an earlier $y_i$.  If $i<n-1$, choose a color
+$\gamma$ missing at $y_{i+1}$.  Both are unused on $T_{i+1}$.  For
+$\gamma$, any earlier use would have a still earlier Tashkinov witness and
+would contradict prefix elementariness.  For $\beta$, the only possible
+witness is $y_i$, and the only new candidate edge is $e_{i+1}$, which cannot
+have color $\beta$ because it is incident with the $\beta$-missing vertex
+$y_i$.  A controlled interchange moves the missing color $\beta$ from
+$y_i$ to $y_{i+1}$ and leaves it missing at $y_n$, the latter because a
+two-colored path has only two ends.  Repetition makes $\beta$ missing at
+both $y_{n-1}$ and $y_n$.  Recolor $e_n$ with $\beta$, and let $\delta$ be
+its former color.  The Tashkinov condition supplies a vertex $y_j$ with
+$j\leq n-2$ missing $\delta$, while removal of color $\delta$ from $e_n$
+makes it missing also at $y_{n-1}$.  Thus $T_{n-1}$ is a shorter bad
+Tashkinov path, a contradiction.  Hence $q>2$.
+
+Because $T_{n-1}$ is elementary, every color repeated as a missing color on
+$T$ is missing at $y_n$ and at some earlier vertex.  We now treat three
+exhaustive cases.
+
+\textbf{Case 1: $q=n$.}
+Then $e_n$ does not join $y_{n-1}$ to $y_n$, for otherwise the path suffix
+would start before $y_n$ and $q<n$.  We put the coloring into three useful
+forms, always by controlled interchanges, so the minimum-rank conclusions
+remain valid.
+
+First, there is a color $\beta$ missing at $y_n$ and some $y_j$ with
+$j\leq n-2$, and unused on every tree edge.  Start with any repeated missing
+color $\beta$ at $y_j,y_n$.  The first consequence above, applied to
+$T_{n-2}$, gives four missing colors unused there.  The two remaining edges
+$e_{n-1},e_n$ use at most two of them, so choose a different color
+$\alpha$, missing at some $y_m$ with $m\leq n-2$, which is unused on all of
+$T$.  If $j=n-1$, prefix elementariness shows that $\beta$ is unused on
+$T_{n-1}$, and incidence with the $\beta$-missing $y_n$ shows it is not the
+color of $e_n$; a controlled interchange between $y_m$ and $y_{n-1}$ gives
+the claim.
+
+Suppose instead that $j\leq n-2$ and that $\beta$ is used.  Follow the
+maximal $(\alpha,\beta)$-chain from $y_n$.  If it first meets $T_{n-2}$ at
+$y_h$, append the chain segment from $y_h$ to $y_n$ to $T_{n-2}$.  Its
+internal vertices occur outside the prefix, and every appended edge has one
+of the two colors missing at the retained vertices $y_m,y_j$.  It is thus a
+bad Tashkinov tree whose path index is at most $n-1<q$, impossible.  The
+chain therefore avoids $T_{n-2}$.  Every tree edge has an end in this prefix,
+including $e_n$ because its earlier end is not $y_{n-1}$, so the chain
+contains no tree edge.  Interchange on the chain and then globally exchange
+the names $\alpha,\beta$.  Tree-edge colors and witnesses are preserved,
+and the resulting color called $\beta$ is missing at $y_m,y_n$ and unused
+on $T$.  This proves the first normal form.
+
+Second, if $\gamma=\varphi(e_n)$, then $\gamma$ is present at $y_{n-1}$.
+Otherwise the Tashkinov witness for $e_n$ and elementariness of $T_{n-1}$
+make $y_{n-1}$ the unique vertex of that prefix missing $\gamma$, so
+$\gamma$ is unused on $T_{n-1}$.  Apply a controlled
+$(\beta,\gamma)$-interchange between the earlier vertex missing the unused
+$\beta$ from the first normal form and $y_{n-1}$.  Its path cannot contain
+$y_n$, since $y_n$ misses $\beta$ and is incident with the
+$\gamma$-colored $e_n$, which would make it a third end.  Thus $e_n$ keeps
+color $\gamma$, while $\gamma$ becomes present at $y_{n-1}$.
+
+Third, some color is missing at $y_n$ and at a vertex of $T_{n-2}$.  Choose
+a repeated missing color $\beta'$ at $y_{j'},y_n$.  There is nothing to do
+if $j'\leq n-2$.  If $j'=n-1$, then $\beta'$ is unused on all of $T$ by
+prefix elementariness and its incidence with $y_n$.  Choose a different
+color $\alpha'$ missing on $T_{n-2}$ and unused on the whole tree, as in the
+first normal form.  A controlled interchange moves $\beta'$ from
+$y_{n-1}$ into $T_{n-2}$ without affecting its absence at $y_n$.  Neither
+color is $\gamma$, because $\gamma$ is used on $e_n$ and is present at
+$y_{n-1}$, so the second normal form remains true.
+
+Delete $y_{n-1}$ and $e_{n-1}$ from the displayed sequence but retain
+$e_n,y_n$ as its last pair.  Since $q=n$, the earlier end of $e_n$ lies in
+$T_{n-2}$, so this is a tree-sequence.  The second normal form says that the
+missing-$\gamma$ witness for $e_n$ is not $y_{n-1}$ and therefore remains
+in $T_{n-2}$.  The third normal form makes the shortened tree bad.  Its path
+index is at most $n-1<n=q$, contradicting minimality.
+
+\textbf{Case 2: $q<n$, and some color is missing at $y_n$ and at a vertex
+$y_i$ with $i\geq q$.}
+Let $\beta$ be such a color.  If $i<n-1$, choose $\gamma$ missing at
+$y_{i+1}$.  The suffix beginning at $y_q$ is a path, so $e_{i+1}$ joins
+$y_i$ and $y_{i+1}$.  The same prefix-elementarity argument used when
+proving $q>2$ shows that $\beta,\gamma$ are unused on $T_{i+1}$.  A
+controlled interchange advances the second missing occurrence of $\beta$
+from $y_i$ to $y_{i+1}$ without changing its absence at $y_n$.  Repetition
+makes $\beta$ missing at $y_{n-1},y_n$.  Recolor $e_n$ with $\beta$ and
+call its former color $\delta$.  Its earlier missing-color witness lies in
+$T_{n-2}$ because $\delta$ was present at the incident vertex $y_{n-1}$.
+After the recoloring, $\delta$ is missing also at $y_{n-1}$.  Hence
+$T_{n-1}$ is a bad Tashkinov tree of smaller rank, a contradiction.
+
+\textbf{Case 3: $q<n$, and no color missing at $y_n$ is missing at a
+vertex $y_i$ with $i\geq q$.}
+There is a repeated missing color $\beta$ at $y_n$ and a vertex $y_i$ with
+$i<q$.  We may arrange $i\leq q-2$.  If initially $i=q-1$, apply the
+four-unused-colors conclusion to $T_{q-2}$.  Even after allowing for
+$e_{q-1}$, choose a color $\alpha\ne\beta$ missing at some
+$y_m$, $m\leq q-2$, and unused on $T_{q-1}$.  Prefix elementariness also
+makes $\beta$ unused there.  A controlled interchange moves the earlier
+missing occurrence of $\beta$ to $y_m$.
+
+Choose $\gamma$ missing at $y_q$.  It is unused on $T_q$, since any use on
+a tree edge would have an earlier missing witness and violate prefix
+elementariness.  Moreover $\gamma\ne\beta$ by the defining assumption of
+this case.  Applying the four-unused-colors conclusion to $T_{q-2}$ and
+allowing for $e_{q-1},e_q$, choose a color $\varepsilon\ne\gamma$, missing
+at some $y_{m'}$ with $m'\leq q-2$, which is unused on $T_q$.
+
+If $\varepsilon$ is missing at $y_n$, a controlled
+$(\varepsilon,\gamma)$-interchange between $y_{m'}$ and $y_q$ moves that
+missing occurrence to $y_q$ while leaving it at $y_n$.  This is Case 2,
+already impossible.  Thus suppose $\varepsilon$ is present at $y_n$, so in
+particular $\varepsilon\ne\beta$.  Follow the maximal
+$(\varepsilon,\beta)$-chain from $y_n$.  If it first meets $T_{q-1}$ at
+$y_h$, append the chain segment from $y_h$ to $y_n$ to $T_{q-2}$ when
+$h\leq q-2$, and to $T_{q-1}$ when $h=q-1$.  In either case both alternating
+colors have missing witnesses in the retained prefix.  The resulting tree
+is bad because $\beta$ remains missing at the retained $y_i$ and at $y_n$,
+and its path index is at most $q-1$, a contradiction.
+
+The chain therefore avoids $T_{q-1}$.  Interchange
+$\varepsilon,\beta$ on it.  No edge of $T_q$ changes, because every such
+edge has an end in $T_{q-1}$.  Witnesses through $T_q$ are unchanged, and a
+later affected edge still has the earlier missing-$\beta$ witness at $y_i$
+or the earlier missing-$\varepsilon$ witness at $y_{m'}$.  The tree remains
+Tashkinov, and now $\varepsilon$ is missing at both $y_{m'}$ and $y_n$.
+The colors $\varepsilon,\gamma$ remain unused on $T_q$, with $\gamma$
+missing at $y_q$.  A controlled interchange between $y_{m'}$ and $y_q$
+therefore moves the repeated missing color to $y_q,y_n$, again reducing to
+the impossible Case 2.
+
+The three cases exhaust $q=n$ and $q<n$, and in the latter situation they
+exhaust whether a missing color of $y_n$ repeats at or after $y_q$.  Every
+case contradicts the minimum choice.  No bad pair exists, so the original
+$V(T)$ is elementary with respect to $\varphi$.
+\end{proof}

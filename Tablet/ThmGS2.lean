@@ -1,6 +1,10 @@
 import Tablet.Critical
 import Tablet.Elementary
 import Tablet.MaximumDegree
+import Tablet.TashTree
+import Tablet.TashkinovOrder
+import Tablet.TreeSequencePrefix
+import Tablet.egraph2
 
 -- [TABLET NODE: ThmGS2]
 theorem ThmGS2 {V E : Type*} [Fintype V] [Fintype E] [DecidableEq E]

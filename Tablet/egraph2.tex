@@ -1,0 +1,128 @@
+\begin{theorem}[Elementary-graph criterion]
+Let $G=(V,E)$ satisfy the paper's criticality convention, here expressed by
+the conjunction that deleting every edge lowers $\chi'(G)$ and that every
+vertex is incident with an edge.  Suppose that
+$\chi'(G)=k+1$ and $k\geq\Delta(G)+1$.  Then the following four conditions
+are equivalent:
+\begin{enumerate}
+\item[(i)] $G$ is elementary.
+\item[(ii)] For every edge identity $e\in E$ and every proper partial
+$k$-edge-coloring $\varphi$ which leaves exactly $e$ uncolored, the whole
+vertex set $V$ is elementary with respect to $\varphi$.
+\item[(iii)] There are an edge identity $e\in E$ and such a coloring
+$\varphi$ for which $V$ is elementary with respect to $\varphi$.
+\item[(iv)] There are an edge identity $e\in E$, such a coloring $\varphi$,
+and a set $X\subseteq V$ containing both ends of $e$, such that $X$ is both
+elementary and strongly closed with respect to $\varphi$.
+\end{enumerate}
+Equivalence means the conjunction
+$(\mathrm{i}\leftrightarrow\mathrm{ii})\land
+(\mathrm{ii}\leftrightarrow\mathrm{iii})\land
+(\mathrm{iii}\leftrightarrow\mathrm{iv})$.
+\end{theorem}
+\begin{proof}
+We use the definitions of criticality, chromatic index, density, and
+elementariness from \noderef{Critical}, \noderef{ChromaticIndex},
+\noderef{Density}, \noderef{DensityCeil}, and \noderef{Elementary}.  Missing
+colors and the three colored-set properties have the meanings fixed in
+\noderef{MissingColors}, \noderef{ColoredVertexSetElementary},
+\noderef{ColoredVertexSetClosed}, and
+\noderef{ColoredVertexSetStronglyClosed}.  Properness and the assertion that
+exactly $e$ is uncolored are those of \noderef{IsProperEdgeColoring} and
+\noderef{IsOneEdgeUncolored}.  We prove the implications cyclically.
+
+Assume (i).  Since $G$ is elementary and $\chi'(G)=k+1$, we have
+$\lceil\Gamma(G)\rceil=k+1$, and hence $\Gamma(G)>k$.  By the finite maximum
+in \noderef{Density}, there is an odd set $U$ of cardinality at least three
+with
+\[
+  2|E_G(U)|>k(|U|-1).                                      \tag{1}
+\]
+Every edge of $G$ has both ends in $U$.  Indeed, if an edge identity $f$
+were not internal to $U$, criticality would give
+$\chi'(G-f)<k+1$, hence a proper coloring of $G-f$ with at most $k$ colors.
+All edges of $E_G(U)$ would remain present.  Each color class is a matching
+on the odd set $U$, so it contains at most $(|U|-1)/2$ internal edges.
+Summing over at most $k$ colors would contradict (1).  Because every vertex
+is incident with an edge, the fact that all edges are internal to $U$ now
+implies $U=V$.
+
+Fix an edge $e$ and a proper partial $k$-edge-coloring $\varphi$ leaving
+exactly $e$ uncolored.  Put $n=|V|$ and $m=|E|$.  The preceding paragraph
+shows that $n$ is odd and (1) says $m>k(n-1)/2$.  Since $m$ is integral,
+$m-1\geq k(n-1)/2$.  On the other hand, the $m-1$ colored edges are
+partitioned into $k$ color classes, each a matching on the odd set $V$ and
+therefore of size at most $(n-1)/2$.  Thus
+\[
+  m-1=k(n-1)/2,
+\]
+and equality must hold in the bound for every color class.  Every color
+class consequently saturates exactly $n-1$ vertices and misses exactly one
+vertex.  No color can therefore be missing at two distinct vertices.  By
+\noderef{ColoredVertexSetElementary}, $V$ is elementary with respect to
+$\varphi$.  Since $e$ and $\varphi$ were arbitrary, (ii) follows.
+
+Assume (ii).  The equality $\chi'(G)=k+1$ implies that $E$ is nonempty:
+an edgeless graph has chromatic index zero.  Choose $e\in E$.  Criticality
+gives $\chi'(G-e)<k+1$, and hence $\chi'(G-e)\leq k$.  The existence part of
+\noderef{ChromaticIndexSpec}, applied to $G-e$, supplies a proper coloring
+with $\chi'(G-e)$ colors; regarding those colors as colors in $[k]$ and
+assigning the value ``uncolored'' only to $e$ gives a proper partial
+$k$-edge-coloring of $G$ leaving exactly $e$ uncolored.  Condition (ii)
+makes $V$ elementary for this choice.  This proves (iii).
+
+Assume (iii), witnessed by $e$ and $\varphi$, and take $X=V$.  Both ends of
+$e$ belong to $X$.  The boundary of the whole vertex set is empty, so the
+closure condition and the distinct-boundary-color condition are both
+vacuous.  Hence $X$ is strongly closed, while its elementariness is the
+hypothesis in (iii).  This proves (iv).
+
+Finally assume (iv), witnessed by $e$, $\varphi$, and $X$.  Let $x$ be one
+end of $e$.  The two ends are distinct by the loopless law in
+\noderef{LooplessMultigraph}.  Since $e$ is the only uncolored edge and is
+incident with $x$, at most $d_G(x)-1$ colors are present at $x$.  The bound
+$k\geq\Delta(G)+1$ therefore gives at least two colors missing at $x$.
+Choose one and call it $\alpha$.
+
+For a color $c$, let $m_c$ be the number of vertices of $X$ missing $c$, let
+$b_c$ be the number of boundary-edge identities of $X$ colored $c$, and let
+$a_c$ be the number of internal edges of $X$ colored $c$.  Counting
+incidences between vertices of $X$ and $c$-colored edges gives
+\[
+  2a_c+b_c=|X|-m_c.                                       \tag{2}
+\]
+Indeed, properness says that each vertex not missing $c$ has exactly one
+incident $c$-edge; an internal edge contributes two such incidences and a
+boundary edge one.  Because $X$ is elementary and $\alpha$ is missing at
+$x$, we have $m_\alpha=1$.  Because $X$ is closed, no boundary edge has
+color $\alpha$, so $b_\alpha=0$.  Equation (2) says
+$2a_\alpha=|X|-1$, and therefore $|X|$ is odd.  The set $X$ contains the
+two distinct ends of $e$, so its odd cardinality is at least three.
+
+Let $q$ be the number of colors missing somewhere on $X$.  Elementariness
+makes the missing-color sets at distinct vertices disjoint, so $q$ is the
+sum of their cardinalities.  Summing, over $X$, the identity ``number of
+missing colors equals $k$ minus colored degree'' and again counting internal
+incidences twice and boundary incidences once yields
+\[
+ q=k|X|-2|E_{G-e}(X)|-|\partial_G(X)|.                    \tag{3}
+\]
+The edge $e$ is internal to $X$, so it does not occur in the boundary and
+every boundary edge is colored.  Strong closure says that their colors are
+pairwise distinct, while closure says that none of those colors is among
+the $q$ colors missing on $X$.  Thus
+$|\partial_G(X)|\leq k-q$.  Substitution in (3) gives
+\[
+  2|E_{G-e}(X)|\geq k(|X|-1).
+\]
+Adding the internal uncolored edge $e$ gives
+\[
+  2|E_G(X)|>k(|X|-1).
+\]
+Since $X$ is an eligible odd set, \noderef{DensityValue} and
+\noderef{Density} imply $\Gamma(G)>k$, and hence
+$\lceil\Gamma(G)\rceil\geq k+1=\chi'(G)$.  The reverse inequality is
+\noderef{DensityLowerBound}.  Equality follows, so $G$ is elementary.
+This proves (iv)$\Rightarrow$(i) and completes all three asserted
+equivalences.
+\end{proof}
