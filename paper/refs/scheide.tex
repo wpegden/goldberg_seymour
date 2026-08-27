@@ -1,0 +1,1751 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{aliascnt}
+\usepackage[hidelinks,hypertexnames=false]{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\allowdisplaybreaks
+\setlength{\parindent}{1.3em}
+\setlength{\parskip}{0pt}
+\emergencystretch=2em
+
+\newtheorem{theorem}{Theorem}[section]
+\newaliascnt{proposition}{theorem}
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\newaliascnt{lemma}{theorem}
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\newaliascnt{corollary}{theorem}
+\newtheorem{corollary}[corollary]{Corollary}
+\aliascntresetthe{corollary}
+\theoremstyle{definition}
+\newaliascnt{definition}{theorem}
+\newtheorem{definition}[definition]{Definition}
+\aliascntresetthe{definition}
+\newaliascnt{remark}{theorem}
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+
+\newcommand{\Ccal}{\mathcal C}
+\newcommand{\Tcal}{\mathcal T}
+\newcommand{\Dcol}{\Gamma^{\mathrm d}}
+\newcommand{\Fcol}{\Gamma^{\mathrm f}}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\comp}{\mathbin{\setminus}}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\target}[1]{\texttt{#1}}
+\newcommand{\colset}{[k]}
+
+\hypersetup{
+  pdftitle={A complete dependency supplement for Scheide's small-Tashkinov-order theorem},
+  pdfauthor={ChatGPT}
+}
+
+\title{A Complete Dependency Supplement for Scheide's\\Small-Tashkinov-Order Theorem}
+\author{ChatGPT}
+\date{August 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note supplies the proof of the result cited as \target{ThmScheide} in
+Chen--Jing--Zang's Goldberg--Seymour manuscript~\cite{CJZ}:
+a critical multigraph with
+$\chi'(G)\ge \Delta(G)+2$ and Tashkinov order less than $11$ is elementary.
+The argument follows the dependency cone of Proposition~4.5 in Scheide's
+published article~\cite{S}. Numbering from Sections~2--4 of that article is
+retained whenever a result is reproduced, and the labels used in the
+formalization target are printed explicitly. Complete proofs are included
+for Scheide's Theorem~3.3, Propositions~3.4--3.6, and every later result in
+the dependency cone through Proposition~4.5. The only companion inputs are
+the elementary-graph criterion and Tashkinov's elementary-tree theorem,
+proved in the separately supplied file
+\texttt{selected\_results\_graph\_edge\_colouring.tex}. No later or
+stronger extended-Tashkinov-tree theorem is used.
+\end{abstract}
+
+\section*{Concordance with the formalization target}
+
+The accompanying source file
+\texttt{goldberg\_seymour\_trellis\_target.tex} uses the following labels.
+This note deliberately reuses them, so a text or source search finds the
+corresponding statement directly.
+
+\begin{center}
+\begin{tabular}{@{}lll@{}}
+\toprule
+Target label & Statement in this note & Source role \\
+\midrule
+\target{egraph2} & \Cref{egraph2} & elementary/strongly-closed criterion \\
+\target{TashTree} & \Cref{TashTree} & elementarity of Tashkinov trees \\
+\target{torder} & Definition on page~\pageref{torder} & Tashkinov order $t(G)$ \\
+\target{ThmScheide} & \Cref{ThmScheide} & the imported small-order theorem \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The target calls the last statement a theorem; in Scheide's article it is
+Proposition~4.5. Accordingly, \Cref{ThmScheide} below is displayed as
+``Proposition~4.5'' while carrying the exact target label
+\target{ThmScheide}. Bibliography keys are also chosen to agree with the
+target wherever possible: in particular, the original article is
+\verb|\bibitem{S}|, and the book and Tashkinov article are
+\verb|\bibitem{SSTF}| and \verb|\bibitem{T}|.
+
+The complete two-file dependency package is organized as follows. The
+separately supplied book extract proves the statements represented here by
+\Cref{egraph2,TashTree}; in that file they carry the searchable labels
+\texttt{thm:egraph2} and \texttt{thm:tashkinov}. Starting from those two
+results, the present note proves every remaining result used to derive
+\target{ThmScheide}, including Scheide's Theorem~3.3 and Propositions~3.5
+and~3.6. Thus the package has no additional theorem-level import in the
+Scheide dependency cone.
+
+\setcounter{section}{1}
+\section{Terminology and the elementary-graph criterion}
+
+All multigraphs are finite, loopless, and may have parallel edges. For a
+multigraph $G=(V,E)$ and $X,Y\subseteq V$, let $E_G(X,Y)$ be the set of edges
+with one end in $X$ and the other in $Y$. The boundary of $X$ is
+\[
+  \partial_G(X)=E_G(X,V\comp X).
+\]
+We suppress the subscript $G$ when the ambient graph is clear. The maximum
+degree is $\Delta(G)$.
+
+A proper $k$-edge-colouring of $G$ is a map $\varphi:E(G)\to\colset$ assigning
+different colours to adjacent edges. The set of such colourings is
+$\Ccal^k(G)$. For $v\in V$ and $X\subseteq V$, put
+\[
+ \varphi(v)=\set{\varphi(f):f\in E_G(v)},\qquad
+ \overline\varphi(v)=\colset\comp\varphi(v),\qquad
+ \overline\varphi(X)=\bigcup_{v\in X}\overline\varphi(v).
+\]
+The colours in $\overline\varphi(v)$ are missing at $v$. A set $X$ is
+\emph{elementary} with respect to $\varphi$ if the missing-colour sets of its
+distinct vertices are pairwise disjoint. It is \emph{closed} if
+\[
+ \varphi(\partial(X))\cap\overline\varphi(X)=\varnothing,
+\]
+and \emph{strongly closed} if it is closed and distinct edges of
+$\partial(X)$ receive distinct colours.
+
+For distinct colours $\alpha,\beta$, the components of the subgraph formed by
+the $\alpha$- and $\beta$-coloured edges are paths or even cycles and are
+called $(\alpha,\beta)$-chains. The chain containing $v$ is denoted by
+$P_v(\alpha,\beta,\varphi)$. Interchanging the two colours on a chain $P$
+is a Kempe change and gives the colouring $\varphi/P$. We regard an isolated
+vertex as a chain of length zero. If a path $P$ has vertices $u,v$, then
+$uPv$ denotes its unique subpath with ends $u,v$.
+
+A multigraph is \emph{critical} if every proper subgraph has smaller chromatic
+index. A \emph{$k$-triple} is a critical multigraph $G$ with
+$\chi'(G)=k+1$ and $k\ge\Delta(G)+1$, together with an edge $e\in E(G)$ and a
+colouring $\varphi\in\Ccal^k(G-e)$. The edge $e$ is regarded as uncoloured.
+
+For completeness, let
+\[
+ \Gamma(G)=\max\left\{\frac{2|E_G(U,U)|}{|U|-1}:
+ U\subseteq V(G),\ |U|\ge3\text{ odd}\right\}.
+\]
+A multigraph is \emph{elementary} if
+$\chi'(G)=\ceil{\Gamma(G)}$, as in the formalization target.
+
+\setcounter{theorem}{7}
+\begin{theorem}[Elementary-graph criterion; target label \target{egraph2}]
+\label{egraph2}\label{Scheide-Theorem-2.8}
+Let $G=(V,E)$ be critical with $\chi'(G)=k+1$ and
+$k\ge\Delta(G)+1$. The following are equivalent.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $G$ is elementary.
+\item For every $e\in E$ and every $\varphi\in\Ccal^k(G-e)$, the set $V$ is
+      elementary with respect to $\varphi$.
+\item For some $e\in E$ and some $\varphi\in\Ccal^k(G-e)$, the set $V$ is
+      elementary with respect to $\varphi$.
+\item For some $e\in E$, some $\varphi\in\Ccal^k(G-e)$, and some
+      $X\subseteq V$ containing both ends of $e$, the set $X$ is elementary
+      and strongly closed with respect to $\varphi$.
+\end{enumerate}
+\end{theorem}
+
+This is the statement labelled \target{egraph2} in the target manuscript.
+A complete proof is supplied in the companion file
+\texttt{selected\_results\_graph\_edge\_colouring.tex}, under the label
+\texttt{thm:egraph2}. Its provenance is Scheide~\cite[Theorem~2.8]{S} and
+Stiebitz--Scheide--Toft--Favrholdt~\cite[Theorem~1.4]{SSTF}.
+
+\section{Tashkinov trees and globally maximum triples}
+
+\setcounter{theorem}{0}
+\begin{definition}[Tashkinov tree; source Definition~3.1]
+\label{Scheide-Definition-3.1}
+Let $(G,e,\varphi)$ be a $k$-triple. A \emph{Tashkinov tree} with respect
+to $e$ and $\varphi$ is a sequence
+\[
+ T=(y_0,e_1,y_1,\ldots,e_{n-1},y_{n-1})
+\]
+such that the vertices are distinct, $e_1=e$, every $e_i$ joins $y_i$ to an
+earlier vertex, and, for every $2\le i\le n-1$, the colour
+$\varphi(e_i)$ is missing at some $y_j$ with $j<i$. We write
+$V(T)=\set{y_0,\ldots,y_{n-1}}$ and
+$E(T)=\set{e_1,\ldots,e_{n-1}}$.
+\end{definition}
+
+For $1\le r\le n-1$, write
+$T\mathbin{|}y_r=(y_0,e_1,y_1,\ldots,e_r,y_r)$. Every such initial segment
+is again a Tashkinov tree. A colour is \emph{used on $T$} if it colours an
+edge of $E(T)\comp\set e$; otherwise it is unused.
+
+\begin{theorem}[Tashkinov; target label \target{TashTree}]
+\label{TashTree}\label{Scheide-Theorem-3.2}
+For every Tashkinov tree $T$ in a $k$-triple $(G,e,\varphi)$, the set $V(T)$
+is elementary with respect to $\varphi$.
+\end{theorem}
+
+This is the statement labelled \target{TashTree} in the target manuscript.
+A complete proof is supplied in the companion file
+\texttt{selected\_results\_graph\_edge\_colouring.tex}, under the label
+\texttt{thm:tashkinov}; see Tashkinov~\cite{T},
+Scheide~\cite[Theorem~3.2]{S}, and
+Stiebitz--Scheide--Toft--Favrholdt~\cite[Theorem~5.1]{SSTF}.
+
+For fixed $e$ and $\varphi$, a Tashkinov tree is \emph{maximal} if no
+Tashkinov tree for the same pair has a strictly larger vertex set containing
+its vertex set. This fixed-pair notion is distinct from the globally maximum
+notion used in the definition of $t(G)$ below.
+
+\begin{theorem}[Maximal-tree package; source Theorem~3.3]
+\label{Scheide-Theorem-3.3}\label{maximal-tree-package}
+Let $(G,e,\varphi)$ be a $k$-triple. Let $T$ be maximal with respect to the
+fixed pair $(e,\varphi)$, and let
+$T'=(y_0,e_1,y_1,\ldots,e_n,y_n)$ be any Tashkinov tree for the same pair.
+Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $V(T)$ is elementary and closed with respect to $\varphi$;
+\item $|V(T)|$ is odd;
+\item $V(T')\subseteq V(T)$;
+\item there is a Tashkinov tree $\widetilde T$ with
+      $V(\widetilde T)=V(T)$ and
+      $\widetilde T\mathbin{|}y_n=T'$;
+\item if $i<j$, $\gamma\in\overline\varphi(y_i)$, and
+      $\delta\in\overline\varphi(y_j)$, then $\gamma\ne\delta$ and
+      $P_{y_i}(\gamma,\delta,\varphi)$ is an even path with ends
+      $y_i,y_j$ and vertex set contained in $V(T)$. If $\gamma$ is unused
+      on $T'\mathbin{|}y_j$, then $T'$ remains a Tashkinov tree after this
+      chain is switched;
+\item $G[V(T)]$ contains an odd cycle.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Put $X=V(T)$. By \Cref{TashTree}, $X$ is elementary. It is also closed.
+Indeed, if an edge $f=xz$ with $x\in X$ and $z\notin X$ had colour
+$\eta\in\overline\varphi(X)$, then $f,z$ could be appended to the displayed
+sequence for $T$, using a vertex of $X$ missing $\eta$ as the witness. This
+would contradict maximality. This proves (a).
+
+Every vertex of $X$ misses at least one colour. Choose
+$\eta\in\overline\varphi(x)$ for some $x\in X$. Elementarity says that
+$\eta$ is present at every vertex of $X\comp\set{x}$, and closedness says
+that no $\eta$-edge leaves $X$. Hence the $\eta$-matching inside $X$
+saturates exactly $|X|-1$ vertices. That number is even, so $|X|$ is odd.
+This proves (b).
+
+For (c), both ends of $e$ belong to $X$. If $T'$ had a vertex outside $X$,
+let $y_r$ be the first such vertex in its sequence. Then $r\ge2$, all
+vertices preceding $y_r$ lie in $X$, the tree edge $e_r$ joins $y_r$ to
+$X$, and its colour is missing at an earlier vertex of $X$. This contradicts
+closedness. Thus $V(T')\subseteq X$.
+
+For (d), start with the sequence $T'$. While some vertex of $X$ has not yet
+been used, take the first such vertex in the original sequence for $T$ and
+append it with its original tree edge. Every vertex and every missing-colour
+witness preceding that edge in the original sequence has already been
+included. The resulting sequence is therefore a Tashkinov tree, begins with
+$T'$, and eventually has vertex set $X$.
+
+For (e), put $X'=V(T')$. The set $X'$ is elementary by
+\Cref{TashTree}, so $\gamma\ne\delta$. In the
+$(\gamma,\delta)$-subgraph, $y_i$ has degree one, with its incident edge
+coloured $\delta$, and $y_j$ has degree one, with its incident edge coloured
+$\gamma$. Every other vertex of $X$ is incident with one edge of each
+colour. Since $X$ is closed and both colours are missing on $X$, no
+$\gamma$- or $\delta$-edge leaves $X$. It follows that the component
+through $y_i$ is a path contained in $X$ whose other end is $y_j$. Its first
+edge has colour $\delta$ and its last edge has colour $\gamma$, so its
+length is even.
+
+Assume now that $\gamma$ is unused on the prefix
+$T'\mathbin{|}y_j$. The colour $\delta$ is unused on that prefix as well:
+if an edge $e_r$ of the prefix had colour $\delta$, the Tashkinov condition
+would give an earlier vertex missing $\delta$, contrary to the elementarity
+of the prefix because $\delta$ is missing at $y_j$. Thus the Kempe change
+on the displayed path changes no tree edge of the prefix. At its ends it
+interchanges the missing colours: afterwards $\delta$ is missing at $y_i$
+and $\gamma$ at $y_j$. Every edge later than $y_j$ whose colour is
+$\gamma$ or $\delta$ consequently has an earlier witness for its new or
+unchanged colour at one of $y_i,y_j$; all other edge colours and witnesses
+are unchanged. Hence $T'$ remains a Tashkinov tree.
+
+Finally, let $x,y$ be the ends of $e$, in their order as the first two
+vertices of $T$. Choose
+$\alpha\in\overline\varphi(x)$ and
+$\beta\in\overline\varphi(y)$. These colours are distinct by elementarity,
+and (e) gives an even $(\alpha,\beta)$-path in $G[X]$ with ends $x,y$.
+Adding the uncoloured edge $e$ produces an odd cycle in $G[X]$. This proves
+(f).
+\end{proof}
+
+The statement and numbering are those of
+Scheide~\cite[Theorem~3.3]{S}. The proof above uses only
+\Cref{TashTree}, maximality for the fixed pair $(e,\varphi)$, and elementary
+matching parity; it does not invoke a stronger extension theorem.
+
+Let $G$ be critical with $\chi'(G)=k+1$ and $k\ge\Delta(G)+1$.
+The \emph{Tashkinov order} of $G$ is
+\begin{equation}
+\label{torder}
+ t(G)=\max |V(T)|,
+\end{equation}
+where the maximum ranges over all $e\in E(G)$, all
+$\varphi\in\Ccal^k(G-e)$, and all corresponding Tashkinov trees. Let
+$\Tcal(G)$ be the set of triples $(T,e,\varphi)$ attaining this maximum. A
+triple in $\Tcal(G)$ will be called \emph{globally maximum}. Its tree is
+maximal for its fixed pair, so \Cref{Scheide-Theorem-3.3} applies.
+
+For a colour $\alpha$, put
+\[
+ E_\alpha(e,\varphi)=\set{f\in E(G)\comp\set e:\varphi(f)=\alpha}
+\]
+and
+\[
+ E_\alpha(T,e,\varphi)=
+ E_\alpha(e,\varphi)\cap E_G(V(T),V(G)\comp V(T)).
+\]
+A colour $\alpha$ is \emph{defective} for $(T,e,\varphi)$ if
+$|E_\alpha(T,e,\varphi)|\ge2$; the set of defective colours is
+$\Dcol(T,e,\varphi)$. It is \emph{free} if it is missing on $V(T)$ and
+unused on $T$; the set of free colours is $\Fcol(T,e,\varphi)$.
+
+\begin{proposition}[Basic facts for globally maximum triples; source Proposition~3.4]
+\label{Scheide-Proposition-3.4}\label{maximum-triple-facts}
+Let $(T,e,\varphi)\in\Tcal(G)$. Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $t(G)=|V(T)|\ge3$ is odd;
+\item $V(T)$ is elementary and closed with respect to $\varphi$;
+\item if $\Dcol(T,e,\varphi)=\varnothing$, then $V(T)$ is strongly closed;
+\item if $\alpha\in\overline\varphi(V(T))$, then
+      $E_\alpha(T,e,\varphi)=\varnothing$;
+\item if $\alpha\in\Dcol(T,e,\varphi)$, then
+      $|E_\alpha(T,e,\varphi)|\ge3$ is odd;
+\item for $v\in V(T)$,
+\[
+ |\overline\varphi(v)|=
+ \begin{cases}
+ k-d_G(v)+1\ge2,&\text{if $v$ is an end of $e$},\\
+ k-d_G(v)\ge1,&\text{otherwise};
+ \end{cases}
+\]
+\item $|\Fcol(T,e,\varphi)|\ge4$;
+\item every colour in
+      $\Dcol(T,e,\varphi)\cup\Fcol(T,e,\varphi)$ is unused on $T$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Parts (a) and (b) follow from
+\Cref{Scheide-Theorem-3.3}(a),(b): a maximal tree contains the initial
+2-vertex tree and has odd order, hence has at least three vertices. Part (c)
+is the definition of strongly closed once there is no defective boundary
+colour, and (d) is closedness.
+
+For (e), a defective colour $\alpha$ occurs on a boundary edge, so closedness
+implies that it is present at every vertex of $V(T)$. The
+$\alpha$-coloured edges form a matching. Counting incidences at the odd set
+$V(T)$ gives
+\[
+ |V(T)|=2|E_\alpha(e,\varphi)\cap E_G(V(T),V(T))|
+       +|E_\alpha(T,e,\varphi)|.
+\]
+Thus the boundary number is odd; if it is at least two, it is at least three.
+Part (f) is the degree count in $G-e$.
+
+By elementarity and (f), the union of the missing-colour sets has size at
+least $|V(T)|+2$. At most $|V(T)|-2$ colours occur on the coloured tree
+edges. Every used tree-edge colour is missing at an earlier tree vertex, so
+at least four missing colours are unused. This proves (g). Finally, free
+colours are unused by definition. A defective colour is present at every
+tree vertex, whereas every used tree-edge colour is missing at an earlier
+one; hence a defective colour is also unused. This proves (h).
+\end{proof}
+
+A vertex $v\in V(G)\comp V(T)$ is \emph{absorbing} with respect to
+$(T,e,\varphi)$ if, for every $\delta\in\overline\varphi(v)$ and every
+$\gamma\in\Fcol(T,e,\varphi)\comp\set\delta$, the chain
+$P_v(\gamma,\delta,\varphi)$ contains the unique vertex
+$u\in V(T)$ for which $\gamma\in\overline\varphi(u)$. In that event the
+chain is a path with ends $u,v$. Let $A(T,e,\varphi)$ be the set of
+absorbing vertices.
+
+\begin{proposition}[Absorbing vertices; source Proposition~3.5]
+\label{Scheide-Proposition-3.5}\label{absorbing-elementary}
+For every $(T,e,\varphi)\in\Tcal(G)$, the set
+$V(T)\cup A(T,e,\varphi)$ is elementary with respect to $\varphi$.
+\end{proposition}
+
+\begin{proof}
+Put $X=V(T)$ and $A=A(T,e,\varphi)$. The set $X$ is elementary by
+\Cref{maximum-triple-facts}(b). We first show that a colour missing at a
+vertex of $A$ is missing at no vertex of $X$. Suppose that
+$v\in A$, $\delta\in\overline\varphi(v)$, and
+$\delta\in\overline\varphi(x)$ for some $x\in X$. Choose
+$\gamma\in\Fcol(T,e,\varphi)\comp\set{\delta}$, possible by
+\Cref{maximum-triple-facts}(g), and let $u\in X$ be the unique vertex
+missing $\gamma$. Both $\gamma$ and $\delta$ are missing on the closed set $X$, so no
+edge of either colour leaves $X$. Consequently the
+$(\gamma,\delta)$-component containing the outside vertex $v$ cannot meet
+$X$, contrary to the absorbing property, which requires it to contain $u$.
+
+It remains to compare two distinct vertices $v,w\in A$. Suppose that a
+colour $\delta$ is missing at both. Choose
+$\gamma\in\Fcol(T,e,\varphi)\comp\set{\delta}$ and let $u\in X$ be the
+vertex missing $\gamma$. By the first paragraph, $\delta$ is present at
+$u$. The absorbing property says that the
+$(\gamma,\delta)$-component containing $u$ is a path with ends $u,v$; the
+same component is also a path with ends $u,w$. Since $v\ne w$, this is
+impossible. Thus the missing-colour sets of all distinct vertices in
+$X\cup A$ are pairwise disjoint.
+\end{proof}
+
+This is the absorbing-vertex theorem quoted in
+Scheide~\cite[Proposition~3.5]{S}; its earlier source is
+Favrholdt--Stiebitz--Toft~\cite{FST}. The proof is included here so that no
+result beyond the two companion inputs remains implicit.
+
+Fix an end $w$ of a path $P$. Write $x\preceq_{w,P}y$ when $x$ lies on the
+subpath $wPy$.
+
+\begin{proposition}[Defective-chain structure; source Proposition~3.6]
+\label{Scheide-Proposition-3.6}\label{defective-chain}
+Let $(T,e,\varphi)\in\Tcal(G)$, let
+$\alpha\in\Dcol(T,e,\varphi)$, let
+$\gamma\in\Fcol(T,e,\varphi)$ be missing at $u\in V(T)$, and put
+$P=P_u(\alpha,\gamma,\varphi)$. Then:
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $P$ is a path from $u$ to a vertex outside $V(T)$;
+\item
+$E_\alpha(T,e,\varphi)=
+ E(P)\cap E_G(V(T),V(G)\comp V(T))$;
+\item in the order $\preceq_{u,P}$ there is a first vertex $v_1$ outside
+      $V(T)$ and a last vertex $v_2$ in $V(T)$ after that first departure;
+\item $\overline\varphi(v_2)\cap\Fcol(T,e,\varphi)=\varnothing$;
+\item $V(T)\cup\set{v_1}$ is elementary with respect to $\varphi$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Put $X=V(T)$. By
+\Cref{maximum-triple-facts}, $X$ is elementary and closed, every defective
+or free colour is unused on $T$, $\alpha$ is present at every vertex of
+$X$, no $\gamma$-edge leaves $X$, and at least three
+$\alpha$-edges leave $X$.
+
+At $u$ the $(\alpha,\gamma)$-subgraph has degree one, whereas every other
+vertex of $X$ has degree two. Thus the component $P$ through $u$ is a path,
+and its other end lies outside $X$. This proves (a).
+
+We prove (b) by contradiction. Let $f$ be an $\alpha$-coloured boundary
+edge not on $P$, and let $Q$ be its $(\alpha,\gamma)$-component. The
+component $Q$ does not contain $u$. It contains no tree edge, since both
+colours are unused on $T$, and it has no end in $X$: every vertex of
+$X\comp\set{u}$ is incident with both colours. Switch $Q$. The displayed
+sequence for $T$ is still Tashkinov, and $\gamma$ is still missing at $u$.
+The edge $f$ now has colour $\gamma$, so it and its outside end can be
+appended to $T$, contradicting the definition of $t(G)$. Hence every
+$\alpha$-coloured boundary edge lies on $P$.
+
+The path starts in $X$ and ends outside it. Its boundary crossings all have
+colour $\alpha$, because no $\gamma$-edge leaves $X$. By (b) there are at
+least three such crossings. Consequently the path returns to $X$ after its
+first departure, and the vertices $v_1,v_2$ in (c) exist.
+
+For (d), let $z$ be the outside end of $P$ and put $R=v_2Pz$. Then
+$V(R)\cap X=\set{v_2}$ and $R$ contains exactly one boundary edge of $X$.
+Suppose that a free colour $\beta$ is missing at $v_2$. Since $v_2$ occurs
+after the first departure, it is distinct from $u$, so elementarity gives
+$\beta\ne\gamma$. Interchange the names $\beta$ and $\gamma$ on all edges
+with both ends outside $X$. This is a proper colouring and leaves every
+edge incident with $X$ unchanged, because both colours are missing on the
+closed set $X$. Under the resulting colouring, $R$ is the full
+$(\alpha,\beta)$-chain from $v_2$. Switch it. No tree edge changes, and the
+only missing-colour change on $X$ replaces $\beta$ by $\alpha$ at $v_2$;
+since both colours are unused on $T$, the tree remains Tashkinov. Now
+$\alpha$ is missing at $v_2$, while at least two of the original
+$\alpha$-coloured boundary edges lie outside $R$ and retain their colour.
+Appending either one contradicts the maximality of $t(G)$. Thus (d) holds.
+
+For (e), suppose that a colour $\delta$ is missing both at $v_1$ and at
+some $x\in X$. The vertex $v_1$ is not an end of $P$: by (b) the path has
+at least two further boundary crossings after its first departure. Hence
+both $\alpha$ and $\gamma$ are present at $v_1$, and
+$\delta\notin\set{\alpha,\gamma}$. Let
+$C=P_{v_1}(\gamma,\delta,\varphi)$. Both colours are missing on the closed
+set $X$, so no edge of either colour leaves $X$. Therefore $C$, which
+contains the outside vertex $v_1$, is disjoint from $X$.
+Switch $C$. The tree remains Tashkinov, $\gamma$ remains missing at $u$,
+and $\gamma$ is now missing at $v_1$. Moreover, the edge of $P$ following
+$v_1$ was the unique $\gamma$-edge at $v_1$ and has changed to
+$\delta$. Thus the initial segment $uPv_1$ is now the full
+$(\alpha,\gamma)$-chain from $u$ to $v_1$.
+
+Switch this initial segment. The colours $\alpha,\gamma$ are unused on
+$T$, so the tree remains Tashkinov, and $\alpha$ becomes missing at $u$.
+The segment contains only the first $\alpha$-coloured boundary edge of
+$P$; at least two further such edges are unchanged. Appending one of them
+again contradicts $t(G)$. Therefore no colour missing at $v_1$ is missing
+on $X$, and $X\cup\set{v_1}$ is elementary.
+\end{proof}
+
+This is the chain theorem quoted in
+Scheide~\cite[Proposition~3.6]{S}, originally due to
+Favrholdt--Stiebitz--Toft~\cite{FST}. Its proof above uses only the
+maximal-tree package already proved in this note.
+
+Let $u\in V(T)$, let $\gamma\in\overline\varphi(u)$, and let
+$\delta\in\Dcol(T,e,\varphi)$. The chain
+$P_u(\gamma,\delta,\varphi)$ is a path from $u$ to a vertex outside $V(T)$:
+$\delta$ is present at every tree vertex, and elementarity leaves no second
+tree vertex missing $\gamma$. Its last vertex in $V(T)$, in the order
+starting at $u$, is an \emph{exit vertex}. Let $F(T,e,\varphi)$ denote the
+set of all exit vertices.
+
+\setcounter{theorem}{7}
+\begin{lemma}[Exit vertices miss no free colour; source Lemma~3.8]
+\label{Scheide-Lemma-3.8}\label{exit-no-free}
+For every $(T,e,\varphi)\in\Tcal(G)$,
+\[
+ \overline\varphi(F(T,e,\varphi))
+ \cap\Fcol(T,e,\varphi)=\varnothing.
+\]
+\end{lemma}
+
+\begin{proof}
+Let $v$ be an exit vertex. Thus, for some $u\in V(T)$,
+$\gamma\in\overline\varphi(u)$, and
+$\delta\in\Dcol(T,e,\varphi)$, the vertex $v$ is the last tree vertex on
+$P=P_u(\gamma,\delta,\varphi)$; the other end $z$ of $P$ lies outside
+$V(T)$. Suppose that a free colour $\alpha$ is missing at $v$.
+
+If $\alpha=\gamma$, elementarity forces $u=v$. Then
+\Cref{defective-chain}(d), applied directly to the free colour $\alpha$ and
+the defective colour $\delta$, says that the last tree vertex on this chain
+misses no free colour, a contradiction.
+
+Assume $\alpha\ne\gamma$. Since both colours are missing on the closed set
+$V(T)$, neither appears on its boundary. Interchange $\alpha$ and $\gamma$
+on every edge whose two ends lie outside $V(T)$. The resulting colouring
+$\varphi'$ agrees with $\varphi$ on every edge incident with $V(T)$; hence
+$(T,e,\varphi')\in\Tcal(G)$ and its free and defective colour sets are
+unchanged. The subpath $vPz$ is now the
+$(\alpha,\delta)$-chain from $v$, and it crosses the boundary of $V(T)$
+exactly once. This contradicts \Cref{defective-chain}(b), which requires
+that chain to contain every $\delta$-coloured boundary edge, of which there
+are at least three. Therefore no free colour is missing at $v$.
+\end{proof}
+
+\subsection*{Normal and balanced globally maximum trees}
+
+Let $(T,e,\varphi)\in\Tcal(G)$, where
+\[
+ T=(y_0,e_1,y_1,\ldots,e_{n-1},y_{n-1}),\qquad n=t(G).
+\]
+The tree is \emph{normal} if there are
+$\alpha\in\overline\varphi(y_0)$,
+$\beta\in\overline\varphi(y_1)$, an integer $2\le p\le n$, and an edge
+$q\in E_G(y_{p-1},y_0)$ such that
+\[
+ P(y_1,e_2,y_2,\ldots,e_{p-1},y_{p-1},q,y_0)
+\]
+is an $(\alpha,\beta)$-chain. The initial tree
+$T\mathbin{|}y_{p-1}$ is its $(\alpha,\beta)$-\emph{trunk}, and its height
+is $h(T)=p$. Let $\Tcal^N(G)$ be the set of normal globally maximum triples,
+and let $h(G)$ be the maximum height of a member of $\Tcal^N(G)$.
+
+\begin{remark}[Indexing convention]
+The upper bound is $p\le n$, so the trunk is allowed to contain all
+$n=t(G)$ vertices. This is the convention required in source
+Proposition~4.2, whose first case is $h(G)=t(G)$. The bound $p\le n-1$
+printed in the 2008 preprint is therefore read as an indexing slip.
+\end{remark}
+
+\setcounter{theorem}{10}
+\begin{lemma}[Normalisation; source Lemma~3.11]
+\label{Scheide-Lemma-3.11}\label{normalisation}
+Let $(T,e,\varphi)\in\Tcal(G)$ and let $e=xy$. There are
+$\alpha\in\overline\varphi(x)$ and
+$\beta\in\overline\varphi(y)$ and a normal Tashkinov tree $T'$ with
+$V(T')=V(T)$ such that
+\[
+ h(T')=|V(P_x(\alpha,\beta,\varphi))|.
+\]
+\end{lemma}
+
+\begin{proof}
+Choose $\alpha\in\overline\varphi(x)$ and
+$\beta\in\overline\varphi(y)$, possible because the degree of each end of
+the uncoloured edge in $G-e$ is at most $\Delta(G)-1<k$. By
+\Cref{Scheide-Theorem-3.3}(e), the colours are distinct and
+$P=P_x(\alpha,\beta,\varphi)$ is an even path with ends $x,y$ and all
+vertices in $V(T)$. Write
+\[
+ P=P(v_1,f_2,v_2,\ldots,f_p,v_p),\qquad v_1=y,\quad v_p=x.
+\]
+Then
+\[
+ (x,e,y,f_2,v_2,\ldots,f_{p-1},v_{p-1})
+\]
+is a Tashkinov tree: every added edge has colour $\alpha$ or $\beta$, and
+each of those colours is missing at one of the first two vertices. By
+\Cref{Scheide-Theorem-3.3}(d), this initial tree extends to a Tashkinov tree
+on the full vertex set $V(T)$. It is normal and has height $|V(P)|$.
+\end{proof}
+
+A normal triple $(T,e,\varphi)$ is \emph{balanced} if
+$h(T)=h(G)=p$ and
+\[
+ \varphi(e_{2j-1})=\varphi(e_{2j})
+ \qquad\text{whenever }p<2j<t(G).
+\]
+Let $\Tcal^B(G)$ be the set of balanced triples.
+
+\begin{lemma}[Balanced triples; source Lemma~3.12]
+\label{Scheide-Lemma-3.12}\label{balanced-triples}
+The following hold.
+\begin{enumerate}[label=\textup{(\alph*)}]
+\item $h(G)\ge3$ is odd.
+\item If $(T,e,\varphi)\in\Tcal^N(G)$ and $h(T)=h(G)$, then there is a
+      Tashkinov tree $T'$ on the same vertex set for which
+      $(T',e,\varphi)\in\Tcal^B(G)$; every colour used on $T'$ is used on
+      $T$.
+\item $\Tcal^B(G)\ne\varnothing$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $p=h(G)$ and let $T\mathbin{|}y_{p-1}$ be an
+$(\alpha,\beta)$-trunk. Its closing $(\alpha,\beta)$-path has distinct ends
+$y_0,y_1$, and exactly one of $\alpha,\beta$ is missing at each end. It has
+positive even length, so the number $p$ of its vertices is odd and at least
+three. This proves (a).
+
+For (b), fix a normal tree of height $p$. Among all Tashkinov trees $S$ for
+the same pair $(e,\varphi)$ that have the prescribed trunk, use only colours
+used on the original tree, and have their post-trunk edges in consecutive
+equal-coloured pairs, choose one with a maximum odd number $i$ of vertices.
+Initially $i\ge p$. Suppose $i<t(G)$. Let $y_r$ be the first vertex of the
+original tree not in $S$, and append the original edge $e_r$ and $y_r$.
+Its colour $\gamma$ is missing at an earlier vertex, so the enlarged
+Tashkinov tree has even order and exactly one of its vertices misses
+$\gamma$, by \Cref{TashTree}. Counting incidences of the
+$\gamma$-matching shows that an odd, hence nonzero, number of
+$\gamma$-edges leave this even vertex set. Append one such edge and its
+outside end. The two newly appended edges have the same colour, so all
+requirements are preserved and the odd order has increased by two, a
+contradiction. Hence $i=t(G)$. Applying
+\Cref{Scheide-Theorem-3.3}(c),(d) to the original globally maximum tree, the
+resulting tree has the same vertex set. This proves (b), and (c) follows
+from \Cref{normalisation}.
+\end{proof}
+
+We shall repeatedly rotate a balanced trunk. Let
+$(T,e,\varphi)\in\Tcal^B(G)$, let $p=h(G)$, set $f_1=e$ and
+$f_i=e_i$ for $2\le i\le p-1$, and let
+$f_p\in E_G(y_{p-1},y_0)$ be the closing edge. The cycle
+$f_1,\ldots,f_p$ has $f_1$ uncoloured and the remaining edges alternately
+coloured $\alpha,\beta$. For $1\le j\le p-1$, move the uncoloured status
+successively around this cycle from $f_1$ to $f_{j+1}$, shifting the two
+colours on the intervening edges. This gives a colouring
+$\varphi_j\in\Ccal^k(G-f_{j+1})$ agreeing with $\varphi$ off the cycle and a
+new trunk
+\[
+ (y_j,f_{j+1},y_{j+1},\ldots,f_p,y_0,
+   f_1,y_1,\ldots,f_{j-1},y_{j-1}).
+\]
+Appending the unchanged tail produces another balanced globally maximum
+triple, denoted by
+\[
+ (T,e,\varphi)(y_0\to y_j).
+\]
+Thus any trunk vertex may be made the first vertex without changing the
+underlying vertex set or the tail blocks.
+
+
+\section{The small-Tashkinov-order theorem}
+
+The next lemma is the structural core of Scheide's argument.  We retain the
+source hypotheses and the source's numbered intermediate conclusions.  In
+particular, the proof below is not an appeal to the original Lemma~4.1; it is
+a reconstruction of that proof with every recolouring and parity step
+specified.
+
+\begin{lemma}[Structural lemma; source Lemma~4.1]
+\label{Scheide-Lemma-4.1}\label{structural-lemma}
+Let $G$ be critical with $\chi'(G)=k+1$ and $k\ge\Delta(G)+1$, and let
+$(T,e,\varphi)\in\Tcal(G)$. Suppose that
+\[
+\begin{split}
+T={}&(y_0,e_1,y_1,\ldots,e_{p-1},y_{p-1},
+ f^1_{\gamma_1},u^1_{\gamma_1},f^2_{\gamma_1},u^2_{\gamma_1},\ldots,\\
+&\hspace{42mm}
+ f^1_{\gamma_s},u^1_{\gamma_s},f^2_{\gamma_s},u^2_{\gamma_s}),
+\end{split}
+\]
+where $\Gamma=\set{\gamma_1,\ldots,\gamma_s}$ and
+$Y=\set{y_0,\ldots,y_{p-1}}$, and suppose that:
+\begin{enumerate}[label=\textup{(S\arabic*)},leftmargin=3.2em]
+\item $f^j_\gamma\in E_G(Y,u^j_\gamma)$ for every
+      $\gamma\in\Gamma$ and $j\in\set{1,2}$;
+\item
+      $\varphi(f^1_\gamma)=\varphi(f^2_\gamma)=\gamma$ and
+      $\gamma\in\overline\varphi(Y)$ for every $\gamma\in\Gamma$;
+\item $\varphi(e_j)\notin\Gamma$ for $2\le j\le p-1$;
+\item every vertex of $F(T,e,\varphi)$ misses a colour of $\Gamma$.
+\end{enumerate}
+Then $G$ is elementary.
+\end{lemma}
+
+\begin{proof}
+By \Cref{maximum-triple-facts}(b), $V(T)$ is elementary and closed. If
+$\Dcol(T,e,\varphi)=\varnothing$, it is strongly closed by
+\Cref{maximum-triple-facts}(c), and \Cref{egraph2}(iv) proves the result.
+We therefore assume throughout that
+$\Dcol(T,e,\varphi)\ne\varnothing$.
+
+We first reduce the data without changing the vertex set or the colouring.
+Each colour of $\Gamma$ is missing at a unique vertex of $V(T)$. By (S4),
+choose one such colour for each exit vertex and call the resulting set
+$\Gamma'$. Distinct exit vertices yield distinct colours, by elementarity,
+so $|\Gamma'|=|F(T,e,\varphi)|$. Reorder the two-vertex blocks so that the
+blocks with colours in $\Gamma\comp\Gamma'$ precede those with colours in
+$\Gamma'$, and enlarge $Y$ by the vertices of the former blocks. This
+reordering is legitimate because both edges of every block join its two new
+vertices to the original set $Y$ and their common colour is missing on that
+set. The four hypotheses remain true with $\Gamma'$ and the enlarged $Y$:
+for (S3), the newly absorbed block colours lie outside $\Gamma'$. We may
+therefore replace the data by these reduced data and assume
+\begin{equation}
+ |F(T,e,\varphi)|=s,
+ \qquad
+ \text{each exit vertex misses exactly one colour of $\Gamma$.}
+ \tag{1}\label{L41-1}
+\end{equation}
+The map sending an exit vertex to its missing colour in $\Gamma$ is
+injective and both sets have size $s$; hence it is a bijection. In
+particular, every colour of $\Gamma$ is missing at an exit vertex.
+
+Every colour used on $T$ is missing on $Y$. For the initial segment this is
+the Tashkinov condition, and for the remaining edges it is (S2). Every
+vertex of $V(T)\comp Y$ misses at least one colour. Such a colour cannot be
+used on $T$, since a used colour is already missing at a vertex of $Y$ and
+$V(T)$ is elementary. It is therefore free. By \Cref{exit-no-free},
+\begin{equation}
+ F(T,e,\varphi)\subseteq Y.
+ \tag{2}\label{L41-2}
+\end{equation}
+
+For $\gamma\in\Gamma$, put
+\[
+ U_\gamma=\set{u^1_\gamma,u^2_\gamma},
+ \qquad
+ Z_\gamma=V(T)\comp U_\gamma,
+\]
+and let $T-\gamma$ be the Tashkinov tree obtained by deleting the two
+$\gamma$-edges and their two new vertices. We claim that
+\begin{equation}
+ E_G(u^1_\gamma,u^2_\gamma)\cap E_\alpha(e,\varphi)
+ \ne\varnothing
+ \quad
+ \text{for every }\alpha\in\overline\varphi(Z_\gamma)
+                 \comp\set{\gamma}.
+ \tag{3}\label{L41-3}
+\end{equation}
+Indeed, $\alpha$ is missing on the closed set $V(T)$, so the unique
+$\alpha$-edge at $u^1_\gamma$ has its other end in $V(T)$. Suppose that
+this other end lies in $Z_\gamma$. The unique $\alpha$-edge at
+$u^2_\gamma$ cannot end at $u^1_\gamma$, which is already incident with
+an $\alpha$-edge, and therefore also ends in $Z_\gamma$. Appending these
+two $\alpha$-edges to $T-\gamma$ gives another globally maximum Tashkinov
+tree with vertex set $V(T)$. In that tree $\gamma$ is missing and unused,
+so it is free. Its defective colours and exit vertices are unchanged,
+because these depend only on the colouring and the vertex set. By the
+bijection following \eqref{L41-1}, an exit vertex misses $\gamma$, contrary
+to \Cref{exit-no-free}. Thus the $\alpha$-edge at $u^1_\gamma$ must join
+the two vertices of $U_\gamma$, proving \eqref{L41-3}.
+
+Both ends of the uncoloured edge $e$ lie in $Y$. By
+\Cref{maximum-triple-facts}(f), $|\overline\varphi(y_0)|\ge2$. Moreover,
+$y_0$ misses at most one colour of $\Gamma$: every colour in $\Gamma$ is
+missing at an exit vertex, and \eqref{L41-1} says that an exit vertex
+misses only one such colour. Fix
+\[
+ \alpha_0\in\overline\varphi(y_0)\comp\Gamma.
+\]
+For $\delta\in\Dcol(T,e,\varphi)$, let
+\[
+ P_\delta=P_{y_0}(\alpha_0,\delta,\varphi).
+\]
+Since $\alpha_0$ is missing on $V(T)$ and the defective colour $\delta$ is
+present at every vertex of $V(T)$, this is a path from $y_0$ to a vertex
+$z_\delta\notin V(T)$. Let $v^0_\delta$ be its last vertex in $V(T)$,
+and let $f^0_\delta$ be the following edge, with outside end
+$u^0_\delta$. The edge $f^0_\delta$ has colour $\delta$, because no
+$\alpha_0$-edge leaves the closed set $V(T)$. The vertex $v^0_\delta$ is
+an exit vertex, so by \eqref{L41-1} there is a unique colour
+$\gamma(\delta)\in\Gamma$ missing at $v^0_\delta$.
+
+We next prove
+\begin{equation}
+ E_G(U_{\gamma(\delta)},Z_{\gamma(\delta)})
+       \cap E_\delta(e,\varphi)=\varnothing
+ \quad\text{for every }\delta\in\Dcol(T,e,\varphi).
+ \tag{4}\label{L41-4}
+\end{equation}
+Suppose instead that a $\delta$-edge $g_1$ joins
+$u^1_{\gamma(\delta)}$ to $Z_{\gamma(\delta)}$ (renumber the two vertices
+of the pair if necessary). By \eqref{L41-3}, an $\alpha_0$-edge $g_2$
+joins the two vertices of $U_{\gamma(\delta)}$. Since $g_1$ occupies the
+$\delta$-incidence at one of these vertices, at most one
+$\delta$-coloured boundary edge of $V(T)$ is incident with the pair. A
+defective colour has at least three boundary edges by
+\Cref{maximum-triple-facts}(e), so there is a $\delta$-edge
+$g_3\ne f^0_\delta$ from $Z_{\gamma(\delta)}$ to a vertex outside
+$V(T)$.
+
+Interchange $\alpha_0$ and $\gamma(\delta)$ on every edge with both ends
+outside $V(T)$. This is a proper colouring because neither colour occurs
+on $\partial(V(T))$. Under this colouring the subpath
+$v^0_\delta P_\delta z_\delta$ is a
+$(\gamma(\delta),\delta)$-chain. Switch that subpath. The tree
+$T-\gamma(\delta)$ remains Tashkinov: no one of its tree edges changes,
+$\delta$ is unused on $T$, no $\gamma(\delta)$-edge remains in the tree,
+and the only changed missing status on its vertex set replaces
+$\gamma(\delta)$ by $\delta$ at $v^0_\delta$. Thus $\delta$ is now missing
+at $v^0_\delta$. The three edges $g_1,g_2,g_3$ retain, respectively, the
+colours $\delta,\alpha_0,\delta$. Appending them successively adds
+$u^1_{\gamma(\delta)}$, $u^2_{\gamma(\delta)}$, and a vertex outside
+$V(T)$ after only the two vertices of $U_{\gamma(\delta)}$ were deleted.
+This produces a Tashkinov tree with more than $t(G)$ vertices, a
+contradiction. Hence \eqref{L41-4} holds.
+
+Put
+\[
+ P'_\delta=P_{v^0_\delta}(\gamma(\delta),\delta,\varphi).
+\]
+It is a path whose other end $z'_\delta$ lies outside $V(T)$. We claim
+\begin{equation}
+ V(P'_\delta)\cap V(T)=\set{v^0_\delta}.
+ \tag{5}\label{L41-5}
+\end{equation}
+Suppose not. Following $P'_\delta$ from $v^0_\delta$, let
+$v_1\ne v^0_\delta$ be its last vertex in $V(T)$. Then $v_1$ is an exit
+vertex and lies in $Y$ by \eqref{L41-2}. Let $f_1$ be the
+$\delta$-edge by which the path leaves $v_1$, and let $u_1$ be its outside
+end. Write $\gamma=\gamma(\delta)$, and let
+$\gamma_j\in\Gamma$ be the unique colour missing at $v_1$. Since
+$v_1\ne v^0_\delta$, elementarity gives $\gamma_j\ne\gamma$.
+
+First interchange $\alpha_0$ and $\gamma$ outside $V(T)$ and then switch
+$v^0_\delta P_\delta z_\delta$. As in the proof of \eqref{L41-4}, this
+gives a colouring $\varphi_2$ under which $T-\gamma$ is Tashkinov,
+$\delta$ is missing at $v^0_\delta$, and $f_1$ still has colour
+$\delta$. Append $f_1,u_1$. Independently, interchange $\gamma$ and
+$\gamma_j$ outside $V(T)$ and then switch
+$v_1P'_\delta z'_\delta$. This gives a colouring $\varphi'_2$ under
+which $T-\gamma_j$ is Tashkinov, $\delta$ is missing at $v_1$, and
+$f^0_\delta$ is unchanged. Append $f^0_\delta,u^0_\delta$.
+
+Let
+\[
+ Z=V(T)\comp(U_\gamma\cup U_{\gamma_j}).
+\]
+The set $Z$ has odd order, and $\delta$ is present at every vertex of $Z$.
+Counting incidences of the $\delta$-matching shows that an odd number of
+$\delta$-edges leave $Z$. Two such edges are $f^0_\delta$ and $f_1$;
+therefore there is a third one, say $f_2$, with other end $u_2$. This edge
+is unchanged by both recolourings: it has an end in $Z$, and, being
+distinct from $f^0_\delta,f_1$, it lies on neither switched tail.
+
+The vertex $u_2$ is not in $U_{\gamma_j}$. Otherwise, after appending
+$f_2,u_2$ to the second partial tree, \eqref{L41-3} supplies an internal
+$\alpha_0$-edge of $U_{\gamma_j}$, and appending that edge and the other
+vertex of the pair gives more than $t(G)$ vertices. Nor is $u_2$ in
+$U_\gamma$, by \eqref{L41-4}. Hence $u_2\notin V(T)$. Append
+$f_2,u_2$ to both partial trees. Each resulting tree has exactly $t(G)$
+vertices and is therefore globally maximum.
+
+By \Cref{maximum-triple-facts}(f) and elementarity, at least four distinct
+colours are missing on $\set{y_0,y_1}$. Choose one, $\beta$, outside
+$\set{\alpha_0,\gamma,\gamma_j}$. It is also distinct from $\delta$,
+which is present throughout $V(T)$. None of the preceding recolourings
+changes a $\beta$-edge or the fact that $\beta$ is missing at an original
+tree vertex. In the first new globally maximum tree, $\beta$ is therefore
+present at $u_2$ and, by closedness, its edge at $u_2$ has its other end in
+that tree. The original set $V(T)$ is closed and misses $\beta$, so this
+other end cannot lie in $V(T)$; it must be $u_1$. In the second new
+globally maximum tree the vertex $u_1$ is absent, while the same
+$\beta$-edge leaves the tree and $\beta$ is missing on it. Appending that
+edge and $u_1$ yields more than $t(G)$ vertices, a contradiction. This
+proves \eqref{L41-5}.
+
+For each defective colour $\delta$, define
+\[
+ \varphi_\delta=\varphi/P'_\delta.
+\]
+By \eqref{L41-5}, this switch has the following precisely delimited effect:
+\begin{equation}
+\begin{gathered}
+ \varphi_\delta(f^0_\delta)=\gamma(\delta),\qquad
+ \overline{\varphi_\delta}(v^0_\delta)=
+ \bigl(\overline\varphi(v^0_\delta)\comp\set{\gamma(\delta)}\bigr)
+       \cup\set{\delta},\\
+ \varphi_\delta(f)=\varphi(f)
+ \quad\text{for every other edge $f$ incident with $V(T)$},\\
+ \overline{\varphi_\delta}(v)=\overline\varphi(v)
+ \quad\text{for }v\in V(T)\comp\set{v^0_\delta},
+ \quad\text{and for every }v\notin V(P'_\delta).
+\end{gathered}
+ \tag{6}\label{L41-6}
+\end{equation}
+
+We next claim
+\begin{equation}
+ \left|E_G(Z_{\gamma(\delta)},V(G)\comp V(T))
+       \cap E_\delta(e,\varphi)\right|=3
+ \quad\text{for every }\delta\in\Dcol(T,e,\varphi).
+ \tag{7}\label{L41-7}
+\end{equation}
+The displayed number is odd. Indeed, $Z_{\gamma(\delta)}$ has odd order,
+$\delta$ is present at every one of its vertices, and \eqref{L41-4}
+excludes $\delta$-edges from it to $U_{\gamma(\delta)}$. If the number were
+greater than three, then, besides $f^0_\delta$, three of these edges would
+retain colour $\delta$ under $\varphi_\delta$ by \eqref{L41-6}. Appending
+their three distinct outside ends to $T-\gamma(\delta)$ would give
+$t(G)+1$ vertices.
+
+Suppose instead that the number is less than three. It is then one, and its
+only edge is $f^0_\delta$. By \eqref{L41-3}, the two vertices of
+$U_{\gamma(\delta)}$ are joined by an $\alpha_0$-edge; hence no
+$\alpha_0$-edge joins that pair to $Z_{\gamma(\delta)}$. Closedness of
+$V(T)$ excludes an $\alpha_0$-edge from $V(T)$ to its exterior. Thus no
+$\alpha_0$-edge leaves $Z_{\gamma(\delta)}$, while the only
+$\delta$-edge from that set to the exterior of $V(T)$ is
+$f^0_\delta$. It follows that the initial segment
+$y_0P_\delta v^0_\delta$ is contained in $Z_{\gamma(\delta)}$ and, since
+$v^0_\delta$ is the last vertex of $V(T)$ on $P_\delta$, the path
+$P_\delta$ avoids $U_{\gamma(\delta)}$ altogether.
+
+Consider the distinct $(\alpha_0,\delta)$-chain through
+$u^1_{\gamma(\delta)}$. Equations \eqref{L41-3} and \eqref{L41-4} show
+that it meets $V(T)$ only in $U_{\gamma(\delta)}$; if it later entered
+$Z_{\gamma(\delta)}$, it would contain $f^0_\delta$ and hence coincide
+with $P_\delta$. It contains no edge of the Tashkinov-tree sequence, since
+the only tree edges incident with this pair have colour
+$\gamma(\delta)$. Switching the chain therefore leaves $T$ Tashkinov: a
+tree edge of colour $\alpha_0$, if any, retains its unchanged witness
+$y_0$, and $\delta$ is unused on $T$. Since $\delta$ is defective and only
+one $\delta$-boundary edge has its in-end in
+$Z_{\gamma(\delta)}$, at least two such edges are incident with
+$U_{\gamma(\delta)}$. There can be at most two, one at each vertex of
+that pair, so there are exactly two. Together with the internal
+$\alpha_0$-edge, they lie on the switched chain and become
+$\alpha_0$-edges. Appending either one to $T$ is then possible because
+$\alpha_0$ remains missing at $y_0$, contradicting the definition of
+$t(G)$. This proves \eqref{L41-7}.
+
+Besides $f^0_\delta$, denote the other two edges counted in
+\eqref{L41-7} by
+\[
+ f^i_\delta=v^i_\delta u^i_\delta\quad(i=1,2),
+ \qquad
+ v^i_\delta\in Z_{\gamma(\delta)},
+ \quad u^i_\delta\notin V(T),
+\]
+and put $U_\delta=\set{u^1_\delta,u^2_\delta}$. Neither
+$u^1_\delta$ nor $u^2_\delta$ belongs to $P'_\delta$: otherwise its
+unique incident $\delta$-edge $f^i_\delta$ would lie on that chain, forcing
+the tree vertex $v^i_\delta\ne v^0_\delta$ onto it, contrary to
+\eqref{L41-5}. Consequently,
+\begin{equation}
+ \varphi_\delta(f)=\varphi(f)
+ \quad\text{for every edge $f$ incident with $U_\delta$.}
+ \tag{8}\label{L41-8}
+\end{equation}
+The sequence
+\[
+ T_\delta=(T-\gamma(\delta),
+            f^1_\delta,u^1_\delta,
+            f^2_\delta,u^2_\delta)
+\]
+is a Tashkinov tree with respect to $e,\varphi_\delta$: both appended
+edges have colour $\delta$, which is missing at $v^0_\delta$. It has
+$t(G)$ vertices, so
+\begin{equation}
+ (T_\delta,e,\varphi_\delta)\in\Tcal(G).
+ \tag{9}\label{L41-9}
+\end{equation}
+
+Closedness of this new maximum tree first gives
+\begin{equation}
+ E_G(u^1_\delta,u^2_\delta)\cap E_\alpha(e,\varphi)
+ \ne\varnothing
+ \quad\text{for every }
+ \alpha\in\overline\varphi(Z_{\gamma(\delta)})
+              \comp\set{\gamma(\delta)}.
+ \tag{10}\label{L41-10}
+\end{equation}
+Indeed, $\alpha$ is not one of the two colours changed on $P'_\delta$:
+$\delta$ is present on $Z_{\gamma(\delta)}$, and
+$\gamma(\delta)$ is excluded. Thus $\alpha$ has the same edges and the
+same missing vertex in $Z_{\gamma(\delta)}$ under both colourings. The
+original closed set $V(T)$ has no $\alpha$-edge from
+$Z_{\gamma(\delta)}$ to $U_\delta$. In the closed maximum tree
+$T_\delta$, the $\alpha$-edge at either vertex of $U_\delta$ can neither
+leave $V(T_\delta)$ nor end in $Z_{\gamma(\delta)}$. Since $\alpha$ is
+missing elsewhere in $V(T_\delta)$, it is present at both vertices of
+$U_\delta$, and their $\alpha$-edge must join them. Equation
+\eqref{L41-8} transfers the conclusion back to $\varphi$.
+
+We shall also need the two symmetric internal-edge conclusions
+\begin{align}
+ E_G(u^1_{\gamma(\delta)},u^2_{\gamma(\delta)})
+   \cap E_\delta(e,\varphi)&\ne\varnothing,
+   \tag{11}\label{L41-11}\\
+ E_G(u^1_\delta,u^2_\delta)
+   \cap E_{\gamma(\delta)}(e,\varphi)&\ne\varnothing.
+   \tag{12}\label{L41-12}
+\end{align}
+We prove \eqref{L41-11} first. The set
+$Z_{\gamma(\delta)}$ has $p+2s-2$ vertices and contains both ends of $e$.
+By \Cref{maximum-triple-facts}(f) and elementarity,
+\[
+ |\overline\varphi(Z_{\gamma(\delta)})|\ge p+2s.
+\]
+At most $p-2+s$ colours are used on $T$: at most $p-2$ occur on its
+initial coloured edges and at most one new colour occurs for each of the
+$s$ blocks. Every such colour is missing on $Y\subseteq
+Z_{\gamma(\delta)}$. Hence there is a colour
+\[
+ \beta\in
+ \overline\varphi(Z_{\gamma(\delta)})
+ \cap\Fcol(T,e,\varphi).
+\]
+Let $v$ be the vertex missing $\beta$ and consider
+$P=P_v(\beta,\delta,\varphi)$. By \Cref{defective-chain}(b) and
+\eqref{L41-7}, the chain contains $f^0_\delta,f^1_\delta,f^2_\delta$.
+Equation \eqref{L41-10} gives an internal $\beta$-edge of $U_\delta$;
+therefore $f^1_\delta$ and $f^2_\delta$ form one excursion of $P$ from
+$Z_{\gamma(\delta)}$ and back to it.
+
+Let $v'$ be the last vertex of $V(T)$ on $P$, in the order beginning at
+$v$. It is an exit vertex, hence lies in $Y$ by \eqref{L41-2}. The final
+edge leaving $V(T)$ must be one of
+$f^0_\delta,f^1_\delta,f^2_\delta$. The latter two are paired by the
+internal $\beta$-edge and form a returning excursion; neither can be the
+final departure. Thus $v'=v^0_\delta$, and the final departure is
+$f^0_\delta$.
+
+The component $P$ cannot contain a vertex of
+$U_{\gamma(\delta)}$. To see this, note first that \eqref{L41-3} gives an
+internal $\beta$-edge in that pair, so no $\beta$-edge joins it to
+$Z_{\gamma(\delta)}$; equation \eqref{L41-4} excludes a $\delta$-edge
+between the two sets. Any route from $Z_{\gamma(\delta)}$ to the pair would
+therefore have to leave $V(T)$ first. The departures through
+$f^1_\delta,f^2_\delta$ are trapped in the already described excursion
+through $U_\delta$, while the departure through $f^0_\delta$ occurs after
+the last tree vertex. Hence no such route is possible. By
+\Cref{defective-chain}(b), every $\delta$-coloured boundary edge of
+$V(T)$ lies on $P$, so none is incident with
+$U_{\gamma(\delta)}$. Together with \eqref{L41-4} and the fact that
+$\delta$ is present at both vertices of that pair, this forces the internal
+$\delta$-edge asserted in \eqref{L41-11}.
+
+For \eqref{L41-12}, work with the globally maximum triple
+$(T_\delta,e,\varphi_\delta)$. The same missing-colour count on
+$Z_{\gamma(\delta)}$ gives a free colour $\beta$ for this triple. Under
+$\varphi_\delta$, the colour $\gamma(\delta)$ is defective, and its
+boundary edges with in-end in $Z_{\gamma(\delta)}$ are exactly
+\[
+ f^0_\delta,
+ \quad f^1_{\gamma(\delta)},
+ \quad f^2_{\gamma(\delta)}.
+\]
+The first acquired colour $\gamma(\delta)$ in \eqref{L41-6}; the other two
+are the deleted block edges. There is no further one: before the switch,
+closedness of $V(T)$ excluded every $\gamma(\delta)$-edge from
+$Z_{\gamma(\delta)}$ to the exterior of $V(T)$, and the two block vertices
+already use their unique $\gamma(\delta)$-edges.
+
+Every vertex of $U_\delta$ misses a free colour for the new triple. Indeed,
+each misses at least one colour, while every colour used on $T_\delta$ has
+a missing witness in $Z_{\gamma(\delta)}$ and hence, by elementarity, is
+present on $U_\delta$. Thus \Cref{exit-no-free} says that every exit vertex
+of $T_\delta$ lies in $Z_{\gamma(\delta)}$. Now repeat the proof of
+\eqref{L41-11}. The edges
+$f^1_{\gamma(\delta)},f^2_{\gamma(\delta)}$ form a returning excursion
+through $U_{\gamma(\delta)}$, because \eqref{L41-3} supplies its internal
+$\beta$-edge. The pair $U_\delta$ has its own internal $\beta$-edge by
+\eqref{L41-10}, and no $\gamma(\delta)$-edge joins it to
+$Z_{\gamma(\delta)}$, by \eqref{L41-8} and the original closedness of
+$V(T)$. Thus the same last-exit argument shows that the relevant
+$(\beta,\gamma(\delta))$-chain avoids $U_\delta$. Consequently no
+$\gamma(\delta)$-coloured boundary edge of $T_\delta$ is incident with
+that pair. Since the colour is present at both of its vertices, they are
+joined by a $\gamma(\delta)$-edge under $\varphi_\delta$, and hence under
+$\varphi$ by \eqref{L41-8}. This proves \eqref{L41-12}.
+
+Two further symmetric consequences will be used repeatedly:
+\begin{align}
+ E_G(u^1_{\gamma(\delta)},u^2_{\gamma(\delta)})
+   \cap E_\alpha(e,\varphi)&\ne\varnothing
+ &&\text{for every }\alpha\in\overline\varphi(U_\delta),
+ \tag{13}\label{L41-13}\\
+ E_G(u^1_\delta,u^2_\delta)
+   \cap E_\alpha(e,\varphi)&\ne\varnothing
+ &&\text{for every }\alpha\in
+          \overline\varphi(U_{\gamma(\delta)}).
+ \tag{14}\label{L41-14}
+\end{align}
+For \eqref{L41-13}, let $\alpha\in\overline\varphi(U_\delta)$. The
+$\delta$-edges $f^1_\delta,f^2_\delta$ and \eqref{L41-12} show that
+$\alpha\notin\set{\delta,\gamma(\delta)}$. Thus the
+$\alpha$-edges are the same in $\varphi$ and $\varphi_\delta$.
+Furthermore $\alpha\ne\alpha_0$, because $V(T_\delta)$ is elementary,
+$\alpha$ is missing on $U_\delta$, and $\alpha_0$ is missing at $y_0$.
+The $(\alpha_0,\alpha)$-chain through
+$u^1_{\gamma(\delta)}$ is disjoint from $V(T_\delta)$: both colours are
+missing on that closed set. It therefore meets $V(T)$ only inside
+$U_{\gamma(\delta)}$ and contains no edge of the tree sequence $T$.
+Switching it preserves $T$, since every colour used on a tree edge has an
+unchanged missing witness in $Y$, which the chain avoids.
+
+By \eqref{L41-3}, the chain contains both vertices of
+$U_{\gamma(\delta)}$ through their internal $\alpha_0$-edge. If an
+$\alpha$-edge joined the pair to the exterior of $V(T)$, the switch would
+turn it into an $\alpha_0$-edge appendable to $T$. If an $\alpha$-edge
+joined the pair to $Z_{\gamma(\delta)}$, it would be a boundary edge of the
+closed maximum tree $T_\delta$ in a colour missing on that tree. Both are
+impossible. Hence no $\alpha$-edge leaves the pair. Without an internal
+$\alpha$-edge, both vertices of the pair would miss $\alpha$, contrary to
+the elementarity of $V(T)$. This proves \eqref{L41-13}.
+
+For \eqref{L41-14}, let
+$\alpha\in\overline\varphi(U_{\gamma(\delta)})$. The block edges of colour
+$\gamma(\delta)$ and \eqref{L41-11} give
+$\alpha\notin\set{\gamma(\delta),\delta}$. The
+$(\alpha_0,\alpha)$-chain through $u^1_\delta$ is disjoint from $V(T)$,
+because both colours are missing on that closed set, and it meets
+$V(T_\delta)$ only in $U_\delta$. Equation \eqref{L41-10} gives its
+internal $\alpha_0$-edge in $U_\delta$. Switching the chain preserves
+$T_\delta$: every initial tree-edge colour has a witness in $Y$, and the
+two appended $\delta$-edges have the witness $v^0_\delta\in Y$; all these
+vertices are avoided. The same switch-and-append argument, with
+$T$ and $T_\delta$ interchanged, excludes every $\alpha$-edge leaving
+$U_\delta$, and elementarity of $V(T_\delta)$ forces an internal one. This
+proves \eqref{L41-14}.
+
+We now prove the absorbing assertion
+\begin{equation}
+ U_\delta\subseteq A(T,e,\varphi)
+ \quad\text{for every }\delta\in\Dcol(T,e,\varphi).
+ \tag{15}\label{L41-15}
+\end{equation}
+Fix $u\in U_\delta$, let $\alpha\in\overline\varphi(u)$, and let
+$\beta\in\Fcol(T,e,\varphi)\comp\set\alpha$. By \eqref{L41-12} and the
+incident $\delta$-edge, $\alpha\notin\set{\delta,\gamma(\delta)}$; a free
+colour $\beta$ is also distinct from those two colours. Hence the
+$(\alpha,\beta)$-chain through $u$ is identical under $\varphi$ and
+$\varphi_\delta$. Let $v\in V(T)$ be the unique vertex missing $\beta$.
+If $v\in Z_{\gamma(\delta)}$, then $u,v\in V(T_\delta)$, and
+\Cref{Scheide-Theorem-3.3}(e), applied to the maximum tree $T_\delta$,
+shows that the chain is a path with ends $u,v$.
+
+Suppose that $v\in U_{\gamma(\delta)}$. Write
+$U_\delta=\set{u,u'}$ and
+$U_{\gamma(\delta)}=\set{v,v'}$. Equation \eqref{L41-14} supplies the
+internal $\beta$-edge $uu'$. Since $\alpha$ is missing at $u$ and
+$V(T_\delta)$ is elementary and closed, the unique $\alpha$-edge at $u'$
+joins $u'$ to a vertex of $Z_{\gamma(\delta)}$. Similarly, $\beta$ is
+missing at $v$, and the elementarity and closedness of $V(T)$ imply that
+the unique $\beta$-edge at $v'$ joins $v'$ to
+$Z_{\gamma(\delta)}$. Finally, \eqref{L41-13} supplies the internal
+$\alpha$-edge $v'v$.
+
+These two edges entering $Z_{\gamma(\delta)}$ belong to the same
+$(\alpha,\beta)$-component. Indeed, every vertex of
+$Z_{\gamma(\delta)}$ is incident with both colours: $\alpha$ is missing at
+$u\in V(T_\delta)$ and $\beta$ is missing at $v\in V(T)$. The closedness
+of $V(T_\delta)$ excludes every $\alpha$-edge from
+$Z_{\gamma(\delta)}$ to $U_{\gamma(\delta)}$ or to the exterior of
+$V(T_\delta)$; because $u$ misses $\alpha$, the edge from $u'$ is the
+unique $\alpha$-edge from $Z_{\gamma(\delta)}$ to $U_\delta$.
+Similarly, the closedness of $V(T)$ excludes every $\beta$-edge from
+$Z_{\gamma(\delta)}$ to $U_\delta$ or to the exterior of $V(T)$; because
+$v$ misses $\beta$, the edge to $v'$ is the unique $\beta$-edge from
+$Z_{\gamma(\delta)}$ to $U_{\gamma(\delta)}$. Thus these are exactly
+the two boundary edges of $Z_{\gamma(\delta)}$ in the
+$(\alpha,\beta)$-subgraph. Every vertex inside the set has degree two in
+that subgraph, so its alternating paths pair the two boundary edges.
+Consequently the chain beginning $u-\beta-u'-\alpha$ passes through
+$Z_{\gamma(\delta)}$, then through $v'-\alpha-v$, and has ends $u,v$.
+This is exactly the absorbing condition, so \eqref{L41-15} follows.
+
+Set
+\[
+ X=V(T)\cup
+   \bigcup_{\delta\in\Dcol(T,e,\varphi)}U_\delta.
+\]
+By \eqref{L41-15} and \Cref{absorbing-elementary},
+\begin{equation}
+ X\text{ is elementary with respect to }\varphi.
+ \tag{16}\label{L41-16}
+\end{equation}
+For a fixed defective colour $\delta$, put
+$X_\delta=V(T)\cup U_\delta$. We claim
+\begin{equation}
+ X_\delta\text{ is closed with respect to }\varphi.
+ \tag{17}\label{L41-17}
+\end{equation}
+Let $\alpha\in\overline\varphi(X_\delta)$. Suppose first that $\alpha$ is
+missing on $V(T)$. The closedness of $V(T)$ excludes an $\alpha$-edge from
+that set to its exterior. The two vertices of $U_\delta$ are joined by an
+$\alpha$-edge: use \eqref{L41-12} if
+$\alpha=\gamma(\delta)$, use \eqref{L41-10} if its missing vertex lies in
+$Z_{\gamma(\delta)}$ and $\alpha\ne\gamma(\delta)$, and use
+\eqref{L41-14} if its missing vertex lies in
+$U_{\gamma(\delta)}$. Thus no $\alpha$-edge leaves $X_\delta$.
+
+Suppose instead that $\alpha$ is missing on $U_\delta$. The incident
+$\delta$-edges and \eqref{L41-12} imply
+$\alpha\notin\set{\delta,\gamma(\delta)}$. Hence the colour is unchanged
+in $\varphi_\delta$, and it is missing on the closed maximum tree
+$T_\delta$. No $\alpha$-edge can leave
+$Z_{\gamma(\delta)}\cup U_\delta$. Equation \eqref{L41-13} gives an
+internal $\alpha$-edge of the remaining pair
+$U_{\gamma(\delta)}$, so no $\alpha$-edge leaves that pair either. This
+proves \eqref{L41-17}.
+
+Equation \eqref{L41-10}, applied to $\alpha_0$, supplies an internal
+$\alpha_0$-edge in every $U_\delta$. Since a vertex is incident with at
+most one edge of a given colour,
+\begin{equation}
+ U_\delta\text{ and }U_{\delta'}
+ \text{ are either equal or disjoint.}
+ \tag{18}\label{L41-18}
+\end{equation}
+We now prove
+\begin{equation}
+ X\text{ is closed with respect to }\varphi.
+ \tag{19}\label{L41-19}
+\end{equation}
+Suppose that an edge $f$ of colour $\alpha$ leaves $X$, where
+$\alpha\in\overline\varphi(X)$. Choose $\delta$ so that the in-end of $f$
+lies in $X_\delta$. Since $X_\delta$ is closed, the vertex of $X$ missing
+$\alpha$ is not in $X_\delta$; by \eqref{L41-18}, it lies in a pair
+$U_{\delta'}$ disjoint from $U_\delta$. Closedness of $X_{\delta'}$ then
+shows that the in-end of $f$ cannot lie in $V(T)$, so it lies in
+$U_\delta$. Denote this end by $u$ and the outside end by $w$.
+
+The $(\alpha_0,\alpha)$-chain through $u$ avoids $X_{\delta'}$, because
+both colours are missing on that closed set. In particular it avoids
+$V(T)$. By \eqref{L41-16}, the colour $\alpha$ is not in $\Gamma$:
+every colour of $\Gamma$ is already missing on $V(T)$. Also
+$\alpha\ne\delta$, since the $\delta$-edge $f^1_\delta$ crosses the
+boundary of the closed set $X_{\delta'}$. We already have
+$\alpha_0\notin\Gamma$ and $\alpha_0\ne\delta$. Therefore this chain is
+the same under $\varphi$ and $\varphi_\delta$, and it contains no edge of
+$T_\delta$. Switching it preserves all Tashkinov conditions for
+$T_\delta$: every tree-edge colour has a missing witness in $V(T)$, which
+the chain avoids. The edge $f$ lies on the chain and acquires colour
+$\alpha_0$, while $\alpha_0$ remains missing at $y_0$. Appending $f,w$ to
+$T_\delta$ contradicts the definition of $t(G)$. This proves
+\eqref{L41-19}.
+
+We require one final boundary fact. If $\alpha$ is present at every vertex
+of $X$ and
+\[
+ P=P_{y_0}(\alpha_0,\alpha,\varphi),
+\]
+then
+\begin{equation}
+ |E(P)\cap E_G(X,V(G)\comp X)|=1.
+ \tag{20}\label{L41-20}
+\end{equation}
+The path has one end $y_0$ and its other end outside $X$, because $X$ is
+elementary, $\alpha_0$ is missing at $y_0$, and $\alpha$ is missing at no
+vertex of $X$. Let $v$ be the last vertex of $X$ on the path, and let $g$
+be the following edge. By \eqref{L41-19}, no $\alpha_0$-edge leaves $X$,
+so $\varphi(g)=\alpha$. We show that $y_0Pv\subseteq X$.
+
+If $v\in V(T)$ and $\alpha$ is not defective for $T$, then $g$ is the
+unique $\alpha$-edge leaving $V(T)$, while no $\alpha_0$-edge leaves that
+set. Thus $y_0Pv\subseteq V(T)$. If $v\in V(T)$ and $\alpha$ is defective,
+then \eqref{L41-7} and \eqref{L41-11}, with $\delta=\alpha$, show that the
+only $\alpha$-edge leaving $X_\alpha$ is $f^0_\alpha$: the other two
+boundary edges of $V(T)$ end in $U_\alpha$, and no such edge is incident
+with $U_{\gamma(\alpha)}$. Since $X_\alpha$ is closed and
+$\alpha_0$ is missing there, the initial segment lies in $X_\alpha$.
+
+Finally suppose that $v\in U_\delta$. The edge $g$ is different from the
+incident $\delta$-edge and from the internal
+$\gamma(\delta)$-edge in \eqref{L41-12}; hence
+$\alpha\notin\set{\delta,\gamma(\delta)}$. The path is therefore unchanged
+under $\varphi_\delta$, and $v$ is its last vertex in
+$V(T_\delta)\subseteq X$. Every colour used on $T_\delta$ has a missing witness in
+$Z_{\gamma(\delta)}$: this is clear for the inherited tree edges, and the
+two appended $\delta$-edges use $v^0_\delta$ as their witness. Since
+$v\in U_\delta$, elementarity therefore prevents any used colour from
+being missing at $v$. Thus every colour missing at $v$ is unused, and $v$
+misses a free colour. If $\alpha$ were defective for
+$T_\delta$, the vertex $v$ would be an exit vertex for the chain from
+$y_0$ in the colours $\alpha_0,\alpha$, contrary to
+\Cref{exit-no-free}. Hence $\alpha$ is not defective for $T_\delta$.
+The edge $g$ is its unique $\alpha$-boundary edge, and no
+$\alpha_0$-edge leaves the closed tree. Therefore
+$y_0Pv\subseteq V(T_\delta)$. All cases prove \eqref{L41-20}.
+
+We finish by proving
+\begin{equation}
+ X\text{ is strongly closed with respect to }\varphi.
+ \tag{21}\label{L41-21}
+\end{equation}
+Suppose not. By \eqref{L41-19}, some colour $\alpha$ that is present at
+every vertex of $X$ occurs on at least two edges of $\partial(X)$. The set
+$X$ has odd order: $V(T)$ has odd order and, by \eqref{L41-18}, the union
+adds disjoint two-vertex pairs. Counting incidences of the
+$\alpha$-matching therefore shows that an odd number, hence at least three,
+of its edges leave $X$.
+
+At most one of these boundary edges has its in-end in $V(T)$. Otherwise
+$\alpha$ would be defective for $T$, while \eqref{L41-7} and
+\eqref{L41-11} would show that only $f^0_\alpha$ among its boundary edges
+can leave $X_\alpha$. Thus at least two boundary edges have their in-end in
+$X\comp V(T)$.
+
+By \eqref{L41-20}, the path
+$P_{y_0}(\alpha_0,\alpha,\varphi)$ uses exactly one boundary edge of $X$.
+Choose another one, $f=wu$, where $w\in U_\delta$ and $u\notin X$, not on
+that path. The chain
+$Q=P_u(\alpha_0,\alpha,\varphi)$ is disjoint from the first chain. It also
+avoids $V(T)$. If $\alpha$ is defective for $T$, the closed set
+$X_\alpha$ has only the edge $f^0_\alpha$ of colour $\alpha$ leaving it,
+and that edge lies on the first chain; hence the disjoint chain $Q$ cannot
+enter $X_\alpha\supseteq V(T)$. If $\alpha$ is not defective, the unique
+$\alpha$-boundary edge of $V(T)$ lies on the first chain, and again $Q$
+cannot enter $V(T)$. No $\alpha_0$-edge leaves $V(T)$ in either case.
+
+The edge $f$ is distinct from the incident $\delta$-edge at $w$ and from
+the internal $\gamma(\delta)$-edge supplied by \eqref{L41-12}. Hence
+$\alpha\notin\set{\delta,\gamma(\delta)}$; the same is true of
+$\alpha_0$. Thus $Q$ is unchanged under $\varphi_\delta$ and contains no
+edge of $T_\delta$. Switching it preserves $T_\delta$, because all
+missing witnesses for its tree-edge colours lie in the avoided set
+$V(T)$. The edge $f$ then has colour $\alpha_0$, while $\alpha_0$ remains
+missing at $y_0$. Appending $f,u$ exceeds $t(G)$, a contradiction. This
+proves \eqref{L41-21}.
+
+By \eqref{L41-16} and \eqref{L41-21}, the set $X$ is elementary and
+strongly closed, and it contains both ends of $e$. The implication \textup{(iv)} $\Rightarrow$ \textup{(i)} in
+\Cref{egraph2} now proves that $G$ is elementary.
+\end{proof}
+
+\begin{proposition}[Source Proposition~4.2]
+\label{Scheide-Proposition-4.2}\label{large-height}
+Let $G$ be critical with $\chi'(G)=k+1$ and $k\ge\Delta(G)+1$. If
+$h(G)>t(G)-4$, then $G$ is elementary.
+\end{proposition}
+
+\begin{proof}
+Both $h(G)$ and $t(G)$ are odd, by \Cref{balanced-triples}(a) and
+\Cref{maximum-triple-facts}(a). Hence the hypothesis gives
+$h(G)=t(G)$ or $h(G)=t(G)-2$. Choose a balanced triple
+$(T,e,\varphi)$.
+
+Suppose first that $h(G)=t(G)$. Then $T$ consists of its trunk, and only the
+two trunk colours $\alpha,\beta$ are used on it. Every vertex of $V(T)$
+misses a free colour. Indeed, the two ends of $e$ each miss at least two
+colours and at most one of $\alpha,\beta$ at that vertex, while every other
+vertex misses at least one colour and, by elementarity, cannot miss either
+trunk colour, which is already missing at one of the first two vertices. If
+a defective colour existed, \Cref{defective-chain}(d) would give an exit
+vertex missing no free colour, a contradiction. Thus there is no defective
+colour. By \Cref{maximum-triple-facts}(b),(c), $V(T)$ is elementary and
+strongly closed, and \Cref{egraph2} proves that $G$ is elementary.
+
+Suppose now that $h(G)=t(G)-2$. Write $p=h(G)$. The balanced tree has the
+form
+\[
+ T=(y_0,e_1,y_1,\ldots,e_{p-1},y_{p-1},f_1,u_1,f_2,u_2),
+\]
+where its trunk uses the two colours $\alpha,\beta$ and
+\[
+ \varphi(f_1)=\varphi(f_2)=\gamma
+ \in\overline\varphi(\set{y_0,\ldots,y_{p-1}}).
+\]
+The colour $\gamma$ is distinct from $\alpha,\beta$: the closing
+$(\alpha,\beta)$-path is the full two-coloured component of the ends of
+$e$, so no $\alpha$- or $\beta$-edge can leave its vertex set along the
+tail. Properness also shows that both $f_1$ and $f_2$ join their new
+vertices to the trunk; the second cannot use $u_1$, already incident with
+the $\gamma$-edge $f_1$.
+
+Let $y_r$ be the unique trunk vertex missing $\gamma$. Every vertex of
+$V(T)\comp\set{y_r}$ misses a free colour: all used colours are
+$\alpha,\beta,\gamma$, and their missing vertices are already prescribed;
+the ends of $e$ have an additional missing colour when needed. By
+\Cref{exit-no-free}, $F(T,e,\varphi)\subseteq\set{y_r}$. The hypotheses of
+\Cref{structural-lemma} hold with $s=1$, $Y$ equal to the trunk, and
+$\Gamma=\set{\gamma}$. That lemma proves that $G$ is elementary.
+\end{proof}
+
+\begin{proposition}[Source Proposition~4.3]
+\label{Scheide-Proposition-4.3}\label{small-height}
+Let $G$ be critical with $\chi'(G)=k+1$ and $k\ge\Delta(G)+1$. If
+$h(G)<5$, then $G$ is elementary.
+\end{proposition}
+
+\begin{proof}
+By \Cref{balanced-triples}(a), $h(G)=3$. Choose a balanced triple and,
+after naming its trunk colours, write
+\[
+ T=(y_0,e_1,y_1,e_2,y_2,e_3,y_3,e_4,y_4,\ldots),
+\]
+where $(y_0,e_1,y_1,e_2,y_2)$ is the trunk,
+$\alpha\in\overline\varphi(y_0)$,
+$\beta\in\overline\varphi(y_1)$, and a closing edge
+$q\in E_G(y_2,y_0)$ has colour $\beta$.
+
+Assume that $G$ is not elementary. By \Cref{large-height},
+$t(G)\ge h(G)+4=7$, so the displayed pair $e_3,e_4$ exists. Its common
+colour $\gamma$ is missing at a trunk vertex, is distinct from the trunk
+colours, and both edges join $\set{y_1,y_2}$ to
+$\set{y_3,y_4}$. Rotate the balanced trunk so that the vertex missing
+$\gamma$ becomes $y_0$, and rename the two trunk colours if necessary.
+Then $y_0,y_1$ form a $(\gamma,\beta)$-pair.
+
+By \Cref{Scheide-Theorem-3.3}(e), their
+$(\gamma,\beta)$-chain is an even path inside $V(T)$. Starting at $y_0$,
+it uses the closing $\beta$-edge $q$ to $y_2$ and then the unique
+$\gamma$-edge at $y_2$. At the other end it uses the unique
+$\gamma$-edge at $y_1$. The two such edges are exactly $e_3,e_4$, one at
+$y_1$ and one at $y_2$, so the path contains all five vertices
+$y_0,\ldots,y_4$. By \Cref{normalisation}, there is a normal globally
+maximum Tashkinov tree of height at least five, contradicting $h(G)=3$.
+\end{proof}
+
+\begin{lemma}[Height-five configuration; source Lemma~4.4]
+\label{Scheide-Lemma-4.4}\label{height-five}
+Let $G$ be critical with $\chi'(G)=k+1$, $k\ge\Delta(G)+1$, and
+$h(G)=5$. Let $(T,e,\varphi)\in\Tcal^N(G)$ have trunk
+\[
+ T_0=(y_0,e_1,y_1,e_2,y_2,e_3,y_3,e_4,y_4),
+\]
+with colours $\alpha\in\overline\varphi(y_0)$ and
+$\beta\in\overline\varphi(y_1)$. Suppose that
+$\gamma\in\overline\varphi(y_0)$ and
+\[
+ E_G(V(T_0),V(T)\comp V(T_0))\cap E_\gamma(e,\varphi)
+ \ne\varnothing.
+\]
+Then:
+\begin{enumerate}[label=\textup{(\arabic*)}]
+\item there are edges
+\[
+ f_1\in E_G(y_1,V(T)\comp V(T_0)),\quad
+ f_2\in E_G(y_4,V(T)\comp V(T_0)),\quad
+ f_3\in E_G(y_2,y_3)
+\]
+all coloured $\gamma$;
+\item if $v_1,v_2$ are the ends of $f_1,f_2$ outside $V(T_0)$, then
+      $E_G(v_1,v_2)$ contains both an $\alpha$-edge and a $\beta$-edge.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+By the definition of the trunk,
+\[
+ e_1=e,
+ \qquad
+ \varphi(e_2)=\varphi(e_4)=\alpha,
+ \qquad
+ \varphi(e_3)=\beta,
+\]
+and there is a closing edge $q\in E_G(y_4,y_0)$ with
+$\varphi(q)=\beta$.
+
+Let $P_1=P_{y_0}(\gamma,\beta,\varphi)$. By
+\Cref{Scheide-Theorem-3.3}(e), it is an even path with ends $y_0,y_1$ and
+vertices in $V(T)$. Applying \Cref{normalisation} to this pair shows that
+$|V(P_1)|\le h(G)=5$. The edge $q$ lies on $P_1$, so
+$y_0,y_1,y_4\in V(P_1)$.
+
+No $\gamma$-edge joins $\set{y_2,y_3}$ to
+$V(T)\comp V(T_0)$. Suppose that such an edge $g$ exists and let $v$ be
+its end outside $V(T_0)$. If one of $y_2,y_3,v$ lay on $P_1$, then the
+$\gamma$-edge $g$ and the $\beta$-edge $e_3$ would put all three on
+$P_1$, producing at least six vertices together with $y_0,y_1,y_4$.
+Thus all three avoid $P_1$.
+
+Switch $P_1$. The full tree $T$ remains Tashkinov by
+\Cref{Scheide-Theorem-3.3}(e), because $\gamma$ is unused on the initial
+two-vertex tree. In the new colouring $\gamma$ is missing at $y_1$, the
+closing edge $q$ has colour $\gamma$, and $g$ is unchanged. The
+$(\alpha,\gamma)$-chain between $y_0$ and $y_1$ contains the forced
+segments
+\[
+ y_0,q,y_4,e_4,y_3
+ \qquad\text{and}\qquad
+ y_1,e_2,y_2,
+\]
+and it also contains $g$ and $v$. Hence it has at least six vertices.
+Normalisation would give a globally maximum normal tree of height greater
+than five, a contradiction.
+
+The $\gamma$-edges at $y_2,y_3$ therefore stay in $V(T_0)$. If they were
+distinct, matching and the fact that $\gamma$ is missing at $y_0$ would
+force them to end at $y_1,y_4$, leaving no $\gamma$-edge from the trunk to
+its complement. Hence they coincide in an edge
+$f_3\in E_G(y_2,y_3)$. The $\gamma$-edges at $y_1,y_4$ cannot coincide,
+for the same reason, and their other ends cannot be elsewhere in the trunk.
+They are the edges $f_1,f_2$ asserted in (1).
+
+Let their outside ends be $v_1,v_2$. The path $P_1$ contains the two
+segments $y_1,f_1,v_1$ and $y_0,q,y_4,f_2,v_2$. These comprise five
+distinct vertices, and $|V(P_1)|\le5$. Therefore a $\beta$-edge joins
+$v_1$ and $v_2$ and completes the path.
+
+Finally switch the original $(\alpha,\beta)$-trunk path
+\[
+ P(y_1,e_2,y_2,e_3,y_3,e_4,y_4,q,y_0).
+\]
+Again $T$ remains Tashkinov by \Cref{Scheide-Theorem-3.3}(e). Now
+$\alpha$ is missing at $y_1$, $\gamma$ is still missing at $y_0$, and
+$q$ has colour $\alpha$. The $(\gamma,\alpha)$-chain between $y_0,y_1$
+contains the five vertices in the two segments
+$y_0,q,y_4,f_2,v_2$ and $y_1,f_1,v_1$. By maximality of $h(G)$ it has
+exactly five vertices, so an $\alpha$-edge joins $v_1,v_2$. This proves
+(2).
+\end{proof}
+
+\begin{proposition}[Small Tashkinov order; source Proposition~4.5;
+ target label \target{ThmScheide}]
+\label{Scheide-Proposition-4.5}\label{ThmScheide}
+Let $G$ be a critical multigraph with $\chi'(G)\ge\Delta(G)+2$. If
+$t(G)<11$, then $G$ is elementary.
+\end{proposition}
+
+\begin{proof}
+Put $k=\chi'(G)-1$, so $k\ge\Delta(G)+1$ and the preceding results apply.
+Suppose for a contradiction that $G$ is not elementary. Since $t(G)$ is
+odd, \Cref{large-height,small-height} force
+\[
+ t(G)=9,
+ \qquad
+ h(G)=5.
+\]
+Choose a balanced triple and write
+\[
+ T=(y_0,e_1,y_1,e_2,y_2,e_3,y_3,e_4,y_4,
+     e_5,y_5,e_6,y_6,e_7,y_7,e_8,y_8),
+\]
+where $e_1=e$, the trunk colours are $\alpha,\beta$, and
+\[
+ \varphi(e_5)=\varphi(e_6)=\gamma_1,
+ \qquad
+ \varphi(e_7)=\varphi(e_8)=\gamma_2.
+\]
+The first tail colour $\gamma_1$ is missing at a trunk vertex. Rotate the
+balanced trunk so that it is missing at $y_0$.
+
+Apply \Cref{height-five} with $\gamma=\gamma_1$. There are vertices
+$v_1,v_2\in\set{y_5,y_6,y_7,y_8}$ such that
+\[
+ y_1v_1,\qquad y_4v_2,
+ \qquad y_2y_3
+\]
+have colour $\gamma_1$, and $v_1v_2$ has both an $\alpha$-edge and a
+$\beta$-edge. The two tree edges $e_5,e_6$ are precisely the first two of
+these $\gamma_1$-edges: their in-ends cannot be $y_0$, where
+$\gamma_1$ is missing, or $y_2,y_3$, already incident with the internal
+$\gamma_1$-edge. Hence
+\[
+ \set{v_1,v_2}=\set{y_5,y_6}.
+\]
+The two equal-coloured edges may be interchanged in their block, so we
+reorder them, if necessary, and henceforth take $v_1=y_5$ and $v_2=y_6$.
+In particular, every vertex among $y_0,\ldots,y_6$, except the unique
+missing vertex for each of $\alpha,\beta,\gamma_1$, is already incident
+with an edge of that colour. It follows at once that
+\[
+ \gamma_2\notin\set{\alpha,\beta,\gamma_1}:
+\]
+if equality held, neither of the two new vertices $y_7,y_8$ could be
+joined by its tree edge to an earlier vertex not already incident with that
+colour (and the unique missing vertex cannot be incident with such an
+edge).
+
+Since $V(T)$ is elementary and closed, the remaining unmatched incidences
+of each of the colours $\gamma_1,\alpha,\beta$ force three edges between
+$y_7$ and $y_8$, one of each colour. We may also assume, after replacing
+and relabelling the balanced tree if necessary, that $\gamma_2$ is missing
+on the trunk. Indeed, its missing witness precedes $e_7$, so it lies either
+on the trunk or in $\set{y_5,y_6}$. In the latter case use the balanced
+tree
+\[
+ (y_0,e_1,y_1,f_1,v_1,g_\beta,v_2,f_2,y_4,
+   e_2,y_2,e_4,y_3,e_7,y_7,e_8,y_8),
+\]
+where $f_1=y_1v_1$ and $f_2=v_2y_4$ have colour $\gamma_1$, and
+$g_\beta$ is the $\beta$-edge between $v_1,v_2$. Its trunk colours are
+$\gamma_1,\beta$, its first tail pair has colour $\alpha$, and the vertex
+missing $\gamma_2$ is now on the trunk. Relabel the vertices by their
+positions in this new sequence as $y_0,\ldots,y_8$; then relabel the old
+$\gamma_1$ as the new trunk colour $\alpha$ and the old $\alpha$ as the
+new first-tail colour $\gamma_1$. The preceding conclusions, including
+the three differently coloured edges between $y_7,y_8$, retain exactly the
+same form.
+
+We claim that a $\gamma_2$-edge joins the trunk to
+$\set{y_7,y_8}$. Suppose not. Then the two tree edges $e_7,e_8$ join
+$\set{y_5,y_6}$ to $\set{y_7,y_8}$, one at each vertex of each pair;
+relabel so that $e_7=y_5y_7$ and $e_8=y_6y_8$. Together with the
+$\beta$-edges $y_5y_6$ and $y_7y_8$, these form an alternating
+$(\gamma_2,\beta)$-cycle. Switch that cycle. The displayed tree sequence
+remains Tashkinov: $e_7,e_8$ now have colour $\beta$, which is missing at
+a trunk vertex, and all other tree edges are unchanged. In the new
+colouring the $(\gamma_1,\beta)$-path between the first two trunk vertices
+contains, in order, the seven vertices
+\[
+ y_1,
+ \quad v_1,
+ \quad y_7,
+ \quad y_8,
+ \quad v_2,
+ \quad y_4,
+ \quad y_0,
+\]
+where $\set{v_1,v_2}=\set{y_5,y_6}$. By \Cref{normalisation}, this gives
+height at least seven, contradicting $h(G)=5$. The claim follows.
+
+Let $y_j$ be the trunk vertex missing $\gamma_2$. Temporarily rotate
+the trunk so that $y_j$ is first and apply \Cref{height-five}. The rotation
+changes only the $\alpha,\beta$ colours on the trunk cycle; it leaves every
+$\gamma_2$-edge and every edge outside that cycle unchanged. The lemma gives
+exactly two $\gamma_2$-edges from the trunk to its complement: the other two
+trunk vertices incident with $\gamma_2$ are joined internally. The outside
+ends of the two crossing edges are joined by an edge of each trunk colour,
+in particular by an $\alpha$-edge. At least one outside end is $y_7$ or
+$y_8$ by the preceding claim. But an $\alpha$-edge already joins $y_7$ and
+$y_8$; properness therefore forces the two outside ends to be exactly
+$y_7,y_8$. Returning to the original orientation and notation, the same two
+$\gamma_2$-edges remain, so $e_7,e_8$ both join the trunk to these two
+vertices.
+
+We have now obtained precisely the configuration in
+\Cref{structural-lemma}, with
+\[
+ Y=\set{y_0,\ldots,y_4},
+ \qquad
+ \Gamma=\set{\gamma_1,\gamma_2},
+ \qquad s=2.
+\]
+The only colours used on $T$ are
+$\alpha,\beta,\gamma_1,\gamma_2$. The trunk colours $\alpha,\beta$ are
+missing at the first and second trunk vertices, respectively;
+$\gamma_1$ is missing at $y_0$, and $\gamma_2$ is missing at $y_j$.
+Every non-end of $e$ outside $\set{y_0,y_j}$ misses at least one colour,
+and none of these four used colours can be missing there, by elementarity.
+Each end of $e$ misses at least two colours; outside the same exceptional
+set, at most one of the four used colours is missing there. Thus every
+vertex outside $\set{y_0,y_j}$ misses an unused colour, hence a free
+colour. Therefore \Cref{exit-no-free} gives
+\[
+ F(T,e,\varphi)\subseteq\set{y_0,y_j}.
+\]
+Each possible exit vertex in this set misses a colour of $\Gamma$, so (S4)
+holds; (S1)--(S3) were established above. The structural lemma says that
+$G$ is elementary, the final contradiction.
+\end{proof}
+
+\section{Dependency boundary and concordance}
+
+The proof of \Cref{ThmScheide} uses no result from the portion of
+Scheide's article beginning with Lemma~4.6.  Its source dependency cone is
+exactly
+\[
+\begin{gathered}
+ \text{Theorems 2.8, 3.2, 3.3; Propositions 3.4--3.6;}\\
+ \text{Lemmas 3.8, 3.11, 3.12, 4.1, 4.4; Propositions 4.2, 4.3, 4.5}.
+\end{gathered}
+\]
+Theorems~2.8 and~3.2 are the two results proved in the separately supplied
+book extract, under the labels \texttt{thm:egraph2} and
+\texttt{thm:tashkinov}. In the present note, Theorem~3.3,
+Propositions~3.4--3.6, Lemmas~3.8, 3.11, 3.12, 4.1, 4.4, and
+Propositions~4.2, 4.3, 4.5 are all proved. Thus these two files together
+cover the entire displayed dependency cone. The later truncation argument
+of source Lemma~4.7 and every result depending on it play no role here.
+
+For source search and formalization, the endpoint has both labels
+\target{Scheide-Proposition-4.5} and \target{ThmScheide}; the elementary-set
+criterion has \target{Scheide-Theorem-2.8} and \target{egraph2}; and the
+Tashkinov-tree theorem has \target{Scheide-Theorem-3.2} and
+\target{TashTree}. The companion file additionally labels those proofs
+\texttt{thm:egraph2} and \texttt{thm:tashkinov}. The definition of $t(G)$
+carries the exact target label \target{torder}.
+
+\begin{thebibliography}{99}
+
+\bibitem[CJZ]{CJZ}
+Guantao Chen, Guangming Jing, and Wenan Zang,
+``Proof of the Goldberg--Seymour conjecture on edge-colorings of
+multigraphs,''
+arXiv:1901.10316v2, 7 June 2022.
+
+\bibitem[FST]{FST}
+Lene M. Favrholdt, Michael Stiebitz, and Bjarne Toft,
+\emph{Graph Edge Colouring: Vizing's Theorem and Goldberg's Conjecture},
+DMF-2006-10-003, IMADA-PP-2006-20, University of Southern Denmark,
+preprint, 2006.
+
+\bibitem[S]{S}
+Diego Scheide,
+``Graph edge coloring: Tashkinov trees and Goldberg's conjecture,''
+\emph{Journal of Combinatorial Theory, Series B} \textbf{100} (2010),
+68--96,
+\href{https://doi.org/10.1016/j.jctb.2009.04.001}
+     {doi:10.1016/j.jctb.2009.04.001}.
+
+\bibitem[SSTF]{SSTF}
+Michael Stiebitz, Diego Scheide, Bjarne Toft, and Lene M. Favrholdt,
+\emph{Graph Edge Colouring: Vizing's Theorem and Goldberg's Conjecture},
+Wiley, 2012.
+
+\bibitem[T]{T}
+V. A. Tashkinov,
+``On an algorithm to colour the edges of a multigraph'' (in Russian),
+\emph{Diskretnyi Analiz i Issledovanie Operatsii} \textbf{7} (2000),
+72--85.
+
+\end{thebibliography}
+
+\end{document}

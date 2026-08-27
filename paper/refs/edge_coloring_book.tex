@@ -1,0 +1,762 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\geometry{margin=1in}
+\hypersetup{
+  hidelinks,
+  pdftitle={Selected results from Graph Edge Colouring: Vizing's Theorem and Goldberg's Conjecture},
+  pdfauthor={Notes prepared by ChatGPT}
+}
+\setlist[enumerate]{label=(\roman*),ref=(\roman*)}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.55em}
+\allowdisplaybreaks
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\calC}{\mathcal C}
+\newcommand{\E}{E}
+\newcommand{\V}{V}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\set}[1]{\{#1\}}
+\newcommand{\ceil}[1]{\left\lceil #1\right\rceil}
+\newcommand{\missing}[1]{\overline{#1}}
+\newcommand{\boundary}{\partial}
+\newcommand{\colours}{[k]}
+\newcommand{\phiT}[1]{\varphi\langle #1\rangle}
+\newcommand{\GammaG}{\Gamma(G)}
+
+\title{\textbf{Selected results from}\\[0.4em]
+  \emph{Graph Edge Colouring: Vizing's Theorem and Goldberg's Conjecture}}
+\author{Notes prepared by ChatGPT}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+These notes give a self-contained formulation and proof of the material needed from
+Chapter~1 through Theorem~1.4, together with the elementary-set theorem for
+Tashkinov trees from Section~5.1 of Stiebitz, Scheide, Toft, and Favrholdt.
+The exposition is newly written and is not a verbatim reproduction of the book.
+Notation is chosen to agree as closely as possible with the accompanying
+formalization manuscript.  The proof of the Tashkinov-tree theorem is expanded
+at the delicate terminal-path step; McDonald's thesis is used as an independent
+verification source for that reduction.
+\end{abstract}
+
+\tableofcontents
+
+\section{Scope and notation}
+
+All graphs in these notes are finite loopless multigraphs.  Parallel edges are
+allowed.  For a multigraph $G=(V,E)$ and a vertex set $X\subseteq V$, let
+$E_G(X)$ be the set of edges with both ends in $X$, and let
+$\boundary_G(X)$ be the set of edges with exactly one end in $X$.  We suppress
+the subscript $G$ when the ambient graph is clear.  The degree of $v$ is denoted
+$d_G(v)$, and $\Delta(G)=\max_{v\in V}d_G(v)$.
+
+A \emph{$k$-edge-colouring} of $G$ is a map
+$\varphi:E(G)\to [k]=\{1,\ldots,k\}$ such that incident edges receive distinct
+colours.  The set of all such colourings is denoted $\calC^k(G)$, and the
+\emph{chromatic index} is
+\[
+  \chi'(G)=\min\{k:\calC^k(G)\neq\varnothing\}.
+\]
+Every colour class of a proper edge-colouring is a matching.
+
+For an odd vertex set $U\subseteq V$ with $\abs U\ge 3$, define its density by
+\[
+  \gamma_G(U)=\frac{2\abs{E_G(U)}}{\abs U-1},
+\]
+and put
+\[
+  \Gamma(G)=\max\left\{\gamma_G(U):
+  U\subseteq V,\ \abs U\ge 3,\ \abs U\text{ odd}\right\}.
+\]
+If no such set exists, the maximum may be taken as $0$; this convention will not
+matter below.
+
+\section{Density, elementary multigraphs, and critical cores}
+
+\begin{proposition}[The two elementary lower bounds]\label{prop:lower-bounds}
+For every loopless multigraph $G$,
+\[
+  \chi'(G)\ge \Delta(G)
+  \qquad\text{and}\qquad
+  \chi'(G)\ge \ceil{\Gamma(G)}.
+\]
+\end{proposition}
+
+\begin{proof}
+At a vertex of degree $\Delta(G)$, all incident edges must receive distinct
+colours, proving the first inequality.
+
+Let $U\subseteq V(G)$ be odd, with $\abs U\ge3$, and suppose that $G$ has a
+proper $k$-edge-colouring.  A matching contains at most
+$(\abs U-1)/2$ edges of $E_G(U)$.  Since the $k$ colour classes partition
+$E_G(U)$,
+\[
+  \abs{E_G(U)}\le k\frac{\abs U-1}{2},
+  \qquad\text{so}\qquad
+  k\ge \frac{2\abs{E_G(U)}}{\abs U-1}.
+\]
+Taking the maximum over all eligible $U$ and then using integrality gives the
+second inequality.
+\end{proof}
+
+\begin{definition}[Elementary multigraph]
+A multigraph $G$ is \emph{elementary} if
+\[
+  \chi'(G)=\ceil{\Gamma(G)}.
+\]
+\end{definition}
+
+\begin{definition}[Critical multigraph]
+A multigraph $G$ is \emph{critical} if every proper subgraph $H$ of $G$ satisfies
+$\chi'(H)<\chi'(G)$.  It is \emph{$k$-critical} if it is critical and
+$\chi'(G)=k+1$.
+\end{definition}
+
+\begin{lemma}[Basic facts about critical graphs]\label{lem:critical-facts}
+Let $G$ be $k$-critical.
+\begin{enumerate}
+  \item $G$ has no isolated vertex.
+  \item For every edge $e\in E(G)$, the graph $G-e$ has a $k$-edge-colouring.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+If $v$ were isolated, then $G-v$ would be a proper subgraph with exactly the
+same edge-colourings as $G$, contrary to criticality.  For an edge $e$,
+criticality gives $\chi'(G-e)\le k$.  A colouring with fewer than $k$ colours
+may be regarded as a $k$-edge-colouring by adjoining unused colours.
+\end{proof}
+
+\begin{proposition}[Critical-subgraph reduction]\label{prop:critical-core}
+Let $G$ be a multigraph, and let $H\subseteq G$ be a critical subgraph with
+$\chi'(H)=\chi'(G)$.  If $H$ is elementary, then $G$ is elementary.
+\end{proposition}
+
+\begin{proof}
+By \cref{prop:lower-bounds} and monotonicity of $\Gamma$ under taking
+supergraphs,
+\[
+  \ceil{\Gamma(G)}
+  \le \chi'(G)
+  =\chi'(H)
+  =\ceil{\Gamma(H)}
+  \le\ceil{\Gamma(G)}.
+\]
+Thus all inequalities are equalities, and
+$\chi'(G)=\ceil{\Gamma(G)}$.
+\end{proof}
+
+\begin{remark}
+Every multigraph contains a critical subgraph with the same chromatic index:
+repeatedly delete an edge or vertex whenever doing so leaves the chromatic index
+unchanged.  Finiteness guarantees termination.
+\end{remark}
+
+\begin{proposition}[Critical elementary graphs; book Proposition~1.3]
+\label{prop:critical-elementary}
+Let $G$ be a critical elementary multigraph with
+$\chi'(G)=k+1$ and $k\ge\Delta(G)+1$.  Put $n=\abs{V(G)}$ and
+$m=\abs{E(G)}$.  Then:
+\begin{enumerate}
+  \item $n$ is odd, the whole vertex set witnesses the density bound, and
+  \[
+    \chi'(G)=\ceil{\Gamma(G)}
+    =\ceil{\frac{2m}{n-1}}.
+  \]
+  \item For every edge $e\in E(G)$ and every
+  $\varphi\in\calC^k(G-e)$, each colour in $[k]$ misses exactly one vertex
+  of $G$.  In particular, $V(G)$ is $\varphi$-elementary.
+  \item
+  \[
+    m=k\frac{n-1}{2}+1.
+  \]
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Since $G$ is elementary, $\ceil{\Gamma(G)}=k+1$, so $\Gamma(G)>k$.
+Choose an odd set $U\subseteq V(G)$ such that
+\[
+  2\abs{E_G(U)}>k(\abs U-1).
+  \tag{2.1}\label{eq:critical-dense-set}
+\]
+We claim that every edge of $G$ has both ends in $U$.  If an edge $f$ did not,
+criticality would give a $k$-edge-colouring of $G-f$.  All edges of $E_G(U)$
+would still be present, but its $k$ colour classes would be matchings and hence
+would contain at most $k(\abs U-1)/2$ edges of $E_G(U)$ in total, contrary to
+\eqref{eq:critical-dense-set}.  Thus every edge lies in $E_G(U)$.  A vertex
+outside $U$ would consequently be isolated, contrary to
+\cref{lem:critical-facts}; hence $U=V(G)$ and $n$ is odd.  In particular,
+\[
+  m>k\frac{n-1}{2}.
+  \tag{2.2}\label{eq:critical-edge-lower}
+\]
+
+Fix $e\in E(G)$ and $\varphi\in\calC^k(G-e)$.  Each colour class is a
+matching on the odd set $V(G)$ and therefore has at most $(n-1)/2$ edges.
+Consequently
+\[
+  m-1=\abs{E(G-e)}\le k\frac{n-1}{2}.
+\]
+On the other hand, integrality and \eqref{eq:critical-edge-lower} give the
+reverse inequality.  Equality follows.  Every one of the $k$ colour classes
+must therefore have exactly $(n-1)/2$ edges, so it saturates all but one
+vertex.  This proves the second assertion and also
+$m=k(n-1)/2+1$.
+
+Finally,
+\[
+  \frac{2m}{n-1}=k+\frac{2}{n-1}>k,
+\]
+so $\ceil{\Gamma(G)}\ge k+1$.  The density lower bound gives
+$\ceil{\Gamma(G)}\le\chi'(G)=k+1$.  Thus equality holds and the whole vertex
+set witnesses it, proving the first assertion.
+\end{proof}
+
+\section{Partial colourings and the equivalence theorem}
+
+Fix an edge $e\in E(G)$ and a colouring
+$\varphi\in\calC^k(G-e)$.  For $v\in V(G)$, let
+\[
+  \varphi(v)=\{\varphi(f): f\in E(G-e)\text{ is incident with }v\},
+  \qquad
+  \missing\varphi(v)=[k]\setminus\varphi(v).
+\]
+For $X\subseteq V(G)$, put
+\[
+  \missing\varphi(X)=\bigcup_{v\in X}\missing\varphi(v).
+\]
+
+\begin{definition}[Elementary, closed, and strongly closed sets]
+Let $X\subseteq V(G)$.
+\begin{enumerate}
+  \item $X$ is \emph{$\varphi$-elementary} if
+  $\missing\varphi(u)\cap\missing\varphi(v)=\varnothing$ for all distinct
+  $u,v\in X$.
+  \item $X$ is \emph{$\varphi$-closed} if no colour in
+  $\missing\varphi(X)$ occurs on an edge of $\boundary_G(X)$.
+  \item $X$ is \emph{$\varphi$-strongly closed} if it is $\varphi$-closed and
+  distinct edges of $\boundary_G(X)$ receive distinct colours.
+\end{enumerate}
+\end{definition}
+
+For a colour $\alpha\in[k]$ and a set $X\subseteq V(G)$, define
+\[
+  m_\alpha(X)=\abs{\{v\in X:\alpha\in\missing\varphi(v)\}},
+  \qquad
+  b_\alpha(X)=\abs{\{f\in\boundary_G(X):\varphi(f)=\alpha\}}.
+\]
+The boundary is the same in $G$ and $G-e$ whenever both ends of $e$ belong to
+$X$.
+
+\begin{lemma}[Per-colour counting identity]\label{lem:per-colour-count}
+Suppose both ends of $e$ lie in $X$.  For every $\alpha\in[k]$,
+\[
+  2\abs{E_\alpha(X)}+b_\alpha(X)=\abs X-m_\alpha(X),
+  \tag{3.1}\label{eq:per-colour}
+\]
+where $E_\alpha(X)$ is the set of $\alpha$-coloured edges of $G-e$ with both
+ends in $X$.
+\end{lemma}
+
+\begin{proof}
+Count incidences between vertices of $X$ and $\alpha$-coloured edges.  Exactly
+$\abs X-m_\alpha(X)$ vertices of $X$ are incident with an $\alpha$-coloured
+edge.  Each internal $\alpha$-edge contributes two incidences, and each
+boundary $\alpha$-edge contributes one.
+\end{proof}
+
+\begin{theorem}[Book Theorem 1.4; equivalence used as \texttt{egraph2}]
+\label{thm:egraph2}\label{egraph2}
+Let $G=(V,E)$ be critical with $\chi'(G)=k+1$, where
+$k\ge\Delta(G)+1$.  The following statements are equivalent.
+\begin{enumerate}
+  \item\label{item:egraph-elementary} $G$ is elementary.
+  \item\label{item:egraph-every} For every $e\in E$ and every
+  $\varphi\in\calC^k(G-e)$, the set $V$ is $\varphi$-elementary.
+  \item\label{item:egraph-some} There exist $e\in E$ and
+  $\varphi\in\calC^k(G-e)$ for which $V$ is $\varphi$-elementary.
+  \item\label{item:egraph-closed} There exist $e\in E$,
+  $\varphi\in\calC^k(G-e)$, and $X\subseteq V$ containing both ends of $e$
+  such that $X$ is $\varphi$-elementary and $\varphi$-strongly closed.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\emph{\cref{item:egraph-elementary}$\Rightarrow$\cref{item:egraph-every}.}
+This is exactly \cref{prop:critical-elementary}(ii).
+
+\emph{\cref{item:egraph-every}$\Rightarrow$\cref{item:egraph-some}.}
+Choose any edge $e$.  By criticality, $\calC^k(G-e)\neq\varnothing$.
+
+\emph{\cref{item:egraph-some}$\Rightarrow$\cref{item:egraph-closed}.}
+Take $X=V$.  Its boundary is empty, so it is strongly closed.
+
+\emph{\cref{item:egraph-closed}$\Rightarrow$\cref{item:egraph-elementary}.}
+Let $x$ be an end of $e$.  In $G-e$,
+\[
+  \abs{\missing\varphi(x)}
+  =k-d_{G-e}(x)
+  \ge k-(\Delta(G)-1)
+  \ge 2.
+\]
+Choose $\alpha\in\missing\varphi(x)$.  Since $X$ is elementary,
+$m_\alpha(X)=1$, and since $X$ is closed, $b_\alpha(X)=0$.  The identity
+\eqref{eq:per-colour} gives
+\[
+  2\abs{E_\alpha(X)}=\abs X-1.
+\]
+Thus $\abs X$ is odd.  Since $X$ contains the two distinct ends of $e$, it has
+odd order at least three.
+
+Put $q=\abs{\missing\varphi(X)}$.  Elementarity gives
+\[
+  q=\sum_{v\in X}\abs{\missing\varphi(v)}.
+\]
+Summing degrees in $G-e$ over $X$ yields
+\[
+  q
+  =k\abs X-\sum_{v\in X}d_{G-e}(v)
+  =k\abs X-2\abs{E_{G-e}(X)}-\abs{\boundary_G(X)}.
+  \tag{3.4}\label{eq:missing-sum}
+\]
+Strong closure has two consequences: no boundary edge uses a colour in
+$\missing\varphi(X)$, and the boundary-edge colours are pairwise distinct.
+Hence
+\[
+  \abs{\boundary_G(X)}\le k-q.
+\]
+Substituting this inequality into \eqref{eq:missing-sum} gives
+\[
+  2\abs{E_{G-e}(X)}
+  =k\abs X-\abs{\boundary_G(X)}-q
+  \ge k(\abs X-1).
+\]
+Because $e$ has both ends in $X$,
+\[
+  2\abs{E_G(X)}=2\abs{E_{G-e}(X)}+2>k(\abs X-1).
+\]
+Therefore $\Gamma(G)>k$, so
+$\ceil{\Gamma(G)}\ge k+1=\chi'(G)$.  The reverse inequality follows from
+\cref{prop:lower-bounds}.  Thus $G$ is elementary.
+\end{proof}
+
+\section{Tashkinov's method}
+
+\subsection{Trees, missing colours, and Kempe interchanges}
+
+\begin{definition}[$k$-triple]
+A \emph{$k$-triple} is a triple $(G,e,\varphi)$ such that $G$ is $k$-critical,
+$k\ge\Delta(G)+1$, $e\in E(G)$, and
+$\varphi\in\calC^k(G-e)$.
+\end{definition}
+
+A \emph{tree-sequence} is a sequence
+\[
+  T=(y_0,e_1,y_1,e_2,y_2,\ldots,e_n,y_n)
+  \tag{4.1}\label{eq:tree-sequence}
+\]
+with distinct vertices $y_0,\ldots,y_n$ and distinct edges
+$e_1,\ldots,e_n$, where $e_1=e$ joins $y_0$ and $y_1$, and for every
+$i\ge2$, the edge $e_i$ joins $y_i$ to some $y_j$ with $j<i$.  Its vertex set
+is $V(T)=\{y_0,\ldots,y_n\}$.  The prefix ending at $y_j$ is denoted
+\[
+  T_j=(y_0,e_1,y_1,\ldots,e_j,y_j).
+\]
+The edge $e_1$ is uncoloured under $\varphi$; all other tree edges are coloured.
+Write
+\[
+  \phiT{T_j}=\{\varphi(e_i):2\le i\le j\}
+\]
+for the set of colours used on the coloured edges of $T_j$.
+
+\begin{definition}[Tashkinov tree]
+The tree-sequence $T$ is a \emph{Tashkinov tree with respect to
+$(G,e,\varphi)$} if, for every $i\ge2$, the colour $\varphi(e_i)$ is missing at
+some earlier vertex: there exists $j<i$ such that
+$\varphi(e_i)\in\missing\varphi(y_j)$.
+\end{definition}
+
+For two colours $\alpha,\beta$, the subgraph of $G-e$ induced by the
+$\alpha$- and $\beta$-coloured edges has maximum degree at most two.  Its
+components are paths, even cycles, or isolated vertices.  Interchanging
+$\alpha$ and $\beta$ on one component preserves properness; this operation is
+an \emph{$(\alpha,\beta)$-Kempe interchange}.
+
+Two elementary observations will be used repeatedly.  In a $k$-triple,
+\[
+  \abs{\missing\varphi(y_0)},\abs{\missing\varphi(y_1)}\ge2,
+  \qquad
+  \abs{\missing\varphi(v)}\ge1\quad(v\notin\{y_0,y_1\}),
+  \tag{4.2}\label{eq:missing-lower}
+\]
+because $k\ge\Delta(G)+1$ and the edge $e$ is absent at its two ends.
+Also, $G$ has no $k$-edge-colouring, since $\chi'(G)=k+1$.
+
+\subsection{Minimal bad trees}
+
+Call a pair $(\psi,S)$ \emph{bad} if
+$\psi\in\calC^k(G-e)$, $S$ is a Tashkinov tree with respect to
+$(G,e,\psi)$, and $V(S)$ is not $\psi$-elementary.
+
+For a tree-sequence $S=(z_0,f_1,z_1,\ldots,f_m,z_m)$, define its
+\emph{path index} $\rho(S)$ to be the least $r\in\{1,\ldots,m\}$ such that
+\[
+  z_r,f_{r+1},z_{r+1},\ldots,f_m,z_m
+\]
+is a graph path in the displayed order.  Equivalently, for every $i$ with
+$r\le i<m$, the edge $f_{i+1}$ joins $z_i$ and $z_{i+1}$.  The choice $r=m$
+is always valid.  Order bad pairs lexicographically by
+\[
+  (\rho(S),m).
+\]
+
+Assume, for a contradiction, that a bad pair exists.  Choose one of minimum
+rank and denote it $(\varphi,T)$, with $T$ as in \eqref{eq:tree-sequence}.  Put
+$q=\rho(T)$.  Every proper prefix $T_j$ is elementary: otherwise
+$(\varphi,T_j)$ would be a bad pair of smaller rank.  The same conclusion
+continues to hold after any recolouring that preserves $T$ as a bad
+Tashkinov tree of the same rank.
+
+\begin{lemma}[Unused missing colours]\label{lem:four-unused}
+Let $T_j$ be a proper prefix of a minimum-rank bad pair.  At least four colours
+are missing on $V(T_j)$ and are not used on the coloured tree edges
+$e_2,\ldots,e_j$.
+\end{lemma}
+
+\begin{proof}
+By \eqref{eq:missing-lower}, the total number of missing-colour incidences on
+$V(T_j)$ is at least
+\[
+  2+2+(j-1)=j+3.
+\]
+Since $T_j$ is elementary, these incidences have distinct colours.  At most
+$j-1$ colours occur on the $j-1$ coloured edges $e_2,\ldots,e_j$.
+Consequently at least $(j+3)-(j-1)=4$ missing colours are unused on $T_j$.
+\end{proof}
+
+\begin{lemma}[Controlled interchange]\label{lem:controlled-swap}
+Let $(\varphi,T)$ be a minimum-rank bad pair.  Suppose $i<j<n$, and let
+distinct colours $\alpha,\beta$ satisfy
+\[
+  \alpha\in\missing\varphi(y_i),
+  \qquad
+  \beta\in\missing\varphi(y_j),
+  \qquad
+  \alpha,\beta\notin\phiT{T_j}.
+\]
+Then the $(\alpha,\beta)$-component containing $y_j$ is a path whose other end
+is $y_i$.  After interchanging $\alpha$ and $\beta$ on that component,
+$T$ remains a bad Tashkinov tree of the same rank; in the new colouring,
+$\beta$ is missing at $y_i$ and $\alpha$ is missing at $y_j$.
+\end{lemma}
+
+\begin{proof}
+Let $Q$ be the $(\alpha,\beta)$-component containing $y_j$.  Since $y_j$
+misses $\beta$, it has degree at most one in this two-coloured subgraph and is
+an end of $Q$.  Likewise, if $y_i\in V(Q)$, then $y_i$ is an end because it
+misses $\alpha$.
+
+Suppose first that $Q$ does not have $y_i$ as its other end.  Then $Q$ avoids
+$y_i$.  Interchanging the two colours on $Q$ makes $\alpha$ missing at $y_j$
+while leaving it missing at $y_i$.  No edge of $T_j$ has colour $\alpha$ or
+$\beta$, so the displayed tree-sequence and all witness conditions for $T_j$
+are unchanged.  Thus $T_j$ becomes a non-elementary Tashkinov tree, contrary
+to the minimality of $(\varphi,T)$.
+
+Hence $Q$ joins $y_j$ to $y_i$.  Perform the interchange.  The missing statuses
+of $\alpha$ and $\beta$ are exchanged at $y_i$ and $y_j$ and are unchanged at
+every other vertex of $T$.  The tree edges through $T_j$ are unchanged.  For a
+later tree edge $e_h$ with $h>j$, the Tashkinov condition is preserved as
+follows.  A witness for a colour outside $\{\alpha,\beta\}$ is unaffected.  If
+an old witness for $\alpha$ or $\beta$ is lost at one of $y_i,y_j$, the other
+one supplies a witness, and both precede $e_h$.  If $e_h$ itself lies on $Q$
+and changes from $\alpha$ to $\beta$, then $y_i$ is an earlier vertex missing
+$\beta$ after the interchange; if it changes from $\beta$ to $\alpha$, then
+$y_j$ is an earlier vertex missing $\alpha$.  Therefore $T$ remains a
+Tashkinov tree.
+
+For each of the two colours, the number of vertices of $T$ missing that colour
+is unchanged, and every other missing-colour multiplicity is unchanged.
+Thus $V(T)$ remains non-elementary.  The sequence and hence its rank are
+unchanged.
+\end{proof}
+
+\begin{remark}\label{rem:third-endpoint}
+A two-coloured component that joins two specified vertices missing one of its
+colours cannot contain a third vertex that also misses one of those colours:
+all three would have degree at most one in the component.  We shall use this
+without further comment to see that a repeated missing colour at $y_n$ survives
+a controlled interchange whose two ends are earlier vertices.
+\end{remark}
+
+\begin{lemma}[The minimum bad tree is not a path]\label{lem:not-path}
+For the minimum-rank bad pair above, $q>2$.
+\end{lemma}
+
+\begin{proof}
+If $n=1$, non-elementarity says that some colour is missing at both ends
+$y_0,y_1$ of $e_1=e$.  Assigning that colour to $e$ would produce a
+$k$-edge-colouring of $G$, a contradiction.  Hence $n\ge2$.
+
+If $q\le2$, then, after possibly interchanging the names of $y_0$ and $y_1$,
+the entire displayed sequence is a path.  Indeed, this is immediate for
+$q=1$; for $q=2$, the edge $e_2$ joins $y_2$ to one of $y_0,y_1$, and the
+initial two vertices may be ordered so that it joins $y_1$ to $y_2$.
+
+Because $T_{n-1}$ is elementary while $T$ is not, some colour $\beta$ is
+missing at $y_n$ and at an earlier vertex $y_i$.  Suppose $i<n-1$, and choose
+$\gamma\in\missing\varphi(y_{i+1})$.  Both $\beta$ and $\gamma$ are unused on
+$T_{i+1}$.  For $\gamma$, any occurrence on a tree edge of this prefix would
+have an earlier missing-colour witness, contradicting the elementarity of
+$T_{i+1}$.  For $\beta$, elementarity forces the witness for any such
+occurrence to be $y_i$; the only possible edge is then $e_{i+1}$, but that edge
+is incident with $y_i$, where $\beta$ is missing.  Apply
+\cref{lem:controlled-swap} with the colours $\beta,\gamma$.  It moves the
+missing colour $\beta$ from $y_i$ to $y_{i+1}$ and, by
+\cref{rem:third-endpoint}, leaves $\beta$ missing at $y_n$.
+
+Repeating, we may assume that $\beta$ is missing at both $y_{n-1}$ and $y_n$.
+The last edge $e_n$ joins these two vertices, so recolour $e_n$ with $\beta$.
+Let $\delta$ be its former colour.  The Tashkinov condition for $e_n$ supplies
+an earlier vertex $y_j$ missing $\delta$; because $e_n$ was incident with
+$y_{n-1}$, we have $j\le n-2$.  After the recolouring, $\delta$ is also missing
+at $y_{n-1}$.  Hence $T_{n-1}$ is a shorter bad Tashkinov path, a contradiction.
+\end{proof}
+
+\subsection{Tashkinov's theorem}
+
+\begin{theorem}[Book Theorem 5.1; Tashkinov's theorem]
+\label{thm:tashkinov}\label{TashTree}
+Let $(G,e,\varphi)$ be a $k$-triple, and let $T$ be a Tashkinov tree with
+respect to $(G,e,\varphi)$.  Then $V(T)$ is $\varphi$-elementary.
+\end{theorem}
+
+\begin{proof}
+Assume otherwise and retain the minimum-rank bad pair and notation introduced
+above.  By \cref{lem:not-path}, $q>2$.  Since $T_{n-1}$ is elementary, every
+repeated missing colour on $T$ occurs at $y_n$ and at some earlier vertex.
+We distinguish three exhaustive cases.
+
+\medskip
+\noindent\textbf{Case 1: $q=n$.}
+Then the final edge $e_n$ does not join $y_{n-1}$ to $y_n$.  We first put the
+colouring into three convenient normal forms.  Each operation below preserves
+$T$ as a minimum-rank bad pair, so all prefix-elementarity and unused-colour
+conclusions remain available.
+
+\smallskip
+\emph{(A) There is a colour $\beta$ missing at $y_n$ and at some
+$y_j$ with $j\le n-2$, and $\beta$ is unused on all tree edges.}
+
+Initially choose a repeated missing colour $\beta$ at $y_j,y_n$ with $j<n$.
+By \cref{lem:four-unused} applied to $T_{n-2}$, at least four missing colours
+are unused there.  The two additional edges $e_{n-1},e_n$ use at most two
+colours, so at least two colours missing on $T_{n-2}$ are unused on the whole
+of $T$.  Choose one of them, say
+$\alpha\in\missing\varphi(y_m)$ with $m\le n-2$ and $\alpha\ne\beta$.
+
+If $j=n-1$, then $\beta$ is unused on $T_{n-1}$: an occurrence there would
+have an earlier missing-$\beta$ witness, contradicting the elementarity of
+$T_{n-1}$.  It is not used on $e_n$, which is incident with the
+$\beta$-missing vertex $y_n$.  Thus both $\alpha$ and $\beta$ are unused on
+all tree edges.  A controlled interchange between $y_m$ and $y_{n-1}$ moves
+the repeated missing colour $\beta$ to $y_m,y_n$, establishing (A).
+
+Now suppose $j\le n-2$.  If $\beta$ is already unused on $T$, there is nothing
+to prove.  Otherwise, let $Q$ be the maximal $(\alpha,\beta)$-chain starting
+at $y_n$.  If $Q$ meets $V(T_{n-2})$, traverse it from $y_n$ and let $y_h$ be
+its first vertex in that prefix.  Append the segment from $y_h$ to $y_n$ to
+$T_{n-2}$.  Its internal vertices lie outside the retained prefix, and its
+edges alternate between $\alpha$ and $\beta$.  Both colours are missing in
+$T_{n-2}$, at $y_m$ and $y_j$, respectively, so every appended edge has a
+valid earlier witness.  The resulting Tashkinov tree is bad because
+$\beta$ is still missing at $y_j,y_n$.  Its path index is at most $n-1$, which
+is smaller than $q=n$, a contradiction.
+
+Hence $Q$ avoids $V(T_{n-2})$.  Every tree edge has an end in
+$V(T_{n-2})$: this is clear for $e_1,\ldots,e_{n-1}$, and it holds for $e_n$
+because $e_n$ is not incident with $y_{n-1}$.  Therefore $Q$ contains no tree
+edge.  Interchange $\alpha$ and $\beta$ on $Q$, and then globally interchange
+the names $\alpha$ and $\beta$.  The local interchange leaves every tree-edge
+colour unchanged and changes no earlier witness needed by a tree edge; the
+global relabelling plainly preserves the Tashkinov condition.  In the final
+colouring, $\beta$ is missing at $y_m,y_n$.  Moreover, any tree edge now
+coloured $\beta$ would have been coloured $\alpha$ before the two operations,
+but $\alpha$ was unused on $T$.  Thus (A) holds.
+
+\smallskip
+\emph{(B) If $\gamma=\varphi(e_n)$, then $\gamma$ is present at
+$y_{n-1}$.}
+
+If $\gamma$ is missing at $y_{n-1}$, the Tashkinov condition for $e_n$ and the
+elementarity of $T_{n-1}$ imply that $y_{n-1}$ is the unique missing-$\gamma$
+vertex in that prefix.  Consequently $\gamma$ is unused on $T_{n-1}$.  The
+colour $\beta$ from (A) is unused on all of $T$.  Apply a controlled
+$(\beta,\gamma)$-interchange between $y_j$ and $y_{n-1}$.  The component cannot
+contain $y_n$: the latter misses $\beta$ and is incident with the
+$\gamma$-coloured edge $e_n$, so it would be a third end of the component.
+Thus $e_n$ keeps colour $\gamma$, while $\gamma$ becomes present at
+$y_{n-1}$.  This proves (B).
+
+\smallskip
+\emph{(C) Some colour is missing at $y_n$ and at a vertex of
+$T_{n-2}$.}
+
+In the current bad pair, choose a repeated missing colour $\beta'$ at
+$y_{j'},y_n$.  If $j'\le n-2$, (C) holds.  If $j'=n-1$, then $\beta'$ is
+unused on all of $T$: it is unused on $T_{n-1}$ by elementarity and cannot
+colour $e_n$, which is incident with $y_n$.  As above, choose a different
+colour $\alpha'$ missing on $T_{n-2}$ and unused on the whole tree.  A
+controlled interchange between the missing-$\alpha'$ vertex in $T_{n-2}$ and
+$y_{n-1}$ moves $\beta'$ into $T_{n-2}$ while leaving it missing at $y_n$.
+Neither colour involved is $\gamma$: the colour $\gamma$ is used on $e_n$, and
+by (B) it is present at $y_{n-1}$.  Hence (B) remains true, and (C) is
+established.
+
+Delete $y_{n-1}$ and $e_{n-1}$ from the displayed sequence, retaining $e_n$
+and $y_n$ as the final edge and vertex:
+\[
+  T'=(y_0,e_1,y_1,\ldots,e_{n-2},y_{n-2},e_n,y_n).
+\]
+Because $q=n$, the earlier end of $e_n$ lies in $T_{n-2}$, so $T'$ is a
+tree-sequence.  By (B), the missing-$\gamma$ witness for the
+$\gamma$-coloured edge $e_n$ is not $y_{n-1}$; it therefore remains in
+$T_{n-2}$.  Thus $T'$ is a Tashkinov tree.  By (C), it is bad.  Its length is
+$n-1$, so its path index is at most $n-1<n=q$, contradicting minimality.
+
+\medskip
+\noindent\textbf{Case 2: $q<n$, and a colour is missing at $y_n$ and at
+some $y_i$ with $i\ge q$.}
+
+Let $\beta$ be such a colour.  If $i<n-1$, choose
+$\gamma\in\missing\varphi(y_{i+1})$.  Since the suffix from $y_q$ to $y_n$ is
+a path, $e_{i+1}$ joins $y_i$ to $y_{i+1}$.  Exactly as in the proof of
+\cref{lem:not-path}, both $\beta$ and $\gamma$ are unused on $T_{i+1}$.
+A controlled interchange moves the missing colour $\beta$ from $y_i$ to
+$y_{i+1}$ and leaves it missing at $y_n$.  Repeating, we arrange that
+$\beta$ is missing at both $y_{n-1}$ and $y_n$.
+
+Now recolour the last edge $e_n$ with $\beta$.  Let $\delta$ be its former
+colour.  Its Tashkinov witness is some $y_j$ with $j\le n-2$, because
+$\delta$ was present at the end $y_{n-1}$ of $e_n$.  After the recolouring,
+$\delta$ is also missing at $y_{n-1}$.  Therefore $T_{n-1}$ is a bad
+Tashkinov tree of smaller rank, a contradiction.
+
+\medskip
+\noindent\textbf{Case 3: $q<n$, and no colour missing at $y_n$ is missing at
+any $y_i$ with $i\ge q$.}
+
+Since $T$ is bad and $T_{n-1}$ is elementary, some colour $\beta$ is missing at
+$y_n$ and at a vertex $y_i$ with $i<q$.  We may first arrange that
+$i\le q-2$.  Indeed, if $i=q-1$, apply \cref{lem:four-unused} to $T_{q-2}$.
+After accounting for the single additional edge $e_{q-1}$, at least three
+colours missing on $T_{q-2}$ are unused on $T_{q-1}$.  Choose one
+$\alpha\ne\beta$, missing at some $y_m$ with $m\le q-2$.  The colour $\beta$
+is also unused on $T_{q-1}$, by the elementarity of that prefix.  A
+controlled interchange between $y_m$ and $y_{q-1}$ moves the repeated missing
+colour $\beta$ to $y_m,y_n$.
+
+Choose a colour $\gamma\in\missing\varphi(y_q)$.  It is unused on $T_q$, for
+otherwise a tree edge of that prefix would have an earlier missing-$\gamma$
+witness, contradicting elementarity.  Also $\gamma\ne\beta$, since this case
+assumes that no colour missing at $y_n$ is missing at $y_q$.
+
+By \cref{lem:four-unused} applied to $T_{q-2}$, after accounting for the two
+additional edges $e_{q-1},e_q$, at least two colours missing on $T_{q-2}$ are
+unused on $T_q$.  Choose one of them, say
+$\varepsilon\in\missing\varphi(y_{m'})$ with $m'\le q-2$, so that
+$\varepsilon\ne\gamma$.
+
+If $\varepsilon$ is missing at $y_n$, a controlled
+$(\varepsilon,\gamma)$-interchange between $y_{m'}$ and $y_q$ moves the
+missing colour $\varepsilon$ to $y_q$ and leaves it missing at $y_n$.  This
+reduces the situation to Case~2.
+
+Suppose instead that $\varepsilon$ is present at $y_n$.  Then
+$\varepsilon\ne\beta$.  Let $R$ be the maximal
+$(\varepsilon,\beta)$-chain starting at $y_n$.  If $R$ meets
+$V(T_{q-1})$, traverse it from $y_n$ and let $y_h$ be its first vertex in that
+prefix.  If $h\le q-2$, append the segment from $y_h$ to $y_n$ to
+$T_{q-2}$; if $h=q-1$, append it to $T_{q-1}$.  In the first subcase, both
+$\varepsilon$ and $\beta$ are missing in $T_{q-2}$; in the second, they are
+missing in $T_{q-1}$.  Thus every appended edge has an earlier missing-colour
+witness.  The resulting tree is bad because $\beta$ is missing at the retained
+vertex $y_i$ and at $y_n$.  Its path index is at most $q-1$, contradicting the
+minimality of $q$.
+
+It remains that $R$ avoids $V(T_{q-1})$.  Interchange $\varepsilon$ and
+$\beta$ on $R$.  No edge of $T_q$ lies on $R$, because every such edge has an
+end in $V(T_{q-1})$.  The tree remains Tashkinov: all witness conditions
+through $T_q$ are unchanged, and every later edge whose colour or witness is
+affected has an earlier witness for $\beta$ at $y_i$ or for $\varepsilon$ at
+$y_{m'}$.  After the interchange, $\varepsilon$ is missing at both
+$y_{m'}$ and $y_n$.  The colours $\varepsilon$ and $\gamma$ are still unused
+on $T_q$, and $\gamma$ is still missing at $y_q$.  A controlled
+$(\varepsilon,\gamma)$-interchange between $y_{m'}$ and $y_q$ now makes
+$\varepsilon$ missing at $y_q$ while leaving it missing at $y_n$.  Again we
+are in Case~2, which has already been shown impossible.
+
+All three cases contradict the choice of the minimum-rank bad pair.  Therefore
+no bad pair exists, and every Tashkinov tree in a $k$-triple is elementary.
+\end{proof}
+
+\section{Concordance with the formalization target}
+
+The statements above match the two imported results as follows.
+\begin{itemize}[leftmargin=2em]
+  \item Book Theorem~1.4 (\Cref{thm:egraph2}) is the four-way equivalence
+  referred to by the formalization label \texttt{egraph2}; the theorem carries both labels
+  \texttt{thm:egraph2} and \texttt{egraph2}.  Its hypotheses include exactly the
+  criticality, chromatic-index, and $k\ge\Delta(G)+1$ assumptions used there.
+  \item Book Theorem~5.1 (\Cref{thm:tashkinov}) is the assertion that the
+  vertex set of every Tashkinov tree in a $k$-triple is elementary; it carries both labels
+  \texttt{thm:tashkinov} and \texttt{TashTree}.
+  \item \Cref{prop:critical-core} is the critical-subgraph reduction used to
+  pass from an arbitrary counterexample to a critical one without changing
+  the chromatic index.
+\end{itemize}
+
+\begin{thebibliography}{9}
+
+\bibitem{SSFT2012}
+Michael Stiebitz, Diego Scheide, Bjarne Toft, and Lene M. Favrholdt,
+\emph{Graph Edge Colouring: Vizing's Theorem and Goldberg's Conjecture},
+Wiley, 2012.
+
+\bibitem{McDonald2009}
+Jessica McDonald,
+\emph{A Survey of Recent Results on the Chromatic Index of Multigraphs},
+Ph.D. thesis, University of Waterloo, 2009.
+
+\bibitem{Sebo2024}
+Andr\'as Seb\H{o},
+``Tashkinov-Trees: an Annotated Proof,''
+\emph{Graphs and Combinatorics} \textbf{40} (2024), Article~18,
+\href{https://doi.org/10.1007/s00373-023-02712-1}{doi:10.1007/s00373-023-02712-1}.
+
+\end{thebibliography}
+
+\end{document}
