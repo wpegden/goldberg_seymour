@@ -77,52 +77,11 @@ closure condition and the distinct-boundary-color condition are both
 vacuous.  Hence $X$ is strongly closed, while its elementariness is the
 hypothesis in (iii).  This proves (iv).
 
-Finally assume (iv), witnessed by $e$, $\varphi$, and $X$.  Let $x$ be one
-end of $e$.  The two ends are distinct by the loopless law in
-\noderef{LooplessMultigraph}.  Since $e$ is the only uncolored edge and is
-incident with $x$, at most $d_G(x)-1$ colors are present at $x$.  The bound
-$k\geq\Delta(G)+1$ therefore gives at least two colors missing at $x$.
-Choose one and call it $\alpha$.
-
-For a color $c$, let $m_c$ be the number of vertices of $X$ missing $c$, let
-$b_c$ be the number of boundary-edge identities of $X$ colored $c$, and let
-$a_c$ be the number of internal edges of $X$ colored $c$.  Counting
-incidences between vertices of $X$ and $c$-colored edges gives
-\[
-  2a_c+b_c=|X|-m_c.                                       \tag{2}
-\]
-Indeed, properness says that each vertex not missing $c$ has exactly one
-incident $c$-edge; an internal edge contributes two such incidences and a
-boundary edge one.  Because $X$ is elementary and $\alpha$ is missing at
-$x$, we have $m_\alpha=1$.  Because $X$ is closed, no boundary edge has
-color $\alpha$, so $b_\alpha=0$.  Equation (2) says
-$2a_\alpha=|X|-1$, and therefore $|X|$ is odd.  The set $X$ contains the
-two distinct ends of $e$, so its odd cardinality is at least three.
-
-Let $q$ be the number of colors missing somewhere on $X$.  Elementariness
-makes the missing-color sets at distinct vertices disjoint, so $q$ is the
-sum of their cardinalities.  Summing, over $X$, the identity ``number of
-missing colors equals $k$ minus colored degree'' and again counting internal
-incidences twice and boundary incidences once yields
-\[
- q=k|X|-2|E_{G-e}(X)|-|\partial_G(X)|.                    \tag{3}
-\]
-The edge $e$ is internal to $X$, so it does not occur in the boundary and
-every boundary edge is colored.  Strong closure says that their colors are
-pairwise distinct, while closure says that none of those colors is among
-the $q$ colors missing on $X$.  Thus
-$|\partial_G(X)|\leq k-q$.  Substitution in (3) gives
-\[
-  2|E_{G-e}(X)|\geq k(|X|-1).
-\]
-Adding the internal uncolored edge $e$ gives
-\[
-  2|E_G(X)|>k(|X|-1).
-\]
-Since $X$ is an eligible odd set, \noderef{DensityValue} and
-\noderef{Density} imply $\Gamma(G)>k$, and hence
-$\lceil\Gamma(G)\rceil\geq k+1=\chi'(G)$.  The reverse inequality is
-\noderef{DensityLowerBound}.  Equality follows, so $G$ is elementary.
-This proves (iv)$\Rightarrow$(i) and completes all three asserted
-equivalences.
+Finally assume (iv), witnessed by $e$, $\varphi$, and $X$.  The hypotheses
+$\chi'(G)=k+1$ and $k\geq\Delta(G)+1$, together with the five properties of
+$e$, $\varphi$, and $X$ stated in (iv), are exactly the hypotheses of
+\noderef{StronglyClosedWitnessElementary}.  That lemma gives (i).  We have
+therefore proved the cyclic implications
+(i)$\Rightarrow$(ii)$\Rightarrow$(iii)$\Rightarrow$(iv)$\Rightarrow$(i),
+which imply each of the three asserted equivalences.
 \end{proof}

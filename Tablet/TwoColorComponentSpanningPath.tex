@@ -1,0 +1,27 @@
+\begin{lemma}[Two-color components have a spanning path]
+Let $\varphi$ be proper.  For every node $z$ of the two-color incidence
+graph, there are nodes $u,v$ and a simple path from $u$ to $v$ whose set of
+nodes is exactly the $(\alpha,\beta)$-component through $z$.
+\end{lemma}
+\begin{proof}
+Let $K$ be the component from \noderef{TwoColorComponent}.  It is finite
+and nonempty, since it contains $z$.  Among all simple paths in the
+incidence graph whose nodes lie in $K$, choose one, say $P$, with the
+largest possible number of nodes.  Such a path exists: the length-zero path
+at $z$ is admissible, and the finite set $K$ bounds all possible support
+sizes.
+
+Suppose that a node $x\in K$ is not on $P$.  Since $K$ is a connected
+component, there is a walk from $x$ to a node of $P$.  Delete repetitions
+from a shortest such walk, and stop at its first node $y$ on $P$.  Its
+predecessor $x'$ is outside $P$ and is adjacent to $y$.
+
+If $y$ is an end of $P$, adjoining the edge $x'y$ and the preceding simple
+part of the chosen walk extends $P$ to a simple path with more nodes, which
+contradicts maximality.  If $y$ is internal to $P$, it already has two
+distinct neighbors on $P$; together with the distinct outside neighbor
+$x'$, it has degree at least three.  This contradicts
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  Therefore no such $x$ exists.
+Every node of $K$ lies on $P$, while $P$ was chosen inside $K$, so the
+support of $P$ is exactly $K$.
+\end{proof}

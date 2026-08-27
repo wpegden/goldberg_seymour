@@ -1,0 +1,21 @@
+\begin{lemma}[Two-color degree bound]
+If $\varphi$ is a proper partial edge-coloring, then every node of
+$I_G(\varphi;\alpha,\beta)$ has degree at most two.
+\end{lemma}
+\begin{proof}
+Use the incidence graph from \noderef{TwoColorIncidenceGraph}.  First let
+$z$ be a vertex-node $v$.  Its neighbors are precisely the identities of
+edges incident with $v$ which have color $\alpha$ or $\beta$.  There is at
+most one incident edge of color $\alpha$: two distinct such edges would be
+adjacent in the sense of \noderef{AdjacentEdges} and would contradict
+properness as defined in \noderef{IsProperEdgeColoring}.  The same argument
+gives at most one incident edge of color $\beta$.  Their union therefore
+has at most two elements (and at most one if $\alpha=\beta$).
+
+Now let $z$ be an edge-node $e$.  If $e$ has neither color, it is isolated
+in the incidence graph.  Otherwise its neighbors are precisely the
+vertex-nodes corresponding to entries of the unordered endpoint pair
+$G.\operatorname{ends}(e)$.  An unordered pair has at most two entries, so
+there are at most two such neighbors.  These two cases exhaust the disjoint
+union $V\sqcup E$ and prove the degree bound.
+\end{proof}

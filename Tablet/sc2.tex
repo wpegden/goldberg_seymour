@@ -1,0 +1,33 @@
+\begin{lemma}[Stability is an equivalence relation]
+On the set of proper partial $k$-edge-colorings which leave exactly $e_0$
+uncolored, being $(T,C,\mathord\cdot)$-stable is an equivalence relation:
+it is reflexive, symmetric, and transitive.
+\end{lemma}
+\begin{proof}
+Reflexivity follows immediately from \noderef{StableColoring}: every
+relevant edge value and every missing-color set is equal to itself.
+
+For symmetry, suppose $\pi$ is $(T,C,\varphi)$-stable.  The second stable
+condition gives
+$\overline\pi(v)=\overline\varphi(v)$ at every $v\in V(T)$, hence
+$\overline\pi(T)=\overline\varphi(T)$.  Apply the alternate criterion
+\noderef{sc1}.  It says that every edge incident with $T$ whose value under
+either $\varphi$ or $\pi$ lies in the common set of tree-missing colors
+union $C$ has equal values in the two colorings.  This condition is
+symmetric in $\varphi$ and $\pi$, so another application of
+\noderef{sc1}, now with $\pi$ as the reference coloring, shows that
+$\varphi$ is $(T,C,\pi)$-stable.
+
+For transitivity, suppose that $\pi$ is $(T,C,\varphi)$-stable and $\sigma$
+is $(T,C,\pi)$-stable.  Their missing-color sets agree vertex by vertex, so
+all three tree-missing-color sets are the same; call this set $M$.  Let $f$
+be incident with $T$.  If $\varphi(f)\in M\cup C$, stability first gives
+$\pi(f)=\varphi(f)$, and the second stability then gives
+$\sigma(f)=\pi(f)$ because this common color is in $M\cup C$.  If instead
+$\sigma(f)\in M\cup C$, use the symmetric alternate condition from
+\noderef{sc1} first for $(\pi,\sigma)$ and then for $(\varphi,\pi)$ to get
+the same equality.  Thus the alternate criterion holds for
+$(\varphi,\sigma)$, and their missing-color sets already agree.  By
+\noderef{sc1}, $\sigma$ is $(T,C,\varphi)$-stable.  This proves
+transitivity and completes the equivalence-relation proof.
+\end{proof}

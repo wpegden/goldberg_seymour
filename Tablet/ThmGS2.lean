@@ -1,10 +1,17 @@
 import Tablet.Critical
 import Tablet.Elementary
+import Tablet.LEM_extable
 import Tablet.MaximumDegree
+import Tablet.MissingColorIncidenceEndpoint
 import Tablet.TashTree
+import Tablet.TashkinovClosure
 import Tablet.TashkinovOrder
 import Tablet.TreeSequencePrefix
+import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorComponentsDisjoint
 import Tablet.egraph2
+import Tablet.zang1
 
 -- [TABLET NODE: ThmGS2]
 theorem ThmGS2 {V E : Type*} [Fintype V] [Fintype E] [DecidableEq E]

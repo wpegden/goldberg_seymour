@@ -14,6 +14,7 @@ import Tablet.IsProperEdgeColoring
 import Tablet.LooplessMultigraph
 import Tablet.MaximumDegree
 import Tablet.MissingColors
+import Tablet.StronglyClosedWitnessElementary
 
 open scoped Sym2
 

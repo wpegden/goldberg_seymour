@@ -1,0 +1,36 @@
+\begin{lemma}[Kempe changes preserve properness]
+Let $\alpha\ne\beta$ and let $\varphi$ be a proper partial edge-coloring.
+Swapping $\alpha$ and $\beta$ on one two-color component produces another
+proper partial edge-coloring.
+\end{lemma}
+\begin{proof}
+Let $K$ be the component selected in \noderef{TwoColorComponent}, and let
+$\varphi'$ be the swap from \noderef{TwoColorComponentSwap}.  Consider
+distinct adjacent edge identities $e$ and $f$.  We prove that they cannot
+receive the same colored value under $\varphi'$.
+
+First suppose that either both edge-nodes belong to $K$ or neither does.
+Outside $K$ the color values are unchanged.  Inside $K$ the same
+transposition of the two distinct values $\alpha$ and $\beta$ is applied to
+both edges, and all other values, including the uncolored value, are fixed.
+In either case the operation applied to the two original values is
+injective.  Equality of the two new colored values would therefore imply
+$\varphi(e)=\varphi(f)$, contrary to the properness hypothesis in
+\noderef{IsProperEdgeColoring}.
+
+It remains to rule out the case in which exactly one edge-node belongs to
+$K$; exchange $e$ and $f$ if necessary so that $e\in K$ and $f\notin K$.
+If the two new colored values were equal, inspection of the swap shows that
+the original values must be the two opposite colors $\alpha$ and $\beta$.
+Indeed, a value outside this pair is fixed on both sides and would reduce to
+the already-contradictory equality of original colors, while an uncolored
+value cannot become colored.  Since $e$ and $f$ are adjacent, some
+multigraph vertex $v$ is incident with both by \noderef{AdjacentEdges}.
+The definition of \noderef{TwoColorIncidenceGraph} then gives incidence-graph
+edges from the edge-node $e$ to the vertex-node $v$ and from $v$ to the
+edge-node $f$.  Thus the two edge-nodes are connected and belong to the
+same component.  This contradicts $e\in K$ and $f\notin K$.
+
+All possibilities lead to distinct colors on distinct adjacent colored
+edges.  Hence $\varphi'$ is proper.
+\end{proof}

@@ -1,0 +1,19 @@
+\begin{lemma}[Disjointness of two-color components]
+For any two nodes $z,w$ of $I_G(\varphi;\alpha,\beta)$, their two-color
+components are either equal or disjoint.  In particular, the chains through
+two distinct multigraph vertices are identical or vertex-disjoint.
+\end{lemma}
+\begin{proof}
+Let $K_z$ and $K_w$ be the supports defined in
+\noderef{TwoColorComponent}.  If they are disjoint there is nothing to
+prove.  Otherwise choose a node $x\in K_z\cap K_w$.  Membership of $x$ in
+$K_z$ means that $x$ is connected to $z$, and membership in $K_w$ means
+that $x$ is connected to $w$.  Reversing the first connecting walk and
+concatenating it with the second gives a walk from $z$ to $w$.
+
+Now a node $y$ is connected to $z$ if and only if it is connected to $w$:
+in either direction, concatenate a connecting walk between $z$ and $w$
+with the given walk.  Hence $y\in K_z$ if and only if $y\in K_w$.  By set
+extensionality, $K_z=K_w$.  Thus failure of disjointness forces equality,
+which proves the dichotomy.
+\end{proof}

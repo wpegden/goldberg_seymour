@@ -1,0 +1,103 @@
+\begin{lemma}[Strongly closed witness implies elementarity]
+Let $G=(V,E)$ be a finite loopless multigraph with
+$\chi'(G)=k+1$ and $k\geq\Delta(G)+1$.  Suppose that an edge identity
+$e_0$, a proper partial $k$-edge-coloring $\varphi$ leaving exactly $e_0$
+uncolored, and a set $X\subseteq V$ have the following properties: $X$
+contains both ends of $e_0$, and $X$ is elementary and strongly closed with
+respect to $\varphi$.  Then $G$ is elementary.
+\end{lemma}
+\begin{proof}
+We use missing colors, internal and boundary edge identities, and the two
+colored-set properties with exactly the meanings in
+\noderef{MissingColors}, \noderef{InternalEdges}, \noderef{BoundaryEdges},
+\noderef{ColoredVertexSetElementary}, and
+\noderef{ColoredVertexSetStronglyClosed}.  Properness and the assertion that
+only $e_0$ is uncolored have the meanings in
+\noderef{IsProperEdgeColoring} and \noderef{IsOneEdgeUncolored}.
+
+Choose an end $x$ of $e_0$.  Such an end exists because an unordered pair
+has two entries, and the loopless law in \noderef{LooplessMultigraph} says
+that its two entries are distinct.  Every colored edge incident with $x$
+has a different color by properness.  Since $e_0$ is incident with $x$ and
+is the only uncolored edge, precisely $d_G(x)-1$ colors are present at $x$.
+The definitions in \noderef{Degree}, \noderef{PresentColors}, and
+\noderef{MissingColors} therefore give
+\[
+ |\overline\varphi(x)|=k-(d_G(x)-1)
+ \geq k-(\Delta(G)-1)\geq2,
+\]
+where $d_G(x)\leq\Delta(G)$ follows from \noderef{MaximumDegree}.  Choose a
+missing color $\alpha\in\overline\varphi(x)$.
+
+For each color $c$, let $m_c$ be the number of vertices of $X$ at which
+$c$ is missing, let $a_c$ be the number of $c$-colored edge identities
+internal to $X$, and let $b_c$ be the number of $c$-colored edge identities
+in $\partial_G(X)$.  We first establish the incidence identity
+\[
+                 2a_c+b_c=|X|-m_c.                 \tag{1}
+\]
+Indeed, properness implies that a vertex at which $c$ is present is
+incident with exactly one $c$-colored edge, whereas a vertex at which $c$
+is missing is incident with none.  Thus the right side counts incidences of
+$c$-colored edges with vertices in $X$.  Every internal edge identity has
+two distinct ends in $X$ and contributes two incidences; every boundary
+edge identity has exactly one end in $X$ and contributes one.  These are all
+possibilities, proving (1).  This count treats parallel edges as distinct
+because it counts elements of the edge type.
+
+The chosen color $\alpha$ is missing at $x\in X$.  Elementariness of $X$
+says that it cannot be missing at any other vertex of $X$, so
+$m_\alpha=1$.  Strong closure includes closure, and closure says that no
+boundary edge has a color missing on $X$; hence $b_\alpha=0$.  Equation
+(1) now yields
+\[
+                      2a_\alpha=|X|-1.
+\]
+Consequently $|X|$ is odd.  The set $X$ contains the two distinct ends of
+$e_0$, so its odd cardinality is at least three.  Thus $X$ is one of the
+eligible sets in \noderef{Density}.
+
+Let $M=\bigcup_{v\in X}\overline\varphi(v)$ and put $q=|M|$.  Since $X$
+is elementary, its missing-color sets are pairwise disjoint, and therefore
+\[
+              q=\sum_{v\in X}|\overline\varphi(v)|. \tag{2}
+\]
+At a vertex $v\in X$, properness and the fact that only $e_0$ is uncolored
+show that the number of present colors equals the number of colored edge
+identities incident with $v$.  Hence the summand in (2) is $k$ minus that
+colored degree.  Summing over $X$ counts each colored internal edge twice
+and each colored boundary edge once.  The edge $e_0$ is internal because
+both its ends lie in $X$, and it is the only uncolored edge; in particular
+every boundary edge is colored.  It follows that
+\[
+ q=k|X|-2\bigl|E_{G-e_0}(X)\bigr|-|\partial_G(X)|. \tag{3}
+\]
+Here $E_{G-e_0}(X)$ denotes the internal edge identities other than $e_0$,
+all of which are colored.
+
+Strong closure has two effects on the boundary.  Closure excludes all $q$
+colors in $M$ from boundary edges, and the remaining clause says that
+distinct boundary edge identities have distinct colors.  Thus the boundary
+is injected into the other $k-q$ colors, giving
+\[
+                       |\partial_G(X)|\leq k-q.       \tag{4}
+\]
+Solving (3) for the internal-edge term and applying (4), we obtain
+\[
+ 2\bigl|E_{G-e_0}(X)\bigr|
+   =k|X|-|\partial_G(X)|-q
+   \geq k(|X|-1).
+\]
+Since $e_0$ is an additional internal edge identity,
+\[
+ 2|E_G(X)|=2\bigl|E_{G-e_0}(X)\bigr|+2
+          >k(|X|-1).                                  \tag{5}
+\]
+By \noderef{DensityValue} and the maximal definition in
+\noderef{Density}, (5) implies $\Gamma(G)>k$.  Hence the natural ceiling in
+\noderef{DensityCeil} satisfies
+$\lceil\Gamma(G)\rceil\geq k+1=\chi'(G)$.  Conversely,
+\noderef{DensityLowerBound} gives
+$\lceil\Gamma(G)\rceil\leq\chi'(G)$.  Equality follows, and the definition
+in \noderef{Elementary} says exactly that $G$ is elementary.
+\end{proof}

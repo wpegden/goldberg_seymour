@@ -1,0 +1,13 @@
+\begin{definition}
+Let $G=(V,E)$ be a multigraph with a partial $k$-edge-coloring $\varphi$,
+and let $\alpha,\beta\in[k]$.  The two-color incidence graph
+$I_G(\varphi;\alpha,\beta)$ is the simple bipartite graph on the disjoint
+union $V\sqcup E$.  Its only adjacencies join a vertex-node $v$ to an
+edge-node $e$, and such nodes are adjacent precisely when $v$ is incident
+with $e$ in $G$ and $\varphi(e)$ is $\alpha$ or $\beta$.
+
+The edge side uses edge identities, not endpoint pairs.  Thus two parallel
+edges remain distinct nodes; in particular, two parallel edges of the two
+different colors give a four-cycle in the incidence graph, representing the
+length-two cycle of the multigraph.
+\end{definition}

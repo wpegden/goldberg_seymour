@@ -1,0 +1,15 @@
+\begin{lemma}[Missing colors give chain ends]
+Let $\alpha\ne\beta$, let $\varphi$ be proper, and suppose that $\alpha$ is
+missing at a vertex $v$.  Then the vertex-node $v$ has degree at most one in
+$I_G(\varphi;\alpha,\beta)$.
+\end{lemma}
+\begin{proof}
+By \noderef{MissingColors}, no edge incident with $v$ is colored
+$\alpha$.  By the definition in \noderef{TwoColorIncidenceGraph}, every
+neighbor of the vertex-node $v$ is therefore the identity of an incident
+$\beta$-colored edge.  There cannot be two distinct such identities:
+they would share $v$, hence be adjacent by \noderef{AdjacentEdges}, and
+their common color would violate \noderef{IsProperEdgeColoring}.  Thus the
+degree is zero or one, as claimed.  This is consistent with the global
+maximum-degree bound \noderef{TwoColorIncidenceDegreeAtMostTwo}.
+\end{proof}

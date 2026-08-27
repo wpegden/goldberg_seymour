@@ -1,0 +1,80 @@
+\begin{lemma}[Exit-coloring lemma]
+Let $k\geq\Delta(G)+1$.  Let $T$ be a tree-sequence with first edge $e_0$,
+and let $\varphi$ be a proper partial $k$-edge-coloring leaving exactly
+$e_0$ uncolored.  Suppose that $T$ is closed with respect to $\varphi$ and
+that $f\in\partial_G(V(T))$ has ends $u\notin V(T)$ and $v\in V(T)$ and
+color $\delta=\varphi(f)$.  Suppose there is a proper partial coloring
+$\pi$, again leaving exactly $e_0$ uncolored, which is
+$(T,C\cup\{\delta\},\varphi)$-stable and for which some color is missing
+both at $u$ and somewhere on $T$.  Then, for every
+$\alpha\in\overline\varphi(v)$, there is a proper partial coloring
+$\sigma$, leaving exactly $e_0$ uncolored and
+$(T,C\cup\{\delta\},\varphi)$-stable, such that $v$ is a
+$(T,\sigma,\{\alpha,\delta\})$-exit.
+\end{lemma}
+\begin{proof}
+Choose the promised coloring $\pi$ and a color
+$\beta\in\overline\pi(u)\cap\overline\pi(T)$.  By stability condition (ii)
+in \noderef{StableColoring},
+$\overline\pi(w)=\overline\varphi(w)$ at every $w\in V(T)$.  Hence
+$\beta\in\overline\varphi(T)$.  The chosen
+$\alpha\in\overline\varphi(v)$ also belongs to
+$\overline\varphi(T)$.
+
+Both $\alpha$ and $\beta$ are closed on $T$ under $\varphi$, because $T$
+is closed.  They remain closed under $\pi$.  Indeed, if a boundary edge
+$g$ had $\pi(g)$ equal to either color, then $g$ is incident with $T$ and
+that color lies in $\overline\varphi(T)$.  The alternate stability
+criterion \noderef{sc1} would give $\varphi(g)=\pi(g)$, contradicting
+closure under $\varphi$ as defined in \noderef{ColoredVertexSetClosed}.
+
+Define
+\[
+             \sigma=\pi/(G-T,\alpha,\beta)
+\]
+using \noderef{OutsideTreeColorSwap}.  Thus every edge incident with $T$ is
+fixed, while $\alpha$ and $\beta$ are interchanged on all other edges.  We
+check properness.  Two adjacent edges both outside $T$ undergo the same
+transposition, and two adjacent edges both incident with $T$ are both fixed.
+If exactly one is incident with $T$, their common vertex is outside $T$;
+the incident edge is a boundary edge.  Such a boundary edge has neither
+color $\alpha$ nor $\beta$ by the preceding paragraph, so the transposition
+on the other edge cannot create a new equality.  Thus properness of $\pi$
+implies properness of $\sigma$.  The only uncolored edge $e_0$ is an edge
+of $T$ and is fixed, while the swap sends colors to colors, so $e_0$ remains
+the unique uncolored edge.
+
+Every edge incident with $T$ is fixed and consequently every missing-color
+set at a vertex of $T$ is fixed.  Therefore $\sigma$ is
+$(T,C\cup\{\delta\},\pi)$-stable directly from
+\noderef{StableColoring}.  Since $\pi$ is
+$(T,C\cup\{\delta\},\varphi)$-stable, transitivity in \noderef{sc2} shows
+that $\sigma$ is $(T,C\cup\{\delta\},\varphi)$-stable.
+
+The color $\alpha$ is missing at $u$ under $\sigma$.  To see this, every
+$\alpha$- or $\beta$-colored edge incident with $u$ but not with $T$ is
+swapped, and no boundary edge incident with $u$ has either color.  Hence an
+$\alpha$-edge at $u$ under $\sigma$ would correspond to a $\beta$-edge at
+$u$ under $\pi$, contradicting the choice
+$\beta\in\overline\pi(u)$.  Also $\alpha$ remains missing at $v$, because
+stability makes it missing there under $\pi$ and all edges incident with
+$T$ are fixed.
+
+Finally $f$ is incident with $T$, and its $\varphi$-color $\delta$ lies in
+$C\cup\{\delta\}$.  Stability of $\pi$ and the outside swap therefore give
+\[
+                    \sigma(f)=\pi(f)=\varphi(f)=\delta.
+\]
+At each of $u$ and $v$, properness permits no second incident
+$\delta$-edge, while $\alpha$ is missing at both vertices.  Thus in
+$I_G(\sigma;\alpha,\delta)$ the three-node walk
+\[
+             u,\ f,\ v
+\]
+is a simple path, has incidence-graph length two, and cannot be extended at
+either end.  Its only vertex in $V(T)$ is $v$, because $u\notin V(T)$, and
+$\alpha$ is missing at its outside end $u$.  By
+\noderef{TreeExitPath} and \noderef{TreeExit}, it is a $T$-exit path and
+$v$ is the required exit.  The constructed $\sigma$ has all asserted
+properties.
+\end{proof}

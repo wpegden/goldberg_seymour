@@ -1,0 +1,51 @@
+\begin{lemma}[Stable colorings preserve failure of strong closure]
+Let $\varphi$ and $\pi$ be proper partial $k$-edge-colorings leaving exactly
+the same tree edge $e_0$ uncolored.  Suppose that $|V(T)|$ is odd, that
+$V(T)$ is closed but not strongly closed with respect to $\varphi$, and
+that $\pi$ is $(T,C,\varphi)$-stable.  Then $V(T)$ is closed but not
+strongly closed with respect to $\pi$.
+\end{lemma}
+\begin{proof}
+Put $X=V(T)$ and $M=\overline\varphi(T)$.  Stability condition (ii) in
+\noderef{StableColoring} gives
+$\overline\pi(v)=\overline\varphi(v)$ for every $v\in X$, and hence
+$\overline\pi(T)=M$.
+
+We first prove closure under $\pi$.  Suppose a boundary edge identity $f$
+had $\pi(f)=c$ with $c\in M$.  Every boundary edge is incident with $T$.
+The alternate stability criterion \noderef{sc1} would give
+$\varphi(f)=\pi(f)=c$, contrary to the assumed closure under $\varphi$ as
+defined in \noderef{ColoredVertexSetClosed}.  Hence no color missing on
+$T$ occurs on a boundary edge under $\pi$, so $X$ is closed under $\pi$.
+
+Let $t=|[k]\setminus M|$.  We next show that every color
+$c\in[k]\setminus M$ occurs on at least one boundary edge under
+$\varphi$.  Such a color is present at every vertex of $X$.  Properness
+therefore makes every vertex incident with exactly one $c$-colored edge.
+Counting these incidences gives
+\[
+ |X|=2a_c+b_c,
+\]
+where $a_c$ and $b_c$ count internal and boundary $c$-colored edge
+identities.  Since $|X|$ is odd, $b_c$ is odd and in particular positive.
+Thus all $t$ colors outside $M$ occur on the boundary.
+
+The only uncolored edge is $e_0$, and the first edge of a tree-sequence has
+both ends in $X$ by \noderef{TreeSequence}; hence $e_0$ is internal and
+every boundary edge is colored under both colorings.  Because $X$ is closed
+but not strongly closed under $\varphi$, the second clause of
+\noderef{ColoredVertexSetStronglyClosed} fails: two distinct boundary edge
+identities share a color.  All $t$ allowable colors occur and one is
+repeated, so
+\[
+                         |\partial_G(X)|\geq t+1.       \tag{1}
+\]
+
+The boundary edge set is independent of the coloring.  Under $\pi$ it is
+fully colored, and the closure already proved says that only the same $t$
+colors in $[k]\setminus M$ may occur there.  Inequality (1) and the
+pigeonhole principle force two distinct boundary edge identities to have
+the same $\pi$-color.  Therefore the distinct-boundary-color clause in
+\noderef{ColoredVertexSetStronglyClosed} fails under $\pi$.  We have proved
+that $X$ is closed but not strongly closed under $\pi$, as required.
+\end{proof}
