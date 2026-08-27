@@ -1,9 +1,16 @@
 \begin{definition}
-For a finite multigraph $G$ and a finite vertex set $U$ with $|U|\ge3$,
-the density value of $U$ is
+For a finite loopless multigraph $G$ and every finite vertex set $U$, the
+total auxiliary rational density value of $U$ is
 \[
-  \gamma_G(U)=\frac{2|E_G(U)|}{|U|-1},
+  \gamma_G(U)=\frac{2|E_G(U)|}{\bigl(|U|:\mathbb{Q}\bigr)-1},
 \]
 where distinct parallel edge identities are counted separately in
-$E_G(U)$.
+$E_G(U)$.  The quotient is evaluated in the rational field, with the total
+field convention that division by zero is $0$; in particular,
+$\gamma_G(U)=0$ when $|U|=1$.  The tablet definition
+\texttt{Tablet.Density} uses \texttt{DensityValue} only when
+$\operatorname{EligibleOddSet}(U)$ holds, namely when $|U|\ge 3$ and $|U|$
+is odd.
+Thus, on every input relevant to the manuscript's density, the denominator
+is positive and this is exactly the manuscript's formula.
 \end{definition}
