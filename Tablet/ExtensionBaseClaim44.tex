@@ -1,17 +1,34 @@
 \begin{lemma}[Claim 4.4: output of Algorithm (B)]
-Retain the Case 1 data, with manuscript stages
-\(j=m(v_n)\leq n\) represented by distinct zero-based Lean predecessor
-slots, and let \(\mathcal B\) be an
+Retain the Case 1 data.  Let \(v_n\in V(T)\), and let the zero-based Lean
+predecessor slot \(j_{\rm slot}\) satisfy the exact first-appearance identity
+\[
+ j_{\rm slot}.\mathrm{val}+1
+   =\noderef{ETTFirstAppearanceIndex}(v_n)=j=m(v_n).
+\]
+Thus
+\(\mathtt{ett.series.data.tree\ jSlot.succ.castSucc}\) is the exact stored
+stage tree \(T_j\), while
+\(\mathtt{ett.series.data.coloring\ jSlot.castSucc}\) is the exact reference
+coloring \(\varphi_{j-1}\).  Choose a positive occurrence position of \(v_n\)
+in this \(T_j\), certify that the vertex at that position is exactly \(v_n\),
+and identify the closure seed by the equality
+\[
+\mathtt{seed}
+   =\noderef{TreeSequencePrefix}(T_j,\mathtt{terminalPosition.val})
+   =T_j(v_n).
+\]
+Let the Lean color-set parameter \(C\) be the manuscript set \(D_{j-1}\).
+Let \(T'_j\) be a \noderef{TashkinovClosure} of this exact ordered prefix under
+\(\varrho_1\), let \(u\in V(T'_j)\setminus V(T_j)\), and let
+\(\mathcal B\) be an
 \noderef{ExtensionBaseAlgorithmBTrace} satisfying
 \noderef{ExtensionBaseAlgorithmBInvariant}.  Write \(\varrho_1\) for
 its initial coloring and \(\varrho_2\) for its output.  Assume Claim
 4.3(b1), namely that \(\varrho_1\) is
 \((T_j(v_n)-v_n,D_{j-1},\varphi_{j-1})\)-stable.  Assume the exact
-containment of those before-\(v_n\) vertices in \(T_j\), the Case 1 fact
-\(u\notin V(T_j)\), the consequence of (14)--(15) saying that no color
+Case 1 consequence of (14)--(15) saying that no color
 used by Algorithm (B) is missing on \(T'_j(u)-u\), and that \(T'_j\) is a closure
-of \(T_j(v_n)\) under \(\varrho_1\).  The seed edges are assumed to be
-the corresponding exact edge identities on \(T_j\).  Finally retain the
+of the displayed exact \(T_j(v_n)\) under \(\varrho_1\).  Finally retain the
 least missing gamma at \(u\), the exact gamma and delta field equalities,
 the exact chain identities, and the exact stored-pair identities.
 
@@ -46,8 +63,8 @@ record the consequence of invariant (16) that will be used repeatedly:
 The invariant also gives \(T_j\subseteq T_{t_a}\) as an ordered initial
 segment and says that every \(\varrho^a\) is proper.
 
-We prove (c1).  Let \(x\) occur before \(v_n\) in the displayed tree
-order.  By hypothesis \(x\in V(T_j)\), hence
+We prove (c1).  Let \(x\) occur before \(v_n\) in the exact stage-\(j\) tree
+order.  By the definition of this prefix \(x\in V(T_j)\), hence
 \(x\in V(T_{t_a})\), and \(x\ne v_n\).  Equation (18) therefore says
 that the switched component contains no vertex node \(x\).  It contains
 no edge node incident with \(x\) either: such an edge node is adjacent
@@ -100,8 +117,11 @@ would put two vertices of \(T_{t_a}\) on the component, contrary to
 step.
 
 Consider an edge of the prefix \(T'_j(u)\).  If it belongs to the seed,
-the stated exact seed-edge hypothesis identifies it with an edge of
-\(T_j\), so it is fixed by the preceding paragraph.  Otherwise, the
+the displayed equality of the seed with
+\(\noderef{TreeSequencePrefix}(T_j,\mathtt{terminalPosition.val})\), together
+with the defining edge map of that prefix, identifies this exact edge with
+the edge of \(T_j\) having the same cast index.  It is therefore fixed by the
+preceding paragraph.  Otherwise, the
 \noderef{TashkinovClosure} certificate and
 \noderef{TashkinovAugmentationSequence}, through
 \noderef{TashkinovAugmentation}, show that this exact edge was

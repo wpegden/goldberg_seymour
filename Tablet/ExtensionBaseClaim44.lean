@@ -1,10 +1,12 @@
 import Tablet.ExtensionBaseAlgorithmB
+import Tablet.ETTFirstAppearanceIndex
 import Tablet.IsProperEdgeColoring
 import Tablet.MissingColors
 import Tablet.StableColoringBeforeVertex
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovClosure
 import Tablet.TreeSequence
+import Tablet.TreeSequencePrefix
 import Tablet.TreeVerticesBefore
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
@@ -19,9 +21,22 @@ theorem ExtensionBaseClaim44 {V E : Type*}
     (ett : ExtendedTashkinovTree G k e0 input T generating)
     (terminalSupport : V)
     (hterminalSupport : terminalSupport ∈ TreeSequenceVertexSet T)
-    (jSlot : Fin ett.rounds) (rho1 phiJ : PartialEdgeColoring E k)
+    (jSlot : Fin ett.rounds)
+    (hjSlot : jSlot.val + 1 =
+      ETTFirstAppearanceIndex ett terminalSupport hterminalSupport)
+    (rho1 : PartialEdgeColoring E k)
     (C : Finset (Fin k)) (u : V)
     (TjPrime seed : TreeSequence G e0)
+    (terminalPosition : Fin
+      ((ett.series.data.tree jSlot.succ.castSucc).length + 1))
+    (hterminalAt :
+      (ett.series.data.tree jSlot.succ.castSucc).vertex terminalPosition =
+        terminalSupport)
+    (hterminalPositionPositive : 1 ≤ terminalPosition.val)
+    (hseed : seed = TreeSequencePrefix
+      (ett.series.data.tree jSlot.succ.castSucc) terminalPosition.val
+      hterminalPositionPositive
+      (Nat.le_of_lt_succ terminalPosition.isLt))
     (huPrime : u ∈ TreeSequenceVertexSet TjPrime)
     (p : ℕ) (indices : Fin (p + 1) → Fin ett.rounds)
     (gamma delta : Fin (p + 1) → Fin k) (b : Fin (p + 1))
@@ -29,19 +44,15 @@ theorem ExtensionBaseClaim44 {V E : Type*}
       p indices b)
     (hinvariant : ExtensionBaseAlgorithmBInvariant ett terminalSupport
       jSlot rho1 u p indices b trace)
-    (hbaseStable : StableColoringBeforeVertex T terminalSupport
-      hterminalSupport C phiJ rho1)
-    (hbeforeContained : ∀ w : V,
-      w ∈ TreeVerticesBefore T terminalSupport hterminalSupport →
-      w ∈ TreeSequenceVertexSet
-        (ett.series.data.tree jSlot.succ.castSucc))
+    (hbaseStable : StableColoringBeforeVertex
+      (ett.series.data.tree jSlot.succ.castSucc) terminalSupport
+      (by
+        rw [← hterminalAt]
+        simp [TreeSequenceVertexSet])
+      C (ett.series.data.coloring jSlot.castSucc) rho1)
     (huOutsideTj : u ∉ TreeSequenceVertexSet
       (ett.series.data.tree jSlot.succ.castSucc))
     (hclosure : TashkinovClosure rho1 seed TjPrime)
-    (hseedEdgesTj : ∀ a : Fin seed.length,
-      ∃ c : Fin (ett.series.data.tree jSlot.succ.castSucc).length,
-        seed.edge a =
-          (ett.series.data.tree jSlot.succ.castSucc).edge c)
     (hprefixAvoids :
       (TreeVerticesBefore TjPrime u huPrime).biUnion
           (fun v => MissingColors G rho1 v) ∩
@@ -58,8 +69,12 @@ theorem ExtensionBaseClaim44 {V E : Type*}
     (hstored : ∀ a,
       ett.series.data.stored (indices a).succ = {gamma a, delta a}) :
     let rho2 := trace.coloring (Fin.last trace.steps)
-    StableColoringBeforeVertex T terminalSupport hterminalSupport C phiJ
-        rho2 ∧
+    StableColoringBeforeVertex
+        (ett.series.data.tree jSlot.succ.castSucc) terminalSupport
+        (by
+          rw [← hterminalAt]
+          simp [TreeSequenceVertexSet])
+        C (ett.series.data.coloring jSlot.castSucc) rho2 ∧
       ((∀ v : V,
         v ∈ TreeSequenceVertexSet
               (ett.series.data.tree jSlot.succ.castSucc) ∪
