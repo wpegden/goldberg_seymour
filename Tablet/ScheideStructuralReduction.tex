@@ -1,0 +1,47 @@
+\begin{lemma}[Scheide structural reduction and exit-color bijection (1)]
+Every Scheide structural configuration admits a reordered tree-sequence
+$T'$ and reduced configuration on $T'$ with $V(T')=V(T)$.  Every old base
+vertex remains in the new base.  For each old block, either its color,
+two vertex identities, and two edge identities occur together as a new
+block, or both of its vertices have been absorbed into the new base.
+Consequently the exits are in bijection with the remaining, pairwise
+distinct block colors as specified by the reduced configuration.
+\end{lemma}
+\begin{proof}
+Put $X=V(T)$.  By the globally maximum clause of
+\noderef{ScheideStructuralConfiguration} and
+\noderef{ScheideGlobalMaximumOrder}, $X$ is elementary.  Hence each block
+color is missing at exactly one vertex of $X$: existence is condition (S2),
+and two such vertices would violate elementariness.
+
+For every exit vertex $v$, condition (S4) in
+\noderef{ScheideStructuralConfiguration} supplies at least one block color
+missing at $v$; choose one and call it $c(v)$.  If $v\ne w$, then
+$c(v)\ne c(w)$, again by elementariness.  Thus the selected colors form a
+set $\Gamma'$ of cardinality equal to the number of exits, and every exit
+misses exactly one color of $\Gamma'$.
+
+Retain precisely the blocks whose colors lie in $\Gamma'$.  Move all other
+blocks before them and regard their two vertices, in their displayed order,
+as the end of the enlarged base segment.  This is still a Tashkinov
+tree-sequence: each of the two edges of a moved block joins its new vertex
+to the old base by (S1), and its common color is missing on the old base by
+(S2), so both attachment and missing-color witnesses remain valid.  The
+operation only permutes named block pairs and changes where the base ends;
+it does not change the coloring or any vertex or edge identity.  Therefore
+the new sequence $T'$ has exactly $V(T)$, contains every old base vertex in
+its new base, and each old block is either retained with all four names or
+has both vertices in that base.
+
+Conditions (S1), (S2), and (S4) are unchanged for retained blocks.  For
+(S3), the newly incorporated block edges have colors in
+$\Gamma\setminus\Gamma'$, hence outside the new block-color set
+$\Gamma'$.  Thus all fields of
+\noderef{ScheideStructuralConfiguration} hold for the reordered data.
+The injection $v\mapsto c(v)$ has domain and codomain of the same finite
+cardinality, so it is a bijection.  Surjectivity says every retained block
+color is missing at an exit; injectivity plus elementariness gives the
+unique-color clause at every exit.  These are exactly the additional fields
+of \noderef{ScheideReducedConfiguration}, proving the asserted existence
+and all identity-preservation clauses.
+\end{proof}

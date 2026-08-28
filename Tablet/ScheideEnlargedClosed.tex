@@ -1,0 +1,47 @@
+\begin{lemma}[Scheide enlarged set is closed (19)]
+The enlarged set $X=V(T)\cup\bigcup_\delta U_\delta$ is closed with
+respect to $\varphi$.
+\end{lemma}
+\begin{proof}
+If there is no defective color, the indexed union in
+\noderef{ScheideEnlargedVertexSet} is empty, so $X=V(T)$, which is closed
+by the globally maximum clause and \noderef{ScheideGlobalMaximumOrder}.
+Assume henceforth that a defective color exists.
+
+Suppose an edge identity $f=uw$ of color $\alpha$ leaves $X$, while
+$\alpha$ is missing at some vertex of $X$.  If $u$ lies in a replacement
+pair, choose its index $\delta$; if $u\in V(T)$, choose any defective
+color, which exists by the preceding case split.  In either event $u$
+belongs to $X_\delta=V(T)\cup U_\delta$.  By
+\noderef{ScheideReplacementUnionClosed}, $X_\delta$ is closed, so the
+vertex missing $\alpha$ is not in $X_\delta$.  By the equal-or-disjoint
+alternative \noderef{ScheideReplacementPairsLaminar}, it belongs to a
+pair $U_{\delta'}$ disjoint from $U_\delta$.  Closedness of
+$X_{\delta'}$ then shows that $u$ cannot lie in $V(T)$; hence
+$u\in U_\delta$.
+
+Consider the $(\alpha_0,\alpha)$ incidence component through $u$.  Both
+colors are missing on the closed set $X_{\delta'}$, so the component avoids
+that set, in particular $V(T)$.  By elementariness of $X$ from
+\noderef{ScheideEnlargedElementary}, $\alpha$ is not a block color, since
+every block color already has a missing vertex in $V(T)$.  Also
+$\alpha\ne\delta$: the named $\delta$-edge from $V(T)$ to $U_\delta$
+crosses the boundary of the closed set $X_{\delta'}$, so $\delta$ is
+present throughout that set.  The setup gives
+$\alpha_0\notin\Gamma$, and $\alpha_0\ne\delta$ because $\delta$ is
+present on the original closed tree.
+
+The component is therefore identical under $\varphi$ and
+$\varphi_\delta$, and it contains no edge of the replacement tree
+$T_\delta$: its inherited edges have an end or missing witness in the
+avoided original tree, while its two new edges have color $\delta$.
+Switching this full incidence component preserves properness by
+\noderef{TwoColorComponentSwapProper} and fixes the unique uncolored edge.
+Every replacement-tree edge and every missing witness for it remains
+unchanged, so \noderef{ScheideReplacementMaximum} remains a globally
+maximum Tashkinov triple.  The boundary edge $f$ lies in the switched
+component and acquires color $\alpha_0$, while $\alpha_0$ remains missing
+at $y_0$.  Appending $f,w$ gives a larger Tashkinov tree, contradicting
+global maximality.  Thus no such boundary edge exists, exactly the closure
+condition of \noderef{ColoredVertexSetClosed}.
+\end{proof}

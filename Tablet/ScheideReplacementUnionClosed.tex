@@ -1,0 +1,30 @@
+\begin{lemma}[Scheide one-pair unions are closed (17)]
+For every defective color $\delta$, the set
+$X_\delta=V(T)\cup U_\delta$ is closed with respect to $\varphi$.
+\end{lemma}
+\begin{proof}
+Let $\alpha$ be missing at a vertex of $X_\delta$.  First suppose it is
+missing on $V(T)$.  Original closedness, from
+\noderef{ScheideGlobalMaximumOrder}, excludes an $\alpha$-edge from
+$V(T)$ to its exterior.  The two vertices of $U_\delta$ have an internal
+$\alpha$-edge in every case.  If $\alpha=\gamma(\delta)$ use assertion
+(12) in \noderef{ScheideSymmetricDefectiveInternal}.  If the missing tree
+vertex lies in $Z_{\gamma(\delta)}$ and
+$\alpha\ne\gamma(\delta)$, use
+\noderef{ScheideReplacementInternalMissing}.  If it lies in the deleted
+pair, use assertion (14) in
+\noderef{ScheideSymmetricMissingInternal}.  Therefore no $\alpha$ edge can
+leave through the replacement pair either.
+
+Now suppose $\alpha$ is missing at a vertex of $U_\delta$.  The incident
+$\delta$ edge and internal $\gamma(\delta)$ edge show that it is neither
+of those colors.  Consequently $\alpha$ is unchanged by the defective
+switch and is missing on the closed globally maximum replacement tree from
+\noderef{ScheideReplacementMaximum}.  No $\alpha$-edge can leave
+$Z_{\gamma(\delta)}\cup U_\delta$.  Assertion (13) in
+\noderef{ScheideSymmetricMissingInternal} supplies an internal
+$\alpha$-edge of the omitted pair $U_{\gamma(\delta)}$, so no such edge
+leaves that pair either.  These two cases cover every possible missing
+vertex in $X_\delta$ and prove closure as defined in
+\noderef{ColoredVertexSetClosed}.
+\end{proof}

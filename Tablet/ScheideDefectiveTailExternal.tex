@@ -1,0 +1,55 @@
+\begin{lemma}[Scheide replacement-chain tail is external (5)]
+For every defective $\delta$, the full
+$(\gamma(\delta),\delta)$ incidence component recorded in the setup meets
+$V(T)$ only at its initial vertex $v^0_\delta$.
+\end{lemma}
+\begin{proof}
+Suppose otherwise, and follow the recorded simple path from
+$v^0_\delta$ to its outside end.  Let $v_1\ne v^0_\delta$ be its last
+tree vertex.  It is an exit and hence lies in the base by
+\noderef{ScheideStructuralExitsInBase}.  Let $f_1=v_1u_1$ be the following
+$\delta$-edge and let $\gamma_j$ be the unique block color missing at
+$v_1$.  The reduced bijection and elementariness give
+$\gamma_j\ne\gamma(\delta)$.
+
+First interchange $\alpha_0$ and $\gamma(\delta)$ outside $V(T)$ and
+switch the terminal part of the initial
+$(\alpha_0,\delta)$ path.  As in
+\noderef{ScheideDefectiveNoCross}, properness and the unique uncolored edge
+are preserved, $T-\gamma(\delta)$ is Tashkinov, $\delta$ is missing at
+$v^0_\delta$, and $f_1$ stays $\delta$-colored; append $f_1,u_1$.
+Independently interchange $\gamma(\delta)$ and $\gamma_j$ outside the
+tree and switch the tail from $v_1$.  The same edge-by-edge check using
+\noderef{OutsideTreeColorSwap} and
+\noderef{TwoColorComponentSwapProper} preserves properness and the unique
+uncolored edge, leaves $T-\gamma_j$ Tashkinov with $\delta$ missing at
+$v_1$, and fixes $f^0_\delta$; append
+$f^0_\delta,u^0_\delta$.
+
+Put $Z=V(T)\setminus(U_{\gamma(\delta)}\cup U_{\gamma_j})$.  Its order is
+odd, and $\delta$ is present at every vertex.  Counting incidences of the
+$\delta$ matching shows that an odd number of $\delta$-edges leave $Z$.
+The two displayed departures are distinct, so a third identity $f_2$ leaves
+$Z$.  It is on neither switched tail and retains color $\delta$ in both
+recolorings.  Its outside end cannot lie in $U_{\gamma_j}$, since
+\noderef{ScheideStructuralInternalPair} would then provide an internal
+$\alpha_0$-edge and allow two successive appendings beyond maximum; it
+cannot lie in $U_{\gamma(\delta)}$ by
+\noderef{ScheideDefectiveNoCross}.  Hence it lies outside $V(T)$.  Append
+$f_2$ in both constructions.  Each resulting tree has the original
+maximum number of vertices.
+
+By \noderef{ScheideGlobalMaximumMissingCounts}, each end of the uncolored
+edge misses at least two colors.  The two ends are distinct and the tree is
+elementary, so at least four distinct colors are missing on the first two
+base vertices.  Choose one such color $\beta$ distinct from
+$\alpha_0,\gamma(\delta),\gamma_j$; it also differs from $\delta$, which
+is present throughout $V(T)$.  Neither recoloring changed a $\beta$ edge
+or its original missing witness.  Closedness of the first new maximum tree
+forces the $\beta$-edge at the new end of $f_2$ to join it to $u_1$, since
+the original closed set admits no such boundary edge.  In the second new
+maximum tree $u_1$ is absent, so that same edge is appendable in a color
+still missing on the tree.  The resulting larger Tashkinov tree is the
+final contradiction.  Therefore the recorded replacement component has
+no second tree vertex.
+\end{proof}

@@ -1,0 +1,49 @@
+\begin{lemma}[Scheide symmetric missing-color internal edges (13)--(14)]
+Fix defective $\delta$.  Every color missing at one of the replacement
+vertices in $U_\delta$ has an edge identity internal to
+$U_{\gamma(\delta)}$; symmetrically, every color missing at one of the two
+vertices of $U_{\gamma(\delta)}$ has an edge identity internal to
+$U_\delta$.
+\end{lemma}
+\begin{proof}
+Let $\alpha$ be missing at a vertex of $U_\delta$.  The two incident
+$\delta$-edges and the internal $\gamma(\delta)$-edge from
+\noderef{ScheideSymmetricDefectiveInternal} show that
+$\alpha\notin\{\delta,\gamma(\delta)\}$.  Thus its edge identities agree
+under $\varphi$ and $\varphi_\delta$.  Also $\alpha\ne\alpha_0$, because
+the globally maximum replacement tree is elementary by
+\noderef{ScheideReplacementMaximum}, $\alpha$ is missing in $U_\delta$,
+and $\alpha_0$ is missing at $y_0\in Z$.
+
+The $(\alpha_0,\alpha)$ component through
+$u^1_{\gamma(\delta)}$ is disjoint from the closed replacement tree:
+both colors are missing on that tree.  It consequently meets the original
+tree only in $U_{\gamma(\delta)}$ and contains no tree edge identity.
+Switching it preserves properness by
+\noderef{TwoColorComponentSwapProper}, fixes the unique uncolored edge, and
+preserves every tree-edge missing witness in the avoided base.  Assertion
+(3), \noderef{ScheideStructuralInternalPair}, gives its internal
+$\alpha_0$ edge in $U_{\gamma(\delta)}$.  An $\alpha$-edge leaving this
+pair either exits $V(T)$ and becomes an appendable $\alpha_0$ edge, or
+enters $Z$ and violates closure of the replacement tree in a color missing
+there.  Both are impossible.  If there were no internal $\alpha$ edge,
+both vertices would miss $\alpha$, contradicting elementariness of $V(T)$.
+This proves (13).
+
+Now let $\alpha$ be missing at a vertex of
+$U_{\gamma(\delta)}$.  The original block edges and the internal
+$\delta$ edge from \noderef{ScheideSymmetricDefectiveInternal} give
+$\alpha\notin\{\gamma(\delta),\delta\}$.  The
+$(\alpha_0,\alpha)$ component through $u^1_\delta$ is disjoint from the
+original closed tree and meets the replacement tree only in $U_\delta$.
+The internal-edge statement
+\noderef{ScheideReplacementInternalMissing} supplies its internal
+$\alpha_0$ edge there.  Switching preserves the replacement tree: all
+inherited missing witnesses lie in the avoided base, and the two appended
+$\delta$ edges use the avoided vertex $v^0_\delta$.  The same
+switch-and-append argument, now with the original and replacement pairs
+interchanged, excludes every $\alpha$ edge leaving $U_\delta$.
+Elementariness of the replacement tree then forces an internal
+$\alpha$-edge, and \noderef{ScheideReplacementPairFixed} transfers its
+color to $\varphi$.  This proves (14).
+\end{proof}

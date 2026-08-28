@@ -1,0 +1,51 @@
+\begin{lemma}[Scheide defective-color setup]
+Let a reduced Scheide configuration have at least one defective color.
+Then it admits defective-color setup data: a common
+$\alpha_0\in\overline\varphi(y_0)\setminus\Gamma$ and, for every defective
+$\delta$, the two full incidence paths, last-tree-vertex indices, named
+boundary edge, outside endpoint, and missing block color specified in
+\noderef{ScheideDefectiveSetup}.
+\end{lemma}
+\begin{proof}
+Both ends of the uncolored edge $e_0$ are among the first two base vertices,
+by the position and attachment fields of
+\noderef{ScheideReducedConfiguration}.  The missing-count clause
+\noderef{ScheideGlobalMaximumMissingCounts} gives at least two colors
+missing at $y_0$.  By the exit-color bijection in
+\noderef{ScheideReducedConfiguration}, every block color is missing at a
+unique exit; elementariness from \noderef{ScheideGlobalMaximumOrder}
+therefore implies that $y_0$ misses at most one block color.  Choose a
+second missing color $\alpha_0$ outside $\Gamma$.
+
+Fix a defective color $\delta$.  Closedness from
+\noderef{ScheideGlobalMaximumOrder}, together with the existence of a
+$\delta$ boundary edge, says that $\delta$ is present at every tree
+vertex.  The vertex-node $y_0$ has no $\alpha_0$ incidence and one
+$\delta$ incidence, so it is an end of its finite two-color component.
+Every edge-node has its two distinct endpoint neighbors, and properness
+gives vertex degree at most two.  Hence the spanning-path argument of
+\noderef{TwoColorComponentSpanningPath} gives a simple incidence path
+whose support is the full component.  Its other end is outside $V(T)$:
+no other tree vertex can be an end, since $\delta$ is present everywhere
+and elementariness makes $\alpha_0$ present away from $y_0$.
+
+Orient this path from $y_0$.  Finiteness gives its last vertex-node in
+$V(T)$, call it $v^0_\delta$, followed by an edge-node
+$f^0_\delta$ and an outside vertex-node $u^0_\delta$.  No
+$\alpha_0$-edge leaves the closed tree, by
+\noderef{ScheideGlobalMaximumBoundaryFacts}; consequently
+$\varphi(f^0_\delta)=\delta$.  The last-tree-vertex property makes
+$v^0_\delta$ a Scheide exit.  The reduced exit-color bijection supplies
+the unique index $\gamma(\delta)$ whose block color is missing there.
+
+Finally consider the incidence component in colors
+$\gamma(\delta),\delta$ through $v^0_\delta$.  At its root the first color
+is missing and the second is present.  Properness again gives a finite path
+component.  It has an outside vertex because a defective $\delta$-edge
+leaves the closed tree and the alternating component cannot end at a second
+tree vertex: that would duplicate a missing color in the elementary set.
+Choose its full simple spanning path oriented from $v^0_\delta$.
+Performing these finite choices for every defective color supplies all
+fields, path supports, and identity equations in
+\noderef{ScheideDefectiveSetup}.
+\end{proof}

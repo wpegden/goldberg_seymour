@@ -1,0 +1,61 @@
+\begin{lemma}[Scheide three departures and replacement data (7)]
+For every defective color $\delta$, the boundary identities of color
+$\delta$ from $Z_{\gamma(\delta)}$ to the exterior of $V(T)$ are exactly
+three.  They can be named $f^0_\delta,f^1_\delta,f^2_\delta$ with distinct
+outside ends, and these choices, together with the exact replacement
+tree-sequence obtained by deleting the $\gamma(\delta)$ block and adjoining
+$f^1_\delta,f^2_\delta$, form a family of
+\noderef{ScheideReplacementData}.
+\end{lemma}
+\begin{proof}
+Fix $\delta$ and abbreviate $Z=Z_{\gamma(\delta)}$.  Every vertex of $Z$
+is incident with a unique $\delta$-edge: defectiveness plus closedness makes
+the color present, and properness makes the incidence unique.  The set $Z$
+has odd order, since the globally maximum tree has odd order and exactly two
+vertices were deleted.  By \noderef{ScheideDefectiveNoCross}, no
+$\delta$-edge joins $Z$ to the deleted pair.  Counting the unique
+$\delta$ incidence at each vertex of $Z$ therefore shows that the number
+of $\delta$-edges from $Z$ to the exterior of $V(T)$ is odd.  It contains
+$f^0_\delta$.
+
+If there were more than three, choose three identities other than
+$f^0_\delta$.  The exact switch statement
+\noderef{ScheideDefectiveSwitchEffect} says that all three retain color
+$\delta$ under $\varphi_\delta$, while that coloring is proper and leaves
+exactly $e_0$ uncolored.  Delete the two vertices of the
+$\gamma(\delta)$ block and append the three chosen boundary identities and
+their outside ends.  Their ends are distinct by properness.  Since
+$\delta$ is missing at $v^0_\delta$ after the switch, the appendings satisfy
+the Tashkinov rule and yield one more vertex than the global maximum, a
+contradiction.
+
+If the odd number were less than three, it would be one, with sole identity
+$f^0_\delta$.  By \noderef{ScheideStructuralInternalPair}, an internal
+$\alpha_0$-edge joins the deleted pair.  The no-cross assertion excludes
+$\delta$ between that pair and $Z$, while closedness excludes
+$\alpha_0$ from $V(T)$ to its exterior.  Thus the initial
+$(\alpha_0,\delta)$ path avoids the deleted pair.  Consider the distinct
+$(\alpha_0,\delta)$ component through one deleted vertex.  Its internal
+$\alpha_0$-edge and the no-cross assertion keep it away from $Z$; it uses
+no tree edge identity, because the only tree edges incident with the pair
+have color $\gamma(\delta)$.  Switching this component preserves
+properness by \noderef{TwoColorComponentSwapProper}, fixes the unique
+uncolored edge, and preserves every Tashkinov witness.  At least two of the
+three or more defective $\delta$ boundary identities must be incident with
+the deleted pair.  They become $\alpha_0$-edges, one of which can be
+appended in the color missing at $y_0$.  This again exceeds the maximum.
+Hence the number is exactly three.
+
+Name the other two identities $f^1_\delta,f^2_\delta$, their ends in $Z$
+$v^1_\delta,v^2_\delta$, and their outside ends
+$u^1_\delta,u^2_\delta$.  Looplessness gives the displayed endpoint
+equations, and properness gives pairwise distinct edge identities and
+distinct outside ends.  Delete the named block vertices and block edge
+identities from the ordered sequence and append
+$f^1_\delta,u^1_\delta,f^2_\delta,u^2_\delta$.  The direct-to-base
+attachment fields of \noderef{ScheideReducedConfiguration} show that the
+remaining order is a tree-sequence, while the two new edges attach their
+outside vertices.  Its vertex and edge images are exactly the finite sets
+stated in \noderef{ScheideReplacementData}.  Finite choice over all
+defective colors produces the asserted replacement-data family.
+\end{proof}

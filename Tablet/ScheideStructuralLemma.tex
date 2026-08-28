@@ -1,0 +1,42 @@
+\begin{lemma}[Structural lemma; Scheide Lemma 4.1]
+Let $G$ satisfy the source's critical-graph convention, let
+$\chi'(G)=k+1$ with $k\geq\Delta(G)+1$, and let
+$(T,e_0,\varphi)$ be a globally maximum triple carrying the exact ordered
+S1--S4 block configuration of
+\noderef{ScheideStructuralConfiguration}.  Then $G$ is elementary.
+\end{lemma}
+\begin{proof}
+Apply \noderef{ScheideStructuralReduction} and replace the original ordered
+tree by its reduced reordering $T'$.  This changes neither the coloring nor
+the vertex set and retains every edge and vertex identity in the precise
+way stated there.
+
+If the reduced tree has no defective color, then
+\noderef{ScheideGlobalMaximumBoundaryFacts} makes $V(T')$ strongly closed,
+while \noderef{ScheideGlobalMaximumOrder} makes it elementary.  The first
+edge of the tree-sequence is $e_0$, so its attachment equation puts both
+ends of $e_0$ in $V(T')$.  The globally maximum field supplies criticality,
+$\chi'(G)=k+1$, $k\geq\Delta(G)+1$, properness, and the fact that exactly
+$e_0$ is uncolored; the configuration's no-isolated-vertex field supplies
+the remaining source criticality convention.  Hence condition (iv) of
+\noderef{egraph2} holds with $X=V(T')$, and its implication
+(iv)$\Rightarrow$(i) yields that $G$ is elementary.
+
+Assume now that a defective color exists.  Choose the incidence paths and
+named departures supplied by \noderef{ScheideDefectiveSetupExists}, then
+choose a replacement-data family by
+\noderef{ScheideReplacementFamilyExists}.  Assertion (16),
+\noderef{ScheideEnlargedElementary}, says that the resulting enlarged set
+$X$ is elementary.  Assertion (21),
+\noderef{ScheideEnlargedStronglyClosed}, says that the same set is strongly
+closed.  It contains $V(T')$ by the definition
+\noderef{ScheideEnlargedVertexSet}, and therefore contains both ends of
+$e_0$.
+
+The original proper coloring and unique-uncolored-edge clauses remain
+unchanged, and the critical, chromatic-index, degree, and no-isolated-vertex
+hypotheses are exactly those already listed in the no-defective case.
+Thus condition (iv) of \noderef{egraph2} again holds, now with the enlarged
+set $X$.  The implication (iv)$\Rightarrow$(i) proves that $G$ is
+elementary.  This covers both cases and completes the structural lemma.
+\end{proof}

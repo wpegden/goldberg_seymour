@@ -1,0 +1,59 @@
+\begin{lemma}[Scheide enlarged set is strongly closed (21)]
+The enlarged set $X=V(T)\cup\bigcup_\delta U_\delta$ is strongly closed
+with respect to $\varphi$.
+\end{lemma}
+\begin{proof}
+The set is closed by \noderef{ScheideEnlargedClosed}.  Suppose it is not
+strongly closed.  Then some color $\alpha$, present at every vertex of
+$X$, occurs on at least two distinct boundary edge identities.  The order
+of $X$ is odd: \noderef{ScheideGlobalMaximumOrder} makes $|V(T)|$ odd,
+and \noderef{ScheideReplacementPairsLaminar} says the union adds a
+collection of pairwise disjoint two-vertex pairs after equal pairs are
+identified.  Counting the unique $\alpha$ incidence at every vertex of
+$X$ gives
+\[
+ |X|=2|E_\alpha(X)|+|\partial_{\varphi,\alpha}(X)|.
+\]
+Thus the boundary count is odd; being at least two, it is at least three.
+
+At most one of these boundary edges has its in-end in $V(T)$.  If
+$\alpha$ is not defective for $T$, this follows directly from the
+definition of defectiveness.  If it is defective, the exact-three clause
+of \noderef{ScheideReplacementData}, together with the internal
+$\alpha$ edge of $U_{\gamma(\alpha)}$ from
+\noderef{ScheideSymmetricDefectiveInternal}, says that only
+$f^0_\alpha$ among the original tree's $\alpha$ boundary identities can
+leave $X_\alpha$, and hence $X$.  Therefore at least two boundary
+identities have their in-ends in $X\setminus V(T)$.
+
+By \noderef{ScheideSingleBoundaryCrossing}, the full
+$(\alpha_0,\alpha)$ component through $y_0$ uses exactly one boundary
+identity of $X$.  Choose another, $f=wu$, with
+$w\in U_\delta$ and $u\notin X$, whose edge-node is not in that component.
+The full $(\alpha_0,\alpha)$ component $Q$ through $u$ is disjoint from the
+first component.  It also avoids $V(T)$.  If $\alpha$ is defective for
+$T$, the closed set $X_\alpha$ has only $f^0_\alpha$ of color $\alpha$
+leaving it, and that identity belongs to the first component; $Q$ cannot
+enter $X_\alpha$.  If $\alpha$ is not defective, the unique possible
+$\alpha$ boundary identity of $V(T)$ belongs to the first component, so
+$Q$ again cannot enter $V(T)$.  No $\alpha_0$ edge leaves $V(T)$ in either
+case.
+
+The edge $f$ is distinct from the incident $\delta$ edge at $w$ and from
+the internal $\gamma(\delta)$ edge supplied by
+\noderef{ScheideSymmetricDefectiveInternal}; hence
+$\alpha\notin\{\delta,\gamma(\delta)\}$.  The same is true of
+$\alpha_0$.  Thus $Q$ is the same incidence component under
+$\varphi$ and $\varphi_\delta$ and contains no edge identity of the
+replacement tree $T_\delta$.  Switching it preserves properness by
+\noderef{TwoColorComponentSwapProper}; it also preserves the unique
+uncolored edge, because every edge-node of $Q$ is colored.  All missing
+witnesses for replacement-tree edges lie in the avoided set $V(T)$, so
+the tree remains Tashkinov and globally maximum as in
+\noderef{ScheideReplacementMaximum}.  The edge $f$ acquires color
+$\alpha_0$, while that color remains missing at $y_0$.  Appending $f,u$
+then gives a Tashkinov tree larger than the global maximum, a contradiction.
+Therefore distinct boundary identities cannot share a color.  Together
+with closure, this is precisely
+\noderef{ColoredVertexSetStronglyClosed}.
+\end{proof}

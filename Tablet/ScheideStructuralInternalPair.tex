@@ -1,0 +1,34 @@
+\begin{lemma}[Scheide internal block-pair edges (3)]
+Let $\gamma$ be a block color in a reduced Scheide configuration, put
+$U_\gamma=\{u^1_\gamma,u^2_\gamma\}$ and
+$Z_\gamma=V(T)\setminus U_\gamma$.  If
+$\alpha\ne\gamma$ is missing at a vertex of $Z_\gamma$, then there is an
+individual edge identity of color $\alpha$ whose endpoint pair is exactly
+$\{u^1_\gamma,u^2_\gamma\}$.
+\end{lemma}
+\begin{proof}
+By \noderef{ScheideGlobalMaximumOrder}, $V(T)$ is elementary and closed.
+Since $\alpha$ is missing at a vertex of $Z_\gamma$, elementariness makes
+$\alpha$ present at both vertices of $U_\gamma$; properness makes the
+incident $\alpha$-edge at either vertex unique.  Closedness prevents either
+of those edges from leaving $V(T)$.
+
+Suppose that the $\alpha$-edge at $u^1_\gamma$ ends in $Z_\gamma$.  The
+$\alpha$-edge at $u^2_\gamma$ cannot end at $u^1_\gamma$, where the unique
+$\alpha$ incidence is already occupied, so it too ends in
+$Z_\gamma$.  Delete from the ordered tree the two named $\gamma$-edges and
+their two new vertices, then append these two individual $\alpha$-edges
+and $u^1_\gamma,u^2_\gamma$.  The remaining order is Tashkinov because
+every deleted block attached directly to the base; the two appended edges
+have the existing missing $\alpha$ witness in $Z_\gamma$.  Properness and
+the unique uncolored edge are unchanged, and the new tree has exactly
+$V(T)$, so the resulting triple is globally maximum.
+
+In that replacement tree, $\gamma$ is missing but unused, hence free.
+Defective colors and Scheide exits depend only on the coloring and vertex
+set, both of which are unchanged.  The exit-color surjectivity in
+\noderef{ScheideReducedConfiguration} supplies an exit missing $\gamma$,
+contradicting \noderef{ScheideExitNoFree}.  Thus the unique
+$\alpha$-edge at $u^1_\gamma$ must end at $u^2_\gamma$, giving the asserted
+edge identity and endpoint equation.
+\end{proof}

@@ -1,0 +1,55 @@
+\begin{lemma}[Scheide single boundary crossing (20)]
+Let $\alpha$ be present at every vertex of the enlarged set $X$.  In the
+full $(\alpha_0,\alpha)$ incidence component through $y_0$, there is exactly
+one individual edge identity in $\partial_G(X)$.
+\end{lemma}
+\begin{proof}
+The color $\alpha_0$ is missing at $y_0$, while $\alpha$ is present there.
+Properness makes the vertex-node $y_0$ an end of its finite two-color
+component.  By \noderef{TwoColorComponentSpanningPath}, the component has a
+simple spanning path $P$ beginning at $y_0$.  Elementariness of $X$ from
+\noderef{ScheideEnlargedElementary} and the hypothesis that $\alpha$ is
+missing nowhere on $X$ force the other end outside $X$.  Let $v$ be the
+last vertex of $X$ on $P$, and let $g$ be its following edge identity.
+Closure from \noderef{ScheideEnlargedClosed} excludes an
+$\alpha_0$-edge from $X$, so $g$ has color $\alpha$.  It remains to show
+that the initial segment from $y_0$ to $v$ stays in $X$; then $g$ is the
+unique boundary crossing of the full path.
+
+First suppose $v\in V(T)$ and $\alpha$ is not defective for $T$.  Since
+$g$ is an $\alpha$ boundary edge of $V(T)$ and nondefectiveness permits at
+most one such identity, while no $\alpha_0$ edge leaves the original
+closed tree, the path cannot leave and reenter $V(T)$ before $g$.
+Therefore its initial segment lies in $V(T)\subseteq X$.
+
+Suppose $v\in V(T)$ and $\alpha$ is defective.  Use $\delta=\alpha$ in
+the exact-three clause of \noderef{ScheideReplacementData}.  The internal
+$\alpha$-edge in $U_{\gamma(\alpha)}$ supplied by
+\noderef{ScheideSymmetricDefectiveInternal} shows that the only one of the
+three original $\alpha$ boundary identities which leaves
+$X_\alpha=V(T)\cup U_\alpha$ is $f^0_\alpha$: the other two end in
+$U_\alpha$, and none is incident with $U_{\gamma(\alpha)}$.  Since
+$X_\alpha$ is closed by \noderef{ScheideReplacementUnionClosed} and
+$\alpha_0$ is missing there, the path cannot leave and reenter
+$X_\alpha$ before $g$.  Its initial segment again lies in $X$.
+
+Finally suppose $v\in U_\delta$.  The edge $g$ differs from the incident
+$\delta$ edge and the internal $\gamma(\delta)$ edge of assertion (12), so
+$\alpha\notin\{\delta,\gamma(\delta)\}$.  The path is consequently
+unchanged under $\varphi_\delta$, and $v$ is its last vertex in the
+globally maximum replacement tree $T_\delta\subseteq X$.  Every color used
+on $T_\delta$ has a missing witness in $Z_{\gamma(\delta)}$: inherited
+tree-edge colors retain their old base witnesses, and the two new
+$\delta$ edges use $v^0_\delta$.  Elementariness of the replacement tree
+therefore makes every color missing at $v$ free for $T_\delta$.
+If $\alpha$ were defective for that tree, $v$ would be its exit on $P$ and
+would miss a free color, contradicting \noderef{ScheideExitNoFree}.
+Thus $\alpha$ is not defective there.  The edge $g$ is its unique
+$\alpha$ boundary edge and no $\alpha_0$ edge leaves the closed replacement
+tree, so the initial segment lies in $V(T_\delta)\subseteq X$.
+
+All cases show that $P$ remains in $X$ until the single departure $g$.
+Because its support is the full incidence component, an edge-node of that
+component lies in $\partial_G(X)$ exactly when the path crosses the
+boundary.  Hence $g$ is the unique boundary edge identity asserted.
+\end{proof}

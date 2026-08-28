@@ -1,0 +1,23 @@
+\begin{lemma}[Scheide replacement-pair switch invariance (8)]
+For replacement data of a defective color $\delta$, the switched coloring
+$\varphi_\delta$ agrees with $\varphi$ on every edge identity incident with
+$U_\delta=\{u^1_\delta,u^2_\delta\}$.
+\end{lemma}
+\begin{proof}
+Suppose that $u^i_\delta$ lay on the switched
+$(\gamma(\delta),\delta)$ component.  Its unique incident
+$\delta$-edge $f^i_\delta$ would then be an edge-node of that component,
+and its other endpoint $v^i_\delta\in V(T)$ would lie on the same component.
+This tree vertex differs from $v^0_\delta$, since the three boundary edge
+identities in \noderef{ScheideReplacementData} are distinct and a proper
+coloring has at most one incident $\delta$-edge at $v^0_\delta$.  This
+contradicts \noderef{ScheideDefectiveTailExternal}, which says that
+$v^0_\delta$ is the component's only tree vertex.  Thus neither replacement
+vertex-node belongs to the component.
+
+If an edge identity incident with one of these vertices belonged to the
+component, incidence adjacency would put the vertex-node in the same
+component.  Hence every such edge-node is outside the component and is
+fixed by the exact definition \noderef{TwoColorComponentSwap}.  This is
+the asserted equality for every incident edge identity.
+\end{proof}

@@ -1,0 +1,28 @@
+\begin{lemma}[Scheide internal replacement-pair edges (10)]
+Fix defective $\delta$.  If
+$\alpha\ne\gamma(\delta)$ is missing at a vertex of
+$Z_{\gamma(\delta)}$, then an individual edge identity of color $\alpha$
+joins $u^1_\delta$ and $u^2_\delta$ under the original coloring.
+\end{lemma}
+\begin{proof}
+The defective color $\delta$ is present throughout
+$Z_{\gamma(\delta)}$, so the assumed $\alpha$ is neither $\delta$ nor the
+excluded $\gamma(\delta)$.  Thus the switch from $\varphi$ to
+$\varphi_\delta$ changes neither the missing witness in $Z$ nor any
+$\alpha$-edge identity.  By
+\noderef{ScheideReplacementMaximum} and
+\noderef{ScheideGlobalMaximumOrder}, the replacement vertex set
+$V(T_\delta)=Z\cup U_\delta$ is elementary and closed for
+$\varphi_\delta$.
+
+The original closed set $V(T)$ has no $\alpha$-edge from $Z$ to
+$U_\delta$, since $U_\delta$ lies outside it.  In the closed replacement
+tree, the unique $\alpha$-edge at either replacement vertex can neither
+leave $V(T_\delta)$ nor end in $Z$.  Elementariness makes $\alpha$ present
+at both replacement vertices, since it is already missing in $Z$.
+Consequently their unique $\alpha$ incidences are one and the same edge
+identity joining the two vertices.  Finally
+\noderef{ScheideReplacementPairFixed} says every incident edge at this
+pair has the same color under $\varphi$ and $\varphi_\delta$, so the edge
+has color $\alpha$ in the original coloring as asserted.
+\end{proof}

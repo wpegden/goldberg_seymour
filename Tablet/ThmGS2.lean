@@ -14,6 +14,7 @@ import Tablet.ScheideAbsorbingElementary
 import Tablet.ScheideDefectiveChainFirstOutsideElementary
 import Tablet.ScheideExitNoFree
 import Tablet.ScheideTrunkRotationPreserves
+import Tablet.ScheideStructuralLemma
 import Tablet.TashTree
 import Tablet.TashkinovClosure
 import Tablet.TashkinovClosureExists

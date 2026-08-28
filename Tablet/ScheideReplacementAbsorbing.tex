@@ -1,0 +1,49 @@
+\begin{lemma}[Scheide replacement vertices are absorbing (15)]
+For every defective color $\delta$, both vertices of $U_\delta$ belong to
+the absorbing set $A(T,e_0,\varphi)$.
+\end{lemma}
+\begin{proof}
+Fix $u\in U_\delta$, a color $\alpha$ missing at $u$, and a free color
+$\beta\ne\alpha$ of the original tree.  The incident $\delta$-edge and the
+internal $\gamma(\delta)$-edge in
+\noderef{ScheideSymmetricDefectiveInternal} show that
+$\alpha\notin\{\delta,\gamma(\delta)\}$.  A free color is missing on
+$V(T)$ and neither of these two colors is free, so
+$\beta\notin\{\delta,\gamma(\delta)\}$.  Thus the
+$(\alpha,\beta)$ incidence component through $u$ is identical under
+$\varphi$ and $\varphi_\delta$.
+
+Let $v\in V(T)$ be the unique vertex missing $\beta$; existence is the
+definition of a free color and uniqueness follows from
+\noderef{ScheideGlobalMaximumOrder}.  If $v\in Z_{\gamma(\delta)}$, then
+$u,v\in V(T_\delta)$.  The elementarity and closedness of the globally
+maximum replacement tree, supplied by
+\noderef{ScheideReplacementMaximum}, make the two-color component a path
+with ends $u$ and $v$: all other replacement-tree vertices have both colors
+present, while neither color can leave the closed set except through the
+two ends.
+
+Suppose instead that $v\in U_{\gamma(\delta)}$.  Write
+$U_\delta=\{u,u'\}$ and
+$U_{\gamma(\delta)}=\{v,v'\}$.  Assertion (14), namely
+\noderef{ScheideSymmetricMissingInternal}, gives an internal $\beta$ edge
+$uu'$.  Since $\alpha$ is missing at $u$, elementariness and closedness of
+$V(T_\delta)$ force the unique $\alpha$ edge at $u'$ into
+$Z_{\gamma(\delta)}$.  Similarly the original tree's elementariness and
+closedness force the unique $\beta$ edge at $v'$ into $Z$, and assertion
+(13) gives the internal $\alpha$ edge $v'v$.
+
+These two edges entering $Z$ are in the same component.  Every vertex of
+$Z$ is incident with both colors: $\alpha$ is missing only at
+$u\in V(T_\delta)$ and $\beta$ only at $v\in V(T)$.  Replacement-tree
+closedness excludes all other $\alpha$ exits from $Z$, and original-tree
+closedness excludes all other $\beta$ exits.  Thus the two displayed edges
+are exactly the two boundary edges of $Z$ in this two-color incidence
+subgraph.  Every internal vertex-node has degree two, so its alternating
+paths pair these boundary edges.  The component beginning
+$u-\beta-u'-\alpha$ therefore crosses $Z$, continues
+$v'-\alpha-v$, and has ends $u,v$.  In either case the component through
+$u$ contains the unique tree vertex missing $\beta$, which is precisely the
+condition in \noderef{AbsorbingVertex}.  Hence both named replacement
+vertices lie in \noderef{AbsorbingVertices}.
+\end{proof}

@@ -1,0 +1,31 @@
+\begin{lemma}[Scheide replacement tree is globally maximum (9)]
+For each defective color $\delta$, the switched coloring
+$\varphi_\delta$ is proper and leaves exactly $e_0$ uncolored, and the
+replacement tree $T_\delta$ in the chosen replacement data forms a globally
+maximum triple $(T_\delta,e_0,\varphi_\delta)$.
+\end{lemma}
+\begin{proof}
+Properness and the unique-uncolored-edge assertion are the first two exact
+conclusions of \noderef{ScheideDefectiveSwitchEffect}.  It remains to check
+the ordered replacement tree.
+
+Delete from $T$ the two named edges and vertices in the
+$\gamma(\delta)$ block.  The other block edges attach directly to the
+base, by \noderef{ScheideReducedConfiguration}, so deleting this pair does
+not invalidate any later attachment.  By the switch-effect statement, no
+remaining edge identity incident with $V(T)$ changes color and every
+missing-color witness away from $v^0_\delta$ remains valid.  At
+$v^0_\delta$, $\delta$ becomes missing.  By
+\noderef{ScheideReplacementPairFixed}, the two named replacement edges
+retain color $\delta$.  Appending
+$f^1_\delta,u^1_\delta,f^2_\delta,u^2_\delta$ therefore satisfies the
+Tashkinov condition twice, using the witness $v^0_\delta$.
+
+The vertex-set equation in \noderef{ScheideReplacementData} deletes two
+tree vertices and adds two outside vertices.  Hence
+$|V(T_\delta)|=|V(T)|=t(G)$.  Together with the already checked properness,
+unique uncolored edge, critical and numerical clauses inherited from the
+original globally maximum triple, this is exactly
+\noderef{GlobalMaximumTriple} for
+$(T_\delta,e_0,\varphi_\delta)$.
+\end{proof}

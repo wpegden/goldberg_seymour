@@ -1,0 +1,21 @@
+\begin{lemma}[Scheide replacement pairs are equal or disjoint (18)]
+For any two defective colors $\delta,\delta'$, the two-vertex sets
+$U_\delta$ and $U_{\delta'}$ are either equal or disjoint.
+\end{lemma}
+\begin{proof}
+The common color $\alpha_0$ is missing at $y_0$, which belongs to every
+$Z_{\gamma(\delta)}$, and differs from every block color.  Therefore
+\noderef{ScheideReplacementInternalMissing}, applied with
+$\alpha=\alpha_0$, supplies an $\alpha_0$-colored edge identity internal
+to each $U_\delta$.
+
+Suppose $U_\delta$ and $U_{\delta'}$ share a vertex $u$.  Properness of the
+original coloring, supplied by the globally maximum field in
+\noderef{ScheideDefectiveSetup}, says that at most one
+$\alpha_0$-colored edge identity is incident with $u$.  Hence the two
+internal $\alpha_0$ edges just obtained are the same edge identity.
+Looplessness gives it exactly two distinct endpoints, so the two unordered
+endpoint sets are equal.  If there is no shared vertex, the finite sets are
+disjoint.  This proves the stated alternative while retaining the internal
+edge identity rather than collapsing parallel edges.
+\end{proof}

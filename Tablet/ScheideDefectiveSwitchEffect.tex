@@ -1,0 +1,45 @@
+\begin{lemma}[Scheide exact defective-color switch (6)]
+For a defective color $\delta$, switch
+$\gamma(\delta)$ and $\delta$ on the full incidence component through
+$v^0_\delta$, obtaining $\varphi_\delta$.  Then
+$\varphi_\delta$ is proper and leaves exactly $e_0$ uncolored,
+$f^0_\delta$ receives color $\gamma(\delta)$, and
+\[
+ \overline{\varphi_\delta}(v^0_\delta)=
+ (\overline\varphi(v^0_\delta)\setminus\{\gamma(\delta)\})
+ \cup\{\delta\}.
+\]
+Every other edge identity incident with $V(T)$ is fixed, every other tree
+vertex has the same missing colors, and every vertex-node outside the
+switched component has the same missing colors.
+\end{lemma}
+\begin{proof}
+The colors are distinct: $\gamma(\delta)$ is missing at
+$v^0_\delta$, whereas closedness and defectiveness make $\delta$ present
+there.  The coloring in the statement is exactly the component swap of
+\noderef{TwoColorComponentSwap}.  Since the original coloring is proper by
+the globally maximum field of \noderef{ScheideDefectiveSetup},
+\noderef{TwoColorComponentSwapProper} makes $\varphi_\delta$ proper.
+Every edge-node of the component has one of the two colored values, so the
+uncolored identity $e_0$ is not changed; all other identities remain
+colored.  Thus the same edge is uniquely uncolored.
+
+The recorded $f^0_\delta$ lies on the component and has color $\delta$,
+so it receives $\gamma(\delta)$.  At $v^0_\delta$, properness gives one
+incident $\delta$-edge and no incident $\gamma(\delta)$-edge before the
+switch.  The switch exchanges precisely those two present/missing statuses,
+which gives the displayed erase-and-insert identity of finite missing-color
+sets.
+
+By \noderef{ScheideDefectiveTailExternal}, no other vertex of $V(T)$ lies
+on the switched component.  Hence no edge of the component can be incident
+with such a vertex.  At $v^0_\delta$, the only incident component edge is
+$f^0_\delta$, because the vertex-node is an end of the path.  Therefore
+every other edge identity incident with $V(T)$ is fixed, and every other
+tree vertex has exactly its old incident color values and hence its old
+missing set.  Finally the definition of
+\noderef{TwoColorComponentSwap} fixes every edge-node outside the selected
+component.  If a vertex-node is outside it, all of its incident edge-nodes
+are outside it as well, so its present and missing colors are unchanged.
+These observations prove every asserted clause.
+\end{proof}

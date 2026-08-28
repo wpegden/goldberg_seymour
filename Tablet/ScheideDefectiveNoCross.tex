@@ -1,0 +1,40 @@
+\begin{lemma}[Scheide defective no-cross property (4)]
+For every defective color $\delta$ in a defective-color setup, no
+$\delta$-colored edge identity joins
+$U_{\gamma(\delta)}$ to $Z_{\gamma(\delta)}$.
+\end{lemma}
+\begin{proof}
+Write $U=U_{\gamma(\delta)}$, $Z=Z_{\gamma(\delta)}$, and suppose that a
+$\delta$-edge $g_1$ joins $u^1_{\gamma(\delta)}$ to $Z$, exchanging the
+two indexed vertices if necessary.  Since $\alpha_0$ is missing in $Z$
+and differs from $\gamma(\delta)$,
+\noderef{ScheideStructuralInternalPair} supplies an internal
+$\alpha_0$-edge $g_2$ of $U$.  Properness then permits at most one
+$\delta$-boundary edge incident with $U$.  By
+\noderef{ScheideGlobalMaximumBoundaryFacts}, a defective color has at least
+three boundary edge identities, so there is a $\delta$-edge
+$g_3\ne f^0_\delta$ joining $Z$ to a vertex outside $V(T)$.
+
+Interchange $\alpha_0$ and $\gamma(\delta)$ on edges with both ends
+outside $V(T)$.  Neither color occurs on the boundary of the closed tree,
+so checking the two ends of each edge shows that the new coloring is
+proper and still leaves exactly $e_0$ uncolored.  Under it, the terminal
+subpath from $v^0_\delta$ on the recorded
+$(\alpha_0,\delta)$ path is a $(\gamma(\delta),\delta)$ chain.  Switch that
+full incidence component; properness is preserved by
+\noderef{TwoColorComponentSwapProper}, and its edge-nodes are colored, so
+$e_0$ remains uniquely uncolored.
+
+Delete the $\gamma(\delta)$ block.  No retained tree edge changes:
+$\delta$ is unused on the original tree by
+\noderef{ScheideGlobalMaximumUnused}, and the only
+$\gamma(\delta)$ tree edges were deleted.  At $v^0_\delta$, the missing
+witness changes from $\gamma(\delta)$ to $\delta$.  Thus the remaining
+sequence is Tashkinov for the recoloring.  The three unchanged edges
+$g_1,g_2,g_3$, with colors respectively
+$\delta,\alpha_0,\delta$, can be appended successively, adding the two
+deleted vertices of $U$ and then a new outside vertex.  This produces a
+Tashkinov tree with more vertices than the globally maximum tree in
+\noderef{ScheideDefectiveSetup}, a contradiction.  Hence no such
+$\delta$-edge exists.
+\end{proof}

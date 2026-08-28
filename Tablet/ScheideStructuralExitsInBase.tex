@@ -1,0 +1,29 @@
+\begin{lemma}[Scheide structural exit localization (2)]
+In a reduced Scheide structural configuration, every Scheide exit vertex
+belongs to the indexed base set $Y=\{y_0,\ldots,y_{p-1}\}$.
+\end{lemma}
+\begin{proof}
+Every color used by an edge of the ordered tree is missing on $Y$.  For a
+colored edge in the base segment this is the Tashkinov condition contained
+in the globally maximum field of
+\noderef{ScheideReducedConfiguration}; for either edge of a later block it
+is condition (S2) in the inherited
+\noderef{ScheideStructuralConfiguration} data.
+
+Let $x\in V(T)\setminus Y$.  It is one of the two vertices in a retained
+block.  The $k$-triple in \noderef{GlobalMaximumTriple} has
+$k\geq\Delta(G)+1$.  Properness makes the present colors at $x$ inject into
+its incident edge identities, so at most $\deg(x)\leq\Delta(G)<k$ colors
+are present.  By \noderef{MaximumDegree} and \noderef{MissingColors}, at
+least one color is therefore missing at $x$.  If such a color were used on
+paragraph would give a second tree vertex in $Y$ missing it.  This is
+impossible because \noderef{ScheideGlobalMaximumOrder} says that $V(T)$ is
+elementary.  Hence every $x\in V(T)\setminus Y$ misses a free color, in the
+sense of \noderef{ScheideGlobalMaximumUnused} and
+\noderef{TreeFreeColors}.
+
+On the other hand, \noderef{ScheideExitNoFree} says that an exit vertex of
+a globally maximum triple misses no free color.  Therefore no vertex of
+$V(T)\setminus Y$ is an exit.  Every Scheide exit already belongs to
+$V(T)$ by \noderef{ScheideExitVertices}, so all exits lie in $Y$.
+\end{proof}
