@@ -1,0 +1,176 @@
+\begin{lemma}[Height-five gamma-edge configuration]
+Let $N$ be normal globally maximum data for a $k$-triple
+$(T,e_0,\varphi)$, suppose that the chosen height of $N$ and the Scheide
+height $h(G)$ are both five, and write the five trunk vertices as
+$y_i=T.\mathsf{vertex}(i)$ for $0\leq i\leq4$.  Let
+$\gamma\in\overline\varphi(y_0)$.  Suppose that specified identities
+$g\in E(G)$ and $v\in V(T)\setminus\{y_0,y_1,y_2,y_3,y_4\}$ satisfy
+$\varphi(g)=\gamma$ and
+$\operatorname{ends}(g)=\{T.\mathsf{vertex}(i),v\}$ for at least one
+$i\in\{0,1,2,3,4\}$.  Then there are edge identities $f_1,f_2,f_3$ and
+vertices $v_1,v_2\in V(T)\setminus\{y_0,y_1,y_2,y_3,y_4\}$ such that
+\[
+ \operatorname{ends}(f_1)=\{y_1,v_1\},\qquad
+ \operatorname{ends}(f_2)=\{y_4,v_2\},\qquad
+ \operatorname{ends}(f_3)=\{y_2,y_3\},
+\]
+and
+$\varphi(f_1)=\varphi(f_2)=\varphi(f_3)=\gamma$.
+The three displayed objects are edge identities; parallel edges are not
+identified with their unordered endpoint pairs.
+\end{lemma}
+\begin{proof}
+Put $y_i=T.\mathsf{vertex}(i)$ for $0\leq i\leq4$ and
+$q=N.\mathsf{closingEdge}$.  The equality
+$N.\mathsf{height}=5$, the height upper bound, the closing-index equation,
+and the support and endpoint fields in
+\noderef{NormalGlobalMaximumTriple} show that the stored closing path is
+\[
+ y_1,e_2,y_2,e_3,y_3,e_4,y_4,q,y_0.                 \tag{1}
+\]
+Here the paper's $e_j$ is the Lean identity $T.\mathsf{edge}(j-1)$, and
+\noderef{TreeSequence} gives $e_1=e_0$ and makes the five displayed
+vertices distinct.  In particular, (1) uses the individual identities
+$e_2,e_3,e_4,q$, even if another edge has the same endpoint pair.
+
+The global field of $N$ is the condition
+\noderef{GlobalMaximumTriple}.  Its \noderef{KTriple} clause says that
+$\varphi$ is proper, leaves exactly $e_0$ uncolored, and has all the stated
+criticality, index, and degree data.  Each edge-node in (1) belongs to the
+incidence graph \noderef{TwoColorIncidenceGraph} for the colors
+$\alpha=N.\mathsf{alpha}$ and $\beta=N.\mathsf{beta}$, so each is colored
+$\alpha$ or $\beta$.  Since $\alpha$ is missing at $y_0$, the edge $q$
+incident with $y_0$ has color $\beta$.  Successive applications of
+properness, in the sense of \noderef{IsProperEdgeColoring}, along (1) then
+give
+\[
+ \varphi(e_2)=\varphi(e_4)=\alpha,
+ \qquad \varphi(e_3)=\varphi(q)=\beta.              \tag{2}
+\]
+
+Apply \noderef{ScheideKempePathHeightBound} to the globally maximum triple,
+the color $\gamma$ missing at $y_0$, and the color $\beta$ missing at
+$y_1$.  It gives a simple incidence path $P_1$ from $y_0$ to $y_1$ whose
+support is the full component
+\noderef{TwoColorComponent} for $\gamma,\beta$, all of whose multigraph
+vertices lie in $V(T)$.  It also gives
+\[
+ \operatorname{length}(P_1)/2+1\leq h(G)=5.          \tag{3}
+\]
+The length here is incidence-walk length.  Because the path begins and ends
+at vertex-nodes and alternates between vertex-nodes and edge-nodes, the
+left side of (3), not the raw incidence length, is the number of multigraph
+vertices of $P_1$.
+
+The identity $q$ has color $\beta$ and is incident with $y_0$, so its
+edge-node, and then its other endpoint $y_4$, lie in the full component
+$P_1$.  Hence $P_1$ contains the three distinct multigraph vertices
+$y_0,y_1,y_4$.  We also record that
+\[
+ \gamma\ne\alpha.                                   \tag{4}
+\]
+Indeed, if the two colors were equal, the normal path (1) would lie in the
+same full $\gamma,\beta$ component as $P_1$.  It already contains all five
+trunk vertices, while the assumed $\gamma$-edge $g$ connects one of those
+vertices to the distinct outside vertex $v$.  The component would therefore
+contain at least six multigraph vertices, contradicting (3).  The
+application of the prescribed-path theorem also gives
+$\gamma\ne\beta$.
+
+We next prove that no $\gamma$-edge joins either $y_2$ or $y_3$ to a
+vertex outside the five-vertex trunk.  Suppose, to the contrary, that an
+identity $r$ of color $\gamma$ joins one of $y_2,y_3$ to such a vertex
+$w$.  If any one of $y_2,y_3,w$ belonged to $P_1$, then the
+$\beta$-identity $e_3$ between $y_2,y_3$ and the $\gamma$-identity $r$
+would put all three in the connected component.  Together with
+$y_0,y_1,y_4$, these are six distinct multigraph vertices, contrary to
+(3).  Thus
+\[
+ y_2,y_3,w\notin V(P_1).                             \tag{5}
+\]
+
+For completeness, we now perform the switch which rules out (5).  Global
+maximality makes $T$ fixed-pair maximal in the sense of
+\noderef{FixedPairMaximalTashkinovTree}: any fixed-pair Tashkinov tree
+containing $V(T)$ has order at most the global maximum
+\noderef{TashkinovOrder}, and hence has the same finite vertex set.  The
+condition that $\gamma$ is unused through $y_1$ in
+\noderef{TreeColorUnusedThrough} is vacuous, since there is no colored tree
+edge strictly between indices zero and one.  Therefore
+\noderef{ScheideMaximalKempePath}, applied to $y_0,y_1$ and
+$\gamma,\beta$, says clause by clause that the component swap
+\[
+ \varphi'=\noderef{TwoColorComponentSwap}
+   (G,\varphi,\gamma,\beta,y_0)
+\]
+is proper, still has exactly $e_0$ uncolored, and leaves the same ordered
+sequence $T$ a Tashkinov tree.  These are precisely the coloring and tree
+clauses in \noderef{KTriple}, \noderef{IsOneEdgeUncolored}, and
+\noderef{TashkinovTree}; the critical, index, and degree clauses do not
+depend on the coloring.  The vertex set and its cardinality have not
+changed.  Thus
+$(T,e_0,\varphi')$ again satisfies \noderef{GlobalMaximumTriple}.
+
+The swap exchanges the missing colors at the two ends of $P_1$, so
+$\gamma$ is missing at $y_1$ under $\varphi'$.  By (4), $\alpha$ is not
+switched and remains missing at $y_0$.  The edge $q$ changes from
+$\beta$ to $\gamma$, whereas $e_2,e_4$ retain color $\alpha$ by (2).
+By (5), neither the edge-node $r$ nor its endpoints belongs to the switched
+component, so $r$ retains color $\gamma$.
+
+Apply \noderef{ScheideKempePathHeightBound} again, now to the globally
+maximum triple $(T,e_0,\varphi')$, with $\alpha$ missing at $y_0$ and
+$\gamma$ missing at $y_1$.  Its full $\alpha,\gamma$ incidence path $P_2$
+contains the forced segments
+\[
+ y_0,q,y_4,e_4,y_3,
+ \qquad y_1,e_2,y_2.                                 \tag{6}
+\]
+Since $r$ joins $w$ to one of $y_2,y_3$, (6) also puts the edge-node $r$
+and the vertex-node $w$ in $P_2$.  Consequently $P_2$ contains the six
+distinct multigraph vertices $y_0,y_1,y_2,y_3,y_4,w$.  The second
+height-bound application says that its incidence length $L$ satisfies
+$L/2+1\leq5$, again bounding the multigraph-vertex count rather than the
+incidence length.  This contradiction proves
+\[
+ \text{no $\gamma$-edge from $\{y_2,y_3\}$ leaves the trunk.} \tag{7}
+\]
+
+It remains to identify the three asserted edge identities.  By
+\noderef{ScheideGlobalMaximumOrder}, the finite set
+\noderef{TreeSequenceVertexSet} of a globally maximum triple is elementary.
+Since $\gamma$ is missing at $y_0$, it is not missing at any of
+$y_1,y_2,y_3,y_4$.  The definitions \noderef{MissingColors} and
+\noderef{PresentColors} therefore supply a $\gamma$-colored incident edge
+at each of these four vertices.  Properness makes that identity unique at
+each vertex.
+
+Let the unique $\gamma$-identities at $y_2,y_3$ be $a_2,a_3$.  By (7),
+their other endpoints lie in the trunk, and neither can meet $y_0$, where
+$\gamma$ is missing.  If $a_2\ne a_3$, the matching property furnished by
+properness forces their remaining endpoints to be $y_1$ and $y_4$ in
+some order: using $y_2$ or $y_3$ would make the two identities coincide,
+and two distinct identities cannot share an endpoint by
+\noderef{AdjacentEdges}.  The unique $\gamma$-edges at all four vertices
+$y_1,y_2,y_3,y_4$ would then be internal to the trunk.  Together with (7)
+and the missing color at $y_0$, this leaves no trunk vertex incident with
+the assumed crossing identity $g$, a contradiction.  Hence
+$a_2=a_3$; call this identity $f_3$.  Looplessness in
+\noderef{LooplessMultigraph} and the two incidences give
+$\operatorname{ends}(f_3)=\{y_2,y_3\}$ and
+$\varphi(f_3)=\gamma$.
+
+The unique $\gamma$-edge at $y_1$ cannot end at $y_0$, and it cannot end
+at $y_2$ or $y_3$, which are already incident with $f_3$.  It cannot end
+at $y_4$, since then every trunk vertex capable of carrying $g$ would
+already have its unique $\gamma$-edge internal to the trunk.  Thus it is
+an identity $f_1$ with ends $\{y_1,v_1\}$ for a vertex $v_1$ outside the
+trunk.  The same argument at $y_4$ gives a distinct identity $f_2$ with
+ends $\{y_4,v_2\}$ and $v_2$ outside the trunk.  Both edge-nodes lie in
+the full path $P_1$: $f_1$ is the unique $\gamma$-edge at its endpoint
+$y_1$, while $f_2$ follows the $\beta$-edge $q$ at $y_4$.  The
+vertex-containment clause of
+\noderef{ScheideKempePathHeightBound} therefore places
+$v_1,v_2$ in $V(T)$.  These $f_1,f_2,f_3,v_1,v_2$ satisfy every asserted
+endpoint, color, membership, and outside-trunk condition.
+\end{proof}

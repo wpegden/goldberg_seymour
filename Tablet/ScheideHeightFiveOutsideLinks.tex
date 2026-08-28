@@ -1,0 +1,149 @@
+\begin{lemma}[Height-five outside links]
+Let $N$ be normal globally maximum data for a $k$-triple
+$(T,e_0,\varphi)$, suppose that the chosen height of $N$ and the Scheide
+height $h(G)$ are both five, and write the trunk as
+$y_i=T.\mathsf{vertex}(i)$ for $0\leq i\leq4$.  Let
+$\gamma\in\overline\varphi(y_0)$.  Suppose that specified edge identities
+$f_1,f_2$ and vertices
+$v_1,v_2\in V(T)\setminus\{y_0,y_1,y_2,y_3,y_4\}$ satisfy
+\[
+ \operatorname{ends}(f_1)=\{y_1,v_1\},\quad
+ \operatorname{ends}(f_2)=\{y_4,v_2\},\quad
+ \varphi(f_1)=\varphi(f_2)=\gamma.
+\]
+Then there are distinct edge identities $a,b$ with
+\[
+ \operatorname{ends}(a)=\operatorname{ends}(b)=\{v_1,v_2\},
+ \qquad \varphi(a)=N.\mathsf{alpha},
+ \qquad \varphi(b)=N.\mathsf{beta}.
+\]
+\end{lemma}
+\begin{proof}
+Write $y_i=T.\mathsf{vertex}(i)$, put
+$\alpha=N.\mathsf{alpha}$ and $\beta=N.\mathsf{beta}$, and let
+$q=N.\mathsf{closingEdge}$.  Exactly as encoded by the endpoint and
+support fields of \noderef{NormalGlobalMaximumTriple}, the height-five
+normal path is
+\[
+ y_1,e_2,y_2,e_3,y_3,e_4,y_4,q,y_0.                 \tag{1}
+\]
+Vertex and edge injectivity in \noderef{TreeSequence} retain all displayed
+identities and vertices separately.  The global field
+\noderef{GlobalMaximumTriple} contains the \noderef{KTriple} condition,
+so $\varphi$ is proper and leaves exactly $e_0$ uncolored.  The same
+alternation and endpoint-missing argument used along (1) gives
+\[
+ \varphi(e_2)=\varphi(e_4)=\alpha,
+ \qquad \varphi(e_3)=\varphi(q)=\beta.              \tag{2}
+\]
+This conclusion uses only the incidence-graph membership stored in the
+normal data, the definition \noderef{TwoColorIncidenceGraph}, and
+properness \noderef{IsProperEdgeColoring}.
+
+First apply \noderef{ScheideKempePathHeightBound} to $\gamma$ missing at
+$y_0$ and $\beta$ missing at $y_1$.  We obtain the full simple
+$\gamma,\beta$ incidence path $P_1$ from $y_0$ to $y_1$, with all
+multigraph vertices in $V(T)$ and
+\[
+ \operatorname{length}(P_1)/2+1\leq h(G)=5.          \tag{3}
+\]
+The support is the complete set \noderef{TwoColorComponent}, not merely a
+chosen subwalk.  Since $q$ is the $\beta$-edge at $y_0$, properness forces
+the initial segment $y_0,q,y_4$.  The specified $\gamma$-edge $f_2$ then
+forces the longer segment
+$y_0,q,y_4,f_2,v_2$.  At the other endpoint, $\beta$ is missing at $y_1$
+and $f_1$ has color $\gamma$, so $P_1$ contains
+$y_1,f_1,v_1$.
+
+These two segments contain five distinct multigraph vertices.  The trunk
+vertices $y_0,y_1,y_4$ are distinct by \noderef{TreeSequence}, and each
+$v_i$ is outside the trunk by hypothesis.  Moreover $v_1\ne v_2$: the
+identities $f_1,f_2$ have different endpoint pairs and hence are distinct,
+while if their outside endpoints coincided they would be adjacent in the
+sense of \noderef{AdjacentEdges} and would violate properness because both
+have color $\gamma$.  In (3), the raw length is the number of incidence
+steps.  Since the path alternates vertex-nodes and edge-nodes, the quotient
+plus one is exactly its number of multigraph vertices.  Thus (3) is
+saturated: $P_1$ has precisely the five vertices just listed.
+
+Follow $P_1$ from $v_2$ after the segment ending in the $\gamma$-identity
+$f_2$.  The path is not yet at its endpoint $y_1$, so it has a next
+edge-node.  That identity cannot also have color $\gamma$ by properness,
+and \noderef{TwoColorIncidenceGraph} says it has one of the two component
+colors; hence it has color $\beta$.  Five-vertex saturation forces its
+other endpoint to be $v_1$, since the remaining terminal segment is
+$v_1,f_1,y_1$.  Denote this individual identity by $b$.  Then
+\[
+ \operatorname{ends}(b)=\{v_1,v_2\},
+ \qquad \varphi(b)=\beta.                            \tag{4}
+\]
+
+We now produce the $\alpha$-identity.  First observe that the normal path
+(1) is the full $\alpha,\beta$ component through $y_0$.  Indeed,
+\noderef{ScheideMaximalKempePath} supplies a full simple incidence path
+between $y_0$ and $y_1$.  The stored path (1) lies in that component and
+already joins the same ends.  At $y_0$ the color $\alpha$ is missing and
+at $y_1$ the color $\beta$ is missing, so properness gives degree one at
+those endpoint vertex-nodes.  Each internal vertex-node and edge-node of
+(1) already has its two path neighbors, and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} forbids a third neighbor.
+Therefore no node of (1) has an unused incidence through which the
+component could continue, and the full component has exactly the vertex-
+and edge-node support recorded in (1).  In particular it contains exactly
+the five trunk vertices.
+
+The colors $\alpha$ and $\beta$ are distinct by the first conclusion of
+\noderef{ScheideMaximalKempePath}.  Also $\gamma\ne\beta$, because
+$\beta$ is missing at $y_1$ while the incident identity $f_1$ has color
+$\gamma$; this is immediate from \noderef{MissingColors}.  Finally
+$\gamma\ne\alpha$: otherwise the $\alpha$-edge-node $f_1$, incident with
+$y_1$, and its outside endpoint $v_1$ would belong to the full
+$\alpha,\beta$ component, contrary to the support equality just proved.
+
+Switch the full component (1) by the definition
+\noderef{TwoColorComponentSwap}.  As in
+\noderef{FixedPairMaximalTashkinovTree}, global maximality follows from
+the order bound \noderef{TashkinovOrder}.  The condition that $\alpha$ is
+unused through $y_1$ in \noderef{TreeColorUnusedThrough} is vacuous.
+Consequently \noderef{ScheideMaximalKempePath} verifies all three relevant
+clauses for the switched coloring $\varphi'$: it is proper, it still has
+exactly $e_0$ uncolored in the sense of
+\noderef{IsOneEdgeUncolored}, and the same sequence $T$ remains a
+\noderef{TashkinovTree}.  The critical, index, degree, and maximum-order
+clauses are unchanged, so $(T,e_0,\varphi')$ is again globally maximum.
+
+Under this switch, $\alpha$ becomes missing at $y_1$, the identity $q$
+changes from $\beta$ to $\alpha$, and $\gamma$ remains missing at $y_0$.
+The two specified identities $f_1,f_2$ and their colors are unchanged,
+because $\gamma$ is distinct from both switched colors and their outside
+endpoints do not belong to the full trunk component.
+
+Apply \noderef{ScheideKempePathHeightBound} to the new globally maximum
+triple with $\gamma$ missing at $y_0$ and $\alpha$ missing at $y_1$.  Its
+full $\gamma,\alpha$ incidence path $P_2$ contains
+\[
+ y_0,q,y_4,f_2,v_2,
+ \qquad y_1,f_1,v_1.                                 \tag{5}
+\]
+These are the same five distinct multigraph vertices as before.  The bound
+$\operatorname{length}(P_2)/2+1\leq5$ therefore saturates exactly as in
+(3); again, the quantity bounded is the multigraph-vertex count obtained
+from the incidence length.  Following $P_2$ between the two segments in
+(5), alternation and properness supply an $\alpha$-colored identity $a$
+with
+\[
+ \operatorname{ends}(a)=\{v_1,v_2\},
+ \qquad \varphi'(a)=\alpha.                          \tag{6}
+\]
+
+Both endpoints of $a$ lie outside the trunk component on which the switch
+was made, so the edge-node $a$ is not in that component.  The definition
+\noderef{TwoColorComponentSwap} therefore gives
+$\varphi(a)=\varphi'(a)=\alpha$.  Together with (4), this proves the two
+required endpoint and color assertions in the original coloring.  Finally
+$a\ne b$: otherwise the equalities
+$\varphi(a)=\alpha$ and $\varphi(b)=\beta$ would force
+$\alpha=\beta$, contrary to the distinctness already obtained.  Thus the
+returned objects are genuinely two distinct edge identities, even if they
+are parallel and have the same unordered endpoint pair.
+\end{proof}
