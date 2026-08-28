@@ -1,4 +1,5 @@
 import Tablet.ExtensionBaseAlgorithmB
+import Tablet.ExtensionBaseSupportClass
 import Tablet.ETTFirstAppearanceIndex
 import Tablet.IsProperEdgeColoring
 import Tablet.MissingColors
@@ -42,6 +43,10 @@ theorem ExtensionBaseClaim44 {V E : Type*}
     (gamma delta : Fin (p + 1) → Fin k) (b : Fin (p + 1))
     (hincreasing : ∀ a c, a.val < c.val →
       (indices a).val < (indices c).val)
+    (hclass : ∀ r : Fin ett.rounds,
+      r ∈ ExtensionBaseSupportClass ett terminalSupport
+          hterminalSupport terminalSupport ↔
+        ∃ a : Fin (p + 1), indices a = r)
     (trace : ExtensionBaseAlgorithmBTrace ett terminalSupport rho1 u
       p indices b)
     (hinvariant : ExtensionBaseAlgorithmBInvariant ett terminalSupport

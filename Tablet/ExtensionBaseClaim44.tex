@@ -26,6 +26,18 @@ Retain the strict enumeration premise
  a<c\quad\Longrightarrow\quad
  \mathtt{indices}(a).\mathrm{val}<\mathtt{indices}(c).\mathrm{val}.
 \]
+Require also that this enumeration has exactly the full support class as its
+range: for every round slot \(r\),
+\[
+ r\in\noderef{ExtensionBaseSupportClass}
+       (\mathtt{ett},v_n,\mathtt{hterminalSupport},v_n)
+ \quad\Longleftrightarrow\quad
+ \exists a\in\operatorname{Fin}(p+1),\ \mathtt{indices}(a)=r.
+\]
+Thus every active PE slot whose chosen supporting vertex is \(v_n\) occurs in
+the displayed list, and every displayed slot is such an active PE slot.  This
+is the complete class \(L_1\), including its first slot when the later selected
+position is \(b=0\); it is not merely the processed prefix \(L_1^*\).
 Also retain equation (4)'s distinctness assertion in its exact Lean form:
 \[
  \mathtt{Fin.cons}(\gamma_0,\delta):
