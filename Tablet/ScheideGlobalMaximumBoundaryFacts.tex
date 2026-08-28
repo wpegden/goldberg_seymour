@@ -21,19 +21,70 @@ $\partial_{\varphi,\alpha}(X)=\varnothing$ directly from
 \noderef{TreeMissingColors}, \noderef{ColoredVertexSetClosed}, and
 \noderef{BoundaryColorEdges}.
 
-Finally let $\alpha$ be defective.  By \noderef{DefectiveColor}, some
-boundary edge has color $\alpha$,
-so closure implies that $\alpha$ is missing at no vertex of $X$ and hence
-is present at every vertex.  Properness from the $k$-triple definition
-\noderef{KTriple}
-then makes every vertex incident with exactly one $\alpha$-colored edge
-identity.  Count incidences at $X$.  Every internal $\alpha$-edge contributes
-two (the two ends are distinct by \noderef{LooplessMultigraph}), while every edge identity in
-$\partial_{\varphi,\alpha}(X)$ contributes one.  Thus
+Finally fix $\alpha\in\noderef{DefectiveColors}(G,\varphi,X)$.  By the
+definitions of \noderef{DefectiveColors} and \noderef{DefectiveColor},
+$|\partial_{\varphi,\alpha}(X)|\geq2$, so this boundary-color set is
+nonempty.  Choose $b\in\partial_{\varphi,\alpha}(X)$.  The definition in
+\noderef{BoundaryColorEdges} says that $b\in\noderef{BoundaryEdges}(G,X)$
+and $\varphi(b)=\alpha$.  Since $X$ is closed, for every $x\in X$ the
+definition in \noderef{ColoredVertexSetClosed}, applied to this same edge
+$b$, gives $\alpha\notin\noderef{MissingColors}(G,\varphi,x)$.  By
+\noderef{MissingColors}, the missing colors are the complement of
+\noderef{PresentColors}; hence $\alpha$ lies in
+$\operatorname{PresentColors}(G,\varphi,x)$.  The definition in
+\noderef{PresentColors} therefore supplies an edge identity $f$ with
+\noderef{Incident}$(G,x,f)$ and $\varphi(f)=\alpha$.
+
+This incident $\alpha$-edge is unique at $x$.  Indeed, global maximality in
+\noderef{GlobalMaximumTriple} includes the $k$-triple condition
+\noderef{KTriple}, and that condition says that $\varphi$ is proper in the
+sense of \noderef{IsProperEdgeColoring}.  If two distinct $\alpha$-colored
+edge identities $f$ and $g$ were both incident with $x$, then $x$ would
+witness \noderef{AdjacentEdges}$(G,f,g)$, contradicting properness.
+
+Define the finite incidence set and the internal $\alpha$-edge set by
 \[
- |X|=2|E_\alpha(X)|+|\partial_{\varphi,\alpha}(X)|.
+ I_\alpha=\{(x,f)\in X\times E(G):
+      \noderef{Incident}(G,x,f)\ \hbox{and}\ \varphi(f)=\alpha\},
+ \qquad
+ E^{\mathrm{int}}_\alpha(X)=
+ \{f\in\noderef{InternalEdges}(G,X):\varphi(f)=\alpha\}.
 \]
-The left side is odd, so the boundary cardinality is odd.  Defectiveness
-already makes it at least two; an odd integer at least two is at least
-three.
+For each $x\in X$, let $q_x$ be the unique incident $\alpha$-edge just
+proved to exist.  The map $x\mapsto(x,q_x)$ is a bijection from $X$ to
+$I_\alpha$, with inverse the first-coordinate projection.  Consequently,
+\[
+ |I_\alpha|=|X|. \tag{1}
+\]
+
+We now count $I_\alpha$ by its edge coordinate.  Fix an edge identity $f$
+appearing in some pair $(x,f)\in I_\alpha$.  By \noderef{Incident}, $x$ is
+one of the two entries of the unordered endpoint pair of $f$.  Write the
+other entry as $y$.  The loopless condition in
+\noderef{LooplessMultigraph} gives $y\ne x$.  If $y\in X$, then both
+distinct endpoints lie in $X$, so \noderef{InternalEdges} puts $f$ in
+$E^{\mathrm{int}}_\alpha(X)$, and the fiber of $I_\alpha$ over $f$ is
+exactly $\{x,y\}$ and has size two.  If $y\notin X$, then
+\noderef{BoundaryEdges} puts $f$ in the boundary, and
+\noderef{BoundaryColorEdges}, together with $\varphi(f)=\alpha$, puts it
+in $\partial_{\varphi,\alpha}(X)$; its fiber is exactly $\{x\}$ and has
+size one.  Conversely, the definitions of \noderef{InternalEdges} and
+\noderef{Incident} show that every edge in
+$E^{\mathrm{int}}_\alpha(X)$ has exactly its two distinct endpoints in its
+fiber, while \noderef{BoundaryEdges} says that every edge in
+$\partial_{\varphi,\alpha}(X)$ has exactly its unique endpoint in $X$ in
+its fiber.  Thus these are all nonempty edge fibers, and they are disjoint
+by edge identity.  Summing the fiber sizes gives
+\[
+ |I_\alpha|
+   =2|E^{\mathrm{int}}_\alpha(X)|
+      +|\partial_{\varphi,\alpha}(X)|. \tag{2}
+\]
+
+By the first paragraph, $|X|$ is odd.  Equations (1) and (2) express this
+odd number as an even number plus
+$|\partial_{\varphi,\alpha}(X)|$, so the latter cardinality is odd.  Its
+membership in \noderef{DefectiveColors}, through
+\noderef{DefectiveColor}, already gives cardinality at least two.  An odd
+natural number at least two is at least three, as required.
 \end{proof}
