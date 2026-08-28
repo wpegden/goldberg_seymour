@@ -18,6 +18,26 @@ and identify the closure seed by the equality
    =T_j(v_n).
 \]
 Let the Lean color-set parameter \(C\) be the manuscript set \(D_{j-1}\).
+Write the support class in its manuscript order as
+\(L_1=\{1_1<\cdots<1_{p+1}\}\), represented in Lean by
+\(\mathtt{indices}:\operatorname{Fin}(p+1)\to\operatorname{Fin}(\mathtt{ett.rounds})\).
+Retain the strict enumeration premise
+\[
+ a<c\quad\Longrightarrow\quad
+ \mathtt{indices}(a).\mathrm{val}<\mathtt{indices}(c).\mathrm{val}.
+\]
+Also retain equation (4)'s distinctness assertion in its exact Lean form:
+\[
+ \mathtt{Fin.cons}(\gamma_0,\delta):
+   \operatorname{Fin}(p+2)\longrightarrow\operatorname{Fin}(k)
+ \quad\text{is injective}.
+\]
+Equivalently, the colors
+\(\gamma_{1_1},\delta_{1_1},\ldots,\delta_{1_{p+1}}\) are pairwise
+distinct; together with the chain identities, this is precisely the list
+of distinct colors displayed in equation (4).  In particular,
+\(\gamma_0=\gamma_{1_1}\) is the color named in (c3), and two nonadjacent
+positions cannot collapse to the same trace slot.
 Let \(T'_j\) be a \noderef{TashkinovClosure} of this exact ordered prefix under
 \(\varrho_1\), let \(u\in V(T'_j)\setminus V(T_j)\), and let
 \(\mathcal B\) be an

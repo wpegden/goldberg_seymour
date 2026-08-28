@@ -40,6 +40,8 @@ theorem ExtensionBaseClaim44 {V E : Type*}
     (huPrime : u ∈ TreeSequenceVertexSet TjPrime)
     (p : ℕ) (indices : Fin (p + 1) → Fin ett.rounds)
     (gamma delta : Fin (p + 1) → Fin k) (b : Fin (p + 1))
+    (hincreasing : ∀ a c, a.val < c.val →
+      (indices a).val < (indices c).val)
     (trace : ExtensionBaseAlgorithmBTrace ett terminalSupport rho1 u
       p indices b)
     (hinvariant : ExtensionBaseAlgorithmBInvariant ett terminalSupport
@@ -66,6 +68,7 @@ theorem ExtensionBaseClaim44 {V E : Type*}
     (hdelta : ∀ a,
       ett.series.data.delta (indices a).succ = some (delta a))
     (hchain : ∀ a : Fin p, gamma a.succ = delta a.castSucc)
+    (hdistinct : Function.Injective (Fin.cons (gamma 0) delta))
     (hstored : ∀ a,
       ett.series.data.stored (indices a).succ = {gamma a, delta a}) :
     let rho2 := trace.coloring (Fin.last trace.steps)
