@@ -1,9 +1,19 @@
+import Tablet.AdjacentEdges
+import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetStronglyClosed
+import Tablet.Incident
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
+import Tablet.LooplessMultigraph
+import Tablet.MissingColors
+import Tablet.PartialEdgeColoring
+import Tablet.PresentColors
 import Tablet.StableColoring
+import Tablet.TreeIncidentEdge
+import Tablet.TreeMissingColors
 import Tablet.TreeSequence
+import Tablet.TreeSequenceVertexSet
 import Tablet.sc1
 
 -- [TABLET NODE: zang1]
