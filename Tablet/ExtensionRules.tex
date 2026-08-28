@@ -91,11 +91,25 @@ and its second inclusion whenever the tree is enlarged.  With
  \subseteq
  \overline\varphi_n(T_n)\cup D_n.                              \tag{1}
 \]
-In particular \(D_{j-1}\) is contained in the right-hand side.  Every
-vertex preceding \(v_n\) lies in \(T_n\); hence the vertex clause of the
-given stability in \noderef{StableColoring} restricts to \(T^*\).  Its
-edge clause and (1) likewise
-show that \(\sigma_n\) is
+In particular \(D_{j-1}\) is contained in the right-hand side.  The
+terminal PE certificate puts \(v_n\) in \(T_n\), and the ordered
+initial-segment clauses of \noderef{TashkinovSeriesStep}, expanded using
+\noderef{TreeSequenceInitialSegment}, imply that every vertex preceding
+\(v_n\) in the final display also belongs to \(T_n\).  Thus
+\(V(T^*)\subseteq V(T_n)\).
+
+Here is the missing-color restriction explicitly.  If
+\(c\in\overline\varphi_n(T^*)\), then the union definition
+\noderef{TreeMissingColors} supplies a vertex \(w\in V(T^*)\) at which
+\(c\) is missing.  The displayed inclusion transports this same witness to
+\(V(T_n)\), so \(c\in\overline\varphi_n(T_n)\).  Likewise, an edge
+incident with \(V(T^*)\) is incident with \(V(T_n)\), using the same
+vertex witness.  Therefore the vertex clause of the given
+\noderef{StableColoring} restricts to \(T^*\); for its edge clause, a
+controlling color lies either in \(\overline\varphi_n(T^*)\), hence in
+\(\overline\varphi_n(T_n)\) by the witness just transported, or in
+\(D_{j-1}\), hence in the right-hand side of (1).  The given edge clause
+then fixes that edge.  Consequently \(\sigma_n\) is
 \((T^*,D_{j-1},\varphi_n)\)-stable.
 It remains to prove that \(\varphi_n\) is
 \((T^*,D_{j-1},\varphi_{j-1})\)-stable.                         \tag{2}
@@ -152,19 +166,69 @@ clauses of \noderef{StableColoring}, drop the unused extra control color
 \(\delta_n\), and compose the resulting edge-value and vertexwise
 missing-set equalities.  This proves (2) when \(j=n\).
 
-Now suppose \(j<n\).  The same terminal certificate says that
-\(\pi_{n-1}\) is stable on \(T_n\), and hence on \(T_{n-1}\), relative to
-\((D_{n-1},\varphi_{n-1})\).  The maximality field of
-\noderef{MaximumDefectiveChoice} makes \(v_n\)
-the largest vertex incident with a \(\delta_n\)-colored defective boundary
-edge of \(T_n\).  Since \(v_n\in T_j\subseteq T_{n-1}\), at least one
-other such boundary incidence precedes it already in \(T_{n-1}\); thus
-\(\delta_n\) is defective there and \(v_n\) is not its smallest boundary
-incidence vertex.  Apply local lower-rung assertion (v) at rung \(n-1\).
-For every PE supporting vertex \(v_h\), \(j\leq h\leq n-1\), it
-gives
+Now suppose \(j<n\).  The same terminal certificate and
+\noderef{MaximumDefectiveChoice} say that \(\pi_{n-1}\) is proper, leaves
+exactly \(e_0\) uncolored, and is
+\((T_n,D_{n-1},\varphi_{n-1})\)-stable.  Because \(T_{n-1}\) is an ordered
+initial segment of \(T_n\) by \noderef{TashkinovSeriesStep} and
+\noderef{TreeSequenceInitialSegment}, this stability restricts to
+\(T_{n-1}\): for the only nonformal point, if a color is missing on
+\(T_{n-1}\), \noderef{TreeMissingColors} supplies a vertex witness in
+\(V(T_{n-1})\), and the initial-segment inclusion makes the same vertex a
+witness that it is missing on \(T_n\).
+
+We now verify the two boundary hypotheses of lower-rung assertion (v) using
+exact edge identities.  The choice certificate in
+\noderef{MaximumDefectiveChoice} gives a defective vertex \(v_n\), a
+selected defective boundary identity \(f_n\), an outside endpoint \(u_n\),
+and
 \[
-                              v_n\preceq v_h.                  \tag{3}
+ \operatorname{ends}(f_n)=\{v_n,u_n\},\qquad
+ \pi_{n-1}(f_n)=\delta_n.                                      \tag{3}
+\]
+Expanding \noderef{DefectiveEdge} and
+\noderef{BoundaryColorEdges}, the selected color \(\delta_n\) is defective
+on \(T_n\).  Hence \noderef{DefectiveColor} supplies a second exact edge
+identity \(g\ne f_n\) in the \(\delta_n\)-colored boundary of \(T_n\).
+By \noderef{BoundaryColorEdges} and \noderef{BoundaryEdges}, write its
+ends as \(\{w,x\}\), with \(w\in V(T_n)\), \(x\notin V(T_n)\), and
+\(\pi_{n-1}(g)=\delta_n\).  We have \(w\ne v_n\): otherwise the distinct
+identities \(f_n\) and \(g\) share \(v_n\), so they are adjacent in the
+sense of \noderef{AdjacentEdges}, yet have the same color, contrary to the
+properness condition \noderef{IsProperEdgeColoring}.
+
+Since \(\delta_n\) is defective and \(g\) is a
+\(\delta_n\)-colored boundary identity, \noderef{DefectiveEdge} makes
+\(g\) defective, and \noderef{DefectiveVertex} makes its tree endpoint
+\(w\) a defective vertex of \(T_n\).  Apply the maximality clause of
+\noderef{MaximumDefectiveChoice} to the same admissible coloring
+\(\pi_{n-1}\).  It gives \(w=v_n\) or \(w\prec v_n\); the first alternative
+was just excluded, so \(w\prec v_n\).
+
+Now use the first-appearance hypothesis rather than mere set inclusion.
+By the least-index definition \noderef{ETTFirstAppearanceIndex},
+\(m(v_n)=j\) puts \(v_n\) in the complete stage \(T_j\).  Since \(j<n\),
+the entrywise prefix relation \noderef{TreeSequenceInitialSegment} along
+the ladder puts \(T_j\) inside \(T_{n-1}\).  Moreover, because that ordered
+prefix already contains \(v_n\), every final-display vertex before
+\(v_n\), in particular \(w\), also lies in \(T_j\) and hence in
+\(T_{n-1}\).  On the other hand, (3) gives
+\(u_n\notin V(T_n)\), and the boundary description of \(g\) gives
+\(x\notin V(T_n)\); therefore neither outside endpoint lies in the smaller
+\(T_{n-1}\).  Thus \(f_n\) and \(g\) are two distinct
+\(\delta_n\)-colored identities in the boundary of \(T_{n-1}\), by
+\noderef{BoundaryColorEdges} and \noderef{BoundaryEdges}.  Consequently
+\(\delta_n\) is defective there by \noderef{DefectiveColor}.  Both
+\(v_n\) and \(w\) belong to
+\(I[\partial_{\pi_{n-1},\delta_n}(T_{n-1})]\) by
+\noderef{BoundaryColorVertex}, and \(w\prec v_n\); hence \(w\) is the
+explicit witness that \(v_n\) is nonminimum in that set.
+
+All hypotheses of local lower-rung assertion (v) at rung \(n-1\) are now
+verified for \(\pi_{n-1},\delta_n,v_n\).  For every PE supporting vertex
+\(v_h\), \(j\leq h\leq n-1\), it gives
+\[
+                              v_n\preceq v_h.                  \tag{4}
 \]
 
 No vertex \(w\prec v_n\) in \(T^*\) can consequently be used as a PE
@@ -173,7 +237,7 @@ support between slots \(j\) and \(n\).  Applying
 interval, gives
 \[
               \overline\varphi_{j-1}(w)=\overline\varphi_n(w)
-              \qquad(w\in V(T^*)).                            \tag{4}
+              \qquad(w\in V(T^*)).                            \tag{5}
 \]
 For the edge clause, let \(f\) be incident with \(T^*\), let
 \(\varphi_{j-1}(f)=c\), and suppose
@@ -183,32 +247,44 @@ The interval assertion \noderef{SameColorSeriesPreserved} says either
 in the interval.  In the exceptional alternative its unique endpoint in
 the current tree is that PE's supporting vertex.  Since \(f\) is incident
 with \(T^*\), that supporting vertex would precede \(v_n\), contradicting
-(3); equality with \(v_n\) is also impossible because \(T^*\) excludes
+(4); equality with \(v_n\) is also impossible because \(T^*\) excludes
 \(v_n\).  Thus only the equality alternative occurs:
 \[
-                         \varphi_n(f)=\varphi_{j-1}(f).         \tag{5}
+                         \varphi_n(f)=\varphi_{j-1}(f).         \tag{6}
 \]
-Equations (4) and (5) are precisely the two clauses of (2).  Transitivity
+Equations (5) and (6) are precisely the two clauses of (2).  Transitivity
 of those same edge-value and missing-set equalities now proves that
 \(\sigma_n\) is stable on \(T^*\) relative to
-\((D_{j-1},\varphi_{j-1})\).  The ordered initial-segment
-relations in \noderef{TashkinovSeriesStep} put \(T_{j-1}\) entirely before
-\(v_n\).  Restricting the same two stability clauses to that stage proves
-the asserted \((T_{j-1},D_{j-1},\varphi_{j-1})\)-stability.
+\((D_{j-1},\varphi_{j-1})\).  More explicitly,
+\noderef{ETTFirstAppearanceIndex} puts \(v_n\) in the complete ladder stage
+\(T_j\).  Together with the entrywise ordered-prefix relations supplied by
+\noderef{TashkinovSeriesStep} and defined in
+\noderef{TreeSequenceInitialSegment}, its least-index consequence is that
+every vertex of \(T_{j-1}\) occurs strictly before \(v_n\) in the final
+display.  Thus \(V(T_{j-1})\subseteq V(T^*)\), and restricting the same
+two stability clauses to that subset proves the asserted
+\((T_{j-1},D_{j-1},\varphi_{j-1})\)-stability.
 
 It remains to prove stored-pair disjointness.  Let \(v_h\ne v_n\) be an
 earlier PE support with \(m(v_h)=m(v_n)\).  The PE constructor gives
 \[
  S_h=\{\delta_h,\gamma_h\},\qquad
- S_n=\{\delta_n,\gamma_n\}.                                   \tag{6}
+ S_n=\{\delta_n,\gamma_n\}.                                   \tag{7}
 \]
 We show that both colors of \(S_h\) occur on internal edges at \(v_n\)
 under \(\varphi_n\).
 
 In the second stable coloring used at slot \(h\), let \(P\) be the
 \((\gamma_h,\delta_h)\)-component through \(v_h\), and let \(Q\) be the
-component through \(v_n\).  Because the two vertices have the same first
-appearance and \(h<n\), \(v_n\in V(T_h)\).  The exit clause in the PE
+component through \(v_n\).  The PE certificate at slot \(h\) in
+\noderef{TashkinovSeriesStep} puts its support \(v_h\) in \(T_h\).
+Therefore the least-index definition
+\noderef{ETTFirstAppearanceIndex} gives \(m(v_h)\leq h\).  Since
+\(m(v_n)=m(v_h)\), \(v_n\) first appears no later than that same stage, and
+the entrywise ladder prefixes from that same step certificate, as defined
+by \noderef{TreeSequenceInitialSegment}, carry it into every subsequent
+stage, in particular
+\(v_n\in V(T_h)\).  The exit clause in the PE
 constructor gives a path in the sense of \noderef{TreeExit} and
 \noderef{TreeExitPath} from an outside vertex to \(v_h\), meeting \(T_h\)
 only in \(v_h\).  The rule \noderef{ParallelExtensionColor} makes
@@ -302,9 +378,24 @@ exists because the terminal slot is a PE.  The priority and cycle fields of
 same cycle meeting \(T_h\) and leaving \(T_r\) would be an available RE
 certificate at slot \(r\), contrary to the choice of \(r\) as non-RE.
 
-By the definition of \(D_h\), every color of \(S_h\) lies in
-\(\overline\varphi_h(T_{h+1})\cup D_h\).  Repeated
-\noderef{HkuMissingStoredMonotone} carries these two colors into
+We justify the required initial union one color at a time.  Fix
+\(c\in S_h\).  If \(c\) is missing at some vertex of \(T_{h+1}\), the
+vertex-union definition \noderef{TreeMissingColors} puts
+\(c\in\overline\varphi_h(T_{h+1})\).  Otherwise unfold
+\noderef{TashkinovStoredColors}: membership \(c\in S_h\) puts \(c\) in the
+accumulated union \(\bigcup_{a\leq h}S_a\).  Also \(T_h\) is an ordered
+initial segment of \(T_{h+1}\) by \noderef{TashkinovSeriesStep} and
+\noderef{TreeSequenceInitialSegment}.  Were \(c\) missing on \(T_h\),
+\noderef{TreeMissingColors} would supply a vertex witness in \(T_h\), and
+the initial-segment inclusion would transport it to \(T_{h+1}\), contrary
+to the present case.  Thus \(c\notin\overline\varphi_h(T_h)\), so the
+accumulated-union membership is not removed in the defining difference for
+\(D_h\); hence \(c\in D_h\).  Thus in both cases
+\[
+                 S_h\subseteq
+                 \overline\varphi_h(T_{h+1})\cup D_h.
+\]
+Repeated \noderef{HkuMissingStoredMonotone} carries these two colors into
 \(\overline\varphi_{r-1}(T_r)\cup D_{r-1}\).  Every edge of \(Q\) is
 internal to \(T_r\), so the internal-edge conclusion of
 \noderef{SameColorSeriesPreserved} fixes its color from \(\varphi_h\)
@@ -328,7 +419,7 @@ therefore prevents either of the two internal edges at \(v_n\) from having
 color \(\gamma_n\), and missingness prevents either from having color
 \(\delta_n\).  Hence
 \(\{\gamma_h,\delta_h\}\cap\{\gamma_n,\delta_n\}=\varnothing\).
-Using the exact identities (6), this is \(S_h\cap S_n=\varnothing\).
+Using the exact identities (7), this is \(S_h\cap S_n=\varnothing\).
 Together with the lower-index reduction at the start, it proves the full
 stored-pair assertion and completes part (iii).
 \end{proof}

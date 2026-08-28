@@ -1,7 +1,12 @@
+import Tablet.AdjacentEdges
+import Tablet.BoundaryColorEdges
 import Tablet.BoundaryColorVertex
+import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.DefectiveColor
+import Tablet.DefectiveEdge
+import Tablet.DefectiveVertex
 import Tablet.ETTFirstAppearanceIndex
 import Tablet.ExtendedTashkinovTree
 import Tablet.HkuMissingStoredMonotone
