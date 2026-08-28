@@ -1,0 +1,73 @@
+\begin{lemma}[Claim 4.3: output of Algorithm (A)]
+Use the extension-base setting and let
+\(\mathcal R\) be a restoration trace satisfying
+\noderef{ExtensionBaseRestorationInvariant}.  Write
+\(\sigma_n\) for its initial coloring and \(\varrho_1\) for its output.
+Let \(q+1=n\) be a certified PE slot with exact chosen support \(v_n\),
+let \(j+1=m(v_n)\) with \(j\leq q\), assume \(v_n\in V(T_j)\), and suppose that
+\(\sigma_n\) is proper, leaves precisely \(e_0\) uncolored, and is stable
+on the terminal ladder tree.  Assume also that it is
+\[
+ (T(v_n)-v_n,C,\varphi_{j-1})\text{-stable}.                  \tag{A}
+\]
+For missing colors, assume explicitly that every unsupported vertex
+\(v\in V(T_j)\) has
+\(\overline{\sigma}_n(v)=\overline{\varphi}_{j-1}(v)\), and that every
+nonterminal support class \(i_0<\cdots<i_p\) has its exact gamma/delta
+fields, satisfies
+\[
+ \gamma_{i_{a+1}}=\delta_{i_a},
+ \qquad
+ \gamma_{i_0},\delta_{i_0},\ldots,\delta_{i_p}
+ \text{ are pairwise distinct},
+\]
+and has endpoint identity
+\[
+ \overline{\varphi}_{j-1}(w)
+  =(\overline{\sigma}_n(w)\setminus\{\delta_{i_p}\})
+      \cup\{\gamma_{i_0}\}.                                  \tag{B}
+\]
+Here (A) is the instance of \noderef{ExtensionRules} used by the paper,
+while the unsupported equality and (B) are supplied by
+\noderef{ExtensionBaseClaimMissingColors}, and the chain data by
+\noderef{ExtensionBaseSupportClassColors}.
+
+Then \(\varrho_1\) has all four properties of Claim 4.3:
+\begin{enumerate}
+\item[(b1)] it is
+ \((T(v_n)-v_n,C,\varphi_{j-1})\)-stable;
+\item[(b2)] its missing colors agree with
+ \(\varphi_{j-1}\) on \(V(T_j)\setminus\{v_n\}\), its missing colors at
+ \(v_n\) agree with \(\sigma_n\), and on every exact displayed edge
+ identity \(f\) of \(T_j\),
+ \[
+                  \varrho_1(f)=\sigma_n(f)=\varphi_{j-1}(f);
+ \]
+\item[(b3)] if \(\varrho_1(f)\ne\sigma_n(f)\), then \(f\) is not
+ internal to \(T_j\), and both colors of \(f\) belong to
+ \(\bigcup_{t\in L^*}S_t\); and
+\item[(b4)] every pair belonging to
+ \(L(v_n)\setminus\{q\}\) remains strongly interchangeable at its tree.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Apply \noderef{ExtensionBaseClaim43Stability} to the trace invariant and
+(A).  It gives (b1).
+
+Apply \noderef{ExtensionBaseClaim43MissingColors} to the unsupported
+vertex equality, the exact class enumerations, their chain and
+injectivity, and (B).  It gives the two missing-color assertions in
+(b2).  Apply \noderef{ExtensionBaseClaim43TreeEdges} to the stated
+terminal stability of \(\sigma_n\).  It supplies the exact two
+equalities on every displayed edge identity, completing (b2).
+
+The trace invariant alone satisfies the hypotheses of
+\noderef{ExtensionBaseClaim43EdgeEffects}; its conclusion is exactly
+(b3), including explicit nonempty initial and final colors and retention
+of each edge identity.  Finally apply
+\noderef{ExtensionBaseClaim43StrongInterchangeable}.  Since the trace
+enumerates \(L^*=L\setminus L(v_n)\), its final preservation clause
+applies to every nonterminal slot in \(L(v_n)\), giving (b4).
+These four cited nodes have distinct conclusions and together establish
+all clauses of Claim 4.3.
+\end{proof}

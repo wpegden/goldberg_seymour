@@ -1,0 +1,26 @@
+\begin{definition}
+An \emph{extension-base restoration trace} for a terminal coloring
+\(\sigma_n\) is the following finite certificate for Algorithm (A).
+It consists of a natural number \(r\), certified slots
+\(t_0,\ldots,t_{r-1}\), their exact supporting vertices and exact
+gamma/delta colors, and colorings
+\(\sigma^0,\ldots,\sigma^r\), such that:
+\begin{enumerate}
+\item \(\sigma^0=\sigma_n\), and the set of the distinct slot identities
+      \(t_a\) is exactly
+      \(L^*=\noderef{ExtensionBaseRestorationIndices}\);
+\item \(t_0>t_1>\cdots>t_{r-1}\);
+\item each stored support, gamma, and delta is equal to the corresponding
+      field of that exact certified PE slot; and
+\item
+\[
+ \sigma^{a+1}=\sigma^a/
+ P_{v_{t_a}}(\gamma_{t_a},\delta_{t_a},\sigma^a)
+\]
+      for every \(a<r\), where the right side is the component switch
+      \noderef{TwoColorComponentSwap} rooted at the exact vertex node
+      \(v_{t_a}\).
+\end{enumerate}
+The certificate therefore records every intermediate coloring and keeps
+parallel edge identities intact throughout the construction.
+\end{definition}

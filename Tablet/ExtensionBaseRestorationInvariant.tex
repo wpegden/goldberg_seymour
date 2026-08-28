@@ -1,0 +1,27 @@
+\begin{definition}
+Let
+\(\mathcal R=(t_a,v_{t_a},\gamma_{t_a},\delta_{t_a},\sigma^a)\)
+be an \noderef{ExtensionBaseRestorationTrace}, and let \(q\) be the
+terminal PE index.  The trace satisfies the \emph{extension-base
+restoration invariant} when every intermediate coloring is proper and
+leaves exactly \(e_0\) uncolored, and the following assertion holds at
+each step \(a\):
+\begin{enumerate}
+\item \(t_a\in L^*\), the terminal support precedes \(v_{t_a}\), and
+      \(T_j\) is an ordered initial segment of \(T_{t_a}\), which
+      contains the exact support \(v_{t_a}\);
+\item \(\delta_{t_a}\) is missing at \(v_{t_a}\) under \(\sigma^a\);
+\item the component
+      \(P_{v_{t_a}}(\gamma_{t_a},\delta_{t_a},\sigma^a)\) is a path and
+      its intersection with \(V(T_{t_a})\) is exactly
+      \(\{v_{t_a}\}\); and
+\item after switching this component, every active nonterminal pair
+      whose exact slot has not yet been processed remains
+      \(T_s\)-strongly interchangeable.
+\end{enumerate}
+The final clause is also required at the output coloring when the trace
+has no steps: every active nonterminal pair whose slot is absent from
+the trace is strongly interchangeable there.  This is precisely the
+substantive invariant (6) of Algorithm (A), including its empty-trace
+boundary case.
+\end{definition}

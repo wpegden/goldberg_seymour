@@ -1,0 +1,52 @@
+\begin{lemma}[Claim 4.3(b3): exact edge effects of restoration]
+Let \(\mathcal R\) be a restoration trace satisfying
+\noderef{ExtensionBaseRestorationInvariant}, with initial coloring
+\(\sigma_n\) and output \(\varrho_1\).  Put
+\[
+                         \mathcal S^*
+   =\bigcup_{t\in L^*}S_t,
+\]
+using the exact stored pairs of the certified PE slots in
+\(L^*=\noderef{ExtensionBaseRestorationIndices}\).  If an exact edge
+identity \(f\) has
+\(\varrho_1(f)\ne\sigma_n(f)\), then \(f\) is not internal to \(T_j\),
+and there are colors \(c,d\in\mathcal S^*\) such that
+\[
+                     \sigma_n(f)=c,\qquad \varrho_1(f)=d.
+\]
+This is Claim 4.3(b3), with the two optional coloring values made
+explicitly nonempty.
+\end{lemma}
+\begin{proof}
+Write the trace as
+\(\sigma^0,\ldots,\sigma^r\).  If the initial and final values on \(f\)
+differ, at least one transition changes \(f\).  At every such transition,
+the definition \noderef{TwoColorComponentSwap} says that the edge node
+of \(f\) lies in the chosen component and that its value is exchanged
+between the exact colors \(\gamma_{t_a}\) and \(\delta_{t_a}\).
+The slot-data fields of
+\noderef{ExtensionBaseRestorationTrace} identify those colors with the
+certified gamma and delta fields.  The PE constructor in
+\noderef{TashkinovSeriesStep} identifies its stored set as
+\(S_{t_a}=\{\gamma_{t_a},\delta_{t_a}\}\).  Since \(t_a\in L^*\), every
+value acquired in a transition belongs to \(\mathcal S^*\).
+
+Choose the first transition which changes \(f\).  Before it, the value
+is still \(\sigma_n(f)\), so the preceding paragraph writes that value
+as \(\mathsf{some}(c)\) with \(c\in\mathcal S^*\).  Choose the last
+transition which changes \(f\).  After it, the value is
+\(\varrho_1(f)=\mathsf{some}(d)\) with
+\(d\in\mathcal S^*\).  This proves the asserted color control, including
+the fact that neither endpoint value is uncolored.
+
+It remains to exclude an internal edge.  At a transition which changes
+\(f\), the invariant says that the chosen component meets \(T_{t_a}\)
+in exactly its support \(v_{t_a}\), and that \(T_j\) is an ordered
+initial segment of \(T_{t_a}\).  If \(f\) were internal to \(T_j\), both
+of its endpoint vertex nodes would lie in \(T_{t_a}\).  Each is adjacent
+to the edge node of \(f\) in \noderef{TwoColorIncidenceGraph}, so both
+would belong to the chosen component and hence both would equal
+\(v_{t_a}\).  This would make \(f\) a loop, contrary to the loopless law
+in \noderef{LooplessMultigraph}.  Thus \(f\) is not internal to \(T_j\),
+which completes (b3) without identifying parallel edges.
+\end{proof}

@@ -1,0 +1,113 @@
+\begin{lemma}[Part III, Algorithm (A) and invariant (6)]
+Let \(T\) be an ETT with terminal PE index \(q\), terminal supporting
+vertex \(v_n\), first-appearance slot \(j\), and a proper coloring
+\(\sigma_n\) leaving exactly \(e_0\) uncolored.  Put
+\(L^*=\noderef{ExtensionBaseRestorationIndices}\).  Assume the following
+explicit conclusions of the preparations preceding Algorithm (A).
+Here terminality means \(q+1=n\), the certified slot \(q.\mathsf{succ}\)
+has kind PE and exact chosen vertex \(v_n\), and
+\(j+1=m(v_n)\).
+\begin{enumerate}
+\item Every \(t\in L^*\) has exact certified data
+      \((v_t,\gamma_t,\delta_t)\), one has \(v_n\prec v_t\), and \(T_j\)
+      is an ordered initial segment of \(T_t\).  These are the order
+      consequences proved by \noderef{ExtensionBaseSupportOrder}.
+\item Every active nonterminal pair is \(T_t\)-strongly interchangeable
+      under \(\sigma_n\), as in
+      \noderef{ExtensionBaseClaimStrongInterchangeable}.
+\item For the largest index \(t\) of each support class contained in
+      \(L^*\), \(\delta_t\) is missing and \(\gamma_t\) is present at
+      \(v_t\) under \(\sigma_n\).  This is the endpoint content of
+      \noderef{ExtensionBaseClaimMissingColors}.
+\item For \(s<t\) in \(L^*\), the exact pairs
+      \(S_s=\{\gamma_s,\delta_s\}\) and
+      \(S_t=\{\gamma_t,\delta_t\}\) intersect if and only if their
+      supports agree and no member of that support class lies strictly
+      between \(s\) and \(t\).  In that case
+      \(S_s\cap S_t=\{\gamma_t\}=\{\delta_s\}\).  This is the exact
+      overlap law of \noderef{ExtensionBaseStoredPairOverlap}.
+\end{enumerate}
+Then there is an \noderef{ExtensionBaseRestorationTrace} which enumerates
+\(L^*\) in strictly decreasing order, starts at \(\sigma_n\), and
+satisfies the \noderef{ExtensionBaseRestorationInvariant}.  In
+particular, before every switch its chosen component is a path meeting
+\(T_t\) exactly at \(v_t\), the color \(\delta_t\) is missing there, and
+after the switch every still-unprocessed active nonterminal pair remains
+strongly interchangeable.
+\end{lemma}
+\begin{proof}
+Because \(L^*\) is finite, list its exact slot identities in strictly
+decreasing order
+\[
+                         t_0>t_1>\cdots>t_{r-1}.               \tag{1}
+\]
+The exact-data assumption chooses \(v_{t_a},\gamma_{t_a},\delta_{t_a}\)
+from the corresponding certified PE fields; no parallel edges are
+identified in this choice.  Define \(\sigma^0=\sigma_n\), and recursively
+define
+\[
+ \sigma^{a+1}=\noderef{TwoColorComponentSwap}
+   (\sigma^a,\gamma_{t_a},\delta_{t_a},v_{t_a}).                \tag{2}
+\]
+Equations (1)--(2), together with the exact range equality, give all
+fields of an \noderef{ExtensionBaseRestorationTrace}.  It remains to
+prove the invariant by induction on \(a\).
+
+Fix a support class \(L(w)\subseteq L^*\), and write its members in
+increasing order as \(i_0<\cdots<i_p\).  The overlap assumption gives
+\[
+          \gamma_{i_{b+1}}=\delta_{i_b}\quad(0\leq b<p),       \tag{3}
+\]
+and says that all other intersections among its exact pairs are empty;
+pairs belonging to different support classes are also disjoint.  At the
+first processed member \(i_p\), the endpoint assumption says that
+\(\delta_{i_p}\) is missing and \(\gamma_{i_p}\) is present at \(w\).
+Switching their component therefore replaces the missing color
+\(\delta_{i_p}\) at \(w\) by \(\gamma_{i_p}=\delta_{i_{p-1}}\).
+Indeed, expand \noderef{MissingColors}: properness gives at most one
+incident edge of either color, the missing delta gives none of color
+\(\delta_{i_p}\), and the present gamma gives one of color
+\(\gamma_{i_p}\); equation (2) exchanges the colors on exactly that
+component.  Repeating this argument down the class and using (3) proves
+that, immediately before processing \(i_b\), \(\delta_{i_b}\) is missing
+and \(\gamma_{i_b}\) is present.  Disjointness of the other exact pairs
+shows that switches in other classes do not alter either assertion.
+This proves the missing-color part of the induction simultaneously for
+all classes.
+
+We next prove the precise component assertion at step \(a\).  By the
+induction hypothesis, the pair at \(t_a\) is strongly interchangeable
+under \(\sigma^a\), and the preceding paragraph says that its delta is
+missing and its gamma is present at \(v_{t_a}\).  The finite component
+has an edge and a vertex of incidence degree one, so the spanning path
+from \noderef{TwoColorComponentSpanningPath} witnesses
+\noderef{TwoColorPathComponent}.  If another vertex
+\(x\in V(T_{t_a})\setminus\{v_{t_a}\}\) belonged to this component,
+strong interchangeability would make the same connected component a
+cycle.  A path component has an endpoint with subsingleton neighbor set,
+whereas every vertex of the asserted cycle has two distinct cycle
+neighbors, a contradiction.  Hence the component meets \(T_{t_a}\)
+in precisely \(v_{t_a}\).  The terminal-order and initial-segment clauses
+are the first explicit preparation and are independent of the coloring.
+
+The component switch preserves properness by
+\noderef{TwoColorComponentSwapProper}.  It merely interchanges two
+\(\mathsf{some}\)-values and therefore preserves the statement that
+exactly \(e_0\) is uncolored.  Now let \(s\ne q\) be an active slot not
+processed through step \(a\), with exact support and colors.  If its
+support differs from \(v_{t_a}\), the overlap law makes its pair disjoint
+from the switched pair.  If its support agrees, decreasing order (1)
+gives \(s<t_a\).  Thus the two alternatives in
+\noderef{StrongInterchangeabilityKempePreserved} apply, and that lemma
+shows that the pair at \(s\) remains strongly interchangeable under
+\(\sigma^{a+1}\).  This is exactly the second half of invariant (6).
+
+Initially the required interchangeability is assumption 2.  The
+preceding paragraphs establish the induction step, including properness,
+the exact-one-uncolored property, the missing endpoint color, the exact
+tree intersection, and preservation for every unprocessed pair.  After
+the last step the same induction statement gives the final clause; when
+\(L^*=\varnothing\), the trace has length zero and it follows directly
+from assumption 2.  Hence the constructed trace satisfies every clause
+of \noderef{ExtensionBaseRestorationInvariant}.
+\end{proof}

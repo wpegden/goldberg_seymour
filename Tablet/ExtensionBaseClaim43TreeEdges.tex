@@ -1,0 +1,37 @@
+\begin{lemma}[Claim 4.3(b2), tree-edge clause]
+In the setting of Algorithm (A), suppose that the initial coloring
+\(\sigma_n\) is proper, leaves exactly \(e_0\) uncolored, and is stable
+on the terminal ladder tree relative to its terminal stored colors and
+displayed coloring.  If the restoration trace satisfies
+\noderef{ExtensionBaseRestorationInvariant}, then its output
+\(\varrho_1\) satisfies, for every exact displayed edge identity \(f\)
+of \(T_j\),
+\[
+             \varrho_1(f)=\sigma_n(f)=\varphi_{j-1}(f).
+\]
+\end{lemma}
+\begin{proof}
+Fix a displayed edge identity \(f\) of \(T_j\).  At any restoration
+step, \(T_j\) is an ordered initial segment of the current \(T_t\).
+The attachment clause in \noderef{TreeSequence} places both endpoint
+vertices of \(f\) in \(T_j\), hence in \(T_t\).  If the edge node of
+\(f\) belonged to the switched component, both endpoint vertex nodes
+would belong to that same component in
+\noderef{TwoColorIncidenceGraph}.  The exact-intersection clause of
+\noderef{ExtensionBaseRestorationInvariant} would identify both
+endpoints with the single support \(v_t\), contradicting the loopless
+law in \noderef{LooplessMultigraph}.  Thus no transition changes \(f\),
+and induction over the trace gives
+\[
+                         \varrho_1(f)=\sigma_n(f).              \tag{1}
+\]
+
+Apply \noderef{ExtensionBaseClaimTreeEdgeColors} to the stated indices,
+properness, exact-one-uncolored property, and terminal stability of
+\(\sigma_n\).  Its displayed-edge conclusion, which retains the exact
+edge identity \(f\), gives
+\[
+                         \sigma_n(f)=\varphi_{j-1}(f).          \tag{2}
+\]
+Combining (1) and (2) proves the tree-edge part of (b2).
+\end{proof}

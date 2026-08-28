@@ -1,0 +1,49 @@
+\begin{lemma}[Claim 4.3(b1): stability of the restoration output]
+Let \(\mathcal R\) be a restoration trace satisfying
+\noderef{ExtensionBaseRestorationInvariant}, with initial coloring
+\(\sigma_n\) and output coloring \(\varrho_1\).  Let \(C\) be a set of
+control colors, assume \(v_n\in V(T_j)\), and suppose that \(\sigma_n\) is
+\[
+ (T(v_n)-v_n,C,\varphi_{j-1})\text{-stable}
+\]
+in the sense of \noderef{StableColoringBeforeVertex}.  Then
+\(\varrho_1\) is
+\((T(v_n)-v_n,C,\varphi_{j-1})\)-stable as well.  In the extension-base
+application, \(C=D_{j-1}\), and the displayed premise is the current-rung
+part (iii) supplied by \noderef{ExtensionRules}.
+\end{lemma}
+\begin{proof}
+Write the trace colorings as
+\(\sigma^0=\sigma_n,\sigma^1,\ldots,\sigma^r=\varrho_1\).
+Fix a step \(a<r\).  Its invariant says that the switched component
+meets \(T_{t_a}\) at exactly \(v_{t_a}\), that \(T_j\) is an ordered
+initial segment of \(T_{t_a}\), and that \(v_n\prec v_{t_a}\).
+Every vertex in
+\(\noderef{TreeVerticesBefore}(T,v_n)\) therefore belongs to
+\(T_{t_a}\) and differs from \(v_{t_a}\); hence none of its vertex nodes
+belongs to the switched component.
+
+If an edge \(f\) incident with one of those vertices belonged to the
+component, its incident vertex node would be adjacent to its edge node
+in \noderef{TwoColorIncidenceGraph} and thus would belong to the same
+component.  This contradicts the preceding paragraph.  Consequently
+\(\sigma^{a+1}(f)=\sigma^a(f)\) for every edge incident with
+\(T(v_n)-v_n\).  In particular, all present and missing color sets at
+those vertices are unchanged.  Induction over the finite trace gives
+\[
+ \varrho_1(f)=\sigma_n(f)
+ \quad\text{on every such incident edge},\qquad
+ \overline{\varrho}_1(w)=\overline{\sigma}_n(w)
+ \quad(w\in V(T(v_n)-v_n)).                                  \tag{1}
+\]
+
+Now expand the two clauses of
+\noderef{StableColoringBeforeVertex}.  The vertex clause for the desired
+relation follows by composing (1) with the vertex clause of the assumed
+stability of \(\sigma_n\).  If an incident edge has
+\(\varphi_{j-1}\)-color in the controlling missing-color union with
+\(C\), the edge clause of that same assumed stability first identifies
+its \(\sigma_n\)-value with its \(\varphi_{j-1}\)-value, and (1) then
+identifies its \(\varrho_1\)-value with the same value.  These are
+exactly the two required clauses, proving (b1).
+\end{proof}

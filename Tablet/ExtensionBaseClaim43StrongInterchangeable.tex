@@ -1,0 +1,26 @@
+\begin{lemma}[Claim 4.3(b4): terminal-class pairs survive restoration]
+Let \(q\) be the terminal PE slot with supporting vertex \(v_n\), and
+let \(\mathcal R\) satisfy
+\noderef{ExtensionBaseRestorationInvariant}.  At the output coloring
+\(\varrho_1\), every exact pair \(\gamma_s,\delta_s\) with
+\[
+             s\in L(v_n)\setminus\{q\}
+\]
+is \(T_s\)-strongly interchangeable.  Here \(L(v_n)\) is the exact
+support class from \noderef{ExtensionBaseSupportClass}.
+\end{lemma}
+\begin{proof}
+The exact range of the slots in
+\noderef{ExtensionBaseRestorationTrace} is
+\[
+ L^*=L\setminus L(v_n)
+\]
+by \noderef{ExtensionBaseRestorationIndices}.  Hence a slot
+\(s\in L(v_n)\) is absent from the trace.  Support-class membership also
+implies active-set membership.  Since \(s\ne q\), all hypotheses of the
+final preservation clause in
+\noderef{ExtensionBaseRestorationInvariant} hold with the exact
+support \(v_n\) and the exact gamma/delta fields stated here.  That
+clause gives precisely the asserted strong interchangeability under the
+output coloring.  This proves (b4), including the empty-\(L^*\) case.
+\end{proof}

@@ -1,0 +1,100 @@
+\begin{lemma}[Claim 4.3(b2), missing-color clauses]
+Let \(\mathcal R\) satisfy
+\noderef{ExtensionBaseRestorationInvariant}, with initial coloring
+\(\sigma_n\), output \(\varrho_1\), terminal support \(v_n\), and ladder
+tree \(T_j\) containing \(v_n\).  Assume the following two explicit
+preparations.
+\begin{enumerate}
+\item If \(v\in V(T_j)\) is not the support of an active slot, then
+      \(\overline{\sigma}_n(v)=\overline{\varphi}_{j-1}(v)\).
+\item For each nonterminal support \(w\in V(T_j)\), let
+      \(i_0<\cdots<i_p\) be the exact support class, with exact fields
+      \(\gamma_{i_a},\delta_{i_a}\).  Then
+      \[
+       \gamma_{i_{a+1}}=\delta_{i_a},
+      \]
+      the list
+      \(\gamma_{i_0},\delta_{i_0},\ldots,\delta_{i_p}\) is injective,
+      and
+      \[
+       \overline{\varphi}_{j-1}(w)
+       =(\overline{\sigma}_n(w)\setminus\{\delta_{i_p}\})
+          \cup\{\gamma_{i_0}\}.                               \tag{1}
+      \]
+\end{enumerate}
+The first preparation and (1) are the two conclusions of
+\noderef{ExtensionBaseClaimMissingColors}; the chain and injectivity are
+the conclusions of \noderef{ExtensionBaseSupportClassColors}.  Then
+\[
+ \overline{\varrho}_1(v)=\overline{\varphi}_{j-1}(v)
+       \quad(v\in V(T_j)\setminus\{v_n\}),                    \tag{2}
+\]
+and
+\[
+             \overline{\varrho}_1(v_n)
+             =\overline{\sigma}_n(v_n).                       \tag{3}
+\]
+\end{lemma}
+\begin{proof}
+Write the trace colorings as
+\(\sigma^0=\sigma_n,\ldots,\sigma^r=\varrho_1\).  First let
+\(v\in V(T_j)\) be unsupported by every active slot.  At a restoration
+step, \(T_j\) is an initial segment of \(T_t\), and the invariant says
+that the switched component meets \(T_t\) only at its support \(v_t\).
+Since \(v\ne v_t\), its vertex node does not belong to that component.
+No edge incident with \(v\) can belong to it either, because such an
+edge node would be adjacent to the vertex node in
+\noderef{TwoColorIncidenceGraph}.  Thus every transition preserves all
+edge colors incident with \(v\), and
+\[
+                 \overline{\varrho}_1(v)
+                 =\overline{\sigma}_n(v)
+                 =\overline{\varphi}_{j-1}(v),                \tag{4}
+\]
+where the second equality is preparation 1.
+
+Now let \(w\ne v_n\) be an active support in \(T_j\), and take the exact
+increasing class enumeration from preparation 2.  Its members all lie
+in \(L^*=L\setminus L(v_n)\), and the exact range and descending-order
+fields of \noderef{ExtensionBaseRestorationTrace} show that the steps
+supported at \(w\) occur in the order
+\[
+                         i_p,i_{p-1},\ldots,i_0.               \tag{5}
+\]
+A step supported at a different vertex does not alter an edge incident
+with \(w\), by the same exact-component-intersection argument used for
+(4).  It therefore suffices to track the steps in (5).
+
+Immediately before the step at \(i_a\), the invariant says that
+\(\delta_{i_a}\) is missing at \(w\), and its path assertion supplies an
+incident edge of color \(\gamma_{i_a}\); hence that gamma color is
+present.  Expanding \noderef{TwoColorComponentSwap} at the root \(w\)
+therefore gives
+\[
+ \overline{\sigma}^{\,\mathrm{after}}(w)
+   =(\overline{\sigma}^{\,\mathrm{before}}(w)
+        \setminus\{\delta_{i_a}\})\cup\{\gamma_{i_a}\}.        \tag{6}
+\]
+The chain
+\(\gamma_{i_a}=\delta_{i_{a-1}}\) makes the new missing color exactly
+the delta needed for the next step.  Injectivity of
+\(\gamma_{i_0},\delta_{i_0},\ldots,\delta_{i_p}\) ensures that no later
+deletion in (6) removes the final color \(\gamma_{i_0}\), and that no
+earlier deletion or insertion changes an unrelated endpoint color.
+Induction down (5) consequently telescopes (6) to
+\[
+ \overline{\varrho}_1(w)
+   =(\overline{\sigma}_n(w)\setminus\{\delta_{i_p}\})
+        \cup\{\gamma_{i_0}\}.                                 \tag{7}
+\]
+Preparation (1) identifies the right side of (7) with
+\(\overline{\varphi}_{j-1}(w)\).
+
+Every vertex in \(V(T_j)\setminus\{v_n\}\) is covered by (4) or (7),
+which proves (2).  Finally, no restoration slot is supported at \(v_n\)
+by the definition of \(L^*\).  Since \(v_n\in V(T_j)\subseteq V(T_t)\)
+at every step, exact component intersection again says that the switched
+component avoids its vertex node and all incident edge nodes.  Its
+missing-color set is unchanged throughout the trace, proving (3) and
+all missing-color clauses of (b2).
+\end{proof}
