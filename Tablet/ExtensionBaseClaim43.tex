@@ -64,10 +64,18 @@ equalities on every displayed edge identity, completing (b2).
 The trace invariant alone satisfies the hypotheses of
 \noderef{ExtensionBaseClaim43EdgeEffects}; its conclusion is exactly
 (b3), including explicit nonempty initial and final colors and retention
-of each edge identity.  Finally apply
-\noderef{ExtensionBaseClaim43StrongInterchangeable}.  Since the trace
-enumerates \(L^*=L\setminus L(v_n)\), its final preservation clause
-applies to every nonterminal slot in \(L(v_n)\), giving (b4).
-These four cited nodes have distinct conclusions and together establish
-all clauses of Claim 4.3.
+of each edge identity.
+
+Finally, let \(s\in L(v_n)\setminus\{q\}\) have the displayed exact
+support and gamma/delta fields.  Membership in \(L(v_n)\) first gives
+\(s\in L\).  By \noderef{ExtensionBaseRestorationTrace}, the range of
+the trace is exactly the restoration-index set, and
+\noderef{ExtensionBaseRestorationIndices} identifies that set as
+\(L\setminus L(v_n)\).  Therefore no trace slot equals \(s\).  The
+final-output clause of \noderef{ExtensionBaseRestorationInvariant},
+applied with \(s\in L\), \(s\ne q\), this absence from the trace, and
+the exact support and color fields, says directly that
+\(\gamma_s,\delta_s\) are \(T_s\)-strongly interchangeable under
+\(\varrho_1\).  This proves (b4), including the case in which the trace
+has no steps, and completes Claim 4.3.
 \end{proof}

@@ -1,13 +1,18 @@
 \begin{definition}
-In the extension-base setting, let \(L\) be the active PE-index set from
-\noderef{ExtensionBaseActiveIndices}, let \(v_n\) be the terminal
-supporting vertex, and let \(L_1=L(v_n)\) be its support class from
+Let \(v\) be an arbitrary distinguished vertex of the final displayed
+ETT, and assume \(v\in V(T)\).  Let \(L\) be the active PE-index set
+relative to \(v\) from \noderef{ExtensionBaseActiveIndices}, and let
+\(L(v)\) be the support class of \(v\) in that active set from
 \noderef{ExtensionBaseSupportClass}.  Define the restoration-index set
-by
+relative to \(v\) by
 \[
-                         L^*:=L\setminus L_1.
+                         L^*(v):=L\setminus L(v).
 \]
-Thus \(L^*\) retains the identities of all active PE slots supported at
-vertices other than \(v_n\); it is a finite set of certified series
-indices, not merely a set of color pairs.
+It is a finite set of exact certified series indices, not merely a set
+of color pairs.  Algorithm \((A)\) specializes the distinguished vertex
+to the certified terminal PE support \(v_n\): its terminal slot \(q\)
+satisfies \(q+1=n\), \(\Theta_{q+1}=\mathrm{PE}\), and
+\(v_{q+1}=v_n\).  Under this specialization the active set is the
+paper's \(L\), the class \(L(v_n)\) is \(L_1\), and hence
+\(L^*(v_n)=L\setminus L_1\).
 \end{definition}

@@ -1,7 +1,6 @@
 import Tablet.ExtensionBaseClaim43EdgeEffects
 import Tablet.ExtensionBaseClaim43MissingColors
 import Tablet.ExtensionBaseClaim43Stability
-import Tablet.ExtensionBaseClaim43StrongInterchangeable
 import Tablet.ExtensionBaseClaim43TreeEdges
 import Tablet.ExtensionRules
 
