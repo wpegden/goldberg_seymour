@@ -1,0 +1,23 @@
+\begin{lemma}[Scheide maximum-triple facts (a)--(b)]
+If $(T,e_0,\varphi)$ is globally maximum, then
+$t(G)=|V(T)|\geq3$, this number is odd, and $V(T)$ is elementary and
+closed with respect to $\varphi$.
+\end{lemma}
+\begin{proof}
+The equality $|V(T)|=t(G)$ is part of
+\noderef{GlobalMaximumTriple}.  The $k$-triple equality there gives
+$k=\chi'(G)-1$, so every Tashkinov tree for the same pair is among the
+trees maximized in \noderef{TashkinovOrder}.  Such a tree is fixed-pair
+maximal in the sense of \noderef{FixedPairMaximalTashkinovTree}.  Indeed,
+if a Tashkinov tree $S$ for the same pair strictly contained $V(T)$ in
+$V(S)$, then finiteness would give $|V(S)|>|V(T)|=t(G)$, contrary to the
+maximum defining \noderef{TashkinovOrder}.  Therefore
+\noderef{ScheideMaximalOddOrder} shows that $|V(T)|$ is odd, while
+\noderef{ScheideMaximalElementaryClosed} shows that $V(T)$ is elementary
+and closed.
+
+The positive-length condition in \noderef{TreeSequence} gives at least the
+two distinct initial vertices, so $|V(T)|\geq2$.  An odd natural number
+which is at least two is at least three.  Combining this with the defining
+equality gives the result.
+\end{proof}

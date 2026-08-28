@@ -1,0 +1,31 @@
+\begin{lemma}[Scheide maximal-tree package (d)]
+Under the fixed-pair maximal-tree hypotheses, every Tashkinov tree $S$ for
+$(e_0,\varphi)$ is an initial segment of a Tashkinov tree $\widetilde T$
+with $V(\widetilde T)=V(T)$.
+\end{lemma}
+\begin{proof}
+By \noderef{ScheideMaximalContainsEveryTree}, $V(S)\subseteq V(T)$.  Start
+with the displayed sequence $S$.  If it does not yet contain all vertices
+of $T$, choose the first vertex $y_j$ in the displayed order of $T$ which
+is absent from the current sequence, and append $y_j$ together with its
+original tree edge $e_j$ from $T$.
+
+Every vertex of $T$ preceding $y_j$ is already in the current sequence by
+the choice of $j$, so the earlier end of $e_j$ is present.  The edge
+identity $e_j$ is not already a tree edge of the current sequence.  Indeed,
+if it were, both of its ends would be current vertices by
+\noderef{TreeSequence}, including its end $y_j$, contrary to the choice of
+$y_j$.  Thus appending the pair preserves distinct vertices, distinct edge
+identities, and the tree attachment rule.  Since $T$ is a Tashkinov tree by
+\noderef{FixedPairMaximalTashkinovTree}, the color of $e_j$ has a
+missing-color witness at a vertex preceding $y_j$ in $T$; this witness is
+already present by the same first-absent choice.  Hence the enlarged
+sequence remains a Tashkinov tree.
+
+There are only finitely many vertices in $V(T)$, so repetition terminates
+with a Tashkinov tree $\widetilde T$ containing every vertex of $T$.  No
+other vertices were appended, so $V(\widetilde T)=V(T)$.  Nothing was
+inserted into or changed within the original displayed sequence $S$;
+therefore $S$ is its ordered initial segment in the sense of
+\noderef{TreeSequenceInitialSegment}.
+\end{proof}

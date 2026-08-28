@@ -1,0 +1,22 @@
+\begin{lemma}[Scheide maximum-triple fact (h)]
+Every color which is defective or free for a globally maximum triple
+$(T,e_0,\varphi)$ is unused on the colored tree edges of $T$.
+\end{lemma}
+\begin{proof}
+A free color is unused by the set-difference definition
+\noderef{TreeFreeColors}, so the free-color set is disjoint from
+\noderef{TreeUsedColors}.
+
+Let $\alpha$ be defective.  The statement-level package
+\noderef{ScheideGlobalMaximumOrder} says that $X=V(T)$ is closed.  Since an
+$\alpha$-colored boundary edge identity exists, closure implies that
+$\alpha$ is missing at no vertex of $X$.
+
+If $\alpha$ were used on $T$, there would be a colored tree edge after the
+distinguished first edge with color $\alpha$, by
+\noderef{TreeUsedColors}.  The Tashkinov-tree clause in
+\noderef{GlobalMaximumTriple} would then provide an earlier tree vertex at
+which $\alpha$ is missing.  That contradicts the preceding paragraph.
+Thus every defective color is also disjoint from the used-color set, which
+proves both asserted disjointness statements.
+\end{proof}

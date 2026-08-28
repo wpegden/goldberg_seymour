@@ -1,0 +1,23 @@
+\begin{lemma}[Scheide maximal-tree package (a)]
+Let $(G,e_0,\varphi)$ be a $k$-triple and let $T$ be a fixed-pair maximal
+Tashkinov tree for $(e_0,\varphi)$.  Then $V(T)$ is elementary and closed
+with respect to $\varphi$.
+\end{lemma}
+\begin{proof}
+The Tashkinov-tree clause in
+\noderef{FixedPairMaximalTashkinovTree}, together with the $k$-triple
+hypothesis, lets us apply \noderef{TashTree}; hence $V(T)$ is elementary.
+
+Suppose $V(T)$ were not closed.  By \noderef{ColoredVertexSetClosed} and
+\noderef{BoundaryEdges}, there would be a boundary edge identity $f$ with
+one end $x\in V(T)$ and the other end $y\notin V(T)$, and a color $\eta$
+such that $\varphi(f)=\eta$ and $\eta$ is missing at some vertex
+$z\in V(T)$.  Append $f,y$ to the displayed tree-sequence $T$.  The new
+vertex is distinct from all old vertices.  The boundary identity $f$ is
+distinct from every old tree edge, since each old tree edge has both ends
+in $V(T)$ by \noderef{TreeSequence}, whereas $f$ has its other end $y$
+outside.  Thus the appended sequence is a tree-sequence.  Its new colored
+edge has the earlier missing-color witness $z$, so it is a Tashkinov tree
+by \noderef{TashkinovTree}.  Its vertex set strictly contains $V(T)$,
+contradicting fixed-pair maximality.  Therefore $V(T)$ is closed as well.
+\end{proof}

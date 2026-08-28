@@ -1,0 +1,39 @@
+\begin{lemma}[Scheide maximum-triple boundary facts (c)--(e)]
+Let $(T,e_0,\varphi)$ be globally maximum.  If it has no defective color,
+then $V(T)$ is strongly closed.  Every color missing on $V(T)$ has no
+boundary edge of that color.  For every defective color $\alpha$, the
+number $|\partial_{\varphi,\alpha}(V(T))|$ is odd and at least three.
+\end{lemma}
+\begin{proof}
+By \noderef{ScheideGlobalMaximumOrder}, $X=V(T)$ is elementary and closed,
+and $|X|$ is odd.
+
+If the defective-color set from \noderef{DefectiveColors} is empty, no two
+distinct boundary edge identities share a color: any shared color would
+have at least two members in the exact boundary-color set of
+\noderef{BoundaryColorEdges} and would therefore be defective.  Together
+with closure, this is precisely strong closure as defined in
+\noderef{ColoredVertexSetStronglyClosed}.
+
+If $\alpha$ is missing on $X$, closure forbids every $\alpha$-colored
+boundary edge identity.  This gives
+$\partial_{\varphi,\alpha}(X)=\varnothing$ directly from
+\noderef{TreeMissingColors}, \noderef{ColoredVertexSetClosed}, and
+\noderef{BoundaryColorEdges}.
+
+Finally let $\alpha$ be defective.  By \noderef{DefectiveColor}, some
+boundary edge has color $\alpha$,
+so closure implies that $\alpha$ is missing at no vertex of $X$ and hence
+is present at every vertex.  Properness from the $k$-triple definition
+\noderef{KTriple}
+then makes every vertex incident with exactly one $\alpha$-colored edge
+identity.  Count incidences at $X$.  Every internal $\alpha$-edge contributes
+two (the two ends are distinct by \noderef{LooplessMultigraph}), while every edge identity in
+$\partial_{\varphi,\alpha}(X)$ contributes one.  Thus
+\[
+ |X|=2|E_\alpha(X)|+|\partial_{\varphi,\alpha}(X)|.
+\]
+The left side is odd, so the boundary cardinality is odd.  Defectiveness
+already makes it at least two; an odd integer at least two is at least
+three.
+\end{proof}

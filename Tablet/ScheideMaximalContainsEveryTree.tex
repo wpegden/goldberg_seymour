@@ -1,0 +1,23 @@
+\begin{lemma}[Scheide maximal-tree package (c)]
+Let $T$ be fixed-pair maximal for the $k$-triple
+$(G,e_0,\varphi)$.  Every Tashkinov tree $S$ for the same pair satisfies
+$V(S)\subseteq V(T)$.
+\end{lemma}
+\begin{proof}
+Write $X=V(T)$, which is closed by
+\noderef{ScheideMaximalElementaryClosed}.  Both ends of $e_0$ lie in $X$:
+$e_0$ is the first tree edge, and the attachment clause of
+\noderef{TreeSequence} identifies its two ends with the first two vertices
+of $T$.
+
+Suppose that the displayed sequence
+$S=(y_0,e_1,y_1,\ldots,e_n,y_n)$ has a vertex outside $X$, and choose its
+first such vertex $y_r$.  Since the first two vertices are the two ends of
+$e_0$, both lie in $X$, so $r\geq2$.  Every vertex before $y_r$ lies in
+$X$.  The tree edge identity $e_r$ joins $y_r$ to an earlier vertex of
+$S$, hence is a boundary edge identity of $X$.  Because $S$ is Tashkinov,
+$e_r$ is colored by a color missing at an even earlier vertex of $S$; that
+witness also lies in $X$.  This contradicts the closure of $X$ as defined
+in \noderef{ColoredVertexSetClosed}.  No first outside vertex exists, and
+therefore $V(S)\subseteq X$.
+\end{proof}

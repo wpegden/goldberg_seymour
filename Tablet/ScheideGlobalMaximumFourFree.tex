@@ -1,0 +1,25 @@
+\begin{lemma}[Scheide maximum-triple fact (g)]
+Every globally maximum triple $(T,e_0,\varphi)$ has at least four free
+colors: $|\mathcal F(T,e_0,\varphi)|\geq4$.
+\end{lemma}
+\begin{proof}
+Write $X=V(T)$.  By \noderef{ScheideGlobalMaximumOrder}, $X$ is
+elementary.  The two
+ends of $e_0$ are the first two distinct vertices of $T$ by
+\noderef{TreeSequence}.  The exact counts in
+\noderef{ScheideGlobalMaximumMissingCounts} say that each vertex of $X$
+misses at least one color and that these two ends each miss one additional
+color.  Elementariness makes the missing-color sets of distinct vertices
+disjoint.  Therefore
+\[
+             |\overline\varphi(T)|\geq |X|+2.             \tag{1}
+\]
+
+If $T$ has $n$ tree edges, then it has $n+1=|X|$ vertices.  Only the
+$n-1=|X|-2$ edge identities after the distinguished first edge can be
+colored tree edges.  Consequently at most $|X|-2$ distinct colors are used
+on $T$ in the sense of \noderef{TreeUsedColors}.  Removing all used colors
+from the missing-color union in (1) leaves at least
+$(|X|+2)-(|X|-2)=4$ colors.  This difference is exactly the free-color set
+defined in \noderef{TreeFreeColors}.
+\end{proof}

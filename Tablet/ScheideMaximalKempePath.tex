@@ -1,0 +1,70 @@
+\begin{lemma}[Scheide maximal-tree package (e)]
+Let $T$ be fixed-pair maximal for $(e_0,\varphi)$, and let
+$S=(y_0,e_1,y_1,\ldots,e_n,y_n)$ be any Tashkinov tree for the same pair.
+If $i<j$, $\gamma$ is missing at $y_i$, and $\delta$ is missing at $y_j$,
+then $\gamma\ne\delta$ and the $(\gamma,\delta)$-component through $y_i$
+is an even multigraph path with ends $y_i,y_j$ whose vertices lie in
+$V(T)$.  In the bipartite incidence graph this is a simple spanning path of
+length divisible by four.  If $\gamma$ is unused through $y_j$, switching
+this component preserves a proper coloring with exactly $e_0$ uncolored and
+leaves $S$ a Tashkinov tree.
+\end{lemma}
+\begin{proof}
+Put $X=V(T)$ and $X'=V(S)$.  The properness and unique-uncolored-edge
+conditions are supplied by \noderef{KTriple}, and missing colors have the
+meaning in \noderef{MissingColors}.  By \noderef{TashTree}, $X'$ is elementary.
+Since $y_i\ne y_j$ by vertex injectivity in \noderef{TreeSequence}, the
+colors missing at those two vertices are distinct; thus
+$\gamma\ne\delta$.  Also \noderef{ScheideMaximalContainsEveryTree} gives
+$X'\subseteq X$, and \noderef{ScheideMaximalElementaryClosed} says that
+$X$ is elementary and closed.
+
+Consider the $(\gamma,\delta)$-component of \noderef{TwoColorComponent}
+containing $y_i$ in the bipartite incidence graph
+\noderef{TwoColorIncidenceGraph}.  Because $\gamma$ is
+missing at $y_i$ and $X$ is elementary, $\delta$ is present at $y_i$ and
+properness gives exactly one incident edge of that color.  Thus $y_i$ has
+degree one in the two-color component, and its incident edge has color
+$\delta$.  Symmetrically, $y_j$ has degree one and its incident edge has
+color $\gamma$.  At every other vertex of $X$, both colors are present:
+each is missing somewhere in $X$, so elementariness forbids it from being
+missing at another vertex.  Properness gives exactly one incident edge of
+each color there.
+
+Closedness of $X$ forbids any $\gamma$- or $\delta$-colored boundary edge,
+because both colors are missing on $X$.  Hence the entire component through
+$y_i$ lies over vertices of $X$.  By
+\noderef{TwoColorComponentSpanningPath}, the finite component has a simple
+spanning incidence path.  The degree calculation shows that its only
+degree-one vertex-nodes are $y_i,y_j$, so these are the two ends.  Along the
+corresponding multigraph path, colors alternate; the first edge at $y_i$
+has color $\delta$ and the last edge at $y_j$ has color $\gamma$.  Since
+these colors differ, the multigraph path has an even number of edges.  Each
+multigraph edge contributes two successive incidences, so the incidence
+path length is divisible by four.  This proves all path assertions.
+
+Now suppose $\gamma$ is unused through $y_j$ in the sense of
+\noderef{TreeColorUnusedThrough}.  The color $\delta$ is unused there as
+well.  Otherwise a colored tree edge before or at $y_j$ with color
+$\delta$ would, by \noderef{TashkinovTree}, have a still earlier vertex
+missing $\delta$; together with the missing occurrence at $y_j$, this would
+contradict the elementariness of $X'$.
+
+Switch $\gamma$ and $\delta$ on the displayed component using
+\noderef{TwoColorComponentSwap}.  Properness is preserved by
+\noderef{TwoColorComponentSwapProper}.  The uncolored edge $e_0$ is not an
+edge-node of the component, because every component edge is colored
+$\gamma$ or $\delta$; hence it remains uncolored, and every other edge
+remains colored.  No colored tree edge
+through $y_j$ changes, since both colors are unused there.  At the path
+ends, the missing colors are exchanged: $\delta$ becomes missing at $y_i$
+and $\gamma$ at $y_j$; at every other tree vertex the two incident colors
+are merely exchanged and its missing-color set is unchanged.  For every
+tree edge later than $y_j$, a witness in a color outside
+$\{\gamma,\delta\}$ is unchanged.  If its color or its old witness uses
+$\gamma$ or $\delta$, the appropriate one of $y_i,y_j$ supplies the new
+or unchanged missing-color witness, and both vertices precede that later
+edge because $i<j$.  Thus every later tree edge still has an earlier
+missing-color witness.  The switched coloring therefore leaves the same
+displayed sequence $S$ a Tashkinov tree.
+\end{proof}

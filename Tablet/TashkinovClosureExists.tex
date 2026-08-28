@@ -1,0 +1,32 @@
+\begin{lemma}[Existence of a finite Tashkinov closure]
+Every finite tree-sequence $T$ has a closure under any fixed partial
+coloring $\varphi$.
+\end{lemma}
+\begin{proof}
+Consider all tree-sequences reachable from $T$ by a Tashkinov augmentation
+sequence as defined in \noderef{TashkinovAugmentationSequence}.  This class
+is nonempty because the empty augmentation sequence reaches $T$.  Every
+reachable sequence has pairwise distinct vertices by \noderef{TreeSequence},
+so its length is less than $|V|$.  Hence the finite set of possible lengths
+has a largest member.  Choose a reachable sequence $S$ of largest length.
+
+We claim that $V(S)$ is closed.  If it were not closed in the sense of
+\noderef{ColoredVertexSetClosed}, there would be a boundary edge identity
+$f$, a vertex $z\in V(S)$, and a color $c$ such that
+$\varphi(f)=c$ and $c$ is missing at $z$.  By
+\noderef{BoundaryEdges}, the two ends of $f$ consist of a vertex
+$x\in V(S)$ and a vertex $y\notin V(S)$.  Append $f,y$ to the displayed
+sequence for $S$.  The new vertex is distinct from all old vertices.  The
+edge identity $f$ is distinct from every old tree edge: every old tree edge
+has both ends among the old tree vertices by the attachment clause in
+\noderef{TreeSequence}, whereas $f$ has the end $y$ outside that set.  The
+new edge attaches $y$ to the earlier vertex $x$, and its color is missing at
+the earlier vertex $z$.  The result is therefore a tree-sequence $S^+$ and
+is one Tashkinov augmentation of $S$ in the sense of
+\noderef{TashkinovAugmentation}.  Concatenating this step with the sequence
+from $T$ to $S$ reaches $S^+$ from $T$, but $S^+$ has greater length than
+$S$, contradicting maximality.
+
+Thus $V(S)$ is closed.  Reachability together with this closure condition is
+exactly \noderef{TashkinovClosure}, so $S$ is the required closure.
+\end{proof}

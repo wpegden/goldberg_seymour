@@ -1,0 +1,26 @@
+\begin{lemma}[Scheide maximal-tree package (b)]
+Let $(G,e_0,\varphi)$ be a $k$-triple and let $T$ be a fixed-pair maximal
+Tashkinov tree for $(e_0,\varphi)$.  Then $|V(T)|$ is odd.
+\end{lemma}
+\begin{proof}
+Put $X=V(T)$.  The positive-length condition in \noderef{TreeSequence}
+makes $X$ nonempty.  By \noderef{ScheideMaximalElementaryClosed}, $X$ is
+elementary and closed.  Every vertex of $X$ misses a color.  Indeed, the
+$k$-triple inequality is $k\geq\Delta(G)+1$ by \noderef{KTriple}; the
+number of incident edge identities is the degree from \noderef{Degree},
+and \noderef{MaximumDegree} bounds this degree by $\Delta(G)$.  Properness
+makes their present colors distinct, so fewer than $k$
+colors are present at every vertex.  The complement definition
+\noderef{MissingColors} therefore supplies a vertex $x\in X$ and a color
+$\eta$ missing at $x$.
+
+Elementariness says that $\eta$ is not missing, hence is present, at every
+vertex of $X\setminus\{x\}$.  By \noderef{PresentColors}, each such vertex
+is incident with an $\eta$-colored edge identity.  Properness gives at most
+one such edge at each vertex.  Closedness says that no $\eta$-colored edge
+has exactly one end in $X$, because $\eta$ is missing on $X$.  Consequently
+the $\eta$-colored internal edges form a matching which saturates exactly
+the $|X|-1$ vertices other than $x$.  Each matching edge has two distinct
+ends by \noderef{LooplessMultigraph}, so $|X|-1$ is twice the number of
+these edge identities and is even.  Hence $|X|$ is odd.
+\end{proof}

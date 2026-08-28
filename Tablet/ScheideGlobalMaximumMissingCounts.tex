@@ -1,0 +1,32 @@
+\begin{lemma}[Scheide maximum-triple fact (f)]
+Let $(T,e_0,\varphi)$ be globally maximum and let $v\in V(T)$.  If $v$ is
+an end of $e_0$, then
+\[
+ |\overline\varphi(v)|=k-d_G(v)+1\geq2;
+\]
+otherwise
+\[
+ |\overline\varphi(v)|=k-d_G(v)\geq1.
+\]
+\end{lemma}
+\begin{proof}
+The $k$-triple part of \noderef{GlobalMaximumTriple} says that $\varphi$ is
+proper and leaves exactly the edge identity $e_0$ uncolored.  Properness
+makes the colors on distinct incident colored edge identities at $v$
+pairwise distinct.  Conversely each present color is witnessed by such an
+incident edge identity by \noderef{PresentColors}.
+
+If $v$ is incident with $e_0$, exactly $d_G(v)-1$ of its incident edge
+identities are colored, by \noderef{Degree} and
+\noderef{IsOneEdgeUncolored}.  Hence its present-color set has cardinality
+$d_G(v)-1$.  Since \noderef{MissingColors} is the complement in the
+$k$-element color set, its missing-color set has cardinality
+$k-(d_G(v)-1)=k-d_G(v)+1$.  If $v$ is not incident with $e_0$, all
+$d_G(v)$ incident identities are colored, giving instead
+$|\overline\varphi(v)|=k-d_G(v)$.
+
+Finally, the $k$-triple inequality in \noderef{KTriple} gives
+$k\geq\Delta(G)+1$, and $d_G(v)\leq\Delta(G)$ by
+\noderef{MaximumDegree}.  Thus $k-d_G(v)\geq1$; in the incident case the
+additional uncolored edge raises the missing-color count to at least two.
+\end{proof}

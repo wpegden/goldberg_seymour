@@ -1,0 +1,29 @@
+\begin{lemma}[Scheide maximal-tree package (f)]
+Let $(G,e_0,\varphi)$ be a $k$-triple and let $T$ be a fixed-pair maximal
+Tashkinov tree for $(e_0,\varphi)$.  Then the induced multigraph $G[V(T)]$
+contains an odd cycle.
+\end{lemma}
+\begin{proof}
+Let $x,y$ be the first two vertices of $T$.  By the first-edge and
+attachment clauses in \noderef{TreeSequence}, they are the two distinct
+ends of the uncolored edge identity $e_0$.  Each misses at least two colors:
+the $k$-triple inequality in \noderef{KTriple} is
+$k\geq\Delta(G)+1$, while uncoloring the incident edge $e_0$ leaves at
+most $d_G(x)-1$ and $d_G(y)-1$ present colors, with degree and maximum
+degree as in \noderef{Degree} and \noderef{MaximumDegree}.  The complements
+are the missing-color sets of \noderef{MissingColors}.  Choose a color $\alpha$
+missing at $x$ and a color $\beta$ missing at $y$.
+
+The set $V(T)$ is elementary by
+\noderef{ScheideMaximalElementaryClosed}, so $\alpha\ne\beta$.
+Apply \noderef{ScheideMaximalKempePath} to $S=T$, the indices of $x,y$,
+and the colors $\alpha,\beta$.  It gives an even
+$(\alpha,\beta)$-path contained in $V(T)$ whose ends are $x,y$.  Because
+the incidence path is simple, its multigraph vertices and edge identities
+are pairwise distinct.  The edge $e_0$ is not one of its edges, since it is
+uncolored by \noderef{KTriple} whereas every edge on the two-color path is
+colored $\alpha$ or $\beta$.  Adding the edge identity $e_0$ closes this
+even path into a cycle of odd length at least three.  All its vertices lie
+in $V(T)$, and all its edge identities remain distinct.  This is precisely
+an odd cycle in the sense of \noderef{OddCycleIn}.
+\end{proof}

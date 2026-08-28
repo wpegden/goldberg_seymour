@@ -1,0 +1,31 @@
+\begin{lemma}[Uniqueness of the closure vertex set]
+If $T_1$ and $T_2$ are two closures of the same tree-sequence $T$ under
+the same coloring $\varphi$, then $V(T_1)=V(T_2)$.
+\end{lemma}
+\begin{proof}
+We first prove the following containment principle.  Let $C$ be a closure
+of $T$, and let $S$ be any tree-sequence reached from $T$ by Tashkinov
+augmentations under the same coloring.  Then $V(S)\subseteq V(C)$.
+
+Because $C$ is reached from $T$, repeated use of the initial-segment clause
+in \noderef{TashkinovAugmentation} shows that $V(T)\subseteq V(C)$.  Induct
+on the augmentation sequence from $T$ to $S$ supplied by
+\noderef{TashkinovAugmentationSequence}.  The empty sequence is the
+containment just noted.  For the induction step, suppose
+$S^+=(S,f,y)$ is obtained by one augmentation from $S$ and
+$V(S)\subseteq V(C)$.  The new edge identity $f$ has an end $x\in V(S)$,
+its other end is the new vertex $y\notin V(S)$, and
+$\varphi(f)=c$ for a color $c$ missing at some $z\in V(S)$, by
+\noderef{TashkinovAugmentation}.  The induction hypothesis puts both $x$
+and $z$ in $V(C)$.  If $y\notin V(C)$, then $f$ is a boundary edge identity
+of $V(C)$ by \noderef{BoundaryEdges}, colored $c$ while $c$ is missing at
+the vertex $z\in V(C)$.  This contradicts the closedness clause in
+\noderef{TashkinovClosure}.  Consequently $y\in V(C)$, and hence
+$V(S^+)\subseteq V(C)$.  This completes the induction.
+
+Apply the containment principle first with $C=T_2$ and $S=T_1$, using the
+augmentation sequence contained in the closure assertion for $T_1$.  It
+gives $V(T_1)\subseteq V(T_2)$.  Interchanging $T_1,T_2$ gives the reverse
+containment.  Extensionality of finite vertex sets yields
+$V(T_1)=V(T_2)$.
+\end{proof}
