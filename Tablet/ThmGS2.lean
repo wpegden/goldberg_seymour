@@ -4,6 +4,7 @@ import Tablet.Elementary
 import Tablet.ETTFirstAppearanceIndex
 import Tablet.ETTInterchangeabilityProperty
 import Tablet.ExtendedTashkinovTree
+import Tablet.ExtensionRules
 import Tablet.HkuIncidentColorPreserved
 import Tablet.HkuMissingStoredMonotone
 import Tablet.HkuParallelBoundaryStructure
