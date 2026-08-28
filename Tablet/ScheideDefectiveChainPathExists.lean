@@ -1,7 +1,25 @@
+import Tablet.AdjacentEdges
+import Tablet.BoundaryColorEdges
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
+import Tablet.ColoredVertexSetElementary
+import Tablet.GlobalMaximumTriple
+import Tablet.Incident
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.LooplessMultigraph
+import Tablet.MissingColors
+import Tablet.PresentColors
 import Tablet.ScheideDefectiveChainPath
 import Tablet.ScheideGlobalMaximumBoundaryFacts
+import Tablet.ScheideGlobalMaximumOrder
 import Tablet.ScheideGlobalMaximumUnused
+import Tablet.TreeFreeColors
+import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ScheideDefectiveChainPathExists]
 theorem ScheideDefectiveChainPathExists {V E : Type*}
