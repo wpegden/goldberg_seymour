@@ -1,0 +1,89 @@
+\begin{lemma}[Maximum property under a corresponding coloring]
+Let \(T\) be an extended Tashkinov tree with rung number \(n\), let
+\(\sigma_n\) be a \(\varphi_n\bmod T_n\) coloring, and let \(T^*\) be a
+displayed tree carrying an actual corresponding-ETT certificate for
+\((\sigma_n,T_n)\).  If \(T\) has the maximum property under
+\(\varphi_n\), then the replacement ETT certified on \(T^*\) has the
+maximum property under \(\sigma_n\).
+\end{lemma}
+\begin{proof}
+Write the base coloring sequence as
+\(\varphi_0,\ldots,\varphi_n\) and the replacement sequence as
+\(\sigma_0,\ldots,\sigma_n\).  The mod-coloring hypothesis is exactly
+the paper's hypothesis that \(\sigma_n\) is
+\(\varphi_n\bmod T_n\), in the sense of \noderef{ModColoring}.  Once the
+displayed tree \(T^*\) and its actual corresponding certificate are fixed,
+the universal extension clause in that hypothesis is not needed again.
+
+By \noderef{CorrespondingExtendedTashkinovTree}, the replacement has the
+same rung number \(n\); for every \(1\leq j\leq n\), its ordered ladder
+tree \(T_j^*\) is exactly \(T_j\).  At every stored index its raw set
+\(S_j^*\), exact connecting-edge set \(F_j^*\), and extension kind
+\(\Theta_j^*\) equal the corresponding base data.  Moreover, each
+\(\sigma_j\) is proper, leaves exactly the distinguished edge uncolored,
+and, for \(1\leq j\leq n\), is
+\((T_j,D_j,\varphi_j)\)-stable.  The base colorings at positive indices
+are also proper and leave exactly the distinguished edge uncolored: this
+is recorded in the positive SE, PE, and RE constructors of the certified
+series in \noderef{TashkinovSeries} and
+\noderef{TashkinovSeriesStep}.
+
+We first record that the replacement stored set at each such stage is
+really the same \(D_j\).  By \noderef{TashkinovStoredColors}, it is the
+union of the raw sets \(S_h\) through \(j\), with the colors missing on
+the stage tree deleted.  The corresponding certificate identifies every
+raw \(S_h^*\) with \(S_h\) and identifies \(T_j^*\) with \(T_j\).
+Its stability clause identifies, vertex by vertex on \(T_j\), the colors
+missing under \(\sigma_j\) with those missing under \(\varphi_j\).
+Taking their unions over the common vertex set and then the same finite-set
+difference gives
+\[
+                         D_j^*=D_j.                 \tag{1}
+\]
+
+Unfold the two clauses of the maximum property in
+\noderef{MaximumProperty}.  For the first clause, use ladder agreement at
+the first index.  It gives \(T_1^*=T_1\) as ordered tree-sequences, hence
+\(|V(T_1^*)|=|V(T_1)|\).  The base maximum property says that the latter
+cardinality is the Tashkinov order of \(G\), so the replacement satisfies
+the first clause as well.
+
+For the second clause, fix \(i\) with \(1\leq i<n\).  Let \(\rho\) be a
+proper coloring leaving exactly the distinguished edge uncolored which is
+\((T_i^*,D_i^*,\sigma_i)\)-stable.  Let \(U\) be a prescribed seed for
+the replacement data, and let \(U'\) be a closure of \(U\) under
+\(\rho\).  By ladder agreement and (1), the assumed stability is precisely
+\((T_i,D_i,\sigma_i)\)-stability.  The certificate also gives that
+\(\sigma_i\) is \((T_i,D_i,\varphi_i)\)-stable.  All three colorings are
+proper and leave exactly the same distinguished edge uncolored, so the
+transitivity clause of \noderef{sc2} yields that \(\rho\) is
+\((T_i,D_i,\varphi_i)\)-stable.
+
+The same certificate identifies the extension kind and exact
+connecting-edge set at index \(i\).  If the kind is PE, the replacement
+seed is \(T_i^*=T_i\), which is exactly the base PE seed.  If the kind is
+SE or RE, the replacement premise supplies an edge identity \(f_i\) with
+the exact equality \(F_i^*=\{f_i\}\) and says that \(U\) is the exact
+one-edge extension \(T_i^*+f_i\).  Agreement of \(F_i^*\) with \(F_i\)
+and of \(T_i^*\) with \(T_i\) makes this the base SE/RE seed using the
+same individual edge \(f_i\).  Thus \(U'\) is the very same candidate
+closure to which the base maximum-property clause applies.  It gives
+\[
+                         |V(U')|\leq |V(T_{i+1})|.  \tag{2}
+\]
+Because \(i<n\), ladder agreement also includes the next stage and gives
+\(T_{i+1}^*=T_{i+1}\).  Rewriting the right side of (2) proves the required
+replacement bound
+\(|V(U')|\leq |V(T_{i+1}^*)|\).
+
+For clarity about indices, the certificate stores ladder agreement with a
+zero-based index \(q<n\) representing the paper tree \(T_{q+1}\).  The
+current stage \(T_i\) above uses \(q=i-1\), which exists because
+\(1\leq i\); the next stage \(T_{i+1}\) uses \(q=i\), which exists because
+\(i<n\).  Equality of the two rung numbers transports both finite indices
+to the replacement series.  Finally, the quantified second clause of
+\noderef{MaximumProperty} ranges only over \(1\leq i<n\).  It imposes no
+maximality condition at \(i=n\), so no agreement or maximality assertion
+for a final stage beyond this range is required.  The two clauses are now
+proved for the replacement ETT.
+\end{proof}

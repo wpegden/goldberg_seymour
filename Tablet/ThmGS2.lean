@@ -11,6 +11,7 @@ import Tablet.HkuTreeColorsControlled
 import Tablet.HkuUnsupportedVertexColors
 import Tablet.LEM_extable
 import Tablet.MaximumProperty
+import Tablet.MaximumPropertyTransport
 import Tablet.MaximumDegree
 import Tablet.MissingColorIncidenceEndpoint
 import Tablet.ModColoring
