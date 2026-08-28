@@ -1,0 +1,238 @@
+\begin{lemma}[Interchangeability for a closed Tashkinov tree]
+Let $(G,e_0,\varphi)$ be a $k$-triple, and let $T$ be a Tashkinov
+tree with respect to $e_0$ and $\varphi$ whose vertex set is closed under
+$\varphi$.  If $\alpha$ or $\beta$ is missing on $T$, then $\alpha$ and
+$\beta$ are $T$-interchangeable under $\varphi$; equivalently, at most one
+nontrivial $(\alpha,\beta)$-path component meets $V(T)$.
+\end{lemma}
+\begin{proof}
+We use path component in the precise sense of
+\noderef{TwoColorPathComponent}, and interchangeability in the sense of
+\noderef{TreeInterchangeable}.  The phrase ``missing on $T$'' means the
+union \noderef{TreeMissingColors} over the vertex set
+\noderef{TreeSequenceVertexSet}.  If $\alpha=\beta$, the former definition
+admits no path component, because it requires two distinct colors, and the
+conclusion is vacuous.  Hence assume $\alpha\ne\beta$.
+
+Suppose for a contradiction that two different $(\alpha,\beta)$-path
+components $Q_1,Q_2$ in the sense of \noderef{TwoColorComponent} meet
+$V(T)$.  By
+\noderef{TwoColorComponentsDisjoint}, they are disjoint.  The properness
+clause of the $k$-triple in \noderef{KTriple}, together with
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, says that every node of either
+component has incidence-graph degree at most two.  Each component contains
+an edge-node and has a node of degree at most one by
+\noderef{TwoColorPathComponent}.  The spanning path supplied by
+\noderef{TwoColorComponentSpanningPath} uses every node of the component.
+Because the component also meets $V(T)$, its stipulated edge-node is not an
+isolated node, so this spanning path is nontrivial.
+No additional component edge can join nonconsecutive nodes of this path:
+such an edge either gives an internal path node a third neighbor, or joins
+the two path ends and makes every node have degree two, both contrary to
+the preceding degree facts.  Thus the incidence component itself is a
+finite nontrivial simple path.
+Both ends are vertex-nodes: an edge-node belonging to the two-color graph
+has its two distinct endpoint vertices as its two neighbors, by
+\noderef{TwoColorIncidenceGraph} and looplessness.  At each end at least
+one of $\alpha,\beta$ is missing, by the definitions of
+\noderef{PresentColors} and \noderef{MissingColors}.
+
+The hypotheses of \noderef{TashTree} are exactly the $k$-triple and the
+Tashkinov-tree hypotheses here.  Consequently $V(T)$ is elementary under
+$\varphi$ in the sense of \noderef{ColoredVertexSetElementary}.  Thus at
+most one vertex of $T$ misses $\alpha$, and at most one misses $\beta$.
+In particular, among the four ends of the two disjoint paths, at most two
+can lie in $V(T)$.
+
+In fact exactly one of $\alpha,\beta$ is missing on $T$.  At least one is
+missing by hypothesis.  If both were missing, closedness in the sense of
+\noderef{ColoredVertexSetClosed} would forbid every $\alpha$- or
+$\beta$-colored edge in \noderef{BoundaryEdges}.  A two-color component meeting $T$ could
+then contain no vertex outside $T$: along a component path, the first edge
+leaving $V(T)$ would be just such a boundary edge.  Hence all four ends of
+$Q_1,Q_2$ would lie in $V(T)$ and miss one of the two colors, contrary to
+elementariness.  Interchanging the names if necessary, assume from now on
+that
+\[
+ \alpha\in\overline\varphi(T),\qquad
+ \beta\notin\overline\varphi(T).
+\]
+Closedness now implies that every boundary edge of either $Q_i$ has color
+$\beta$.  Since no vertex of $T$ misses $\beta$ and at most one vertex of
+$T$ misses $\alpha$, at most one of the four path ends lies in $T$.
+Therefore at least three ends lie outside $T$.
+
+Starting at three distinct outside ends and traversing their component
+paths toward their first vertex of $T$ gives three pairwise edge-disjoint
+exit paths $P_1,P_2,P_3$.  Write $a_i$ for the outside end, $b_i$ for the
+first tree vertex, and $f_i$ for the last multigraph edge, incident with
+$b_i$.  Each $P_i$ is a simple incidence path of length at least two, its
+only tree vertex is $b_i$, and one of $\alpha,\beta$ is missing at $a_i$;
+these are exactly the conditions of \noderef{TreeExitPath}.  Moreover
+$\varphi(f_i)=\beta$ by closedness.  The $b_i$ are distinct.  Indeed,
+properness as in \noderef{IsProperEdgeColoring} permits at most one
+$\beta$-edge at a fixed vertex, while two of the chosen edge-disjoint exit
+paths with the same $b_i$ would have different last $\beta$-edges there.
+The order encoded by \noderef{TreeVertexOrder} is linear on the distinct
+displayed vertices, so relabel the paths so that
+$b_1\prec_T b_2\prec_T b_3$.
+
+Call any tuple with all the properties just listed a counterexample.  More
+explicitly, its coloring is part of a $k$-triple on the fixed
+$(G,k,e_0)$, its tree is closed and Tashkinov for that coloring, at least
+one of its two colors is missing on the tree, and its three exit paths have distinct
+outside and tree ends, are the initial-to-first-tree portions of their full
+two-color component paths, and are pairwise edge-disjoint.  The preceding
+paragraph constructs such a tuple from the assumed failure.  The set of
+the three-path total lengths is therefore a nonempty set of natural
+numbers; choose a counterexample minimizing
+$|P_1|+|P_2|+|P_3|$.  Here and below $|P_i|$ is half the incidence-graph
+length, namely the number of multigraph edge-nodes of $P_i$, so strict
+shortening is the same in either convention.
+
+Every vertex misses a color.  Indeed, the $k$-triple gives
+$k\geq\Delta(G)+1$.  Properness makes the colors present at a vertex
+distinct, so \noderef{MaximumDegree} bounds their number by
+$\Delta(G)<k$; \noderef{MissingColors} then leaves a missing color.  Choose
+$\gamma\in\overline\varphi(b_3)$ and put
+\[
+ \sigma_1=\varphi/(G-T,\alpha,\gamma)
+\]
+using \noderef{OutsideTreeColorSwap}.  Both $\alpha$ and $\gamma$ are
+missing on $T$, so closedness forbids either color on a boundary edge.
+We record all coloring checks for this operation.  Two adjacent edges both
+incident with $T$ in the sense of \noderef{TreeIncidentEdge} are fixed.
+Two adjacent edges neither incident with
+$T$ undergo the same transposition of $\alpha,\gamma$.  If exactly one is
+incident with $T$, their common vertex is outside $T$ and the fixed edge
+is a boundary edge, which has neither color; swapping the other edge cannot
+create a conflict.  Thus $\sigma_1$ is proper.  The distinguished edge
+$e_0$ is the first edge of the tree-sequence in \noderef{TreeSequence}, so
+it is incident with $T$ and remains uncolored; every other edge remains
+colored because the operation only transposes colored values.  Hence the
+unique-uncolored clause \noderef{IsOneEdgeUncolored} is preserved.
+
+Every edge incident with $T$ is fixed, so the present and missing color
+sets at every tree vertex are unchanged.  Every displayed tree edge and
+every earlier missing-color witness in \noderef{TashkinovTree} is therefore
+unchanged.  The same observation preserves closedness.  The graph,
+chromatic-index, criticality, and degree clauses do not depend on the
+coloring.  Consequently $(G,e_0,\sigma_1)$ is again a $k$-triple and $T$
+is again a closed Tashkinov tree.
+
+The boundary edges $f_1,f_2,f_3$ keep color $\beta$.  On the portion of
+each $P_i$ outside $T$, $\alpha$ is changed to $\gamma$ and $\beta$ is
+fixed.  More explicitly, every path edge other than $f_i$ is not incident
+with $T$: in the full original component path its two endpoint vertices
+occur before the first tree vertex $b_i$.  At the outside end the
+corresponding missing status is changed in the same way.  Hence the same
+three edge sequences are
+$(T,\sigma_1,\{\gamma,\beta\})$-exit paths.  In particular $P_3$ is the
+entire $(\gamma,\beta)$-component between $a_3$ and $b_3$: its outside end
+still misses one of the two colors, while at $b_3$ the color $\gamma$ is
+missing and the unique incident $\beta$-edge of this component is $f_3$.
+Because $f_3$ has color $\beta$ at $b_3$, the chosen missing color
+$\gamma$ is distinct from $\beta$.
+
+Let $\sigma_2$ be obtained by interchanging $\gamma$ and $\beta$ on the
+component $P_3$, that is, by the operation
+\noderef{TwoColorComponentSwap} rooted at a node of $P_3$.
+Properness follows from \noderef{TwoColorComponentSwapProper}.  This swap
+again only transposes colored values, so it preserves the assertion that
+$e_0$ is the unique uncolored edge.  It interchanges the two missing
+statuses at the two ends of $P_3$ and changes no other incidence; hence
+\[
+ \beta\in\overline{\sigma_2}(b_3).
+\]
+The components containing $P_1$ and $P_2$ are disjoint from the component
+$P_3$: otherwise that component, whose support is exactly $P_3$, would
+contain the distinct tree end $b_1$ or $b_2$.  This also follows from
+\noderef{TwoColorComponentsDisjoint}.  Hence their edges and endpoint
+missing statuses are unchanged.  Thus all three $P_i$ remain
+$(\gamma,\beta)$-exit paths under $\sigma_2$, with the colors merely
+interchanged along $P_3$.
+
+Let $q$ be the displayed index of $b_3$.  Since two distinct tree vertices
+precede it, $1\le q\le\operatorname{length}(T)$, and
+\noderef{TreeSequencePrefix} gives the tree-sequence
+$S=T|b_3$.  The swap on $P_3$ meets $T$ only at $b_3$.  Its sole edge
+incident with $b_3$ is the boundary edge $f_3$, not a displayed tree edge;
+no edge or missing witness at a vertex strictly preceding $b_3$ changes.
+Although the missing sets at $b_3$ exchange $\gamma$ and $\beta$, that last
+vertex is not an earlier witness for any edge of $S$.  It follows directly
+from \noderef{TashkinovTree} that $S$ is a Tashkinov tree under $\sigma_2$.
+
+For clarity, let $x_i$ be the outside endpoint of the boundary edge $f_i$;
+this need not be the remote path end $a_i$ when $P_i$ has more than one
+edge.  Append first $(f_1,x_1)$ and then $(f_2,x_2)$ to $S$, obtaining
+$T'$.  We check that these really are the two augmentations represented by
+\noderef{TashkinovAugmentation}.  The vertices $x_1,x_2$ are outside the
+original $T$, because $b_i$ was the first tree vertex of $P_i$.  The edge
+identities $f_1,f_2$ are not displayed edges of $S$, since each is a
+boundary edge while every displayed tree edge has both ends in the tree.
+They are distinct because the exit paths were chosen edge-disjoint.  Also
+$x_1\ne x_2$: otherwise the distinct adjacent edges $f_1,f_2$, both still
+colored $\beta$ under $\sigma_2$, would violate properness.  Each $f_i$
+attaches its new outside endpoint $x_i$ to the earlier displayed vertex
+$b_i$.  Finally $\sigma_2(f_1)=\sigma_2(f_2)=\beta$, and $\beta$ is
+missing at the earlier vertex $b_3$ both before and after the first
+augmentation, since neither $f_1$ nor $f_2$ is incident with the distinct
+vertex $b_3$.  Thus the old entries agree exactly as required by
+\noderef{TreeSequenceInitialSegment}, and the two steps form a
+\noderef{TashkinovAugmentationSequence} from $S$ to $T'$.
+By \noderef{TashkinovAugmentationSequencePreservesTashkinovTree}, $T'$ is a
+Tashkinov tree under $\sigma_2$.
+
+Choose a closure $T''$ of $T'$ under $\sigma_2$ by
+\noderef{TashkinovClosureExists}.  By the definition
+\noderef{TashkinovClosure}, there is a Tashkinov augmentation sequence from
+$T'$ to $T''$ and $V(T'')$ is closed.  A second application of
+\noderef{TashkinovAugmentationSequencePreservesTashkinovTree} shows that
+$T''$ is a Tashkinov tree.  At every augmentation, the old vertices and
+edges remain entrywise fixed by \noderef{TreeSequenceInitialSegment}; hence
+$V(S)\subseteq V(T')\subseteq V(T'')$.  All coloring-independent clauses of the
+$k$-triple were already preserved, so \noderef{TashTree} now gives that
+$V(T'')$ is elementary under $\sigma_2$.
+
+We claim that none of $a_1,a_2,a_3$ lies in $V(T'')$.  Suppose
+$a_i\in V(T'')$.  At least one of $\beta,\gamma$ is missing at $a_i$ under
+$\sigma_2$, while $\beta$ is missing at the distinct vertex
+$b_3\in V(S)\subseteq V(T'')$.  Elementariness therefore forces
+$\gamma$ to be missing at $a_i$.  Both $\beta$ and $\gamma$ are now
+missing somewhere on $T''$.  Closedness of $T''$ says that no boundary
+edge has either color.
+
+Each $b_j$ belongs to the prefix $S$ and hence to $T''$.  Traverse $P_j$
+from $b_j$ toward $a_j$.  Its edges alternate $\beta,\gamma$ under
+$\sigma_2$.  If the next vertex ever lay outside $V(T'')$, the first edge
+crossing from inside to outside would be a $\beta$- or $\gamma$-colored
+boundary edge, contradicting closedness.  Induction along the finite path
+therefore puts all three paths, and in particular all three distinct
+$a_j$, inside $V(T'')$.  At every $a_j$ at least one of
+$\beta,\gamma$ is missing.  Since $\beta$ is already missing at the
+distinct vertex $b_3$, elementariness forces $\gamma$ to be missing at
+each $a_j$.  This gives the same missing color at three distinct vertices
+of $V(T'')$, contradicting elementariness.  The claim follows.
+
+For each $i$, traverse $P_i$ from the outside vertex $a_i$ and stop at its
+first vertex in $V(T'')$; such a vertex exists because $b_i\in V(S)$.
+Call the resulting initial subpath $L_i$.  The preceding claim keeps its
+first vertex outside, and the choice of the stopping point makes its last
+vertex the only vertex of $T''$ on it.  It is a nontrivial simple
+$(\gamma,\beta)$-path, and one of its two colors is missing at $a_i$.
+Thus \noderef{TreeExitPath} says that $L_i$ is a $T''$-exit path.  Their
+outside ends remain distinct and the paths remain pairwise edge-disjoint.
+
+Both ends $b_1,x_1$ of $f_1$ already belong to $T'$, hence to $T''$.
+Consequently the first-entry subpath $L_1$ stops no later than $x_1$ and
+does not contain $f_1$, whereas $P_1$ does.  Thus
+\[
+ |L_1|+|L_2|+|L_3|<|P_1|+|P_2|+|P_3|.
+\]
+The tuple $(\sigma_2,T'',\gamma,\beta,L_1,L_2,L_3)$ satisfies every
+counterexample condition: $(G,e_0,\sigma_2)$ is a $k$-triple, $T''$ is a
+closed Tashkinov tree, $\beta$ is missing on it, and the three displayed
+paths are its distinct exit paths.  This contradicts the minimum choice.
+Therefore two different path components cannot both meet $T$, which is
+exactly the asserted $T$-interchangeability.
+\end{proof}
