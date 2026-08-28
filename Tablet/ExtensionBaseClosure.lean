@@ -5,6 +5,7 @@ import Tablet.ModColoring
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovClosureExists
 import Tablet.TashkinovExtensionKind
+import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 
 -- [TABLET NODE: ExtensionBaseClosure]
@@ -16,15 +17,26 @@ theorem ExtensionBaseClosure {V E : Type*}
     (base : ExtendedTashkinovTree G k e0 input T generating)
     (rho1 : PartialEdgeColoring E k) (seed : TreeSequence G e0)
     (terminalSupport : V) (supportColors : Finset (Fin k))
-    (hkind : base.series.data.kind (Fin.last base.rounds) =
-      some TashkinovExtensionKind.PE)
     (hseedSegment : TreeSequenceInitialSegment
       (base.series.data.tree (Fin.last base.rounds).castSucc) seed)
     (hseedStrict :
       (base.series.data.tree (Fin.last base.rounds).castSucc).length <
         seed.length)
-    (hseedReach : TashkinovAugmentationSequence rho1
-      (base.series.data.tree (Fin.last base.rounds).castSucc) seed)
+    (hseedEligible :
+      (base.series.data.kind (Fin.last base.rounds) =
+          some TashkinovExtensionKind.PE ∧
+        TashkinovAugmentationSequence rho1
+          (base.series.data.tree (Fin.last base.rounds).castSucc) seed) ∨
+      ((base.series.data.kind (Fin.last base.rounds) =
+            some TashkinovExtensionKind.SE ∨
+          base.series.data.kind (Fin.last base.rounds) =
+            some TashkinovExtensionKind.RE) ∧
+        ∃ (f : E) (adjoinSeed : TreeSequence G e0),
+          base.series.data.connectingEdges (Fin.last base.rounds) = {f} ∧
+            TreeSequenceAdjoinEdge
+              (base.series.data.tree (Fin.last base.rounds).castSucc)
+              f adjoinSeed ∧
+            TashkinovAugmentationSequence rho1 adjoinSeed seed))
     (hmod : ModColoring base rho1) (hMP : MaximumProperty base)
     (hLowerElementary : ∀ (Tstar : TreeSequence G e0)
       (corr : CorrespondingExtendedTashkinovTree G k e0 base rho1 Tstar),

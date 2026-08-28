@@ -1,21 +1,28 @@
 \begin{definition}
-Fix the Case 1 vertex \(u\), the exact increasing support-class
-enumeration
-\(L_1=\{1_1<\cdots<1_{p+1}\}\), and the selected position \(b\) for
-which \(\gamma_{1_{b+1}}\) is the first missing gamma at \(u\).  An
-Algorithm (B) trace is a finite list of exact certified slots enumerating
-\(L_1^*=\noderef{ExtensionBaseCaseOneIndices}\) in strictly decreasing
-order, together with every intermediate coloring.  Each listed slot is
-certified to have PE kind and records its exact position in the
-enumeration, its certified gamma and
-delta fields, and the equality saying its chosen PE support is the
-terminal vertex \(v_n\).  The first coloring is \(\varrho_1\), and the
-successor coloring is obtained by switching the two-color component
-through the fixed vertex \(u\):
+Fix an ETT, vertices \(v\) and \(u\), a coloring \(\varrho_1\), an
+arbitrary slot map
+\[
+ \mathtt{indices}:\operatorname{Fin}(p+1)\longrightarrow
+                  \operatorname{Fin}(n),
+\]
+and an arbitrary position \(b\in\operatorname{Fin}(p+1)\).  An Algorithm
+(B) trace consists of a natural number of steps; for every step, its
+position below \(b\), its exact slot \(\mathtt{indices}(a)\), its gamma
+and delta colors; and every intermediate coloring.  The image of the
+listed slots is exactly
+\(\noderef{ExtensionBaseCaseOneIndices}(\mathtt{indices},b)\), and the
+listed slots occur in strictly decreasing numerical order.  Each listed
+slot has PE kind, has exact chosen support \(v\), and has the displayed
+gamma and delta as its exact certified fields.  The first coloring is
+\(\varrho_1\), and each successor is obtained by switching the two-color
+component through \(u\):
 \[
  \varrho^{a+1}=\varrho^a/P_u
        (\gamma_{t_a},\delta_{t_a},\varrho^a).
 \]
 All slot equalities are equalities of the certified finite indices, not
-only equalities of their numerical values.
+only equalities of their numerical values.  No increasing-enumeration,
+least-missing-gamma, properness, or Case 1 hypothesis is part of this
+generic data structure.  In particular \(b=0\) permits the zero-step trace:
+the prefix-slot set is empty and its only coloring is \(\varrho_1\).
 \end{definition}

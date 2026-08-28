@@ -1,24 +1,40 @@
 \begin{lemma}[The closure after Claim 4.3 and equation (12)]
 Let \(B\) be the lower-rung ETT whose terminal ladder tree is
-\(T_{j-1}\), and suppose its terminal extension kind is PE.  Let
-\(T_j(v_n)\) be an exact ordered tree-sequence strictly extending
-\(T_{j-1}\) by Tashkinov augmentation under a proper coloring
-\(\varrho_1\).  Assume that \(\varrho_1\) is a mod-coloring of \(B\),
-that \(B\) has the maximum property, and that the lower-rung
-elementarity assertion applies to every corresponding ETT with the
-transported maximum property.
+\(T_{j-1}\), terminal extension kind \(\Theta_{j-1}\), and exact
+connecting-edge set \(F_{j-1}\).  Let \(U_j\) be an exact ordered
+tree-sequence having \(T_{j-1}\) as a proper initial segment; in the
+extension-base application, \(U_j\) is the exact prefix \(T_j(v_n)\).
+Assume the
+following exact eligibility disjunction from \noderef{ModColoring}:
+\begin{itemize}
+\item if \(\Theta_{j-1}=PE\), then \(U_j\) is obtained from
+  \(T_{j-1}\) by a Tashkinov augmentation sequence under \(\varrho_1\);
+\item or \(\Theta_{j-1}\in\{SE,RE\}\), and there are an exact edge
+  identity \(f_{j-1}\) and an exact one-edge seed \(U\) such that
+  \[
+    F_{j-1}=\{f_{j-1}\},\qquad
+    U=T_{j-1}+f_{j-1},
+  \]
+  in the sense of \noderef{TreeSequenceAdjoinEdge}, and \(U_j\)
+  is obtained from \(U\) by a Tashkinov augmentation sequence under
+  \(\varrho_1\).
+\end{itemize}
+Assume that \(\varrho_1\) is a mod-coloring of \(B\), that \(B\) has
+the maximum property, and that the lower-rung elementarity assertion
+applies to every corresponding ETT with the transported maximum property.
 
-Fix a finite color set \(S\); in the extension-base application this is
+Fix a vertex \(v\) and a finite color set \(S\); in the extension-base
+application these are \(v_n\) and
 the exact terminal-support color set
 \(S(L_1)=\bigcup_{i\in L_1}S_i\).  There is a closure \(T'_j\) of
-\(T_j(v_n)\) under \(\varrho_1\), together with an actual corresponding
+\(U_j\) under \(\varrho_1\), together with an actual corresponding
 ETT certificate, such that this corresponding ETT has the maximum
 property and \(V(T'_j)\) is elementary under \(\varrho_1\).  Moreover,
 exactly one of the following finite alternatives holds:
 \[
-\overline\varrho_1(T'_j-v_n)\cap S\ne\varnothing,
+\overline\varrho_1(T'_j-v)\cap S\ne\varnothing,
  \qquad
- \overline\varrho_1(T'_j-v_n)\cap S=\varnothing.              \tag{12}
+ \overline\varrho_1(T'_j-v)\cap S=\varnothing.                \tag{12}
 \]
 Here \(j\) is a manuscript ladder stage.  It is not identified with the
 terminal manuscript stage \(n\), nor with either stage's zero-based Lean
@@ -26,22 +42,28 @@ predecessor slot.
 \end{lemma}
 \begin{proof}
 By \noderef{TashkinovClosureExists}, choose a closure \(T'_j\) of the
-displayed seed \(T_j(v_n)\) under \(\varrho_1\).  Its
+displayed seed \(U_j\) under \(\varrho_1\).  Its
 \noderef{TashkinovClosure} certificate contains a finite
 \noderef{TashkinovAugmentationSequence} from the seed to \(T'_j\).
 Each individual augmentation, by \noderef{TashkinovAugmentation}, retains
-all old vertex and edge identities
-as an ordered initial segment.  Composing those initial-segment maps with
-the given map from \(T_{j-1}\) to the seed gives an ordered
-initial-segment map from \(T_{j-1}\) to \(T'_j\).  The seed was already
-strictly longer than \(T_{j-1}\), so this composite extension is strict.
-Transitivity of the augmentation relation also combines the given
-augmentation from \(T_{j-1}\) to the seed with the closure sequence to
-give an augmentation from \(T_{j-1}\) to \(T'_j\).
+all old vertex and edge identities as an ordered initial segment.
+Composing those initial-segment maps with the given map from
+\(T_{j-1}\) to \(U_j\) gives an ordered initial-segment map from
+\(T_{j-1}\) to \(T'_j\).  The displayed seed was already strictly longer
+than \(T_{j-1}\), so this composite extension is strict.
 
-The terminal-kind hypothesis is PE.  Consequently the universal PE
-clause in \noderef{ModColoring}, applied to the strict extension just
-constructed, supplies an actual
+We next retain the appropriate branch of the eligibility disjunction.  In
+the PE branch, transitivity of the reflexive-transitive augmentation
+relation \noderef{TashkinovAugmentationSequence} composes the sequence
+from \(T_{j-1}\) to \(U_j\) with the closure sequence, giving a
+sequence from \(T_{j-1}\) to \(T'_j\).  In the SE/RE branch, keep the
+same exact edge identity \(f_{j-1}\), the equality
+\(F_{j-1}=\{f_{j-1}\}\), and the same one-edge seed
+\(U=T_{j-1}+f_{j-1}\).  Transitivity now composes the sequence from
+\(U\) to \(U_j\) with the closure sequence, giving a sequence from
+\(U\) to \(T'_j\).  Thus in either branch \(T'_j\) satisfies exactly the
+corresponding premise of the universal clause in \noderef{ModColoring}.
+Applied to the strict extension just constructed, that clause supplies an actual
 \noderef{CorrespondingExtendedTashkinovTree} certificate \(C\) on
 \(T'_j\).  Apply \noderef{MaximumPropertyTransport} to the base maximum
 property, the mod-coloring hypothesis, and \(C\).  It proves that the
@@ -56,9 +78,9 @@ This proves all mathematical assertions in (12).
 
 Finally form the finite set
 \[
- X=\overline\varrho_1(T'_j-v_n)\cap S
-   =\left(\bigcup_{v\in V(T'_j)\setminus\{v_n\}}
-                    \overline\varrho_1(v)\right)\cap S.
+ X=\overline\varrho_1(T'_j-v)\cap S
+   =\left(\bigcup_{x\in V(T'_j)\setminus\{v\}}
+                    \overline\varrho_1(x)\right)\cap S.
 \]
 Equality to the displayed union is the finite-set meaning of
 \noderef{MissingColors}.  A finite set is either empty or has an element.

@@ -1,8 +1,20 @@
 \begin{lemma}[Case 1: the first vertex and equations (13)--(15)]
 Use manuscript stages \(j=m(v_n)\leq n\), represented in Lean by
-distinct zero-based predecessor slots \(j_{\rm slot}\leq q\), with
+zero-based predecessor slots \(j_{\rm slot}\leq q\), with
 \(q.\mathrm{val}+1=n\) and
-\(j_{\rm slot}.\mathrm{val}+1=j\).  Let
+\[
+ j_{\rm slot}.\mathrm{val}+1
+   =\noderef{ETTFirstAppearanceIndex}(v_n)=j.
+\]
+Thus the exact reference coloring in every hypothesis below is the stored
+coloring
+\(\mathtt{ett.series.data.coloring\ jSlot.castSucc}), namely
+\(\varphi_{j-1}\), and the corresponding stored tree is \(T_j\).
+Choose the exact occurrence position of \(v_n\) in \(T_j\), require that
+position to be positive, and identify the closure seed with
+\noderef{TreeSequencePrefix} through that occurrence.  In other words, the
+seed is exactly the ordered stage prefix \(T_j(v_n)\), not an unrelated
+tree-sequence.  Let
 \[
  L_1=\{1_1<\cdots<1_{p+1}=n\}
 \]
@@ -15,8 +27,9 @@ fields \(\gamma_{1_{a+1}}=\gamma_a\),
  \qquad \gamma_0,\delta_0,\ldots,\delta_p
              \text{ are pairwise distinct}.                  \tag{4}
 \]
-Let \(T'_j\), with its displayed closure certificate, be the elementary
-closure supplied by \noderef{ExtensionBaseClosure}.  Suppose Case 1 holds:
+Let \(T'_j\), with its displayed closure certificate from that exact seed,
+be the elementary closure supplied by \noderef{ExtensionBaseClosure}.
+Suppose Case 1 holds:
 \[
  \overline\varrho_1(T'_j-v_n)\cap
           \bigcup_{i\in L_1}S_i\ne\varnothing.               \tag{C1}

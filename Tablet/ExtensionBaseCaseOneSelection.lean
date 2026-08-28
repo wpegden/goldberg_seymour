@@ -1,9 +1,11 @@
 import Tablet.ColoredVertexSetElementary
+import Tablet.ETTFirstAppearanceIndex
 import Tablet.ExtensionBaseCaseOneIndices
 import Tablet.ExtensionBaseClosure
 import Tablet.ExtensionBaseSupportClass
 import Tablet.TashkinovClosure
 import Tablet.TreeMissingColors
+import Tablet.TreeSequencePrefix
 import Tablet.TreeVerticesBefore
 
 -- [TABLET NODE: ExtensionBaseCaseOneSelection]
@@ -17,11 +19,20 @@ theorem ExtensionBaseCaseOneSelection {V E : Type*}
     (hterminalSupport : terminalSupport ∈ TreeSequenceVertexSet T)
     (jSlot q : Fin ett.rounds) (hjle : jSlot.val ≤ q.val)
     (hqTerminal : q.val + 1 = ett.rounds)
-    (rho1 phiJ : PartialEdgeColoring E k)
+    (hjSlot : jSlot.val + 1 =
+      ETTFirstAppearanceIndex ett terminalSupport hterminalSupport)
+    (rho1 : PartialEdgeColoring E k)
     (seed TjPrime : TreeSequence G e0)
+    (terminalPosition : Fin
+      ((ett.series.data.tree jSlot.succ.castSucc).length + 1))
+    (hterminalAt :
+      (ett.series.data.tree jSlot.succ.castSucc).vertex terminalPosition =
+        terminalSupport)
+    (hterminalPositionPositive : 1 ≤ terminalPosition.val)
+    (hseed : seed = TreeSequencePrefix
+      (ett.series.data.tree jSlot.succ.castSucc) terminalPosition.val
+      hterminalPositionPositive (Nat.le_of_lt_succ terminalPosition.isLt))
     (hclosure : TashkinovClosure rho1 seed TjPrime)
-    (hterminalJ : terminalSupport ∈ TreeSequenceVertexSet
-      (ett.series.data.tree jSlot.succ.castSucc))
     (hterminalPrime : terminalSupport ∈ TreeSequenceVertexSet TjPrime)
     (p : ℕ) (indices : Fin (p + 1) → Fin ett.rounds)
     (gamma delta : Fin (p + 1) → Fin k)
@@ -52,17 +63,21 @@ theorem ExtensionBaseCaseOneSelection {V E : Type*}
           (Finset.univ.biUnion fun a : Fin (p + 1) =>
             ett.series.data.stored (indices a).succ) =
         {delta (Fin.last p)})
-    (hTjElementary : ColoredVertexSetElementary G phiJ
+    (hTjElementary : ColoredVertexSetElementary G
+      (ett.series.data.coloring jSlot.castSucc)
       (TreeSequenceVertexSet
         (ett.series.data.tree jSlot.succ.castSucc)))
     (hrhoAgreement : ∀ v : V,
       v ∈ (TreeSequenceVertexSet
           (ett.series.data.tree jSlot.succ.castSucc)).erase
             terminalSupport →
-      MissingColors G rho1 v = MissingColors G phiJ v)
-    (hfirstGammaMissing : gamma 0 ∈ MissingColors G phiJ terminalSupport)
+      MissingColors G rho1 v = MissingColors G
+        (ett.series.data.coloring jSlot.castSucc) v)
+    (hfirstGammaMissing : gamma 0 ∈ MissingColors G
+      (ett.series.data.coloring jSlot.castSucc) terminalSupport)
     (hdeltaAvoidsTj : ∀ a : Fin (p + 1),
-      delta a ∉ TreeMissingColors phiJ
+      delta a ∉ TreeMissingColors
+        (ett.series.data.coloring jSlot.castSucc)
         (ett.series.data.tree jSlot.succ.castSucc)) :
     ∃ (u : V) (hu : u ∈ TreeSequenceVertexSet TjPrime)
       (b : Fin (p + 1)),
