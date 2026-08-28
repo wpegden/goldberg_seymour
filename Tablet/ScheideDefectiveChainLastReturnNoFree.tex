@@ -1,0 +1,39 @@
+\begin{lemma}[Defective-chain structure, part (d)]
+In the notation of part (c), the last returning vertex $v_2$ misses no free
+color:
+\[
+ \overline\varphi(v_2)\cap\mathcal F(T,e_0,\varphi)=\varnothing.
+\]
+\end{lemma}
+\begin{proof}
+Let $R=v_2Pz$ be the terminal subpath.  The last-return condition in
+\noderef{ScheideDepartureReturn} says that $R$ meets $V(T)$ only at $v_2$.
+Consequently it contains exactly one boundary edge identity.  Suppose for
+a contradiction that the free color $\beta$ is missing at $v_2$.  Since
+$v_2$ occurs after the first departure, $v_2\ne u$; elementariness from
+\noderef{ScheideGlobalMaximumOrder} and the fact that $\gamma$ is missing
+at $u$ give $\beta\ne\gamma$.
+
+Apply the outside-tree swap of \noderef{OutsideTreeColorSwap} to
+$\beta,\gamma$.  Both colors are missing somewhere on the closed set
+$V(T)$, so \noderef{ScheideGlobalMaximumBoundaryFacts} says that neither
+has a boundary edge.  The outside swap therefore changes no edge identity
+incident with $V(T)$, preserves properness and the unique uncolored edge,
+and changes neither the Tashkinov sequence nor its free and defective color
+sets.  Along $R$, it changes the outside portions of the old
+$(\alpha,\gamma)$-path so that $R$ becomes the full
+$(\alpha,\beta)$-chain from $v_2$.
+
+Switch this full chain.  Properness is preserved by
+\noderef{TwoColorComponentSwapProper}.  No tree edge changes, because
+$\alpha$ and $\beta$ are unused on the tree by
+\noderef{ScheideGlobalMaximumUnused}; at tree vertices the only
+missing-color change is that $\alpha$ replaces $\beta$ at $v_2$.
+Therefore the displayed sequence is still Tashkinov.  The exact boundary
+identity statement \noderef{ScheideDefectiveChainBoundaryEdges} and
+\noderef{ScheideGlobalMaximumBoundaryFacts} give at least three original
+$\alpha$-boundary edges.  Only the single boundary edge of $R$ changes, so
+at least two retain color $\alpha$.  Since $\alpha$ is now missing at
+$v_2$, appending either retained edge and its outside endpoint contradicts
+global maximality.  Thus no such $\beta$ exists.
+\end{proof}

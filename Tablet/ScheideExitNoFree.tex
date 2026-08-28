@@ -1,0 +1,51 @@
+\begin{lemma}[Exit vertices miss no free color; Scheide Lemma 3.8]
+For every globally maximum triple $(T,e_0,\varphi)$,
+\[
+ \overline\varphi(F(T,e_0,\varphi))
+ \cap\mathcal F(T,e_0,\varphi)=\varnothing.
+\]
+Equivalently, no Scheide exit vertex misses a free color.
+\end{lemma}
+\begin{proof}
+Let $v\in F(T,e_0,\varphi)$.  By
+\noderef{ScheideExitVertex}, there are a tree vertex $u$, a color
+$\gamma$ missing at $u$, a defective color $\delta$, and a full
+$(\delta,\gamma)$-path $P$ from $u$ to an outside vertex $z$, with $v$ the
+last tree vertex on $P$.  Suppose that a free color $\alpha$ is missing at
+$v$.
+
+If $\alpha=\gamma$, elementariness from
+\noderef{ScheideGlobalMaximumOrder} forces $u=v$.  Apply
+\noderef{ScheideDefectiveChainDepartureReturn} to the full path $P$; it
+produces a first departure and a last later tree vertex $v_2$.  The exit
+witness says that $v$ is the last tree vertex on the same directed path,
+so $v_2=v$.  Now
+\noderef{ScheideDefectiveChainLastReturnNoFree}, with the free color
+$\gamma=\alpha$ and defective color $\delta$, says that $v_2=v$ misses no
+free color, a contradiction.
+
+Assume $\alpha\ne\gamma$.  Both colors are missing on the closed set
+$V(T)$, so \noderef{ScheideGlobalMaximumBoundaryFacts} says neither occurs
+on a boundary edge identity.  Interchange $\alpha$ and $\gamma$ on every
+edge not incident with $T$, using \noderef{OutsideTreeColorSwap}.  The new
+coloring $\varphi'$ agrees with $\varphi$ on every edge incident with
+$V(T)$.  Thus it remains proper with only $e_0$ uncolored, the displayed
+tree remains Tashkinov, its vertex set is still globally maximum, and its
+free and defective color sets are unchanged.
+
+Under $\varphi'$, the terminal subpath $vPz$ is the full
+$(\delta,\alpha)$-chain from $v$: the swap changes the outside
+$\gamma$-segments to $\alpha$-segments and, because $v$ was the last tree
+vertex, this subpath has exactly one boundary crossing.  Apply
+\noderef{ScheideDefectiveChainBoundaryEdges} to the globally maximum triple
+$(T,e_0,\varphi')$, the defective color $\delta$, and the free color
+$\alpha$ missing at $v$.  It says that this full chain contains every
+$\delta$-colored boundary edge identity.  But
+\noderef{ScheideGlobalMaximumBoundaryFacts} gives at least three such
+identities, while the terminal subpath contains exactly one boundary edge.
+This contradiction proves that no free color is missing at $v$.  Since
+$v$ was arbitrary, the asserted disjointness holds for the entire finite
+exit set.  The bridge \noderef{ScheideExitVertexTreeExit} records that
+these exact exits may subsequently be used wherever the broader tablet
+predicate \noderef{TreeExit} is required.
+\end{proof}

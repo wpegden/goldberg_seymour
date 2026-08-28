@@ -1,0 +1,43 @@
+\begin{lemma}[Absorbing vertices; Scheide Proposition 3.5]
+If $(T,e_0,\varphi)$ is globally maximum, then
+\[
+  V(T)\cup A(T,e_0,\varphi)
+\]
+is elementary with respect to $\varphi$.
+\end{lemma}
+\begin{proof}
+Put $X=V(T)$ and $A=A(T,e_0,\varphi)$.  The statement-level package
+\noderef{ScheideGlobalMaximumOrder} says that $X$ is elementary and closed.
+It remains to compare an absorbing vertex with $X$, and then two distinct
+absorbing vertices.
+
+Suppose first that $v\in A$, that $\delta$ is missing at $v$, and that
+$\delta$ is also missing at some $x\in X$.  By
+\noderef{ScheideGlobalMaximumFourFree} there is a free color
+$\gamma\ne\delta$.  Elementariness gives a unique $u\in X$ missing
+$\gamma$.  Since both $\gamma$ and $\delta$ are missing on the closed set
+$X$, closedness forbids every boundary edge identity of either color.  A
+walk in the two-color incidence graph from the outside vertex-node $v$ to
+a vertex-node of $X$ would have a first edge-node crossing the boundary of
+$X$; that edge identity would have color $\gamma$ or $\delta$, a
+contradiction.  Hence the $(\gamma,\delta)$-component through $v$ is
+disjoint from $X$.  This contradicts the defining requirement in
+\noderef{AbsorbingVertex} that it contain $u$.  Thus no color missing at a
+vertex of $A$ is missing on $X$.
+
+Now let $v,w\in A$ be distinct and suppose that $\delta$ is missing at
+both.  Again choose a free $\gamma\ne\delta$, and let $u\in X$ be the
+unique vertex missing $\gamma$.  The first paragraph shows that $\delta$
+is present at $u$.  Properness, supplied by the $k$-triple clause of
+\noderef{GlobalMaximumTriple}, gives degree one at each of the three
+vertex-nodes $u,v,w$ in their common $(\gamma,\delta)$-component: $u$
+misses $\gamma$ and has its unique $\delta$-edge, whereas $v,w$ miss
+$\delta$ and have their unique $\gamma$-edges.  The absorbing property
+puts all three nodes in that component.  But
+\noderef{TwoColorComponentSpanningPath}, together with the two-color
+degree bound used there, says the finite component is a path; a path has
+only two degree-one vertices.  This is impossible.  Missing-color sets of
+distinct vertices of $X\cup A$ are therefore pairwise disjoint, which is
+exactly elementariness as defined in
+\noderef{ColoredVertexSetElementary}.
+\end{proof}

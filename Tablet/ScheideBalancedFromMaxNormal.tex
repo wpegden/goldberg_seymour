@@ -1,0 +1,47 @@
+\begin{lemma}[Balanced triples, part (b); Scheide Lemma 3.12(b)]
+Let $(T,e_0,\varphi)$ be normal with $h(T)=h(G)$.  There is a Tashkinov
+tree $T'$ on the same vertex set such that $(T',e_0,\varphi)$ is balanced,
+and every color used on $T'$ was already used on $T$.
+\end{lemma}
+\begin{proof}
+Put $p=h(G)=h(T)$.  By
+\noderef{ScheideGraphHeightOdd}, $p$ is odd.  Keep the prescribed normal
+trunk of $T$.  Among all Tashkinov tree-sequences $S$ for the fixed pair
+$(e_0,\varphi)$ which have this trunk, use only colors from
+\noderef{TreeUsedColors} of $T$, and whose post-trunk edges occur in
+consecutive equal-colored pairs, choose one with a maximum odd number $i$
+of vertices.  Such a sequence exists: the trunk itself is a Tashkinov
+initial segment, has the odd order $p$, and has no post-trunk edges.
+Finiteness of $V(G)$ makes the maximum choice legitimate.
+
+Suppose $i<t(G)$.  Let $y_r$ be the first vertex of the original globally
+maximum tree $T$ not in $S$.  Every earlier original tree vertex belongs
+to $S$.  The original attaching edge $e_r$ joins $y_r$ to an earlier
+vertex and has a color $\gamma$ missing at an earlier original vertex;
+that witness lies in $S$.  Append the identity $e_r$ and $y_r$.  The
+result is a Tashkinov tree of even order $i+1$, and its new color
+$\gamma$ belongs to the used-color set of $T$.
+
+By \noderef{TashTree}, the even vertex set is elementary.  Exactly one of
+its vertices misses $\gamma$: at least one does because $\gamma$ was an
+earlier missing-color witness, and elementariness gives uniqueness.
+The $\gamma$-colored edges are a matching.  Counting their incidences at
+this even set gives an odd number of $\gamma$-colored boundary edge
+identities, because all but one vertices are incident with exactly one
+$\gamma$-edge.  In particular such a boundary identity exists.  Append it
+and its outside endpoint.  These two newly appended tree edges both have
+color $\gamma$, so the pairing rule and the used-color restriction are
+preserved, while the odd order has risen from $i$ to $i+2$.  This
+contradicts maximality of $i$.  Therefore $i=t(G)$.
+
+Call the resulting full sequence $T'$.  It has the same order as $T$ and
+is a Tashkinov tree for the same fixed pair.  Viewing $T$ as fixed-pair
+maximal, \noderef{ScheideMaximalContainsEveryTree} gives
+$V(T')\subseteq V(T)$; equal finite cardinalities give equality.  The
+unchanged prescribed trunk supplies normal data $N'$ of height $p=h(G)$,
+and the construction supplies every post-trunk equal-color pair.  Hence
+$N'$ is balanced by \noderef{BalancedGlobalMaximumTriple}.  The explicit
+color restriction in the maximizing family gives
+$\varphi\langle T'\rangle\subseteq\varphi\langle T\rangle$, completing
+all three conclusions.
+\end{proof}

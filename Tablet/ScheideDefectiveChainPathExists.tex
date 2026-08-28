@@ -1,0 +1,35 @@
+\begin{lemma}[Defective-chain structure, part (a)]
+Let $(T,e_0,\varphi)$ be globally maximum, let $\alpha$ be defective, and
+let the free color $\gamma$ be missing at $u\in V(T)$.  The full
+$(\alpha,\gamma)$-component through $u$ is a path from $u$ to a vertex
+$z\notin V(T)$.
+\end{lemma}
+\begin{proof}
+Write $X=V(T)$.  By
+\noderef{ScheideGlobalMaximumBoundaryFacts}, $X$ is closed, no
+$\gamma$-colored edge identity leaves $X$, and at least three
+$\alpha$-colored edge identities leave $X$.  By
+\noderef{ScheideGlobalMaximumUnused}, neither $\alpha$ nor $\gamma$ is
+used on a tree edge.  The $k$-triple clause of
+\noderef{GlobalMaximumTriple} supplies properness.
+
+The defective color $\alpha$ occurs on a boundary edge.  Closedness
+therefore implies that $\alpha$ is missing at no vertex of $X$.  Hence the
+vertex-node $u$ has one incident $\alpha$-edge and no
+$\gamma$-edge, so it has degree one in its two-color component.  At every
+other vertex of $X$, elementariness from
+\noderef{ScheideGlobalMaximumBoundaryFacts} implies that $\gamma$ is
+present, and closedness again implies that $\alpha$ is present; properness
+makes the two incident edge identities unique.  Thus those vertex-nodes
+have degree two.
+
+By \noderef{TwoColorComponentSpanningPath}, the finite component has a
+simple path spanning its full incidence support.  Its degree-one
+vertex-node $u$ must be one end.  Its other end cannot be another vertex of
+$X$, since all those vertices have degree two.  It also cannot be an
+edge-node: every colored edge-node has exactly its two distinct endpoint
+neighbors, because the graph is loopless.  Therefore the other end is a
+vertex-node $z\notin X$.  Orienting the spanning path from $u$ to $z$
+gives exactly the full defective-chain path of
+\noderef{ScheideDefectiveChainPath}.
+\end{proof}

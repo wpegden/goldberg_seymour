@@ -1,0 +1,20 @@
+\begin{lemma}[Scheide exits are tree exits]
+Every Scheide exit vertex $v$ is a tree exit in the broader sense of
+\noderef{TreeExit}: for the missing color $\gamma$ and defective color
+$\delta$ in its witness, the terminal segment from the outside end of the
+full $(\delta,\gamma)$-chain to $v$ is a $T$-exit path.
+\end{lemma}
+\begin{proof}
+Unpack the witness from \noderef{ScheideExitVertex}.  It supplies the full
+simple incidence path $P$ from a tree vertex $u$ to an outside vertex $z$,
+and identifies $v$ as the last tree vertex on $P$.  Take the subpath from
+$v$ to $z$ and reverse it.  It is still simple, begins at the outside
+vertex-node $z$, ends at the tree vertex-node $v$, and has positive
+multigraph length.  By the last-tree-vertex clause, its only vertex-node
+in $V(T)$ is $v$.  The outside endpoint of a two-color path is incident
+with only the last one of the alternating colors, so it misses the other.
+Consequently the reversed subpath satisfies every clause of
+\noderef{TreeExitPath}, and hence witnesses
+\noderef{TreeExit} for the same two colors.  The defective-color clause is
+carried unchanged from the Scheide witness.
+\end{proof}

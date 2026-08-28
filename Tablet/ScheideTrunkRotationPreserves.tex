@@ -1,0 +1,50 @@
+\begin{lemma}[Balanced trunk rotation]
+Let $(T,e_0,\varphi)$ be balanced of height $p=h(G)$.  For every trunk
+index $1\le j\le p-1$, moving the uncolored status around the closing cycle
+from $f_0=e_0$ to $f_j$ and rotating the trunk from $y_0$ to $y_j$
+produces another balanced globally maximum triple.  The resulting data
+satisfy the exact rotation relation \noderef{TrunkRotation}.
+\end{lemma}
+\begin{proof}
+The closing incidence path in \noderef{NormalGlobalMaximumTriple} is
+simple.  Its edge-nodes are therefore distinct, and none is $e_0$ because
+they are colored while $e_0$ is uniquely uncolored.  Hence the cycle
+identities $f_0,\ldots,f_{p-1}$ of \noderef{NormalCycleEdge} are all
+distinct, even when two of them have the same endpoint pair.
+
+Define $\varphi_j$ by making $f_j$ uncolored, assigning to $f_i$ the old
+color of $f_{i+1}$ for $0\le i<j$, and leaving every other edge identity
+unchanged.  The colored cycle identities alternate between the two trunk
+colors.  At each intermediate cycle vertex, the two shifted incident
+colors remain distinct.  At the initial endpoint $y_0$, the color shifted
+onto $e_0$ was missing there; at the other end of the shifted segment, the
+removed color becomes missing.  Thus no equal-colored adjacent pair is
+created.  Away from the cycle nothing changes, so $\varphi_j$ is proper
+and has exactly $f_j$ uncolored.
+
+Order the trunk vertices cyclically as
+\[
+ y_j,y_{j+1},\ldots,y_{p-1},y_0,y_1,\ldots,y_{j-1},
+\]
+using $f_j$ first and the successive cycle identities thereafter, and
+append the old post-trunk tail without changing a vertex or edge identity.
+The Tashkinov condition is preserved: along the rotated trunk, the two
+alternating colors are missing at its first two vertices in the rotated
+coloring; in the unchanged tail, every old missing-color witness remains
+somewhere in the rotated trunk because the shift only moves the missing
+status of the two trunk colors around that trunk.  Every other color and
+witness is unchanged.
+
+The resulting sequence $T'$ has exactly the same vertex set and order as
+$T$, hence it still attains the global Tashkinov order.  Its closing edge
+is the predecessor $f_{j-1\pmod p}$, and the same alternating cycle gives
+normal data $N'$ of height $p$.  These facts are precisely the vertex,
+edge, color-shift, tail, and closing-edge clauses of
+\noderef{TrunkRotation}.
+
+Finally $p=h(G)$ by the original balanced hypothesis.  The post-trunk
+tail is unchanged position by position, so every equality
+$\varphi(e_{2r-1})=\varphi(e_{2r})$ with
+$p<2r<t(G)$ is the same equality for $\varphi_j$ on $T'$.  Therefore
+$N'$ satisfies \noderef{BalancedGlobalMaximumTriple} and is balanced.
+\end{proof}

@@ -10,6 +10,10 @@ import Tablet.ScheideGlobalMaximumMissingCounts
 import Tablet.ScheideGlobalMaximumUnused
 import Tablet.ScheideMaximalExtendsEveryTree
 import Tablet.ScheideMaximalOddCycle
+import Tablet.ScheideAbsorbingElementary
+import Tablet.ScheideDefectiveChainFirstOutsideElementary
+import Tablet.ScheideExitNoFree
+import Tablet.ScheideTrunkRotationPreserves
 import Tablet.TashTree
 import Tablet.TashkinovClosure
 import Tablet.TashkinovClosureExists

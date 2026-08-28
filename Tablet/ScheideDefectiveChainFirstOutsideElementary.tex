@@ -1,0 +1,36 @@
+\begin{lemma}[Defective-chain structure, part (e)]
+In the notation of part (c), adjoining the first outside vertex preserves
+elementariness: $V(T)\cup\{v_1\}$ is elementary with respect to $\varphi$.
+\end{lemma}
+\begin{proof}
+Put $X=V(T)$.  Suppose that a color $\delta$ is missing both at $v_1$ and
+at some $x\in X$.  By
+\noderef{ScheideDefectiveChainBoundaryEdges} and the three-boundary-edge
+clause of \noderef{ScheideGlobalMaximumBoundaryFacts}, the path has at
+least two boundary crossings after its first departure.  Thus $v_1$ is
+not an end of the full $(\alpha,\gamma)$-path, so both $\alpha$ and
+$\gamma$ are present at $v_1$ and
+$\delta\notin\{\alpha,\gamma\}$.
+
+Consider the full $(\gamma,\delta)$-component $C$ through $v_1$.  Both
+colors are missing on the closed set $X$; hence no edge identity of either
+color leaves $X$, by \noderef{ScheideGlobalMaximumBoundaryFacts}.  The
+outside component $C$ is therefore disjoint from $X$.  Switch $C$.
+Properness is preserved by \noderef{TwoColorComponentSwapProper}, no tree
+edge or tree missing-color witness changes, and $\gamma$ remains missing
+at $u$.  At $v_1$, $\gamma$ is now missing, and the unique
+$\gamma$-edge of the old path following $v_1$ has become a
+$\delta$-edge.  Hence the initial segment $uPv_1$ is now the full
+$(\alpha,\gamma)$-component through $u$.
+
+Switch that initial component.  The colors $\alpha,\gamma$ are unused on
+$T$ by \noderef{ScheideGlobalMaximumUnused}, so the same sequence remains
+Tashkinov, and $\alpha$ becomes missing at $u$.  This initial segment uses
+only the first $\alpha$-boundary edge of $P$.  At least two later
+$\alpha$-boundary edge identities retain their colors, by
+\noderef{ScheideDefectiveChainBoundaryEdges}.  Appending either to the
+tree contradicts global maximality.  Thus a color missing at $v_1$ cannot
+be missing on $X$.  Since $X$ itself is elementary by
+\noderef{ScheideGlobalMaximumOrder}, the union $X\cup\{v_1\}$ is
+elementary.
+\end{proof}

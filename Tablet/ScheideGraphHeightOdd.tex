@@ -1,0 +1,21 @@
+\begin{lemma}[Balanced triples, part (a); Scheide Lemma 3.12(a)]
+If $G$ has a globally maximum triple, then its normal-tree height satisfies
+$h(G)\ge 3$ and is odd.
+\end{lemma}
+\begin{proof}
+By \noderef{ScheideNormalisation}, at least one normal globally maximum
+triple exists.  The possible heights form a nonempty finite set bounded by
+$|V(G)|$, so the maximum in \noderef{ScheideGraphHeight} is attained by
+some normal data $N$ of height $p=h(G)$.
+
+The closing $(\alpha,\beta)$-path in
+\noderef{NormalGlobalMaximumTriple} has distinct multigraph ends $y_1$ and
+$y_0$, because tree vertices are injective by \noderef{TreeSequence}.
+At $y_1$, $\beta$ is missing, so the first path edge has color $\alpha$;
+at $y_0$, $\alpha$ is missing, so the last path edge has color $\beta$.
+Properness makes the two colors alternate along the multigraph path.
+Hence the number of multigraph edges is positive and even.  That number is
+$p-1$: the stored incidence path has length $2(p-1)$, with two incidence
+steps per multigraph edge identity.  Thus $p-1$ is a positive even integer,
+so $p$ is odd and $p\ge3$.
+\end{proof}

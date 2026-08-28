@@ -1,0 +1,44 @@
+\begin{lemma}[Normalisation; Scheide Lemma 3.11]
+Let $(T,e_0,\varphi)$ be globally maximum, with the first two vertices
+$x,y$.  There are colors $\alpha\in\overline\varphi(x)$ and
+$\beta\in\overline\varphi(y)$ and a normal Tashkinov tree $T'$ on the
+same vertex set such that
+\[
+ h(T')=|V(P_x(\alpha,\beta,\varphi))|.
+\]
+In the incidence encoding, if the full path has length $L$, this equality
+is $h(T')=L/2+1$.
+\end{lemma}
+\begin{proof}
+The first two distinct vertices $x,y$ are the ends of the uniquely
+uncolored edge $e_0$.  The missing-color counts in
+\noderef{ScheideGlobalMaximumMissingCounts} give a color $\alpha$ missing
+at $x$ and a color $\beta$ missing at $y$.  Regard the globally maximum
+tree as fixed-pair maximal: otherwise a larger Tashkinov tree for the same
+pair would exceed the global order.  Apply
+\noderef{ScheideMaximalKempePath} to its first two vertices.  It gives
+$\alpha\ne\beta$ and a full simple incidence path $P$ from $x$ to $y$,
+contained in $V(T)$, whose length is divisible by four.  Consequently its
+number $L/2$ of multigraph edges is positive and even, and its number of
+multigraph vertices is $L/2+1$.
+
+List those multigraph vertices in the reverse path order as
+$y=v_1,v_2,\ldots,v_p=x$, retaining each intervening edge identity.  Start
+a tree sequence with $x,e_0,y$ and then append the path identities from
+$y$ through $v_{p-1}$.  Every appended edge has color $\alpha$ or $\beta$,
+and one of these colors is missing at one of the first two vertices, so
+this initial sequence is Tashkinov.  The path is simple, so its vertices
+and its edge identities are duplicate-free even when parallel edges occur.
+
+By \noderef{ScheideMaximalExtendsEveryTree}, this initial Tashkinov tree
+extends, without changing it, to a Tashkinov tree $T'$ whose vertex set is
+the full globally maximum set $V(T)$.  Its first $p=L/2+1$ vertices form
+the trunk \noderef{NormalTripleTrunk}, and the final edge of $P$ completes
+precisely the closing
+$(\alpha,\beta)$-chain required by
+\noderef{NormalGlobalMaximumTriple}.  The upper bound $p\le |V(T')|$
+holds because the path lies in $V(T)$; equality is allowed.  Since
+$V(T')=V(T)$, the new tree still attains the global Tashkinov order.  Thus
+it supplies normal data of height $p=L/2+1$, proving every asserted
+clause.
+\end{proof}

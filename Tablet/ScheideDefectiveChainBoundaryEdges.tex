@@ -1,0 +1,39 @@
+\begin{lemma}[Defective-chain structure, part (b)]
+Under the hypotheses of part (a), let $P$ be the full
+$(\alpha,\gamma)$-path from $u$ to its outside end.  Then
+\[
+ \partial_{\varphi,\alpha}(V(T))
+ =\{f\in\partial_G(V(T)): \text{the edge-node of }f\text{ lies on }P\}.
+\]
+The equality is between sets of edge identities, including distinct
+parallel edges.
+\end{lemma}
+\begin{proof}
+Let $X=V(T)$.  By
+\noderef{ScheideGlobalMaximumBoundaryFacts}, no $\gamma$-colored edge
+leaves $X$.  Since every edge-node on the two-color path has color
+$\alpha$ or $\gamma$, it follows immediately that every boundary edge-node
+on $P$ has color $\alpha$.  This gives the inclusion from right to left.
+
+For the converse, suppose that an $\alpha$-colored boundary edge identity
+$f$ is not on $P$.  Its edge-node belongs to a different
+$(\alpha,\gamma)$-component $Q$, since $P$ spans the complete component of
+$u$ by \noderef{ScheideDefectiveChainPath}.  Neither color is used on a
+tree edge by \noderef{ScheideGlobalMaximumUnused}; moreover every vertex
+of $X\setminus\{u\}$ is incident with both colors, by the degree argument
+in \noderef{ScheideDefectiveChainPathExists}.  Thus $Q$ contains no tree
+edge and has no end in $X$.
+
+Switch $\alpha$ and $\gamma$ on the entire component $Q$.  Properness is
+preserved by \noderef{TwoColorComponentSwapProper}.  The distinguished
+edge remains the unique uncolored edge because all edge-nodes of $Q$ are
+colored.  No displayed tree edge changes, and no missing-color witness
+used by the Tashkinov sequence is lost; hence the same sequence remains a
+Tashkinov tree for the switched coloring.  The edge identity $f$ now has
+color $\gamma$, while $\gamma$ remains missing at $u$.  Appending $f$ and
+its outside endpoint produces a Tashkinov tree with one more vertex.  This
+contradicts the global maximality clause of
+\noderef{GlobalMaximumTriple}.  Therefore every
+$\alpha$-colored boundary edge identity lies on $P$, proving the reverse
+inclusion and the claimed identity-wise equality.
+\end{proof}
