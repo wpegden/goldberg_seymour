@@ -1,0 +1,25 @@
+\begin{definition}
+Let \(T\) be an extended Tashkinov tree with rung number \(n\) and
+certified series
+\(\{(T_i,\varphi_{i-1},S_{i-1},F_{i-1},\Theta_{i-1})
+:1\leq i\leq n+1\}\).  The tree \(T\) has the maximum property under its
+coloring sequence when both of the following conditions hold.
+
+First, the number of vertices of \(T_1\) equals the global Tashkinov order
+of \(G\), namely the maximum order of any Tashkinov tree based at any
+distinguished edge and any admissible initial coloring.
+
+Second, for each \(i\) with \(1\leq i<n\), every proper coloring \(\pi\)
+leaving exactly the distinguished edge uncolored and
+\((T_i,D_i,\varphi_i)\)-stable satisfies the following bound.  If
+\(\Theta_i=PE\), take the seed to be exactly \(T_i\).  If
+\(\Theta_i\) is \(SE\) or \(RE\), take the unique displayed edge identity
+\(f_i\), certified by the exact equality \(F_i=\{f_i\}\), and take the
+seed to be the exact one-edge extension \(T_i+f_i\).  Every closure
+\(T'_{i+1}\) of that prescribed seed under \(\pi\) has
+\[
+                       |V(T'_{i+1})|\leq |V(T_{i+1})|.
+\]
+There is deliberately no maximality requirement for \(T_{n+1}\) over
+colorings stable on \(T_n\).
+\end{definition}

@@ -1,0 +1,24 @@
+\begin{definition}
+Fix an extended Tashkinov tree \(T\), with rung number \(n\), generated
+by a certified series \(\mathcal T\), and fix a coloring \(\sigma_n\).
+A tree-sequence \(T^*\) is a corresponding extended Tashkinov tree for
+\((\sigma_n,T_n)\) when it carries an actual replacement input coloring,
+an actual certified replacement Tashkinov series \(\mathcal T^*\) of the
+same rung number, and an actual extended Tashkinov tree presentation of
+\(T^*\) whose displayed generating coloring is \(\sigma_n\).  The ETT
+presentation and \(\mathcal T^*\) must be the same dependent series.
+
+Writing the replacement colorings as
+\(\sigma_0,\ldots,\sigma_n\), the certificate additionally requires:
+\begin{itemize}
+\item its final generating coloring is exactly \(\sigma_n\);
+\item \(T_i^*=T_i\) as ordered tree-sequences for \(1\leq i\leq n\);
+\item the exact sets \(S_i\), exact edge-identity sets \(F_i\), and
+extension kinds \(\Theta_i\) agree with those of \(\mathcal T\) at every
+stored index through \(n\);
+\item every \(\sigma_i\) is proper and leaves exactly the distinguished
+edge uncolored; and, for \(1\leq i\leq n\), \(\sigma_i\) is
+\((T_i,D_i,\varphi_i)\)-stable.
+\end{itemize}
+No equality is imposed on additional internal PE or RE witness fields.
+\end{definition}

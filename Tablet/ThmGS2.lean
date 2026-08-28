@@ -1,6 +1,8 @@
 import Tablet.Critical
 import Tablet.DefectiveVertex
 import Tablet.Elementary
+import Tablet.ETTFirstAppearanceIndex
+import Tablet.ETTInterchangeabilityProperty
 import Tablet.ExtendedTashkinovTree
 import Tablet.HkuIncidentColorPreserved
 import Tablet.HkuMissingStoredMonotone
@@ -8,8 +10,10 @@ import Tablet.HkuParallelBoundaryStructure
 import Tablet.HkuTreeColorsControlled
 import Tablet.HkuUnsupportedVertexColors
 import Tablet.LEM_extable
+import Tablet.MaximumProperty
 import Tablet.MaximumDegree
 import Tablet.MissingColorIncidenceEndpoint
+import Tablet.ModColoring
 import Tablet.ParallelExtensionUndoStable
 import Tablet.SameColorSeriesPreserved
 import Tablet.ScheideGlobalMaximumBoundaryFacts
