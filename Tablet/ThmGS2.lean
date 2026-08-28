@@ -9,6 +9,7 @@ import Tablet.ScheideGlobalMaximumFourFree
 import Tablet.ScheideGlobalMaximumMissingCounts
 import Tablet.ScheideGlobalMaximumUnused
 import Tablet.ScheideLargeHeightElementary
+import Tablet.ScheideSmallHeightElementary
 import Tablet.ScheideMaximalExtendsEveryTree
 import Tablet.ScheideMaximalOddCycle
 import Tablet.ScheideAbsorbingElementary

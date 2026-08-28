@@ -1,0 +1,91 @@
+\begin{lemma}[Prescribed Kempe path height bound]
+Let $(T,e_0,\varphi)$ be a globally maximum $k$-triple, with first two
+vertices $y_0,y_1$.  If
+$\alpha\in\overline\varphi(y_0)$ and
+$\beta\in\overline\varphi(y_1)$, then the full
+$(\alpha,\beta)$-component through $y_0$ has a simple incidence path $P$
+from $y_0$ to $y_1$.  Every vertex-node of $P$ belongs to $V(T)$, its
+incidence length is divisible by four, and
+\[
+ \frac{\operatorname{length}(P)}2+1\leq h(G).
+\]
+Here the quotient converts incidence length to the number of multigraph
+edge identities on the path; the additional one converts edge count to
+multigraph vertex count.
+\end{lemma}
+\begin{proof}
+Write $X=V(T)$ as in \noderef{TreeSequenceVertexSet}.  The globally maximum hypothesis in
+\noderef{GlobalMaximumTriple} says that $T$ is a Tashkinov tree for the
+$k$-triple $(G,e_0,\varphi)$ and that $|X|=t(G)$.  It also makes $T$
+maximal for this fixed pair in the sense of
+\noderef{FixedPairMaximalTashkinovTree}.  Indeed, if a Tashkinov tree $S$
+for the same pair had $X\subseteq V(S)$, then the definition
+\noderef{TashkinovOrder}, applied using the $k=\chi'(G)-1$ equality in
+\noderef{KTriple}, gives $|V(S)|\leq t(G)=|X|$.  Finiteness and the
+inclusion therefore give $V(S)=X$.
+
+Apply \noderef{ScheideMaximalKempePath} with $S=T$, indices $0<1$, and
+the prescribed colors $\alpha,\beta$.  It gives
+$\alpha\ne\beta$ and a simple path $P$ in the two-color incidence graph
+\noderef{TwoColorIncidenceGraph}, from the vertex-node $y_0$ to the
+vertex-node $y_1$, whose support is exactly the full component
+\noderef{TwoColorComponent} through $y_0$.  That result also gives
+$4\mid\operatorname{length}(P)$ and places every vertex-node of $P$ in
+$X$.  Notice that the path alternates between vertex-nodes and individual
+edge-nodes.  Thus an incidence length of $2m$ represents exactly $m$
+multigraph edge identities, even when two such identities have the same
+unordered pair of endpoints.
+
+It remains to compare this prescribed path with $h(G)$.  Reverse $P$ and
+write its multigraph vertices and edge identities as
+\[
+ y_1,f_m,z_{m-1},f_{m-1},\ldots,z_1,f_1,y_0,
+ \qquad m=\operatorname{length}(P)/2.
+\]
+The edge identities $f_1,\ldots,f_m$ are pairwise distinct because $P$
+is a simple incidence path.  None equals $e_0$: by
+\noderef{TwoColorIncidenceGraph} every displayed edge-node is colored
+$\alpha$ or $\beta$, whereas the $k$-triple clause
+\noderef{KTriple} says that $e_0$ is uncolored.  The endpoints $y_0,y_1$
+are distinct, so the positive path length together with
+$4\mid\operatorname{length}(P)$ gives $m\geq2$.  Form an initial tree
+$U$ by starting with
+$y_0,e_0,y_1$, then adjoining successively
+$f_m,z_{m-1},\ldots,f_2,z_1$; reserve $f_1$ as the closing edge from
+$z_1$ to $y_0$.  This construction uses the actual edge-nodes of $P$, so
+parallel edges are never identified.  Simplicity of $P$, injectivity in
+\noderef{TreeSequence}, and looplessness give distinct displayed vertices,
+distinct displayed tree-edge identities, and the required attachment
+equalities.
+
+The path colors alternate between $\alpha$ and $\beta$.  Every colored
+tree edge added after $e_0$ therefore has a missing-color witness among
+$y_0,y_1$, by the two prescribed hypotheses and
+\noderef{MissingColors}.  Hence $U$ satisfies
+\noderef{TashkinovTree}.  The same fixed-pair maximality established in
+the first paragraph now lets
+\noderef{ScheideMaximalExtendsEveryTree} extend $U$, without changing its
+ordered initial segment, to a Tashkinov tree $T'$ with $V(T')=X$.  The
+initial-segment assertion is entrywise equality in the sense of
+\noderef{TreeSequenceInitialSegment}.  The $k$-triple is unchanged, and
+$|V(T')|=|X|=t(G)$, so $T'$ is again globally
+maximum.
+
+The retained initial segment, the reversed incidence path, and the
+closing identity $f_1$ define normal data in the sense of
+\noderef{NormalGlobalMaximumTriple}.  Its chosen height is the number of
+multigraph vertices on $P$, namely
+$m+1=\operatorname{length}(P)/2+1$.  The support clauses hold because the
+incidence path is simple: its vertex-nodes are precisely the $m+1$
+vertices of the initial segment, and its edge-nodes are precisely the
+$m-1$ added tree identities together with the closing identity.
+
+Finally this normal globally maximum triple is one of the witnesses over
+which \noderef{ScheideGraphHeight} takes its finite maximum.  Its height
+is at most $|V(T')|\leq |V(G)|$, so it lies in the defining finite range.
+Consequently
+\[
+ \operatorname{length}(P)/2+1=m+1\leq h(G),
+\]
+which proves the asserted bound for the originally prescribed pair.
+\end{proof}

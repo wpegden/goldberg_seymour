@@ -1,0 +1,147 @@
+\begin{theorem}[Scheide Proposition 4.3]
+Let $G$ satisfy the paper's criticality convention, here expressed as
+edge-criticality together with the requirement that every vertex is
+incident with an edge.  Suppose $\chi'(G)=k+1$ and
+$\Delta(G)+1\leq k$.  If $h(G)<5$, then $G$ is elementary.
+\end{theorem}
+\begin{proof}
+By \noderef{GlobalMaximumTripleExists}, choose a globally maximum triple
+$(T_0,e_0,\varphi_0)$.  Part (a) of the balanced-triple argument,
+\noderef{ScheideGraphHeightOdd}, says that $h(G)\geq3$ and $h(G)$ is odd.
+Together with $h(G)<5$, this forces
+\[
+ h(G)=3. \tag{1}
+\]
+Apply \noderef{ScheideBalancedExists} to obtain a balanced normal globally
+maximum triple $(T,e,\varphi)$ with normal data $N$.  By
+\noderef{BalancedGlobalMaximumTriple} and (1), $N$ has height three.
+Write its three trunk vertices as $y_0,y_1,y_2$.
+As in the maximum argument defining the preceding prescribed-path lemma,
+this globally maximum $T$ is fixed-pair maximal in the sense of
+\noderef{FixedPairMaximalTashkinovTree}: every Tashkinov tree $S$
+for $(e,\varphi)$ with $V(T)\subseteq V(S)$ satisfies
+$|V(S)|\leq t(G)=|V(T)|$ by \noderef{TashkinovOrder} and
+\noderef{GlobalMaximumTriple}, hence has the same finite vertex set.  This
+verifies the maximality hypothesis that will be used below in
+\noderef{ScheideMaximalKempePath}.
+
+Suppose for a contradiction that $G$ is not elementary.  The
+contrapositive of \noderef{ScheideLargeHeightElementary} is applicable
+with the given edge-criticality, index, degree, and no-isolated-vertex
+hypotheses.  It says that
+$t(G)-4\not<h(G)$.  Using (1) gives
+\[
+ 7\leq t(G). \tag{2}
+\]
+The equality in \noderef{GlobalMaximumTriple}, the vertex-set definition
+\noderef{TreeSequenceVertexSet}, and vertex injectivity from
+\noderef{TreeSequence} give
+$t(G)=|V(T)|=\operatorname{length}(T)+1$.  Thus the first post-trunk pair
+exists.
+
+We now translate the paper's indices explicitly.  Its edge $e_i$ is the
+Lean edge $T.\mathsf{edge}(i-1)$.  Hence the paper's $e_3,e_4$ are the
+Lean indices $2,3$, and their newly displayed vertices $y_3,y_4$ are the
+Lean vertex indices $3,4$.  Taking $j=2$ in the tail-pair clause of
+\noderef{BalancedGlobalMaximumTriple} is legal because
+$N.\mathsf{height}=3<4<t(G)$ by (1) and (2), and yields
+\[
+ \varphi(e_3)=\varphi(e_4).
+\]
+Apply \noderef{TashkinovTree} to the edge at Lean index $2$.  It supplies
+a color $\gamma$ and a missing-color witness among the three earlier
+vertices $y_0,y_1,y_2$, with
+\[
+ \varphi(e_3)=\varphi(e_4)=\gamma. \tag{3}
+\]
+
+Let $a=N.\mathsf{alpha}$ and $b=N.\mathsf{beta}$ be the two trunk colors
+from \noderef{NormalGlobalMaximumTriple}.  The stored closing incidence
+path has height three, so it runs from $y_1$ to $y_0$ through $y_2$ and
+uses exactly the individual identities $e_2$ and the closing edge.  The
+full $(a,b)$-component given by \noderef{ScheideMaximalKempePath} is this
+path: $a$ is missing at $y_0$, $b$ is missing at $y_1$, and properness
+from \noderef{GlobalMaximumTriple} and \noderef{KTriple} gives degree one
+at those endpoints and degree at most two everywhere in the incidence
+graph \noderef{TwoColorIncidenceGraph}.  A simple path joining the two
+degree-one endpoints cannot be a proper subpath of their component.
+Consequently the full trunk component contains exactly
+$y_0,y_1,y_2$.  In particular every trunk vertex which does not miss $a$
+is already incident with its unique $a$-edge on that component, and the
+same holds for $b$.  By properness in
+\noderef{IsProperEdgeColoring}, (3) therefore implies
+\[
+ \gamma\ne a,b. \tag{4}
+\]
+
+The attachment law in \noderef{TreeSequence} says that $e_3$ joins $y_3$
+to one of $y_0,y_1,y_2$, while $e_4$ joins $y_4$ to one of
+$y_0,y_1,y_2,y_3$.  The second attachment is not $y_3$: otherwise the
+distinct identities $e_3,e_4$ would be adjacent and have the same color,
+contrary to \noderef{AdjacentEdges} and properness.  The two trunk
+attachment vertices are also distinct for the same reason.  Finally,
+neither edge can attach at the trunk vertex missing $\gamma$, by
+\noderef{MissingColors} and \noderef{PresentColors}.  There are only
+three trunk vertices, so $e_3,e_4$ join $y_3,y_4$ separately to exactly
+the other two trunk vertices.
+
+Move the $\gamma$-missing trunk vertex to the first position.  If it is
+already $y_0$, make no change at all; this is the required no-rotation
+case.  If its old index is $1$ or $2$, apply
+\noderef{ScheideTrunkRotationPreserves} at that positive index.  The
+relation \noderef{TrunkRotation} says that the new trunk is the cyclic
+order beginning at that vertex, that all post-trunk vertices and edge
+identities retain their positions, and that all colors off the three-edge
+closing cycle are unchanged.  By (4), $\gamma$ is neither cycle color, so
+its incident edges and its missing status are unchanged by this shift.
+Thus, after replacing the triple by the
+rotated one and renaming its vertices, it remains balanced and globally
+maximum, $\gamma$ is missing at the new $y_0$, and the unchanged identities
+$e_3,e_4$ still have color $\gamma$ and join $y_1,y_2$ separately to
+$y_3,y_4$.  This conclusion also holds in the no-rotation case by the
+preceding paragraph.
+
+Let $\beta$ be the missing color at the other end $y_1$ of the new first
+edge supplied by the new normal data.  The elementary clause of
+\noderef{ScheideGlobalMaximumOrder}, with elementarity interpreted by
+\noderef{ColoredVertexSetElementary}, makes $\beta\ne\gamma$, since
+$\gamma$ is missing at the distinct vertex $y_0$.  The normal closing
+identity $q$ joins $y_2$ to $y_0$.  It lies on the two-trunk-color path;
+the other trunk color is missing at $y_0$, so properness forces
+\[
+ \varphi(q)=\beta. \tag{5}
+\]
+Moreover elementarity says that $\gamma$ is present at both $y_1$ and
+$y_2$, and \noderef{PresentColors} supplies incident
+$\gamma$-colored edge identities there.  Properness makes each such
+identity unique.  The attachment conclusion above and (3) identify these
+two unique identities with $e_3,e_4$, one incident with $y_1$ and the
+other with $y_2$.  This argument uses edge identities throughout; equal
+endpoint pairs of parallel edges are never collapsed.
+
+Apply \noderef{ScheideKempePathHeightBound} to the prescribed pair
+$(\gamma,\beta)$ at $y_0,y_1$.  It returns the full simple incidence path
+$P$ between those vertices, as in
+\noderef{ScheideMaximalKempePath}, and gives
+\[
+ \operatorname{length}(P)/2+1\leq h(G). \tag{6}
+\]
+At $y_0$ the color $\gamma$ is missing, so the first multigraph edge of
+$P$ has color $\beta$.  By (5) and properness, it is the closing identity
+$q$, and its next vertex is $y_2$.  The next edge has color $\gamma$ and
+is therefore the unique one of $e_3,e_4$ incident with $y_2$, so $P$
+contains one of $y_3,y_4$.  At the other endpoint $y_1$, the color
+$\beta$ is missing, so the terminal edge of $P$ is the unique
+$\gamma$-identity there, namely the other one of $e_3,e_4$; hence $P$
+contains the other vertex among $y_3,y_4$.  Thus the simple path contains
+the five distinct multigraph vertices
+$y_0,y_1,y_2,y_3,y_4$.
+
+A simple multigraph path containing five vertex-nodes has at least four
+multigraph edge identities.  In the bipartite incidence graph each such
+identity contributes two successive incidence steps, so
+$\operatorname{length}(P)\geq8$ and
+$\operatorname{length}(P)/2+1\geq5$.  Equation (6) now gives
+$h(G)\geq5$, contradicting (1).  The assumption of non-elementarity was
+false, and $G$ is elementary.
+\end{proof}
