@@ -21,7 +21,7 @@ theorem ExtensionBaseClaim43 {V E : Type*}
       some terminalSupport)
     (hjSlot : jSlot.val + 1 =
       ETTFirstAppearanceIndex ett terminalSupport hterminalSupport)
-    (sigmaN phiJ : PartialEdgeColoring E k) (C : Finset (Fin k))
+    (sigmaN : PartialEdgeColoring E k) (C : Finset (Fin k))
     (hterminalJ : terminalSupport ∈ TreeSequenceVertexSet
       (ett.series.data.tree jSlot.succ.castSucc))
     (hsigmaProper : IsProperEdgeColoring G sigmaN)
@@ -31,7 +31,7 @@ theorem ExtensionBaseClaim43 {V E : Type*}
       (TashkinovStoredColors ett.series.data q.succ)
       (ett.series.data.coloring q.succ) sigmaN)
     (hsigmaBefore : StableColoringBeforeVertex T terminalSupport
-      hterminalSupport C phiJ sigmaN)
+      hterminalSupport C (ett.series.data.coloring jSlot.castSucc) sigmaN)
     (trace : ExtensionBaseRestorationTrace ett terminalSupport
       hterminalSupport sigmaN)
     (hinvariant : ExtensionBaseRestorationInvariant ett terminalSupport
@@ -42,7 +42,8 @@ theorem ExtensionBaseClaim43 {V E : Type*}
       (∀ r : Fin ett.rounds,
         r ∈ ExtensionBaseActiveIndices ett terminalSupport hterminalSupport →
         ett.series.data.chosenVertex r.succ ≠ some v) →
-      MissingColors G sigmaN v = MissingColors G phiJ v)
+      MissingColors G sigmaN v =
+        MissingColors G (ett.series.data.coloring jSlot.castSucc) v)
     (hclassPrepared : ∀ w : V,
       w ∈ TreeSequenceVertexSet
           (ett.series.data.tree jSlot.succ.castSucc) →
@@ -63,20 +64,21 @@ theorem ExtensionBaseClaim43 {V E : Type*}
           (∀ a, ett.series.data.delta (indices a).succ = some (delta a)) ∧
           (∀ a : Fin p, gamma a.succ = delta a.castSucc) ∧
           Function.Injective (Fin.cons (gamma 0) delta) ∧
-          MissingColors G phiJ w =
+          MissingColors G (ett.series.data.coloring jSlot.castSucc) w =
             (MissingColors G sigmaN w \ {delta (Fin.last p)}) ∪
               {gamma 0}) :
     let rho1 := trace.coloring (Fin.last trace.steps)
     let restorationColors :=
       (ExtensionBaseRestorationIndices ett terminalSupport
         hterminalSupport).biUnion fun t => ett.series.data.stored t.succ
-    StableColoringBeforeVertex T terminalSupport hterminalSupport C phiJ
-        rho1 ∧
+    StableColoringBeforeVertex T terminalSupport hterminalSupport C
+        (ett.series.data.coloring jSlot.castSucc) rho1 ∧
       ((∀ v : V,
         v ∈ (TreeSequenceVertexSet
             (ett.series.data.tree jSlot.succ.castSucc)).erase
               terminalSupport →
-        MissingColors G rho1 v = MissingColors G phiJ v) ∧
+        MissingColors G rho1 v =
+          MissingColors G (ett.series.data.coloring jSlot.castSucc) v) ∧
        MissingColors G rho1 terminalSupport =
           MissingColors G sigmaN terminalSupport) ∧
       (∀ a : Fin (ett.series.data.tree jSlot.succ.castSucc).length,
