@@ -10,35 +10,216 @@ In the incidence encoding, if the full path has length $L$, this equality
 is $h(T')=L/2+1$.
 \end{lemma}
 \begin{proof}
-The first two distinct vertices $x,y$ are the ends of the uniquely
-uncolored edge $e_0$.  The missing-color counts in
-\noderef{ScheideGlobalMaximumMissingCounts} give a color $\alpha$ missing
-at $x$ and a color $\beta$ missing at $y$.  Regard the globally maximum
-tree as fixed-pair maximal: otherwise a larger Tashkinov tree for the same
-pair would exceed the global order.  Apply
-\noderef{ScheideMaximalKempePath} to its first two vertices.  It gives
-$\alpha\ne\beta$ and a full simple incidence path $P$ from $x$ to $y$,
-contained in $V(T)$, whose length is divisible by four.  Consequently its
-number $L/2$ of multigraph edges is positive and even, and its number of
-multigraph vertices is $L/2+1$.
+Write
+\[
+ x=T.\operatorname{vertex}(0),\qquad
+ y=T.\operatorname{vertex}(1).
+\]
+Unpacking \noderef{GlobalMaximumTriple} gives three facts: $(G,e_0,
+\varphi)$ is a $k$-triple, $T$ is a Tashkinov tree for this pair, and
+$|V(T)|=t(G)$.  By \noderef{TreeSequence}, the first edge identity of
+$T$ is $e_0$, its ends are $x,y$, and $x\ne y$ because the vertex map of
+$T$ is injective.  The $k$-triple definition \noderef{KTriple} says in
+particular that $\chi'(G)=k+1$ and that $\varphi$ leaves exactly $e_0$
+uncolored.  Thus \noderef{IsOneEdgeUncolored} gives
+\[
+ \varphi(e_0)=\mathsf{none},\qquad
+ f\ne e_0\Longrightarrow \varphi(f)=\mathsf{some}(c)
+ \text{ for some }c.
+\tag{1}
+\]
 
-List those multigraph vertices in the reverse path order as
-$y=v_1,v_2,\ldots,v_p=x$, retaining each intervening edge identity.  Start
-a tree sequence with $x,e_0,y$ and then append the path identities from
-$y$ through $v_{p-1}$.  Every appended edge has color $\alpha$ or $\beta$,
-and one of these colors is missing at one of the first two vertices, so
-this initial sequence is Tashkinov.  The path is simple, so its vertices
-and its edge identities are duplicate-free even when parallel edges occur.
+We next verify the fixed-pair maximality needed below.  Let $R$ be a
+Tashkinov tree for $(e_0,\varphi)$ with $V(T)\subseteq V(R)$.  Since
+$\chi'(G)=k+1$, the integer used in \noderef{TashkinovOrder} is
+$\chi'(G)-1=k$.  Therefore $|V(R)|$ is one of the cardinalities over
+which $t(G)$ is maximized, and $|V(R)|\le t(G)=|V(T)|$.  The inclusion
+$V(T)\subseteq V(R)$ between the finite sets of
+\noderef{TreeSequenceVertexSet}, together with this cardinal inequality,
+forces equality of the two sets and hence $V(R)\subseteq V(T)$.  This is
+every clause of \noderef{FixedPairMaximalTashkinovTree}: the required
+Tashkinov-tree clause for $T$ came from global maximality, and the preceding
+argument is its maximality clause.
 
-By \noderef{ScheideMaximalExtendsEveryTree}, this initial Tashkinov tree
-extends, without changing it, to a Tashkinov tree $T'$ whose vertex set is
-the full globally maximum set $V(T)$.  Its first $p=L/2+1$ vertices form
-the trunk \noderef{NormalTripleTrunk}, and the final edge of $P$ completes
-precisely the closing
-$(\alpha,\beta)$-chain required by
-\noderef{NormalGlobalMaximumTriple}.  The upper bound $p\le |V(T')|$
-holds because the path lies in $V(T)$; equality is allowed.  Since
-$V(T')=V(T)$, the new tree still attains the global Tashkinov order.  Thus
-it supplies normal data of height $p=L/2+1$, proving every asserted
-clause.
+Since $x$ and $y$ are ends of $e_0$, the incident case of
+\noderef{ScheideGlobalMaximumMissingCounts} gives at least two missing
+colors at each.  Choose
+\[
+ \alpha\in\overline\varphi(x),\qquad
+ \beta\in\overline\varphi(y),
+\tag{2}
+\]
+where missing-color membership has the meaning in
+\noderef{MissingColors}.  Apply \noderef{ScheideMaximalKempePath} with
+$S=T$, indices $0<1$, the $k$-triple above, the just-proved fixed-pair
+maximality, the Tashkinov certificate for $T$, and (2).  It yields
+$\alpha\ne\beta$ and a simple incidence path $P$ from $x$ to $y$ such
+that
+\[
+ \{z:z\in P.\operatorname{support}\}
+ =C_{\alpha,\beta}(x),\qquad 4\mid L:=|P|,
+\tag{3}
+\]
+and every vertex-node on $P$ belongs to $V(T)$.  Here the component in
+(3) is exactly \noderef{TwoColorComponent} in the incidence graph
+\noderef{TwoColorIncidenceGraph}.
+
+The graph in \noderef{TwoColorIncidenceGraph} is bipartite between vertex
+identities and edge identities, so the successive nodes of $P$, whose two
+ends are vertex-nodes, alternate between the two sorts.  Put
+\[
+ \ell=L/2,\qquad p=\ell+1.
+\]
+Because $x\ne y$, the path has positive length; together with $4\mid L$
+this gives $L\ge4$, $\ell\ge2$, and $p\ge3$.  Reverse the ordered list of
+nodes of $P$ and name its identities as
+\[
+ P^{\mathrm{rev}}=(y=v_1,f_2,v_2,f_3,\ldots,
+                    f_{p-1},v_{p-1},f_p,v_p=x).
+\tag{4}
+\]
+Thus (4) has precisely the $p$ vertex identities
+$v_1,\ldots,v_p$ and the $p-1=\ell$ edge identities
+$f_2,\ldots,f_p$.  Since $P$ is a path, its support has no repeated node;
+consequently all the displayed vertex identities are distinct and all the
+displayed edge identities are distinct.  For each $2\le r\le p$, the two
+incidence adjacencies surrounding $f_r$ in (4), together with
+\noderef{TwoColorIncidenceGraph}, say
+\[
+ \varphi(f_r)=\mathsf{some}(\alpha)
+ \text{ or }\mathsf{some}(\beta).
+\tag{5a}
+\]
+They also say that both $v_{r-1}$ and $v_r$ are incident with $f_r$ in
+the sense of \noderef{Incident}.  These vertices are distinct by
+simplicity.  Since the endpoint datum in \noderef{LooplessMultigraph} is
+an unordered pair, the two distinct incidence memberships exhaust it, and
+therefore
+\[
+ G.\operatorname{ends}(f_r)=\{v_{r-1},v_r\}.
+\tag{5b}
+\]
+In particular, (1) and (5a) show separately that every $f_r$ differs from
+the uncolored identity $e_0$; this conclusion does not identify parallel
+edges by their endpoint pairs.
+
+Reserve the last colored path identity
+\[
+ q:=f_p
+\tag{6}
+\]
+for closing the trunk, and form the prefix
+\[
+ S=(x,e_0,y=v_1,f_2,v_2,\ldots,f_{p-1},v_{p-1}).
+\tag{7}
+\]
+We check the clauses of \noderef{TreeSequence} for (7).  Its length is
+$p-1\ge2$.  Its vertices are $x=v_p,v_1,\ldots,v_{p-1}$, hence are
+pairwise distinct by the simplicity check above.  Its edge identities are
+$e_0,f_2,\ldots,f_{p-1}$; the $f_r$ are pairwise distinct and each differs
+from $e_0$, so these too are pairwise distinct.  Its first edge is $e_0$,
+whose ends are $x,y$ as already proved.  For $2\le r\le p-1$, equation
+(5b) says that the appended edge $f_r$ has new end $v_r$ and earlier end
+$v_{r-1}$.  Hence each edge in (7) attaches its new displayed vertex to
+an earlier displayed vertex, as required.
+
+The sequence $S$ is also Tashkinov in the precise sense of
+\noderef{TashkinovTree}.  The first identity $e_0$ has no witness
+obligation.  For every later identity $f_r$ in (7), (5a) gives its color.
+If that color is $\alpha$, use the earlier vertex $x$ and the first
+membership in (2); if it is $\beta$, use the earlier vertex $y$ and the
+second membership in (2).  Both $x$ and $y$ precede the newly attached
+vertex $v_r$ because $r\ge2$.  Thus every appended colored edge has the
+required earlier missing-color witness.
+
+Now apply \noderef{ScheideMaximalExtendsEveryTree} to the $k$-triple, the
+fixed-pair maximal tree $T$, and the Tashkinov tree $S$.  We obtain a
+Tashkinov tree $T'$ such that
+\[
+ V(T')=V(T)\quad\hbox{and}\quad S\preccurlyeq T'.
+\tag{8}
+\]
+The second assertion is the ordered relation of
+\noderef{TreeSequenceInitialSegment}, not merely a set inclusion: $T'$ has
+length at least $p-1$, its first $p$ vertex entries are exactly
+$x,v_1,\ldots,v_{p-1}$ in the order (7), and its first $p-1$ edge entries
+are exactly $e_0,f_2,\ldots,f_{p-1}$.  The first assertion in (8) is
+equality of the finite sets defined by
+\noderef{TreeSequenceVertexSet}.
+
+We construct the certificate required by
+\noderef{NormalGlobalMaximumTriple} and verify its fields one at a time.
+Take its height to be $p$, its colors to be $\alpha,\beta$, its closing
+edge to be $q$, its last index to be the index of value $p-1$ in $T'$, and
+its closing path to be $P^{\mathrm{rev}}$.
+
+First, $2\le p$ was proved above.  From $S\preccurlyeq T'$ and
+$\operatorname{length}(S)=p-1$ we get
+$p\le\operatorname{length}(T')+1$, so the proposed last index exists and
+has value plus one equal to $p$.  The two first-vertex equalities supplied
+by (8) transport (2) to the required assertions that $\alpha$ is missing
+at $T'.\operatorname{vertex}(0)$ and $\beta$ at
+$T'.\operatorname{vertex}(1)$.  By (5), (6), and the vertex equalities in
+(8),
+\[
+ G.\operatorname{ends}(q)
+ =\{v_{p-1},x\}
+ =\{T'.\operatorname{vertex}(p-1),T'.\operatorname{vertex}(0)\},
+\]
+which is the closing-edge endpoint field.
+
+Second, reversing a simple path preserves simplicity, support, and length,
+so $P^{\mathrm{rev}}$ is a simple path from $y$ to $x$ of length $L$.
+Since $2\mid L$ and $p=L/2+1$, its length is exactly $2(p-1)$.  Its
+vertex-node support is exactly $\{v_1,\ldots,v_p\}$.  By (8), the first
+$p$ vertices of $T'$ are the same identities in the reordered list
+\[
+ x=v_p,v_1,v_2,\ldots,v_{p-1}.
+\]
+Therefore, for every vertex identity $v$, the node $\mathsf{inl}(v)$ is
+in the closing-path support if and only if $v$ is one of the first $p$
+vertex entries of $T'$.  This proves both directions of the exact
+vertex-node-support field, not only containment.
+
+Third, the edge-node support of the reversed path is exactly
+$\{f_2,\ldots,f_p\}$.  Its last member is $q=f_p$.  The remaining members
+$f_2,\ldots,f_{p-1}$ are, by the edge-entry equalities in (8), exactly the
+edges $T'.\operatorname{edge}(j)$ with
+$1\le j$ and $j+2\le p$.  Conversely, every edge of $T'$ in that index
+range is one of those displayed identities.  Hence, for every edge
+identity $f$, its edge-node lies in the closing-path support if and only if
+either $f=q$ or it is one of precisely those indexed trunk edges.  This is
+both directions of the exact edge-node-support field.
+
+Fourth, fix an index $j$ with $1\le j$ and $j+2\le p$.  The preserved
+prefix identifies $T'.\operatorname{edge}(j)$ with $f_{j+1}$,
+$T'.\operatorname{vertex}(j)$ with $v_j$, and
+$T'.\operatorname{vertex}(j+1)$ with $v_{j+1}$.  Equation (5) therefore
+gives
+\[
+ G.\operatorname{ends}(T'.\operatorname{edge}(j))
+ =\{T'.\operatorname{vertex}(j),T'.\operatorname{vertex}(j+1)\}.
+\]
+This verifies every trunk-edge endpoint equality in the normal
+certificate.
+
+Finally, we rebuild rather than assume global maximality of $T'$.  The
+$k$-triple clause is unchanged from \noderef{GlobalMaximumTriple}; the
+Tashkinov-tree clause is supplied by the extension theorem; and (8) gives
+\[
+ |V(T')|=|V(T)|=t(G).
+\]
+These are exactly the three clauses of \noderef{GlobalMaximumTriple} for
+$T'$.  All fields of \noderef{NormalGlobalMaximumTriple} have now been
+verified, so they define normal data $N$ with
+$N.\alpha=\alpha$, $N.\beta=\beta$, and
+$N.\operatorname{height}=p=L/2+1$.  Only now may
+\noderef{NormalTripleTrunk} be applied: it identifies the resulting trunk
+with the first $p$ vertices and first $p-1$ edges already checked above.
+
+Return the original orientation $P$ as the incidence path in the lemma's
+conclusion, together with $T'$ and $N$.  Its simplicity and exact full
+component support are the assertions in (3), (8) gives
+$V(T')=V(T)$, and the three displayed fields of $N$ give all remaining
+conjuncts.
 \end{proof}
