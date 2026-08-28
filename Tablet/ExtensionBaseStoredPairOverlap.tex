@@ -1,17 +1,71 @@
 \begin{lemma}[Extension-base Part I(5): exact stored-pair overlap]
-Let \(T\), \(v_n\), \(j\), and \(L\) have the setup of
-\noderef{ExtensionBaseSupportOrder}, with \(n>0\), and suppose \(T\)
-satisfies \noderef{MaximumProperty}.  Assume (4.1) in the following
-explicit form for every positive-rung lower ETT satisfying MP: its final
-vertex set is elementary; its final closed tree has the
-interchangeability property under every stable coloring; assertion (iii)
-gives both the stable-before-support conclusion and disjoint stored pairs
-for distinct supports with equal first-appearance index; assertion (iv)
-gives the one-tree-vertex conclusion for a terminal PE two-color
-component; assertion (v) gives the maximum-defective order conclusion;
-and assertion (vi) makes every terminal stable coloring a mod-coloring.
-Also take the corresponding ladder-stage elementarity and assertion-(v)
-instances explicitly, as in \noderef{ExtensionBaseDeltaExclusion}.
+Let \(G\) be a finite loopless multigraph, let \(e_0\) be its
+distinguished edge, and fix \(k\) and an initial partial \(k\)-edge-coloring.
+Let \(T\), with generating coloring, be an ETT whose certified series has
+\(n>0\) noninitial rounds, and assume that this ETT has
+\noderef{MaximumProperty}.  Choose the last noninitial Lean index \(q\),
+so \(q+1=n\), and assume that the positive slot \(q.\mathsf{succ}\) is a
+PE whose exact chosen vertex is \(v_n\in V(T)\).  Put \(j=m(v_n)\), choose
+a Lean index \(jSlot\) satisfying \(jSlot+1=j\), and write \(T_j\) and
+\(\varphi_{j-1}\) for the displayed tree and coloring at that index.
+Define, locally,
+\[
+ L=\{s:j\leq s\leq n,\ \Theta_s=\mathrm{PE},\
+                         m(v_s)\leq j\}.                       \tag{A}
+\]
+Membership includes the exact chosen-vertex equality at the positive PE
+slot and membership of that vertex in the final displayed ETT.
+
+Assume the following complete lower-rung package.  For every ETT \(T'\)
+over the same \((G,e_0)\) and initial coloring, with generating coloring
+\(\psi'\), positive rung number \(n'<n\), and
+\noderef{MaximumProperty}, all six conclusions below hold.
+\begin{enumerate}
+\item The set \(V(T')\) is elementary under \(\psi'\).
+\item If \(T'_{n'+1}\) is the final closed tree in its certified series,
+      then, under every proper coloring \(\sigma\) leaving exactly
+      \(e_0\) uncolored and stable on \(T'_{n'+1}\) relative to the
+      terminal stored colors and displayed coloring, every pair
+      \(\alpha,\beta\) with at least one member missing on
+      \(T'_{n'+1}\) is
+      \noderef{TreeInterchangeable} on \(T'_{n'+1}\).
+\item If a positive slot \(b\) of the lower series is a PE with exact
+      support \(v\), and \(m_{T'}(v)=h+1\), then every proper,
+      exactly-\(e_0\)-uncolored coloring stable at slot \(b\) is both
+      stable before \(v\) in \(T'\) and stable on the ladder tree
+      \(T'_h\), in both cases relative to \(D'_h\) and
+      \(\varphi'_h\).  Moreover, two distinct PE
+      slots with distinct supports of the same first-appearance index
+      have disjoint exact stored pairs.
+\item If the terminal slot of the lower series is a PE with exact support
+      \(v\) and exact colors \(\gamma,\delta\), then, under every proper,
+      exactly-\(e_0\)-uncolored coloring stable on its terminal tree, the
+      \((\gamma,\delta)\)-component containing \(v\) meets the vertex set
+      of that tree exactly in \(\{v\}\).
+\item Under every proper, exactly-\(e_0\)-uncolored coloring stable on the
+      lower terminal tree, if \(\delta\) is defective and a
+      \(\delta\)-boundary vertex \(x\) has an earlier
+      \(\delta\)-boundary vertex, then for every PE or SE positive slot
+      \(b\) with exact chosen vertex \(v_b\) and
+      \(m_{T'}(x)\leq b\), one has
+      \(x=v_b\) or \(x\prec_{T'}v_b\).
+\item Every proper, exactly-\(e_0\)-uncolored coloring stable on the lower
+      terminal tree, relative to its terminal stored colors and displayed
+      coloring, is a \noderef{ModColoring} of that lower ETT.
+\end{enumerate}
+
+Finally assume the two ladder-stage instances used at the current ETT.
+For every Lean index \(r<q\), the vertex set of \(T_{r+1}\) is elementary
+under \(\varphi_r\).  For all noninitial Lean indices \(a<r\), every
+proper, exactly-\(e_0\)-uncolored
+\((T_{r+1},D_r,\varphi_r)\)-stable coloring \(\pi\), every defective
+color \(\delta\), and every \(\delta\)-boundary vertex \(x\) with an
+earlier \(\delta\)-boundary vertex satisfy the following: if
+\(x\in V(T)\), \(m_T(x)\leq a+1\), and slot \(a.\mathsf{succ}\) is a PE
+or SE with exact chosen vertex \(v_{a+1}\), then
+\[
+         x=v_{a+1}\quad\hbox{or}\quad x\prec_{T_{r+1}}v_{a+1}. \tag{B}
+\]
 
 For active indices \(s<t\), write their exact supporting vertices as
 \(v_s,v_t\), their certified gamma and delta fields as

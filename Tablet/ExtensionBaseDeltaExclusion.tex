@@ -1,16 +1,44 @@
 \begin{lemma}[Extension-base Part I(2): delta-color exclusion]
-Use the setup of \noderef{ExtensionBaseSupportOrder}: the terminal
-iteration \(n\) is a PE with support \(v_n\), \(j=m(v_n)\), and \(L\)
-is the active set.  Let the Lean index called \(jSlot\) represent the
-manuscript stage \(j\), so its coloring and tree are
-\(\varphi_{j-1}\) and \(T_j\).
+Let \(G\) be a finite loopless multigraph, let \(e_0\) be its
+distinguished edge, and fix \(k\) and an initial partial \(k\)-edge-coloring.
+Let \(T\), with generating coloring, be an ETT whose certified series has
+\(n\) noninitial rounds.  Choose the last noninitial Lean index \(q\), so
+\(q+1=n\), and assume that the positive slot \(q.\mathsf{succ}\) is a PE
+whose exact chosen vertex is \(v_n\in V(T)\).  Put \(j=m(v_n)\).  Choose a
+Lean index \(jSlot\) with
+\[
+                         jSlot+1=m(v_n),
+\]
+and write \(T_j\) and \(\varphi_{j-1}\) for the tree and coloring in the
+certified series at that index.  Define, locally,
+\[
+ L=\{s:j\leq s\leq n,\ \Theta_s=\mathrm{PE},\
+                         m(v_s)\leq j\};                       \tag{A}
+\]
+membership here includes the exact equality saying that the chosen vertex
+at slot \(s\) is \(v_s\), viewed as a vertex of \(T\).
 
-Assume explicitly that every earlier stage needed below has the two
-lower-rung conclusions from (4.1): its vertex set is elementary under
-its generating coloring (technical assertion (i)), and the
-maximum-defective order assertion (v) has the form stated in
-\noderef{ExtensionBaseSupportOrder}.  Then, for all (s,t\in L) with
-(s\leq t),
+Assume the following two ladder-stage hypotheses.
+
+First, for every Lean index \(r<q\), the vertex set of the displayed tree
+\(T_{r+1}\) is elementary under its displayed coloring \(\varphi_r\).
+
+Second, for all noninitial Lean indices \(a<r\), every proper coloring
+\(\pi\) leaving exactly \(e_0\) uncolored that is
+\((T_{r+1},D_r,\varphi_r)\)-stable, every defective color \(\delta\) of
+\(T_{r+1}\) under \(\pi\), and every \(\delta\)-boundary vertex \(x\)
+which has an earlier \(\delta\)-boundary vertex in the tree order, the
+following holds.  If \(x\in V(T)\), \(m(x)\leq a+1\), and slot
+\(a.\mathsf{succ}\) is a PE or SE with exact chosen vertex \(v_{a+1}\), then
+\[
+         x=v_{a+1}\quad\hbox{or}\quad x\prec_{T_{r+1}}v_{a+1}. \tag{B}
+\]
+This is the precise lower-rung maximum-defective order hypothesis quantified
+in the Lean statement; in particular, (A) and (B) are assumptions on the
+present ETT data, not hypotheses borrowed from another theorem.
+
+Then, for all \(s,t\in L\) with \(s\leq t\), and for the exact certified
+colors \(\delta_t\) and \(\gamma_s\) in their PE slots,
 \[
  \delta_t\notin\overline\varphi_{s-1}(T_s),
  \qquad \delta_t\ne\gamma_s.                                  \tag{1}

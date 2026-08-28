@@ -4,7 +4,9 @@ import Tablet.ExtensionBaseSupportClassColors
 import Tablet.ExtensionBaseSupportOrder
 import Tablet.ExtensionRules
 import Tablet.MaximumProperty
+import Tablet.ModColoring
 import Tablet.TashkinovSeriesStep
+import Tablet.TreeInterchangeable
 
 -- [TABLET NODE: ExtensionBaseStoredPairOverlap]
 theorem ExtensionBaseStoredPairOverlap {V E : Type*}

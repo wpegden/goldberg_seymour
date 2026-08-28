@@ -16,6 +16,9 @@ theorem ExtensionBaseClaimMissingColors {V E : Type*}
     (hterminalSupport : terminalSupport ∈ TreeSequenceVertexSet T)
     (jSlot q : Fin ett.rounds) (hjle : jSlot.val ≤ q.val)
     (hqTerminal : q.val + 1 = ett.rounds)
+    (hqKind : ett.series.data.kind q.succ =
+      some TashkinovExtensionKind.PE)
+    (hqVertex : ett.series.data.chosenVertex q.succ = some terminalSupport)
     (hjSlot : jSlot.val + 1 =
       ETTFirstAppearanceIndex ett terminalSupport hterminalSupport)
     (w : V)
