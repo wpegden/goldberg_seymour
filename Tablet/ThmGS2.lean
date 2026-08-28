@@ -38,6 +38,12 @@ import Tablet.SupportingPEMissingTransport
 import Tablet.SupportingPEStoredIntersection
 import Tablet.ExtensionBaseSupportClass
 import Tablet.ExtensionBaseSupportClassColors
+import Tablet.ExtensionBaseDeltaExclusion
+import Tablet.ExtensionBaseClaimMissingColors
+import Tablet.ExtensionBaseClaimStrongInterchangeable
+import Tablet.ExtensionBaseClaimTreeEdgeColors
+import Tablet.ExtensionBaseSupportOrder
+import Tablet.ExtensionBaseStoredPairOverlap
 import Tablet.StrongInterchangeableImpliesInterchangeable
 import Tablet.StrongInterchangeabilityKempePreserved
 import Tablet.ThmScheide

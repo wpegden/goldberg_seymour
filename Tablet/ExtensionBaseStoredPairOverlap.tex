@@ -1,0 +1,91 @@
+\begin{lemma}[Extension-base Part I(5): exact stored-pair overlap]
+Let \(T\), \(v_n\), \(j\), and \(L\) have the setup of
+\noderef{ExtensionBaseSupportOrder}, with \(n>0\), and suppose \(T\)
+satisfies \noderef{MaximumProperty}.  Assume (4.1) in the following
+explicit form for every positive-rung lower ETT satisfying MP: its final
+vertex set is elementary; its final closed tree has the
+interchangeability property under every stable coloring; assertion (iii)
+gives both the stable-before-support conclusion and disjoint stored pairs
+for distinct supports with equal first-appearance index; assertion (iv)
+gives the one-tree-vertex conclusion for a terminal PE two-color
+component; assertion (v) gives the maximum-defective order conclusion;
+and assertion (vi) makes every terminal stable coloring a mod-coloring.
+Also take the corresponding ladder-stage elementarity and assertion-(v)
+instances explicitly, as in \noderef{ExtensionBaseDeltaExclusion}.
+
+For active indices \(s<t\), write their exact supporting vertices as
+\(v_s,v_t\), their certified gamma and delta fields as
+\(\gamma_s,\delta_s,\gamma_t,\delta_t\), and their exact stored pairs as
+\(S_s,S_t\).  Then
+\[
+ S_s\cap S_t\ne\varnothing
+ \quad\Longleftrightarrow\quad
+ v_s=v_t\ \hbox{ and no }r\in L(v_s)\hbox{ satisfies }s<r<t.    \tag{1}
+\]
+When these equivalent conditions hold,
+\[
+                  S_s\cap S_t=\{\gamma_t\}=\{\delta_s\}.       \tag{2}
+\]
+Thus two active stored pairs overlap exactly when their indices are
+consecutive members of one support class, which is Part I(5).
+\end{lemma}
+\begin{proof}
+Apply \noderef{ExtensionBaseSupportOrder} with the explicit lower-rung
+assertion (v).  Every active support has first-appearance index (j),
+and distinct support classes occur in reverse index blocks.  Apply
+\noderef{ExtensionBaseDeltaExclusion} with the stated lower-rung
+elementarity and assertion-(v) instances.  It gives, for active
+(a\leq b),
+\[
+                         \delta_b\ne\gamma_a.                  \tag{3}
+\]
+
+Fix one nonempty support class (L(w)).  Since (m(w)=j), every PE
+through the terminal round supported at (w) has index at least (j),
+and hence belongs to (L(w)); conversely this is the defining condition
+in \noderef{ExtensionBaseSupportClass}.  The finite set therefore has a
+unique strictly increasing enumeration
+\[
+                         i_0<i_1<\cdots<i_p.                    \tag{4}
+\]
+It is at the same time the exact enumeration of all terminal-bounded PEs
+supported at (w).  The membership of (w) in the required current tree
+comes from any one of these PE certificates and the ordered initial
+segments in \noderef{TashkinovSeriesStep}.
+
+Supply (4), its exact-range equivalences, the exact gamma and delta fields,
+and (3) to \noderef{ExtensionBaseSupportClassColors}.  That lemma gives
+\[
+ \gamma_{i_{a+1}}=\delta_{i_a}\quad(0\leq a<p)                 \tag{5}
+\]
+and says that
+\[
+ \gamma_{i_0},\delta_{i_0},\delta_{i_1},\ldots,\delta_{i_p}    \tag{6}
+\]
+are pairwise distinct.  The PE constructor of
+\noderef{TashkinovSeriesStep} identifies every exact stored set as
+\(S_{i_a}=\{\delta_{i_a},\gamma_{i_a}\}\).  Equations (5)--(6) now show
+directly that two stored pairs in this class are disjoint unless their
+positions in (4) are consecutive.  For consecutive positions (a,a+1),
+their only common color is
+\(\delta_{i_a}=\gamma_{i_{a+1}}\), proving (2) within one class.
+
+It remains to exclude overlap between different classes.  Invoke
+\noderef{ExtensionRules} with the present graph, ETT, MP witness,
+positivity witness, and the full explicit six-assertion lower-rung package
+listed in the statement.  This supplies current-rung assertion (iii), not
+an uncited hypothesis from its proof.  Its second conclusion says that
+two distinct PE supporting vertices with equal first-appearance index
+have disjoint exact stored sets.  The order lemma gives that equal index,
+namely (j), for every active support.  Hence (v_s\ne v_t) implies
+\(S_s\cap S_t=\varnothing\).
+
+We can now prove (1).  If the intersection is nonempty, the preceding
+paragraph forces (v_s=v_t=w).  In enumeration (4), nonconsecutive
+positions have disjoint pairs by (5)--(6), so no member of (L(w)) lies
+strictly between (s) and (t).  Conversely, if the supports agree and
+there is no intervening class member, (s,t) are consecutive in (4),
+and (5) places the common color \(\delta_s=\gamma_t\) in both stored
+pairs.  This proves nonemptiness, (1), and the exact singleton equalities
+(2).
+\end{proof}

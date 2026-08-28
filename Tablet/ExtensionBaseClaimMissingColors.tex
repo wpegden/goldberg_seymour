@@ -1,0 +1,78 @@
+\begin{lemma}[Claim 4.1(a3)--(a4): missing-color transport]
+Use the active set \(L\) and support classes
+\(L(w)\) from \noderef{ExtensionBaseSupportClass}.  Put
+\(j=m(v_n)\leq n\),
+and let \(\sigma_n\) be a proper coloring leaving exactly \(e_0\)
+uncolored and \((T_n,D_n,\varphi_n)\)-stable.
+
+First, if \(v\in V(T_j)\) is not the supporting vertex of any active
+slot, then
+\[
+                    \overline\sigma_n(v)
+                    =\overline\varphi_{j-1}(v).                \tag{1}
+\]
+
+Second, let the nonempty class (L(w)) have exact increasing enumeration
+\(i_0<\cdots<i_p\), and assume this is also the exact enumeration through
+round (n) of all PEs supported at (w).  Put
+\[
+ \mathcal S_w=\bigcup_{a=0}^{p}S_{i_a},qquad
+ \gamma_0=\gamma_{i_0},\qquad \delta_p=\delta_{i_p}.
+\]
+Then
+\[
+ \overline\sigma_n(w)\cap\mathcal S_w=\{\delta_p\},            \tag{2}
+\]
+and
+\[
+ \overline\varphi_{j-1}(w)
+   =(\overline\sigma_n(w)\setminus\{\delta_p\})
+       \cup\{\gamma_0\}.                                     \tag{3}
+\]
+These are exactly Claim 4.1(a3) and (a4).
+\end{lemma}
+\begin{proof}
+The vertex clause of \noderef{StableColoring} gives
+\[
+                  \overline\sigma_n(x)=\overline\varphi_n(x) \tag{4}
+\]
+for every (x\in V(T_n)).  The certified ordered initial segments put
+\(V(T_j)\), and all support vertices considered below, inside \(V(T_n)\).
+
+Let (v\in V(T_j)) satisfy the first hypothesis.  No PE between stages
+(j) and (n) is supported at (v): a PE there has index at least (j),
+and (v\in V(T_j)) gives (m(v)\leq j), so such an index would belong
+to the active set \noderef{ExtensionBaseActiveIndices}.  Apply
+\noderef{HkuUnsupportedVertexColors} to the full interval.  It yields
+\(\overline\varphi_{j-1}(v)=\overline\varphi_n(v)\), which combines
+with (4) to prove (1).
+
+For the class (L(w)), apply \noderef{SupportingPEStoredIntersection}
+to its exact enumeration, with terminal bound (n).  It gives
+\[
+                  \overline\varphi_n(w)\cap\mathcal S_w
+                  =\{\delta_p\}.                              \tag{5}
+\]
+Equation (4) at (w) changes the left side of (5) to
+\(\overline\sigma_n(w)\cap\mathcal S_w\), proving (2).
+
+Apply \noderef{SupportingPEMissingTransport} to the same enumeration.
+Its endpoint identity is
+\[
+ \overline\varphi_{i_0-1}(w)
+   =(\overline\varphi_{i_p}(w)\setminus\{\delta_p\})
+      \cup\{\gamma_0\}.                                     \tag{6}
+\]
+Exactness of the enumeration says there is no PE supported at (w)
+between (j) and (i_0-1), nor between (i_p+1) and (n).
+Two applications of \noderef{HkuUnsupportedVertexColors} therefore give
+\[
+ \overline\varphi_{j-1}(w)=\overline\varphi_{i_0-1}(w),
+ \qquad
+ \overline\varphi_{i_p}(w)=\overline\varphi_n(w).             \tag{7}
+\]
+The range equality with \noderef{ExtensionBaseSupportClass} ensures in
+particular that (i_0\geq j), so both applications use the indicated
+ordered intervals without an index shift.  Substitute (7) and then (4)
+into (6).  The result is exactly (3), completing (a4) and the proof.
+\end{proof}

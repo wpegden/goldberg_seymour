@@ -1,0 +1,113 @@
+\begin{lemma}[Extension-base Part I(1) and the support-class order]
+Let \(T\) be an \(n\)-rung ETT, let its terminal iteration \(n\) be a PE
+with supporting vertex \(v_n\), and put \(j=m(v_n)\).  Let \(L\) be the
+active index set from \noderef{ExtensionBaseActiveIndices}.  Assume the
+following explicit lower-rung instance of technical assertion (v).  For
+every \(a<r\leq n\), every
+\((T_r,D_{r-1},\varphi_{r-1})\)-stable proper coloring \(\pi\), every
+defective color \(\delta\) of \(T_r\) under \(\pi\), and every
+non-first vertex \(x\) of
+(I[\partial_{\pi,\delta}(T_r)]), if (m(x)\leq a), then
+
+\[
+ x\preceq v_a
+\]
+
+for each PE or SE supporting/extension vertex (v_a).  In Lean,
+``non-first'' is supplied by an explicit earlier boundary-color vertex,
+and (x\preceq v_a) means equality or
+\noderef{TreeVertexOrder} in (T_r).
+
+Then the following statements hold.
+
+\begin{enumerate}
+\item If (s,t\in L) and (s<t), then (v_t\preceq v_s) in the
+      displayed order of (T).
+\item For every (s\in L),
+      (m(v_s)=j) and (v_n\preceq v_s).
+\item If (s,t\in L), (v_s\ne v_t), and (v_s\prec v_t), then
+      (t<s).  Consequently, after the distinct support vertices are
+      named (w_1\prec\cdots\prec w_\kappa), every index in the class
+      of (w_h) is larger than every index in the class of (w_i)
+      whenever (h<i), and (v_n=w_1).
+\end{enumerate}
+These are Part I(1) and precisely the class-order consequences used from
+Part I(3).
+\end{lemma}
+\begin{proof}
+Fix (s,t\in L) with (s<t).  Membership in
+\noderef{ExtensionBaseActiveIndices} gives
+\[
+ j\leq s<t,\qquad \Theta_s=\Theta_t=\mathrm{PE},qquad
+ m(v_t)\leq j.                                                   \tag{1}
+\]
+Inspect the certificate at iteration (t), supplied by
+\noderef{TashkinovSeries}.  The equality
+\(\Theta_t=\mathrm{PE}\) eliminates the initial, SE, and RE constructors
+of \noderef{TashkinovSeriesStep}.  In its PE constructor, write
+\(\pi_{t-1}\) for the selected coloring, (f_t) for the selected edge,
+and \(\delta_t\) for its color.  The fields of
+\noderef{MaximumDefectiveChoice} say that \(\pi_{t-1}\) is proper,
+leaves precisely (e_0) uncolored, is
+((T_t,D_{t-1},\varphi_{t-1}))-stable, and that (f_t) is a defective
+boundary edge incident with (v_t), colored \(\delta_t\).
+
+Expanding \noderef{DefectiveEdge} and \noderef{DefectiveColor}, the
+\(\delta_t\)-boundary contains at least two distinct edge identities.
+Choose one different from (f_t), and let (x) be its endpoint in
+(T_t).  Properness, in the sense of \noderef{IsProperEdgeColoring},
+forces (x\ne v_t): otherwise the two distinct incident edges would
+have the same color.  Hence (x) and (v_t) are distinct
+\(\delta_t\)-boundary vertices, as defined by
+\noderef{BoundaryColorVertex}.  Each is a defective vertex by
+\noderef{DefectiveVertex}.  The maximality field of
+\noderef{MaximumDefectiveChoice}, applied to (x) and the same selected
+coloring, gives (x\prec_{T_t}v_t).  Thus (v_t) is not the first
+vertex of (I[\partial_{\pi_{t-1},\delta_t}(T_t)]).
+
+By (1), (m(v_t)\leq j\leq s).  Apply the stated lower-rung assertion
+(v) to the ETT ending at (T_t), the coloring \(\pi_{t-1}\), the
+defective color \(\delta_t\), the non-first vertex (v_t), and the PE
+support (v_s).  It yields
+
+\[
+                         v_t\preceq_{T_t}v_s.                    \tag{2}
+\]
+
+Every certified step makes its old tree an ordered initial segment of
+its new tree by \noderef{TashkinovSeriesStep} and
+\noderef{TreeSequenceInitialSegment}; the two terminal segment fields of
+\noderef{ExtendedTashkinovTree} then embed (T_t) order-preservingly in
+(T).  Therefore (2) is also (v_t\preceq_Tv_s).  This proves the
+first assertion.
+
+The terminal PE support (v_n) lies in (T_n) by the defective-vertex
+field of its PE certificate.  Hence (j=m(v_n)\leq n), and the terminal
+index belongs to (L).  For (s\in L), either (s=n), when the desired
+order is equality, or the first assertion with (t=n) gives
+\(v_n\preceq_Tv_s\).  The definition
+\noderef{ETTFirstAppearanceIndex} takes the least ladder stage containing
+a vertex.  All ladder stages are ordered initial segments of (T), as
+just observed.  Thus a stage containing (v_s) also contains every
+vertex preceding (v_s), in particular (v_n); consequently
+\(m(v_n)\leq m(v_s)\).  Active membership gives the reverse inequality
+\(m(v_s)\leq j=m(v_n)\).  Hence (m(v_s)=j), proving the second
+assertion.
+
+Finally take distinct active supports (v_s,v_t) with
+\(v_s\prec_Tv_t\).  If (s=t), the exact chosen-vertex field at that
+single PE slot gives (v_s=v_t), contrary to the hypothesis.  If
+\(s<t\), the first assertion gives \(v_t=v_s\) or
+\(v_t\prec_Tv_s\); both alternatives contradict respectively
+distinctness or asymmetry of the strict order induced by the
+duplicate-free vertex list in \noderef{TreeVertexOrder}.  Trichotomy of
+the natural indices therefore leaves only (t<s).
+
+Order the distinct supports as
+\(w_1\prec\cdots\prec w_\kappa\).  Applying the preceding conclusion to
+one index from the classes of (w_h,w_i), with (h<i), shows that every
+index of the earlier vertex (w_h) is larger than every index of
+(w_i).  Since the terminal index is larger than every other active
+index, its support must be the earliest class vertex (w_1).  This is
+exactly the asserted consequence of Part I(3).
+\end{proof}

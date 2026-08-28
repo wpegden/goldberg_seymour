@@ -1,0 +1,47 @@
+\begin{lemma}[Claim 4.1(a2): controlled internal and tree-edge colors]
+Let \(j\leq n\) be positive series indices.  Suppose \(\sigma_n\) is a
+proper coloring leaving exactly \(e_0\) uncolored and is
+\((T_n,D_n,\varphi_n)\)-stable.  If an exact edge identity \(f\) is
+internal to \(T_j\),
+\[
+ \varphi_{j-1}(f)=c,
+ \qquad c\in\overline\varphi_{j-1}(T_j)\cup D_{j-1},
+\]
+then
+\[
+                         \sigma_n(f)=\varphi_{j-1}(f).          \tag{1}
+\]
+In particular, (1) holds for every displayed edge identity of \(T_j\),
+including its distinguished first edge \(e_0\).
+\end{lemma}
+\begin{proof}
+Fix (f,c) as in the statement.  Every internal edge of (T_j) is
+incident with (T_j), so the hypotheses of
+\noderef{SameColorSeriesPreserved} apply at the initial index (j).  Use
+its internal-edge conclusion over the interval through (n).  It gives
+\[
+                         \varphi_n(f)=\varphi_{j-1}(f)=c.       \tag{2}
+\]
+Iterating the two inclusions in
+\noderef{HkuMissingStoredMonotone} along the ordered series gives
+\[
+ \overline\varphi_{j-1}(T_j)\cup D_{j-1}
+ \subseteq \overline\varphi_n(T_n)\cup D_n.                    \tag{3}
+\]
+The same ordered initial-segment relations show that (f), already
+incident with (T_j), is incident with (T_n).  By (2)--(3), its
+\(\varphi_n\)-color is in the controlling set of the terminal stability
+hypothesis.  The edge clause of \noderef{StableColoring} therefore gives
+\(\sigma_n(f)=\varphi_n(f)\).  Combining this with (2) proves (1).
+
+Now let (f) be a displayed edge of (T_j).  If it is the first edge,
+\noderef{TreeSequence} identifies it with (e_0), and both colorings give
+it value \(\mathrm{none}\) by \noderef{IsOneEdgeUncolored}.  Otherwise,
+the first inclusion of \noderef{HkuTreeColorsControlled}, applied at
+stage (j), says that its \(\varphi_{j-1}\)-color belongs to
+\(\overline\varphi_{j-1}(T_j)\cup D_{j-1}\).  Its two endpoints are
+displayed vertices by the attachment field of \noderef{TreeSequence}, so
+the edge is internal to (T_j) according to \noderef{InternalEdges}.
+The first part of the proof applies and yields (1).  This covers every
+displayed edge identity and proves Claim 4.1(a2).
+\end{proof}

@@ -1,0 +1,131 @@
+\begin{lemma}[Extension-base Part I(2): delta-color exclusion]
+Use the setup of \noderef{ExtensionBaseSupportOrder}: the terminal
+iteration \(n\) is a PE with support \(v_n\), \(j=m(v_n)\), and \(L\)
+is the active set.  Let the Lean index called \(jSlot\) represent the
+manuscript stage \(j\), so its coloring and tree are
+\(\varphi_{j-1}\) and \(T_j\).
+
+Assume explicitly that every earlier stage needed below has the two
+lower-rung conclusions from (4.1): its vertex set is elementary under
+its generating coloring (technical assertion (i)), and the
+maximum-defective order assertion (v) has the form stated in
+\noderef{ExtensionBaseSupportOrder}.  Then, for all (s,t\in L) with
+(s\leq t),
+\[
+ \delta_t\notin\overline\varphi_{s-1}(T_s),
+ \qquad \delta_t\ne\gamma_s.                                  \tag{1}
+\]
+Moreover, for every (t\in L),
+\[
+                  \delta_t\notin\overline\varphi_{j-1}(T_j).  \tag{2}
+\]
+The gamma and delta colors in Lean are tied to the exact optional fields
+of their PE slots; neither conclusion is an additional hypothesis.
+\end{lemma}
+\begin{proof}
+We first note a certified fact valid at every PE slot (r):
+\[
+                  \delta_r\notin
+                  \overline\varphi_{r-1}(T_r).                 \tag{3}
+\]
+Indeed, eliminate the certificate at (r) using
+\noderef{TashkinovSeries} and the equality
+\(\Theta_r=\mathrm{PE}\).  In the PE constructor of
+\noderef{TashkinovSeriesStep}, the selected coloring \(\pi_{r-1}\)
+from \noderef{MaximumDefectiveChoice} is
+((T_r,D_{r-1},\varphi_{r-1}))-stable, and its selected connecting edge
+is a \(\delta_r\)-colored boundary edge.  If \(\delta_r\) were missing
+at a vertex of (T_r) under \(\varphi_{r-1}\), the vertex clause of
+\noderef{StableColoring} would make it missing there under
+\(\pi_{r-1}\).  The old tree is
+\(\varphi_{r-1}\)-closed by the PE certificate.  Stability preserves
+both its vertexwise missing sets and every incident edge whose old color
+lies in the controlling set, so the usual two applications of
+\noderef{sc2} transfer this closedness to \(\pi_{r-1}\).  That contradicts
+the displayed \(\delta_r\)-boundary edge.  This proves (3).
+
+Fix (s,t\in L) with (s\leq t).  If (s=t), the first assertion of
+(1) is (3).  The PE rule \noderef{ParallelExtensionColor} makes
+\(\gamma_s\) missing at the supporting vertex under the selected
+coloring, and stability makes it missing there under
+\(\varphi_{s-1}\).  Hence
+\(\gamma_s\in\overline\varphi_{s-1}(T_s)\), whereas (3) excludes
+\(\delta_s\) from that set; therefore
+\(\delta_s\ne\gamma_s\).
+
+Suppose now that (s<t), and assume for a contradiction that
+\(\delta_t\in\overline\varphi_{s-1}(T_s)\).  Choose
+\(u\in V(T_s)\) at which \(\delta_t\) is missing.  Since (t\leq n)
+and (s<t), this (T_s) is an earlier-rung stage, so the explicit
+lower-rung assertion (i) says that its vertex set is elementary under
+\(\varphi_{s-1}\).  By \noderef{ColoredVertexSetElementary}, no other
+vertex of (T_s) misses \(\delta_t\).  Thus, for every
+\(x\in V(T_s)\setminus\{u\}\), the definition
+\noderef{MissingColors} supplies an incident edge (f_x) with
+\(\varphi_{s-1}(f_x)=\delta_t\).
+
+The PE certificate at (s) says that (T_s) is closed under
+\(\varphi_{s-1}\).  Since \(\delta_t\) is missing at \(u\), closedness
+\noderef{ColoredVertexSetClosed} excludes every
+\(\delta_t\)-colored boundary edge.  Hence each exact identity (f_x)
+is internal to (T_s), in the sense of \noderef{InternalEdges}.
+Apply \noderef{SameColorSeriesPreserved} over the interval from (s) to
+just before (t).  Its internal-edge clause gives
+\[
+                 \varphi_{t-1}(f_x)=\delta_t.                  \tag{4}
+\]
+The inclusions in \noderef{HkuMissingStoredMonotone}, iterated over the
+same interval, put \(\delta_t\) in the missing-plus-stored controlling
+set at (T_t).  Therefore the selected stability and then the second
+stability fields of the PE certificate at (t) preserve (4).  Write
+\(\pi'_{t-1}\) for that second stable coloring.  We have proved that
+every (x\in V(T_s)\setminus\{u\}) is incident with an internal
+\(\delta_t\)-edge under \(\pi'_{t-1}\).  Properness consequently
+prevents any such (x) from also being a
+\(\delta_t\)-boundary vertex.
+
+By \noderef{ExtensionBaseSupportOrder}, whose explicit lower-rung
+assertion (v) is among the present hypotheses,
+\(v_t\preceq v_s\).  The certified ordered initial-segment relations
+from \noderef{TashkinovSeriesStep} and
+\noderef{TreeSequenceInitialSegment} imply that every vertex of (T_t)
+preceding (v_t) lies in (T_s): indeed (v_s\in V(T_s)), and
+\(v_t\preceq v_s\).
+
+It remains to compare this with the maximum-defective choice at (t).
+Its selected \(\delta_t\)-boundary set is defective.  The second stable
+coloring controls \(\delta_t\), so its exact \(\delta_t\)-boundary set is
+the same; this follows directly from the edge clause of
+\noderef{StableColoring}, with symmetry supplied by \noderef{sc2}.
+Thus it contains (v_t) and at least one other boundary vertex (y).
+The maximality field of \noderef{MaximumDefectiveChoice}, applied to the
+second stable coloring after forgetting the one extra controlled color,
+gives (y\prec v_t).  Hence both (v_t) and (y) lie in (T_s).
+If (u=v_t), then (y\in V(T_s)\setminus\{u\}) is a boundary vertex,
+contrary to the preceding paragraph.  If (u\ne v_t), then (v_t)
+itself gives that contradiction.  This proves
+\(\delta_t\notin\overline\varphi_{s-1}(T_s)\).
+
+The PE rule \noderef{ParallelExtensionColor} and selected stability make
+\(\gamma_s\) a member of
+\(\overline\varphi_{s-1}(T_s)\).  The exclusion just proved therefore
+gives \(\delta_t\ne\gamma_s\), completing (1).
+
+For (2), the finite set (L) is nonempty because it contains the
+terminal PE index.  Choose its least member (s_0).  We have just shown
+that \(\delta_t\notin\overline\varphi_{s_0-1}(T_{s_0})\) for every
+(t\in L).  Between (j) and (s_0-1), no PE can be supported at a
+vertex of (T_j): such a support would have first-appearance index at
+most (j), hence would define an earlier member of (L).  Apply
+\noderef{HkuUnsupportedVertexColors} separately at every vertex of
+(T_j).  It identifies that vertex's missing-color set under
+\(\varphi_{j-1}\) with its set under \(\varphi_{s_0-1}\).  The ordered
+initial-segment fields identify (T_j) with the corresponding prefix of
+(T_{s_0}).  Taking the union over its vertices gives
+\[
+ \overline\varphi_{j-1}(T_j)
+   =\overline\varphi_{s_0-1}(T_j)
+   \subseteq\overline\varphi_{s_0-1}(T_{s_0}).
+\]
+The already established exclusion at (s_0) now proves (2).
+\end{proof}
