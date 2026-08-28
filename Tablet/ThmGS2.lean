@@ -37,6 +37,7 @@ import Tablet.SupportingPEMissingTransport
 import Tablet.SupportingPEStoredIntersection
 import Tablet.ThmScheide
 import Tablet.TashTree
+import Tablet.TashkinovAugmentationSequencePreservesTashkinovTree
 import Tablet.TashkinovClosure
 import Tablet.TashkinovClosureExists
 import Tablet.TashkinovClosureVertexSetUnique

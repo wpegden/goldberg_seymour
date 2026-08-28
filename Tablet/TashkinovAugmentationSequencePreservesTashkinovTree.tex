@@ -1,0 +1,50 @@
+\begin{lemma}
+Let $(G,e_0,\varphi)$ be fixed.  If $T$ is a Tashkinov tree with respect
+to $e_0$ and $\varphi$, and a tree-sequence $T'$ is obtained from $T$ by a
+Tashkinov augmentation sequence under $\varphi$, then $T'$ is also a
+Tashkinov tree with respect to $e_0$ and $\varphi$.
+\end{lemma}
+\begin{proof}
+By \noderef{TashkinovAugmentationSequence}, the passage from $T$ to $T'$
+is a reflexive-transitive sequence of one-step augmentations.  We induct on
+that sequence.  For the reflexive case there is no change, so the assertion
+is precisely the assumed Tashkinov-tree property of $T$ from
+\noderef{TashkinovTree}.
+
+For the induction step, suppose that $A$ is already a Tashkinov tree, that
+$B$ is obtained from $A$ by one augmentation, and that the remaining
+augmentation sequence starts at $B$.  It suffices to show that $B$ is a
+Tashkinov tree and then apply the induction hypothesis to the remaining
+sequence.  Write $m$ for the length of $A$.  By
+\noderef{TashkinovAugmentation}, $B$ has length $m+1$, $A$ is an ordered
+initial segment of $B$, and the new last edge of $B$ has some color $c$
+belonging to the set of colors missing on $A$.
+
+Consider an edge of $B$ with index $j\geq 1$.  If $j<m$, it is an old edge
+of $A$.  The edge-entry equality in
+\noderef{TreeSequenceInitialSegment} identifies the $j$-th edge of $B$
+with the $j$-th edge of $A$.  Since $A$ is a Tashkinov tree,
+\noderef{TashkinovTree} supplies a color $d$ of this edge and an index
+$i<j$ such that $d$ is missing at the $i$-th vertex of $A$.  The
+vertex-entry equality in \noderef{TreeSequenceInitialSegment} identifies
+that vertex with the $i$-th vertex of $B$.  The same $i$ and $d$ therefore
+witness the Tashkinov-tree condition for the $j$-th edge of $B$.  Notice
+that $i<j<m$ gives both required finite-index bounds: $i$ is an index among
+the first $j$ vertices, and its transported vertex index is below
+$m+2=|V(B)|$.
+
+It remains to treat the only other possible index, namely $j=m$, the new
+last edge.  Its displayed color is $c$.  Expanding
+\noderef{TreeMissingColors}, membership of $c$ means that there is a vertex
+$v$ in the vertex set of $A$ at which $c$ is missing in the sense of
+\noderef{MissingColors}.  Expanding \noderef{TreeSequenceVertexSet}, choose
+$q\in\{0,\ldots,m\}$ with $v$ equal to the $q$-th vertex of $A$.  Since
+$q\leq m=j$, the same natural number defines an element of the finite index
+type for the first $j+1$ vertices required by
+\noderef{TashkinovTree}.  Since $A$ is an initial segment of $B$, its
+$q$-th vertex is also the $q$-th vertex of $B$; hence $c$ is missing there.
+The length equality for the augmentation identifies the $j$-th edge of
+$B$ with its new last edge, so that edge has color $c$.  Thus $q$ and $c$
+witness the Tashkinov-tree condition at $j=m$.  This proves that $B$ is a
+Tashkinov tree and completes the induction.
+\end{proof}
