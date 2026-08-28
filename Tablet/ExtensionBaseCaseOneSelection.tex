@@ -1,0 +1,115 @@
+\begin{lemma}[Case 1: the first vertex and equations (13)--(15)]
+Use manuscript stages \(j=m(v_n)\leq n\), represented in Lean by
+distinct zero-based predecessor slots \(j_{\rm slot}\leq q\), with
+\(q.\mathrm{val}+1=n\) and
+\(j_{\rm slot}.\mathrm{val}+1=j\).  Let
+\[
+ L_1=\{1_1<\cdots<1_{p+1}=n\}
+\]
+be the exact class of active PE slots supported at \(v_n\), with exact
+fields \(\gamma_{1_{a+1}}=\gamma_a\),
+\(\delta_{1_{a+1}}=\delta_a\), and
+\(S_{1_{a+1}}=\{\gamma_a,\delta_a\}\).  Assume
+\[
+ \gamma_{a+1}=\delta_a\quad(0\leq a<p),
+ \qquad \gamma_0,\delta_0,\ldots,\delta_p
+             \text{ are pairwise distinct}.                  \tag{4}
+\]
+Let \(T'_j\), with its displayed closure certificate, be the elementary
+closure supplied by \noderef{ExtensionBaseClosure}.  Suppose Case 1 holds:
+\[
+ \overline\varrho_1(T'_j-v_n)\cap
+          \bigcup_{i\in L_1}S_i\ne\varnothing.               \tag{C1}
+\]
+Assume also the Claim 4.3 missing-color equality on
+\(T_j-v_n\), the elementariness of \(T_j\) under
+\(\varphi_{j-1}\), the Part I(2) exclusions
+\(\delta_a\notin\overline\varphi_{j-1}(T_j)\), and
+\[
+ \gamma_0\in\overline\varphi_{j-1}(v_n),\qquad
+ \overline\varrho_1(v_n)\cap\bigcup_{i\in L_1}S_i
+       =\{\delta_p\}.                                        \tag{U}
+\]
+
+Then there are a first vertex \(u\) in the order of \(T'_j-v_n\) and
+a least position \(b\) such that
+\(\gamma_b\in\overline\varrho_1(u)\).  No earlier
+\(\gamma_a\), \(a<b\), is missing at \(u\), and every other vertex
+of \(T'_j-v_n\) meeting the displayed support-color union is either
+\(u\) or occurs after \(u\).  Moreover,
+\[
+                         u\in V(T'_j)-V(T_j),                 \tag{13}
+\]
+\[
+ \overline\varrho_1(T'_j(u)-u)\cap
+  \left(\bigcup_{i\in L_1}S_i-\{\delta_p\}\right)
+                         =\varnothing,                         \tag{14}
+\]
+and, for \(L_1^*=\noderef{ExtensionBaseCaseOneIndices}\),
+\[
+ \delta_p\notin\bigcup_{i\in L_1^*}S_i,qquad
+ \overline\varrho_1(v_n)\cap
+       \bigcup_{i\in L_1^*}S_i=\varnothing.                  \tag{15}
+\]
+\end{lemma}
+\begin{proof}
+Put \(S(L_1)=\bigcup_{i\in L_1}S_i\).  By (C1), the finite set
+\[
+ A=\{x\in V(T'_j)\setminus\{v_n\}:
+          \overline\varrho_1(x)\cap S(L_1)\ne\varnothing\}
+\]
+is nonempty.  The duplicate-free vertex list in
+\noderef{TreeSequence} gives
+a strict total order on its vertex set, as encoded by
+\noderef{TreeVertexOrder}.  Therefore \(A\) has a first member \(u\).
+This gives \(u\ne v_n\), the asserted minimality property, and the
+membership witness \(u\in V(T'_j)\).
+
+Equation (U) puts \(\delta_p\) in
+\(\overline\varrho_1(v_n)\).  Since \(V(T'_j)\) is elementary under
+\(\varrho_1\), the definition
+\noderef{ColoredVertexSetElementary}, applied to the distinct vertices
+\(v_n,u\), shows that \(\delta_p\notin
+\overline\varrho_1(u)\).  Choose
+\(c\in\overline\varrho_1(u)\cap S(L_1)\).  By the exact stored-pair
+identities and (4), every color of \(S(L_1)\) is one of
+\[
+                    \gamma_0,\delta_0,\ldots,\delta_p,
+\]
+and \(\delta_a=\gamma_{a+1}\) for \(a<p\).  Since \(c\ne\delta_p\),
+it follows that \(c=\gamma_b\) for some \(0\leq b\leq p\).  Choose the
+least such \(b\).  Then
+\(\gamma_b\in\overline\varrho_1(u)\), while no
+\(\gamma_a\) with \(a<b\) is missing at \(u\).
+
+We prove (13).  If \(b=0\), then \(\gamma_b=\gamma_0\) is missing at
+\(v_n\) under \(\varphi_{j-1}\) by hypothesis.  The vertices of
+\(T_j\) are elementary under that coloring, so no other vertex of
+\(T_j\) misses \(\gamma_0\).  If \(b>0\), equation (4) gives
+\(\gamma_b=\delta_{b-1}\), and the Part I(2) hypothesis says that this
+color is missing at no vertex of \(T_j\) under
+\(\varphi_{j-1}\).  Thus in either case \(u\ne v_n\) and
+\(\gamma_b\) is not missing at \(u\) if \(u\in V(T_j)\), because the
+Claim 4.3 agreement hypothesis identifies the two missing-color sets at
+every vertex of \(T_j-v_n\).  This contradicts the choice of \(b\), so
+\(u\notin V(T_j)\), proving (13).
+
+For (14), take a vertex \(x\) of the prefix \(T'_j(u)-u\).  If
+\(x\ne v_n\), then \(x\) occurs strictly before \(u\), so minimality
+of \(u\) gives
+\(\overline\varrho_1(x)\cap S(L_1)=\varnothing\).  If
+\(x=v_n\), equation (U) says that the same intersection is exactly
+\(\{\delta_p\}\).  After deleting \(\delta_p\) from the color side,
+both cases have empty intersection.  Taking the union over the vertices
+in \noderef{TreeVerticesBefore} proves (14).
+
+It remains to prove (15).  By definition,
+\(L_1^*\) consists of the positions \(a<b\).  Its stored colors belong
+to \(\{\gamma_0,\delta_0,\ldots,\delta_{b-1}\}\).  The injectivity in
+(4) makes \(\delta_p\) distinct from every color in this list; hence
+\(\delta_p\notin\bigcup_{i\in L_1^*}S_i\).  Intersect the containment
+\(\bigcup_{i\in L_1^*}S_i\subseteq S(L_1)\) with (U).  The intersection
+can contain only \(\delta_p\), which has just been excluded, so it is
+empty.  This is the second assertion of (15), and completes all the
+Case 1 selection properties.
+\end{proof}

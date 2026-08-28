@@ -53,6 +53,13 @@ import Tablet.ExtensionBaseClaim43MissingColors
 import Tablet.ExtensionBaseClaim43TreeEdges
 import Tablet.ExtensionBaseClaim43EdgeEffects
 import Tablet.ExtensionBaseClaim43
+import Tablet.ExtensionBaseCaseOneIndices
+import Tablet.ExtensionBaseClosure
+import Tablet.ExtensionBaseCaseOneSelection
+import Tablet.ExtensionBaseAlgorithmBTrace
+import Tablet.ExtensionBaseAlgorithmBInvariant
+import Tablet.ExtensionBaseAlgorithmB
+import Tablet.ExtensionBaseClaim44
 import Tablet.StrongInterchangeableImpliesInterchangeable
 import Tablet.StrongInterchangeabilityKempePreserved
 import Tablet.ThmScheide

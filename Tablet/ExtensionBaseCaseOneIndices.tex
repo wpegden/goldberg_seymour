@@ -1,0 +1,23 @@
+\begin{definition}
+Given an ETT, a map
+\(\mathtt{indices}:\operatorname{Fin}(p+1)\to\operatorname{Fin}(n)\),
+and a position \(b\in\operatorname{Fin}(p+1)\), define the prefix-slot
+set to be the image of the positions \(a<b\).  In the extension-base
+Case 1 application, \(\mathtt{indices}\) is the exact increasing
+enumeration
+\[
+                  L_1=\{1_1<1_2<\cdots<1_{p+1}\}
+\]
+of the active PE indices supported at the terminal vertex \(v_n\).  If the Case 1 color selected at a vertex
+\(u\) is \(\gamma_r=\gamma_{1_{b+1}}\), define
+\[
+             L_1^*=\{1_1,\ldots,1_b\}
+                  =\{1_a\in L_1:a<b+1\}.
+\]
+Thus \(L_1^*=\varnothing\) when \(b=0\).  In that application, the map
+contains zero-based predecessor slots: \(\mathtt{indices}(a).\mathtt{val}+1\)
+is the manuscript index \(1_{a+1}\).  The definition filters the position
+type by \(a<b\) and then takes its image under this exact enumeration, so
+it retains the certified slot identities rather than merely their natural
+numbers.
+\end{definition}

@@ -1,0 +1,106 @@
+\begin{lemma}[Part IV, Algorithm (B) and invariant (16)]
+Use the Case 1 data from
+\noderef{ExtensionBaseCaseOneSelection}.  Let
+\(1_1<\cdots<1_{p+1}\) be its strictly increasing finite list of exact
+PE slots, all supported at \(v_n\); in the extension-base application
+this is the exact class \(L_1\) and \(1_{p+1}=n\).  The chosen missing color at \(u\) is
+\(\gamma_{1_{b+1}}\), no earlier gamma in this list is missing at
+\(u\), and
+\(L_1^*=\{1_1,\ldots,1_b\}\).  Assume the exact gamma, delta, stored-pair,
+PE-kind, and supporting-vertex fields, the chain identities
+\(\gamma_{1_{a+2}}=\delta_{1_{a+1}}\), and their stated distinctness.
+Assume that every pair indexed by \(L_1^*\) is strongly interchangeable
+under \(\varrho_1\), that \(T_j\) is an ordered initial segment of each
+corresponding \(T_t\), and that (15) holds at \(v_n\).  If
+\(\varrho_1\) is proper and leaves exactly \(e_0\) uncolored, then there
+is an \noderef{ExtensionBaseAlgorithmBTrace} satisfying
+\noderef{ExtensionBaseAlgorithmBInvariant}.
+
+Equivalently, Algorithm (B) can be carried out in decreasing order on
+the exact set \(L_1^*\), and before every iteration \(B(t)\):
+\(\delta_t\) is missing at \(u\); the switched path contains at most the
+single vertex \(v_n\) of \(T_t\), with \(v_n\) not an end; and every
+unprocessed pair remains strongly interchangeable after the switch.
+\end{lemma}
+\begin{proof}
+If \(b=0\), then \(L_1^*=\varnothing\).  Take the trace of length zero
+whose only coloring is \(\varrho_1\).  Properness, the exact-one-uncolored
+condition, and the final survivor clause are immediate from the
+hypotheses.  Hence suppose \(b>0\).
+
+List the exact predecessor slots in decreasing position order:
+\[
+ t_0=1_b>t_1=1_{b-1}>\cdots>t_{b-1}=1_1.                    \tag{1}
+\]
+Strict increase of the original enumeration proves strict decrease in
+(1), and the image equality is exactly
+\noderef{ExtensionBaseCaseOneIndices}.  Define
+\(\varrho^0=\varrho_1\) and recursively set
+\[
+ \varrho^{a+1}=\noderef{TwoColorComponentSwap}
+   (\varrho^a,\gamma_{t_a},\delta_{t_a},u).                   \tag{2}
+\]
+The exact field equalities at the listed slots and (1)--(2) define an
+\noderef{ExtensionBaseAlgorithmBTrace}.  We verify its invariant by
+induction on \(a\).
+
+At the first slot \(t_0=1_b\), the chain identity gives
+\(\delta_{t_0}=\gamma_{1_{b+1}}\), which is missing at \(u\) by the
+Case 1 choice.  Its other color \(\gamma_{t_0}\) is not missing at
+\(u\), by minimality of \(b\).  Switching the component therefore makes
+\(\gamma_{t_0}\) missing at \(u\).  This is
+\(\delta_{t_1}\) when a next slot exists.  Repeating the same argument
+down (1) proves inductively that, immediately before slot \(t_a\),
+\(\delta_{t_a}\) is missing and \(\gamma_{t_a}\) is present at \(u\).
+The pairwise distinctness of
+\(\gamma_0,\delta_0,\ldots,\delta_p\) ensures that later switches do not
+prematurely alter an earlier gamma.  This proves the missing-color part
+of (16).
+
+By hypothesis and \noderef{ETTStrongInterchangeable}, the current pair is
+strongly interchangeable before its
+first possible use; the survivor induction below preserves that fact at
+subsequent steps.  Since its delta is missing and its gamma is present at
+\(u\), its two-color component contains an edge and has \(u\) as an
+endpoint.  The finite spanning-path statement
+\noderef{TwoColorComponentSpanningPath} therefore gives
+\noderef{TwoColorPathComponent}.  Suppose that the component also
+contains a vertex \(x\in V(T_{t_a})\setminus\{v_n\}\).  Strong
+interchangeability makes the component through \(x\) a
+\noderef{TwoColorComponentCycle}.  It is the same connected component as
+the \noderef{TwoColorPathComponent} through \(u\), contradicting the
+endpoint of the latter.  Hence the path meets \(T_{t_a}\) in at most
+\(v_n\).
+
+Both colors of the current pair belong to the stored-color union over
+\(L_1^*\).  Equation (15), as stated in the terminal-no-missing
+hypothesis, says that neither is missing at \(v_n\) under
+\(\varrho_1\).  Earlier switches only use colors in the same union and,
+by the just-proved intersection property, can meet \(T_{t_a}\) only at
+\(v_n\).  At such an internal vertex the switch exchanges its two
+incident component edges, so it preserves the fact that both colors are
+present.  Inductively neither current color is missing at \(v_n\).
+Thus, if \(v_n\) lies on the current component, its node has two distinct
+neighbors in \noderef{TwoColorIncidenceGraph}; it is not an end.  This is
+the remaining path assertion in (16).
+
+The switch preserves properness by
+\noderef{TwoColorComponentSwapProper}.  It exchanges two
+\(\mathsf{some}\)-values and changes no \(\mathsf{none}\)-value, so the
+same edge \(e_0\) remains uniquely uncolored.  Let \(s\) be an
+unprocessed slot after switching at \(t_a\).  All slots have the same
+support \(v_n\), and decreasing order gives \(s<t_a\).  The current
+component is a path, both the current and survivor pairs are strongly
+interchangeable, and their optional fields are the exact certified
+fields.  Therefore the same-support, earlier-index alternative of
+\noderef{StrongInterchangeabilityKempePreserved} applies and proves that
+the pair at \(s\) remains strongly interchangeable under
+\(\varrho^{a+1}\).
+
+This establishes every per-step clause and closes the induction.  After
+the last step the survivor statement is vacuous; more generally, the
+same induction proves the invariant's final clause for any exact slot
+absent from the trace.  Together with the fixed initial-segment
+hypotheses \(T_j\subseteq T_t\), all clauses of
+\noderef{ExtensionBaseAlgorithmBInvariant} hold.
+\end{proof}

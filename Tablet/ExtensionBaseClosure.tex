@@ -1,0 +1,70 @@
+\begin{lemma}[The closure after Claim 4.3 and equation (12)]
+Let \(B\) be the lower-rung ETT whose terminal ladder tree is
+\(T_{j-1}\), and suppose its terminal extension kind is PE.  Let
+\(T_j(v_n)\) be an exact ordered tree-sequence strictly extending
+\(T_{j-1}\) by Tashkinov augmentation under a proper coloring
+\(\varrho_1\).  Assume that \(\varrho_1\) is a mod-coloring of \(B\),
+that \(B\) has the maximum property, and that the lower-rung
+elementarity assertion applies to every corresponding ETT with the
+transported maximum property.
+
+Fix a finite color set \(S\); in the extension-base application this is
+the exact terminal-support color set
+\(S(L_1)=\bigcup_{i\in L_1}S_i\).  There is a closure \(T'_j\) of
+\(T_j(v_n)\) under \(\varrho_1\), together with an actual corresponding
+ETT certificate, such that this corresponding ETT has the maximum
+property and \(V(T'_j)\) is elementary under \(\varrho_1\).  Moreover,
+exactly one of the following finite alternatives holds:
+\[
+\overline\varrho_1(T'_j-v_n)\cap S\ne\varnothing,
+ \qquad
+ \overline\varrho_1(T'_j-v_n)\cap S=\varnothing.              \tag{12}
+\]
+Here \(j\) is a manuscript ladder stage.  It is not identified with the
+terminal manuscript stage \(n\), nor with either stage's zero-based Lean
+predecessor slot.
+\end{lemma}
+\begin{proof}
+By \noderef{TashkinovClosureExists}, choose a closure \(T'_j\) of the
+displayed seed \(T_j(v_n)\) under \(\varrho_1\).  Its
+\noderef{TashkinovClosure} certificate contains a finite
+\noderef{TashkinovAugmentationSequence} from the seed to \(T'_j\).
+Each individual augmentation, by \noderef{TashkinovAugmentation}, retains
+all old vertex and edge identities
+as an ordered initial segment.  Composing those initial-segment maps with
+the given map from \(T_{j-1}\) to the seed gives an ordered
+initial-segment map from \(T_{j-1}\) to \(T'_j\).  The seed was already
+strictly longer than \(T_{j-1}\), so this composite extension is strict.
+Transitivity of the augmentation relation also combines the given
+augmentation from \(T_{j-1}\) to the seed with the closure sequence to
+give an augmentation from \(T_{j-1}\) to \(T'_j\).
+
+The terminal-kind hypothesis is PE.  Consequently the universal PE
+clause in \noderef{ModColoring}, applied to the strict extension just
+constructed, supplies an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate \(C\) on
+\(T'_j\).  Apply \noderef{MaximumPropertyTransport} to the base maximum
+property, the mod-coloring hypothesis, and \(C\).  It proves that the
+replacement ETT carried by \(C\) has the maximum property.  The stated
+lower-rung elementarity hypothesis now applies to this very certificate
+and gives
+\[
+        \noderef{ColoredVertexSetElementary}
+              (G,\varrho_1,V(T'_j)).                           \tag{1}
+\]
+This proves all mathematical assertions in (12).
+
+Finally form the finite set
+\[
+ X=\overline\varrho_1(T'_j-v_n)\cap S
+   =\left(\bigcup_{v\in V(T'_j)\setminus\{v_n\}}
+                    \overline\varrho_1(v)\right)\cap S.
+\]
+Equality to the displayed union is the finite-set meaning of
+\noderef{MissingColors}.  A finite set is either empty or has an element.
+In the latter case \(X\ne\varnothing\); in the former case
+\(X=\varnothing\).  These are precisely Case 1 and Case 2, respectively,
+and they are mutually exclusive.  Thus the chosen closure carries the
+claimed split as well as its corresponding-ETT, maximum-property, and
+elementarity certificates.
+\end{proof}

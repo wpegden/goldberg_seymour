@@ -1,0 +1,129 @@
+\begin{lemma}[Claim 4.4: output of Algorithm (B)]
+Retain the Case 1 data, with manuscript stages
+\(j=m(v_n)\leq n\) represented by distinct zero-based Lean predecessor
+slots, and let \(\mathcal B\) be an
+\noderef{ExtensionBaseAlgorithmBTrace} satisfying
+\noderef{ExtensionBaseAlgorithmBInvariant}.  Write \(\varrho_1\) for
+its initial coloring and \(\varrho_2\) for its output.  Assume Claim
+4.3(b1), namely that \(\varrho_1\) is
+\((T_j(v_n)-v_n,D_{j-1},\varphi_{j-1})\)-stable.  Assume the exact
+containment of those before-\(v_n\) vertices in \(T_j\), the Case 1 fact
+\(u\notin V(T_j)\), the consequence of (14)--(15) saying that no color
+used by Algorithm (B) is missing on \(T'_j(u)-u\), and that \(T'_j\) is a closure
+of \(T_j(v_n)\) under \(\varrho_1\).  The seed edges are assumed to be
+the corresponding exact edge identities on \(T_j\).  Finally retain the
+least missing gamma at \(u\), the exact gamma and delta field equalities,
+the exact chain identities, and the exact stored-pair identities.
+
+Then:
+\begin{enumerate}
+\item[(c1)] \(\varrho_2\) is
+ \((T_j(v_n)-v_n,D_{j-1},\varphi_{j-1})\)-stable;
+\item[(c2)]
+ \(\overline\varrho_2(v)=\overline\varrho_1(v)\) for every
+ \(v\in V(T_j)\cup V(T'_j(u)-u)\), and
+ \(\varrho_2(f)=\varrho_1(f)\) for every exact displayed edge identity
+ \(f\) on \(T_j\) or on the prefix \(T'_j(u)\); and
+\item[(c3)] \(\gamma_{1_1}\in\overline\varrho_2(u)\).
+\end{enumerate}
+In the Lean statement, \(V(T'_j(u)-u)\) is
+\noderef{TreeVerticesBefore}, and an edge of \(T'_j(u)\) is expressed by
+its exact edge index lying strictly before the unique vertex index of
+\(u\).  Thus parallel edge identities are not collapsed.
+\end{lemma}
+\begin{proof}
+Write the trace as
+\[
+ \varrho^0=\varrho_1,\varrho^1,\ldots,\varrho^r=\varrho_2,
+\]
+and let \(t_a\) be the exact slot processed at step \(a\).  We first
+record the consequence of invariant (16) that will be used repeatedly:
+\[
+ P_u(\gamma_{t_a},\delta_{t_a},\varrho^a)
+ \text{ contains at most }v_n\text{ from }T_{t_a},
+ \text{ and }v_n\text{ is not an end}.                        \tag{18}
+\]
+The invariant also gives \(T_j\subseteq T_{t_a}\) as an ordered initial
+segment and says that every \(\varrho^a\) is proper.
+
+We prove (c1).  Let \(x\) occur before \(v_n\) in the displayed tree
+order.  By hypothesis \(x\in V(T_j)\), hence
+\(x\in V(T_{t_a})\), and \(x\ne v_n\).  Equation (18) therefore says
+that the switched component contains no vertex node \(x\).  It contains
+no edge node incident with \(x\) either: such an edge node is adjacent
+to \(x\) in \noderef{TwoColorIncidenceGraph}, so connectedness would
+put \(x\) in the component.  Thus every step fixes every edge incident
+with the before-\(v_n\) vertex set and fixes every missing-color set on
+that set.  Induction over the trace gives
+\[
+ \varrho_2(f)=\varrho_1(f)\text{ on all such incident edges},
+ \qquad
+ \overline\varrho_2(x)=\overline\varrho_1(x).                \tag{19}
+\]
+Expanding \noderef{StableColoringBeforeVertex}, compose (19) with the
+two clauses of the assumed stability of \(\varrho_1\).  The missing sets
+still agree with those of \(\varphi_{j-1}\), and every controlled
+incident edge still has its \(\varphi_{j-1}\)-color.  This is precisely
+(c1), the before-vertex form of the stability transitivity used in the
+paper.
+
+For the first assertion of (c2), begin with a vertex \(x\in V(T_j)\).
+If \(x\ne v_n\), (18) says that the component avoids \(x\), so the switch
+does not alter any incident edge or missing color there.  If \(x=v_n\),
+then the component either avoids \(v_n\) or passes through it.  In the
+latter case (18) says that \(v_n\) is not an end.  By
+\noderef{IsProperEdgeColoring} and
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, a proper two-color path
+then has one incident edge of each of its two colors at \(v_n\); the
+switch exchanges them, so the set of colors present, and hence
+\noderef{MissingColors}, is unchanged.  Induction proves missing-color
+equality on all of \(V(T_j)\).
+
+Now let \(x\) occur in \(T'_j(u)-u\).  At each step,
+\(\delta_{t_a}\) is missing at \(u\), so \(u\) is one end of the path.
+If the other end also occurred before \(u\) in \(T'_j\), then one of
+\(\gamma_{t_a},\delta_{t_a}\) would be missing at a vertex of that
+prefix.  Both colors belong to the stored-color union over \(L_1^*\),
+contradicting the hypothesis obtained from equations (14)--(15).
+Inductively, earlier switches have already preserved the missing sets on
+this prefix, so the same argument applies at every step.  Hence every
+prefix vertex on the path is internal; its two incident path colors are
+merely exchanged and its missing set is unchanged.  This proves the
+vertex half of (c2).
+
+We next prove the exact edge equalities.  If an edge identity displayed
+on \(T_j\) belonged to a switched component, both of its distinct
+endpoints would be vertices of \(T_j\subseteq T_{t_a}\).  The graph is
+loopless and \noderef{TreeSequence} retains both endpoint identities, so this
+would put two vertices of \(T_{t_a}\) on the component, contrary to
+(18).  Therefore every displayed edge of \(T_j\) is fixed at every
+step.
+
+Consider an edge of the prefix \(T'_j(u)\).  If it belongs to the seed,
+the stated exact seed-edge hypothesis identifies it with an edge of
+\(T_j\), so it is fixed by the preceding paragraph.  Otherwise, the
+\noderef{TashkinovClosure} certificate and
+\noderef{TashkinovAugmentationSequence}, through
+\noderef{TashkinovAugmentation}, show that this exact edge was
+adjoined by TAA under \(\varrho_1\).  Its \(\varrho_1\)-color was missing
+at a vertex of the tree prefix present immediately before it was added.
+Because the edge itself occurs before \(u\), that witnessing vertex also
+occurs before \(u\).  Equations (14)--(15) say that no color used by
+Algorithm (B) is missing there.  Thus the edge's \(\varrho_1\)-color is
+not one of the two colors at any switch.  It never belongs to a switched
+component and retains its exact value.  This proves the edge half of
+(c2), including the individual identities of parallel edges.
+
+Finally prove (c3).  If \(L_1^*=\varnothing\), then the selected position
+is the first position and the trace has length zero; the Case 1 selection
+already says that \(\gamma_{1_1}=\gamma_0\) is missing at \(u\) under
+\(\varrho_1=\varrho_2\).  Otherwise Algorithm (B) processes
+\(1_b,1_{b-1},\ldots,1_1\).  Before switching at \(1_a\), invariant
+(16) says that \(\delta_{1_a}\) is missing at \(u\).  The switch turns
+the incident \(\gamma_{1_a}\)-edge into a
+\(\delta_{1_a}\)-edge, so \(\gamma_{1_a}\) becomes missing.  The chain
+identity identifies this new missing color with the delta of the next
+slot.  Descending induction therefore ends with \(\gamma_{1_1}\)
+missing at \(u\) under \(\varrho_2\).  This is (c3), and all three parts
+of Claim 4.4 follow.
+\end{proof}
