@@ -81,101 +81,269 @@ its exact edge index lying strictly before the unique vertex index of
 \(u\).  Thus parallel edge identities are not collapsed.
 \end{lemma}
 \begin{proof}
-Write the trace as
+Expand the three pieces of Algorithm (B) data first.  By
+\noderef{ExtensionBaseCaseOneIndices}, the processed set is the image of
+the positions \(q<b\).  By \noderef{ExtensionBaseAlgorithmBTrace}, if
+\(r\) is the number of steps, then there are positions \(q_a<b\), exact
+slots \(t_a=\mathtt{indices}(q_a)\), colors
+\(\alpha_a,\beta_a\), and colorings
 \[
- \varrho^0=\varrho_1,\varrho^1,\ldots,\varrho^r=\varrho_2,
+ \varrho^0=\varrho_1,\varrho^1,\ldots,
+ \varrho^r=\varrho_2                                      \tag{18a}
 \]
-and let \(t_a\) be the exact slot processed at step \(a\).  We first
-record the consequence of invariant (16) that will be used repeatedly:
+such that the \(t_a\)'s have precisely that processed set as their image,
+are strictly decreasing, and
 \[
- P_u(\gamma_{t_a},\delta_{t_a},\varrho^a)
+ \varrho^{a+1}=\noderef{TwoColorComponentSwap}
+       (\varrho^a,\alpha_a,\beta_a,u).                      \tag{18b}
+\]
+The given strict increase of \(\mathtt{indices}\) makes it injective.
+The strict decrease of the trace slots makes the trace slot map injective.
+Consequently both sides of the trace's image equality have respectively
+\(r\) and \(b\) elements, so \(r=b\).  Moreover, if \(a<c\), strict
+decrease of the slots, their identities
+\(t_a=\mathtt{indices}(q_a)\), and strict increase of
+\(\mathtt{indices}\) give \(q_c<q_a\).  Thus the \(b\) distinct positions
+below \(b\) occur in their unique decreasing order:
+\[
+ q_0=b-1,\ q_1=b-2,\ldots,\ q_{b-1}=0,\qquad
+ t_a=\mathtt{indices}(q_a).                                \tag{18c}
+\]
+Here and below this display is omitted when \(b=0\).  The gamma and delta
+field clauses of the trace, its slot-identity clause, and the hypotheses
+on the corresponding ETT fields give, by injectivity of
+\(\mathtt{some}\),
+\[
+                 \alpha_a=\gamma(q_a),\qquad
+                 \beta_a=\delta(q_a).                      \tag{18d}
+\]
+This derives the exact slot and color identifications rather than merely
+matching their numerical subscripts.
+
+Now expand \noderef{ExtensionBaseAlgorithmBInvariant}.  Its first clause
+says that every \(\varrho^a\), including the output, is proper in the
+sense of \noderef{IsProperEdgeColoring}.  Before step \(a\), its second
+clause says all of the following:
+\[
+ \begin{gathered}
+ T_j\text{ is an ordered }\noderef{TreeSequenceInitialSegment}
+       \text{ of }T_{t_a},\qquad
+ \beta_a\in\overline{\varrho^a}(u),\\
+ \noderef{TwoColorPathComponent}
+       (G,\varrho^a,\alpha_a,\beta_a,u),                    \tag{18e}\\
+ x\in V(T_{t_a})\text{ and }x\in
+ \noderef{TwoColorComponent}(G,\varrho^a,
+       \alpha_a,\beta_a,u)\Longrightarrow x=v_n,\\
+ v_n\text{ in that component}\Longrightarrow
+ v_n\text{ has at least two neighbors there}.
+ \end{gathered}
+\]
+The last two lines say exactly that the path contains at most the one
+vertex \(v_n\) from \(T_{t_a}\), and, when it contains \(v_n\), that
+\(v_n\) is not an end.  Hence the manuscript's repeatedly used equation
+is now justified in its exact form:
+\[
+ P_u(\alpha_a,\beta_a,\varrho^a)
  \text{ contains at most }v_n\text{ from }T_{t_a},
- \text{ and }v_n\text{ is not an end}.                        \tag{18}
+ \text{ and }v_n\text{ is not an end}.                     \tag{18}
 \]
-The invariant also gives \(T_j\subseteq T_{t_a}\) as an ordered initial
-segment and says that every \(\varrho^a\) is proper.
 
-We prove (c1).  Let \(x\) occur before \(v_n\) in the exact stage-\(j\) tree
-order.  By the definition of this prefix \(x\in V(T_j)\), hence
-\(x\in V(T_{t_a})\), and \(x\ne v_n\).  Equation (18) therefore says
-that the switched component contains no vertex node \(x\).  It contains
-no edge node incident with \(x\) either: such an edge node is adjacent
-to \(x\) in \noderef{TwoColorIncidenceGraph}, so connectedness would
-put \(x\) in the component.  Thus every step fixes every edge incident
-with the before-\(v_n\) vertex set and fixes every missing-color set on
-that set.  Induction over the trace gives
+We will use the following elementary consequence of (18e).  The component
+is the connected component through the vertex-node \(u\), by
+\noderef{TwoColorComponent}; it contains an edge-node and its two colors
+are distinct, by \noderef{TwoColorPathComponent}.  Since \(\beta_a\) is
+missing at \(u\), no \(\beta_a\)-edge is incident with \(u\).  A path in
+the connected component from \(u\) to the asserted edge-node must begin
+with an incident edge-node.  By the definition of
+\noderef{TwoColorIncidenceGraph}, that edge has color \(\alpha_a\).
+Properness gives at most one incident edge of either fixed color, so this
+is the unique neighbor of \(u\) in the two-color component.  Thus \(u\)
+is an endpoint and has an \(\alpha_a\)-edge.
+
+For completeness, the other endpoint is also a vertex-node.  Properness
+gives every vertex-node at most one incident edge of each of the two
+colors, hence degree at most two, as recorded by
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  Every edge-node on the
+component has exactly its two distinct endpoint vertices as neighbors:
+its color is one of the selected colors and
+\noderef{LooplessMultigraph} makes its two endpoints distinct.
+In a finite connected graph of maximum degree two which has an edge and
+an endpoint, following the unique unused neighbor from that endpoint must
+terminate at one other endpoint; it cannot return to the first endpoint,
+since the first has degree one, and it cannot continue forever.  Edge-nodes
+have degree two, so the other endpoint is a vertex-node \(y\).  It has
+exactly one incident path edge.  If that edge has color \(\alpha_a\), then
+\(\beta_a\) is missing at \(y\); if it has color \(\beta_a\), then
+\(\alpha_a\) is missing at \(y\).  Indeed, an incident edge of the other
+color would be a second neighbor in the same component.
+
+The same argument also describes every non-end vertex-node \(x\) in the
+component.  Such an \(x\) has at least two neighbors and at most two.
+The two incident edges cannot have the same color by properness, so one
+has color \(\alpha_a\) and the other color \(\beta_a\).  The switch in
+\noderef{TwoColorComponentSwap} exchanges these two values.  All incident
+edges of other colors are fixed, and hence the set of colors present at
+\(x\), and therefore \noderef{MissingColors}, is unchanged.  At the
+endpoint \(u\), the same definition changes its unique
+\(\alpha_a\)-edge to \(\beta_a\); because \(\beta_a\) was absent and
+properness allowed only that one \(\alpha_a\)-edge, it makes
+\(\alpha_a\) missing at \(u\).
+
+We prove (c1).  Let \(x\) occur before \(v_n\) in the exact stage-\(j\)
+tree order.  Then \(x\ne v_n\).  The ordered initial-segment clause in
+(18e) places \(x\) in \(T_{t_a}\), so (18) says that \(x\) is not in the
+switched component.  If an \(\alpha_a\)- or \(\beta_a\)-edge incident
+with \(x\) were in that component, its adjacency to \(x\) in
+\noderef{TwoColorIncidenceGraph} would put \(x\) in it as well.  Thus
+such edges are outside the component; edges of all other colors are fixed
+directly by \noderef{TwoColorComponentSwap}.  Every step therefore fixes
+every edge incident with the before-\(v_n\) vertex set.  Induction on \(a\)
+in (18a) gives
 \[
- \varrho_2(f)=\varrho_1(f)\text{ on all such incident edges},
+ \varrho_2(f)=\varrho_1(f)\text{ on all those incident edges},
  \qquad
- \overline\varrho_2(x)=\overline\varrho_1(x).                \tag{19}
+ \overline\varrho_2(x)=\overline\varrho_1(x)               \tag{19}
 \]
-Expanding \noderef{StableColoringBeforeVertex}, compose (19) with the
-two clauses of the assumed stability of \(\varrho_1\).  The missing sets
-still agree with those of \(\varphi_{j-1}\), and every controlled
-incident edge still has its \(\varphi_{j-1}\)-color.  This is precisely
-(c1), the before-vertex form of the stability transitivity used in the
-paper.
+for every such \(x\).  Expanding
+\noderef{StableColoringBeforeVertex}, its assumed instance for
+\(\varrho_1\) says that the controlled incident edges agree with
+\(\varphi_{j-1}\) and that the missing sets agree with those under
+\(\varphi_{j-1}\).  Composing those two equalities with (19) verifies the
+two defining clauses for \(\varrho_2\).  This proves (c1).
 
-For the first assertion of (c2), begin with a vertex \(x\in V(T_j)\).
-If \(x\ne v_n\), (18) says that the component avoids \(x\), so the switch
-does not alter any incident edge or missing color there.  If \(x=v_n\),
-then the component either avoids \(v_n\) or passes through it.  In the
-latter case (18) says that \(v_n\) is not an end.  By
-\noderef{IsProperEdgeColoring} and
-\noderef{TwoColorIncidenceDegreeAtMostTwo}, a proper two-color path
-then has one incident edge of each of its two colors at \(v_n\); the
-switch exchanges them, so the set of colors present, and hence
-\noderef{MissingColors}, is unchanged.  Induction proves missing-color
-equality on all of \(V(T_j)\).
+We next prove the vertex half of (c2), simultaneously at every trace
+stage.  At stage zero the desired equality with \(\varrho_1\) is
+tautological.  Suppose it holds through stage \(a\).  If
+\(x\in V(T_j)\) and \(x\ne v_n\), (18) makes the component avoid \(x\),
+so the preceding incident-edge argument fixes its missing set.  If
+\(x=v_n\), either the component avoids \(x\), with the same conclusion,
+or the last clause of (18e) says that \(x\) is not an end.  The non-end
+calculation above then says that the switch exchanges one edge of each
+path color and again fixes its missing set.  Thus the induction preserves
+the missing sets on all of \(V(T_j)\).
 
-Now let \(x\) occur in \(T'_j(u)-u\).  At each step,
-\(\delta_{t_a}\) is missing at \(u\), so \(u\) is one end of the path.
-If the other end also occurred before \(u\) in \(T'_j\), then one of
-\(\gamma_{t_a},\delta_{t_a}\) would be missing at a vertex of that
-prefix.  Both colors belong to the stored-color union over \(L_1^*\),
-contradicting the hypothesis obtained from equations (14)--(15).
-Inductively, earlier switches have already preserved the missing sets on
-this prefix, so the same argument applies at every step.  Hence every
-prefix vertex on the path is internal; its two incident path colors are
-merely exchanged and its missing set is unchanged.  This proves the
-vertex half of (c2).
+Now take \(x\in\noderef{TreeVerticesBefore}(T'_j,u)\).  If \(x\) is not
+on the current component, the switch fixes its missing set.  If it is on
+the component but is not internal, then \(x\ne u\), so it must be the
+other endpoint just identified.  Consequently some
+\(c\in\{\alpha_a,\beta_a\}\) is missing at \(x\) under \(\varrho^a\).
+The simultaneous induction hypothesis converts this to
+\(c\in\overline{\varrho_1}(x)\).  On the other hand, the trace enumeration
+puts \(t_a\) in \noderef{ExtensionBaseCaseOneIndices}; (18c)--(18d) and
+the stored-pair hypothesis identify
+\[
+ \mathtt{ett.series.data.stored}(t_a+1)
+       =\{\alpha_a,\beta_a\}.
+\]
+Thus \(c\) belongs both to the missing-color union on the prefix and to
+the stored-color union over the processed slots, contradicting
+\(\mathtt{hprefixAvoids}\).  Therefore every prefix vertex which lies on
+the component is internal.  The internal-vertex calculation above shows
+that its present and missing sets survive the switch.  This completes the
+induction and proves
+\[
+ \overline\varrho_2(x)=\overline\varrho_1(x)
+ \quad\text{for every }x\in V(T_j)\cup V(T'_j(u)-u).         \tag{20}
+\]
 
-We next prove the exact edge equalities.  If an edge identity displayed
-on \(T_j\) belonged to a switched component, both of its distinct
-endpoints would be vertices of \(T_j\subseteq T_{t_a}\).  The graph is
-loopless and \noderef{TreeSequence} retains both endpoint identities, so this
-would put two vertices of \(T_{t_a}\) on the component, contrary to
-(18).  Therefore every displayed edge of \(T_j\) is fixed at every
-step.
+We turn to exact edge identities.  Fix a displayed edge \(f\) of \(T_j\)
+and a trace step \(a\).  By \noderef{TreeSequence}, \(f\) joins its new
+displayed vertex to a distinct earlier displayed vertex.  The
+\noderef{TreeSequenceInitialSegment} clause places both vertices in
+\(T_{t_a}\).  If the edge-node of \(f\) belonged to the switched
+component, adjacency would put both of these distinct vertices in that
+component, contrary to (18), which permits at most \(v_n\).  Hence the
+edge-node is outside the component whenever its color is a path color;
+if its color is not a path color, the switch definition fixes it directly.
+Induction over (18a) proves
+\[
+                    \varrho_2(f)=\varrho_1(f)               \tag{21}
+\]
+for every exact displayed edge of \(T_j\).
 
-Consider an edge of the prefix \(T'_j(u)\).  If it belongs to the seed,
-the displayed equality of the seed with
-\(\noderef{TreeSequencePrefix}(T_j,\mathtt{terminalPosition.val})\), together
-with the defining edge map of that prefix, identifies this exact edge with
-the edge of \(T_j\) having the same cast index.  It is therefore fixed by the
-preceding paragraph.  Otherwise, the
-\noderef{TashkinovClosure} certificate and
-\noderef{TashkinovAugmentationSequence}, through
-\noderef{TashkinovAugmentation}, show that this exact edge was
-adjoined by TAA under \(\varrho_1\).  Its \(\varrho_1\)-color was missing
-at a vertex of the tree prefix present immediately before it was added.
-Because the edge itself occurs before \(u\), that witnessing vertex also
-occurs before \(u\).  Equations (14)--(15) say that no color used by
-Algorithm (B) is missing there.  Thus the edge's \(\varrho_1\)-color is
-not one of the two colors at any switch.  It never belongs to a switched
-component and retains its exact value.  This proves the edge half of
-(c2), including the individual identities of parallel edges.
+It remains to prove (21) for an exact edge \(f\) of \(T'_j\) whose edge
+index is before the displayed occurrence of \(u\).  From
+\noderef{TashkinovClosure}, discard the final closedness clause and retain
+the \noderef{TashkinovAugmentationSequence} from the exact seed to
+\(T'_j\).  We spell out the needed induction through this
+reflexive-transitive sequence.  For the empty sequence every final edge
+is a seed edge.  For a sequence ending in one
+\noderef{TashkinovAugmentation} \(Q\to Q^+\), that definition says that
+\(Q^+\) has length \(\operatorname{length}(Q)+1\), that \(Q\) is an
+ordered \noderef{TreeSequenceInitialSegment} of \(Q^+\), and that the
+new last exact edge is the only edge not inherited from \(Q\).  Apply the
+induction hypothesis to every inherited edge and record this last edge
+with the immediately preceding tree \(Q\).  This proves the following
+exhaustive alternative for each exact edge identity of \(T'_j\): it is an
+edge inherited from the seed, or there is a unique augmentation stage at
+which it is the new last edge.  Uniqueness follows because every step adds
+one edge, every earlier tree is an ordered initial segment of every later
+one, and the edge map of a \noderef{TreeSequence} is injective.
 
-Finally prove (c3).  If \(L_1^*=\varnothing\), then the selected position
-is the first position and the trace has length zero; the Case 1 selection
-already says that \(\gamma_{1_1}=\gamma_0\) is missing at \(u\) under
-\(\varrho_1=\varrho_2\).  Otherwise Algorithm (B) processes
-\(1_b,1_{b-1},\ldots,1_1\).  Before switching at \(1_a\), invariant
-(16) says that \(\delta_{1_a}\) is missing at \(u\).  The switch turns
-the incident \(\gamma_{1_a}\)-edge into a
-\(\delta_{1_a}\)-edge, so \(\gamma_{1_a}\) becomes missing.  The chain
-identity identifies this new missing color with the delta of the next
-slot.  Descending induction therefore ends with \(\gamma_{1_1}\)
-missing at \(u\) under \(\varrho_2\).  This is (c3), and all three parts
-of Claim 4.4 follow.
+In the seed alternative, the equality
+\(\mathtt{hseed}\) and the defining edge map of
+\noderef{TreeSequencePrefix} identify \(f\) with the exact edge of
+\(T_j\) at the same cast index.  Equation (21) applies.
+
+In the augmentation alternative, let \(Q\to Q^+\) be the unique stage.
+The definition of \noderef{TashkinovAugmentation} supplies a color \(c\)
+such that
+\[
+              \varrho_1(f)=c,\qquad
+              c\in\noderef{TreeMissingColors}(\varrho_1,Q). \tag{22}
+\]
+By the definition of \noderef{TreeMissingColors}, choose a displayed
+vertex \(w\in V(Q)\) with
+\(c\in\overline{\varrho_1}(w)\).  Chaining the ordered initial-segment
+clauses identifies \(Q\) with the prefix of \(T'_j\) immediately before
+the edge \(f\) was appended.  If the final edge index of \(f\) is \(q\),
+then \(\operatorname{length}(Q)=q\), while every vertex of \(Q\) has
+index at most \(q\).  The hypothesis on \(f\) says \(q\) is strictly less
+than the vertex index of \(u\).  Hence the index of \(w\) is also strictly
+less than that of \(u\), so
+\[
+              w\in\noderef{TreeVerticesBefore}(T'_j,u).      \tag{23}
+\]
+This is the missing intermediate-prefix witness used implicitly by TAA
+in the manuscript.
+
+Fix any processed switch \(a\).  As above, the exact trace slot belongs
+to the processed set and its stored set is
+\(\{\alpha_a,\beta_a\}\).  Equations (22)--(23) put \(c\) in the left
+side of \(\mathtt{hprefixAvoids}\), while either equality
+\(c=\alpha_a\) or \(c=\beta_a\) would put it in the right side.  Their
+intersection is empty, so
+\[
+                       c\ne\alpha_a,\qquad c\ne\beta_a.      \tag{24}
+\]
+Induct now over the switches.  At stage zero (22) gives the exact value
+of \(f\).  If \(\varrho^a(f)=c\), then (24) and the definition of
+\noderef{TwoColorComponentSwap} show directly that
+\(\varrho^{a+1}(f)=c\), whether or not one first tests membership of its
+edge-node in the component.  Therefore
+\(\varrho_2(f)=c=\varrho_1(f)\).  Together with the seed alternative this
+proves the edge half of (c2), with no identification of parallel edges.
+
+Finally prove (c3).  If \(b=0\), then
+\noderef{ExtensionBaseCaseOneIndices} is empty.  The enumeration clause
+of \noderef{ExtensionBaseAlgorithmBTrace} forces \(r=0\), since a
+positive trace would contribute its first slot to the image.  The trace's
+initial-coloring clause therefore identifies its output with
+\(\varrho_1\).  The unique element \(b\) of \(\operatorname{Fin}(1)\) is
+zero, so the local hypothesis \(\mathtt{hselected}\) is exactly
+\(\gamma_0\in\overline{\varrho_1}(u)\), and hence gives (c3) directly.
+
+Suppose \(b>0\).  By (18c), the first processed position is \(b-1\).
+The chain identity gives
+\(\delta(b-1)=\gamma(b)\), which is missing at \(u\) initially by
+\(\mathtt{hselected}\).  More generally, before the step at position
+\(q\), (18e) says that \(\delta(q)\) is missing at \(u\).  The endpoint
+calculation following (18e), together with
+\noderef{TwoColorComponentSwap}, says that this step makes
+\(\gamma(q)\) missing at \(u\).  If \(q>0\), the chain identity rewrites
+this color as \(\delta(q-1)\), exactly the missing delta needed for the
+next position in the decreasing sequence (18c).  Descending induction
+through \(b-1,b-2,\ldots,0\) therefore leaves
+\(\gamma(0)=\gamma_{1_1}\) missing at \(u\) in the output coloring.
+This is (c3), and (c1), (c2), and (c3) together prove the claim.
 \end{proof}

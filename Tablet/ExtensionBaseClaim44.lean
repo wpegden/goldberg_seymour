@@ -1,17 +1,26 @@
 import Tablet.ExtensionBaseAlgorithmB
+import Tablet.ExtensionBaseAlgorithmBInvariant
+import Tablet.ExtensionBaseAlgorithmBTrace
+import Tablet.ExtensionBaseCaseOneIndices
 import Tablet.ExtensionBaseSupportClass
 import Tablet.ETTFirstAppearanceIndex
 import Tablet.IsProperEdgeColoring
+import Tablet.LooplessMultigraph
 import Tablet.MissingColors
 import Tablet.StableColoringBeforeVertex
+import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovClosure
+import Tablet.TreeMissingColors
 import Tablet.TreeSequence
+import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix
 import Tablet.TreeVerticesBefore
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
 import Tablet.TwoColorIncidenceGraph
+import Tablet.TwoColorPathComponent
 
 -- [TABLET NODE: ExtensionBaseClaim44]
 theorem ExtensionBaseClaim44 {V E : Type*}
