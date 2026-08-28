@@ -1,0 +1,61 @@
+\begin{lemma}[Scheide Proposition 4.2, full-trunk case]
+Let $(T,e_0,\varphi)$ be a balanced normal globally maximum $k$-triple in
+a finite loopless multigraph $G$, and suppose every vertex of $G$ is
+incident with an edge.  If $h(G)=t(G)$, then $G$ is elementary.
+\end{lemma}
+\begin{proof}
+Let $p$ be the chosen height of the normal triple.  By
+\noderef{BalancedGlobalMaximumTriple}, $p=h(G)$.  By
+\noderef{GlobalMaximumTriple}, $|V(T)|=t(G)$, while injectivity of the
+ordered vertices in \noderef{TreeSequence} and the definition
+\noderef{TreeSequenceVertexSet} give $|V(T)|=\operatorname{length}(T)+1$.
+The equality $h(G)=t(G)$ therefore gives
+$p=\operatorname{length}(T)+1$.  Thus all vertices and all non-first tree
+edges belong to the trunk recorded by \noderef{NormalGlobalMaximumTriple}.
+Its closing path lies in the $(\alpha,\beta)$ incidence graph, so each
+non-first tree edge is colored $\alpha$ or $\beta$.  In the terminology of
+\noderef{TreeUsedColors}, no color other than $\alpha,\beta$ is used on
+$T$.
+
+We next show that every vertex of $V(T)$ misses a free color.  The first
+edge of \noderef{TreeSequence} is $e_0$ and attaches the first two ordered
+vertices, so those vertices are exactly the two ends of $e_0$.  By
+\noderef{ScheideGlobalMaximumMissingCounts}, each of them misses at least
+two colors, whereas every other tree vertex misses at least one.  The
+normal-triple data say that $\alpha$ is missing at the first vertex and
+$\beta$ at the second.  The set $V(T)$ is elementary by
+\noderef{ScheideGlobalMaximumOrder}; hence $\beta$ is not missing at the
+first vertex, $\alpha$ is not missing at the second, and neither trunk
+color is missing at any other vertex.  Each end of $e_0$ therefore has a
+second missing color outside $\{\alpha,\beta\}$, and every other vertex
+has all its missing colors outside that set.  Since only
+$\alpha,\beta$ are used on non-first tree edges, such a color lies in the
+set \noderef{TreeFreeColors}.  This proves the assertion.
+
+Suppose for contradiction that a defective color $\delta$ exists.  Choose
+a tree vertex $u$ and a free color $\gamma$ missing at $u$, as supplied by
+the preceding paragraph.  The node
+\noderef{ScheideDefectiveChainPathExists} gives a full simple
+$(\delta,\gamma)$ chain from $u$ to a vertex outside $V(T)$.  Applying
+\noderef{ScheideDefectiveChainDepartureReturn} to this supplied chain gives
+its first departure and its last return, in the exact sense of
+\noderef{ScheideDepartureReturn}.  If $v$ is that last return, the same
+witnesses $u,\gamma,\delta$, the same full chain, and its last-return index
+satisfy \noderef{ScheideExitVertex}; thus
+$v\in\noderef{ScheideExitVertices}(T,\varphi)$.  But
+\noderef{ScheideExitNoFree} says that the missing-color set at an exit
+vertex is disjoint from the free-color set.  This contradicts the fact
+proved above that every vertex of $V(T)$, in particular $v$, misses a free
+color.  Hence the defective-color set is empty.
+
+Now \noderef{ScheideGlobalMaximumOrder} makes $V(T)$ elementary and
+\noderef{ScheideGlobalMaximumBoundaryFacts} makes it strongly closed.  The
+two ends of $e_0$ lie in $V(T)$ by the first attachment clause of
+\noderef{TreeSequence}.  Finally, the globally maximum condition contains
+the $k$-triple condition \noderef{KTriple}: $G$ is edge-critical,
+$\chi'(G)=k+1$, $\Delta(G)+1\leq k$, and $\varphi$ is proper with exactly
+$e_0$ uncolored.  Together with the stated no-isolated-vertex hypothesis,
+the witnesses $e_0,\varphi,V(T)$ satisfy condition (iv) of
+\noderef{egraph2}.  The implication (iv)$\Rightarrow$(i) in that theorem
+proves that $G$ is elementary.
+\end{proof}

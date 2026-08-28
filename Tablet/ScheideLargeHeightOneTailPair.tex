@@ -1,0 +1,94 @@
+\begin{lemma}[Scheide Proposition 4.2, one-tail-pair case]
+Let $(T,e_0,\varphi)$ be a balanced normal globally maximum $k$-triple in
+a finite loopless multigraph $G$, and suppose every vertex of $G$ is
+incident with an edge.  If $h(G)+2=t(G)$, then $G$ is elementary.
+\end{lemma}
+\begin{proof}
+Put $p=h(G)$.  The balanced condition
+\noderef{BalancedGlobalMaximumTriple} identifies $p$ with the chosen
+normal height.  The global equality in \noderef{GlobalMaximumTriple},
+vertex injectivity in \noderef{TreeSequence}, and
+\noderef{TreeSequenceVertexSet} give
+\[
+ \operatorname{length}(T)+1=|V(T)|=t(G)=p+2.
+\]
+Thus $T$ consists of the $p$ trunk vertices
+$y_0,\ldots,y_{p-1}$ followed by precisely two vertices $u_1,u_2$, with
+corresponding tail edges $f_1,f_2$.
+
+The first tail edge has index $p-1\geq1$.  The Tashkinov condition contained
+in \noderef{GlobalMaximumTriple} and defined in
+\noderef{TashkinovTree} therefore supplies a color $\gamma$ on $f_1$ which
+is missing at an earlier vertex.  Every earlier vertex lies in the trunk.
+By \noderef{ScheideGraphHeightOdd}, $p$ is odd.  Taking
+$j=(p+1)/2$ in the paired-tail clause of
+\noderef{BalancedGlobalMaximumTriple} is legitimate because
+$p<2j=p+1<p+2$; that clause gives
+$\varphi(f_2)=\varphi(f_1)=\gamma$.  Hence $\gamma$ is missing on the
+trunk and both tail edges have color $\gamma$.
+
+We verify carefully that $\gamma$ is not either trunk color.  Global
+maximality makes $T$ maximal for its fixed pair: a fixed-pair Tashkinov
+tree strictly containing $V(T)$ would have order larger than $t(G)$, by
+\noderef{TashkinovOrder} and \noderef{GlobalMaximumTriple}.  Apply
+\noderef{ScheideMaximalKempePath} to this fixed-pair maximum, to the
+Tashkinov tree $T$, to its first two vertices, and to the colors
+$\alpha,\beta$ recorded in \noderef{NormalGlobalMaximumTriple}.  It says
+that the full $(\alpha,\beta)$ component of those vertices is a path.
+The normal closing path is another simple path in that same component with
+the same ends.  A path has a unique simple path between its ends, so the
+normal closing path is the full component.  Its recorded vertex support is
+exactly $\{y_0,\ldots,y_{p-1}\}$.
+
+The first tail edge attaches $u_1$ to an earlier, hence trunk, vertex by
+\noderef{TreeSequence}.  If $\gamma$ were $\alpha$ or $\beta$, that edge
+and $u_1$ would belong to the full $(\alpha,\beta)$ component, contrary to
+the preceding support equality and vertex injectivity.  Thus
+$\gamma\notin\{\alpha,\beta\}$.  The second tail edge initially attaches
+$u_2$ either to a trunk vertex or to $u_1$.  The latter is impossible:
+$f_1\ne f_2$ by edge injectivity, and two distinct $\gamma$-colored edges
+incident with $u_1$ contradict the properness in
+\noderef{GlobalMaximumTriple}.  Consequently both tail edges attach their
+new vertices directly to the trunk.
+
+Every non-first trunk edge is an edge-node of the normal
+$(\alpha,\beta)$ closing path and is therefore colored $\alpha$ or
+$\beta$.  Since $\gamma$ differs from both, all earlier non-first trunk
+edges avoid $\gamma$.  We have now established the ordered block data,
+equal block color, attachment-to-base condition, missing-on-base condition,
+and earlier-edge avoidance required by
+\noderef{ScheideStructuralConfiguration} with $s=1$, base equal to the
+trunk, and the singleton color list $\Gamma=\{\gamma\}$.  The singleton
+list is injective automatically.
+
+It remains to verify the exit-covering field.  By
+\noderef{ScheideGlobalMaximumOrder}, $V(T)$ is elementary.  Therefore each
+of $\alpha,\beta,\gamma$ is missing at a unique tree vertex; denote a
+vertex missing $\gamma$ by $y_r$.  The used tree colors are contained in
+$\{\alpha,\beta,\gamma\}$, as just proved.  Every vertex other than $y_r$
+misses a free color.  Indeed, a vertex other than the two ends of $e_0$
+misses at least one color by
+\noderef{ScheideGlobalMaximumMissingCounts}; unless it is $y_r$, none of
+the three used colors can be missing there, because their missing
+occurrences are already prescribed.  At either end of $e_0$, the same
+counting lemma supplies at least two missing colors.  If that end is not
+$y_r$, at most its own one of $\alpha,\beta$ can be among those colors, so
+another missing color lies outside the three used colors.  In every case
+the color obtained is missing on $V(T)$ and absent from
+\noderef{TreeUsedColors}, hence belongs to
+\noderef{TreeFreeColors}.
+
+Now let $v\in\noderef{ScheideExitVertices}(T,\varphi)$.  By the definition
+\noderef{ScheideExitVertex}, $v\in V(T)$.  The theorem
+\noderef{ScheideExitNoFree} says that $v$ misses no free color.  The
+preceding paragraph forces $v=y_r$, and therefore $\gamma$ is missing at
+$v$.  This proves that every exit is covered by the sole color in
+$\Gamma$.
+
+Finally, the stated hypothesis supplies the no-isolated-vertex field, and
+the original balanced normal triple supplies the globally maximum field.
+Thus all fields, including the numerical length identity, of
+\noderef{ScheideStructuralConfiguration} have been proved for $s=1$.
+Applying \noderef{ScheideStructuralLemma} to this exact configuration
+gives that $G$ is elementary.
+\end{proof}

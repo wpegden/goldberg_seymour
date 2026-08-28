@@ -1,0 +1,39 @@
+\begin{theorem}[Scheide Proposition 4.2]
+Let $G$ satisfy the paper's criticality convention, here expressed as
+edge-criticality together with the requirement that every vertex is
+incident with an edge.  Suppose $\chi'(G)=k+1$ and
+$\Delta(G)+1\leq k$.  If
+\[
+ h(G)>t(G)-4,
+\]
+then $G$ is elementary.
+\end{theorem}
+\begin{proof}
+By \noderef{GlobalMaximumTripleExists}, choose a globally maximum triple.
+Then \noderef{ScheideBalancedExists} supplies a balanced normal globally
+maximum triple $(T,e_0,\varphi)$; write $h=h(G)$ and $t=t(G)$.
+
+The balanced condition identifies the normal height with $h$.  Its normal
+height is at most $\operatorname{length}(T)+1$ by
+\noderef{NormalGlobalMaximumTriple}.  On the other hand,
+\noderef{GlobalMaximumTriple} and vertex injectivity in
+\noderef{TreeSequence} give
+$\operatorname{length}(T)+1=|V(T)|=t$.  Hence $h\leq t$.
+The node \noderef{ScheideGraphHeightOdd}, applied to the initially chosen
+globally maximum triple, says that $h$ is odd.  The maximum-order fact
+\noderef{ScheideGlobalMaximumOrder}, applied to the balanced triple, says
+that $t$ is odd.
+
+The strict inequality $h>t-4$ says that the nonnegative difference
+$t-h$ is less than four.  Since $h$ and $t$ have the same parity, this
+difference is even.  Therefore it is either zero or two; equivalently,
+\[
+ h=t \qquad\text{or}\qquad h+2=t.
+\]
+In the first case, all the hypotheses of
+\noderef{ScheideLargeHeightFullTrunk} hold for the chosen balanced triple,
+so that lemma makes $G$ elementary.  In the second case,
+\noderef{ScheideLargeHeightOneTailPair} applies to the same triple and
+again makes $G$ elementary.  These two exhaustive parity cases prove the
+proposition.
+\end{proof}

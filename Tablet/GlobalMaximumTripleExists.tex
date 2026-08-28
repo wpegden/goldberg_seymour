@@ -1,0 +1,63 @@
+\begin{lemma}[Attainment of the Tashkinov order]
+Let $G$ be a finite loopless multigraph satisfying the tablet's
+edge-criticality condition.  If $\chi'(G)=k+1$ and
+$\Delta(G)+1\leq k$, then there are an edge identity $e_0$, a proper
+partial $k$-edge-coloring $\varphi$ leaving exactly $e_0$ uncolored, and a
+corresponding Tashkinov tree $T$ such that
+$|V(T)|=t(G)$.  Equivalently, $(T,e_0,\varphi)$ is globally maximum.
+\end{lemma}
+\begin{proof}
+First, $E(G)$ is nonempty.  If it were empty, the unique map from its edge
+type to partial colors in $\operatorname{Fin}(0)$ would be both proper and
+full, vacuously satisfying \noderef{IsProperEdgeColoring} and
+\noderef{HasKEdgeColoring}.  The minimum characterization
+\noderef{ChromaticIndexSpec} would then give $\chi'(G)=0$.  On the other
+hand, $\Delta(G)+1\leq k$ gives $1\leq k$, and the assumed equality gives
+$\chi'(G)=k+1\geq2$, a contradiction.  Choose an edge identity $e_0$.
+
+By \noderef{Critical}, deleting $e_0$ strictly lowers the chromatic index,
+so
+\[
+ \chi'(G-e_0)<\chi'(G)=k+1,
+ \qquad\text{hence}\qquad \chi'(G-e_0)\leq k.
+\]
+The existence half of \noderef{ChromaticIndexSpec} supplies a proper full
+edge-coloring of $G-e_0$ with colors in
+$\operatorname{Fin}(\chi'(G-e_0))$.  Embed this finite color set into
+$\operatorname{Fin}(k)$ using the displayed inequality.  On every retained
+edge use the embedded color, and give $e_0$ the value ``uncolored.''
+Call the resulting partial coloring $\varphi$.  Two distinct colored
+adjacent edge identities are retained identities of $G-e_0$, so their
+preimages had different colors and their embedded colors are still
+different.  Thus $\varphi$ is proper.  It is uncolored precisely on $e_0$,
+as required by \noderef{IsOneEdgeUncolored}.  Together with the three
+numerical hypotheses, this is exactly the $k$-triple condition
+\noderef{KTriple}.
+
+The equality $\chi'(G)=k+1$ also gives $\chi'(G)-1=k$.  Thus the color
+parameter in the attainable-order set defining \noderef{TashkinovOrder}
+is exactly the $k$ used by the triple just constructed.
+
+Write the unordered endpoint pair of $e_0$ as $\{x,y\}$.  The loopless law
+in \noderef{LooplessMultigraph} gives $x\ne y$.  Form the length-one tree
+sequence with ordered vertices $x,y$ and sole edge identity $e_0$.  The
+vertices are distinct, the sole edge attaches $y$ to the earlier vertex
+$x$, and the first-edge clause is immediate, so this is a
+\noderef{TreeSequence}.  Its \noderef{TashkinovTree} condition is vacuous,
+because there is no tree edge after the first one.  Consequently the set
+of attainable orders used in \noderef{TashkinovOrder} is nonempty; it
+contains the order of this two-vertex initial tree.
+
+For completeness, maximum attainment is not being inferred merely from
+the word ``maximum.''  Every tree sequence has pairwise distinct vertices
+by \noderef{TreeSequence}, so \noderef{TreeSequenceVertexSet} has
+cardinality at most $|V(G)|$.  Hence all attainable orders lie in the
+finite set $\{0,1,\ldots,|V(G)|\}$, and the preceding initial tree makes
+the attainable subset nonempty.  The finite set therefore has a largest
+member $m$, and \noderef{TashkinovOrder} defines $t(G)$ to be that member.
+Membership of $m$ in the attainable-order set yields witnesses
+$e$, $\psi$, and $S$ with the $k$-triple condition, the Tashkinov-tree
+condition, and $|V(S)|=m=t(G)$.  These three clauses are precisely
+\noderef{GlobalMaximumTriple}, so $(S,e,\psi)$ is the required globally
+maximum triple.
+\end{proof}
