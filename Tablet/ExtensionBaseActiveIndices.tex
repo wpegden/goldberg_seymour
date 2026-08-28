@@ -1,0 +1,15 @@
+\begin{definition}
+Given a vertex \(v_*\) of the final displayed ETT, put \(j=m(v_*)\) and
+define the active finite index set
+\[
+ L=\{s:j\leq s\leq n,\ \Theta_s=\mathrm{PE},\
+                    \ m(v_s)\leq j\}.
+\]
+In the extension-base argument, \(v_*\) is the supporting vertex \(v_n\)
+of the terminal PE, so this is exactly the manuscript's set \(L\).
+Lean stores noninitial rounds with zero-based indices.  Accordingly, an
+index \(q\in\operatorname{Fin}(n)\) belongs to this finite set exactly
+when \(j\leq q+1\), the positive slot \(q.\mathrm{succ}\) is a PE, and
+its exact chosen vertex \(v\), viewed in the final ETT, satisfies
+\(m(v)\leq j\).  The upper bound is supplied by the finite index type.
+\end{definition}

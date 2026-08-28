@@ -1,0 +1,54 @@
+\begin{lemma}[Extension-base Part I(4): colors in one support class]
+Let the active support class \(L(w)\) be nonempty and write its exact
+increasing enumeration as
+\[
+             i_1<i_2<\cdots<i_{p+1}.
+\]
+Assume this is also the exact enumeration, through the terminal round, of
+all PE slots supported at \(w\).  Write the certified gamma and delta fields
+at slot \(i_{a+1}\) as \(\gamma_a,\delta_a\).  Suppose the conclusion of
+Part I(2) is available in the form
+\[
+                 \delta_b\ne\gamma_a\qquad(0\leq a\leq b\leq p).
+\]
+Then
+\[
+ \gamma_{a+1}=\delta_a\qquad(0\leq a<p),
+\]
+and the \(p+2\) colors
+\[
+ \gamma_0,\ \delta_0=\gamma_1,\ \delta_1=\gamma_2,
+       \ldots,\ \delta_{p-1}=\gamma_p,\ \delta_p
+\]
+are pairwise distinct.  Equivalently, the function on
+\(\operatorname{Fin}(p+2)\) obtained by adjoining \(\gamma_0\) in front
+of the delta sequence is injective.
+\end{lemma}
+\begin{proof}
+The range condition for the displayed indices is the support-class
+definition \noderef{ExtensionBaseSupportClass}; the second exact-range
+hypothesis says that there are no omitted PEs supported at \(w\).  Apply
+\noderef{SupportingPEColorChain} to this increasing enumeration.  It gives
+\[
+                    \gamma_{a+1}=\delta_a
+                    \quad(0\leq a<p),                         \tag{1}
+\]
+using the exact gamma and delta fields from the hypotheses.
+
+Define \(c_0=\gamma_0\) and \(c_{b+1}=\delta_b\) for
+\(0\leq b\leq p\).  We prove directly that the \(c_r\) are pairwise
+distinct.  First, for every \(b\), Part I(2) with \(a=0\) gives
+\(c_{b+1}=\delta_b\ne\gamma_0=c_0\).
+
+Now take \(0\leq a<b\leq p\).  Since \(a+1\leq b\), Part I(2), with
+\(a+1\) in its first position and \(b\) in its second, gives
+\[
+                         \delta_b\ne\gamma_{a+1}.              \tag{2}
+\]
+Equation (1) identifies \(\gamma_{a+1}=\delta_a\).  Hence (2) says
+\(c_{b+1}=\delta_b\ne\delta_a=c_{a+1}\).  Together with the preceding
+comparison with \(c_0\), this handles every pair of distinct indices;
+reversing the pair handles the opposite order.  Thus the finite function
+\(c=\operatorname{Fin.cons}(\gamma_0,\delta)\) is injective, which is
+exactly the asserted distinctness and completes Part I(4).
+\end{proof}

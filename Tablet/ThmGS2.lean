@@ -36,6 +36,10 @@ import Tablet.ScheideStructuralLemma
 import Tablet.SupportingPEColorChain
 import Tablet.SupportingPEMissingTransport
 import Tablet.SupportingPEStoredIntersection
+import Tablet.ExtensionBaseSupportClass
+import Tablet.ExtensionBaseSupportClassColors
+import Tablet.StrongInterchangeableImpliesInterchangeable
+import Tablet.StrongInterchangeabilityKempePreserved
 import Tablet.ThmScheide
 import Tablet.TashTree
 import Tablet.Tchange
