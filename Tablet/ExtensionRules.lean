@@ -14,6 +14,7 @@ import Tablet.MaximumProperty
 import Tablet.MissingColors
 import Tablet.ModColoring
 import Tablet.ParallelExtensionColor
+import Tablet.PresentColors
 import Tablet.RevisitingExtensionCertificate
 import Tablet.SameColorSeriesPreserved
 import Tablet.StableColoring
@@ -35,6 +36,7 @@ import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentsDisjoint
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.sc1
 
 -- [TABLET NODE: ExtensionRules]
 theorem ExtensionRules {V E : Type*} [Fintype V] [Fintype E]

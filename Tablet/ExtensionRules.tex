@@ -114,12 +114,43 @@ coloring \(\pi_{n-1}\), its second coloring \(\pi'_{n-1}\), and colors
 \((T_n,D_{n-1},\varphi_{n-1})\)-stable, that \(\pi'_{n-1}\) is stable from
 \(\pi_{n-1}\) with control \(D_{n-1}\cup\{\delta_n\}\), and that
 \(\varphi_n\) is obtained by switching the
-\((\gamma_n,\delta_n)\)-component through \(v_n\).  Its exit witness says
-that this component meets \(T_n\) only in \(v_n\).  Therefore the switch
-changes no edge incident with \(T^*\) and no missing set at a vertex of
-\(T^*\).  Restricting both stated stability relations to \(T^*\), dropping
-the unused extra color \(\delta_n\), and composing their edge-value
-equalities and vertexwise missing-set equalities proves (2) in this case.
+\((\gamma_n,\delta_n)\)-component through \(v_n\).  Let \(R\) be the path
+from its certified \noderef{TreeExit} witness.  By
+\noderef{TreeExitPath}, \(R\) runs from a vertex outside \(T_n\) to \(v_n\)
+and has no other vertex of \(T_n\).
+
+We verify that \(R\) is the whole component, rather than infer this from
+the exit-path definition.  The rule \noderef{ParallelExtensionColor}
+makes \(\gamma_n\) missing at \(v_n\) under \(\pi_{n-1}\), and the vertex
+clause of \noderef{StableColoring} makes it missing there under
+\(\pi'_{n-1}\) as well.  The selected edge \(f_n\) in
+\noderef{MaximumDefectiveChoice} is incident with \(v_n\) and has
+\(\pi_{n-1}(f_n)=\delta_n\).  Because \(\delta_n\) belongs to the enlarged
+control set, the edge clause of the same stability relation gives
+\(\pi'_{n-1}(f_n)=\delta_n\).  Properness as defined in
+\noderef{IsProperEdgeColoring}, together with the missingness of
+\(\gamma_n\), therefore makes \(f_n\) the unique two-color incidence at
+\(v_n\); in particular \(\gamma_n\ne\delta_n\), and the tree end of \(R\)
+has degree one.  At the outside end,
+\noderef{TreeExitPath} makes one of the two colors missing, while the path
+edge incident there has the other color; properness again makes that the
+unique two-color incidence.  Every internal node of \(R\) already has its
+two path neighbors.  If the component contained a node outside \(R\), a
+shortest route from that node to \(R\) would add a third neighbor at an
+internal path node, contradicting
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, or a second neighbor at an
+endpoint, contradicting the endpoint's just-proved total degree one.  Hence
+\(R\) is the entire component, and it meets \(T_n\) only in \(v_n\).
+
+By \noderef{TwoColorComponentSwap}, the switch consequently changes no
+edge incident with \(T^*\): if a component edge were incident with a
+vertex \(w\) of \(T^*\), the corresponding incidence would put the
+vertex-node \(w\) in the same component, contrary to its intersection with
+\(T_n\).  It therefore changes no missing set at a vertex of \(T^*\).
+Restrict the two certified stability relations to \(T^*\), use the two
+clauses of \noderef{StableColoring}, drop the unused extra control color
+\(\delta_n\), and compose the resulting edge-value and vertexwise
+missing-set equalities.  This proves (2) when \(j=n\).
 
 Now suppose \(j<n\).  The same terminal certificate says that
 \(\pi_{n-1}\) is stable on \(T_n\), and hence on \(T_{n-1}\), relative to
@@ -199,25 +230,70 @@ definition \noderef{TwoColorComponentSwap} of the switch to
 The PE switch replaces the missing color \(\gamma_h\) at \(v_h\) by
 \(\delta_h\), so \(\delta_h\) is missing on \(T_{h+1}\) under
 \(\varphi_h\).  Local lower-rung assertion (ii) at rung \(h\), for the
-closed stage \(T_{h+1}\) therefore says that \(P\) is the unique
-\((\gamma_h,\delta_h)\)-path component meeting that stage.  Before the PE,
-the second coloring is closed on \(T_h\): this follows from the previous
-closedness clause of \noderef{TashkinovSeriesStep}, the equality of missing
-sets in \noderef{StableColoring}, and the same incident-edge argument as
-in \noderef{ColoredVertexSetClosed}.  The color \(\gamma_h\) is missing at
-\(v_h\), so elementariness of \(T_h\), supplied by local lower-rung
-assertion (i) at rung \(h-1\) (or directly by
-\noderef{TechnicalTheoremBase} when \(h=1\)) and
-transported through stability, makes it present at the distinct vertex
-\(v_n\).  The connecting color
-\(\delta_h\) occurs on a boundary edge of the closed tree, so it is not
-missing at any tree vertex and is also present at \(v_n\).  The component
-\(Q\) therefore has both colored incidences at \(v_n\), and is not
-isolated.  Properness in \noderef{IsProperEdgeColoring} and
+closed stage \(T_{h+1}\), and the definition
+\noderef{TreeInterchangeable}, says that the nontrivial path \(P\) is the
+unique \((\gamma_h,\delta_h)\)-path component meeting that stage.
+
+We next prove explicitly that the second pre-switch coloring
+\(\pi'_{h-1}\) is closed on \(T_h\).  The noninitial PE clause of
+\noderef{TashkinovSeriesStep} first says that \(T_h\) is closed under
+\(\varphi_{h-1}\) in the sense of \noderef{ColoredVertexSetClosed}.
+That clause and \noderef{MaximumDefectiveChoice} also say that all three
+colorings \(\varphi_{h-1},\pi_{h-1},\pi'_{h-1}\) are proper and leave the
+same edge \(e_0\) uncolored, so \noderef{sc1} applies to each of the two
+certified stability relations.  Let
+\(b\) be a boundary-edge identity whose color under the selected coloring
+\(\pi_{h-1}\) is a color \(c\) missing at a vertex of \(T_h\) under
+\(\pi_{h-1}\).  By \noderef{BoundaryEdges}, \(b\) is incident with
+\(T_h\).  The vertex clause of \noderef{StableColoring} makes \(c\)
+missing at the same vertex under \(\varphi_{h-1}\).  Apply the reverse-color
+disjunct of \noderef{sc1} to the certified stability from
+\(\varphi_{h-1}\) to \(\pi_{h-1}\): since the later color
+\(\pi_{h-1}(b)=c\) lies in the common tree-missing set, it gives
+\(\varphi_{h-1}(b)=\pi_{h-1}(b)=c\), contrary to the stated closedness of
+\(T_h\) under \(\varphi_{h-1}\).  Thus \(T_h\) is closed under
+\(\pi_{h-1}\).  Repeat the same argument for the certified stability from
+\(\pi_{h-1}\) to \(\pi'_{h-1}\): the vertex clause of
+\noderef{StableColoring} puts any later boundary color which is missing on
+the tree into the earlier tree-missing set, and the reverse-color disjunct
+of \noderef{sc1} forces the same earlier color on that exact boundary
+identity, contradicting the just-proved closedness under \(\pi_{h-1}\).
+Hence \(T_h\) is closed under \(\pi'_{h-1}\), again exactly as defined in
+\noderef{ColoredVertexSetClosed}.
+
+Local lower-rung assertion (i) at rung \(h-1\), or
+\noderef{TechnicalTheoremBase} when \(h=1\), says that \(T_h\) is
+elementary under \(\varphi_{h-1}\) in the sense of
+\noderef{ColoredVertexSetElementary}.  The vertex clauses of the two
+\noderef{StableColoring} relations preserve each individual missing-color
+set, so \(T_h\) is elementary under \(\pi'_{h-1}\).  Now \(\gamma_h\) is
+missing at \(v_h\), while \(v_h\ne v_n\).  The disjointness of the two
+missing sets at these distinct vertices therefore says that \(\gamma_h\)
+is not missing at \(v_n\).  By \noderef{MissingColors}, nonmissing means
+membership in the complementary set \noderef{PresentColors}; hence an
+edge incident with \(v_n\) has color \(\gamma_h\) under
+\(\pi'_{h-1}\).  By \noderef{MaximumDefectiveChoice}, the selected
+connecting identity \(f_h\) is a boundary edge of \(T_h\) with color
+\(\delta_h\) under \(\pi_{h-1}\); the edge clause of
+\noderef{StableColoring} fixes that exact value under \(\pi'_{h-1}\).
+If \(\delta_h\) were missing at any tree vertex, this exact
+boundary identity would contradict \noderef{ColoredVertexSetClosed}.
+Thus it is not missing at \(v_n\), and the same
+\noderef{MissingColors}--\noderef{PresentColors} conversion supplies an
+incident \(\delta_h\)-colored edge there.
+
+Both incident edge identities belong to the component \(Q\) through
+\(v_n\).  Since the switch affects only the disjoint component \(P\), they
+retain their colors under \(\varphi_h\).  Consequently \(Q\) has both
+colored incidences at \(v_n\) under \(\varphi_h\) and is nonisolated.
+Properness in \noderef{IsProperEdgeColoring} and
 \noderef{TwoColorIncidenceDegreeAtMostTwo} say that a finite nonisolated
-two-color component is a path or a cycle.  It cannot be a second path
-meeting \(T_{h+1}\), by that instance of lower-rung assertion (ii); hence
-\(Q\) is a two-color cycle.
+two-color component is a path or a cycle.  After the switch, \(P\) remains
+a nontrivial path component meeting \(T_{h+1}\), whereas \(Q\) is the
+distinct component through \(v_n\).  If \(Q\) were also a path, these
+would be two distinct path components meeting \(T_{h+1}\), contrary to
+the uniqueness clause in \noderef{TreeInterchangeable}.  Hence \(Q\) is a
+two-color cycle.
 
 Let \(r>h\) be the first slot which is not an RE.  Such an \(r\leq n\)
 exists because the terminal slot is a PE.  The priority and cycle fields of
