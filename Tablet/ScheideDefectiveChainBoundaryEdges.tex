@@ -13,41 +13,165 @@ The equality is between sets of edge identities, including distinct
 parallel edges.
 \end{lemma}
 \begin{proof}
-Let $X=V(T)$.  By
-\noderef{ScheideGlobalMaximumBoundaryFacts}, no $\gamma$-colored edge
-leaves $X$.  Since every edge-node on the two-color path has color
-$\alpha$ or $\gamma$, it follows immediately that every boundary edge-node
-on $P$ has color $\alpha$.  This gives the inclusion from right to left.
+Put $X=V(T)$, with $X$ understood as the vertex set supplied by
+\noderef{TreeSequenceVertexSet}.  We first prove the right-to-left
+inclusion.  Let $f\in\partial_G(X)$ and suppose that the edge-node of $f$
+lies in the support of $P$.  The ends of $P$ are vertex-nodes.  Hence this
+edge-node is incident along the walk with a vertex-node.  By
+\noderef{TwoColorIncidenceGraph}, its color under $\varphi$ is therefore
+either $\alpha$ or $\gamma$.  Since $\gamma$ is free,
+\noderef{TreeFreeColors} and \noderef{TreeMissingColors} show that
+$\gamma$ is missing at some vertex of $X$.  The missing-color clause of
+\noderef{ScheideGlobalMaximumBoundaryFacts} says that no boundary edge of
+$X$ has color $\gamma$.  Since $f$ is a boundary edge in the sense of
+\noderef{BoundaryEdges}, its color must be $\alpha$.  The definition
+\noderef{BoundaryColorEdges} now gives
+$f\in\partial_{\varphi,\alpha}(X)$.
 
-For the converse, suppose that an $\alpha$-colored boundary edge identity
-$f$ is not on $P$.  Its edge-node belongs to a different
-$(\alpha,\gamma)$-component $Q$, since $P$ spans the complete component of
-$u$ by the supplied hypothesis and
-\noderef{ScheideDefectiveChainPath}.  In particular $Q$ does not contain
-$u$.  The defective-color clause of
-\noderef{ScheideGlobalMaximumBoundaryFacts} gives a nonempty
-$\alpha$-boundary set.  Its missing-color clause therefore shows that
-$\alpha$ is missing at no vertex of $X$.  Also $X$ is elementary by
-\noderef{ScheideGlobalMaximumOrder}; since $\gamma$ is missing at $u$, it
-is present at every other vertex of $X$.  Properness, supplied by the
-$k$-triple clause of \noderef{GlobalMaximumTriple}, makes the incident
-edge of each present color unique.  Hence every vertex-node of $Q$ that
-lies in $X$ is incident in $Q$ with one $\alpha$-edge and one
-$\gamma$-edge and is not an end of $Q$.  Finally neither color is used on
-a tree edge by \noderef{ScheideGlobalMaximumUnused}.  Thus $Q$ contains
-no tree edge and has no end in $X$.  The colors $\alpha$ and $\gamma$ are
-distinct: $\alpha$ is present at $u$, whereas $\gamma$ is missing there.
+For the reverse inclusion, fix
+$f\in\partial_{\varphi,\alpha}(X)$ and suppose, for a contradiction, that
+the edge-node of $f$ does not lie on $P$.  By
+\noderef{BoundaryColorEdges}, $f\in\partial_G(X)$ and
+$\varphi(f)=\alpha$.  Let
+\[
+ Q=\noderef{TwoColorComponent}(G,\varphi;\alpha,\gamma,
+       \operatorname{inr}f)
+\]
+be the complete two-color incidence component through that particular
+edge identity.  The full-path clause of
+\noderef{ScheideDefectiveChainPath} identifies the support of $P$ with
+the complete component through the vertex-node $u$.  If $u$ belonged to
+$Q$, then $u$ and the edge-node of $f$ would be connected, so that edge-node
+would belong to the component through $u$ and hence to $P$, contrary to
+our assumption.  Thus $u\notin Q$; in particular $Q$ is distinct from the
+component displayed by $P$.
 
-Switch $\alpha$ and $\gamma$ on the entire component $Q$.  Properness is
-preserved by \noderef{TwoColorComponentSwapProper}.  The distinguished
-edge remains the unique uncolored edge because all edge-nodes of $Q$ are
-colored.  No displayed tree edge changes, and no missing-color witness
-used by the Tashkinov sequence is lost; hence the same sequence remains a
-Tashkinov tree for the switched coloring.  The edge identity $f$ now has
-color $\gamma$, while $\gamma$ remains missing at $u$.  Appending $f$ and
-its outside endpoint produces a Tashkinov tree with one more vertex.  This
-contradicts the global maximality clause of
-\noderef{GlobalMaximumTriple}.  Therefore every
-$\alpha$-colored boundary edge identity lies on $P$, proving the reverse
-inclusion and the claimed identity-wise equality.
+We record the two-color incidences at vertices of $X$.  The defective
+boundary clause of \noderef{ScheideGlobalMaximumBoundaryFacts} supplies
+at least one $\alpha$-colored boundary edge.  On the other hand,
+\noderef{ScheideGlobalMaximumOrder} says that $X$ is closed.  Unfolding
+closedness with \noderef{ColoredVertexSetClosed}, that boundary edge shows
+that $\alpha$ is not missing at any $x\in X$.  Since
+\noderef{MissingColors} is the complement of
+\noderef{PresentColors}, $\alpha$ is present at every vertex of $X$.
+The same maximum-order result says that $X$ is elementary.  By
+\noderef{ColoredVertexSetElementary}, the fact that $\gamma$ is missing
+at $u$ implies that it is not missing at any $x\in X\setminus\{u\}$;
+hence \noderef{MissingColors} and \noderef{PresentColors} show that
+$\gamma$ is present at each such $x$.
+
+Every present color at a vertex has exactly one incident edge identity.
+Existence is the defining witness in \noderef{PresentColors}.  For
+uniqueness, two distinct edges of the same color incident with one vertex
+would be adjacent by \noderef{Incident} and \noderef{AdjacentEdges}.  But
+the globally maximum hypothesis in \noderef{GlobalMaximumTriple} includes
+a \noderef{KTriple}, whose \noderef{IsProperEdgeColoring} clause forbids
+two distinct adjacent colored edges from receiving the same color.  In
+particular, at $u$ there is one $\alpha$-edge and no $\gamma$-edge, while
+at every $x\in X\setminus\{u\}$ there is exactly one edge of each color.
+This also proves $\alpha\ne\gamma$: $\alpha$ is present at $u$, whereas
+$\gamma\in\noderef{MissingColors}(G,\varphi,u)$.
+
+We next determine exactly what the switch on $Q$ does at the vertices of
+$X$.  Every edge-node in $Q$ has original color $\alpha$ or $\gamma$.
+Indeed, the node of $f$ has color $\alpha$ and is adjacent to its
+endpoints; every other edge-node in its connected component occurs on a
+nontrivial incidence walk, and \noderef{TwoColorIncidenceGraph} permits
+an incidence adjacency at an edge-node only for those two colors.  If a
+vertex-node $x\in X$ lies in $Q$, then $x\ne u$.  Its unique incident
+$\alpha$- and $\gamma$-edges are adjacent to it in the incidence graph,
+so both edge-nodes also lie in $Q$.  There are no other incident edge-nodes
+of $Q$ at $x$, by the preceding uniqueness and two-color observations.
+Thus switching $Q$ merely exchanges these two incident edges at $x$ and
+leaves the set of colors present there unchanged.  If instead
+$x\notin Q$, no edge-node of $Q$ is incident with $x$: such an incident
+two-colored edge-node would be adjacent to $x$ in
+\noderef{TwoColorIncidenceGraph} and would put $x$ in the same component.
+Consequently the switch changes no incident edge at such a vertex.
+
+Define the switched partial coloring explicitly by
+\[
+ \varphi'=\noderef{TwoColorComponentSwap}
+   (G,\varphi;\alpha,\gamma,\operatorname{inr}f).
+\]
+The preceding paragraph and the definition of
+\noderef{TwoColorComponentSwap} show, for every $x\in X$, that
+\[
+ \noderef{PresentColors}(G,\varphi',x)
+   =\noderef{PresentColors}(G,\varphi,x).
+\]
+Taking complements via \noderef{MissingColors} gives equality of the
+missing-color sets at every tree vertex.  In particular $\gamma$ remains
+missing at $u$.  Since $\alpha\ne\gamma$, the properness statement
+\noderef{TwoColorComponentSwapProper} applies and proves that $\varphi'$
+is proper.
+
+We also check the distinguished edge and all displayed tree edges.  The
+$k$-triple clause of \noderef{GlobalMaximumTriple}, expanded through
+\noderef{KTriple} and \noderef{IsOneEdgeUncolored}, says that
+$\varphi(e_0)$ is uncolored and every other edge is colored.  The swap in
+\noderef{TwoColorComponentSwap} fixes uncolored values, sends either of
+the two switched colors to the other color, and fixes all other values.
+Therefore $e_0$ is still uncolored under $\varphi'$, and every
+$e\ne e_0$ is still colored; $e_0$ remains the unique uncolored edge.
+
+Moreover, \noderef{ScheideGlobalMaximumUnused} says that both the
+defective color $\alpha$ and the free color $\gamma$ are absent from the
+used-color set \noderef{TreeUsedColors}.  Hence no displayed colored tree
+edge has either color.  Since every edge-node in $Q$ has one of those two
+colors, no displayed colored tree edge lies in $Q$; the first displayed
+edge is $e_0$ and is uncolored, so it does not lie in $Q$ either.  Thus
+every displayed tree-edge value is unchanged by the switch.
+
+It follows clause by clause that the old sequence $T$ is still a
+Tashkinov tree for $(e_0,\varphi')$.  Its vertices, edge identities,
+distinctness conditions, attachments, and first-edge identity are the
+same, so it is still the same \noderef{TreeSequence}.  For every displayed
+edge after the first, the old \noderef{TashkinovTree} witness consists of
+its color and an earlier vertex missing that color.  We have proved both
+that the displayed edge keeps its color and that the full missing-color
+set at every tree vertex is unchanged.  Hence every old witness remains
+valid under $\varphi'$.
+
+It remains to append $f$ and verify every new condition.  Since
+$f\in\partial_G(X)$, the definition \noderef{BoundaryEdges} supplies
+endpoints $x\in X$ and $y\notin X$ with
+$\operatorname{ends}(f)=\{x,y\}$.  Write the ordered data of
+\noderef{TreeSequence} as
+\[
+ T=(y_0,e_1,y_1,\ldots,e_n,y_n),
+ \qquad e_1=e_0,
+\]
+and form the exact appended sequence
+\[
+ T'=(y_0,e_1,y_1,\ldots,e_n,y_n,f,y).
+\]
+The vertex $y$ is new because $y\notin X$, while $x\in X$ is one of the
+earlier displayed vertices and so gives the required attachment of $f$.
+The edge identity $f$ is new: its edge-node lies in $Q$, whereas we proved
+that no displayed tree-edge node lies in $Q$.  All old vertices and edges
+remain pairwise distinct, the new ones are distinct from them, every old
+attachment is unchanged, and the first edge is still $e_1=e_0$.
+Therefore $T'$ satisfies every clause of \noderef{TreeSequence}, and its
+vertex set is $X\cup\{y\}$ with cardinality $|X|+1$.
+
+By the definition of the switch, the chosen identity $f$, which originally
+has color $\alpha$ and lies in $Q$, now has color $\gamma$.  The vertex
+$u\in X$ occurs earlier than the appended vertex, and we proved that
+$\gamma$ is still missing there.  Thus $u$ is the missing-color witness
+required by \noderef{TashkinovTree} for the new last edge $f$; all earlier
+edges retain the witnesses checked above.  Hence $T'$ is a Tashkinov tree
+for $(e_0,\varphi')$.
+
+Finally, the graph-criticality, chromatic-index equality, and maximum-degree
+inequality in \noderef{KTriple} do not depend on the coloring.  Together
+with the properness and unique-uncolored conclusions already proved, they
+show that $(G,e_0,\varphi')$ is again a $k$-triple.  Its chromatic-index
+equality gives $k=\chi'(G)-1$, so the definition
+\noderef{TashkinovOrder} applies to $T'$ and yields
+$|V(T')|\leq t(G)$.  But \noderef{GlobalMaximumTriple} gives
+$|X|=t(G)$, whereas the append construction gives
+$|V(T')|=|X|+1$.  This contradiction proves that the edge-node of every
+$f\in\partial_{\varphi,\alpha}(X)$ lies on $P$.  Together with the first
+inclusion, this proves the claimed equality of edge identities.
 \end{proof}
