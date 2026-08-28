@@ -1,0 +1,13 @@
+\begin{definition}
+For the PE choice made while processing (T_{i+1}), a color \(\gamma\)
+obeys the history-sensitive parallel-extension rule at the selected support
+vertex (v) if \(\gamma\) is missing at (v) under the selected coloring
+and one of the following mutually exhaustive alternatives holds.
+
+If an earlier positive PE index (h\leq i) has the same support vertex,
+then (h) is the latest such index and
+\(\gamma=\delta_h\).  If there is no earlier PE index at the same support
+vertex, \(\gamma\) is simply an arbitrary color missing at (v).  This is
+the rule for \(\gamma_n\) in Algorithm 3.1, with current iteration
+\(n=i+1\).
+\end{definition}

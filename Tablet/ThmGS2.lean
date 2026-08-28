@@ -1,6 +1,7 @@
 import Tablet.Critical
 import Tablet.DefectiveVertex
 import Tablet.Elementary
+import Tablet.ExtendedTashkinovTree
 import Tablet.LEM_extable
 import Tablet.MaximumDegree
 import Tablet.MissingColorIncidenceEndpoint

@@ -1,0 +1,50 @@
+\begin{definition}
+Fix a (k)-triple ((G,e_0,\varphi)) and finite indexed series data.  The
+inductive relation “the tuple at index (j) is an Algorithm 3.1 step” has
+the following four constructors.
+
+The initial constructor requires the given (k)-triple, makes the auxiliary
+(T_0) a one-edge tree-sequence rooted at (e_0), sets
+\(\varphi_0=\varphi\), (S_0=F_0=\varnothing), and all optional initial
+witnesses including \(\Theta_0\) to absent, and certifies (T_1) as a
+Tashkinov closure of (T_0) under \(\varphi_0\).
+
+Each noninitial constructor processes iteration (n=i+1).  It requires
+(T_n) to be closed but not strongly closed under the proper coloring
+\(\varphi_{n-1}\), which leaves exactly (e_0) uncolored, and requires the
+resulting (T_{n+1}) to strictly extend (T_n) as an ordered
+tree-sequence.
+
+The SE constructor first certifies that no revisiting extension is
+available and then records an admissible maximum-defective choice
+\((\pi_{n-1},v_n,f_n,u_n,\delta_n)\) for
+\((T_n,D_{n-1},\varphi_{n-1})\).  It requires that every proper coloring
+leaving (e_0) uncolored and stable for
+\((T_n,D_{n-1}\cup\{\delta_n\},\pi_{n-1})\) have disjoint sets of colors
+missing at (u_n) and on (T_n).  It then sets
+\(\varphi_n=\pi_{n-1}\), (S_n=\{\delta_n\}), (F_n=\{f_n\}), and
+\(\Theta_n=\mathrm{SE}\), and makes (T_{n+1}) a closure of the exact
+one-edge augmentation (T_n+f_n).
+
+The PE constructor likewise requires that no RE is available and records
+the same maximum-defective choice, but it certifies failure of the universal
+disjointness alternative.  It chooses \(\gamma_n\) by the
+history-sensitive PE rule, records a second proper coloring
+\(\pi'_{n-1}\) leaving (e_0) uncolored and stable for the enlarged exact
+stored-color set, and records that (v_n) is the corresponding
+\((\gamma_n,\delta_n)\)-exit.  It defines \(\varphi_n\) by switching the
+entire two-color incidence component of (v_n), requires the switched
+coloring to remain proper and leave exactly (e_0) uncolored, sets
+\(S_n=\{\delta_n,\gamma_n\}), (F_n=\{f_n\}), and
+\(\Theta_n=\mathrm{PE}\), and makes (T_{n+1}) a closure of (T_n)
+under \(\varphi_n\).  The connecting edge (f_n) is stored even though it
+need not belong to that closure.
+
+The RE constructor has priority over the other two: it takes an available
+RE certificate based at some earlier PE index (h), keeps
+\(\varphi_n=\varphi_{n-1}\), reuses
+\((\delta_h,\gamma_h)\), sets the exact finite sets
+\(S_n=\{\delta_h,\gamma_h\}) and (F_n=\{f_n\}), sets
+\(\Theta_n=\mathrm{RE}\), and makes (T_{n+1}) a closure of the exact
+augmentation (T_n+f_n).
+\end{definition}
