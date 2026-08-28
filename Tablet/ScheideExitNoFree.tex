@@ -7,45 +7,259 @@ For every globally maximum triple $(T,e_0,\varphi)$,
 Equivalently, no Scheide exit vertex misses a free color.
 \end{lemma}
 \begin{proof}
-Let $v\in F(T,e_0,\varphi)$.  By
-\noderef{ScheideExitVertex}, there are a tree vertex $u$, a color
-$\gamma$ missing at $u$, a defective color $\delta$, and a full
-$(\delta,\gamma)$-path $P$ from $u$ to an outside vertex $z$, with $v$ the
-last tree vertex on $P$.  Suppose that a free color $\alpha$ is missing at
-$v$.
+Fix $v\in F(T,e_0,\varphi)$ and suppose, toward a contradiction, that a
+color $\alpha$ belongs both to
+$\noderef{MissingColors}(G,\varphi,v)$ and to
+$\noderef{TreeFreeColors}(\varphi,T)$.  By the definition
+\noderef{ScheideExitVertices}, membership of $v$ in this finite set
+unfolds to the predicate \noderef{ScheideExitVertex}.  Unpack that
+predicate.  It supplies a vertex $u\in V(T)$, a color $\gamma$ missing at
+$u$, a defective color
+$\delta\in\noderef{DefectiveColors}(G,\varphi,V(T))$, an outside vertex
+$z$, and an incidence walk $P$ from $u$ to $z$.  The walk satisfies the
+full-path predicate \noderef{ScheideDefectiveChainPath} for
+$(T,\varphi,\delta,\gamma,u,z)$, and a specified occurrence of $v$ on
+$P$ lies in $V(T)$ while every later vertex-node of $P$ lies outside
+$V(T)$.  In particular, $P$ is simple, $z\notin V(T)$, and its support is
+exactly the $(\delta,\gamma)$-component through $u$.
 
-If $\alpha=\gamma$, elementariness from
-\noderef{ScheideGlobalMaximumOrder} forces $u=v$.  Apply
-\noderef{ScheideDefectiveChainDepartureReturn} to the full path $P$; it
-produces a first departure and a last later tree vertex $v_2$.  The exit
-witness says that $v$ is the last tree vertex on the same directed path,
-so $v_2=v$.  Now
-\noderef{ScheideDefectiveChainLastReturnNoFree}, with the free color
-$\gamma=\alpha$ and defective color $\delta$, says that $v_2=v$ misses no
-free color, a contradiction.
+First suppose that $\alpha=\gamma$.  The maximum-order facts
+\noderef{ScheideGlobalMaximumOrder} say that $V(T)$ is elementary.  If
+$u\ne v$, then the common color $\gamma=\alpha$ lies in the missing-color
+sets at the two distinct tree vertices $u$ and $v$, contrary to the
+definition \noderef{ColoredVertexSetElementary}.  Hence $u=v$.
+Furthermore, $\gamma=\alpha$ is free and missing at $u$, $\delta$ is
+defective, and $P$ has the required full-path property.  The lemma
+\noderef{ScheideDefectiveChainDepartureReturn} therefore gives a first
+outside occurrence and a later last returning tree vertex $v_2$, with
+indices satisfying \noderef{ScheideDepartureReturn}.  The exit witness
+for $v$ says that no tree vertex occurs later than its specified
+occurrence, while the last-return predicate says the same of the
+specified occurrence of $v_2$.  Comparing the two indices, either strict
+inequality would put one of $v,v_2$ later than the other's last-tree
+occurrence.  Thus the indices are equal, and the values of $P$ there give
+$v_2=v$.  Apply
+\noderef{ScheideDefectiveChainLastReturnNoFree} to these exact data.  It
+says that $v_2=v$ misses no free color, contradicting that the free color
+$\alpha$ is missing at $v$.
 
-Assume $\alpha\ne\gamma$.  Both colors are missing on the closed set
-$V(T)$, so \noderef{ScheideGlobalMaximumBoundaryFacts} says neither occurs
-on a boundary edge identity.  Interchange $\alpha$ and $\gamma$ on every
-edge not incident with $T$, using \noderef{OutsideTreeColorSwap}.  The new
-coloring $\varphi'$ agrees with $\varphi$ on every edge incident with
-$V(T)$.  Thus it remains proper with only $e_0$ uncolored, the displayed
-tree remains Tashkinov, its vertex set is still globally maximum, and its
-free and defective color sets are unchanged.
+It remains to treat $\alpha\ne\gamma$.  Put
+\[
+ X=\noderef{TreeSequenceVertexSet}(T).
+\]
+Since $\alpha$ is free, the definitions
+\noderef{TreeFreeColors} and \noderef{TreeMissingColors} give a vertex
+$x_\alpha\in X$ at which $\alpha$ is missing.  The exit data give
+$u\in X$ with $\gamma$ missing at $u$.  By
+\noderef{ScheideGlobalMaximumOrder}, $X$ is closed; expanding this with
+\noderef{ColoredVertexSetClosed}, and using the exact boundary identities
+from \noderef{BoundaryEdges} and \noderef{BoundaryColorEdges}, shows that
+no boundary identity has color $\alpha$ or $\gamma$.  This is also the
+missing-color boundary clause of
+\noderef{ScheideGlobalMaximumBoundaryFacts}.  Thus
+\[
+ \noderef{BoundaryColorEdges}(G,\varphi,X,\alpha)=\varnothing,
+ \qquad
+ \noderef{BoundaryColorEdges}(G,\varphi,X,\gamma)=\varnothing. \tag{1}
+\]
 
-Under $\varphi'$, the terminal subpath $vPz$ is the full
-$(\delta,\alpha)$-chain from $v$: the swap changes the outside
-$\gamma$-segments to $\alpha$-segments and, because $v$ was the last tree
-vertex, this subpath has exactly one boundary crossing.  Apply
-\noderef{ScheideDefectiveChainBoundaryEdges} to the globally maximum triple
-$(T,e_0,\varphi')$, the defective color $\delta$, and the free color
-$\alpha$ missing at $v$.  It says that this full chain contains every
-$\delta$-colored boundary edge identity.  But
-\noderef{ScheideGlobalMaximumBoundaryFacts} gives at least three such
-identities, while the terminal subpath contains exactly one boundary edge.
-This contradiction proves that no free color is missing at $v$.  Since
-$v$ was arbitrary, the asserted disjointness holds for the entire finite
-exit set.  The bridge \noderef{ScheideExitVertexTreeExit} records that
-these exact exits may subsequently be used wherever the broader tablet
-predicate \noderef{TreeExit} is required.
+The membership of $\delta$ in \noderef{DefectiveColors}, together with
+the defective-color clause of
+\noderef{ScheideGlobalMaximumBoundaryFacts}, gives at least three
+distinct $\delta$-colored identities in $\partial_G(X)$; in particular,
+there is one.  Closedness now implies that $\delta$ is missing at no
+vertex of $X$: if it were missing at $x\in X$, the definition
+\noderef{ColoredVertexSetClosed} would forbid that chosen
+$\delta$-colored boundary identity.  Since \noderef{MissingColors} is the
+complement of \noderef{PresentColors}, $\delta$ is present at every
+vertex of $X$.  It is therefore distinct from $\gamma$, which is missing
+at $u$, and from $\alpha$, which is missing at $x_\alpha$.  Together with
+the case assumption, the three colors $\alpha,\gamma,\delta$ are
+pairwise distinct.
+
+Define
+\[
+ \varphi'=\noderef{OutsideTreeColorSwap}(T,\varphi,\alpha,\gamma).
+\]
+Thus every identity incident with $X$ is fixed, and on every other
+identity the two colors $\alpha$ and $\gamma$ are transposed; every other
+value, including the uncolored value, is fixed.  We next verify, rather
+than assume, that $(T,e_0,\varphi')$ is again globally maximum.
+
+The definition \noderef{GlobalMaximumTriple} supplies a
+$\noderef{KTriple}(G,k,e_0,\varphi)$, hence properness of $\varphi$ in the
+sense of \noderef{IsProperEdgeColoring}.  Let $f,g$ be distinct adjacent
+colored edge identities under $\varphi'$.  By
+\noderef{AdjacentEdges}, they share a vertex $w$ in the incidence sense
+of \noderef{Incident}.  There are three cases.  If both are incident with
+$X$, both values are fixed, so equality of their new colors would be
+equality of their old colors.  If neither is incident with $X$, the same
+transposition of $\alpha$ and $\gamma$ is applied to both, and its
+injectivity again turns equality of new colors into equality of old
+colors.  Finally suppose exactly one, say $f$, is incident with $X$.
+Then $w\notin X$, since otherwise $g$ would also be incident with $X$.
+The identity $f$ has one end in $X$ and the shared end $w$ outside $X$,
+so \noderef{BoundaryEdges} puts $f$ in $\partial_G(X)$.  By (1), the
+fixed color of $f$ is neither $\alpha$ nor $\gamma$.  The transposition
+on $g$ can equal this fixed color only if $g$ already had that same
+color.  Each case contradicts the old properness, proving that
+$\varphi'$ is proper.
+
+The same $k$-triple also supplies
+$\noderef{IsOneEdgeUncolored}(\varphi,e_0)$.  The outside swap fixes an
+uncolored value and sends every colored value to a colored value.
+Checking each edge identity gives
+\[
+ \noderef{IsOneEdgeUncolored}(\varphi',e_0).                    \tag{2}
+\]
+For every $x\in X$, each edge incident with $x$ satisfies
+\noderef{TreeIncidentEdge} and hence is fixed.  The witness definition
+\noderef{PresentColors} therefore gives
+\[
+ \noderef{PresentColors}(G,\varphi',x)
+   =\noderef{PresentColors}(G,\varphi,x),
+\]
+and taking complements by \noderef{MissingColors} gives equality of the
+missing-color sets at $x$.  Every boundary edge is incident with $X$, so
+for every color $c$,
+\[
+ \noderef{BoundaryColorEdges}(G,\varphi',X,c)
+   =\noderef{BoundaryColorEdges}(G,\varphi,X,c).                \tag{3}
+\]
+Consequently \noderef{DefectiveColors} is unchanged.  Taking the union
+of the unchanged vertex missing sets shows via
+\noderef{TreeMissingColors} that the tree-missing set is unchanged.
+Every displayed edge of $T$ joins a displayed vertex to an earlier one by
+\noderef{TreeSequence}; hence it is incident with $X$ by
+\noderef{TreeIncidentEdge} and is fixed.  Thus
+\noderef{TreeUsedColors} is unchanged, and so is its difference from the
+tree-missing set, namely \noderef{TreeFreeColors}.
+
+We also verify the Tashkinov condition witness by witness.  The old
+globally maximum triple supplies
+$\noderef{TashkinovTree}(G,e_0,\varphi,T)$.  For every displayed edge
+after the first, retain its old earlier vertex and old missing-color
+witness.  The displayed edge keeps its color, and the earlier vertex has
+the same missing-color set, so every witness remains valid for
+$\varphi'$.  Hence $T$ is a Tashkinov tree for $(e_0,\varphi')$.  The
+criticality, chromatic-index equality, and degree inequality in
+\noderef{KTriple} depend only on $G,k,e_0$; combining them with the
+properness just proved and (2) rebuilds the same $k$-triple.  The tree
+$T$ itself and therefore $|X|$ are unchanged.  All three clauses of
+\noderef{GlobalMaximumTriple} now give
+\[
+ (T,e_0,\varphi')\text{ globally maximum}.                     \tag{4}
+\]
+
+Let $R=vPz$ be the terminal incidence subwalk beginning at the specified
+exit occurrence of $v$.  The last-tree-vertex clause in
+\noderef{ScheideExitVertex} says that the only vertex-node of $R$ in $X$
+is its initial node $v$.  Since its terminal node $z$ is outside $X$, the
+first edge-node of $R$ joins $v$ to an outside vertex: the adjacency rule
+in \noderef{TwoColorIncidenceGraph}, together with
+\noderef{Incident} and \noderef{BoundaryEdges}, makes its individual
+edge identity a boundary identity.  If a later edge-node of $R$ were
+another boundary identity, its two neighboring vertex-nodes on the
+incidence walk would be its two ends, one in $X$ and one outside $X$.
+That would put a later tree vertex on $R$, contradicting the exit clause.
+Thus
+\[
+ V(R)\cap X=\{v\},\qquad
+ \bigl|E(R)\cap\partial_G(X)\bigr|=1.                           \tag{5}
+\]
+Both assertions concern actual edge-nodes and hence actual parallel-edge
+identities.
+
+The first boundary edge-node of $R$ lies on the old
+$(\delta,\gamma)$-walk.  By \noderef{TwoColorIncidenceGraph} its old
+color is $\delta$ or $\gamma$, and (1) excludes $\gamma$ on a boundary
+identity.  It therefore has old color $\delta$ and, being incident with
+$X$, remains $\delta$ under $\varphi'$.  Every later edge of $R$ has both
+ends outside $X$ by (5).  Consecutive old edge identities on $P$ are
+distinct and adjacent; because $\delta\ne\gamma$ and $\varphi$ is
+proper, their old colors alternate between $\delta$ and $\gamma$.
+The outside swap fixes $\delta$ and changes each of these outside
+$\gamma$-edges to $\alpha$.  Thus the same ordered incidence sequence
+$R$ is a $(\delta,\alpha)$-walk under $\varphi'$.
+
+We prove that this is the complete new component, not merely a walk in
+it.  At $v$, the color $\alpha$ remains missing by the equality of
+tree-vertex missing sets, while the first edge of $R$ is the unique
+incident $\delta$-edge by properness of $\varphi'$.  If the chosen
+occurrence of $v$ has a predecessor edge on $P$, that edge is distinct
+from the first edge of $R$; both old colors lie in
+$\{\delta,\gamma\}$, so old properness and the first edge's color
+$\delta$ make the predecessor's color $\gamma$.  It is incident with
+$v\in X$ and hence stays $\gamma$, which is outside
+$\{\delta,\alpha\}$.  If there is no predecessor, the occurrence is the
+initial vertex $u$ of $P$ and there is no prefix to consider.  In either
+case there is no new two-color incidence before $v$, and missingness of
+$\alpha$ together with uniqueness of the incident $\delta$-edge excludes
+every extra incidence there.
+
+At every outside internal vertex-node of $R$, the two incident edges of
+$R$ have the two distinct colors $\delta$ and $\alpha$.  Properness of
+$\varphi'$ permits no additional incident edge of either color.  At an
+edge-node, \noderef{TwoColorIncidenceGraph} gives only the incidences with
+its two endpoint vertices, and both are already the neighboring nodes of
+$R$.  Hence no incidence leaves $R$ at an internal node.
+
+It remains to check the terminal vertex $z$.  In the old incidence graph,
+$u$ has degree one: $\gamma$ is missing there, while $\delta$ is present
+there and its incident $\delta$-edge is unique by properness.  The
+support equality in \noderef{ScheideDefectiveChainPath} says that the
+simple path $P$ spans the whole old $(\delta,\gamma)$-component.  The
+degree bound \noderef{TwoColorIncidenceDegreeAtMostTwo} applies because
+$\varphi$ is proper.  Every internal node of the simple path already uses
+two distinct path incidences, and $u$ has only its one path incidence.
+If $z$ had a second incidence, its other neighbor would still belong to
+the same component and hence to the support of $P$; but every edge-node
+in that support is internal on this vertex-to-vertex path and already
+uses its two path incidences.  Therefore $z$ is the other degree-one
+endpoint of the old full component.
+
+Now let an edge identity incident with $z$ have new color $\delta$ or
+$\alpha$.  If it is not incident with $X$, reversing the outside
+transposition shows that its old color was respectively $\delta$ or
+$\gamma$.  If it is incident with $X$, then $z\notin X$ makes it a
+boundary identity by \noderef{TreeIncidentEdge} and
+\noderef{BoundaryEdges}; it is fixed, and (1) excludes both old
+$\alpha$ and old $\gamma$ on such an identity.  Thus in this case a new
+two-color edge must already have had old color $\delta$.  Every new
+$(\delta,\alpha)$-incidence at $z$ therefore comes from an old
+$(\delta,\gamma)$-incidence at $z$.  The old degree-one conclusion, and
+the last edge of $R$ which realizes that one incidence, show that $z$ has
+degree one in the new two-color graph as well.
+
+We have proved that the support of $R$ is connected and that no incidence
+of the new two-color graph leaves it at either endpoint, at an internal
+vertex-node, or at an edge-node.  By the connected-component definition
+\noderef{TwoColorComponent},
+\[
+ \operatorname{supp}(R)=
+ \noderef{TwoColorComponent}
+   (G,\varphi',\delta,\alpha,\operatorname{inl}v).              \tag{6}
+\]
+The terminal subwalk of the simple path $P$ is simple, its initial vertex
+$v$ lies in $X$, and its terminal vertex $z$ lies outside $X$.  Equation
+(6) supplies the remaining support clause.  Consequently $R$ satisfies
+every clause of \noderef{ScheideDefectiveChainPath} for
+$(T,\varphi',\delta,\alpha,v,z)$.
+
+Apply \noderef{ScheideDefectiveChainBoundaryEdges} to the rebuilt
+globally maximum triple (4), the unchanged defective color $\delta$, the
+unchanged free color $\alpha$ still missing at $v$, and this exact full
+component $R$.  Its conclusion puts every $\delta$-colored boundary edge
+identity under $\varphi'$ on $R$.  By (5), $R$ contains exactly one
+boundary identity.  On the other hand,
+\noderef{ScheideGlobalMaximumBoundaryFacts} gives at least three distinct
+$\delta$-colored boundary identities under $\varphi$, and (3) says that
+this precise set of identities is unchanged under $\varphi'$.  This is a
+contradiction.
+
+Thus for the arbitrary $v\in F(T,e_0,\varphi)$ there is no color in both
+$\noderef{MissingColors}(G,\varphi,v)$ and
+$\noderef{TreeFreeColors}(\varphi,T)$.  The two finite color sets are
+disjoint.  Since $v$ was arbitrary, the asserted disjointness holds for
+every Scheide exit vertex.
 \end{proof}
