@@ -1,0 +1,114 @@
+\begin{lemma}[Missing and stored colors are monotone through one series iteration]
+Let \(\mathcal T\) be a certified Tashkinov series with \(r\) noninitial
+iterations, and let \(q<r\).  Put
+\[
+ n=q+1,\quad T_n=\mathcal T.\mathrm{tree}(q+1),\quad
+ T_{n+1}=\mathcal T.\mathrm{tree}(q+2),
+\]
+\[
+ \varphi_{n-1}=\mathcal T.\mathrm{coloring}(q),\quad
+ \varphi_n=\mathcal T.\mathrm{coloring}(q+1),\quad
+ D_{n-1}=D_q,\quad D_n=D_{q+1}.
+\]
+Then both inclusions
+\[
+ \overline\varphi_{n-1}(T_n)\cup D_{n-1}
+ \subseteq \overline\varphi_n(T_n)\cup D_n
+ \subseteq \overline\varphi_n(T_{n+1})\cup D_n
+\]
+hold.
+\end{lemma}
+\begin{proof}
+Write \(S_{\leq a}=\bigcup_{0\leq h\leq a}S_h\), using the exact
+stored sets carried by the series.  We first record two set identities.
+By \noderef{TashkinovStoredColors}, for a positive index \(a\),
+\(D_a=S_{\leq a}\setminus\overline\varphi_a(T_a)\), whereas
+\(D_0=\varnothing\).  Every certified noninitial constructor in
+\noderef{TashkinovSeriesStep} makes the old tree an ordered initial
+segment of the new tree.  At index zero, the initial constructor makes
+\(T_1\) a \noderef{TashkinovClosure} of the seed \(T_0\).  Expanding
+\noderef{TashkinovAugmentationSequence}, every step in this closure is a
+one-edge \noderef{TashkinovAugmentation} and hence an ordered
+initial-segment extension; an
+induction on the reflexive-transitive closure therefore also makes
+\(T_0\) an initial segment of \(T_1\).  By
+\noderef{TreeSequenceInitialSegment}, all vertices of an earlier tree
+occur in the later tree.  The union definition
+\noderef{TreeMissingColors} consequently gives
+\[
+ \overline\psi(T_a)\subseteq\overline\psi(T_{a+1})                 \tag{1}
+\]
+for every coloring \(\psi\) and every consecutive pair of certified
+trees.
+
+Apply the elementary identity
+\(A\cup(B\setminus C)=A\cup B\) when \(C\subseteq A\).  With
+\(A=\overline\varphi_{n-1}(T_n)\), (1) supplies
+\(\overline\varphi_{n-1}(T_{n-1})\subseteq A\), and hence
+\[
+ \overline\varphi_{n-1}(T_n)\cup D_{n-1}
+ =\overline\varphi_{n-1}(T_n)\cup S_{\leq n-1}.                  \tag{2}
+\]
+When \(n=1\), the same equality follows from the initial-constructor
+equalities \(D_0=S_0=\varnothing\) in
+\noderef{TashkinovSeriesStep}.  Since the set subtracted in the definition
+of \(D_n\) is already \(\overline\varphi_n(T_n)\), we likewise have
+\[
+ \overline\varphi_n(T_n)\cup D_n
+ =\overline\varphi_n(T_n)\cup S_{\leq n}.                        \tag{3}
+\]
+
+It remains to compare the missing colors on the fixed tree \(T_n\).
+Use the certificate field of \noderef{TashkinovSeries} at the positive
+index \(q+1\), and distinguish its three possible constructors from
+\noderef{TashkinovSeriesStep}.
+
+In an RE, the constructor states
+\(\varphi_n=\varphi_{n-1}\), so every old missing color is still missing.
+In an SE, \(\varphi_n\) is the selected coloring, which is
+\((T_n,D_{n-1},\varphi_{n-1})\)-stable.  The vertexwise equality in
+\noderef{StableColoring} therefore gives
+\(\overline\varphi_n(T_n)=\overline\varphi_{n-1}(T_n)\).
+
+In a PE, call the selected stable coloring \(\pi\), the second stable
+coloring \(\rho\), the supporting vertex \(v_n\), and the selected colors
+\(\gamma_n,\delta_n\).  The two stable-coloring conditions give, at each
+vertex of \(T_n\), first
+\(\overline\pi(x)=\overline\varphi_{n-1}(x)\) and then
+\(\overline\rho(x)=\overline\pi(x)\).  The PE certificate also gives a
+\noderef{TreeExit} for the \((\gamma_n,\delta_n)\)-component through
+\(v_n\), with no other tree vertex on its exit path by
+\noderef{TreeExitPath}.  Here \noderef{ParallelExtensionColor} says that
+\(\gamma_n\) is missing at \(v_n\), while the selected connecting edge is
+incident there and has color \(\delta_n\) under \(\rho\).  Thus
+\(\gamma_n\ne\delta_n\), and \(v_n\) has degree one in the two-color
+incidence graph.  The outside end of the exit path also has degree one:
+one of the two colors is missing there, while the nontrivial path supplies
+an incident edge of the other color.  Properness and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} bound every intermediate degree
+by two.  A simple path between two degree-one vertices in a connected
+graph of maximum degree two exhausts their component: otherwise the first
+edge from the path to a node outside it would give degree at least three at
+an internal node, or degree at least two at an endpoint.  Hence the full
+component meets \(V(T_n)\) only at \(v_n\).
+
+The definition \noderef{TwoColorComponentSwap} now shows that the PE
+switch changes no tree-vertex missing-color set except at \(v_n\), where
+it replaces the missing color \(\gamma_n\) by \(\delta_n\).  Consequently
+every member of \(\overline\varphi_{n-1}(T_n)\) remains in
+\(\overline\varphi_n(T_n)\), except possibly \(\gamma_n\); in that
+exceptional case \(\gamma_n\in S_n=\{\delta_n,\gamma_n\}\).  The RE and
+SE cases satisfy the same conclusion without an exception.  Therefore
+\[
+ \overline\varphi_{n-1}(T_n)
+ \subseteq\overline\varphi_n(T_n)\cup S_n.                       \tag{4}
+\]
+
+Combining (2), (4), and
+\(S_{\leq n-1}\cup S_n=S_{\leq n}\), and then using (3), proves the
+first asserted inclusion.  Finally, (1), now for \(T_n\subseteq T_{n+1}\)
+under the fixed coloring \(\varphi_n\), gives
+\(\overline\varphi_n(T_n)\subseteq\overline\varphi_n(T_{n+1})\).
+Adjoining the unchanged set \(D_n\) to both sides proves the second
+inclusion.
+\end{proof}

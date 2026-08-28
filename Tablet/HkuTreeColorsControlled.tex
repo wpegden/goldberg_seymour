@@ -1,0 +1,97 @@
+\begin{lemma}[Colors on the current tree are controlled]
+For \(n=q+1\), use
+\(T_n=\mathcal T.\mathrm{tree}(q+1)\),
+\(\varphi_{n-1}=\mathcal T.\mathrm{coloring}(q)\), and
+\(\varphi_n=\mathcal T.\mathrm{coloring}(q+1)\).  Then
+\[
+ \varphi_{n-1}\langle T_n\rangle
+   \subseteq\overline\varphi_{n-1}(T_n)\cup D_{n-1},
+ \qquad
+ \varphi_n\langle T_n\rangle
+   \subseteq\overline\varphi_n(T_n)\cup D_n.
+\]
+Moreover, if \(\sigma\) is a proper coloring leaving exactly \(e_0\)
+uncolored and is \((T_n,D_n,\varphi_n)\)-stable, then
+\(\sigma(g)=\varphi_n(g)\) for every displayed edge identity \(g\) of
+\(T_n\), including the root identity \(e_0\).
+\end{lemma}
+\begin{proof}
+We prove the first inclusion by induction on \(n\).  Recall from
+\noderef{TreeUsedColors} that the notation
+\(\psi\langle T\rangle\) records the colors of all displayed edges after
+the distinguished first edge; that first edge is handled separately at
+the end.
+
+For \(n=1\), the first-edge and attachment fields in
+\noderef{TreeSequence} identify the root and its displayed successors.
+The initial constructor in \noderef{TashkinovSeriesStep} makes \(T_1\) a
+\noderef{TashkinovClosure} of the one-edge seed \(T_0\), under
+\(\varphi_0\), and gives \(D_0=\varnothing\).  Expand
+\noderef{TashkinovAugmentationSequence}.  At each one-edge step,
+\noderef{TashkinovAugmentation} says that the new displayed edge has a
+color missing on the preceding prefix.  The prefixes are ordered initial
+segments by \noderef{TreeSequenceInitialSegment}; hence their vertex sets
+are nested, and \noderef{TreeMissingColors} puts that color among the
+colors missing on the final tree \(T_1\).  Induction over the finite
+augmentation sequence accounts for every displayed edge after the seed
+edge.  Thus
+\(\varphi_0\langle T_1\rangle\subseteq
+\overline\varphi_0(T_1)=\overline\varphi_0(T_1)\cup D_0\).
+
+Now let \(n>1\), and assume the assertion for \(T_{n-1}\) under
+\(\varphi_{n-2}\).  Consider first an edge already displayed on
+\(T_{n-1}\).  Its old color lies in
+\(\overline\varphi_{n-2}(T_{n-1})\cup D_{n-2}\) by induction.  It is
+incident with \(T_{n-1}\), so
+\noderef{HkuIncidentColorPreserved}, applied to iteration \(n-1\), says
+that its \(\varphi_{n-1}\)-color belongs to
+\(\overline\varphi_{n-1}(T_{n-1})\cup D_{n-1}\).  Since
+\(T_{n-1}\) is an initial segment of \(T_n\), this set is contained in
+\(\overline\varphi_{n-1}(T_n)\cup D_{n-1}\).
+
+It remains to treat the edges newly displayed between \(T_{n-1}\) and
+\(T_n\).  Inspect the certificate for iteration \(n-1\) in
+\noderef{TashkinovSeries}.  For a PE, \(T_n\) is obtained by a closure of
+\(T_{n-1}\) under \(\varphi_{n-1}\); every new edge is therefore a
+Tashkinov augmentation edge and its color is missing on an earlier prefix,
+hence on \(T_n\).  For an SE or RE, the constructor first adjoins its exact
+connecting edge in the sense of \noderef{TreeSequenceAdjoinEdge} and then
+takes such a closure.  The connecting edge's
+color is one of the exact colors stored at that iteration, and therefore
+belongs to
+\(\overline\varphi_{n-1}(T_n)\cup D_{n-1}\) after expanding
+\noderef{TashkinovStoredColors} and using
+\(A\cup(B\setminus A)=A\cup B\).  Every subsequent closure edge is again
+colored by a color missing on its preceding augmentation prefix, hence on
+the final tree.  These cases exhaust all newly displayed identities and
+prove
+\[
+ \varphi_{n-1}\langle T_n\rangle
+ \subseteq\overline\varphi_{n-1}(T_n)\cup D_{n-1}.               \tag{1}
+\]
+
+For every edge counted on the left of (1), its color and edge identity
+satisfy the hypotheses of \noderef{HkuIncidentColorPreserved} at the
+current iteration \(n\).  That lemma's unconditional conclusion gives a
+\(\varphi_n\)-color in
+\(\overline\varphi_n(T_n)\cup D_n\).  Thus
+\[
+ \varphi_n\langle T_n\rangle
+ \subseteq\overline\varphi_n(T_n)\cup D_n,                       \tag{2}
+\]
+including the possible PE connecting-edge exception because the cited
+lemma records its replacement color rather than merely its old color.
+
+Finally let \(\sigma\) have the three properties in the statement.  If a
+displayed edge \(g\) is not the first edge, the series certificate says it
+is colored under \(\varphi_n\), and (2) puts that color in the controlling
+set.  The edge is incident with the tree by its attachment equation in
+\noderef{TreeSequence}, which is exactly \noderef{TreeIncidentEdge}.
+The edge clause of \noderef{StableColoring} therefore
+gives \(\sigma(g)=\varphi_n(g)\).  The first displayed edge equals
+\(e_0\).  The relevant constructor of \noderef{TashkinovSeriesStep} says
+that \(\varphi_n\) leaves exactly \(e_0\) uncolored, while the same is an
+explicit hypothesis on \(\sigma\); by \noderef{IsOneEdgeUncolored}, both
+values there are \(\mathrm{none}\).  Equality follows also for this root
+edge, completing the proof.
+\end{proof}

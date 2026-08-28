@@ -1,0 +1,67 @@
+\begin{lemma}[Missing colors change only at PE supporting vertices]
+Let \(\mathcal T\) be a certified Tashkinov series, let \(p,q<r\) with
+\(p\leq q\), and put \(i=p+1\) and \(n=q+1\).  If
+\(v\in V(T_i)\) and no iteration \(j\) in the closed interval
+\(i\leq j\leq n\) is a PE whose chosen supporting vertex is \(v\), then
+\[
+ \overline\varphi_{i-1}(v)=\overline\varphi_n(v).
+\]
+Here Lean index \(a\) denotes iteration \(a+1\), so the quantified
+interval is exactly \(p\leq a\leq q\), not an interval shifted at either
+end.
+\end{lemma}
+\begin{proof}
+We prove the stronger running assertion that after processing every
+iteration \(a+1\) with \(p\leq a\leq q\), the missing-color set at \(v\)
+is unchanged from \(\overline\varphi_p(v)\).  The ordered-extension field
+in each noninitial constructor of \noderef{TashkinovSeriesStep}, together
+with \noderef{TreeSequenceInitialSegment}, implies inductively that
+\(v\in V(T_{a+1})\) throughout the interval.
+
+Fix one such \(a\) and eliminate the certified step supplied by
+\noderef{TashkinovSeries}.  In the RE constructor the current coloring is
+definitionally the previous coloring, so there is nothing to prove.  In
+the SE constructor the current coloring is the selected
+\((T_{a+1},D_a,\varphi_a)\)-stable coloring.  The second clause of
+\noderef{StableColoring} gives equality of the two missing-color sets at
+every vertex of \(T_{a+1}\), in particular at \(v\).
+
+Consider a PE.  Let \(x\) be its supporting vertex, let \(\pi\) be the
+first selected stable coloring, and let \(\rho\) be the second stable
+coloring.  Stability first gives
+\(\overline\pi(w)=\overline\varphi_a(w)\) and then
+\(\overline\rho(w)=\overline\pi(w)\) for every
+\(w\in V(T_{a+1})\).  These are direct applications of
+\noderef{StableColoring}; equivalently their composition is the
+transitivity supplied by \noderef{sc2} after restricting the enlarged
+stored-color set to \(D_a\).
+
+It remains to analyze the component switch.  The PE constructor in
+\noderef{TashkinovSeriesStep} supplies a \noderef{TreeExit} from an
+outside vertex to \(x\) whose path has no other tree vertex, with its
+endpoint and support conditions given by \noderef{TreeExitPath}.  The
+rule \noderef{ParallelExtensionColor} says that the PE color
+\(\gamma\) is missing at \(x\), while its connecting edge supplies the
+other color \(\delta\) there.  Thus \(x\) has degree one in the
+two-color incidence graph.  At the outside endpoint, one of the two colors
+is missing and the path supplies the other, so that endpoint also has
+degree one.  By \noderef{TwoColorIncidenceDegreeAtMostTwo}, all degrees in
+the component are at most two.  The usual first-branch argument therefore
+shows that the supplied simple exit path exhausts the full component: an
+extra component node would attach either to an internal path node, giving
+degree at least three, or to an endpoint, giving degree at least two.
+Consequently the full switched component meets the current tree precisely
+at \(x\).
+
+By \noderef{TwoColorComponentSwap}, switching that component changes
+incident colors, and hence missing colors, at the one tree vertex \(x\)
+only.  The interval hypothesis says that the present PE does not have
+\(x=v\).  Thus the missing-color set at \(v\) is unchanged in the PE case
+as well.
+
+Induction over the finite ordered interval \(p,p+1,\ldots,q\) composes
+these one-step equalities.  Its initial set is
+\(\overline\varphi_p(v)=\overline\varphi_{i-1}(v)\), and its final set is
+\(\overline\varphi_{q+1}(v)=\overline\varphi_n(v)\), which proves the
+claim.
+\end{proof}

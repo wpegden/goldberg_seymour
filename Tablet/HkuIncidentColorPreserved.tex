@@ -1,0 +1,103 @@
+\begin{lemma}[Controlled incident colors survive one iteration]
+Use the zero-based translation
+\(n=q+1\), \(T_n=\mathcal T.\mathrm{tree}(q+1)\),
+\(\varphi_{n-1}=\mathcal T.\mathrm{coloring}(q)\), and
+\(\varphi_n=\mathcal T.\mathrm{coloring}(q+1)\).  Let \(f\) be an exact
+edge identity incident with \(T_n\), and suppose
+\(\varphi_{n-1}(f)=c\) with
+\[
+ c\in\overline\varphi_{n-1}(T_n)\cup D_{n-1}.
+\]
+Then either \(\varphi_n(f)=\varphi_{n-1}(f)\), or the current certified
+step is a PE, its singleton connecting-edge set is \(\{f\}\), its stored
+\(\delta_n\) equals \(c\), and for its stored \(\gamma_n\) one has
+\(\varphi_n(f)=\gamma_n\).  In all cases there is a color \(d\) such that
+\[
+ \varphi_n(f)=d
+ \quad\hbox{and}\quad
+ d\in\overline\varphi_n(T_n)\cup D_n.
+\]
+\end{lemma}
+\begin{proof}
+Eliminate the certificate at positive index \(q+1\) supplied by
+\noderef{TashkinovSeries}, using the three noninitial constructors of
+\noderef{TashkinovSeriesStep}.
+
+For an RE, the constructor equality
+\(\varphi_n=\varphi_{n-1}\) proves preservation immediately.  The old
+color \(c\) belongs to the new missing-plus-stored set by the first
+inclusion of \noderef{HkuMissingStoredMonotone}; take \(d=c\).
+
+For an SE, write \(\pi\) for the selected coloring.  The constructor says
+that \(\varphi_n=\pi\) and that \(\pi\) is
+\((T_n,D_{n-1},\varphi_{n-1})\)-stable.  Since \(f\) is incident with
+the tree and its old value \(c\) is in the controlling set, the first
+clause of \noderef{StableColoring} gives
+\(\pi(f)=\varphi_{n-1}(f)\).  Thus preservation holds, and the same
+application of \noderef{HkuMissingStoredMonotone} again gives the asserted
+membership with \(d=c\).
+
+Suppose finally that the certificate is a PE.  Let \(\pi\) be the
+maximum-defective selected coloring and \(\rho\) the second stable
+coloring.  The first stability relation is
+\((T_n,D_{n-1},\varphi_{n-1})\)-stability of \(\pi\).  The second is
+\((T_n,D_{n-1}\cup\{\delta_n\},\pi)\)-stability of \(\rho\).  On
+discarding the extra color \(\delta_n\), the latter remains
+\((T_n,D_{n-1},\pi)\)-stable.  Both colorings are proper and leave exactly
+\(e_0\) uncolored by the PE certificate.  Transitivity in
+\noderef{sc2} therefore makes \(\rho\)
+\((T_n,D_{n-1},\varphi_{n-1})\)-stable.  Applying its edge clause to the
+given \(f,c\) yields
+\[
+ \rho(f)=\varphi_{n-1}(f)=c.                                    \tag{1}
+\]
+
+We next locate all edges of the switched component that are incident with
+\(T_n\).  The \noderef{TreeExit} witness in the PE constructor, with the
+conditions in \noderef{TreeExitPath}, gives a simple
+\((\gamma_n,\delta_n)\)-path from outside \(T_n\) to its supporting
+vertex \(v_n\), with no other tree vertex on the path.  The rule
+\noderef{ParallelExtensionColor} says that \(\gamma_n\) is missing at
+\(v_n\), whereas the exact connecting edge
+\(f_n\) is incident with \(v_n\) and has color \(\delta_n\) under
+\(\pi\).  Since \(\delta_n\) belongs to the enlarged controlling set,
+the second stability relation fixes that edge under \(\rho\).  Hence
+\(v_n\) has degree one in the two-color incidence graph and its unique
+incident edge-node is \(f_n\).  The outside endpoint of the exit path has
+one of the two colors missing and has the path edge of the other color, so
+it also has degree one.  Every other node has degree at most two by
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  If the full component had a
+node outside the exit path, a shortest attachment to the path would raise
+the degree of an internal path node to at least three or that of an
+endpoint to at least two.  Thus the exit path is the whole component.  It
+follows that \(f_n\) is the unique edge identity of this component incident
+with \(T_n\).
+
+The current coloring is the \noderef{TwoColorComponentSwap} of \(\rho\)
+on precisely this component.  Therefore (1) is preserved unless
+\(f=f_n\).  In that exceptional case (1), uniqueness of the incident
+\(\delta_n\)-edge at \(v_n\) from \noderef{IsProperEdgeColoring}, and the
+PE fields give
+\[
+ c=\delta_n,\qquad \varphi_n(f_n)=\gamma_n,
+\]
+as well as \(\Theta_n=\mathrm{PE}\) and \(F_n=\{f_n\}\).  These are
+exactly the stated exception, including the identities of the edge and
+both colors.
+
+It remains to prove the unconditional membership conclusion in the PE
+case.  If \(f\ne f_n\), its new color is the old color \(c\), and the
+first inclusion of \noderef{HkuMissingStoredMonotone} puts \(c\) in
+\(\overline\varphi_n(T_n)\cup D_n\).  If \(f=f_n\), its new color is
+\(\gamma_n\), which belongs to the exact PE stored set
+\(S_n=\{\delta_n,\gamma_n\}\).  Unfolding
+\noderef{TashkinovStoredColors} gives
+\[
+ \overline\varphi_n(T_n)\cup D_n
+ =\overline\varphi_n(T_n)\cup\bigcup_{h\leq n}S_h;
+\]
+this is the same elementary union-minus identity used for clause (i).
+Hence \(\gamma_n\) belongs to the required union whether it is still
+missing on the tree or lies in the set difference defining \(D_n\).
+Taking \(d=\gamma_n\) completes the exceptional case and the proof.
+\end{proof}

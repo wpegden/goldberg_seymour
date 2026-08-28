@@ -2,6 +2,11 @@ import Tablet.Critical
 import Tablet.DefectiveVertex
 import Tablet.Elementary
 import Tablet.ExtendedTashkinovTree
+import Tablet.HkuIncidentColorPreserved
+import Tablet.HkuMissingStoredMonotone
+import Tablet.HkuParallelBoundaryStructure
+import Tablet.HkuTreeColorsControlled
+import Tablet.HkuUnsupportedVertexColors
 import Tablet.LEM_extable
 import Tablet.MaximumDegree
 import Tablet.MissingColorIncidenceEndpoint
