@@ -1,0 +1,82 @@
+\begin{lemma}[Controlled incident colors persist through a series interval]
+Let \(\mathcal T\) be a certified Tashkinov series with \(r\)
+noninitial rounds.  Let \(p,q<r\), with \(p\leq q\), and put
+\[
+ i=p+1,\qquad j=q+1,\qquad T_i=\mathcal T.\mathrm{tree}(p+1).
+\]
+Suppose that the exact edge identity \(f\) is incident with \(T_i\),
+that \(\varphi_{i-1}(f)=c\), and that
+\[
+ c\in\overline\varphi_{i-1}(T_i)\cup D_{i-1}.
+\]
+Then either \(\varphi_j(f)=\varphi_{i-1}(f)\), or there is a round
+\(h\) with \(i\leq h\leq j\) for which
+\(\Theta_h=\mathrm{PE}\) and the exact singleton connecting-edge set is
+\(F_h=\{f\}\).  In particular, if
+\(f\in E(G[T_i])\), then
+\[
+ \varphi_j(f)=\varphi_{i-1}(f).
+\]
+Here paper round \(h\) is represented by the positive data slot
+\((h-1).\mathrm{succ}\).
+\end{lemma}
+\begin{proof}
+We induct over the finite ordered interval of zero-based rounds
+\(p,p+1,\ldots,q\).  The induction invariant after round \(a+1\) has
+three parts.  First, \(f\) is incident with \(T_{a+1}\).  Second, its
+current value has the form \(\varphi_{a+1}(f)=d_a\), where
+\[
+ d_a\in\overline\varphi_{a+1}(T_{a+1})\cup D_{a+1}.              \tag{1}
+\]
+Third, either its current value is its initial value
+\(\varphi_p(f)\), or one of the already processed rounds is a PE whose
+singleton connecting-edge set is \(\{f\}\).
+
+The incidence part persists because every noninitial constructor in
+\noderef{TashkinovSeriesStep} declares the preceding tree to be an
+ordered initial segment of the next one.  Expanding
+\noderef{TreeSequenceInitialSegment}, every old tree vertex remains a
+new tree vertex, so the witness in \noderef{TreeIncidentEdge} remains a
+valid incidence witness.
+
+For the first round, apply \noderef{HkuIncidentColorPreserved} to
+\(f,c\) and the hypotheses of the lemma.  Its first conclusion says
+that the value is preserved or that this exact round is a PE with
+singleton connecting-edge set \(\{f\}\).  Its second conclusion supplies
+the color \(d_p\) and membership (1).  This establishes the invariant.
+
+Now suppose the invariant holds through round \(a+1<q+1\).  The second
+inclusion in \noderef{HkuMissingStoredMonotone} enlarges (1), under the
+fixed coloring \(\varphi_{a+1}\), from \(T_{a+1}\) to \(T_{a+2}\).
+Thus the current exact color satisfies the controlling-set hypothesis for
+the next application of \noderef{HkuIncidentColorPreserved}.  That
+application gives both the next fixed-tree membership and the following
+dichotomy: the exact edge value is unchanged, or the new round is a PE
+whose singleton connecting-edge set is \(\{f\}\).  The first inclusion
+of \noderef{HkuMissingStoredMonotone}, which is built into that one-step
+conclusion, accounts for the change from the old coloring to the new one;
+its second inclusion will again prepare the following round.  In the
+unchanged case the old disjunction in the invariant is retained.  In the
+exceptional case the new round itself witnesses that disjunction.  This
+completes the interval induction.  At its last index it gives precisely
+the first assertion of the lemma.
+
+Assume now that \(f\in E(G[T_i])\).  By the definition
+\noderef{InternalEdges}, every endpoint incident with \(f\) belongs to
+\(V(T_i)\).  The vertex containment obtained above from
+\noderef{TreeSequenceInitialSegment} therefore makes \(f\) internal to
+every \(T_h\) with \(i\leq h\leq j\).
+
+It remains to exclude the alternative produced by the induction.  In a
+PE constructor, the singleton stored in \(F_h\) is the exact edge
+identity selected by the \noderef{MaximumDefectiveChoice}.  Its
+\(\mathrm{edgeDefective}\) field and the definition
+\noderef{DefectiveEdge} put that identity in the corresponding
+\noderef{BoundaryColorEdges}, hence in the exact boundary set
+\noderef{BoundaryEdges} of \(T_h\).  Equality of singleton finite sets
+would therefore make \(f\) a boundary edge of \(T_h\).  A boundary edge
+has an endpoint outside \(V(T_h)\), while internality says that every
+endpoint of the same exact identity lies inside \(V(T_h)\), a
+contradiction.  Thus no PE exception is possible, and the final color is
+the initial color as claimed.
+\end{proof}

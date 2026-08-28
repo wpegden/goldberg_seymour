@@ -1,0 +1,108 @@
+\begin{lemma}[Missing colors telescope along PEs at one support]
+Let \(u\in V(T_{q+1})\), and let
+\[
+ b_0<b_1<\cdots<b_p\leq q
+\]
+be a nonempty, strictly increasing enumeration of exactly the zero-based
+rounds through \(q\) whose positive slots are PEs supported at \(u\).
+Let \(\gamma_{b_0+1}=\gamma_0\) and
+\(\delta_{b_p+1}=\delta_p\).  Then
+\[
+ \overline\varphi_{b_0}(u)
+   =\bigl(\overline\varphi_{b_p+1}(u)\setminus\{\delta_p\}\bigr)
+      \cup\{\gamma_0\},                                        \tag{1}
+\]
+and
+\[
+ \overline\varphi_{b_p+1}(u)
+   =\bigl(\overline\varphi_{b_0}(u)\setminus\{\gamma_0\}\bigr)
+      \cup\{\delta_p\}.                                       \tag{2}
+\]
+The enumeration, its strict increase, and the exact-range equivalence are
+explicit hypotheses; \(\gamma_0\) and \(\delta_p\) are identified with
+their optional data fields by explicit equalities.
+\end{lemma}
+\begin{proof}
+For an enumerated round \(b_t\), set
+\[
+ A_t=\overline\varphi_{b_t}(u),\qquad
+ B_t=\overline\varphi_{b_t+1}(u),
+\]
+and abbreviate the colors in its positive PE slot by
+\(\gamma_t,\delta_t\).  We first prove the exact one-round replacement
+formula
+\[
+ B_t=(A_t\setminus\{\gamma_t\})\cup\{\delta_t\},\qquad
+ A_t=(B_t\setminus\{\delta_t\})\cup\{\gamma_t\}.               \tag{3}
+\]
+
+The exact-range hypothesis gives the PE kind and supporting-vertex
+equalities at \(b_t.\mathrm{succ}\).  Eliminate the corresponding
+certificate from \noderef{TashkinovSeries}; only the PE constructor of
+\noderef{TashkinovSeriesStep} has that kind.  Call its maximum-defective
+selected coloring \(\pi_t\) and its second stable coloring \(\rho_t\).
+The selected-stability field of \noderef{MaximumDefectiveChoice} and the
+second-stability field of the PE constructor, interpreted with the
+vertex clause of \noderef{StableColoring}, give
+\[
+ \overline\pi_t(u)=A_t,
+ \qquad \overline\rho_t(u)=\overline\pi_t(u).                  \tag{4}
+\]
+The rule \noderef{ParallelExtensionColor} says that \(\gamma_t\) is
+missing at \(u\) under \(\pi_t\), hence also under \(\rho_t\).
+The selected connecting edge is incident with \(u\) and has color
+\(\delta_t\) under \(\pi_t\).  Since the second stability controls the
+enlarged set containing \(\delta_t\), its edge clause fixes this exact
+edge under \(\rho_t\).  Thus \(\delta_t\) is present at \(u\) under
+\(\rho_t\), while \(\gamma_t\) is missing there; in particular the two
+colors are distinct.
+
+The PE constructor defines \(\varphi_{b_t+1}\) by
+\noderef{TwoColorComponentSwap} on the
+\((\gamma_t,\delta_t)\)-component containing \(u\).  Every incident
+edge at \(u\) carrying either color belongs to that component.  Properness
+allows at most one incident edge of either color.  The swap therefore
+turns the unique \(\delta_t\)-edge into a \(\gamma_t\)-edge and changes
+no incidence involving any other color.  In view of (4), this removes
+\(\gamma_t\) from the missing set at \(u\), inserts \(\delta_t\), and
+proves both equalities in (3).
+
+There is no PE supported at \(u\) strictly between consecutive entries
+\(b_t,b_{t+1}\), by the exact-range and strict-increase hypotheses.
+Applying \noderef{HkuUnsupportedVertexColors} over that intervening
+interval (or observing definitional equality when the rounds are
+consecutive) yields
+\[
+ A_{t+1}=B_t.                                                    \tag{5}
+\]
+The required tree-membership premise holds because a PE supporting
+vertex belongs to its current tree, and ordered extensions preserve
+vertices by \noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}.
+
+By \noderef{SupportingPEColorChain},
+\(\gamma_{t+1}=\delta_t\).  Define
+\(R=A_0\setminus\{\gamma_0\}\).  We claim by induction on \(t\) that
+\[
+ A_t\setminus\{\gamma_t\}=R
+ \quad\hbox{and}\quad
+ B_t\setminus\{\delta_t\}=R.                                  \tag{6}
+\]
+For \(t=0\), this is (3).  If it holds at \(t\), then (5) and (3) give
+\(A_{t+1}=R\cup\{\delta_t\}=R\cup\{\gamma_{t+1}\}\).
+Moreover \(\delta_t\notin R\), because
+\(R=B_t\setminus\{\delta_t\}\).  Deleting
+\(\gamma_{t+1}=\delta_t\) therefore recovers exactly \(R\), and the
+next instance of (3) also gives
+\(B_{t+1}\setminus\{\delta_{t+1}\}=R\).  This proves (6).
+
+At \(t=p\), (3) and (6) say
+\[
+ B_p=R\cup\{\delta_p\},\qquad
+ A_0=R\cup\{\gamma_0\}.
+\]
+The endpoint colors are exactly the explicit gamma and delta fields in
+the statement.  Substituting the definition of \(R\) gives (2), while
+using \(R=B_p\setminus\{\delta_p\}\) gives (1).  These are the two
+asserted transport identities.
+\end{proof}

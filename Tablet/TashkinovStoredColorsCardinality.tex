@@ -1,0 +1,106 @@
+\begin{lemma}[At most one stored color survives per series round]
+For every certified Tashkinov series and every data index \(i\),
+\[
+ |D_i|\leq i.
+\]
+Here \(D_i\) is the finite set \noderef{TashkinovStoredColors}; in
+particular, \(D_0=\varnothing\).  The natural number on the right is the
+value of the zero-based Lean index.
+\end{lemma}
+\begin{proof}
+We prove the assertion by induction on the natural value of \(i\).  The
+definition \noderef{TashkinovStoredColors} gives \(D_0=\varnothing\), so
+the bound is equality at zero.
+
+For the induction step write \(i=n\), with \(n\geq1\), and write the
+preceding zero-based round as \(a=n-1\).  Thus the current positive data
+slot is \(a.\mathrm{succ}\).  We first prove the finite-set recurrence
+\[
+ D_n\subseteq D_{n-1}\cup\{x_n\}                               \tag{1}
+\]
+for some color \(x_n\), allowing the right-hand singleton to be omitted
+in the RE case.
+
+Use the certified step supplied by \noderef{TashkinovSeries} at this
+positive slot, and distinguish the constructors in
+\noderef{TashkinovSeriesStep}.
+
+In an RE, the current coloring equals the preceding coloring.  Its two
+stored colors are the gamma and delta of an explicitly recorded earlier
+PE slot.  Consequently the current stored pair is already contained in
+the union of earlier stored sets; it adds no color to that union.  The
+current tree contains the preceding tree as an ordered initial segment,
+by \noderef{TreeSequenceInitialSegment}, so under the unchanged coloring
+its tree-missing set contains the preceding tree-missing set.  Subtracting
+this larger set from the same accumulated stored union gives
+\[
+ D_n\subseteq D_{n-1}.                                         \tag{2}
+\]
+This is the exact recurrence supplied by the witness-carrying RE
+constructor.  It is also the content behind the paper's notation that
+an RE reuses its active stored pair.
+
+In an SE, let \(\delta_n\) be the selected defective color.  The
+\noderef{MaximumDefectiveChoice} makes the current coloring stable
+relative to the preceding coloring on \(T_n\).  The vertex clause of
+\noderef{StableColoring} therefore leaves the missing-color union on
+\(T_n\) unchanged.  The only new stored set is
+\(S_n=\{\delta_n\}\).  Earlier tree vertices remain in \(T_n\), again by
+\noderef{TreeSequenceInitialSegment}; hence, after expanding the two set
+differences in \noderef{TashkinovStoredColors},
+\[
+ D_n\subseteq D_{n-1}\cup\{\delta_n\}.                          \tag{3}
+\]
+
+It remains to consider a PE.  Let \(\pi\) be its selected coloring,
+\(\rho\) its second stable coloring, and let its stored pair be
+\(S_n=\{\delta_n,\gamma_n\}\).  The two applications of
+\noderef{StableColoring} identify the missing-color set of \(T_n\)
+under the preceding coloring, \(\pi\), and \(\rho\).  The rule
+\noderef{ParallelExtensionColor} says that \(\gamma_n\) is missing at
+the supporting vertex under \(\rho\), while the controlled connecting
+edge has color \(\delta_n\) there.  The PE's \noderef{TreeExit} witness,
+with the conditions in \noderef{TreeExitPath}, is a simple path from
+outside \(T_n\) to that support and has no other tree vertex.  Both path
+endpoints have degree one in the two-color incidence graph, and every
+degree is at most two by
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  A shortest-attachment
+argument shows that this path exhausts the component: an extra branch
+would give degree three internally or degree two at an endpoint.  Hence
+the switched component meets \(T_n\) only at the supporting vertex.
+The definition \noderef{TwoColorComponentSwap} of the current coloring
+therefore replaces the missing color \(\gamma_n\) by \(\delta_n\) at
+that vertex and loses no other tree-missing color.  In particular,
+\[
+ \bigl(\overline\varphi_{n-1}(T_n)\setminus\{\gamma_n\}\bigr)
+       \cup\{\delta_n\}
+ \subseteq \overline\varphi_n(T_n).                             \tag{4}
+\]
+This is the PE instance of the first propagation established in
+\noderef{HkuMissingStoredMonotone}.
+
+Let \(U_{n-1}=\bigcup_{h\leq n-1}S_h\).  Using (4) and finite-set
+algebra,
+\[
+\begin{aligned}
+ D_n
+ &=\bigl(U_{n-1}\cup\{\delta_n,\gamma_n\}\bigr)
+      \setminus\overline\varphi_n(T_n)\\
+ &\subseteq
+   \bigl(U_{n-1}\setminus\overline\varphi_{n-1}(T_n)\bigr)
+      \cup\{\gamma_n\}\\
+ &\subseteq D_{n-1}\cup\{\gamma_n\}.
+\end{aligned}                                                    \tag{5}
+\]
+For the last inclusion, the preceding tree is an initial segment of
+\(T_n\), so a color missing on the preceding tree is also missing on
+\(T_n\).  This completes all cases of (1).
+
+For finite sets, inclusion (1), monotonicity of cardinality, and
+\(|A\cup\{x\}|\leq |A|+1\) give
+\[
+ |D_n|\leq |D_{n-1}|+1.
+\]
+The induction hypothesis gives \(|D_{n-1}|\leq n-1\), and hence
+\(|D_n|\leq n\).  This proves the bound for every allowed finite index.
+\end{proof}

@@ -10,6 +10,8 @@ import Tablet.HkuUnsupportedVertexColors
 import Tablet.LEM_extable
 import Tablet.MaximumDegree
 import Tablet.MissingColorIncidenceEndpoint
+import Tablet.ParallelExtensionUndoStable
+import Tablet.SameColorSeriesPreserved
 import Tablet.ScheideGlobalMaximumBoundaryFacts
 import Tablet.ScheideGlobalMaximumFourFree
 import Tablet.ScheideGlobalMaximumMissingCounts
@@ -25,12 +27,16 @@ import Tablet.ScheideDefectiveChainFirstOutsideElementary
 import Tablet.ScheideExitNoFree
 import Tablet.ScheideTrunkRotationPreserves
 import Tablet.ScheideStructuralLemma
+import Tablet.SupportingPEColorChain
+import Tablet.SupportingPEMissingTransport
+import Tablet.SupportingPEStoredIntersection
 import Tablet.ThmScheide
 import Tablet.TashTree
 import Tablet.TashkinovClosure
 import Tablet.TashkinovClosureExists
 import Tablet.TashkinovClosureVertexSetUnique
 import Tablet.TashkinovOrder
+import Tablet.TashkinovStoredColorsCardinality
 import Tablet.TreeVertexOrder
 import Tablet.TreeSequencePrefix
 import Tablet.TwoColorComponentSpanningPath

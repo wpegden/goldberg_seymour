@@ -1,0 +1,137 @@
+\begin{lemma}[Undoing a parallel-extension switch preserves stability]
+Let the positive slot \(q.\mathrm{succ}\), representing paper round
+\(n=q+1\), be a PE with supporting vertex \(v\), stored gamma
+\(\gamma\), and stored delta \(\delta\).  Let \(\sigma_n\) be a proper
+coloring leaving exactly \(e_0\) uncolored and stable for
+\((T_n,D_n,\varphi_n)\).  Suppose that the
+\((\gamma,\delta)\)-component of \(v\) under \(\sigma_n\) meets
+\(V(T_n)\) exactly in \(v\).  Define
+\[
+ \sigma_{n-1}=\sigma_n/P_v(\gamma,\delta,\sigma_n).
+\]
+Then the PE certificate supplies a selected coloring \(\pi_{n-1}\) and
+a second stable coloring \(\pi'_{n-1}\) such that
+\(\pi_{n-1}\) is \((T_n,D_{n-1},\varphi_{n-1})\)-stable,
+\(\pi'_{n-1}\) is
+\((T_n,D_{n-1}\cup\{\delta\},\pi_{n-1})\)-stable, and
+\[
+ \varphi_n=\pi'_{n-1}/P_v(\gamma,\delta,\pi'_{n-1}).             \tag{1}
+\]
+Moreover, \(\sigma_{n-1}\) is successively stable relative to
+\(\pi'_{n-1}\) and to \(\pi_{n-1}\) for the enlarged control set
+\(D_{n-1}\cup\{\delta\}\), and it is
+\((T_n,D_{n-1},\varphi_{n-1})\)-stable.
+All component switches are on edge identities in the incidence graph.
+\end{lemma}
+\begin{proof}
+Take the certificate at slot \(q.\mathrm{succ}\) from
+\noderef{TashkinovSeries}.  The PE-kind hypothesis eliminates the SE and
+RE constructors of \noderef{TashkinovSeriesStep}.  Equality of the
+chosen-vertex, gamma, and delta option fields identifies its witnesses
+with the displayed \(v,\gamma,\delta\).  Let
+\(\pi_{n-1}\) be the selected field of its
+\noderef{MaximumDefectiveChoice}, and let \(\pi'_{n-1}\) be its
+second-stable field.  The constructor gives properness and the exact-one-
+uncolored condition for both, the two stability assertions in the
+statement, and the switch identity (1).  Thus these are genuine recovered
+constructor witnesses, not arbitrary existential colorings.
+
+We record the geometry of the switch in (1).  By
+\noderef{ParallelExtensionColor}, \(\gamma\) is missing at \(v\) under
+\(\pi_{n-1}\), and the vertex clause of \noderef{StableColoring} makes
+it missing there under \(\pi'_{n-1}\).  The selected connecting edge is
+incident with \(v\) and has color \(\delta\) under \(\pi_{n-1}\).  The
+second stability controls \(\delta\), so the same exact edge has color
+\(\delta\) under \(\pi'_{n-1}\).  Hence
+\(\gamma\ne\delta\), and properness makes this connecting edge the unique
+two-color edge incident with \(v\).
+
+The PE constructor also supplies a \noderef{TreeExit}.  Expanding
+\noderef{TreeExitPath}, its simple path runs from an outside vertex to
+\(v\) and has no other vertex of \(T_n\).  The preceding paragraph makes
+the incidence-graph degree at \(v\) equal to one.  At the outside
+endpoint, one of the two colors is missing and the path supplies an edge
+of the other color, so its degree is also one.  All component degrees are
+at most two by \noderef{TwoColorIncidenceDegreeAtMostTwo}.  If the full
+component had a node outside the supplied path, a shortest connection to
+the path would give a third neighbor at an internal path node or a second
+neighbor at an endpoint.  Thus the path exhausts the component.  It
+follows that the switch in (1) changes, among all edges incident with
+\(T_n\), only the exact connecting edge: its value changes from
+\(\delta\) to \(\gamma\).
+
+Put
+\[
+ C=D_{n-1}\cup\{\delta\},\qquad
+ \tau=\sigma_n/P_v(\gamma,\delta,\sigma_n).
+\]
+Here \(D_{n-1}\) and \(D_n\) are the exact finite sets from
+\noderef{TashkinovStoredColors}.  The assumed component is the exact
+connected support of \noderef{TwoColorComponent}, and its tree-vertex
+intersection is expressed using \noderef{TreeSequenceVertexSet}.
+The hypothesis on the \(\sigma_n\)-component likewise says that it meets
+the current tree only at \(v\).  Stability of \(\sigma_n\) preserves the
+missing set at \(v\) from \(\varphi_n\).  By (1), \(\delta\) is missing
+and the exact connecting edge has color \(\gamma\) under \(\varphi_n\).
+The edge clause of stability fixes this controlled connecting edge under
+\(\sigma_n\).  Properness then makes it the only two-color edge of the
+\(\sigma_n\)-component incident with \(T_n\).  Consequently the undo
+switch changes that edge from \(\gamma\) back to \(\delta\), and changes
+no other edge incident with \(T_n\).
+
+We next prove that \(\tau\) is
+\((T_n,C,\pi'_{n-1})\)-stable.  The two switch descriptions give, for
+every incident edge other than the connecting edge,
+\[
+ \tau(f)=\sigma_n(f),\qquad
+ \pi'_{n-1}(f)=\varphi_n(f),                                    \tag{2}
+\]
+while both values at the connecting edge are \(\delta\).
+The vertex clauses of the two certificate stabilities give
+\[
+ \overline{\pi}'_{n-1}(T_n)
+ =\overline\pi_{n-1}(T_n)
+ =\overline\varphi_{n-1}(T_n).                                 \tag{3}
+\]
+The first inclusion in \noderef{HkuMissingStoredMonotone}, together
+with the PE replacement that makes \(\delta\) missing under
+\(\varphi_n\), yields
+\[
+ \overline{\pi}'_{n-1}(T_n)\cup C
+ \subseteq \overline\varphi_n(T_n)\cup D_n.                    \tag{4}
+\]
+
+Let \(f\) be incident with \(T_n\), and suppose that either its
+\(\pi'_{n-1}\)-color or its \(\tau\)-color lies in the set on the left
+of (4).  If \(f\) is not the connecting edge, equations (2) translate
+this condition to the corresponding condition for
+\(\varphi_n,\sigma_n\) and the right side of (4).  The symmetric edge
+criterion \noderef{sc1}, applied to the assumed
+\((T_n,D_n,\varphi_n)\)-stability of \(\sigma_n\), gives
+\(\sigma_n(f)=\varphi_n(f)\), and hence
+\(\tau(f)=\pi'_{n-1}(f)\).  At the connecting edge both sides equal
+\(\delta\).  Another application of \noderef{sc1} therefore proves
+\[
+ \tau\text{ is }(T_n,C,\pi'_{n-1})\text{-stable}.               \tag{5}
+\]
+The properness needed here follows from
+\noderef{TwoColorComponentSwapProper}, using
+\(\gamma\ne\delta\).  The definition
+\noderef{TwoColorComponentSwap} only exchanges two present colors, so
+the exact uncolored edge remains \(e_0\); this is precisely
+\noderef{IsOneEdgeUncolored} for \(\tau\).
+
+The PE certificate already states that \(\pi'_{n-1}\) is
+\((T_n,C,\pi_{n-1})\)-stable.  Transitivity in \noderef{sc2}, combined
+with (5), makes \(\tau\) \((T_n,C,\pi_{n-1})\)-stable.  Restricting the
+controlling set from \(C\) to \(D_{n-1}\) preserves this stability
+directly from \noderef{StableColoring}.  Finally,
+\(\pi_{n-1}\) is
+\((T_n,D_{n-1},\varphi_{n-1})\)-stable by the selected-coloring field.
+A last use of transitivity in \noderef{sc2} gives
+\[
+ \tau\text{ is }(T_n,D_{n-1},\varphi_{n-1})\text{-stable}.
+\]
+Together with the recovered witnesses and (5), these are all three
+stability conclusions in the Lean statement.
+\end{proof}

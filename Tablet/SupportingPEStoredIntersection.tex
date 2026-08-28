@@ -1,0 +1,102 @@
+\begin{lemma}[Only the last PE delta remains missing among stored pairs]
+Let \(u\in V(T_{q+1})\), and let
+\[
+ b_0<b_1<\cdots<b_p\leq q
+\]
+be a nonempty, strictly increasing enumeration of exactly the zero-based
+rounds through \(q\) whose positive slots are PEs supported at \(u\).
+Let
+\[
+ \mathcal S_u=\bigcup_{t=0}^{p} S_{b_t+1},
+\]
+where every \(S_{b_t+1}\) is the exact stored pair in that PE slot, and
+let the last delta field be \(\delta_{b_p+1}=\delta_p\).  Then
+\[
+ \overline\varphi_{q+1}(u)\cap\mathcal S_u
+ =\overline\varphi_{b_p+1}(u)\cap\mathcal S_u
+ =\{\delta_p\}.
+\]
+The set \(\mathcal S_u\) is a finite-set indexed union, so repeated
+colors are automatically identified without losing their exact values.
+\end{lemma}
+\begin{proof}
+For each enumerated round \(b_t\), put
+\[
+ A_t=\overline\varphi_{b_t}(u),\qquad
+ B_t=\overline\varphi_{b_t+1}(u),
+\]
+and denote the two colors in its PE constructor by
+\(\gamma_t,\delta_t\).  We first establish
+\[
+ A_t\setminus\{\gamma_t\}
+   =B_t\setminus\{\delta_t\}.                                  \tag{1}
+\]
+Indeed, eliminate the positive-slot certificate furnished by
+\noderef{TashkinovSeries}.  The exact PE-kind equality leaves the PE
+constructor of \noderef{TashkinovSeriesStep}.  Its
+\noderef{MaximumDefectiveChoice} supplies a selected coloring
+\(\pi_t\) in which the connecting edge at \(u\) has color
+\(\delta_t\).  The constructor supplies a second coloring \(\rho_t\)
+stable for the enlarged stored-color set.  The vertex clause of
+\noderef{StableColoring} identifies the missing sets of
+\(\varphi_{b_t},\pi_t,\rho_t\) at \(u\), while its edge clause fixes the
+connecting \(\delta_t\)-edge under \(\rho_t\).
+
+The rule \noderef{ParallelExtensionColor} makes \(\gamma_t\) missing at
+\(u\) under these pre-switch colorings.  Thus \(\rho_t\) has a
+\(\delta_t\)-edge but no \(\gamma_t\)-edge at \(u\).  By the definition
+\noderef{TwoColorComponentSwap}, the PE switch on the component through
+\(u\) changes the former edge to color \(\gamma_t\), and it changes no
+other color at \(u\).  Consequently
+\[
+ B_t=(A_t\setminus\{\gamma_t\})\cup\{\delta_t\},
+ \qquad
+ A_t=(B_t\setminus\{\delta_t\})\cup\{\gamma_t\},                \tag{2}
+\]
+which proves (1).  It also shows
+\(\gamma_t\notin A_t\setminus\{\gamma_t\}\) and
+\(\delta_t\notin B_t\setminus\{\delta_t\}\).
+
+No PE supported at \(u\) occurs strictly between \(b_t\) and
+\(b_{t+1}\), by exactness of the enumeration.  Therefore
+\noderef{HkuUnsupportedVertexColors} gives
+\[
+ B_t=A_{t+1}.                                                    \tag{3}
+\]
+The supporting-vertex field puts \(u\) in the current tree, and its
+membership persists through the intervening ordered extensions by
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}.  Meanwhile
+\noderef{SupportingPEColorChain} gives
+\(\delta_t=\gamma_{t+1}\).  Combining (1)--(3) inductively shows that
+all \(2(p+1)\) residual sets
+\[
+ A_t\setminus\{\gamma_t\},\qquad
+ B_t\setminus\{\delta_t\}
+\]
+are one common set \(R\).
+
+The PE constructor states exactly
+\(S_{b_t+1}=\{\delta_t,\gamma_t\}\).  For every \(t\), the preceding
+paragraph gives \(\gamma_t\notin R\) by viewing
+\(R=A_t\setminus\{\gamma_t\}\), and
+\(\delta_t\notin R\) by viewing
+\(R=B_t\setminus\{\delta_t\}\).  Hence the indexed union
+\(\mathcal S_u\) is disjoint from \(R\).  The last instance of (2) is
+\[
+ B_p=R\cup\{\delta_p\}.
+\]
+The last PE stored set contains \(\delta_p\), so
+\(B_p\cap\mathcal S_u=\{\delta_p\}\).  This proves the second displayed
+intersection in the statement, including its reverse inclusion.
+
+Finally, exactness of the enumeration says that no PE supported at
+\(u\) occurs after \(b_p\) and through \(q\).  A final application of
+\noderef{HkuUnsupportedVertexColors} gives
+\(\overline\varphi_{q+1}(u)=B_p\); if \(b_p=q\), this is simply the same
+coloring.  Intersecting with the unchanged exact finite union
+\(\mathcal S_u\) proves the first displayed intersection as well.
+The ambient missing sets are those of \noderef{MissingColors}, so all
+set differences, unions, and intersections above are finite-set
+operations exactly matching the Lean statement.
+\end{proof}

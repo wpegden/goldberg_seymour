@@ -1,0 +1,59 @@
+\begin{lemma}[Successive parallel extensions at one support share a color]
+Let \(u\in V(T_{q+1})\).  Suppose that
+\[
+ b_0<b_1<\cdots<b_p\leq q
+\]
+is a nonempty, strictly increasing enumeration of exactly those
+zero-based rounds \(b\leq q\) for which the positive data slot
+\(b.\mathrm{succ}\) is a PE with supporting vertex \(u\).  Then, for
+every \(0\leq a<p\),
+\[
+ \gamma_{b_{a+1}+1}=\delta_{b_a+1}.
+\]
+In Lean the enumeration is an explicit map
+\(\mathrm{Fin}(p+1)\to\mathrm{Fin}(r)\); strict increase and the
+``if and only if'' description of its range are separate hypotheses.
+\end{lemma}
+\begin{proof}
+Fix \(a<p\), and write \(b=b_a\) and \(b'=b_{a+1}\).  The exact-range
+hypothesis says that both positive slots \(b.\mathrm{succ}\) and
+\(b'.\mathrm{succ}\) have extension kind PE and chosen vertex \(u\).
+Use the certificate field of \noderef{TashkinovSeries} at the latter
+slot.  The kind equality eliminates the SE and RE constructors of
+\noderef{TashkinovSeriesStep}, leaving its PE constructor.
+
+Let \(g\) be the constructor's chosen value of \(\gamma_{b'+1}\).
+The constructor records the history-sensitive rule
+\noderef{ParallelExtensionColor}.  There is already an earlier PE at
+\(u\), namely the slot \(b.\mathrm{succ}\), and strict increase gives
+\(b<b'\).  Hence the ``no earlier PE at \(u\)'' alternative in that
+rule is impossible.  The other alternative supplies a positive slot
+\(h\), at most the preceding-coloring index \(b'\), such that
+\(h\) is a PE at \(u\),
+\[
+ \delta_h=g,                                                     \tag{1}
+\]
+and every earlier PE slot at \(u\) through that index is at most
+\(h\).
+
+Translate the positive slot \(h\) to its zero-based round
+\(d=h-1\).  Positivity makes this translation exact.  Since
+\(d<b'\leq q\), the exact-range hypothesis places \(d\) in the displayed
+enumeration.  Maximality in
+\noderef{ParallelExtensionColor}, applied to
+\(b.\mathrm{succ}\), gives \(b\leq d\).  There is no enumerated index
+strictly between the consecutive entries \(b_a\) and \(b_{a+1}\): if
+\(d=b_t\), strict increase would force \(t\leq a\) from \(d<b_{a+1}\),
+whereas \(b_a\leq d\) forces \(a\leq t\).  Thus \(t=a\) and
+\(d=b\), so \(h=b.\mathrm{succ}\).
+
+Finally, the PE constructor identifies the optional gamma field at the
+new slot with \(g\), while (1) identifies the optional delta field at the
+preceding enumerated slot with the same \(g\).  Therefore
+\(\gamma_{b_{a+1}+1}=\delta_{b_a+1}\), including equality of the exact
+stored color values.  Since \(a<p\) was arbitrary, all successive
+equalities follow.  The condition
+\(u\in V(T_{q+1})\), expressed by
+\noderef{TreeSequenceVertexSet}, is the manuscript's ambient condition
+on the common supporting vertex.
+\end{proof}
