@@ -1,9 +1,40 @@
+import Tablet.AdjacentEdges
+import Tablet.BoundaryColorEdges
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
+import Tablet.ColoredVertexSetElementary
+import Tablet.DefectiveColors
+import Tablet.GlobalMaximumTriple
+import Tablet.Incident
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.LooplessMultigraph
+import Tablet.MissingColors
+import Tablet.PresentColors
+import Tablet.ScheideDefectiveChainPath
 import Tablet.ScheideDefectiveSetup
 import Tablet.ScheideGlobalMaximumBoundaryFacts
+import Tablet.ScheideGlobalMaximumOrder
 import Tablet.ScheideGlobalMaximumUnused
+import Tablet.ScheideExitVertex
+import Tablet.ScheideExitVertices
+import Tablet.ScheideReducedConfiguration
+import Tablet.ScheideStructuralConfiguration
 import Tablet.ScheideStructuralInternalPair
 import Tablet.OutsideTreeColorSwap
+import Tablet.TashkinovOrder
+import Tablet.TashkinovTree
+import Tablet.TreeIncidentEdge
+import Tablet.TreeMissingColors
+import Tablet.TreeSequence
+import Tablet.TreeSequenceVertexSet
+import Tablet.TreeUsedColors
+import Tablet.TwoColorComponent
+import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ScheideDefectiveNoCross]
 theorem ScheideDefectiveNoCross {V E : Type*}

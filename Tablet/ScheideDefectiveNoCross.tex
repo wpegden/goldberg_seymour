@@ -4,37 +4,421 @@ $\delta$-colored edge identity joins
 $U_{\gamma(\delta)}$ to $Z_{\gamma(\delta)}$.
 \end{lemma}
 \begin{proof}
-Write $U=U_{\gamma(\delta)}$, $Z=Z_{\gamma(\delta)}$, and suppose that a
-$\delta$-edge $g_1$ joins $u^1_{\gamma(\delta)}$ to $Z$, exchanging the
-two indexed vertices if necessary.  Since $\alpha_0$ is missing in $Z$
-and differs from $\gamma(\delta)$,
-\noderef{ScheideStructuralInternalPair} supplies an internal
-$\alpha_0$-edge $g_2$ of $U$.  Properness then permits at most one
-$\delta$-boundary edge incident with $U$.  By
-\noderef{ScheideGlobalMaximumBoundaryFacts}, a defective color has at least
-three boundary edge identities, so there is a $\delta$-edge
-$g_3\ne f^0_\delta$ joining $Z$ to a vertex outside $V(T)$.
+Fix a defective color $\delta$, write
+\[
+ X=\noderef{TreeSequenceVertexSet}(T),\qquad
+ i=\gammaIndex(\delta),\qquad \gamma=\gamma_i,
+\]
+and put
+\[
+ U=\{u^1_\gamma,u^2_\gamma\},\qquad Z=X\setminus U.
+\]
+We first unpack all data that will be used.  The definition
+\noderef{ScheideDefectiveSetup} supplies a color $\alpha_0$ missing at the
+first base vertex $y_0$, with $\alpha_0\ne\gamma_r$ for every block index
+$r$.  It supplies a full simple $(\alpha_0,\delta)$ incidence path
+\[
+ P=P_{y_0}(\alpha_0,\delta,\varphi)
+\]
+from $y_0$ to a vertex $z_\delta\notin X$.  On this recorded path,
+$v^0=v^0_\delta$ is the last vertex in $X$, and the next two incidence
+nodes are the edge-node $f^0=f^0_\delta$ and the vertex-node
+$u^0=u^0_\delta$.  In particular,
+\[
+ \varphi(f^0)=\delta,\qquad
+ \operatorname{ends}(f^0)=\{v^0,u^0\},\qquad u^0\notin X.       \tag{1}
+\]
+The same setup says that $v^0$ is a Scheide exit vertex and that
+$\gamma$ is missing at $v^0$.  Its full-path clause is the predicate
+\noderef{ScheideDefectiveChainPath}; consequently $P$ is simple and its
+support is exactly
+\[
+ \noderef{TwoColorComponent}
+   (G,\varphi,\alpha_0,\delta,\operatorname{inl}y_0).           \tag{2}
+\]
 
-Interchange $\alpha_0$ and $\gamma(\delta)$ on edges with both ends
-outside $V(T)$.  Neither color occurs on the boundary of the closed tree,
-so checking the two ends of each edge shows that the new coloring is
-proper and still leaves exactly $e_0$ uncolored.  Under it, the terminal
-subpath from $v^0_\delta$ on the recorded
-$(\alpha_0,\delta)$ path is a $(\gamma(\delta),\delta)$ chain.  Switch that
-full incidence component; properness is preserved by
-\noderef{TwoColorComponentSwapProper}, and its edge-nodes are colored, so
-$e_0$ remains uniquely uncolored.
+Unpack the extension \noderef{ScheideReducedConfiguration} to the
+underlying \noderef{ScheideStructuralConfiguration}.  It gives the exact
+ordered decomposition of $T$ into the $p\geq2$ base vertices and edges,
+followed by the two vertices and two edges of each block.  It also gives
+the injectivity of the block colors, a base vertex missing each block
+color, the block attachment and color equations, the avoidance of all
+block colors by every colored nonfirst base edge, and a globally maximum
+triple.  Expanding \noderef{GlobalMaximumTriple}, denote its
+\noderef{KTriple} component by $K$; it says in particular that $\varphi$
+is proper in the sense of \noderef{IsProperEdgeColoring} and satisfies
+\noderef{IsOneEdgeUncolored}$(\varphi,e_0)$.  It also supplies
+\noderef{TashkinovTree}$(G,e_0,\varphi,T)$ and
+\[
+ |X|=\noderef{TashkinovOrder}(G).                               \tag{3}
+\]
+By \noderef{ScheideGlobalMaximumOrder}, the same $X$ is elementary and
+closed in the senses of \noderef{ColoredVertexSetElementary} and
+\noderef{ColoredVertexSetClosed}.
 
-Delete the $\gamma(\delta)$ block.  No retained tree edge changes:
-$\delta$ is unused on the original tree by
-\noderef{ScheideGlobalMaximumUnused}, and the only
-$\gamma(\delta)$ tree edges were deleted.  At $v^0_\delta$, the missing
-witness changes from $\gamma(\delta)$ to $\delta$.  Thus the remaining
-sequence is Tashkinov for the recoloring.  The three unchanged edges
-$g_1,g_2,g_3$, with colors respectively
-$\delta,\alpha_0,\delta$, can be appended successively, adding the two
-deleted vertices of $U$ and then a new outside vertex.  This produces a
-Tashkinov tree with more vertices than the globally maximum tree in
-\noderef{ScheideDefectiveSetup}, a contradiction.  Hence no such
-$\delta$-edge exists.
+We shall need the precise location of $v^0$, so we derive it rather than
+assuming it.  Membership of $v^0$ in
+\noderef{ScheideExitVertices}, supplied by the setup, unfolds through
+\noderef{ScheideExitVertex} to give $v^0\in X$.  The exit-covering field
+of the structural configuration supplies an index $r$ for which
+$\gamma_r$ is missing at $v^0$, while its block-missing field supplies a
+base vertex $y_q$ at which the same $\gamma_r$ is missing.  The position
+equations and \noderef{TreeSequenceVertexSet} put $y_q$ in $X$.
+Elementariness of $X$ forces $v^0=y_q$.  Thus
+\[
+ v^0\text{ belongs to the base }Y.                             \tag{4}
+\]
+The position equations and vertex injectivity in
+\noderef{TreeSequence} separate every base position from every block
+position.  Hence the base vertices $v^0$ and $y_0$ are different from
+both vertices of $U$, while both vertices of $U$ belong to $X$ and are
+distinct.  In particular,
+\[
+ v^0,y_0\in Z.                                                 \tag{5}
+\]
+
+We next record all needed color inequalities.  We already have
+$\alpha_0\ne\gamma$.  The membership of $\delta$ in
+\noderef{DefectiveColors}, together with the last clause of
+\noderef{ScheideGlobalMaximumBoundaryFacts}, gives at least three
+identities in
+\[
+ \noderef{BoundaryColorEdges}(G,\varphi,X,\delta).
+\]
+Choose one of them.  Closedness of $X$, unfolded via
+\noderef{ColoredVertexSetClosed}, says that the color of this boundary
+edge is missing at no vertex of $X$.  Because
+\noderef{MissingColors} is the complement of
+\noderef{PresentColors}, $\delta$ is present at every vertex of $X$.
+It is therefore distinct from $\alpha_0$, which is missing at $y_0$, and
+from $\gamma$, which is missing at $v^0$.  Thus
+\[
+ \alpha_0,\gamma,\delta\quad\hbox{are pairwise distinct}.       \tag{6}
+\]
+
+Suppose now, for a contradiction, that a $\delta$-colored edge identity
+$g_1$ joins $U$ to $Z$.  By the definition \noderef{Incident}, its two
+incidences and the loopless endpoint condition in
+\noderef{LooplessMultigraph} identify its endpoint pair as
+$\{a,z_1\}$ for some $a\in U$ and $z_1\in Z$.  Relabel the two members
+of $U$, and their corresponding two deleted block pairs, locally as
+$u^1=a$ and $u^2$; both block pairs will be deleted later, so this
+relabeling changes no retained ordered datum.  Since
+$\alpha_0$ is missing at $y_0\in Z$ and $\alpha_0\ne\gamma$,
+\noderef{ScheideStructuralInternalPair} supplies an individual edge
+identity $g_2$ with
+\[
+ \varphi(g_2)=\alpha_0,\qquad
+ \operatorname{ends}(g_2)=\{u^1,u^2\}.                         \tag{7}
+\]
+
+We choose the third identity with the required endpoint information.
+Equation (1), (4), and (5), together with the definitions
+\noderef{BoundaryEdges} and \noderef{BoundaryColorEdges}, show that
+\[
+ f^0\in\noderef{BoundaryColorEdges}(G,\varphi,X,\delta)
+ \quad\hbox{and its endpoint in }X\hbox{ lies in }Z.           \tag{8}
+\]
+At $u^1$, the identity $g_1$ already occupies the $\delta$-incidence.
+No different $\delta$-edge can be incident there: two such identities
+would be adjacent by \noderef{AdjacentEdges} and \noderef{Incident},
+contrary to properness.  Properness likewise permits at most one
+$\delta$-edge incident with $u^2$.  A boundary identity has exactly one
+endpoint in $X$ by \noderef{BoundaryEdges}; hence at most one member of
+$\noderef{BoundaryColorEdges}(G,\varphi,X,\delta)$ has its endpoint in
+$U$.  If every member other than $f^0$ had its endpoint in $U$, that
+boundary-color set would have cardinality at most two.  This contradicts
+its cardinality at least three.  We may therefore choose an identity
+$g_3\ne f^0$ and vertices $z_3,w_3$ such that
+\[
+ g_3\in\noderef{BoundaryColorEdges}(G,\varphi,X,\delta),\qquad
+ z_3\in Z,\quad w_3\notin X,\quad
+ \operatorname{ends}(g_3)=\{z_3,w_3\}.                         \tag{9}
+\]
+This argument counts edge identities, so it remains valid for parallel
+edges.  Notice also that $g_1$ and $g_2$ are internal to $X$, whereas
+$g_3$ and $f^0$ are boundary identities.  Together with (6)--(9), this
+shows already that $g_1,g_2,g_3$ are pairwise distinct.
+
+Both $\alpha_0$ and $\gamma$ are missing somewhere on $X$, at $y_0$ and
+$v^0$ respectively.  By \noderef{TreeMissingColors}, they belong to the
+tree-missing set.  The missing-color clause of
+\noderef{ScheideGlobalMaximumBoundaryFacts} therefore gives
+\[
+ \noderef{BoundaryColorEdges}(G,\varphi,X,\alpha_0)=\varnothing,
+ \qquad
+ \noderef{BoundaryColorEdges}(G,\varphi,X,\gamma)=\varnothing. \tag{10}
+\]
+Define the first recoloring exactly by
+\[
+ \varphi_1=\noderef{OutsideTreeColorSwap}
+   (T,\varphi,\alpha_0,\gamma).
+\]
+The definition fixes an identity satisfying
+\noderef{TreeIncidentEdge}$(T,f)$ and applies the transposition of the
+distinct colors $\alpha_0,\gamma$ to every other edge identity.  In
+particular, every edge incident with a vertex of $X$ is fixed.
+
+We verify properness of $\varphi_1$ edge by edge.  Let $a,b$ be distinct
+adjacent colored identities under $\varphi_1$.  By
+\noderef{AdjacentEdges}, some vertex $x$ is incident with both.  If both
+identities are incident with $X$, both values are fixed.  If neither is,
+the same injective transposition is applied to both old values.  Equality
+of their new colors would in either case imply equality of their old
+colors, contradicting properness of $\varphi$.  Finally suppose exactly
+one identity, say $a$, is incident with $X$.  The common vertex $x$ must
+lie outside $X$, since otherwise $b$ would also be incident with $X$.
+Thus $a$ is a boundary edge in the sense of \noderef{BoundaryEdges}.
+Equation (10) says that its fixed color is neither $\alpha_0$ nor
+$\gamma$.  Transposing those two colors on $b$ can equal that fixed value
+only if $b$ already had the same value, again contradicting properness of
+$\varphi$.  This proves
+\[
+ \noderef{IsProperEdgeColoring}(G,\varphi_1).                  \tag{11}
+\]
+The unique-uncolored condition is equally explicit.  The $K$-triple gives
+$\varphi(e_0)=\mathsf{none}$ and a colored value on every other identity.
+The outside swap fixes $\mathsf{none}$ and maps every colored value to a
+colored value.  Applying this to $e_0$ and then to each $f\ne e_0$ proves
+\[
+ \noderef{IsOneEdgeUncolored}(\varphi_1,e_0).                  \tag{12}
+\]
+
+Let $R=v^0Pz_\delta$ be the terminal subwalk of the recorded path starting
+at its recorded occurrence of $v^0$.  The successive-index fields in
+\noderef{ScheideDefectiveSetup} say that its first edge-node is precisely
+$f^0$ and its following vertex-node is $u^0$.  The last-tree-vertex field
+says that every later vertex-node of $R$ lies outside $X$.  Hence
+\[
+ V(R)\cap X=\{v^0\}.                                         \tag{13}
+\]
+The first edge $f^0$ is incident with $X$, so the outside swap fixes it;
+by (1) it retains color $\delta$.  Every later edge of $R$ has both ends
+outside $X$.  Its old color is $\alpha_0$ or $\delta$ by
+\noderef{TwoColorIncidenceGraph}.  Along the simple proper old path,
+successive edge identities have different colors, so these colors
+alternate.  The outside swap changes every such outside
+$\alpha_0$-edge to $\gamma$ and fixes every $\delta$-edge, using (6).
+Thus $R$ is a $(\gamma,\delta)$ incidence walk under $\varphi_1$.
+
+We now prove that it is the entire new component, not merely a walk inside
+that component.  First consider its initial vertex $v^0$.  The color
+$\gamma$ is missing there and the outside swap fixes every incident edge.
+The identity $f^0$ is an incident $\delta$-edge; properness makes it the
+unique such edge.  If $v^0=y_0$, then $\alpha_0$ is also missing there,
+and $v^0$ plainly has only the $f^0$ adjacency in the new two-color graph.
+If $v^0\ne y_0$, simplicity of $P$ gives a predecessor edge at $v^0$,
+distinct from $f^0$.  Since $f^0$ has old color $\delta$, properness and
+the two-color path condition force that predecessor to have old color
+$\alpha_0$.  It is incident with $X$, so it remains $\alpha_0$ under
+$\varphi_1$ and is excluded from the new $(\gamma,\delta)$ graph by (6).
+Thus in both cases $v^0$ has degree one in the new component, through
+$f^0$.
+
+At every later internal vertex-node of $R$, the two path edges have the
+two different colors $\gamma$ and $\delta$.  Properness (11) permits no
+additional incident edge of either color.  At every internal edge-node,
+the bipartite definition \noderef{TwoColorIncidenceGraph} permits only
+its two endpoint incidences, both already used by $R$.  Hence no branch
+leaves $R$ at an internal node.
+
+It remains to check the terminal vertex $z_\delta$.  In the old
+$(\alpha_0,\delta)$ incidence graph, $y_0$ has degree one: $\alpha_0$ is
+missing there, while $\delta$ is present there and properness makes its
+incident $\delta$-edge unique.  The theorem
+\noderef{TwoColorIncidenceDegreeAtMostTwo} bounds every node degree in
+that old graph by two.  By (2), the simple path $P$ has support equal to
+the whole finite connected component.  Starting at the degree-one node
+$y_0$, follow the unique unused adjacency.  At each later node the
+degree-two bound leaves at most one continuation, so no branch is
+possible.  Finiteness forces the traversal to stop unless it revisits a
+node.  A first revisit would create a cycle; the first node where the
+route from $y_0$ met that cycle would have the entering edge and two cycle
+edges, contradicting the degree-two bound, while $y_0$ itself cannot lie
+on a cycle because its degree is one.  Connectedness and (2) therefore
+make $P$ the whole component path and make its other endpoint
+$z_\delta$ a degree-one node.
+
+Every new $\gamma$- or $\delta$-edge incident with $z_\delta$ corresponds
+to an old $\alpha_0$- or $\delta$-edge there.  Indeed, on an edge having
+both ends outside $X$ this is exactly the $\alpha_0,\gamma$
+transposition; on a boundary edge the value is fixed, and (10) excludes
+both $\alpha_0$ and $\gamma$.  The old degree-one conclusion thus gives
+degree one at $z_\delta$ in the new graph.  We have checked the first
+edge, the possible excluded predecessor at $v^0$, every internal vertex-
+and edge-node, and the terminal endpoint.  Therefore $R$ is connected and
+no incidence adjacency leaves its support.  By
+\noderef{TwoColorComponent},
+\[
+ \operatorname{supp}(R)=
+ \noderef{TwoColorComponent}
+   (G,\varphi_1,\gamma,\delta,\operatorname{inl}v^0).           \tag{14}
+\]
+
+Define the second recoloring by switching exactly this full component:
+\[
+ \varphi_2=\noderef{TwoColorComponentSwap}
+   (G,\varphi_1,\gamma,\delta,\operatorname{inl}v^0).
+\]
+The colors are distinct by (6), and (11) is proper, so
+\noderef{TwoColorComponentSwapProper} makes $\varphi_2$ proper.  The
+definition \noderef{TwoColorComponentSwap} fixes an uncolored value and
+maps each colored value to a colored value.  Applying it edge by edge to
+(12) proves
+\[
+ \noderef{IsOneEdgeUncolored}(\varphi_2,e_0).                  \tag{15}
+\]
+
+We determine the exact missing-color effect at $v^0$.  The first swap
+fixed every edge incident there, so its present and missing sets under
+$\varphi_1$ equal those under $\varphi$.  By (13)--(14), the second swap
+contains exactly one edge at $v^0$, namely $f^0$; before the switch it has
+color $\delta$, and no incident edge has color $\gamma$.  It changes
+$f^0$ to $\gamma$ and fixes every other incident identity.  Consequently
+\[
+ \noderef{MissingColors}(G,\varphi_2,v^0)
+  =\operatorname{insert}\delta
+     \bigl(\noderef{MissingColors}(G,\varphi,v^0)
+       \setminus\{\gamma\}\bigr).                             \tag{16}
+\]
+In particular, $\delta$ is missing at $v^0$.  If $x\in X$ and
+$x\ne v^0$, then (13)--(14) put its vertex-node outside the switched
+component.  An incident changed edge-node would connect it to the
+component in \noderef{TwoColorIncidenceGraph}, which is impossible.
+Thus every other vertex of $X$ has exactly its old present and missing
+sets.  Equation (16) is the only missing-status change on $X$.
+
+We also locate all switched edge identities.  Equations (13)--(14) say
+that the switched component meets $X$ only at the base vertex $v^0$ and
+contains only $f^0$ among the edges incident there.  Hence it contains no
+edge identity having two endpoints in $X$.  In particular it contains no
+retained tree edge.  The same conclusion can be checked from colors:
+\noderef{ScheideGlobalMaximumUnused}, read through
+\noderef{TreeUsedColors}, says that the defective color $\delta$ is unused
+on the colored edges of $T$; after deleting the $i$-block, the structural
+base-avoidance, block-color, and color-injectivity fields say that
+$\gamma$ is also unused on every retained colored tree edge.  The first
+edge is $e_0$ and is uncolored by $K$.  Thus no retained edge-node can
+belong to a $(\gamma,\delta)$ component.
+
+The first swap fixes $g_1,g_2,g_3$, because each is incident with $X$.
+None lies in the component (14).  If $g_1$ did, its incidence with
+$u^1\in X$ would put that vertex-node in the same component, contradicting
+$u^1\ne v^0$ and (13).  The identity $g_2$ has color $\alpha_0$, outside
+the pair $\{\gamma,\delta\}$ by (6), whereas every edge-node in the
+nontrivial component (14) has one of its two defining colors; this excludes
+$g_2$.  For $g_3$, first note that its tree endpoint $z_3$ is not $v^0$.
+Otherwise $g_3\ne f^0$ would give two distinct
+incident $\delta$-edges at $v^0$ under the proper coloring $\varphi_1$:
+both boundary identities are fixed by the outside swap.  Thus
+$z_3\ne v^0$, and its incidence excludes $g_3$ from (14).  Both
+recolorings therefore leave these three exact identities unchanged, and
+(7), (9) give
+\[
+ \varphi_2(g_1)=\delta,\qquad
+ \varphi_2(g_2)=\alpha_0,\qquad
+ \varphi_2(g_3)=\delta.                                      \tag{17}
+\]
+
+We now construct the ordered sequence used for the contradiction and
+verify every clause rather than invoking an unspecified preservation
+principle.  The structural position equations write the old sequence as
+the base segment followed, in increasing block index, by the pairs
+\[
+ (f^1_{\gamma_r},u^1_{\gamma_r}),
+ (f^2_{\gamma_r},u^2_{\gamma_r}).
+\]
+Let $T^-$ retain the whole base and every block pair with $r\ne i$, in
+their original relative order, and delete exactly
+\[
+ (f^1_\gamma,u^1),\qquad(f^2_\gamma,u^2).                     \tag{18}
+\]
+Because $p\ge2$, a base edge remains, so the new sequence has positive
+length and its first edge is still $e_0$.  Its vertices are precisely
+$Z$.  Vertex injectivity and edge injectivity are inherited from
+\noderef{TreeSequence}.  Every base attachment is unchanged.  Every
+retained block edge has, by the structural attachment field, endpoints
+consisting of its block vertex and a base vertex; that base vertex occurs
+earlier in $T^-$.  Thus every attachment remains valid after the explicit
+reindexing, and $T^-$ is a tree-sequence with vertex set $Z$.
+
+Every retained edge identity has the same color under $\varphi_2$ as
+under $\varphi$: the outside swap fixed it because it is incident with
+$X$, and the component swap contains no retained tree edge.  We verify
+the Tashkinov witnesses by the two possible locations of a retained edge.
+For a nonfirst base edge, use its old witness from the
+\noderef{TashkinovTree} clause of the global maximum.  Every earlier
+vertex lies in the base and is retained.  The structural base-avoidance
+field says that this edge's color is not $\gamma$; hence even if its old
+witness is $v^0$, the only possible loss in (16) does not remove that
+color.  For an edge in a retained block $r\ne i$, use the base vertex
+missing $\gamma_r$ supplied by the structural block-missing field.  That
+base vertex precedes the block after reindexing.  Injectivity of the block
+colors gives $\gamma_r\ne\gamma$, so (16) again preserves the missing
+witness, including when it is $v^0$.  These cases exhaust all nonfirst
+edges of $T^-$.  Therefore
+\[
+ \noderef{TashkinovTree}(G,e_0,\varphi_2,T^-).                 \tag{19}
+\]
+
+Append the exact three pairs
+\[
+ T'=T^-\mathbin{\Vert}(g_1,u^1,g_2,u^2,g_3,w_3)               \tag{20}
+\]
+in that order.  We check the \noderef{TreeSequence} fields.  The first
+new edge $g_1$ has endpoints $z_1\in Z$ and $u^1$, so the retained
+occurrence of $z_1$ is its earlier attachment and $u^1$ is its new vertex.
+The edge $g_2$ has endpoints $u^1,u^2$, so the just-appended $u^1$ is its
+earlier attachment and $u^2$ is its new vertex.  The edge $g_3$ has
+endpoints $z_3\in Z$ and $w_3\notin X$, so the retained occurrence of
+$z_3$ is its earlier attachment and $w_3$ is its new vertex.
+
+The new vertices are distinct from all earlier ones: $u^1,u^2$ are the
+two distinct members deleted from $X$, and $w_3\notin X$.  The new edge
+identities are pairwise distinct as already observed.  They are also
+distinct from every retained tree edge.  The $\delta$-identities $g_1$
+and $g_3$ cannot be retained colored edges by
+\noderef{ScheideGlobalMaximumUnused}, and neither is $e_0$ because both
+are colored while $e_0$ is uncolored.  The identity $g_2$ cannot be a
+base edge or an edge of another block because its exact endpoints are the
+two selected block vertices, which the structural position equations and
+old vertex injectivity separate from all base vertices and all other block
+vertices.  It cannot be either removed block edge because its color is
+$\alpha_0\ne\gamma$.  Thus edge injectivity holds in (20).  All old
+attachments and the first-edge equation persist from $T^-$.  This proves
+every tree-sequence clause for $T'$.
+
+It remains to check the three new Tashkinov witnesses.  Equations
+(16)--(17) say that $g_1$ has color $\delta$ missing at the earlier
+retained base vertex $v^0\in Z$.  The edge $g_2$ has color $\alpha_0$.
+The first outside swap fixes every edge incident with $y_0$, and the
+second swap changes at $v^0$ only the $\gamma,\delta$ statuses in (16).
+Since $\alpha_0$ is distinct from both colors by (6), $\alpha_0$ remains
+missing at the earlier retained vertex $y_0\in Z$.  Finally $g_3$ again
+has color $\delta$ missing at the earlier vertex $v^0$.  Together with
+(19), these are witnesses for every nonfirst edge of (20), so
+\[
+ \noderef{TashkinovTree}(G,e_0,\varphi_2,T').                 \tag{21}
+\]
+
+We rebuild the $k$-triple for the final coloring.  Criticality of $G$, the
+chromatic-index equality, and the maximum-degree inequality are the three
+coloring-independent clauses of the original \noderef{KTriple} $K$.
+The remaining clauses are precisely the properness of $\varphi_2$ and
+(15).  Hence $\noderef{KTriple}(G,k,e_0,\varphi_2)$ holds.  Its
+chromatic-index equality places $T'$ among the trees maximized in
+\noderef{TashkinovOrder}, so (21) gives
+\[
+ |V(T')|\le \noderef{TashkinovOrder}(G).                       \tag{22}
+\]
+On the other hand, (18) deletes exactly the two distinct vertices of $U$
+and (20) appends those same two vertices and the new vertex
+$w_3\notin X$.  Therefore
+\[
+ |V(T')|=|X|-2+3=|X|+1.                                      \tag{23}
+\]
+Equations (3), (22), and (23) give $|X|+1\le|X|$, a contradiction.
+Thus the assumed $\delta$-colored identity joining $U$ to $Z$ cannot
+exist.  Since $\delta$ and the alleged identity were arbitrary, the
+required no-cross property holds for every defective color.
 \end{proof}
