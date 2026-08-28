@@ -9,8 +9,12 @@ kinds \(\Theta_i\) for \(0\leq i\leq r\).  They also retain the witnesses
 
 The indexing is zero-based but otherwise literal: Lean index (i) denotes
 the manuscript subscript (i).  The sole auxiliary entry (T_0), which is
-not one of the manuscript's output tuples, is the one-edge seed used to
-certify that the initial (T_1) is a closure.  For (i\geq1), the entry
+not one of the manuscript's output tuples, is an auxiliary slot intended
+to hold the seed used when certifying the initial closure.  This raw-data
+structure by itself imposes no condition on the length of (T_0) or on its
+relation to (T_1); the one-edge seed condition and the requirement that
+(T_1) be its closure belong to the later Algorithm 3.1 step certificate.
+For (i\geq1), the entry
 \((T_i,\varphi_{i-1},S_{i-1},F_{i-1},\Theta_{i-1})\) is exactly the
 manuscript's (i)-th tuple.  Edge fields store edge identities and therefore
 retain multiplicity.
