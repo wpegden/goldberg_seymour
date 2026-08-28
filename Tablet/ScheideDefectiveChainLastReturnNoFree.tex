@@ -1,6 +1,13 @@
 \begin{lemma}[Defective-chain structure, part (d)]
-In the notation of part (c), the last returning vertex $v_2$ misses no free
-color:
+Let $(T,e_0,\varphi)$ be a globally maximum triple for $G$.  Let
+$\alpha\in\mathcal D(V(T),\varphi)$ be defective, let
+$\gamma\in\mathcal F(T,e_0,\varphi)$ be free and missing at a vertex
+$u\in V(T)$, and let $z\notin V(T)$.  Let the supplied incidence walk $P$
+from $u$ to $z$ be a full defective-chain path for
+$(T,\varphi,\alpha,\gamma,u,z)$.  If the supplied indices $i_1<i_2$ and
+vertices $v_1,v_2$ satisfy the first-departure/last-return predicate for
+$(T,\varphi,\alpha,\gamma,u,z,P)$, then the last returning vertex $v_2$
+misses no free color:
 \[
  \overline\varphi(v_2)\cap\mathcal F(T,e_0,\varphi)=\varnothing.
 \]
@@ -18,13 +25,25 @@ Apply the outside-tree swap of \noderef{OutsideTreeColorSwap} to
 $\beta,\gamma$.  Both colors are missing somewhere on the closed set
 $V(T)$, so \noderef{ScheideGlobalMaximumBoundaryFacts} says that neither
 has a boundary edge.  The outside swap therefore changes no edge identity
-incident with $V(T)$, preserves properness and the unique uncolored edge,
-and changes neither the Tashkinov sequence nor its free and defective color
-sets.  Along $R$, it changes the outside portions of the old
+incident with $V(T)$ and changes neither the Tashkinov sequence nor its
+free and defective color sets.  It also preserves the unique uncolored
+edge, since the defining relabeling fixes the uncolored value.  To check
+properness, which the $k$-triple clause of
+\noderef{GlobalMaximumTriple} gives for $\varphi$, consider two adjacent
+colored edges.  If both are incident with $V(T)$, both are fixed; if
+neither is, both undergo the same transposition of the distinct colors
+$\beta$ and $\gamma$.  In the remaining case their common endpoint is
+outside $V(T)$ and the incident edge is a boundary edge.  Its color is
+neither $\beta$ nor $\gamma$, by the preceding no-boundary-edge fact, so
+the transposition on the other edge cannot create a new equality.  Thus
+the outside swap is proper.  Along $R$, it changes the outside portions of the old
 $(\alpha,\gamma)$-path so that $R$ becomes the full
 $(\alpha,\beta)$-chain from $v_2$.
 
-Switch this full chain.  Properness is preserved by
+The two colors are distinct because $\alpha$ is present at every tree
+vertex by the defective and missing-color clauses of
+\noderef{ScheideGlobalMaximumBoundaryFacts}, while $\beta$ is missing at
+$v_2$.  Switch this full chain.  Properness is preserved by
 \noderef{TwoColorComponentSwapProper}.  No tree edge changes, because
 $\alpha$ and $\beta$ are unused on the tree by
 \noderef{ScheideGlobalMaximumUnused}; at tree vertices the only

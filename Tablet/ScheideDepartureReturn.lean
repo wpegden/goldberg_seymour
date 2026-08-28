@@ -10,7 +10,8 @@ def ScheideDepartureReturn {V E : Type*} [Fintype V] [Fintype E]
       (Sum.inl u) (Sum.inl z)}
     (i1 i2 : Fin (p.length + 1)) (v1 v2 : V) : Prop :=
 -- BODY
-  p.getVert i1.val = Sum.inl v1 ∧
+  ScheideDefectiveChainPath T phi alpha gamma u z p ∧
+    p.getVert i1.val = Sum.inl v1 ∧
     v1 ∉ TreeSequenceVertexSet T ∧
     (∀ r : Fin (p.length + 1), r.val < i1.val →
       ∀ w : V, p.getVert r.val = Sum.inl w →

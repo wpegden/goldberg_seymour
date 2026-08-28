@@ -1,14 +1,23 @@
 \begin{lemma}[Defective-chain structure, part (c)]
-Under the hypotheses of parts (a)--(b), direct the full path $P$ from
-$u\in V(T)$ toward its outside end.  In this path order there is a first
-vertex $v_1\notin V(T)$ and, strictly after that first departure, a last
-vertex $v_2\in V(T)$.
+Let $(T,e_0,\varphi)$ be a globally maximum triple for $G$.  Let
+$\alpha\in\mathcal D(V(T),\varphi)$ be defective, let
+$\gamma\in\mathcal F(T,e_0,\varphi)$ be free and missing at a vertex
+$u\in V(T)$, and let $z\notin V(T)$.  If the supplied incidence walk $P$
+from $u$ to $z$ is a full defective-chain path for
+$(T,\varphi,\alpha,\gamma,u,z)$, then there exist incidence indices
+$i_1<i_2$ and vertices $v_1,v_2$ satisfying the
+first-departure/last-return predicate for
+$(T,\varphi,\alpha,\gamma,u,z,P)$.  Equivalently, $v_1$ is the first
+vertex of $P$ outside $V(T)$ and $v_2$ is the last vertex of $P$ in
+$V(T)$ after that first departure.
 \end{lemma}
 \begin{proof}
-The path starts at the tree vertex $u$ and ends at the outside vertex $z$
-by \noderef{ScheideDefectiveChainPathExists}, so the finite ordered list of
-vertex-nodes on the incidence path has a first member outside $V(T)$; call
-it $v_1$.  The corresponding incidence index is the first-departure index.
+By the supplied hypothesis and \noderef{ScheideDefectiveChainPath}, the
+particular walk $P$ is a finite simple incidence path, starts at the tree
+vertex $u$, ends at the outside vertex $z$, and spans the full two-color
+component through $u$.  Hence its finite ordered list of vertex-nodes has
+a first member outside $V(T)$; call it $v_1$.  The corresponding incidence
+index is the first-departure index $i_1$.
 
 By \noderef{ScheideGlobalMaximumBoundaryFacts}, the defective color
 $\alpha$ has at least three distinct boundary edge identities, whereas no
@@ -19,7 +28,8 @@ the boundary at least three times before ending outside forces a return to
 $V(T)$ after the first departure.  Hence there is a tree vertex after
 $v_1$.  Among the finitely many such later vertex-nodes choose the last
 one and call it $v_2$.  The first and last choices give exactly the index
-conditions in \noderef{ScheideDepartureReturn}.  Notice that the indices
-are incidence-walk indices: boundary edge-nodes occur between consecutive
-multigraph vertex-nodes, so no crossing is lost by parallelism.
+conditions in \noderef{ScheideDepartureReturn}; its full-path conjunct is
+the supplied hypothesis.  Notice that the indices are incidence-walk
+indices: boundary edge-nodes occur between consecutive multigraph
+vertex-nodes, so no crossing is lost by parallelism.
 \end{proof}

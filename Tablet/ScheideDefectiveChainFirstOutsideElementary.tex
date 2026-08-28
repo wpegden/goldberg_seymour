@@ -1,6 +1,13 @@
 \begin{lemma}[Defective-chain structure, part (e)]
-In the notation of part (c), adjoining the first outside vertex preserves
-elementariness: $V(T)\cup\{v_1\}$ is elementary with respect to $\varphi$.
+Let $(T,e_0,\varphi)$ be a globally maximum triple for $G$.  Let
+$\alpha\in\mathcal D(V(T),\varphi)$ be defective, let
+$\gamma\in\mathcal F(T,e_0,\varphi)$ be free and missing at a vertex
+$u\in V(T)$, and let $z\notin V(T)$.  Let the supplied incidence walk $P$
+from $u$ to $z$ be a full defective-chain path for
+$(T,\varphi,\alpha,\gamma,u,z)$.  If the supplied indices $i_1<i_2$ and
+vertices $v_1,v_2$ satisfy the first-departure/last-return predicate for
+$(T,\varphi,\alpha,\gamma,u,z,P)$, then $V(T)\cup\{v_1\}$ is elementary
+with respect to $\varphi$.
 \end{lemma}
 \begin{proof}
 Put $X=V(T)$.  Suppose that a color $\delta$ is missing both at $v_1$ and
@@ -16,18 +23,25 @@ Consider the full $(\gamma,\delta)$-component $C$ through $v_1$.  Both
 colors are missing on the closed set $X$; hence no edge identity of either
 color leaves $X$, by \noderef{ScheideGlobalMaximumBoundaryFacts}.  The
 outside component $C$ is therefore disjoint from $X$.  Switch $C$.
-Properness is preserved by \noderef{TwoColorComponentSwapProper}, no tree
-edge or tree missing-color witness changes, and $\gamma$ remains missing
-at $u$.  At $v_1$, $\gamma$ is now missing, and the unique
+Properness of the original coloring follows from the $k$-triple clause of
+\noderef{GlobalMaximumTriple}, so it is preserved by
+\noderef{TwoColorComponentSwapProper}; here $\gamma\ne\delta$ was proved
+in the preceding paragraph.  No tree edge or tree missing-color witness
+changes, and $\gamma$ remains missing at $u$.  At $v_1$, $\gamma$ is now
+missing, and the unique
 $\gamma$-edge of the old path following $v_1$ has become a
 $\delta$-edge.  Hence the initial segment $uPv_1$ is now the full
 $(\alpha,\gamma)$-component through $u$.
 
 Switch that initial component.  The colors $\alpha,\gamma$ are unused on
 $T$ by \noderef{ScheideGlobalMaximumUnused}, so the same sequence remains
-Tashkinov, and $\alpha$ becomes missing at $u$.  This initial segment uses
-only the first $\alpha$-boundary edge of $P$.  At least two later
-$\alpha$-boundary edge identities retain their colors, by
+Tashkinov, and $\alpha$ becomes missing at $u$.  The colors are distinct,
+since $\gamma$ is missing at $u$ whereas the defective color $\alpha$ is
+present there by the two corresponding clauses of
+\noderef{ScheideGlobalMaximumBoundaryFacts}; hence properness of this
+second switch again follows from \noderef{TwoColorComponentSwapProper}.
+This initial segment uses only the first $\alpha$-boundary edge of $P$.
+At least two later $\alpha$-boundary edge identities retain their colors, by
 \noderef{ScheideDefectiveChainBoundaryEdges}.  Appending either to the
 tree contradicts global maximality.  Thus a color missing at $v_1$ cannot
 be missing on $X$.  Since $X$ itself is elementary by

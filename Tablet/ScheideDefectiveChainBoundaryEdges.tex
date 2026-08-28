@@ -1,6 +1,10 @@
 \begin{lemma}[Defective-chain structure, part (b)]
-Under the hypotheses of part (a), let $P$ be the full
-$(\alpha,\gamma)$-path from $u$ to its outside end.  Then
+Let $(T,e_0,\varphi)$ be a globally maximum triple for $G$.  Let
+$\alpha\in\mathcal D(V(T),\varphi)$ be defective, let
+$\gamma\in\mathcal F(T,e_0,\varphi)$ be free and missing at a vertex
+$u\in V(T)$, and let $z\notin V(T)$.  If the supplied incidence walk $P$
+from $u$ to $z$ is a full defective-chain path for
+$(T,\varphi,\alpha,\gamma,u,z)$, then
 \[
  \partial_{\varphi,\alpha}(V(T))
  =\{f\in\partial_G(V(T)): \text{the edge-node of }f\text{ lies on }P\}.
@@ -18,11 +22,21 @@ on $P$ has color $\alpha$.  This gives the inclusion from right to left.
 For the converse, suppose that an $\alpha$-colored boundary edge identity
 $f$ is not on $P$.  Its edge-node belongs to a different
 $(\alpha,\gamma)$-component $Q$, since $P$ spans the complete component of
-$u$ by \noderef{ScheideDefectiveChainPath}.  Neither color is used on a
-tree edge by \noderef{ScheideGlobalMaximumUnused}; moreover every vertex
-of $X\setminus\{u\}$ is incident with both colors, by the degree argument
-in \noderef{ScheideDefectiveChainPathExists}.  Thus $Q$ contains no tree
-edge and has no end in $X$.
+$u$ by the supplied hypothesis and
+\noderef{ScheideDefectiveChainPath}.  In particular $Q$ does not contain
+$u$.  The defective-color clause of
+\noderef{ScheideGlobalMaximumBoundaryFacts} gives a nonempty
+$\alpha$-boundary set.  Its missing-color clause therefore shows that
+$\alpha$ is missing at no vertex of $X$.  Also $X$ is elementary by
+\noderef{ScheideGlobalMaximumOrder}; since $\gamma$ is missing at $u$, it
+is present at every other vertex of $X$.  Properness, supplied by the
+$k$-triple clause of \noderef{GlobalMaximumTriple}, makes the incident
+edge of each present color unique.  Hence every vertex-node of $Q$ that
+lies in $X$ is incident in $Q$ with one $\alpha$-edge and one
+$\gamma$-edge and is not an end of $Q$.  Finally neither color is used on
+a tree edge by \noderef{ScheideGlobalMaximumUnused}.  Thus $Q$ contains
+no tree edge and has no end in $X$.  The colors $\alpha$ and $\gamma$ are
+distinct: $\alpha$ is present at $u$, whereas $\gamma$ is missing there.
 
 Switch $\alpha$ and $\gamma$ on the entire component $Q$.  Properness is
 preserved by \noderef{TwoColorComponentSwapProper}.  The distinguished

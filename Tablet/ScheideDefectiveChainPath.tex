@@ -1,8 +1,10 @@
 \begin{definition}
-For a tree $T$, colors $\alpha,\gamma$, and $u\in V(T)$, a
-\emph{full defective-chain path} from $u$ to $z$ is a simple path in the
-$(\alpha,\gamma)$ incidence graph which starts at the vertex-node $u$,
-ends at a vertex-node $z\notin V(T)$, and whose support is the entire
-two-color component containing $u$.  Its incidence support includes the
-individual edge-node of every multigraph edge on the chain.
+Let $T$ be a tree-sequence, let $\varphi$ be a partial edge-coloring, and
+let $P$ be an $(\alpha,\gamma)$-incidence walk from the vertex-node $u$ to
+the vertex-node $z$.  The predicate that $P$ is a \emph{full
+defective-chain path} for $(T,\varphi,\alpha,\gamma,u,z)$ means that
+$u\in V(T)$, the walk $P$ is simple, $z\notin V(T)$, and the support of
+$P$ is exactly the full $(\alpha,\gamma)$-component containing $u$.  The
+incidence support includes the individual edge-node of every multigraph
+edge identity on the chain.
 \end{definition}

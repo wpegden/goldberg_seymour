@@ -9,6 +9,7 @@ def ScheideDefectiveChainPath {V E : Type*} [Fintype V] [Fintype E]
     (p : (TwoColorIncidenceGraph G phi alpha gamma).Walk
       (Sum.inl u) (Sum.inl z)) : Prop :=
 -- BODY
-  p.IsPath ∧ z ∉ TreeSequenceVertexSet T ∧
+  u ∈ TreeSequenceVertexSet T ∧ p.IsPath ∧
+    z ∉ TreeSequenceVertexSet T ∧
     {x | x ∈ p.support} =
       TwoColorComponent G phi alpha gamma (Sum.inl u)
