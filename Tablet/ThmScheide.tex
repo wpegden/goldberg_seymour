@@ -1,0 +1,28 @@
+\begin{theorem}[Small Tashkinov order; Scheide Proposition 4.5]
+Let $G$ be a finite loopless critical multigraph in which every vertex is
+incident with an edge.  If
+\[
+ \chi'(G)\geq\Delta(G)+2
+ \qquad\text{and}\qquad
+ t(G)<11,
+\]
+then $G$ is elementary.
+\end{theorem}
+\begin{proof}
+Put $k=\chi'(G)-1$.  The displayed degree hypothesis implies
+$\chi'(G)\geq2$, so subtraction is exact and
+\[
+ \chi'(G)=k+1,
+ \qquad
+ \Delta(G)+1\leq k.                                 \tag{1}
+\]
+Suppose for a contradiction that $G$ is not elementary.  Criticality,
+the no-isolated-vertex hypothesis, (1), non-elementarity, and $t(G)<11$
+are exactly the hypotheses of
+\noderef{ScheideOrderNineStructuralConfiguration}.  It therefore supplies
+an edge identity $e_0$, a partial $k$-edge-coloring $\varphi$, and an
+ordered tree-sequence $T$ carrying a Scheide structural configuration.
+The structural lemma \noderef{ScheideStructuralLemma}, applied to these
+same identities and data, concludes that $G$ is elementary.  This
+contradicts the supposition, so $G$ is elementary.
+\end{proof}

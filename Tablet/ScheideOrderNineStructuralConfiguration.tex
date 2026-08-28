@@ -1,0 +1,342 @@
+\begin{lemma}[Order-nine structural configuration; core of Scheide Proposition 4.5]
+Let $G$ be a finite loopless multigraph, let $k$ be a natural number, and
+suppose that $G$ is critical,
+\[
+ \chi'(G)=k+1,\qquad \Delta(G)+1\leq k,
+\]
+and every vertex of $G$ is incident with an edge.  If $G$ is not
+elementary and $t(G)<11$, then there are an edge identity $e_0$, a proper
+partial $k$-edge-coloring $\varphi$ leaving exactly $e_0$ uncolored, and a
+tree-sequence $T$ such that $(T,e_0,\varphi)$ carries a Scheide structural
+configuration.
+\end{lemma}
+\begin{proof}
+By \noderef{GlobalMaximumTripleExists}, choose a globally maximum triple
+$(T_0,e_0,\varphi_0)$.  Apply \noderef{ScheideBalancedExists} and replace
+it by balanced normal data $(T,e,\varphi,N)$.  Write $t=t(G)$ and
+$h=h(G)$.  The global field is unchanged, and the balanced condition in
+\noderef{BalancedGlobalMaximumTriple} gives $N.\mathsf{height}=h$.
+
+We first determine both numerical parameters.  Since $G$ is assumed
+non-elementary, the contrapositive of
+\noderef{ScheideSmallHeightElementary} gives $5\leq h$, and the
+contrapositive of \noderef{ScheideLargeHeightElementary} gives
+$h\leq t-4$.  The initial globally maximum triple and
+\noderef{ScheideGraphHeightOdd} show that $h$ is odd.  The maximum-order
+assertion \noderef{ScheideGlobalMaximumOrder}, applied to the balanced
+triple, shows that $t\geq3$ and is odd.  Together with $t<11$, the inequalities
+$5\leq h\leq t-4$ exclude the odd values $t=3,5,7$ and leave only
+\[
+ t=9,\qquad h=5.                                      \tag{1}
+\]
+The equality in \noderef{GlobalMaximumTriple} is an equality
+$|V(T)|=t$, where $V(T)$ means \noderef{TreeSequenceVertexSet}.  Vertex
+injectivity in \noderef{TreeSequence} separately gives
+$|V(T)|=T.\mathsf{length}+1$.  Thus (1) says
+$T.\mathsf{length}=8$; it is not an assertion that the alternating
+vertex--edge sequence has length nine.
+
+Name its individual entries, using the paper's one-based edge labels, as
+\[
+ T=(y_0,e_1,y_1,e_2,y_2,e_3,y_3,e_4,y_4,
+       e_5,y_5,e_6,y_6,e_7,y_7,e_8,y_8).             \tag{2}
+\]
+Thus $e_i$ is Lean edge index $i-1$; in particular the two balanced
+tail pairs $e_5,e_6$ and $e_7,e_8$ are Lean indices $4,5$ and $6,7$.
+By \noderef{BalancedGlobalMaximumTriple} there are colors
+$\gamma_1,\gamma_2$ with
+\[
+ \varphi(e_5)=\varphi(e_6)=\gamma_1,
+ \qquad
+ \varphi(e_7)=\varphi(e_8)=\gamma_2.                \tag{3}
+\]
+The values are actual colors because \noderef{GlobalMaximumTriple}
+contains \noderef{KTriple}, hence \noderef{IsOneEdgeUncolored}; among the
+tree identities only $e_1=e$ is uncolored.  Applying
+\noderef{TashkinovTree} to $e_5$ and $e_7$ gives, respectively, a vertex
+among $y_0,\ldots,y_4$ missing $\gamma_1$ and a vertex among
+$y_0,\ldots,y_6$ missing $\gamma_2$.
+
+Let $y_j$ be the first witness missing $\gamma_1$.  If $j=0$, retain the
+triple; this is the no-rotation case.  If $j>0$, apply
+\noderef{ScheideTrunkRotationPreserves} at the positive trunk index $j$.
+The exact relation \noderef{TrunkRotation} cyclically moves $y_j$ to the
+first position, changes colors only on the closing trunk cycle, and keeps
+every post-trunk vertex and edge identity in its old position.  The
+identities $e_5,\ldots,e_8$ have outside-trunk endpoints and so are not
+closing-cycle identities.  Their values in (3) are therefore unchanged.
+It remains to check missingness at the new first vertex rather than assume
+it.  The elementary clause of \noderef{ScheideGlobalMaximumOrder}, read
+through \noderef{ColoredVertexSetElementary}, makes a missing color have
+at most one witness in $V(T)$.  If $\gamma_1=\alpha$, (4)'s original
+$\alpha$-witness forces $j=0$, so this case was not rotated.  If
+$\gamma_1=\beta$, its witness forces $j=1$; the shift prescribed by
+\noderef{TrunkRotation} exchanges the uncolored identity and the adjacent
+$\alpha$-identity, neither of which has color $\beta$, so $\beta$ remains
+missing at $y_1$.  If $\gamma_1$ is neither trunk color, every changed
+cycle identity has one of the two trunk colors and hence no incident
+$\gamma_1$-value changes.  Thus $\gamma_1$ is missing at the new first
+vertex in every case.  Relabel
+the rotated trunk by $y_0,\ldots,y_4$ and call its two normal colors
+$\alpha,\beta$.  We have proved, in both cases, that the current triple is
+balanced and globally maximum of height five, that (2)--(3) still hold,
+and that
+\[
+ \gamma_1\in\overline\varphi(y_0),\qquad
+ \alpha\in\overline\varphi(y_0),\qquad
+ \beta\in\overline\varphi(y_1).                    \tag{4}
+\]
+
+The edge $e_5$ joins its new vertex $y_5$ to the five-vertex trunk by the
+attachment field of \noderef{TreeSequence}.  Hence it supplies the
+specified crossing identity needed by
+\noderef{ScheideHeightFiveGammaEdges}.  That lemma yields identities
+$f_1,f_2,f_3$ and vertices $v_1,v_2$ outside the trunk, all in $V(T)$,
+such that
+\[
+ f_1=y_1v_1,\qquad f_2=y_4v_2,\qquad f_3=y_2y_3,
+ \qquad
+ \varphi(f_1)=\varphi(f_2)=\varphi(f_3)=\gamma_1.   \tag{5}
+\]
+Here and below an equation such as $f_1=y_1v_1$ abbreviates the exact
+unordered-endpoint equality; $f_1$ remains an edge identity.
+
+We identify the first balanced pair without collapsing parallel edges.
+The attachment of $e_5$ lies on the trunk.  The attachment of $e_6$ also
+lies on the trunk: it cannot be $y_5$, since the distinct identities
+$e_5,e_6$ would then be adjacent in the sense of
+\noderef{AdjacentEdges} and have the same color, contrary to
+\noderef{IsProperEdgeColoring}.  Neither identity can attach at $y_0$,
+where $\gamma_1$ is missing by \noderef{MissingColors}; equivalently an
+incident identity of that color would put $\gamma_1$ in
+\noderef{PresentColors}.  Neither can attach at $y_2$ or $y_3$, since the
+identity $f_3$ in (5) already supplies the unique incident
+$\gamma_1$-edge there.  Thus their attachment vertices are $y_1,y_4$,
+one each: sharing one would again make the two distinct identities
+adjacent and equally colored.  Properness makes the incident
+$\gamma_1$-identity at $y_1$ unique, so the edge attached there is
+exactly $f_1$, not merely parallel to it; its other endpoint is $v_1$.
+The same argument at $y_4$ identifies the other identity with $f_2$ and
+its other endpoint with $v_2$.  Interchange the two complete
+edge--new-vertex entries if necessary.  All vertices and edges remain
+injective, both attachments remain to earlier trunk vertices, all
+\noderef{TashkinovTree} witnesses and the normal trunk remain unchanged,
+so the reordered tree is still balanced and globally maximum.  We may
+therefore assume
+\[
+ e_5=f_1, y_5=v_1,qquad e_6=f_2, y_6=v_2.         \tag{6}
+\]
+Apply \noderef{ScheideHeightFiveOutsideLinks} to (5).  It supplies two
+different edge identities $a_{56},b_{56}$ with the same endpoint pair
+$\{y_5,y_6\}$ and respective colors $\alpha,\beta$.
+
+We next prove the required color distinctness.  Along the normal
+height-five closing path, properness and (4) give $\alpha$-edges
+$y_1y_2,y_3y_4$ and $\beta$-edges $y_2y_3,y_4y_0$.  Together with
+$a_{56}$ and $b_{56}$, these are matchings of $y_0,\ldots,y_6$ which
+leave only $y_0$ unmatched in color $\alpha$ and only $y_1$ unmatched in
+color $\beta$.  Equations (5)--(6) similarly give a
+$\gamma_1$-matching $y_1y_5,y_2y_3,y_4y_6$, leaving only $y_0$
+unmatched.  These assertions use \noderef{Incident} to turn endpoint
+equalities into incidences and \noderef{IsProperEdgeColoring} to make
+each colored incidence unique.  If $\gamma_2$ equaled any of
+$\alpha,\beta,\gamma_1$, each attachment of the same-colored identities
+$e_7,e_8$ to the earlier seven vertices would either meet a vertex
+already incident with that color, contradicting properness through
+\noderef{AdjacentEdges}, or meet the unique missing vertex, contradicting
+\noderef{MissingColors} and \noderef{PresentColors}.  Hence
+\[
+ \gamma_2\notin\{\alpha,\beta,\gamma_1\}.           \tag{7}
+\]
+
+The last two vertices are joined by three separately named identities.
+Indeed, \noderef{ScheideGlobalMaximumOrder} says that $V(T)$ is elementary
+and closed in the senses of \noderef{ColoredVertexSetElementary} and
+\noderef{ColoredVertexSetClosed}.  For each
+$c\in\{\gamma_1,\alpha,\beta\}$ its displayed
+matching on the first seven vertices has exactly one missing vertex.
+Elementarity therefore makes $c$ present at both $y_7,y_8$, and
+\noderef{PresentColors} supplies incident $c$-colored identities there.
+Closedness prevents their other endpoints from leaving $V(T)$.  Every
+earlier vertex is either the unique $c$-missing vertex or is already
+incident with its unique $c$-identity.  Properness consequently forces
+the identities at $y_7$ and $y_8$ to coincide in a single edge between
+them.  Denote the resulting identities by
+$g_{\gamma_1},g_\alpha,g_\beta$.  They are pairwise distinct because
+their colors are distinct; parallel identity is retained even though all
+three have endpoint pair $\{y_7,y_8\}$.
+
+The $\gamma_2$-witness preceding $e_7$ lies either on the trunk or in
+$\{y_5,y_6\}$.  In the first case keep the present data.  In the second,
+let the witness be one of $v_1,v_2$ and replace (2) by
+\[
+ (y_0,e_1,y_1,f_1,v_1,g_\beta,v_2,f_2,y_4,
+      e_2,y_2,e_4,y_3,e_7,y_7,e_8,y_8).             \tag{8}
+\]
+We verify this rebasing before relabeling.  The nine vertices in (8) are
+exactly the old nine vertices, so vertex injectivity is preserved.  Its
+eight edges are distinct identities: $e_1,f_1,f_2,e_2,e_4,e_7,e_8$ are
+distinct old tree identities, while $g_\beta$ is the separate
+$\beta$-identity between $v_1,v_2$ and differs from the two
+$\gamma_1$-identities and from every edge with a different endpoint
+pair.  Their endpoint equalities show successively that every new vertex
+attaches to an earlier one, and the first identity remains the uniquely
+uncolored $e_1=e$; hence (8) satisfies every field of
+\noderef{TreeSequence}.
+
+Every Tashkinov witness is also explicit.  The colors of $f_1,f_2$ are
+$\gamma_1$, missing at $y_0$; $g_\beta$ has color $\beta$, missing at
+$y_1$; $e_2,e_4$ have color $\alpha$, missing at $y_0$; and the
+$\gamma_2$ witness in $\{v_1,v_2\}$ precedes both $e_7,e_8$ in (8).
+Thus (8) is a \noderef{TashkinovTree}.  The coloring and distinguished
+identity did not change, so its \noderef{KTriple} is the same, and its
+vertex set still has cardinality $t=9$; hence
+\noderef{GlobalMaximumTriple} holds.
+
+Moreover
+\[
+ y_1,f_1,v_1,g_\beta,v_2,f_2,y_4,q,y_0
+\]
+is a simple alternating $(\gamma_1,\beta)$ incidence path with exactly
+the first five vertices of (8), where $q$ is the old closing identity.
+It therefore supplies \noderef{NormalGlobalMaximumTriple} of height five.
+The remaining pairs $e_2,e_4$ and $e_7,e_8$ have equal colors
+$\alpha$ and $\gamma_2$, respectively, so
+\noderef{BalancedGlobalMaximumTriple} holds.  Only now relabel positions
+in (8) as $y_0,\ldots,y_8$: the old $\gamma_1$ is the new trunk color
+$\alpha$, the old $\alpha$ is the new first-block color $\gamma_1$, and
+$\beta,\gamma_2$ keep their names.  Relation (7), the three differently
+colored identities between the final vertices, and all conclusions above
+retain the same form.  Thus in either case we henceforth have balanced
+data of form (2) with $\gamma_2$ missing at a trunk vertex.
+
+We claim that some $\gamma_2$-edge joins the trunk to
+$\{y_7,y_8\}$.  Suppose otherwise.  The attachment clauses for the two
+distinct $\gamma_2$-colored tree identities $e_7,e_8$, together with
+properness, force them to match $\{y_5,y_6\}$ to $\{y_7,y_8\}$, one at
+each vertex of both pairs.  Relabel within the pairs so that
+$e_7=y_5y_7$ and $e_8=y_6y_8$.  Along with the $\beta$-identities
+$g_\beta$ on $y_5y_6$ and $y_7y_8$, these four individual identities
+form a full alternating $\gamma_2,\beta$ component: every one of its four
+vertex-nodes already has its unique incidence of each color, and every
+edge-node has exactly its two endpoint incidences.  This proves the
+support equality with \noderef{TwoColorComponent}, rather than merely
+exhibiting a cycle.
+
+Let $\varphi'$ be the switch of that component from
+\noderef{TwoColorComponentSwap}.  The colors are distinct by (7), so
+\noderef{TwoColorComponentSwapProper} makes $\varphi'$ proper.  The
+component is disjoint from the trunk, hence it does not contain $e_1$ and
+does not change any trunk incidence or missing set.  The definition of
+the swap leaves the unique uncolored identity unchanged, verifying
+\noderef{IsOneEdgeUncolored}.  All tree edges before $e_7$ keep their
+colors and old Tashkinov witnesses; $e_7,e_8$ now have color $\beta$,
+which is missing at the trunk vertex $y_1$.  Thus the same sequence is a
+Tashkinov tree for $\varphi'$.  The numerical part of the $k$-triple and
+the order-nine vertex set are unchanged, so these checks rebuild
+\noderef{GlobalMaximumTriple} for $(T,e,\varphi')$.
+
+In the switched coloring, the full $\gamma_1,\beta$ component between
+the first two trunk vertices contains, in order,
+\[
+ y_1, y_5, y_7, y_8, y_6, y_4, y_0,           \tag{9}
+\]
+up to interchanging $y_5,y_6$.  The successive identities are the
+$\gamma_1$ crossing at $y_1$, a switched tree identity, the unchanged
+$\gamma_1$ identity on $y_7y_8$, the other switched tree identity, the
+other $\gamma_1$ crossing, and the $\beta$ closing identity.  They are
+distinct, and the seven vertices are distinct by tree injectivity.
+Apply \noderef{ScheideKempePathHeightBound} to this rebuilt globally
+maximum triple.  Its returned simple incidence path has support equal to
+the full component and hence contains all seven multigraph vertex-nodes
+in (9).  A vertex-to-vertex path in the bipartite incidence graph with
+seven distinct multigraph vertices has incidence length at least $12$,
+so $\mathsf{length}/2+1\geq7$.  The same lemma bounds this number by
+$h(G)=5$, a contradiction.  The claim follows.
+
+Let $y_j$ be the trunk vertex missing $\gamma_2$.  If $j=0$, make no
+change.  If $j>0$, temporarily apply
+\noderef{ScheideTrunkRotationPreserves}.  By
+\noderef{TrunkRotation}, the new first vertex is the old $y_j$, all
+post-trunk identities and positions are unchanged, and only the two
+trunk colors are shifted on the closing cycle.  Since (7) separates
+$\gamma_2$ from both trunk colors, all $\gamma_2$ identities and its
+missing status are unchanged.  We may therefore apply
+\noderef{ScheideHeightFiveGammaEdges} to $\gamma_2$, using the crossing
+just proved, and then apply
+\noderef{ScheideHeightFiveOutsideLinks} to its two returned crossing
+identities.
+
+The first lemma gives one internal $\gamma_2$-identity joining the two
+middle trunk vertices and two crossing identities at the remaining two
+non-missing trunk vertices.  Properness makes these exactly all
+$\gamma_2$ incidences on the trunk.  The second lemma joins their outside
+ends by one identity of each temporary trunk color.  At least one outside
+end is $y_7$ or $y_8$ by the preceding claim.  We already have both an
+$\alpha$-identity and a $\beta$-identity between $y_7,y_8$, and the
+temporary trunk colors are precisely these two colors, possibly in the
+opposite order.  Properness at the known final vertex forces the new
+same-colored identity to be the already named identity to the other final
+vertex.  Hence the two outside ends are exactly $y_7,y_8$.
+
+Undoing the temporary rotation restores only the trunk-cycle colors and
+positions; it does not alter these $\gamma_2$ identities.  Each of
+$y_7,y_8$ is already incident with its tree identity $e_7$ or $e_8$ of
+color $\gamma_2$.  Properness identifies those tree identities with the
+two crossing identities just found.  Consequently both $e_7,e_8$ attach
+to the five-vertex trunk, one at each of $y_7,y_8$.                \tag{10}
+
+We finally build \noderef{ScheideStructuralConfiguration}.  Take $p=5$,
+$s=2$, let $\Gamma=(\gamma_1,\gamma_2)$ in that order, use
+$y_0,\ldots,y_4$ as the base vertices, $e_1,\ldots,e_4$ as the four base
+edge identities, and use the ordered blocks
+\[
+ (e_5,y_5,e_6,y_6),\qquad(e_7,y_7,e_8,y_8).
+\]
+Equation (1) and the injective image calculation above give the required
+length equation.  Equation (2) gives every exact vertex and edge
+position.  Equations (6) and (10) give every block-to-base endpoint
+field, and (3) gives the block colors.  The colors are injective by (7).
+The first block color is missing at $y_0$, and the second at $y_j$, so
+both block colors have base witnesses.  Every colored nonfirst base edge
+has color $\alpha$ or $\beta$ along the normal closing path; (4) and (7)
+make both colors different from $\gamma_1,\gamma_2$.  The assumed
+incidence condition on every graph vertex supplies the no-isolated field,
+and the current triple is globally maximum by construction.
+
+It remains only to verify the exit field.  By \noderef{Degree} and
+\noderef{MaximumDegree}, the $k$-triple inequality gives
+$d_G(v)\leq\Delta(G)\leq k-1$.  Properness makes the colors on the colored
+identities incident with $v$ pairwise distinct.  By
+\noderef{IsOneEdgeUncolored}, a non-end of $e$ has all $d_G(v)$ incident
+identities colored and therefore misses at least $k-d_G(v)\geq1$ color;
+an end of $e$ has only $d_G(v)-1$ colored incident identities and misses
+at least $k-d_G(v)+1\geq2$ colors.  The exact first-edge attachment in
+\noderef{TreeSequence} says that the two ends of $e$ are $y_0,y_1$.
+
+Elementarity of $V(T)$ from \noderef{ScheideGlobalMaximumOrder}, using
+\noderef{ColoredVertexSetElementary}, makes missing-color sets at distinct
+tree vertices disjoint.  The four colors
+used by the colored tree identities are exactly
+\[
+ \noderef{TreeUsedColors}(\varphi,T)
+   =\{\alpha,\beta,\gamma_1,\gamma_2\};              \tag{11}
+\]
+their exhibited missing witnesses are respectively
+$y_0,y_1,y_0,y_j$.  If $v\in V(T)\setminus\{y_0,y_j\}$ is not an end of
+$e$, then it is distinct from all four witnesses and its guaranteed
+missing color is outside (11).  If it is an end of $e$, it must be
+$y_1$; among the four used colors only $\beta$ can be missing there, and
+the count of at least two missing colors supplies another color outside
+(11).  In either case $v$ misses a color which is free in the sense of
+\noderef{TreeFreeColors}.
+
+By \noderef{ScheideExitVertex}, every exit is a tree vertex.  But
+\noderef{ScheideExitNoFree} says that an exit vertex has no missing free
+color.  Hence every vertex in \noderef{ScheideExitVertices} lies in
+$\{y_0,y_j\}$.  The first of these misses $\gamma_1$ and the second
+misses $\gamma_2$, so every exit misses a member of $\Gamma$.  This is
+the required exit-coverage field.  All fields of the structural
+configuration have now been checked for the current edge identity,
+coloring, and ordered tree-sequence, which proves the asserted existence.
+\end{proof}
