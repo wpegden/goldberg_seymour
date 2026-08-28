@@ -7,28 +7,214 @@ individual edge identity of color $\alpha$ whose endpoint pair is exactly
 $\{u^1_\gamma,u^2_\gamma\}$.
 \end{lemma}
 \begin{proof}
-By \noderef{ScheideGlobalMaximumOrder}, $V(T)$ is elementary and closed.
-Since $\alpha$ is missing at a vertex of $Z_\gamma$, elementariness makes
-$\alpha$ present at both vertices of $U_\gamma$; properness makes the
-incident $\alpha$-edge at either vertex unique.  Closedness prevents either
-of those edges from leaving $V(T)$.
+Fix a block index $i$ and a color $\alpha\ne\gamma_i$, and abbreviate
+\[
+ X=\noderef{TreeSequenceVertexSet}(T),\qquad
+ u_0=u^1_{\gamma_i},\quad u_1=u^2_{\gamma_i},\qquad
+ Z=X\setminus\{u_0,u_1\}.
+\]
+Choose $z\in Z$ at which $\alpha$ is missing.  We keep edge identities
+throughout the argument, even when two identities have the same endpoint
+pair.
 
-Suppose that the $\alpha$-edge at $u^1_\gamma$ ends in $Z_\gamma$.  The
-$\alpha$-edge at $u^2_\gamma$ cannot end at $u^1_\gamma$, where the unique
-$\alpha$ incidence is already occupied, so it too ends in
-$Z_\gamma$.  Delete from the ordered tree the two named $\gamma$-edges and
-their two new vertices, then append these two individual $\alpha$-edges
-and $u^1_\gamma,u^2_\gamma$.  The remaining order is Tashkinov because
-every deleted block attached directly to the base; the two appended edges
-have the existing missing $\alpha$ witness in $Z_\gamma$.  Properness and
-the unique uncolored edge are unchanged, and the new tree has exactly
-$V(T)$, so the resulting triple is globally maximum.
+Unpack the extension in
+\noderef{ScheideReducedConfiguration} to the underlying
+\noderef{ScheideStructuralConfiguration}.  It supplies the integers
+$p\geq2$ and $s$, the injectively indexed colors $\gamma_r$, the base
+vertices $y_0,\ldots,y_{p-1}$, the base edges, and the two vertices and
+two edges in each block.  Its position equalities say that these named
+data, in precisely that order, are all vertices and edges of $T$.  Its
+attachment clauses say that every block edge has endpoints
+$\{y_q,u^j_{\gamma_r}\}$ for some base vertex $y_q$; its color clauses
+give that edge color $\gamma_r$; its missing-color clauses give a base
+vertex missing $\gamma_r$; and its base-avoidance clause says that every
+colored base edge other than the first has color different from every
+$\gamma_r$.  It also supplies a globally maximum triple.  Expanding
+\noderef{GlobalMaximumTriple}, write its first component as the unchanged
+$k$-triple $K$, its second as the Tashkinov certificate for $T$, and its
+third as
+\[
+ |X|=t(G).                                                     \tag{1}
+\]
+By \noderef{ScheideGlobalMaximumOrder} applied to this globally maximum
+triple, $X$ is elementary and closed in the senses of
+\noderef{ColoredVertexSetElementary} and
+\noderef{ColoredVertexSetClosed}.
 
-In that replacement tree, $\gamma$ is missing but unused, hence free.
-Defective colors and Scheide exits depend only on the coloring and vertex
-set, both of which are unchanged.  The exit-color surjectivity in
-\noderef{ScheideReducedConfiguration} supplies an exit missing $\gamma$,
-contradicting \noderef{ScheideExitNoFree}.  Thus the unique
-$\alpha$-edge at $u^1_\gamma$ must end at $u^2_\gamma$, giving the asserted
-edge identity and endpoint equation.
+The block-position equalities and vertex injectivity in
+\noderef{TreeSequence} show that $u_0,u_1\in X$, that $u_0\ne u_1$, and
+that neither equals any base vertex or a vertex in another block.  Since
+$z\in Z$, it is distinct from both $u_0$ and $u_1$.  If $\alpha$ were
+missing at either $u_j$, then the missing-color sets at $z$ and $u_j$
+would meet in $\alpha$, contrary to elementariness.  Thus $\alpha$ is not
+in $\noderef{MissingColors}(G,\varphi,u_j)$.  Since missing colors are,
+by that definition, the complement of
+\noderef{PresentColors}(G,\varphi,u_j)$, for each $j\in\{0,1\}$ there is
+an individual edge identity $a_j$ such that
+\[
+ \noderef{Incident}(G,u_j,a_j),\qquad
+ \varphi(a_j)=\alpha.                                         \tag{2}
+\]
+
+These incident $\alpha$-edges are unique.  Indeed, expansion of
+\noderef{KTriple} gives the properness of $\varphi$ in the sense of
+\noderef{IsProperEdgeColoring}.  Two distinct $\alpha$-colored identities
+incident with the same $u_j$ would be adjacent by
+\noderef{AdjacentEdges}, contradicting that properness.  By
+\noderef{Incident}, the endpoint pair of $a_j$ contains $u_j$; write it
+as
+\[
+ G.\operatorname{ends}(a_j)=\{u_j,w_j\}.
+\]
+The loopless clause in \noderef{LooplessMultigraph} gives $w_j\ne u_j$.
+Moreover $w_j\in X$.  Otherwise $a_j$ would, by
+\noderef{BoundaryEdges}, be a boundary edge of $X$.  But $\alpha$ is
+missing at $z\in X$, so the closedness clause would forbid the
+$\alpha$-colored boundary edge $a_j$, contrary to (2).
+
+It remains to prove $w_0=u_1$.  Suppose for a contradiction that
+$w_0\in Z$.  We first show $w_1\in Z$.  We already know $w_1\in X$ and
+$w_1\ne u_1$.  If $w_1=u_0$, then $a_1$ is an $\alpha$-edge incident
+with $u_0$.  It is not $a_0$: equality would make
+$\{u_0,w_0\}=\{u_1,u_0\}$, whereas $w_0\in Z$ is distinct from $u_1$.
+Thus $a_0$ and $a_1$ would be distinct adjacent edges of color $\alpha$,
+contrary to properness.  Hence $w_1\ne u_0$, and so $w_1\in Z$.
+
+We now construct the replacement ordered sequence $T'$.  Retain the
+entire base, retain every block with index $r\ne i$ in increasing original
+order, delete the two entries
+\[
+ (f^1_{\gamma_i},u_0),\qquad(f^2_{\gamma_i},u_1),
+\]
+and append
+\[
+ (a_0,u_0),\qquad(a_1,u_1).
+\]
+Thus, suppressing the unchanged base entries, the block part of $T'$ is
+\[
+ \mathop{\Vert}_{0\le r<s,\ r\ne i}
+   (f^1_{\gamma_r},u^1_{\gamma_r},
+    f^2_{\gamma_r},u^2_{\gamma_r}),
+ \quad a_0,u_0,a_1,u_1,                                      \tag{3}
+\]
+where $\Vert$ means concatenation in increasing $r$.  We verify every
+field of \noderef{TreeSequence} for (3).
+
+First, (3) has $p+2(s-1)+2=p+2s$ vertices and one fewer edge.  The
+length equality in the structural configuration therefore gives it the
+same positive length as $T$.  Since $p\geq2$, at least one base edge is
+retained; the first edge is the old first base edge and hence is still
+$e_0$.  Every named vertex of $T$ occurs exactly once in (3): all vertices
+except $u_0,u_1$ are retained once, and those two are appended once.
+Consequently vertex distinctness follows from the old vertex-position
+equalities and the old vertex injectivity.
+
+For edge distinctness, the retained identities are pairwise distinct by
+the edge injectivity of $T$.  Neither $a_j$ is a removed
+$\gamma_i$-block edge, since (2), the block-color equation, and
+$\alpha\ne\gamma_i$ give different colors.  Neither $a_j$ is the first
+base edge: \noderef{KTriple} and
+\noderef{IsOneEdgeUncolored} say that the latter is uncolored, whereas
+(2) colors $a_j$.  A later base edge has, by its old
+\noderef{TreeSequence} attachment and its structural position, both
+ends among the base vertices; it cannot equal $a_j$, which is incident
+with the nonbase vertex $u_j$.  A retained block edge has exact endpoints
+$\{y_q,u^h_{\gamma_r}\}$ with $r\ne i$ and therefore cannot equal
+$a_j$: old vertex injectivity makes $u_j$ distinct from both of those
+endpoints.  Equivalently, if its color happened to be $\alpha$, the same
+conclusion also follows by comparing these exact endpoint pairs; if it did
+not, the color equations already separate the identities.  Finally
+$a_0\ne a_1$, because their endpoint pairs contain respectively the
+distinct removed vertices $u_0,u_1$, while their other ends $w_0,w_1$
+both lie in $Z$.  This proves pairwise edge distinctness.
+
+For the attachment field, every base edge retains its old attachment
+witness because the base prefix is unchanged.  Each retained block edge
+still has endpoints $\{y_q,u^h_{\gamma_r}\}$ by the structural
+attachment clause, and every base vertex precedes every retained block
+vertex in (3).  Finally (2) and the choices of $w_0,w_1$ give the exact
+endpoint pairs $\{u_0,w_0\}$ and $\{u_1,w_1\}$.  Both $w_0,w_1$ lie in
+$Z$, so both occur in the retained portion before the two appended
+vertices.  These are valid earlier-vertex witnesses for the last two
+edges.  Thus (3), with these data, is a tree-sequence $T'$.
+
+Next verify \noderef{TashkinovTree} for $T'$.  There is no condition on
+its first edge.  For each nonfirst base edge, use its original Tashkinov
+witness; the whole base prefix and all earlier base vertices are
+unchanged.  A retained block edge belonging to index $r\ne i$ has color
+$\gamma_r$, and the structural missing-color clause supplies a base
+vertex $y_q$ missing $\gamma_r$; that base vertex precedes the block edge
+in $T'$.  Both appended edges have color $\alpha$ by (2), and the chosen
+vertex $z\in Z$, which precedes both appended edges, misses $\alpha$.
+These cases exhaust every nonfirst edge of $T'$, so $T'$ is Tashkinov.
+
+The construction merely moves $u_0,u_1$ to the end and changes the two
+edge identities paired with them.  Hence
+\[
+ \noderef{TreeSequenceVertexSet}(T')=X.                       \tag{4}
+\]
+The graph, distinguished edge, coloring, and $k$-triple $K$ are
+unchanged.  Combining $K$, the preceding Tashkinov certificate, (4), and
+(1), and then expanding \noderef{GlobalMaximumTriple}, proves that
+$(T',e_0,\varphi)$ is globally maximum.
+
+We next check directly that $\gamma_i$ is free for $T'$.  The structural
+missing-color clause supplies a base vertex $y_q$ missing $\gamma_i$;
+this vertex was retained, so
+$\gamma_i\in\noderef{TreeMissingColors}(\varphi,T')$.  To see that the
+color is unused, classify the tree edges in (3).  The first edge is
+uncolored by the one-edge-uncolored clause of $K$ and in any event is
+excluded from \noderef{TreeUsedColors}.  Every other base edge avoids
+all block colors by the structural base-avoidance clause.  Every retained
+block edge has color $\gamma_r$ for some $r\ne i$, and injectivity of the
+indexed block colors gives $\gamma_r\ne\gamma_i$.  The last two edges
+have color $\alpha\ne\gamma_i$.  Thus no colored nonfirst edge of $T'$
+has color $\gamma_i$, so
+$\gamma_i\notin\noderef{TreeUsedColors}(\varphi,T')$.  By the set
+difference in \noderef{TreeFreeColors},
+\[
+ \gamma_i\in\noderef{TreeFreeColors}(\varphi,T').             \tag{5}
+\]
+
+It remains to transport the promised exit vertex, for which we do not
+appeal to an unstated invariance lemma.  Expand
+\noderef{DefectiveColors}: it is determined by $G$, $\varphi$, and the
+vertex finset, so (4) makes the defective-color sets for $T$ and $T'$
+equal.  Expand \noderef{ScheideDefectiveChainPath}: its only dependence
+on the tree is through its vertex set, both in the condition that its
+initial vertex lies in the set and in the condition that its terminal
+vertex lies outside it; its simplicity and full-component clauses depend
+only on $G$, $\varphi$, and the two colors.  Hence (4) makes every such
+full-path predicate for $T$ equivalent to the corresponding predicate
+for $T'$.  Now expand \noderef{ScheideExitVertex}.  Its tree-dependent
+clauses are exactly membership in the tree vertex set, membership in the
+just-identified defective-color set, the just-identified full-path
+predicate, and the assertion that later vertex-nodes lie outside the same
+tree vertex set.  Each clause is unchanged by (4).  Therefore a vertex is
+a Scheide exit for $T$ if and only if it is one for $T'$.  Finally,
+\noderef{ScheideExitVertices} filters the finite vertex universe by this
+predicate, so
+\[
+ \noderef{ScheideExitVertices}(T,\varphi)
+   =\noderef{ScheideExitVertices}(T',\varphi).                 \tag{6}
+\]
+
+The field ``every block color occurs at an exit'' in
+\noderef{ScheideReducedConfiguration} now gives a vertex $v$ in the
+left-hand side of (6) with
+$\gamma_i\in\noderef{MissingColors}(G,\varphi,v)$.  By (6), $v$ is an
+exit vertex of $T'$.  Apply \noderef{ScheideExitNoFree} to the globally
+maximum triple just constructed.  It says that the missing-color set at
+$v$ is disjoint from the free-color set of $T'$, contradicting the
+membership of $\gamma_i$ in the former and (5) in the latter.
+
+Thus $w_0\notin Z$.  We already proved $w_0\in X$ and looplessness gives
+$w_0\ne u_0$; since $X$ is the disjoint union of $Z$ and
+$\{u_0,u_1\}$, it follows that $w_0=u_1$.  The edge identity $a_0$ from
+(2) therefore satisfies
+\[
+ \varphi(a_0)=\alpha,\qquad
+ G.\operatorname{ends}(a_0)=\{u_0,u_1\},
+\]
+which is the required individual edge identity and endpoint equation.
 \end{proof}
