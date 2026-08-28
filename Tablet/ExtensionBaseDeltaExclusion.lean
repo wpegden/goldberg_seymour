@@ -1,19 +1,35 @@
+import Tablet.AdjacentEdges
+import Tablet.BoundaryColorEdges
+import Tablet.BoundaryColorVertex
+import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
+import Tablet.DefectiveColor
+import Tablet.DefectiveEdge
+import Tablet.DefectiveVertex
+import Tablet.ETTFirstAppearanceIndex
+import Tablet.ExtendedTashkinovTree
+import Tablet.ExtensionBaseActiveIndices
 import Tablet.ExtensionBaseSupportOrder
 import Tablet.HkuMissingStoredMonotone
 import Tablet.HkuUnsupportedVertexColors
+import Tablet.Incident
 import Tablet.InternalEdges
+import Tablet.IsProperEdgeColoring
 import Tablet.MaximumDefectiveChoice
 import Tablet.MissingColors
 import Tablet.ParallelExtensionColor
+import Tablet.PresentColors
 import Tablet.SameColorSeriesPreserved
 import Tablet.StableColoring
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
+import Tablet.TreeIncidentEdge
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceInitialSegment
-import Tablet.TwoColorComponentSwap
+import Tablet.TreeSequenceVertexSet
+import Tablet.TreeVertexOrder
 import Tablet.sc2
 
 -- [TABLET NODE: ExtensionBaseDeltaExclusion]

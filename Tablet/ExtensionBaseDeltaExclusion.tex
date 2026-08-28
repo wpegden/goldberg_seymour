@@ -51,109 +51,295 @@ The gamma and delta colors in Lean are tied to the exact optional fields
 of their PE slots; neither conclusion is an additional hypothesis.
 \end{lemma}
 \begin{proof}
-We first note a certified fact valid at every PE slot (r):
+We use throughout the exact edge identities stored by the series; in
+particular, two parallel edges remain distinct elements of the edge type.
+
+We first prove a fact valid at every PE slot \(r\):
 \[
                   \delta_r\notin
                   \overline\varphi_{r-1}(T_r).                 \tag{3}
 \]
-Indeed, eliminate the certificate at (r) using
-\noderef{TashkinovSeries} and the equality
-\(\Theta_r=\mathrm{PE}\).  In the PE constructor of
-\noderef{TashkinovSeriesStep}, the selected coloring \(\pi_{r-1}\)
-from \noderef{MaximumDefectiveChoice} is
-((T_r,D_{r-1},\varphi_{r-1}))-stable, and its selected connecting edge
-is a \(\delta_r\)-colored boundary edge.  If \(\delta_r\) were missing
-at a vertex of (T_r) under \(\varphi_{r-1}\), the vertex clause of
-\noderef{StableColoring} would make it missing there under
-\(\pi_{r-1}\).  The old tree is
-\(\varphi_{r-1}\)-closed by the PE certificate.  Stability preserves
-both its vertexwise missing sets and every incident edge whose old color
-lies in the controlling set, so the usual two applications of
-\noderef{sc2} transfer this closedness to \(\pi_{r-1}\).  That contradicts
-the displayed \(\delta_r\)-boundary edge.  This proves (3).
+Eliminate the certificate at \(r\), using \noderef{TashkinovSeries} and
+the equality \(\Theta_r=\mathrm{PE}\).  The PE constructor in
+\noderef{TashkinovSeriesStep} supplies the previous proper coloring
+\(\varphi_{r-1}\), for which \(T_r\) is closed, and an admissible choice
+\(\pi_{r-1}\) from \noderef{MaximumDefectiveChoice}.  The latter is
+proper, leaves exactly \(e_0\) uncolored, and is
+\((T_r,D_{r-1},\varphi_{r-1})\)-stable.  Its selected edge \(f_r\) is
+incident with its selected vertex in \(T_r\), is a defective boundary-edge
+identity, and satisfies \(\pi_{r-1}(f_r)=\delta_r\).  Expanding
+\noderef{DefectiveEdge} and then \noderef{BoundaryColorEdges} shows, by
+comparison with this exact color equation, that
+\(f_r\in\partial_{\pi_{r-1},\delta_r}(T_r)\); in particular
+\(f_r\in\partial_G(T_r)\) by \noderef{BoundaryEdges}.
 
-Fix (s,t\in L) with (s\leq t).  If (s=t), the first assertion of
-(1) is (3).  The PE rule \noderef{ParallelExtensionColor} makes
-\(\gamma_s\) missing at the supporting vertex under the selected
-coloring, and stability makes it missing there under
-\(\varphi_{s-1}\).  Hence
-\(\gamma_s\in\overline\varphi_{s-1}(T_s)\), whereas (3) excludes
-\(\delta_s\) from that set; therefore
+Suppose contrary to (3) that
+\(\delta_r\in\overline\varphi_{r-1}(T_r)\).  By the union definition
+\noderef{TreeMissingColors}, choose \(z\in V(T_r)\) with
+\(\delta_r\in\overline\varphi_{r-1}(z)\).  The vertex clause of
+\noderef{StableColoring} gives
+\(\overline\pi_{r-1}(z)=\overline\varphi_{r-1}(z)\), so
+\(\delta_r\in\overline\pi_{r-1}(z)\) and, again by
+\noderef{TreeMissingColors},
+\(\delta_r\in\overline\pi_{r-1}(T_r)\).  Apply the symmetry part of
+\noderef{sc2} to the two proper colorings, both leaving exactly \(e_0\)
+uncolored.  It makes \(\varphi_{r-1}\)
+\((T_r,D_{r-1},\pi_{r-1})\)-stable.  The edge \(f_r\) is incident with
+the tree in the sense of \noderef{TreeIncidentEdge}, and its reference
+color under \(\pi_{r-1}\) is the tree-missing color \(\delta_r\).
+The edge clause of \noderef{StableColoring} therefore gives
+\(\varphi_{r-1}(f_r)=\pi_{r-1}(f_r)=\delta_r\).  Now
+\(f_r\in\partial_G(T_r)\), \(z\in V(T_r)\), and \(\delta_r\) is missing
+at \(z\), contradicting the closedness condition
+\noderef{ColoredVertexSetClosed}.  This proves (3).
+
+Fix \(s,t\in L\) with \(s\leq t\).  If \(s=t\), (3) is the first
+assertion of (1).  At slot \(s\), \noderef{ParallelExtensionColor} says
+that \(\gamma_s\) is missing at \(v_s\) under the selected coloring.
+The selected vertex belongs to \(V(T_s)\) by the defective-vertex field of
+\noderef{MaximumDefectiveChoice}, and the vertex clause of
+\noderef{StableColoring} transfers this membership to
+\(\overline\varphi_{s-1}(v_s)\).  The definition
+\noderef{TreeMissingColors} then puts
+\(\gamma_s\in\overline\varphi_{s-1}(T_s)\).  In view of (3),
 \(\delta_s\ne\gamma_s\).
 
-Suppose now that (s<t), and assume for a contradiction that
-\(\delta_t\in\overline\varphi_{s-1}(T_s)\).  Choose
-\(u\in V(T_s)\) at which \(\delta_t\) is missing.  Since (t\leq n)
-and (s<t), this (T_s) is an earlier-rung stage, so the explicit
-lower-rung assertion (i) says that its vertex set is elementary under
-\(\varphi_{s-1}\).  By \noderef{ColoredVertexSetElementary}, no other
-vertex of (T_s) misses \(\delta_t\).  Thus, for every
-\(x\in V(T_s)\setminus\{u\}\), the definition
-\noderef{MissingColors} supplies an incident edge (f_x) with
-\(\varphi_{s-1}(f_x)=\delta_t\).
-
-The PE certificate at (s) says that (T_s) is closed under
-\(\varphi_{s-1}\).  Since \(\delta_t\) is missing at \(u\), closedness
-\noderef{ColoredVertexSetClosed} excludes every
-\(\delta_t\)-colored boundary edge.  Hence each exact identity (f_x)
-is internal to (T_s), in the sense of \noderef{InternalEdges}.
-Apply \noderef{SameColorSeriesPreserved} over the interval from (s) to
-just before (t).  Its internal-edge clause gives
+Suppose henceforth that \(s<t\), and assume for a contradiction that
+\(\delta_t\in\overline\varphi_{s-1}(T_s)\).  Unfolding
+\noderef{TreeMissingColors}, choose \(u\in V(T_s)\) such that
+\(\delta_t\in\overline\varphi_{s-1}(u)\).  Since \(s<t\leq n\), the
+explicit lower-rung hypothesis makes \(V(T_s)\) elementary under
+\(\varphi_{s-1}\).  Thus \noderef{ColoredVertexSetElementary} says that
+no \(x\in V(T_s)\setminus\{u\}\) also misses \(\delta_t\).  For each
+such \(x\), the complement definition \noderef{MissingColors} first puts
+\(\delta_t\) in the set of colors present at \(x\); unfolding
+\noderef{PresentColors} then supplies a particular edge identity \(f_x\)
+incident with \(x\), in the sense of \noderef{Incident}, such that
 \[
-                 \varphi_{t-1}(f_x)=\delta_t.                  \tag{4}
+                        \varphi_{s-1}(f_x)=\delta_t.             \tag{4}
 \]
-The inclusions in \noderef{HkuMissingStoredMonotone}, iterated over the
-same interval, put \(\delta_t\) in the missing-plus-stored controlling
-set at (T_t).  Therefore the selected stability and then the second
-stability fields of the PE certificate at (t) preserve (4).  Write
-\(\pi'_{t-1}\) for that second stable coloring.  We have proved that
-every (x\in V(T_s)\setminus\{u\}) is incident with an internal
-\(\delta_t\)-edge under \(\pi'_{t-1}\).  Properness consequently
-prevents any such (x) from also being a
-\(\delta_t\)-boundary vertex.
 
-By \noderef{ExtensionBaseSupportOrder}, whose explicit lower-rung
-assertion (v) is among the present hypotheses,
-\(v_t\preceq v_s\).  The certified ordered initial-segment relations
-from \noderef{TashkinovSeriesStep} and
-\noderef{TreeSequenceInitialSegment} imply that every vertex of (T_t)
-preceding (v_t) lies in (T_s): indeed (v_s\in V(T_s)), and
-\(v_t\preceq v_s\).
+The PE certificate at \(s\) states that \(T_s\) is closed under
+\(\varphi_{s-1}\).  If \(f_x\) were in the exact boundary set
+\(\partial_G(T_s)\) of \noderef{BoundaryEdges}, then (4), the vertex
+\(u\in V(T_s)\), and the fact that \(\delta_t\) is missing at \(u\)
+would contradict \noderef{ColoredVertexSetClosed}.  Hence \(f_x\) is not
+a boundary edge.  Since it is incident with the inside vertex \(x\), the
+two-endpoint definitions \noderef{Incident} and \noderef{BoundaryEdges}
+imply that every endpoint incident with this
+same edge identity is inside \(V(T_s)\).  Thus
+\(f_x\in E(G[T_s])\) by \noderef{InternalEdges}.
 
-It remains to compare this with the maximum-defective choice at (t).
-Its selected \(\delta_t\)-boundary set is defective.  The second stable
-coloring controls \(\delta_t\), so its exact \(\delta_t\)-boundary set is
-the same; this follows directly from the edge clause of
-\noderef{StableColoring}, with symmetry supplied by \noderef{sc2}.
-Thus it contains (v_t) and at least one other boundary vertex (y).
-The maximality field of \noderef{MaximumDefectiveChoice}, applied to the
-second stable coloring after forgetting the one extra controlled color,
-gives (y\prec v_t).  Hence both (v_t) and (y) lie in (T_s).
-If (u=v_t), then (y\in V(T_s)\setminus\{u\}) is a boundary vertex,
-contrary to the preceding paragraph.  If (u\ne v_t), then (v_t)
-itself gives that contradiction.  This proves
+Apply \noderef{SameColorSeriesPreserved} to the nonempty interval from
+slot \(s\) through the slot immediately before \(t\).  Its internal-edge
+clause and (4) give
+\[
+                        \varphi_{t-1}(f_x)=\delta_t.             \tag{5}
+\]
+The original assumption puts \(\delta_t\) in
+\(\overline\varphi_{s-1}(T_s)\cup D_{s-1}\).  Iterating the two
+inclusions of \noderef{HkuMissingStoredMonotone} through the same stage
+interval yields
+\[
+       \delta_t\in\overline\varphi_{t-1}(T_t)\cup D_{t-1}.      \tag{6}
+\]
+
+At the PE slot \(t\), write \(\pi_{t-1}\) for the selected coloring and
+\(\rho=\pi'_{t-1}\) for the second coloring.  The first is
+\((T_t,D_{t-1},\varphi_{t-1})\)-stable.  The ordered-extension fields
+of \noderef{TashkinovSeriesStep} and
+\noderef{TreeSequenceInitialSegment} put every vertex of \(T_s\) in
+\(T_t\).  Hence the internal edge \(f_x\) is incident with \(T_t\), and
+(5), (6), and the edge clause of
+\noderef{StableColoring} give
+\(\pi_{t-1}(f_x)=\varphi_{t-1}(f_x)=\delta_t\).  The PE certificate
+makes \(\rho\)
+\((T_t,D_{t-1}\cup\{\delta_t\},\pi_{t-1})\)-stable.  Because
+\(\delta_t\) lies in this enlarged controlling set, a second use of the
+same edge clause gives
+\[
+                              \rho(f_x)=\delta_t.                \tag{7}
+\]
+
+We record explicitly why (7) excludes \(x\) from the
+\(\delta_t\)-boundary vertices of \(T_t\).  If it did not, the definition
+\noderef{BoundaryColorVertex} would supply an exact edge identity \(g\)
+incident with \(x\) and belonging to
+\(\partial_{\rho,\delta_t}(T_t)\).  By
+\noderef{BoundaryColorEdges}, \(\rho(g)=\delta_t\), and by
+\noderef{BoundaryEdges}, \(g\) is a boundary edge of \(T_t\).  The edge
+\(f_x\), being internal to \(T_s\), has both endpoints in \(T_s\), and
+the same initial-segment inclusion puts both endpoints in \(T_t\).
+Consequently it is not a boundary edge of \(T_t\), so \(g\ne f_x\).
+The common incident
+vertex \(x\) makes these two distinct edge identities adjacent by
+\noderef{AdjacentEdges}.  Their common color in (7) contradicts the
+properness condition \noderef{IsProperEdgeColoring} for \(\rho\).  We
+have proved
+\[
+ x\in V(T_s)\setminus\{u\}\quad\Longrightarrow\quad
+ x\notin I[\partial_{\rho,\delta_t}(T_t)].                       \tag{8}
+\]
+This argument concerns exact edge identities, so it remains valid when
+\(f_x\) and \(g\) are parallel.
+
+We next put \(\rho\) into the precise admissible class required by the
+maximum-defective choice.  Its enlarged-set stability implies
+\((T_t,D_{t-1},\pi_{t-1})\)-stability: the vertexwise equality is
+unchanged, and every color in
+\(\overline\pi_{t-1}(T_t)\cup D_{t-1}\) also belongs to
+\(\overline\pi_{t-1}(T_t)\cup(D_{t-1}\cup\{\delta_t\})\), so the edge
+clause of \noderef{StableColoring} restricts directly.  The PE constructor
+and \noderef{MaximumDefectiveChoice} say that
+\(\varphi_{t-1},\pi_{t-1},\rho\) are proper and leave exactly \(e_0\)
+uncolored.  The transitivity part of \noderef{sc2}, applied at the
+smaller set \(D_{t-1}\), now composes this restricted stability with the
+selected coloring's
+\((T_t,D_{t-1},\varphi_{t-1})\)-stability.  Consequently
+\[
+                 \rho\text{ is }(T_t,D_{t-1},\varphi_{t-1})
+                 \text{-stable}.                              \tag{9}
+\]
+
+It remains to verify defectiveness under \(\rho\) without collapsing
+parallel edges.  The selected edge \(f_t\) from
+\noderef{MaximumDefectiveChoice} is defective under \(\pi_{t-1}\).
+Unfold \noderef{DefectiveEdge}: for some color \(\alpha\), it belongs to
+\(\partial_{\pi_{t-1},\alpha}(T_t)\), and \(\alpha\) is defective.
+The definition \noderef{BoundaryColorEdges} and the stored equation
+\(\pi_{t-1}(f_t)=\delta_t\) force \(\alpha=\delta_t\).  Hence
+\noderef{DefectiveColor} gives at least two distinct edge identities in
+\(\partial_{\pi_{t-1},\delta_t}(T_t)\), one of which is \(f_t\).
+
+The exact \(\delta_t\)-boundary-edge set is unchanged on passing from
+\(\pi_{t-1}\) to \(\rho\).  Indeed, membership in
+\noderef{BoundaryEdges} is independent of the coloring, and every
+boundary edge is incident with its inside tree endpoint, hence with the
+tree by \noderef{TreeIncidentEdge}.  If such an edge has color
+\(\delta_t\) under \(\pi_{t-1}\), the edge clause of the enlarged-set
+stability gives the same color under \(\rho\).  Conversely, symmetry in
+\noderef{sc2} makes \(\pi_{t-1}\) stable relative to \(\rho\) for the
+same enlarged controlling set, and its edge clause gives the reverse
+implication.  Unfolding \noderef{BoundaryColorEdges} proves equality of
+the two finite sets.  Therefore \(\delta_t\) is defective under \(\rho\),
+and \(f_t\) remains one of its boundary edges.
+
+Choose another exact edge identity
+\(g\in\partial_{\rho,\delta_t}(T_t)\) with \(g\ne f_t\), possible by
+\noderef{DefectiveColor}.  By \noderef{BoundaryEdges}, choose its endpoint
+\(y\in V(T_t)\); its endpoint equation makes it incident with \(g\) by
+\noderef{Incident}, and then \noderef{BoundaryColorVertex} makes \(y\) a
+\(\delta_t\)-boundary vertex.  The stored edge \(f_t\) is incident with
+\(v_t\in V(T_t)\), so \(v_t\) is also such a boundary vertex.  These two
+vertices are distinct: if \(y=v_t\), then the distinct identities \(g\)
+and \(f_t\) are adjacent by \noderef{AdjacentEdges} and both have color
+\(\delta_t\), contrary to \noderef{IsProperEdgeColoring}.  Since
+\(\delta_t\) is defective under \(\rho\), the edge \(g\) is a defective
+edge by \noderef{DefectiveEdge}, and \(y\) is a defective vertex by
+\noderef{DefectiveVertex}.
+
+Apply the maximality field of \noderef{MaximumDefectiveChoice} to
+\(\rho,y\), using properness, the one-uncolored condition, (9), and the
+defective-vertex fact just proved.  It gives \(y=v_t\) or
+\(y\prec_{T_t}v_t\).  The first alternative was excluded, so
+\[
+                              y\prec_{T_t}v_t.                  \tag{10}
+\]
+
+By \noderef{ExtensionBaseSupportOrder}, applied with the explicit
+lower-rung assertion (v) from the present statement,
+\(v_t\preceq_Tv_s\).  We now justify the required stage containment.
+Iterate the ordered-extension fields in \noderef{TashkinovSeriesStep}
+and finish with the terminal segment field in
+\noderef{ExtendedTashkinovTree}.  Expanding
+\noderef{TreeSequenceInitialSegment} proves that both \(T_s\) and \(T_t\)
+are ordered initial segments of \(T\).  Such an embedding preserves
+\noderef{TreeVertexOrder}: the same two vertex positions witness the
+strict order after applying the entrywise prefix equations.  Thus (10)
+gives \(y\prec_Tv_t\).
+
+We also need downward closure, not merely order preservation.  Let \(A\)
+be an ordered initial segment of \(B\), let \(b\in V(A)\), and suppose
+\(a\prec_B b\).  By \noderef{TreeSequenceVertexSet}, \(b\) has a position
+\(i_b\) in \(A\); the entrywise equality in
+\noderef{TreeSequenceInitialSegment} puts it at the same position in
+\(B\).  The uniqueness of vertex positions from the injectivity field of
+\noderef{TreeSequence} and the definition \noderef{TreeVertexOrder} show
+that the position of \(a\) in \(B\) is smaller than \(i_b\), hence still
+lies in the prefix \(A\).  The corresponding prefix equation then puts
+\(a\in V(A)\).  Apply this observation to \(A=T_s\), \(B=T\), and
+\(b=v_s\in V(T_s)\).  From \(v_t\preceq_Tv_s\) we get
+\(v_t\in V(T_s)\).  If \(v_t=v_s\), then (10) gives \(y\prec_Tv_s\);
+if \(v_t\prec_Tv_s\), transitivity of the numerical position order in
+\noderef{TreeVertexOrder} gives the same conclusion.  Thus
+\(y\in V(T_s)\) as well.
+
+If \(u=v_t\), then the boundary vertex \(y\) belongs to
+\(V(T_s)\setminus\{u\}\), contradicting (8).  If \(u\ne v_t\), the
+boundary vertex \(v_t\) itself belongs to that difference, again
+contradicting (8).  Therefore
 \(\delta_t\notin\overline\varphi_{s-1}(T_s)\).
 
-The PE rule \noderef{ParallelExtensionColor} and selected stability make
-\(\gamma_s\) a member of
-\(\overline\varphi_{s-1}(T_s)\).  The exclusion just proved therefore
-gives \(\delta_t\ne\gamma_s\), completing (1).
+Finally, \noderef{ParallelExtensionColor} makes \(\gamma_s\) missing at
+\(v_s\) under the selected coloring at \(s\).  The vertex clause of
+\noderef{StableColoring} makes it missing there under
+\(\varphi_{s-1}\), and \noderef{TreeMissingColors} then gives
+\(\gamma_s\in\overline\varphi_{s-1}(T_s)\).  The exclusion just proved
+implies \(\delta_t\ne\gamma_s\), completing (1).
 
-For (2), the finite set (L) is nonempty because it contains the
-terminal PE index.  Choose its least member (s_0).  We have just shown
-that \(\delta_t\notin\overline\varphi_{s_0-1}(T_{s_0})\) for every
-(t\in L).  Between (j) and (s_0-1), no PE can be supported at a
-vertex of (T_j): such a support would have first-appearance index at
-most (j), hence would define an earlier member of (L).  Apply
-\noderef{HkuUnsupportedVertexColors} separately at every vertex of
-(T_j).  It identifies that vertex's missing-color set under
-\(\varphi_{j-1}\) with its set under \(\varphi_{s_0-1}\).  The ordered
-initial-segment fields identify (T_j) with the corresponding prefix of
-(T_{s_0}).  Taking the union over its vertices gives
+For (2), the finite set \(L\) is nonempty.  At the terminal PE slot, the
+chosen vertex is \(v_n\), and its defective-vertex field in
+\noderef{MaximumDefectiveChoice} puts it in \(V(T_n)\).  Thus \(T_n\) is
+a candidate containing \(v_n\) in the minimum
+\noderef{ETTFirstAppearanceIndex}, so \(j=m(v_n)\leq n\).  The terminal
+index consequently satisfies all three defining clauses in
+\noderef{ExtensionBaseActiveIndices}: \(j\leq n\), its kind is PE, and
+its exact chosen vertex has first-appearance index \(j\leq j\).
+
+Let \(s_0\) be the least manuscript subscript represented in \(L\).
+For every \(t\in L\), we have \(s_0\leq t\), so (1) gives
+\[
+        \delta_t\notin\overline\varphi_{s_0-1}(T_{s_0}).        \tag{11}
+\]
+
+We split the index transport into its two possible cases.  If \(s_0=j\),
+then the relation \(jSlot+1=j\) identifies the Lean slot for \(T_j\) with
+the slot for \(T_{s_0}\).  Both the tree and coloring are therefore the
+same indexed entries, so
+\[
+ \overline\varphi_{j-1}(T_j)
+   =\overline\varphi_{s_0-1}(T_{s_0})
+\]
+by reflexivity.  The desired exclusion follows immediately from (11).
+
+Assume instead that \(s_0>j\).  Fix \(x\in V(T_j)\).  The stage \(T_j\)
+is an ordered initial segment of the final ETT, so \(x\in V(T)\).  In the
+finite minimum defining \noderef{ETTFirstAppearanceIndex}, the ladder
+stage \(T_j\) itself is a candidate containing \(x\); hence
+\[
+                              m(x)\leq j.                        \tag{12}
+\]
+There is no PE iteration \(h\) with \(j\leq h\leq s_0-1\) whose exact
+chosen vertex is \(x\).  Otherwise (12), the PE equality, and \(j\leq h\)
+would put \(h\) in the set \noderef{ExtensionBaseActiveIndices}, while
+\(h<s_0\), contradicting the least choice of \(s_0\).
+
+The interval \(j,j+1,\ldots,s_0-1\) is nonempty in the present case.
+Apply \noderef{HkuUnsupportedVertexColors} to \(x\) over precisely that
+interval.  Its conclusion is
+\[
+             \overline\varphi_{j-1}(x)
+                 =\overline\varphi_{s_0-1}(x).                 \tag{13}
+\]
+This holds for every \(x\in V(T_j)\).  Taking the vertexwise union in
+\noderef{TreeMissingColors} gives the first equality below.  Iterating
+the certified initial segments from \noderef{TashkinovSeriesStep} puts
+every vertex of \(T_j\) in \(T_{s_0}\), so the same union definition gives
+the inclusion:
 \[
  \overline\varphi_{j-1}(T_j)
    =\overline\varphi_{s_0-1}(T_j)
    \subseteq\overline\varphi_{s_0-1}(T_{s_0}).
 \]
-The already established exclusion at (s_0) now proves (2).
+Combining this with (11) proves (2) also when \(s_0>j\).
 \end{proof}
