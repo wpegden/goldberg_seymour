@@ -1,5 +1,9 @@
+import Tablet.FixedPairMaximalTashkinovTree
 import Tablet.ScheideMaximalContainsEveryTree
+import Tablet.TashkinovTree
+import Tablet.TreeSequence
 import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: ScheideMaximalExtendsEveryTree]
 theorem ScheideMaximalExtendsEveryTree {V E : Type*}

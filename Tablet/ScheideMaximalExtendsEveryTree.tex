@@ -4,28 +4,106 @@ $(e_0,\varphi)$ is an initial segment of a Tashkinov tree $\widetilde T$
 with $V(\widetilde T)=V(T)$.
 \end{lemma}
 \begin{proof}
-By \noderef{ScheideMaximalContainsEveryTree}, $V(S)\subseteq V(T)$.  Start
-with the displayed sequence $S$.  If it does not yet contain all vertices
-of $T$, choose the first vertex $y_j$ in the displayed order of $T$ which
-is absent from the current sequence, and append $y_j$ together with its
-original tree edge $e_j$ from $T$.
+Write
+\[
+ T=(x_0,f_1,x_1,\ldots,f_m,x_m),\qquad X=V(T).
+\]
+By \noderef{ScheideMaximalContainsEveryTree}, $V(S)\subseteq X$.  We
+construct a sequence of enlargements, beginning with $C_0=S$, and maintain
+the following three assertions about the current sequence $C$: it is a
+Tashkinov tree, $S$ is an ordered initial segment of $C$, and
+$V(C)\subseteq X$.  The meanings of the two vertex sets here are those of
+\noderef{TreeSequenceVertexSet}.  These assertions hold for $C_0$: the
+first is the given Tashkinov-tree hypothesis on $S$, the second follows
+from \noderef{TreeSequenceInitialSegment} because $S$ has its own length
+and agrees with itself entry by entry, and the third is the inclusion just
+obtained.
 
-Every vertex of $T$ preceding $y_j$ is already in the current sequence by
-the choice of $j$, so the earlier end of $e_j$ is present.  The edge
-identity $e_j$ is not already a tree edge of the current sequence.  Indeed,
-if it were, both of its ends would be current vertices by
-\noderef{TreeSequence}, including its end $y_j$, contrary to the choice of
-$y_j$.  Thus appending the pair preserves distinct vertices, distinct edge
-identities, and the tree attachment rule.  Since $T$ is a Tashkinov tree by
-\noderef{FixedPairMaximalTashkinovTree}, the color of $e_j$ has a
-missing-color witness at a vertex preceding $y_j$ in $T$; this witness is
-already present by the same first-absent choice.  Hence the enlarged
-sequence remains a Tashkinov tree.
+Consider one stage, and display the current sequence as
+\[
+ C=(z_0,g_1,z_1,\ldots,g_q,z_q).
+\]
+The definition \noderef{TreeSequence} gives $q\geq1$, $g_1=e_0$, and says
+that the ends of $g_1$ are $z_1$ and $z_0$.  Applied to $T$, the same
+definition gives $f_1=e_0$ and says that the ends of $f_1$ are $x_1$ and
+$x_0$.  Consequently the unordered endpoint pair of $e_0$ is both
+$\{z_0,z_1\}$ and $\{x_0,x_1\}$.  In particular, each of $x_0,x_1$ occurs
+among the current vertices.  If $V(C)\ne X$, let $j$ be the least index for
+which $x_j\notin V(C)$.  The preceding observation gives $j\geq2$, and
+minimality gives
+\[
+ x_h\in V(C)\quad\hbox{for every }h<j. \tag{1}
+\]
 
-There are only finitely many vertices in $V(T)$, so repetition terminates
-with a Tashkinov tree $\widetilde T$ containing every vertex of $T$.  No
-other vertices were appended, so $V(\widetilde T)=V(T)$.  Nothing was
-inserted into or changed within the original displayed sequence $S$;
-therefore $S$ is its ordered initial segment in the sense of
-\noderef{TreeSequenceInitialSegment}.
+The attachment clause of \noderef{TreeSequence} for the original edge
+$f_j$ gives an index $i<j$ such that the ends of $f_j$ are $x_j$ and
+$x_i$.  By (1), $x_i$ has some current index $r$, say $z_r=x_i$; this is
+exactly the membership description in \noderef{TreeSequenceVertexSet}.
+The edge identity $f_j$ is not one of $g_1,\ldots,g_q$.  Indeed, if
+$f_j=g_\ell$, the attachment clause for the already present identity
+$g_\ell$ would say that both ends of this identity are current vertices.
+Its endpoint pair is also $\{x_j,x_i\}$, so $x_j$ would equal one of those
+two current endpoints.  This contradicts the choice of $j$.
+
+Append $f_j,x_j$ at the end of $C$, and call the resulting sequence $C^+$.
+We check all clauses of \noderef{TreeSequence}.  Its length is $q+1$, still
+positive.  Its old vertices remain pairwise distinct and the new vertex is
+distinct from all of them because $x_j\notin V(C)$, so its vertex map is
+injective.  Its old edge identities remain pairwise distinct and $f_j$ is
+not among them by the preceding paragraph, so its edge map is injective.
+The first edge and every old attachment are unchanged.  Finally, the new
+edge has ends $x_j$ and $x_i=z_r$, where the current index satisfies
+$r\leq q<q+1$; hence it attaches the new last vertex to an earlier vertex.
+Thus $C^+$ is a tree-sequence.  Since it was formed only by appending its
+last edge and vertex, $C$ is an ordered initial segment of $C^+$ in the
+sense of \noderef{TreeSequenceInitialSegment}.
+
+It remains to check the Tashkinov condition.  By
+\noderef{FixedPairMaximalTashkinovTree}, $T$ is itself a Tashkinov tree.
+For each old edge of $C^+$ whose index is at least two, use the witness it
+had in the current Tashkinov tree $C$.  The edge and every earlier vertex
+retain the same indices in $C^+$ because $C$ is its ordered initial segment,
+so this is still a valid witness.  For the new edge, $j\geq2$ permits us to
+apply the defining witness clause of \noderef{TashkinovTree} to $f_j$ in
+$T$.  It supplies an index $h<j$ and a color $\alpha$ such that
+$\varphi(f_j)=\alpha$ and $\alpha$ is missing at $x_h$.  By (1), $x_h$ has
+some current index $s\leq q$.  In $C^+$ that same vertex has index $s$, and
+$s<q+1$, the index of the newly appended vertex.  Hence it is the required
+earlier missing-color witness for $f_j$.  The old and new cases together
+are precisely the condition in \noderef{TashkinovTree}, so $C^+$ is a
+Tashkinov tree.  Moreover, no entry of $S$ was changed: its entries agree
+with those of $C$, and those of $C$ agree with the initial entries of
+$C^+$.  Thus $S$ remains an ordered initial segment.  Finally,
+\[
+ V(C^+)=V(C)\cup\{x_j\}\subseteq X, \tag{2}
+\]
+where the equality follows directly from the entry-wise definition in
+\noderef{TreeSequenceVertexSet}.
+
+To iterate this step rigorously, use induction on the finite number
+\[
+ \mu(C)=|X\setminus V(C)|.
+\]
+If $\mu(C)=0$, the finite set $X\setminus V(C)$ has cardinality zero and
+is therefore empty, so no enlargement is needed.  Otherwise the least
+absent vertex $x_j$ exists, and the construction above applies.  Since
+$x_j$ lies in $X$ but not in $V(C)$, while (2) shows that it is the only
+new vertex, $X\setminus V(C^+)$ is obtained from $X\setminus V(C)$ by
+deleting exactly $x_j$.  Thus $\mu(C^+)=\mu(C)-1$.  The three maintained
+assertions were verified above, so the induction continues and terminates
+at a Tashkinov tree $\widetilde T$ with
+$X\setminus V(\widetilde T)=\varnothing$.
+
+We now verify the required vertex-set equality by both inclusions.  If
+$v\in V(\widetilde T)$, then either $v$ was already a vertex of $S$, in
+which case $v\in X$ by the initial inclusion, or $v$ was appended as one of
+the selected vertices $x_j$ of $T$, again giving $v\in X$.  Hence
+$V(\widetilde T)\subseteq X$.  Conversely, if $v\in X$ but
+$v\notin V(\widetilde T)$, then $v\in X\setminus V(\widetilde T)$,
+contrary to its emptiness.  Hence $X\subseteq V(\widetilde T)$, and so
+$V(\widetilde T)=V(T)$.  At every induction step entries were appended only
+at the end.  Therefore the final sequence has at least the length of $S$
+and agrees with every vertex and edge entry of $S$ through that length,
+which is exactly
+$\noderef{TreeSequenceInitialSegment}$ for $S$ and $\widetilde T$.
 \end{proof}
