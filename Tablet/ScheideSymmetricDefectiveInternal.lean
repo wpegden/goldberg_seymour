@@ -1,7 +1,41 @@
+import Tablet.AdjacentEdges
+import Tablet.BoundaryColorEdges
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
+import Tablet.ColoredVertexSetElementary
+import Tablet.DefectiveColors
+import Tablet.GlobalMaximumTriple
+import Tablet.Incident
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.LooplessMultigraph
+import Tablet.MissingColors
+import Tablet.PresentColors
 import Tablet.ScheideDefectiveChainBoundaryEdges
+import Tablet.ScheideDefectiveChainPath
 import Tablet.ScheideDefectiveChainPathExists
+import Tablet.ScheideDefectiveNoCross
+import Tablet.ScheideDefectiveSetup
+import Tablet.ScheideDefectiveSwitchEffect
+import Tablet.ScheideExitNoFree
+import Tablet.ScheideExitVertex
+import Tablet.ScheideExitVertices
+import Tablet.ScheideGlobalMaximumMissingCounts
+import Tablet.ScheideGlobalMaximumOrder
+import Tablet.ScheideReducedConfiguration
+import Tablet.ScheideReplacementData
 import Tablet.ScheideReplacementInternalMissing
+import Tablet.ScheideReplacementMaximum
+import Tablet.ScheideReplacementPairFixed
+import Tablet.ScheideStructuralConfiguration
 import Tablet.ScheideStructuralExitsInBase
+import Tablet.ScheideStructuralInternalPair
+import Tablet.TashkinovTree
+import Tablet.TreeFreeColors
+import Tablet.TreeSequence
+import Tablet.TreeUsedColors
+import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 
 open scoped Sym2
 

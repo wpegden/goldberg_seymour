@@ -4,61 +4,334 @@ identity internal to $U_{\gamma(\delta)}$, and there is a
 $\gamma(\delta)$-colored edge identity internal to $U_\delta$.
 \end{lemma}
 \begin{proof}
-Write $Z=Z_{\gamma(\delta)}$.  The set $Z$ has $|V(T)|-2$ vertices and
-contains both ends of $e_0$.  The missing-color count in
-\noderef{ScheideGlobalMaximumMissingCounts}, together with elementariness,
-gives at least $|V(T)|$ distinct missing incidences on $Z$.  At most
-$p-2+s$ colors occur on tree edges: at most $p-2$ on the colored part of
-the base and one common color for each block.  Every used color is missing
-on the base.  Hence some color $\beta$ missing in $Z$ is free for $T$.
+Fix a defective color $\delta$.  Put
+\[
+ X=V(T),\qquad r=\gammaIndex(\delta),\qquad
+ \gamma=\gamma(r),\qquad
+ U_\gamma=\{u^1_\gamma,u^2_\gamma\},\qquad Z=X\setminus U_\gamma,
+\]
+and write $U_\delta=\{u^1_\delta,u^2_\delta\}$ for the replacement
+pair.  All the vertices and edge identities in this notation are the
+ordered data of \noderef{ScheideDefectiveSetup} and
+\noderef{ScheideReplacementData}; in particular, the three distinct
+$\delta$-edges $f^0_\delta,f^1_\delta,f^2_\delta$ have their tree ends in
+$Z$, their other ends outside $X$, and are exactly the $\delta$-colored
+departures having these two properties.  For $f^0_\delta$, the assertion
+that its tree end lies in $Z$ follows as follows.  The setup says that
+$v^0_\delta$ is a Scheide exit, and
+\noderef{ScheideStructuralExitsInBase} puts every such exit in the base
+$Y$.  The exact ordered layout in the underlying
+\noderef{ScheideReducedConfiguration} and
+\noderef{ScheideStructuralConfiguration}, together with the distinctness
+in \noderef{TreeSequence}, gives $Y\subseteq Z$.
 
-By \noderef{ScheideDefectiveChainPathExists}, there is a full
-$(\beta,\delta)$ incidence path from its unique missing vertex to an
-outside vertex.  By \noderef{ScheideDefectiveChainBoundaryEdges}, it contains all
-three $\delta$ departures named in
-\noderef{ScheideReplacementData}.  The internal-edge conclusion
-\noderef{ScheideReplacementInternalMissing} gives a $\beta$-edge internal
-to $U_\delta$, so $f^1_\delta$ and $f^2_\delta$ are one returning excursion
-of this path.  Its last tree vertex is therefore $v^0_\delta$: the other
-two departures return through that internal edge, while
-$f^0_\delta$ is the remaining final departure.  This last exit lies in
-the base by \noderef{ScheideStructuralExitsInBase}.
+We first choose the free color used for (11), including the count.  The
+inherited structural configuration says that $(T,e_0,\varphi)$ is
+globally maximum.  Hence \noderef{ScheideGlobalMaximumOrder} says that
+$X$ is elementary and closed.  Unpacking
+\noderef{GlobalMaximumTriple} and \noderef{KTriple} also says that
+$\varphi$ is proper in the sense of
+\noderef{IsProperEdgeColoring}.  The structural layout gives
+$|X|=p+2s$ and $|Z|=p+2s-2$.  The first edge of
+\noderef{TreeSequence} is $e_0$ and its two distinct ends are the first
+two base vertices, so both ends of $e_0$ belong to $Y\subseteq Z$.
 
-The path cannot enter $U_{\gamma(\delta)}$.  Assertion (3), namely
-\noderef{ScheideStructuralInternalPair}, supplies an internal $\beta$-edge
-there; \noderef{ScheideDefectiveNoCross} excludes a $\delta$-edge between
-that pair and $Z$.  A route to the pair would have to leave $V(T)$ first.
-The two departures through $f^1_\delta,f^2_\delta$ are already paired in
-their returning excursion, and the departure through $f^0_\delta$ occurs
-after the last tree vertex.  No such route exists.  Since every
-$\delta$-boundary edge lies on the full path, none is incident with
-$U_{\gamma(\delta)}$.  The color $\delta$ is present at both vertices of
-that pair, so their unique $\delta$ incidences must form one internal edge.
-This proves (11).
+Apply \noderef{ScheideGlobalMaximumMissingCounts} at every vertex of
+$Z$.  Each vertex contributes at least one missing color, and each of the
+two ends of $e_0$ contributes one further missing color.  Since $X$ is
+elementary, the definition \noderef{ColoredVertexSetElementary} makes
+all these missing colors distinct between different vertices.  Therefore
+the union of the missing-color sets on $Z$ has cardinality at least
+\[
+ |Z|+2=p+2s. \tag{13}
+\]
+On the other hand, at most $p-2+s$ colors belong to
+\noderef{TreeUsedColors}$(\varphi,T)$.  There are $p-2$ colored base
+edges after $e_0$, and the two edges of each of the $s$ blocks have their
+single common block color.  Every one of these used colors is missing at
+a vertex of $Y$: this is explicit for a block color in
+\noderef{ScheideStructuralConfiguration}, while for a colored base edge
+it is the earlier-vertex witness in \noderef{TashkinovTree}, which is
+part of the globally maximum triple and is still a base vertex at that
+position.  Thus every used color is among the colors counted in (13).
+Since
+\[
+ p-2+s<p+2s,
+\]
+there is a color $\beta$ missing at some vertex $v\in Z$ but unused on
+the colored tree edges.  By \noderef{TreeFreeColors}, $\beta$ is free
+for $(T,e_0,\varphi)$.  Elementariness makes $v$ unique.  Moreover
+$\beta\ne\gamma$, because $\gamma$ colors the two edges of the
+$r$-th block and hence is used on $T$.
 
-For (12), work in the globally maximum replacement triple supplied by
-\noderef{ScheideReplacementMaximum}.  Under $\varphi_\delta$, the color
-$\gamma(\delta)$ is defective.  Its boundary identities with tree end in
-$Z$ are exactly $f^0_\delta$ and the two deleted block edges: the first
-acquired color $\gamma(\delta)$ in
-\noderef{ScheideDefectiveSwitchEffect}; the latter two retain their
-original block color; and original closedness excludes any further such
-edge from $Z$.
+Now instantiate \noderef{ScheideDefectiveChainPathExists} with the
+globally maximum triple $(T,e_0,\varphi)$, defective color $\delta$,
+free color $\beta$, and the vertex $v$ missing $\beta$.  It supplies an
+outside vertex $z$ and a simple $(\delta,\beta)$ incidence path $P$ from
+$v$ to $z$.  By \noderef{ScheideDefectiveChainPath}, the support of $P$
+is the entire two-color component.  The conclusion of
+\noderef{ScheideDefectiveChainBoundaryEdges} therefore puts every
+$\delta$-colored boundary edge identity of $X$ on $P$.  In particular,
+the three boundary identities $f^0_\delta,f^1_\delta,f^2_\delta$ occur
+on $P$.
 
-Every vertex of $U_\delta$ misses a free color for the replacement tree.
-Indeed it misses some color by the degree bound, and every replacement-tree
-edge color has a missing witness in $Z$; elementariness therefore makes all
-used colors present on $U_\delta$.  Thus
-\noderef{ScheideExitNoFree} puts every exit of the replacement tree in $Z$.
-Repeat the preceding last-exit argument with the two pairs interchanged.
-The deleted block edges form the returning excursion through
-$U_{\gamma(\delta)}$, the pair $U_\delta$ has its internal $\beta$-edge by
-\noderef{ScheideReplacementInternalMissing}, and no
-$\gamma(\delta)$-edge joins $U_\delta$ to $Z$ by
-\noderef{ScheideReplacementPairFixed} and original closedness.  Hence the
-relevant full chain avoids $U_\delta$, so no
-$\gamma(\delta)$ boundary edge is incident with it.  Since that color is
-present at both replacement vertices, their unique incidences give an
-internal $\gamma(\delta)$ edge.  Switch invariance transfers its color back
-to $\varphi$, proving (12).
+Apply \noderef{ScheideReplacementInternalMissing} to $\beta\ne\gamma$
+and the fact that $\beta$ is missing in $Z$.  We obtain a
+$\beta$-colored edge identity $h_\delta$ with ends
+$u^1_\delta,u^2_\delta$.  The path order around these five edge and
+vertex nodes is forced, not merely possible.  Indeed,
+$f^i_\delta$ and $h_\delta$ are respectively the known incident
+$\delta$- and $\beta$-edges at $u^i_\delta$.  Two distinct edges of one
+color incident at one vertex would be adjacent by
+\noderef{AdjacentEdges} and would contradict properness.  Hence those
+are the unique incidences of the two path colors at that vertex.  This is
+also the vertex-node case of
+\noderef{TwoColorIncidenceDegreeAtMostTwo} in the incidence graph
+\noderef{TwoColorIncidenceGraph}.  Each edge-node has only its two
+endpoint incidences, and the endpoints of $h_\delta$ are distinct by
+the loopless law in \noderef{LooplessMultigraph}.  Because $P$ is a
+simple path whose support is the full component, it must consequently
+contain, in one of the two orientations, the consecutive segment
+\[
+ f^1_\delta, u^1_\delta, h_\delta, u^2_\delta, f^2_\delta. \tag{14}
+\]
+Thus $f^1_\delta$ and $f^2_\delta$ are exactly one returning excursion
+of $P$ from $Z$ through $U_\delta$ and back to $Z$.
+
+Since $P$ begins in $X$ and ends outside $X$, it has a last vertex-node
+$w$ belonging to $X$ in the order starting at $v$.  The defective color,
+the free color missing at $v$, the full path $P$, and this last occurrence
+are precisely the witnesses in \noderef{ScheideExitVertex}; hence $w$
+belongs to the finite exit set of \noderef{ScheideExitVertices}.
+By \noderef{ScheideStructuralExitsInBase}, $w\in Y\subseteq Z$.  Let
+$q$ be the edge-node immediately after $w$ on $P$.  It is a boundary
+edge of $X$ by \noderef{BoundaryEdges}.  It cannot have color $\beta$:
+$\beta$ is missing in $X$,
+and closedness, as defined in \noderef{ColoredVertexSetClosed}, forbids a
+boundary edge with any color missing in $X$.  Thus $q$ has color
+$\delta$.  Its tree end is in $Z$ and its other end is outside $X$, so
+the exact-three clause of \noderef{ScheideReplacementData} gives
+\[
+ q\in\{f^0_\delta,f^1_\delta,f^2_\delta\}.
+\]
+Neither $f^1_\delta$ nor $f^2_\delta$ can be this final departure,
+because (14) forces either one, when used as a departure, to return to a
+later vertex of $Z\subseteq X$ through the other.  Therefore
+$q=f^0_\delta$.  The endpoint record in
+\noderef{ScheideDefectiveSetup} then identifies $w=v^0_\delta$.  This
+establishes the claimed path order before using it below.
+
+We next prove that $P$ avoids $U_\gamma$.  The lemma
+\noderef{ScheideStructuralInternalPair}, applied to $\beta\ne\gamma$ and
+the missing occurrence of $\beta$ in $Z$, supplies a $\beta$-edge
+internal to $U_\gamma$.  Properness makes it the unique incident
+$\beta$-edge at either vertex of this pair, so no $\beta$-edge joins
+$U_\gamma$ to $Z$.  The assertion
+\noderef{ScheideDefectiveNoCross} says independently that no
+$\delta$-edge joins $U_\gamma$ to $Z$.
+
+Suppose that $P$ nevertheless first reaches a vertex of $U_\gamma$.
+There is no direct two-color incidence from $Z$ to $U_\gamma$, by the
+preceding paragraph, so before that first occurrence the path must leave
+$X$ from a vertex of $Z$.  Consider the last such departure before the
+first occurrence of $U_\gamma$.  Closedness again says that its color is
+$\delta$, and the exact-three clause says that it is one of
+$f^0_\delta,f^1_\delta,f^2_\delta$.  If it is $f^1_\delta$ or
+$f^2_\delta$, the forced segment (14) returns to $Z$ before the path can
+go anywhere else, contradicting the choice of this departure.  If it is
+$f^0_\delta$, it occurs after the last tree vertex just identified, so
+the path cannot subsequently reach $U_\gamma\subseteq X$.  This exhausts
+the three possibilities and proves
+\[
+ V(P)\cap U_\gamma=\varnothing. \tag{15}
+\]
+
+Every $\delta$-colored boundary identity of $X$ lies on $P$ by
+\noderef{ScheideDefectiveChainBoundaryEdges}.  Hence (15) says that none
+of them is incident with $U_\gamma$.  Also, because $\delta$ is defective,
+\noderef{DefectiveColors} and \noderef{BoundaryColorEdges} give at least
+one $\delta$-colored boundary identity of $X$.  Since $X$ is closed,
+$\delta$ cannot be missing at any vertex of $X$; by the complementary
+definitions \noderef{MissingColors} and \noderef{PresentColors}, it is
+present at both vertices of $U_\gamma$.  Choose the incident
+$\delta$-edge at either one.  Its other end cannot be in $Z$ by
+\noderef{ScheideDefectiveNoCross}, and cannot be outside $X$ by (15) and
+the boundary-path equality.  The loopless law excludes the same endpoint,
+so the other end is the other vertex of $U_\gamma$.  Thus this individual
+edge identity is internal to $U_\gamma$ and has color $\delta$, proving
+(11).
+
+For (12), set
+\[
+ \varphi_\delta=
+ \operatorname{swap}_{\gamma,\delta}(\varphi;v^0_\delta),
+ \qquad T_\delta=\text{the replacement tree},\qquad
+ X_\delta=V(T_\delta)=Z\cup U_\delta.
+\]
+The coloring and the last equality are the exact data of
+\noderef{ScheideDefectiveSwitchEffect} and
+\noderef{ScheideReplacementData}.  The theorem
+\noderef{ScheideReplacementMaximum} says that $\varphi_\delta$ is proper,
+leaves exactly $e_0$ uncolored, and that
+$(T_\delta,e_0,\varphi_\delta)$ is globally maximum.  Applying
+\noderef{ScheideGlobalMaximumOrder} to this new triple shows explicitly
+that $X_\delta$ is elementary and closed under $\varphi_\delta$.
+
+We record exactly how $\gamma$ becomes defective.  In the original
+coloring, $\gamma$ is missing at $v^0_\delta$, whereas the incident edge
+$f^0_\delta$ has color $\delta$; by
+\noderef{Incident}, \noderef{PresentColors}, and
+\noderef{MissingColors}, this also proves $\delta\ne\gamma$.
+The switch-effect theorem colors $f^0_\delta$ with $\gamma$ and fixes
+every other edge identity incident with $X$.  Let
+$g^1_\gamma,g^2_\gamma$ be the two edges of the deleted $\gamma$-block.
+The structural configuration colors both with $\gamma$, and they remain
+so under $\varphi_\delta$.  Their base ends lie in $Y\subseteq Z$ and
+their block ends lie in $U_\gamma$, which is outside $X_\delta$.
+Moreover $f^0_\delta$ also leaves $X_\delta$: its outside end cannot equal
+$u^i_\delta$, since otherwise the distinct original $\delta$-edges
+$f^0_\delta$ and $f^i_\delta$ would violate properness at that vertex.
+Thus the three pairwise distinct identities
+\[
+ f^0_\delta,\quad g^1_\gamma,\quad g^2_\gamma \tag{16}
+\]
+are $\gamma$-colored boundary edges of $X_\delta$ with their tree ends
+in $Z$.
+
+They are exactly the $\gamma$-departures from $Z$ under
+$\varphi_\delta$.  Indeed, let $a$ be such a departure.  If
+$a\ne f^0_\delta$, the switch-effect theorem gives
+$\varphi_\delta(a)=\varphi(a)=\gamma$.  Original closedness of $X$ and
+the fact that $\gamma$ is missing at $v^0_\delta$ exclude an original
+$\gamma$-edge from $Z$ to the exterior of $X$.  Hence the other end of
+$a$ lies in $X\setminus X_\delta=U_\gamma$.  At either vertex of
+$U_\gamma$, the corresponding one of $g^1_\gamma,g^2_\gamma$ is already
+an incident $\gamma$-edge, and original properness makes it unique.
+Therefore $a$ is that named block edge.  This proves the exactness claim.
+In particular, the three identities in (16) show, via
+\noderef{DefectiveColors}, that $\gamma$ is defective for
+$X_\delta$ under $\varphi_\delta$.
+
+We now perform the missing-color count for the replacement triple rather
+than appealing to symmetry.  The two ends of $e_0$ still lie in
+$Y\subseteq Z\subseteq X_\delta$.  Applying
+\noderef{ScheideGlobalMaximumMissingCounts} to the replacement triple and
+using its elementariness gives at least
+$|Z|+2=p+2s$ distinct missing colors on $Z$, exactly as in (13).  At most
+$p-2+s$ colors are used on $T_\delta$: there are at most $p-2$ retained
+colored base-edge colors, $s-1$ retained block colors, and the two appended
+edges share the single color $\delta$.  The last assertion follows from
+\noderef{ScheideReplacementPairFixed}, since those appended edges are
+incident with $U_\delta$ and originally have color $\delta$.
+
+Every color used on $T_\delta$ has a missing witness in $Z$.  A retained
+base or block color has its old witness in $Y$ as in the first count.  The
+only missing set changed at an old tree vertex is that at
+$v^0_\delta$, where \noderef{ScheideDefectiveSwitchEffect} replaces the
+missing color $\gamma$ by $\delta$.  A retained base color differs from
+every block color by \noderef{ScheideStructuralConfiguration}, and a
+retained block color differs from $\gamma$ by injectivity of the indexed
+block colors, so each retained witness survives.  The new used color
+$\delta$ is missing at $v^0_\delta\in Y\subseteq Z$ by the same exact
+switch formula.  Consequently the same strict cardinality inequality
+chooses a color $\beta_\delta$ which is missing at a vertex $v_\delta\in Z$
+and is unused on $T_\delta$.  By \noderef{TreeFreeColors}, it is free for
+the replacement triple.  Since $\delta$ is used on the appended edges,
+$\beta_\delta\ne\delta$.  Since $\gamma$ is defective and
+$X_\delta$ is closed, $\gamma$ is present at every vertex of
+$X_\delta$; hence $\beta_\delta\ne\gamma$.  Finally the switch-effect
+formula, and these two inequalities, show that
+$\beta_\delta$ is also missing under the original coloring at the same
+vertex $v_\delta\in Z$.
+
+Instantiate \noderef{ScheideDefectiveChainPathExists} for the globally
+maximum replacement triple with defective color $\gamma$, free color
+$\beta_\delta$, and missing vertex $v_\delta$.  We obtain a simple full
+$(\gamma,\beta_\delta)$ incidence path $P_\delta$ from $v_\delta$ to an
+outside vertex.  By \noderef{ScheideDefectiveChainPath} its support is
+the full component, and by
+\noderef{ScheideDefectiveChainBoundaryEdges} it contains every
+$\gamma$-colored boundary identity of $X_\delta$, in particular all three
+identities in (16).
+
+The original missing occurrence of $\beta_\delta$ in $Z$ and
+$\beta_\delta\ne\gamma$ allow us to apply
+\noderef{ScheideStructuralInternalPair}.  It gives an original
+$\beta_\delta$-edge $h_\gamma$ internal to $U_\gamma$.
+The switch-effect theorem fixes this edge, because it is incident with
+$X$ and is not $f^0_\delta$, so it is still colored $\beta_\delta$ under
+$\varphi_\delta$.  Properness of $\varphi_\delta$, the degree bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, and the full-component
+property now force the consecutive segment
+\[
+ g^1_\gamma, u^1_\gamma, h_\gamma,
+ u^2_\gamma, g^2_\gamma \tag{17}
+\]
+in one of its two orientations on $P_\delta$, by exactly the incidence
+degree argument used for (14).  Thus the two deleted block edges form one
+returning excursion through $U_\gamma$.
+
+We next locate the last replacement-tree vertex on $P_\delta$.  First,
+every vertex $x\in U_\delta$ misses at least one color by
+\noderef{ScheideGlobalMaximumMissingCounts} for the replacement triple.
+Every used color of $T_\delta$ has a missing witness in $Z$, as just
+proved.  Since $X_\delta$ is elementary and $x\notin Z$, none of those
+used colors can be missing at $x$.  Therefore any color missing at $x$
+is unused and hence is free by \noderef{TreeFreeColors}.  The theorem
+\noderef{ScheideExitNoFree} says that a Scheide exit of a globally maximum
+triple misses no free color.  It follows that neither vertex of
+$U_\delta$ is an exit of the replacement tree.
+
+Choose the last vertex-node $w_\delta$ of $X_\delta$ on $P_\delta$.
+The definition \noderef{ScheideExitVertex} makes it a replacement-tree
+exit, so the preceding paragraph and
+$X_\delta=Z\cup U_\delta$ put it in $Z$.  Its next edge is a boundary
+edge and cannot have color $\beta_\delta$, because $X_\delta$ is closed
+and that color is missing on it.  It therefore has color $\gamma$.
+The exact list (16) shows that this final departure is one of the three
+named edges.  It is not $g^1_\gamma$ or $g^2_\gamma$, because (17) would
+then return to a later vertex of $Z$.  It is consequently
+$f^0_\delta$.  This is the replacement-coloring last-exit order needed
+below.
+
+There is also a $\beta_\delta$-edge $h'_\delta$ internal to $U_\delta$:
+apply \noderef{ScheideReplacementInternalMissing} to the original
+missing occurrence of $\beta_\delta$ in $Z$, and then use
+\noderef{ScheideReplacementPairFixed} to retain its color under
+$\varphi_\delta$.  Properness makes $h'_\delta$ the unique incident
+$\beta_\delta$-edge at either vertex of $U_\delta$.  Furthermore no
+$\gamma$-edge under $\varphi_\delta$ joins $U_\delta$ to $Z$.  If one
+did, \noderef{ScheideReplacementPairFixed} would give the same
+$\gamma$-colored identity under $\varphi$; since $U_\delta$ is outside
+$X$ and $Z\subseteq X$, this would be an original $\gamma$-boundary edge
+of $X$, contrary to original closedness and the fact that $\gamma$ is
+missing at $v^0_\delta$.
+
+Suppose $P_\delta$ reached $U_\delta$.  The internal edge
+$h'_\delta$ and properness exclude a $\beta_\delta$ crossing from $Z$,
+and the preceding paragraph excludes a $\gamma$ crossing.  Hence, before
+its first occurrence in $U_\delta$, the path must leave $X_\delta$ from
+$Z$.  Take the last such departure.  It has color $\gamma$ and hence is
+one of (16).  If it is a deleted block edge, the forced excursion (17)
+returns to $Z$ before proceeding; if it is $f^0_\delta$, it occurs after
+the last replacement-tree vertex.  Both alternatives contradict the
+choice of the departure.  Thus
+\[
+ V(P_\delta)\cap U_\delta=\varnothing. \tag{18}
+\]
+
+All $\gamma$-colored boundary edges of $X_\delta$ lie on $P_\delta$, so
+(18) excludes every such boundary edge incident with $U_\delta$.  Since
+$\gamma$ is defective and $X_\delta$ is closed, the complementary
+definitions \noderef{MissingColors} and \noderef{PresentColors} show
+that $\gamma$ is present at both vertices of $U_\delta$.  At either
+vertex choose its unique incident $\gamma$-edge.  Its other end is not in
+$Z$ by the no-cross assertion above and not outside $X_\delta$ by (18)
+and the boundary-path equality.  Looplessness leaves only the other
+vertex of $U_\delta$.  We have therefore found an individual edge
+identity internal to $U_\delta$ and colored $\gamma$ under
+$\varphi_\delta$.  It is incident with $U_\delta$, so
+\noderef{ScheideReplacementPairFixed} transfers the same color to the
+original coloring $\varphi$.  This proves (12), and hence both asserted
+internal-edge conclusions.
 \end{proof}
