@@ -3,12 +3,22 @@ Use the extension-base setting and let
 \(\mathcal R\) be a restoration trace satisfying
 \noderef{ExtensionBaseRestorationInvariant}.  Write
 \(\sigma_n\) for its initial coloring and \(\varrho_1\) for its output.
-Let \(q+1=n\) be a certified PE slot with exact chosen support \(v_n\),
-let \(j+1=m(v_n)\) with \(j\leq q\), assume \(v_n\in V(T_j)\), and suppose that
-\(\sigma_n\) is proper, leaves precisely \(e_0\) uncolored, and is stable
-on the terminal ladder tree.  Assume also that it is
+Let \(n\) be the terminal manuscript PE stage with exact chosen support
+\(v_n\), and put \(j=m(v_n)\), where \(j\leq n\); assume
+\(v_n\in V(T_j)\).  Lean represents these manuscript stages by the
+zero-based predecessor slots \(q\) and \(j_{\mathrm{slot}}\), respectively:
 \[
- (T(v_n)-v_n,C,\varphi_{j-1})\text{-stable}.                  \tag{A}
+ q.\mathrm{val}+1=n,\qquad j_{\mathrm{slot}}.\mathrm{val}+1=j,
+ \qquad j_{\mathrm{slot}}.\mathrm{val}\leq q.\mathrm{val}.
+\]
+Thus the last inequality encodes \(j\leq n\), the Lean tree expression
+\(\mathtt{ett.series.data.tree\ jSlot.succ.castSucc}\) denotes \(T_j\),
+and \(\mathtt{ett.series.data.coloring\ jSlot.castSucc}\) denotes
+\(\varphi_{j-1}\).  Suppose that \(\sigma_n\) is proper, leaves precisely
+\(e_0\) uncolored, and is stable on the terminal ladder tree \(T_n\).
+Assume also that it is
+\[
+ (T_j(v_n)-v_n,C,\varphi_{j-1})\text{-stable}.                \tag{A}
 \]
 For missing colors, assume explicitly that every unsupported vertex
 \(v\in V(T_j)\) has
@@ -35,7 +45,7 @@ while the unsupported equality and (B) are supplied by
 Then \(\varrho_1\) has all four properties of Claim 4.3:
 \begin{enumerate}
 \item[(b1)] it is
- \((T(v_n)-v_n,C,\varphi_{j-1})\)-stable;
+ \((T_j(v_n)-v_n,C,\varphi_{j-1})\)-stable;
 \item[(b2)] its missing colors agree with
  \(\varphi_{j-1}\) on \(V(T_j)\setminus\{v_n\}\), its missing colors at
  \(v_n\) agree with \(\sigma_n\), and on every exact displayed edge
@@ -46,8 +56,12 @@ Then \(\varrho_1\) has all four properties of Claim 4.3:
 \item[(b3)] if \(\varrho_1(f)\ne\sigma_n(f)\), then \(f\) is not
  internal to \(T_j\), and both colors of \(f\) belong to
  \(\bigcup_{t\in L^*}S_t\); and
-\item[(b4)] every pair belonging to
- \(L(v_n)\setminus\{q\}\) remains strongly interchangeable at its tree.
+\item[(b4)] for every manuscript index \(i\in L_1\setminus\{n\}\),
+ the pair \(\gamma_i,\delta_i\) remains \(T_i\)-strongly
+ interchangeable.  Equivalently in Lean's predecessor-slot notation,
+ this quantifies over \(s\in L(v_n)\) with \(s\ne q\); the exclusion
+ \(s\ne q\), rather than an identification \(q=n\), represents the
+ paper's exclusion \(i\ne n\).
 \end{enumerate}
 \end{lemma}
 \begin{proof}
@@ -66,16 +80,19 @@ The trace invariant alone satisfies the hypotheses of
 (b3), including explicit nonempty initial and final colors and retention
 of each edge identity.
 
-Finally, let \(s\in L(v_n)\setminus\{q\}\) have the displayed exact
-support and gamma/delta fields.  Membership in \(L(v_n)\) first gives
-\(s\in L\).  By \noderef{ExtensionBaseRestorationTrace}, the range of
-the trace is exactly the restoration-index set, and
+Finally, let \(i\in L_1\setminus\{n\}\), and let \(s\) be its Lean
+predecessor-slot representative, so \(s.\mathrm{val}+1=i\).  Since
+\(q.\mathrm{val}+1=n\), the condition \(i\ne n\) is represented exactly
+by \(s\ne q\).  Thus \(s\in L(v_n)\), and membership in \(L(v_n)\)
+first gives \(s\in L\).  By \noderef{ExtensionBaseRestorationTrace},
+the range of the trace is exactly the restoration-index set, and
 \noderef{ExtensionBaseRestorationIndices} identifies that set as
 \(L\setminus L(v_n)\).  Therefore no trace slot equals \(s\).  The
 final-output clause of \noderef{ExtensionBaseRestorationInvariant},
 applied with \(s\in L\), \(s\ne q\), this absence from the trace, and
-the exact support and color fields, says directly that
-\(\gamma_s,\delta_s\) are \(T_s\)-strongly interchangeable under
-\(\varrho_1\).  This proves (b4), including the case in which the trace
-has no steps, and completes Claim 4.3.
+the exact support and color fields, says directly that the paper colors
+\(\gamma_i,\delta_i\) selected by slot \(s\) are strongly
+interchangeable under \(\varrho_1\) at the stored tree represented by
+that slot, namely \(T_i\).  This proves (b4), including the case in
+which the trace has no steps, and completes Claim 4.3.
 \end{proof}
