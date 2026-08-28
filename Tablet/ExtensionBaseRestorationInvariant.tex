@@ -1,27 +1,51 @@
 \begin{definition}
+Let \(T\) be the final displayed ETT, let \(v_*\in V(T)\) be the
+distinguished vertex used to form
+\(L^*=\noderef{ExtensionBaseRestorationIndices}\), and let
+\(j_{\mathrm{slot}}\) and \(q\) be arbitrary noninitial slots of this
+ETT.  For any such slot \(s\), write \(\mathcal T[s]\) for the stored
+tree at its positive displayed stage \(s+1\).  Thus
+\(\mathcal T[j_{\mathrm{slot}}]\), with no first-appearance assumption,
+is the reference tree in every initial-segment clause below.  The slot
+\(q\), with no terminality assumption, is exactly the slot exempted by
+\(s\ne q\) when the active pairs are quantified below.
+
 Let
 \(\mathcal R=(t_a,v_{t_a},\gamma_{t_a},\delta_{t_a},\sigma^a)\)
-be an \noderef{ExtensionBaseRestorationTrace}, and let \(q\) be the
-terminal PE index.  The trace satisfies the \emph{extension-base
-restoration invariant} when every intermediate coloring is proper and
-leaves exactly \(e_0\) uncolored, and the following assertion holds at
-each step \(a\):
+be an \noderef{ExtensionBaseRestorationTrace} of length \(\ell\), with
+initial coloring \(\sigma^0=\sigma_n\).  The trace satisfies the
+\emph{extension-base restoration invariant} when every
+\(\sigma^a\), \(0\leq a\leq\ell\), is proper and leaves exactly
+\(e_0\) uncolored, and the following conditions hold for every step
+\(a<\ell\):
 \begin{enumerate}
-\item \(t_a\in L^*\), the terminal support precedes \(v_{t_a}\), and
-      \(T_j\) is an ordered initial segment of \(T_{t_a}\), which
-      contains the exact support \(v_{t_a}\);
+\item \(t_a\in L^*\), one has \(v_*\prec_T v_{t_a}\), the ordered tree
+      \(\mathcal T[j_{\mathrm{slot}}]\) is an initial segment of
+      \(\mathcal T[t_a]\), and
+      \(v_{t_a}\in V(\mathcal T[t_a])\);
 \item \(\delta_{t_a}\) is missing at \(v_{t_a}\) under \(\sigma^a\);
 \item the component
-      \(P_{v_{t_a}}(\gamma_{t_a},\delta_{t_a},\sigma^a)\) is a path and
-      its intersection with \(V(T_{t_a})\) is exactly
-      \(\{v_{t_a}\}\); and
-\item after switching this component, every active nonterminal pair
-      whose exact slot has not yet been processed remains
-      \(T_s\)-strongly interchangeable.
+      \(P_{v_{t_a}}(\gamma_{t_a},\delta_{t_a},\sigma^a)\) is a path,
+      and its vertex-node intersection with \(V(\mathcal T[t_a])\) is
+      exactly \(\{v_{t_a}\}\); and
+\item under the post-switch coloring \(\sigma^{a+1}\), every active
+      slot \(s\ne q\) which has not occurred among
+      \(t_0,\ldots,t_a\), with exact certified support \(v_s\) and
+      exact certified colors \(\gamma_s,\delta_s\), has
+      \(\gamma_s,\delta_s\) strongly interchangeable at
+      \(\mathcal T[s]\).
 \end{enumerate}
-The final clause is also required at the output coloring when the trace
-has no steps: every active nonterminal pair whose slot is absent from
-the trace is strongly interchangeable there.  This is precisely the
-substantive invariant (6) of Algorithm (A), including its empty-trace
-boundary case.
+In addition, at the output \(\sigma^\ell\) of every trace, every active
+slot \(s\ne q\) which is absent from the entire list
+\(t_0,\ldots,t_{\ell-1}\), with its exact certified support and colors,
+has its color pair strongly interchangeable at \(\mathcal T[s]\).
+This final absent-slot clause is required for all \(\ell\); when
+\(\ell=0\), it is simply the zero-step boundary case of that same
+requirement.
+
+This is the generic restoration predicate abstracted from invariant
+(6).  It does not assert \(q+1=n\), does not call \(q\) terminal, and
+does not identify \(j_{\mathrm{slot}}\) with the first appearance of
+\(v_*\); those extra facts belong only to the certified Algorithm (A)
+specialization.
 \end{definition}
