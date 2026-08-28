@@ -1,33 +1,31 @@
 \begin{lemma}[The technical theorem at rung zero]
 For the initial tuple
 ((T_1,\varphi_0,S_0,F_0,\Theta_0)) of every certified Tashkinov series,
-the rung-zero package \noderef{TechnicalTheoremBaseClaims} holds: (T_1)
-is elementary under (arphi_0), and (T_1) has the interchangeability
+the vertex set (V(T_1)) is elementary under (\varphi_0), and (T_1) has the interchangeability
 property under every proper ((T_1,D_0,\varphi_0))-stable coloring leaving
-exactly (e_0) uncolored.  The indexed positive-rung assertions are
-vacuous.
+exactly (e_0) uncolored.
 \end{lemma}
 \begin{proof}
-Write (T_0,T_1) and (arphi_0) for data slots (0,1) of the
+Write (T_0,T_1) and (\varphi_0) for data slots (0,1) of the
 series.  Eliminating the certificate at slot (0) in
 \noderef{TashkinovSeries} leaves precisely the initial constructor of
 \noderef{TashkinovSeriesStep}: it states that
 ((G,e_0,\varphi_0)) is a (k)-triple, that (T_0) has length one and
 first edge (e_0), that (S_0=F_0=\varnothing), and that (T_1) is a
-closure of (T_0) under (arphi_0).  By
+closure of (T_0) under (\varphi_0).  By
 \noderef{TashkinovStoredColors}, (D_0=\varnothing).
 
-The length-one tree (T_0) is a Tashkinov tree under (arphi_0): in
+The length-one tree (T_0) is a Tashkinov tree under (\varphi_0): in
 the defining condition \noderef{TashkinovTree}, the only edge position is
 position zero, while the condition asks only about positions at least one.
 The closure assertion, by \noderef{TashkinovClosure}, supplies a
 \noderef{TashkinovAugmentationSequence} from (T_0) to (T_1) and says
-that (V(T_1)) is closed under (arphi_0).  Applying
+that (V(T_1)) is closed under (\varphi_0).  Applying
 \noderef{TashkinovAugmentationSequencePreservesTashkinovTree} gives that
-(T_1) is a Tashkinov tree under (arphi_0).  The (k)-triple and this
+(T_1) is a Tashkinov tree under (\varphi_0).  The (k)-triple and this
 last fact are exactly the hypotheses of \noderef{TashTree}; hence
-(V(T_1)) is elementary under (arphi_0).  This proves the first field
-of the base package.
+(V(T_1)) is elementary under (\varphi_0).  This proves the first
+assertion.
 
 Now let (sigma_0) be proper, leave precisely (e_0) uncolored, and be
 ((T_1,D_0,\varphi_0))-stable.  We first verify that the same displayed
@@ -35,7 +33,7 @@ Now let (sigma_0) be proper, leave precisely (e_0) uncolored, and be
 
 Consider one augmentation (A\to B) in the preceding augmentation
 sequence.  By \noderef{TashkinovAugmentation}, its new edge (f) has
-(arphi_0(f)=c), where (c) is missing at an old vertex (x\in V(A)).
+(\varphi_0(f)=c), where (c) is missing at an old vertex (x\in V(A)).
 Every augmentation preserves the previous display as the ordered initial
 segment specified by \noderef{TreeSequenceInitialSegment}; induction along
 the finite sequence therefore puts (x) in (V(T_1)) and makes (f)
@@ -56,11 +54,11 @@ Tashkinov tree under (sigma_0), so
 For closedness, suppose that a boundary edge (f) had
 (sigma_0(f)=c), where (c) is missing at a vertex of (T_1) under
 (sigma_0).  Stability identifies that missing set with the one under
-(arphi_0).  Both colorings are proper and leave the same unique edge
+(\varphi_0).  Both colorings are proper and leave the same unique edge
 uncolored, so the reverse-color clause of \noderef{sc1} applies to the
 incident boundary edge and gives
-(arphi_0(f)=sigma_0(f)=c).  This contradicts the closedness of
-(V(T_1)) under (arphi_0) supplied by the initial closure and defined
+(\varphi_0(f)=sigma_0(f)=c).  This contradicts the closedness of
+(V(T_1)) under (\varphi_0) supplied by the initial closure and defined
 in \noderef{ColoredVertexSetClosed}.  Hence (T_1) is closed under
 (sigma_0).
 
@@ -71,8 +69,7 @@ unique-uncolored properties of (sigma_0) shows that
 ((G,e_0,\sigma_0)) is a (k)-triple.  We have proved all three remaining
 hypotheses of \noderef{Tchange}: this (k)-triple, the Tashkinov-tree
 property of (T_1), and its closedness under (sigma_0).  Therefore, for
-any colors (alpha,eta) of which at least one is missing on (T_1),
-they are (T_1)-interchangeable under (sigma_0).  This is exactly the
-second field of \noderef{TechnicalTheoremBaseClaims}, and the proof is
-complete.
+any colors (alpha,\beta) of which at least one is missing on (T_1),
+they are (T_1)-interchangeable under (sigma_0).  This is the second
+assertion, and the proof is complete.
 \end{proof}
