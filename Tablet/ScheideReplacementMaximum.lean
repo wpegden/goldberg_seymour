@@ -1,5 +1,15 @@
+import Tablet.GlobalMaximumTriple
+import Tablet.KTriple
 import Tablet.ScheideDefectiveSwitchEffect
+import Tablet.ScheideDefectiveSetup
+import Tablet.ScheideReducedConfiguration
+import Tablet.ScheideReplacementData
 import Tablet.ScheideReplacementPairFixed
+import Tablet.ScheideStructuralConfiguration
+import Tablet.ScheideStructuralExitsInBase
+import Tablet.TashkinovTree
+import Tablet.TreeSequence
+import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: ScheideReplacementMaximum]
 theorem ScheideReplacementMaximum {V E : Type*}

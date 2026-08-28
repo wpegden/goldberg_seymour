@@ -5,27 +5,139 @@ replacement tree $T_\delta$ in the chosen replacement data forms a globally
 maximum triple $(T_\delta,e_0,\varphi_\delta)$.
 \end{lemma}
 \begin{proof}
-Properness and the unique-uncolored-edge assertion are the first two exact
-conclusions of \noderef{ScheideDefectiveSwitchEffect}.  It remains to check
-the ordered replacement tree.
+Put $r=\gammaIndex(\delta)$ and
+$b=p-1+2r$, the zero-based position of the first edge in the block of
+color $\gamma(r)$.  Write $n$ for the length of $T$.  The ordered-data
+clauses of \noderef{ScheideReplacementData} say that $T_\delta$ also has
+length $n$: positions below $b$ are retained, positions $j$ with
+$b\leq j$ and $j+2<n$ contain the old entry at position $j+2$, and the
+last two edge positions $n-2,n-1$ contain $f^1_\delta,f^2_\delta$.
+The corresponding retained-vertex clauses keep every vertex position at
+most $b$ and shift every old vertex position strictly above the deleted
+pair down by two.  Here these positions are meaningful because
+$r<s$, $p\geq2$, and
+$n+1=p+2s$, all recorded by the inherited structural data in
+\noderef{ScheideDefectiveSetup}, \noderef{ScheideReducedConfiguration},
+and \noderef{ScheideStructuralConfiguration}.
 
-Delete from $T$ the two named edges and vertices in the
-$\gamma(\delta)$ block.  The other block edges attach directly to the
-base, by \noderef{ScheideReducedConfiguration}, so deleting this pair does
-not invalidate any later attachment.  By the switch-effect statement, no
-remaining edge identity incident with $V(T)$ changes color and every
-missing-color witness away from $v^0_\delta$ remains valid.  At
-$v^0_\delta$, $\delta$ becomes missing.  By
-\noderef{ScheideReplacementPairFixed}, the two named replacement edges
-retain color $\delta$.  Appending
-$f^1_\delta,u^1_\delta,f^2_\delta,u^2_\delta$ therefore satisfies the
-Tashkinov condition twice, using the witness $v^0_\delta$.
+First, \noderef{ScheideDefectiveSwitchEffect} gives, verbatim, that
+$\varphi_\delta$ is proper and that exactly $e_0$ is uncolored.  It also
+gives the three switch facts used below: every tree-incident edge other
+than $f^0_\delta$ keeps its color; every tree vertex other than
+$v^0_\delta$ keeps its missing-color set; and
+\[
+ \overline{\varphi_\delta}(v^0_\delta)
+ =\bigl(\overline\varphi(v^0_\delta)
+        \setminus\{\gamma(r)\}\bigr)\cup\{\delta\}.
+\tag{*}
+\]
 
-The vertex-set equation in \noderef{ScheideReplacementData} deletes two
-tree vertices and adds two outside vertices.  Hence
-$|V(T_\delta)|=|V(T)|=t(G)$.  Together with the already checked properness,
-unique uncolored edge, critical and numerical clauses inherited from the
-original globally maximum triple, this is exactly
-\noderef{GlobalMaximumTriple} for
-$(T_\delta,e_0,\varphi_\delta)$.
+We next verify \noderef{TashkinovTree} for $T_\delta$ one edge position
+at a time.  Fix a noninitial edge position $j$, so $1\leq j<n$.
+There are three exhaustive cases.
+
+Suppose first that $j<b$.  The retained-entry equalities from
+\noderef{ScheideReplacementData} identify the new edge at $j$ with the
+old edge at $j$.  The globally maximum field inherited from
+\noderef{ScheideStructuralConfiguration}, interpreted with
+\noderef{GlobalMaximumTriple}, says that the old tree is Tashkinov.
+Consequently \noderef{TashkinovTree} supplies an index $a\leq j$ and a
+color $c$ such that the old edge at $j$ has color $c$ and $c$ is missing
+at the old vertex at $a$.  Since $a\leq j<b$, the retained-vertex equality
+identifies that old witness with the new vertex at the same index $a$.
+
+The old edge at $j$ is incident with $V(T)$ and is not
+$f^0_\delta$.  Indeed, the attachment clause of \noderef{TreeSequence}
+makes both ends of a tree edge vertices listed in $T$, hence members of
+the image defining \noderef{TreeSequenceVertexSet}; but
+\noderef{ScheideDefectiveSetup} gives
+$f^0_\delta=v^0_\delta u^0_\delta$ with
+$u^0_\delta\notin V(T)$.  Thus the switch-effect clause preserves the
+edge color $c$.
+
+If the witness vertex at $a$ is not $v^0_\delta$, its missing set is also
+unchanged.  If it is $v^0_\delta$, we must check that $(*)$ does not erase
+$c$.  When $j<p-1$, the edge is a nonfirst base edge because $j\geq1$;
+the nonfirst-base-edge avoidance clause of
+\noderef{ScheideStructuralConfiguration} gives
+$c\ne\gamma(r)$.  When $p-1\leq j<b$, division of
+$j-(p-1)$ by two writes the entry uniquely as the first or second edge of
+a block with index $h<r$.  Its block-color clause gives $c=\gamma(h)$,
+and injectivity of the indexed block colors gives
+$c\ne\gamma(r)$.  In either subcase $(*)$ preserves $c$ as missing at the
+same vertex.  Hence $a\leq j$ is a valid earlier witness for the retained
+edge.
+
+Suppose next that $b\leq j$ and $j+2<n$.  The retained-after equality in
+\noderef{ScheideReplacementData} identifies the new edge at $j$ with the
+old edge at $j+2$.  Since $j+2\geq b+2$, the exact layout in
+\noderef{ScheideStructuralConfiguration} writes that old entry as one of
+the two edges of a unique block $h>r$.  The block-color clause colors it
+$\gamma(h)$, and the block-color-missing-on-base clause supplies a base
+index $a<p$ at whose vertex $\gamma(h)$ is missing.  The inequalities
+\[
+ a\leq p-1\leq b\leq j
+\]
+show both that the replacement data retain this base vertex at index $a$
+and that it is earlier than the edge at zero-based position $j$ in the
+sense required by \noderef{TashkinovTree}.  The old block edge is again a
+tree edge distinct from $f^0_\delta$, by the same endpoint argument, so
+its color is fixed by \noderef{ScheideDefectiveSwitchEffect}.  If the
+chosen base vertex is not $v^0_\delta$, its missing set is fixed as well;
+if it is $v^0_\delta$, then $h>r$ and block-color injectivity give
+$\gamma(h)\ne\gamma(r)$, so $(*)$ still leaves $\gamma(h)$ missing.
+Thus the shifted edge also has the required retained base witness.
+
+It remains that $j+2\geq n$.  Since $j<n$, this says precisely that
+$j=n-2$ or $j=n-1$, the two appended positions.  The exit clause in
+\noderef{ScheideDefectiveSetup} places $v^0_\delta$ among the Scheide exit
+vertices, and \noderef{ScheideStructuralExitsInBase} therefore gives an
+index $a<p$ with $v^0_\delta=y_a$.  The base-position clause of
+\noderef{ScheideStructuralConfiguration}, followed by the
+retained-vertices-before clause of \noderef{ScheideReplacementData},
+identifies the replacement vertex at index $a$ with $v^0_\delta$; the
+required retention inequality is $a\leq p-1\leq b$.  Moreover $r<s$
+implies $s\geq1$, so $n+1=p+2s$ implies
+\[
+ a\leq p-1\leq n-2<n-1.
+\]
+Thus this witness precedes both appended edge positions.  Formula $(*)$
+says that $\delta$ is missing there.
+
+For the first appended edge, the endpoint equality
+$f^1_\delta=v^1_\delta u^1_\delta$ in
+\noderef{ScheideReplacementData} makes it incident with
+$u^1_\delta$.  Hence \noderef{ScheideReplacementPairFixed} and the
+recorded equality $\varphi(f^1_\delta)=\delta$ give
+$\varphi_\delta(f^1_\delta)=\delta$.  The same argument using
+$f^2_\delta=v^2_\delta u^2_\delta$ and
+$\varphi(f^2_\delta)=\delta$ gives
+$\varphi_\delta(f^2_\delta)=\delta$.  Therefore the retained occurrence
+of $v^0_\delta$ at index $a$ witnesses the Tashkinov condition for each
+of the last two edges.  The three cases prove that $T_\delta$ is a
+Tashkinov tree under $\varphi_\delta$.
+
+We now compute its order without using the replacement vertex-set
+equation.  By \noderef{TreeSequenceVertexSet}, the vertex set of any
+tree-sequence $S$ is the image of all indices
+$0,\ldots,S.\mathrm{length}$ under its vertex map.  That map is injective
+by \noderef{TreeSequence}, so the image has cardinality
+$S.\mathrm{length}+1$.  Applying this once to $T_\delta$ and once to $T$,
+and then using the replacement-length equality from
+\noderef{ScheideReplacementData}, gives
+\[
+ |V(T_\delta)|=n+1=|V(T)|.
+\]
+The cardinality clause of the old globally maximum triple in
+\noderef{GlobalMaximumTriple} says $|V(T)|=t(G)$; hence
+$|V(T_\delta)|=t(G)$.
+
+Finally unfold \noderef{KTriple}.  From the $K$-triple clause of the old
+globally maximum field we retain, unchanged, that $G$ is critical, that
+$\chi'(G)=k+1$, and that $\Delta(G)+1\leq k$.  The first paragraph supplied
+properness of $\varphi_\delta$ and the assertion that exactly $e_0$ is
+uncolored.  These five clauses assemble the new $K$-triple.  Combining it
+with the proved Tashkinov-tree clause and the proved equality
+$|V(T_\delta)|=t(G)$ gives precisely the three defining clauses of
+\noderef{GlobalMaximumTriple}.  This proves the claimed conjunction.
 \end{proof}
