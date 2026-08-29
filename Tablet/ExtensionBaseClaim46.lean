@@ -6,7 +6,6 @@ import Tablet.ETTStrongInterchangeable
 import Tablet.ExtensionBaseCaseTwoObservation19
 import Tablet.ExtensionBaseCaseTwoObservation20
 import Tablet.ExtensionBaseCaseTwoObservation21
-import Tablet.ExtensionBaseCaseTwoObservation22
 import Tablet.ExtensionBaseCaseTwoObservation23
 import Tablet.ExtensionBaseSupportClass
 import Tablet.Incident
@@ -79,7 +78,7 @@ theorem ExtensionBaseClaim46 {V E : Type*}
     (hgammaControlled : gammaN ∈ controlled)
     (hdeltaControlled : deltaN ∈ controlled)
     (hb3 : ∀ f : E, rho1 f ≠ sigmaN f →
-      f ∉ InternalEdges G (TreeSequenceVertexSet Tn) ∧
+      f ∉ InternalEdges G (TreeSequenceVertexSet Tj) ∧
         ∃ c d : Fin k, sigmaN f = some c ∧ rho1 f = some d ∧
           c ∈ restorationColors ∧ d ∈ restorationColors)
     (hgammaRestored : gammaN ∉ restorationColors)

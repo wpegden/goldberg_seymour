@@ -1,7 +1,6 @@
 import Tablet.BoundaryColorEdges
 import Tablet.ColoredVertexSetClosed
 import Tablet.Incident
-import Tablet.InternalEdges
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.LooplessMultigraph
@@ -33,9 +32,8 @@ theorem ExtensionBaseCaseTwoObservation20 {V E : Type*}
     (hgammaControlled : gammaN ∈ controlled)
     (hdeltaControlled : deltaN ∈ controlled)
     (hb3 : ∀ f : E, rho1 f ≠ sigmaN f →
-      f ∉ InternalEdges G (TreeSequenceVertexSet Tn) ∧
-        ∃ c d : Fin k, sigmaN f = some c ∧ rho1 f = some d ∧
-          c ∈ restorationColors ∧ d ∈ restorationColors)
+      ∃ c d : Fin k, sigmaN f = some c ∧ rho1 f = some d ∧
+        c ∈ restorationColors ∧ d ∈ restorationColors)
     (hgammaRestored : gammaN ∉ restorationColors)
     (hdeltaRestored : deltaN ∉ restorationColors)
     (hgammaBoundary :

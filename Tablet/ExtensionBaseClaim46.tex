@@ -44,7 +44,7 @@ Retain all of the following Case 2 data explicitly.
       \(\gamma_n,\delta_n\in D\), and Claim 4.3(b3) has the exact form
       \[
        \varrho_1(a)\ne\sigma_n(a)\Longrightarrow
-       a\notin E(G[V(T_n)])\text{ and }
+       a\notin E(G[V(T_j)])\text{ and }
        \sigma_n(a)=c,\ \varrho_1(a)=d
        \text{ for some }c,d\in R,                             \tag{b3}
       \]
@@ -147,8 +147,8 @@ satisfies:
 \end{lemma}
 \begin{proof}
 Apply \noderef{ExtensionBaseCaseTwoObservation20} to the explicit
-terminal stability, b3, color-exclusion, boundary-location, and closure
-premises.  It gives
+terminal stability, the color-control projection of b3, color-exclusion,
+boundary-location, and closure premises.  It gives
 \[
  \partial_{\varrho_1,\gamma_n}(T_n)=\{f_n\},\qquad
  \partial_{\varrho_1,\delta_n}(V(T_n)\cup V(T'_j))=\varnothing. \tag{7}
@@ -164,8 +164,11 @@ and exact exit suffix \(Q=P[x,u]\).  In particular,
 \(\varrho_1\)-color \(\gamma_n\).
 
 Fix \(\beta\in\overline{\varrho}_1(u)\).
-\noderef{ExtensionBaseCaseTwoObservation22}, applied to (C2) and (8),
-gives
+By (8), \(u\notin V(T_n)\).  On the other hand,
+\(v_n\in V(T_j)\subseteq V(T_n)\), so \(u\ne v_n\).  Thus
+\(u\in V(T'_j)\setminus\{v_n\}\), and (C2) gives
+\(\overline{\varrho}_1(u)\cap S'=\varnothing\).  The chosen membership
+\(\beta\in\overline{\varrho}_1(u)\) therefore implies
 \[
                               \beta\notin S'.                  \tag{9}
 \]
