@@ -85,42 +85,93 @@ consecutive members of one support class, which is Part I(5).
 \end{lemma}
 \begin{proof}
 Apply \noderef{ExtensionBaseSupportOrder} with the explicit lower-rung
-assertion (v).  Every active support has first-appearance index (j),
-and distinct support classes occur in reverse index blocks.  Apply
+assertion (v).  Its second conclusion says that every active support has
+first-appearance index \(j\), and its third conclusion says that distinct
+support classes occur in reverse index blocks.  Apply
 \noderef{ExtensionBaseDeltaExclusion} with the stated lower-rung
 elementarity and assertion-(v) instances.  It gives, for active
-(a\leq b),
+\(a\leq b\),
 \[
                          \delta_b\ne\gamma_a.                  \tag{3}
 \]
 
-Fix one nonempty support class (L(w)).  Since (m(w)=j), every PE
-through the terminal round supported at (w) has index at least (j),
-and hence belongs to (L(w)); conversely this is the defining condition
-in \noderef{ExtensionBaseSupportClass}.  The finite set therefore has a
-unique strictly increasing enumeration
+Fix one nonempty support class \(L(w)\), and choose
+\(r_0\in L(w)\).  Unfolding
+\noderef{ExtensionBaseSupportClass} and
+\noderef{ExtensionBaseActiveIndices}, the active certificate supplies a
+vertex \(u\) of the final displayed ETT whose exact chosen-vertex field is
+\(\mathsf{some}(u)\), while the support-class filter says that the same
+field is \(\mathsf{some}(w)\).  Injectivity of the
+\(\mathsf{some}\) constructor gives \(u=w\).
+Thus \(r_0\) is active, its positive slot is a PE, its exact chosen vertex
+is \(w\), and \(w\) belongs to the final displayed ETT.  The second
+conclusion of \noderef{ExtensionBaseSupportOrder} now gives
 \[
-                         i_0<i_1<\cdots<i_p.                    \tag{4}
+                              m(w)=j.                          \tag{4}
+\]
+
+We verify rather than assume that this active class contains every PE
+through the terminal round supported at \(w\).  Let \(r\leq q\) be any
+such PE slot, so its kind field is PE and its exact chosen-vertex field is
+\(w\).  The certificate at \(r.\mathsf{succ}\), supplied by
+\noderef{TashkinovSeries}, is one of the constructors of
+\noderef{TashkinovSeriesStep}.  The exact PE kind eliminates the initial,
+SE, and RE constructors.  In the remaining PE constructor, let \(C_r\)
+be its recorded \noderef{MaximumDefectiveChoice}.  The constructor's
+\(\mathsf{currentVertex}\) field and the assumed chosen-vertex equality
+give
+\(C_r.\mathsf{vertex}=w\).  Its
+\(\mathsf{vertexDefective}\) field, unfolded with
+\noderef{DefectiveVertex}, has first conjunct
+\[
+ w\in V\bigl(T_{r+1}\bigr),                                  \tag{5}
+\]
+where \(T_{r+1}\) is exactly that slot's current ladder tree.
+By \noderef{ETTFirstAppearanceIndex}, \(m(w)\) is the least complete
+ladder-stage subscript containing \(w\).  Equations (4)--(5) therefore
+give \(j=m(w)\leq r+1\).  Thus no terminal-bounded PE supported at
+\(w\) precedes \(j\).  Together with \(r\leq q\), the PE kind, the exact
+chosen vertex, final-tree membership, and (4), these are precisely the
+conditions in \noderef{ExtensionBaseActiveIndices}; hence
+\(r\in L(w)\).  Conversely, unfolding the two displayed definitions
+shows that every member of \(L(w)\) is a PE supported at \(w\); its index
+is at most \(q\), because \(q+1=n\) and every Lean index in
+\(\operatorname{Fin}(n)\) is at most \(q\).
+
+Consequently the finite nonempty set \(L(w)\) has a unique strictly
+increasing enumeration
+\[
+                         i_0<i_1<\cdots<i_p.                    \tag{6}
 \]
 It is at the same time the exact enumeration of all terminal-bounded PEs
-supported at (w).  The membership of (w) in the required current tree
-comes from any one of these PE certificates and the ordered initial
-segments in \noderef{TashkinovSeriesStep}.
+supported at \(w\).  For completeness, apply the PE-constructor argument
+above to the enumerated slot \(i_0\).  Its
+\noderef{MaximumDefectiveChoice} vertex is \(w\), and
+\noderef{DefectiveVertex} gives \(w\in V(T_{i_0+1})\).  Since
+\(i_0\leq q\), successively use the
+\(\mathsf{orderedExtension}\) field at each intervening noninitial
+constructor of \noderef{TashkinovSeriesStep}.  Unfolding
+\noderef{TreeSequenceInitialSegment} gives equality of every old vertex
+entry with its new entry, and the image description in
+\noderef{TreeSequenceVertexSet} therefore preserves vertex-set
+membership at each step.  A finite induction from \(i_0\) to \(q\)
+gives \(w\in V(T_{q+1})\), exactly the current-tree membership required
+by \noderef{ExtensionBaseSupportClassColors}.
 
-Supply (4), its exact-range equivalences, the exact gamma and delta fields,
+Supply (6), its exact-range equivalences, the exact gamma and delta fields,
 and (3) to \noderef{ExtensionBaseSupportClassColors}.  That lemma gives
 \[
- \gamma_{i_{a+1}}=\delta_{i_a}\quad(0\leq a<p)                 \tag{5}
+ \gamma_{i_{a+1}}=\delta_{i_a}\quad(0\leq a<p)                 \tag{7}
 \]
 and says that
 \[
- \gamma_{i_0},\delta_{i_0},\delta_{i_1},\ldots,\delta_{i_p}    \tag{6}
+ \gamma_{i_0},\delta_{i_0},\delta_{i_1},\ldots,\delta_{i_p}    \tag{8}
 \]
 are pairwise distinct.  The PE constructor of
 \noderef{TashkinovSeriesStep} identifies every exact stored set as
-\(S_{i_a}=\{\delta_{i_a},\gamma_{i_a}\}\).  Equations (5)--(6) now show
+\(S_{i_a}=\{\delta_{i_a},\gamma_{i_a}\}\).  Equations (7)--(8) now show
 directly that two stored pairs in this class are disjoint unless their
-positions in (4) are consecutive.  For consecutive positions (a,a+1),
+positions in (6) are consecutive.  For consecutive positions \(a,a+1\),
 their only common color is
 \(\delta_{i_a}=\gamma_{i_{a+1}}\), proving (2) within one class.
 
@@ -135,11 +186,11 @@ namely (j), for every active support.  Hence (v_s\ne v_t) implies
 \(S_s\cap S_t=\varnothing\).
 
 We can now prove (1).  If the intersection is nonempty, the preceding
-paragraph forces (v_s=v_t=w).  In enumeration (4), nonconsecutive
-positions have disjoint pairs by (5)--(6), so no member of (L(w)) lies
-strictly between (s) and (t).  Conversely, if the supports agree and
-there is no intervening class member, (s,t) are consecutive in (4),
-and (5) places the common color \(\delta_s=\gamma_t\) in both stored
+paragraph forces \(v_s=v_t=w\).  In enumeration (6), nonconsecutive
+positions have disjoint pairs by (7)--(8), so no member of \(L(w)\) lies
+strictly between \(s\) and \(t\).  Conversely, if the supports agree and
+there is no intervening class member, \(s,t\) are consecutive in (6),
+and (7) places the common color \(\delta_s=\gamma_t\) in both stored
 pairs.  This proves nonemptiness, (1), and the exact singleton equalities
 (2).
 \end{proof}

@@ -1,12 +1,19 @@
+import Tablet.DefectiveVertex
+import Tablet.ETTFirstAppearanceIndex
+import Tablet.ExtensionBaseActiveIndices
 import Tablet.ExtensionBaseDeltaExclusion
 import Tablet.ExtensionBaseSupportClass
 import Tablet.ExtensionBaseSupportClassColors
 import Tablet.ExtensionBaseSupportOrder
 import Tablet.ExtensionRules
+import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumProperty
 import Tablet.ModColoring
+import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TreeInterchangeable
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: ExtensionBaseStoredPairOverlap]
 theorem ExtensionBaseStoredPairOverlap {V E : Type*}
