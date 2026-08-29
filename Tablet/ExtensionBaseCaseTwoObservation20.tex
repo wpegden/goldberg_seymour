@@ -1,0 +1,94 @@
+\begin{lemma}[Case 2, observation (20)]
+Let \(T_n\), \(T_j(v_n)\), and \(T'_j\) be tree-sequences with
+\(T_j(v_n)\) an ordered initial segment of \(T_n\).  Put
+\(X_n=V(T_n)\), \(X'=V(T'_j)\), and require that the terminal displayed
+vertex of the exact seed \(T_j(v_n)\) is \(v_n\).
+Let \(\varphi_n,\sigma_n,\varrho_1\) be proper partial \(k\)-edge-colorings
+which leave exactly the same edge \(e_0\) uncolored.  Let \(D\) be a
+finite controlled color set and \(R\) the finite set of colors used by
+the restoration from \(\sigma_n\) to \(\varrho_1\).  Assume
+\(\sigma_n\) is \((T_n,D,\varphi_n)\)-stable and
+\(\gamma_n,\delta_n\in D\).  Assume the exact Claim 4.3(b3) edge effect
+\[
+ \varrho_1(a)\ne\sigma_n(a)
+ \Longrightarrow a\notin E(G[X_n])\ \hbox{ and }\
+ \sigma_n(a)=c,\ \varrho_1(a)=d\quad\hbox{for some }c,d\in R,       \tag{20a}
+\]
+and assume \(\gamma_n,\delta_n\notin R\).  Finally suppose
+\[
+ \partial_{\varphi_n,\gamma_n}(X_n)=\{f_n\},                     \tag{20b}
+\]
+every identity in \(\partial_{\varphi_n,\delta_n}(X_n)\) is incident
+with a vertex of \(T_j(v_n)\), \(T'_j\) is a
+\(\varrho_1\)-\noderef{TashkinovClosure} of \(T_j(v_n)\), and
+\(\delta_n\in\overline{\varrho}_1(v_n)\).  Then
+\[
+ \partial_{\varrho_1,\gamma_n}(X_n)=\{f_n\},\qquad
+ \partial_{\varrho_1,\delta_n}(X_n\cup X')=\varnothing.          \tag{20}
+\]
+All sets in this statement are sets of exact edge identities.
+\end{lemma}
+\begin{proof}
+We first transport the two boundary colors from \(\varphi_n\) to
+\(\sigma_n\).  Every boundary identity of \(X_n\) is incident with
+\(T_n\), by the endpoint condition in \noderef{BoundaryEdges} and the
+definition of \noderef{TreeIncidentEdge}.  If such an identity has
+\(\varphi_n\)-color \(\alpha\in\{\gamma_n,\delta_n\}\subseteq D\),
+the edge clause of \noderef{StableColoring} fixes it.  Conversely,
+\noderef{sc2} applies because both colorings are proper and leave exactly
+\(e_0\) uncolored; it makes \(\varphi_n\) stable relative to
+\(\sigma_n\).  Its edge clause fixes any boundary identity whose
+\(\sigma_n\)-color is \(\alpha\in D\).  Since membership of the
+color-independent boundary does not change, the filter definition
+\noderef{BoundaryColorEdges} gives
+\[
+ \partial_{\sigma_n,\alpha}(X_n)
+   =\partial_{\varphi_n,\alpha}(X_n)
+ \quad(\alpha=\gamma_n,\delta_n).                              \tag{1}
+\]
+We next transport from \(\sigma_n\) to \(\varrho_1\).  Fix an identity
+\(a\) in the boundary of \(X_n\).  If
+\(\varrho_1(a)=\gamma_n\) and its value differed from the
+\(\sigma_n\)-value, (20a) would give
+\(\varrho_1(a)=d\) for a color \(d\in R\), forcing
+\(\gamma_n\in R\), a contradiction.  Thus
+\(\sigma_n(a)=\varrho_1(a)=\gamma_n\).  The reverse implication is the
+same: if \(\sigma_n(a)=\gamma_n\) and the values differed, (20a) would
+force the old color \(\gamma_n\) into \(R\).  Repeating the argument
+with \(\delta_n\) yields
+\[
+ \partial_{\varrho_1,\alpha}(X_n)
+   =\partial_{\sigma_n,\alpha}(X_n)
+ \quad(\alpha=\gamma_n,\delta_n).                              \tag{2}
+\]
+Equations (1), (2), and (20b) prove the first equality in (20).
+
+It remains to exclude a \(\delta_n\)-colored identity \(a\) from the
+boundary of \(X_n\cup X'\).  By \noderef{BoundaryEdges}, \(a\) has one
+endpoint in this union and one endpoint outside it.  If its inside
+endpoint belongs to \(X'\), then \(a\) is a boundary identity of \(X'\).
+The closure hypothesis unfolds, by \noderef{TashkinovClosure}, to say
+that \(X'\) is \(\varrho_1\)-closed and that \(T'_j\) is reached from
+the seed by a \noderef{TashkinovAugmentationSequence}.  Each step in
+that finite chain has the ordered initial-segment clause of
+\noderef{TashkinovAugmentation}; composing the vertex equalities in
+\noderef{TreeSequenceInitialSegment} puts every seed vertex, and in
+particular \(v_n\), in \(X'\).  Hence the
+assumed membership of \(\delta_n\) in
+\(\overline{\varrho}_1(v_n)\) and
+\noderef{ColoredVertexSetClosed} forbid a \(\delta_n\)-colored boundary
+identity of \(X'\), a contradiction.
+
+The remaining possibility is that the inside endpoint lies in
+\(X_n\setminus X'\).  Then \(a\) is a \(\delta_n\)-colored boundary
+identity of \(X_n\), so (2), (1), and the location hypothesis supply a
+vertex \(w\in V(T_j(v_n))\subseteq X'\) incident with this same exact
+identity \(a\).  The outside endpoint of \(a\) is outside
+\(X_n\cup X'\), whereas both its first inside endpoint and \(w\) lie in
+that union.  The two-endpoint and loopless clauses of
+\noderef{LooplessMultigraph}, read through \noderef{Incident}, say that
+these exhaust the endpoints of \(a\); they cannot include both an outside
+endpoint and the two distinct inside locations just obtained.  This is
+again a contradiction.  Therefore the second boundary set in (20) is
+empty, completing the proof.
+\end{proof}

@@ -1,0 +1,21 @@
+\begin{lemma}[Case 2, observation (22)]
+Let \(v_n\in V(T_n)\), let
+\(u\in V(T'_j)\setminus V(T_n)\), and let \(S'\) be the support-color
+set.  Suppose the Case 2 hypothesis holds in its vertexwise form
+\[
+ \overline{\varrho}_1(v)\cap S'=\varnothing
+ \quad\text{for every }v\in V(T'_j)\setminus\{v_n\}.            \tag{C2}
+\]
+If \(\beta\in\overline{\varrho}_1(u)\), then
+\[
+                         \beta\notin S'.                       \tag{22}
+\]
+\end{lemma}
+\begin{proof}
+Since \(u\notin V(T_n)\) but \(v_n\in V(T_n)\), we have \(u\ne v_n\).
+Together with \(u\in V(T'_j)\), this puts \(u\) in the erased vertex set
+to which (C2) applies.  If \(\beta\in S'\), its assumed membership in
+\(\noderef{MissingColors}(G,\varrho_1,u)\) would put \(\beta\) in the
+intersection in (C2), contradicting its emptiness.  Hence
+\(\beta\notin S'\), as asserted.
+\end{proof}

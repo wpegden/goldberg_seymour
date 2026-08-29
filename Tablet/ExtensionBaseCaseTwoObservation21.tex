@@ -1,0 +1,78 @@
+\begin{lemma}[Case 2, observation (21)]
+Put \(X=V(T_n)\cup V(T'_j)\), and suppose
+\(v_n\in V(T_n)\cap V(T'_j)\).  Under \(\varrho_1\), let \(P\) be a
+simple \((\gamma_n,\delta_n)\)-path in the incidence graph from \(v_n\)
+to \(x\) whose support is the entire
+\(\noderef{TwoColorComponent}\) through \(v_n\).  Assume \(x\notin X\)
+and that \(P\) contains a vertex of \(T_n\) other than \(v_n\).  Suppose
+\[
+ \partial_{\varrho_1,\gamma_n}(T_n)=\{f_n\},\qquad
+ \partial_{\varrho_1,\delta_n}(X)=\varnothing,                 \tag{20}
+\]
+and \(f_n\) is incident with \(v_n\).  Then there are a vertex \(u\) and
+a simple subpath \(Q=P[x,u]\), represented as an exact incidence-graph
+walk from \(x\) to \(u\), such that
+\[
+ u\in V(T'_j)\setminus V(T_n),                                 \tag{21}
+\]
+\(Q\) uses at least one graph-edge identity, every node of \(Q\) is a
+node of \(P\), and \(u\) is the only vertex-node of \(Q\) in \(X\).
+Moreover, \(Q\) contains an exact \(\gamma_n\)-colored boundary identity
+of \(X\) incident with \(u\), and \(u\) is not incident with \(f_n\).
+\end{lemma}
+\begin{proof}
+Write the nodes of the simple walk \(P\) in their exact walk order.  The
+first vertex-node \(v_n\) lies in \(X\), whereas the last vertex-node
+\(x\) does not.  Among the indices of vertex-nodes of \(P\) whose
+vertices lie in \(X\), choose the largest one, and call its vertex \(u\).
+The finite maximum exists because the first index is eligible.  Reverse
+the suffix from that occurrence of \(u\) to \(x\); this is the displayed
+walk \(Q=P[x,u]\).  A contiguous subwalk of a simple walk is simple, and
+its nodes are nodes of \(P\).  Maximality of the chosen occurrence says
+exactly that \(u\) is the only vertex-node of \(Q\) lying in \(X\).
+Since \(x\notin X\), the suffix is nonconstant; the bipartite adjacency
+rule of \noderef{TwoColorIncidenceGraph} makes its incidence-graph length
+at least two.
+
+Let \(g\) be the first graph-edge node of the unreversed suffix, namely
+the exact edge identity by which \(P\) leaves \(X\) at \(u\).  Its next
+vertex-node is outside \(X\), so \noderef{BoundaryEdges} puts
+\(g\in\partial_G(X)\), and \noderef{Incident} says that \(g\) is
+incident with \(u\).  Adjacency in
+\noderef{TwoColorIncidenceGraph} says that its
+\(\varrho_1\)-color is either \(\gamma_n\) or \(\delta_n\).  The second
+equation in (20) excludes \(\delta_n\); hence
+\[
+             g\in\partial_{\varrho_1,\gamma_n}(X).             \tag{1}
+\]
+We show that \(u\notin V(T_n)\).  First, the occurrence of \(u\) is not
+the initial occurrence of \(v_n\): by hypothesis there is a distinct
+vertex \(w\in V(T_n)\subseteq X\) later on \(P\), and the largest
+in-\(X\) occurrence is at least as late as that of \(w\).  Thus
+\(u\ne v_n\).
+
+Suppose nevertheless that \(u\in V(T_n)\).  The endpoint after \(g\) is
+outside \(X\), and hence outside \(V(T_n)\), so \(g\) is also a boundary
+identity of \(T_n\).  Equation (1) and the first equality in (20) give
+the exact identity \(g=f_n\).  Both \(u\) and \(v_n\) are incident with
+this loopless identity.  Since the other endpoint of \(g\) is outside
+\(X\) while \(u,v_n\in X\), the two-endpoint clause of
+\noderef{LooplessMultigraph} forces \(u=v_n\), contrary to the preceding
+paragraph.  Therefore \(u\notin V(T_n)\).  Its defining membership in
+\(X=V(T_n)\cup V(T'_j)\) now gives \(u\in V(T'_j)\), proving (21).
+
+Finally suppose that \(u\) were incident with \(f_n\).  The singleton
+identity in (20) says that \(f_n\) has color \(\gamma_n\), and its
+incidence with \(v_n\) makes its edge-node adjacent to the initial node
+of \(P\) in \noderef{TwoColorIncidenceGraph}.  It therefore belongs to
+the component through \(v_n\), and the full-support hypothesis puts that
+edge-node on \(P\).  An edge-node has at most its two actual endpoint
+neighbors by \noderef{LooplessMultigraph}.  Since \(P\) is a simple path
+whose endpoints are vertex-nodes, both neighbors used by \(P\) at the
+interior edge-node \(f_n\) are its two endpoints, namely \(v_n\) and
+\(u\).  Thus \(u\) is the first vertex of \(P\) after \(v_n\).  The
+distinct \(T_n\)-vertex supplied by the two-vertex hypothesis occurs
+later, so the last vertex of \(P\) in \(X\) cannot be \(u\), contrary to
+the definition of \(u\).  Thus \(u\) is not incident with \(f_n\), and
+all asserted exact path and edge data have been retained.
+\end{proof}

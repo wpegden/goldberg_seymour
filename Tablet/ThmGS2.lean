@@ -62,6 +62,7 @@ import Tablet.ExtensionBaseAlgorithmB
 import Tablet.ExtensionBaseClaim44
 import Tablet.OutsideTreeColorSwapStable
 import Tablet.ExtensionBaseCaseTwoObservation19
+import Tablet.ExtensionBaseClaim46
 import Tablet.ExtensionBaseAlgorithmCTrace
 import Tablet.ExtensionBaseAlgorithmCInvariant
 import Tablet.StrongInterchangeableImpliesInterchangeable

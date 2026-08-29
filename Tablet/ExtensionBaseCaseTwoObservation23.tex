@@ -1,0 +1,89 @@
+\begin{lemma}[Case 2, observation (23)]
+Let \(T_j(v_n)\) be an ordered initial segment of both \(T_j\) and
+\(T'_j\), with terminal displayed vertex exactly \(v_n\), and let
+\(u\in V(T'_j)\setminus V(T_j(v_n))\).  Suppose
+\(V(T'_j)\) is elementary under \(\varrho_1\),
+\(\beta\in\overline{\varrho}_1(u)\), and
+\(v_n\in V(T_j(v_n))\).  Let \(\varphi_{j-1}\) be another coloring.
+Assume the explicit Claim 4.3(b2) vertex relation
+\[
+ \overline{\varrho}_1(v)=\overline\varphi_{j-1}(v)
+ \quad(v\in V(T_j)\setminus\{v_n\}),                           \tag{b2v}
+\]
+assume \(\beta\notin\overline{\varrho}_1(v_n)\), and assume
+\[
+ \overline\varphi_{j-1}(v_n)
+   \subseteq\overline{\varrho}_1(v_n)\cup\{\gamma_{1_1}\},
+ \qquad \beta\ne\gamma_{1_1}.                                 \tag{3}
+\]
+Suppose \(T_j\) is obtained from \(T_j(v_n)\) by a
+\(\varphi_{j-1}\)-\noderef{TashkinovAugmentationSequence}, and retain the
+exact b2 edge equality
+\[
+ \varrho_1(T_j.\operatorname{edge}(a))
+ =\varphi_{j-1}(T_j.\operatorname{edge}(a))
+ \quad\text{whenever }a\ge |T_j(v_n)|.                        \tag{b2e}
+\]
+Then there is a vertex \(z\) at or after the terminal vertex of
+\(T_j(v_n)\), with its exact position \(q_z\), having the following
+alternative.  If a vertex after
+\(T_j(v_n)\) misses \(\beta\), then \(z\) is the first such vertex;
+otherwise \(z\) is the terminal vertex of \(T_j\).  In either case
+\[
+ \beta\notin\overline{\varrho}_1(T_j(z)-z),\qquad
+ \varrho_1(T_j.\operatorname{edge}(a))\ne\beta
+ \quad(|T_j(v_n)|\le a<q_z).                                  \tag{23}
+\]
+The quantified indices in the second assertion name exact appended edge
+identities.
+\end{lemma}
+\begin{proof}
+First we exclude \(\beta\) from the seed.  The initial-segment clauses of
+\noderef{TreeSequenceInitialSegment} put every vertex of \(T_j(v_n)\),
+including \(v_n\), in \(V(T'_j)\).  The vertex \(u\) is distinct from
+all seed vertices because it lies outside the seed, and it misses
+\(\beta\).  Elementariness, expanded using
+\noderef{ColoredVertexSetElementary}, therefore says that no seed vertex
+misses \(\beta\) under \(\varrho_1\).  This includes the separately
+assumed assertion at \(v_n\).
+
+Consider the finite linearly ordered set of vertex positions of \(T_j\)
+strictly after the seed length.  If some such displayed vertex misses
+\(\beta\) under \(\varrho_1\), let \(q_z\) be the least position with
+that property and put \(z=T_j.\operatorname{vertex}(q_z)\).  Otherwise
+take \(q_z=\operatorname{Fin.last}(|T_j|)\) and let \(z\) be the terminal
+displayed vertex; this may be the seed endpoint \(v_n\) when the two
+tree-sequences have the same length.  In the first case, minimality gives
+\[
+ \beta\notin\overline{\varrho}_1(T_j.\operatorname{vertex}(r))
+ \quad(|T_j(v_n)|<r<q_z),                                    \tag{4}
+\]
+and in the second case the defining failure of the first alternative
+gives the same exclusion for every \(r>|T_j(v_n)|\).  The seed exclusion
+from the first paragraph combines with (4).  By the position definition
+of \noderef{TreeVerticesBefore}, this proves the first assertion in
+(23).
+
+We now transfer that missing-color exclusion to
+\(\varphi_{j-1}\).  At every vertex before \(z\) other than \(v_n\),
+(b2v) makes the two missing sets equal.  At \(v_n\), if \(\beta\) were
+missing under \(\varphi_{j-1}\), inclusion (3) would place it either in
+\(\overline{\varrho}_1(v_n)\), contrary to the seed exclusion, or in the
+singleton \(\{\gamma_{1_1}\}\), contrary to
+\(\beta\ne\gamma_{1_1}\).  Hence
+\[
+ \beta\notin\overline\varphi_{j-1}(T_j(z)-z).                  \tag{5}
+\]
+Finally fix an edge position \(a\) with
+\(|T_j(v_n)|\le a<q_z\).  Expand the finite reachability relation in
+\noderef{TashkinovAugmentationSequence}.  At the unique augmentation step
+which appends this exact position, \noderef{TashkinovAugmentation} says
+that the color of this exact edge identity under \(\varphi_{j-1}\) is a
+color missing on the preceding tree.  That preceding vertex set is
+contained in \(V(T_j(z)-z)\), by repeated composition of the ordered
+initial-segment clauses.  Equation (5) therefore excludes \(\beta\) as
+the \(\varphi_{j-1}\)-color of the appended identity.  Equality (b2e)
+transfers this exact edge value to \(\varrho_1\), proving the second
+assertion in (23).  Because no endpoint pair was substituted for an edge
+position, the conclusion also distinguishes parallel identities.
+\end{proof}
