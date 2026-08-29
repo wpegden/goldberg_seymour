@@ -1,50 +1,52 @@
 \begin{lemma}[Case 2, observation (19)]
-Let \(T'_j\) be a \(\varrho_1\)-closure of a tree-sequence \(T_j(v_n)\),
-and let
+Let \(G\) be a finite loopless multigraph, let \(\varrho_1\) be a
+partial \(k\)-edge-coloring of \(G\), and let \(T\) and \(T'\) be
+arbitrary tree-sequences for \(G\) with the same distinguished first
+edge.  Let \(S\) be an arbitrary finite set of colors, let \(v_*\) be a
+distinguished vertex of \(T'\), and let \(\delta\) be a color.  Suppose
+that \(T'\) is a \(\varrho_1\)-closure of \(T\), that \(v_*\in V(T')\),
 \[
-                  S'=\bigcup_{i\in L_1}S_i.
-\]
-Suppose \(v_n\in V(T'_j)\),
-\[
- \overline{\varrho}_1(v)\cap S'=\varnothing
- \quad\text{for every }v\in V(T'_j)\setminus\{v_n\},          \tag{19a}
+ \overline{\varrho}_1(v)\cap S=\varnothing
+ \quad\text{for every }v\in V(T')\setminus\{v_*\},          \tag{19a}
 \]
 and
 \[
-            \overline{\varrho}_1(v_n)\cap S'=\{\delta_n\}.    \tag{19b}
+              \overline{\varrho}_1(v_*)\cap S=\{\delta\}.    \tag{19b}
 \]
 Then
 \[
-        \overline{\varrho}_1(T'_j)\cap S'=\{\delta_n\},       \tag{19c}
+             \overline{\varrho}_1(T')\cap S=\{\delta\},      \tag{19c}
 \]
-and every exact tree edge appended after \(T_j(v_n)\) in the closure
-sequence has \(\varrho_1\)-color outside
-\(S'\setminus\{\delta_n\}\).  More explicitly, if the seed has length
-\(q\), then for every displayed edge position \(a\ge q\) of \(T'_j\)
-and every \(c\in S'\setminus\{\delta_n\}\),
+and every exact tree edge appended after \(T\) in the closure sequence is
+not assigned any color in \(S\setminus\{\delta\}\).  More explicitly,
+for every index \(a\) with
+\(0\leq a<\operatorname{length}(T')\) and
+\(\operatorname{length}(T)\leq a\), and every
+\(c\in S\setminus\{\delta\}\),
 \[
-                    \varrho_1(e_a)\ne c.                     \tag{19d}
+               \varrho_1\bigl(T'.\operatorname{edge}(a)\bigr)
+                    \ne \operatorname{some}(c).              \tag{19d}
 \]
 \end{lemma}
 \begin{proof}
 By \(\noderef{TreeMissingColors}\), membership of a color \(c\) in
-\(\overline{\varrho}_1(T'_j)\) is witnessed by a displayed vertex
-\(v\in V(T'_j)\) at which \(c\) is missing.  Suppose also that \(c\in S'\).
-If \(v=v_n\), equation (19b) gives \(c=\delta_n\).  If \(v\ne v_n\),
+\(\overline{\varrho}_1(T')\) is witnessed by a displayed vertex
+\(v\in V(T')\) at which \(c\) is missing.  Suppose also that \(c\in S\).
+If \(v=v_*\), equation (19b) gives \(c=\delta\).  If \(v\ne v_*\),
 then the definition of \(\noderef{TreeSequenceVertexSet}\) puts \(v\) in
-\(V(T'_j)\setminus\{v_n\}\), and (19a) contradicts the simultaneous
-membership of \(c\) in the missing set of \(v\) and in \(S'\).  This proves
+\(V(T')\setminus\{v_*\}\), and (19a) contradicts the simultaneous
+membership of \(c\) in the missing set of \(v\) and in \(S\).  This proves
 the inclusion from left to right in (19c).  Conversely, (19b) says that
-\(\delta_n\) is missing at \(v_n\), and \(v_n\in V(T'_j)\); hence
-\(\delta_n\in\overline{\varrho}_1(T'_j)\) by
-\(\noderef{TreeMissingColors}\), while (19b) also puts it in \(S'\).
+\(\delta\) is missing at \(v_*\), and \(v_*\in V(T')\); hence
+\(\delta\in\overline{\varrho}_1(T')\) by
+\(\noderef{TreeMissingColors}\), while (19b) also puts it in \(S\).
 Thus (19c) is an equality.
 
 It remains to retain the identities and order of the closure edges.
 Unfold \(\noderef{TashkinovClosure}\).  Its first clause, together with
 \(\noderef{TashkinovAugmentationSequence}\), supplies a finite chain
 \[
- T^0=T_j(v_n),T^1,\ldots,T^m=T'_j.                            \tag{1}
+                         T^0=T,T^1,\ldots,T^m=T'.             \tag{1}
 \]
 of \(\varrho_1\)-Tashkinov augmentations.  Unfolding
 \(\noderef{TashkinovAugmentation}\) at step \(r<m\) gives all of the
@@ -53,31 +55,39 @@ following exact information: \(T^{r+1}\) has length
 the new edge identity at position \(|T^r|\) has a color \(d_r\) which is
 missing on \(T^r\).
 
-Induction on \(r\) gives \(|T^r|=q+r\).  Composition of the length and
+Put \(q=\operatorname{length}(T)\).  Induction on \(r\) gives
+\(|T^r|=q+r\).  Composition of the length and
 entrywise vertex and edge equalities in
 \(\noderef{TreeSequenceInitialSegment}\) shows that each \(T^r\) is an
-ordered initial segment of \(T'_j\).  In particular,
+ordered initial segment of \(T'\).  In particular,
 \[
- V(T^r)\subseteq V(T'_j),                                    \tag{2}
+                         V(T^r)\subseteq V(T'),               \tag{2}
 \]
 and the exact edge appended at step \(r\) is still the exact displayed
-edge of \(T'_j\) at position \(q+r\); parallel edges are not identified
+edge of \(T'\) at position \(q+r\); parallel edges are not identified
 in this comparison.
 
-Now fix a displayed edge position \(a\ge q\) of \(T'_j\).  Since
-\(a<|T'_j|=q+m\), the natural number \(r=a-q\) satisfies \(r<m\), and
+Now fix a displayed edge position \(a\ge q\) of \(T'\).  Since
+\(a<|T'|=q+m\), the natural number \(r=a-q\) satisfies \(r<m\), and
 the edge at position \(a\) is precisely the edge appended in the passage
 from \(T^r\) to \(T^{r+1}\).  Let its \(\varrho_1\)-color be \(d_r\).
 The augmentation certificate says
 \(d_r\in\overline{\varrho}_1(T^r)\).  By (2), the vertex witness for
-this missing color also belongs to \(V(T'_j)\); the union definition in
+this missing color also belongs to \(V(T')\); the union definition in
 \(\noderef{TreeMissingColors}\) therefore yields
 \[
-                    d_r\in\overline{\varrho}_1(T'_j).         \tag{3}
+                         d_r\in\overline{\varrho}_1(T').      \tag{3}
 \]
-If \(d_r\in S'\setminus\{\delta_n\}\), then (19c) and (3) force
-\(d_r=\delta_n\), while membership in the displayed set difference says
-\(d_r\ne\delta_n\), a contradiction.  Thus the exact appended edge at
-position \(a\) has no color in \(S'\setminus\{\delta_n\}\).  Since
-\(a\) was arbitrary, this is (19d), completing observation (19).
+If \(d_r\in S\setminus\{\delta\}\), then (19c) and (3) force
+\(d_r=\delta\), while membership in the displayed set difference says
+\(d_r\ne\delta\), a contradiction.  Thus the exact appended edge at
+position \(a\) is not assigned any color in \(S\setminus\{\delta\}\).
+Since \(a\) was arbitrary, this is (19d).
+
+The manuscript's observation (19) is the specialization of this generic
+lemma obtained when the later Case 2 data take
+\(T=T_j(v_n)\), \(T'=T'_j\), \(v_*=v_n\), and
+\(S=S'=\bigcup_{i\in L_1}S_i\).  Its Case 2 hypotheses are exactly
+(19a) and (19b), so the two conclusions above give the displayed
+observation there.
 \end{proof}
