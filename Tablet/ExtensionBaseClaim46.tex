@@ -148,14 +148,20 @@ satisfies:
 \begin{proof}
 Apply \noderef{ExtensionBaseCaseTwoObservation20} to the explicit
 terminal stability, the color-control projection of b3, color-exclusion,
-boundary-location, and closure premises.  It gives
+boundary-location, and closure premises.  Here the required seed inclusion
+in \(T_n\) is the composite of the two ordered initial-segment relations,
+using \noderef{TreeSequenceInitialSegment}; its induced vertex-set
+inclusion is obtained from \noderef{TreeSequenceVertexSet}.  It gives
 \[
  \partial_{\varrho_1,\gamma_n}(T_n)=\{f_n\},\qquad
  \partial_{\varrho_1,\delta_n}(V(T_n)\cup V(T'_j))=\varnothing. \tag{7}
 \]
-The hypotheses on \(P\), together with (7), are exactly those of
-\noderef{ExtensionBaseCaseTwoObservation21}.  Choose its vertex \(u\)
-and exact exit suffix \(Q=P[x,u]\).  In particular,
+The initial-segment relations, expanded with
+\noderef{TreeSequenceInitialSegment}, and the vertex-set definition
+\noderef{TreeSequenceVertexSet} put \(v_n\) in both \(V(T_n)\) and
+\(V(T'_j)\).  Hence the hypotheses on \(P\), together with (7), are exactly
+those of \noderef{ExtensionBaseCaseTwoObservation21}.  Choose its vertex
+\(u\) and exact exit suffix \(Q=P[x,u]\).  In particular,
 \[
  u\in V(T'_j)\setminus V(T_n),                                \tag{8}
 \]
@@ -165,7 +171,11 @@ and exact exit suffix \(Q=P[x,u]\).  In particular,
 
 Fix \(\beta\in\overline{\varrho}_1(u)\).
 By (8), \(u\notin V(T_n)\).  On the other hand,
-\(v_n\in V(T_j)\subseteq V(T_n)\), so \(u\ne v_n\).  Thus
+\(v_n\) belongs to \(V(T_j)\), and the ordered inclusion
+\(T_j\preccurlyeq T_n\), expanded with
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}, puts it in \(V(T_n)\).  Thus \(u\ne v_n\).
+Consequently
 \(u\in V(T'_j)\setminus\{v_n\}\), and (C2) gives
 \(\overline{\varrho}_1(u)\cap S'=\varnothing\).  The chosen membership
 \(\beta\in\overline{\varrho}_1(u)\) therefore implies
@@ -178,7 +188,9 @@ and both vertices belong to the elementary set \(V(T'_j)\).  The
 definition \noderef{ColoredVertexSetElementary}, applied to the
 \(\beta\)-membership at \(u\), shows that \(\beta\) is not missing at
 \(v_n\).  The ordered inclusions of the seed into \(T_j\) and \(T_n\),
-together with (8), show that \(u\notin V(T_j(v_n))\).  Thus every
+together with (8), show that \(u\notin V(T_j(v_n))\): this is again the
+vertex-set inclusion obtained from \noderef{TreeSequenceInitialSegment}
+and \noderef{TreeSequenceVertexSet}.  Thus every
 hypothesis of \noderef{ExtensionBaseCaseTwoObservation23} is available:
 the b2 vertex and edge clauses and the displayed missing-set inclusion
 are premises here.  Choose the resulting \(z,q_z\).  We retain
@@ -199,10 +211,15 @@ and no exact edge appended after \(T_j(v_n)\) in \(T'_j\) has a color in
 \(S'\setminus\{\delta_n\}\).
 
 Define \(\varrho_0\) as in (6).  The closure definition
-\noderef{TashkinovClosure} says that \(V(T'_j)\) is
-\(\varrho_1\)-closed.  Both swap colors are tree-missing: \(\beta\) is
-missing at \(u\), and \(\delta_n\) is missing at \(v_n\).  They are
-distinct by (9).  Hence
+\noderef{TashkinovClosure} says, in the sense of
+\noderef{ColoredVertexSetClosed}, that \(V(T'_j)\) is
+\(\varrho_1\)-closed.  Both swap colors are missing on the whole tree:
+\(\beta\) is missing at \(u\in V(T'_j)\), and \(\delta_n\) is missing at
+\(v_n\in V(T'_j)\), where the latter membership follows from the seed
+initial segment by \noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}.  The union definition
+\noderef{TreeMissingColors} therefore puts both colors in
+\(\overline{\varrho}_1(T'_j)\).  They are distinct by (9).  Hence
 \noderef{OutsideTreeColorSwapStable} applies.  It proves that
 \(\varrho_0\) is proper, leaves exactly \(e_0\) uncolored, is stable on
 \(T'_j\), and, more strongly,
@@ -212,9 +229,15 @@ distinct by (9).  Hence
 \]
 
 We next identify the component \(K\) switched in the definition of
-\(\mu_0\).  At \(u\), the path \(P\) has one edge toward \(x\), namely
+\(\mu_0\).  By \noderef{TwoColorComponent}, the hypothesis that the support
+of \(P\) is the full old component means that it contains every node
+connected to \(v_n\) in the old two-color incidence graph.  At \(u\), the
+path \(P\) has one edge toward \(x\), namely
 the \(\gamma_n\)-colored exit identity from observation (21), and one
-edge back toward \(v_n\), of color \(\delta_n\).  The latter identity is
+edge back toward \(v_n\), of color \(\delta_n\).  Indeed, the adjacency
+clauses of \noderef{TwoColorIncidenceGraph} allow only these two colors,
+and \noderef{IsProperEdgeColoring} excludes the already used
+\(\gamma_n\) on the distinct adjacent edge.  The latter identity is
 not \(f_n\), because observation (21) says that \(u\) is not incident
 with \(f_n\).  Both identities are incident with \(T'_j\), so (12) fixes
 them.  Past the exit identity, every vertex-node of the suffix \(Q-u\)
@@ -226,13 +249,15 @@ leaves every \(\gamma_n\)-edge fixed.  Thus \(Q\) is a
 \(u\) toward \(v_n\), because that next old \(\delta_n\)-edge is fixed
 and \(\beta\) is missing at \(u\).
 
-The support of \(P\) is the full old component, and \(P\) is simple.
-Every node of the old incidence graph has degree at most two under the
-proper coloring, by
+The support of \(P\) is the full old component in the precise sense of
+\noderef{TwoColorComponent}, and \(P\) is simple.  Every node of the old
+incidence graph has degree at most two under the proper coloring, by
 \noderef{TwoColorIncidenceDegreeAtMostTwo}.  The same holds after the
 outside swap, which is proper.  If the
-\((\gamma_n,\beta)\)-component through \(u\) had a node outside \(Q\),
-a shortest route from that node to \(Q\) would either give an internal
+\((\gamma_n,\beta)\)-component through \(u\), as defined by
+\noderef{TwoColorComponent}, had a node outside \(Q\), connectivity of
+that component would give a shortest route from that node to \(Q\).  The
+first new adjacency on such a route would either give an internal
 node of \(Q\) a third neighbor or extend one of its endpoints.  The first
 is impossible by the degree bound; the second is impossible at \(u\)
 by the preceding paragraph and at \(x\) because the old full path ended
@@ -256,14 +281,18 @@ other option values are fixed.  Thus the two clauses of
 uncolored.
 
 We prove (e1).  Every vertex of \(T_j(v_n)-v_n\) lies in
-\(V(T_j)\subseteq V(T_n)\) and is distinct from \(u\) by (8).  Equation
+\(V(T_j)\subseteq V(T_n)\): the two inclusions follow from the ordered
+prefix clauses of \noderef{TreeSequenceInitialSegment} and the vertex-set
+description \noderef{TreeSequenceVertexSet}.  It is distinct from \(u\)
+by (8).  Equation
 (12) says that the first recoloring fixes every identity incident with
 this set.  Equation (13), the adjacency definition in
-\noderef{TwoColorIncidenceGraph}, and the two endpoint identities in
+\noderef{TwoColorIncidenceGraph}, the connected-component definition
+\noderef{TwoColorComponent}, and the two endpoint identities in
 \noderef{LooplessMultigraph} show that no edge-node of \(K\) is incident
-with a vertex of this set; otherwise that vertex-node would also be in
-\(K\).  The component switch therefore fixes all those exact incident
-identities as well.  The incidence-witness definition of
+with a vertex of this set; otherwise adjacency would put that vertex-node
+in the same component \(K\).  The component switch therefore fixes all
+those exact incident identities as well.  The incidence-witness definition of
 \noderef{PresentColors} and complement definition of
 \noderef{MissingColors} now give equality of the \(\mu_0\)- and
 \(\varrho_1\)-missing sets at every preceding vertex.  Both clauses of
@@ -272,9 +301,11 @@ from \(\varrho_1\) to \(\mu_0\).  This is (e1).
 
 At \(u\), equation (12) retains the fact that \(\beta\) is missing and
 the exit identity supplies a present \(\gamma_n\).  The rooted switch
-interchanges these two colors on every incident edge-node in \(K\).
-Consequently \(\gamma_n\) becomes missing and \(\beta\) becomes present
-at \(u\).  Combining this with the exact field identity (4) proves (e3).
+in \noderef{TwoColorComponentSwap} interchanges these two colors on every
+incident edge-node in \(K\).  The incidence-witness and complement
+definitions \noderef{PresentColors} and \noderef{MissingColors} therefore
+show that \(\gamma_n\) becomes missing and \(\beta\) becomes present at
+\(u\).  Combining this with the exact field identity (4) proves (e3).
 
 For (e4), fix \(t\in L_1\setminus\{n\}\), with exact fields
 \(\gamma_t,\delta_t\).  By (9) and the support-color premise, \(\beta\)
@@ -286,10 +317,14 @@ graph, its components, and the b4 strong-interchangeability certificates
 are identical under \(\varrho_1\) and \(\varrho_0\).
 
 The support-order premise puts every vertex-node of each cycle appearing
-in those certificates in \(V(T_n)\), while (13) says that \(K\) has no
+in those certificates in \(V(T_n)\).  By
+\noderef{TwoColorComponent}, each such cycle support and \(K\) are supports
+of connected components in their respective two-color incidence graphs,
+while (13) says that \(K\) has no
 vertex-node there.  If an edge-node belonged both to such an earlier
-cycle and to \(K\), either endpoint, using \noderef{Incident}, would
-belong to both components, contradicting their vertex-node disjointness.
+cycle and to \(K\), either endpoint, using \noderef{Incident} and the
+adjacency clauses of \noderef{TwoColorIncidenceGraph}, would belong to both
+components, contradicting their vertex-node disjointness.
 Thus the component switch fixes every exact edge on every earlier cycle.
 Conversely, no new earlier-color adjacency can enter those cycles:
 an entering edge-node in \(K\) would again carry one of its incident
@@ -300,51 +335,113 @@ proves (e4).
 
 For (e5), equation (12) fixes every edge incident with \(T'_j\), and
 (13) shows that the second switch fixes every edge incident with a vertex
-of \(T'_j-u\).  Hence
+of \(T'_j-u\).  Applying \noderef{PresentColors} and
+\noderef{MissingColors} to these incident-edge equalities gives
 \[
  \overline{\mu}_0(v)=\overline{\varrho}_1(v)
  \quad(v\in V(T'_j)\setminus\{u\}).                            \tag{14}
 \]
-In particular this holds at \(v_n\).  Intersecting (14) with \(S'\) and
+The initial-segment clauses in \noderef{TreeSequenceInitialSegment}, read
+through \noderef{TreeSequenceVertexSet}, put \(v_n\) in \(V(T'_j)\); since
+\(u\ne v_n\), (14) holds there in particular.  Intersecting (14) with \(S'\) and
 using (C2) and (11) gives the first two equalities of (e5).  Every
 displayed edge identity of \(T'_j\) has both endpoints in \(V(T'_j)\).
-It is fixed by (12), and if it belonged to \(K\), its endpoint different
-from \(u\) would contradict (13) and looplessness.  It is therefore also
-fixed by the second switch.  The exact appended-edge conclusion following
-(11) now gives the last clause of (e5).
+It is fixed by (12), and if it belonged to \(K\), adjacency in
+\noderef{TwoColorIncidenceGraph} and connectedness in
+\noderef{TwoColorComponent} would put its endpoint different from \(u\)
+in \(K\), contradicting (13); looplessness ensures that such an endpoint
+exists.  It is therefore also fixed by the second switch.  The exact
+appended-edge conclusion following (11) now gives the last clause of (e5).
 
-It remains to verify (e2).  Observation (23), equation (10), excludes
-\(\beta\) from every vertex before \(z\) and every exact displayed edge
-strictly between the seed and \(z\).  The premise
-\(\delta_n\notin\overline\varphi_{j-1}(T_j)\), the b2 missing-set
-equality, and the exception at \(v_n\) exclude \(\delta_n\) from the
-same vertices other than \(v_n\).  At each augmentation step from the
-seed to \(T_j\), \noderef{TashkinovAugmentation} colors the new exact
-edge by a color missing on the preceding tree.  Thus \(\delta_n\) cannot
-color an edge appended between the seed and \(z\); b2 edge equality
-transfers that assertion from \(\varphi_{j-1}\) to \(\varrho_1\).
+It remains to verify (e2).  We first record the information on the
+\(T_j\)-prefix.  Observation (23), equation (10), excludes \(\beta\) from
+every vertex strictly before \(z\) and from every exact displayed edge
+strictly between the seed and \(z\).  Since
+\(\delta_n\notin\overline\varphi_{j-1}(T_j)\), the union definition
+\noderef{TreeMissingColors} says that \(\delta_n\) is present under
+\(\varphi_{j-1}\) at every vertex of \(T_j\).  At a vertex other than
+\(v_n\), b2 transfers this presence to \(\varrho_1\).  We deliberately do
+not make that transfer at \(v_n\), where (C2) instead says that
+\(\delta_n\) is missing.
 
-On seed identities and on all of \(T'_j(u)\), (12) fixes the first swap.
-At a vertex of \(T_j(z)\) outside \(T'_j\), no incident boundary identity
-of \(T'_j\) has color \(\beta\) or \(\delta_n\): both colors are missing
-on \(T'_j\) by the choices of \(u,v_n\), and its vertex set is closed.
-Thus every incident edge carrying either swap color is wholly outside
-\(T'_j\), while any edge from this vertex into \(T'_j\) is fixed and
-carries another color.  At every vertex covered by the equality in
-(e2), (10) and the \(\delta_n\)-exclusion say that both swap colors are
-present, so their transposition leaves the missing set unchanged.
-If \(\beta\) is missing at \(z\), elementariness and its simultaneous
-membership at \(u\) first show that \(z\notin V(T'_j)\); the
-\(\delta_n\)-exclusion says that \(\delta_n\) is present there.  The same
-transposition therefore makes \(\delta_n\) missing at \(z\).  The exact
-edge exclusions in the preceding paragraph show that
-every displayed identity of \(T_j(z)\) is fixed.  Finally,
-\(V(T_j(z))\subseteq V(T_n)\), so (13) makes the second switch disjoint
-from all its vertices; on \(T'_j(u)\), only \(u\) can meet \(K\).
-Therefore the second switch fixes the missing sets at every stated vertex
-other than \(u\) and fixes every exact displayed edge identity in the two
-prefixes.  The possible exception \(z\) was erased from the equality
-claim, and its conditional \(\delta_n\)-missing conclusion was just
-proved.  These are precisely all three clauses of (e2), completing the
-proof.
+The global augmentation premise is a finite chain by
+\noderef{TashkinovAugmentationSequence}.  At the unique one-step
+augmentation which appends any exact position between the seed and \(z\),
+\noderef{TashkinovAugmentation} says that its
+\(\varphi_{j-1}\)-color is missing on the preceding tree.  It cannot be
+\(\delta_n\), since \noderef{TreeMissingColors} excludes \(\delta_n\)
+from every preceding-tree vertex.  The b2 edge equality transfers this
+exact edge value to \(\varrho_1\); equation (10) separately excludes
+\(\beta\).  Thus every such appended identity is fixed by the first swap.
+Every seed identity is also an identity of \(T'_j\), by
+\noderef{TreeSequenceInitialSegment}, and hence is fixed by (12).
+
+Now split the missing-set assertion vertexwise.  If a stated vertex lies
+in \(V(T'_j)\setminus\{u\}\), equation (14) gives its full missing-set
+equality immediately.  This case includes \(v_n\); no presence of
+\(\delta_n\) at \(v_n\) is asserted or needed.
+
+Suppose instead that \(v\) is a stated vertex of \(T_j(z)\) outside
+\(V(T'_j)\).  Since \(v\ne z\), observation (23) says that \(\beta\) is
+present at \(v\).  Also \(v\ne v_n\), because the seed inclusion
+\(T_j(v_n)\preccurlyeq T'_j\), expanded by
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}, puts \(v_n\) in \(V(T'_j)\).  The first
+paragraph of this verification therefore says that \(\delta_n\) is
+present at \(v\) as well.
+
+Neither of these two colors can occur on an edge from \(v\) into
+\(V(T'_j)\).  Indeed, \noderef{TreeMissingColors} puts \(\beta\) and
+\(\delta_n\) among the colors missing on \(T'_j\), witnessed respectively
+by \(u\) and \(v_n\); \noderef{TashkinovClosure} supplies closedness, and
+\noderef{ColoredVertexSetClosed} forbids either missing color on a boundary
+identity.  By \noderef{BoundaryEdges}, an edge from the outside vertex
+\(v\) into \(V(T'_j)\) is exactly such a boundary identity.  Consequently
+every \(\beta\)- or \(\delta_n\)-edge incident with \(v\) is wholly outside
+\(T'_j\), so \noderef{OutsideTreeColorSwap} transposes the two complete
+nonempty incidence sets at \(v\).  Since both colors were present, this
+transposition leaves the entire present set, and hence by
+\noderef{PresentColors} and \noderef{MissingColors} the entire missing set,
+at \(v\) unchanged.
+
+The ordered inclusions \(T_j(z)\preccurlyeq T_j\preccurlyeq T_n\),
+interpreted through \noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}, give
+\(V(T_j(z))\subseteq V(T_n)\).  Equation (13) and the component definition
+\noderef{TwoColorComponent} therefore make the second switch disjoint from
+every vertex of this prefix.  Thus the first-swap equality just proved is
+also the required \(\mu_0\)-versus-\(\varrho_1\) equality.  Together with
+the \(T'_j\)-case from (14), this proves the vertex equality in (e2).
+
+The exact displayed edges are fixed as well.  We proved this for every
+seed identity and every edge appended between the seed and \(z\); hence
+the first swap fixes all of \(T_j(z)\).  Equation (12) fixes all of
+\(T'_j(u)\).  For the second swap, the preceding containment and (13) show
+that no edge of \(T_j(z)\) lies in \(K\): otherwise adjacency in
+\noderef{TwoColorIncidenceGraph} and connectedness in
+\noderef{TwoColorComponent} would put one of its endpoint vertices in
+\(K\cap V(T_n)\).  Likewise, if a displayed edge of \(T'_j(u)\) lay in
+\(K\), its two endpoint vertices, which lie in \(V(T'_j)\) by
+\noderef{TreeSequenceVertexSet}, would lie in the connected component
+\(K\) by those same two definitions; (13) permits only \(u\), and
+looplessness rules out both endpoints being \(u\).  Thus the second swap
+fixes every exact identity in both prefixes.
+
+Finally suppose conditionally that \(\beta\) is missing at \(z\).  The
+vertex \(z\) belongs to \(V(T_j)\subseteq V(T_n)\), by
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}, whereas \(u\notin V(T_n)\); hence
+\(z\ne u\).  Elementariness of \(V(T'_j)\), together with the simultaneous
+\(\beta\)-membership at \(u\), now shows that \(z\notin V(T'_j)\).
+Therefore \(z\ne v_n\), and the first paragraph gives that \(\delta_n\)
+is present there.  The same closed-boundary argument using
+\noderef{ColoredVertexSetClosed} and \noderef{BoundaryEdges} shows that
+all incident \(\beta\)- and \(\delta_n\)-identities are outside \(T'_j\).
+Expansion of \noderef{OutsideTreeColorSwap}, followed by
+\noderef{PresentColors} and \noderef{MissingColors}, consequently shows
+that the first transposition makes \(\delta_n\) missing at \(z\).
+Since \(z\in V(T_n)\), (13) and \noderef{TwoColorComponent} show that the
+second switch fixes every identity incident with \(z\), so
+\(\delta_n\in\overline\mu_0(z)\).  This is the conditional clause, and all
+three assertions of (e2) are proved.
 \end{proof}
