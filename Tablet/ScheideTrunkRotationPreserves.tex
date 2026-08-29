@@ -6,45 +6,425 @@ produces another balanced globally maximum triple.  The resulting data
 satisfy the exact rotation relation \noderef{TrunkRotation}.
 \end{lemma}
 \begin{proof}
-The closing incidence path in \noderef{NormalGlobalMaximumTriple} is
-simple.  Its edge-nodes are therefore distinct, and none is $e_0$ because
-they are colored while $e_0$ is uniquely uncolored.  Hence the cycle
-identities $f_0,\ldots,f_{p-1}$ of \noderef{NormalCycleEdge} are all
-distinct, even when two of them have the same endpoint pair.
-
-Define $\varphi_j$ by making $f_j$ uncolored, assigning to $f_i$ the old
-color of $f_{i+1}$ for $0\le i<j$, and leaving every other edge identity
-unchanged.  The colored cycle identities alternate between the two trunk
-colors.  At each intermediate cycle vertex, the two shifted incident
-colors remain distinct.  At the initial endpoint $y_0$, the color shifted
-onto $e_0$ was missing there; at the other end of the shifted segment, the
-removed color becomes missing.  Thus no equal-colored adjacent pair is
-created.  Away from the cycle nothing changes, so $\varphi_j$ is proper
-and has exactly $f_j$ uncolored.
-
-Order the trunk vertices cyclically as
+Put $p=N.height$, $n=T.length$, and write
+$y_r=T.vertex(r)$ for $0\leq r\leq n$.  For $0\leq i<p$, put
 \[
- y_j,y_{j+1},\ldots,y_{p-1},y_0,y_1,\ldots,y_{j-1},
+             f_i=\noderef{NormalCycleEdge}(N,i).
+                                                               \tag{1}
 \]
-using $f_j$ first and the successive cycle identities thereafter, and
-append the old post-trunk tail without changing a vertex or edge identity.
-The Tashkinov condition is preserved: along the rotated trunk, the two
-alternating colors are missing at its first two vertices in the rotated
-coloring; in the unchanged tail, every old missing-color witness remains
-somewhere in the rotated trunk because the shift only moves the missing
-status of the two trunk colors around that trunk.  Every other color and
-witness is unchanged.
+Thus $f_0=e_0$, $f_i=T.edge(i)$ for $1\leq i\leq p-2$, and
+$f_{p-1}=N.closingEdge$.  Moreover, $f_i$ has the exact unordered
+endpoint pair $\{y_i,y_{i+1}\}$ for $i<p-1$, while $f_{p-1}$ has
+endpoint pair $\{y_{p-1},y_0\}$.  These endpoint assertions follow from
+\noderef{NormalCycleEdge}, the `trunk_edge_ends' and `closing_ends'
+fields of \noderef{NormalGlobalMaximumTriple}; they refer to individual
+edge identities, not merely endpoint pairs.
 
-The resulting sequence $T'$ has exactly the same vertex set and order as
-$T$, hence it still attains the global Tashkinov order.  Its closing edge
-is the predecessor $f_{j-1\pmod p}$, and the same alternating cycle gives
-normal data $N'$ of height $p$.  These facts are precisely the vertex,
-edge, color-shift, tail, and closing-edge clauses of
-\noderef{TrunkRotation}.
+We first recover all information about this closing cycle.  The global
+field of $N$, expanded by \noderef{GlobalMaximumTriple}, says that
+$(G,e_0,\varphi)$ is a $k$-triple, $T$ is a Tashkinov tree, and
+\[
+                         |V(T)|=t(G).                            \tag{2}
+\]
+By \noderef{KTriple}, $\varphi$ is proper and leaves exactly $e_0$
+uncolored in the respective senses of
+\noderef{IsProperEdgeColoring} and
+\noderef{IsOneEdgeUncolored}.  The balanced hypothesis, unfolded using
+\noderef{BalancedGlobalMaximumTriple}, gives $p=h(G)$.  Since (2)
+exhibits a globally maximum triple, \noderef{ScheideGraphHeightOdd}
+therefore gives
+\[
+                         p\geq3\quad\hbox{and}\quad p\text{ odd}. \tag{3}
+\]
 
-Finally $p=h(G)$ by the original balanced hypothesis.  The post-trunk
-tail is unchanged position by position, so every equality
-$\varphi(e_{2r-1})=\varphi(e_{2r})$ with
-$p<2r<t(G)$ is the same equality for $\varphi_j$ on $T'$.  Therefore
-$N'$ satisfies \noderef{BalancedGlobalMaximumTriple} and is balanced.
+The stored closing walk in \noderef{NormalGlobalMaximumTriple} is a
+simple incidence path of length $2(p-1)$.  A simple path of that length
+has $2p-1$ distinct nodes.  Its vertex-node support consists of the $p$
+nodes $\mathrm{inl}(y_0),\ldots,\mathrm{inl}(y_{p-1})$, which are
+distinct by the vertex-injectivity clause of
+\noderef{TreeSequence}.  Its edge-node support consists precisely of
+\[
+       \mathrm{inr}(f_1),\ldots,\mathrm{inr}(f_{p-1})             \tag{4}
+\]
+by the exact `closingPath_edges' field.  The two sides of the incidence
+graph are disjoint, so (4) contains $p-1$ distinct edge-nodes.  Hence the
+identities $f_1,\ldots,f_{p-1}$ are pairwise distinct.  Each of them is
+colored $\alpha=N.alpha$ or $\beta=N.beta$, because every adjacency of
+an edge-node in \noderef{TwoColorIncidenceGraph} records both incidence
+and one of those two exact colors.  Since $f_0=e_0$ is uncolored, it is
+distinct from every identity in (4).  We have proved that
+\[
+                  f_0,\ldots,f_{p-1}\text{ are pairwise distinct}. \tag{5}
+\]
+
+The endpoint equations in (1), together with $p\geq3$, force the simple
+closing path to have the order
+\[
+ y_1,f_1,y_2,f_2,\ldots,y_{p-1},f_{p-1},y_0.                    \tag{6}
+\]
+Indeed, among the identities in (4), only $f_1$ is incident with $y_1$;
+after traversing it, only $f_2$ is the unused identity incident with
+$y_2$, and induction gives the displayed order through $f_{p-1}$.
+Here incidence has its literal endpoint meaning from
+\noderef{Incident}, and the distinct vertices used in this induction
+come from \noderef{TreeSequence}.  Expanding
+\noderef{MissingColors} and \noderef{PresentColors}, the fact that
+$\beta$ is missing at $y_1$ excludes color $\beta$ from the incident
+edge $f_1$, so
+\[
+                         \varphi(f_1)=\alpha.                    \tag{7}
+\]
+Likewise $\alpha$ is missing at $y_0$, so
+$\varphi(f_{p-1})=\beta$.  In particular $\alpha\ne\beta$: (7) makes
+$\alpha$ present at $y_1$, whereas $\beta$ is missing there.  Consecutive
+identities in (6) are distinct by (5), share the displayed vertex and
+are therefore adjacent by \noderef{AdjacentEdges}; properness from
+\noderef{IsProperEdgeColoring} forces their colors to differ.  Since
+only $\alpha$ and $\beta$ occur, the colors alternate.  Thus, for
+$1\leq i<p$,
+\[
+ \varphi(f_i)=
+ \begin{cases}
+  \alpha,&i\text{ odd},\\
+  \beta,&i\text{ even}.
+ \end{cases}                                                     \tag{8}
+\]
+The last value agrees with (3), since $p-1$ is even.
+
+Fix the supplied index $j$, so $1\leq j<p$.  Define a partial coloring
+$\psi$ identity by identity as follows:
+\[
+ \psi(f_j)=\mathrm{uncolored},\qquad
+ \psi(f_i)=\varphi(f_{i+1})\ (0\leq i<j),\qquad
+ \psi(g)=\varphi(g)\quad
+   \bigl(g\notin\{f_0,\ldots,f_j\}\bigr).                       \tag{9}
+\]
+Pairwise distinctness (5) makes these cases disjoint and makes $\psi$
+well-defined.  Every $f_i$ with $i<j$ receives a color, because
+$i+1\geq1$ and (8) applies.  If $g\ne f_j$ is outside the shifted set,
+then $g\ne e_0=f_0$, so the exact-one-uncolored clause of
+\noderef{IsOneEdgeUncolored} supplies a color for $g$.  Consequently
+\[
+                    \psi\text{ leaves exactly }f_j\text{ uncolored}. \tag{10}
+\]
+
+We next prove properness rather than infer it from the word ``shift.''
+For $0\leq i<j$, let $c_i$ be the old color of $f_{i+1}$, which is the
+new color of $f_i$.  At the endpoint $y_{i+1}$, the old identity
+$f_{i+1}$ was a $c_i$-colored carrier.  Old properness makes it the unique
+$c_i$-colored identity incident there: any distinct second carrier would
+share $y_{i+1}$, hence would be adjacent by
+\noderef{AdjacentEdges}, contradicting
+\noderef{IsProperEdgeColoring}.  Under (9), this unique old carrier is
+either recolored simultaneously, when $i+1<j$, or is the newly uncolored
+$f_j$, when $i+1=j$.  Thus no unchanged noncycle edge at $y_{i+1}$ can
+conflict with the new color on $f_i$.
+
+At the other endpoint $y_i$ there are three exhaustive cases.  If $i=0$,
+then $c_i=\alpha$ by (7), and $\alpha$ was missing at $y_0$; the
+definitions \noderef{MissingColors} and \noderef{PresentColors} exclude
+every unchanged $\alpha$-colored edge there.  If $i=1$, then (8) gives
+$c_i=\beta$, which was missing at $y_1$, so the same argument excludes
+every unchanged carrier.  If $2\leq i<j$, alternation (8) gives
+\[
+                    \varphi(f_{i-1})=c_i.                        \tag{11}
+\]
+The old carrier $f_{i-1}$ is unique at $y_i$ by old properness.  It too is
+recolored in (9), now receiving the different old color of $f_i$.
+Therefore no unchanged noncycle identity at $y_i$ conflicts in this case
+either.  This checks both endpoints of every shifted identity and also
+explains explicitly where its incoming color was missing or which unique
+old carrier was recolored at the same time.
+
+By the endpoint equations in (1), vertex injectivity, and $p\geq3$, two
+cycle identities share an endpoint only when their indices are consecutive
+modulo $p$.  Two consecutive shifted cycle identities receive consecutive
+old cycle colors and hence different colors by (8).  At $y_0$, the only
+possible additional cycle comparison is between $f_0$ and $f_{p-1}$: the former
+gets $\alpha$ and the latter either remains $\beta$ by (8), or, when
+$j=p-1$, is uncolored.  At the other end of the shifted segment $f_j$ is
+uncolored.  Every pair of colored identities not involving a shifted
+identity keeps its old colors and is proper by (2).  The preceding
+endpoint analysis covers every remaining pair consisting of one shifted
+identity and one unchanged identity.  By the definition
+\noderef{IsProperEdgeColoring}, this proves
+\[
+                         \psi\text{ is proper}.                  \tag{12}
+\]
+
+Let $B$ be the old color of $f_j$, and let $A$ be the other member of
+$\{\alpha,\beta\}$.  Equation (8) makes this choice unique and gives
+$A\ne B$.  We record the two missing-color facts needed for the rotated
+normal data.  At $y_j$, if $j=1$, the color $A=\beta$ was already
+missing and (9) adds only color $B=\alpha$ there.  If $j>1$, the unique
+old $A$-carrier at $y_j$ was $f_{j-1}$ by (8) and old properness; (9)
+recolors that edge with $B$, while $f_j$ becomes uncolored.  In both
+cases no other incident identity changes to $A$, so
+\[
+                          A\in\overline\psi(y_j).                 \tag{13}
+\]
+At $y_{j+1\pmod p}$, the unique old $B$-carrier was $f_j$.  This follows
+from old properness, including the case $j=p-1$, where the endpoint is
+$y_0$.  The edge $f_j$ becomes uncolored.  The other cycle edge at this
+vertex has new color $A$: it is the unchanged $f_{j+1}$ when $j<p-1$,
+and it is $f_0$, with new color $\varphi(f_1)=\alpha=A$, when $j=p-1$
+(in the latter case (3) makes $B=\beta$).  No noncycle identity can have
+old color $B$ at this vertex, by uniqueness, and none is changed.  Hence
+\[
+                    B\in\overline\psi(y_{j+1\pmod p}).           \tag{14}
+\]
+Statements (13)--(14) use exactly the complement relation in
+\noderef{MissingColors} and the carrier description in
+\noderef{PresentColors}.
+
+We now construct the rotated tree-sequence with all indices exposed.  For
+$0\leq r<p$, set
+\[
+                 \rho(r)=(j+r)\bmod p.                           \tag{15}
+\]
+Give $T'$ length $n$ and define its zero-based maps by
+\[
+ T'.vertex(r)=
+ \begin{cases}
+  y_{\rho(r)},&r<p,\\
+  y_r,&p\leq r\leq n,
+ \end{cases}
+ \qquad
+ T'.edge(r)=
+ \begin{cases}
+  f_{\rho(r)},&r+1<p,\\
+  T.edge(r),&p-1\leq r<n.
+ \end{cases}                                                     \tag{16}
+\]
+The ranges in (16) cover all indices, and (3) makes the common length
+positive.
+
+We verify every clause of \noderef{TreeSequence}.  Addition by $j$ modulo
+$p$ is a permutation of $\{0,\ldots,p-1\}$: if
+$\rho(r)=\rho(s)$ for $r,s<p$, cancellation in the cyclic group gives
+$r=s$.  Thus the first vertex block in (16) is injective.  It uses exactly
+the old indices below $p$, while the tail fixes every index at least $p$.
+The old vertex map is injective, so no first-block vertex equals a tail
+vertex and the whole new vertex map is injective.
+
+The new trunk edges are the $p-1$ cycle identities other than
+\[
+        f_{(j+p-1)\bmod p}=f_{j-1};                              \tag{17}
+\]
+they are pairwise distinct by (5).  The old tail identities
+$T.edge(r)$ for $r\geq p-1$ are pairwise distinct by the edge-injectivity
+clause of \noderef{TreeSequence}.  They are also disjoint from every
+cycle identity.  For $0\leq i\leq p-2$, the definition
+\noderef{NormalCycleEdge} identifies $f_i$ with $T.edge(i)$, so old edge
+injectivity separates it from $T.edge(r)$ with $r\geq p-1$.  For the
+remaining identity $f_{p-1}=N.closingEdge$, suppose it equaled such a
+$T.edge(r)$.  The attachment clause of \noderef{TreeSequence} would make
+its endpoint pair contain the fresh vertex $y_{r+1}$, whose index is at
+least $p$; the `closing_ends' field of
+\noderef{NormalGlobalMaximumTriple} makes the same pair
+$\{y_{p-1},y_0\}$.  Vertex injectivity says that $y_{r+1}$ is neither of
+those two vertices, a contradiction.  This proves both the old closing
+edge's distinctness from every tail identity and injectivity of the whole
+new edge map.  Formula (16) at $r=0$ and (15) give
+\[
+                         T'.edge(0)=f_j,                         \tag{18}
+\]
+so the new first edge is the new distinguished edge.
+
+For a trunk edge index $r$ with $r+1<p$, the exact endpoint equation in
+(1) gives
+\[
+ G.ends(T'.edge(r))
+   =\{y_{\rho(r)},y_{(\rho(r)+1)\bmod p}\}
+   =\{T'.vertex(r),T'.vertex(r+1)\}.                             \tag{19}
+\]
+Thus it attaches the new vertex at position $r+1$ to the immediately
+preceding vertex at position $r$.  Now let $r\geq p-1$ be a tail edge
+index.  The old attachment clause supplies an old index $a\leq r$ such
+that
+\[
+             G.ends(T.edge(r))=\{y_{r+1},y_a\}.                  \tag{20}
+\]
+If $a<p$, let $s=(a+p-j)\bmod p$.  More explicitly, $s=a-j$ when
+$j\leq a$, while $s=a+p-j$ when $a<j$.  In the first case
+$j+s=a<p$, and in the second $j+s=a+p$, so in both cases $s<p$ and
+$\rho(s)=a$.  Also $s\leq p-1\leq r$.  If $a\geq p$, put $s=a$,
+again with $s\leq r$.
+In either case (16) gives $T'.vertex(s)=y_a$, while
+$T'.vertex(r+1)=y_{r+1}$.  Equations (16) and (20) therefore give the
+required attachment to an earlier new vertex.  We have checked positive
+length, both injectivity clauses, the first edge, and every exact
+attachment, so (16) defines a TreeSequence.
+
+Next we prove every clause of \noderef{TashkinovTree}.  Delete $f_j$ from
+the cycle and traverse the remaining identities from $y_{j+1\pmod p}$
+to $y_j$.  Equations (8)--(9), including the wrap through the newly
+colored $f_0$, show that these identities alternate between $A$ and $B$.
+Consequently every new trunk edge at index $1\leq r<p-1$ has color $A$
+or $B$.  In the first case, (13) supplies the earlier vertex
+$T'.vertex(0)=y_j$ as its missing-color witness.  In the second case,
+(14) supplies $T'.vertex(1)=y_{j+1\pmod p}$.  Both positions are no later
+than $r$, exactly as required by the zero-based quantifier in
+\noderef{TashkinovTree}.
+
+Let instead $r\geq p-1$ be a tail index.  The original Tashkinov
+condition from (2) supplies a color $c$ and an old witness position
+$a\leq r$ such that
+\[
+       \varphi(T.edge(r))=c,\qquad c\in\overline\varphi(y_a).   \tag{21}
+\]
+The tail-cycle disjointness proved above and (9) give
+$\psi(T'.edge(r))=\varphi(T.edge(r))=c$.  If $c=A$ or $c=B$, use the
+new missing witness (13) or (14), respectively.  These positions are
+earlier because (3) and $r\geq p-1$ give $r\geq2$.  If
+$c\notin\{A,B\}=\{\alpha,\beta\}$, every shifted identity had an old and
+new color in $\{\alpha,\beta\}$, and every other identity is unchanged.
+Thus an identity incident with $y_a$ has color $c$ under $\psi$ exactly
+when it had color $c$ under $\varphi$.  By
+\noderef{PresentColors} and \noderef{MissingColors}, the second assertion
+of (21) remains true under $\psi$.  Place $y_a$ in its new earlier
+position $s$ using exactly the inverse-index construction following
+(20).  This supplies the required witness for every unchanged tail edge.
+Hence $T'$ is a Tashkinov tree for $(f_j,\psi)$.
+
+We can now assemble the new global triple.  The criticality,
+chromatic-index, and maximum-degree clauses of the old $k$-triple concern
+only $G$ and $k$ and are unchanged.  Assertions (10) and (12) give its
+one-uncolored and properness clauses for $(f_j,\psi)$.  Thus
+\noderef{KTriple} gives a new $k$-triple.  We have just proved the
+Tashkinov-tree clause.  Finally, (15)--(16) cyclically permute precisely
+the first $p$ old vertices and fix all later vertices, so
+\[
+        \noderef{TreeSequenceVertexSet}(T')
+          =\noderef{TreeSequenceVertexSet}(T).                   \tag{22}
+\]
+Equations (2) and (22) give the maximum-order clause.  These are every
+clause of \noderef{GlobalMaximumTriple}, so
+\[
+                  (T',f_j,\psi)\text{ is globally maximum}.      \tag{23}
+\]
+
+It remains to construct, field by field, normal data $N'$ for (23).  Use
+height $p$, colors $A,B$, last index $p-1$, and closing identity
+\[
+                  q'=f_{(j+p-1)\bmod p}=f_{j-1}.                 \tag{24}
+\]
+The last index is legal because $p\leq n+1$ is the old `height_upper'
+field; it satisfies $(p-1)+1=p$.  The old lower bound gives $2\leq p$,
+and the new length is $n$, so both height bounds hold.  Assertions
+(13)--(14) are exactly the two missing-color fields at the new first and
+second vertices.  Equations (1), (15), and (16) say that (24) has ends
+\[
+                    \{T'.vertex(p-1),T'.vertex(0)\},             \tag{25}
+\]
+which is the required closing-end field.
+
+For the stored closing walk, take the incidence sequence
+\[
+ \begin{split}
+ R={}&(\mathrm{inl}(T'.vertex(1)),
+       \mathrm{inr}(T'.edge(1)),
+       \mathrm{inl}(T'.vertex(2)),\ldots,\\
+    &\mathrm{inr}(T'.edge(p-2)),
+       \mathrm{inl}(T'.vertex(p-1)),
+       \mathrm{inr}(q'),
+       \mathrm{inl}(T'.vertex(0))).                              \tag{26}
+ \end{split}
+\]
+Here the middle pattern is taken once for each index
+$1\leq r\leq p-2$; in particular, when $p=3$ its first and last displayed
+terms describe the same single edge rather than two copies.
+For every displayed edge-node, (19) or (25) supplies incidence with its
+two neighboring vertex-nodes.  The alternation proved before (21) says
+that its $\psi$-color is $A$ or $B$.  By the adjacency definition
+\noderef{TwoColorIncidenceGraph}, each consecutive pair in (26) is
+therefore adjacent, so $R$ is a walk in the required two-color incidence
+graph.
+
+The vertex-nodes in (26) are the $p$ pairwise distinct first-block
+vertices of $T'$.  Its edge-nodes are the $p-1$ cycle identities other
+than $f_j$; they are pairwise distinct by (5), and the two sum tags keep
+every vertex-node distinct from every edge-node.  Thus $R$ is simple.
+It contains $p-1$ multigraph edge-nodes and two incidence steps for each,
+so
+\[
+                         R.length=2(p-1).                        \tag{27}
+\]
+Its vertex-node support is exactly
+\[
+ \{\mathrm{inl}(T'.vertex(i)):0\leq i<p\},                      \tag{28}
+\]
+which proves both directions of `closingPath_vertices'.  Its edge-node
+support is exactly $q'$ together with
+\[
+ \{\mathrm{inr}(T'.edge(r)):1\leq r,\ r+2\leq p\}.             \tag{29}
+\]
+Indeed, the bounds in (29) are precisely $1\leq r\leq p-2$, the
+nonclosing edges explicitly displayed in (26); distinctness (5) proves
+the converse without identifying any parallel identities.  This is both
+directions of `closingPath_edges'.  Finally, for every index satisfying
+the bounds in (29), equation (19) is exactly the required
+`trunk_edge_ends' equation.  Together, (23), (25)--(29), the two height
+bounds, the last-index equation, and (13)--(14) provide every field of
+\noderef{NormalGlobalMaximumTriple}.  Denote this normal witness by $N'$.
+
+We now check the complete conjunction in \noderef{TrunkRotation}.  The
+first clause is the supplied inequality $1\leq j$.  Choose the new
+distinguished identity $e_1=f_j$; equation (1) is its required
+`NormalCycleEdge' identity, and (9) gives $\psi(e_1)$ uncolored.  For
+every finite index $i<j$, the first two cases of (9) give exactly
+\[
+                   \psi(f_i)=\varphi(f_{i+1}),                   \tag{30}
+\]
+including $i=0$.  If an identity differs from every $f_i$ with
+$0\leq i\leq j$, the last case of (9) gives pointwise equality of its
+colors.  These are the two quantified coloring clauses, with their exact
+finite-index casts.
+
+The construction gives $T'.length=n=T.length$ and
+$N'.height=p=N.height$.  Equation (22) is the required vertex-set
+equality.  If $r<p$, choose the finite index
+$i=(j+r)\bmod p$; the elementary remainder bound gives $i<p$, and (15)
+is simultaneously the required equality of index values and the required
+vertex equality.  If $p\leq r$, choose the old index $s=r$; the second
+case of the vertex formula (16) gives both required tail identities.
+Likewise, if $r+1<p$, choose $i=(j+r)\bmod p$ and use the first edge
+formula in (16); if $p-1\leq r$, choose $s=r$ and use its second edge
+formula.  This proves, one by one, all four quantified trunk and tail
+formulas.
+
+For the predecessor clause, put
+\[
+                   pred=(j+p-1)\bmod p.                          \tag{31}
+\]
+The remainder bound makes this a finite index below $p$.  Since
+$1\leq j<p$,
+\[
+      j+p-1=p+(j-1),\qquad 0\leq j-1<p,
+\]
+so the modular calculation gives $pred=j-1$.  The choice (24) is therefore
+exactly $N'.closingEdge=f_{pred}$.  Equations (30)--(31), (16), (22), and
+the displayed length and height equalities are every formula quantified
+by \noderef{TrunkRotation}; hence the constructed data satisfy that
+relation.
+
+Finally we transfer balance without suppressing the tail indices.  The
+height equation $N'.height=p=h(G)$ was already proved.  Let $r$ satisfy
+\[
+                         p<2r<n+1.                               \tag{32}
+\]
+Then $2r-2\geq p-1$, so both zero-based edge indices $2r-2$ and $2r-1$
+lie in the unchanged tail range of (16).  The tail-cycle disjointness
+proved before (18) shows that these identities lie outside every shifted
+cycle identity, and (9) therefore gives the two pointwise equalities
+\[
+ \psi(T'.edge(2r-2))=\varphi(T.edge(2r-2)),\qquad
+ \psi(T'.edge(2r-1))=\varphi(T.edge(2r-1)).                      \tag{33}
+\]
+The old balance clause in
+\noderef{BalancedGlobalMaximumTriple}, applied to the same bounds (32),
+equates the right sides of (33).  Hence the left sides are equal.  Since
+$r$ was arbitrary, this proves every quantified post-trunk equality, and
+therefore $N'$ is balanced.  The witnesses $e_1=f_j$, $\psi$, $T'$, and
+$N'$ satisfy both conclusions of the lemma.
 \end{proof}

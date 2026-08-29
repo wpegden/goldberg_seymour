@@ -1,5 +1,20 @@
-import Tablet.ScheideBalancedExists
+import Tablet.AdjacentEdges
+import Tablet.BalancedGlobalMaximumTriple
+import Tablet.GlobalMaximumTriple
+import Tablet.Incident
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.MissingColors
+import Tablet.NormalCycleEdge
+import Tablet.NormalGlobalMaximumTriple
+import Tablet.PresentColors
+import Tablet.ScheideGraphHeightOdd
+import Tablet.TashkinovTree
+import Tablet.TreeSequence
+import Tablet.TreeSequenceVertexSet
 import Tablet.TrunkRotation
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ScheideTrunkRotationPreserves]
 theorem ScheideTrunkRotationPreserves {V E : Type*}
