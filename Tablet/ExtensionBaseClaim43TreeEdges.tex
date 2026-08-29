@@ -11,19 +11,76 @@ of \(T_j\),
 \]
 \end{lemma}
 \begin{proof}
-Fix a displayed edge identity \(f\) of \(T_j\).  At any restoration
-step, \(T_j\) is an ordered initial segment of the current \(T_t\).
-The attachment clause in \noderef{TreeSequence} places both endpoint
-vertices of \(f\) in \(T_j\), hence in \(T_t\).  If the edge node of
-\(f\) belonged to the switched component, both endpoint vertex nodes
-would belong to that same component in
-\noderef{TwoColorIncidenceGraph}.  The exact-intersection clause of
-\noderef{ExtensionBaseRestorationInvariant} would identify both
-endpoints with the single support \(v_t\), contradicting the loopless
-law in \noderef{LooplessMultigraph}.  Thus no transition changes \(f\),
-and induction over the trace gives
+Fix an exact displayed edge identity
+\(f=e_a\) of \(T_j\), and fix a restoration step \(b<\ell\).  Write
+\(t=t_b\), \(v_t=v_{t_b}\), \(\sigma^b\) for the coloring before this
+step, and
 \[
-                         \varrho_1(f)=\sigma_n(f).              \tag{1}
+ C_b=P_{v_t}(\gamma_t,\delta_t,\sigma^b)
+\]
+for its rooted two-color component.  The initial-segment clause of
+\noderef{ExtensionBaseRestorationInvariant} says that \(T_j\) is an
+ordered initial segment of the current tree \(T_t\).  Unpacking
+\noderef{TreeSequenceInitialSegment}, there is a length inequality and
+the vertex and edge entries of \(T_j\) agree entry by entry with the
+corresponding entries of \(T_t\).  In particular, the occurrence of
+\(e_a\) in \(T_t\) is the same exact edge identity \(f\), not merely an
+edge with the same ends.
+
+By the attachment clause of \noderef{TreeSequence}, for some earlier
+index \(i<a\) one has
+\[
+             \operatorname{ends}(f)=\{y_a,y_i\}.              \tag{1}
+\]
+The entrywise vertex equalities just obtained put the corresponding
+occurrences of both \(y_a\) and \(y_i\) among the vertices of \(T_t\),
+so \noderef{TreeSequenceVertexSet} gives
+\(y_a,y_i\in V(T_t)\).  Equation (1) also says that each of these two
+vertices is incident with the exact edge \(f\).
+
+We claim that the edge-node \(\operatorname{inr}(f)\) is not in
+\(C_b\).  Suppose to the contrary that it is.  By
+\noderef{TwoColorComponent}, this means that the edge-node and the root
+vertex-node \(\operatorname{inl}(v_t)\) lie in the same connected
+component of the graph in \noderef{TwoColorIncidenceGraph}.  These two
+nodes have different sum tags, so a component path between them is
+nontrivial.  At its edge-node end it has an incidence adjacency.  The
+definition of the two-color incidence graph therefore implies
+\[
+          \sigma^b(f)=\gamma_t\quad\hbox{or}\quad
+          \sigma^b(f)=\delta_t.                              \tag{2}
+\]
+For each \(x\in\{y_a,y_i\}\), incidence of \(x\) with \(f\), together
+with (2), makes \(\operatorname{inl}(x)\) adjacent to
+\(\operatorname{inr}(f)\) in that same incidence graph.  Hence both
+endpoint vertex-nodes belong to \(C_b\).  The exact-intersection clause
+of \noderef{ExtensionBaseRestorationInvariant}, applied separately to
+the already established memberships \(y_a,y_i\in V(T_t)\), now gives
+\[
+                         y_a=v_t=y_i.                         \tag{3}
+\]
+Substitution of (3) into (1) yields
+\(\operatorname{ends}(f)=\{v_t,v_t\}\), contradicting the loopless
+law in \noderef{LooplessMultigraph}.  This proves the claim for the
+arbitrary step \(b\).
+
+The transition clause of \noderef{ExtensionBaseRestorationTrace} says
+that \(\sigma^{b+1}\) is obtained from \(\sigma^b\) by the component
+switch rooted at \(v_t\).  Since the edge-node of \(f\) is outside
+that component, the outside-component clause in the definition
+\noderef{TwoColorComponentSwap} gives
+\[
+                         \sigma^{b+1}(f)=\sigma^b(f).          \tag{4}
+\]
+We now induct explicitly on \(m\), for \(0\leq m\leq\ell\), to prove
+\(\sigma^m(f)=\sigma_n(f)\).  At \(m=0\), this is the
+\(\sigma^0=\sigma_n\) initial-coloring clause of
+\noderef{ExtensionBaseRestorationTrace}.  If it holds at
+\(m=b<\ell\), equation (4) gives
+\(\sigma^{b+1}(f)=\sigma^b(f)=\sigma_n(f)\).  Finite induction reaches
+\(m=\ell\); since the output is \(\varrho_1=\sigma^\ell\), it gives
+\[
+                         \varrho_1(f)=\sigma_n(f).              \tag{5}
 \]
 
 Apply \noderef{ExtensionBaseClaimTreeEdgeColors} to the stated indices,
@@ -31,7 +88,7 @@ properness, exact-one-uncolored property, and terminal stability of
 \(\sigma_n\).  Its displayed-edge conclusion, which retains the exact
 edge identity \(f\), gives
 \[
-                         \sigma_n(f)=\varphi_{j-1}(f).          \tag{2}
+                         \sigma_n(f)=\varphi_{j-1}(f).          \tag{6}
 \]
-Combining (1) and (2) proves the tree-edge part of (b2).
+Combining (5) and (6) proves the tree-edge part of (b2).
 \end{proof}
