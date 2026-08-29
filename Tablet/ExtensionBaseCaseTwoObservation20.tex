@@ -72,9 +72,12 @@ The closure hypothesis unfolds, by \noderef{TashkinovClosure}, to say
 that \(X'\) is \(\varrho_1\)-closed and that \(T'_j\) is reached from
 the seed by a \noderef{TashkinovAugmentationSequence}.  Each step in
 that finite chain has the ordered initial-segment clause of
-\noderef{TashkinovAugmentation}; composing the vertex equalities in
-\noderef{TreeSequenceInitialSegment} puts every seed vertex, and in
-particular \(v_n\), in \(X'\).  Hence the
+\noderef{TashkinovAugmentation}; composing the entrywise vertex equalities
+specified by \noderef{TreeSequenceInitialSegment} shows that every displayed
+vertex entry of the seed is the corresponding displayed vertex entry of
+\(T'_j\).  By the definition of the vertex set in
+\noderef{TreeSequenceVertexSet}, every seed vertex, and in particular
+\(v_n\), therefore belongs to \(X'\).  Hence the
 assumed membership of \(\delta_n\) in
 \(\overline{\varrho}_1(v_n)\) and
 \noderef{ColoredVertexSetClosed} forbid a \(\delta_n\)-colored boundary
@@ -83,8 +86,12 @@ identity of \(X'\), a contradiction.
 The remaining possibility is that the inside endpoint lies in
 \(X_n\setminus X'\).  Then \(a\) is a \(\delta_n\)-colored boundary
 identity of \(X_n\), so (2), (1), and the location hypothesis supply a
-vertex \(w\in V(T_j(v_n))\subseteq X'\) incident with this same exact
-identity \(a\).  The outside endpoint of \(a\) is outside
+vertex \(w\in V(T_j(v_n))\) incident with this same exact identity \(a\).
+The same augmentation-chain argument makes every ordered seed entry an
+entry of \(T'_j\): each augmentation retains all preceding entries by
+\noderef{TreeSequenceInitialSegment}.  Since \(w\) is a seed vertex,
+\noderef{TreeSequenceVertexSet} now gives \(w\in X'\).  The outside endpoint
+of \(a\) is outside
 \(X_n\cup X'\), whereas both its first inside endpoint and \(w\) lie in
 that union.  The two-endpoint and loopless clauses of
 \noderef{LooplessMultigraph}, read through \noderef{Incident}, say that
