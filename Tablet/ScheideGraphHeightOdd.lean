@@ -1,5 +1,14 @@
+import Tablet.AdjacentEdges
+import Tablet.GlobalMaximumTriple
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.MissingColors
+import Tablet.NormalGlobalMaximumTriple
+import Tablet.PresentColors
 import Tablet.ScheideGraphHeight
 import Tablet.ScheideNormalisation
+import Tablet.TreeSequence
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ScheideGraphHeightOdd]
 theorem ScheideGraphHeightOdd {V E : Type*}

@@ -11,11 +11,33 @@ some normal data $N$ of height $p=h(G)$.
 The closing $(\alpha,\beta)$-path in
 \noderef{NormalGlobalMaximumTriple} has distinct multigraph ends $y_1$ and
 $y_0$, because tree vertices are injective by \noderef{TreeSequence}.
-At $y_1$, $\beta$ is missing, so the first path edge has color $\alpha$;
-at $y_0$, $\alpha$ is missing, so the last path edge has color $\beta$.
-Properness makes the two colors alternate along the multigraph path.
-Hence the number of multigraph edges is positive and even.  That number is
-$p-1$: the stored incidence path has length $2(p-1)$, with two incidence
-steps per multigraph edge identity.  Thus $p-1$ is a positive even integer,
-so $p$ is odd and $p\ge3$.
+By \noderef{TwoColorIncidenceGraph}, every edge-node on this incidence path
+is an individual multigraph edge identity colored either $\alpha$ or
+$\beta$.  Its first edge-node is adjacent to the initial vertex-node
+$y_1$, so that multigraph edge is incident with $y_1$.  The definition
+\noderef{MissingColors}, together with \noderef{PresentColors}, says that
+$\beta$ missing at $y_1$ rules out a $\beta$-colored edge incident with
+$y_1$.  Hence the first path edge has color $\alpha$.  Similarly, the last
+edge-node is adjacent to the terminal vertex-node $y_0$, and $\alpha$
+missing at $y_0$ rules out color $\alpha$ on that incident edge.  Since
+only the two displayed colors are allowed, the last path edge has color
+$\beta$.
+
+In particular $\alpha\ne\beta$: the first edge is $\alpha$-colored and
+incident with $y_1$, so \noderef{PresentColors} makes $\alpha$ present at
+$y_1$, whereas $\beta$ is missing there by \noderef{MissingColors}.  The
+global field of $N$ is a globally maximum triple; by
+\noderef{GlobalMaximumTriple} its first clause is a $k$-triple, and by
+\noderef{KTriple} that triple's coloring is proper in the sense of
+\noderef{IsProperEdgeColoring}.  Any two consecutive multigraph edges of
+the closing path share their intervening vertex.  They are distinct edge
+identities because the incidence path is simple, so they are adjacent by
+\noderef{AdjacentEdges}.  Properness therefore gives them different
+colors.  Since each color is either $\alpha$ or $\beta$ and
+$\alpha\ne\beta$, the edge colors alternate.  They start with $\alpha$ and
+end with $\beta$, so the positive number of multigraph edges is even.
+
+That number is $p-1$: the stored incidence path has length $2(p-1)$, with
+two incidence steps per multigraph edge identity.  Thus $p-1$ is a positive
+even integer, so $p$ is odd and $p\ge3$.
 \end{proof}
