@@ -41,7 +41,8 @@ vertex-node is outside \(X\), so \noderef{BoundaryEdges} puts
 incident with \(u\).  Adjacency in
 \noderef{TwoColorIncidenceGraph} says that its
 \(\varrho_1\)-color is either \(\gamma_n\) or \(\delta_n\).  The second
-equation in (20) excludes \(\delta_n\); hence
+equation in (20), together with the definition in
+\noderef{BoundaryColorEdges}, excludes \(\delta_n\); hence
 \[
              g\in\partial_{\varrho_1,\gamma_n}(X).             \tag{1}
 \]
@@ -53,8 +54,10 @@ in-\(X\) occurrence is at least as late as that of \(w\).  Thus
 
 Suppose nevertheless that \(u\in V(T_n)\).  The endpoint after \(g\) is
 outside \(X\), and hence outside \(V(T_n)\), so \(g\) is also a boundary
-identity of \(T_n\).  Equation (1) and the first equality in (20) give
-the exact identity \(g=f_n\).  Both \(u\) and \(v_n\) are incident with
+identity of \(T_n\).  Equation (1) gives \(g\) color \(\gamma_n\), so
+\noderef{BoundaryColorEdges} puts \(g\) in the \(\gamma_n\)-colored
+boundary of \(V(T_n)\); the first equality in (20) then gives the exact
+identity \(g=f_n\).  Both \(u\) and \(v_n\) are incident with
 this loopless identity.  Since the other endpoint of \(g\) is outside
 \(X\) while \(u,v_n\in X\), the two-endpoint clause of
 \noderef{LooplessMultigraph} forces \(u=v_n\), contrary to the preceding
@@ -62,12 +65,13 @@ paragraph.  Therefore \(u\notin V(T_n)\).  Its defining membership in
 \(X=V(T_n)\cup V(T'_j)\) now gives \(u\in V(T'_j)\), proving (21).
 
 Finally suppose that \(u\) were incident with \(f_n\).  The singleton
-identity in (20) says that \(f_n\) has color \(\gamma_n\), and its
-incidence with \(v_n\) makes its edge-node adjacent to the initial node
-of \(P\) in \noderef{TwoColorIncidenceGraph}.  It therefore belongs to
-the component through \(v_n\), and the full-support hypothesis puts that
-edge-node on \(P\).  An edge-node has at most its two actual endpoint
-neighbors by \noderef{LooplessMultigraph}.  Since \(P\) is a simple path
+identity in (20), interpreted by \noderef{BoundaryColorEdges}, says that
+\(f_n\) has color \(\gamma_n\), and its incidence with \(v_n\) makes its
+edge-node adjacent to the initial node of \(P\) in
+\noderef{TwoColorIncidenceGraph}.  By \noderef{TwoColorComponent} it
+therefore belongs to the component through \(v_n\), and the full-support
+hypothesis puts that edge-node on \(P\).  An edge-node has at most its two
+actual endpoint neighbors by \noderef{LooplessMultigraph}.  Since \(P\) is a simple path
 whose endpoints are vertex-nodes, both neighbors used by \(P\) at the
 interior edge-node \(f_n\) are its two endpoints, namely \(v_n\) and
 \(u\).  Thus \(u\) is the first vertex of \(P\) after \(v_n\).  The
