@@ -1,6 +1,18 @@
 import Tablet.ExtensionBaseClaimMissingColors
+import Tablet.ExtensionBaseActiveIndices
+import Tablet.ExtensionBaseRestorationIndices
 import Tablet.ExtensionBaseRestorationInvariant
+import Tablet.ExtensionBaseRestorationTrace
+import Tablet.ExtensionBaseSupportClass
 import Tablet.ExtensionBaseSupportClassColors
+import Tablet.MissingColors
+import Tablet.PresentColors
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorComponent
+import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorIncidenceGraph
+import Tablet.TwoColorPathComponent
 
 -- [TABLET NODE: ExtensionBaseClaim43MissingColors]
 theorem ExtensionBaseClaim43MissingColors {V E : Type*}

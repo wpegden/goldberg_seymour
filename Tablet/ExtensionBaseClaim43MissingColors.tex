@@ -36,65 +36,216 @@ and
 \]
 \end{lemma}
 \begin{proof}
-Write the trace colorings as
-\(\sigma^0=\sigma_n,\ldots,\sigma^r=\varrho_1\).  First let
-\(v\in V(T_j)\) be unsupported by every active slot.  At a restoration
-step, \(T_j\) is an initial segment of \(T_t\), and the invariant says
-that the switched component meets \(T_t\) only at its support \(v_t\).
-Since \(v\ne v_t\), its vertex node does not belong to that component.
-No edge incident with \(v\) can belong to it either, because such an
-edge node would be adjacent to the vertex node in
-\noderef{TwoColorIncidenceGraph}.  Thus every transition preserves all
-edge colors incident with \(v\), and
+Write the colorings in \(\mathcal R\) as
+\(\sigma^0,\ldots,\sigma^r\).  Unpacking
+\noderef{ExtensionBaseRestorationTrace}, its initial-coloring field gives
+\(\sigma^0=\sigma_n\), its output is
+\(\sigma^r=\varrho_1\), and at position \(a<r\) it records the exact
+slot \(t_a\), support \(v_{t_a}\), colors
+\(\gamma_{t_a},\delta_{t_a}\), and the transition
+\[
+ \sigma^{a+1}=
+ \noderef{TwoColorComponentSwap}
+   (\sigma^a,\gamma_{t_a},\delta_{t_a},v_{t_a}).                \tag{A}
+\]
+Its enumeration field says that the set of the \(t_a\)'s is exactly
+\(L^*\), and its strict-descent field says
+\(a<b\Rightarrow t_b<t_a\).  In particular the \(t_a\)'s are distinct.
+
+We first derive two consequences that will be used at every transition.
+Unpack \noderef{ExtensionBaseRestorationInvariant} at position \(a\).
+It says that \(T_j\) is an initial segment of \(T_{t_a}\), that
+\(v_{t_a}\in V(T_{t_a})\), that
+\(\delta_{t_a}\in\overline{\sigma^a}(v_{t_a})\), and that the
+\((\gamma_{t_a},\delta_{t_a})\)-component \(K_a\) rooted at
+\(v_{t_a}\) is a path whose vertex-node intersection with
+\(V(T_{t_a})\) is exactly \(\{v_{t_a}\}\).
+By \noderef{TreeSequenceInitialSegment}, every ordered vertex entry of
+\(T_j\) occurs as the same entry of \(T_{t_a}\).  Unfolding
+\noderef{TreeSequenceVertexSet} (the image of the ordered vertex map)
+therefore gives
+\[
+                         V(T_j)\subseteq V(T_{t_a}).            \tag{B}
+\]
+
+Let \(x\in V(T_j)\) with \(x\ne v_{t_a}\).  By (B) and the exact
+intersection clause, the vertex node \(x\) is not in \(K_a\).  We claim
+that no edge incident with \(x\) has its edge node in \(K_a\).  Indeed,
+unfold \noderef{TwoColorComponent}: membership means membership in the
+connected component of the root in
+\noderef{TwoColorIncidenceGraph}.  If an edge node \(f\) is in this
+component, then, since it is not the vertex root, the last adjacency on
+a walk from the root to \(f\) shows from the incidence-graph definition
+that \(\sigma^a(f)\) is one of
+\(\gamma_{t_a},\delta_{t_a}\).  If \(f\) is also incident with \(x\),
+the same definition makes \(x\) adjacent to \(f\).  Connected-component
+closure under this adjacency would put the vertex node \(x\) in \(K_a\),
+a contradiction.  Thus all edges incident with \(x\) lie outside
+\(K_a\), and the edgewise definition of
+\noderef{TwoColorComponentSwap} in (A) leaves every one of their colors
+unchanged.  By \noderef{PresentColors}, the sets of colors occurring on
+incident edges are equal before and after the transition; by
+\noderef{MissingColors}, taking their complements in the full color set
+gives
+\[
+              \overline{\sigma^{a+1}}(x)
+                    =\overline{\sigma^a}(x).                  \tag{C}
+\]
+
+At the root \(x=v_{t_a}\), unpacking
+\noderef{TwoColorPathComponent} supplies an edge node in \(K_a\).
+Because \(K_a\) is the connected component of the vertex root by
+\noderef{TwoColorComponent}, a walk from the root to that edge has a
+first edge node adjacent to the root.  The adjacency formula in
+\noderef{TwoColorIncidenceGraph} says that this is an incident edge of
+color \(\gamma_{t_a}\) or \(\delta_{t_a}\).  But the invariant says
+that \(\delta_{t_a}\) is missing; after unfolding
+\noderef{MissingColors} and \noderef{PresentColors}, no incident edge
+has that color.  The distinct-color clause of
+\noderef{TwoColorPathComponent} therefore shows that
+\(\gamma_{t_a}\) is present at the root.
+Moreover, every incident edge of color \(\gamma_{t_a}\) is adjacent to
+the root in the incidence graph and therefore has its edge node in
+\(K_a\); there is no incident edge of color \(\delta_{t_a}\).
+The edgewise clauses of \noderef{TwoColorComponentSwap} consequently
+change all incident gamma edges to delta, change no incident delta edge
+to gamma, and preserve every other incident-edge color.  Thus the new
+present-color set is obtained by deleting gamma and adjoining delta.
+Taking its complement using \noderef{MissingColors} gives the exact root
+exchange
+\[
+ \overline{\sigma^{a+1}}(v_{t_a})
+   =(\overline{\sigma^a}(v_{t_a})
+        \setminus\{\delta_{t_a}\})
+          \cup\{\gamma_{t_a}\}.                              \tag{6}
+\]
+This derives, rather than assumes, the missing-color effect of each
+transition.
+
+We now identify which transitions occur at a fixed nonterminal support.
+Unfold \noderef{ExtensionBaseActiveIndices} and
+\noderef{ExtensionBaseSupportClass}: a slot belongs to \(L(w)\) exactly
+when it is active and its exact chosen vertex is \(w\).  Unfolding
+\noderef{ExtensionBaseRestorationIndices} gives
+\[
+                         L^*=L\setminus L(v_n).                \tag{D}
+\]
+Let \(w\in V(T_j)\) and \(w\ne v_n\).  If an active slot is supported
+at \(w\), it cannot lie in \(L(v_n)\), since its exact chosen-vertex
+field cannot be both \(w\) and \(v_n\).  Hence it lies in \(L^*\) by
+(D), and the enumeration field of
+\noderef{ExtensionBaseRestorationTrace} produces a trace position having
+that exact slot; its exact chosen-support field then makes the recorded
+support equal to \(w\).  Conversely, if a trace position has support
+\(w\), the per-step slot clause of
+\noderef{ExtensionBaseRestorationInvariant} puts its slot in \(L^*\),
+hence in \(L\), while the exact support field of
+\noderef{ExtensionBaseRestorationTrace} puts that slot in \(L(w)\).
+Thus the trace enumeration proves the equivalence
+\[
+ \{t_a:v_{t_a}=w\}=L(w)                                      \tag{E}
+\]
+including both inclusions.  In particular, the existence of any active
+slot supported at \(w\) supplies the antecedent of preparation 2.
+
+Take its exact increasing enumeration
+\(i_0<\cdots<i_p\) and exact fields
+\(\gamma_{i_a},\delta_{i_a}\).  Equation (E), trace enumeration, and
+distinctness of the trace slots show that each \(i_a\) occurs exactly
+once among the \(t_b\)'s.  Since the trace is strictly descending, the
+transitions supported at \(w\) occur in exactly the order
+\[
+                         i_p,i_{p-1},\ldots,i_0.               \tag{5}
+\]
+Here the descending-order field is the one in
+\noderef{ExtensionBaseRestorationTrace}; together with its enumeration
+field it also proves that there are no omitted or repeated class slots.
+There are no additional transitions at \(w\).  At a transition supported
+at another vertex, transport \(w\in V(T_j)\) through
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet} as in (B), then apply the exact component
+intersection, \noderef{TwoColorComponent},
+\noderef{TwoColorIncidenceGraph}, and
+\noderef{TwoColorComponentSwap} as in (C).  Such a transition preserves
+the missing-color set at \(w\).
+
+At the transition with slot \(i_a\), the exact support, gamma, and delta
+fields in \noderef{ExtensionBaseRestorationTrace} identify (6) with
+\[
+ \overline{\sigma}^{\,\mathrm{after}}(w)
+   =(\overline{\sigma}^{\,\mathrm{before}}(w)
+        \setminus\{\delta_{i_a}\})\cup\{\gamma_{i_a}\}.
+\]
+The prepared chain says
+\(\gamma_{i_a}=\delta_{i_{a-1}}\) for \(a>0\).  Hence the first
+transition in (5) deletes \(\delta_{i_p}\) and adjoins the delta needed
+by the next transition; each following transition deletes precisely that
+adjoined delta and adjoins the next one.  We also check that no deletion
+removes a color which was initially missing.  For \(a>0\), the root-path
+argument preceding (6), using \noderef{TwoColorPathComponent}, says that
+\(\gamma_{i_a}=\delta_{i_{a-1}}\) is present immediately before the
+step at \(i_a\).  Every earlier trace step supported at \(w\) has
+index \(i_b\) with \(b>a\), and by (6) it touches only
+\(\delta_{i_b}\) and
+\(\gamma_{i_b}=\delta_{i_{b-1}}\).  Injectivity of
+\(\gamma_{i_0},\delta_{i_0},\ldots,\delta_{i_p}\) makes both colors
+different from \(\delta_{i_{a-1}}\); intervening steps at other supports
+preserve every incident-edge color at \(w\) by (C).  The latter color is
+therefore unchanged from \(\sigma_n\) until the step at \(i_a\), so it was already
+present, rather than missing, under \(\sigma_n\).  The same injectivity
+ensures that no transition deletes the final color \(\gamma_{i_0}\),
+and that unrelated colors are untouched.  Induction down the complete
+list (5), using (6), therefore
+gives
+\[
+ \overline{\varrho}_1(w)
+   =(\overline{\sigma}_n(w)\setminus\{\delta_{i_p}\})
+        \cup\{\gamma_{i_0}\}.                                \tag{7}
+\]
+Preparation (1) identifies the right side with
+\(\overline{\varphi}_{j-1}(w)\).
+
+It remains to treat the other two cases.  Let \(v\in V(T_j)\) be
+unsupported by every active slot.  Every trace slot lies in \(L^*\) and
+hence is active by (D), by the per-step clause of
+\noderef{ExtensionBaseRestorationInvariant}; its exact support field in
+\noderef{ExtensionBaseRestorationTrace} therefore makes its support
+different from \(v\).
+At every transition transport \(v\) by
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}, and apply (C), whose component and swap
+steps were justified by \noderef{TwoColorComponent},
+\noderef{TwoColorIncidenceGraph}, and
+\noderef{TwoColorComponentSwap}.  Induction over the trace, followed by
+its initial-coloring equality, yields
 \[
                  \overline{\varrho}_1(v)
                  =\overline{\sigma}_n(v)
                  =\overline{\varphi}_{j-1}(v),                \tag{4}
 \]
-where the second equality is preparation 1.
+where the second equality is preparation 1.  Every
+\(v\in V(T_j)\setminus\{v_n\}\) is either in this unsupported case or
+has an active supporting slot and is covered by (7).  This proves (2).
 
-Now let \(w\ne v_n\) be an active support in \(T_j\), and take the exact
-increasing class enumeration from preparation 2.  Its members all lie
-in \(L^*=L\setminus L(v_n)\), and the exact range and descending-order
-fields of \noderef{ExtensionBaseRestorationTrace} show that the steps
-supported at \(w\) occur in the order
+Finally, no restoration slot is supported at \(v_n\).  Indeed, every
+trace slot lies in the set difference (D) by
+\noderef{ExtensionBaseRestorationInvariant}; if its stored support were
+\(v_n\), the exact chosen-vertex field of
+\noderef{ExtensionBaseRestorationTrace}, together with the definition
+\noderef{ExtensionBaseSupportClass}, would put it in \(L(v_n)\),
+contradicting (D).  At every transition, transport the given
+\(v_n\in V(T_j)\) through \noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}; it differs from the current support, so
+the exact intersection and connected-component argument using
+\noderef{TwoColorComponent} and \noderef{TwoColorIncidenceGraph}, followed
+by the edgewise rule in \noderef{TwoColorComponentSwap}, preserves all
+incident-edge colors.  Unfolding \noderef{PresentColors} and then
+\noderef{MissingColors} turns that preservation into equality of missing
+sets.  Induction through the trace and its initial-coloring field now
+derives
 \[
-                         i_p,i_{p-1},\ldots,i_0.               \tag{5}
+             \overline{\varrho}_1(v_n)
+                =\overline{\sigma}_n(v_n).                    \tag{3}
 \]
-A step supported at a different vertex does not alter an edge incident
-with \(w\), by the same exact-component-intersection argument used for
-(4).  It therefore suffices to track the steps in (5).
-
-Immediately before the step at \(i_a\), the invariant says that
-\(\delta_{i_a}\) is missing at \(w\), and its path assertion supplies an
-incident edge of color \(\gamma_{i_a}\); hence that gamma color is
-present.  Expanding \noderef{TwoColorComponentSwap} at the root \(w\)
-therefore gives
-\[
- \overline{\sigma}^{\,\mathrm{after}}(w)
-   =(\overline{\sigma}^{\,\mathrm{before}}(w)
-        \setminus\{\delta_{i_a}\})\cup\{\gamma_{i_a}\}.        \tag{6}
-\]
-The chain
-\(\gamma_{i_a}=\delta_{i_{a-1}}\) makes the new missing color exactly
-the delta needed for the next step.  Injectivity of
-\(\gamma_{i_0},\delta_{i_0},\ldots,\delta_{i_p}\) ensures that no later
-deletion in (6) removes the final color \(\gamma_{i_0}\), and that no
-earlier deletion or insertion changes an unrelated endpoint color.
-Induction down (5) consequently telescopes (6) to
-\[
- \overline{\varrho}_1(w)
-   =(\overline{\sigma}_n(w)\setminus\{\delta_{i_p}\})
-        \cup\{\gamma_{i_0}\}.                                 \tag{7}
-\]
-Preparation (1) identifies the right side of (7) with
-\(\overline{\varphi}_{j-1}(w)\).
-
-Every vertex in \(V(T_j)\setminus\{v_n\}\) is covered by (4) or (7),
-which proves (2).  Finally, no restoration slot is supported at \(v_n\)
-by the definition of \(L^*\).  Since \(v_n\in V(T_j)\subseteq V(T_t)\)
-at every step, exact component intersection again says that the switched
-component avoids its vertex node and all incident edge nodes.  Its
-missing-color set is unchanged throughout the trace, proving (3) and
-all missing-color clauses of (b2).
+which is (3) and completes the missing-color clauses of Claim 4.3(b2).
 \end{proof}
