@@ -7,9 +7,10 @@ stored colors \(\delta_n,\gamma_n\), and supporting vertex \(v_n\).  Then
  \partial_{\varphi_n,\gamma_n}(T_n)=\{f_n\}.
 \]
 For every identity \(g\in\partial_{\varphi_n,\delta_n}(T_n)\), there is a
-tree vertex \(w\prec_{T_n}v_n\) incident with \(g\).  Finally, for every
-\(\alpha\in\overline\varphi_n(T_n)\) with
-\(\alpha\ne\delta_n\),
+tree vertex \(w\prec_{T_n}v_n\) incident with \(g\).  Finally, if
+\(V(T_n)\) is elementary under the pre-step coloring
+\(\varphi_{n-1}=\mathcal T.\mathrm{coloring}(q)\), then every
+\(\alpha\in\overline\varphi_n(T_n)\) with \(\alpha\ne\delta_n\) satisfies
 \[
  \partial_{\varphi_n,\alpha}(T_n)=\varnothing.
 \]
@@ -17,103 +18,170 @@ All three assertions concern exact edge identities, so the singleton in
 the first assertion is not merely a singleton endpoint pair.
 \end{lemma}
 \begin{proof}
-Use the current certificate supplied by \noderef{TashkinovSeries}.  The
-equality \(\Theta_n=\mathrm{PE}\) rules out the SE and RE constructors of
-\noderef{TashkinovSeriesStep}; injectivity of \(\mathrm{some}\) and of
-singleton finite sets identifies the constructor's witnesses with the
-given \(f_n,\delta_n,\gamma_n,v_n\).  Write \(\pi\) for its
-maximum-defective selected coloring and \(\rho\) for its second stable
-coloring.
-
-We first collect the pre-switch boundary information.  By
-\noderef{MaximumDefectiveChoice}, \(\pi\) is
-\((T_n,D_{n-1},\varphi_{n-1})\)-stable, \(v_n\) is maximum among all
-defective vertices arising under such stable colorings, and \(f_n\) is a
-defective boundary identity incident with \(v_n\), with
-\(\pi(f_n)=\delta_n\).  Expanding \noderef{DefectiveEdge} identifies
-\(\delta_n\) as the defective color of that boundary identity.  The PE
-constructor says that \(\rho\) is stable
-relative to the enlarged exact set \(D_{n-1}\cup\{\delta_n\}\).
-Consequently every incident identity colored \(\delta_n\) under either
-\(\pi\) or \(\rho\) has the same value under both colorings.  Formally,
-one direction is the edge clause of \noderef{StableColoring}; the reverse
-direction follows by symmetry in \noderef{sc2}, since both colorings are
-proper and leave exactly \(e_0\) uncolored.  Thus their exact
-\(\delta_n\)-boundary sets coincide, and in particular
-\(\rho(f_n)=\delta_n\).
-
-The same stability argument transfers closedness from
-\(\varphi_{n-1}\) to \(\pi\) and then to \(\rho\).  Indeed, the PE
-constructor states that \(V(T_n)\) is closed under \(\varphi_{n-1}\).
-The vertex clause of \noderef{StableColoring} identifies the missing
-colors at every tree vertex.  If an identity on the boundary acquired one
-of those missing colors, symmetry from \noderef{sc2} would force its old
-value to be the same, contradicting \noderef{ColoredVertexSetClosed}.
-Hence every color in \(\overline\rho(T_n)\), including
-\(\gamma_n\), has empty \(\rho\)-boundary.
-
-Next consider a \(\delta_n\)-boundary identity \(g\) under \(\rho\), and
-let \(w\in V(T_n)\) be its inside endpoint, supplied by
-\noderef{BoundaryColorEdges} and \noderef{BoundaryEdges}; its relation to
-\(g\) is the incidence
-relation \noderef{Incident}.  The color \(\delta_n\) is defective under
-\(\pi\), because \(f_n\) is a defective edge with that color; the equality
-of the two \(\delta_n\)-boundary sets therefore makes \(w\) a defective
-vertex under \(\pi\) by \noderef{DefectiveVertex}.  Maximality in
-\noderef{MaximumDefectiveChoice} gives either \(w=v_n\) or
-\(w\prec_{T_n}v_n\), where the latter relation is exactly
-\noderef{TreeVertexOrder}.  The edgewise condition
-\noderef{IsProperEdgeColoring} permits at most one
-\(\delta_n\)-identity incident with \(v_n\), and that identity is
-\(f_n\).  We have proved
+Put \(X=V(T_n)\), and use the step certificate supplied by
+\noderef{TashkinovSeries}.  Since the index is positive, its certificate
+cannot be the initial constructor.  The displayed PE-kind equation rules
+out the SE and RE constructors of \noderef{TashkinovSeriesStep}.
+Injectivity of \(\mathrm{some}\) and of singleton finite sets therefore
+identifies the PE constructor's edge, colors, and support with
+\(f_n,\delta_n,\gamma_n,v_n\).  Write \(\pi\) for the selected
+maximum-defective coloring, \(\rho\) for the second stable coloring, and
+\(K\) for the \((\gamma_n,\delta_n)\)-component of \(v_n\) under
+\(\rho\).  The same constructor gives
 \[
- g=f_n\quad\hbox{or}\quad
- \text{the inside endpoint of }g\text{ precedes }v_n.             \tag{1}
+ \varphi_n=\rho/K.                                                \tag{1}
 \]
 
-We now identify the switched component.  The PE color rule
-\noderef{ParallelExtensionColor} says that \(\gamma_n\) is missing at
-\(v_n\) under \(\pi\), and stability gives the same under \(\rho\).
-Since \(f_n\) is incident there with color \(\delta_n\), properness makes
-\(f_n\) the unique two-color edge at \(v_n\); in particular
-\(\gamma_n\ne\delta_n\).  The \noderef{TreeExit} witness supplies a
-simple path from an outside vertex to \(v_n\), meeting \(T_n\) only in
-\(v_n\).  Its outside endpoint misses one of the two colors by
-\noderef{TreeExitPath} and has an incident path edge of the other color,
-so both endpoints of the path have incidence-graph degree one.  All other
-nodes have degree at most two by
-\noderef{TwoColorIncidenceDegreeAtMostTwo}.  If the connected component
-had a node outside this path, a shortest route from it to the path would
-give either a third neighbor at an internal path node or a second neighbor
-at an endpoint.  This is impossible.  Thus the path is the whole
-\noderef{TwoColorComponent}; it meets the tree only at \(v_n\), and
-\(f_n\) is its unique boundary identity.
+We first transport the pre-switch invariants.  The certificate
+\noderef{MaximumDefectiveChoice} says that \(\pi\) is proper, leaves
+exactly \(e_0\) uncolored, and is
+\((T_n,D_{n-1},\varphi_{n-1})\)-stable.  It also says that \(f_n\) is a
+defective boundary-edge identity incident with \(v_n\), that
+\(\pi(f_n)=\delta_n\), and that \(v_n\in X\) by
+\noderef{DefectiveVertex}.  The PE constructor says that \(\rho\) is
+proper, leaves exactly \(e_0\) uncolored, and is stable relative to
+\((T_n,D_{n-1}\cup\{\delta_n\},\pi)\).  The vertex clause of
+\noderef{StableColoring} consequently gives, for every \(x\in X\),
+\[
+ \overline{\varphi}_{n-1}(x)=\overline\pi(x)=\overline\rho(x).    \tag{2}
+\]
+Taking the union over \(x\in X\), as prescribed by
+\noderef{TreeMissingColors}, gives the analogous equality of the three
+tree-missing color sets.
 
-The definition \noderef{TwoColorComponentSwap} now gives the boundary
-calculation edge by edge.  Before the switch, the component's unique
-boundary identity \(f_n\) has color \(\delta_n\), and the closedness just
-proved says that there is no \(\gamma_n\)-boundary identity.  The switch
-changes \(f_n\) to \(\gamma_n\), changes no other boundary identity to
-\(\gamma_n\), and removes \(f_n\) from the \(\delta_n\)-boundary.
+The PE constructor also says that \(X\) is closed under
+\(\varphi_{n-1}\).  We claim that it is closed under both \(\pi\) and
+\(\rho\).  For the first claim, suppose that a boundary identity \(a\)
+has \(\pi(a)=c\), where \(c\) is missing at some \(x\in X\).  By (2),
+\(c\) is missing at \(x\) under \(\varphi_{n-1}\), and hence belongs to
+the corresponding tree-missing set.  A boundary identity is incident with
+the tree by \noderef{BoundaryEdges}, \noderef{Incident}, and
+\noderef{TreeIncidentEdge}.  Symmetry of stability from \noderef{sc2},
+followed by the edge clause of \noderef{StableColoring}, therefore gives
+\(\varphi_{n-1}(a)=\pi(a)=c\).  This contradicts
+\noderef{ColoredVertexSetClosed}.  Thus \(X\) is closed under \(\pi\).
+The identical argument with the symmetric second stable relation sends a
+hypothetical \(\rho\)-boundary color missing at a vertex of \(X\) back to
+\(\pi\), proving that \(X\) is closed under \(\rho\).  In particular,
+every color in \(\overline\rho(T_n)\) has empty \(\rho\)-boundary.
+
+We next record the pre-switch \(\delta_n\)-boundary order.  The statements
+\noderef{DefectiveEdge} and \noderef{BoundaryColorEdges}, together with
+\(\pi(f_n)=\delta_n\), show that \(\delta_n\) is the defective color
+witnessed by \(f_n\).  The edge clauses of the second stable relation and
+its symmetric form from \noderef{sc2} apply to every boundary identity
+colored \(\delta_n\), because \(\delta_n\) is in the enlarged control
+set.  Hence the exact \(\delta_n\)-boundary sets under \(\pi\) and
+\(\rho\) coincide, and \(\rho(f_n)=\delta_n\).
+
+Let \(g\) belong to this common boundary and let \(w\in X\) be its inside
+endpoint, whose existence follows from \noderef{BoundaryEdges}.  Then
+\(g\) is itself a defective edge incident with \(w\), so
+\noderef{DefectiveVertex} makes \(w\) a defective vertex under \(\pi\).
+Maximality in \noderef{MaximumDefectiveChoice} gives
+\(w=v_n\) or \(w\prec_{T_n}v_n\), the latter being the order of
+\noderef{TreeVertexOrder}.  If \(w=v_n\), then \(g\) and \(f_n\) are
+both incident with \(v_n\) and both have color \(\delta_n\) under
+\(\pi\).  Were their identities distinct, they would be adjacent by
+\noderef{AdjacentEdges}, contrary to \noderef{IsProperEdgeColoring}.
 Therefore
 \[
- \partial_{\varphi_n,\gamma_n}(T_n)=\{f_n\}.                     \tag{2}
+ g=f_n\quad\text{or}\quad
+ \text{an inside endpoint of }g\text{ strictly precedes }v_n.     \tag{3}
 \]
-Every remaining \(\delta_n\)-boundary identity is a
-\(\delta_n\)-boundary identity of \(\rho\) different from \(f_n\), so
-(1) gives an incident inside vertex strictly preceding \(v_n\).  This is
-the second assertion.
 
-For the last assertion, compare missing colors and boundary identities
-before and after the same switch.  The full switched component meets
-\(T_n\) only at its supporting endpoint.  Thus the only missing-color
-replacement on the tree is the PE replacement of \(\gamma_n\) by
-\(\delta_n\) at that endpoint, and the only boundary replacement is the
-change of the unique identity \(f_n\) from \(\delta_n\) to
-\(\gamma_n\).  In particular, a color
-\(\alpha\in\overline\varphi_n(T_n)\) with
-\(\alpha\ne\delta_n\) is a pre-switch tree-missing color whose boundary
-identities are unchanged by the switch.  The pre-switch closedness proved
-above makes that boundary empty.  Hence
+We now identify \(K\).  The PE rule \noderef{ParallelExtensionColor}
+says that \(\gamma_n\) is missing at \(v_n\) under \(\pi\); equation
+(2) gives the same fact under \(\rho\).  Since \(f_n\) is incident there
+and \(\rho(f_n)=\delta_n\), the complement description in
+\noderef{MissingColors} and the edge-witness description in
+\noderef{PresentColors} imply \(\gamma_n\ne\delta_n\).  Moreover,
+properness and \noderef{AdjacentEdges} show that \(f_n\) is the only
+\(\gamma_n\)- or \(\delta_n\)-colored edge incident with \(v_n\).
+By the adjacency rule in \noderef{TwoColorIncidenceGraph}, the vertex-node
+\(v_n\) consequently has degree one in that graph.
+
+The exit certificate \noderef{TreeExit} supplies a simple exit path
+\(P\) from a vertex \(u\notin X\) to \(v_n\).  By
+\noderef{TreeExitPath}, it meets \(X\) in the single vertex-node \(v_n\),
+and \(u\) misses at least one of \(\gamma_n,\delta_n\).  The path is
+nontrivial, so \(u\) has an incident edge of the other color; properness
+then makes the vertex-node \(u\) degree one as well.  Every node of the
+two-color incidence graph has degree at most two by
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  If the connected component
+of \(v_n\) had a node outside the support of \(P\), choose a shortest
+route from such a node to \(P\).  Its first contact with an internal node
+of \(P\) would give that node a third neighbor, while contact with either
+endpoint would give that degree-one endpoint a second neighbor.  Both are
+impossible.  Thus \(P\) is the whole component \(K\), as defined in
+\noderef{TwoColorComponent}, and
+\[
+ K\cap\{\text{vertex-nodes of }X\}=\{v_n\}.                       \tag{4}
+\]
+
+There is exactly one boundary-edge node in \(K\), namely \(f_n\).  Indeed,
+\(f_n\in K\) because it is a \(\delta_n\)-edge incident with \(v_n\).
+Conversely, if a boundary identity \(a\) has its edge-node in \(K\), its
+inside endpoint \(x\in X\) is adjacent to that edge-node by
+\noderef{TwoColorIncidenceGraph}, and hence its vertex-node lies in
+\(K\).  Equation (4) gives \(x=v_n\).  Since \(\gamma_n\) is missing at
+\(v_n\), the edge has color \(\delta_n\); properness then gives
+\(a=f_n\).
+
+Expand the switch in \noderef{TwoColorComponentSwap}.  It exchanges
+\(\gamma_n\) and \(\delta_n\) on precisely the edge-nodes in \(K\) and
+fixes every other edge value.  Thus it changes the unique component
+boundary identity \(f_n\) from \(\delta_n\) to \(\gamma_n\).  Outside
+\(K\), a new \(\gamma_n\)-boundary identity cannot appear, and an old one
+does not exist because \(X\) is closed under \(\rho\) while
+\(\gamma_n\in\overline\rho(v_n)\).  Using (1) and the filter definition
+\noderef{BoundaryColorEdges}, we obtain
+\[
+ \partial_{\varphi_n,\gamma_n}(T_n)=\{f_n\}.                      \tag{5}
+\]
+If \(g\) is a \(\delta_n\)-boundary identity under \(\varphi_n\), it
+cannot lie in \(K\), since its pre-switch color there would be
+\(\gamma_n\), whose \(\rho\)-boundary is empty.  Hence the switch fixes
+\(g\), so \(g\) is a \(\rho\)-boundary identity colored \(\delta_n\),
+and \(g\ne f_n\).  Equation (3) supplies an inside endpoint strictly
+preceding \(v_n\), proving the second unconditional assertion.
+
+It remains to prove the conditional assertion.  Assume that \(X\) is
+elementary under \(\varphi_{n-1}\).  For distinct \(x,y\in X\), equation
+(2) identifies their \(\rho\)-missing sets with their respective
+\(\varphi_{n-1}\)-missing sets.  Their disjointness from
+\noderef{ColoredVertexSetElementary} therefore proves that \(X\) is also
+elementary under \(\rho\).  Since \(v_n\in X\) and \(\gamma_n\) is
+missing there under \(\rho\), elementariness shows that \(\gamma_n\) is
+missing at no other vertex of \(X\).
+
+After the switch, \(f_n\) makes \(\gamma_n\) present at \(v_n\).  If
+\(x\in X-\{v_n\}\), no edge incident with \(x\) has its edge-node in
+\(K\): otherwise the adjacency rule of \noderef{TwoColorIncidenceGraph}
+would put the vertex-node \(x\) in \(K\), contradicting (4).  Hence the
+switch fixes every edge incident with \(x\), and
+\noderef{MissingColors} gives
+\(\overline\varphi_n(x)=\overline\rho(x)\).  Thus \(\gamma_n\) is
+missing at no vertex of \(X\) after the switch.  By the union definition
+\noderef{TreeMissingColors},
+\[
+ \gamma_n\notin\overline\varphi_n(T_n).                           \tag{6}
+\]
+
+Finally take \(\alpha\in\overline\varphi_n(T_n)\) with
+\(\alpha\ne\delta_n\).  Equation (6) also gives
+\(\alpha\ne\gamma_n\).  By \noderef{TreeMissingColors}, choose
+\(x\in X\) at which \(\alpha\) is missing under \(\varphi_n\).  If it
+were present under \(\rho\), \noderef{PresentColors} would supply an
+incident edge identity colored \(\alpha\); since \(\alpha\) is neither
+switch color, \noderef{TwoColorComponentSwap} would leave that value
+unchanged, contradicting its being missing under \(\varphi_n\).  Hence
+\(\alpha\) is missing at \(x\) under \(\rho\).  The same edge-by-edge
+switch definition shows, in both directions, that an identity has color
+\(\alpha\) under \(\rho\) exactly when it has color \(\alpha\) under
+\(\varphi_n\).  Its membership in the coloring-independent boundary is
+unchanged, so the two \(\alpha\)-boundary sets are equal.  The
+\(\rho\)-boundary is empty because \(X\) is closed under \(\rho\) and
+\(\alpha\) is missing at \(x\in X\).  Therefore
 \(\partial_{\varphi_n,\alpha}(T_n)=\varnothing\), as required.
 \end{proof}

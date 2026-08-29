@@ -1,17 +1,22 @@
+import Tablet.AdjacentEdges
 import Tablet.BoundaryColorEdges
 import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetClosed
+import Tablet.ColoredVertexSetElementary
 import Tablet.DefectiveEdge
 import Tablet.DefectiveVertex
 import Tablet.Incident
 import Tablet.IsProperEdgeColoring
 import Tablet.MaximumDefectiveChoice
+import Tablet.MissingColors
 import Tablet.ParallelExtensionColor
+import Tablet.PresentColors
 import Tablet.StableColoring
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TreeExit
 import Tablet.TreeExitPath
+import Tablet.TreeIncidentEdge
 import Tablet.TreeMissingColors
 import Tablet.TreeVertexOrder
 import Tablet.TwoColorComponent
@@ -38,9 +43,11 @@ theorem HkuParallelBoundaryStructure {V E : Type*}
         (TreeSequenceVertexSet (series.data.tree q.succ.castSucc)) delta,
       ∃ w : V, TreeVertexOrder (series.data.tree q.succ.castSucc) w v ∧
         Incident G w g) ∧
-    ∀ alpha ∈ TreeMissingColors (series.data.coloring q.succ)
-        (series.data.tree q.succ.castSucc), alpha ≠ delta →
-      BoundaryColorEdges G (series.data.coloring q.succ)
-        (TreeSequenceVertexSet (series.data.tree q.succ.castSucc)) alpha = ∅ := by
+    (ColoredVertexSetElementary G (series.data.coloring q.castSucc)
+        (TreeSequenceVertexSet (series.data.tree q.succ.castSucc)) →
+      ∀ alpha ∈ TreeMissingColors (series.data.coloring q.succ)
+          (series.data.tree q.succ.castSucc), alpha ≠ delta →
+        BoundaryColorEdges G (series.data.coloring q.succ)
+          (TreeSequenceVertexSet (series.data.tree q.succ.castSucc)) alpha = ∅) := by
 -- BODY
   sorry
