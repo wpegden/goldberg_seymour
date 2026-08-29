@@ -1,8 +1,29 @@
+import Tablet.AdjacentEdges
+import Tablet.ETTStrongInterchangeable
+import Tablet.ExtendedTashkinovTree
 import Tablet.ExtensionBaseAlgorithmBInvariant
+import Tablet.ExtensionBaseAlgorithmBTrace
+import Tablet.ExtensionBaseCaseOneIndices
 import Tablet.ExtensionBaseSupportClassColors
+import Tablet.Incident
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
+import Tablet.MissingColors
+import Tablet.PresentColors
 import Tablet.StrongInterchangeabilityKempePreserved
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorComponent
+import Tablet.TwoColorComponentCycle
 import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorCycle
+import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
+import Tablet.TwoColorPathComponent
 
 -- [TABLET NODE: ExtensionBaseAlgorithmB]
 theorem ExtensionBaseAlgorithmB {V E : Type*}
