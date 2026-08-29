@@ -1,18 +1,32 @@
 import Tablet.ETTStrongInterchangeable
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
 import Tablet.ExtensionBaseActiveIndices
 import Tablet.HkuMissingStoredMonotone
+import Tablet.InternalEdges
+import Tablet.IsProperEdgeColoring
+import Tablet.MaximumDefectiveChoice
+import Tablet.MissingColors
 import Tablet.ParallelExtensionColor
+import Tablet.PresentColors
 import Tablet.RevisitingExtensionCertificate
 import Tablet.SameColorSeriesPreserved
 import Tablet.StableColoring
+import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.TreeInterchangeable
 import Tablet.TreeExit
+import Tablet.TreeExitPath
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentCycle
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorCycle
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
+import Tablet.TwoColorPathComponent
 import Tablet.sc2
 
 -- [TABLET NODE: ExtensionBaseClaimStrongInterchangeable]

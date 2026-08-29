@@ -9,92 +9,229 @@ leaving precisely \(e_0\) uncolored and
 \(\sigma_n\), in the sense of \noderef{ETTStrongInterchangeable}.
 \end{lemma}
 \begin{proof}
-Fix \(t\in L\) with \(t<n\).  Since the terminal round \(n\) is a PE, it
-is not an RE.  Hence the finite set of indices (r>t) with
-\(\Theta_r\ne\mathrm{RE}\) is nonempty.  Let \(\epsilon(t)\) be its least
-member.  By construction
+Fix an index \(t\in L\) with \(t<n\), and write \(v_t\) for its certified
+support.  Unfolding \noderef{ExtensionBaseActiveIndices} gives the exact
+PE-kind equation at the positive slot \(t\), while the hypotheses give
+the exact chosen-vertex, gamma, and delta equations there.  By the
+certificate field of \noderef{TashkinovSeries}, the witness at that slot
+is one of the four constructors of \noderef{TashkinovSeriesStep}; its
+kind equation excludes the initial, SE, and RE constructors.  We may
+therefore unpack its PE constructor.  Denote its preceding coloring by
+\(\varphi^-\), its maximum-defective selected coloring by \(\pi\), its
+second stable coloring by \(\rho\), its pre-switch tree by \(T_t\), and
+its switched coloring by \(\varphi_t\).  The constructor equations
+identify its chosen support and colors with
+\(v_t,\gamma_t,\delta_t\), and say exactly that
 \[
- t<\epsilon(t)\leq n,qquad
- \Theta_{\epsilon(t)}\ne\mathrm{RE},
+ \varphi_t=
+ \operatorname{swap}_{K_{v_t}(\gamma_t,\delta_t;\rho)}(\rho).
+ \tag{1}
 \]
-and every strictly intermediate slot is an RE.  These are exactly the
-first three witness clauses of
-\noderef{ETTStrongInterchangeable}.
 
-Inspect the PE certificate at (t) in \noderef{TashkinovSeriesStep}.
-Its \noderef{ParallelExtensionColor} field makes \(\gamma_t\) missing at
-the supporting vertex before the switch, while its selected connecting
-edge supplies \(\delta_t\) there.  Thus the colors are distinct.  The
-\noderef{TreeExit} field and the definition
-\noderef{TwoColorComponentSwap} show that under \(\varphi_t\) the
-\((\gamma_t,\delta_t)\)-component through \(v_t\) is a path meeting
-\(T_t\) only at \(v_t\).  To see that the witnessed exit path is the
-whole component, note that \(\gamma_t\) is missing at \(v_t\), while the
-outside endpoint in \noderef{TreeExit} misses one of the two colors.
-Both endpoints therefore have incidence-graph degree one; all degrees
-are at most two by \noderef{TwoColorIncidenceDegreeAtMostTwo}.  Any
-component vertex outside the witnessed path would attach to an internal
-path vertex, creating degree at least three, or to an endpoint, creating
-degree at least two.  Hence no such vertex exists.  The component remains
-the same path after \noderef{TwoColorComponentSwap}, with its two colors
-interchanged.
+We first transfer the closedness in the PE certificate all the way to
+\(\rho\).  Its \(\varphi^-\)-closedness is the condition of
+\noderef{ColoredVertexSetClosed} on \(V(T_t)\).  The
+\noderef{MaximumDefectiveChoice} says that \(\pi\) is proper, leaves
+exactly \(e_0\) uncolored, and is
+\((T_t,D_{t-1},\varphi^-)\)-stable.  The preceding coloring has the same
+two coloring properties by the PE certificate.  Hence symmetry in
+\noderef{sc2} makes \(\varphi^-\) stable relative to \(\pi\).  If a
+boundary edge had \(\pi\)-color \(c\) missing at a tree vertex, the
+vertex clause of \noderef{StableColoring} would make \(c\) missing there
+under \(\varphi^-\), while reverse stability would fix the exact boundary
+edge because its \(\pi\)-color lies among the tree-missing colors.  This
+would contradict \(\varphi^-\)-closedness.  Thus \(T_t\) is closed under
+\(\pi\).  Apply the identical argument to the PE field saying that
+\(\rho\) is
+\((T_t,D_{t-1}\cup\{\delta_t\},\pi)\)-stable.  Symmetry from
+\noderef{sc2} and the missing-set equality in
+\noderef{StableColoring} show that every hypothetical
+\(\rho\)-colored boundary obstruction would be the same obstruction
+under \(\pi\).  Consequently
+\[
+                 V(T_t)\text{ is closed under }\rho .            \tag{2}
+\]
 
-Now take \(v\in V(T_t)\setminus\{v_t\}\).  The stated lower-rung
-interchangeability on \(T_{t+1}\), namely
-\noderef{TreeInterchangeable}, permits at most one two-color path
-component meeting that tree.  The path through \(v_t\) is already such a
-component.  Therefore the component through \(v\) cannot be a path.
-More explicitly, \noderef{TwoColorIncidenceDegreeAtMostTwo} bounds every
-degree by two.  If the component had a vertex of degree at most one, the
-finite traversal argument in \noderef{TwoColorComponentSpanningPath}
-would make it a path component.  Thus every component vertex has degree
-two, and following unused edges until the first repetition gives the
-cycle required by \noderef{TwoColorComponentCycle}.  Distinct connected
-components are disjoint, and hence this cycle avoids \(v_t\).
+The selected exact connecting edge \(f_t\) in
+\noderef{MaximumDefectiveChoice} is a boundary identity, is incident
+with \(v_t\), has its other endpoint outside \(T_t\), and has
+\(\pi(f_t)=\delta_t\).  Since \(\delta_t\) belongs to the enlarged
+control set, forward stability fixes this identity and gives
+\(\rho(f_t)=\delta_t\).  Now fix any \(x\in V(T_t)\).  If
+\(\delta_t\) were missing at \(x\) under \(\rho\), the same boundary
+edge \(f_t\) would violate (2).  Hence \(\delta_t\) is not missing at
+\(x\).  By the complementary definitions
+\noderef{MissingColors} and \noderef{PresentColors}, there is an exact
+edge identity \(g_x\) incident with \(x\) such that
+\[
+                         \rho(g_x)=\delta_t .                    \tag{3}
+\]
+This conclusion holds at every tree vertex, not merely at the support.
 
-We claim that the cycle is contained in \(G[T_{\epsilon(t)}]\).  If not,
-all intermediate slots are RE and hence preserve the coloring, by their
-constructor equalities in \noderef{TashkinovSeriesStep}.  The same cycle
-under \(\varphi_{\epsilon(t)-1}\) therefore meets the earlier tree \(T_t\)
-but leaves \(T_{\epsilon(t)}\).  Traverse it from a vertex of \(T_t\),
-take the first edge leaving \(T_{\epsilon(t)}\), and then the last edge
-by which the traversal returns before ending at the chosen vertex of
-\(T_t\).  The latter edge is an exact boundary
-identity with one endpoint in and one endpoint out.  The segment from
-that edge to the first subsequent vertex of \(T_t\) is simple after
-deleting any closed subwalk, stays inside \(T_{\epsilon(t)}\), lies on
-the same two-color cycle, and ends in the earlier tree.  The cycle,
-leaving edge, endpoints, and this segment satisfy every field of
-\noderef{RevisitingExtensionCertificate}: the exact earlier positive PE
-index and its gamma/delta fields are those of \(t\); the cycle meets its
-tree and has a vertex outside the current tree; and the chosen return
-path is internally current.  Algorithm 3.1 gives RE priority.  In the
-relational encoding this is the `available' constructor alternative in
-\noderef{TashkinovSeriesStep}; consequently the slot
-\(\epsilon(t)\) would have kind RE.  This contradicts the choice of
-\(\epsilon(t)\).  Thus every vertex node of the cycle lies in
+The \noderef{ParallelExtensionColor} field says that \(\gamma_t\) is
+missing at \(v_t\) under \(\pi\), and the vertex clause of second
+stability transfers this to \(\rho\).  On the other hand, (3), or the
+specific connecting edge \(f_t\), makes \(\delta_t\) present there.
+Thus \(\gamma_t\ne\delta_t\).  Unpack the PE's
+\noderef{TreeExit} witness as a walk \(P\) from an outside vertex \(u\)
+to \(v_t\).  The clauses of \noderef{TreeExitPath} say that \(P\) is a
+simple path of length at least two, that one of the two colors is missing
+at \(u\), and that its only vertex-node in \(T_t\) is \(v_t\).  At
+\(v_t\), the missingness of \(\gamma_t\), together with the incident
+path edge, gives incidence-graph degree one.  At \(u\), the path edge
+and its missing-color clause likewise give degree one.  Every other node
+of \(P\) has its two path neighbors, and every incidence-graph degree is
+at most two by \noderef{TwoColorIncidenceDegreeAtMostTwo}.  If a node of
+the component were outside \(P\), take a shortest route from it to
+\(P\).  The first attachment would give a third neighbor at an internal
+node of \(P\), or a second neighbor at one of its degree-one endpoints.
+Both are impossible.  Hence \(P\) exhausts the full component through
+\(v_t\).  In particular it is the nontrivial path component from
+\noderef{TwoColorPathComponent}, and it contains no other tree vertex.
+Equation (1) and \noderef{TwoColorComponentSwap} interchange the two
+colors on this entire component and nowhere else.  Its support therefore
+remains the same full path component under \(\varphi_t\), still meeting
+\(T_t\) only at \(v_t\).
+
+Now fix \(v\in V(T_t)\setminus\{v_t\}\).  Choose the identity \(g_v\)
+from (3).  Were its edge-node in the root component before the switch,
+incidence at \(v\) in \noderef{TwoColorIncidenceGraph} would put the
+vertex-node \(v\) in that component, contrary to the just-proved
+unique-tree-vertex property.  Thus the swap fixes \(g_v\), and
+\[
+                       \varphi_t(g_v)=\delta_t .                 \tag{4}
+\]
+The component \(C_v\) through \(v\) under \(\varphi_t\) is therefore
+nonisolated: it contains the genuine edge-node of \(g_v\).  The lower-rung
+hypothesis \noderef{TreeInterchangeable} applies on the certified next
+tree, which contains \(T_t\) by the ordered-extension field in
+\noderef{TashkinovSeriesStep} and
+\noderef{TreeSequenceInitialSegment}.  If \(C_v\) satisfied
+\noderef{TwoColorPathComponent}, interchangeability would identify it
+with the already exhibited path component through \(v_t\), since both
+meet that next tree.  It would then put \(v\) in the root component,
+again contradicting its unique-tree-vertex property.  Thus \(C_v\) is
+not a path component.
+
+Here is the required cycle certificate, including the formerly missing
+isolated-component case.  The colors are distinct and (4) supplies an
+edge-node in \(C_v\).  Therefore, by the definition of
+\noderef{TwoColorPathComponent}, failure of the path alternative says
+that no node of \(C_v\) has a subsingleton neighbor set.  The degree bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, now applied to the proper
+coloring \(\varphi_t\), makes every node of \(C_v\) have exactly two
+neighbors.  Take the simple spanning path supplied by
+\noderef{TwoColorComponentSpanningPath}; its support is exactly \(C_v\).
+Each endpoint has one neighbor along the path and hence one further
+neighbor in \(C_v\).  The further neighbor cannot be an internal path
+node, because that node would then have its two path neighbors and a third
+neighbor.  It is consequently the other endpoint.  Closing the spanning
+path with this edge gives a simple closed walk in
+\noderef{TwoColorCycle}, and its support is still exactly \(C_v\).
+This is precisely \noderef{TwoColorComponentCycle}.  Moreover
+\(v_t\notin C_v\): otherwise the connected-component definition
+\noderef{TwoColorComponent} would identify \(C_v\) with the root
+component and put \(v\) in the latter.  Denote the resulting full cycle
+by \(O_v\).
+
+We next prove that every vertex-node of \(O_v\) lies in
+\(T_{\epsilon(t)}\).  Since the terminal slot \(n\) is a PE and
+\(t<n\), the finite set of later non-RE slots is nonempty.  Let
+\(\epsilon(t)\) be its least member.  Then
+\[
+ t<\epsilon(t)\leq n,\qquad
+ \Theta_{\epsilon(t)}\ne\mathrm{RE},                            \tag{5}
+\]
+and minimality says that every strictly intermediate slot is an RE.
+The RE current-coloring equalities in
+\noderef{TashkinovSeriesStep}, composed over this finite interval, give
+\(\varphi_t=\varphi_{\epsilon(t)-1}\).  Its ordered-extension fields,
+composed using \noderef{TreeSequenceInitialSegment}, also put every
+vertex of \(T_t\), in particular \(v\), in
 \(T_{\epsilon(t)}\).
 
-It remains to transport this statement from \(\varphi_t\) to
-\(\sigma_n\).  Both colors belong to the exact stored pair \(S_t\).  By
-the definition \noderef{TashkinovStoredColors} and the monotonicity of
-missing-plus-stored colors, they lie in the controlling set at every
-stage from \(\epsilon(t)\) through \(n\), by
-\noderef{HkuMissingStoredMonotone}.  The intermediate RE constructor
-equalities identify
-\(\varphi_t=\varphi_{\epsilon(t)-1}\).  Apply
-\noderef{SameColorSeriesPreserved} from stage \(\epsilon(t)\) to every
-exact edge identity on the contained cycle: its color is unchanged up to
-\(\varphi_n\).  Terminal stability \noderef{StableColoring} then fixes
-the same identities from \(\varphi_n\) to \(\sigma_n\).  Conversely,
-symmetry of stability from \noderef{sc2}, together with properness,
-prevents a new incident edge of either color at a cycle
-vertex, so the full two-color component, not merely the displayed cycle,
-is unchanged.  It remains a cycle, avoids \(v_t\), and is contained in
-\(T_{\epsilon(t)}\).
+Suppose some vertex-node \(w\) of \(O_v\) were outside
+\(T_{\epsilon(t)}\).  Regard the same exact cycle as a cycle under
+\(\varphi_{\epsilon(t)-1}\), using the preceding coloring equality.
+Starting at \(v\), traverse the simple cycle toward \(w\), and stop at
+the first outside vertex.  Let \(f\) be the exact edge-node immediately
+before that vertex, let \(a\) be its preceding inside endpoint, and let
+\(b\) be that outside endpoint.  By \noderef{BoundaryEdges},
+\(f\in\partial(T_{\epsilon(t)})\), with the exact endpoint equation
+\(G.\operatorname{ends}(f)=\{a,b\}\).  Reverse the initial cycle segment
+from the edge-node \(f\) back to \(v\).  It is a simple path on \(O_v\);
+every one of its vertex-nodes is in \(T_{\epsilon(t)}\), by the choice of
+the first outside vertex.
 
-The PE kind and exact support are supplied by active membership and the
-chosen-vertex hypothesis.  Together with the witness
-\(\epsilon(t)\) and the preceding component conclusions, these are all
-clauses of \noderef{ETTStrongInterchangeable}.  This proves (a5).
+These data fill every field of
+\noderef{RevisitingExtensionCertificate} at the current index
+\(\epsilon(t)-1\): take the earlier index to be the positive slot \(t\),
+whose positivity and bound follow from \(t<\epsilon(t)\); its PE-kind,
+gamma, and delta equations are the exact equations unpacked above; take
+the cycle to be \(O_v\), which meets its earlier tree at \(v\) and leaves
+the current tree at \(w\); take the boundary identity and endpoints to be
+\(f,a,b\); and take the return vertex and return path to be \(v\) and the
+reversed initial segment.  The segment is simple, lies on the cycle, and
+all its vertex-nodes are current-tree vertices, exactly as the three
+return-path fields require.  Now inspect the certified constructor at
+slot \(\epsilon(t)\).  It is not initial by (5), and its non-RE equation
+excludes the RE constructor.  Each remaining SE or PE constructor has the
+`noRevisiting' field, contradicting the inhabited certificate just
+constructed.  This is the witness-carrying form of RE priority.  The
+supposition was therefore false, and
+\[
+  \operatorname{Vert}(O_v)\subseteq V(T_{\epsilon(t)}).          \tag{6}
+\]
+
+It remains to transport the full component to \(\sigma_n\).  The PE
+constructor gives the exact stored pair
+\(S_t=\{\delta_t,\gamma_t\}\).  For either color \(c\) in this pair,
+at stage \(t\) either \(c\) is tree-missing, or it is not tree-missing
+and the set-difference definition \noderef{TashkinovStoredColors} puts it
+in \(D_t\).  Thus both colors lie in
+\(\overline\varphi_t(T_t)\cup D_t\).  Iterating the two inclusions of
+\noderef{HkuMissingStoredMonotone} carries both colors first to the
+control set at \(T_{\epsilon(t)}\), and then to
+\(\overline\varphi_n(T_n)\cup D_n\).
+
+Every exact edge-node \(e\) of \(O_v\) has both endpoint vertex-nodes in
+the same full component.  By (6) both endpoints lie in
+\(T_{\epsilon(t)}\), so \(e\) belongs to the exact set
+\noderef{InternalEdges}.  Apply the internal-edge conclusion of
+\noderef{SameColorSeriesPreserved} from \(\epsilon(t)\) through \(n\):
+the exact \(\gamma_t\)- or \(\delta_t\)-color of every edge of \(O_v\)
+is unchanged from \(\varphi_{\epsilon(t)-1}=\varphi_t\) to
+\(\varphi_n\).  The terminal PE certificate makes \(\varphi_n\) proper
+and leaves exactly \(e_0\) uncolored.  Since each vertex of the cycle has
+one incident cycle edge of each of the two distinct colors, properness
+in the exact-edge sense of \noderef{IsProperEdgeColoring} allows no
+additional \(\gamma_t\)- or \(\delta_t\)-edge at such a vertex.  Hence
+the support of \(O_v\), not merely its displayed edges, is the full
+two-color component under \(\varphi_n\).
+
+Each cycle edge is incident with the terminal tree, and its
+\(\varphi_n\)-color belongs to the terminal control set just obtained.
+Forward terminal stability \noderef{StableColoring} therefore fixes all
+of these exact identities from \(\varphi_n\) to \(\sigma_n\).  For the
+reverse inclusion of full components, package the proper, one-uncolored
+colorings \(\varphi_n,\sigma_n\) and apply symmetry in \noderef{sc2} to
+the assumed terminal stability.  Their vertexwise missing sets agree, so
+the two colors also lie in the control set when \(\sigma_n\) is used as
+reference.  If an edge \(h\) incident with a cycle vertex had
+\(\sigma_n(h)\in\{\gamma_t,\delta_t\}\), reverse stability would give
+\(\varphi_n(h)=\sigma_n(h)\).  Properness of \(\varphi_n\), together
+with the already fixed cycle edge of that same color at the same vertex,
+forces \(h\) to be that exact cycle-edge identity.  Thus no path in the
+\(\sigma_n\) incidence graph can leave the support of \(O_v\).  Since
+the fixed cycle edges keep that support connected, the full component
+under \(\sigma_n\) is exactly \(O_v\).  It is a cycle, avoids \(v_t\),
+and satisfies (6).
+
+Finally, the active-set and chosen-vertex equations give the PE-kind and
+exact-support clauses of \noderef{ETTStrongInterchangeable}; distinctness
+was proved above; (5) supplies the least non-RE witness and all
+intermediate RE clauses; and the construction for each
+\(v\in V(T_t)\setminus\{v_t\}\) supplies the required full cycle,
+avoidance, and containment clauses under \(\sigma_n\).  This proves
+Claim 4.1(a5).
 \end{proof}
