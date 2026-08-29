@@ -1,11 +1,27 @@
+import Tablet.DefectiveVertex
+import Tablet.ETTStrongInterchangeable
+import Tablet.ExtensionBaseActiveIndices
 import Tablet.ExtensionBaseClaimMissingColors
 import Tablet.ExtensionBaseClaimStrongInterchangeable
 import Tablet.ExtensionBaseRestorationInvariant
+import Tablet.ExtensionBaseRestorationIndices
 import Tablet.ExtensionBaseStoredPairOverlap
+import Tablet.ExtensionBaseSupportClass
 import Tablet.ExtensionBaseSupportOrder
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
+import Tablet.MaximumDefectiveChoice
+import Tablet.MissingColors
+import Tablet.PresentColors
 import Tablet.StrongInterchangeabilityKempePreserved
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorIncidenceGraph
+import Tablet.TwoColorPathComponent
 
 -- [TABLET NODE: ExtensionBaseAlgorithmA]
 theorem ExtensionBaseAlgorithmA {V E : Type*}
@@ -52,24 +68,25 @@ theorem ExtensionBaseAlgorithmA {V E : Type*}
       ett.series.data.gamma t.succ = some gammaT →
       ett.series.data.delta t.succ = some deltaT →
       ETTStrongInterchangeable ett t vt sigmaN gammaT deltaT)
-    (hlastMissing : ∀ (t : Fin ett.rounds) (vt : V)
-      (gammaT deltaT : Fin k),
-      t ∈ ExtensionBaseRestorationIndices ett terminalSupport
-          hterminalSupport →
-      ett.series.data.chosenVertex t.succ = some vt →
-      ett.series.data.gamma t.succ = some gammaT →
-      ett.series.data.delta t.succ = some deltaT →
-      (∀ s : Fin ett.rounds,
-        s ∈ ExtensionBaseRestorationIndices ett terminalSupport
+    (hclassMissing : ∀ (w : V) (t : Fin ett.rounds) (deltaT : Fin k),
+      ExtensionBaseSupportClass ett terminalSupport hterminalSupport w ⊆
+          ExtensionBaseRestorationIndices ett terminalSupport
             hterminalSupport →
-        ett.series.data.chosenVertex s.succ = some vt → s.val ≤ t.val) →
-      deltaT ∈ MissingColors G sigmaN vt ∧
-        gammaT ∉ MissingColors G sigmaN vt)
+      t ∈ ExtensionBaseSupportClass ett terminalSupport
+          hterminalSupport w →
+      (∀ s : Fin ett.rounds,
+        s ∈ ExtensionBaseSupportClass ett terminalSupport
+            hterminalSupport w →
+        s.val ≤ t.val) →
+      ett.series.data.delta t.succ = some deltaT →
+      MissingColors G sigmaN w ∩
+          (ExtensionBaseSupportClass ett terminalSupport hterminalSupport w).biUnion
+            (fun s => ett.series.data.stored s.succ) = {deltaT})
     (hpairOverlap : ∀ (s t : Fin ett.rounds) (vs vt : V)
       (gammaS deltaS gammaT deltaT : Fin k),
-      s ∈ ExtensionBaseRestorationIndices ett terminalSupport
+      s ∈ ExtensionBaseActiveIndices ett terminalSupport
           hterminalSupport →
-      t ∈ ExtensionBaseRestorationIndices ett terminalSupport
+      t ∈ ExtensionBaseActiveIndices ett terminalSupport
           hterminalSupport →
       s.val < t.val →
       ett.series.data.chosenVertex s.succ = some vs →
@@ -79,10 +96,10 @@ theorem ExtensionBaseAlgorithmA {V E : Type*}
       ett.series.data.gamma t.succ = some gammaT →
       ett.series.data.delta t.succ = some deltaT →
       ((({gammaS, deltaS} : Finset (Fin k)) ∩ {gammaT, deltaT}).Nonempty ↔
-        vs = vt ∧
+          vs = vt ∧
           ¬ ∃ r : Fin ett.rounds,
-            r ∈ ExtensionBaseRestorationIndices ett terminalSupport
-                hterminalSupport ∧
+            r ∈ ExtensionBaseSupportClass ett terminalSupport
+                hterminalSupport vs ∧
             s.val < r.val ∧ r.val < t.val ∧
             ett.series.data.chosenVertex r.succ = some vs) ∧
       ((({gammaS, deltaS} : Finset (Fin k)) ∩ {gammaT, deltaT}).Nonempty →
