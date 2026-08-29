@@ -1,5 +1,17 @@
+import Tablet.ExtensionBaseActiveIndices
+import Tablet.ExtensionBaseRestorationIndices
 import Tablet.ExtensionBaseRestorationInvariant
+import Tablet.ExtensionBaseRestorationTrace
+import Tablet.Incident
 import Tablet.InternalEdges
+import Tablet.LooplessMultigraph
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorComponent
+import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ExtensionBaseClaim43EdgeEffects]
 theorem ExtensionBaseClaim43EdgeEffects {V E : Type*}

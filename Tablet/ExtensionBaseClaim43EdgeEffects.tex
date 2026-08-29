@@ -18,35 +18,115 @@ This is Claim 4.3(b3), with the two optional coloring values made
 explicitly nonempty.
 \end{lemma}
 \begin{proof}
-Write the trace as
-\(\sigma^0,\ldots,\sigma^r\).  If the initial and final values on \(f\)
-differ, at least one transition changes \(f\).  At every such transition,
-the definition \noderef{TwoColorComponentSwap} says that the edge node
-of \(f\) lies in the chosen component and that its value is exchanged
-between the exact colors \(\gamma_{t_a}\) and \(\delta_{t_a}\).
-The slot-data fields of
-\noderef{ExtensionBaseRestorationTrace} identify those colors with the
-certified gamma and delta fields.  The PE constructor in
-\noderef{TashkinovSeriesStep} identifies its stored set as
-\(S_{t_a}=\{\gamma_{t_a},\delta_{t_a}\}\).  Since \(t_a\in L^*\), every
-value acquired in a transition belongs to \(\mathcal S^*\).
+Write the trace from \noderef{ExtensionBaseRestorationTrace} as
+\(\sigma^0,\ldots,\sigma^r\), and fix a transition \(a<r\).  Clause (1)
+of \noderef{ExtensionBaseRestorationInvariant} gives
+\(t_a\in L^*\).  Unfolding
+\noderef{ExtensionBaseRestorationIndices}, this says that \(t_a\) lies
+in the active set and not in the support class of the distinguished
+vertex.  In particular, it lies in the active set.  Unfolding
+\noderef{ExtensionBaseActiveIndices} at \(t_a\) now gives
+\[
+       \Theta_{t_a+1}=\mathrm{PE}.
+\]
+The certificate field in \noderef{TashkinovSeries} supplies a
+\noderef{TashkinovSeriesStep} certificate at the positive index
+\(t_a+1\).  Inspect its four constructors.  The initial constructor is
+impossible because its index is zero, whereas \(t_a+1\) is positive.
+The SE and RE constructors respectively set the kind at this index to
+SE and RE, contradicting the displayed PE equality.  Consequently the
+certificate has the PE constructor.
 
-Choose the first transition which changes \(f\).  Before it, the value
-is still \(\sigma_n(f)\), so the preceding paragraph writes that value
-as \(\mathsf{some}(c)\) with \(c\in\mathcal S^*\).  Choose the last
-transition which changes \(f\).  After it, the value is
-\(\varrho_1(f)=\mathsf{some}(d)\) with
-\(d\in\mathcal S^*\).  This proves the asserted color control, including
-the fact that neither endpoint value is uncolored.
+In that PE constructor, if its maximum-defective color and chosen
+parallel-extension color are denoted by \(\delta\) and \(\gamma\), the
+fields called currentStored, currentGamma, and currentDelta state
+\[
+ S_{t_a}=\{\delta,\gamma\},\qquad
+ \Gamma_{t_a+1}=\mathsf{some}(\gamma),\qquad
+ \Delta_{t_a+1}=\mathsf{some}(\delta).
+\]
+The gammaField and deltaField clauses of
+\noderef{ExtensionBaseRestorationTrace} identify the latter two option
+values with
+\(\mathsf{some}(\gamma_{t_a})\) and
+\(\mathsf{some}(\delta_{t_a})\), respectively.  Injectivity of
+\(\mathsf{some}\) therefore gives the exact equality
+\[
+          S_{t_a}=\{\delta_{t_a},\gamma_{t_a}\}.
+\]
+Since \(t_a\in L^*\), both colors on the right belong to the
+\(t_a\)-summand of the defining union \(\mathcal S^*\), and hence both
+belong to \(\mathcal S^*\).
 
-It remains to exclude an internal edge.  At a transition which changes
-\(f\), the invariant says that the chosen component meets \(T_{t_a}\)
-in exactly its support \(v_{t_a}\), and that \(T_j\) is an ordered
-initial segment of \(T_{t_a}\).  If \(f\) were internal to \(T_j\), both
-of its endpoint vertex nodes would lie in \(T_{t_a}\).  Each is adjacent
-to the edge node of \(f\) in \noderef{TwoColorIncidenceGraph}, so both
-would belong to the chosen component and hence both would equal
-\(v_{t_a}\).  This would make \(f\) a loop, contrary to the loopless law
-in \noderef{LooplessMultigraph}.  Thus \(f\) is not internal to \(T_j\),
-which completes (b3) without identifying parallel edges.
+The transition clause of
+\noderef{ExtensionBaseRestorationTrace} says that \(\sigma^{a+1}\) is
+obtained from \(\sigma^a\) by the component switch rooted at the exact
+vertex node \(v_{t_a}\).  Unfolding
+\noderef{TwoColorComponentSwap}, if this transition changes the value
+on the exact edge identity \(f\), then the edge node
+\(\mathsf{inr}(f)\) lies in that component, the value before the switch
+is one of
+\(\mathsf{some}(\gamma_{t_a})\) and
+\(\mathsf{some}(\delta_{t_a})\), and the value after the switch is the
+other one.  By the preceding paragraph, the colors underlying both
+values lie in \(\mathcal S^*\).
+
+Now suppose \(\varrho_1(f)\ne\sigma_n(f)\).  If no transition changed
+\(f\), induction along the finite trace, starting with the
+initialColoring clause of \noderef{ExtensionBaseRestorationTrace}, would
+give \(\varrho_1(f)=\sigma_n(f)\), a contradiction.  Thus there is a
+first and a last transition changing \(f\).  No earlier transition
+changes \(f\), so immediately before the first one its value is
+\(\sigma_n(f)\).  The preceding switch analysis therefore gives a color
+\(c\in\mathcal S^*\) with
+\(\sigma_n(f)=\mathsf{some}(c)\).  No later transition changes \(f\), so
+immediately after the last one its value is the final value
+\(\varrho_1(f)\).  The same analysis gives a color
+\(d\in\mathcal S^*\) with
+\(\varrho_1(f)=\mathsf{some}(d)\).  This proves the asserted color
+control, including that both optional values are nonempty.
+
+It remains to exclude an internal edge.  Fix, for example, the first
+transition changing \(f\), and again write its slot as \(t_a\).  Clause
+(1) of \noderef{ExtensionBaseRestorationInvariant} states that the
+reference tree \(T_j\) is an ordered initial segment of \(T_{t_a}\).
+By \noderef{TreeSequenceInitialSegment}, every indexed vertex entry of
+\(T_j\) is the equal entry of \(T_{t_a}\) at the embedded index.  Hence,
+using the indexed-entry description in \noderef{TreeSequenceVertexSet},
+\[
+                         V(T_j)\subseteq V(T_{t_a}).
+\]
+Indeed, a vertex in \(V(T_j)\) is the value of some vertex index of
+\(T_j\); embed that index using the length inequality in the
+initial-segment certificate and use its vertex-entry equality to exhibit
+the same vertex in \(V(T_{t_a})\).
+
+Assume for contradiction that \(f\) is internal to \(T_j\).  Unfolding
+\noderef{InternalEdges}, every vertex incident with this exact edge
+identity belongs to \(V(T_j)\).  Choose representatives \(x,y\) of its
+unordered endpoint pair, so that
+\(G.\operatorname{ends}(f)=\{x,y\}\).  By \noderef{Incident}, both
+\(x\) and \(y\) are incident with \(f\); hence both lie in \(V(T_j)\),
+and the displayed vertex-set inclusion puts both in \(V(T_{t_a})\).
+
+The switch analysis already put the exact edge node
+\(\mathsf{inr}(f)\) in the chosen two-color component and showed that
+its pre-switch color is one of
+\(\gamma_{t_a},\delta_{t_a}\).  By
+\noderef{TwoColorIncidenceGraph}, incidence of \(x\) and \(y\) with
+that same edge identity therefore gives graph edges from
+\(\mathsf{inr}(f)\) to each of the vertex nodes
+\(\mathsf{inl}(x)\) and \(\mathsf{inl}(y)\).  Since
+\noderef{TwoColorComponent} is the connected component through
+\(\mathsf{inl}(v_{t_a})\), adjoining either one-edge walk shows that
+both vertex nodes also belong to that component.  Clause (3) of
+\noderef{ExtensionBaseRestorationInvariant} says that its vertex-node
+intersection with \(V(T_{t_a})\) is exactly
+\(\{v_{t_a}\}\).  Applying that equivalence first to \(x\) and then to
+\(y\) gives \(x=v_{t_a}=y\).  Thus
+\(G.\operatorname{ends}(f)=\{x,x\}\), contrary to the loopless law in
+\noderef{LooplessMultigraph}.  Therefore \(f\) is not internal to
+\(T_j\).  Throughout the argument the node \(\mathsf{inr}(f)\), rather
+than merely its endpoint pair, was retained, so parallel edge identities
+were never identified.
 \end{proof}
