@@ -33,4 +33,69 @@ theorem ExtensionBaseSupportClassColors {V E : Type*}
     (∀ a : Fin p, gamma a.succ = delta a.castSucc) ∧
       Function.Injective (Fin.cons (gamma 0) delta) := by
 -- BODY
-  sorry
+  constructor
+  · intro a
+    have chain := SupportingPEColorChain G k ett.rounds p e0 input ett.series q w hw
+      indices hincreasing henumerates a
+    rw [hgamma, hdelta] at chain
+    exact Option.some.inj chain
+  · intro a b
+    revert b
+    refine Fin.cases ?_ (fun a => ?_) a
+    · intro b
+      refine Fin.cases ?_ (fun b => ?_) b
+      · intro hab
+        rfl
+      · intro hab
+        exfalso
+        apply hdeltaAvoidsEarlierGamma 0 b (Nat.zero_le _)
+        simpa only [Fin.cons_zero, Fin.cons_succ] using hab.symm
+    · intro b
+      refine Fin.cases ?_ (fun b => ?_) b
+      · intro hab
+        exfalso
+        apply hdeltaAvoidsEarlierGamma 0 a (Nat.zero_le _)
+        simpa only [Fin.cons_zero, Fin.cons_succ] using hab
+      · intro hab
+        rcases lt_trichotomy a b with hlt | heq | hgt
+        · have ha : a.val < p := by omega
+          let x : Fin p := ⟨a.val, ha⟩
+          have hxa : x.castSucc = a := by
+            apply Fin.ext
+            rfl
+          have hxval : x.val = a.val := rfl
+          have hxb : x.succ.val ≤ b.val := by
+            change a.val + 1 ≤ b.val
+            omega
+          have he : delta a = delta b := by
+            simpa only [Fin.cons_succ] using hab
+          have hx : delta a = gamma x.succ := by
+            rw [← hxa]
+            have chain := SupportingPEColorChain G k ett.rounds p e0 input ett.series q w hw
+              indices hincreasing henumerates x
+            rw [hgamma, hdelta] at chain
+            exact (Option.some.inj chain).symm
+          exfalso
+          apply hdeltaAvoidsEarlierGamma x.succ b hxb
+          exact he ▸ hx
+        · exact congrArg Fin.succ heq
+        · exfalso
+          have hb : b.val < p := by omega
+          let x : Fin p := ⟨b.val, hb⟩
+          have hxb : x.castSucc = b := by
+            apply Fin.ext
+            rfl
+          have hxval : x.val = b.val := rfl
+          have hxa : x.succ.val ≤ a.val := by
+            change b.val + 1 ≤ a.val
+            omega
+          have he : delta b = delta a := by
+            simpa only [Fin.cons_succ] using hab.symm
+          have hx : delta b = gamma x.succ := by
+            rw [← hxb]
+            have chain := SupportingPEColorChain G k ett.rounds p e0 input ett.series q w hw
+              indices hincreasing henumerates x
+            rw [hgamma, hdelta] at chain
+            exact (Option.some.inj chain).symm
+          apply hdeltaAvoidsEarlierGamma x.succ a hxa
+          exact he ▸ hx

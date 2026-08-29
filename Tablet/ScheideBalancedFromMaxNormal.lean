@@ -1,8 +1,25 @@
 import Tablet.BalancedGlobalMaximumTriple
+import Tablet.AdjacentEdges
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetElementary
+import Tablet.FixedPairMaximalTashkinovTree
+import Tablet.GlobalMaximumTriple
+import Tablet.Incident
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.LooplessMultigraph
+import Tablet.MissingColors
+import Tablet.NormalGlobalMaximumTriple
+import Tablet.NormalTripleTrunk
+import Tablet.PresentColors
 import Tablet.ScheideGlobalMaximumOrder
 import Tablet.ScheideGraphHeightOdd
 import Tablet.ScheideMaximalContainsEveryTree
 import Tablet.TashTree
+import Tablet.TashkinovOrder
+import Tablet.TashkinovTree
+import Tablet.TreeSequence
+import Tablet.TreeSequenceVertexSet
 import Tablet.TreeUsedColors
 
 -- [TABLET NODE: ScheideBalancedFromMaxNormal]

@@ -4,44 +4,191 @@ tree $T'$ on the same vertex set such that $(T',e_0,\varphi)$ is balanced,
 and every color used on $T'$ was already used on $T$.
 \end{lemma}
 \begin{proof}
-Put $p=h(G)=h(T)$.  By
-\noderef{ScheideGraphHeightOdd}, $p$ is odd.  Keep the prescribed normal
-trunk of $T$.  Among all Tashkinov tree-sequences $S$ for the fixed pair
-$(e_0,\varphi)$ which have this trunk, use only colors from
-\noderef{TreeUsedColors} of $T$, and whose post-trunk edges occur in
-consecutive equal-colored pairs, choose one with a maximum odd number $i$
-of vertices.  Such a sequence exists: the trunk itself is a Tashkinov
-initial segment, has the odd order $p$, and has no post-trunk edges.
-Finiteness of $V(G)$ makes the maximum choice legitimate.
+Write
+\[
+ T=(y_0,e_1,y_1,\ldots,e_{n-1},y_{n-1})
+ \quad\hbox{and}\quad p=h(G)=h(T).
+\]
+The normal data in \noderef{NormalGlobalMaximumTriple} have a global
+field.  By \noderef{GlobalMaximumTriple}, this says simultaneously that
+$(G,e_0,\varphi)$ is a $k$-triple, that $T$ is a Tashkinov tree, and that
+$|V(T)|=t(G)$.  By \noderef{ScheideGraphHeightOdd}, $p$ is odd.  Let
+$Q=\noderef{NormalTripleTrunk}(T)$ be the prescribed initial trunk, with
+vertices $y_0,\ldots,y_{p-1}$ and edge identities
+$e_1,\ldots,e_{p-1}$.
 
-Suppose $i<t(G)$.  Let $y_r$ be the first vertex of the original globally
-maximum tree $T$ not in $S$.  Every earlier original tree vertex belongs
-to $S$.  The original attaching edge $e_r$ joins $y_r$ to an earlier
-vertex and has a color $\gamma$ missing at an earlier original vertex;
-that witness lies in $S$.  Append the identity $e_r$ and $y_r$.  The
-result is a Tashkinov tree of even order $i+1$, and its new color
-$\gamma$ belongs to the used-color set of $T$.
+Consider the Tashkinov tree-sequences $S$ for the fixed pair
+$(e_0,\varphi)$ which begin with exactly $Q$, use on their colored tree
+edges only colors in $\varphi\langle T\rangle$ as defined by
+\noderef{TreeUsedColors}, and, after $Q$, have consecutive pairs
+\[
+ (e_p,e_{p+1}),\ (e_{p+2},e_{p+3}),\ldots
+\]
+of equally colored edges.  This family is nonempty.  Indeed, restrict the
+Tashkinov condition for $T$ to the prefix $Q$: every retained edge keeps
+the same earlier missing-color witness, so \noderef{TashkinovTree} holds
+for $Q$; the tree-sequence clauses in \noderef{TreeSequence} are inherited
+by a prefix.  Its order is the odd number $p$, and it has no post-trunk
+edge.  Every tree-sequence has pairwise distinct vertices by
+\noderef{TreeSequence}, hence has order at most $|V(G)|$.  Thus the set of
+odd orders attained by this nonempty family is a nonempty finite set of
+natural numbers.  Choose a member $S$ with maximum odd order $i$.
 
-By \noderef{TashTree}, the even vertex set is elementary.  Exactly one of
-its vertices misses $\gamma$: at least one does because $\gamma$ was an
-earlier missing-color witness, and elementariness gives uniqueness.
-The $\gamma$-colored edges are a matching.  Counting their incidences at
-this even set gives an odd number of $\gamma$-colored boundary edge
-identities, because all but one vertices are incident with exactly one
-$\gamma$-edge.  In particular such a boundary identity exists.  Append it
-and its outside endpoint.  These two newly appended tree edges both have
-color $\gamma$, so the pairing rule and the used-color restriction are
-preserved, while the odd order has risen from $i$ to $i+2$.  This
-contradicts maximality of $i$.  Therefore $i=t(G)$.
+We first locate this maximum relative to $t(G)$.  The $k$-triple equality
+in \noderef{KTriple}, obtained from the global field above, is
+$\chi'(G)=k+1$, and hence $k=\chi'(G)-1$.  Every candidate $S$ has the same
+$k$-triple and is a Tashkinov tree.  Consequently its cardinality is one
+of the cardinalities over which \noderef{TashkinovOrder} takes its
+maximum, so $|V(S)|=i\leq t(G)$.  On the other hand
+$|V(T)|=t(G)$ by \noderef{GlobalMaximumTriple} (equivalently, by the first
+conclusion of \noderef{ScheideGlobalMaximumOrder}).
 
-Call the resulting full sequence $T'$.  It has the same order as $T$ and
-is a Tashkinov tree for the same fixed pair.  Viewing $T$ as fixed-pair
-maximal, \noderef{ScheideMaximalContainsEveryTree} gives
-$V(T')\subseteq V(T)$; equal finite cardinalities give equality.  The
-unchanged prescribed trunk supplies normal data $N'$ of height $p=h(G)$,
-and the construction supplies every post-trunk equal-color pair.  Hence
-$N'$ is balanced by \noderef{BalancedGlobalMaximumTriple}.  The explicit
-color restriction in the maximizing family gives
-$\varphi\langle T'\rangle\subseteq\varphi\langle T\rangle$, completing
-all three conclusions.
+Suppose for a contradiction that $i<t(G)$.  Since
+$|V(S)|<|V(T)|$, some vertex of $T$ is not in $V(S)$; let $y_r$ be the
+first one.  Both $y_0$ and $y_1$ belong to $V(S)$: the first edge identity
+of both sequences is $e_0$, and the attachment clause of
+\noderef{TreeSequence} says that its two ends are precisely the first two
+vertices.  Thus $r\geq2$, and every $y_j$ with $j<r$ lies in $V(S)$.
+The Tashkinov condition for $T$ supplies a color $\gamma$ and an index
+$a<r$ such that
+\[
+ \varphi(e_r)=\gamma
+ \quad\hbox{and}\quad
+ \gamma\in\overline\varphi(y_a).
+\]
+The attachment clause supplies an index $b<r$ such that $e_r$ has ends
+$y_r$ and $y_b$.  Both $y_a$ and $y_b$ belong to $V(S)$.
+
+Append the edge identity $e_r$ and then $y_r$ to $S$.  We check all data
+rather than merely calling this an append.  The vertex $y_r$ is fresh by
+its choice.  The identity $e_r$ is also fresh: every old tree edge has
+both ends in $V(S)$ by \noderef{TreeSequence}, whereas $e_r$ has the end
+$y_r\notin V(S)$.  It attaches the new vertex to the earlier vertex
+$y_b\in V(S)$.  The old vertices and edge identities remain pairwise
+distinct, the first edge remains $e_0$, and every old Tashkinov witness is
+unchanged.  Finally the displayed witness $y_a\in V(S)$ occurs earlier
+than the new edge and misses its color $\gamma$.  Hence the enlarged
+sequence, say $S^+$, satisfies both \noderef{TreeSequence} and
+\noderef{TashkinovTree}.  Its vertex set $U=V(S^+)$ has even cardinality
+$i+1$.  Moreover $\gamma\in\varphi\langle T\rangle$: it colors the
+original edge $e_r$ with $r\geq2$, exactly as required by
+\noderef{TreeUsedColors}.
+
+Apply \noderef{TashTree} to $S^+$, using the unchanged $k$-triple.  It
+says that $U$ is elementary in the sense of
+\noderef{ColoredVertexSetElementary}.  At least one vertex of $U$, namely
+$y_a$, misses $\gamma$.  No second vertex of $U$ can miss $\gamma$, since
+elementariness makes the missing-color sets of two distinct vertices
+disjoint.  Thus exactly one vertex of $U$ misses $\gamma$.
+
+We now give the incidence count.  By \noderef{MissingColors} and
+\noderef{PresentColors}, the unique missing vertex is incident with no
+$\gamma$-colored edge, while every other vertex of $U$ is incident with at
+least one $\gamma$-colored edge.  It is incident with at most one: if two
+distinct $\gamma$-colored edge identities met there, they would be
+adjacent by \noderef{AdjacentEdges}, contrary to the properness clause of
+\noderef{KTriple} and \noderef{IsProperEdgeColoring}.  Therefore the
+number of pairs
+\[
+ (v,f),\qquad v\in U,\quad v\hbox{ incident with }f,
+ \quad\varphi(f)=\gamma,
+\]
+is exactly $|U|-1=i$, which is odd.
+
+Here incidence has its literal endpoint meaning from
+\noderef{Incident}.  Thus the following partition counts exactly the
+pairs just displayed, rather than only endpoint pairs with multiplicity
+forgotten.
+
+Partition the $\gamma$-colored edge identities meeting $U$ according as
+both ends lie in $U$ or exactly one end lies in $U$.  If $a_0$ and $b_0$
+are the respective numbers of identities, then the incidence count is
+$2a_0+b_0$.  Indeed, an internal identity contributes its two distinct
+ends, distinct by the loopless condition in
+\noderef{LooplessMultigraph}; an identity in the second class contributes
+its unique end in $U$, and every other edge contributes zero.  The second
+class is precisely the set of $\gamma$-colored identities in
+$\noderef{BoundaryEdges}(G,U)$.  Since $2a_0+b_0=i$ is odd, $b_0$ is odd
+and in particular is nonzero.  Choose such a boundary identity $f$, write
+its ends as $u\in U$ and $w\notin U$, and note that
+$\varphi(f)=\gamma$.
+
+Append $f$ and $w$ to $S^+$.  Again, all clauses are explicit.  The
+vertex $w$ is fresh because it is outside $U$.  The edge identity $f$ is
+fresh because every edge identity already in $S^+$ has both ends in $U$,
+whereas $f$ is a boundary edge.  It attaches $w$ to the earlier vertex
+$u\in U$.  All earlier tree and Tashkinov clauses are unchanged, and the
+unique vertex of $U$ missing $\gamma$ is an earlier missing-color witness
+for the new $\gamma$-colored edge.  Hence the twice-enlarged sequence is a
+Tashkinov tree-sequence by \noderef{TreeSequence} and
+\noderef{TashkinovTree}.  Its two new edges $e_r,f$ have the common color
+$\gamma\in\varphi\langle T\rangle$, so they form exactly the next
+post-trunk pair; all earlier pairs and the used-color restriction remain
+unchanged.  Its order is the odd number $i+2$, contradicting the choice of
+$S$.  We have therefore ruled out $i<t(G)$, and the already proved bound
+$i\leq t(G)$ yields $i=t(G)$.
+
+Set $T'=S$.  Before comparing its vertex set with that of $T$, we verify
+the fixed-pair maximal hypothesis needed below.  The global field gives
+that $T$ is Tashkinov.  Let $R$ be any Tashkinov tree for
+$(e_0,\varphi)$ with $V(T)\subseteq V(R)$.  As above,
+\noderef{TashkinovOrder} gives $|V(R)|\leq t(G)=|V(T)|$.  Finite-set
+inclusion gives the reverse cardinal inequality, hence equality of the
+two cardinalities, and inclusion plus equal cardinality gives
+$V(R)=V(T)$.  In particular $V(R)\subseteq V(T)$.  This proves, clause by
+clause, that $T$ is fixed-pair maximal according to
+\noderef{FixedPairMaximalTashkinovTree}.  We may now apply
+\noderef{ScheideMaximalContainsEveryTree} to the $k$-triple, this
+fixed-pair maximal tree $T$, and the Tashkinov tree $T'$, obtaining
+$V(T')\subseteq V(T)$.  Both sets have cardinality $t(G)$, so finite-set
+equality gives
+\[
+ V(T')=V(T).
+\]
+
+It remains to construct the asserted normal and balanced data, rather
+than infer it solely from the common vertex set.  The vertex maps in a
+tree-sequence are injective, and \noderef{TreeSequenceVertexSet} is their
+finite image, so
+$|V(T')|=T'.\operatorname{length}+1$ and
+$|V(T)|=T.\operatorname{length}+1$; their equal orders give equal
+lengths.  Define $N'$ using the following fields of
+\noderef{NormalGlobalMaximumTriple}.
+\begin{itemize}
+\item Its global field consists of the original $k$-triple, the proved
+Tashkinov property of $T'$, and $|V(T')|=t(G)$, and is therefore a
+\noderef{GlobalMaximumTriple}.
+\item Take its height to be $p$.  The lower bound $2\leq p$ is copied from
+$N$, and the upper bound follows because the prescribed $p$-vertex trunk
+is an initial segment of $T'$.  Take the same colors $\alpha,\beta$.
+Since $T'$ begins with exactly the prescribed trunk, its first two
+vertices are the same $y_0,y_1$, so the two missing-color fields are
+unchanged.
+\item Take the same closing edge identity and the index of value $p-1$.
+The entire first $p$ vertices and first $p-1$ edge identities of $T'$ are
+those of $T$.  Therefore the closing-edge endpoint equation and every
+trunk-edge endpoint equation are literally the corresponding equations
+from $N$.
+\item Take the same closing incidence path.  Its simplicity and length
+$2(p-1)$ are unchanged.  Its vertex-node support is exactly the first
+$p$ vertices of $T'$ because that ordered prefix agrees with $T$, and its
+edge-node support is exactly the same closing identity together with the
+same trunk edge identities.  Thus both support equivalences required by
+\noderef{NormalGlobalMaximumTriple} hold for $N'$.
+\end{itemize}
+These checks construct normal globally maximum data $N'$ of exact height
+$p=h(G)$.
+
+Finally consider any one-based post-trunk pair indexed by $2j$ with
+$p<2j<T'.\operatorname{length}+1$.  The defining choice of the family
+gives
+$\varphi(e_{2j-1})=\varphi(e_{2j})$; after shifting to Lean's zero-based
+edge indices, this is exactly the quantified pair clause in
+\noderef{BalancedGlobalMaximumTriple}.  Together with $N'.h=p=h(G)$ it
+proves that $N'$ is balanced.  Only after this balance check, use the
+family's color restriction and \noderef{TreeUsedColors}: every colored
+tree edge of $T'$ has a color in $\varphi\langle T\rangle$, so
+$\varphi\langle T'\rangle\subseteq\varphi\langle T\rangle$.  This proves
+the balanced conclusion, equality of vertex sets, and the required
+used-color inclusion.
 \end{proof}

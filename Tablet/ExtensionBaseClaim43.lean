@@ -102,4 +102,35 @@ theorem ExtensionBaseClaim43 {V E : Type*}
         ett.series.data.delta s.succ = some deltaS →
         ETTStrongInterchangeable ett s terminalSupport rho1 gammaS deltaS := by
 -- BODY
-  sorry
+  dsimp
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · exact ExtensionBaseClaim43Stability ett terminalSupport hterminalSupport
+      jSlot q sigmaN (ett.series.data.coloring jSlot.castSucc) C hterminalJ trace hinvariant
+      hsigmaBefore
+  · exact ExtensionBaseClaim43MissingColors ett terminalSupport hterminalSupport
+      jSlot q sigmaN (ett.series.data.coloring jSlot.castSucc) hterminalJ trace
+      hinvariant hunsupported hclassPrepared
+  · exact ExtensionBaseClaim43TreeEdges ett terminalSupport hterminalSupport
+      jSlot q hjle hqTerminal sigmaN hsigmaProper hsigmaOne hsigmaStable trace
+      hinvariant
+  · exact ExtensionBaseClaim43EdgeEffects ett terminalSupport hterminalSupport
+      jSlot q sigmaN trace hinvariant
+  · intro s gammaS deltaS hs hneq hchosen hgamma hdelta
+    have hactive : s ∈ ExtensionBaseActiveIndices ett terminalSupport
+        hterminalSupport := by
+      simp only [ExtensionBaseSupportClass, Finset.mem_filter] at hs
+      exact hs.1
+    have hnoTrace : ∀ a : Fin trace.steps, trace.slot a ≠ s := by
+      intro a ha
+      have hrest : trace.slot a ∈
+          ExtensionBaseRestorationIndices ett terminalSupport hterminalSupport := by
+        rw [← trace.enumerates]
+        exact Finset.mem_image.mpr ⟨a, Finset.mem_univ _, rfl⟩
+      have hdiff : trace.slot a ∈
+          ExtensionBaseActiveIndices ett terminalSupport hterminalSupport ∧
+          trace.slot a ∉ ExtensionBaseSupportClass ett terminalSupport
+            hterminalSupport terminalSupport := by
+        simpa [ExtensionBaseRestorationIndices] using hrest
+      exact hdiff.2 (by simpa [ha])
+    exact hinvariant.2.2 s terminalSupport gammaS deltaS hactive hneq hnoTrace
+      hchosen hgamma hdelta
