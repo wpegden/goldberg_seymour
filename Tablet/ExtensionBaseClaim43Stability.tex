@@ -14,36 +14,129 @@ part (iii) supplied by \noderef{ExtensionRules}.
 \end{lemma}
 \begin{proof}
 Write the trace colorings as
-\(\sigma^0=\sigma_n,\sigma^1,\ldots,\sigma^r=\varrho_1\).
-Fix a step \(a<r\).  Its invariant says that the switched component
-meets \(T_{t_a}\) at exactly \(v_{t_a}\), that \(T_j\) is an ordered
-initial segment of \(T_{t_a}\), and that \(v_n\prec v_{t_a}\).
-Every vertex in
-\(\noderef{TreeVerticesBefore}(T,v_n)\) therefore belongs to
-\(T_{t_a}\) and differs from \(v_{t_a}\); hence none of its vertex nodes
-belongs to the switched component.
+\(\sigma^0,\sigma^1,\ldots,\sigma^r\), where the initial-coloring and
+output clauses of \noderef{ExtensionBaseRestorationTrace} give
+\(\sigma^0=\sigma_n\) and \(\sigma^r=\varrho_1\).  Denote the reference
+stored tree in \noderef{ExtensionBaseRestorationInvariant} by
+\(T_j=\mathcal T[j_{\rm slot}]\).
 
-If an edge \(f\) incident with one of those vertices belonged to the
-component, its incident vertex node would be adjacent to its edge node
-in \noderef{TwoColorIncidenceGraph} and thus would belong to the same
-component.  This contradicts the preceding paragraph.  Consequently
-\(\sigma^{a+1}(f)=\sigma^a(f)\) for every edge incident with
-\(T(v_n)-v_n\).  In particular, all present and missing color sets at
-those vertices are unchanged.  Induction over the finite trace gives
+We first verify the tree-membership fact needed at every switch.  The
+series certificate \noderef{TashkinovSeries} supplies an Algorithm 3.1
+step certificate at every index.  Starting at the positive stage which
+stores \(T_j\), induct on the number of remaining stages up to the
+penultimate series tree.  At a successor stage the certificate cannot be
+the initial constructor, since its index is positive.  Each of the three
+remaining constructors in \noderef{TashkinovSeriesStep} has an
+\({\tt orderedExtension}\) field saying that the preceding stored tree is
+an ordered initial segment of the succeeding stored tree.  At the base
+stage the initial-segment relation is reflexive.  At the induction step,
+compose the two relations: by
+\noderef{TreeSequenceInitialSegment}, their length inequalities compose,
+and substituting their entrywise vertex and edge equalities gives the
+entrywise equalities for the composite.  Hence \(T_j\) is an ordered
+initial segment of the penultimate series tree.  The
+\({\tt abovePenultimate}\) clause of
+\noderef{ExtendedTashkinovTree} says that this penultimate tree is an
+ordered initial segment of the displayed tree \(T\).  One more composition
+therefore gives
 \[
- \varrho_1(f)=\sigma_n(f)
- \quad\text{on every such incident edge},\qquad
- \overline{\varrho}_1(w)=\overline{\sigma}_n(w)
- \quad(w\in V(T(v_n)-v_n)).                                  \tag{1}
+                         T_j\preceq T.                         \tag{1}
 \]
 
-Now expand the two clauses of
-\noderef{StableColoringBeforeVertex}.  The vertex clause for the desired
-relation follows by composing (1) with the vertex clause of the assumed
-stability of \(\sigma_n\).  If an incident edge has
-\(\varphi_{j-1}\)-color in the controlling missing-color union with
-\(C\), the edge clause of that same assumed stability first identifies
-its \(\sigma_n\)-value with its \(\varphi_{j-1}\)-value, and (1) then
-identifies its \(\varrho_1\)-value with the same value.  These are
-exactly the two required clauses, proving (b1).
+Let \(w\in\noderef{TreeVerticesBefore}(T,v_n)\).  Expanding that
+definition, \noderef{TreeVertexOrder}, and
+\noderef{TreeSequenceVertexSet}, there are displayed indices \(p_w<p_n\)
+of \(T\) containing \(w\) and \(v_n\), respectively.  The hypothesis
+\(v_n\in V(T_j)\) supplies an index \(q_n\) of \(T_j\) containing \(v_n\).
+By (1) and the entrywise clause of
+\noderef{TreeSequenceInitialSegment}, the image of \(q_n\) at the same
+natural position in \(T\) also contains \(v_n\).  Displayed vertices are
+pairwise distinct by \noderef{TreeSequence}, so \(p_n\) is this image of
+\(q_n\).  Thus \(p_w<q_n\) as natural positions; in particular \(p_w\)
+lies inside the length of \(T_j\).  The entrywise clause of (1) then
+identifies the \(p_w\)-entry of \(T_j\) with \(w\).  Consequently
+\[
+        w\in V(T_j)\quad\hbox{for every }w\in V(T(v_n)-v_n).   \tag{2}
+\]
+
+Fix a trace step \(a<r\), and let
+\[
+ K_a=P_{v_{t_a}}(\gamma_{t_a},\delta_{t_a},\sigma^a)
+\]
+be the incidence-graph component defined by
+\noderef{TwoColorComponent}.  The step clause of
+\noderef{ExtensionBaseRestorationInvariant} says that
+\(T_j\preceq\mathcal T[t_a]\), that \(v_n\prec_Tv_{t_a}\), and that the
+vertex-node intersection of \(K_a\) with
+\(V(\mathcal T[t_a])\) is exactly \(\{v_{t_a}\}\).  By (2) and the
+initial-segment definition, \(w\) belongs to
+\(V(\mathcal T[t_a])\).  Moreover, the index inequalities defining
+\noderef{TreeVertexOrder} give
+\(w\prec_Tv_n\prec_Tv_{t_a}\), so the vertex-injectivity clause of
+\noderef{TreeSequence} gives \(w\ne v_{t_a}\).  The exact-intersection
+clause of the invariant now implies
+\[
+                         \operatorname{inl}(w)\notin K_a.      \tag{3}
+\]
+
+Let \(f\) be any edge identity incident with \(w\), in the sense of
+\noderef{Incident}.  Suppose \(\operatorname{inr}(f)\in K_a\).  By the
+connected-component definition in \noderef{TwoColorComponent}, there is
+a walk in the two-color incidence graph from the root vertex-node
+\(\operatorname{inl}(v_{t_a})\) to the edge-node
+\(\operatorname{inr}(f)\).  These two nodes have different sum types, so
+the walk has positive length.  Its last adjacency and
+\noderef{TwoColorIncidenceGraph} show that
+\(\sigma^a(f)\) is one of \(\gamma_{t_a},\delta_{t_a}\).  Since \(f\) is
+incident with \(w\), that same definition makes
+\(\operatorname{inl}(w)\) adjacent to \(\operatorname{inr}(f)\).
+Connected components are closed under adjacency, so
+\(\operatorname{inl}(w)\in K_a\), contradicting (3).  Therefore
+\(\operatorname{inr}(f)\notin K_a\).
+
+The \({\tt transition}\) field of
+\noderef{ExtensionBaseRestorationTrace} identifies
+\(\sigma^{a+1}\) with the exact component switch of \(\sigma^a\) on
+\(K_a\).  By \noderef{TwoColorComponentSwap}, every edge-node outside
+that component keeps its coloring value.  Hence
+\[
+ \sigma^{a+1}(f)=\sigma^a(f)
+ \quad\text{whenever }w\in V(T(v_n)-v_n)\text{ and }f\text{ is incident
+ with }w.                                                       \tag{4}
+\]
+
+Inducting on \(a=0,\ldots,r-1\) in (4), with the zero-step case given
+directly by the initial-coloring field of the trace, gives
+\[
+ \varrho_1(f)=\sigma_n(f)
+ \quad\text{for every edge identity }f\text{ incident with a vertex of
+ }V(T(v_n)-v_n).                                               \tag{5}
+\]
+
+For each such vertex \(w\), the definition
+\noderef{PresentColors} says that a color is present exactly when some
+incident edge identity has that color.  Applying (5) to every incident
+edge identity in both directions therefore makes the present-color sets
+under \(\varrho_1\) and \(\sigma_n\) equal.  Since
+\noderef{MissingColors} defines the missing-color set as the complement
+of the present-color set in the common finite color set, it follows that
+\[
+ \overline{\varrho}_1(w)=\overline{\sigma}_n(w)
+ \quad(w\in V(T(v_n)-v_n)).                                  \tag{6}
+\]
+
+It remains to check the two clauses of
+\noderef{StableColoringBeforeVertex}.  For its missing-set clause, the
+assumed stability gives
+\(\overline{\sigma}_n(w)=\overline{\varphi}_{j-1}(w)\) for every
+\(w\in V(T(v_n)-v_n)\); composing this equality with (6) gives the
+required equality for \(\varrho_1\).  For its edge clause, let \(f\) be
+incident with this vertex set and suppose its
+\(\varphi_{j-1}\)-color belongs to the union of the
+\(\varphi_{j-1}\)-missing colors on that set with \(C\).  The edge clause
+of the assumed stability gives
+\(\sigma_n(f)=\varphi_{j-1}(f)\), while (5) gives
+\(\varrho_1(f)=\sigma_n(f)\).  Their composition is exactly the required
+edge equality.  Both defining clauses hold, so \(\varrho_1\) is
+\((T(v_n)-v_n,C,\varphi_{j-1})\)-stable, proving (b1).
 \end{proof}

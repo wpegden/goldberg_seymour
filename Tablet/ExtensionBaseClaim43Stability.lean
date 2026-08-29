@@ -1,5 +1,20 @@
+import Tablet.ExtendedTashkinovTree
 import Tablet.ExtensionBaseRestorationInvariant
+import Tablet.ExtensionBaseRestorationTrace
+import Tablet.Incident
+import Tablet.MissingColors
+import Tablet.PresentColors
 import Tablet.StableColoringBeforeVertex
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
+import Tablet.TreeSequence
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
+import Tablet.TreeVertexOrder
+import Tablet.TreeVerticesBefore
+import Tablet.TwoColorComponent
+import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ExtensionBaseClaim43Stability]
 theorem ExtensionBaseClaim43Stability {V E : Type*}
