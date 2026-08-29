@@ -60,6 +60,10 @@ import Tablet.ExtensionBaseAlgorithmBTrace
 import Tablet.ExtensionBaseAlgorithmBInvariant
 import Tablet.ExtensionBaseAlgorithmB
 import Tablet.ExtensionBaseClaim44
+import Tablet.OutsideTreeColorSwapStable
+import Tablet.ExtensionBaseCaseTwoObservation19
+import Tablet.ExtensionBaseAlgorithmCTrace
+import Tablet.ExtensionBaseAlgorithmCInvariant
 import Tablet.StrongInterchangeableImpliesInterchangeable
 import Tablet.StrongInterchangeabilityKempePreserved
 import Tablet.ThmScheide

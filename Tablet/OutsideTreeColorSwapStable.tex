@@ -1,0 +1,80 @@
+\begin{lemma}[Stability of a color swap outside a closed tree]
+Let \(T\) be a tree-sequence, let \(\varphi\) be a proper partial
+\(k\)-edge-coloring leaving exactly \(e_0\) uncolored, and suppose that
+\(V(T)\) is closed under \(\varphi\).  Let \(\alpha\ne\beta\) be two
+colors missing on \(T\), and let \(C\subseteq[k]\) be arbitrary.  Define
+\[
+ \psi=\noderef{OutsideTreeColorSwap}(T,\varphi,\alpha,\beta).
+\]
+Then \(\psi\) is proper, leaves exactly \(e_0\) uncolored, and is
+\((T,C,\varphi)\)-stable.  Moreover, every exact edge identity incident
+with \(T\) has the same color under \(\psi\) and \(\varphi\).
+\end{lemma}
+\begin{proof}
+Write \(X=V(T)\).  We first show that no boundary edge of \(X\) has color
+\(\alpha\) or \(\beta\) under \(\varphi\).  By
+\(\noderef{TreeMissingColors}\), choose \(x_\alpha,x_\beta\in X\) at
+which \(\alpha,\beta\), respectively, are missing.  If an exact boundary
+identity \(f\) had, say, color \(\alpha\), then the closedness condition
+\(\noderef{ColoredVertexSetClosed}\), applied to \(f,x_\alpha\), would
+say that \(\alpha\) is not missing at \(x_\alpha\), a contradiction.
+The same argument applies to \(\beta\).  Hence
+\[
+ f\in\noderef{BoundaryEdges}(G,X)
+ \quad\Longrightarrow\quad
+ \varphi(f)\notin\{\mathsf{some}(\alpha),
+                       \mathsf{some}(\beta)\}.                 \tag{1}
+\]
+By the definition of \(\noderef{OutsideTreeColorSwap}\), every
+\(\noderef{TreeIncidentEdge}\)-identity is fixed.  On every other edge,
+the same transposition \(\alpha\leftrightarrow\beta\) is applied, and
+all other values, including \(\mathsf{none}\), are fixed.  In particular,
+\[
+ \psi(f)=\mathsf{none}\quad\Longleftrightarrow\quad
+ \varphi(f)=\mathsf{none}.                                   \tag{2}
+\]
+We verify properness using exact edge identities.  Let \(f\ne g\) be
+adjacent.  If both are incident with \(T\), both are fixed, so equality
+of their new nonempty colors would contradict the properness of
+\(\varphi\) in \(\noderef{IsProperEdgeColoring}\).  If neither is
+incident with \(T\), both old values undergo the same transposition.
+That transposition is injective because \(\alpha\ne\beta\): it exchanges
+the two displayed values and fixes every other option value.  Equality of
+the new colors would therefore again give equality of the old colors,
+contrary to properness.
+
+It remains to consider the mixed case.  Suppose that \(f\) is incident
+with \(T\) and \(g\) is not.  By \(\noderef{AdjacentEdges}\), they share
+a vertex \(w\).  The vertex \(w\) is outside \(X\), since otherwise \(g\)
+would be incident with \(T\).  Choose \(x\in X\) incident with \(f\).
+Then \(x\ne w\), and \(\noderef{Incident}\) together with the two
+endpoint description in \(\noderef{LooplessMultigraph}\) shows that its
+endpoint pair is exactly \(\{x,w\}\); hence
+\(\noderef{BoundaryEdges}\) shows that \(f\) is
+a boundary identity of \(X\).  Consequently (1) says that the old and
+new color of \(f\) is neither \(\alpha\) nor \(\beta\).  The outside
+transposition can give \(g\) this same other color only if \(g\) already
+had it.  Thus a new equality on \(f,g\) would have been an old equality,
+again contradicting properness.  Interchanging \(f\) and \(g\) handles
+the other mixed orientation.  This proves that \(\psi\) is proper.
+
+Equation (2) and the two clauses of
+\(\noderef{IsOneEdgeUncolored}\) show that precisely the same identity
+\(e_0\) is uncolored under \(\psi\).
+
+Finally, every edge incident with a vertex \(x\in X\) is a tree-incident
+edge and is therefore fixed.  The incidence-witness definition of
+\(\noderef{PresentColors}\) gives
+\(\operatorname{present}_\psi(x)=\operatorname{present}_\varphi(x)\),
+and taking complements using \(\noderef{MissingColors}\) gives
+\[
+                  \overline\psi(x)=\overline\varphi(x)
+                  \qquad(x\in X).                            \tag{3}
+\]
+The first clause of \(\noderef{StableColoring}\) holds because every
+tree-incident edge is fixed, without any restriction on its color; the
+second clause is exactly (3).  Thus \(\psi\) is
+\((T,C,\varphi)\)-stable.  The asserted pointwise equality on all
+tree-incident identities was already obtained directly from the outside
+swap definition, completing the proof.
+\end{proof}
