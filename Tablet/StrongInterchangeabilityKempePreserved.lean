@@ -1,10 +1,18 @@
 import Tablet.ETTStrongInterchangeable
+import Tablet.ExtendedTashkinovTree
+import Tablet.Incident
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
+import Tablet.LooplessMultigraph
+import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorComponent
+import Tablet.TwoColorComponentCycle
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorCycle
 import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorPathComponent
 

@@ -18,86 +18,218 @@ is again proper, leaves exactly \(e_0\) uncolored, and
 \(\varphi^*\).
 \end{lemma}
 \begin{proof}
-Write \(K=P\) for the exact connected component through the supplied
-root.  By \noderef{TwoColorPathComponent},
-\(\gamma_t\ne\delta_t\).  Hence
+Let
+\[
+ H_t=I_G(\varphi;\gamma_t,\delta_t),\qquad
+ K=\noderef{TwoColorComponent}(G,\varphi,
+       \gamma_t,\delta_t,z).
+\]
+The first clause of \noderef{TwoColorPathComponent} gives
+\(\gamma_t\ne\delta_t\).  Thus
 \noderef{TwoColorComponentSwapProper}, applied to the assumed properness
 of \(\varphi\), proves that
-\(\varphi^*=\noderef{TwoColorComponentSwap}(\varphi,K)\) is proper.
-The same definition shows pointwise that a value is \(\mathsf{none}\)
-after the switch exactly when it was \(\mathsf{none}\) before the switch:
-on an edge node of \(K\) the definition exchanges the two \(\mathsf{some}\)
-values, and off \(K\) it changes nothing.  The exact-one-uncolored
-hypothesis \noderef{IsOneEdgeUncolored} therefore remains true with the
-same edge \(e_0\).
+\(\varphi^*=\noderef{TwoColorComponentSwap}(
+G,\varphi,\gamma_t,\delta_t,z)\) is proper.
 
-We prove the strong-interchangeability assertion using the same
-first-non-RE witness supplied for slot \(s\) by
-\noderef{ETTStrongInterchangeable}.  The extension kinds, supporting
-vertex, and minimality clauses depend only on the certified series and are
-unchanged by a Kempe switch.  Fix
-\(x\in V(T_s)\setminus\{v_s\}\), and let \(C_x\) be its
-\((\gamma_s,\delta_s)\)-component under \(\varphi\).  The strong
-interchangeability hypothesis at \(s\) says that \(C_x\) is a cycle,
-avoids \(v_s\), and is contained in \(T_{\epsilon(s)}\).  It remains to
-show that this exact component is unchanged by the switch on \(K\).
-
-First suppose \(v_s\ne v_t\).  The explicit cross-class hypothesis says
-that the finite pairs \(\{\gamma_s,\delta_s\}\) and
-\(\{\gamma_t,\delta_t\}\) are disjoint.  Expanding
-\noderef{TwoColorComponentSwap}, only edges whose old color is
-\(\gamma_t\) or \(\delta_t\) can change, and their new color is the other
-member of that same pair.  Thus the set of edges colored
-\(\gamma_s\) or \(\delta_s\), and every incidence between such an edge
-and a vertex, is identical under \(\varphi\) and \(\varphi^*\).
-By \noderef{TwoColorComponent}, the whole component \(C_x\) is therefore
-identical under the two colorings.  Its cycle witness, avoidance of
-\(v_s\), and containment in \(T_{\epsilon(s)}\) all persist.
-
-It remains to treat \(v_s=v_t\).  The alternative in the statement then
-gives \(s<t\).  Let \(r=\epsilon(s)\).  Slot \(t\) is a PE by the
-strong-interchangeability hypothesis at \(t\), so it is not an RE.  If
-\(t<r\), the minimality clause for \(r\) would say that slot \(t\) is an
-RE, a contradiction.  Hence \(r\leq t\).  Every positive constructor of
-\noderef{TashkinovSeriesStep} makes its current tree an ordered initial
-segment of its output tree.  Induction from \(r\) through \(t\), using
-\noderef{TreeSequenceInitialSegment}, therefore gives
+For every edge identity \(a\), expansion of the component-swap definition
+gives
 \[
-             V(T_r)\subseteq V(T_t).                           \tag{1}
+                 \varphi^*(a)=\mathsf{none}
+       \quad\Longleftrightarrow\quad
+                 \varphi(a)=\mathsf{none}.                    \tag{1}
 \]
-Consequently the cycle \(C_x\), which is contained in \(T_r\), is
-contained in \(T_t\); it also avoids the common vertex
-\(v_s=v_t\).
+Indeed, if the edge-node of \(a\) is outside \(K\), the value is fixed.
+If it is in \(K\), the two colored values
+\(\mathsf{some}(\gamma_t)\) and
+\(\mathsf{some}(\delta_t)\) are exchanged, while every other value,
+including \(\mathsf{none}\), is fixed.  The two clauses of
+\noderef{IsOneEdgeUncolored}, together with (1), therefore say that
+\(\varphi^*\) leaves precisely the same edge \(e_0\) uncolored.
 
-We next show that the path component \(K\) meets \(V(T_t)\) in at most
-\(v_t\).  If a vertex \(y\ne v_t\) of \(T_t\) lay in \(K\), strong
-interchangeability at \(t\) would make the component through \(y\) a
-cycle.  Membership of \(y\) in \(K\) identifies that component with
-\(K\), contradicting the path-component clause for \(K\).  This uses the
-definitions \noderef{TwoColorComponentCycle} and
-\noderef{TwoColorPathComponent}: every node on the former's simple closed
-walk has two distinct walk neighbors, while the latter has a node with a
-subsingleton neighbor set.  Since every vertex of \(C_x\) lies in \(T_t\)
-by (1) and \(C_x\) avoids \(v_t\), the two components have no common
-vertex node.  They have no common edge node either.  Indeed, an edge node
-on the cycle has an endpoint vertex adjacent to it in
-\noderef{TwoColorIncidenceGraph}; if that edge node also belonged to
-\(K\), connectedness would put the same endpoint vertex in \(K\), contrary
-to vertex-node disjointness.  Thus the vertex and edge nodes of \(K\) and
-\(C_x\) are disjoint.
+Unpack the hypothesis at slot \(s\) using
+\noderef{ETTStrongInterchangeable}.  It gives
+\(\gamma_s\ne\delta_s\), the exact PE-kind and supporting-vertex
+equalities at slot \(s\), and an index \(r=\epsilon(s)\) such that
+\(s<r\), slot \(r\) is not an RE, every slot strictly between \(s\) and
+\(r\) is an RE, and the required full-component cycle assertion holds at
+every vertex of \(T_s-v_s\).  We retain this exact index \(r\), including
+all of its kind and minimality clauses; none of those clauses mentions the
+coloring being switched.
 
-No edge of \(C_x\) is switched.  Moreover, no switched edge can acquire a
-\(\gamma_s\)- or \(\delta_s\)-incidence at a vertex of \(C_x\): such an
-edge has both endpoint nodes in the component \(K\), while \(K\) is
-disjoint from \(C_x\).  Therefore the two-color incidence graph has the
-same connected component through \(x\) after the switch.  The old cycle
-witness from \noderef{TwoColorComponentCycle} still has exactly that
-support, still avoids \(v_s\), and still lies in
-\(T_{\epsilon(s)}\).
+First suppose that \(v_s\ne v_t\).  The cross-support hypothesis makes
+the two finite color pairs
+\(\{\gamma_s,\delta_s\}\) and
+\(\{\gamma_t,\delta_t\}\) disjoint.  For each edge \(a\), inspection of
+\noderef{TwoColorComponentSwap} then gives both equivalences
+\[
+ \varphi^*(a)=\mathsf{some}(\gamma_s)
+   \Longleftrightarrow
+ \varphi(a)=\mathsf{some}(\gamma_s),\qquad
+ \varphi^*(a)=\mathsf{some}(\delta_s)
+   \Longleftrightarrow
+ \varphi(a)=\mathsf{some}(\delta_s).                           \tag{2}
+\]
+An edge outside \(K\) is fixed; an edge in \(K\) is either fixed or has
+one member of the \(t\)-pair exchanged for the other, and disjointness
+prevents either member of the \(s\)-pair from being gained or lost.
+By the adjacency definition in \noderef{TwoColorIncidenceGraph}, (2)
+makes the entire \((\gamma_s,\delta_s)\)-incidence graph identical before
+and after the switch.  Hence every full component in
+\noderef{TwoColorComponent} is identical.  In particular, each cycle,
+avoidance, and containment clause supplied by the retained witness \(r\)
+continues to hold under \(\varphi^*\).  This proves the assertion in the
+different-support case.
 
-The conclusion holds for every
-\(x\in V(T_s)\setminus\{v_s\}\).  Together with the unchanged PE and
-first-non-RE clauses, this is precisely
-\noderef{ETTStrongInterchangeable} for
-\(\gamma_s,\delta_s\) under \(\varphi^*\), completing the proof.
+We may therefore assume \(v_s=v_t\).  The alternative in the hypotheses
+then yields \(s<t\).  Before comparing any edge-node supports, split on
+the supplied root \(z\).  The only degenerate possibility is
+\[
+ z=\mathsf{inr}(f),\qquad
+ \varphi(f)\ne\mathsf{some}(\gamma_t),\qquad
+ \varphi(f)\ne\mathsf{some}(\delta_t).                         \tag{3}
+\]
+Under (3), expansion of \noderef{TwoColorIncidenceGraph} shows that the
+root edge-node has empty neighbor set in \(H_t\).  Any incidence-graph
+walk starting at that node is therefore constant, so its connected
+component is the singleton \(\{z\}\).  Now consider any edge \(a\).  If
+its edge-node is outside this singleton, the swap fixes it.  If its
+edge-node is in the singleton, injectivity of the \(\mathsf{inr}\) tag
+gives \(a=f\), and both color tests in the swap fail by (3), so it is
+again fixed.  Thus \(\varphi^*=\varphi\) pointwise.  Properness,
+exact-one-uncoloredness, and the original strong-interchangeability
+hypothesis at \(s\) give the conclusion immediately in this case.
+
+For the rest of the proof, either \(z=\mathsf{inl}(u)\) for some vertex
+\(u\), or \(z=\mathsf{inr}(f)\) and \(f\) has color \(\gamma_t\) or
+\(\delta_t\).  We record the consequence needed below:
+\[
+ \mathsf{inr}(a)\in K
+ \quad\Longrightarrow\quad
+ \varphi(a)=\mathsf{some}(\gamma_t)
+       \ \text{or}\
+ \varphi(a)=\mathsf{some}(\delta_t).                           \tag{4}
+\]
+If \(\mathsf{inr}(a)=z\), then the root is an edge-node and (4) is the
+nondegenerate root alternative just retained.  Otherwise, membership in
+the connected component \(K\) supplies an \(H_t\)-walk from \(z\) to
+\(\mathsf{inr}(a)\).  Its endpoints are distinct, so the walk has positive
+length and its last step gives a neighbor of \(\mathsf{inr}(a)\).
+Expanding \noderef{TwoColorIncidenceGraph}, that neighbor must be a vertex
+node incident with \(a\), and the same adjacency says exactly that the
+color of \(a\) is one of the two values in (4).
+
+We next justify the tree containment used in the manuscript.  The
+strong-interchangeability hypothesis at \(t\) says that slot \(t\) has PE
+kind and hence is not an RE.  If \(t<r\), then \(s<t<r\), so the
+minimality clause belonging to the retained first-non-RE witness \(r\)
+would make slot \(t\) an RE, a contradiction.  Therefore \(r\le t\).
+
+Here the inclusion of trees is supplied by the certified series, not just
+by the definition of one step.  The structure
+\noderef{ExtendedTashkinovTree} contains the series
+\({\tt ett.series}\), and \noderef{TashkinovSeries} gives a certificate
+\({\tt ett.series.certified}(q+1)\) at every positive index.  For each
+\(q\) with \(r\le q<t\), unpack this certificate.  Its index is positive,
+so it cannot use the initial constructor of
+\noderef{TashkinovSeriesStep}; each of its SE, PE, and RE constructors has
+an \({\tt orderedExtension}\) field saying that the stored tree at slot
+\(q\) is an ordered initial segment of the stored tree at slot \(q+1\).
+Starting with the reflexive initial segment at \(r\), compose these fields
+through \(q=r,\ldots,t-1\).  Composition is obtained directly from
+\noderef{TreeSequenceInitialSegment}: compose the length inequalities and
+then the entrywise vertex and edge equalities.  Thus \(T_r\) is an ordered
+initial segment of \(T_t\).  Finally, every member of
+\noderef{TreeSequenceVertexSet} is the value of the corresponding stored
+vertex map; the composed vertex equalities therefore give
+\[
+                         V(T_r)\subseteq V(T_t).                \tag{5}
+\]
+
+Fix \(x\in V(T_s)\setminus\{v_s\}\), and write
+\[
+ C_x=\noderef{TwoColorComponent}(G,\varphi,
+           \gamma_s,\delta_s,\mathsf{inl}(x)).
+\]
+The retained witness \(r\) says that \(C_x\) is a full component cycle,
+that \(\mathsf{inl}(v_s)\notin C_x\), and that every vertex-node of
+\(C_x\) belongs to \(V(T_r)\).  By (5), every such vertex lies in
+\(V(T_t)\); since \(v_s=v_t\), the component \(C_x\) avoids \(v_t\).
+
+We claim that a vertex-node of \(K\) which belongs to \(V(T_t)\) must be
+\(\mathsf{inl}(v_t)\).  Otherwise let
+\(y\in V(T_t)-\{v_t\}\) with \(\mathsf{inl}(y)\in K\).
+Strong interchangeability at \(t\) makes the
+\((\gamma_t,\delta_t)\)-component through \(y\) a full component cycle.
+Because \(y\in K\), connected-component equality identifies this
+component with \(K\).  On the other hand,
+\noderef{TwoColorPathComponent} supplies a node of \(K\) whose neighbor
+set is subsingleton.  The full-support equality in
+\noderef{TwoColorComponentCycle} places that node on the simple closed
+walk from \noderef{TwoColorCycle}; at an occurrence of that node, the two
+directions around the simple cycle give two distinct incidence-graph
+neighbors.  This contradicts subsingletonness.  The claim follows.
+Together with the preceding paragraph, it proves
+\[
+ \{\text{vertex-nodes of }C_x\}\cap
+ \{\text{vertex-nodes of }K\}=\varnothing.                    \tag{6}
+\]
+
+We now prove edge-node disjointness, using (4) before invoking an endpoint.
+Every edge-node \(\mathsf{inr}(a)\) in \(C_x\) lies on the full cycle
+witness.  A neighboring step of that cycle and
+\noderef{TwoColorIncidenceGraph} show that
+\(\varphi(a)\) is \(\mathsf{some}(\gamma_s)\) or
+\(\mathsf{some}(\delta_s)\).  Suppose that the same edge-node also lies
+in \(K\).  Then (4) also puts its color in the \(t\)-pair.  Choose either
+endpoint \(y\) of \(a\), whose incidence is expressed by
+\noderef{Incident} for the endpoint pair stored by
+\noderef{LooplessMultigraph}.  Incidence and the \(s\)-pair color make
+\(\mathsf{inl}(y)\) adjacent to \(\mathsf{inr}(a)\) in the
+\((\gamma_s,\delta_s)\)-incidence graph; incidence and (4) make the same
+two nodes adjacent in \(H_t\).  Since a connected component contains
+every neighbor of each of its nodes, \(\mathsf{inl}(y)\) belongs both to
+\(C_x\) and to \(K\), contrary to (6).  Hence
+\[
+ \{\text{edge-nodes of }C_x\}\cap
+ \{\text{edge-nodes of }K\}=\varnothing.                      \tag{7}
+\]
+
+It remains to verify equality of the full component after the switch, not
+merely persistence of one closed walk.  By (7), every edge-node on the old
+cycle is outside \(K\), so \noderef{TwoColorComponentSwap} fixes its exact
+color.  Every adjacency of the old cycle therefore remains an adjacency
+under \(\varphi^*\).  The old cycle is connected and its support is all of
+\(C_x\), so every node of \(C_x\) belongs to the new component through
+\(x\).
+
+Conversely, the old support is closed under every new
+\((\gamma_s,\delta_s)\)-adjacency.  For a vertex-node
+\(\mathsf{inl}(y)\in C_x\), let \(\mathsf{inr}(a)\) be a neighbor under
+\(\varphi^*\).  If \(\mathsf{inr}(a)\in K\), then (4), together with the
+incidence of \(y\) and \(a\), makes \(\mathsf{inl}(y)\) a member of
+\(K\), contradicting (6).  Thus \(\mathsf{inr}(a)\notin K\), the switch
+fixes \(a\), and the same adjacency existed under \(\varphi\); hence
+\(\mathsf{inr}(a)\in C_x\).  For an edge-node
+\(\mathsf{inr}(a)\in C_x\), (7) again says that it is outside \(K\), so
+its color is fixed; each of its new adjacent vertex-nodes was already an
+old adjacent vertex-node and therefore lies in \(C_x\).  Induction along
+any new incidence-graph walk starting at \(x\) now keeps every node of the
+walk inside \(C_x\).  This proves the reverse inclusion and hence the
+exact equality
+\[
+ \noderef{TwoColorComponent}(G,\varphi^*,
+       \gamma_s,\delta_s,\mathsf{inl}(x))=C_x.                 \tag{8}
+\]
+
+The old simple closed walk is still a two-color cycle under
+\(\varphi^*\), and (8) says that its support is exactly the new full
+component.  Its avoidance of \(v_s\) and its vertexwise containment in
+\(V(T_r)=V(T_{\epsilon(s)})\) are properties of that unchanged support.
+Thus all component clauses required by
+\noderef{ETTStrongInterchangeable} hold under \(\varphi^*\) for this
+arbitrary \(x\).  The same is true for every
+\(x\in V(T_s)-\{v_s\}\), while the exact PE kind, supporting vertex, and
+least-non-RE witness \(r\) were retained unchanged.  This proves strong
+interchangeability at \(s\); together with properness and
+exact-one-uncoloredness established above, it completes the proof.
 \end{proof}
