@@ -1,9 +1,18 @@
+import Tablet.DefectiveVertex
+import Tablet.ETTFirstAppearanceIndex
+import Tablet.ExtendedTashkinovLadderStage
+import Tablet.ExtendedTashkinovTree
 import Tablet.ExtensionBaseActiveIndices
 import Tablet.ExtensionBaseSupportClass
 import Tablet.HkuUnsupportedVertexColors
+import Tablet.MaximumDefectiveChoice
 import Tablet.StableColoring
 import Tablet.SupportingPEMissingTransport
 import Tablet.SupportingPEStoredIntersection
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: ExtensionBaseClaimMissingColors]
 theorem ExtensionBaseClaimMissingColors {V E : Type*}

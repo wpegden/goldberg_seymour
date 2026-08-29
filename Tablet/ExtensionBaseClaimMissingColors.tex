@@ -34,47 +34,146 @@ and
 These are exactly Claim 4.1(a3) and (a4).
 \end{lemma}
 \begin{proof}
-The vertex clause of \noderef{StableColoring} gives
+We first record the stage inclusions that will be used at each invocation
+of stability.  The certificate \noderef{ExtendedTashkinovTree} contains a
+\noderef{TashkinovSeries}; by that definition, every slot has a certified
+\noderef{TashkinovSeriesStep}.  At a positive slot the initial constructor
+is impossible, and each of the SE, PE, and RE constructors contains an
+ordered-extension certificate from the current tree to the next tree.
+By \noderef{TreeSequenceInitialSegment}, such a certificate preserves every
+ordered vertex entry, and the definition \noderef{TreeSequenceVertexSet}
+then gives inclusion of the corresponding vertex sets.  Composing these
+inclusions for the slots from \(j\) through \(n-1\) gives
 \[
-                  \overline\sigma_n(x)=\overline\varphi_n(x) \tag{4}
+                         V(T_j)\subseteq V(T_n).                \tag{4}
 \]
-for every (x\in V(T_n)).  The certified ordered initial segments put
-\(V(T_j)\), and all support vertices considered below, inside \(V(T_n)\).
+If \(j=n\), this inclusion is reflexive.  Here the identification of the
+series trees with \(T_j\) and \(T_n\) is exactly the ordered ladder-stage
+convention of \noderef{ExtendedTashkinovLadderStage}; in the Lean indexing,
+the indices called \(jSlot\) and \(q\) have values \(j-1\) and \(n-1\).
+The further initial-segment field \(T_n\subset T\) in
+\noderef{ExtendedTashkinovTree} also shows that every vertex of \(T_j\)
+belongs to the displayed final ETT.
 
-Let (v\in V(T_j)) satisfy the first hypothesis.  No PE between stages
-(j) and (n) is supported at (v): a PE there has index at least (j),
-and (v\in V(T_j)) gives (m(v)\leq j), so such an index would belong
-to the active set \noderef{ExtensionBaseActiveIndices}.  Apply
-\noderef{HkuUnsupportedVertexColors} to the full interval.  It yields
-\(\overline\varphi_{j-1}(v)=\overline\varphi_n(v)\), which combines
-with (4) to prove (1).
+The definition \noderef{ETTFirstAppearanceIndex} makes \(m(x)\) the least
+subscript of an ordered ladder stage containing \(x\).  Consequently, for
+every \(x\in V(T_j)\), the stage \(T_j\) itself is a candidate in that
+minimum and
+\[
+                              m(x)\leq j.                       \tag{5}
+\]
+Conversely, if \(x\in V(T)\) and \(m(x)\leq j\), then the least stage
+containing \(x\) is one of \(T_1,\ldots,T_j\); composing the same certified
+ordered extensions from that stage through \(T_j\) gives
+\[
+                              x\in V(T_j).                      \tag{6}
+\]
 
-For the class (L(w)), apply \noderef{SupportingPEStoredIntersection}
-to its exact enumeration, with terminal bound (n).  It gives
+The vertex clause in the definition \noderef{StableColoring}, applied on
+the stable tree \(T_n\), gives
+\[
+                  \overline\sigma_n(x)=\overline\varphi_n(x)  \tag{7}
+\]
+for every \(x\in V(T_n)\).  In particular, (4) makes (7) available at
+every vertex of \(T_j\).
+
+Now let \(v\in V(T_j)\) satisfy the first hypothesis.  Suppose a round
+\(s\), with \(j\leq s\leq n\), were a PE supported at \(v\).  The lower
+bound is the first clause in \noderef{ExtensionBaseActiveIndices}; its
+second clause is the assumed PE kind; and its existential third clause is
+witnessed by \(v\in V(T)\), the exact chosen-support equality, and (5).
+Thus \(s\) is active.  This contradicts the hypothesis that no active
+round has chosen vertex \(v\).  Hence no PE in the full nonempty interval
+from \(j\) through \(n\) is supported at \(v\).  Applying
+\noderef{HkuUnsupportedVertexColors}, with starting-tree membership
+\(v\in V(T_j)\), yields
+\[
+                  \overline\varphi_{j-1}(v)
+                    =\overline\varphi_n(v).                   \tag{8}
+\]
+Equations (7) and (8) prove (1).
+
+We next establish all premises needed for the two endpoint comparisons for
+the class \(L(w)\).  Write \(b_a=i_a-1\) for the zero-based Lean round in
+the given enumeration.  Its range equality at \(b_0\) says
+\(b_0\in L(w)\).  Unfolding \noderef{ExtensionBaseSupportClass} gives both
+\(b_0\in L\) and the exact equality saying that the chosen vertex at this
+PE is \(w\).  Unfolding \noderef{ExtensionBaseActiveIndices} at \(b_0\)
+then gives
+\[
+ b_0+1=i_0\geq j,\qquad w\in V(T),\qquad m(w)\leq j,            \tag{9}
+\]
+as well as the PE-kind equality.  In the existential clause of the active
+set, its chosen vertex equals \(w\) because both optional chosen-vertex
+values equal the one stored at \(b_0\).  Equation (6) applied to (9) now
+supplies the required starting-tree fact
+\[
+                              w\in V(T_j).                     \tag{10}
+\]
+
+We prove the early endpoint equality, separating the possible empty
+interval.  If \(i_0=j\), then the two endpoint colorings are the same
+indexed coloring, so
+\(\overline\varphi_{j-1}(w)=
+  \overline\varphi_{i_0-1}(w)\) is reflexive.  Suppose instead that
+\(j<i_0\).  The interval of manuscript rounds from \(j\) through
+\(i_0-1\) is then nonempty.  Its zero-based indices run from \(j-1\)
+through \(b_0-1=i_0-2\).  No PE in this interval is supported at \(w\):
+otherwise the exact enumeration through \(n\) would identify its
+zero-based index with some \(b_a\), while strict increase of the
+enumeration makes \(b_0\) its least member.  This contradicts that the
+index is strictly less than \(b_0\).  Apply
+\noderef{HkuUnsupportedVertexColors} to this interval, whose starting
+membership is (10) and whose final zero-based index is \(b_0-1\).
+Its conclusion is
+\[
+                  \overline\varphi_{j-1}(w)
+                    =\overline\varphi_{i_0-1}(w).              \tag{11}
+\]
+
+For the late endpoint, exactness of the enumeration at its last member
+\(b_p=i_p-1\) gives \(b_p\leq n-1\), the PE-kind equality at the positive
+slot \(i_p\), and the exact chosen vertex \(w\).  If \(i_p=n\), the desired
+equality
+\(\overline\varphi_{i_p}(w)=\overline\varphi_n(w)\) is reflexive.
+Suppose \(i_p<n\).  Inspect the certificate at the positive slot \(i_p\),
+supplied by \noderef{TashkinovSeries}.  The exact PE-kind equality rules
+out the initial, SE, and RE constructors of
+\noderef{TashkinovSeriesStep}, so this certificate is its PE constructor.
+The constructor's exact chosen-vertex field identifies the vertex in its
+\noderef{MaximumDefectiveChoice} with \(w\).  That vertex is defective in
+the current tree; by the membership clause of \noderef{DefectiveVertex},
+\(w\in V(T_{i_p})\).  The PE constructor's ordered-extension field, followed
+by \noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}, therefore gives
+\[
+                              w\in V(T_{i_p+1}).                \tag{12}
+\]
+The interval from \(i_p+1\) through \(n\) is nonempty.  It contains no PE
+supported at \(w\): exactness would identify its zero-based index with
+some \(b_a>b_p\), contrary to the fact that \(b_p\) is the last member of
+the strictly increasing enumeration.  Thus
+\noderef{HkuUnsupportedVertexColors}, starting with (12), gives
+\[
+                  \overline\varphi_{i_p}(w)
+                    =\overline\varphi_n(w).                   \tag{13}
+\]
+
+It remains to combine the endpoint equalities with the two already
+established PE identities.  Apply \noderef{SupportingPEStoredIntersection}
+to the given exact enumeration and terminal bound \(n\).  It gives
 \[
                   \overline\varphi_n(w)\cap\mathcal S_w
-                  =\{\delta_p\}.                              \tag{5}
+                    =\{\delta_p\}.                            \tag{14}
 \]
-Equation (4) at (w) changes the left side of (5) to
-\(\overline\sigma_n(w)\cap\mathcal S_w\), proving (2).
-
-Apply \noderef{SupportingPEMissingTransport} to the same enumeration.
-Its endpoint identity is
+The hypothesis \(w\in V(T_n)\) permits (7) at \(w\); substituting it into
+(14) proves (2).  Next, \noderef{SupportingPEMissingTransport} applied to
+the same enumeration gives
 \[
  \overline\varphi_{i_0-1}(w)
    =(\overline\varphi_{i_p}(w)\setminus\{\delta_p\})
-      \cup\{\gamma_0\}.                                     \tag{6}
+      \cup\{\gamma_0\}.                                     \tag{15}
 \]
-Exactness of the enumeration says there is no PE supported at (w)
-between (j) and (i_0-1), nor between (i_p+1) and (n).
-Two applications of \noderef{HkuUnsupportedVertexColors} therefore give
-\[
- \overline\varphi_{j-1}(w)=\overline\varphi_{i_0-1}(w),
- \qquad
- \overline\varphi_{i_p}(w)=\overline\varphi_n(w).             \tag{7}
-\]
-The range equality with \noderef{ExtensionBaseSupportClass} ensures in
-particular that (i_0\geq j), so both applications use the indicated
-ordered intervals without an index shift.  Substitute (7) and then (4)
-into (6).  The result is exactly (3), completing (a4) and the proof.
+Substitute (11) on the left of (15), then (13) and (7) on its right.
+The resulting equality is exactly (3), which completes the proof.
 \end{proof}
