@@ -3,9 +3,15 @@ import Tablet.ETTFirstAppearanceIndex
 import Tablet.ExtensionBaseCaseOneIndices
 import Tablet.ExtensionBaseClosure
 import Tablet.ExtensionBaseSupportClass
+import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovClosure
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
+import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
+import Tablet.TreeVertexOrder
 import Tablet.TreeVerticesBefore
 
 -- [TABLET NODE: ExtensionBaseCaseOneSelection]

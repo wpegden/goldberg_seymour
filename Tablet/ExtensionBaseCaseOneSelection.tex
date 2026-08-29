@@ -66,63 +66,147 @@ and, for \(L_1^*=\noderef{ExtensionBaseCaseOneIndices}\),
 \]
 \end{lemma}
 \begin{proof}
-Put \(S(L_1)=\bigcup_{i\in L_1}S_i\).  By (C1), the finite set
+Put
+\[
+ S(L_1)=\bigcup_{i\in L_1}S_i
+ =\bigcup_{a\in\operatorname{Fin}(p+1)}
+       \mathtt{ett.series.data.stored}(\mathtt{indices}(a)+1).
+\]
+Unfold the vertex union in \noderef{TreeMissingColors} in (C1).  Membership
+in the resulting biunion and intersection says exactly that there are a
+vertex \(x\in V(T'_j)\setminus\{v_n\}\) and a color
+\(c\in\overline\varrho_1(x)\cap S(L_1)\).  Consequently the finite set
 \[
  A=\{x\in V(T'_j)\setminus\{v_n\}:
           \overline\varrho_1(x)\cap S(L_1)\ne\varnothing\}
 \]
-is nonempty.  The duplicate-free vertex list in
-\noderef{TreeSequence} gives
-a strict total order on its vertex set, as encoded by
-\noderef{TreeVertexOrder}.  Therefore \(A\) has a first member \(u\).
-This gives \(u\ne v_n\), the asserted minimality property, and the
-membership witness \(u\in V(T'_j)\).
+is nonempty.
 
-Equation (U) puts \(\delta_p\) in
-\(\overline\varrho_1(v_n)\).  Since \(V(T'_j)\) is elementary under
-\(\varrho_1\), the definition
-\noderef{ColoredVertexSetElementary}, applied to the distinct vertices
-\(v_n,u\), shows that \(\delta_p\notin
-\overline\varrho_1(u)\).  Choose
-\(c\in\overline\varrho_1(u)\cap S(L_1)\).  By the exact stored-pair
-identities and (4), every color of \(S(L_1)\) is one of
+We make the choice of its first member explicit.  By
+\noderef{TreeSequenceVertexSet}, every member of \(A\) has a displayed
+position in \(T'_j\).  Hence the nonempty finite set
 \[
-                    \gamma_0,\delta_0,\ldots,\delta_p,
+ I_A=\{i\in\operatorname{Fin}(T'_j.\mathtt{length}+1):
+                      T'_j.\mathtt{vertex}(i)\in A\}
 \]
-and \(\delta_a=\gamma_{a+1}\) for \(a<p\).  Since \(c\ne\delta_p\),
-it follows that \(c=\gamma_b\) for some \(0\leq b\leq p\).  Choose the
-least such \(b\).  Then
-\(\gamma_b\in\overline\varrho_1(u)\), while no
+has a least natural-valued position \(i_u\).  Set
+\(u=T'_j.\mathtt{vertex}(i_u)\).  The vertex map is injective by
+\noderef{TreeSequence}, so a vertex of \(V(T'_j)\) has only one displayed
+position.  Thus, if \(w\in A\) has position \(i_w\), minimality gives
+\(i_u\leq i_w\); equality gives \(w=u\), and strict inequality gives
+\(u\prec_{T'_j}w\) by \noderef{TreeVertexOrder}.  This proves
+\(u\in V(T'_j)\), \(u\ne v_n\), and the universal order-minimality
+clause in the conclusion.
+
+Before applying elementariness, we verify that \(v_n\) belongs to the
+closure.  Write \(T_j\) for the stored tree at \(j_{\rm slot}\).  In the
+prefix from \noderef{TreeSequencePrefix}, the position whose value is
+\(\mathtt{terminalPosition.val}\) is a valid last position because that
+prefix has length \(\mathtt{terminalPosition.val}\).  The defining
+entrywise equality for this prefix, together with \(\mathtt{hseed}\) and
+\(\mathtt{hterminalAt}\), therefore gives a position of the seed whose
+vertex is exactly \(v_n\).  Unfolding \noderef{TreeSequenceVertexSet}
+shows
+\[
+                         v_n\in V(\mathtt{seed}).             \tag{16}
+\]
+Now unfold \noderef{TashkinovClosure} and then
+\noderef{TashkinovAugmentationSequence}.  The first closure conjunct is a
+reflexive-transitive chain of one-step augmentations from the seed to
+\(T'_j\).  At one such step, \noderef{TashkinovAugmentation} supplies
+\noderef{TreeSequenceInitialSegment} from the old sequence to the new one.
+Its entrywise vertex equality, together with
+\noderef{TreeSequenceVertexSet}, sends every old displayed vertex at
+position \(i\) to the new displayed vertex at the cast of the same
+position.  Thus one augmentation gives inclusion of vertex sets.  Induction
+along the reflexive-transitive chain, using equality in the reflexive case
+and composing these inclusions in the transitive case, yields
+\[
+                    V(\mathtt{seed})\subseteq V(T'_j).
+\]
+Combining this with (16) proves \(v_n\in V(T'_j)\).
+
+Equation (U) now puts \(\delta_p\) both in
+\(\overline\varrho_1(v_n)\) and in \(S(L_1)\).  Since \(u\ne v_n\) and
+both vertices have just been proved to lie in \(V(T'_j)\), the definition
+\noderef{ColoredVertexSetElementary} makes their missing-color sets
+disjoint.  In particular,
+\[
+                       \delta_p\notin\overline\varrho_1(u).  \tag{17}
+\]
+Choose \(c\in\overline\varrho_1(u)\cap S(L_1)\), which is possible since
+\(u\in A\).  Unfolding the finite biunion and using the exact stored-pair
+identities shows that \(c=\gamma_a\) or \(c=\delta_a\) for some
+\(a\in\operatorname{Fin}(p+1)\).  In the second alternative, either
+\(a=\operatorname{Fin.last}(p)\), contrary to (17), or there is a unique
+\(t\in\operatorname{Fin}(p)\) with \(a=t.\mathtt{castSucc}\).  In the
+latter case the chain equality in (4) gives
+\(c=\delta_{t.\mathtt{castSucc}}=\gamma_{t.\mathtt{succ}}\).
+Therefore the set of positions \(a\) for which
+\(\gamma_a\in\overline\varrho_1(u)\) is nonempty.  Choose its least
+member \(b\).  Then \(\gamma_b\in\overline\varrho_1(u)\), while no
 \(\gamma_a\) with \(a<b\) is missing at \(u\).
 
-We prove (13).  If \(b=0\), then \(\gamma_b=\gamma_0\) is missing at
-\(v_n\) under \(\varphi_{j-1}\) by hypothesis.  The vertices of
-\(T_j\) are elementary under that coloring, so no other vertex of
-\(T_j\) misses \(\gamma_0\).  If \(b>0\), equation (4) gives
-\(\gamma_b=\delta_{b-1}\), and the Part I(2) hypothesis says that this
-color is missing at no vertex of \(T_j\) under
-\(\varphi_{j-1}\).  Thus in either case \(u\ne v_n\) and
-\(\gamma_b\) is not missing at \(u\) if \(u\in V(T_j)\), because the
-Claim 4.3 agreement hypothesis identifies the two missing-color sets at
-every vertex of \(T_j-v_n\).  This contradicts the choice of \(b\), so
-\(u\notin V(T_j)\), proving (13).
+We prove (13).  The equality \(\mathtt{hterminalAt}\), unfolded through
+\noderef{TreeSequenceVertexSet}, also gives \(v_n\in V(T_j)\).  Suppose,
+for a contradiction, that \(u\in V(T_j)\).  Since \(u\ne v_n\), this puts
+\(u\) in the erased set on which the Claim 4.3 agreement hypothesis
+applies.  If \(b=0\), then \(\gamma_b=\gamma_0\) is missing at \(v_n\)
+under \(\varphi_{j-1}\) by hypothesis.  The elementariness of \(V(T_j)\)
+under that coloring and the distinctness of \(u,v_n\) imply that
+\(\gamma_0\) is not missing at \(u\) under \(\varphi_{j-1}\).  Agreement
+then says it is not missing at \(u\) under \(\varrho_1\), contrary to the
+choice of \(b\).  If \(b>0\), write \(b=t.\mathtt{succ}\) for the unique
+\(t\in\operatorname{Fin}(p)\).  Equation (4) gives
+\(\gamma_b=\delta_{t.\mathtt{castSucc}}\).  The Part I(2) hypothesis
+excludes this delta color from \noderef{TreeMissingColors} of \(T_j\), so
+unfolding that vertex biunion shows that it is not missing at \(u\) under
+\(\varphi_{j-1}\).  Agreement again contradicts the choice of \(b\).
+Thus \(u\notin V(T_j)\), which is (13).
 
-For (14), take a vertex \(x\) of the prefix \(T'_j(u)-u\).  If
-\(x\ne v_n\), then \(x\) occurs strictly before \(u\), so minimality
-of \(u\) gives
-\(\overline\varrho_1(x)\cap S(L_1)=\varnothing\).  If
-\(x=v_n\), equation (U) says that the same intersection is exactly
-\(\{\delta_p\}\).  After deleting \(\delta_p\) from the color side,
-both cases have empty intersection.  Taking the union over the vertices
-in \noderef{TreeVerticesBefore} proves (14).
+For (14), suppose that a color \(d\) belongs to its left-hand
+intersection.  Unfolding \noderef{TreeVerticesBefore} gives a vertex
+\(x\in V(T'_j)\) with \(x\prec_{T'_j}u\),
+\(d\in\overline\varrho_1(x)\), and
+\(d\in S(L_1)\setminus\{\delta_p\}\).  If \(x=v_n\), equation (U) forces
+\(d=\delta_p\), contradicting the last membership.  If \(x\ne v_n\),
+then \(x\in A\).  The minimality already proved for \(u\) says that either
+\(x=u\) or \(u\prec_{T'_j}x\).  The first possibility is incompatible
+with \(x\prec_{T'_j}u\), and the second gives positions simultaneously
+strictly increasing in both directions.  These contradictions follow
+directly by unfolding \noderef{TreeVertexOrder} and using the position
+injectivity in \noderef{TreeSequence}.  No such \(d\) exists, so the
+intersection is empty and (14) follows.
 
-It remains to prove (15).  By definition,
-\(L_1^*\) consists of the positions \(a<b\).  Its stored colors belong
-to \(\{\gamma_0,\delta_0,\ldots,\delta_{b-1}\}\).  The injectivity in
-(4) makes \(\delta_p\) distinct from every color in this list; hence
-\(\delta_p\notin\bigcup_{i\in L_1^*}S_i\).  Intersect the containment
-\(\bigcup_{i\in L_1^*}S_i\subseteq S(L_1)\) with (U).  The intersection
-can contain only \(\delta_p\), which has just been excluded, so it is
-empty.  This is the second assertion of (15), and completes all the
-Case 1 selection properties.
+It remains to prove (15).  Unfold
+\noderef{ExtensionBaseCaseOneIndices}.  Membership in its filtered image
+says exactly that a slot is \(\mathtt{indices}(a)\) for a position
+\(a\) with \(a.\mathtt{val}<b.\mathtt{val}\).  Hence, using
+\(\mathtt{hstored}\), every color in its stored-color biunion is either
+\(\gamma_a\) or \(\delta_a\) for such an \(a\).
+
+We check that neither possibility can equal \(\delta_p\).  The injective
+map in (4),
+\[
+ \operatorname{Fin.cons}(\gamma_0,\delta),
+\]
+lists \(\gamma_0\) at position zero and \(\delta_a\) at successor
+position \(a+1\).  Since \(a<b\leq p\), the position \(a+1\) is strictly
+below the position \(p+1\) of \(\delta_p\); injectivity therefore gives
+\(\delta_a\ne\delta_p\).  For \(\gamma_a\), if \(a=0\), its position
+zero is distinct from \(p+1\).  If \(a>0\), write
+\(a=t.\mathtt{succ}\); (4) identifies \(\gamma_a\) with
+\(\delta_{t.\mathtt{castSucc}}\), whose position in the same injective
+map is \(a<p+1\).  Thus \(\gamma_a\ne\delta_p\) as well.  This proves
+\[
+          \delta_p\notin\bigcup_{i\in L_1^*}S_i.
+\]
+The filtered image is contained in the full image, so its stored-color
+biunion is contained in \(S(L_1)\).  A color in
+\(\overline\varrho_1(v_n)\cap\bigcup_{i\in L_1^*}S_i\) would therefore
+belong to \(\overline\varrho_1(v_n)\cap S(L_1)\), which is
+\(\{\delta_p\}\) by (U).  It would have to equal \(\delta_p\), contrary
+to the exclusion just proved.  The intersection is empty.  This is the
+second assertion of (15), and completes all the Case 1 selection
+properties.
 \end{proof}
