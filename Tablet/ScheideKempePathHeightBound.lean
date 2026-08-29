@@ -1,6 +1,9 @@
 import Tablet.FixedPairMaximalTashkinovTree
 import Tablet.GlobalMaximumTriple
+import Tablet.Incident
+import Tablet.IsOneEdgeUncolored
 import Tablet.KTriple
+import Tablet.LooplessMultigraph
 import Tablet.MissingColors
 import Tablet.NormalGlobalMaximumTriple
 import Tablet.ScheideGraphHeight

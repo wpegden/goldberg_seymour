@@ -14,78 +14,286 @@ edge identities on the path; the additional one converts edge count to
 multigraph vertex count.
 \end{lemma}
 \begin{proof}
-Write $X=V(T)$ as in \noderef{TreeSequenceVertexSet}.  The globally maximum hypothesis in
-\noderef{GlobalMaximumTriple} says that $T$ is a Tashkinov tree for the
-$k$-triple $(G,e_0,\varphi)$ and that $|X|=t(G)$.  It also makes $T$
-maximal for this fixed pair in the sense of
-\noderef{FixedPairMaximalTashkinovTree}.  Indeed, if a Tashkinov tree $S$
-for the same pair had $X\subseteq V(S)$, then the definition
-\noderef{TashkinovOrder}, applied using the $k=\chi'(G)-1$ equality in
-\noderef{KTriple}, gives $|V(S)|\leq t(G)=|X|$.  Finiteness and the
-inclusion therefore give $V(S)=X$.
-
-Apply \noderef{ScheideMaximalKempePath} with $S=T$, indices $0<1$, and
-the prescribed colors $\alpha,\beta$.  It gives
-$\alpha\ne\beta$ and a simple path $P$ in the two-color incidence graph
-\noderef{TwoColorIncidenceGraph}, from the vertex-node $y_0$ to the
-vertex-node $y_1$, whose support is exactly the full component
-\noderef{TwoColorComponent} through $y_0$.  That result also gives
-$4\mid\operatorname{length}(P)$ and places every vertex-node of $P$ in
-$X$.  Notice that the path alternates between vertex-nodes and individual
-edge-nodes.  Thus an incidence length of $2m$ represents exactly $m$
-multigraph edge identities, even when two such identities have the same
-unordered pair of endpoints.
-
-It remains to compare this prescribed path with $h(G)$.  Reverse $P$ and
-write its multigraph vertices and edge identities as
+Put $y_0=T.vertex(0)$, $y_1=T.vertex(1)$, and
+$X=V(T)$, where the last notation has the meaning in
+\noderef{TreeSequenceVertexSet}.  We first derive the fixed-pair
+maximality needed below.  By \noderef{GlobalMaximumTriple}, the hypotheses
+give all three assertions
 \[
- y_1,f_m,z_{m-1},f_{m-1},\ldots,z_1,f_1,y_0,
- \qquad m=\operatorname{length}(P)/2.
+ (G,e_0,\varphi)\text{ is a $k$-triple},\qquad
+ T\text{ is a Tashkinov tree},\qquad |X|=t(G).                \tag{1}
 \]
-The edge identities $f_1,\ldots,f_m$ are pairwise distinct because $P$
-is a simple incidence path.  None equals $e_0$: by
-\noderef{TwoColorIncidenceGraph} every displayed edge-node is colored
-$\alpha$ or $\beta$, whereas the $k$-triple clause
-\noderef{KTriple} says that $e_0$ is uncolored.  The endpoints $y_0,y_1$
-are distinct, so the positive path length together with
-$4\mid\operatorname{length}(P)$ gives $m\geq2$.  Form an initial tree
-$U$ by starting with
-$y_0,e_0,y_1$, then adjoining successively
-$f_m,z_{m-1},\ldots,f_2,z_1$; reserve $f_1$ as the closing edge from
-$z_1$ to $y_0$.  This construction uses the actual edge-nodes of $P$, so
-parallel edges are never identified.  Simplicity of $P$, injectivity in
-\noderef{TreeSequence}, and looplessness give distinct displayed vertices,
-distinct displayed tree-edge identities, and the required attachment
-equalities.
-
-The path colors alternate between $\alpha$ and $\beta$.  Every colored
-tree edge added after $e_0$ therefore has a missing-color witness among
-$y_0,y_1$, by the two prescribed hypotheses and
-\noderef{MissingColors}.  Hence $U$ satisfies
-\noderef{TashkinovTree}.  The same fixed-pair maximality established in
-the first paragraph now lets
-\noderef{ScheideMaximalExtendsEveryTree} extend $U$, without changing its
-ordered initial segment, to a Tashkinov tree $T'$ with $V(T')=X$.  The
-initial-segment assertion is entrywise equality in the sense of
-\noderef{TreeSequenceInitialSegment}.  The $k$-triple is unchanged, and
-$|V(T')|=|X|=t(G)$, so $T'$ is again globally
-maximum.
-
-The retained initial segment, the reversed incidence path, and the
-closing identity $f_1$ define normal data in the sense of
-\noderef{NormalGlobalMaximumTriple}.  Its chosen height is the number of
-multigraph vertices on $P$, namely
-$m+1=\operatorname{length}(P)/2+1$.  The support clauses hold because the
-incidence path is simple: its vertex-nodes are precisely the $m+1$
-vertices of the initial segment, and its edge-nodes are precisely the
-$m-1$ added tree identities together with the closing identity.
-
-Finally this normal globally maximum triple is one of the witnesses over
-which \noderef{ScheideGraphHeight} takes its finite maximum.  Its height
-is at most $|V(T')|\leq |V(G)|$, so it lies in the defining finite range.
-Consequently
+Let $S$ be any Tashkinov tree for the same $e_0$ and $\varphi$ such that
+$X\subseteq V(S)$.  The equality $\chi'(G)=k+1$ in
+\noderef{KTriple} says that the integer called $k$ here is exactly
+$\chi'(G)-1$.  Hence $S$, together with this same edge and coloring, is
+one of the candidates in the maximum defining \noderef{TashkinovOrder}.
+It follows that $|V(S)|\leq t(G)$.  On the other hand, the inclusion and
+(1) give $t(G)=|X|\leq |V(S)|$.  Thus $|V(S)|=|X|$, and equality of the
+cardinalities of these finite sets together with $X\subseteq V(S)$ gives
+$V(S)=X$, in particular $V(S)\subseteq X$.  This is every clause of
+\noderef{FixedPairMaximalTashkinovTree}: the first clause is the
+Tashkinov-tree assertion in (1), and the implication just proved is its
+maximality clause.  Therefore
 \[
- \operatorname{length}(P)/2+1=m+1\leq h(G),
+ T\text{ is fixed-pair maximal for }(e_0,\varphi).                \tag{2}
 \]
-which proves the asserted bound for the originally prescribed pair.
+
+Apply \noderef{ScheideMaximalKempePath} with its two tree arguments both
+equal to $T$, with indices $0<1$, and with the prescribed colors
+$\alpha,\beta$.  The hypotheses on the missing colors agree literally
+with those in that lemma.  We obtain $\alpha\ne\beta$ and an incidence
+path $P$ from the vertex-node $y_0$ to the vertex-node $y_1$ such that
+\[
+ \begin{split}
+ &P\text{ is simple},\qquad
+ \operatorname{supp}(P)=
+   \operatorname{Comp}_{\alpha,\beta}(y_0),\qquad
+ 4\mid\operatorname{length}(P),                                   \tag{3}\\
+ &\mathrm{inl}(v)\in\operatorname{supp}(P)
+      \Longrightarrow v\in X.                                    \tag{4}
+ \end{split}
+\]
+Here the component is exactly \noderef{TwoColorComponent}; thus (3)--(4)
+already give the component, divisibility, and containment conclusions
+required in the statement.  It remains only to prove the height bound for
+this same $P$.
+
+Unfold \noderef{TwoColorIncidenceGraph}.  Its adjacencies always join a
+vertex-node to an edge-node, so $P$ alternates between the two sides.
+Because it starts and ends on the vertex side, write
+\[
+ P=(\mathrm{inl}(a_0),\mathrm{inr}(f_1),\mathrm{inl}(a_1),
+       \ldots,\mathrm{inr}(f_m),\mathrm{inl}(a_m)),                \tag{5}
+\]
+where $a_0=y_0$, $a_m=y_1$, and
+\[
+ 2m=\operatorname{length}(P),\qquad
+ m=\operatorname{length}(P)/2.                                   \tag{6}
+\]
+The path is simple, so the vertices $a_0,\ldots,a_m$ are pairwise
+distinct and the individual edge identities $f_1,\ldots,f_m$ are
+pairwise distinct.  This conclusion concerns the nodes
+$\mathrm{inr}(f_r)$ and therefore does not identify parallel edge
+identities that happen to have equal endpoints.
+
+For later use we now determine the endpoints and color of every one of
+these identities.  The two consecutive adjacencies at
+$\mathrm{inr}(f_r)$ in (5), when expanded using
+\noderef{TwoColorIncidenceGraph}, give
+\[
+ \noderef{Incident}(G,a_{r-1},f_r),\qquad
+ \noderef{Incident}(G,a_r,f_r),qquad
+ \varphi(f_r)=\alpha\ \hbox{or}\ \varphi(f_r)=\beta.             \tag{7}
+\]
+We stress the endpoint conclusion encoded by the first two assertions.
+By \noderef{Incident}, the first assertion lets us write the unordered
+endpoint pair as $G.\operatorname{ends}(f_r)=\{a_{r-1},w\}$ for some
+$w$.  The loopless clause of \noderef{LooplessMultigraph} gives
+$w\ne a_{r-1}$.  The second incidence assertion says that $a_r$ is one of
+these two endpoints.  Simplicity of $P$ gives
+$a_r\ne a_{r-1}$, so $a_r=w$.  Consequently, for every
+$1\leq r\leq m$,
+\[
+       G.\operatorname{ends}(f_r)=\{a_{r-1},a_r\}.                \tag{8}
+\]
+This derives the exact unordered endpoint equality from the two incidence
+adjacencies for each actual identity $f_r$.
+
+The first two vertices of the original tree are distinct by the vertex
+injectivity clause of \noderef{TreeSequence}; hence $y_0\ne y_1$, and
+$P$ has positive length.  A positive integer divisible by four is at
+least four, so (3) and (6) give
+\[
+                         m\geq2.                                 \tag{9}
+\]
+Moreover none of the $f_r$ equals $e_0$.  Indeed, (7) says that every
+$f_r$ is colored.  The $k$-triple assertion in (1), unfolded through
+\noderef{KTriple} and \noderef{IsOneEdgeUncolored}, says that $e_0$ is
+uncolored.  Therefore
+\[
+                       f_r\ne e_0\quad(1\leq r\leq m).            \tag{10}
+\]
+
+We next construct the reversed-path initial tree without suppressing any
+of its indices.  Define
+\[
+ U=(b_0,g_0,b_1,\ldots,g_{m-1},b_m)
+\]
+in the notation of \noderef{TreeSequence} by using the following Lean
+zero-based vertex and edge maps:
+\[
+ \begin{array}{c|c@{\qquad}c|c}
+ j&b_j&j&g_j\\ \hline
+ 0&a_0=y_0&0&e_0\\
+ 1&a_m=y_1&1\leq j\leq m-1&f_{m+1-j}\\
+ 2\leq j\leq m&a_{m+1-j}&&
+ \end{array}                                                       \tag{11}
+\]
+Thus, in the paper's alternating notation,
+\[
+ U=(y_0,e_0,y_1,f_m,a_{m-1},f_{m-1},a_{m-2},
+          \ldots,f_2,a_1),                                       \tag{12}
+\]
+and $U$ has length $m$.
+
+We verify every tree-sequence clause in \noderef{TreeSequence}.  Its
+length is positive by (9).  The displayed vertex map is a permutation of
+$a_0,\ldots,a_m$, so it is injective by simplicity of $P$.  The displayed
+edge map is injective by pairwise distinctness of the $f_r$ and (10).
+Its first edge is $e_0$ by definition.  For the first attachment, apply
+the attachment clause of the original $T$ at its zero-based edge index
+$0$.  Its only earlier vertex index is $0$, while its new vertex index is
+$1$, and its first-edge clause identifies that edge with $e_0$; hence
+\[
+             G.\operatorname{ends}(e_0)=\{y_1,y_0\}
+                   =\{b_1,b_0\}.                                \tag{13}
+\]
+For a remaining edge index $1\leq j\leq m-1$, put
+$r=m+1-j$, so $2\leq r\leq m$.  Equations (8) and (11) give
+\[
+ G.\operatorname{ends}(g_j)
+   =G.\operatorname{ends}(f_r)
+   =\{a_{r-1},a_r\}=\{b_{j+1},b_j\}.                             \tag{14}
+\]
+Thus $g_j$ attaches the new vertex $b_{j+1}$ to the immediately preceding
+vertex $b_j$, which is an allowed earlier vertex.  Equations (13)--(14)
+prove all attachment clauses, so $U$ is a TreeSequence, with the actual
+edge identities retained throughout.
+
+We also verify the Tashkinov condition of \noderef{TashkinovTree} for
+$U$.  There is nothing to prove for the distinguished edge at zero-based
+index $0$.  Let $1\leq j\leq m-1$.  By (7), the edge
+$g_j=f_{m+1-j}$ has color $\alpha$ or color $\beta$.  In the first case,
+the given $\alpha\in\overline\varphi(y_0)$, interpreted by
+\noderef{MissingColors}, supplies the earlier witness $b_0=y_0$.  In the
+second case, the given $\beta\in\overline\varphi(y_1)$ supplies the
+earlier witness $b_1=y_1$.  Both indices $0$ and $1$ precede the newly
+adjoined vertex index $j+1$ because $j\geq1$.  Hence every required edge
+has an earlier missing-color witness.  Notice that this argument uses
+only the disjunction in (7); it neither assumes nor needs alternation of
+the colors along $P$.  We have proved
+\[
+                    U\text{ is a Tashkinov tree}.                 \tag{15}
+\]
+
+Apply \noderef{ScheideMaximalExtendsEveryTree} to the $k$-triple in (1),
+the fixed-pair maximal tree in (2), and the Tashkinov tree (15).  It gives
+a Tashkinov tree $T'$ such that
+\[
+ V(T')=X,\qquad U\text{ is an ordered initial segment of }T'.    \tag{16}
+\]
+By \noderef{TreeSequenceInitialSegment}, the second assertion means
+precisely that
+\[
+ m=U.\operatorname{length}\leq T'.\operatorname{length}          \tag{17}
+\]
+and that $T'.vertex(j)=b_j$ for $0\leq j\leq m$ and
+\[
+ T'.edge(j)=g_j\quad\text{for }0\leq j<m.                        \tag{18}
+\]
+The same $k$-triple is still in force, $T'$ is Tashkinov by construction,
+and (1) and (16) give $|V(T')|=|X|=t(G)$.  These are exactly the three
+clauses of \noderef{GlobalMaximumTriple}, so
+\[
+                   (T',e_0,\varphi)\text{ is globally maximum}.  \tag{19}
+\]
+
+We now instantiate \noderef{NormalGlobalMaximumTriple} field by field.
+Choose height
+\[
+                    p=m+1                                      \tag{20}
+\]
+and choose as its last index the index $m$ of $T'$.  This is a legal index
+by (17), it satisfies $m+1=p$, and (9) gives $2\leq p$, while (17) gives
+$p\leq T'.\operatorname{length}+1$.  Use the same $\alpha,\beta$ as the
+two colors.  Equations (18) at indices $0$ and $1$ identify the first two
+vertices of $T'$ with $y_0,y_1$, so the two prescribed missing-color
+hypotheses give exactly the `alpha_missing' and `beta_missing' fields.
+For the closing edge choose the individual identity $f_1$.  At index $m$,
+(11) and (18) give $T'.vertex(m)=b_m=a_1$, while
+$T'.vertex(0)=a_0$; hence (8) for $r=1$ is precisely
+\[
+ G.\operatorname{ends}(f_1)
+    =\{T'.vertex(m),T'.vertex(0)\},                               \tag{21}
+\]
+with the order immaterial in the unordered pair.  This proves the exact
+closing-end field.
+
+Take the reversal of $P$ as the stored closing walk.  It starts at
+$a_m=y_1=T'.vertex(1)$ and ends at
+$a_0=y_0=T'.vertex(0)$.  Reversal preserves simplicity, support, and
+length, so (3), (6), and (20) give
+\[
+ \operatorname{length}(P^{\mathrm{rev}})=2m=2(p-1),              \tag{22}
+\]
+which proves the closing-walk endpoint, path, and length fields.
+
+It remains to check both support fields, rather than infer them merely
+from the word ``simple.''  The alternating display (5) shows that the
+vertex-nodes in the support of $P^{\mathrm{rev}}$ are exactly
+\[
+ \mathrm{inl}(a_0),\mathrm{inl}(a_1),\ldots,
+ \mathrm{inl}(a_m).                                               \tag{23}
+\]
+The first $p=m+1$ vertices $b_0,\ldots,b_m$ in (11) are exactly these
+same vertices in the order
+$a_0,a_m,a_{m-1},\ldots,a_1$, and (18) transports them to the first
+$p$ vertices of $T'$.  Therefore, for every multigraph vertex $v$,
+\[
+ \mathrm{inl}(v)\in\operatorname{supp}(P^{\mathrm{rev}})
+ \quad\Longleftrightarrow\quad
+ \text{there is an index }0\leq i<p\text{ with }v=T'.vertex(i).  \tag{24}
+\]
+This is exactly `closingPath_vertices'.
+
+Similarly, (5) says that the edge-nodes in the reversed support are
+exactly the individual nodes
+\[
+             \mathrm{inr}(f_1),\ldots,\mathrm{inr}(f_m).          \tag{25}
+\]
+The first is the chosen closing edge.  For $2\leq r\leq m$, set
+$j=m+1-r$.  Then $1\leq j\leq m-1$, so
+$1\leq j$ and $j+2\leq m+1=p$, and (11), (18) give
+$f_r=g_j=T'.edge(j)$.  Conversely, every index satisfying
+$1\leq j$ and $j+2\leq p=m+1$ lies in $1\leq j\leq m-1$ and yields
+$r=m+1-j$ in the range $2\leq r\leq m$.  Thus, for every edge identity
+$f$,
+\[
+ \mathrm{inr}(f)\in\operatorname{supp}(P^{\mathrm{rev}})
+ \Longleftrightarrow
+ f=f_1\ \hbox{or}\
+ \bigl(\exists j,\ 1\leq j,\ j+2\leq p,\ f=T'.edge(j)\bigr).     \tag{26}
+\]
+This is exactly `closingPath_edges', including its two index bounds.
+
+Finally take any zero-based edge index $j$ with
+$1\leq j$ and $j+2\leq p$.  Then $1\leq j\leq m-1$, and with the explicit
+reindexing $r=m+1-j$ equations (8), (11), and (18) give
+\[
+ \begin{split}
+ G.\operatorname{ends}(T'.edge(j))
+ &=G.\operatorname{ends}(f_r)
+   =\{a_{r-1},a_r\}\\
+ &=\{b_{j+1},b_j\}
+   =\{T'.vertex(j),T'.vertex(j+1)\}.
+ \end{split}                                                       \tag{27}
+\]
+The last equality only swaps the entries of an unordered pair.  Since
+$j$ was arbitrary, (27) proves every `trunk_edge_ends' equation.  Together
+with (19)--(26), it completes every field of a normal globally maximum
+witness of chosen height $p=m+1$.
+
+It remains only to place this witness in the finite maximum defining
+\noderef{ScheideGraphHeight}.  The height bound already proved as a normal
+field gives $p\leq T'.\operatorname{length}+1$.  The vertex map of the
+TreeSequence $T'$ is injective into the finite vertex type of $G$, so
+$T'.\operatorname{length}+1\leq |V(G)|$.  Hence $p$ lies in the defining
+range, and the normal witness just constructed puts $p$ in the set of
+heights over which $h(G)$ is the maximum.  Therefore
+\[
+ \operatorname{length}(P)/2+1=m+1=p\leq h(G).                    \tag{28}
+\]
+Choosing the original $P$ from (3), assertions (3)--(4) and (28) are all
+the conclusions of the lemma.
 \end{proof}
