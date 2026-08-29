@@ -1,8 +1,12 @@
+import Tablet.AdjacentEdges
+import Tablet.DefectiveVertex
 import Tablet.HkuMissingStoredMonotone
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.MaximumDefectiveChoice
+import Tablet.MissingColors
 import Tablet.ParallelExtensionColor
+import Tablet.PresentColors
 import Tablet.StableColoring
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
@@ -10,11 +14,13 @@ import Tablet.TashkinovStoredColors
 import Tablet.TreeIncidentEdge
 import Tablet.TreeExit
 import Tablet.TreeExitPath
+import Tablet.TreeMissingColors
 import Tablet.TreeSequenceVertexSet
 import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 import Tablet.sc1
 import Tablet.sc2
 
