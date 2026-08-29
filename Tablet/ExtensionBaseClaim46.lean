@@ -24,6 +24,7 @@ import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovClosure
 import Tablet.TreeMissingColors
 import Tablet.TreeIncidentEdge
+import Tablet.TreeSequence
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceVertexSet
 import Tablet.TreeVerticesBefore

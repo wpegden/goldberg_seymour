@@ -234,10 +234,13 @@ of \(P\) is the full old component means that it contains every node
 connected to \(v_n\) in the old two-color incidence graph.  At \(u\), the
 path \(P\) has one edge toward \(x\), namely
 the \(\gamma_n\)-colored exit identity from observation (21), and one
-edge back toward \(v_n\), of color \(\delta_n\).  Indeed, the adjacency
-clauses of \noderef{TwoColorIncidenceGraph} allow only these two colors,
-and \noderef{IsProperEdgeColoring} excludes the already used
-\(\gamma_n\) on the distinct adjacent edge.  The latter identity is
+edge back toward \(v_n\).  These are distinct path-edge identities and
+both share the endpoint \(u\), so they are adjacent by
+\noderef{AdjacentEdges}.  The adjacency clauses of
+\noderef{TwoColorIncidenceGraph} allow the back edge only the colors
+\(\gamma_n\) and \(\delta_n\), while \noderef{IsProperEdgeColoring}
+excludes the already used \(\gamma_n\) on this distinct adjacent edge.
+Thus the back edge has color \(\delta_n\).  The latter identity is
 not \(f_n\), because observation (21) says that \(u\) is not incident
 with \(f_n\).  Both identities are incident with \(T'_j\), so (12) fixes
 them.  Past the exit identity, every vertex-node of the suffix \(Q-u\)
@@ -344,9 +347,10 @@ of \(T'_j-u\).  Applying \noderef{PresentColors} and
 The initial-segment clauses in \noderef{TreeSequenceInitialSegment}, read
 through \noderef{TreeSequenceVertexSet}, put \(v_n\) in \(V(T'_j)\); since
 \(u\ne v_n\), (14) holds there in particular.  Intersecting (14) with \(S'\) and
-using (C2) and (11) gives the first two equalities of (e5).  Every
-displayed edge identity of \(T'_j\) has both endpoints in \(V(T'_j)\).
-It is fixed by (12), and if it belonged to \(K\), adjacency in
+using (C2) and (11) gives the first two equalities of (e5).  The attachment
+law in \noderef{TreeSequence} says that every displayed edge identity of
+\(T'_j\) has both endpoints in \(V(T'_j)\).  It is fixed by (12), and if it
+belonged to \(K\), adjacency in
 \noderef{TwoColorIncidenceGraph} and connectedness in
 \noderef{TwoColorComponent} would put its endpoint different from \(u\)
 in \(K\), contradicting (13); looplessness ensures that such an endpoint
@@ -420,10 +424,13 @@ the first swap fixes all of \(T_j(z)\).  Equation (12) fixes all of
 that no edge of \(T_j(z)\) lies in \(K\): otherwise adjacency in
 \noderef{TwoColorIncidenceGraph} and connectedness in
 \noderef{TwoColorComponent} would put one of its endpoint vertices in
-\(K\cap V(T_n)\).  Likewise, if a displayed edge of \(T'_j(u)\) lay in
-\(K\), its two endpoint vertices, which lie in \(V(T'_j)\) by
-\noderef{TreeSequenceVertexSet}, would lie in the connected component
-\(K\) by those same two definitions; (13) permits only \(u\), and
+\(K\cap V(T_n)\); here \noderef{TreeSequence} supplies that each displayed
+edge of the prefix has both endpoints among its displayed vertices.
+Likewise, if a displayed edge of \(T'_j(u)\) lay in \(K\), its two endpoint
+vertices lie in \(V(T'_j(u))\subseteq V(T'_j)\) by the attachment law in
+\noderef{TreeSequence} and the prefix inclusion.  They would therefore lie
+in the connected component \(K\) by those same two definitions; (13)
+permits only \(u\), and
 looplessness rules out both endpoints being \(u\).  Thus the second swap
 fixes every exact identity in both prefixes.
 
