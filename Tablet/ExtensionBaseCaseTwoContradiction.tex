@@ -1,0 +1,272 @@
+\begin{lemma}[The contradiction after Claim 4.5]
+Let \(\mathcal T\) be a certified ETT satisfying
+\noderef{MaximumProperty}, and let the positive zero-based slot
+\(q\) represent the manuscript stage \(j-1\).  Write
+\[
+ T_{j-1}=\mathcal T.\mathrm{tree}(q),\qquad
+ T_j=\mathcal T.\mathrm{tree}(q+1),\qquad
+ D_{j-1}=\noderef{TashkinovStoredColors}(\mathcal T,q),
+\]
+and write \(\varphi_{j-1}\) for the displayed coloring at slot \(q\).
+Let \(\mathcal L\) be the exact lower-rung ETT: its rung number is
+\(q\), its terminal ladder tree, displayed coloring, stored set,
+extension kind, and exact connecting-edge set are respectively
+\(T_{j-1},\varphi_{j-1},D_{j-1}\), and the corresponding fields of
+\(\mathcal T\) at \(q\).  Assume that \(\mathcal L\) has the maximum
+property.  Retain the following two lower-rung assertions explicitly:
+\begin{enumerate}
+\item[(i)] every tree carrying a
+  \noderef{CorrespondingExtendedTashkinovTree} certificate for
+  \((\varrho_3,T_{j-1})\), whose certified replacement ETT has the
+  maximum property, has a vertex set elementary under \(\varrho_3\);
+\item[(vi)] every proper coloring leaving exactly \(e_0\) uncolored
+  which is \((T_{j-1},D_{j-1},\varphi_{j-1})\)-stable is a
+  \noderef{ModColoring} of \(\mathcal L\).
+\end{enumerate}
+
+Let \(T_j(v_n)\) be an ordered initial segment of \(T_j\), ending
+exactly at \(v_n\), and let \(T'_j\) contain this same ordered seed as
+an initial segment.  Assume that \(T_{j-1}\) lies entirely before
+\(v_n\) in \(T_j\).  Retain the exact stage-construction alternative:
+if the slot kind is PE, \(T_j(v_n)\) is obtained from \(T_{j-1}\) by a
+\(\varphi_{j-1}\)-\noderef{TashkinovAugmentationSequence}; if it is SE
+or RE, there are an exact connecting-edge identity \(f\) and an exact
+one-edge seed \(A=T_{j-1}+f\), in the sense of
+\noderef{TreeSequenceAdjoinEdge}, with the displayed connecting set
+equal to \(\{f\}\), and \(T_j(v_n)\) is obtained from \(A\) by such an
+augmentation sequence.  Also assume that all of \(T_j\) is obtained
+from \(T_j(v_n)\) by augmentation under \(\varphi_{j-1}\).
+
+Let \(T'_j\) be a \(\varrho_1\)-\noderef{TashkinovClosure} of the same
+seed, with elementary vertex set under \(\varrho_1\).  Fix
+\(u\in V(T'_j)\setminus V(T_j)\), with its exact displayed position,
+and a color
+\(\beta\in\overline{\varrho}_1(u)\).  Fix
+\(z\in V(T_j)\), with exact position \(q_z\), such that the seed ends
+no later than \(q_z\), and suppose \(v_n\) occurs strictly before
+\(z\).  The choice of \(z\) has exactly the final alternative from
+Claim 4.5:
+\[
+ q_z=\operatorname{last}(T_j),
+ \quad\hbox{or}\quad
+ q_z<\operatorname{last}(T_j)
+       \text{ and }\beta\in\overline{\varrho}_1(z).          \tag{1}
+\]
+
+Retain the relevant Claim 4.3(b2), equation (19), and
+uniquezang(iii) data in exact form:
+\begin{align}
+ \overline{\varrho}_1(x)&=\overline\varphi_{j-1}(x)
+       &&(x\in V(T_j)\setminus\{v_n\}),                     \tag{2}\
+ \varrho_1(T_j.\mathrm{edge}(a))
+   &=\varphi_{j-1}(T_j.\mathrm{edge}(a))
+       &&(a\text{ an exact displayed edge position}),       \tag{3}\
+ \overline\varphi_{j-1}(v_n)
+   &\subseteq\overline{\varrho}_1(v_n)\cup\{\gamma_{1_1}\},
+                                                                    \tag{4}\
+ \delta_n&\in\overline{\varrho}_1(v_n).                    \tag{5}
+\end{align}
+Here (4) is the explicit missing-set inclusion supplied by the
+supporting-PE color chain, and (5) is the missing-color part of (19).
+
+Finally let \(\varrho_3\) be the exact coloring selected in
+\noderef{ExtensionBaseClaim45}.  Assume its complete clauses (d1)--(d3):
+it is proper, leaves exactly \(e_0\) uncolored, and is
+\((T_j(v_n)-v_n,D_{j-1},\varphi_{j-1})\)-stable; on the displayed
+prefixes \(T_j(z)\) and \(T'_j(u)\), every missing set except possibly
+those at \(u,z\), and every exact displayed edge identity, agrees with
+\(\varrho_1\); moreover
+\[
+ \beta\in\overline{\varrho}_1(z)
+     \Longrightarrow\delta_n\in\overline{\varrho}_3(z),     \tag{6}
+\]
+and
+\[
+                  \gamma_{1_1}\in\overline{\varrho}_3(u).   \tag{7}
+\]
+The prefix agreements are expressed using
+\noderef{TreeVerticesBefore} and the exact two displayed positions, so
+no parallel edge identity is replaced by its endpoint pair.
+
+Then these data are contradictory.
+\end{lemma}
+\begin{proof}
+We first restrict (d1) to \(T_{j-1}\).  By hypothesis every vertex of
+\(T_{j-1}\) occurs before \(v_n\) in \(T_j\).  Thus the missing-set
+clause of \noderef{StableColoringBeforeVertex} gives
+\[
+ \overline{\varrho}_3(x)=\overline\varphi_{j-1}(x)
+                  \qquad(x\in V(T_{j-1})).                  \tag{8}
+\]
+If an exact edge \(a\) is incident with \(T_{j-1}\), and its
+\(\varphi_{j-1}\)-color lies in
+\(\overline\varphi_{j-1}(T_{j-1})\cup D_{j-1}\), choose a witnessing
+vertex of \(T_{j-1}\).  That vertex lies before \(v_n\), so the
+edge clause of the same stability hypothesis fixes the individual edge
+identity.  Together with (8), this is precisely
+\[
+ \noderef{StableColoring}
+   (T_{j-1},D_{j-1},\varphi_{j-1},\varrho_3).                \tag{9}
+\]
+Properness, the unique-uncolored-edge assertion, (9), and lower-rung
+assertion (vi) now give
+\[
+                       \noderef{ModColoring}(\mathcal L,\varrho_3).
+                                                                    \tag{10}
+\]
+
+We next check the copied augmentations, rather than merely declaring
+that they remain valid.  Consider one
+\(\varphi_{j-1}\)-\noderef{TashkinovAugmentation} in the exact
+stage-construction sequence ending at \(T_j(v_n)\).  Its definition
+supplies its newly appended edge identity \(a\), its unchanged ordered
+initial segment, a color \(c\), and an old vertex \(x\) at which \(c\)
+is missing.  All old vertices occur before \(v_n\).  Equation (8)
+makes \(c\) missing at the same vertex under \(\varrho_3\), and the
+edge part of (d1) fixes the exact identity \(a\), since its old color
+\(c\) is missing on the before-\(v_n\) set.  Hence this very one-edge
+step is a \(\varrho_3\)-Tashkinov augmentation.  Induction through the
+finite relation \noderef{TashkinovAugmentationSequence} copies the whole
+sequence.  In the SE/RE alternative the one-edge adjoin relation is
+purely structural and retains the same exact connecting edge; the
+subsequent augmentation sequence is copied by the same argument.  We
+therefore have the appropriate \(\varrho_3\)-eligible route from the
+prescribed stage seed to \(T_j(v_n)\).                           \tag{11}
+
+Let
+\[
+ U=\noderef{TreeSequencePrefix}(T'_j,q_u),
+ \qquad Z=\noderef{TreeSequencePrefix}(T_j,q_z),              \tag{12}
+\]
+where \(q_u\) is the displayed position of \(u\).  Thus these are the
+exact ordered prefixes \(T'_j(u)\) and \(T_j(z)\), including their
+terminal vertices.  Unfold the closure certificate from
+\noderef{TashkinovClosure}.  Its first component is a finite
+\(\varrho_1\)-augmentation sequence from \(T_j(v_n)\) to \(T'_j\).
+Stop it at the unique step that creates the displayed position \(q_u\).
+At every retained step, the new exact edge lies strictly before \(u\)
+and its missing-color witness is an old vertex.  Clause (d2) preserves
+the missing set of that old vertex and the value of that exact edge
+identity; neither the new terminal vertex \(u\) nor the later endpoint
+of a one-edge step is used as its old missing-color witness.  Consequently
+each retained step satisfies the two defining color clauses of
+\noderef{TashkinovAugmentation} under \(\varrho_3\).  Induction gives
+\[
+ \noderef{TashkinovAugmentationSequence}
+       (\varrho_3,T_j(v_n),U).                               \tag{13}
+\]
+This is the promised edge-by-edge reconstruction of the copied closure
+prefix, not an assumed corresponding-ETT certificate.
+
+We now derive the missing-set inclusion needed for the second growth.
+Because \(v_n\) is strictly before \(z\) and is distinct from \(u\),
+(d2) gives
+\[
+ \overline{\varrho}_3(v_n)=\overline{\varrho}_1(v_n).        \tag{14}
+\]
+Apply (4) to a color \(c\in\overline\varphi_{j-1}(v_n)\).
+If \(c\in\overline{\varrho}_1(v_n)\), equation (14) makes it missing
+at \(v_n\) under \(\varrho_3\).  Otherwise membership in the union in
+(4) forces \(c=\gamma_{1_1}\), and (7) makes it missing at \(u\).
+Thus uniquezang(iii), (d2), and (d3) give exactly
+\[
+ \overline\varphi_{j-1}(v_n)
+   \subseteq
+   \overline{\varrho}_3(v_n)\cup\overline{\varrho}_3(u).    \tag{15}
+\]
+
+Starting from \(U\), scan the exact edge positions of \(Z\) in their
+original order.  Skip precisely an edge in
+\noderef{InternalEdges}\((G,V(U))\); append every other displayed edge
+identity.  We verify inductively that this is a legal construction.
+The attachment field of \noderef{TreeSequence} says that the edge at
+position \(a\) joins its new displayed vertex to a strictly earlier
+displayed vertex.  All earlier noninternal edges have already been
+processed, while every skipped edge has both endpoints in \(V(U)\).
+Therefore the current union contains the old endpoint and the appended
+edge introduces exactly the needed new vertex; the ordered display stays
+a tree-sequence and retains every old edge identity.
+
+The original augmentation sequence from the seed to \(T_j\), stopped at
+position \(a\), supplies a color \(c\) and an earlier vertex \(x\) with
+\[
+ \varphi_{j-1}(T_j.\mathrm{edge}(a))=c,
+ \qquad c\in\overline\varphi_{j-1}(x).                      \tag{16}
+\]
+The new edge is before \(z\), so (3) and the edge part of (d2) preserve
+this exact value under \(\varrho_3\).  If \(x\ne v_n\), then (2) and
+the missing-set part of (d2) make \(c\) missing at \(x\) under
+\(\varrho_3\); the induction has already placed \(x\) in the current
+union.  If \(x=v_n\), inclusion (15) makes \(c\) missing at either
+\(v_n\) or \(u\), both of which are in the current union.  Hence (16)
+always supplies an actual current missing-color witness.  The structural
+and color checks are exactly the clauses of
+\noderef{TashkinovAugmentation}.  This proves, one edge at a time, a
+finite augmentation sequence from \(U\) to a tree \(M\) with
+\[
+                 V(M)=V(U)\cup V(Z).                        \tag{17}
+\]
+In particular, the filtering used exact edge positions and preserves
+distinct parallel identities.
+
+For the precise maximum-property interface, extend \(M\) to a closure
+\(C\) under \(\varrho_3\) using \noderef{TashkinovClosureExists}.
+Compose its augmentation sequence with (13), the sequence just checked,
+and (11).  In the PE case this makes \(C\) a closure of the exact seed
+\(T_{j-1}\); in the SE/RE case it makes \(C\) a closure of the exact
+one-edge seed \(T_{j-1}+f\), retaining the singleton connecting-edge
+identity.  Since \(u\in V(C)\setminus V(T_j)\) while
+\(V(T_{j-1})\subseteq V(T_j)\), this is a strict extension of the lower
+terminal ladder tree.
+
+Apply the universal clause of (10) to this strict eligible extension.
+It yields an actual
+\[
+ K:\noderef{CorrespondingExtendedTashkinovTree}
+          (G,k,e_0,\mathcal L,\varrho_3,C).                  \tag{18}
+\]
+Now apply \noderef{MaximumPropertyTransport} to \(K\), (10), and the
+maximum property of \(\mathcal L\).  This proves the proposition
+\[
+                   \noderef{MaximumProperty}(K.\mathrm{replacementETT}),
+                                                                    \tag{19}
+\]
+rather than treating maximum property as an informal label.  Lower-rung
+assertion (i), applied to the same certificate (18) and the transported
+fact (19), gives
+\[
+           \noderef{ColoredVertexSetElementary}
+                    (G,\varrho_3,V(C)).                     \tag{20}
+\]
+
+We also apply the original maximum property of \(\mathcal T\) at the
+exact positive index \(q=j-1\).  The stage equalities identify its
+current tree, stored set, and reference coloring with
+\(T_{j-1},D_{j-1},\varphi_{j-1}\); (9) gives its stability premise.
+The two alternatives in (11) give exactly its PE or SE/RE seed premise,
+including the same edge identity \(f\), and the preceding construction
+gives the required closure certificate for \(C\).  The exact stage-bound
+clause of \noderef{MaximumProperty} therefore yields
+\[
+                         |V(C)|\le |V(T_j)|.                 \tag{21}
+\]
+
+It remains only to split the alternative (1).  Suppose first that
+\(q_z\) is the last position of \(T_j\).  Then \(Z=T_j\).  Equations
+(17) and the closure inclusion put both \(V(T_j)\) and \(u\) in
+\(V(C)\), while the stated Case 2 fact says
+\(u\notin V(T_j)\).  Thus the inclusion
+\(V(T_j)\subseteq V(C)\) is strict, so
+\(|V(T_j)|<|V(C)|\), contradicting (21).
+
+Otherwise \(q_z\) is not last and
+\(\beta\in\overline{\varrho}_1(z)\).  Clause (6) gives
+\(\delta_n\in\overline{\varrho}_3(z)\).  Since \(v_n\) is strictly
+before \(z\), the two vertices are distinct; they both lie in
+\(V(Z)\subseteq V(C)\).  Equations (5) and (14) also give
+\(\delta_n\in\overline{\varrho}_3(v_n)\).  Hence the two distinct
+vertices \(z,v_n\) of \(C\) share the missing color \(\delta_n\),
+contradicting elementariness (20) by the definition of
+\noderef{ColoredVertexSetElementary}.  Both alternatives are impossible,
+which proves the claimed contradiction.
+\end{proof}
