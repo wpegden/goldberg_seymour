@@ -1,9 +1,34 @@
+import Tablet.AdjacentEdges
+import Tablet.BoundaryColorEdges
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
+import Tablet.ColoredVertexSetElementary
+import Tablet.DefectiveColor
+import Tablet.DefectiveColors
+import Tablet.GlobalMaximumTriple
+import Tablet.Incident
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.LooplessMultigraph
+import Tablet.MissingColors
+import Tablet.PartialEdgeColoring
+import Tablet.PresentColors
+import Tablet.ScheideDefectiveChainPath
 import Tablet.ScheideDefectiveSetup
+import Tablet.ScheideExitVertex
+import Tablet.ScheideExitVertices
 import Tablet.ScheideGlobalMaximumMissingCounts
-import Tablet.ScheideStructuralExitsInBase
 import Tablet.ScheideGlobalMaximumBoundaryFacts
 import Tablet.ScheideGlobalMaximumOrder
+import Tablet.ScheideReducedConfiguration
+import Tablet.ScheideStructuralConfiguration
+import Tablet.TreeMissingColors
+import Tablet.TreeSequence
+import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ScheideDefectiveSetupExists]
 theorem ScheideDefectiveSetupExists {V E : Type*}

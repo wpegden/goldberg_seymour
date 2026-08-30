@@ -7,45 +7,264 @@ boundary edge, outside endpoint, and missing block color specified in
 \noderef{ScheideDefectiveSetup}.
 \end{lemma}
 \begin{proof}
-Both ends of the uncolored edge $e_0$ are among the first two base vertices,
-by the position and attachment fields of
-\noderef{ScheideReducedConfiguration}.  The missing-count clause
-\noderef{ScheideGlobalMaximumMissingCounts} gives at least two colors
-missing at $y_0$.  By the exit-color bijection in
-\noderef{ScheideReducedConfiguration}, every block color is missing at a
-unique exit; elementariness from \noderef{ScheideGlobalMaximumOrder}
-therefore implies that $y_0$ misses at most one block color.  Choose a
-second missing color $\alpha_0$ outside $\Gamma$.
+Write
+\[
+ X=V(T),\qquad
+ y_0=C.y(0),\qquad
+ \Gamma=\{C.\gamma(i):i\in\operatorname{Fin}(C.s)\}.
+\]
+Here $X$ is the set defined by \noderef{TreeSequenceVertexSet}.  The
+inherited globally-maximum field of \noderef{ScheideReducedConfiguration}
+is the one in \noderef{ScheideStructuralConfiguration}.  Consequently
+\noderef{ScheideGlobalMaximumOrder} says that $X$ is elementary and closed
+in the respective senses of \noderef{ColoredVertexSetElementary} and
+\noderef{ColoredVertexSetClosed}.  Moreover, unfolding
+\noderef{GlobalMaximumTriple} and \noderef{KTriple} shows that $\varphi$ is
+proper in the sense of \noderef{IsProperEdgeColoring}.  Thus two distinct
+edge identities incident with one vertex cannot have the same color: they
+are adjacent by \noderef{AdjacentEdges} and properness applies.
 
-Fix a defective color $\delta$.  Closedness from
-\noderef{ScheideGlobalMaximumOrder}, together with the existence of a
-$\delta$ boundary edge, says that $\delta$ is present at every tree
-vertex.  The vertex-node $y_0$ has no $\alpha_0$ incidence and one
-$\delta$ incidence, so it is an end of its finite two-color component.
-Every edge-node has its two distinct endpoint neighbors, and properness
-gives vertex degree at most two.  Hence the spanning-path argument of
-\noderef{TwoColorComponentSpanningPath} gives a simple incidence path
-whose support is the full component.  Its other end is outside $V(T)$:
-no other tree vertex can be an end, since $\delta$ is present everywhere
-and elementariness makes $\alpha_0$ present away from $y_0$.
+We first choose the common color $\alpha _0$.  The first-edge and attachment
+clauses of \noderef{TreeSequence}, together with the base-position clauses
+of \noderef{ScheideStructuralConfiguration}, identify $e_0$ with the first
+edge between the distinct base vertices $y_0$ and $C.y(1)$.  In particular,
+$y_0\in X$ and $y_0$ is incident with $e_0$ in the sense of
+\noderef{Incident}.  Hence \noderef{ScheideGlobalMaximumMissingCounts}
+gives
+\[
+ |\overline\varphi(y_0)|\geq2. \tag{1}
+\]
+There is at most one index $i$ for which $C.\gamma(i)$ is missing at
+$y_0$.  Indeed, the every-block-color clause of
+\noderef{ScheideReducedConfiguration} supplies, for such an $i$, an exit
+$x_i$ at which $C.\gamma(i)$ is missing.  Unfolding
+\noderef{ScheideExitVertices} and then \noderef{ScheideExitVertex} shows
+that $x_i$ is a tree vertex.  If $x_i\ne y_0$,
+then the same color belongs to the two missing-color sets at the distinct
+tree vertices $x_i,y_0$, contrary to elementariness.  Thus $x_i=y_0$, so
+$y_0$ is itself an exit; the exactly-one clause of
+\noderef{ScheideReducedConfiguration} now makes $i$ unique.  Since the
+indexed block colors are distinct, (1) therefore contains a color outside
+$\Gamma$.  Fix
+\[
+ \alpha _0\in\overline\varphi(y_0)\setminus\Gamma. \tag{2}
+\]
+This gives both the missing-color and all the non-block-color fields
+required by \noderef{ScheideDefectiveSetup}.
 
-Orient this path from $y_0$.  Finiteness gives its last vertex-node in
-$V(T)$, call it $v^0_\delta$, followed by an edge-node
-$f^0_\delta$ and an outside vertex-node $u^0_\delta$.  No
-$\alpha_0$-edge leaves the closed tree, by
-\noderef{ScheideGlobalMaximumBoundaryFacts}; consequently
-$\varphi(f^0_\delta)=\delta$.  The last-tree-vertex property makes
-$v^0_\delta$ a Scheide exit.  The reduced exit-color bijection supplies
-the unique index $\gamma(\delta)$ whose block color is missing there.
+Fix from now on
+$\delta\in\noderef{DefectiveColors}(G,\varphi,X)$.  By
+\noderef{DefectiveColor} and \noderef{BoundaryColorEdges}, there is a
+boundary edge identity $b$ with $\varphi(b)=\delta$.  For every $x\in X$,
+closedness applied to $b$ says
+$\delta\notin\overline\varphi(x)$.  The definitions
+\noderef{MissingColors} and \noderef{PresentColors} therefore give an edge
+identity incident with $x$ and colored $\delta$; properness makes that
+identity unique.  We have proved
+\[
+ \text{$\delta$ is present exactly once at every vertex of $X$.} \tag{3}
+\]
+On the other hand, (2) and elementariness imply that $\alpha _0$ is not
+missing at any $x\in X\setminus\{y_0\}$.  Hence it too is present exactly
+once there.  At $y_0$ it is absent, by (2) and the complement definition
+\noderef{MissingColors}.  In particular $\alpha _0\ne\delta$, since (3)
+says that $\delta$ is present at $y_0$.
 
-Finally consider the incidence component in colors
-$\gamma(\delta),\delta$ through $v^0_\delta$.  At its root the first color
-is missing and the second is present.  Properness again gives a finite path
-component.  It has an outside vertex because a defective $\delta$-edge
-leaves the closed tree and the alternating component cannot end at a second
-tree vertex: that would duplicate a missing color in the elementary set.
-Choose its full simple spanning path oriented from $v^0_\delta$.
-Performing these finite choices for every defective color supplies all
-fields, path supports, and identity equations in
-\noderef{ScheideDefectiveSetup}.
+Let
+\[
+ H_\delta=\noderef{TwoColorIncidenceGraph}
+       (G,\varphi;\alpha _0,\delta),\qquad
+ K_\delta=\noderef{TwoColorComponent}
+       (G,\varphi;\alpha _0,\delta,y_0).
+\]
+We record the exact degrees in $H_\delta$.  Its vertex-node $y_0$ has
+degree one: its unique neighbor is the unique incident $\delta$-edge from
+(3), while (2), \noderef{PresentColors}, and
+\noderef{TwoColorIncidenceGraph} exclude every $\alpha _0$-edge.  Every
+other tree vertex-node has degree two, because it has one incident edge of
+each of the two distinct colors, those two edge identities are distinct,
+since the coloring map in \noderef{PartialEdgeColoring} cannot give one
+edge identity two distinct colors, and these are all possible neighbors in
+$H_\delta$.  Finally, every
+edge-node belonging to $K_\delta$ has degree two.  Such a node is not the
+vertex-node $y_0$; connectedness to $y_0$ therefore gives it an adjacency,
+so \noderef{TwoColorIncidenceGraph} says that its edge identity is colored
+$\alpha _0$ or $\delta$.  Its neighbors are precisely its two endpoints.
+Those endpoints are distinct by the loopless clause of
+\noderef{LooplessMultigraph}, and both are incident by
+\noderef{Incident}, so both and only both are neighbors.  These exact
+counts agree with the global upper bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, whose properness hypothesis was
+verified above.
+
+Apply \noderef{TwoColorComponentSpanningPath} at the node $y_0$.  It gives
+a simple path $Q$ whose support is exactly $K_\delta$.  Since $y_0$ belongs
+to that support, it occurs on $Q$.  It cannot be internal on $Q$: the two
+distinct path neighbors at an internal occurrence would contradict its
+degree one.  Orient $Q$ (reversing it if necessary) from $y_0$, and call
+the resulting path $P_\delta$.  It has positive length, since the unique
+$\delta$-edge at $y_0$ also belongs to $K_\delta$ and hence to the support
+of $P_\delta$.  Let $z_\delta$ denote its other endpoint.
+
+The component degree of $z_\delta$ is exactly one.  It has its predecessor
+on $P_\delta$.  If it had a different neighbor $q$, then $q$ would lie in
+the same component and hence, by the support equality, on $P_\delta$.  If
+$q=y_0$, this would give $y_0$ a second neighbor (unless it were the
+already-counted predecessor, contrary to the choice of $q$).  Otherwise
+$q$ is internal on the simple path and already has its two distinct path
+neighbors; adjacency to the different endpoint $z_\delta$ would give it
+degree at least three, contrary to
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  Thus no such $q$ exists.
+The endpoint $z_\delta$ cannot be an edge-node, since every edge-node of
+$K_\delta$ has degree two.  It is not $y_0$ because the path has positive
+length, and it cannot be another vertex of $X$, since every such
+vertex-node has degree two.  Therefore $z_\delta$ is a vertex-node with
+\[
+ z_\delta\notin X. \tag{4}
+\]
+The root membership, simplicity, (4), and support equality are precisely
+the four clauses of the initial full-chain predicate
+\noderef{ScheideDefectiveChainPath}.
+
+We next extract all the ordered data from $P_\delta$.  Among its indices
+whose nodes are vertex-nodes belonging to $X$, choose the largest one and
+call it $i_\delta$.  This finite set of indices is nonempty because index
+zero is $y_0$.  Write
+\[
+ P_\delta(i_\delta)=v^0_\delta.
+\]
+The terminal node is the outside vertex $z_\delta$, so
+$i_\delta<\operatorname{length}(P_\delta)$.  By the definition of
+\noderef{TwoColorIncidenceGraph}, successive nodes alternate between the
+vertex and edge sides.  Starting at a vertex-node, all even indices are
+vertex-nodes and all odd indices are edge-nodes.  Both $i_\delta$ and the
+terminal index are therefore even.  Their strict inequality implies
+$i_\delta+2\leq\operatorname{length}(P_\delta)$.  Consequently there are
+unique identities $f^0_\delta$ and $u^0_\delta$ such that
+\[
+ P_\delta(i_\delta+1)=f^0_\delta,\qquad
+ P_\delta(i_\delta+2)=u^0_\delta, \tag{5}
+\]
+where the first is an edge-node and the second a vertex-node.  Take the
+bounded indices $i_\delta,i_\delta+1,i_\delta+2$ as respectively the
+$v^0$-, $f^0$-, and $u^0$-indices in
+\noderef{ScheideDefectiveSetup}.  Equation (5) gives both index equations
+and the two required successive-index equalities.  The maximality of
+$i_\delta$ gives the full quantified assertion that every later
+vertex-node is outside $X$, and in particular
+\[
+ u^0_\delta\notin X. \tag{6}
+\]
+
+The two successive adjacencies in (5), unfolded through
+\noderef{TwoColorIncidenceGraph}, say that $f^0_\delta$ is incident with
+both $v^0_\delta$ and $u^0_\delta$.  Since
+\noderef{LooplessMultigraph} makes its two endpoints distinct, the two
+incidences and \noderef{Incident} give the identity of unordered endpoint
+pairs
+\[
+ G.\operatorname{ends}(f^0_\delta)
+    =\{v^0_\delta,u^0_\delta\}. \tag{7}
+\]
+Thus (6)--(7) also show directly from \noderef{BoundaryEdges} that
+$f^0_\delta$ is a boundary edge.  Its color is one of
+$\alpha _0,\delta$ by the same incidence-graph adjacency.  It cannot be
+$\alpha _0$: (2) puts $\alpha _0$ in the tree-missing set of
+\noderef{TreeMissingColors}, and
+\noderef{ScheideGlobalMaximumBoundaryFacts} says that such a color has no
+boundary edge (equivalently, this follows by applying
+\noderef{ColoredVertexSetClosed} at $y_0$).  Hence
+\[
+ \varphi(f^0_\delta)=\delta. \tag{8}
+\]
+Because every displayed node of $P_\delta$ belongs to its support, support
+equality also gives the two required memberships of $v^0_\delta$ and
+$f^0_\delta$ in $K_\delta$.
+
+We now verify, rather than merely name, the exit assertion.  In the
+definition \noderef{ScheideExitVertex}, take the starting tree vertex to
+be $y_0$, the missing color to be $\alpha _0$, the defective color to be
+$\delta$, the outside endpoint to be $z_\delta$, the full path to be
+$P_\delta$, and the last-tree index to be $i_\delta$.  The incidence graphs
+and components are unchanged when the displayed pair of colors is swapped,
+as is immediate from the two disjuncts in
+\noderef{TwoColorIncidenceGraph}.  Thus the initial full-chain clauses
+above also give the order $(\delta,\alpha _0)$ used in
+\noderef{ScheideExitVertex}.  The missing-color and defective-color clauses
+are (2) and the choice of $\delta$; membership of $y_0$ in $X$ was proved
+above; the last-index equality is the definition of $v^0_\delta$; and the
+entire quantified last-tree-vertex clause is the maximality assertion after
+(5).  All clauses of \noderef{ScheideExitVertex} therefore hold, and
+unfolding \noderef{ScheideExitVertices} gives
+\[
+ v^0_\delta\in F(T,e_0,\varphi). \tag{9}
+\]
+Apply the exactly-one clause of
+\noderef{ScheideReducedConfiguration} to (9), and denote its unique index
+by $g_\delta\in\operatorname{Fin}(C.s)$.  Then
+\[
+ C.\gamma(g_\delta)\in\overline\varphi(v^0_\delta). \tag{10}
+\]
+This is exactly the $\gamma$-index and missing-color datum required in the
+setup.
+
+It remains to construct the replacement path through this specific
+$v^0_\delta$.  Put $\gamma_\delta=C.\gamma(g_\delta)$ and consider the
+$(\gamma_\delta,\delta)$ component through $v^0_\delta$.  Equation (10)
+and (3) imply $\gamma_\delta\ne\delta$.  Its root vertex-node has degree
+exactly one: no $\gamma_\delta$-edge is incident there by
+\noderef{MissingColors} and \noderef{PresentColors}, while its unique
+$\delta$-edge exists by (3).  Every other tree vertex-node has degree
+exactly two.  Indeed, $\delta$ is present there by (3), while elementarity
+and (10) forbid $\gamma_\delta$ from being missing there, so each of the
+two distinct colors occurs on exactly one incident edge.  As before, every
+edge-node in this particular component has degree exactly two by
+\noderef{TwoColorIncidenceGraph}, \noderef{Incident}, and the loopless
+two-endpoint condition of \noderef{LooplessMultigraph}.
+
+Apply \noderef{TwoColorComponentSpanningPath} to this component, obtaining
+a simple path whose support is the whole component.  The root
+$v^0_\delta$ occurs on this path.  It is an endpoint, since an internal
+occurrence would give it two distinct path neighbors although its degree is
+one.  Orient the path from $v^0_\delta$ and call it $P'_\delta$.  It has
+positive length because the root's unique $\delta$-edge belongs to the
+component.  Let $z'_\delta$ be the opposite endpoint.
+
+As in the initial component, $z'_\delta$ has component degree exactly one,
+but we repeat the check for this particular component.  It has its path
+predecessor.  If it had a different neighbor $q$, component membership and
+the support equality would put $q$ on $P'_\delta$.  If $q=v^0_\delta$,
+then the positive simple path either has length one, when $q$ is the
+already-counted predecessor, or gives the root a second neighbor.  Both
+contradict the choice of $q$ or the root's exact degree.  If
+$q\ne v^0_\delta$, then $q$ is an internal path node, already with two
+distinct path neighbors, and adjacency to the different endpoint
+$z'_\delta$ gives degree at least three.  This contradicts
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  Hence the predecessor is the
+only neighbor of $z'_\delta$.  The opposite endpoint is not an edge-node,
+because all edge-nodes in this component have degree two; it is not the
+root, because the path has positive length; and it is not any other tree
+vertex-node, because those too have degree two.  Therefore it is a vertex
+with $z'_\delta\notin X$.
+
+The root of $P'_\delta$ lies in $X$ by construction, the path is simple,
+its other end is outside $X$, and its support equals the full component.
+These are all four clauses of the replacement
+\noderef{ScheideDefectiveChainPath}; importantly, the argument concerns the
+component through $v^0_\delta$ itself and does not use an unrelated
+$\delta$-boundary edge to infer component membership.
+
+For each member $\delta$ of the finite set
+\noderef{DefectiveColors}$(G,\varphi,X)$, the preceding construction gives
+simultaneously
+\[
+ (v^0_\delta,f^0_\delta,u^0_\delta,g_\delta,z_\delta,P_\delta,
+   i_\delta,i_\delta+1,i_\delta+2,z'_\delta,P'_\delta).
+\]
+Finite dependent choice collects these witnesses into the corresponding
+functions.  Equations (2), (4)--(10), the support memberships following
+(8), the quantified maximal-index assertion, and the two explicitly
+verified \noderef{ScheideDefectiveChainPath} predicates fill, field by
+field and in the displayed order, every component of
+\noderef{ScheideDefectiveSetup}.  Therefore that structure is nonempty.
 \end{proof}
