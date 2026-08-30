@@ -35,9 +35,10 @@ theorem ExtensionBase {V E : Type*} [Fintype V] [Fintype E]
     (ett : ExtendedTashkinovTree G k e0 input T generating)
     (hMP : MaximumProperty ett)
     (hpositive : 0 < ett.rounds)
-    (hlower : ∀ {T' : TreeSequence G e0}
+    (hlower : ∀ {input' : PartialEdgeColoring E k}
+      {T' : TreeSequence G e0}
       {generating' : PartialEdgeColoring E k}
-      (lower : ExtendedTashkinovTree G k e0 input T' generating'),
+      (lower : ExtendedTashkinovTree G k e0 input' T' generating'),
       0 < lower.rounds → lower.rounds < ett.rounds → MaximumProperty lower →
       ColoredVertexSetElementary G generating'
           (TreeSequenceVertexSet T') ∧
