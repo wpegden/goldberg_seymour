@@ -80,7 +80,14 @@ those at \(u,z\), and every exact displayed edge identity, agrees with
  \beta\in\overline{\varrho}_1(z)
      \Longrightarrow\delta_n\in\overline{\varrho}_3(z),     \tag{6}
 \]
-and
+and the exact endpoint refinement is
+\[
+ z\in V(T'_j(u)-u)
+ \Longrightarrow
+ \overline{\varrho}_3(z)=\overline{\varrho}_1(z).           \tag{6z}
+\]
+Thus equality at \(z\) is assumed only when its displayed position in
+\(T'_j\) is strictly before \(u\).  Finally,
 \[
                   \gamma_{1_1}\in\overline{\varrho}_3(u).   \tag{7}
 \]
@@ -121,10 +128,12 @@ that they remain valid.  Consider one
 stage-construction sequence ending at \(T_j(v_n)\).  Its definition
 supplies its newly appended edge identity \(a\), its unchanged ordered
 initial segment, a color \(c\), and an old vertex \(x\) at which \(c\)
-is missing.  All old vertices occur before \(v_n\).  Equation (8)
-makes \(c\) missing at the same vertex under \(\varrho_3\), and the
-edge part of (d1) fixes the exact identity \(a\), since its old color
-\(c\) is missing on the before-\(v_n\) set.  Hence this very one-edge
+is missing.  The displayed stage construction ends at \(v_n\), so this
+old witness \(x\) occurs strictly before \(v_n\).  Apply the full
+missing-set clause of (d1) at \(x\), rather than (8), to make \(c\) missing
+at the same vertex under \(\varrho_3\).  The edge part of (d1) fixes the
+exact identity \(a\), since its old color \(c\) is missing on the full
+before-\(v_n\) set.  Hence this very one-edge
 step is a \(\varrho_3\)-Tashkinov augmentation.  Induction through the
 finite relation \noderef{TashkinovAugmentationSequence} copies the whole
 sequence.  In the SE/RE alternative the one-edge adjoin relation is
@@ -146,9 +155,13 @@ terminal vertices.  Unfold the closure certificate from
 Stop it at the unique step that creates the displayed position \(q_u\).
 At every retained step, the new exact edge lies strictly before \(u\)
 and its missing-color witness is an old vertex.  Clause (d2) preserves
-the missing set of that old vertex and the value of that exact edge
-identity; neither the new terminal vertex \(u\) nor the later endpoint
-of a one-edge step is used as its old missing-color witness.  Consequently
+the value of that exact edge identity.  For the old missing-color witness
+\(w\), the tree-sequence order puts \(w\) strictly before \(u\), so
+\(w\in V(T'_j(u)-u)\).  If \(w=z\), use the conditional endpoint clause
+(6z).  If \(w\ne z\), then \(w\ne u\) and the ordinary missing-set clause
+of (d2) applies.  Thus in either case the complete missing set of the
+actual old witness is preserved; neither the new terminal vertex \(u\) nor
+the later endpoint of a one-edge step is used as its old witness.  Consequently
 each retained step satisfies the two defining color clauses of
 \noderef{TashkinovAugmentation} under \(\varrho_3\).  Induction gives
 \[
@@ -175,29 +188,49 @@ Thus uniquezang(iii), (d2), and (d3) give exactly
    \overline{\varrho}_3(v_n)\cup\overline{\varrho}_3(u).    \tag{15}
 \]
 
-Starting from \(U\), scan the exact edge positions of \(Z\) in their
-original order.  Skip precisely an edge in
-\noderef{InternalEdges}\((G,V(U))\); append every other displayed edge
-identity.  We verify inductively that this is a legal construction.
-The attachment field of \noderef{TreeSequence} says that the edge at
-position \(a\) joins its new displayed vertex to a strictly earlier
-displayed vertex.  All earlier noninternal edges have already been
-processed, while every skipped edge has both endpoints in \(V(U)\).
-Therefore the current union contains the old endpoint and the appended
-edge introduces exactly the needed new vertex; the ordered display stays
-a tree-sequence and retains every old edge identity.
+Starting from \(U\), scan the exact edge positions \(a\) of \(Z\) in their
+original order.  At position \(a\), let \(y_a\) be its displayed new vertex
+and let \(x_a\) be the strictly earlier displayed endpoint supplied by the
+attachment field of \noderef{TreeSequence}.  Compare \(y_a\) with the
+vertex set of the tree sequence built so far.  Skip this position exactly
+when \(y_a\) is already present.  Otherwise append the exact edge identity
+at \(a\), followed by the exact new vertex \(y_a\).
 
-The original augmentation sequence from the seed to \(T_j\), stopped at
-position \(a\), supplies a color \(c\) and an earlier vertex \(x\) with
+We verify this construction by induction on the scanned position.  The
+initial common seed, including its root and every displayed seed vertex, is
+already contained in \(U\).  At position \(a\), the attachment witness
+\(x_a\) occurs at an earlier displayed position.  By the induction
+hypothesis, that earlier vertex was either already present when its position
+was scanned or was appended then; hence \(x_a\) belongs to the current
+vertex set.  In the nonskip branch \(y_a\) does not, by the branch
+condition.  Thus the exact edge at \(a\) joins a current vertex to the
+specified genuinely new vertex.  This exact edge identity is also new:
+if it were already displayed in the current tree, its attachment there
+would put both of its endpoints in the current vertex set, contrary to
+\(y_a\notin V(\text{current})\).  Appending this edge and vertex therefore
+preserves both injectivity fields and the attachment field of the
+tree-sequence.  In the skip branch no edge is appended, so no redundant
+edge with an already present displayed new vertex is introduced.  This is
+an evolving-current-set scan, not a filter taken once against \(V(U)\).
+
+In each nonskip branch, the original augmentation sequence from the seed
+to \(T_j\), stopped at position \(a\), supplies a color \(c\) and an earlier
+vertex \(x\) with
 \[
  \varphi_{j-1}(T_j.\mathrm{edge}(a))=c,
  \qquad c\in\overline\varphi_{j-1}(x).                      \tag{16}
 \]
+Indeed, a position inside the common seed is necessarily skipped because
+its displayed new vertex already lies in \(U\); hence every nonskipped
+position is one of the one-edge steps in the stated augmentation sequence
+from the seed to \(T_j\).
 The new edge is before \(z\), so (3) and the edge part of (d2) preserve
 this exact value under \(\varrho_3\).  If \(x\ne v_n\), then (2) and
 the missing-set part of (d2) make \(c\) missing at \(x\) under
-\(\varrho_3\); the induction has already placed \(x\) in the current
-union.  If \(x=v_n\), inclusion (15) makes \(c\) missing at either
+\(\varrho_3\): the witness \(x\) is strictly before the displayed new
+vertex and hence before \(z\), it is not \(z\), and it is not \(u\) because
+\(u\notin V(T_j)\).  The scan induction has already placed \(x\) in the
+current union.  If \(x=v_n\), inclusion (15) makes \(c\) missing at either
 \(v_n\) or \(u\), both of which are in the current union.  Hence (16)
 always supplies an actual current missing-color witness.  The structural
 and color checks are exactly the clauses of
@@ -206,8 +239,12 @@ finite augmentation sequence from \(U\) to a tree \(M\) with
 \[
                  V(M)=V(U)\cup V(Z).                        \tag{17}
 \]
-In particular, the filtering used exact edge positions and preserves
-distinct parallel identities.
+For (17), each displayed vertex of \(Z\) is either in the common root/seed,
+already present at its scanned position, or appended at that position;
+conversely the construction appends only displayed vertices of \(Z\).
+In particular, the scan used exact edge positions and preserves distinct
+parallel identities; its skip decision used the evolving new-vertex
+membership, not equality of endpoint pairs.
 
 For the precise maximum-property interface, extend \(M\) to a closure
 \(C\) under \(\varrho_3\) using \noderef{TashkinovClosureExists}.

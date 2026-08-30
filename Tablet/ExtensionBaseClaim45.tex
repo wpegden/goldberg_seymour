@@ -132,6 +132,12 @@ appended between the seed and \(z\).  Finally:
        \quad\Longrightarrow\quad
        \delta_n\in\overline{\varrho}_3(z).
       \]
+      If \(z\) is displayed strictly before \(u\) in \(T'_j\), then also
+      \[
+       z\in V(T'_j(u)-u)
+       \quad\Longrightarrow\quad
+       \overline{\varrho}_3(z)=\overline{\varrho}_1(z).       \tag{d2z}
+      \]
 \item[(d3)] \(\gamma_{1_1}\in\overline{\varrho}_3(u)\).
 \end{enumerate}
 All prefix and path assertions above concern the displayed positions and
@@ -163,6 +169,8 @@ The five conclusions of that node give:
    \quad(v\in V(T_j(z)\cup T'_j(u))\setminus\{u,z\});               \tag{7}\\
  &\mu_0(f)=\varrho_1(f)
    \quad(f\in E(T_j(z)\cup T'_j(u)));                               \tag{8}\\
+ &z\in V(T'_j(u)-u)\Longrightarrow
+   \overline\mu_0(z)=\overline{\varrho}_1(z);                      \tag{8a}\\
  &\beta\in\overline{\varrho}_1(z)
       \Longrightarrow\delta_n\in\overline\mu_0(z),                 \tag{9}\\
  &\gamma_n\in\overline\mu_0(u),\qquad
@@ -354,6 +362,12 @@ Equations (7) and (8) now transfer these final
 \(\varrho_3\)-versus-\(\mu_0\) equalities to
 \(\varrho_3\)-versus-\(\varrho_1\) equalities on
 \(T_j(z)\cup T'_j(u)\), with \(u,z\) excluded exactly as in the statement.
+If \(z\) is displayed strictly before \(u\) in \(T'_j\), take \(w=z\) in
+the preceding vertexwise trace argument.  It gives
+\(\overline{\varrho}_3(z)=\overline\mu_0(z)\), while the conditional
+conclusion (8a) of \noderef{ExtensionBaseClaim46} gives
+\(\overline\mu_0(z)=\overline{\varrho}_1(z)\).  Their composition is
+exactly (d2z); no unconditional equality at \(z\) is asserted.
 For the conditional clause, (9) makes \(\delta_n\) missing at \(z\) under
 \(\mu_0\).  At every trace step the two switched colors belong to an
 earlier stored pair and are both different from \(\delta_n\).  Expansion of

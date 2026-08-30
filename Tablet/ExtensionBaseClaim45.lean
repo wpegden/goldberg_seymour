@@ -240,6 +240,8 @@ theorem ExtensionBaseClaim45 {V E : Type*}
             rho3 f = rho1 f) ∧
           (beta ∈ MissingColors G rho1 z →
             deltaN ∈ MissingColors G rho3 z) ∧
+          (z ∈ TreeVerticesBefore TjPrime u huPrime →
+            MissingColors G rho3 z = MissingColors G rho1 z) ∧
           gammaFirst ∈ MissingColors G rho3 u := by
 -- BODY
   sorry

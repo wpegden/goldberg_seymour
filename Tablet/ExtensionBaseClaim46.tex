@@ -141,6 +141,13 @@ satisfies:
   \beta\in\overline{\varrho}_1(z)
   \Longrightarrow \delta_n\in\overline{\mu}_0(z).
  \]
+ If \(z\) is displayed strictly before \(u\) in \(T'_j\), then the
+ endpoint exception disappears and one also has the conditional equality
+ \[
+  z\in V(T'_j(u)-u)
+  \Longrightarrow
+  \overline\mu_0(z)=\overline{\varrho}_1(z).                 \tag{e2z}
+ \]
  Here \(T_j(z)\) consists of positions through \(q_z\), and the seed
  edges of this prefix are also present in the exact prefix \(T'_j(u)\).
 \item[(e3)] The exact color identity in (4) is retained, and
@@ -362,6 +369,13 @@ of \(T'_j-u\).  Applying \noderef{PresentColors} and
  \overline{\mu}_0(v)=\overline{\varrho}_1(v)
  \quad(v\in V(T'_j)\setminus\{u\}).                            \tag{14}
 \]
+In particular, suppose that \(z\) is displayed strictly before \(u\) in
+\(T'_j\).  By the definition \noderef{TreeVerticesBefore}, this puts
+\(z\) in \(V(T'_j)\setminus\{u\}\).  The exact incident-edge fixation just
+proved, including the component-intersection argument (13) for the second
+switch, therefore applies at \(z\), and (14) gives
+\(\overline\mu_0(z)=\overline{\varrho}_1(z)\).  This proves the
+conditional clause (e2z) directly from the two switches.
 The initial-segment clauses in \noderef{TreeSequenceInitialSegment}, read
 through \noderef{TreeSequenceVertexSet}, put \(v_n\) in \(V(T'_j)\); since
 \(u\ne v_n\), (14) holds there in particular.  Intersecting (14) with \(S'\) and

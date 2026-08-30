@@ -117,6 +117,8 @@ theorem ExtensionBaseCaseTwoContradiction {V E : Type*}
       rho3 f = rho1 f)
     (hd2Delta : beta ∈ MissingColors G rho1 z →
       deltaN ∈ MissingColors G rho3 z)
+    (hd2Z : z ∈ TreeVerticesBefore TjPrime u huPrime →
+      MissingColors G rho3 z = MissingColors G rho1 z)
     (hd3 : gammaFirst ∈ MissingColors G rho3 u)
     (hzChoice : zPosition = Fin.last Tj.length ∨
       (zPosition.val < (Fin.last Tj.length).val ∧

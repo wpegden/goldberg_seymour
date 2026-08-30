@@ -200,7 +200,9 @@ theorem ExtensionBaseClaim46 {V E : Type*}
                   TjPrime.edge a = f)) →
             mu0 f = rho1 f) ∧
           (beta ∈ MissingColors G rho1 z →
-            deltaN ∈ MissingColors G mu0 z)) ∧
+            deltaN ∈ MissingColors G mu0 z) ∧
+          (z ∈ TreeVerticesBefore TjPrime u huPrime →
+            MissingColors G mu0 z = MissingColors G rho1 z)) ∧
         (ett.series.data.delta preterminalSlot.succ = some gammaN ∧
           gammaN ∈ MissingColors G mu0 u ∧
           beta ∉ MissingColors G mu0 u) ∧
