@@ -81,6 +81,7 @@ import Tablet.TashkinovClosureExists
 import Tablet.TashkinovClosureVertexSetUnique
 import Tablet.TashkinovOrder
 import Tablet.TashkinovStoredColorsCardinality
+import Tablet.Td
 import Tablet.TreeVertexOrder
 import Tablet.TreeSequencePrefix
 import Tablet.TwoColorComponentSpanningPath
