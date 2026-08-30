@@ -49,6 +49,7 @@ theorem ExtensionBaseCaseTwoContradiction {V E : Type*}
     (huOutsideTj : u ∉ TreeSequenceVertexSet Tj)
     (hTjm1Stored :
       ett.series.data.tree jSlot.castSucc.castSucc = Tjm1)
+    (hPhiJStored : ett.series.data.coloring jSlot.castSucc = phiJ)
     (hTjStored : ett.series.data.tree jSlot.succ.castSucc = Tj)
     (hDprevStored :
       TashkinovStoredColors ett.series.data jSlot.castSucc = Dprev)
