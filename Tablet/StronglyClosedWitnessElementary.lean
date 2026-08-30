@@ -1,5 +1,6 @@
 import Tablet.ChromaticIndex
 import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.ColoredVertexSetStronglyClosed
 import Tablet.Degree

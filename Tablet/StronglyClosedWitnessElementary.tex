@@ -7,10 +7,10 @@ contains both ends of $e_0$, and $X$ is elementary and strongly closed with
 respect to $\varphi$.  Then $G$ is elementary.
 \end{lemma}
 \begin{proof}
-We use missing colors, internal and boundary edge identities, and the two
+We use missing colors, internal and boundary edge identities, and the three
 colored-set properties with exactly the meanings in
 \noderef{MissingColors}, \noderef{InternalEdges}, \noderef{BoundaryEdges},
-\noderef{ColoredVertexSetElementary}, and
+\noderef{ColoredVertexSetElementary}, \noderef{ColoredVertexSetClosed}, and
 \noderef{ColoredVertexSetStronglyClosed}.  Properness and the assertion that
 only $e_0$ is uncolored have the meanings in
 \noderef{IsProperEdgeColoring} and \noderef{IsOneEdgeUncolored}.
@@ -47,8 +47,9 @@ because it counts elements of the edge type.
 
 The chosen color $\alpha$ is missing at $x\in X$.  Elementariness of $X$
 says that it cannot be missing at any other vertex of $X$, so
-$m_\alpha=1$.  Strong closure includes closure, and closure says that no
-boundary edge has a color missing on $X$; hence $b_\alpha=0$.  Equation
+$m_\alpha=1$.  By \noderef{ColoredVertexSetStronglyClosed}, strong closure
+includes closure, and by \noderef{ColoredVertexSetClosed} closure says that
+no boundary edge has a color missing on $X$; hence $b_\alpha=0$.  Equation
 (1) now yields
 \[
                       2a_\alpha=|X|-1.
@@ -75,10 +76,11 @@ every boundary edge is colored.  It follows that
 Here $E_{G-e_0}(X)$ denotes the internal edge identities other than $e_0$,
 all of which are colored.
 
-Strong closure has two effects on the boundary.  Closure excludes all $q$
-colors in $M$ from boundary edges, and the remaining clause says that
-distinct boundary edge identities have distinct colors.  Thus the boundary
-is injected into the other $k-q$ colors, giving
+Strong closure has two effects on the boundary.  By
+\noderef{ColoredVertexSetClosed}, closure excludes all $q$ colors in $M$
+from boundary edges, and by \noderef{ColoredVertexSetStronglyClosed} the
+remaining clause says that distinct boundary edge identities have distinct
+colors.  Thus the boundary is injected into the other $k-q$ colors, giving
 \[
                        |\partial_G(X)|\leq k-q.       \tag{4}
 \]
