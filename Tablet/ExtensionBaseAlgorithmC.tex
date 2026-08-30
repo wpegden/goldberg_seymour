@@ -1,0 +1,269 @@
+\begin{lemma}[Part IV, Algorithm (C) and invariant (24)]
+Fix the following Case 2 data.  Let \(v_n\in V(T)\) be the terminal
+supporting vertex, and let
+\[
+ L_1=\noderef{ExtensionBaseSupportClass}(v_n)
+      =\{1_1<1_2<\cdots<1_{p+1}\}
+\]
+be the exact increasing enumeration of the full terminal support class.
+Assume that its last member is the terminal slot
+\(1_{p+1}=n\), that \(n+1\) is the number of certified rounds, and
+that every displayed slot has PE kind, exact supporting vertex \(v_n\),
+exact certified fields \(\gamma_{1_a},\delta_{1_a}\), and exact stored
+set \(S_{1_a}=\{\gamma_{1_a},\delta_{1_a}\}\).  Retain
+explicitly the support-color conclusions furnished in the extension-base
+argument by \noderef{ExtensionBaseSupportClassColors}:
+\[
+ \gamma_{1_{a+1}}=\delta_{1_a}\quad(1\leq a\leq p),
+ \qquad
+ \gamma_{1_1},\delta_{1_1},\ldots,\delta_{1_{p+1}}
+ \text{ form an injectively indexed color chain}.             \tag{1}
+\]
+Let \(T_j\) be the certified tree stored at an exact slot \(j\), and
+assume \(T_j\) is an ordered initial segment, in the sense of
+\noderef{TreeSequenceInitialSegment}, of \(T_t\) for every
+\(t\in L_1\setminus\{n\}\).
+
+Let \(\mu_0\) be proper and leave exactly \(e_0\) uncolored.  Assume
+the following explicit consequences of the construction in Claim 4.6:
+\[
+ \gamma_n\in\overline\mu_0(u),                               \tag{2}
+\]
+and, for every exact \(t\in L_1\setminus\{n\}\), the pair
+\(\gamma_t,\delta_t\) is \(T_t\)-strongly interchangeable under
+\(\mu_0\).  Also retain the present-color fact implicit in that
+construction: every preterminal \(\gamma_t\) is present at \(u\) under
+\(\mu_0\).  Finally assume the precise form of (25), namely
+\[
+ \overline\mu_0(v_n)\cap
+   \bigcup_{t\in L_1\setminus\{n\}}S_t=\varnothing,           \tag{3}
+\]
+where \(S_t\) is the exact stored-color set at slot \(t\).
+
+Then there is an \noderef{ExtensionBaseAlgorithmCTrace} on
+\(L_1^*=L_1\setminus\{n\}\) satisfying
+\noderef{ExtensionBaseAlgorithmCInvariant}.  Thus Algorithm (C) processes
+the exact slots of \(L_1^*\) in decreasing order, starting at \(\mu_0\),
+and invariant (24) holds before and after every rooted component switch.
+This includes the zero-step case \(p=0\).
+\end{lemma}
+\begin{proof}
+Write the increasing enumeration as
+\(i_a=1_{a+1}\) for \(0\leq a\leq p\), so \(i_p=n\), and put
+\[
+ A=L_1\setminus\{n\}=\{i_0,\ldots,i_{p-1}\}.                \tag{4}
+\]
+The equality in (4) is an equality of exact finite slot identities.  For
+the forward inclusion, every \(i_a\) belongs to the exact enumerated
+support class, and strict increase gives \(i_a<i_p=n\) when \(a<p\).
+For the reverse inclusion, exactness of the enumeration writes a member
+of \(L_1\) uniquely as \(i_q\); if it is not \(n=i_p\), strict increase
+forces \(q<p\).  Here and below we use
+\noderef{ExtensionBaseSupportClass} with the exact range hypothesis, not
+merely equality of numerical slot values.
+
+If \(p=0\), (4) says that \(A\) is empty.  Take the zero-step
+\noderef{ExtensionBaseAlgorithmCTrace}, whose only coloring is
+\(\mu_0\).  Its terminal slot is \(i_0=n\), which belongs to \(L_1\),
+and the terminal-round and initial-color fields are hypotheses.  The
+properness and unique-uncolored clauses of
+\noderef{ExtensionBaseAlgorithmCInvariant} are the two initial coloring
+hypotheses.  Every remaining clause quantifies over a step or a member of
+the empty set \(A\), so it is vacuous.  This proves the assertion when
+\(p=0\).  Henceforth assume \(p>0\).
+
+For \(0\leq a<p\), define
+\[
+ r_a=p-1-a,\qquad t_a=i_{r_a}.                                \tag{5}
+\]
+The list \(t_0,\ldots,t_{p-1}\) has exact image \(A\) by (4).  If
+\(a<c<p\), then \(r_c<r_a\), and strict increase of the original
+enumeration gives \(t_c<t_a\).  Define recursively
+\[
+ \mu^0=\mu_0,\qquad
+ K_a=\noderef{TwoColorComponent}
+   (G,\mu^a,\gamma_{r_a},\delta_{r_a},\mathsf{inl}(u)),
+ \qquad
+ \mu^{a+1}=\noderef{TwoColorComponentSwap}
+   (G,\mu^a,\gamma_{r_a},\delta_{r_a},\mathsf{inl}(u)).       \tag{6}
+\]
+At step \(a\), use the exact slot \(t_a\), the exact colors
+\(\gamma_{r_a},\delta_{r_a}\), and the coloring \(\mu^a\).  Equations
+(4)--(6), together with the assumed support, PE-kind, gamma, and delta
+field equalities, verify every field of an
+\noderef{ExtensionBaseAlgorithmCTrace}; call it \(\mathcal C\).
+
+For the color bookkeeping, set
+\[
+ c_0=\gamma_0,\qquad c_{q+1}=\delta_q\quad(0\leq q\leq p).   \tag{7}
+\]
+The chain identities in (1) give \(\gamma_q=c_q\) for every
+\(0\leq q\leq p\).  The injectivity in (1) says that
+\(c_0,\ldots,c_{p+1}\) are pairwise distinct.  Consequently
+\[
+ \gamma_q=c_q\ne c_{q+1}=\delta_q,                           \tag{8}
+\]
+and, if \(q<r\), then \(\gamma_q=c_q\) differs from both colors
+\(c_r,c_{r+1}\) switched at position \(r\).  This is precisely the
+chain and distinctness conclusion stated by
+\noderef{ExtensionBaseSupportClassColors}; no equality of two different
+certified color fields is being inferred merely from their names.
+
+Let
+\[
+ U=\bigcup_{t\in A}S_t.                                      \tag{9}
+\]
+For every \(q<p\), the exact stored-pair field at slot \(i_q\) puts
+\(\gamma_q\) and \(\delta_q\) in \(U\).  Hypothesis (3), together
+with the definitions \noderef{MissingColors} and
+\noderef{PresentColors}, therefore gives an edge incident with \(v_n\)
+of each of these two colors under \(\mu_0\).  We shall preserve this
+stronger presentness assertion for every color in \(U\), rather than
+using (3) only once.
+
+We prove invariant (24) by induction along the decreasing list (5).
+Immediately before processing position \(r=r_a\), maintain:
+\[
+\begin{array}{ll}
+({\rm I})&\mu^a\text{ is proper and leaves exactly }e_0
+          \text{ uncolored};\\
+({\rm II})&\delta_r\in\overline{\mu^a}(u),\quad
+          \gamma_q\text{ is present at }u\text{ for every }q\leq r;\\
+({\rm III})&\text{every pair at an unprocessed slot is strongly
+          interchangeable under }\mu^a;\\
+({\rm IV})&\text{every color in }U\text{ is present at }v_n
+          \text{ under }\mu^a.
+\end{array}                                                    \tag{10}
+\]
+At \(a=0\), assertion (I) is assumed.  Since \(r_0=p-1\), the last
+chain identity gives
+\(\delta_{r_0}=\gamma_p=\gamma_n\), so (2) gives the missing-delta
+part of (II); the explicitly assumed initial presentness of all
+preterminal gammas gives its other part.  The strong-interchangeability
+conclusion of Claim 4.6, stated here for every exact member of \(A\), is
+(III).  The preceding paragraph is (IV).
+
+Fix a stage \(a\), abbreviate
+\[
+ r=r_a,\quad t=t_a,\quad \alpha=\gamma_r,\quad
+ \beta=\delta_r,\quad \varphi=\mu^a,\quad K=K_a.             \tag{11}
+\]
+We verify the per-step clauses of
+\noderef{ExtensionBaseAlgorithmCInvariant} and then restore (10).
+
+By (II), \(\beta\) is missing and \(\alpha\) is present at \(u\).
+Unfolding \noderef{MissingColors} and \noderef{PresentColors}, no edge
+incident with \(u\) has \(\varphi\)-color \(\beta\), while some edge
+\(e_\alpha\) incident with \(u\) has color \(\alpha\).  This
+\(\alpha\)-edge is unique.  Indeed, two distinct such edge identities
+would share \(u\), hence would be adjacent by \noderef{AdjacentEdges},
+contradicting properness as defined by
+\noderef{IsProperEdgeColoring}.  The definition
+\noderef{TwoColorIncidenceGraph} makes
+\(\mathsf{inr}(e_\alpha)\) adjacent to \(\mathsf{inl}(u)\), so both
+nodes belong to \(K\).  The preceding uniqueness and missingness show
+that \(u\) has exactly one neighbor in this incidence graph.
+
+Thus \(K\) contains a genuine edge node and contains a node with a
+subsingleton neighbor set.  Distinctness (8) and
+\noderef{TwoColorComponentSpanningPath}, applied to the proper coloring
+in (I), show that \(K\) is exactly a path component in the sense of
+\noderef{TwoColorPathComponent}, with \(u\) as an end.  This proves the
+path clause, including the nondegeneracy that would fail if both colors
+were missing at \(u\).
+
+The current pair is strongly interchangeable by (III).  Suppose
+\(x\in V(T_t)\), \(x\ne v_n\), and \(\mathsf{inl}(x)\in K\).  Since
+\(x\) and \(u\) lie in the same connected component, the component
+through \(x\) is exactly \(K\).  Expanding
+\noderef{ETTStrongInterchangeable} at \(x\) supplies a
+\noderef{TwoColorComponentCycle} whose support is all of \(K\), not
+merely a cycle contained in it.  Its \noderef{TwoColorCycle} therefore
+contains the endpoint \(u\).  The two directions of a simple closed
+cycle at that occurrence of \(u\) give two distinct neighbors, contrary
+to the singleton neighbor set just proved.  Hence
+\[
+ x\in V(T_t),\ \mathsf{inl}(x)\in K\quad\Longrightarrow\quad x=v_n.
+                                                                    \tag{12}
+\]
+This is the exact ``at most \(v_n\)'' clause of (24).
+
+By (9), (IV), and the exact stored-pair field at \(t\), both
+\(\alpha\) and \(\beta\) are present at \(v_n\).  Thus there are
+incident edge identities \(e_\alpha^n,e_\beta^n\) of those colors.
+They are distinct by (8).  If \(\mathsf{inl}(v_n)\in K\), both are
+neighbors of \(v_n\) in \(K\).  The degree bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, using properness in (I), says
+that these two distinct neighbors exhaust the neighbor set.  In
+particular it is not subsingleton, so \(v_n\) is not an end whenever it
+lies on the path.  This is exactly the remaining path assertion in (24).
+
+The same argument preserves (IV).  Fix \(c\in U\) and an incident
+\(c\)-colored edge at \(v_n\).  If \(v_n\notin K\), no incident edge
+at \(v_n\) can be changed by (6), since any changed edge-node would be
+adjacent to and hence place \(v_n\) in \(K\).  If \(v_n\in K\), the
+preceding paragraph shows that the swap exchanges the colors on exactly
+\(e_\alpha^n,e_\beta^n\), so both current colors remain present.  Every
+other color is fixed pointwise by
+\noderef{TwoColorComponentSwap}.  Therefore every color in \(U\)
+remains present at \(v_n\) under \(\mu^{a+1}\).
+
+At \(u\), the unique incident \(\alpha\)-edge belongs to \(K\) and is
+changed to \(\beta\); there was no incident \(\beta\)-edge.  Hence no
+incident edge has color \(\alpha\) after the swap, while an incident edge
+does have color \(\beta\).  Thus \(\alpha\) becomes missing and
+\(\beta\) becomes present, by \noderef{Incident},
+\noderef{MissingColors}, and \noderef{PresentColors}.  For every
+\(q<r\), (7)--(8) show that \(\gamma_q=c_q\) differs from both switched
+colors \(c_r,c_{r+1}\), so its existing incident witness at \(u\) is
+fixed.  If a next position exists, it is \(r-1\), and (1) gives
+\[
+                  \delta_{r-1}=\gamma_r=\alpha.              \tag{13}
+\]
+The newly missing \(\alpha\), equation (13), and the surviving lower
+gammas establish (II) for the next stage.
+
+By (8), \(\alpha\ne\beta\), so
+\noderef{TwoColorComponentSwapProper} applied to (I) proves that
+\(\mu^{a+1}\) is proper.  The set of uncolored edge identities is
+unchanged.  Indeed, expansion of
+\noderef{TwoColorComponentSwap} gives, for every edge \(f\),
+\[
+ \mu^{a+1}(f)=\mathsf{none}\quad\Longleftrightarrow\quad
+ \mu^a(f)=\mathsf{none}:                                    \tag{14}
+\]
+outside \(K\) the value is fixed, and inside \(K\) two
+\(\mathsf{some}\)-values are exchanged while \(\mathsf{none}\) is
+fixed.  Applying both clauses of \noderef{IsOneEdgeUncolored} to (14)
+proves that precisely \(e_0\) remains uncolored.  This restores (I).
+
+It remains to restore (III), which is the post-step assertion in (24).
+Let \(s\in A\) be unprocessed after the current step, and let its exact
+certified fields be \(\gamma_s,\delta_s\).  Exact enumeration gives a
+unique \(q<r\) with \(s=i_q\); in particular strict increase gives
+\(s<t\).  Comparing the certified field equalities with those at
+position \(q\) identifies
+\(\gamma_s=\gamma_q\) and \(\delta_s=\delta_q\).  The current and
+surviving slots have the same exact support \(v_n\) and PE kind.  Their
+pairs are strongly interchangeable under \(\mu^a\) by (III), and the
+current rooted component is the path component already established.
+Together with properness and unique-uncoloredness from (I), these are
+all premises of the strict earlier-slot alternative in
+\noderef{StrongInterchangeabilityKempePreserved}.  It follows that the
+pair at \(s\) remains strongly interchangeable under \(\mu^{a+1}\).
+The lemma's different-support disjointness premise is vacuous here:
+both certified supporting vertices are exactly \(v_n\), so its required
+alternative is supplied solely by the strict slot inequality \(s<t\).
+Since \(s\) was arbitrary, (III) is restored for every unprocessed slot.
+
+Finally, the assumed ordered initial-segment premise applied to the exact
+current member \(t\in A\) gives \(T_j\preccurlyeq T_t\).  Together with
+(I), the missing-delta statement (II), the path certificate, (12), the
+nonendpoint argument at \(v_n\), and the survivor conclusion, this
+verifies every per-step field of
+\noderef{ExtensionBaseAlgorithmCInvariant}.  The induction gives
+properness and exact-one-uncoloredness for the output coloring as well.
+By the exact image equality in (4)--(5), no member of \(A\) is absent
+from the complete trace, so the invariant's final absent-slot clause is
+vacuous.  Hence \(\mathcal C\) satisfies invariant (24), as required.
+\end{proof}
