@@ -143,11 +143,16 @@ component-path, b1--b4, support-color, and support-order data.  Every
 hypothesis is present above individually; in particular, (1) is the exact
 support-set identity, and the two exact slots \(n^-,n\) provide the
 displayed gamma and delta identities required there.  We obtain a vertex
-\(u\in V(T'_j)\setminus V(T_n)\), the asserted exit suffix \(Q\), and all
-of its exact path and boundary conclusions.  Fix
+\(u\in V(T'_j)\setminus V(T_n)\), the asserted exit suffix \(Q\), an exact
+\(\gamma_n\)-colored boundary identity on \(Q\) incident with \(u\), and
+the stated nonincidence of \(u\) with \(f_n\).  These are all clauses of
+the cited statement.  Fix
 \(\beta\in\overline{\varrho}_1(u)\).  The same application gives the
 position \(q_z\), the vertex \(z\), its two-case minimality certificate,
-and the two exclusions before \(z\).  Define \(\varrho_0,\mu_0\) by (4).
+the full no-earlier-missing assertion on
+\(\noderef{TreeVerticesBefore}(T_j,z)\), and the exact no-\(\beta\) edge
+assertion at every position \(|T_j(v_n)|\le a<q_z\).  Define
+\(\varrho_0,\mu_0\) by (4).
 The five conclusions of that node give:
 \begin{align}
  &\mu_0\text{ is proper and leaves exactly }e_0\text{ uncolored};
@@ -217,7 +222,14 @@ Fix a processed slot \(t\), put
 \(\alpha=\gamma_t\), \(\eta=\delta_t\), let \(K\) be the full
 \((\alpha,\eta)\)-component rooted at \(u\) before the switch, and let
 \(w\in V(T_j(v_n)-v_n)\).  The exact initial-segment field of the invariant
-puts \(T_j\preccurlyeq T_t\).  Hence \(w\in V(T_t)\) and \(w\ne v_n\).
+puts \(T_j\preccurlyeq T_t\).  Unfold
+\noderef{TreeSequenceInitialSegment}: every displayed vertex position of
+\(T_j\) has the identical vertex at the corresponding cast position of
+\(T_t\).  By the image description in
+\noderef{TreeSequenceVertexSet}, the membership of \(w\) among the
+displayed vertices before \(v_n\), as defined by
+\noderef{TreeVerticesBefore}, therefore gives \(w\in V(T_t)\); that same
+before-vertex definition gives \(w\ne v_n\).
 The component-intersection clause of
 \noderef{ExtensionBaseAlgorithmCInvariant} gives
 \(\mathsf{inl}(w)\notin K\).  If an edge incident with \(w\) had its edge
@@ -244,9 +256,15 @@ two clauses have just been checked explicitly because the tablet represents
 (d1).
 
 We now prove (d2), retaining exact edge identities.  First consider
-\(T_j(z)\).  It is an ordered prefix of \(T_j\preccurlyeq T_t\).  If an
-exact displayed edge \(f\) of this prefix belonged to \(K\), both endpoint
-vertices of \(f\) would also belong to \(K\), by
+\(T_j(z)\).  In the formal statement its vertices are exactly
+\(\noderef{TreeVerticesBefore}(T_j,z)\cup\{z\}\), and its exact edge
+positions are those before \(q_z\).  Unfolding
+\noderef{TreeSequenceInitialSegment} in \(T_j\preccurlyeq T_t\) identifies
+each such displayed vertex and edge with the entry at the corresponding
+cast position of \(T_t\); unfolding the image in
+\noderef{TreeSequenceVertexSet} then puts every such vertex in \(V(T_t)\).
+If an exact displayed edge \(f\) of this prefix belonged to \(K\), both
+endpoint vertices of \(f\) would also belong to \(K\), by
 \noderef{TwoColorIncidenceGraph} and \noderef{TwoColorComponent}.  The
 attachment law in \noderef{TreeSequence} puts both endpoints in \(V(T_t)\).
 The invariant permits only \(v_n\) from \(V(T_t)\), so both endpoints would
@@ -277,21 +295,55 @@ exact stored-pair field and (1) give
 \(\alpha,\eta\ne\delta_n\).  Equation (13) therefore excludes every exact
 appended edge of \(T'_j(u)\) from \(K\): its \(\mu_0\)-color is neither
 \(\alpha\) nor \(\eta\).  The seed identities are already fixed by the
-preceding \(T_j(z)\)-argument, since
-\(T_j(v_n)\preccurlyeq T_j\preccurlyeq T_t\).  Thus all exact displayed
-edges of \(T'_j(u)\) are fixed at the first step.  The same reasoning is
-inductive, since earlier steps have fixed those values.
+preceding \(T_j(z)\)-argument, with exact identities as follows.  Unfolding
+\noderef{TreeSequenceInitialSegment} in
+\(T_j(v_n)\preccurlyeq T_j\), every seed edge is the identical edge of
+\(T_j\), and \(q_z\ge |T_j(v_n)|\) places that edge before \(z\).
+Unfolding it in \(T_j(v_n)\preccurlyeq T'_j\) identifies the same edge
+identity in \(T'_j\).  Moreover, \(u\notin V(T_n)\), while the composite
+\(T_j(v_n)\preccurlyeq T_j\preccurlyeq T_n\), unfolded in the same way and
+read through \noderef{TreeSequenceVertexSet}, puts every seed vertex in
+\(V(T_n)\).  Unfold \noderef{TreeSequenceVertexSet} once more in
+\(u\in V(T'_j)\), and choose its exact displayed position \(q_u\).  If
+\(q_u\le |T_j(v_n)|\), the vertex clause of
+\noderef{TreeSequenceInitialSegment} for
+\(T_j(v_n)\preccurlyeq T'_j\) identifies \(u\) with the seed vertex at
+that position.  The preceding seed containment would give
+\(u\in V(T_n)\), contradicting the exit conclusion.  Hence
+\(|T_j(v_n)|<q_u\), so those common seed edges are all in the displayed
+prefix \(T'_j(u)\).  This proves that every exact displayed edge of
+\(T'_j(u)\), whether a common seed identity or a later identity covered by
+(13), is fixed at the first step.  The same reasoning is inductive, since
+earlier steps have fixed those values.
 
-Let \(w\in V(T'_j(u))\setminus\{u\}\).  Equation (12) says that neither
-current switched color is missing at \(w\) under \(\mu_0\).  By induction
-the same holds immediately before the current step.  Properness gives one
-incident \(\alpha\)-edge and one incident \(\eta\)-edge, each unique by
-\noderef{AdjacentEdges} and \noderef{IsProperEdgeColoring}.  If
-\(\mathsf{inl}(w)\notin K\), neither is changed.  If
-\(\mathsf{inl}(w)\in K\), both incident edge nodes are adjacent to \(w\)
-and hence lie in the same full component \(K\); the switch exchanges the
-two colors.  In either case the present-color set, and hence the complete
-missing-color set, is unchanged at \(w\).  This proves the simultaneous
+Let \(w\in V(T'_j(u))\setminus\{u\}\).  More explicitly,
+\noderef{TreeVerticesBefore} says that \(w\) is a displayed vertex before
+\(u\), and the image definition \noderef{TreeSequenceVertexSet} gives
+\(w\in V(T'_j)\setminus\{u\}\).  We now derive, rather than assume, the
+needed consequence of (12).  For either
+\(c\in\{\alpha,\eta\}\), the exact stored-pair and earlier-slot clauses
+give \(c\in S'\setminus\{\delta_n\}\).  If
+\(c\in\overline\mu_0(w)\), the union definition
+\noderef{TreeMissingColors}, applied to the displayed vertex
+\(w\in V(T'_j)\setminus\{u\}\), puts \(c\) in
+\(\overline\mu_0(T'_j-u)\cap S'\).  Equation (12) would then give
+\(c=\delta_n\), contradicting the earlier-slot exclusion.  Thus neither
+\(\alpha\) nor \(\eta\) is missing at \(w\) under \(\mu_0\).
+
+The inductive missing-set equality at \(w\) gives the same conclusion
+immediately before the current step.  Expanding
+\noderef{MissingColors} and \noderef{PresentColors} now supplies an exact
+incident \(\alpha\)-edge and an exact incident \(\eta\)-edge.  They are
+unique by \noderef{AdjacentEdges} and
+\noderef{IsProperEdgeColoring}.  If
+\(\mathsf{inl}(w)\notin K\), adjacency in
+\noderef{TwoColorIncidenceGraph} and connectedness in
+\noderef{TwoColorComponent} show that neither incident edge-node lies in
+\(K\), so neither is changed.  If \(\mathsf{inl}(w)\in K\), both incident
+edge nodes are adjacent to \(w\) and hence lie in the same full component
+\(K\); the switch exchanges the two colors.  In either case the
+present-color set, and hence the complete missing-color set, is unchanged
+at \(w\).  This proves the simultaneous
 inductive assertion that the trace fixes every displayed prefix-edge value
 and every required prefix-vertex missing set.  Notice that this argument
 allows a component to pass through a prefix vertex; it proves the required

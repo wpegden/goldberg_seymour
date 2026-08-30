@@ -93,11 +93,29 @@ Retain all of the following Case 2 data explicitly.
 Then there are a vertex \(u\in V(T'_j)\setminus V(T_n)\) and an exact
 simple exit suffix \(Q=P[x,u]\) with at least one edge identity such that
 \(u\) is the only vertex-node of \(Q\) in
-\(V(T_n)\cup V(T'_j)\).  For every
+\(V(T_n)\cup V(T'_j)\).  There is an exact edge identity
+\[
+ g\in\partial_{\varrho_1,\gamma_n}
+       \bigl(V(T_n)\cup V(T'_j)\bigr)
+\]
+which is incident with \(u\) and whose edge-node lies on \(Q\); moreover,
+\(u\) is not incident with \(f_n\).  For every
 \(\beta\in\overline{\varrho}_1(u)\), there are a vertex \(z\in V(T_j)\)
 and its exact position \(q_z\ge |T_j(v_n)|\), chosen minimally among
 later vertices missing \(\beta\), or terminally when there is no such
-vertex, for which the following holds.  Define
+vertex.  In both cases the choice has the full exclusions
+\[
+ \beta\notin\overline{\varrho}_1(w)
+ \quad\text{for every }w\in\noderef{TreeVerticesBefore}(T_j,z),
+                                                               \tag{5}
+\]
+and
+\[
+ \varrho_1(T_j.\operatorname{edge}(a))\ne\beta
+ \quad\text{for every exact }a\text{ with }
+ |T_j(v_n)|\le a<q_z.                                        \tag{5'}
+\]
+Define
 \[
  \varrho_0=
  \noderef{OutsideTreeColorSwap}(T'_j,\varrho_1,\beta,\delta_n),
