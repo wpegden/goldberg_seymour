@@ -3,47 +3,248 @@ For every defective color $\delta$, both vertices of $U_\delta$ belong to
 the absorbing set $A(T,e_0,\varphi)$.
 \end{lemma}
 \begin{proof}
-Fix $u\in U_\delta$, a color $\alpha$ missing at $u$, and a free color
-$\beta\ne\alpha$ of the original tree.  The incident $\delta$-edge and the
-internal $\gamma(\delta)$-edge in
-\noderef{ScheideSymmetricDefectiveInternal} show that
-$\alpha\notin\{\delta,\gamma(\delta)\}$.  A free color is missing on
-$V(T)$ and neither of these two colors is free, so
-$\beta\notin\{\delta,\gamma(\delta)\}$.  Thus the
-$(\alpha,\beta)$ incidence component through $u$ is identical under
-$\varphi$ and $\varphi_\delta$.
+Write
+\[
+ X=V(T),\qquad \gamma=\gamma(\delta),\qquad
+ U_\gamma=\{u^1_\gamma,u^2_\gamma\},\qquad
+ Z=X\setminus U_\gamma,
+\]
+and put $U_\delta=\{u^1_\delta,u^2_\delta\}$,
+$T_\delta$ for the replacement tree, $X_\delta=V(T_\delta)$, and
+$\varphi_\delta$ for the defective-color switch.  Unpacking
+\noderef{ScheideReplacementData}, the two named $\delta$-colored edge
+identities $f^1_\delta,f^2_\delta$ have respective endpoint pairs
+$\{v^1_\delta,u^1_\delta\}$ and
+$\{v^2_\delta,u^2_\delta\}$, where $v^1_\delta,v^2_\delta\in Z$ and
+$u^1_\delta,u^2_\delta\notin X$.  The same definition gives
+\[
+ X_\delta=Z\cup U_\delta.                                  \tag{1}
+\]
+The exact ordered layout in the underlying
+\noderef{ScheideReducedConfiguration} and
+\noderef{ScheideStructuralConfiguration} puts both vertices of
+$U_\gamma$ in $X$; hence the definition of $Z$ also gives
+\[
+ X=Z\cup U_\gamma.                                         \tag{2}
+\]
+In particular, both vertices whose absorption is asserted already satisfy
+the outside-$X$ conjunct in \noderef{AbsorbingVertex}.
 
-Let $v\in V(T)$ be the unique vertex missing $\beta$; existence is the
-definition of a free color and uniqueness follows from
-\noderef{ScheideGlobalMaximumOrder}.  If $v\in Z_{\gamma(\delta)}$, then
-$u,v\in V(T_\delta)$.  The elementarity and closedness of the globally
-maximum replacement tree, supplied by
-\noderef{ScheideReplacementMaximum}, make the two-color component a path
-with ends $u$ and $v$: all other replacement-tree vertices have both colors
-present, while neither color can leave the closed set except through the
-two ends.
+We record the two maximum-tree facts before choosing colors.  The reduced
+configuration extends a structural configuration, whose globally maximum
+field is a \noderef{GlobalMaximumTriple}; its underlying
+\noderef{KTriple} says in particular that $\varphi$ is proper in the sense
+of \noderef{IsProperEdgeColoring}.  Applying
+\noderef{ScheideGlobalMaximumOrder} to this original maximum triple gives
+\[
+ X\text{ is elementary and closed with respect to }\varphi. \tag{3}
+\]
+On the other hand, \noderef{ScheideReplacementMaximum} says both that
+$\varphi_\delta$ is proper and that $(T_\delta,e_0,\varphi_\delta)$ is
+globally maximum.  A second application of
+\noderef{ScheideGlobalMaximumOrder} therefore gives
+\[
+ X_\delta\text{ is elementary and closed with respect to }
+ \varphi_\delta.                                            \tag{4}
+\]
+Here ``elementary'' and ``closed'' always have exactly the meanings in
+\noderef{ColoredVertexSetElementary} and
+\noderef{ColoredVertexSetClosed}.
 
-Suppose instead that $v\in U_{\gamma(\delta)}$.  Write
-$U_\delta=\{u,u'\}$ and
-$U_{\gamma(\delta)}=\{v,v'\}$.  Assertion (14), namely
-\noderef{ScheideSymmetricMissingInternal}, gives an internal $\beta$ edge
-$uu'$.  Since $\alpha$ is missing at $u$, elementariness and closedness of
-$V(T_\delta)$ force the unique $\alpha$ edge at $u'$ into
-$Z_{\gamma(\delta)}$.  Similarly the original tree's elementariness and
-closedness force the unique $\beta$ edge at $v'$ into $Z$, and assertion
-(13) gives the internal $\alpha$ edge $v'v$.
+Now fix an arbitrary $u\in U_\delta$, an arbitrary
+$\alpha\in\overline\varphi(u)$, and an arbitrary
+$\beta\in\mathcal F(T,e_0,\varphi)$ with $\beta\ne\alpha$.  The appropriate
+one of the two $\delta$-identities in
+\noderef{ScheideReplacementData} is incident with $u$, so $\delta$ is
+present at $u$ by \noderef{Incident} and \noderef{PresentColors}.
+Moreover, the second conclusion of
+\noderef{ScheideSymmetricDefectiveInternal} supplies a
+$\gamma$-colored edge identity internal to $U_\delta$.  Its endpoints are
+distinct by \noderef{LooplessMultigraph}; since they both lie in the
+two-element set $U_\delta$, this identity is incident with the arbitrary
+member $u$.  Since \noderef{MissingColors} is the complement of the
+present colors, the assumption that $\alpha$ is missing at $u$ gives
+\[
+ \alpha\ne\delta,\qquad \alpha\ne\gamma.                   \tag{5}
+\]
 
-These two edges entering $Z$ are in the same component.  Every vertex of
-$Z$ is incident with both colors: $\alpha$ is missing only at
-$u\in V(T_\delta)$ and $\beta$ only at $v\in V(T)$.  Replacement-tree
-closedness excludes all other $\alpha$ exits from $Z$, and original-tree
-closedness excludes all other $\beta$ exits.  Thus the two displayed edges
-are exactly the two boundary edges of $Z$ in this two-color incidence
-subgraph.  Every internal vertex-node has degree two, so its alternating
-paths pair these boundary edges.  The component beginning
-$u-\beta-u'-\alpha$ therefore crosses $Z$, continues
-$v'-\alpha-v$, and has ends $u,v$.  In either case the component through
-$u$ contains the unique tree vertex missing $\beta$, which is precisely the
-condition in \noderef{AbsorbingVertex}.  Hence both named replacement
-vertices lie in \noderef{AbsorbingVertices}.
+By \noderef{TreeFreeColors}, $\beta$ is missing at some vertex of $X$ and
+does not belong to \noderef{TreeUsedColors}$(\varphi,T)$.  The exact block
+layout and block-color clause of
+\noderef{ScheideStructuralConfiguration} put $\gamma$ on each of the two
+colored $\gamma$-block tree edges, so $\gamma$ is used and
+$\beta\ne\gamma$.  Also, defectiveness of $\delta$ in
+\noderef{DefectiveColors}, expanded using
+\noderef{BoundaryColorEdges}, supplies a $\delta$-colored identity in
+$\partial_G(X)$.  If $\beta=\delta$, the missing occurrence of $\beta$ in
+$X$ would make this identity a forbidden boundary identity by (3) and
+\noderef{ColoredVertexSetClosed}.  Thus
+\[
+ \beta\ne\delta,\qquad \beta\ne\gamma.                     \tag{6}
+\]
+
+The coloring $\varphi_\delta$ in
+\noderef{ScheideDefectiveSwitchEffect} is exactly the
+$(\gamma,\delta)$ component swap.  By the defining formula in
+\noderef{TwoColorComponentSwap}, (5)--(6) imply, for every edge identity
+$q$,
+\[
+ \varphi(q)=\alpha\Longleftrightarrow
+ \varphi_\delta(q)=\alpha,
+ \qquad
+ \varphi(q)=\beta\Longleftrightarrow
+ \varphi_\delta(q)=\beta.                                  \tag{7}
+\]
+Consequently \noderef{TwoColorIncidenceGraph} gives literally the same
+bipartite $(\alpha,\beta)$ incidence graph for the two colorings, and
+\noderef{TwoColorComponent} gives the same full component through every
+node.  In particular, by \noderef{Incident},
+\noderef{PresentColors}, and \noderef{MissingColors}, the present and
+missing status of each of $\alpha,\beta$ at every vertex is also unchanged.
+
+Choose $v\in X$ at which $\beta$ is missing; its existence is the first
+clause of \noderef{TreeFreeColors}.  It is unique in $X$: two distinct such
+vertices would contradict (3) and
+\noderef{ColoredVertexSetElementary}.  By (2), either $v\in Z$ or
+$v\in U_\gamma$.
+
+First suppose $v\in Z$.  Then (1) puts $u,v$ in $X_\delta$, and they are
+distinct because $u\notin X$ while $v\in X$.  By (7), $\alpha$ is missing
+at $u$ and $\beta$ is missing at $v$ under $\varphi_\delta$.  Elementarity
+in (4), read through \noderef{ColoredVertexSetElementary}, says that
+$\beta$ is present at $u$ and $\alpha$ is present at $v$: otherwise the
+two distinct vertices would share a missing color.  The complementary
+definitions \noderef{MissingColors} and \noderef{PresentColors} therefore
+show that the two corresponding vertex-nodes have degree one in the
+incidence graph.  Indeed, $u$ has no incident $\alpha$-identity and has an
+incident $\beta$-identity, while $v$ has no incident $\beta$-identity and
+has an incident $\alpha$-identity; in each case that present identity is
+unique because two distinct incident identities of the same color are
+adjacent by \noderef{AdjacentEdges} and contradict properness in
+\noderef{IsProperEdgeColoring}.
+
+Every other vertex $x\in X_\delta\setminus\{u,v\}$ has both colors
+present: missing $\alpha$ would contradict elementarity with $u$, and
+missing $\beta$ would contradict elementarity with $v$.  Again using
+\noderef{PresentColors}, \noderef{MissingColors},
+\noderef{AdjacentEdges}, and properness, there is exactly one incident
+identity of each color at $x$; the two identities are distinct because
+$\alpha\ne\beta$.  Hence every such vertex-node has degree two.  Each
+edge-node of the two-color incidence graph also has degree two: by
+\noderef{TwoColorIncidenceGraph} its neighbors are exactly its incident
+endpoint vertices, and \noderef{Incident} together with the loopless law
+in \noderef{LooplessMultigraph} says that these are two distinct vertices.
+This also checks explicitly both cases behind
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.
+
+Because $\alpha$ and $\beta$ are missing in $X_\delta$, closedness in (4)
+and \noderef{ColoredVertexSetClosed} forbid every
+$\alpha$- or $\beta$-colored identity in the boundary
+\noderef{BoundaryEdges}$(G,X_\delta)$.  Thus the full component through
+$u$ is trapped in the finite incidence graph over $X_\delta$.  Starting
+at the degree-one node $u$, follow at each subsequent degree-two node the
+unique incidence other than the one just used.  This walk cannot branch or
+stop at an internal node.  It cannot repeat a node: at a first repetition,
+the two incidences used on the first visit together with the new entering
+incidence would violate the degree-two bound (and returning to $u$ would
+violate its degree-one computation).  Finiteness therefore forces the walk
+to end at another degree-one node.  The degree computations show that the
+only possibility is $v$.  Hence the full $(\alpha,\beta)$ component is a
+path with vertex ends $u,v$.
+
+It remains to suppose $v\in U_\gamma$.  The internal identities supplied
+below and \noderef{LooplessMultigraph} show that the two vertices in each
+pair are distinct, so we may write
+\[
+ U_\delta=\{u,u'\},\qquad U_\gamma=\{v,v'\}.
+\]
+Use \noderef{ScheideSymmetricMissingInternal} in its second direction on
+the color $\beta$ missing at $v\in U_\gamma$: it gives a
+$\beta$-colored edge identity $b_\delta$ with endpoints $u,u'$.  Use its
+first direction on the color $\alpha$ missing at $u\in U_\delta$: it gives
+an $\alpha$-colored identity $a_\gamma$ with endpoints $v,v'$.  By (7),
+these are the same colored identities in the common incidence graph.
+
+We next force the two remaining identities.  In $X_\delta$, the distinct
+vertices $u,u'$ cannot both miss $\alpha$ by (4) and
+\noderef{ColoredVertexSetElementary}; hence $\alpha$ is present at $u'$ by
+\noderef{MissingColors} and \noderef{PresentColors}.  Choose an incident
+$\alpha$-identity $a_Z$.  It is unique by
+\noderef{AdjacentEdges} and properness in
+\noderef{IsProperEdgeColoring}.  Its other endpoint exists by
+\noderef{Incident} and differs from $u'$ by
+\noderef{LooplessMultigraph}.  Since $\alpha$ is missing at $u$, this
+endpoint is not $u$.  Since $\alpha$ is missing in $X_\delta$, (4) and
+\noderef{ColoredVertexSetClosed} exclude an $\alpha$-colored identity in
+\noderef{BoundaryEdges}$(G,X_\delta)$.  Decomposition (1) therefore forces
+the other endpoint of $a_Z$ to lie in $Z$.
+
+Similarly, in the original set $X$, elementarity in (3) forces $\beta$ to
+be present at $v'$, because it is missing at the distinct vertex $v$.
+By \noderef{MissingColors}, \noderef{PresentColors},
+\noderef{AdjacentEdges}, and properness, there is a unique incident
+$\beta$-identity $b_Z$ at $v'$.  The loopless law gives a distinct other
+endpoint, missingness at $v$ excludes $v$, and original closedness in (3)
+excludes a $\beta$-colored member of
+\noderef{BoundaryEdges}$(G,X)$.  Decomposition (2) therefore forces the
+other endpoint of $b_Z$ to lie in $Z$.
+
+We claim that $a_Z$ and $b_Z$ are exactly the two boundary identities of
+$Z$ in the common $(\alpha,\beta)$ incidence graph.  First, every
+$z\in Z$ has both colors present.  Under $\varphi_\delta$, it cannot miss
+$\alpha$, because $u,z$ are distinct members of the elementary set
+$X_\delta$ and $u$ misses $\alpha$.  Under $\varphi$, it cannot miss
+$\beta$, because $v,z$ are distinct members of the elementary set $X$ and
+$v$ misses $\beta$.  By (7) these assertions concern the same graph.  The
+definitions \noderef{MissingColors} and \noderef{PresentColors}, followed
+by \noderef{AdjacentEdges} and properness, give exactly one incident
+identity of each color and thus degree two at every such vertex-node.
+
+Now let $q$ be any $\alpha$-colored boundary identity of $Z$.  Replacement
+closedness, using the missing occurrence of $\alpha$ at $u$, forbids $q$
+from leaving $X_\delta$ by
+\noderef{ColoredVertexSetClosed} and \noderef{BoundaryEdges}.  Its endpoint
+outside $Z$ therefore lies in $U_\delta$ by (1); it cannot be $u$ by
+\noderef{MissingColors}, so it is $u'$, and the uniqueness just proved from
+\noderef{IsProperEdgeColoring} makes $q=a_Z$.  Conversely $a_Z$ is such a
+boundary identity by its two endpoints.  If $q$ is instead
+$\beta$-colored, original closedness and the missing occurrence at $v$
+force its endpoint outside $Z$ into $U_\gamma$ by (2); it cannot be $v$,
+so it is $v'$, and properness makes $q=b_Z$.  Conversely $b_Z$ is a
+$\beta$-boundary identity.  This proves the exactness claim.
+
+Finally consider the alternating walk that starts
+\[
+ u,\ b_\delta,\ u',\ a_Z
+\]
+and has now entered $Z$.  At $u$ there is no $\alpha$ incidence and the
+$\beta$ incidence $b_\delta$ is unique; at $u'$ the displayed identities
+are the unique incidences of their respective colors.  Inside $Z$, every
+vertex-node has degree two by the preceding paragraph.  Every edge-node
+encountered has exactly its two distinct endpoint neighbors by
+\noderef{TwoColorIncidenceGraph}, \noderef{Incident}, and
+\noderef{LooplessMultigraph}; in particular this realizes the bound in
+\noderef{TwoColorIncidenceDegreeAtMostTwo} on the edge-node side as well.
+Thus, after entering through $a_Z$, the finite non-backtracking walk has a
+unique continuation, cannot branch, and cannot stop internally.  Nor can
+it close or repeat before leaving $Z$: a first repeated node would require
+a third incidence besides its entering and leaving incidences, while
+returning through $a_Z$ would repeat that boundary edge-node.  It must
+therefore leave $Z$, and the exact boundary calculation says that its only
+unused exit is $b_Z$.  From there the unique continuation is
+\[
+ b_Z,\ v',\ a_\gamma,\ v,
+\]
+where it stops because $\beta$ is missing at $v$ and the displayed
+$\alpha$-identity is unique by properness.  Hence $u$ and the unique
+original tree vertex $v$ missing $\beta$ lie in the same full
+$(\alpha,\beta)$ component.
+
+Both cases produce the witness required by \noderef{AbsorbingVertex} for
+the arbitrary choices of $u$, $\alpha$, and free $\beta\ne\alpha$.
+Together with the outside-$X$ fact from
+\noderef{ScheideReplacementData}, this makes each of
+$u^1_\delta,u^2_\delta$ absorbing.  By the definition
+\noderef{AbsorbingVertices}, $U_\delta\subseteq A(T,e_0,\varphi)$, as
+claimed.
 \end{proof}
