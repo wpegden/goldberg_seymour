@@ -1,0 +1,332 @@
+\begin{lemma}[Claim 4.5: the terminal Case 2 coloring]
+Let \(G\) be a finite loopless multigraph, let \(e_0\) be the distinguished
+uncolored edge, and fix a certified ETT \(\mathcal T\).  Let \(v_n\) be its
+terminal supporting vertex.  Fix an exact terminal slot \(n\), an exact
+earlier slot \(n^-<n\), and an exact reference slot \(j\), with \(n+1\)
+equal to the number of certified rounds.  Let
+\(T_j,T_n,T_j(v_n),T'_j\) be tree-sequences, and let
+\(\varphi_{j-1},\varphi_n,\sigma_n,\varrho_1\) be the displayed colorings.
+Assume that \(\varphi_n,\sigma_n,\varrho_1\) are proper and leave exactly
+\(e_0\) uncolored.  The ordered tree data satisfy
+\[
+ T_j(v_n)\preccurlyeq T_j\preccurlyeq T_n,\qquad
+ T_j(v_n)\preccurlyeq T'_j,
+\]
+the last displayed vertex of \(T_j(v_n)\) is \(v_n\), and \(v_n\) belongs
+to the displayed vertex sets required by these inclusions.
+
+Let \(D_{j-1},D,R,S'\) be the preceding control set, the terminal control
+set, the restoration-color set, and the support-color set.  Let
+\(\gamma_{1_1},\gamma_n,\delta_n\) be colors, let \(f_n\) be an edge, and
+let \(x\) be a vertex.  Retain the following Case 2 hypotheses explicitly.
+\begin{enumerate}
+\item \(T'_j\) is a \(\varrho_1\)-\noderef{TashkinovClosure} of
+      \(T_j(v_n)\), \(V(T'_j)\) is elementary, and
+      \[
+       \overline{\varrho}_1(v)\cap S'=\varnothing
+       \quad(v\in V(T'_j)\setminus\{v_n\}),\qquad
+       \overline{\varrho}_1(v_n)\cap S'=\{\delta_n\}.          \tag{C2}
+      \]
+      The colors \(\gamma_n,\delta_n,\gamma_{1_1}\) lie in \(S'\), and
+      \(\gamma_n\ne\delta_n\).
+\item \(\sigma_n\) is \((T_n,D,\varphi_n)\)-stable,
+      \(\gamma_n,\delta_n\in D\), and whenever
+      \(\varrho_1(a)\ne\sigma_n(a)\), the exact edge identity \(a\) is not
+      internal to \(V(T_j)\) and the old and new colors of \(a\) both lie
+      in \(R\).  Neither \(\gamma_n\) nor \(\delta_n\) lies in \(R\).
+\item Under \(\varphi_n\), the exact \(\gamma_n\)-boundary of \(T_n\) is
+      \(\{f_n\}\); every \(\delta_n\)-boundary edge of \(T_n\) is incident
+      with \(T_j(v_n)\); \(f_n\) is incident with \(v_n\); and
+      \(\delta_n\in\overline{\varrho}_1(v_n)\).
+\item A specified simple \((\gamma_n,\delta_n)\)-path \(P\) from \(v_n\)
+      to \(x\notin V(T_n)\cup V(T'_j)\) has support equal to the entire
+      two-color component through \(v_n\), and it contains a vertex of
+      \(T_n\) other than \(v_n\).
+\item The Claim 4.3 data hold in their exact forms: \(\varrho_1\) is
+      \((T_j(v_n)-v_n,D_{j-1},\varphi_{j-1})\)-stable;
+      \[
+       \overline{\varrho}_1(v)=\overline\varphi_{j-1}(v)
+       \quad(v\in V(T_j)\setminus\{v_n\}),\qquad
+       \overline\varphi_{j-1}(v_n)
+       \subseteq\overline{\varrho}_1(v_n)\cup\{\gamma_{1_1}\}; \tag{b2v}
+      \]
+      \(T_j\) is obtained from \(T_j(v_n)\) by a
+      \(\varphi_{j-1}\)-Tashkinov augmentation sequence; every exact edge
+      appended after that seed has the same \(\varrho_1\)- and
+      \(\varphi_{j-1}\)-color; and
+      \(\delta_n\notin\overline\varphi_{j-1}(T_j)\).
+\end{enumerate}
+
+Put
+\[
+ L_1=\noderef{ExtensionBaseSupportClass}(v_n),\qquad
+ S'=\bigcup_{t\in L_1}\mathcal T.\mathrm{stored}(t).          \tag{1}
+\]
+Assume \(n\in L_1\), \(n^-\in L_1\setminus\{n\}\),
+\(\delta_{n^-}=\gamma_n\), and that the exact gamma and delta fields at
+\(n\) are \(\gamma_n,\delta_n\).  For every exact
+\(t\in L_1\setminus\{n\}\), assume that its certified pair
+\(\gamma_t,\delta_t\) is \(T_t\)-strongly interchangeable under
+\(\varrho_1\), that both colors lie in \(S'\), that neither equals
+\(\delta_n\), and that the support-order condition puts every relevant
+component vertex other than \(v_n\) inside \(V(T_n)\).
+
+Write the exact increasing enumeration of the whole support class as
+\[
+ L_1=\{i_0<i_1<\cdots<i_p\},\qquad i_p=n.                    \tag{2}
+\]
+At each \(i_a\), assume the exact support is \(v_n\), the exact extension
+kind is PE, the exact gamma and delta fields are
+\(\gamma_a,\delta_a\), and the exact stored set is
+\(\{\gamma_a,\delta_a\}\).  Assume
+\[
+ \gamma_{a+1}=\delta_a\quad(a<p),\qquad
+ \gamma_0,\delta_0,\ldots,\delta_p
+ \text{ are injectively indexed},\qquad
+ \gamma_0=\gamma_{1_1}.                                     \tag{3}
+\]
+The tree stored at slot \(j\) is exactly \(T_j\), and \(T_j\preccurlyeq
+T_t\) for every \(t\in L_1\setminus\{n\}\).
+
+Finally retain, as an explicit ambient Case 2 construction premise, the
+present-color fact not contained in the conclusion of Claim 4.6: whenever
+\(u\in V(T'_j)\setminus V(T_n)\) and
+\(\beta\in\overline{\varrho}_1(u)\), define
+\[
+ \varrho_0=\noderef{OutsideTreeColorSwap}
+   (T'_j,\varrho_1,\beta,\delta_n),\qquad
+ \mu_0=\noderef{TwoColorComponentSwap}
+   (G,\varrho_0,\gamma_n,\beta,\mathsf{inl}(u)).              \tag{4}
+\]
+Then every preterminal color \(\gamma_a\), \(a<p\), is present at \(u\)
+under \(\mu_0\).  This premise is not attributed to Claim 4.6; it is the
+explicit obligation that the later extension-base assembly must discharge
+from the preceding Case 2 construction.
+
+Then there are \(u\in V(T'_j)\setminus V(T_n)\) and an exact simple exit
+suffix \(Q=P[x,u]\), containing at least one graph-edge identity, such that
+\(u\) is the only vertex-node of \(Q\) in \(V(T_n)\cup V(T'_j)\), the
+exit has a \(\gamma_n\)-colored boundary identity at \(u\), and \(u\) is
+not incident with \(f_n\).  For every
+\(\beta\in\overline{\varrho}_1(u)\), there are \(z\in V(T_j)\), at an
+exact position \(q_z\ge |T_j(v_n)|\), and a proper coloring
+\(\varrho_3\) leaving exactly \(e_0\) uncolored, with the following
+properties.  The position \(q_z\) is the first later position missing
+\(\beta\), if one exists, and is the terminal position otherwise; moreover
+\(\beta\) is missing at no vertex before \(z\) and colors no exact edge
+appended between the seed and \(z\).  Finally:
+\begin{enumerate}
+\item[(d1)] \(\varrho_3\) is
+      \((T_j(v_n)-v_n,D_{j-1},\varphi_{j-1})\)-stable.
+\item[(d2)] For every
+      \(v\in V(T_j(z)\cup T'_j(u))\setminus\{u,z\}\),
+      \[
+                  \overline{\varrho}_3(v)
+                    =\overline{\varrho}_1(v),
+      \]
+      and every exact displayed edge identity of
+      \(T_j(z)\cup T'_j(u)\) has the same color under
+      \(\varrho_3\) and \(\varrho_1\).  In addition,
+      \[
+       \beta\in\overline{\varrho}_1(z)
+       \quad\Longrightarrow\quad
+       \delta_n\in\overline{\varrho}_3(z).
+      \]
+\item[(d3)] \(\gamma_{1_1}\in\overline{\varrho}_3(u)\).
+\end{enumerate}
+All prefix and path assertions above concern the displayed positions and
+exact edge identities, so parallel edges are retained distinctly.
+\end{lemma}
+\begin{proof}
+Apply \noderef{ExtensionBaseClaim46} to the stated closure, boundary,
+component-path, b1--b4, support-color, and support-order data.  Every
+hypothesis is present above individually; in particular, (1) is the exact
+support-set identity, and the two exact slots \(n^-,n\) provide the
+displayed gamma and delta identities required there.  We obtain a vertex
+\(u\in V(T'_j)\setminus V(T_n)\), the asserted exit suffix \(Q\), and all
+of its exact path and boundary conclusions.  Fix
+\(\beta\in\overline{\varrho}_1(u)\).  The same application gives the
+position \(q_z\), the vertex \(z\), its two-case minimality certificate,
+and the two exclusions before \(z\).  Define \(\varrho_0,\mu_0\) by (4).
+The five conclusions of that node give:
+\begin{align}
+ &\mu_0\text{ is proper and leaves exactly }e_0\text{ uncolored};
+                                                                    \tag{5}\\
+ &\mu_0\text{ is }(T_j(v_n)-v_n,D_{j-1},\varphi_{j-1})
+    \text{-stable};                                                 \tag{6}\\
+ &\overline\mu_0(v)=\overline{\varrho}_1(v)
+   \quad(v\in V(T_j(z)\cup T'_j(u))\setminus\{u,z\});               \tag{7}\\
+ &\mu_0(f)=\varrho_1(f)
+   \quad(f\in E(T_j(z)\cup T'_j(u)));                               \tag{8}\\
+ &\beta\in\overline{\varrho}_1(z)
+      \Longrightarrow\delta_n\in\overline\mu_0(z),                 \tag{9}\\
+ &\gamma_n\in\overline\mu_0(u),\qquad
+   \beta\notin\overline\mu_0(u),                                   \tag{10}\\
+ &(\gamma_t,\delta_t)\text{ is }T_t\text{-strongly interchangeable
+   under }\mu_0\quad(t\in L_1\setminus\{n\}),                       \tag{11}\\
+ &\overline\mu_0(T'_j-u)\cap S'
+    =\overline\mu_0(v_n)\cap S'=\{\delta_n\},                       \tag{12}\\
+ &\mu_0(T'_j.\operatorname{edge}(a))\notin S'\setminus\{\delta_n\}
+   \quad(a\ge |T_j(v_n)|).                                         \tag{13}
+\end{align}
+Equations (5)--(13) are exactly e1--e5 of
+\noderef{ExtensionBaseClaim46}; no property from that node's proof is
+being used.
+
+We next verify every input of \noderef{ExtensionBaseAlgorithmC}.  The
+exact enumeration (2), the slot-support, PE-kind, gamma, delta, stored-pair,
+chain, injectivity, and \(T_j\preccurlyeq T_t\) assumptions supply its
+finite support-class data.  Equations (5), (10), and (11) supply initial
+properness, unique uncoloredness, terminal-gamma missingness, and initial
+strong interchangeability.  The explicit final premise of the statement,
+not Claim 4.6, supplies the required initial presentness of every
+preterminal gamma at \(u\).
+
+It remains only to check Algorithm (C)'s initial missing-color exclusion at
+\(v_n\).  Put
+\[
+ U=\bigcup_{t\in L_1\setminus\{n\}}
+       \mathcal T.\mathrm{stored}(t).
+\]
+By (1), \(U\subseteq S'\).  If
+\(c\in\overline\mu_0(v_n)\cap U\), then (12) first gives
+\(c=\delta_n\).  Exactness of (2) writes the witnessing slot as \(i_a\).
+It cannot be \(i_p=n\), so strict increase gives \(a<p\).  Its exact stored
+set is \(\{\gamma_a,\delta_a\}\), whereas the stated earlier-slot
+exclusion says that neither member is \(\delta_n\), a contradiction.
+Thus
+\[
+                         \overline\mu_0(v_n)\cap U=\varnothing.       \tag{14}
+\]
+All inputs of \noderef{ExtensionBaseAlgorithmC} are now verified.  Choose
+the resulting \noderef{ExtensionBaseAlgorithmCTrace} \(\mathcal C\),
+which processes \(L_1\setminus\{n\}\) in exact decreasing slot order and
+satisfies \noderef{ExtensionBaseAlgorithmCInvariant}.  Write its successive
+colorings as
+\[
+ \mu^0=\mu_0,\mu^1,\ldots,\mu^r,\qquad
+ \varrho_3=\mu^r.                                                   \tag{15}
+\]
+By the first clause of the invariant, every \(\mu^a\), in particular
+\(\varrho_3\), is proper and leaves exactly \(e_0\) uncolored.  These are
+precisely the two coloring-membership assertions in the conclusion; see
+\noderef{IsProperEdgeColoring} and \noderef{IsOneEdgeUncolored}.
+
+We prove the preservation needed for (d1) directly at each trace step.
+Fix a processed slot \(t\), put
+\(\alpha=\gamma_t\), \(\eta=\delta_t\), let \(K\) be the full
+\((\alpha,\eta)\)-component rooted at \(u\) before the switch, and let
+\(w\in V(T_j(v_n)-v_n)\).  The exact initial-segment field of the invariant
+puts \(T_j\preccurlyeq T_t\).  Hence \(w\in V(T_t)\) and \(w\ne v_n\).
+The component-intersection clause of
+\noderef{ExtensionBaseAlgorithmCInvariant} gives
+\(\mathsf{inl}(w)\notin K\).  If an edge incident with \(w\) had its edge
+node in \(K\), its pair-color makes it adjacent to \(\mathsf{inl}(w)\)
+by \noderef{TwoColorIncidenceGraph}; the connected-component definition
+\noderef{TwoColorComponent} would then also put \(\mathsf{inl}(w)\) in
+\(K\), a contradiction.  Therefore
+\noderef{TwoColorComponentSwap} fixes every exact identity incident with
+\(w\).  Expanding \noderef{PresentColors} and \noderef{MissingColors}, it
+also fixes the complete missing-color set at \(w\).
+
+Induction over the trace shows that \(\varrho_3\) agrees with \(\mu_0\) on
+every edge incident with \(V(T_j(v_n)-v_n)\), and has the same missing set
+as \(\mu_0\) at every vertex there.  Thus it is stable on that prefix
+relative to \(\mu_0\), directly by
+\noderef{StableColoringBeforeVertex}.  Compose these equalities with (6):
+an edge selected by the control or missing-color clause for
+\(\varphi_{j-1}\) is first fixed by (6) and then by the trace, while each
+vertex missing set is equal successively to the \(\mu_0\)- and
+\(\varphi_{j-1}\)-missing set.  This is the prefix form of the transitivity
+calculation formalized for ordinary tree stability by \noderef{sc2}; the
+two clauses have just been checked explicitly because the tablet represents
+\(T_j(v_n)-v_n\) by \noderef{StableColoringBeforeVertex}.  This proves
+(d1).
+
+We now prove (d2), retaining exact edge identities.  First consider
+\(T_j(z)\).  It is an ordered prefix of \(T_j\preccurlyeq T_t\).  If an
+exact displayed edge \(f\) of this prefix belonged to \(K\), both endpoint
+vertices of \(f\) would also belong to \(K\), by
+\noderef{TwoColorIncidenceGraph} and \noderef{TwoColorComponent}.  The
+attachment law in \noderef{TreeSequence} puts both endpoints in \(V(T_t)\).
+The invariant permits only \(v_n\) from \(V(T_t)\), so both endpoints would
+equal \(v_n\), contrary to \noderef{LooplessMultigraph}.  Hence every such
+edge identity is fixed by this switch.
+
+For a displayed vertex \(w\in V(T_j(z))\), if \(w\ne v_n\), the same
+component-intersection clause shows that no incident edge is switched, so
+its missing set is fixed.  If \(w=v_n\) and \(v_n\notin K\), the conclusion
+is again immediate.  In the remaining case the invariant says that the
+neighbor set of \(v_n\) in the two-color incidence graph is not
+subsingleton.  Properness and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} bound it by two.  Two distinct
+identities of the same color would share \(v_n\), hence be adjacent by
+\noderef{AdjacentEdges}, and contradict
+\noderef{IsProperEdgeColoring}.  Consequently there is exactly one
+incident \(\alpha\)-edge and exactly one incident \(\eta\)-edge, and these
+are the two component neighbors.  The switch exchanges their colors and
+fixes every other incident identity.  The set of present colors, and
+therefore the missing set, is unchanged at \(v_n\).  Induction proves exact
+edge-value and vertexwise missing-set preservation on \(T_j(z)\) throughout
+the trace.
+
+For \(T'_j(u)\), use (12)--(14) rather than asserting that each component
+avoids every prefix vertex.  At a current preterminal slot \(t=i_a\), its
+exact stored-pair field and (1) give
+\(\alpha,\eta\in S'\), while the earlier-slot exclusion gives
+\(\alpha,\eta\ne\delta_n\).  Equation (13) therefore excludes every exact
+appended edge of \(T'_j(u)\) from \(K\): its \(\mu_0\)-color is neither
+\(\alpha\) nor \(\eta\).  The seed identities are already fixed by the
+preceding \(T_j(z)\)-argument, since
+\(T_j(v_n)\preccurlyeq T_j\preccurlyeq T_t\).  Thus all exact displayed
+edges of \(T'_j(u)\) are fixed at the first step.  The same reasoning is
+inductive, since earlier steps have fixed those values.
+
+Let \(w\in V(T'_j(u))\setminus\{u\}\).  Equation (12) says that neither
+current switched color is missing at \(w\) under \(\mu_0\).  By induction
+the same holds immediately before the current step.  Properness gives one
+incident \(\alpha\)-edge and one incident \(\eta\)-edge, each unique by
+\noderef{AdjacentEdges} and \noderef{IsProperEdgeColoring}.  If
+\(\mathsf{inl}(w)\notin K\), neither is changed.  If
+\(\mathsf{inl}(w)\in K\), both incident edge nodes are adjacent to \(w\)
+and hence lie in the same full component \(K\); the switch exchanges the
+two colors.  In either case the present-color set, and hence the complete
+missing-color set, is unchanged at \(w\).  This proves the simultaneous
+inductive assertion that the trace fixes every displayed prefix-edge value
+and every required prefix-vertex missing set.  Notice that this argument
+allows a component to pass through a prefix vertex; it proves the required
+nonendpoint behavior from e5 instead of assuming unsupported vertex
+avoidance.
+
+Equations (7) and (8) now transfer these final
+\(\varrho_3\)-versus-\(\mu_0\) equalities to
+\(\varrho_3\)-versus-\(\varrho_1\) equalities on
+\(T_j(z)\cup T'_j(u)\), with \(u,z\) excluded exactly as in the statement.
+For the conditional clause, (9) makes \(\delta_n\) missing at \(z\) under
+\(\mu_0\).  At every trace step the two switched colors belong to an
+earlier stored pair and are both different from \(\delta_n\).  Expansion of
+\noderef{TwoColorComponentSwap} therefore fixes every
+\(\delta_n\)-colored incident value and cannot create one from another
+color.  Membership of \(\delta_n\) in the missing set at \(z\) is preserved
+through the trace.  This proves all of (d2).
+
+It remains to prove (d3).  The support class contains the strict earlier
+slot \(n^-<n\); exactness and strict increase in (2) therefore imply
+\(p>0\).  The trace enumerates all preterminal slots and is strictly
+decreasing, so its last processed exact slot is \(i_0\), whose gamma is
+\(\gamma_0=\gamma_{1_1}\) by (3).  More explicitly, before processing the
+largest preterminal position, (10) and the chain equation in (3) say that
+its delta is missing at \(u\), while the explicit ambient premise says its
+gamma is present.  Properness makes its incident gamma edge unique by
+\noderef{AdjacentEdges} and \noderef{IsProperEdgeColoring}.  The rooted
+component switch replaces that edge by a delta edge, making that gamma
+missing.  Injectivity in (3) says every lower gamma differs from both colors
+already switched, so its incident witness remains present; the chain
+identity says that the newly missing gamma is precisely the delta required
+at the next lower position.  Downward induction repeats this argument at
+every exact preterminal slot.  At the final step \(i_0\), it makes
+\(\gamma_0=\gamma_{1_1}\) missing at \(u\), and there is no later switch
+which could change that conclusion.  By \noderef{MissingColors},
+\(\gamma_{1_1}\in\overline{\varrho}_3(u)\), proving (d3) and completing
+Claim 4.5.
+\end{proof}
