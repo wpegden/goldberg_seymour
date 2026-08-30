@@ -15,6 +15,9 @@ structure RevisitingExtensionCertificate {V E : Type*} [Fintype V] [Fintype E]
   earlierPositive : 0 < earlier.val
   earlierAtMost : earlier.val ≤ i.val
   earlierPE : data.kind earlier = some TashkinovExtensionKind.PE
+  interveningRevisiting : ∀ j : Fin (rounds + 1),
+    0 < j.val → earlier.val < j.val → j.val ≤ i.val →
+      data.kind j = some TashkinovExtensionKind.RE
   gamma : Fin k
   delta : Fin k
   earlierGamma : data.gamma earlier = some gamma
