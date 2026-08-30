@@ -1,9 +1,13 @@
+import Tablet.AdjacentEdges
 import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
+import Tablet.Degree
+import Tablet.Incident
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.KTriple
+import Tablet.LooplessMultigraph
 import Tablet.MaximumDegree
 import Tablet.MissingColors
 import Tablet.OutsideTreeColorSwap

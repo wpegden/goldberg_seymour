@@ -31,10 +31,13 @@ such an edge either gives an internal path node a third neighbor, or joins
 the two path ends and makes every node have degree two, both contrary to
 the preceding degree facts.  Thus the incidence component itself is a
 finite nontrivial simple path.
-Both ends are vertex-nodes: an edge-node belonging to the two-color graph
-has its two distinct endpoint vertices as its two neighbors, by
-\noderef{TwoColorIncidenceGraph} and looplessness.  At each end at least
-one of $\alpha,\beta$ is missing, by the definitions of
+Both ends are vertex-nodes.  Indeed, by \noderef{Incident} and
+\noderef{TwoColorIncidenceGraph}, the neighbors of a colored edge-node are
+exactly the vertex-nodes represented by the entries of its endpoint pair.
+The loopless law in \noderef{LooplessMultigraph} makes those two entries
+distinct, so every colored edge-node has degree two and cannot be an end of
+the component path.  At each vertex-node end at least one of
+$\alpha,\beta$ is missing, by the definitions of
 \noderef{PresentColors} and \noderef{MissingColors}.
 
 The hypotheses of \noderef{TashTree} are exactly the $k$-triple and the
@@ -69,10 +72,12 @@ first tree vertex, and $f_i$ for the last multigraph edge, incident with
 $b_i$.  Each $P_i$ is a simple incidence path of length at least two, its
 only tree vertex is $b_i$, and one of $\alpha,\beta$ is missing at $a_i$;
 these are exactly the conditions of \noderef{TreeExitPath}.  Moreover
-$\varphi(f_i)=\beta$ by closedness.  The $b_i$ are distinct.  Indeed,
-properness as in \noderef{IsProperEdgeColoring} permits at most one
-$\beta$-edge at a fixed vertex, while two of the chosen edge-disjoint exit
-paths with the same $b_i$ would have different last $\beta$-edges there.
+$\varphi(f_i)=\beta$ by closedness.  The $b_i$ are distinct.  Indeed, if
+$b_i=b_j$ for $i\ne j$, edge-disjointness gives $f_i\ne f_j$, while
+\noderef{Incident} says both edges are incident with that common vertex.
+They are therefore adjacent by \noderef{AdjacentEdges}.  Since both have
+color $\beta$, this contradicts properness in the sense of
+\noderef{IsProperEdgeColoring}.
 The order encoded by \noderef{TreeVertexOrder} is linear on the distinct
 displayed vertices, so relabel the paths so that
 $b_1\prec_T b_2\prec_T b_3$.
@@ -91,9 +96,13 @@ length, namely the number of multigraph edge-nodes of $P_i$, so strict
 shortening is the same in either convention.
 
 Every vertex misses a color.  Indeed, the $k$-triple gives
-$k\geq\Delta(G)+1$.  Properness makes the colors present at a vertex
-distinct, so \noderef{MaximumDegree} bounds their number by
-$\Delta(G)<k$; \noderef{MissingColors} then leaves a missing color.  Choose
+$k\geq\Delta(G)+1$.  For a vertex $v$, choose for each color in
+\noderef{PresentColors} an incident edge carrying that color.  This choice
+is injective, since one edge has only one coloring value.  Hence the number
+of present colors is at most the number of incident edge identities, which
+is $d_G(v)$ by \noderef{Degree}; and \noderef{MaximumDegree} gives
+$d_G(v)\leq\Delta(G)<k$.  The complement definition
+\noderef{MissingColors} therefore leaves a missing color.  Choose
 $\gamma\in\overline\varphi(b_3)$ and put
 \[
  \sigma_1=\varphi/(G-T,\alpha,\gamma)
@@ -171,8 +180,10 @@ original $T$, because $b_i$ was the first tree vertex of $P_i$.  The edge
 identities $f_1,f_2$ are not displayed edges of $S$, since each is a
 boundary edge while every displayed tree edge has both ends in the tree.
 They are distinct because the exit paths were chosen edge-disjoint.  Also
-$x_1\ne x_2$: otherwise the distinct adjacent edges $f_1,f_2$, both still
-colored $\beta$ under $\sigma_2$, would violate properness.  Each $f_i$
+$x_1\ne x_2$: otherwise the distinct edges $f_1,f_2$ would both be
+incident with $x_1$ by \noderef{Incident}, hence adjacent by
+\noderef{AdjacentEdges}; as both still have color $\beta$ under $\sigma_2$,
+this would violate \noderef{IsProperEdgeColoring}.  Each $f_i$
 attaches its new outside endpoint $x_i$ to the earlier displayed vertex
 $b_i$.  Finally $\sigma_2(f_1)=\sigma_2(f_2)=\beta$, and $\beta$ is
 missing at the earlier vertex $b_3$ both before and after the first
@@ -215,13 +226,79 @@ each $a_j$.  This gives the same missing color at three distinct vertices
 of $V(T'')$, contradicting elementariness.  The claim follows.
 
 For each $i$, traverse $P_i$ from the outside vertex $a_i$ and stop at its
-first vertex in $V(T'')$; such a vertex exists because $b_i\in V(S)$.
-Call the resulting initial subpath $L_i$.  The preceding claim keeps its
-first vertex outside, and the choice of the stopping point makes its last
-vertex the only vertex of $T''$ on it.  It is a nontrivial simple
-$(\gamma,\beta)$-path, and one of its two colors is missing at $a_i$.
-Thus \noderef{TreeExitPath} says that $L_i$ is a $T''$-exit path.  Their
-outside ends remain distinct and the paths remain pairwise edge-disjoint.
+first vertex $c_i$ in $V(T'')$; such a vertex exists because
+$b_i\in V(S)\subseteq V(T'')$.  Call the resulting initial subpath $L_i$,
+and call its final multigraph edge $g_i$.  The preceding claim keeps
+$a_i$ outside $V(T'')$, while the definition of $c_i$ makes it the only
+vertex-node of $L_i$ in $V(T'')$.  Thus $L_i$ is nontrivial.  It remains a
+simple path in the $(\gamma,\beta)$-incidence graph, and one of the two
+colors is missing at $a_i$.  These facts verify every clause of
+\noderef{TreeExitPath}, so $L_i$ is a $T''$-exit path.  The $a_i$ remain
+distinct, and the $L_i$ remain pairwise edge-disjoint because they are
+subpaths of the corresponding $P_i$.
+
+We next determine the colors of the three final edges.  The two consecutive
+vertex-nodes around $g_i$ are the vertex just before $c_i$, which lies
+outside $V(T'')$, and $c_i$, which lies inside.  Adjacency in
+\noderef{TwoColorIncidenceGraph} and the incidence definition
+\noderef{Incident} show that these are the two ends of $g_i$; they are
+distinct by the loopless law in \noderef{LooplessMultigraph}.  Hence
+$g_i\in\partial_G(V(T''))$ by \noderef{BoundaryEdges}.  The same
+two-color adjacency says that $\sigma_2(g_i)$ is either $\gamma$ or
+$\beta$.  Now $\beta$ is missing at $b_3\in V(T'')$, so it is missing on
+$T''$ by \noderef{TreeMissingColors}.  Since $V(T'')$ is closed,
+\noderef{ColoredVertexSetClosed} forbids color $\beta$ on every boundary
+edge.  Consequently
+\[
+ \sigma_2(g_i)=\gamma\qquad(i=1,2,3).
+\]
+
+The new tree ends $c_1,c_2,c_3$ are distinct.  If $c_i=c_j$ for
+$i\ne j$, pairwise edge-disjointness gives $g_i\ne g_j$ and
+\noderef{Incident} makes both edges incident with that common vertex.
+Thus \noderef{AdjacentEdges} makes them adjacent.  Their common color
+$\gamma$ then contradicts properness as defined in
+\noderef{IsProperEdgeColoring}.
+
+It remains to verify the full-component-prefix condition, rather than only
+the exit-path condition.  Fix $i$ and let $C_i$ be the full
+$(\gamma,\beta)$-component through the vertex-node $a_i$, as defined by
+\noderef{TwoColorComponent}.  Missingness at $a_i$ means, by
+\noderef{MissingColors} and \noderef{PresentColors}, that no incident edge
+of the missing color is adjacent to $a_i$ in
+\noderef{TwoColorIncidenceGraph}.  There is at most one incident edge of
+the other color: two distinct such identities would both be incident with
+$a_i$ by \noderef{Incident}, hence adjacent by \noderef{AdjacentEdges},
+and their equal colors would contradict
+\noderef{IsProperEdgeColoring}.  Thus the incidence-graph degree of $a_i$
+is at most one.  The first edge-node of the nontrivial path $L_i$ is a
+neighbor of $a_i$, so the degree is exactly one.
+
+As recorded above, $\gamma\ne\beta$: under $\sigma_1$ the color $\gamma$
+is missing at $b_3$, while its incident edge $f_3$ has color $\beta$.
+The component $C_i$ contains the edge-node $g_i$ and has the degree-one
+node $a_i$, so it is a path component in the sense of
+\noderef{TwoColorPathComponent}.  Apply
+\noderef{TwoColorComponentSpanningPath} to the proper coloring $\sigma_2$
+and orient the resulting simple spanning path $R_i$ from $a_i$.  This
+orientation is possible because $a_i$ cannot be internal in $R_i$: an
+internal occurrence would give it two distinct neighbors, whereas it has
+degree one.
+
+We compare $R_i$ with $L_i$ one node at a time.  Their first node is
+$a_i$, and its unique neighbor forces their next nodes to agree.  Suppose
+inductively that they agree through some internal node $z$ of $L_i$.
+Because $L_i$ is simple, its predecessor and successor at $z$ are two
+distinct neighbors.  The bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo} says that $z$ has no third
+neighbor.  The spanning path $R_i$ has arrived through the common
+predecessor and cannot repeat it, so its next node must be the displayed
+successor of $L_i$.  Induction continues up to $c_i$.  Therefore $L_i$ is
+exactly the initial segment of the full component path $R_i$ from its end
+$a_i$ through $c_i$.  Since by construction no earlier vertex-node of
+$L_i$ belongs to $V(T'')$, it is precisely the initial-to-first-$T''$
+prefix required in the counterexample class.  This argument applies to
+all three indices.
 
 Both ends $b_1,x_1$ of $f_1$ already belong to $T'$, hence to $T''$.
 Consequently the first-entry subpath $L_1$ stops no later than $x_1$ and
@@ -229,10 +306,19 @@ does not contain $f_1$, whereas $P_1$ does.  Thus
 \[
  |L_1|+|L_2|+|L_3|<|P_1|+|P_2|+|P_3|.
 \]
-The tuple $(\sigma_2,T'',\gamma,\beta,L_1,L_2,L_3)$ satisfies every
-counterexample condition: $(G,e_0,\sigma_2)$ is a $k$-triple, $T''$ is a
-closed Tashkinov tree, $\beta$ is missing on it, and the three displayed
-paths are its distinct exit paths.  This contradicts the minimum choice.
+Finally relabel the three $L_i$ if necessary so that their now distinct
+tree ends satisfy $c_1\prec_{T''}c_2\prec_{T''}c_3$ in the linear order
+\noderef{TreeVertexOrder}; this permutation leaves their total length
+unchanged.  We can now restate every counterexample condition for
+$(\sigma_2,T'',\gamma,\beta,L_1,L_2,L_3)$.  The graph, $k$, and
+distinguished edge are the fixed ones; $(G,e_0,\sigma_2)$ is a $k$-triple;
+$T''$ is a closed Tashkinov tree; $\gamma\ne\beta$ and $\beta$ is missing
+on $T''$; each $L_i$ is a nontrivial simple $(\gamma,\beta)$-exit path
+from the distinct outside end $a_i$ to the distinct ordered tree end
+$c_i$; each is exactly the initial-to-first-tree prefix of its full
+two-color component path; and the three paths are pairwise edge-disjoint.
+Thus this tuple belongs to the very counterexample class minimized above.
+Its strictly smaller total length contradicts the minimum choice.
 Therefore two different path components cannot both meet $T$, which is
 exactly the asserted $T$-interchangeability.
 \end{proof}
