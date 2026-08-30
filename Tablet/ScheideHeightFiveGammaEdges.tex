@@ -62,6 +62,20 @@ at vertex-nodes and alternates between vertex-nodes and edge-nodes, the
 left side of (3), not the raw incidence length, is the number of multigraph
 vertices of $P_1$.
 
+We first justify that the two colors defining this path are distinct.  The
+vertex-injectivity clause of \noderef{TreeSequence} gives $y_0\ne y_1$.
+Thus the $y_0$--$y_1$ path $P_1$ has positive length, so it has a first
+edge-node, say $d$, adjacent to its initial vertex-node $y_0$.  Expanding
+this adjacency with \noderef{TwoColorIncidenceGraph} gives
+$\noderef{Incident}(G,y_0,d)$ and says that
+$\varphi(d)=\gamma$ or $\varphi(d)=\beta$.  If $\gamma=\beta$, either
+color alternative says $\varphi(d)=\gamma$.  The incidence then puts
+$\gamma$ in the set of colors present at $y_0$ by
+\noderef{PresentColors}.  This contradicts
+$\gamma\in\overline\varphi(y_0)$, because \noderef{MissingColors} defines
+the latter set as the complement of the former.  Hence
+$\gamma\ne\beta$.
+
 The identity $q$ has color $\beta$ and is incident with $y_0$, so its
 edge-node, and then its other endpoint $y_4$, lie in the full component
 $P_1$.  Hence $P_1$ contains the three distinct multigraph vertices
@@ -74,8 +88,9 @@ same full $\gamma,\beta$ component as $P_1$.  It already contains all five
 trunk vertices, while the assumed $\gamma$-edge $g$ connects one of those
 vertices to the distinct outside vertex $v$.  The component would therefore
 contain at least six multigraph vertices, contradicting (3).  The
-application of the prescribed-path theorem also gives
-$\gamma\ne\beta$.
+individual identity $g$ remains visible as an edge-node here; the argument
+uses its stated endpoint equality and does not identify it with any other
+edge having the same ends.
 
 We next prove that no $\gamma$-edge joins either $y_2$ or $y_3$ to a
 vertex outside the five-vertex trunk.  Suppose, to the contrary, that an
@@ -111,12 +126,20 @@ depend on the coloring.  The vertex set and its cardinality have not
 changed.  Thus
 $(T,e_0,\varphi')$ again satisfies \noderef{GlobalMaximumTriple}.
 
-The swap exchanges the missing colors at the two ends of $P_1$, so
-$\gamma$ is missing at $y_1$ under $\varphi'$.  By (4), $\alpha$ is not
-switched and remains missing at $y_0$.  The edge $q$ changes from
-$\beta$ to $\gamma$, whereas $e_2,e_4$ retain color $\alpha$ by (2).
-By (5), neither the edge-node $r$ nor its endpoints belongs to the switched
-component, so $r$ retains color $\gamma$.
+Here is the required missing-color check after the swap.  The color
+$\beta$ was missing at $y_1$.  The last edge-node of $P_1$ is therefore
+colored $\gamma$, and properness makes it the only incident
+$\gamma$-identity at $y_1$.  The full-component swap changes this identity
+to $\beta$ and changes no identity outside the component, so $\gamma$ is
+missing at $y_1$ under $\varphi'$.  By (4), $\alpha\ne\gamma$; moreover
+$q$ is a $\beta$-edge incident with $y_0$ while $\alpha$ is missing there,
+so $\alpha\ne\beta$.  Hence $\alpha$ is not one of the switched colors and
+remains missing at $y_0$.  The edge $q$ changes from $\beta$ to $\gamma$,
+whereas $e_2,e_4$ retain color $\alpha$ by (2).  Finally, (5) excludes both
+endpoints of $r$ from the full component.  If the edge-node $r$ belonged to
+it, its incidence adjacency in \noderef{TwoColorIncidenceGraph} would put
+an endpoint there as well.  Thus $r$ is not switched and retains color
+$\gamma$.
 
 Apply \noderef{ScheideKempePathHeightBound} again, now to the globally
 maximum triple $(T,e_0,\varphi')$, with $\alpha$ missing at $y_0$ and
@@ -139,38 +162,74 @@ incidence length.  This contradiction proves
 It remains to identify the three asserted edge identities.  By
 \noderef{ScheideGlobalMaximumOrder}, the finite set
 \noderef{TreeSequenceVertexSet} of a globally maximum triple is elementary.
-Since $\gamma$ is missing at $y_0$, it is not missing at any of
-$y_1,y_2,y_3,y_4$.  The definitions \noderef{MissingColors} and
-\noderef{PresentColors} therefore supply a $\gamma$-colored incident edge
-at each of these four vertices.  Properness makes that identity unique at
+Unfolding this assertion with \noderef{ColoredVertexSetElementary} says
+that distinct vertices of this set have disjoint missing-color sets.  Each
+$y_i$ belongs to the set by \noderef{TreeSequenceVertexSet}, and the
+vertex-injectivity clause of \noderef{TreeSequence} gives $y_i\ne y_0$ for
+$1\leq i\leq4$.  Thus $\gamma$ cannot be missing at any of
+$y_1,y_2,y_3,y_4$: otherwise it would belong to that vertex's missing set
+and to the missing set at $y_0$, contrary to the stated disjointness.  The
+definitions \noderef{MissingColors} and \noderef{PresentColors} therefore
+supply a $\gamma$-colored incident edge at each of these four vertices.
+Properness in \noderef{IsProperEdgeColoring} makes that identity unique at
 each vertex.
 
-Let the unique $\gamma$-identities at $y_2,y_3$ be $a_2,a_3$.  By (7),
-their other endpoints lie in the trunk, and neither can meet $y_0$, where
+Let the unique $\gamma$-identities at $y_2,y_3$ be $a_2,a_3$.  For
+$i=2,3$, their defining incidence and \noderef{Incident} let us choose
+the other endpoint $z_i$ with
+$\operatorname{ends}(a_i)=\{y_i,z_i\}$; this equality records both
+incidence memberships.  Looplessness gives $z_i\ne y_i$.  By (7), these
+other endpoints lie in the trunk, and neither can be $y_0$, where
 $\gamma$ is missing.  If $a_2\ne a_3$, the matching property furnished by
-properness forces their remaining endpoints to be $y_1$ and $y_4$ in
+properness forces $z_2,z_3$ to be $y_1$ and $y_4$ in
 some order: using $y_2$ or $y_3$ would make the two identities coincide,
 and two distinct identities cannot share an endpoint by
 \noderef{AdjacentEdges}.  The unique $\gamma$-edges at all four vertices
 $y_1,y_2,y_3,y_4$ would then be internal to the trunk.  Together with (7)
 and the missing color at $y_0$, this leaves no trunk vertex incident with
 the assumed crossing identity $g$, a contradiction.  Hence
-$a_2=a_3$; call this identity $f_3$.  Looplessness in
-\noderef{LooplessMultigraph} and the two incidences give
+$a_2=a_3$; call this identity $f_3$.  It is incident with both $y_2$ and
+$y_3$.  Expanding the first membership with \noderef{Incident}, write
+$\operatorname{ends}(f_3)=\{y_2,z\}$.  Looplessness in
+\noderef{LooplessMultigraph} gives $z\ne y_2$.  The second incidence says
+$y_3\in\{y_2,z\}$, while vertex injectivity gives $y_3\ne y_2$; hence
+$z=y_3$.  Therefore
 $\operatorname{ends}(f_3)=\{y_2,y_3\}$ and
 $\varphi(f_3)=\gamma$.
 
-The unique $\gamma$-edge at $y_1$ cannot end at $y_0$, and it cannot end
-at $y_2$ or $y_3$, which are already incident with $f_3$.  It cannot end
-at $y_4$, since then every trunk vertex capable of carrying $g$ would
-already have its unique $\gamma$-edge internal to the trunk.  Thus it is
-an identity $f_1$ with ends $\{y_1,v_1\}$ for a vertex $v_1$ outside the
-trunk.  The same argument at $y_4$ gives a distinct identity $f_2$ with
-ends $\{y_4,v_2\}$ and $v_2$ outside the trunk.  Both edge-nodes lie in
-the full path $P_1$: $f_1$ is the unique $\gamma$-edge at its endpoint
-$y_1$, while $f_2$ follows the $\beta$-edge $q$ at $y_4$.  The
-vertex-containment clause of
-\noderef{ScheideKempePathHeightBound} therefore places
-$v_1,v_2$ in $V(T)$.  These $f_1,f_2,f_3,v_1,v_2$ satisfy every asserted
-endpoint, color, membership, and outside-trunk condition.
+Call the unique $\gamma$-edge at $y_1$ by the name $f_1$.  Its incidence
+at $y_1$, unfolded by \noderef{Incident}, lets us choose the other
+endpoint $v_1$.  Thus both $y_1$ and $v_1$ are incident with this same
+identity and
+$\operatorname{ends}(f_1)=\{y_1,v_1\}$; looplessness gives
+$v_1\ne y_1$.  This other endpoint is not $y_0$, where
+$\gamma$ is missing, and is not $y_2$ or $y_3$, since properness forbids a
+second $\gamma$-identity adjacent to $f_3$.  Nor is it $y_4$: in that case
+the unique $\gamma$-edges at all four vertices $y_1,y_2,y_3,y_4$ would be
+internal to the trunk, and, together with (7) and the missing color at
+$y_0$, no trunk vertex could be incident with the assumed crossing
+identity $g$.  Hence $v_1$ is outside the trunk, and the displayed
+endpoint equality for $f_1$ has been obtained from its actual incidence
+memberships rather than by identifying an endpoint pair with an edge.
+
+Likewise, call the unique $\gamma$-edge at $y_4$ by the name $f_2$.
+Using \noderef{Incident} at $y_4$, choose its other incident endpoint
+$v_2$ and obtain
+$\operatorname{ends}(f_2)=\{y_4,v_2\}$; looplessness gives
+$v_2\ne y_4$.  The endpoint $v_2$ is not $y_0$, because $\gamma$ is
+missing there, and it is not $y_2$ or $y_3$, because those vertices are
+already incident with $f_3$.  It is not $y_1$ either: uniqueness at
+$y_1$ would then give $f_2=f_1$, contradicting the just-proved fact that
+the other endpoint $v_1$ of $f_1$ lies outside the trunk.  Thus $v_2$ is
+also outside the trunk.  This proves the exact endpoint equality for
+$f_2$ from the two incidences and looplessness.
+
+Finally, both edge-nodes lie in the full path $P_1$.  The endpoint $y_1$
+of $P_1$ is adjacent to $f_1$ in \noderef{TwoColorIncidenceGraph}, and
+the edge $q$ first places $y_4$ in the component, where $y_4$ is adjacent
+to $f_2$.  The same adjacencies then place $v_1,v_2$ in that component.
+The vertex-containment clause of \noderef{ScheideKempePathHeightBound}
+therefore places $v_1,v_2$ in $V(T)$.  These
+$f_1,f_2,f_3,v_1,v_2$ satisfy every asserted endpoint, color, membership,
+and outside-trunk condition.
 \end{proof}
