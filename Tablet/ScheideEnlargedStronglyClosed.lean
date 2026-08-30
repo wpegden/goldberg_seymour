@@ -12,10 +12,13 @@ import Tablet.KTriple
 import Tablet.LooplessMultigraph
 import Tablet.MissingColors
 import Tablet.PresentColors
+import Tablet.ScheideDefectiveChainPath
 import Tablet.ScheideDefectiveSetup
 import Tablet.ScheideDefectiveSwitchEffect
 import Tablet.ScheideEnlargedClosed
 import Tablet.ScheideEnlargedVertexSet
+import Tablet.ScheideExitVertex
+import Tablet.ScheideExitVertices
 import Tablet.ScheideGlobalMaximumOrder
 import Tablet.ScheideReducedConfiguration
 import Tablet.ScheideReplacementData

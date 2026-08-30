@@ -241,17 +241,65 @@ For the last two edges, \noderef{ScheideReplacementData} gives their old
 color $\delta$, their retained endpoints in $Z$, and their inequalities
 from $f^0_\delta$.  The fixed-edge clause of
 \noderef{ScheideDefectiveSwitchEffect} therefore leaves both colors equal
-to $\delta$.  The setup places $v^0_\delta$ among the exit vertices, and
-\noderef{ScheideStructuralExitsInBase} places it in the base, hence in
-$Z$.  The exact switch formula inserts $\delta$ into the missing set at
-$v^0_\delta$.  If its base index is $a<p$, then
-$r\in\{0,\ldots,s-1\}$ makes $s\geq1$, and the structural length equation
-$n+1=p+2s$ gives
+to $\delta$.
+
+We justify the required witness from the recorded path data rather than
+assuming its membership in the exit set.  Write the already chosen
+defective index as $d=(\delta,h_\delta)$, and name the recorded outside
+endpoint, incidence walk, and occurrence index by
+$z_\delta$, $P_\delta$, and $i_\delta$, respectively.  The definition
+\noderef{ScheideDefectiveSetup} gives $P_\delta$ as the full simple
+$(\alpha_0,\delta)$ incidence path from $y_0$ to $z_\delta$.  By
+\noderef{ScheideDefectiveChainPath}, this says in particular that
+$y_0\in X_0$, that the path is simple, that its final vertex is outside
+$X_0$, and that its support is the entire two-color component through
+$y_0$.  The same setup gives the vertex-node equation
+$P_\delta(i_\delta)=\operatorname{inl}v^0_\delta$, records
+$v^0_\delta\in X_0$, and says that every later vertex-node on the path is
+outside $X_0$.  It also gives (1), and $h_\delta$ says exactly that
+$\delta$ is defective for $X_0$.
+
+The definition \noderef{ScheideExitVertex} writes its two colors in the
+order $(\delta,\gamma)$, whereas the recorded path is typed in the order
+$(\alpha_0,\delta)$.  With $\gamma=\alpha_0$ these are the same labeled
+incidence graph: after unfolding \noderef{TwoColorIncidenceGraph}, the
+only color condition changes from
+``$\varphi(e)=\alpha_0$ or $\varphi(e)=\delta$'' to
+``$\varphi(e)=\delta$ or $\varphi(e)=\alpha_0$''.  Commutativity of this
+disjunction leaves every adjacency unchanged, so it leaves the recorded
+walk, its order, its support, and its full-path assertion unchanged.
+Taking $u=y_0$, $\gamma=\alpha_0$, the defective color $\delta$, the
+recorded outside endpoint and path, and the recorded occurrence of
+$v^0_\delta$ now supplies every witness in
+\noderef{ScheideExitVertex}.  Unfolding
+\noderef{ScheideExitVertices}, the vertex belongs to the universal finite
+set and the resulting predicate witness puts $v^0_\delta$ in its filtered
+finite exit set.
+
+Apply \noderef{ScheideStructuralExitsInBase} to this membership.  Its
+image conclusion supplies $a:\operatorname{Fin}p$ such that
+$v^0_\delta=C.y(a)$.  The base-position equation in
+\noderef{ScheideStructuralConfiguration} identifies this vertex with the
+old tree vertex at position $a$.  The two deleted vertices are the old
+vertices at positions $p+2r$ and $p+2r+1$.  Since $a<p$, both positions
+are different from $a$; vertex injectivity in \noderef{TreeSequence}
+therefore shows that $v^0_\delta$ is neither deleted vertex, and hence
+$v^0_\delta\in Z$.  Moreover
+$a\leq p-1\leq p-1+2r=b$, so the retained-vertex equation in
+\noderef{ScheideReplacementData} places that same vertex at position $a$
+of $T_\delta$.
+
+The exact switch formula in \noderef{ScheideDefectiveSwitchEffect} inserts
+$\delta$ into the missing set at $v^0_\delta$.  Because
+$r\in\operatorname{Fin}s$, one has $s\geq1$, and the structural length
+equation $n+1=p+2s$ gives
 \[
  a\leq p-1\leq n-2<n-1.
 \]
-Thus its retained base position precedes both final edge positions.
-Consequently it is the missing witness for both appended edges.
+The last two edge positions are exactly $n-2$ and $n-1$ by
+\noderef{ScheideReplacementData}.  Thus the retained occurrence of
+$v^0_\delta$ precedes both appended edges and is a missing-$\delta$
+witness for each of them.
 
 This exhausts every noninitial position of $T_\delta$ and produces, for
 each one, an earlier witness in $Z\subseteq X_0$.  Equation (7) and the
