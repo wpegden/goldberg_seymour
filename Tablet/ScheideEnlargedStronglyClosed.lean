@@ -1,7 +1,39 @@
+import Tablet.AdjacentEdges
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
+import Tablet.ColoredVertexSetStronglyClosed
+import Tablet.DefectiveColors
+import Tablet.GlobalMaximumTriple
+import Tablet.Incident
+import Tablet.InternalEdges
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.LooplessMultigraph
+import Tablet.MissingColors
+import Tablet.PresentColors
+import Tablet.ScheideDefectiveSetup
+import Tablet.ScheideDefectiveSwitchEffect
 import Tablet.ScheideEnlargedClosed
+import Tablet.ScheideEnlargedVertexSet
+import Tablet.ScheideGlobalMaximumOrder
+import Tablet.ScheideReducedConfiguration
+import Tablet.ScheideReplacementData
+import Tablet.ScheideReplacementMaximum
+import Tablet.ScheideReplacementPairsLaminar
+import Tablet.ScheideReplacementUnionClosed
 import Tablet.ScheideSingleBoundaryCrossing
+import Tablet.ScheideStructuralConfiguration
+import Tablet.ScheideStructuralExitsInBase
 import Tablet.ScheideSymmetricDefectiveInternal
+import Tablet.TashkinovOrder
+import Tablet.TashkinovTree
+import Tablet.TreeSequence
+import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorComponent
+import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ScheideEnlargedStronglyClosed]
 theorem ScheideEnlargedStronglyClosed {V E : Type*}
