@@ -1,4 +1,5 @@
 import Tablet.Critical
+import Tablet.Basic2
 import Tablet.DefectiveVertex
 import Tablet.Elementary
 import Tablet.ETTFirstAppearanceIndex
