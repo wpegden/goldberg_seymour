@@ -68,6 +68,7 @@ import Tablet.ExtensionBaseAlgorithmCInvariant
 import Tablet.ExtensionBaseAlgorithmC
 import Tablet.ExtensionBaseClaim45
 import Tablet.ExtensionBaseCaseTwoContradiction
+import Tablet.ExtensionBase
 import Tablet.StrongInterchangeableImpliesInterchangeable
 import Tablet.StrongInterchangeabilityKempePreserved
 import Tablet.ThmScheide
