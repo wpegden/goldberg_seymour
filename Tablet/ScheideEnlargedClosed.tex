@@ -3,45 +3,223 @@ The enlarged set $X=V(T)\cup\bigcup_\delta U_\delta$ is closed with
 respect to $\varphi$.
 \end{lemma}
 \begin{proof}
-If there is no defective color, the indexed union in
-\noderef{ScheideEnlargedVertexSet} is empty, so $X=V(T)$, which is closed
-by the globally maximum clause and \noderef{ScheideGlobalMaximumOrder}.
-Assume henceforth that a defective color exists.
+Write $U_\delta=\{u^1_\delta,u^2_\delta\}$ and
+$X_\delta=V(T)\cup U_\delta$.  If there is no defective color, the
+indexed union in \noderef{ScheideEnlargedVertexSet} is empty, and hence
+$X=V(T)$.  The globally maximum field in the structural data then makes
+$V(T)$ closed by \noderef{ScheideGlobalMaximumOrder}.  We may therefore
+assume that at least one defective color exists.
 
-Suppose an edge identity $f=uw$ of color $\alpha$ leaves $X$, while
-$\alpha$ is missing at some vertex of $X$.  If $u$ lies in a replacement
-pair, choose its index $\delta$; if $u\in V(T)$, choose any defective
-color, which exists by the preceding case split.  In either event $u$
-belongs to $X_\delta=V(T)\cup U_\delta$.  By
-\noderef{ScheideReplacementUnionClosed}, $X_\delta$ is closed, so the
-vertex missing $\alpha$ is not in $X_\delta$.  By the equal-or-disjoint
-alternative \noderef{ScheideReplacementPairsLaminar}, it belongs to a
-pair $U_{\delta'}$ disjoint from $U_\delta$.  Closedness of
-$X_{\delta'}$ then shows that $u$ cannot lie in $V(T)$; hence
-$u\in U_\delta$.
+Suppose, for a contradiction, that an edge identity $f$ of color
+$\alpha$ leaves $X$.  Choose its ends as $u\in X$ and $w\notin X$, and
+choose $x\in X$ at which $\alpha$ is missing.  These choices are exactly
+the negation of closure in \noderef{ColoredVertexSetClosed}.  If
+$u\in V(T)$, choose any defective color $\delta$; otherwise the union
+formula in \noderef{ScheideEnlargedVertexSet} supplies a defective
+$\delta$ with $u\in U_\delta$.  Thus in both cases $u\in X_\delta$.
+Since $w\notin X$ also gives $w\notin X_\delta$, the edge $f$ is a
+boundary identity of $X_\delta$.  Its closedness from
+\noderef{ScheideReplacementUnionClosed} and its color $\alpha$ show that
+$x\notin X_\delta$.
 
-Consider the $(\alpha_0,\alpha)$ incidence component through $u$.  Both
-colors are missing on the closed set $X_{\delta'}$, so the component avoids
-that set, in particular $V(T)$.  By elementariness of $X$ from
-\noderef{ScheideEnlargedElementary}, $\alpha$ is not a block color, since
-every block color already has a missing vertex in $V(T)$.  Also
-$\alpha\ne\delta$: the named $\delta$-edge from $V(T)$ to $U_\delta$
-crosses the boundary of the closed set $X_{\delta'}$, so $\delta$ is
-present throughout that set.  The setup gives
-$\alpha_0\notin\Gamma$, and $\alpha_0\ne\delta$ because $\delta$ is
-present on the original closed tree.
+In particular $x\notin V(T)$ and $x\notin U_\delta$.  The same union
+formula now supplies a defective color $\delta'$ with
+$x\in U_{\delta'}$.  By
+\noderef{ScheideReplacementPairsLaminar}, the two pairs are equal or
+disjoint.  They cannot be equal because $x\notin U_\delta$, so
+$U_\delta$ and $U_{\delta'}$ are disjoint.  If $u$ were in $V(T)$, then
+$f$ would also leave $X_{\delta'}$, while $\alpha$ is missing at
+$x\in X_{\delta'}$; this contradicts the closedness of
+$X_{\delta'}$ from \noderef{ScheideReplacementUnionClosed}.  Therefore
+$u\notin V(T)$ and hence $u\in U_\delta$.  The disjointness just proved
+then gives $u\notin X_{\delta'}$.
 
-The component is therefore identical under $\varphi$ and
-$\varphi_\delta$, and it contains no edge of the replacement tree
-$T_\delta$: its inherited edges have an end or missing witness in the
-avoided original tree, while its two new edges have color $\delta$.
-Switching this full incidence component preserves properness by
-\noderef{TwoColorComponentSwapProper} and fixes the unique uncolored edge.
-Every replacement-tree edge and every missing witness for it remains
-unchanged, so \noderef{ScheideReplacementMaximum} remains a globally
-maximum Tashkinov triple.  The boundary edge $f$ lies in the switched
-component and acquires color $\alpha_0$, while $\alpha_0$ remains missing
-at $y_0$.  Appending $f,w$ gives a larger Tashkinov tree, contradicting
-global maximality.  Thus no such boundary edge exists, exactly the closure
-condition of \noderef{ColoredVertexSetClosed}.
+Let $y_0$ denote the first base vertex.  The exact position clauses of
+\noderef{ScheideStructuralConfiguration}, together with the image
+definition \noderef{TreeSequenceVertexSet}, put $y_0$ in $V(T)$.  The
+setup \noderef{ScheideDefectiveSetup} states that $\alpha_0$ is missing
+at $y_0$ and differs from every block color.  Thus $y_0,x\in X$, and
+they are distinct because $x\notin V(T)$.  By
+\noderef{ScheideEnlargedElementary} the set $X$ is elementary; unfolding
+the pairwise-disjoint missing-set condition in
+\noderef{ColoredVertexSetElementary} shows that
+$\alpha_0\ne\alpha$, since otherwise the same color would be missing at
+the two distinct vertices $y_0$ and $x$.
+
+Consider the full $(\alpha_0,\alpha)$ incidence component $K$ through
+$u$ in the sense of \noderef{TwoColorComponent}.  Apply closedness of
+$X_{\delta'}$ separately to the two missing colors.  Because $\alpha_0$
+is missing at $y_0\in X_{\delta'}$, no $\alpha_0$-colored boundary
+identity of $X_{\delta'}$ exists.  Because $\alpha$ is missing at
+$x\in X_{\delta'}$, no $\alpha$-colored boundary identity exists either.
+The root $u$ is outside $X_{\delta'}$.  If a vertex-node of
+$X_{\delta'}$ belonged to $K$, a path in the connected incidence support
+from $u$ to that vertex would have a first edge identity crossing into
+$X_{\delta'}$; that identity has color $\alpha_0$ or $\alpha$, contrary
+to one of the two preceding closure conclusions.  Hence $K$ avoids every
+vertex of $X_{\delta'}$.  Moreover, an edge-node of $K$ incident with a
+vertex of $X_{\delta'}$ is adjacent to that vertex-node in the same
+incidence graph, so it too is impossible.  Consequently $K$ avoids every
+vertex and every incident edge identity of $X_{\delta'}$, in particular
+all vertices and incident identities of $V(T)$.
+
+We next record all color inequalities needed for the two switches.  For
+each block color $\gamma_i$, \noderef{ScheideStructuralConfiguration}
+provides a base vertex of $V(T)$ missing $\gamma_i$.  Since $x$ lies
+outside $V(T)$ and misses $\alpha$, elementariness of $X$ implies
+$\alpha\ne\gamma_i$.  The setup already gives
+$\alpha_0\ne\gamma_i$ for every $i$.  The replacement data
+\noderef{ScheideReplacementData} give a named edge
+$f^1_\delta=v^1_\delta u^1_\delta$ of color $\delta$, with
+$v^1_\delta\in V(T)$ and $u^1_\delta\in U_\delta$.  Its first end is in
+$X_{\delta'}$, while its second end is outside that set because the two
+pairs are disjoint and replacement-pair vertices lie outside $V(T)$.
+Closedness of $X_{\delta'}$, first with the color missing at $x$ and then
+with the color missing at $y_0$, therefore yields
+$\alpha\ne\delta$ and $\alpha_0\ne\delta$.  Finally
+\noderef{ScheideDefectiveSetup} makes $\gamma(\delta)$ missing at
+$v^0_\delta$ while the incident identity $f^0_\delta$ has color
+$\delta$; by the meaning of missing color in \noderef{MissingColors},
+$\gamma(\delta)\ne\delta$.  Together with
+$\alpha_0\ne\alpha$, these facts say that the four colors
+$\alpha_0,\alpha,\gamma(\delta),\delta$ are pairwise distinct.
+
+Put
+\[
+ \varphi_\delta=
+ \varphi/P'_{\delta}
+ =\operatorname{swap}_{\gamma(\delta),\delta}(\varphi)
+ \quad\hbox{and}\quad T_\delta=R(\delta).\mathrm{replacementTree}.
+\]
+Here the first equality is the exact component swap specified by
+\noderef{TwoColorComponentSwap}, and
+\noderef{ScheideReplacementMaximum} says that $\varphi_\delta$ is proper,
+leaves exactly $e_0$ uncolored, and makes
+$(T_\delta,e_0,\varphi_\delta)$ globally maximum.
+
+We now justify, edge by edge, that $K$ has the same support under
+$\varphi$ and $\varphi_\delta$.  If an identity has color
+$\alpha_0$ or $\alpha$ under $\varphi$, the definition of the first swap
+leaves that value fixed, whether or not the identity lies in the switched
+component, because neither value is $\gamma(\delta)$ or $\delta$.
+Conversely, inspection of the three branches in
+\noderef{TwoColorComponentSwap} shows that an output value
+$\alpha_0$ or $\alpha$ can only have had that same input value: the only
+values interchanged are $\gamma(\delta)$ and $\delta$, and both are
+different from $\alpha_0,\alpha$.  Thus an edge identity is
+$\alpha_0$- or $\alpha$-colored for one coloring exactly when it is so,
+with the same color, for the other.  The two corresponding incidence
+graphs are identical, so their component through $u$ is the same set $K$.
+
+No edge identity of $T_\delta$ belongs to $K$.  Indeed, the exact edge
+list in \noderef{ScheideReplacementData} says that every such identity is
+either an inherited identity of $T$ other than the two deleted block
+edges, or one of $f^1_\delta,f^2_\delta$.  By the attachment clause of
+\noderef{TreeSequence}, every inherited tree identity is incident with a
+vertex of $V(T)$ and is therefore excluded by the avoidance result above.
+The two appended identities have color $\delta$ under $\varphi$, so they
+are not edge-nodes in the $(\alpha_0,\alpha)$ support.  The support is the
+same under $\varphi_\delta$, as just proved.
+
+Let $\psi$ be the result of swapping $\alpha_0$ and $\alpha$ on $K$ in
+$\varphi_\delta$.  We verify rather than assume that $T_\delta$ remains
+Tashkinov.  Fix $q\in U_\delta$.  Since replacement-pair vertices are
+outside $V(T)$, $q\ne y_0$; since $U_\delta$ and $U_{\delta'}$ are
+disjoint, $q\ne x$.  Elementariness of $X$, with $\alpha_0$ missing at
+$y_0$ and $\alpha$ missing at $x$, says that neither color is missing at
+$q$, hence both are present there in the terminology of
+\noderef{MissingColors}.  The first switch interchanges only
+$\gamma(\delta),\delta$, so both colors are also present at $q$ under
+$\varphi_\delta$.  If the vertex-node $q$ is outside $K$, no incident
+edge-node lies in $K$ and its missing set is fixed.  If $q$ lies in $K$,
+properness of $\varphi_\delta$ gives exactly one incident edge of each of
+the two present colors; both edge-nodes lie in $K$, and the second switch
+merely exchanges them.  All other incident values are fixed.  Thus in
+either case the whole missing-color set at $q$ is unchanged.
+
+Every vertex of $V(T)$ and every edge incident with it is avoided by
+$K$, so its whole missing-color set is unchanged as well.  The exact
+vertex equation in \noderef{ScheideReplacementData} is
+\[
+ V(T_\delta)=
+ \bigl(V(T)\setminus
+   \{u^1_{\gamma(\delta)},u^2_{\gamma(\delta)}\}\bigr)
+ \cup U_\delta .
+\]
+Consequently the second switch preserves the missing-color set of every
+vertex of $T_\delta$.  It also fixes every edge identity of $T_\delta$,
+as proved above.  The globally maximum clause supplied by
+\noderef{ScheideReplacementMaximum}, unfolded with
+\noderef{GlobalMaximumTriple}, supplies
+\noderef{TashkinovTree} witnesses for every noninitial edge of
+$T_\delta$ under $\varphi_\delta$.  The same earlier vertex, the same
+missing color, and the same edge color remain valid under $\psi$.
+Therefore $T_\delta$ is a Tashkinov tree for $\psi$.
+
+We also check every other clause of global maximality.  The colors
+$\alpha_0$ and $\alpha$ are distinct, so
+\noderef{TwoColorComponentSwapProper}, applied to the proper coloring
+$\varphi_\delta$, makes $\psi$ proper.  By
+\noderef{TwoColorComponentSwap}, the second switch sends colored values
+to colored values and fixes the uncolored value.  Thus the assertion from
+\noderef{ScheideReplacementMaximum} that exactly $e_0$ is uncolored is
+preserved in the precise sense of \noderef{IsOneEdgeUncolored}.  The
+criticality of $G$, the equality $\chi'(G)=k+1$, and the inequality
+$\Delta(G)+1\leq k$ are graph-and-integer clauses and are copied unchanged
+from the old \noderef{KTriple}.  These five facts reconstruct a
+$k$-triple $(G,e_0,\psi)$.  The tree itself is unchanged, so its vertex
+cardinality is still $t(G)$; combined with the Tashkinov conclusion of the
+preceding paragraph, the three clauses of
+\noderef{GlobalMaximumTriple} are all satisfied for
+$(T_\delta,e_0,\psi)$.
+
+It remains to construct the forbidden augmentation explicitly.  Since
+$f$ has color $\alpha$ and is incident with the root $u$, its edge-node is
+adjacent to $u$ in the two-color incidence graph, and hence belongs to the
+full component $K$ by \noderef{TwoColorComponent}.  The first switch fixes
+its color, and the second therefore changes $f$ from $\alpha$ to
+$\alpha_0$.  The first switch cannot create an $\alpha_0$-edge at $y_0$
+because its two colors are disjoint from $\alpha_0$, and the second switch
+fixes every edge incident with the avoided vertex $y_0$.  Hence
+$\alpha_0$ remains missing at $y_0$ under $\psi$.
+
+The displayed vertex equation puts $u\in U_\delta$ in $V(T_\delta)$.
+It also puts $y_0$ there: the structural position of $y_0$ is zero,
+whereas the two deleted block vertices have positions at least $p\geq2$;
+vertex injectivity in \noderef{TreeSequence} makes these vertices
+distinct.  On the other hand that same equation gives
+$V(T_\delta)\subseteq V(T)\cup U_\delta\subseteq X$, so
+$w\notin X$ implies $w\notin V(T_\delta)$.  The edge identity $f$ is
+also fresh for $T_\delta$, since $f\in K$ whereas every edge identity of
+$T_\delta$ was proved outside $K$.
+
+Let $n=T_\delta.\mathrm{length}$.  Form an ordered sequence $S$ of length
+$n+1$ by retaining, in their old positions, the vertices indexed
+$0,\ldots,n$ and the edges indexed $0,\ldots,n-1$, and by putting $f$ in
+edge position $n$ and $w$ in vertex position $n+1$.  This is explicit
+\noderef{TreeSequence} data.  Its old vertices remain injective and the
+new one is fresh; its old edges remain injective and $f$ is fresh.  Its
+first edge is the old first edge $e_0$.  Every old attachment equality is
+unchanged, while the last edge attaches because its ends are $u$ and $w$
+and $u$ occurs among the earlier vertices of $T_\delta$.  Hence $S$ is a
+tree-sequence with respect to $G,e_0$.
+
+For every old noninitial edge position, the Tashkinov witness already
+verified for $T_\delta$ under $\psi$ is still earlier and unchanged in
+$S$.  At the new last position, $f$ has color $\alpha_0$ and the earlier
+vertex $y_0$ misses $\alpha_0$.  These are exactly all clauses of
+\noderef{TashkinovTree}, so $S$ is a Tashkinov tree for the reconstructed
+$k$-triple $(G,e_0,\psi)$.
+
+Finally, \noderef{TreeSequenceVertexSet} is the image of all displayed
+vertex positions.  Vertex injectivity and freshness of $w$ give
+\[
+ |V(S)|=|V(T_\delta)|+1=t(G)+1.
+\]
+The equality $\chi'(G)=k+1$ in the reconstructed
+\noderef{KTriple} gives $k=\chi'(G)-1$, so this very triple and tree occur
+among the candidates whose maximum defines \noderef{TashkinovOrder}.
+That definition would force $|V(S)|\leq t(G)$, contradicting the displayed
+equality.  The assumed boundary identity $f$ therefore cannot exist, and
+$X$ is closed.
 \end{proof}
