@@ -1,3 +1,8 @@
+import Tablet.AdjacentEdges
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
+import Tablet.ColoredVertexSetElementary
+import Tablet.Degree
 import Tablet.ExtensionBaseAlgorithmA
 import Tablet.ExtensionBaseAlgorithmB
 import Tablet.ExtensionBaseAlgorithmC
@@ -20,11 +25,23 @@ import Tablet.ExtensionBaseStoredPairOverlap
 import Tablet.ExtensionBaseSupportClassColors
 import Tablet.ExtensionBaseSupportOrder
 import Tablet.ExtensionRules
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
+import Tablet.LooplessMultigraph
 import Tablet.MaximumPropertyTransport
+import Tablet.MaximumDegree
+import Tablet.MissingColors
 import Tablet.OutsideTreeColorSwapStable
+import Tablet.PresentColors
 import Tablet.TashTree
 import Tablet.TashkinovAugmentationSequencePreservesTashkinovTree
+import Tablet.TashkinovClosure
 import Tablet.TashkinovOrder
+import Tablet.TreeMissingColors
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorComponentSwapProper
 
 -- [TABLET NODE: ExtensionBase]
