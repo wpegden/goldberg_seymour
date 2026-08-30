@@ -1,10 +1,46 @@
+import Tablet.AdjacentEdges
+import Tablet.BoundaryColorEdges
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
+import Tablet.ColoredVertexSetElementary
+import Tablet.DefectiveColors
+import Tablet.GlobalMaximumTriple
+import Tablet.Incident
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.LooplessMultigraph
+import Tablet.MissingColors
+import Tablet.PresentColors
 import Tablet.ScheideDefectiveChainBoundaryEdges
+import Tablet.ScheideDefectiveSetup
+import Tablet.ScheideDefectiveSwitchEffect
 import Tablet.ScheideEnlargedClosed
+import Tablet.ScheideEnlargedElementary
+import Tablet.ScheideEnlargedVertexSet
+import Tablet.ScheideExitNoFree
+import Tablet.ScheideExitVertex
+import Tablet.ScheideExitVertices
+import Tablet.ScheideGlobalMaximumMissingCounts
+import Tablet.ScheideGlobalMaximumOrder
+import Tablet.ScheideReducedConfiguration
+import Tablet.ScheideReplacementData
+import Tablet.ScheideReplacementMaximum
 import Tablet.ScheideReplacementUnionClosed
+import Tablet.ScheideStructuralConfiguration
 import Tablet.ScheideStructuralExitsInBase
 import Tablet.ScheideReplacementFamilyExists
 import Tablet.ScheideSymmetricDefectiveInternal
+import Tablet.TashkinovTree
+import Tablet.TreeFreeColors
+import Tablet.TreeMissingColors
+import Tablet.TreeSequence
+import Tablet.TreeSequenceVertexSet
+import Tablet.TreeUsedColors
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ScheideSingleBoundaryCrossing]
 theorem ScheideSingleBoundaryCrossing {V E : Type*}
