@@ -32,9 +32,11 @@ is simple and that its support is exactly the full
 $(\alpha,\gamma)$-component through $u$.  Since $u\in X$ and
 $v_1\notin X$, the predecessor of the vertex-node $v_1$ on $P$ is an
 edge-node; call its edge identity $f_0$.  The preceding vertex-node lies
-in $X$.  The two adjacencies in the incidence path and
-\noderef{TwoColorIncidenceGraph} show that the ends of $f_0$ are that
-preceding tree vertex and $v_1$.  Thus
+in $X$.  By \noderef{TwoColorIncidenceGraph}, the two adjacent
+vertex-nodes are incident with $f_0$, and \noderef{Incident} says that
+their vertices belong to the endpoint pair of $f_0$.  The loopless law in
+\noderef{LooplessMultigraph} rules out a doubled endpoint pair, so these
+two distinct vertices are exactly the ends of $f_0$.  Thus
 $f_0\in\partial_G(X)$ by \noderef{BoundaryEdges}.
 
 Every edge-node of $P$ has color $\alpha$ or $\gamma$, again by
@@ -54,11 +56,16 @@ $\partial_{\varphi,\alpha}(X)$ by
 \noderef{ScheideGlobalMaximumBoundaryFacts}, and
 \noderef{ScheideDefectiveChainBoundaryEdges} says that the edge-node of
 each of them lies on $P$.  An edge-node on this simple incidence path is
-between its two endpoint vertex-nodes: it has precisely those incidence
-neighbors by \noderef{TwoColorIncidenceGraph} and the loopless endpoint
-pair has two distinct entries.  If an $\alpha$-boundary edge-node other
-than $f_0$ occurred before $v_1$, one of its two neighboring vertex-nodes
-would already be outside $X$, contrary to the first-departure clause of
+between its two endpoint vertex-nodes.  Indeed,
+\noderef{TwoColorIncidenceGraph} identifies its vertex-neighbors with the
+vertices incident with its edge identity, \noderef{Incident} identifies
+those vertices with the entries of its endpoint pair, and
+\noderef{LooplessMultigraph} makes the two entries distinct.  Hence the
+two path-neighbors of the edge-node are exactly its two endpoint vertices.
+If an $\alpha$-boundary edge-node other than $f_0$ occurred before $v_1$,
+\noderef{BoundaryEdges} would make one of these two neighboring
+vertex-nodes an outside vertex, and it too would occur before $v_1$.
+This contradicts the first-departure clause of
 \noderef{ScheideDepartureReturn}.  Therefore $f_0$ is the only boundary
 edge in the segment $uPv_1$, and at least two distinct
 $\alpha$-boundary edge identities occur strictly after $v_1$.  In
@@ -176,8 +183,12 @@ properness permits no additional incident edge of either color.  At
 $v_1$, (2) and (6) say that the entering identity $f_0$ is the unique
 incident $\alpha$-edge and that $\gamma$ is missing.  Finally, every
 edge-node of the prefix has exactly its two endpoint vertex-nodes as
-incidence neighbors, and both are already in the prefix.  These endpoint
-degree checks show that the prefix is a connected component of
+incidence neighbors: this is the same consequence of
+\noderef{TwoColorIncidenceGraph}, \noderef{Incident}, and the distinct-end
+law in \noderef{LooplessMultigraph} used above.  Both endpoint nodes are
+already in the prefix because they are the two path-neighbors of that
+edge-node.  These endpoint-degree checks show that the prefix is a
+connected component of
 \noderef{TwoColorIncidenceGraph} for $\varphi_1$.  Since it contains $u$,
 \[
  D=\operatorname{supp}(uPv_1). \tag{7}
@@ -263,23 +274,31 @@ and append the particular edge identity $f$ and its outside endpoint:
 \[
  T^+=(y_0,e_1,y_1,\ldots,e_n,y_n,f,b).
 \]
-We check every \noderef{TreeSequence} clause.  The old vertices and edges
-remain pairwise distinct.  The new vertex $b$ is distinct from every old
-vertex because $b\notin X=V(T)$.  The new edge $f$ is distinct from every
-old displayed edge by the preceding paragraph.  Every old attachment is
-unchanged, while the new edge has ends $a$ and $b$, with
-$a\in X$ an earlier displayed vertex.  The first edge is still $e_0$ and
-the length is still positive.  Thus $T^+$ is a tree-sequence and
+By \noderef{TreeSequenceVertexSet}, $a\in X$ and $u\in X$ provide old
+displayed-vertex witnesses $a=y_r$ and $u=y_s$ for suitable indices
+$r,s\in\{0,\ldots,n\}$; both vertices therefore occur earlier than the
+new last edge.  We check every \noderef{TreeSequence} clause.  The old
+vertices and edges remain pairwise distinct.  The same
+\noderef{TreeSequenceVertexSet} statement identifies every old displayed
+vertex with an element of $X$, so $b\notin X$ proves that the new vertex
+$b$ is fresh.  The new edge $f$ is distinct from every old displayed edge
+by the preceding paragraph.  Every old attachment is unchanged, while
+the new edge has ends $a=y_r$ and $b$, with $a$ an earlier displayed
+vertex.  The first edge is still $e_0$ and the length is still positive.
+Thus $T^+$ is a tree-sequence.  Applying
+\noderef{TreeSequenceVertexSet} to its displayed list, and using $b\notin
+X$, gives
 \[
  V(T^+)=X\cup\{b\},\qquad |V(T^+)|=|X|+1. \tag{10}
 \]
 
 All old edges of $T^+$ satisfy their Tashkinov clauses under $\varphi_2$
 by the clause-by-clause verification above.  The new last edge $f$ has
-color $\alpha$ by (9), and the earlier tree vertex $u$ is missing
-$\alpha$ by (8).  Hence $u$ is the required witness for the new last-edge
-clause in \noderef{TashkinovTree}.  Therefore $T^+$ is a Tashkinov tree
-for $(e_0,\varphi_2)$.
+color $\alpha$ by (9), and the displayed-vertex witness $u=y_s$ obtained
+from \noderef{TreeSequenceVertexSet} is missing $\alpha$ by (8).  Since
+$u$ occurs before the appended edge, it is the required witness for the
+new last-edge clause in \noderef{TashkinovTree}.  Therefore $T^+$ is a
+Tashkinov tree for $(e_0,\varphi_2)$.
 
 The criticality, chromatic-index, and maximum-degree clauses of
 \noderef{KTriple} depend only on $G$ and $k$, so they are inherited from

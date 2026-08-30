@@ -4,9 +4,11 @@ import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.GlobalMaximumTriple
+import Tablet.Incident
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.KTriple
+import Tablet.LooplessMultigraph
 import Tablet.MissingColors
 import Tablet.PresentColors
 import Tablet.ScheideDefectiveChainBoundaryEdges
