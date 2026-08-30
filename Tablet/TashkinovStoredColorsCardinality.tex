@@ -8,99 +8,253 @@ particular, \(D_0=\varnothing\).  The natural number on the right is the
 value of the zero-based Lean index.
 \end{lemma}
 \begin{proof}
-We prove the assertion by induction on the natural value of \(i\).  The
-definition \noderef{TashkinovStoredColors} gives \(D_0=\varnothing\), so
-the bound is equality at zero.
-
-For the induction step write \(i=n\), with \(n\geq1\), and write the
-preceding zero-based round as \(a=n-1\).  Thus the current positive data
-slot is \(a.\mathrm{succ}\).  We first prove the finite-set recurrence
+Write
 \[
- D_n\subseteq D_{n-1}\cup\{x_n\}                               \tag{1}
+ U_m=\bigcup_{0\leq h\leq m}S_h,
+ \qquad M_\psi(T)=\overline\psi(T).
 \]
-for some color \(x_n\), allowing the right-hand singleton to be omitted
-in the RE case.
-
-Use the certified step supplied by \noderef{TashkinovSeries} at this
-positive slot, and distinguish the constructors in
-\noderef{TashkinovSeriesStep}.
-
-In an RE, the current coloring equals the preceding coloring.  Its two
-stored colors are the gamma and delta of an explicitly recorded earlier
-PE slot.  Consequently the current stored pair is already contained in
-the union of earlier stored sets; it adds no color to that union.  The
-current tree contains the preceding tree as an ordered initial segment,
-by \noderef{TreeSequenceInitialSegment}, so under the unchanged coloring
-its tree-missing set contains the preceding tree-missing set.  Subtracting
-this larger set from the same accumulated stored union gives
+Thus \noderef{TreeMissingColors} says that \(M_\psi(T)\) is the union of
+the vertexwise missing-color sets over \(V(T)\), and
+\noderef{TashkinovStoredColors} gives
 \[
- D_n\subseteq D_{n-1}.                                         \tag{2}
+ D_0=\varnothing,
+ \qquad D_m=U_m\setminus M_{\varphi_m}(T_m)\quad(m>0).            \tag{1}
 \]
-This is the exact recurrence supplied by the witness-carrying RE
-constructor.  It is also the content behind the paper's notation that
-an RE reuses its active stored pair.
+We induct on the natural value of the data index.  Equation (1) proves
+the assertion at index zero.
 
-In an SE, let \(\delta_n\) be the selected defective color.  The
-\noderef{MaximumDefectiveChoice} makes the current coloring stable
-relative to the preceding coloring on \(T_n\).  The vertex clause of
-\noderef{StableColoring} therefore leaves the missing-color union on
-\(T_n\) unchanged.  The only new stored set is
-\(S_n=\{\delta_n\}\).  Earlier tree vertices remain in \(T_n\), again by
-\noderef{TreeSequenceInitialSegment}; hence, after expanding the two set
-differences in \noderef{TashkinovStoredColors},
+Fix a positive index \(n\), and put \(a=n-1\).  The certificate field of
+\noderef{TashkinovSeries} at slot \(n=a+1\) supplies exactly one of the
+three noninitial constructors in \noderef{TashkinovSeriesStep}.  Before
+considering those constructors, we record the tree bookkeeping which is
+available only when \(n>1\).  In that case \(n-1\) is itself a positive
+slot.  Unpack the series certificate at that preceding slot.  It cannot
+be the initial constructor, and each of its SE, PE, and RE constructors
+has an ordered-extension field saying that its input tree \(T_{n-1}\)
+is an ordered initial segment of its output tree \(T_n\).  Hence, by the
+entrywise relation \noderef{TreeSequenceInitialSegment}, every vertex of
+\(T_{n-1}\) is a vertex of \(T_n\).  The union formula in
+\noderef{TreeMissingColors} then gives, for every coloring \(\psi\),
 \[
- D_n\subseteq D_{n-1}\cup\{\delta_n\}.                          \tag{3}
+ M_\psi(T_{n-1})\subseteq M_\psi(T_n)\qquad(n>1).                \tag{2}
 \]
+Notice that (2) comes from the certificate at slot \(n-1\), not from the
+current certificate at slot \(n\).
 
-It remains to consider a PE.  Let \(\pi\) be its selected coloring,
-\(\rho\) its second stable coloring, and let its stored pair be
-\(S_n=\{\delta_n,\gamma_n\}\).  The two applications of
-\noderef{StableColoring} identify the missing-color set of \(T_n\)
-under the preceding coloring, \(\pi\), and \(\rho\).  The rule
-\noderef{ParallelExtensionColor} says that \(\gamma_n\) is missing at
-the supporting vertex under \(\rho\), while the controlled connecting
-edge has color \(\delta_n\) there.  The PE's \noderef{TreeExit} witness,
-with the conditions in \noderef{TreeExitPath}, is a simple path from
-outside \(T_n\) to that support and has no other tree vertex.  Both path
-endpoints have degree one in the two-color incidence graph, and every
-degree is at most two by
-\noderef{TwoColorIncidenceDegreeAtMostTwo}.  A shortest-attachment
-argument shows that this path exhausts the component: an extra branch
-would give degree three internally or degree two at an endpoint.  Hence
-the switched component meets \(T_n\) only at the supporting vertex.
-The definition \noderef{TwoColorComponentSwap} of the current coloring
-therefore replaces the missing color \(\gamma_n\) by \(\delta_n\) at
-that vertex and loses no other tree-missing color.  In particular,
+We now prove, constructor by constructor, that at most one color survives
+in addition to \(D_{n-1}\).
+
+Suppose first that the current constructor is RE.  Its available
+\noderef{RevisitingExtensionCertificate} contains an earlier index
+\(h\) with \(0<h\leq n-1\) and \(\Theta_h=\mathrm{PE}\).  In particular,
+an RE is impossible when \(n=1\), since then it would require
+\(0<h\leq0\).  At general \(n\), unpack the
+\noderef{TashkinovSeries} certificate at \(h\).  Positivity excludes its
+initial constructor, and the recorded PE kind excludes its SE and RE
+constructors.  Its PE constructor and the current RE constructor in
+\noderef{TashkinovSeriesStep} therefore give, for the same ordered pair of
+colors,
 \[
- \bigl(\overline\varphi_{n-1}(T_n)\setminus\{\gamma_n\}\bigr)
-       \cup\{\delta_n\}
- \subseteq \overline\varphi_n(T_n).                             \tag{4}
+ S_h=\{\delta_h,\gamma_h\}=S_n,
+ \qquad \varphi_n=\varphi_{n-1}.                                \tag{3}
 \]
-This is the PE instance of the first propagation established in
-\noderef{HkuMissingStoredMonotone}.
-
-Let \(U_{n-1}=\bigcup_{h\leq n-1}S_h\).  Using (4) and finite-set
-algebra,
+Thus \(S_n\subseteq U_{n-1}\), so \(U_n=U_{n-1}\).  We have already
+seen that this case forces \(n>1\), and (2), with
+\(\psi=\varphi_{n-1}\), shows
 \[
 \begin{aligned}
  D_n
- &=\bigl(U_{n-1}\cup\{\delta_n,\gamma_n\}\bigr)
-      \setminus\overline\varphi_n(T_n)\\
- &\subseteq
-   \bigl(U_{n-1}\setminus\overline\varphi_{n-1}(T_n)\bigr)
-      \cup\{\gamma_n\}\\
- &\subseteq D_{n-1}\cup\{\gamma_n\}.
-\end{aligned}                                                    \tag{5}
+ &=U_{n-1}\setminus M_{\varphi_{n-1}}(T_n)\\
+ &\subseteq U_{n-1}\setminus M_{\varphi_{n-1}}(T_{n-1})
+  =D_{n-1}.                                                      \tag{4}
+\end{aligned}
 \]
-For the last inclusion, the preceding tree is an initial segment of
-\(T_n\), so a color missing on the preceding tree is also missing on
-\(T_n\).  This completes all cases of (1).
 
-For finite sets, inclusion (1), monotonicity of cardinality, and
-\(|A\cup\{x\}|\leq |A|+1\) give
+Suppose next that the current constructor is SE, and denote its selected
+coloring and defective color by \(\pi\) and \(\delta_n\).  The exact
+fields in \noderef{TashkinovSeriesStep} say
+\(\varphi_n=\pi\) and \(S_n=\{\delta_n\}\).  The selected coloring in
+\noderef{MaximumDefectiveChoice} is stable relative to
+\(\varphi_{n-1}\) on \(T_n\).  The vertex clause of
+\noderef{StableColoring}, followed by the union in
+\noderef{TreeMissingColors}, yields
+\[
+ M_{\varphi_n}(T_n)=M_\pi(T_n)=M_{\varphi_{n-1}}(T_n).          \tag{5}
+\]
+When \(n=1\), the initial constructor in
+\noderef{TashkinovSeriesStep} gives \(S_0=\varnothing\), while (1) gives
+\(D_0=\varnothing\).  Consequently
+\[
+ D_1=(S_0\cup S_1)\setminus M_{\varphi_1}(T_1)
+     \subseteq\{\delta_1\}=D_0\cup\{\delta_1\}.                \tag{6}
+\]
+When \(n>1\), an element of \(D_n\) which is not \(\delta_n\) belongs
+to \(U_{n-1}\) and, by (5), is not in
+\(M_{\varphi_{n-1}}(T_n)\).  Inclusion (2) says it is then not in
+\(M_{\varphi_{n-1}}(T_{n-1})\), so (1) puts it in \(D_{n-1}\).
+Together with the exceptional color this proves
+\[
+ D_n\subseteq D_{n-1}\cup\{\delta_n\}                           \tag{7}
+\]
+in every SE.
+
+It remains to treat a PE.  Use the notation from its constructor in
+\noderef{TashkinovSeriesStep}: \(\pi\) is the coloring selected by the
+maximum-defective choice, \(\rho\) is the second stable coloring,
+\(v_n\) is the support, \(f_n\) is the connecting edge,
+\(\delta_n\) is its selected color, and \(\gamma_n\) is the parallel
+color.  The constructor gives
+\[
+ S_n=\{\delta_n,\gamma_n\},
+ \qquad
+ \varphi_n=\rho/K,                                              \tag{8}
+\]
+where \(K\) is the \((\gamma_n,\delta_n)\)-component through the
+vertex-node \(v_n\).  We prove directly the missing-color propagation
+needed below.
+
+First, the vertex clause of the stability belonging to
+\noderef{MaximumDefectiveChoice}, and then the vertex clause of the second
+\noderef{StableColoring} relation recorded by the PE constructor, give
+for every \(x\in V(T_n)\)
+\[
+ \overline{\varphi_{n-1}}(x)=\overline\pi(x)=\overline\rho(x).  \tag{9}
+\]
+The exact connecting data in \noderef{MaximumDefectiveChoice} say that
+\(v_n\in V(T_n)\), that \(v_n\) is incident with the edge identity
+\(f_n\), and that \(\pi(f_n)=\delta_n\).  On the other hand,
+\noderef{ParallelExtensionColor} says that \(\gamma_n\) is missing at
+\(v_n\) under \(\pi\).  By (9), \(\gamma_n\) is also missing there under
+\(\rho\).  For the edge color, the edge clause of the second
+\noderef{StableColoring} relation applies to \(f_n\): the incidence just
+recorded is incidence with \(T_n\), in the sense of
+\noderef{Incident}, and \(\pi(f_n)=\delta_n\) lies in that relation's
+control set \(D_{n-1}\cup\{\delta_n\}\).  Hence
+\[
+ \rho(f_n)=\pi(f_n)=\delta_n.                                  \tag{10}
+\]
+By \noderef{PresentColors} and \noderef{MissingColors}, (9)--(10) say
+that \(v_n\) has an incident \(\delta_n\)-edge and no incident
+\(\gamma_n\)-edge under \(\rho\); in particular
+\(\gamma_n\ne\delta_n\).
+
+We next identify the whole component \(K\), rather than merely the exit
+path.  The PE constructor supplies a \noderef{TreeExit} at \(v_n\).
+Unpack it as an outside vertex \(u\) and a walk \(P\) from the
+vertex-node \(u\) to the vertex-node \(v_n\) in
+\(I_G(\rho;\gamma_n,\delta_n)\).  By
+\noderef{TreeExitPath}, \(P\) is a simple path of length at least two,
+\(u\notin V(T_n)\), \(v_n\in V(T_n)\), one of
+\(\gamma_n,\delta_n\) is missing at \(u\), and the only vertex-node of
+\(P\) belonging to \(T_n\) is \(v_n\).
+
+The vertex-node \(v_n\) has degree exactly one in this incidence graph.
+Indeed, the adjacency rule in \noderef{TwoColorIncidenceGraph}, together
+with (10), makes the edge-node \(f_n\) a neighbor.  There is no neighbor
+coming from a \(\gamma_n\)-edge because \(\gamma_n\) is missing at
+\(v_n\), by \noderef{PresentColors} and \noderef{MissingColors}.  There
+cannot be a second \(\delta_n\)-edge at \(v_n\): it would be distinct
+from \(f_n\), the two identities would be adjacent by
+\noderef{Incident} and \noderef{AdjacentEdges}, and assigning both the
+color \(\delta_n\) would contradict the properness condition
+\noderef{IsProperEdgeColoring} for \(\rho\).  Thus \(f_n\) is the unique
+neighbor of \(v_n\).
+
+The vertex-node \(u\) also has degree exactly one.  Since \(P\) has
+positive length, its first step supplies an edge-node \(g\) adjacent to
+\(u\).  By \noderef{TwoColorIncidenceGraph}, the edge identity \(g\) is
+incident with \(u\) and has one of the two colors.  At least one of those
+colors is missing at \(u\) by \noderef{TreeExitPath}; the incident edge
+\(g\) shows, through \noderef{PresentColors} and
+\noderef{MissingColors}, that its own color is not missing.  Since the
+two colors are distinct, the other color is the missing one and supplies
+no neighbor at \(u\).  Finally, two distinct incident edges of the color
+of \(g\) would be adjacent by \noderef{Incident} and
+\noderef{AdjacentEdges} and would violate
+\noderef{IsProperEdgeColoring}.  Hence the edge-node \(g\) is the unique
+neighbor of \(u\).
+
+Every internal node of the simple path \(P\) has its two distinct path
+neighbors.  The bound \noderef{TwoColorIncidenceDegreeAtMostTwo} says
+that it has no third neighbor, while the preceding two paragraphs say
+that neither endpoint has a neighbor other than its unique path neighbor.
+It follows that the support of \(P\) is the whole component \(K\).  To
+check this conclusion explicitly, every node of \(P\) is connected along
+\(P\) to \(v_n\), so it belongs to the connected-component support
+\noderef{TwoColorComponent}.  If a node of \(K\) were outside the support
+of \(P\), take a connecting walk from that node to \(v_n\), and at its
+first entry into the support of \(P\) obtain a path node with a neighbor
+outside the path.  At an internal path node this would be a third
+neighbor, and at either endpoint it would be a second neighbor.  Both
+possibilities contradict the degree conclusions above.  Therefore
+\[
+ K=\operatorname{supp}(P),
+ \quad\text{and the only vertex-node of }K\text{ in }T_n
+ \text{ is }v_n.                                                \tag{11}
+\]
+
+Now apply the component swap in (8), using its edgewise definition
+\noderef{TwoColorComponentSwap}.  If \(x\in V(T_n)\) and \(x\ne v_n\),
+then (11) places the vertex-node \(x\) outside \(K\).  No edge-node in
+\(K\) can be incident with \(x\): such an incidence, for an edge having
+one of the two component colors, would be an adjacency in
+\noderef{TwoColorIncidenceGraph} and would put \(x\) in the same
+component.  Thus the swap changes no edge incident with \(x\), and
+\[
+ \overline{\varphi_n}(x)=\overline\rho(x)\qquad
+ (x\in V(T_n),\ x\ne v_n).                                    \tag{12}
+\]
+At \(v_n\), its unique two-color neighbor is \(f_n\), which has color
+\(\delta_n\) by (10).  The swap changes that edge to
+\(\gamma_n\).  There was no incident \(\gamma_n\)-edge, and properness
+excluded any other incident \(\delta_n\)-edge; all colors outside the
+pair are left fixed by \noderef{TwoColorComponentSwap}.  Expanding
+\noderef{PresentColors} and \noderef{MissingColors} therefore gives the
+exact equality
+\[
+ \overline{\varphi_n}(v_n)
+   =\bigl(\overline\rho(v_n)\setminus\{\gamma_n\}\bigr)
+       \cup\{\delta_n\}.                                      \tag{13}
+\]
+Equations (9), (12), and (13), followed by the vertex union in
+\noderef{TreeMissingColors}, prove directly that
+\[
+ \bigl(M_{\varphi_{n-1}}(T_n)\setminus\{\gamma_n\}\bigr)
+       \cup\{\delta_n\}
+ \subseteq M_{\varphi_n}(T_n).                                 \tag{14}
+\]
+Indeed, \(\delta_n\) is missing at \(v_n\) after the swap.  For any old
+missing color other than \(\gamma_n\), choose a tree vertex where it was
+missing; (9) transports that fact to \(\rho\), and either (12) or (13)
+preserves it after the swap.  This establishes (14) from the PE data
+themselves.
+
+When \(n=1\), the initial-constructor equality \(S_0=\varnothing\) and
+(14) give
+\[
+ D_1=\{\delta_1,\gamma_1\}\setminus M_{\varphi_1}(T_1)
+     \subseteq\{\gamma_1\}=D_0\cup\{\gamma_1\},                \tag{15}
+\]
+because \(\delta_1\) belongs to the set subtracted.  When \(n>1\), take
+\(c\in D_n\).  By (1) and (8),
+\(c\in U_{n-1}\cup\{\delta_n,\gamma_n\}\) and
+\(c\notin M_{\varphi_n}(T_n)\).  Inclusion (14) first gives
+\(c\ne\delta_n\).  If \(c=\gamma_n\), it is the allowed exceptional
+color.  Otherwise \(c\in U_{n-1}\), and (14) also shows that
+\(c\notin M_{\varphi_{n-1}}(T_n)\).  By (2), it is not missing on
+\(T_{n-1}\) under that coloring either, so (1) gives
+\(c\in D_{n-1}\).  Hence every PE satisfies
+\[
+ D_n\subseteq D_{n-1}\cup\{\gamma_n\}.                         \tag{16}
+\]
+
+The RE inclusion (4), the SE inclusion (7), and the PE inclusion (16)
+show in every case that
 \[
  |D_n|\leq |D_{n-1}|+1.
 \]
-The induction hypothesis gives \(|D_{n-1}|\leq n-1\), and hence
-\(|D_n|\leq n\).  This proves the bound for every allowed finite index.
+Here we used only monotonicity of finite-set cardinality and the elementary
+bound \(|A\cup\{x\}|\leq |A|+1\).  The induction hypothesis gives
+\(|D_{n-1}|\leq n-1\), whence \(|D_n|\leq n\).  This proves the claim at
+every allowed finite index.
 \end{proof}

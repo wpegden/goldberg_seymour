@@ -1,15 +1,23 @@
-import Tablet.HkuMissingStoredMonotone
+import Tablet.AdjacentEdges
+import Tablet.Incident
+import Tablet.IsProperEdgeColoring
 import Tablet.MaximumDefectiveChoice
+import Tablet.MissingColors
 import Tablet.ParallelExtensionColor
+import Tablet.PresentColors
+import Tablet.RevisitingExtensionCertificate
 import Tablet.StableColoring
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.TreeExit
 import Tablet.TreeExitPath
+import Tablet.TreeMissingColors
 import Tablet.TreeSequenceInitialSegment
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: TashkinovStoredColorsCardinality]
 theorem TashkinovStoredColorsCardinality {V E : Type*}
