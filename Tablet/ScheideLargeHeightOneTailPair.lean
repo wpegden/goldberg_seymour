@@ -1,9 +1,13 @@
+import Tablet.AdjacentEdges
 import Tablet.BalancedGlobalMaximumTriple
+import Tablet.ColoredVertexSetElementary
 import Tablet.Elementary
 import Tablet.FixedPairMaximalTashkinovTree
 import Tablet.GlobalMaximumTriple
 import Tablet.Incident
+import Tablet.IsProperEdgeColoring
 import Tablet.KTriple
+import Tablet.MissingColors
 import Tablet.NormalGlobalMaximumTriple
 import Tablet.ScheideExitNoFree
 import Tablet.ScheideExitVertex

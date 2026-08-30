@@ -28,33 +28,49 @@ $\varphi(f_2)=\varphi(f_1)=\gamma$.  Hence $\gamma$ is missing on the
 trunk and both tail edges have color $\gamma$.
 
 We verify carefully that $\gamma$ is not either trunk color.  Global
-maximality makes $T$ maximal for its fixed pair: a fixed-pair Tashkinov
-tree strictly containing $V(T)$ would have order larger than $t(G)$, by
-\noderef{TashkinovOrder} and \noderef{GlobalMaximumTriple}.  Apply
+maximality makes $T$ maximal for its fixed pair.  Indeed, if a Tashkinov
+tree $S$ for the same pair contained $V(T)$ but not conversely, finiteness
+would give $|V(S)|>|V(T)|=t(G)$, contrary to the maximum in
+\noderef{TashkinovOrder} and the equality in
+\noderef{GlobalMaximumTriple}.  Thus the containment implication in
+\noderef{FixedPairMaximalTashkinovTree} holds for $T$.  Apply
 \noderef{ScheideMaximalKempePath} to this fixed-pair maximum, to the
 Tashkinov tree $T$, to its first two vertices, and to the colors
 $\alpha,\beta$ recorded in \noderef{NormalGlobalMaximumTriple}.  It says
 that the full $(\alpha,\beta)$ component of those vertices is a path.
-The normal closing path is another simple path in that same component with
-the same ends.  A path has a unique simple path between its ends, so the
-normal closing path is the full component.  Its recorded vertex support is
-exactly $\{y_0,\ldots,y_{p-1}\}$.
+Every edge-node of the normal closing path is colored $\alpha$ or $\beta$
+and is joined to its incident endpoint vertex-nodes, so by
+\noderef{TwoColorIncidenceGraph} this is another simple path in that same
+component with the same ends.  A path has a unique simple path between its
+ends, so the normal closing path is the full component.  Its recorded
+vertex support is exactly $\{y_0,\ldots,y_{p-1}\}$.
 
 The first tail edge attaches $u_1$ to an earlier, hence trunk, vertex by
-\noderef{TreeSequence}.  If $\gamma$ were $\alpha$ or $\beta$, that edge
-and $u_1$ would belong to the full $(\alpha,\beta)$ component, contrary to
-the preceding support equality and vertex injectivity.  Thus
+\noderef{TreeSequence}.  If $\gamma$ were $\alpha$ or $\beta$, then the
+colored identity $f_1$, incident with its trunk attachment and with $u_1$,
+would give two successive adjacencies in
+\noderef{TwoColorIncidenceGraph}.  Since the attachment vertex is in the
+full $(\alpha,\beta)$ component, both the edge-node $f_1$ and its other
+endpoint vertex-node $u_1$ would belong to that component.  This contradicts
+the preceding support equality and the fact from \noderef{TreeSequence}
+that $u_1$ is distinct from every earlier trunk vertex.  Thus
 $\gamma\notin\{\alpha,\beta\}$.  The second tail edge initially attaches
 $u_2$ either to a trunk vertex or to $u_1$.  The latter is impossible:
-$f_1\ne f_2$ by edge injectivity, and two distinct $\gamma$-colored edges
-incident with $u_1$ contradict the properness in
-\noderef{GlobalMaximumTriple}.  Consequently both tail edges attach their
-new vertices directly to the trunk.
+$f_1\ne f_2$ by edge injectivity in \noderef{TreeSequence}, and both
+identities would then be incident with $u_1$, hence adjacent by
+\noderef{AdjacentEdges}.  The globally maximum field in
+\noderef{GlobalMaximumTriple} contains a $k$-triple; \noderef{KTriple}
+supplies its proper coloring, and \noderef{IsProperEdgeColoring} says that
+the two distinct adjacent colored identities must receive different
+colors.  This contradicts
+$\varphi(f_1)=\varphi(f_2)=\gamma$.  Consequently both tail edges attach
+their new vertices directly to the trunk.
 
 Every non-first trunk edge is an edge-node of the normal
 $(\alpha,\beta)$ closing path and is therefore colored $\alpha$ or
-$\beta$.  Since $\gamma$ differs from both, all earlier non-first trunk
-edges avoid $\gamma$.  We have now established the ordered block data,
+$\beta$ by \noderef{TwoColorIncidenceGraph}.  Since $\gamma$ differs from
+both, all earlier non-first trunk edges avoid $\gamma$.  We have now
+established the ordered block data,
 equal block color, attachment-to-base condition, missing-on-base condition,
 and earlier-edge avoidance required by
 \noderef{ScheideStructuralConfiguration} with $s=1$, base equal to the
@@ -63,18 +79,29 @@ list is injective automatically.
 
 It remains to verify the exit-covering field.  By
 \noderef{ScheideGlobalMaximumOrder}, $V(T)$ is elementary.  Therefore each
-of $\alpha,\beta,\gamma$ is missing at a unique tree vertex; denote a
-vertex missing $\gamma$ by $y_r$.  The used tree colors are contained in
-$\{\alpha,\beta,\gamma\}$, as just proved.  Every vertex other than $y_r$
-misses a free color.  Indeed, a vertex other than the two ends of $e_0$
-misses at least one color by
-\noderef{ScheideGlobalMaximumMissingCounts}; unless it is $y_r$, none of
-the three used colors can be missing there, because their missing
-occurrences are already prescribed.  At either end of $e_0$, the same
-counting lemma supplies at least two missing colors.  If that end is not
-$y_r$, at most its own one of $\alpha,\beta$ can be among those colors, so
-another missing color lies outside the three used colors.  In every case
-the color obtained is missing on $V(T)$ and absent from
+of $\alpha,\beta,\gamma$ is missing at a unique tree vertex.  Existence for
+$\alpha$ at $y_0$ and $\beta$ at $y_1$ is part of
+\noderef{NormalGlobalMaximumTriple}, and existence for $\gamma$ at a trunk
+vertex was proved above from \noderef{TashkinovTree}; these are memberships
+in the sets defined by \noderef{MissingColors}.  For uniqueness, if one of
+these colors were missing at two distinct tree vertices, their missing-color
+sets would intersect, contrary to the disjointness required by
+\noderef{ColoredVertexSetElementary}.  Denote the unique vertex missing
+$\gamma$ by $y_r$.  The used tree colors are contained in
+$\{\alpha,\beta,\gamma\}$, as just proved.
+
+Every vertex other than $y_r$ misses a free color.  Indeed, a vertex other
+than the two ends of $e_0$ misses at least one color by
+\noderef{ScheideGlobalMaximumMissingCounts}.  Such a vertex is distinct
+from $y_0,y_1,y_r$, so uniqueness and \noderef{MissingColors} exclude all
+three used colors from its missing-color set.  At either end of $e_0$, the
+same counting lemma supplies at least two missing colors.  By
+\noderef{TreeSequence} these ends are the distinct vertices $y_0,y_1$.
+If that end is not $y_r$, uniqueness says that $\gamma$ is not missing
+there, while \noderef{ColoredVertexSetElementary} and
+\noderef{MissingColors} say that only its own one of $\alpha,\beta$ can be
+missing there.  Hence another missing color lies outside the three used
+colors.  In every case the color obtained is missing on $V(T)$ and absent from
 \noderef{TreeUsedColors}, hence belongs to
 \noderef{TreeFreeColors}.
 
