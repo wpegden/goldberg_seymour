@@ -8,40 +8,284 @@ Consequently the exits are in bijection with the remaining, pairwise
 distinct block colors as specified by the reduced configuration.
 \end{lemma}
 \begin{proof}
-Put $X=V(T)$.  By the globally maximum clause of
-\noderef{ScheideStructuralConfiguration} and
-\noderef{ScheideGlobalMaximumOrder}, $X$ is elementary.  Hence each block
-color is missing at exactly one vertex of $X$: existence is condition (S2),
-and two such vertices would violate elementariness.
+Write
+\[
+ X=V(T)=\operatorname{TreeSequenceVertexSet}(T),\qquad
+ F=\operatorname{ScheideExitVertices}(T,\varphi).
+\]
+The last field of the given
+\noderef{ScheideStructuralConfiguration} is a
+\noderef{GlobalMaximumTriple}.  Applying
+\noderef{ScheideGlobalMaximumOrder} to that field says, in particular,
+that $X$ is elementary.  We use elementariness in the precise sense of
+\noderef{ColoredVertexSetElementary}: two distinct members of $X$ have
+disjoint sets of missing colors, where those sets are the sets defined in
+\noderef{MissingColors}.
 
-For every exit vertex $v$, condition (S4) in
-\noderef{ScheideStructuralConfiguration} supplies at least one block color
-missing at $v$; choose one and call it $c(v)$.  If $v\ne w$, then
-$c(v)\ne c(w)$, again by elementariness.  Thus the selected colors form a
-set $\Gamma'$ of cardinality equal to the number of exits, and every exit
-misses exactly one color of $\Gamma'$.
+We first record uniqueness for every old block color.  Fix
+$i\in\operatorname{Fin}(C.s)$.  The missing-on-base field (S2) of
+\noderef{ScheideStructuralConfiguration} gives $q\in\operatorname{Fin}(C.p)$
+such that $C.\gamma(i)$ is missing at $C.y(q)$.  The exact base-position
+field identifies $C.y(q)$ with the vertex of $T$ at position $q$, so
+\noderef{TreeSequenceVertexSet} gives $C.y(q)\in X$.  Thus the color is
+missing at at least one member of $X$.  If it were missing at
+$x,x'\in X$, with $x\ne x'$, then it would belong to both missing-color
+sets, contradicting their disjointness.  Therefore
+\[
+ \tag{A}
+ \text{for each old index $i$, $C.\gamma(i)$ is missing at exactly one
+ member of $X$.}
+\]
 
-Retain precisely the blocks whose colors lie in $\Gamma'$.  Move all other
-blocks before them and regard their two vertices, in their displayed order,
-as the end of the enlarged base segment.  This is still a Tashkinov
-tree-sequence: each of the two edges of a moved block joins its new vertex
-to the old base by (S1), and its common color is missing on the old base by
-(S2), so both attachment and missing-color witnesses remain valid.  The
-operation only permutes named block pairs and changes where the base ends;
-it does not change the coloring or any vertex or edge identity.  Therefore
-the new sequence $T'$ has exactly $V(T)$, contains every old base vertex in
-its new base, and each old block is either retained with all four names or
-has both vertices in that base.
+Membership in $F$, after unfolding \noderef{ScheideExitVertices}, gives
+the predicate \noderef{ScheideExitVertex}.  One of the final clauses of
+that predicate is that the chosen exit vertex belongs to $X$.  Hence every
+$v\in F$ belongs to $X$.  For each member $x=(v,h_v)$ of the finite subtype
+\[
+ \widehat F:=\{v:V\mid v\in F\},
+\]
+the exit-coverage field (S4) of
+\noderef{ScheideStructuralConfiguration} supplies an index
+$\iota(x)\in\operatorname{Fin}(C.s)$ with
+\[
+ \tag{B} C.\gamma(\iota(x))\in\overline\varphi(v).
+\]
+Make these finitely many choices once and for all.  If
+$\iota(x)=\iota(x')$, then (B) makes the same old block color missing at
+the two underlying exit vertices.  Both lie in $X$, so (A) makes those
+vertices equal, and equality in the subtype then gives $x=x'$.  Thus
+$\iota$ is injective.  Since the old color map $C.\gamma$ is injective as
+well, $x\mapsto C.\gamma(\iota(x))$ is injective.  More strongly, if the
+selected color belonging to $x'$ is missing at the vertex underlying $x$,
+then (A), applied also to (B) for $x'$, gives $x=x'$.  Consequently every
+exit misses exactly its one selected old block color.
 
-Conditions (S1), (S2), and (S4) are unchanged for retained blocks.  For
-(S3), the newly incorporated block edges have colors in
-$\Gamma\setminus\Gamma'$, hence outside the new block-color set
-$\Gamma'$.  Thus all fields of
-\noderef{ScheideStructuralConfiguration} hold for the reordered data.
-The injection $v\mapsto c(v)$ has domain and codomain of the same finite
-cardinality, so it is a bijection.  Surjectivity says every retained block
-color is missing at an exit; injectivity plus elementariness gives the
-unique-color clause at every exit.  These are exactly the additional fields
-of \noderef{ScheideReducedConfiguration}, proving the asserted existence
-and all identity-preservation clauses.
+We now fix exact finite enumerations.  Put $r=|F|$ and choose a bijection
+\[
+ b:\operatorname{Fin}(r)\longrightarrow\widehat F.
+\]
+Define the retained old index
+$\rho(t)=\iota(b(t))$.  The map $\rho$ is injective.  Let
+\[
+ U=\{i\in\operatorname{Fin}(C.s):
+       i\notin\operatorname{range}(\rho)\},\qquad a=|U|,
+\]
+and choose a bijection $\upsilon:\operatorname{Fin}(a)\to U$.
+The range of $\rho$ has $r$ members, its complement has $a$ members, and
+the two sets partition $\operatorname{Fin}(C.s)$.  Counting that partition
+gives
+\[
+ \tag{C} C.s=a+r.
+\]
+It also gives the following exact alternative for every old index $i$:
+either there is a unique $h\in\operatorname{Fin}(a)$ with
+$\upsilon(h).1=i$, or there is a unique $t\in\operatorname{Fin}(r)$ with
+$\rho(t)=i$.  The alternatives are disjoint.  Define the new indexed block
+colors by
+\[
+ \tag{D} \gamma'(t)=C.\gamma(\rho(t))
+ \quad(t\in\operatorname{Fin}(r)).
+\]
+They are pairwise distinct because both $\rho$ and $C.\gamma$ are
+injective.
+
+Here is the reordered list with all positions specified.  Its vertices,
+in zero-based order, are
+\[
+\begin{array}{ll}
+ C.y(q) & (0\le q<C.p),\\
+ C.\operatorname{blockVertex}(\upsilon(h).1,j)
+   & (q=C.p+2h+j,\ 0\le h<a,\ 0\le j<2),\\
+ C.\operatorname{blockVertex}(\rho(t),j)
+   & (q=C.p+2a+2t+j,\ 0\le t<r,\ 0\le j<2),
+\end{array}
+\]
+and its edge identities, also in zero-based order, are
+\[
+\begin{array}{ll}
+ C.\operatorname{baseEdge}(q) & (0\le q<C.p-1),\\
+ C.\operatorname{blockEdge}(\upsilon(h).1,j)
+   & (q=C.p-1+2h+j,\ 0\le h<a,\ 0\le j<2),\\
+ C.\operatorname{blockEdge}(\rho(t),j)
+   & (q=C.p-1+2a+2t+j,\ 0\le t<r,\ 0\le j<2).
+\end{array}
+\]
+Call this alternating list $T'$.  The three intervals in each display are
+disjoint and exhaustive; within each two-place block the quotient and
+remainder on division by two recover the indicated $h$ or $t$ and $j$.
+By (C), its number of vertices is
+$C.p+2a+2r=C.p+2C.s=T.\operatorname{length}+1$, using the original exact
+length field.  Thus its number of edge identities is
+$T.\operatorname{length}$.
+
+We next check every field of \noderef{TreeSequence}.  Positivity follows
+from $C.p\ge2$.  Because $C.p-1\ge1$, the first new edge is the old
+$C.\operatorname{baseEdge}(0)$; the old base-position equation and the
+first-edge field of $T$ show that this exact identity is $e_0$.  Every new
+vertex entry is an old entry, at respectively an old base, unselected-block,
+or retained-block position.  Conversely, the exact alternative following
+(C) puts every old block entry into exactly one of the last two classes.
+Thus the new vertex-position map is a permutation of the old one.  The same
+argument, using the displayed edge positions, makes the new edge-position
+map a permutation of the old one.  Vertex and individual-edge injectivity
+therefore follow from the two injectivity fields of the old
+\noderef{TreeSequence}; in particular, no two parallel edge identities are
+identified by the reordering.
+
+For attachment, consider an exact new edge position.  An old-base edge has
+the same position as in $T$, and the earlier endpoint furnished by the old
+tree-sequence lies in the unchanged old-base prefix.  An absorbed edge is
+$C.\operatorname{blockEdge}(\upsilon(h).1,j)$; the block-attachment field
+(S1) supplies $q<C.p$ and the exact endpoint equation
+\[
+ G.\operatorname{ends}
+   (C.\operatorname{blockEdge}(\upsilon(h).1,j))
+ =\{C.y(q),C.\operatorname{blockVertex}(\upsilon(h).1,j)\}.
+\]
+The vertex $C.y(q)$ occurs in the old-base prefix, strictly before this
+absorbed vertex.  A retained edge has the identical verification with
+$\rho(t)$ in place of $\upsilon(h).1$; its old-base endpoint is also
+strictly earlier.  These three cases establish the attachment field for
+every edge of $T'$, so the displayed data do define a tree-sequence.
+
+The new sequence is also a Tashkinov tree.  By
+\noderef{GlobalMaximumTriple}, the old globally maximum field contains a
+proof of \noderef{TashkinovTree} for $T$.  For a nonfirst old-base edge,
+its old Tashkinov witness is at an earlier old-base vertex, and both exact
+positions are unchanged.  For an absorbed block edge, (S2) gives
+\[
+ \varphi(C.\operatorname{blockEdge}(\upsilon(h).1,j))
+   =C.\gamma(\upsilon(h).1)
+\]
+and gives an old base vertex missing that color.  The same two clauses with
+$\rho(t)$ verify every retained block edge.  In each case the missing
+witness occurs in the first $C.p$ positions and is therefore earlier than
+the edge being checked.  This proves the defining missing-color clause of
+\noderef{TashkinovTree} for every nonfirst edge of $T'$.
+
+The permutation argument and \noderef{TreeSequenceVertexSet} give
+\[
+ \tag{E} \operatorname{TreeSequenceVertexSet}(T')=X.
+\]
+Indeed, the left side is the image of the displayed new vertex map: every
+new entry is an old entry, and every old base or old block entry occurs in
+one of the three new intervals.  We can therefore rebuild global
+maximality, rather than merely assert that it survives.  Unfolding
+\noderef{GlobalMaximumTriple} in the old global field gives a
+\noderef{KTriple} for the unchanged quadruple $(G,k,e_0,\varphi)$, the old
+Tashkinov assertion, and $|X|=t(G)$.  The $K$-triple is literally unchanged,
+the preceding paragraph supplies the new Tashkinov assertion, and (E)
+transfers the cardinality equality.  Hence
+$(T',e_0,\varphi)$ is a global maximum triple.
+
+Before constructing the new structural data, we prove the decisive exit-set
+identity
+\[
+ \tag{F}
+ \operatorname{ScheideExitVertices}(T',\varphi)
+ =\operatorname{ScheideExitVertices}(T,\varphi)=F.
+\]
+By \noderef{ScheideExitVertices}, it is enough to prove the two exit
+predicates equivalent for each vertex $v$.  Unfold
+\noderef{ScheideExitVertex} and take witnesses
+$u,\gamma,\delta,z$, the same incidence walk $P$, and the same selected
+position on $P$.  Every occurrence of the tree in this predicate is an
+occurrence of its vertex set.  More explicitly, (E) rewrites the assertion
+that the start vertex $u$ lies in the tree.  It also rewrites
+\[
+ \delta\in
+ \operatorname{DefectiveColors}(G,\varphi,
+     \operatorname{TreeSequenceVertexSet}(T)).
+\]
+Here \noderef{DefectiveColors} is the finite set filtered by the predicate
+\noderef{DefectiveColor}, and that predicate uses the given vertex set in
+its boundary-edge count, so replacing equal vertex sets replaces this
+membership with the corresponding one for $T'$.
+
+The remaining tree-dependent assertion is
+\noderef{ScheideDefectiveChainPath}.  Its start-membership condition is
+rewritten by (E), its assertion that the terminal vertex $z$ is outside the
+tree is rewritten by (E), and its path and full-component assertions do not
+change because $G,\varphi,\delta,\gamma,u,z$, and the exact walk $P$ have
+not changed.  Finally (E) rewrites both the membership of the selected exit
+vertex $v$ and, for every later vertex-node of $P$, the assertion that this
+later vertex is outside the tree.  Thus the same witnesses prove the
+$T'$-exit predicate from the $T$-exit predicate.  The same replacements in
+the reverse direction prove the converse.  This proves (F), including all
+endpoint-outside and later-vertex exclusions and without changing any
+edge-node identity in the defective chain.
+
+We now define the new \noderef{ScheideStructuralConfiguration}.  Put
+\[
+ p'=C.p+2a,\qquad s'=r.
+\]
+Its base vertices are the first $p'$ vertices in the first two intervals
+of the display for $T'$, and its base edges are the first $p'-1$ edge
+identities in the corresponding first two intervals.  Its $t$-th block
+uses color (D) and the two vertices and two exact edge identities of the old
+$\rho(t)$-block.  We verify its fields in their defining order.
+
+First, $p'\ge2$ follows from $C.p\ge2$, and (D) is injective.  Equation (C)
+and the displayed list give
+$T'.\operatorname{length}+1=p'+2s'$.  The four exact-position fields for
+base vertices, block vertices, base edges, and block edges hold by the
+three defining intervals.  The retained block-attachment equations are the
+old (S1) equations; their endpoints $C.y(q)$ occur among the first $C.p$
+new base vertices.  The retained block-color and missing-on-base fields are
+the old (S2) equations and witnesses, again with their witnesses in that
+old-base prefix.
+
+For the new base-color exclusion (S3), let a nonfirst new base edge have
+color $c$.  If it is an old base edge, the old (S3) clause says that $c$
+differs from every old block color, hence from every retained color (D).
+If it is an absorbed edge, then old (S2) identifies its color as
+$C.\gamma(\upsilon(h).1)$.  Equality with a retained color
+$C.\gamma(\rho(t))$ would, by injectivity of $C.\gamma$, give
+$\upsilon(h).1=\rho(t)$.  This is impossible because $\upsilon(h)$ lies in
+the complement of the range of $\rho$.  Thus (S3) holds both for the old
+base edges and for every absorbed block edge now lying in the enlarged
+base.
+
+For exit coverage (S4), take $v$ in the new exit set.  By (F),
+$x=(v,h_v)$ is a member of $\widehat F$.  There is a unique
+$t\in\operatorname{Fin}(r)$ with $b(t)=x$.  Equations (B) and (D) say that
+the retained color $\gamma'(t)$ is missing at $v$.  The no-isolated-vertex
+field is copied verbatim from $C$, since neither the graph nor its edge
+identities changed.  The final global-maximum field was established above
+from the unchanged \noderef{KTriple}, the checked Tashkinov property, and
+(E).  This constructs every field of the new structural configuration,
+including its new values $p'$ and $s'$.
+
+It remains to supply exactly the three additional fields of
+\noderef{ScheideReducedConfiguration}.  By (F), the definition of $r$, and
+$s'=r$, the new exit set has cardinality $s'$.  Let $v$ be a new exit and
+again write $x=(v,h_v)$.  The unique index $t=b^{-1}(x)$ has
+$\gamma'(t)$ missing at $v$ by (B).  If also $\gamma'(t')$ is missing at
+$v$, then it is the selected old block color belonging to the exit
+$b(t')$.  Assertion (A), together with (B) for $b(t')$, forces the
+underlying vertex of $b(t')$ to be $v$.  Hence $b(t')=x=b(t)$ and, by
+injectivity of $b$, $t'=t$.  This is the exact `exit exactly one' field.
+Conversely, for each $t\in\operatorname{Fin}(s')$, the exit underlying
+$b(t)$ belongs to the new exit set by (F), and (B) says it misses
+$\gamma'(t)$.  This is the `every block color at an exit' field.  Thus
+$\operatorname{Fin}(s')$ has been identified with the retained colors, and
+the cardinality, unique-missing, and surjectivity assertions have all been
+proved separately.
+
+Let $R$ denote this reduced configuration.  Equation (E) is the required
+vertex-set equality.  Each old base vertex $C.y(q)$ is literally the new
+base vertex at position $q$, so it lies in the image of $R.y$.  Finally,
+fix an old block index $i$.  In the retained alternative after (C), its
+unique $t$ satisfies $i=\rho(t)$, and the definitions give simultaneously
+\[
+ C.\gamma(i)=R.\gamma(t),\qquad
+ C.\operatorname{blockVertex}(i,j)=R.\operatorname{blockVertex}(t,j),
+ \qquad
+ C.\operatorname{blockEdge}(i,j)=R.\operatorname{blockEdge}(t,j)
+\]
+for both $j\in\operatorname{Fin}(2)$.  In the complementary alternative,
+the unique $h$ with $\upsilon(h).1=i$ puts both old vertices at the new base
+positions $C.p+2h+j$, so both belong to the image of $R.y$.  These are the
+two alternatives in the conclusion, with every original parallel-edge
+identity retained exactly.
 \end{proof}

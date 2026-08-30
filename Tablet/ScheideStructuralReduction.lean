@@ -1,5 +1,18 @@
+import Tablet.ColoredVertexSetElementary
+import Tablet.DefectiveColor
+import Tablet.DefectiveColors
+import Tablet.GlobalMaximumTriple
+import Tablet.KTriple
+import Tablet.MissingColors
+import Tablet.ScheideDefectiveChainPath
+import Tablet.ScheideExitVertex
+import Tablet.ScheideExitVertices
 import Tablet.ScheideReducedConfiguration
 import Tablet.ScheideGlobalMaximumOrder
+import Tablet.ScheideStructuralConfiguration
+import Tablet.TashkinovTree
+import Tablet.TreeSequence
+import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: ScheideStructuralReduction]
 theorem ScheideStructuralReduction {V E : Type*}
