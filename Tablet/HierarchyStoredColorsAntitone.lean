@@ -12,4 +12,48 @@ theorem HierarchyStoredColorsAntitone {V E : Type*}
     HierarchyStoredColorsAt H i.succ ⊆
       HierarchyStoredColorsAt H i.castSucc := by
 -- BODY
-  sorry
+  classical
+  unfold HierarchyStoredColorsAt
+  intro c hc
+  have initialVertices : ∀ {A B : TreeSequence G e0},
+      TreeSequenceInitialSegment A B →
+        TreeSequenceVertexSet A ⊆ TreeSequenceVertexSet B := by
+    intro A B hab v hv
+    unfold TreeSequenceVertexSet at hv ⊢
+    simp only [Finset.mem_image] at hv ⊢
+    obtain ⟨x, hx, rfl⟩ := hv
+    obtain ⟨hlen, hvertices, hedges⟩ := hab
+    refine ⟨Fin.castLE (Nat.succ_le_succ hlen) x, Finset.mem_univ _, ?_⟩
+    exact hvertices x
+  have hstage : TreeSequenceInitialSegment
+      (HierarchyStarredStage H i.castSucc)
+      (HierarchyStarredStage H i.succ) := by
+    by_cases hi : i.val = 0
+    · have hi' : i = ⟨0, Fin.pos i⟩ := Fin.ext hi
+      rw [hi']
+      simpa [HierarchyStarredStage] using H.coreInsideFirst
+    · have hne : i.castSucc ≠ 0 := by
+        intro hz
+        apply hi
+        exact congrArg Fin.val hz
+      change TreeSequenceInitialSegment
+        (Fin.cases base.core (fun j => H.stage j.castSucc.succ) i.castSucc)
+        (H.stage i.castSucc.succ)
+      have hindex : (i.castSucc.pred hne).succ = i.castSucc :=
+        Fin.succ_pred i.castSucc hne
+      have hstar :
+          Fin.cases base.core (fun j => H.stage j.castSucc.succ) i.castSucc =
+            H.stage i.castSucc.castSucc := by
+        rw [← hindex]
+        rfl
+      rw [hstar]
+      exact H.nested i.castSucc
+  apply Finset.mem_sdiff.mpr
+  refine ⟨(Finset.mem_sdiff.mp hc).1, ?_⟩
+  intro hprev
+  apply (Finset.mem_sdiff.mp hc).2
+  unfold TreeMissingColors at hprev ⊢
+  obtain ⟨v, hv, hcv⟩ := Finset.mem_biUnion.mp hprev
+  apply Finset.mem_biUnion.mpr
+  refine ⟨v, ?_, hcv⟩
+  exact initialVertices hstage hv
