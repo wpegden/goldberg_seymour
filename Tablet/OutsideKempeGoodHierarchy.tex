@@ -1,12 +1,15 @@
 \begin{lemma}[A good hierarchy survives outside-chain recoloring]
 Let two corresponding ETT presentations have the same terminal tree,
-stored sets, starred core, ordered stages, and dividers, and, in the PE
-case, the same chosen closure, the first under $\varphi_n$ and the second
-under $\sigma_n$.  Suppose the first
+stored sets, starred core, ordered stages, and dividers.  Require also
+that they have the same PE/non-PE terminal status and, in the common PE
+case, the same chosen closure.  Let the first presentation be under
+$\varphi_n$ and the second under $\sigma_n$.  Suppose the first
 presentation is a good hierarchy and $\sigma_n$ is obtained from
 $\varphi_n$ by recoloring finitely many $(\alpha,\beta)$-chains fully
 outside the terminal tree.  Then the second presentation is a good
-hierarchy with exactly the same Gamma family.
+hierarchy with the same $D_{n,j}$ at corresponding stages and exactly
+the same $\Gamma^j_\eta$ for every $\eta\in D_{n,j}$.  Values of the
+total Gamma functions outside these paper domains are irrelevant.
 \end{lemma}
 \begin{proof}
 By \noderef{OutsideKempeRecoloringStable}, every edge incident with the
@@ -40,8 +43,13 @@ missing-color set and every colored boundary identity of the stage agree.
 Thus all five clauses hold under $\sigma_n$.
 
 The constructed witness has the same paper-extensional hierarchy
-presentation by the assumed \noderef{SameHierarchyStages} relation and
-has definitionally the same dependent Gamma family.  These are exactly
-the two conjuncts of \noderef{SameGoodHierarchy}; no equality of an
-unused non-PE closure field is required.
+presentation by the assumed \noderef{SameHierarchyStages} relation.
+That relation includes equality of PE status and, in the PE case,
+equality of the closure; in the common non-PE case it ignores both unused
+closure fields.  At each stage, the equality of raw stored colors and of
+stage missing-color sets identifies the corresponding $D_{n,j}$ sets.
+On every color in this common set the copied Gamma value is literally the
+old Gamma value.  These are exactly the transported, stagewise clauses of
+\noderef{SameGoodHierarchy}; no condition is needed at a color outside
+$D_{n,j}$.
 \end{proof}

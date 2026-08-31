@@ -1,10 +1,15 @@
 \begin{definition}
 Two good-hierarchy witnesses are the \emph{same good hierarchy} when
 their underlying hierarchy presentations have the same stages and
-dividers in the sense of \noderef{SameHierarchyStages}, and their
-dependent Gamma families are equal after transporting across the common
-divider count.  In particular, the PE closure is the same when it is
-part of the starred base, while an unused non-PE closure field is not
-constrained.  Thus “remains good with the same Gamma sets” has a literal
-formal meaning without adding non-paper data.
+dividers in the sense of \noderef{SameHierarchyStages}.  Transport each
+stage index $j$ across the resulting equality of divider counts.  At
+every transported pair of stages, the corresponding sets $D_{n,j}$
+from \noderef{HierarchyStoredColorsAt} must be equal, and
+$\Gamma^j_\eta$ must be equal for every color $\eta$ in this common
+set.  No equality is imposed on values of the total Lean Gamma functions
+at colors outside $D_{n,j}$, because those values are not Gamma sets in
+the paper.  In particular, the PE closure is the same when it is part of
+the starred base, while unused closure fields in the common non-PE case
+are not constrained.  Thus “remains good with the same Gamma sets” means
+exactly equality on all and only the paper-defined Gamma indices.
 \end{definition}

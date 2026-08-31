@@ -31,8 +31,9 @@ Then:
 $(T,D_n,\varphi_n)$-stable, and is $(T,\varphi_n)$-invariant;
 \item the same terminal tree carries a corresponding ETT certificate
 under $\sigma_n$ and satisfies maximum property;
-\item the same ordered stages, dividers, and Gamma sets form a good
-hierarchy under $\sigma_n$; and
+\item the same ordered stages and dividers form a good hierarchy under
+$\sigma_n$, with the same $D_{n,j}$ and the same $\Gamma^j_\eta$ for
+every $\eta\in D_{n,j}$; and
 \item if $T$ is
 $(\bigcup_{\eta\in D_{n,q+1}}\Gamma^q_\eta)^{-}$-closed under
 $\varphi_n$, it is so under $\sigma_n$.
@@ -75,7 +76,11 @@ Apply \noderef{OutsideKempeGoodHierarchy} to these two corresponding
 presentations.  Its hypotheses have just been verified: the stage data
 are identical, the raw stored sets agree by correspondence, and the
 recoloring is outside $T$.  It supplies a good hierarchy under
-$\sigma_n$ with the same Gamma family, proving (iii).
+$\sigma_n$ with the same Gamma family, proving (iii).  Here this means
+the paper-extensional relation \noderef{SameGoodHierarchy}:
+corresponding stages have equal $D_{n,j}$ sets and their Gamma values
+agree on every color of that common set.  The total Lean functions may
+differ away from these sets, where the paper defines no Gamma set.
 
 For (iv), set
 $C=\bigcup_{\eta\in D_{n,q+1}}\Gamma^q_\eta$, where

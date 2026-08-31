@@ -14,4 +14,11 @@ def SameGoodHierarchy {V E : Type*} [Fintype V] [Fintype E]
     {H₂ : TashkinovHierarchy ett₂ base₂}
     (good₁ : GoodHierarchy H₁) (good₂ : GoodHierarchy H₂) : Prop :=
 -- BODY
-  SameHierarchyStages H₁ H₂ ∧ HEq good₁.gamma good₂.gamma
+  SameHierarchyStages H₁ H₂ ∧
+    ∃ hcount : H₁.dividerCount = H₂.dividerCount,
+      ∀ j : Fin (H₁.dividerCount + 1),
+        let j₂ : Fin (H₂.dividerCount + 1) :=
+          Fin.cast (congrArg (fun q => q + 1) hcount) j
+        HierarchyStoredColorsAt H₁ j = HierarchyStoredColorsAt H₂ j₂ ∧
+          ∀ eta ∈ HierarchyStoredColorsAt H₁ j,
+            good₁.gamma j eta = good₂.gamma j₂ eta
