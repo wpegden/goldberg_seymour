@@ -60,13 +60,16 @@ maximum property, proves (ii).
 We next transport the hierarchy base.  In the PE case, the hypotheses
 just established meet \noderef{HierarchySplitter}; it uses
 \noderef{CombinedStableClosurePreserved} to retain the same ordered
-$R_n$, the same union $T_n\vee R_n$, and all stages and dividers.  In the
-non-PE cases the starred base is $T_n$ by \noderef{HierarchyBase}, so no
-closure transport is required.  The corresponding-ETT certificate
+$R_n$, the same union $T_n\vee R_n$, and all stages and dividers; its
+stable vertex clause also supplies the terminal-ladder missing-color
+equality required by \noderef{HierarchyBase}.  In the non-PE cases the
+starred base is $T_n$, and the outside recoloring fixes its vertexwise
+missing-color sets.  Thus a compatible base exists there without
+constraining the unused closure field.  The corresponding-ETT certificate
 identifies every ladder tree, raw stored set, extension kind, and support
 datum.  Copying all stages and divider positions therefore yields a
-hierarchy for the corresponding ETT satisfying
-\noderef{SameHierarchyStages}.
+hierarchy for the corresponding ETT satisfying the paper-extensional
+relation \noderef{SameHierarchyStages}.
 
 Apply \noderef{OutsideKempeGoodHierarchy} to these two corresponding
 presentations.  Its hypotheses have just been verified: the stage data
@@ -76,7 +79,9 @@ $\sigma_n$ with the same Gamma family, proving (iii).
 
 For (iv), set
 $C=\bigcup_{\eta\in D_{n,q+1}}\Gamma^q_\eta$, where
-$D_{n,q+1}$ is \noderef{HierarchyTerminalStoredColors}.  The two
+$D_{n,q+1}$ is \noderef{HierarchyTerminalStoredColors}.  Its stored
+union and terminal subtraction are compatible by the hierarchy-base
+missing-color invariant.  The two
 colorings agree on every edge incident with $T$ and have identical
 missing-color sets at every vertex of $T$.  Hence
 $\overline{\sigma_n}(T)-C=\overline{\varphi_n}(T)-C$, and for each color

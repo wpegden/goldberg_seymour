@@ -1,4 +1,5 @@
 import Tablet.OutsideKempeRecoloringStable
+import Tablet.OrderedTreeUnion
 import Tablet.SameGoodHierarchy
 
 -- [TABLET NODE: OutsideKempeGoodHierarchy]

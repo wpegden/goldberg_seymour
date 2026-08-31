@@ -1,7 +1,8 @@
 \begin{lemma}[A good hierarchy survives outside-chain recoloring]
 Let two corresponding ETT presentations have the same terminal tree,
-stored sets, hierarchy base, ordered stages, and dividers, the first under
-$\varphi_n$ and the second under $\sigma_n$.  Suppose the first
+stored sets, starred core, ordered stages, and dividers, and, in the PE
+case, the same chosen closure, the first under $\varphi_n$ and the second
+under $\sigma_n$.  Suppose the first
 presentation is a good hierarchy and $\sigma_n$ is obtained from
 $\varphi_n$ by recoloring finitely many $(\alpha,\beta)$-chains fully
 outside the terminal tree.  Then the second presentation is a good
@@ -11,12 +12,14 @@ hierarchy with exactly the same Gamma family.
 By \noderef{OutsideKempeRecoloringStable}, every edge incident with the
 terminal tree has the same value under the two colorings, and every
 vertex of the terminal tree has the same missing-color set.  Every
-hierarchy stage, the chosen $R_n$, and the starred base are vertex subsets
-of the terminal tree by \noderef{TashkinovHierarchy},
-\noderef{HierarchyBase}, and the equalities in
-\noderef{SameHierarchyStages}.  Therefore all their missing-color sets,
-all colors on their displayed edge differences, and every colored
-boundary-edge set agree under $\varphi_n$ and $\sigma_n$.
+hierarchy stage and the starred base are vertex subsets of the terminal
+tree by \noderef{TashkinovHierarchy}, \noderef{HierarchyBase}, and the
+equalities in \noderef{SameHierarchyStages}.  In the PE case the chosen
+closure is also equal in the two bases and is contained in the common
+starred core by \noderef{OrderedTreeUnion}; in a non-PE case it enters
+none of the five good-hierarchy clauses.  Therefore all paper-relevant
+missing-color sets, all colors on their displayed edge differences, and
+every colored boundary-edge set agree under $\varphi_n$ and $\sigma_n$.
 
 The raw stored sets agree at every rung by hypothesis.  Combining this
 with the preceding equality of missing-color sets in the definition
@@ -36,8 +39,9 @@ colors agree.  Clause (v) is unchanged for the same reason: both the
 missing-color set and every colored boundary identity of the stage agree.
 Thus all five clauses hold under $\sigma_n$.
 
-The constructed witness has the same hierarchy presentation by the
-assumed \noderef{SameHierarchyStages} relation and has definitionally the
-same dependent Gamma family.  These are exactly the two conjuncts of
-\noderef{SameGoodHierarchy}.
+The constructed witness has the same paper-extensional hierarchy
+presentation by the assumed \noderef{SameHierarchyStages} relation and
+has definitionally the same dependent Gamma family.  These are exactly
+the two conjuncts of \noderef{SameGoodHierarchy}; no equality of an
+unused non-PE closure field is required.
 \end{proof}

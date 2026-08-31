@@ -1,11 +1,23 @@
 \begin{definition}
-For $0\leq j\leq q$, let
+Let $\varphi_n$ be the ETT generating coloring, let $\sigma$ be the
+coloring of its hierarchy base, and write
 \[
- D_{n,j}=D_n-\overline{\varphi_n}(T_{n,j}^{*}).
+ D_n^{\varphi}=\noderef{TashkinovStoredColors}
+   =\left(\bigcup_{h\leq n}S_h\right)
+      -\overline{\varphi_n}(T_n).
 \]
-Here $D_n$ is the accumulated stored-color set at the terminal rung and
-$T_{n,j}^{*}$ is the starred hierarchy stage.  Since every starred stage
-contains $T_n$, this is the paper's set
-$\bigcup_{h\leq n}S_h-\overline{\varphi_n}(T_{n,j}^{*})$ and in
-particular $D_{n,j}\subseteq D_n$.
+For $0\leq j\leq q$, define
+\[
+ D_{n,j}=D_n^{\varphi}-\overline\sigma(T_{n,j}^{*}).
+\]
+The compatibility field of \noderef{HierarchyBase} gives
+$\overline\sigma(T_n)=\overline{\varphi_n}(T_n)$, and every starred
+stage contains $T_n$.  Consequently the displayed formal definition is
+equal to the paper's single-coloring expression
+\[
+ D_{n,j}=\left(\bigcup_{h\leq n}S_h\right)
+       -\overline\sigma(T_{n,j}^{*}).
+\]
+In particular $D_{n,j}\subseteq D_n^{\varphi}$.  For the generating
+base, $\sigma=\varphi_n$, recovering the paper's notation literally.
 \end{definition}

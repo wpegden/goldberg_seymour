@@ -2,6 +2,7 @@ import Tablet.ExtendedTashkinovTree
 import Tablet.OrderedTreeUnion
 import Tablet.TashkinovClosure
 import Tablet.TashkinovExtensionKind
+import Tablet.TreeMissingColors
 import Tablet.TreeSequencePrefix
 
 -- [TABLET NODE: HierarchyBase]
@@ -17,6 +18,10 @@ structure HierarchyBase {V E : Type*} [Fintype V] [Fintype E]
   supportPosition : Fin
     ((ett.series.data.tree (Fin.last ett.rounds).castSucc).length + 1)
   supportPositive : 1 ≤ supportPosition.val
+  terminalMissingColors :
+    let n : Fin (ett.rounds + 1) := Fin.last ett.rounds
+    let Tn := ett.series.data.tree n.castSucc
+    TreeMissingColors phi Tn = TreeMissingColors generating Tn
   parallel :
     let n : Fin (ett.rounds + 1) := Fin.last ett.rounds
     let Tn := ett.series.data.tree n.castSucc

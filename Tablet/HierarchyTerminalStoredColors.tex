@@ -1,10 +1,17 @@
 \begin{definition}
-For a hierarchy with terminal tree $T=T_{n,q+1}$, define
+Let $\varphi_n$ be the ETT generating coloring, let $\sigma$ be the
+coloring of its hierarchy base, and let $T=T_{n,q+1}$ be the terminal
+tree.  Define
 \[
- D_{n,q+1}=D_n-\overline{\varphi_n}(T).
+ D_{n,q+1}=D_n^{\varphi}-\overline\sigma(T),
+ \qquad
+ D_n^{\varphi}=\noderef{TashkinovStoredColors}.
 \]
-Equivalently, it is the union of the stored sets $S_h$ through the
-terminal rung with all colors missing on $T$ removed.  This is the
-terminal stored-color set used in the last clause of
+By the terminal-ladder missing-color compatibility in
+\noderef{HierarchyBase} and the inclusion $T_n\subseteq T$, this is
+equivalently the union of the raw stored sets $S_h$ through the terminal
+rung with $\overline\sigma(T)$ removed.  Thus the raw stored union and
+the subtraction use one mathematically compatible terminal coloring.
+This is the terminal stored-color set used in the last clause of
 \textup{LEM\_Stable}.
 \end{definition}

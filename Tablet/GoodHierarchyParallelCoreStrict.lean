@@ -1,4 +1,10 @@
 import Tablet.GoodHierarchy
+import Tablet.HierarchyStarredStage
+import Tablet.HierarchyStoredColorsAt
+import Tablet.TashkinovHierarchy
+import Tablet.TreeColorSetClosed
+import Tablet.TreeColorSetMinusClosed
+import Tablet.TreeMissingColors
 
 -- [TABLET NODE: GoodHierarchyParallelCoreStrict]
 theorem GoodHierarchyParallelCoreStrict {V E : Type*}
@@ -10,7 +16,8 @@ theorem GoodHierarchyParallelCoreStrict {V E : Type*}
     {base : HierarchyBase ett phi} {H : TashkinovHierarchy ett base}
     (good : GoodHierarchy H)
     (hPE : ett.series.data.kind (Fin.last ett.rounds) =
-      some TashkinovExtensionKind.PE) :
+      some TashkinovExtensionKind.PE)
+    (hclosed : TreeColorSetClosed G phi T (TreeMissingColors phi T)) :
     H.stage ⟨1, by omega⟩ ≠ base.core := by
 -- BODY
   sorry

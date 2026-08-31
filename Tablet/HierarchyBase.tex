@@ -1,14 +1,21 @@
 \begin{definition}
-Fix an ETT with terminal rung $n$, terminal ladder tree $T_n$, and a
-coloring $\sigma$.  Its \emph{hierarchy base under $\sigma$} consists of
-a tree $T_{n,0}^{*}$, a tree $R_n$, and a positive position of the
-recorded supporting vertex in $T_n$, with the following requirements.
+Fix an ETT with terminal rung $n$, terminal ladder tree $T_n$, and
+generating coloring $\varphi_n$.  Its \emph{hierarchy base under a
+coloring $\sigma$} consists of a tree $T_{n,0}^{*}$, a tree $R_n$, and
+a positive position of the recorded supporting vertex in $T_n$, with
+the following requirements.  First, the two terminal-ladder
+missing-color sets agree:
+\[
+             \overline\sigma(T_n)=\overline{\varphi_n}(T_n).
+\]
 If $\Theta_n=PE$, the chosen vertex at that position is $v_n$, the tree
 $R_n$ is a closure of the ordered prefix $T_n(v_n)$ under $\sigma$, and
 $T_{n,0}^{*}$ is the exact ordered union $T_n\vee R_n$ in the sense of
 \noderef{OrderedTreeUnion}.  If $\Theta_n\ne PE$, then
 $T_{n,0}^{*}=T_n$; in that case the unused closure field carries no
-mathematical condition.  Thus the same data type can represent the
-paper's starred base under the generating coloring and under later
-stable colorings without changing any edge identity.
+mathematical condition.  Thus the same data type represents the paper's
+starred base both under the generating coloring and under later stable
+colorings.  The displayed missing-color equality is automatic for the
+generating base and is the vertexwise missing-color clause of stability
+for a transported base; no edge identity is changed.
 \end{definition}

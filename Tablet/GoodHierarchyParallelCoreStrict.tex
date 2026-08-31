@@ -1,25 +1,34 @@
 \begin{lemma}[The first PE hierarchy stage properly extends the core]
-If a good hierarchy has terminal kind PE, then
+If a good hierarchy has terminal kind PE and its terminal tree $T$ is
+closed under $\varphi_n$ for every color missing on $T$, then
 \[
                      T_{n,1}\ne T_n\vee R_n.
 \]
 \end{lemma}
 \begin{proof}
-Write $C=T_n\vee R_n=T_{n,0}^{*}$ and suppose that $T_{n,1}=C$.
-Clause (iv) of \noderef{GoodHierarchy} says that $C$ is not
-$(\Gamma^0)^{-}$-closed.
+Write $C=T_n\vee R_n=T_{n,0}^{*}$ and
+$\Gamma^0=\bigcup_{\eta\in D_{n,0}}\Gamma^0_\eta$.  Suppose that
+$T_{n,1}=C$.  Clause (iv) of \noderef{GoodHierarchy} says that $C$ is
+not $(\Gamma^0)^{-}$-closed.
 
-If the hierarchy has a divider, clause (v) at $j=1$ says that
+Suppose first that the divider count $q$ is positive.  Clause (v) of
+\noderef{GoodHierarchy} at $j=1$ says that
 $T_{n,1}$ is
 $(\bigcup_{\eta\in D_{n,1}}\Gamma^0_\eta)^{-}$-closed.  Equality of
-$T_{n,1}$ and $C$ gives equality of their missing-color sets, so
-\noderef{HierarchyStoredColorsAt} gives $D_{n,1}=D_{n,0}$.
+$T_{n,1}$ and $C$ also identifies the starred stages
+$T_{n,1}^{*}=T_{n,1}$ and $T_{n,0}^{*}=C$ from
+\noderef{HierarchyStarredStage}.  The two subtractions in
+\noderef{HierarchyStoredColorsAt} therefore have the same stored set and
+the same missing-color set, so $D_{n,1}=D_{n,0}$.
 The reserved unions are therefore equal, contradicting clause (iv).
 
-If there is no divider, $T_{n,1}$ is the terminal tree $T$.  The PE
-constructor in \noderef{TashkinovSeriesStep} makes $T$ a closure under
-$\varphi_n$, hence it is closed for every missing color.  Under the
-assumed equality the core $C$ is therefore, in particular,
-$(\Gamma^0)^{-}$-closed, again contradicting clause (iv).  Both cases
-are impossible, proving (5.8).
+Suppose now that $q=0$.  The terminal-stage field of
+\noderef{TashkinovHierarchy} gives $T_{n,1}=T$.  Hence the assumed
+equality yields $C=T$.  By hypothesis, $T$ is closed for every color in
+$\overline{\varphi_n}(T)$.  Every color in
+$\overline{\varphi_n}(T)-\Gamma^0$ lies in that set, so expanding
+\noderef{TreeColorSetClosed} and \noderef{TreeColorSetMinusClosed}
+shows that $T$, and therefore $C$, is $(\Gamma^0)^{-}$-closed.  This
+again contradicts clause (iv).  Both possible divider-count cases are
+impossible, proving the asserted strictness.
 \end{proof}

@@ -12,5 +12,5 @@ noncomputable def HierarchyCounterexampleMeasure {V E : Type*}
     ℕ × ℕ :=
 -- BODY
   (HierarchyPathNumber C.hierarchy,
-    T.length - (HierarchyStarredStage C.hierarchy
-      (Fin.last C.hierarchy.dividerCount)).length)
+    T.length - (C.hierarchy.stage
+      ⟨C.hierarchy.dividerCount, by omega⟩).length)

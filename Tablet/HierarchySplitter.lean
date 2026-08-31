@@ -1,4 +1,5 @@
 import Tablet.CombinedStableClosurePreserved
+import Tablet.CombinedStableColoring
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.MaximumPropertyTransport
 import Tablet.ModColoring
