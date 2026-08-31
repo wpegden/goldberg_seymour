@@ -1,0 +1,21 @@
+\begin{lemma}
+The incident core preserves maximum degree:
+$\Delta(G^{\circ})=\Delta(G)$.
+\end{lemma}
+\begin{proof}
+Every core vertex is an original incident vertex, and
+\noderef{IncidentCoreDegree} preserves its degree.  Hence each degree
+appearing in the maximum for $G^{\circ}$ also appears in the maximum for
+$G$, so $\Delta(G^{\circ})\leq\Delta(G)$.
+
+For the reverse inequality, fix $v\in V(G)$.  If $d_G(v)=0$, then its degree
+is bounded by the explicit value $0$ included in the maximum defining
+\noderef{MaximumDegree}.  If $d_G(v)>0$, the finite incident-edge set is
+nonempty; choose an identity $e$ incident with $v$.  Then $x=(v,e)$ is a
+vertex of the subtype \noderef{IncidentVertex}, and
+\noderef{IncidentCoreDegree} gives
+$d_G(v)=d_{G^{\circ}}(x)\leq\Delta(G^{\circ})$.  Thus every value entering
+the maximum for $G$, including the isolated-vertex value $0$, is at most
+$\Delta(G^{\circ})$.  Therefore $\Delta(G)\leq\Delta(G^{\circ})$, proving
+equality.
+\end{proof}

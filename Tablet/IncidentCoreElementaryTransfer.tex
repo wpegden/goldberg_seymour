@@ -1,0 +1,20 @@
+\begin{lemma}
+If the incident core $G^{\circ}$ is elementary, then the original graph
+$G$ is elementary.
+\end{lemma}
+\begin{proof}
+The general density lower bound \noderef{DensityLowerBound}, elementariness
+of the core, chromatic-index equality
+\noderef{IncidentCoreChromaticIndex}, and the density comparison
+\noderef{IncidentCoreDensity} give the chain
+\[
+ \lceil\Gamma(G)\rceil
+ \leq \chi'(G)
+ = \chi'(G^{\circ})
+ = \lceil\Gamma(G^{\circ})\rceil
+ \leq \lceil\Gamma(G)\rceil.
+\]
+The first and last quantities are therefore equal.  Hence
+$\chi'(G)=\lceil\Gamma(G)\rceil$, which is exactly
+\noderef{Elementary} for $G$.
+\end{proof}

@@ -1,0 +1,26 @@
+\begin{lemma}
+The incident core has the same chromatic index as the original graph:
+$\chi'(G^{\circ})=\chi'(G)$.  More generally, for every set of edge
+identities $F\subseteq E$,
+\[
+ \chi'(G^{\circ}|F)=\chi'(G|F).
+\]
+\end{lemma}
+\begin{proof}
+Choose a full proper $\chi'(G)$-edge-coloring of $G$ using the existence
+clause of \noderef{ChromaticIndexSpec}.  Fullness is a property of the
+unchanged coloring function on the unchanged edge type.  Properness
+transports to $G^{\circ}$ by
+\noderef{IncidentCoreColoringTransport}.  The minimality clause of
+\noderef{ChromaticIndexSpec} therefore gives
+$\chi'(G^{\circ})\leq\chi'(G)$.  Starting with an optimal full coloring of
+$G^{\circ}$ and transporting properness in the reverse direction gives the
+opposite inequality.  Antisymmetry proves equality.
+
+Fix $F\subseteq E$.  The same argument applies verbatim to the common
+retained edge subtype.  The restricted clause of
+\noderef{IncidentCoreColoringTransport} transports properness in both
+directions, fullness again refers to the same function domain, and the two
+applications of \noderef{ChromaticIndexSpec} give both inequalities between
+$\chi'(G^{\circ}|F)$ and $\chi'(G|F)$.  Hence these indices are equal.
+\end{proof}

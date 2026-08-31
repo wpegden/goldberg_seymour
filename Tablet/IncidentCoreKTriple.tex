@@ -1,0 +1,16 @@
+\begin{lemma}
+For every integer $k$, edge identity $e_0$, and partial coloring $\varphi$
+of the common edge type, $(G^{\circ},e_0,\varphi)$ is a $k$-triple if and
+only if $(G,e_0,\varphi)$ is a $k$-triple.
+\end{lemma}
+\begin{proof}
+Expand the five clauses in \noderef{KTriple}.  Criticality is equivalent by
+\noderef{IncidentCoreCritical}; chromatic index is equal by
+\noderef{IncidentCoreChromaticIndex}; and maximum degree is equal by
+\noderef{IncidentCoreMaximumDegree}.  Properness of the same partial
+coloring is equivalent by \noderef{IncidentCoreColoringTransport}.  Finally,
+the assertion that exactly $e_0$ is uncolored depends only on the coloring
+function on the unchanged edge type $E$, so it is literally identical on
+both sides.  Substituting these four equivalences and the identical fifth
+clause into the definition proves the claimed equivalence of $k$-triples.
+\end{proof}

@@ -1,0 +1,58 @@
+\begin{lemma}
+Certified ordered tree-sequences transport in both directions between $G$
+and $G^{\circ}$ without changing an edge identity.  More precisely, for
+every $e_0$, palette size $k$, coloring $\varphi$, and ordered tree-sequence
+$T$ of $G$, there is an ordered tree-sequence $T^{\circ}$ of $G^{\circ}$
+with the same length, the same edge at every ordered edge position, and at
+every ordered vertex position the incident-core copy of the corresponding
+vertex of $T$.  Their vertex sets have equal cardinality, and
+$T^{\circ}$ is a Tashkinov tree exactly when $T$ is.  Conversely, coercing
+the vertices of any ordered core tree-sequence to $V(G)$ gives such a
+sequence of $G$ with the same indexed edges and vertices, equal vertex-set
+cardinality, and equivalent Tashkinov-tree certification.
+\end{lemma}
+\begin{proof}
+We first transport a tree-sequence $T$ of $G$ to the core.  Every indexed
+vertex of $T$ is incident with an indexed edge.  Indeed, the vertex in
+position $r+1$ is an endpoint of the edge in position $r$ by the attachment
+clause of \noderef{TreeSequence}.  For the vertex in position $0$, use the
+edge in position $0$, which exists because the length is positive: its
+attachment index lies in the one-element initial segment and therefore is
+$0$.  Thus each indexed vertex has a witness placing it in the subtype
+\noderef{IncidentVertex}.
+
+Keep the length and every edge entry unchanged and replace each vertex entry
+by this incident-core copy.  Injectivity of the vertex list follows from
+injectivity of the original list after forgetting subtype witnesses;
+injectivity of the edge list and the first-edge equation are literally
+unchanged.  For an attachment equation, apply
+\noderef{IncidentCoreEndpoints}: the coerced core endpoint pair is the
+original endpoint pair.  Both displayed endpoints are the incident-core
+copies of the original displayed endpoints, and subtype equality is
+determined by the underlying vertex.  Hence the original attachment equation
+lifts to the required core attachment equation.  This constructs the
+ordered core sequence with exactly the stated indexed vertices and edges.
+The indexed vertex bijection gives equality of the two vertex-set
+cardinalities in \noderef{TreeSequenceVertexSet}.
+
+To compare the Tashkinov certificates, fix a positive edge position $j$.
+The edge identity and its assigned color are unchanged.  A candidate earlier
+vertex has the same index on both sides, and
+\noderef{IncidentCoreMissingColors} says that precisely the same colors are
+missing at that vertex and at its underlying original vertex.  Therefore the
+existential earlier-index and missing-color witness required by
+\noderef{TashkinovTree} transports in each direction.  Quantifying over $j$
+proves the asserted equivalence of Tashkinov-tree certification.
+
+Conversely, start with a core tree-sequence and coerce every indexed vertex
+to $V(G)$, retaining the same length and edge list.  Vertex injectivity is
+preserved because equality of underlying vertices implies equality in the
+incident-vertex subtype.  The first-edge equation is unchanged, and applying
+\noderef{IncidentCoreEndpoints} to each core attachment equation gives the
+original attachment equation.  The indexed vertex map is again a bijection
+between the two vertex lists, hence preserves vertex-set cardinality.  The
+same missing-color argument using
+\noderef{IncidentCoreMissingColors} proves the Tashkinov equivalence.  This
+establishes all stated data in both directions, with every parallel edge
+identity kept at its original ordered position.
+\end{proof}

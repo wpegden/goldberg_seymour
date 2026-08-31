@@ -1,0 +1,18 @@
+\begin{lemma}
+For every partial coloring $\varphi$ of the original edge type and every
+$x\in V^{\circ}(G)$, the colors present at $x$ in $G^{\circ}$ are exactly
+the colors present at its underlying vertex in $G$.  Consequently the two
+missing-color sets are equal as well.
+\end{lemma}
+\begin{proof}
+By \noderef{PresentColors}, a color $c$ is present at $x$ precisely when
+some edge identity $e$ incident with $x$ receives $c$.  The edge type and
+the coloring function are identical in the two graphs, while
+\noderef{IncidentCoreIncidence} identifies the two incidence conditions.
+Thus the same edge identity witnesses presence of $c$ on either side, which
+proves equality of the present-color sets.
+
+By \noderef{MissingColors}, the missing colors are the complement of the
+present colors in the same finite palette.  Taking complements of the
+equality just proved gives equality of the missing-color sets.
+\end{proof}

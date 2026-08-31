@@ -1,0 +1,26 @@
+\begin{lemma}
+The density ceiling of the incident core is at most that of the original
+graph:
+\[
+ \lceil\Gamma(G^{\circ})\rceil\leq\lceil\Gamma(G)\rceil.
+\]
+\end{lemma}
+\begin{proof}
+Fix a finite core vertex set $U$ that is eligible in the sense of
+\noderef{EligibleOddSet}; thus $|U|\geq3$ and $|U|$ is odd.  Let $\bar U$
+be its image in $V(G)$.  By \noderef{IncidentCoreInternalEdges},
+$|\bar U|=|U|$ and the internal-edge finsets agree identity by identity.
+Consequently $\bar U$ is also eligible and
+\[
+ \frac{2|E_{G^{\circ}}(U)|}{|U|-1}
+ =\frac{2|E_G(\bar U)|}{|\bar U|-1}.
+\]
+By \noderef{DensityValue}, this says that every density value contributed
+to the maximum for $G^{\circ}$ is also contributed to the maximum for $G$.
+The additional value $0$ in \noderef{Density} is common to both maxima.
+Therefore $\Gamma(G^{\circ})\leq\Gamma(G)$.  The least-natural-upper-bound
+operation in \noderef{DensityCeil} is monotone: every natural upper bound of
+$\Gamma(G)$ is also an upper bound of the smaller rational number
+$\Gamma(G^{\circ})$.  Taking the least such bounds yields the displayed
+inequality.
+\end{proof}

@@ -1,0 +1,32 @@
+\begin{lemma}
+The incident core preserves Tashkinov order:
+$t(G^{\circ})=t(G)$.
+\end{lemma}
+\begin{proof}
+Put $k=\chi'(G)-1$.  By
+\noderef{IncidentCoreChromaticIndex}, this is also
+$\chi'(G^{\circ})-1$, so both maxima in \noderef{TashkinovOrder} use the
+same palette size.
+
+Let $n$ be attainable in the defining maximum for $G$.  Thus there are an
+edge identity $e_0$, a partial coloring $\varphi$, and an ordered
+tree-sequence $T$ such that $(G,e_0,\varphi)$ is a $k$-triple, $T$ is a
+Tashkinov tree, and its vertex set has cardinality $n$.
+By \noderef{IncidentCoreKTriple}, the same edge identity and coloring form a
+$k$-triple on $G^{\circ}$.  The forward half of
+\noderef{IncidentCoreTreeTransport} supplies a certified core tree with the
+same indexed edge identities and vertex-set cardinality $n$.  Hence every
+attainable value for $G$ is attainable for $G^{\circ}$.
+
+Conversely, begin with any value attainable for $G^{\circ}$.  The reverse
+halves of \noderef{IncidentCoreKTriple} and
+\noderef{IncidentCoreTreeTransport} give a $k$-triple and a certified tree
+of $G$ having the same vertex-set cardinality.  Thus the two sets of
+attainable natural numbers coincide.  The finite range bounds in
+\noderef{TashkinovOrder} remove no attainable value, because a tree's
+injective vertex list has cardinality at most its ambient finite vertex
+type; the two transport directions also verify the corresponding bound in
+the other graph.  Both definitions adjoin $0$ and take the maximum of the
+same attainable set, so their maxima, and hence their Tashkinov orders, are
+equal.
+\end{proof}

@@ -1,0 +1,15 @@
+\begin{lemma}
+For every edge identity $e\in E$, coercing both endpoints of $e$ in the
+incident core $G^{\circ}$ back to $V(G)$ gives exactly the endpoint pair of
+$e$ in $G$.
+\end{lemma}
+\begin{proof}
+By \noderef{IncidentCore}, the core endpoint pair of $e$ consists of the two
+entries of a representative of the unordered pair $G.\operatorname{ends}(e)$,
+each equipped with the incidence witness supplied by $e$.  Forgetting those
+witnesses therefore returns the representative pair.  The defining quotient
+property of an unordered pair identifies that representative with
+$G.\operatorname{ends}(e)$ itself.  No operation has been performed on the
+edge identity $e$, so this equality holds separately for every member of a
+parallel class.
+\end{proof}

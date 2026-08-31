@@ -1,0 +1,34 @@
+\begin{lemma}
+The incident core preserves edge adjacency and proper coloring, both on the
+full original edge type and after retaining an arbitrary set $F\subseteq E$.
+Precisely, two original edge identities are adjacent in $G^{\circ}$ if and
+only if they are adjacent in $G$; consequently, every partial coloring of
+$E$ is proper on $G^{\circ}$ if and only if it is proper on $G$.  Moreover,
+for every $F\subseteq E$, the analogous two equivalences hold between
+$G^{\circ}|F$ and $G|F$, using the identical retained edge subtype.
+\end{lemma}
+\begin{proof}
+Fix edge identities $e$ and $f$.  If they are adjacent in $G^{\circ}$,
+they have a common core endpoint $x$.  Applying
+\noderef{IncidentCoreIncidence} twice shows that the underlying vertex of
+$x$ is incident with both $e$ and $f$ in $G$, so the identities are adjacent
+there.  Conversely, if a vertex $v$ is incident with both identities in
+$G$, regard $v$ as an incident vertex using $e$ as its witness.  The reverse
+direction of \noderef{IncidentCoreIncidence}, first for $e$ and then for
+$f$, makes this core vertex a common endpoint.  This proves full adjacency
+equivalence.
+
+The definition \noderef{IsProperEdgeColoring} tests only distinct edge
+identities, adjacency, and their assigned colors.  The edge type and coloring
+function are unchanged, and the preceding paragraph preserves adjacency;
+substitution in that definition proves properness in both directions.
+
+Now fix $F\subseteq E$.  By \noderef{RestrictEdges}, an edge of either
+restriction is the same pair consisting of an identity $e\in E$ and a proof
+that $e\in F$, and its endpoint pair is inherited without change.  Repeating
+the common-endpoint argument above, while forgetting only the membership
+proof in $F$, proves adjacency equivalence for $G^{\circ}|F$ and $G|F$.
+Substitution into \noderef{IsProperEdgeColoring} again proves the restricted
+properness equivalence.  At no point are two retained, parallel identities
+identified.
+\end{proof}

@@ -1,0 +1,30 @@
+\begin{lemma}
+Let $U$ be a finite set of vertices of $G^{\circ}$, and let
+$\bar U\subseteq V(G)$ be its image under the injective map forgetting the
+incidence witness.  Then $|\bar U|=|U|$, and, as finite sets of the original
+edge identities,
+\[
+ E_{G^{\circ}}(U)=E_G(\bar U).
+\]
+\end{lemma}
+\begin{proof}
+The forgetting map on \noderef{IncidentVertex} is injective because two
+subtype elements with the same underlying vertex are equal.  Its image on
+$U$ therefore has cardinality $|U|$.
+
+Fix an edge identity $e$.  Suppose first that $e$ is internal to $U$ in the
+sense of \noderef{InternalEdges}.  If an original vertex $v$ is incident
+with $e$, then $(v,e)$ is an incident-core vertex and
+\noderef{IncidentCoreIncidence} makes it incident with $e$ in the core.
+Internality puts $(v,e)$ in $U$, so $v$ lies in $\bar U$.  Thus every
+original endpoint of $e$ lies in $\bar U$, and $e\in E_G(\bar U)$.
+
+Conversely, suppose $e\in E_G(\bar U)$ and let $x$ be a core vertex
+incident with $e$.  By \noderef{IncidentCoreIncidence}, the underlying
+vertex of $x$ is an original endpoint of $e$, hence belongs to $\bar U$.
+It is therefore the underlying vertex of some $y\in U$.  Injectivity of the
+forgetting map gives $x=y$, so $x\in U$.  Every core endpoint of $e$ lies in
+$U$, proving $e\in E_{G^{\circ}}(U)$.  Membership is equivalent for each
+individual $e\in E$, so the two internal-edge finsets are equal without
+collapsing parallel identities.
+\end{proof}

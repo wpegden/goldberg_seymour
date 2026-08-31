@@ -1,0 +1,15 @@
+\begin{lemma}
+For every incident vertex $x\in V^{\circ}(G)$,
+\[
+ d_{G^{\circ}}(x)=d_G(x),
+\]
+where the $x$ on the right denotes the underlying original vertex.
+\end{lemma}
+\begin{proof}
+By \noderef{Degree}, each side counts edge identities incident with the
+displayed vertex.  Both counts range over exactly the original edge type
+$E$.  For each identity $e$, \noderef{IncidentCoreIncidence} says that it
+is included in the left count if and only if it is included in the right
+count.  Thus the two finite sets being counted are equal, and so are their
+cardinalities.
+\end{proof}

@@ -1,0 +1,18 @@
+\begin{lemma}
+Let $x\in V^{\circ}(G)$ and $e\in E$.  Then $x$ is incident with $e$ in
+$G^{\circ}$ if and only if the underlying vertex of $x$ is incident with
+the same edge identity $e$ in $G$.
+\end{lemma}
+\begin{proof}
+Suppose first that $x$ is an endpoint of $e$ in $G^{\circ}$.  Applying the
+endpoint-forgetting map to this membership and using
+\noderef{IncidentCoreEndpoints} shows that the underlying vertex of $x$ is
+an endpoint of $e$ in $G$.
+
+Conversely, suppose the underlying vertex of $x$ is an endpoint of $e$ in
+$G$.  By \noderef{IncidentCoreEndpoints}, membership in the original
+endpoint pair lifts to membership of some incident vertex $y$ in the core
+endpoint pair, with $y$ and $x$ having the same underlying vertex.  Equality
+in the subtype \noderef{IncidentVertex} is determined by the underlying
+vertex, so $y=x$.  Hence $x$ is incident with $e$ in $G^{\circ}$.
+\end{proof}

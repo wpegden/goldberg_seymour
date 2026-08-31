@@ -1,0 +1,21 @@
+\begin{lemma}
+Deleting every edge identity lowers the chromatic index of $G^{\circ}$ if
+and only if deleting every edge identity lowers the chromatic index of $G$.
+Thus criticality in the sense of \noderef{Critical} is equivalent for $G$
+and its incident core.
+\end{lemma}
+\begin{proof}
+Fix the original edge identity $e$.  Deleting $e$ is restriction to
+$E\setminus\{e\}$ in both graphs.  Applying the
+restricted equality in \noderef{IncidentCoreChromaticIndex} to this edge
+set, and its full equality to the undeleted graphs, gives
+\[
+ \chi'(G^{\circ}-e)=\chi'(G-e)
+ \quad\hbox{and}\quad
+ \chi'(G^{\circ})=\chi'(G).
+\]
+Consequently the strict inequality on the core side holds exactly when the
+strict inequality on the original side holds.  Quantifying this equivalence
+over all $e$ and using \noderef{Critical} proves the claimed equivalence of
+criticality.
+\end{proof}

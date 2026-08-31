@@ -1,0 +1,28 @@
+\begin{theorem}[Incident-core reduction]
+Let $G=(V,E)$ be a finite loopless multigraph and let $H=G^{\circ}$ be its
+incident core.  Then:
+\begin{enumerate}
+\item coercing the endpoints of every individual edge identity of $H$ back
+to $V$ gives its endpoint pair in $G$;
+\item every vertex of $H$ is incident with an edge;
+\item $H$ is critical if and only if $G$ is critical;
+\item $\chi'(H)=\chi'(G)$ and $\Delta(H)=\Delta(G)$;
+\item $t(H)=t(G)$; and
+\item if $H$ is elementary, then $G$ is elementary.
+\end{enumerate}
+The edge type of $H$ is exactly $E$, so all assertions preserve individual
+parallel-edge identities.
+\end{theorem}
+\begin{proof}
+The endpoint assertion is \noderef{IncidentCoreEndpoints}, and absence of
+isolated core vertices is \noderef{IncidentCoreNoIsolated}.  Criticality
+equivalence is \noderef{IncidentCoreCritical}.  The two numerical equalities
+are \noderef{IncidentCoreChromaticIndex} and
+\noderef{IncidentCoreMaximumDegree}; Tashkinov-order equality is
+\noderef{IncidentCoreTashkinovOrder}.  Finally,
+\noderef{IncidentCoreElementaryTransfer} transfers elementariness from $H$
+back to $G$.  These are logically distinct properties proved from the same
+incident-core construction, and their conjunction gives every clause of the
+stated reduction.  Since \noderef{IncidentCore} uses the original edge type
+$E$ throughout, the conjunction also retains each parallel identity exactly.
+\end{proof}
