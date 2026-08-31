@@ -1,0 +1,68 @@
+\begin{lemma}[Hierarchy preservation under a combined-stable coloring]
+Let the last step be a PE.  Suppose $T$ has maximum property and carries
+a hierarchy under $\varphi_n$, and let $\sigma_n$ be proper, leave
+exactly $e_0$ uncolored, and be
+$(T_n\oplus R_n,D_n,\varphi_n)$-stable.  Keep $G,k,e_0$ fixed but
+allow the certified input coloring to vary.  Assume that for every
+positive-rung ETT $T'$ with arbitrary certified input coloring, maximum
+property, and rung number $s<n$, the following six assertions hold.
+\begin{enumerate}
+\item $V(T')$ is elementary under its generating coloring
+$\varphi'_s$.
+\item Under every proper $(T'_{s+1},D'_s,\varphi'_s)$-stable coloring
+leaving exactly $e_0$ uncolored, $T'_{s+1}$ is interchangeable for any
+two colors of which at least one is missing on it.
+\item At every PE slot, stability descends to the prefix before the
+support and to the ladder stage indexed by the support's first
+appearance; stored pairs at distinct PE slots with distinct supports
+and equal first-appearance indices are disjoint.
+\item At a terminal PE, the stored two-color component through its
+support meets the terminal ladder tree only at that support.
+\item Every nonminimum tree endpoint of a defective boundary color
+precedes each later PE support or SE extension vertex permitted by its
+first-appearance index.
+\item Every proper terminal stable coloring leaving exactly $e_0$
+uncolored is a $\varphi'_s\bmod T'_s$ coloring.
+\end{enumerate}
+If the displayed terminal tree $T$ can be built from $T_n$ by Tashkinov
+augmentation under $\sigma_n$, then:
+\begin{enumerate}
+\item $T$ carries an actual corresponding ETT certificate under
+$\sigma_n$ and has maximum property; and
+\item the same ordered stages and divider positions form a hierarchy
+under $\sigma_n$, with the same $R_n$ and $T_n\vee R_n$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+By \noderef{CombinedStableClosurePreserved}, the two colorings agree on
+every displayed identity of $T_n$ and $R_n$, and the same ordered
+$R_n$ is a closure of $T_n(v_n)$ under $\sigma_n$.  Hence the hierarchy
+base from \noderef{HierarchyBase} can be rebuilt under $\sigma_n$ using
+the same supporting position, closure, ordered-union witness, and starred
+base tree.
+
+The first conjunct of combined stability is the required
+$(T_n,D_n,\varphi_n)$-stable relation.  Apply \noderef{Td} to the stated
+lower-rung package, maximum property, properness, and unique-uncolored
+edge.  Current assertion (vi) follows: $\sigma_n$ is a
+$\varphi_n\bmod T_n$ coloring.
+
+The definition \noderef{ModColoring} applies to every eligible ordered
+tree strictly above $T_n$.  The initial-segment and strictness fields of
+\noderef{ExtendedTashkinovTree} make $T$ such a strict extension, while
+the displayed augmentation hypothesis is precisely the PE eligibility
+alternative.  Therefore an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate exists on the
+same terminal tree $T$ under $\sigma_n$.
+\noderef{MaximumPropertyTransport} transfers maximum property to that
+replacement ETT.
+
+Correspondence identifies all ladder trees and the terminal PE kind.
+Use the rebuilt hierarchy base and copy the old divider count, every
+ordered stage, and every divider position.  Each proper-prefix,
+divider-prefix, and core-inside-first proof is unchanged because it is a
+statement only about those same ordered tree-sequences.  This constructs
+a \noderef{TashkinovHierarchy} for the replacement ETT.  By construction
+the bases, stage families, and divider positions satisfy every equality
+in \noderef{SameHierarchyStages}, proving the second conclusion.
+\end{proof}

@@ -1,0 +1,33 @@
+\begin{lemma}[The next hierarchy edge uses an old reserved color]
+Let a hierarchy be good and let $1\le j\le q$.  The first edge added in
+$T_{n,j+1}-T_{n,j}$ has a color $\alpha$ for which there is an
+$\eta_g\in D_{n,j}$ such that
+\[
+             \alpha\in\Gamma^{j-1}_{g}
+             \quad\hbox{and}\quad
+             \alpha\notin\Gamma^{j}_{g}.
+\]
+\end{lemma}
+\begin{proof}
+Let $e$ be the first exact displayed edge after $T_{n,j}$.  The terminal
+constructor in \noderef{TashkinovSeriesStep} obtains the part above its
+seed by Tashkinov augmentation.  Since $j\ge1$, the stage $T_{n,j}$
+already contains that seed.  Hence \noderef{TashkinovAugmentation} says
+that $e$ is a boundary identity of $T_{n,j}$ and that its color
+$\alpha$ is missing on $T_{n,j}$.
+
+Clause (v) of \noderef{GoodHierarchy} makes $T_{n,j}$
+$(\bigcup_{\eta\in D_{n,j}}\Gamma^{j-1}_{\eta})^{-}$-closed.  Since
+$e$ is an $\alpha$-colored boundary edge and $\alpha$ is missing on the
+stage, minus-closedness forces
+$\alpha\in\Gamma^{j-1}_{g}$ for some $\eta_g\in D_{n,j}$.
+
+Because $\eta_g\in D_{n,j}$, it is not missing on $T_{n,j}$.  Its first
+missing vertex $v_{\eta_g}$ therefore lies strictly after that stage, or
+does not occur at all.  In either case the first new edge $e$ belongs to
+the exact segment
+$T_{n,j+1}(v_{\eta_g})-T_{n,j}$ used in clause (i).  That clause says
+that no color of $\Gamma^j_g$ is used on this segment.  As $e$ has color
+$\alpha$, we obtain $\alpha\notin\Gamma^j_g$, completing the second
+assertion in (5.9).
+\end{proof}

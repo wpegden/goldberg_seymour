@@ -12,6 +12,16 @@ import Tablet.HkuMissingStoredMonotone
 import Tablet.HkuParallelBoundaryStructure
 import Tablet.HkuTreeColorsControlled
 import Tablet.HkuUnsupportedVertexColors
+import Tablet.GoodHierarchyNewMissingClosed
+import Tablet.GoodHierarchyNextEdgeColor
+import Tablet.GoodHierarchyParallelCoreStrict
+import Tablet.GoodHierarchyReservedDisjoint
+import Tablet.HierarchyCounterexampleCoreProper
+import Tablet.HierarchyCounterexampleLess
+import Tablet.HierarchyLEMStable
+import Tablet.HierarchyNonparallelFirstEdge
+import Tablet.HierarchyStoredColorsCardinality
+import Tablet.HierarchyWeaklyStable
 import Tablet.LEM_extable
 import Tablet.MaximumProperty
 import Tablet.MaximumPropertyTransport
@@ -19,6 +29,8 @@ import Tablet.MaximumDegree
 import Tablet.MissingColorIncidenceEndpoint
 import Tablet.ModColoring
 import Tablet.ParallelExtensionUndoStable
+import Tablet.ParallelClosureUnionElementary
+import Tablet.ParallelCommonMissingClosed
 import Tablet.SameColorSeriesPreserved
 import Tablet.ScheideGlobalMaximumBoundaryFacts
 import Tablet.ScheideGlobalMaximumFourFree

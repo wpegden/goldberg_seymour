@@ -1,0 +1,13 @@
+\begin{definition}
+Write the terminal part above the last starred stage as
+\[
+ T=T_{n,q}^{*}\cup\{e_1,y_1,e_2,y_2,\ldots,e_p,y_p\}.
+\]
+The \emph{path number} $p(T)$ is the least
+$i\in\{1,\ldots,p\}$ for which
+$(y_i,e_{i+1},y_{i+1},\ldots,e_p,y_p)$ is a path in $G$; when $i=p$
+this is the one-vertex path.  In the Lean definition, being this path
+means that each subsequent exact edge identity $e_{r+1}$ has endpoint
+pair $\{y_r,y_{r+1}\}$.  The fallback value $p$ is extensionally the
+same one-vertex case and makes the finite minimum total.
+\end{definition}

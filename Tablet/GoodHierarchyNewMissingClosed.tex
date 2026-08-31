@@ -1,0 +1,45 @@
+\begin{lemma}[A color newly missing above a divider is closed]
+Let a hierarchy be good, let $1\leq j\leq q$, and assume that
+$V(T_{n,j})$ is elementary under $\varphi_n$.  If
+\[
+ \alpha\in
+ \overline{\varphi_n}\bigl(
+   V(T_{n,j})-V(T_{n,j-1}^{*})\bigr),
+\]
+then $\alpha$ is closed in $T_{n,j}$ under $\varphi_n$.
+\end{lemma}
+\begin{proof}
+Choose
+$v\in V(T_{n,j})-V(T_{n,j-1}^{*})$ at which $\alpha$ is missing.
+We first prove
+\[
+ \alpha\notin
+ \bigcup_{\eta\in D_{n,j}}\Gamma^{j-1}_\eta.                  \tag{1}
+\]
+Suppose instead that $\alpha\in\Gamma^{j-1}_\eta$ for some
+$\eta\in D_{n,j}$.  By
+\noderef{HierarchyStoredColorsAntitone}, $\eta\in D_{n,j-1}$, so this
+pair is among those governed by clause (i) of
+\noderef{GoodHierarchy} at stage $j-1$.  That clause and
+\noderef{HierarchyStageMissingColors} put $\alpha$ among the colors
+missing on $T_n$ if $j=1$, and among those missing on $T_{n,j-1}$ if
+$j>1$.  In both cases
+\noderef{TashkinovHierarchy} embeds the displayed earlier tree into
+$T_{n,j-1}^{*}$ and then into $T_{n,j}$.  Hence there is a vertex
+$u\in V(T_{n,j-1}^{*})$ at which $\alpha$ is missing.  The chosen
+vertex $v$ is outside that set, so $u\ne v$.  Both lie in
+$V(T_{n,j})$, contradicting the assumed
+\noderef{ColoredVertexSetElementary} property.  This proves (1).
+
+The witness $v$ also shows that
+$\alpha\in\overline{\varphi_n}(T_{n,j})$.  Clause (v), the
+minusClosed field of \noderef{GoodHierarchy}, says that $T_{n,j}$ is
+\[
+ \left(\bigcup_{\eta\in D_{n,j}}
+        \Gamma^{j-1}_\eta\right)^{-}\text{-closed}.
+\]
+By (1), $\alpha$ is a missing color outside the displayed reserved
+union.  Expanding \noderef{TreeColorSetMinusClosed} and
+\noderef{TreeColorSetClosed} therefore gives
+$\partial_{\varphi_n,\alpha}(T_{n,j})=\varnothing$, as required.
+\end{proof}

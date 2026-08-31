@@ -1,0 +1,33 @@
+\begin{definition}
+Let
+$T_n=T_{n,0}\subset T_{n,1}\subset\cdots\subset T_{n,q+1}=T$
+be a hierarchy under $\varphi_n$.  A \emph{good hierarchy} is a family
+of finite color sets $\Gamma^j_\eta$ indexed by
+$0\leq j\leq q$ and $\eta\in D_{n,j}$ such that every
+$\Gamma^j_\eta$ has exactly two colors and the following five clauses
+hold.
+\begin{enumerate}
+\item $\Gamma^j_\eta$ is contained in the colors missing on $T_n$ when
+$j=0$, and on $T_{n,j}$ when $j>0$, and is disjoint from the colors used
+on $T_{n,j+1}(v_\eta)-T_{n,j}^{*}$.
+\item At a fixed stage, the pairs reserved for two distinct colors of
+$D_{n,j}$ are disjoint.
+\item For every $1\leq j\leq q$ there is a unique
+$\eta_g\in D_{n,j}$ whose pair is refreshed: its new pair is missing on
+$V(T_{n,j})-V(T_{n,j-1}^{*})$, while every other pair indexed by
+$D_{n,j}$ agrees with its pair at stage $j-1$.
+\item If $\Theta_n=PE$, then $T_n\vee R_n$ is not
+$(\Gamma^0)^{-}$-closed and
+\[
+ |(\overline\varphi_n(T_n)\cap\overline\varphi_n(R_n))-\Gamma^0|
+ \geq4,
+ \quad
+ \Gamma^0=\bigcup_{\eta\in D_{n,0}}\Gamma^0_\eta.
+\]
+\item For $1\leq j\leq q$, the stage $T_{n,j}$ is
+$(\bigcup_{\eta\in D_{n,j}}\Gamma^{j-1}_\eta)^{-}$-closed.
+\end{enumerate}
+The family is total as Lean data, but its pair-size and hierarchy
+conditions are imposed exactly at the paper-relevant indices
+$\eta\in D_{n,j}$.
+\end{definition}

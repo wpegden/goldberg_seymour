@@ -1,0 +1,30 @@
+\begin{lemma}[Outside-chain stability at the hierarchy base]
+Let $T$ be the terminal ETT and let $\sigma_n$ be obtained from its
+generating coloring $\varphi_n$ by recoloring finitely many
+$(\alpha,\beta)$-chains fully contained in $G-V(T)$.  Then $\sigma_n$
+is proper, leaves exactly $e_0$ uncolored, is
+$(T,D_n,\varphi_n)$-stable, and is $(T,\varphi_n)$-invariant.
+Furthermore, if $\Theta_n=PE$, then $\sigma_n$ is
+$(T_n\oplus R_n,D_n,\varphi_n)$-stable.
+\end{lemma}
+\begin{proof}
+Apply \noderef{OutsideKempeRecoloringStable} to $T$ with control set
+$D_n$.  It gives properness, the unique uncolored identity,
+$(T,D_n,\varphi_n)$-stability, invariance, and equality of the two
+colorings on every edge incident with $T$.
+
+Assume now that $\Theta_n=PE$.  By \noderef{HierarchyBase} and
+\noderef{OrderedTreeUnion}, the vertex sets of both $T_n$ and $R_n$
+are contained in the starred base $T_n\vee R_n$.  The
+core-inside-first field of \noderef{TashkinovHierarchy}, followed by its
+chain of ordered stage inclusions and terminal-stage equality, embeds
+that starred base into $T$.  Thus every edge incident with either $T_n$
+or $R_n$ is incident with $T$, and every vertex of either tree is a
+vertex of $T$.
+
+The pointwise edge equality already obtained therefore supplies the edge
+clause of \noderef{StableColoring} for $T_n$ with control set $D_n$ and
+for $R_n$ with empty control set.  The vertexwise missing-color equality
+supplies both vertex clauses.  These are precisely the two conjuncts of
+\noderef{CombinedStableColoring}, proving the PE conclusion.
+\end{proof}

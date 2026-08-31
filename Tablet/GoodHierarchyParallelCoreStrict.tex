@@ -1,0 +1,25 @@
+\begin{lemma}[The first PE hierarchy stage properly extends the core]
+If a good hierarchy has terminal kind PE, then
+\[
+                     T_{n,1}\ne T_n\vee R_n.
+\]
+\end{lemma}
+\begin{proof}
+Write $C=T_n\vee R_n=T_{n,0}^{*}$ and suppose that $T_{n,1}=C$.
+Clause (iv) of \noderef{GoodHierarchy} says that $C$ is not
+$(\Gamma^0)^{-}$-closed.
+
+If the hierarchy has a divider, clause (v) at $j=1$ says that
+$T_{n,1}$ is
+$(\bigcup_{\eta\in D_{n,1}}\Gamma^0_\eta)^{-}$-closed.  Equality of
+$T_{n,1}$ and $C$ gives equality of their missing-color sets, so
+\noderef{HierarchyStoredColorsAt} gives $D_{n,1}=D_{n,0}$.
+The reserved unions are therefore equal, contradicting clause (iv).
+
+If there is no divider, $T_{n,1}$ is the terminal tree $T$.  The PE
+constructor in \noderef{TashkinovSeriesStep} makes $T$ a closure under
+$\varphi_n$, hence it is closed for every missing color.  Under the
+assumed equality the core $C$ is therefore, in particular,
+$(\Gamma^0)^{-}$-closed, again contradicting clause (iv).  Both cases
+are impossible, proving (5.8).
+\end{proof}

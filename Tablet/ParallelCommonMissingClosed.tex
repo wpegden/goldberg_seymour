@@ -1,0 +1,55 @@
+\begin{lemma}[Common missing colors are closed after a PE]
+Let the terminal step of a positive-rung ETT be a PE, let
+$\varphi_n$ be its terminal coloring, let $R_n$ be the chosen closure of
+$T_n(v_n)$, and let $T_n\vee R_n$ be their ordered union.  Assume
+explicitly that $V(T_n)$ is elementary under the pre-step coloring
+$\varphi_{n-1}$, as supplied by the lower-rung assertion (i).  Then
+\[
+ T_n\vee R_n\text{ is }
+ \bigl(\overline{\varphi_n}(T_n)\cap
+       \overline{\varphi_n}(R_n)\bigr)\text{-closed}.
+\]
+Equivalently, every color missing on both $T_n$ and $R_n$ has empty
+colored boundary at their ordered union.
+\end{lemma}
+\begin{proof}
+Put $X=V(T_n)$, $Y=V(R_n)$, and $U=V(T_n\vee R_n)$.
+The PE certificate in \noderef{TashkinovSeries} and
+\noderef{TashkinovSeriesStep} supplies the exact connecting edge
+$f_n$, colors $\delta_n,\gamma_n$, and support $v_n$ at the last
+positive slot.  The displayed pre-step elementarity hypothesis is
+therefore exactly the conditional hypothesis of
+\noderef{HkuParallelBoundaryStructure}.  That lemma gives two facts:
+every $\alpha\in\overline{\varphi_n}(T_n)$ with
+$\alpha\ne\delta_n$ has
+$\partial_{\varphi_n,\alpha}(T_n)=\varnothing$, and every exact
+$\delta_n$-boundary identity of $T_n$ is incident with a vertex strictly
+preceding $v_n$.
+
+By \noderef{HierarchyBase}, $R_n$ is a
+\noderef{TashkinovClosure} of the ordered prefix $T_n(v_n)$.
+Consequently $Y$ is closed under $\varphi_n$, and the augmentation
+sequence contains every vertex of that prefix.  The same definition and
+\noderef{OrderedTreeUnion} give $U=X\cup Y$ exactly.
+
+Fix
+$\alpha\in\overline{\varphi_n}(T_n)\cap
+\overline{\varphi_n}(R_n)$ and suppose that an exact edge identity $g$
+belongs to $\partial_{\varphi_n,\alpha}(U)$.  Its endpoint in $U$ lies
+in $X\cup Y$.  If it lies in $Y$, then its other endpoint, being outside
+$U$, is outside $Y$, so $g$ is an $\alpha$-boundary edge of $R_n$.
+This contradicts the closedness of $Y$ and the fact that $\alpha$ is
+missing on $R_n$.
+
+It remains that the endpoint in $U$ lies in $X$.  If
+$\alpha\ne\delta_n$, the first conclusion of
+\noderef{HkuParallelBoundaryStructure} makes this an impossible
+$\alpha$-boundary identity of $T_n$.  If $\alpha=\delta_n$, its second
+conclusion supplies an endpoint $w\prec_{T_n}v_n$ incident with $g$.
+The vertex $w$ belongs to the prefix $T_n(v_n)$ and hence to $Y$.
+Again the other endpoint of $g$ is outside $U$ and therefore outside
+$Y$, making $g$ a $\delta_n$-boundary identity of the closed tree
+$R_n$.  Since $\delta_n=\alpha$ is missing on $R_n$, this is the same
+contradiction.  Thus no such $g$ exists for any common missing color,
+which is precisely the asserted color-set closedness.
+\end{proof}

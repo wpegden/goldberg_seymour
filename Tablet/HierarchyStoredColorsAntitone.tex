@@ -1,0 +1,24 @@
+\begin{lemma}[Stored colors decrease along a hierarchy]
+For every $1\leq j\leq q$,
+\[
+ D_{n,j}\subseteq D_{n,j-1}.
+\]
+\end{lemma}
+\begin{proof}
+The ordered-prefix fields of \noderef{TashkinovHierarchy} say that
+$T_{n,j-1}^{*}$ is an initial segment of $T_{n,j}^{*}$.  For $j=1$,
+this is the separately recorded inclusion of the starred base in
+$T_{n,1}$; for $j>1$ it is one of the consecutive stage inclusions.
+Hence every vertex of $T_{n,j-1}^{*}$ is also a vertex of
+$T_{n,j}^{*}$, and the union definition in
+\noderef{TreeMissingColors} gives
+\[
+ \overline{\varphi_n}(T_{n,j-1}^{*})
+ \subseteq
+ \overline{\varphi_n}(T_{n,j}^{*}).
+\]
+Subtracting these two nested missing-color sets from the same terminal
+stored-color set $D_n$ reverses the inclusion.  Expanding
+\noderef{HierarchyStoredColorsAt} yields exactly
+$D_{n,j}\subseteq D_{n,j-1}$.
+\end{proof}

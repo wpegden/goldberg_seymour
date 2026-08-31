@@ -1,0 +1,16 @@
+\begin{lemma}[Stagewise stored-color bound]
+For every hierarchy stage $0\leq j\leq q$,
+\[
+ |D_{n,j}|\leq n.
+\]
+In particular, passing from $D_n$ to a starred hierarchy stage does not
+increase the number of stored colors.
+\end{lemma}
+\begin{proof}
+By \noderef{HierarchyStoredColorsAt},
+$D_{n,j}=D_n-\overline{\varphi_n}(T_{n,j}^{*})$, and hence
+$D_{n,j}\subseteq D_n$.  Taking cardinalities gives
+$|D_{n,j}|\leq |D_n|$.  The terminal instance of
+\noderef{TashkinovStoredColorsCardinality} gives $|D_n|\leq n$.
+Combining the two inequalities proves the claim.
+\end{proof}

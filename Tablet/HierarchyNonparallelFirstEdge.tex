@@ -1,0 +1,17 @@
+\begin{lemma}[The first non-PE hierarchy edge]
+Suppose the terminal extension kind is SE or RE and its exact connecting
+set is $F_n=\{f_n\}$.  Then the first displayed edge of
+$T_{n,1}-T_n$ is the individual edge identity $f_n$.
+\end{lemma}
+\begin{proof}
+The SE and RE constructors in \noderef{TashkinovSeriesStep} first form
+the exact one-edge extension $T_n+f_n$ and only then run Tashkinov
+augmentation to obtain the terminal tree.  Thus
+\noderef{ExtendedTashkinovTree} identifies the entry of the terminal
+display at index $|T_n|$ with $f_n$.  The base-stage and strictness
+fields of \noderef{TashkinovHierarchy} say that $T_n$ is a strict
+ordered prefix of $T_{n,1}$, while all hierarchy stages are ordered
+prefixes of the same terminal display.  Therefore $T_{n,1}$ contains
+that next entry with the same exact identity $f_n$.  This is the first
+assertion in (5.9), and it does not identify parallel edges.
+\end{proof}

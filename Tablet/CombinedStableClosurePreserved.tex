@@ -1,0 +1,69 @@
+\begin{lemma}[Combined stability preserves the PE closure]
+Let the terminal step be a PE, let $R_n$ be the chosen
+$\varphi_n$-closure of $T_n(v_n)$, and let $\sigma_n$ and
+$\varphi_n$ be proper colorings leaving exactly $e_0$ uncolored.
+If $\sigma_n$ is
+$(T_n\oplus R_n,D_n,\varphi_n)$-stable, then
+\[
+ \sigma_n(f)=\varphi_n(f)
+\]
+for every displayed edge identity $f$ of $T_n$ and of $R_n$.
+Moreover, the very same ordered tree $R_n$ is a closure of
+$T_n(v_n)$ under $\sigma_n$.
+\end{lemma}
+\begin{proof}
+Write $T_n$ for the last ladder tree and $A=T_n(v_n)$ for the supporting
+prefix recorded by \noderef{HierarchyBase}.  The first conjunct of
+\noderef{CombinedStableColoring} is
+$(T_n,D_n,\varphi_n)$-stability.  Choose the penultimate finite series
+index $q=n-1$; positivity of the rung number makes this index valid and
+$q+1$ is the terminal slot.  Applying
+\noderef{HkuTreeColorsControlled} at $q$, with the properness and
+unique-uncolored-edge hypotheses on $\sigma_n$, gives
+\[
+ \sigma_n(f)=\varphi_n(f)\qquad(f\in E(T_n))
+                                                               \tag{1}
+\]
+entry by entry, including the root identity $e_0$.
+
+The second conjunct of \noderef{CombinedStableColoring} says that
+$\sigma_n$ is $(R_n,\varnothing,\varphi_n)$-stable.  By symmetry of
+stability in \noderef{sc2}, $\varphi_n$ is also
+$(R_n,\varnothing,\sigma_n)$-stable.  The closure certificate in
+\noderef{HierarchyBase} expands by \noderef{TashkinovClosure} into a
+\noderef{TashkinovAugmentationSequence}
+\[
+ A=A_0,A_1,\ldots,A_m=R_n
+                                                               \tag{2}
+\]
+under $\varphi_n$, followed by closedness of $R_n$.
+
+We induct along (2).  All entries already in $A$ are entries of $T_n$,
+so (1) fixes them.  At an augmentation $A_i\to A_{i+1}$,
+\noderef{TashkinovAugmentation} says that the newly displayed exact edge
+$f$ has a color $c$ missing on $A_i$.  Every vertex of $A_i$ remains a
+vertex of $R_n$ by the ordered-initial-segment clauses, so
+$c\in\overline{\varphi_n}(R_n)$.  The new edge is incident with
+$R_n$ and the $R_n$-stable edge clause therefore gives
+$\sigma_n(f)=\varphi_n(f)=c$.  This proves inductively that every
+displayed identity of $R_n$ is fixed.
+
+The missing-color clause of stability gives
+$\overline{\sigma_n}(v)=\overline{\varphi_n}(v)$ for every
+$v\in V(R_n)$.  Hence at every step of (2), the same color $c$ is also
+missing on $A_i$ under $\sigma_n$.  Together with the edge equality just
+proved, each $\varphi_n$-augmentation in (2) is therefore the identical
+$\sigma_n$-augmentation.  Thus (2) is a
+$\sigma_n$-augmentation sequence from $A$ to $R_n$.
+
+Finally suppose that a boundary identity $g$ of $R_n$ has
+$\sigma_n(g)=c$ for a color missing on $R_n$ under $\sigma_n$.
+The symmetric stable relation from \noderef{sc2} applies because $c$ is
+in the $\sigma_n$ tree-missing set, and gives
+$\varphi_n(g)=\sigma_n(g)=c$.  Vertexwise equality of missing sets says
+that $c$ is also missing on $R_n$ under $\varphi_n$, contradicting the
+closedness at the end of the original closure certificate.  Hence
+$R_n$ is closed under $\sigma_n$.  Combined with the transported
+augmentation sequence, this is exactly
+\noderef{TashkinovClosure} under $\sigma_n$.
+\end{proof}

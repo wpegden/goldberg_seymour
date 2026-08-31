@@ -1,0 +1,86 @@
+\begin{lemma}[\textup{LEM\_Stable}: recoloring chains outside a good hierarchy]
+Let $T$ be a positive-rung ETT satisfying maximum property and carrying a
+good hierarchy under its generating coloring $\varphi_n$.  Let
+$\sigma_n$ be obtained by recoloring finitely many
+$(\alpha,\beta)$-chains fully contained in $G-V(T)$.  Keep $G,k,e_0$
+fixed but allow the certified input coloring to vary.  Assume that for
+every positive-rung ETT $T'$ with arbitrary certified input coloring,
+maximum property, and rung number $s<n$, the following six assertions
+hold.
+\begin{enumerate}
+\item $V(T')$ is elementary under its generating coloring
+$\varphi'_s$.
+\item Under every proper $(T'_{s+1},D'_s,\varphi'_s)$-stable coloring
+leaving exactly $e_0$ uncolored, $T'_{s+1}$ is interchangeable for any
+two colors of which at least one is missing on it.
+\item At every PE slot, stability descends to the prefix before the
+support and to the ladder stage indexed by the support's first
+appearance; stored pairs at distinct PE slots with distinct supports
+and equal first-appearance indices are disjoint.
+\item At a terminal PE, the stored two-color component through its
+support meets the terminal ladder tree only at that support.
+\item Every nonminimum tree endpoint of a defective boundary color
+precedes each later PE support or SE extension vertex permitted by its
+first-appearance index.
+\item Every proper terminal stable coloring leaving exactly $e_0$
+uncolored is a $\varphi'_s\bmod T'_s$ coloring.
+\end{enumerate}
+Then:
+\begin{enumerate}
+\item $\sigma_n$ is proper, leaves exactly $e_0$ uncolored, is
+$(T,D_n,\varphi_n)$-stable, and is $(T,\varphi_n)$-invariant;
+\item the same terminal tree carries a corresponding ETT certificate
+under $\sigma_n$ and satisfies maximum property;
+\item the same ordered stages, dividers, and Gamma sets form a good
+hierarchy under $\sigma_n$; and
+\item if $T$ is
+$(\bigcup_{\eta\in D_{n,q+1}}\Gamma^q_\eta)^{-}$-closed under
+$\varphi_n$, it is so under $\sigma_n$.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Apply \noderef{HierarchyOutsideKempeStable}.  It gives every assertion in
+(i), and in the PE case it also gives
+$(T_n\oplus R_n,D_n,\varphi_n)$-stability.  Since every edge incident
+with $T$ and every missing-color set on $T$ is fixed, the original
+terminal construction from $T_n$ remains the identical Tashkinov
+augmentation construction under $\sigma_n$: in a PE the seed is $T_n$,
+and in an SE or RE the same individual connecting edge is adjoined before
+the same augmentation tail.  Restricting the stable relation from $T$
+to $T_n$ gives $(T_n,D_n,\varphi_n)$-stability.  Apply \noderef{Td} to
+the lower-rung package, maximum property, properness, and this restricted
+stability.  It gives that $\sigma_n$ is a
+$\varphi_n\bmod T_n$ coloring.  The eligibility alternative in
+\noderef{ModColoring} therefore applies to the displayed tree $T$.
+It supplies an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate under
+$\sigma_n$.  Now \noderef{MaximumPropertyTransport}, using the given
+maximum property, proves (ii).
+
+We next transport the hierarchy base.  In the PE case, the hypotheses
+just established meet \noderef{HierarchySplitter}; it uses
+\noderef{CombinedStableClosurePreserved} to retain the same ordered
+$R_n$, the same union $T_n\vee R_n$, and all stages and dividers.  In the
+non-PE cases the starred base is $T_n$ by \noderef{HierarchyBase}, so no
+closure transport is required.  The corresponding-ETT certificate
+identifies every ladder tree, raw stored set, extension kind, and support
+datum.  Copying all stages and divider positions therefore yields a
+hierarchy for the corresponding ETT satisfying
+\noderef{SameHierarchyStages}.
+
+Apply \noderef{OutsideKempeGoodHierarchy} to these two corresponding
+presentations.  Its hypotheses have just been verified: the stage data
+are identical, the raw stored sets agree by correspondence, and the
+recoloring is outside $T$.  It supplies a good hierarchy under
+$\sigma_n$ with the same Gamma family, proving (iii).
+
+For (iv), set
+$C=\bigcup_{\eta\in D_{n,q+1}}\Gamma^q_\eta$, where
+$D_{n,q+1}$ is \noderef{HierarchyTerminalStoredColors}.  The two
+colorings agree on every edge incident with $T$ and have identical
+missing-color sets at every vertex of $T$.  Hence
+$\overline{\sigma_n}(T)-C=\overline{\varphi_n}(T)-C$, and for each color
+in this common set the two exact colored boundary-edge sets are equal.
+Expanding \noderef{TreeColorSetMinusClosed} transports the assumed
+minus-closedness from $\varphi_n$ to $\sigma_n$, completing the proof.
+\end{proof}

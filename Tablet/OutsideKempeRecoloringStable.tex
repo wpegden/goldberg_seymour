@@ -1,0 +1,55 @@
+\begin{lemma}[Outside Kempe recolorings are stable]
+Let $\varphi$ be a proper partial $k$-edge-coloring leaving exactly
+$e_0$ uncolored.  If $\sigma$ is obtained by recoloring finitely many
+full $(\alpha,\beta)$-chains contained in $G-V(T)$, then $\sigma$ is
+proper, leaves exactly $e_0$ uncolored, and, for every control set
+$C\subseteq[k]$, is $(T,C,\varphi)$-stable.  It is also
+$(T,\varphi)$-invariant, and every exact edge identity incident with
+$T$ has the same value under $\sigma$ and $\varphi$.
+\end{lemma}
+\begin{proof}
+Let $\mathcal K$ be the selected family of full components from
+\noderef{OutsideKempeRecoloring}.  We first prove that no selected edge
+identity is incident with $T$.  If a selected edge-node $f$ were
+incident with $v\in V(T)$, then the incidence edge in
+\noderef{TwoColorIncidenceGraph} would join the vertex-node $v$ to
+$f$.  The connected-component definition
+\noderef{TwoColorComponent} would put $v$ in the same selected
+component, contrary to the requirement that every vertex-node of each
+selected component lies outside $V(T)$.  Therefore
+\[
+ \sigma(f)=\varphi(f)
+ \quad\text{for every edge identity incident with }T.          \tag{1}
+\]
+
+Swapping two colors on a full two-color component preserves properness.
+Indeed, at a vertex in a selected component, the incident
+$\alpha$- and $\beta$-edges are exchanged together; at a vertex outside
+that component no incident value changes.  Distinct
+$(\alpha,\beta)$-components are vertex-disjoint by the connected
+component relation in \noderef{TwoColorComponent}, so carrying out the
+finitely many selected swaps produces no interaction between them.
+All colors other than $\alpha,\beta$ are fixed.  Thus any equality of
+new nonempty colors on adjacent distinct edge identities would pull back
+to the same equality under $\varphi$, contradicting
+\noderef{IsProperEdgeColoring}.  Hence $\sigma$ is proper.
+
+The component swap fixes the value $\mathsf{none}$ and exchanges only
+the two displayed nonempty values.  Consequently an edge is uncolored
+under $\sigma$ exactly when it is uncolored under $\varphi$.
+\noderef{IsOneEdgeUncolored} therefore shows that precisely $e_0$
+remains uncolored.
+
+Equation (1) holds for every edge incident with every $v\in V(T)$.
+The incidence-witness definition of present colors, and then its
+complement \noderef{MissingColors}, give
+\[
+ \overline\sigma(v)=\overline\varphi(v)\qquad(v\in V(T)).       \tag{2}
+\]
+For an arbitrary control set $C$, equation (1) is stronger than the
+controlled edge clause of \noderef{StableColoring}, while (2) is its
+vertex clause.  Thus $\sigma$ is $(T,C,\varphi)$-stable.
+The displayed nonroot edges of $T$ are incident with $T$, so (1), along
+with (2), is exactly \noderef{TreeColoringInvariant}.  This proves all
+five conclusions.
+\end{proof}

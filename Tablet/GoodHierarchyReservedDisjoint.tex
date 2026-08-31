@@ -1,0 +1,41 @@
+\begin{lemma}[Reserved colors at a hierarchy stage]
+Let a hierarchy be good.  For every $0\leq j\leq q$ and every
+$\eta\in D_{n,j}$,
+\[
+ \Gamma^j_\eta\subseteq
+ \overline{\varphi_n}(T_{n,j}^{*}).
+\]
+Consequently
+\[
+ \Gamma^j\cap D_{n,j}=\varnothing,\qquad
+ \Gamma^j=\bigcup_{\eta\in D_{n,j}}\Gamma^j_\eta.
+\]
+\end{lemma}
+\begin{proof}
+Fix $j$ and $\eta\in D_{n,j}$.  Clause (i), namely the avoidance field
+of \noderef{GoodHierarchy}, puts $\Gamma^j_\eta$ in the relevant
+stage-missing set of \noderef{HierarchyStageMissingColors}.  For
+$j>0$ that tree is exactly $T_{n,j}^{*}=T_{n,j}$.
+
+For $j=0$, clause (i) gives
+$\Gamma^0_\eta\subseteq\overline{\varphi_n}(T_n)$.  If the terminal
+kind is not PE, \noderef{HierarchyBase} identifies
+$T_{n,0}^{*}$ with $T_n$.  If it is PE, the same definition supplies
+an \noderef{OrderedTreeUnion} witness whose left-segment field embeds
+$T_n$ into $T_n\vee R_n=T_{n,0}^{*}$.  In either case every vertex of
+$T_n$ belongs to the starred base.  The union definition
+\noderef{TreeMissingColors} therefore gives
+\[
+ \overline{\varphi_n}(T_n)
+ \subseteq\overline{\varphi_n}(T_{n,0}^{*}),
+\]
+proving the first assertion also at $j=0$.
+
+By \noderef{HierarchyStoredColorsAt},
+$D_{n,j}=D_n-\overline{\varphi_n}(T_{n,j}^{*})$.  Thus no color in
+$D_{n,j}$ belongs to the starred-stage missing set.  Every member of
+every $\Gamma^j_\eta$ does belong to that missing set by the first
+assertion, so it cannot lie in $D_{n,j}$.  Taking the union over
+$\eta\in D_{n,j}$ gives
+$\Gamma^j\cap D_{n,j}=\varnothing$.
+\end{proof}
