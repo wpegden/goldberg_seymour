@@ -1,10 +1,19 @@
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
 import Tablet.CombinedStableColoring
 import Tablet.HierarchyBase
 import Tablet.HkuTreeColorsControlled
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
+import Tablet.StableColoring
+import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovClosure
+import Tablet.TreeIncidentEdge
+import Tablet.TreeMissingColors
+import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
 import Tablet.sc2
 
 -- [TABLET NODE: CombinedStableClosurePreserved]
