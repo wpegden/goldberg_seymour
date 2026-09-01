@@ -28,28 +28,70 @@ preceding $v_n$.
 
 By \noderef{HierarchyBase}, $R_n$ is a
 \noderef{TashkinovClosure} of the ordered prefix $T_n(v_n)$.
-Consequently $Y$ is closed under $\varphi_n$, and the augmentation
-sequence contains every vertex of that prefix.  The same definition and
-\noderef{OrderedTreeUnion} give $U=X\cup Y$ exactly.
+Thus $Y$ is closed under $\varphi_n$.  Moreover, by
+\noderef{TashkinovAugmentationSequence}, $R_n$ is obtained from
+$T_n(v_n)$ through a finite, possibly empty, chain of steps from
+\noderef{TashkinovAugmentation}.  At every such step the preceding tree
+is a \noderef{TreeSequenceInitialSegment} of the succeeding tree.
+Induction along the chain, including the empty-chain case, therefore makes
+$T_n(v_n)$ an ordered initial segment of $R_n$.  Unpacking
+\noderef{TreeSequenceInitialSegment} entry by entry and then using
+\noderef{TreeSequenceVertexSet} gives
+\[
+             V(T_n(v_n))\subseteq Y.                              \tag{1}
+\]
+The parallel clause of \noderef{HierarchyBase}, together with
+\noderef{OrderedTreeUnion}, identifies the hierarchy core with the exact
+ordered union and gives
+\[
+             U=X\cup Y.                                           \tag{2}
+\]
 
 Fix
 $\alpha\in\overline{\varphi_n}(T_n)\cap
-\overline{\varphi_n}(R_n)$ and suppose that an exact edge identity $g$
-belongs to $\partial_{\varphi_n,\alpha}(U)$.  Its endpoint in $U$ lies
-in $X\cup Y$.  If it lies in $Y$, then its other endpoint, being outside
-$U$, is outside $Y$, so $g$ is an $\alpha$-boundary edge of $R_n$.
-This contradicts the closedness of $Y$ and the fact that $\alpha$ is
-missing on $R_n$.
+\overline{\varphi_n}(R_n)$.  By \noderef{TreeMissingColors}, there is
+a vertex $y\in Y$ at which $\alpha$ is missing.  Suppose that an exact
+edge identity $g$ belongs to
+$\partial_{\varphi_n,\alpha}(U)$.  By
+\noderef{BoundaryColorEdges}, $g$ has color $\alpha$ and belongs to the
+uncolored boundary of $U$.  By \noderef{BoundaryEdges}, its two ends may
+be named $p$ and $q$ so that $p\in U$ and $q\notin U$.  Equation (2)
+gives $p\in X\cup Y$.
 
-It remains that the endpoint in $U$ lies in $X$.  If
-$\alpha\ne\delta_n$, the first conclusion of
-\noderef{HkuParallelBoundaryStructure} makes this an impossible
-$\alpha$-boundary identity of $T_n$.  If $\alpha=\delta_n$, its second
-conclusion supplies an endpoint $w\prec_{T_n}v_n$ incident with $g$.
-The vertex $w$ belongs to the prefix $T_n(v_n)$ and hence to $Y$.
-Again the other endpoint of $g$ is outside $U$ and therefore outside
-$Y$, making $g$ a $\delta_n$-boundary identity of the closed tree
-$R_n$.  Since $\delta_n=\alpha$ is missing on $R_n$, this is the same
-contradiction.  Thus no such $g$ exists for any common missing color,
-which is precisely the asserted color-set closedness.
+First suppose $p\in Y$.  Since $Y\subseteq U$, we have $q\notin Y$.
+Thus \noderef{BoundaryEdges} puts the same exact identity $g$ in the
+boundary of $Y$, and its unchanged color $\alpha$ lets
+\noderef{BoundaryColorEdges} put it in
+$\partial_{\varphi_n,\alpha}(Y)$.  But $Y$ is closed, while $\alpha$
+is missing at $y\in Y$; this is forbidden by
+\noderef{ColoredVertexSetClosed}.  Hence $p\notin Y$, and consequently
+$p\in X$ by (2).
+
+Because $X\subseteq U$, the relation $q\notin U$ implies $q\notin X$.
+The inside/outside characterization in \noderef{BoundaryEdges} therefore
+puts $g$ in the boundary of $X$, and \noderef{BoundaryColorEdges}
+upgrades this to $g\in\partial_{\varphi_n,\alpha}(X)$.
+
+If $\alpha\ne\delta_n$, this contradicts the empty-boundary conclusion
+of \noderef{HkuParallelBoundaryStructure}.  Suppose instead that
+$\alpha=\delta_n$.  The other conclusion of that lemma supplies a tree
+vertex $w\prec_{T_n}v_n$ incident with the exact identity $g$.
+By the positional meaning of $\prec_{T_n}$ in
+\noderef{TreeVertexOrder} and the definition of the prefix in
+\noderef{TreeSequencePrefix}, the entry for $w$ occurs strictly before
+the entry for $v_n$, so $w\in V(T_n(v_n))$.  Equation (1) gives
+$w\in Y$.  The other endpoint of $g$ is $q$: indeed, $w\in X$ whereas
+$q\notin X$, so the endpoint of $g$ lying in $X$ is the incident vertex
+$w$.  Since $q\notin U$ also gives $q\notin Y$,
+\noderef{BoundaryEdges} places $g$ in the boundary of $Y$, and
+\noderef{BoundaryColorEdges} places it in
+$\partial_{\varphi_n,\delta_n}(Y)$.  This again contradicts
+\noderef{ColoredVertexSetClosed}, because $Y$ is closed and
+$\delta_n=\alpha$ is missing at $y\in Y$.
+
+We have ruled out every exact identity in
+$\partial_{\varphi_n,\alpha}(U)$ for an arbitrary common missing color
+$\alpha$.  Applying the definition \noderef{TreeColorSetClosed} to all
+$\alpha\in\overline{\varphi_n}(T_n)\cap
+\overline{\varphi_n}(R_n)$ proves the asserted color-set closedness.
 \end{proof}

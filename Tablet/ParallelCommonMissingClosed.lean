@@ -1,8 +1,21 @@
+import Tablet.BoundaryColorEdges
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.HierarchyBase
 import Tablet.HkuParallelBoundaryStructure
+import Tablet.OrderedTreeUnion
+import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovClosure
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
 import Tablet.TreeColorSetClosed
 import Tablet.TreeMissingColors
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
+import Tablet.TreeVertexOrder
 
 -- [TABLET NODE: ParallelCommonMissingClosed]
 theorem ParallelCommonMissingClosed {V E : Type*}
