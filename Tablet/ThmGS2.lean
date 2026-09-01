@@ -1,4 +1,5 @@
 import Tablet.Critical
+import Tablet.ChangeLemma
 import Tablet.IncidentCoreReduction
 import Tablet.Basic2
 import Tablet.DefectiveVertex
