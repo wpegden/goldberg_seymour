@@ -1,4 +1,24 @@
+import Tablet.BoundaryColorEdges
+import Tablet.BoundaryEdges
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
+import Tablet.HierarchyFirstMissingPosition
+import Tablet.HierarchySegmentColors
+import Tablet.HierarchyStarredStage
+import Tablet.HierarchyStoredColorsAt
+import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovClosure
+import Tablet.TashkinovHierarchy
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
+import Tablet.TreeColorSetClosed
+import Tablet.TreeColorSetMinusClosed
+import Tablet.TreeMissingColors
+import Tablet.TreeSequence
+import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: GoodHierarchyNextEdgeColor]
 theorem GoodHierarchyNextEdgeColor {V E : Type*}
