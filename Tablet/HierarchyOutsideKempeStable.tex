@@ -1,30 +1,91 @@
 \begin{lemma}[Outside-chain stability at the hierarchy base]
-Let $T$ be the terminal ETT and let $\sigma_n$ be obtained from its
-generating coloring $\varphi_n$ by recoloring finitely many
-$(\alpha,\beta)$-chains fully contained in $G-V(T)$.  Then $\sigma_n$
-is proper, leaves exactly $e_0$ uncolored, is
+Fix a finite loopless multigraph $G$, a palette $[k]$, a distinguished
+edge $e_0$, and an input partial $k$-edge-coloring.  Let
+$(T,\varphi_n)$ carry an \emph{ExtendedTashkinovTree} certificate from
+that input coloring, and write $T_n$ and $D_n$ for the terminal ladder
+tree and its stored-color set.  Let
+$\mathcal B$ be a \emph{HierarchyBase} for this certificate under
+$\varphi_n$, write
+\[
+ T_{n,0}^{*}=\mathcal B.\mathit{core}
+ \quad\hbox{and}\quad
+ R_n=\mathcal B.\mathit{closure},
+\]
+and suppose that $T$ carries a \emph{TashkinovHierarchy} based at
+$\mathcal B$.  Assume that $\varphi_n$ is proper and leaves exactly
+$e_0$ uncolored.  If $\sigma_n$ is obtained from $\varphi_n$ by an
+outside $(\alpha,\beta)$ Kempe recoloring relative to $T$, then
+$\sigma_n$ is proper, leaves exactly $e_0$ uncolored, is
 $(T,D_n,\varphi_n)$-stable, and is $(T,\varphi_n)$-invariant.
 Furthermore, if $\Theta_n=PE$, then $\sigma_n$ is
 $(T_n\oplus R_n,D_n,\varphi_n)$-stable.
 \end{lemma}
 \begin{proof}
-Apply \noderef{OutsideKempeRecoloringStable} to $T$ with control set
-$D_n$.  It gives properness, the unique uncolored identity,
-$(T,D_n,\varphi_n)$-stability, invariance, and equality of the two
-colorings on every edge incident with $T$.
+The hypotheses of \noderef{OutsideKempeRecoloringStable} are available
+verbatim: $\varphi_n$ is proper, it leaves exactly $e_0$ uncolored, and
+the asserted change from $\varphi_n$ to $\sigma_n$ is an outside
+$(\alpha,\beta)$ recoloring relative to $T$.  Apply that lemma with
+control set $C=D_n$.  Its first four conclusions say respectively that
+$\sigma_n$ is proper, leaves exactly $e_0$ uncolored, is
+$(T,D_n,\varphi_n)$-stable, and is $(T,\varphi_n)$-invariant.  Retain
+also its last conclusion
+\[
+ \sigma_n(f)=\varphi_n(f)
+ \quad\text{for every edge identity $f$ incident with $T$.}       \tag{1}
+\]
+This proves all conclusions before the final implication.
 
-Assume now that $\Theta_n=PE$.  By \noderef{HierarchyBase} and
-\noderef{OrderedTreeUnion}, the vertex sets of both $T_n$ and $R_n$
-are contained in the starred base $T_n\vee R_n$.  The
-core-inside-first field of \noderef{TashkinovHierarchy}, followed by its
-chain of ordered stage inclusions and terminal-stage equality, embeds
-that starred base into $T$.  Thus every edge incident with either $T_n$
-or $R_n$ is incident with $T$, and every vertex of either tree is a
-vertex of $T$.
+Assume henceforth that $\Theta_n=PE$.  The parallel clause in
+\noderef{HierarchyBase} supplies, in particular, a certificate that
+$T_{n,0}^{*}$ is the ordered tree union of $T_n$ and $R_n$.  By
+\noderef{OrderedTreeUnion}, this certificate gives
+\[
+ T_n\text{ is an ordered initial segment of }T_{n,0}^{*},
+ \qquad
+ V(T_{n,0}^{*})=V(T_n)\cup V(R_n).                    \tag{2}
+\]
+The core-inside-first clause of \noderef{TashkinovHierarchy} says that
+$T_{n,0}^{*}$ is an ordered initial segment of the first hierarchy
+stage.  Every subsequent stage is an ordered initial segment of the
+next one, and the terminal-stage clause identifies the last stage with
+$T$.
 
-The pointwise edge equality already obtained therefore supplies the edge
-clause of \noderef{StableColoring} for $T_n$ with control set $D_n$ and
-for $R_n$ with empty control set.  The vertexwise missing-color equality
-supplies both vertex clauses.  These are precisely the two conjuncts of
-\noderef{CombinedStableColoring}, proving the PE conclusion.
+We spell out the consequence of this chain.  By
+\noderef{TreeSequenceInitialSegment}, each one-step relation consists of
+a length inequality together with equality of the vertex and edge entry
+at every carried index.  Composing two consecutive steps preserves the
+length inequality by transitivity of the numerical order and preserves
+each carried entry by transitivity of equality.  Induction over the
+finite hierarchy-stage chain therefore shows that
+$T_{n,0}^{*}$ is an ordered initial segment of $T$.  In particular, if
+$x\in V(T_{n,0}^{*})$, then the description of vertex sets in
+\noderef{TreeSequenceVertexSet} writes $x$ as a vertex entry of
+$T_{n,0}^{*}$; the initial-segment equality at the same index writes it
+as a vertex entry of $T$.  Consequently
+\[
+ V(T_{n,0}^{*})\subseteq V(T).                         \tag{3}
+\]
+Combining (2) and (3) gives
+\[
+ V(T_n)\subseteq V(T),\qquad V(R_n)\subseteq V(T).      \tag{4}
+\]
+
+Now let $f$ be incident with $T_n$.  Unfolding
+\noderef{TreeIncidentEdge}, there is a vertex $v\in V(T_n)$ incident
+with $f$.  The first containment in (4) puts $v$ in $V(T)$, so $f$ is
+incident with $T$.  The same argument using the second containment
+shows that every edge incident with $R_n$ is incident with $T$.  Thus
+(1) restricts to every edge incident with either $T_n$ or $R_n$.
+
+It remains to check the two stable-coloring assertions.  For $T_n$ and
+control set $D_n$, the edge clause of \noderef{StableColoring} follows
+from (1), even without using its color-side condition.  If
+$v\in V(T_n)$, then (4) puts $v$ in $V(T)$, and the vertex clause of the
+already obtained $(T,D_n,\varphi_n)$-stability gives
+$\overline{\sigma_n}(v)=\overline{\varphi_n}(v)$.  Hence $\sigma_n$ is
+$(T_n,D_n,\varphi_n)$-stable.  The identical argument for $R_n$, with
+empty control set, proves that $\sigma_n$ is
+$(R_n,\varnothing,\varphi_n)$-stable.  These two assertions are exactly
+the two conjuncts in \noderef{CombinedStableColoring}; therefore
+$\sigma_n$ is $(T_n\oplus R_n,D_n,\varphi_n)$-stable, as required.
 \end{proof}

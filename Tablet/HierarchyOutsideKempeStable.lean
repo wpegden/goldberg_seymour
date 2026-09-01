@@ -4,6 +4,9 @@ import Tablet.OutsideKempeRecoloringStable
 import Tablet.TashkinovExtensionKind
 import Tablet.TashkinovStoredColors
 import Tablet.TashkinovHierarchy
+import Tablet.TreeIncidentEdge
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: HierarchyOutsideKempeStable]
 theorem HierarchyOutsideKempeStable {V E : Type*}
