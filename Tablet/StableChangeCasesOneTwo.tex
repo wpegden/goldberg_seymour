@@ -1,0 +1,472 @@
+\begin{lemma}[Stable change, cases 1 and 2]
+Fix a finite loopless multigraph with its exact edge set, a palette of
+$k$ colors, and a distinguished edge $e_0$.  Let $(T,\varphi_n)$ be a
+positive-rung extended Tashkinov tree.  Let $\mathcal B$ be a hierarchy
+base and let
+\[
+ T_n=T_{n,0}\subset T_{n,1}\subset\cdots\subset
+ T_{n,q}\subset T_{n,q+1}=T
+\]
+be a good hierarchy $H$ under $\varphi_n$.  Put
+\[
+ A=T_{n,q}^{*}=\noderef{HierarchyStarredStage}(H,q),\qquad
+ D_n=\noderef{TashkinovStoredColors}(\mathcal E,q_n),
+ \qquad D_{n,q}=\noderef{HierarchyStoredColorsAt}(H,q).
+\]
+Assume that $T$ has maximum property, that $V(T)$ is not elementary,
+that $\varphi_n$ is proper and leaves exactly $e_0$ uncolored, and that
+these data form a \noderef{HierarchyCounterexample} $C$.
+
+Assume, uniformly for every positive-rung maximum ETT on the same graph,
+palette, and distinguished edge, with arbitrary certified input and
+generating colorings and with rung number smaller than that of $T$, the
+six lower-rung assertions of the technical theorem: elementarity,
+terminal interchangeability, the two PE stability and stored-pair
+assertions, the terminal PE component assertion, the defective-endpoint
+order assertion, and the mod-coloring assertion.  Assume also that every
+same-rung maximum ETT with a good hierarchy having fewer than $q$
+dividers is elementary.  Assume that $C$ is lexicographically minimal
+among hierarchy counterexamples with exactly $q$ dividers, in the sense
+of \noderef{HierarchyCounterexampleLess} and
+\noderef{HierarchyCounterexampleMeasure}, and assume
+\[
+                 2n+11\leq |\overline\varphi_n(T_n)|.          \tag{L}
+\]
+
+Put $p=\noderef{HierarchyPathNumber}(H)$ and
+\[
+ T(y_{p-1})=T\big|_{\min\{|A|+p-1,|T|\}}.
+\]
+Assume (6.6), namely that $V(T(y_{p-1}))$ is elementary under
+$\varphi_n$.  Let $\alpha\ne\beta$ be colors missing on
+$T(y_{p-1})$, and put
+\[
+ i_c=\noderef{HierarchyFirstMissingPosition}(\varphi_n,T,c),
+ \qquad v_c=T.\mathit{vertex}(i_c).
+\]
+
+Let $z$ certify a possibly singleton
+\noderef{TwoColorPathComponent} $Q$ of the full
+$(\alpha,\beta)$-component through $z$, and suppose that the full node
+support of $Q$ is disjoint from the full component through
+$\operatorname{inl}v_\alpha$.  Thus $Q$ is not required to contain an
+edge, and no path hypothesis is imposed on the component through
+$v_\alpha$.  Put
+\[
+ \sigma_n=\noderef{TwoColorComponentSwap}
+       (G,\varphi_n,\alpha,\beta,z).
+\]
+Suppose exactly one of the following two paper cases holds:
+\begin{enumerate}
+\item $q\geq1$ and $\alpha\in\overline\varphi_n(T_{n,q})$;
+\item $q=0$ and either
+$\alpha\in\overline\varphi_n(T_n)$, or
+$\alpha\in\overline\varphi_n(A)$ with
+$\alpha,\beta\notin D_n$.
+\end{enumerate}
+Then all of the following hold.
+\begin{enumerate}
+\item The coloring $\sigma_n$ is
+$(T_{n,q}^{*},D_n,\varphi_n)$-weakly stable in the exact sense of
+\noderef{HierarchyWeaklyStable}.
+\item The coloring $\sigma_n$ is a
+$\varphi_n\bmod T_n$ coloring in the sense of \noderef{ModColoring}.
+Either $A=T_n$, the non-strict endpoint which the tablet's positive-rung
+ETT type intentionally does not repackage, or $A$ has an actual maximum
+ETT presentation under $\sigma_n$.
+\item If $q\geq1$, the same ordered base core and closure and the stages
+\[
+ T_n=T_{n,0}\subset\cdots\subset T_{n,q}=A
+\]
+form a good hierarchy of an actual maximum ETT on $A$ under
+$\sigma_n$.  Its divider count is $q-1$; at every retained index the
+sets $D_{n,j}$ agree exactly, and
+$\Gamma^j_\eta$ agrees exactly for every $\eta\in D_{n,j}$.  In addition,
+\[
+ T_{n,q}\text{ is }
+ \left(\bigcup_{\eta\in D_{n,q}}\Gamma^{q-1}_\eta\right)^{-}
+ \text{-closed under }\sigma_n.                                \tag{M}
+\]
+\end{enumerate}
+No corresponding ETT or good-hierarchy assertion for the full tree $T$
+is claimed in these two cases.
+\end{lemma}
+\begin{proof}
+Unpack $C$.  Its fields supply positivity, maximum property, the displayed
+\noderef{TashkinovHierarchy}, its \noderef{GoodHierarchy} witness, and
+non-elementarity.  Every component below is a
+\noderef{TwoColorComponent} in the vertex--edge incidence graph, so its
+edge nodes retain individual parallel-edge identities.
+
+We first dispose of the totalized path-number endpoint.  The ordered
+initial-segment fields of the hierarchy put $A$ inside $T$.  If
+$p=0$, the candidate set in \noderef{HierarchyPathNumber} must be empty,
+because every genuine candidate is at least one.  Its fallback value then
+gives $0=|T|-|A|$, so $A=T$ entry by entry.  Truncated subtraction makes
+the prefix in (6.6) the full-length
+\noderef{TreeSequencePrefix} $T$, contradicting the non-elementarity
+field of $C$.  Hence $p\geq1$.  It follows from the exact prefix and
+hierarchy inclusions that $A$, every displayed stage, the PE closure, and
+the PE core all have vertex sets contained in $T(y_{p-1})$.  Restricting
+\noderef{ColoredVertexSetElementary} makes each of these sets elementary.
+In particular $v_\alpha$ and $v_\beta$ are actual first missing witnesses,
+and a color missing on a displayed stage has a unique missing vertex there.
+
+Properness and the fact that $\alpha$ is missing at $v_\alpha$ give the
+path certificate which was deliberately not assumed in the statement.
+At the vertex-node $\operatorname{inl}v_\alpha$ there is no
+$\alpha$-edge-node and, by \noderef{IsProperEdgeColoring}, at most one
+$\beta$-edge-node.  Hence its neighbor set in
+\noderef{TwoColorIncidenceGraph} is a subsingleton.  The vertex-node itself
+belongs to its full component, so it witnesses
+\noderef{TwoColorPathComponent} for the component rooted at
+$v_\alpha$.  This argument includes the case in which both colors are
+missing there and the component is the isolated singleton.
+
+We shall use the following consequence repeatedly.  Let $U$ be a
+displayed tree containing $v_\alpha$, and suppose $U$ is
+$\alpha,\beta$-interchangeable.  If a vertex-node of $Q$ belonged to
+$V(U)$, then the assumed path certificate for $z$, the just-derived path
+certificate at $v_\alpha$, and \noderef{TreeInterchangeable} would make
+their two full components equal.  Both contain their roots, so equality
+contradicts the assumed disjointness.  Thus every vertex-node of $Q$ is
+outside $U$.  Taking the singleton root set $\{z\}$ and expanding
+\noderef{TwoColorComponentSwap} verifies every clause of
+\noderef{OutsideKempeRecoloring} for $U$.  Consequently
+\noderef{OutsideKempeRecoloringStable} says that $\sigma_n$ is proper,
+leaves exactly $e_0$ uncolored, preserves every missing-color set on
+$U$, and fixes every exact edge identity incident with $U$.              \tag{1}
+
+Independently of $U$, properness of $\sigma_n$ also follows from
+\noderef{TwoColorComponentSwapProper}.  The swap fixes
+$\mathsf{none}$ and exchanges only the two displayed nonempty values, so
+\noderef{IsOneEdgeUncolored} again shows that exactly $e_0$ is uncolored.
+
+We need one standard predecessor instance for the uses of
+\noderef{rutcor}.  If $n=1$, the first conclusion of
+\noderef{TechnicalTheoremBase} gives elementarity of $T_n$ under the
+pre-step coloring.  If $n>1$, restrict the certified
+\noderef{TashkinovSeries} through its predecessor: its final ladder tree is
+the exact ordered tree $T_n$, its rung number is $n-1$, and the stagewise
+definition of \noderef{MaximumProperty} restricts.  Lower assertion (i)
+then gives the same elementarity.  Denote this established pre-step fact
+by (2).
+
+We now treat the two cases.
+
+\textbf{Case 1: $q\geq1$ and
+$\alpha\in\overline\varphi_n(T_{n,q})$.}
+Here $A=T_{n,q}$ by \noderef{HierarchyStarredStage}; in particular
+$v_\alpha\in V(A)$.  Split according as $v_\beta$ belongs to $A$.
+
+Suppose first that $v_\beta\in V(A)$.  In this subcase both colors are
+missing on $A$.  The conditional ordering premise of
+\noderef{ChangeLemma} is vacuous, so all its remaining hypotheses are
+exactly the ambient lower-rung, fewer-divider, minimality, prefix, and
+large-color hypotheses here.  Its case-1 conclusion gives
+\[
+ K_{v_\alpha}=K_{v_\beta}.                                    \tag{3}
+\]
+Thus the disjointness hypothesis also keeps $Q$ disjoint from the full
+component rooted at $v_\beta$; neither first-missing vertex lies in $Q$.
+
+Assume that one of $\alpha,\beta$ is singleton-closed on some starred
+stage, and choose the largest index $r$ at which either singleton is
+closed.  We do not infer missingness from closedness.  Instead,
+missingness of both colors descends from $A$ to this stage.  Indeed, if
+one of their first missing vertices occurred for the first time at a
+later positive stage, the stage elementarity proved above and
+\noderef{GoodHierarchyNewMissingClosed} would make that color closed at
+that later stage, contradicting maximality.  Hence
+\[
+ v_\alpha,v_\beta\in V(T_{n,r}^{*}).                           \tag{4}
+\]
+
+Apply \noderef{rutcor}, with (2), separately to each affected color.  For
+a color closed at $r$, its maximal-closed conclusion excludes that color
+from every exact displayed edge after $T_{n,r}^{*}$ through $A$.  For the
+other color, choose its own largest singleton-closed stage if one exists
+and first apply the same missingness descent to it; that stage is no later
+than $r$, and the same conclusion applies.  If no such stage exists,
+the no-closed conclusion of \noderef{rutcor} excludes the color from all
+displayed edges after $T_n$, hence in particular after
+$T_{n,r}^{*}$.  Therefore
+\[
+ \alpha,\beta\notin
+ \varphi_n\langle A-T_{n,r}^{*}\rangle.                        \tag{5}
+\]
+
+Place in the first color slot a color which is missing and closed at $r$.
+If $r>0$, the hypotheses just established, the lower package,
+fewer-divider induction, maximum property, and (L) are exactly those of
+\noderef{step1}.  If $r=0$ and the terminal kind is PE, conclusion (iii)
+of \noderef{interchange} applies to the exact core, with the reflexive
+\noderef{CombinedStableColoring}.  If $r=0$ and the kind is SE or RE, the
+core is $T_n$ by \noderef{HierarchyBase}; the predecessor lower assertion
+(ii), or \noderef{TechnicalTheoremBase} when $n=1$, gives terminal-ladder
+interchangeability.  If the closed color was $\beta$, these conclusions
+are initially written with the displayed color order reversed; the
+definitions of \noderef{TwoColorComponent},
+\noderef{TwoColorPathComponent}, and \noderef{TreeInterchangeable} are
+symmetric in the two colors, so they give the stated $\alpha,\beta$ order.
+Thus $T_{n,r}^{*}$ is interchangeable in all cases.
+Together with (4), observation (1) makes the swap an outside recoloring of
+this exact controlled stage.                                           \tag{6}
+
+Now suppose instead that neither affected singleton is closed on any
+starred stage.  The no-closed conclusion of \noderef{rutcor}, applied
+to both colors, gives
+\[
+ \Theta_n=PE,\qquad
+ v_\alpha,v_\beta\in V(T_n)-V(R_n),                            \tag{7}
+\]
+puts each affected color in every appropriate reserved Gamma union, and
+excludes both colors from the exact displayed edges of $A-T_n$.
+Conclusion (ii) of \noderef{interchange}, with reflexive combined
+stability, makes $T_n$ interchangeable because $\alpha$ is missing there.
+Observation (1) therefore makes $Q$ outside $T_n$.  Elementarity of the
+PE core and (7) say that neither affected color is missing on $R_n$.
+Every exact edge added in the Tashkinov closure of the support prefix to
+$R_n$ has, by \noderef{TashkinovAugmentation}, a color missing on its
+preceding subtree; consequently no such edge has color $\alpha$ or
+$\beta$.  The support prefix lies in $T_n$ and is fixed by (1).  Hence the
+missing sets on $R_n$ and all its displayed edge values are preserved,
+which supplies the second clause of combined stability.                \tag{8}
+
+Return to the alternative $v_\beta\notin V(A)$.  Now $\beta$ is missing
+at no vertex of $A$.  If some starred stage is singleton-closed for
+$\alpha$, choose the largest such index $r$.  The same descent,
+\noderef{rutcor}, and interchangeability argument used for (4)--(6) gives
+$v_\alpha\in T_{n,r}^{*}$, makes $Q$ outside that stage, and excludes
+$\alpha$ from the exact tail to $A$.  Every ordinary edge of that tail is
+introduced by \noderef{TashkinovAugmentation}; its color is missing on an
+earlier prefix.  Since $v_\beta$ is the first $\beta$-missing vertex and
+lies after $A$, none of those ordinary identities has color $\beta$.
+There is exactly one possible exception: $r=0$, the core is $T_n$, and
+the first displayed edge is the SE/RE connecting seed $f_n$ with
+$\beta\in D_n$.  The SE or RE constructor of
+\noderef{TashkinovSeriesStep} identifies this exact edge and makes it
+incident with $T_n$; (1) therefore fixes its value.  This is precisely the
+stored-seed exception, not a claim that every later segment color is
+unchanged.                                                              \tag{9}
+
+If no starred stage is singleton-closed for $\alpha$, apply the
+no-closed conclusion of \noderef{rutcor}.  It gives the PE kind,
+$v_\alpha\in V(T_n)-V(R_n)$, membership of $\alpha$ in every later
+reserved Gamma union, and absence of $\alpha$ from $A-T_n$.
+Again \noderef{interchange}(ii) makes $T_n$ interchangeable and (1) makes
+$Q$ outside it.  The color $\beta$ is missing nowhere on $A$, so neither
+it nor $\alpha$ is missing on $R_n$, and the closure argument in (8)
+preserves the PE base.  Tashkinov augmentation excludes $\beta$ from the
+displayed edges after the base because it is missing nowhere on the
+preceding prefixes.                                                     \tag{10}
+
+We summarize what (5)--(10) prove in every subcase of Case 1.  Every exact
+displayed edge of $A$ has the same value under $\varphi_n$ and $\sigma_n$.
+At $v_\alpha$, and also at $v_\beta$ when it lies in $A$, the swapped
+component is disjoint by hypothesis and (3).  At every other vertex of
+the elementary tree $A$, both affected colors are present; if its
+vertex-node lies in $Q$, the two incident affected edges are exchanged
+together, and otherwise neither is changed.  All other colors are fixed.
+Thus
+\[
+ \sigma_n(A.\mathit{edge}(i))=\varphi_n(A.\mathit{edge}(i)),
+ \qquad
+ \overline\sigma_n(v)=\overline\varphi_n(v)quad(v\in V(A)).  \tag{11}
+\]
+The base stability in (6), or the combined stability in (8) and (10),
+together with the tree invariant (11), is exactly
+\noderef{HierarchyWeaklyStable} at the positive last index $q$.
+
+\textbf{Case 2: $q=0$.}
+Now $A=T_{n,0}^{*}$ is the exact hierarchy core.  The case hypothesis
+always makes $\alpha$ missing on $A$: either it is already missing on the
+initial segment $T_n$, or this is explicit.  As in Case 1, if
+$v_\beta\in A$, the conditional premise of \noderef{ChangeLemma} is
+vacuous and its case-2 conclusion identifies the components rooted at
+$v_\alpha$ and $v_\beta$; hence $Q$ contains neither root.              \tag{12}
+
+First suppose that one of $\alpha,\beta$ is both missing and
+singleton-closed on $A$.  This explicit conjunction is the formal meaning
+of choosing a closed tree-missing color; mere boundary emptiness is not
+used as missingness.  If the terminal kind is PE, apply conclusion (iii)
+of \noderef{interchange}, putting that missing closed color first and
+using reflexive combined stability.  If the terminal kind is SE or RE,
+\noderef{HierarchyBase} identifies $A=T_n$, and lower assertion (ii), or
+\noderef{TechnicalTheoremBase} at $n=1$, gives the same interchangeability.
+When the missing closed color is $\beta$, symmetry of
+\noderef{TwoColorComponent}, \noderef{TwoColorPathComponent}, and
+\noderef{TreeInterchangeable} restores the displayed $\alpha,\beta$ order.
+Observation (1) makes $Q$ an outside recoloring of all of $A$.  It follows
+at once that the appropriate PE combined stability, or the non-PE
+terminal-ladder stability, holds.                                      \tag{13}
+
+It remains that neither affected color which is missing on $A$ is closed
+there.  The terminal kind cannot be SE or RE.  In that event $A=T_n$, and
+the actual non-PE constructor in \noderef{TashkinovSeriesStep}, together
+with reverse stability from \noderef{sc2} in the SE case, closes every
+terminal missing color;
+this contradicts the choice of the present branch.  Thus
+$\Theta_n=PE$.  The common-missing closure conclusion of
+\noderef{ParallelCommonMissingClosed}, with predecessor elementarity (2),
+shows that a first missing vertex lying in $V(T_n)\cap V(R_n)$ would make
+its color closed on $A=T_n\vee R_n$.  Therefore
+\[
+ v_\alpha\notin V(T_n)\cap V(R_n),
+\]
+and the same holds for $v_\beta$ whenever $v_\beta\in A$.              \tag{14}
+
+If the two first-missing vertices lie in opposite constituents, conclusion
+(iv) of \noderef{interchange}, with the color names ordered according to
+the two locations, makes the whole core $A$ interchangeable.  Hence $Q$
+is outside $A$ by (1), and combined stability follows.                 \tag{15}
+
+Suppose next that $v_\alpha\in V(T_n)-V(R_n)$.  If $v_\beta\in A$, then
+(12), (14), and the same-constituent alternative put it in
+$V(T_n)-V(R_n)$; if it is outside $A$, it is missing nowhere on $R_n$.
+Conclusion (ii) of \noderef{interchange} makes $T_n$ interchangeable, so
+$Q$ is outside $T_n$ and (1) gives $(T_n,D_n,\varphi_n)$-stability.
+Elementarity of the core says that neither affected color is missing on
+$R_n$.  Thus every $R_n$ vertex retains its missing set under the swap.
+Moreover, any edge incident with $R_n$ whose old color is missing on
+$R_n$ has a color different from $\alpha,\beta$ and is fixed.  This is
+precisely $(R_n,\varnothing,\varphi_n)$-stability, so combined stability
+holds.                                                                  \tag{16}
+
+Finally suppose that $v_\alpha\in V(R_n)-V(T_n)$.  If $v_\beta\in A$ it
+lies in the same exclusive constituent, and otherwise it lies outside the
+core.  Conclusion (i) of \noderef{interchange} makes $R_n$
+interchangeable, so $Q$ is outside $R_n$.  Here $\alpha$ is not missing on
+$T_n$; hence the case-2 disjunction forces the second alternative and
+gives $\alpha,\beta\notin D_n$.  Neither color is missing on $T_n$, by
+elementarity and the locations.  The statement
+\noderef{HkuTreeColorsControlled} excludes both colors from every exact
+displayed edge of $T_n$, since a used tree color lies in
+$\overline\varphi_n(T_n)\cup D_n$.  Any incident edge whose color belongs
+to $\overline\varphi_n(T_n)\cup D_n$ likewise has an unaffected color and
+is fixed.  Missing sets on $T_n$ are preserved because both affected
+colors are present at every one of its vertices.  This gives the first
+stable relation, while outside stability on $R_n$ gives the second.
+Thus combined stability again holds.                                   \tag{17}
+
+Equations (13), (15), (16), and (17) prove
+\noderef{HierarchyWeaklyStable} at the zero index.  They also prove the
+analogue of (11) for the exact core $A$.  In (16), every edge added in the
+closure $R_n$ has a color missing on its preceding subtree and hence is
+neither $\alpha$ nor $\beta$; in (17), the $R_n$ edges are fixed by
+outside stability and the $T_n$ edges are fixed by
+\noderef{HkuTreeColorsControlled}.  Thus in every Case-2 branch all
+displayed edge identities of $A$ and all vertexwise missing sets agree. \tag{18}
+
+We now establish the ETT and mod-coloring conclusions uniformly.  Inspect
+the terminal positive \noderef{TashkinovSeriesStep}.  In PE it supplies a
+\noderef{TashkinovClosure}, hence a
+\noderef{TashkinovAugmentationSequence}, from $T_n$ to the certified final
+closure.  In SE or RE it supplies an individual connecting edge $f_n$, the
+exact singleton equation $F_n=\{f_n\}$, a
+\noderef{TreeSequenceAdjoinEdge} seed $T_n+f_n$, and an augmentation
+sequence from that seed to the same final closure.  The hierarchy makes
+$A$ an exact ordered initial segment of $T$, and the ETT makes $T$ an exact
+ordered initial segment of that closure.  In the non-PE case with $q=0$,
+$A=T_n$ and no strict route is required.  In every other case the relevant
+seed is an initial segment of $A$; for the SE/RE seed this follows from its
+one-edge length, the strict hierarchy stage, and equality of entries in the
+common certified closure.  Apply
+\noderef{TashkinovAugmentationSequenceRestrict} to obtain the exact old
+route to $A$.                                                           \tag{19}
+
+At each step of (19), the new edge is the exact next displayed identity of
+$A$, and its color is missing at a vertex of the preceding prefix by
+\noderef{TashkinovAugmentation}.  Equations (11) and (18) preserve both
+the edge value and that missing-color witness.  Length, attachment, and
+ordered-prefix clauses do not depend on the coloring.  Hence the same
+route is a $\sigma_n$-augmentation sequence, retaining the exact SE/RE
+seed identity when present.                                             \tag{20}
+
+Weak stability contains $(T_n,D_n,\varphi_n)$-stability in both terminal
+kind branches.  Apply \noderef{Td}, with the given lower package, original
+maximum property, positivity, and the proved properness and unique
+uncolored edge.  It yields
+\[
+                         \noderef{ModColoring}(\mathcal E,\sigma_n).     \tag{21}
+\]
+If $A=T_n$, this is the stated endpoint.  Otherwise (20) is exactly the PE
+eligibility clause, or the exact SE/RE seed clause, in (21).  Its universal
+property gives a \noderef{CorrespondingExtendedTashkinovTree} on $A$, and
+\noderef{MaximumPropertyTransport} gives maximum property.  This proves
+conclusions 1 and 2 in both paper cases.
+
+Assume finally that $q>0$.  Apply
+\noderef{GoodHierarchyPrefixRepackage} to the original ETT, maximum
+witness, base, hierarchy, and good witness at the positive internal index
+$q$.  It returns an old-color maximum ETT on the exact ordered tree
+$A=T_{n,q}$ with the same certified series, a base with the same core and
+closure, and a good hierarchy $H_A$ of divider count $q-1$ having the
+exact retained stages, stored sets, and total Gamma values.  It also
+returns the old terminal minus-closed assertion corresponding to (M).   \tag{22}
+
+If the terminal kind is PE, apply \noderef{HierarchySplitter} to this
+prefix ETT.  Its combined-stability premise is the PE projection of the
+proved weak stability, and its build premise is the PE route in (20).  It
+returns a corresponding maximum ETT under $\sigma_n$, the same core and
+closure, and the same retained ordered stages and dividers.  In the SE/RE
+case use the corresponding ETT already obtained from (21), rebuild the
+base with the common exact $T_n$ as core and the unused closure field, and
+copy the retained stages and dividers from $H_A$.  The equal series,
+ladder trees, stored sets, connecting edges, and terminal non-PE kind are
+the statement-level fields of
+\noderef{CorrespondingExtendedTashkinovTree}; every hierarchy field then
+has exactly its old ordered-tree proof.  Denote the resulting hierarchy
+under $\sigma_n$ by $K$.                                                \tag{23}
+
+Copy every Gamma pair from (22).  Equations (11) give equality of all
+stage and starred-stage missing sets.  Correspondence gives equality of
+the raw stored sets, so the definition
+\noderef{HierarchyStoredColorsAt} gives equality of every retained
+$D_{n,j}$.  We check the five fields of \noderef{GoodHierarchy}.
+Pair cardinality and pairwise disjointness are literal.  For avoidance,
+fix a retained $j,\eta$, a copied Gamma color $c$, and an exact segment
+edge position.  Missing-set equality makes the first $\eta$-missing
+position the same, and (11) fixes the value of that individual displayed
+edge.  Thus a new occurrence of $c$ would be the same old occurrence,
+contrary to old avoidance.  This is a pointwise argument; it does not
+assert a generic equality of \noderef{HierarchySegmentColors} under a
+two-color swap.  Unique refresh copies because both exact stage
+differences, all their vertex missing sets, the stored sets, and Gamma
+pairs agree.                                                            \tag{24}
+
+For the PE base field, the common-missing cardinality is unchanged by
+combined stability.  Consider an old exact boundary witness to failure of
+minus-closedness.  In a maximal-closed branch the base core lies inside
+the controlled outside stage, so (1) fixes that boundary identity.  In a
+no-closed Case-1 branch, \noderef{rutcor} puts every affected color which
+is missing on the core into the stage-zero reserved Gamma union; hence a
+witness color outside that union is not $\alpha$ or $\beta$ and its edge
+is fixed.  Thus the same witness proves the new non-minus-closed clause.
+The non-PE implication is vacuous.                                      \tag{25}
+
+For an internal minus-closed field, expand
+\noderef{TreeColorSetMinusClosed}: let $c$ be missing on the retained
+stage but outside its reserved union, and suppose a boundary identity has
+new color $c$.  At or below the controlled outside stage, (1) fixes the
+identity.  Above it, maximality says no affected color is singleton-closed.
+If an affected color is missing there, the old minus-closed field of
+\noderef{GoodHierarchy} forces it into the relevant reserved union; an
+affected color not missing there cannot be $c$.  Therefore $c$ is
+unaffected, the swap fixes the boundary identity, and (11) makes $c$
+old-missing as well.  The old minus-closed field is a contradiction.  This
+proves every internal field, including its last instance.              \tag{26}
+
+Equations (22)--(26) construct the required good hierarchy on $A$, with
+the exact retained base, stages, stored sets, and paper Gamma pairs.  The
+separately returned last field from
+\noderef{GoodHierarchyPrefixRepackage}, transported by the same boundary
+argument (26), is exactly
+\[
+ T_{n,q}\text{ is }
+ \left(\bigcup_{\eta\in D_{n,q}}\Gamma^{q-1}_\eta\right)^-
+ \text{-closed under }\sigma_n.
+\]
+This is (M) and completes conclusion 3.  No step constructed or used a
+replacement hierarchy on the full tree $T$, as required for cases 1 and 2.
+\end{proof}
