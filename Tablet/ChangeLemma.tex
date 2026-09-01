@@ -110,12 +110,31 @@ Because $\alpha$ and $\beta$ are missing on this elementary prefix,
 the least-candidate clause of
 \noderef{HierarchyFirstMissingPosition} makes $v_\alpha$ and
 $v_\beta$ actual vertices of the prefix missing the indicated colors.
-They are distinct: otherwise the same vertex would miss the two colors,
-but $\alpha\ne\beta$ and this does not yet contradict elementarity;
-instead, if they coincided then $K_{v_\alpha}=K_{v_\beta}$ immediately,
-so every asserted component equality is already proved.  We may thus
-assume that they are distinct.  Elementarity says that $\beta$, which is
-missing at $v_\beta$, is not missing at $v_\alpha$, and symmetrically
+They are distinct unless the two first-missing positions name the same
+vertex.  In that equality branch
+$K_{v_\alpha}=K_{v_\beta}$ is immediate, but alternative 3 still requires
+interchangeability on $A$.  If $q>0$, then
+$A=T_{n,q}$ by \noderef{HierarchyStarredStage}, and the last-stage
+instance of \noderef{step1} applies to the missing, closed color
+$\alpha$.  If $q=0$ and the terminal kind is PE, conclusion (iii) of
+\noderef{interchange} applies to the exact core $A$: reflexivity gives
+both clauses of \noderef{CombinedStableColoring}, and the given
+lower-rung package supplies its induction hypothesis.  Finally suppose
+$q=0$ and the terminal kind is not PE.  Then
+\noderef{HierarchyBase} identifies $A$ with $T_n$.  When the rung number
+is greater than one, restrict the certified series through the preceding
+rung; its final ladder closure is this exact $T_n$, maximum property
+restricts, and the RE constructor of \noderef{TashkinovSeriesStep} gives
+the required generating coloring while the SE constructor, together
+with the reverse stability relation from \noderef{sc2}, gives the
+stable-coloring premise.  Lower assertion (ii) therefore makes
+$\alpha,\beta$ interchangeable on $T_n$.  At the one-rung endpoint the
+same conclusion is the interchangeability clause of
+\noderef{TechnicalTheoremBase}.  Thus the coincident-vertex branch proves
+both every requested component equality and, under alternative 3, the
+additional interchangeability conclusion.  We may henceforth assume
+that the two vertices are distinct.  Elementarity says that $\beta$,
+which is missing at $v_\beta$, is not missing at $v_\alpha$, and symmetrically
 $\alpha$ is not missing at $v_\beta$.  By the complementary definitions
 \noderef{MissingColors} and \noderef{PresentColors}, each vertex is
 incident with an edge of the other color.  Properness makes it a
@@ -230,20 +249,52 @@ $K_a=K_b$ and uniqueness of the path component meeting $A$ by the
 definition \noderef{TreeInterchangeable}.                              \tag{7}
 
 It remains in this location to consider the case in which neither color
-is closed on $A$.  Let $r$ be the first starred stage on which $\beta$
-is missing.  Both $a$ and $b$ lie in that stage.  If $r>0$, the witness
-is new above the preceding starred stage; (1) and
+is closed on $A$.  Before choosing a first missing stage, we justify the
+paper's reduction $a\prec b$.  The strict position order is the one in
+\noderef{TreeVertexOrder}; distinct displayed vertices have distinct
+indices by \noderef{TreeSequence}.  If $q>0$, then
+$A=T_{n,q}$ by \noderef{HierarchyStarredStage}, so both named colors are
+missing on $T_{n,q}$.  The local hypotheses and the desired component
+equality are therefore symmetric in the two colors, and in the order
+$b\prec a$ we interchange the names $(\alpha,a)$ and $(\beta,b)$.  If
+$q=0$ and $\{\alpha,\beta\}\cap D_n=\varnothing$, the same relabeling is
+legitimate because pair avoidance is symmetric.
+
+There remains the asymmetric $q=0$ alternative in which pair avoidance
+fails and $\alpha$ is specifically missing on $T_n$.  The definition
+\noderef{TashkinovStoredColors} first gives $\alpha\notin D_n$; failure of
+pair avoidance consequently gives $\beta\in D_n$, and the same
+definition gives $\beta\notin\overline\varphi_n(T_n)$.  Hence the first
+$\alpha$-missing vertex $a$ lies in $T_n$, whereas the first
+$\beta$-missing vertex $b$, which lies in $A$, is outside $T_n$.  As
+the non-PE clause of \noderef{HierarchyBase} would identify $A$ with
+$T_n$, this already forces the terminal kind to be PE.  The PE clause of
+the same definition and the left-segment clause of
+\noderef{OrderedTreeUnion} make $T_n$ an exact ordered initial segment
+of $A$; \noderef{TashkinovHierarchy} makes $A$ an ordered initial segment
+of $T$.  Thus the displayed index of $a$ is strictly smaller than that
+of $b$, namely $a\prec b$.  This proves the order reduction in every
+asymmetric alternative without exchanging the distinguished hypothesis.
+
+Now let $r$ be the least index for which the first $\beta$-missing
+vertex $b$ belongs to $T_{n,r}^{*}$.  Such an index exists because
+$b\in A=T_{n,q}^{*}$.  The exact initial-segment relations in
+\noderef{TashkinovHierarchy} and
+\noderef{TreeSequenceInitialSegment}, together with $a\prec b$, put $a$
+in this same starred stage; thus both $a$ and $b$ lie there, as required
+before the descent.  If $r>0$, the $\beta$ witness is new above the
+preceding starred stage; (1) and
 \noderef{GoodHierarchyNewMissingClosed} make $\beta$ closed on
-$T_{n,r}=T_{n,r}^{*}$.  Repeating (7) with $r$ in place of $q$ gives
+$T_{n,r}=T_{n,r}^{*}$.  If $\alpha$ is also closed there, apply (6) to
+that stage; otherwise apply (7) with $r$ in place of $q$.  Either way
 $K_a=K_b$.  If $r=0$ and the last extension is non-PE, the same SE/RE
 closedness argument makes both colors closed on $T_n=A$, and (6)
 applies.  If $r=0$ and the extension is PE, place $a$ and $b$ in the
-two constituents $T_n$ and $R_n$ of the exact union $A$.  The four
-conclusions (i), (ii), and (iv) of \noderef{interchange}, as appropriate
-to those two locations, show that their two path components coincide.
-This is the paper's descent to the first starred stage; it uses the PE
-base interface rather than pretending that the union itself is a ladder
-ETT.                                                                    \tag{8}
+two constituents $T_n$ and $R_n$ of the exact union $A$.  Conclusions
+(i), (ii), and (iv) of \noderef{interchange}, according to those two
+locations, show that their two path components coincide.  This is the
+paper's descent to the first starred stage; it uses the PE base interface
+rather than pretending that the union itself is a ladder ETT.           \tag{8}
 
 Equations (6)--(8) prove the required component equality in Location 1
 under each of alternatives 1--3 in the statement.  They also prove the
@@ -429,12 +480,72 @@ the $T_n$ part of (18), obtain the corresponding ETT from
 and (16) supply the same base core.
 
 For the zero-divider good hierarchy, pair size and disjointness are
-literal, avoidance follows from the unchanged prefix edges, and the PE
-base clause follows from the constituent missing-set and boundary-edge
-equalities in (18); there are no refresh or positive-stage minus-closed
-fields.  Thus the actual candidate satisfies every field, is
-non-elementary by (4), and has the measure comparison (5).  This
-contradicts minimality and settles $q=0$.                               \tag{19}
+literal and avoidance follows from the unchanged displayed prefix
+edges.  We verify the two parts of the PE `parallelBase' field of
+\noderef{GoodHierarchy} separately.  The vertexwise clauses of the two
+constituent stable relations in (18) identify the missing-color sets on
+$T_n$ and $R_n$ under $\sigma_n$ with their sets under $\varphi_n$.
+They therefore identify the missing set of the exact union.  Together
+with \noderef{HierarchyStoredColorsAt}, this keeps the stage-zero stored
+index set and hence the copied union $\Gamma^0$ unchanged.  It also
+preserves the cardinality
+\[
+ \left|\bigl(\overline\varphi_n(T_n)\cap
+       \overline\varphi_n(R_n)\bigr)-\Gamma^0\right|\geq4
+\]
+with the identical inequality under $\sigma_n$.
+
+It remains to transport non-minus-closedness; combined stability does
+not assert equality on every boundary edge.  Unfold the original
+`parallelBase' witness using \noderef{TreeColorSetMinusClosed},
+\noderef{TreeColorSetClosed}, \noderef{BoundaryColorEdges}, and
+\noderef{BoundaryEdges}.  There are a color
+\[
+ c\in\overline\varphi_n(A)-\Gamma^0
+\]
+and an exact boundary-edge identity $f$ of $A$ with
+$\varphi_n(f)=c$.  If the component swap fixes $f$, the same $c$ and $f$
+witness that $A$ is not $(\Gamma^0)^-$-closed under $\sigma_n$.
+
+Suppose instead that $f$ is changed.  By
+\noderef{TwoColorComponentSwap}, its edge-node lies in $K_b$ and
+$c\in\{\alpha,\beta\}$.  Since $b$ is the first vertex missing $\beta$
+and $b\notin A$, the color $\beta$ is not missing anywhere on $A$.
+Thus $c\ne\beta$, and consequently
+\[
+             c=\alpha,\qquad \alpha\notin\Gamma^0,
+             \qquad f\in K_b.                                \tag{19a}
+\]
+Assume for contradiction that the transported core $A$ is
+$(\Gamma^0)^-$-closed under $\sigma_n$.  The missing-set equality from
+(18), (19a), and the definitions just cited say that $\alpha$ is missing
+and singleton-closed on $A$ under $\sigma_n$.  Apply conclusion (iii) of
+\noderef{interchange}: properness and exact one-uncoloredness were proved
+in (4), its combined-stability premise is exactly (18), and its
+lower-rung premise is the stated six-assertion package.  Hence
+$\alpha,\beta$ are $A$-interchangeable under $\sigma_n$.
+
+On the other hand, swapping a full component changes every one of its
+$\alpha$- and $\beta$-colored edge identities to the other color and
+changes no membership in the two-color incidence graph.  By
+\noderef{TwoColorComponentSwap} and
+\noderef{TwoColorComponent}, the old supports $K_a$ and $K_b$ are
+therefore the same two distinct full components under $\sigma_n$.
+The definition \noderef{TwoColorPathComponent} and (2) show that they
+remain nontrivial path components.  The component $K_a$
+meets $A$ at $a$.  The boundary identity $f$ in (19a) has exactly one
+endpoint in $A$ by \noderef{BoundaryEdges}; incidence with that
+inside endpoint shows that $K_b$ also meets $A$.  Their distinctness is
+preserved, equivalently by \noderef{TwoColorComponentsDisjoint}.  These
+two components contradict the just-established
+\noderef{TreeInterchangeable}.  Therefore $A$ is not
+$(\Gamma^0)^-$-closed under $\sigma_n$ after all.
+
+This proves the entire PE base field.  There are no refresh or
+positive-stage minus-closed fields when $q=0$.  Thus the actual candidate
+satisfies every good-hierarchy field, is non-elementary by (4), and has
+the measure comparison (5).  This contradicts minimality and settles
+$q=0$.                                                                 \tag{19}
 
 It remains to treat $q>0$.  Since $a\in A=T_{n,q}$, the color $\alpha$
 is missing on $T_{n,q}$, so \noderef{rutcor} applies.  Its pre-step
