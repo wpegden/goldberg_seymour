@@ -1,0 +1,208 @@
+\begin{lemma}[Lemma 9n: available colors before the path tail]
+Let $(T,\varphi_n)$ be a positive-rung extended Tashkinov tree, let
+$T_n$ be its last ladder tree, and let
+$T_n=T_{n,0}\subset\cdots\subset T_{n,q+1}=T$ be a good hierarchy with
+base $T_{n,0}^{*}$.  Put
+\[
+ A=T_{n,q}^{*},\qquad p=p(T),\qquad
+ D_{n,q}=\noderef{HierarchyStoredColorsAt}(H,q),
+ \qquad
+ \Gamma^q=\bigcup_{\eta\in D_{n,q}}\Gamma^q_\eta.
+\]
+Here $A$ is \noderef{HierarchyStarredStage} at the last divider and
+$p$ is \noderef{HierarchyPathNumber}.  For a natural number $i$, let
+$T(y_i)$ be the ordered prefix of $T$ ending after the first $i$ entries
+above $A$; here and below $|A|$ denotes its tree-sequence length, and
+formally the prefix length is
+$\min\{|A|+i,|T|\}$.  Define
+\[
+ B=\bigcup_{v\in V(T_{n,0}^{*})\setminus V(T_n)}
+       \overline\varphi_n(v),
+ \qquad
+ U_i=\{\varphi_n(e_r): |A|\le r<|A|+i\},
+\]
+where $U_i$ contains only colors actually assigned to the displayed exact
+edge identities in that index interval, and put
+\[
+ X_i=\overline\varphi_n(T(y_i))\setminus B\setminus U_i.
+\]
+Assume the exact prefix-elementarity assertion (6.6), namely that
+$V(T(y_{p-1}))$ is elementary with respect to $\varphi_n$, and assume
+\[
+ 2n+11\le |\overline\varphi_n(T_n)|,
+ \qquad n=\mathit{ett.rounds}.
+\]
+Then, for every $0\le i\le p-1$ (equivalently, every natural number
+$i<p$),
+\[
+                         |X_i|\ge 2n+11.                 \tag{1}
+\]
+Furthermore, if
+\[
+             |X_i\setminus(\Gamma^q\cup D_{n,q})|\le4, \tag{2}
+\]
+then there is an injective family of colors
+$(\eta_h)_{h\in\operatorname{Fin}7}$ such that, for every $h$,
+\[
+ \eta_h\in D_{n,q}\cap\overline\varphi_n(T(y_i))
+ \quad\hbox{and}\quad
+ (\Gamma^q_{\eta_h}\cup\{\eta_h\})\cap U_i=\varnothing.
+\]
+\end{lemma}
+\begin{proof}
+Write $m=|A|$ and $\ell=|T|-m$.  We first verify that all displayed
+prefixes and edge indices in the statement are the paper's actual ones.
+The nested and terminal-stage fields of \noderef{TashkinovHierarchy}
+show that $A$ is an ordered initial segment of $T$.  Indeed, if $q>0$,
+the last nested inclusion is $T_{n,q}^{*}=T_{n,q}\subset T_{n,q+1}=T$;
+if $q=0$, this is the core-inside-first field followed by the terminal-stage
+identity.  Thus $m\le |T|$.
+
+Unfold \noderef{HierarchyPathNumber}.  Its candidates form a subset of
+$\{1,\ldots,\ell\}$.  If that set is nonempty, its minimum $p$ belongs
+to it, so $1\le p\le\ell$; if it is empty, the fallback definition gives
+$p=\ell$.  In either case $p\le\ell$.  Now fix $i<p$.  This inequality
+itself gives $p>0$ and $i\le p-1$, while
+\[
+              m+i<m+p\le m+\ell=|T|.
+\]
+Consequently the minimum in the formal definition of $T(y_i)$ is
+$m+i$, and the one in $T(y_{p-1})$ is $m+p-1$.  This proves rather than
+assumes both the positivity and the prefix-bound side conditions.  By
+\noderef{TreeSequencePrefix}, $T(y_i)$ is the entry-by-entry prefix of
+$T(y_{p-1})$, so (6.6) and
+\noderef{ColoredVertexSetElementary} imply that $V(T(y_i))$ is elementary.
+
+We next expand the first count.  Let
+\[
+ N_i=V(T(y_i))\setminus V(A).
+\]
+The vertex and edge maps of a \noderef{TreeSequence} are injective.
+Since the two prefixes have respective lengths $m+i$ and $m$, their
+vertex-set difference has exactly $i$ members.  The exact tail-edge
+identities are $T.\mathit{edge}(r)$ for $m\le r<m+i$; there are also
+exactly $i$ of them, and hence their set of colors $U_i$ has cardinality
+at most $i$.  This uses the precise half-open interval appearing in the
+Lean statement, so neither the distinguished first edge nor the next edge
+after $T(y_i)$ is counted.
+
+Every vertex misses at least one color.  To see this from the stated ETT
+data, the index-zero certificate in \noderef{TashkinovSeries} is the
+initial constructor of \noderef{TashkinovSeriesStep}, hence supplies the
+\noderef{KTriple} from which the series starts.  Its degree clause is
+$k\ge\Delta(G)+1$.  For any vertex $v$, choose for each member of
+\noderef{PresentColors} at $v$ an incident edge bearing that color.
+Two different colors cannot choose the same edge, because an edge has one
+value under the partial coloring.  Thus the number of present colors is at
+most the number of incident exact edge identities, namely
+$d_G(v)$ by \noderef{Degree}, and this is at most
+\noderef{MaximumDegree}.  Since $d_G(v)<k$, the complement definition
+\noderef{MissingColors} shows that $\overline\varphi_n(v)$ is nonempty.
+
+The missing-color sets at distinct vertices of $T(y_i)$ are pairwise
+disjoint by elementarity.  Therefore the union definition
+\noderef{TreeMissingColors}, applied to the $i$ vertices of $N_i$, gives
+\[
+ \left|\bigcup_{v\in N_i}\overline\varphi_n(v)\right|
+   =\sum_{v\in N_i}|\overline\varphi_n(v)|\ge i\ge |U_i|.       \tag{3}
+\]
+Since $A$ is an initial segment of $T(y_i)$, the same disjointness also
+gives
+\[
+ |\overline\varphi_n(T(y_i))|
+ =|\overline\varphi_n(A)|+
+   \left|\bigcup_{v\in N_i}\overline\varphi_n(v)\right|.       \tag{4}
+\]
+
+It remains to compare the base with $T_n$.  By
+\noderef{HierarchyBase}, if the last extension is not PE then
+$T_{n,0}^{*}=T_n$ and $B$ is empty.  In the PE case its
+\noderef{OrderedTreeUnion} witness makes $T_n$ an ordered initial segment
+of $T_{n,0}^{*}$.  Hence in both cases
+$V(T_n)\subseteq V(T_{n,0}^{*})\subseteq V(A)$.  Elementarity and the
+definition of $B$ yield the disjoint equality
+\[
+ |\overline\varphi_n(T_{n,0}^{*})|
+   =|\overline\varphi_n(T_n)|+|B|.
+\]
+As the base is contained in $A$, this implies
+\[
+                  |\overline\varphi_n(A)|-|B|
+                       \ge |\overline\varphi_n(T_n)|.           \tag{5}
+\]
+For arbitrary finite sets $Y,B,U$, the inclusion
+$Y\subseteq((Y\setminus B)\setminus U)\cup B\cup U$ gives
+$|((Y\setminus B)\setminus U)|\ge |Y|-|B|-|U|$ whenever the
+right side is read through the corresponding cardinal inequality.
+Apply this with $Y=\overline\varphi_n(T(y_i))$, and use (3)--(5):
+\[
+\begin{aligned}
+ |X_i|
+ &\ge |\overline\varphi_n(T(y_i))|-|B|-|U_i|\\
+ &\ge |\overline\varphi_n(A)|-|B|\\
+ &\ge |\overline\varphi_n(T_n)|\\
+ &\ge 2n+11.
+\end{aligned}
+\]
+This proves (1).
+
+Assume now (2), and set
+\[
+ C=X_i\cap(\Gamma^q\cup D_{n,q}),\qquad d=|D_{n,q}|.
+\]
+The disjoint decomposition of $X_i$ into $C$ and the set in (2), together
+with (1), gives
+\[
+                              |C|\ge 2n+7.                       \tag{6}
+\]
+By \noderef{HierarchyStoredColorsCardinality}, $d\le n$.
+
+For each $\eta\in D_{n,q}$ put
+$Q_\eta=\Gamma^q_\eta\cup\{\eta\}$.  We check the block structure
+directly from the good-hierarchy fields.  The `twoColors' field of
+\noderef{GoodHierarchy} says $|\Gamma^q_\eta|=2$, and its
+`disjointPairs' field says that the Gamma pairs for distinct stored colors
+are disjoint.  Its `avoidance' field puts every color of
+$\Gamma^q_\eta$ among the colors missing at the last relevant hierarchy
+stage.  For $q>0$ that stage is $A$; for $q=0$ it is $T_n$, whose vertex
+set is contained in $A$.  On the other hand, unfolding
+\noderef{HierarchyStoredColorsAt} gives
+\[
+ D_{n,q}=D_n\setminus\overline\varphi_n(A),
+\]
+so every member of $D_{n,q}$ is not missing on $A$.  It follows both that
+$\eta\notin\Gamma^q_\eta$ and that no stored color belongs to any other
+Gamma pair.  Therefore the blocks $Q_\eta$ are pairwise disjoint and each
+has exactly three members.  Moreover
+\[
+ \Gamma^q\cup D_{n,q}=\bigcup_{\eta\in D_{n,q}}Q_\eta,
+ \qquad |\Gamma^q\cup D_{n,q}|=3d\le3n.                         \tag{7}
+\]
+Equations (6) and (7) first imply $2n+7\le3n$, hence $n\ge7$.
+They also give $3d\ge |C|\ge2n+7\ge21$, so $d\ge7$; in particular
+there really are at least six blocks available for the padded estimate
+below.
+
+Call a block full when $Q_\eta\subseteq C$.  Suppose at most six blocks
+were full.  A full block contributes at most three colors to $C$, while a
+nonfull three-element block contributes at most two.  The blocks are
+pairwise disjoint and $C$ is contained in their union.  Since $d\le n$
+and $n\ge7$, padding to six full blocks and $n-6$ remaining blocks gives
+the paper's exact estimate
+\[
+             |C|\le 3\cdot6+2\cdot(n-6)=2n+6,
+\]
+contradicting (6).  Thus at least seven distinct stored colors index full
+blocks.  Choose seven of them and index them injectively as
+$(\eta_h)_{h\in\operatorname{Fin}7}$.
+
+For every $h$, fullness gives
+$Q_{\eta_h}\subseteq C\subseteq X_i$.  In particular
+$\eta_h\in D_{n,q}$ and, because $X_i$ is a subset of
+$\overline\varphi_n(T(y_i))$, the color $\eta_h$ is missing on
+$T(y_i)$.  Finally, the definition
+$X_i=(\overline\varphi_n(T(y_i))\setminus B)\setminus U_i$
+shows that every member of the whole block
+$\Gamma^q_{\eta_h}\cup\{\eta_h\}$ avoids $U_i$.  This is precisely the
+two asserted properties of the seven-color family.
+\end{proof}
