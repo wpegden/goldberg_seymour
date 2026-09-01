@@ -1,0 +1,60 @@
+\begin{lemma}[Restriction of a Tashkinov augmentation sequence]
+Let \(S,B,C\) be tree-sequences for the same multigraph and distinguished
+first edge, and let \(\varphi\) be one fixed partial edge coloring.  Suppose
+that \(C\) is obtained from \(S\) by a
+\(\varphi\)-\noderef{TashkinovAugmentationSequence}, that \(S\) is an exact
+ordered \noderef{TreeSequenceInitialSegment} of \(B\), and that \(B\) is an
+exact ordered \noderef{TreeSequenceInitialSegment} of \(C\).  Then \(B\) is
+obtained from \(S\) by a
+\(\varphi\)-\noderef{TashkinovAugmentationSequence}.
+\end{lemma}
+\begin{proof}
+We first record two consequences of the exact ordered initial-segment
+definition.  First, if \(X\) is an exact ordered initial segment of \(Y\)
+and the two tree-sequences have the same length, then \(X=Y\).  Indeed, the
+lengths agree, and the vertex and edge equalities in
+\noderef{TreeSequenceInitialSegment} identify every entry at the same
+index.  The remaining fields of the tree-sequence structures are proofs of
+the attachment and injectivity conditions, so proof irrelevance identifies
+those fields as well.
+
+Second, suppose that \(X\) and \(Y\) are exact ordered initial segments of
+the same tree-sequence \(Z\), and that the length of \(Y\) is at most the
+length of \(X\).  Then \(Y\) is an exact ordered initial segment of \(X\).
+For each vertex or edge index of \(Y\), its entry in \(Y\) equals the entry
+of \(Z\) at that index, while the entry of \(X\) at the same index also
+equals that entry of \(Z\).  Thus the entries of \(Y\) and \(X\) agree
+through the length of \(Y\), which is precisely
+\noderef{TreeSequenceInitialSegment}.
+
+By \noderef{TashkinovAugmentationSequence}, the given passage from \(S\) to
+\(C\) is a finite reflexive-transitive chain of one-step
+\noderef{TashkinovAugmentation}s, all under \(\varphi\).  We induct on this
+chain while allowing \(B\) to be any exact ordered intermediate segment.
+If the chain is empty, then \(C=S\).  The two assumed initial-segment length
+inequalities give
+\[
+  |B|\le |C|=|S|\le |B|.
+\]
+Hence \(B\) and \(S\) have equal length, and the first consequence above,
+applied to the initial-segment relation from \(B\) to \(C=S\), gives
+\(B=S\).  The empty augmentation sequence therefore proves the conclusion.
+
+For the induction step, write the final one-step augmentation as
+\(A\longrightarrow C\).  By \noderef{TashkinovAugmentation}, \(A\) is an
+exact ordered initial segment of \(C\) and
+\[
+  |C|=|A|+1.
+\]
+If \(|B|\le |A|\), the second consequence above, applied to the two initial
+segments \(A,B\) of \(C\), shows that \(B\) is an exact ordered initial
+segment of \(A\).  The induction hypothesis restricts the earlier chain
+from \(S\) to \(A\) to a chain from \(S\) to \(B\), as required.
+
+It remains that \(|B|>|A|\).  Since \(B\) is an initial segment of \(C\),
+we also have \(|B|\le |C|=|A|+1\), and hence \(|B|=|C|\).  The first
+consequence above now gives \(B=C\).  Appending the displayed final
+\(\varphi\)-\noderef{TashkinovAugmentation} to the earlier chain from \(S\)
+to \(A\) yields the required augmentation sequence from \(S\) to \(B=C\).
+This completes the induction.
+\end{proof}

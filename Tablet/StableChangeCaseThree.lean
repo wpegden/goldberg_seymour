@@ -7,6 +7,7 @@ import Tablet.MaximumPropertyTransport
 import Tablet.OrderedTreeUnion
 import Tablet.SameGoodHierarchy
 import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequenceRestrict
 import Tablet.Td
 import Tablet.TreeColorSetMinusClosed
 import Tablet.TwoColorComponentSwap
