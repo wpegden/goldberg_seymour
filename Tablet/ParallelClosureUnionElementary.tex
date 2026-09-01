@@ -31,122 +31,314 @@ $\sigma_n$ and $T_n\vee J_n$ is their ordered union, then
 $V(T_n\vee J_n)$ is elementary under $\sigma_n$.
 \end{lemma}
 \begin{proof}
-Put $n=r(T)$ and inspect the terminal PE constructor in
-\noderef{TashkinovSeriesStep}.  It supplies the selected stable coloring,
-the second stable coloring, the colors $\delta_n,\gamma_n$, the support
-$v_n$, and the final two-color switch defining $\varphi_n$.
+Put $n=r(T)$.  The generating-color equality in
+\noderef{ExtendedTashkinovTree} identifies the displayed $\varphi_n$
+with the coloring in the last positive slot.  Eliminate that slot in
+\noderef{TashkinovSeries} using the hypothesis $\Theta_n=PE$.  The PE
+constructor of \noderef{TashkinovSeriesStep} supplies a selected coloring
+$\pi_{n-1}$, a second coloring $\pi'_{n-1}$, an exact connecting edge
+$f_n$, colors $\delta_n,\gamma_n$, and the support $v_n$.  In particular,
+\[
+ \varphi_n=\pi'_{n-1}/P_{v_n}(\gamma_n,\delta_n,\pi'_{n-1}),   \tag{3}
+\]
+$\pi_{n-1}$ is $(T_n,D_{n-1},\varphi_{n-1})$-stable, and
+$\pi'_{n-1}$ is
+$(T_n,D_{n-1}\cup\{\delta_n\},\pi_{n-1})$-stable.  Both are proper
+and leave exactly $e_0$ uncolored.  The
+\noderef{MaximumDefectiveChoice} fields say that $f_n$ is a
+$\delta_n$-colored defective boundary edge incident with $v_n$, while
+\noderef{ParallelExtensionColor} says that $\gamma_n$ is missing at
+$v_n$ under $\pi_{n-1}$.  The vertex and edge clauses of
+\noderef{StableColoring} give the same two facts under $\pi'_{n-1}$;
+thus $\gamma_n\ne\delta_n$.
 
-First truncate the certified series immediately before its terminal
-step.  Restricting the series data and its certificates to the first
-$n-1$ positive slots gives an ETT whose terminal tree is $T_n$ and whose
-generating coloring is $\varphi_{n-1}$; the ordered-prefix and strictness
-fields are inherited from \noderef{TashkinovSeries} and
-\noderef{ExtendedTashkinovTree}.  Its maximum property is the
-corresponding initial part of \noderef{MaximumProperty}.  If $n>1$, this
-restriction has positive rung number and the lower-rung elementarity
-hypothesis applies.  If $n=1$, it is the initial tuple and
-\noderef{TechnicalTheoremBase} gives the same conclusion.  Hence in all
-cases $V(T_n)$ is elementary under $\varphi_{n-1}$.
+First restrict the original series through slot $n-1$.  Its last
+displayed tree is $T_n$ and its generating coloring is
+$\varphi_{n-1}$.  The ordered initial-segment and strict-extension fields
+are restrictions of \noderef{TashkinovSeriesStep}, and the initial
+maximum clause and all stage bounds below $n-1$ are restrictions of
+\noderef{MaximumProperty}.  Hence, when $n>1$, this is a positive-rung
+ETT with maximum property and smaller rung number, so lower assertion (i)
+makes $V(T_n)$ elementary under $\varphi_{n-1}$.  When $n=1$, the same
+claim is the elementarity conclusion of
+\noderef{TechnicalTheoremBase} for the original initial tuple.  The two
+vertex clauses of the stable relations just extracted therefore make
+$V(T_n)$ elementary under $\pi'_{n-1}$ as well.
 
-The two stable relations in the PE constructor preserve every
-missing-color set on $T_n$ by \noderef{StableColoring}.  Before the final
-switch, $V(T_n)$ is consequently elementary.  The PE component meets
-$T_n$ only at $v_n$: this is current assertion (iv), obtained from
-\noderef{ExtensionBase} using the displayed lower package.  The switch
-therefore changes incident colors at no other tree vertex, and at
-$v_n$ exchanges the missing color $\gamma_n$ with the present color
-$\delta_n$.  Hence no missing color is duplicated on $T_n$ after the
-switch.  Thus $V(T_n)$ is elementary under $\varphi_n$ and, by the
-vertex clause of the assumed stable relation, under $\sigma_n$:
+We also need the pre-switch closedness which prevents $\delta_n$ from
+already being missing elsewhere on $T_n$.  The terminal PE constructor
+says that $V(T_n)$ is closed under $\varphi_{n-1}$ in the sense of
+\noderef{ColoredVertexSetClosed}.  Suppose a boundary identity $g$ had
+$\pi'_{n-1}(g)=c$ with $c$ missing on $T_n$ under $\pi'_{n-1}$.
+The vertex clauses transport this missing color first to $\pi_{n-1}$ and
+then to $\varphi_{n-1}$.  A boundary edge is incident with the tree by
+\noderef{TreeIncidentEdge}.  Apply the reverse controlled-value criterion
+\noderef{sc1} to the two certified stable relations, or equivalently use
+symmetry and transitivity from \noderef{sc2}; it gives
+$\varphi_{n-1}(g)=\pi_{n-1}(g)=\pi'_{n-1}(g)=c$, contrary to the old
+closedness.  Thus $T_n$ is closed under $\pi'_{n-1}$.  Since $f_n$ is a
+$\delta_n$-colored boundary edge under $\pi'_{n-1}$, it follows that
+\[
+          \delta_n\notin\overline\pi'_{n-1}(T_n).              \tag{4}
+\]
+
+We now justify the effect of the switch in (3).  Apply
+\noderef{ExtensionBase} to the current ETT and the displayed lower-rung
+package, taking its stable coloring to be $\varphi_n$ itself.  Properness
+and unique-uncoloredness come from the PE constructor, and reflexivity of
+the required stable relation is the reflexive clause of \noderef{sc2}.
+We obtain
+\[
+ P_{v_n}(\gamma_n,\delta_n,\varphi_n)\cap V(T_n)=\{v_n\}.       \tag{5}
+\]
+The definition \noderef{TwoColorComponentSwap} only transposes
+$\gamma_n$ and $\delta_n$ on edge-nodes of the selected component.  It
+does not change which edge-nodes carry one of these two colors, and hence
+does not change the two-color incidence graph or any of its connected
+components.  Consequently the component in (3) and the component in (5)
+have exactly the same node support.  In particular, the pre-switch
+component in (3) also meets $V(T_n)$ only in $v_n$.
+
+If $x\in V(T_n)-\{v_n\}$ and an edge of the switched component were
+incident with $x$, the incidence rule in
+\noderef{TwoColorIncidenceGraph} would put the vertex-node $x$ in that
+component, contradicting (5).  Thus the switch fixes every edge incident
+with every such $x$, and so fixes its entire missing-color set.  At
+$v_n$, $\gamma_n$ is missing and $f_n$ is the unique incident
+$\delta_n$-edge by properness; the switch changes $f_n$ to
+$\gamma_n$ and changes the missing color at $v_n$ from $\gamma_n$ to
+$\delta_n$.  Before the switch, elementarity says that $\gamma_n$ is
+missing nowhere else, while (4) says that $\delta_n$ is missing nowhere
+on the tree.  Therefore the switch creates no repeated missing color, and
+$V(T_n)$ is elementary under $\varphi_n$.  The vertex clause of the
+assumed $(T_n,D_n,\varphi_n)$-stability then gives
 \[
              V(T_n)\text{ is elementary under }\sigma_n.       \tag{1}
 \]
+It also records for later use that $\delta_n$ is missing at $v_n$ under
+both $\varphi_n$ and $\sigma_n$.
 
-Let $j=m(v_n)$ be the first ladder index relevant to the support.
-Current assertion (iii), namely \noderef{ExtensionRules} applied to the
-same generalized lower package, descends the assumed terminal stability
-to the prefix through $v_n$ and to $T_{j-1}$.  When $j>1$, the
-restricted ETT ending at $T_{j-1}$ has positive rung number below $n$,
-so the sixth lower-rung assertion says that $\sigma_n$ is a
-$\varphi_{j-1}\bmod T_{j-1}$ coloring.  When $j=1$, the same conclusion
-is obtained directly from the initial closure certificate: stability
-copies its augmentations edge by edge, and the assumed closure $J_n$
-supplies the new terminal closure.  This is the zero-rung construction
-used in \noderef{TechnicalTheoremBase}.
+We next construct the lower-rung presentation of $J_n$.  The PE clause of
+\noderef{HierarchyBase}, together with the chosen-vertex equation just
+extracted, identifies its support with $v_n$, says that $J_n$ is a
+\noderef{TashkinovClosure} under $\sigma_n$ of the ordered prefix
+$T_n(v_n)$, and gives the exact ordered union certificate for
+$T_n\vee J_n$.  Let $j=m(v_n)$.  The least-index definition
+\noderef{ETTFirstAppearanceIndex} and the entrywise relations
+\noderef{TreeSequenceInitialSegment} identify this final prefix with
+$T_j(v_n)$.  Apply current assertion (iii), namely
+\noderef{ExtensionRules} with the displayed lower package.  It says that
+$\sigma_n$ is stable relative to $(D_{j-1},\varphi_{j-1})$ both on every
+vertex and incident edge strictly before $v_n$ and on $T_{j-1}$.
 
-The exact edge-control conclusion of
-\noderef{HkuTreeColorsControlled} identifies the displayed colors on the
-intervening ladder segment.  The base data \noderef{HierarchyBase} say
-that $J_n$ is a closure of the same ordered prefix
-$T_n(v_n)=T_j(v_n)$ under $\sigma_n$.  Thus the universal clause of
-\noderef{ModColoring}, or the preceding zero-rung construction, gives an
-actual corresponding ETT presentation with terminal tree $J_n$ above
-$T_{j-1}$.  \noderef{MaximumPropertyTransport} gives that presentation
-maximum property when its rung number is positive.  The first two
-lower-rung assertions then apply; in the zero-rung case their two needed
-conclusions instead come from \noderef{TechnicalTheoremBase}.  Together
-with the closedness field of the \noderef{TashkinovClosure} certificate,
-this gives
+We verify the displayed edge colors needed to copy the construction of
+$T_j(v_n)$.  Let $g$ be a colored displayed edge of $T_j$.
+\noderef{HkuTreeColorsControlled} puts its $\varphi_{j-1}$-color in
+$\overline\varphi_{j-1}(T_j)\cup D_{j-1}$.  Both endpoints of a
+displayed tree edge lie in $V(T_j)$, so $g$ is internal to that vertex
+set in the sense of \noderef{InternalEdges}.  The internal-edge conclusion of
+\noderef{SameColorSeriesPreserved}, applied from slot $j-1$ through slot
+$n-1$, therefore gives
+\[
+                  \varphi_n(g)=\varphi_{j-1}(g).               \tag{6}
+\]
+The terminal conclusion of \noderef{HkuTreeColorsControlled} and the
+assumed stability give $\sigma_n(g)=\varphi_n(g)$, because the ordered
+ladder inclusions put the same exact edge identity in $T_n$.  Thus
+$\sigma_n(g)=\varphi_{j-1}(g)$ for every colored displayed edge of
+$T_j$.  The remaining displayed identity is the root $e_0$, and both
+colorings take value uncolored there by
+\noderef{IsOneEdgeUncolored}.  Hence equality holds on every displayed
+edge required below.
+
+Now inspect the constructor which produces $T_j$ in
+\noderef{TashkinovSeriesStep}.  It contains an explicit
+\noderef{TashkinovAugmentationSequence} under $\varphi_{j-1}$ from the
+prescribed seed to $T_j$: the seed is $T_{j-1}$ in the PE case and the
+exact one-edge extension $T_{j-1}+f_{j-1}$ in the SE or RE case; when
+$j=1$, the seed is the initial one-edge tree $T_0$.  Stop that finite
+sequence at the prefix $T_j(v_n)$.  At one of its steps, let $g$ be the
+new displayed edge and let $c=\varphi_{j-1}(g)$ be missing at the old
+witness vertex $x$.  The witness $x$ occurs strictly before the newly
+adjoined vertex and hence strictly before $v_n$.  The before-$v_n$
+stability from \noderef{ExtensionRules} preserves the missingness of
+$c$ at $x$, while (6) and terminal edge control give
+$\sigma_n(g)=c$.  These are exactly the color and missing-witness clauses
+of \noderef{TashkinovAugmentation}; the ordered-prefix and one-new-entry
+clauses are unchanged.  Repeating this verification at every position
+gives a $\sigma_n$-augmentation sequence from the same prescribed seed
+to $T_j(v_n)$.  Compose it with the augmentation sequence in the
+$\sigma_n$-closure of $T_j(v_n)$ supplied by
+\noderef{HierarchyBase}.  Transitivity of
+\noderef{TashkinovAugmentationSequence}, together with the final
+closedness field of \noderef{TashkinovClosure}, proves that $J_n$ is a
+$\sigma_n$-closure of that exact prescribed seed.
+
+Suppose first that $j>1$.  Restrict the original series through rung
+$j-1$ and take the displayed ETT ending between $T_{j-1}$ and $T_j$.
+As above, the relevant clauses of \noderef{MaximumProperty} restrict to
+give it maximum property.  Its rung number $j-1$ is positive and below
+$n$.  Lower assertion (vi), applied to the $T_{j-1}$-stability already
+obtained, says precisely that $\sigma_n$ is a
+\noderef{ModColoring} of this restricted ETT.  Only now do we apply the
+universal extension clause of that definition: the exact seed and the
+augmentation sequence just checked make $J_n$ an eligible strict
+extension: the first-appearance definition puts $v_n$ outside
+$T_{j-1}$ but inside $J_n$.  It returns an actual
+\noderef{CorrespondingExtendedTashkinovTree} with displayed tree $J_n$,
+replacement input coloring, replacement series, and generating coloring
+$\sigma_n$.  By \noderef{MaximumPropertyTransport}, its replacement ETT
+has maximum property.  Lower assertion (i), instantiated with that actual
+replacement input and ETT, makes $V(J_n)$ elementary under $\sigma_n$.
+
+For interchangeability, let $L$ be the final ladder closure in this
+replacement series.  The ETT certificate makes $J_n$ an ordered initial
+segment of $L$.  A color missing at a vertex of $J_n$ is therefore also
+missing on $L$ by the vertex-union definition
+\noderef{TreeMissingColors}.  Apply lower assertion (ii) to the reflexive
+stable coloring $\sigma_n$ of $L$; it makes $L$ interchangeable for every
+pair of which one color is missing on $J_n$.  Any two nontrivial path
+components meeting $J_n$ also meet $L$, so the definition
+\noderef{TreeInterchangeable} restricts this conclusion from $L$ to
+$J_n$.
+
+If $j=1$, no positive lower ETT exists, so we construct the initial
+series rather than infer it from the base theorem.  Retain the original
+one-edge seed $T_0$, set its input and initial coloring equal to
+$\sigma_n$, keep $S_0=F_0=\varnothing$ and all optional initial fields
+absent, and take the $\sigma_n$-closure of $T_0$ ending at $J_n$ which
+was proved above.  The graph, criticality, chromatic-index, and degree
+clauses of the original \noderef{KTriple} do not depend on its coloring;
+the assumed properness and exact unique-uncoloredness supply the two
+coloring clauses.  Hence these data satisfy the initial constructor of
+\noderef{TashkinovSeriesStep} and form an actual initial certified series
+whose $T_1$ is $J_n$.  Applying \noderef{TechnicalTheoremBase} to this
+constructed series gives both elementarity of $J_n$ under $\sigma_n$ and,
+using reflexive stability, its interchangeability for every pair with a
+color missing on it.
+
+In both cases the original hierarchy-base closure already supplies
+closedness.  We have therefore proved
 \[
  V(J_n)\text{ is elementary and closed under }\sigma_n,        \tag{2}
 \]
 and every pair of colors of which one is missing on $J_n$ is
 $J_n$-interchangeable.
 
+We record one further consequence needed for the final path argument.
+Let $a,b$ be colors missing on $T_n$ and suppose
+$a,b\notin\{\gamma_n,\delta_n\}$.  Apply \noderef{ExtensionBase} again,
+now to the given coloring $\sigma_n$ and its stated properness,
+unique-uncoloredness, and stability.  It gives the exact singleton
+intersection of the $(\gamma_n,\delta_n)$-component of $v_n$ under
+$\sigma_n$ with $V(T_n)$.  All hypotheses of
+\noderef{ParallelExtensionUndoStable} are now present.  Put
+\[
+ \tau=\sigma_n/P_{v_n}(\gamma_n,\delta_n,\sigma_n).
+\]
+That lemma makes $\tau$
+$(T_n,D_{n-1},\varphi_{n-1})$-stable.  Since
+$\gamma_n\ne\delta_n$,
+\noderef{TwoColorComponentSwapProper} gives properness of $\tau$ from
+properness of $\sigma_n$; and \noderef{TwoColorComponentSwap} fixes every
+uncolored value and sends every colored value to a colored value, so the
+exact statement \noderef{IsOneEdgeUncolored} is preserved as well.
+The same swap definition changes only edge values
+$\gamma_n,\delta_n$.  Since $a,b$ avoid those values, every edge has
+color $a$ or $b$ under $\tau$ exactly when it has the same color under
+$\sigma_n$.  Thus the two $(a,b)$-incidence graphs, their connected
+components, their nontriviality, and the colors missing at their vertices
+are identical.  In particular $a,b$ are still missing on $T_n$ under
+$\tau$.  If $n>1$, lower assertion (ii) for the restricted rung-$(n-1)$
+ETT makes $T_n$ interchangeable under $\tau$ for $a,b$; if $n=1$, this
+is the interchangeability conclusion of
+\noderef{TechnicalTheoremBase} for the original initial tuple.  Equality
+of the two incidence graphs transports that conclusion back to
+$\sigma_n$:
+\[
+ \begin{split}
+ &a,b\in\overline\sigma_n(T_n),\quad
+   a,b\notin\{\gamma_n,\delta_n\}\quad\Longrightarrow\\
+ &\hspace{45mm}a,b\text{ are $T_n$-interchangeable under }\sigma_n.
+                                                               \tag{7}
+ \end{split}
+\]
+
 Suppose, for a contradiction, that the ordered union is not elementary.
 By (1), (2), and the exact vertex-set equality in
-\noderef{OrderedTreeUnion}, there are
+\noderef{OrderedTreeUnion}, two vertices with a common missing color
+cannot both lie in either constituent.  Hence there are
 \[
  u\in V(T_n)-V(J_n),\qquad v\in V(J_n)-V(T_n)
 \]
-and a color $\alpha$ missing at both $u$ and $v$.  The PE certificate
-puts $\delta_n$ missing at $v_n\in V(T_n)\cap V(J_n)$; (2) therefore
-gives $\alpha\ne\delta_n$.  The first conclusion of
-\noderef{HkuParallelBoundaryStructure} says that the
-$\gamma_n$-boundary is the singleton $\{f_n\}$.  Its conditional
-conclusion, using the already established pre-step elementarity, would
-make that boundary empty if $\gamma_n$ were missing on $T_n$; the PE
-certificate has $\gamma_n\ne\delta_n$.  Hence $\gamma_n$ is not missing
-on $T_n$, so $\alpha\ne\gamma_n$ as well.
+and a color $\alpha$ missing at both $u$ and $v$.  The support $v_n$
+belongs to the prefix contained in both trees, and $\delta_n$ is missing
+there under $\sigma_n$ by the calculation following (5).  Elementarity
+of $J_n$ and $v\ne v_n$ give $\alpha\ne\delta_n$.
 
-We next produce the paper's vertex $w$.  The
-\noderef{MaximumDefectiveChoice} certificate has at least two exact
-$\delta_n$-boundary identities before the terminal switch.  Its second
-stable relation preserves those identities and their colors.  The
-switch changes the selected identity $f_n$ to $\gamma_n$ and fixes the
-other $\delta_n$-boundary identities.  Choose one of the latter.
-The unconditional delta-boundary conclusion of
-\noderef{HkuParallelBoundaryStructure} gives an incident tree vertex
-$w\prec_{T_n}v_n$.  Hence $w$ lies both in $T_n$ and in the supporting
-prefix contained in $J_n$.
+The first conclusion of \noderef{HkuParallelBoundaryStructure} says that
+the $\gamma_n$-boundary of $T_n$ under $\varphi_n$ is the nonempty
+singleton $\{f_n\}$.  If $\gamma_n$ were missing on $T_n$, then, since
+$\gamma_n\ne\delta_n$, the conditional conclusion of the same lemma and
+the pre-step elementarity proved above would make this boundary empty.
+Thus $\gamma_n$ is not missing on $T_n$ under $\varphi_n$, and the vertex
+clause of terminal stability gives the same fact under $\sigma_n$.
+Since $\alpha$ is missing at $u\in V(T_n)$, we also have
+$\alpha\ne\gamma_n$.
 
-The numerical clause of the initial \noderef{KTriple} gives
-$k\geq\Delta(G)+1$, while the degree of $w$ is at most $\Delta(G)$;
-therefore some color $\beta$ is missing at $w$.  Since $J_n$ is
-elementary, $\delta_n$ is missing at the distinct vertex $v_n$, and
-$\gamma_n$ is missing nowhere on $T_n$, we have
-$\beta\notin\{\delta_n,\gamma_n\}$.
+We next produce the paper's vertex $w$.  The selected edge is defective
+in the sense of \noderef{DefectiveEdge}; expanding
+\noderef{DefectiveColor} and the fields of
+\noderef{MaximumDefectiveChoice} supplies a
+$\delta_n$-boundary identity $g\ne f_n$ under $\pi_{n-1}$.  The enlarged
+stable relation fixes its value under $\pi'_{n-1}$.  This edge-node cannot
+belong to the component in (3): otherwise its inside endpoint would be a
+tree vertex in that component, hence $v_n$ by (5), but properness makes
+$f_n$ the unique incident $\delta_n$-edge there.  Therefore the switch
+fixes $g$, so it remains a $\delta_n$-boundary identity under
+$\varphi_n$.  The unconditional delta-boundary conclusion of
+\noderef{HkuParallelBoundaryStructure} gives an inside endpoint
+$w\prec_{T_n}v_n$.  By \noderef{TreeSequencePrefix}, this vertex lies in
+$T_n(v_n)$, hence in its closure $J_n$; of course it also lies in $T_n$.
 
-Both $\alpha$ and $\beta$ are missing on $T_n$ and differ from
-$\delta_n$.  The conditional conclusion of
-\noderef{HkuParallelBoundaryStructure} therefore says that neither has
-a boundary edge at $T_n$.  On $J_n$, closedness gives the same
-boundary-free conclusion.  Interchangeability on $J_n$ implies that the
-two nontrivial two-color components meeting $J_n$ at $v$ and $w$ are the
-same.  They are nontrivial because elementarity makes $\beta$ present at
-$v$ and $\alpha$ present at $w$.
-\noderef{TwoColorComponentSpanningPath} identifies the common component
-as a path; missingness and properness make $v,w$ its two degree-one ends.
-The same argument using (1) gives a path with ends $u,w$ on $T_n$.
+The numerical clause of \noderef{KTriple} gives
+$k\geq\Delta(G)+1$, and \noderef{MaximumDegree} gives
+$d_G(w)\leq\Delta(G)$.  Under the proper coloring $\sigma_n$, at most
+$d_G(w)<k$ colors are present at $w$.  The complementary definition
+\noderef{MissingColors} therefore supplies a color $\beta$ missing at
+$w$.  Elementarity of $J_n$, together with the missing
+$\delta_n$ at the distinct vertex $v_n$, gives
+$\beta\ne\delta_n$.  The fact that $\gamma_n$ is missing nowhere on
+$T_n$ gives $\beta\ne\gamma_n$.  Finally, elementarity of either
+constituent, using $u\ne w$ or $v\ne w$, gives $\alpha\ne\beta$.
 
-Connected components are disjoint by
-\noderef{TwoColorComponentsDisjoint}, so the two paths sharing $w$ lie
-in one component.  The distinct vertices $u,v$ both miss $\alpha$ and
-$w$ misses $\beta$, so each vertex-node has at most one incident edge of
-the other color by \noderef{MissingColors} and properness.  Thus all
-three have degree at most one in the two-color incidence graph.  A connected
-component containing three such distinct endpoints cannot be a path.
-This contradiction proves that no common missing color at distinct
-vertices of $T_n\vee J_n$ exists.  Therefore the union is elementary,
-as required.
+Apply (7) to $a=\alpha$ and $b=\beta$: both colors are missing on
+$T_n$, at $u$ and $w$, and both avoid the terminal PE pair.  Thus they
+are $T_n$-interchangeable under $\sigma_n$.  They are also
+$J_n$-interchangeable by (2), since they are missing there at $v$ and
+$w$.
+
+Consider first the two-color components through $v$ and $w$.  At $v$,
+$\alpha$ is missing; because $\beta$ is missing at the distinct vertex
+$w$ and $J_n$ is elementary, $\beta$ is present at $v$.  Similarly,
+$\beta$ is missing and $\alpha$ is present at $w$.  By
+\noderef{PresentColors}, each component is nontrivial.  Properness in
+\noderef{IsProperEdgeColoring} makes the vertex-nodes $v,w$ have degree
+exactly one in the $(\alpha,\beta)$-incidence graph.
+\noderef{TwoColorComponentSpanningPath} supplies a spanning simple path
+for each component, so the two nontrivial components qualify for the
+definition \noderef{TreeInterchangeable}.  Interchangeability identifies
+them, and either spanning path has the common component as its support.
+Its two degree-one ends are therefore $v$ and $w$.
+
+The same argument in $T_n$, using (1) and (7), identifies the components
+through $u$ and $w$ and gives a spanning path with degree-one ends $u$
+and $w$.  Both common components are the component through $w$, so they
+are one and the same connected component.  The three vertices $u,v,w$
+are distinct by their memberships in the two set differences and the
+intersection.  Each has degree one in this component, but a simple path
+has only its two ends of degree one.  This contradicts the spanning-path
+conclusion.  Therefore no two distinct vertices of $T_n\vee J_n$ have a
+common missing color, and the ordered union is elementary under
+$\sigma_n$, as required.
 \end{proof}
