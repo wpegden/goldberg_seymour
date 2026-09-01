@@ -80,9 +80,10 @@ $\{\alpha,\beta\}\cap D_n=\varnothing$.
 \item $\alpha\in\overline\varphi_n(A)$ and the singleton
 $\{\alpha\}$ is closed on $A$ under $\varphi_n$.
 \end{enumerate}
-In case 3 the colors are also $A$-interchangeable.  Consequently their
-common nontrivial $(\alpha,\beta)$-path component is the only such path
-component meeting $A$.
+In case 3 the colors are also $A$-interchangeable: at most one nontrivial
+$(\alpha,\beta)$-path component meets $A$.  This does not assert that the
+common component through $v_\alpha$ and $v_\beta$ itself contains an edge
+node; that common component may be an isolated-vertex chain.
 \end{lemma}
 \begin{proof}
 Unpack $C$.  Its fields give positivity, the displayed
@@ -575,8 +576,9 @@ All possibilities under (15) contradict minimality, so $K_a=K_b$ in
 Location 3.  Together with Locations 1 and 2, this proves the component
 equality in alternatives 1 and 2.  Under alternative 3, Location 2 is
 impossible, and (7), (8), or (14) gives
-\noderef{TreeInterchangeable} on $A$.  By its definition, every two
-nontrivial path components meeting $A$ are equal; since the common
-component through $v_\alpha,v_\beta$ is one of them, it is the unique
-one.  This proves alternative 3 and completes the proof.
+\noderef{TreeInterchangeable} on $A$.  By its definition, at most one
+nontrivial path component meets $A$; it does not follow that the common
+component $K_a=K_b$ itself contains an edge node.  Thus we have exactly
+the component equality and $A$-interchangeability asserted in alternative
+3.  This completes the proof.
 \end{proof}
