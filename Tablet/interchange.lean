@@ -11,11 +11,13 @@ import Tablet.ExtendedTashkinovTree
 import Tablet.ExtensionBase
 import Tablet.ExtensionRules
 import Tablet.HierarchyBase
-import Tablet.HierarchyLEMStable
 import Tablet.HkuParallelBoundaryStructure
+import Tablet.Incident
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.KTriple
+import Tablet.LooplessMultigraph
+import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumDegree
 import Tablet.MaximumProperty
 import Tablet.MaximumPropertyTransport
@@ -27,7 +29,9 @@ import Tablet.OutsideKempeRecoloring
 import Tablet.OutsideTreeColorSwap
 import Tablet.ParallelClosureUnionElementary
 import Tablet.ParallelCommonMissingClosed
+import Tablet.ParallelExtensionColor
 import Tablet.ParallelExtensionUndoStable
+import Tablet.PresentColors
 import Tablet.StableColoring
 import Tablet.StableColoringBeforeVertex
 import Tablet.TashkinovAugmentation
@@ -52,6 +56,10 @@ import Tablet.TreeVertexOrder
 import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorComponentsDisjoint
+import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
+import Tablet.TwoColorPathComponent
 import Tablet.sc2
 
 -- [TABLET NODE: interchange]
