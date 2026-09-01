@@ -1,0 +1,318 @@
+\begin{lemma}[Lemma rutcor: reserved colors and the terminal PE]
+Let $(T,\varphi_n)$ be a positive-rung extended Tashkinov tree, let
+$T_n$ be its last ladder tree, and let $T_{n,0}^{*}$ be a hierarchy
+base with closure tree $R_n$.  Let
+\[
+ T_n=T_{n,0}\subset T_{n,1}\subset\cdots\subset
+ T_{n,q}\subset T_{n,q+1}=T
+\]
+be a good hierarchy, where $q\geq1$, and put
+$T_{n,j}^{*}=\noderef{HierarchyStarredStage}(H,j)$.  Thus
+$T_{n,q}^{*}=T_{n,q}$.  Let $p=\noderef{HierarchyPathNumber}(H)$ and
+let $T(y_{p-1})$ be the ordered prefix of $T$ of length
+\[
+ \min\{|T_{n,q}|+(p-1),|T|\}.
+\]
+Assume the exact prefix-elementarity assertion (6.6), namely that
+$V(T(y_{p-1}))$ is elementary under $\varphi_n$.  Also assume that
+$V(T_n)$ is elementary under the pre-step coloring
+$\varphi_{n-1}$; formally this is the coloring at the predecessor of
+the last positive index in the certified series.
+
+Fix $\alpha\in\overline\varphi_n(T_{n,q})$.  For two nested displayed
+trees $A\subseteq B$, the expression
+$\varphi_n\langle B-A\rangle$ used below means, inline and with exact
+edge identities,
+\[
+ \left\{c\in[k]:\text{ for some }t\in\operatorname{Fin}|B|,
+       |A|\leq t\text{ and }\varphi_n(B.\mathit{edge}(t))=c\right\}.
+                                                               \tag{*}
+\]
+If at least one $T_{n,i}^{*}$, $0\leq i\leq q$, is
+$\alpha$-closed, then for every maximal such index $r$, equivalently
+for every $r$ such that $T_{n,r}^{*}$ is $\alpha$-closed and no
+$T_{n,s}^{*}$ with $r<s\leq q$ is $\alpha$-closed,
+\[
+       \alpha\notin
+       \varphi_n\langle T_{n,q}-T_{n,r}^{*}\rangle.            \tag{1}
+\]
+
+If no $T_{n,i}^{*}$, $0\leq i\leq q$, is $\alpha$-closed, then all
+of the following assertions hold simultaneously.  For every
+$1\leq j\leq q$,
+\[
+ \alpha\in
+   \bigcup_{\eta\in D_{n,j}}\Gamma^{j-1}_{\eta}
+ \quad\text{and}\quad
+ \alpha\in
+   \bigcup_{\eta\in D_{n,j-1}}\Gamma^{j-1}_{\eta}
+   =:\Gamma^{j-1}.                                             \tag{2}
+\]
+The terminal extension kind is $\Theta_n=PE$.  Moreover, if
+$v_\alpha$ is the vertex of $T$ at
+$\noderef{HierarchyFirstMissingPosition}(\varphi_n,T,\alpha)$, then
+\[
+                  v_\alpha\in V(T_n)\setminus V(R_n),          \tag{3}
+\]
+and
+\[
+       \alpha\notin
+       \varphi_n\langle T_{n,q}-T_n\rangle.                    \tag{4}
+\]
+The two unions in (2) are respectively the reserved union indexed by
+$D_{n,j}$ and the full paper union $\Gamma^{j-1}$ indexed by
+$D_{n,j-1}$.
+\end{lemma}
+\begin{proof}
+We first fix the ordered-stage facts and the elementarity instances that
+will be used in both branches.  Since $q>0$, the last starred stage from
+\noderef{HierarchyStarredStage} is the unstarred stage $T_{n,q}$.
+The nested and terminal fields of \noderef{TashkinovHierarchy} make it
+an ordered initial segment of $T$, and every earlier hierarchy stage and
+the base core $T_{n,0}^{*}$ is an ordered initial segment of it.
+
+Unfold \noderef{HierarchyPathNumber}.  The final strict hierarchy
+inclusion gives $|T_{n,q}|<|T|$.  The path number is either an element of
+the nonempty candidate interval beginning at $1$, or the positive tail
+length $|T|-|T_{n,q}|$; hence $p\geq1$.  Consequently the prefix
+$T(y_{p-1})$ contains $T_{n,q}$ entry by entry.  The exact-prefix
+property of \noderef{TreeSequencePrefix} and transitivity of the
+initial-segment relations therefore put the vertex set of every
+$T_{n,j}$ and every $T_{n,j}^{*}$ inside
+$V(T(y_{p-1}))$.  Restricting the pairwise-disjointness condition in the
+assumed \noderef{ColoredVertexSetElementary} property proves that all
+these vertex sets, including the PE core when it occurs, are elementary
+under $\varphi_n$.  This is the promised derivation of stage
+elementarity from (6.6), rather than a separate elementarity assumption.
+
+We next record a downward-propagation claim.  Suppose
+$1\leq t\leq q$ and no starred stage with index in $[t,q]$ is
+$\alpha$-closed.  Then
+\[
+                    \alpha\in\overline\varphi_n(T_{n,t}).      \tag{5}
+\]
+We prove this by descending induction on $t$.  At $t=q$, (5) is the
+hypothesis that $\alpha$ is missing on $T_{n,q}$.  For the induction
+step, suppose that $\alpha$ is missing on $T_{n,t+1}$ but not on
+$T_{n,t}^{*}=T_{n,t}$.  Every witness at which it is missing then lies
+in
+\[
+             V(T_{n,t+1})\setminus V(T_{n,t}^{*}).
+\]
+The elementarity of $T_{n,t+1}$ established above lets us apply
+\noderef{GoodHierarchyNewMissingClosed}; that lemma says that a color
+newly missing in this difference is closed on $T_{n,t+1}$.  Since
+$t+1>0$, this is precisely the starred stage
+$T_{n,t+1}^{*}$, contrary to the assumption on $[t,q]$.  Thus the color
+was already missing on $T_{n,t}$, proving (5).
+
+Assume first that a closed starred stage exists, and fix an index $r$
+which is closed and has no later closed index.  If $r=q$, the index set
+in (*) for $T_{n,q}-T_{n,r}^{*}$ is empty, so (1) is immediate.  Suppose
+$r<q$, and fix $s$ with $r<s\leq q$.  Maximality of $r$ says that no
+starred stage in $[s,q]$ is closed, so (5) gives
+$\alpha\in\overline\varphi_n(T_{n,s})$.  On the other hand,
+$T_{n,s}=T_{n,s}^{*}$ is not $\alpha$-closed.
+
+Clause `minusClosed' of \noderef{GoodHierarchy}, expanded through
+\noderef{TreeColorSetMinusClosed}, says that every color missing on
+$T_{n,s}$ but outside
+\[
+                   C_s:=\bigcup_{\eta\in D_{n,s}}
+                                  \Gamma^{s-1}_{\eta}
+\]
+has empty boundary there.  If $\alpha\notin C_s$, this clause and the
+just-proved missingness would say exactly that $T_{n,s}$ is
+$\{\alpha\}$-closed in the sense of
+\noderef{TreeColorSetClosed}, a contradiction.  Hence there is
+$\eta\in D_{n,s}$ with
+\[
+                         \alpha\in\Gamma^{s-1}_{\eta}.          \tag{6}
+\]
+
+We turn (6) into an exact segment exclusion.  By
+\noderef{HierarchyStoredColorsAntitone},
+$D_{n,s}\subseteq D_{n,s-1}$, so the `avoidance' field of
+\noderef{GoodHierarchy} at index $s-1$ applies to this $\eta$ and
+$\alpha$.  Also, the definition
+\noderef{HierarchyStoredColorsAt} says that
+$\eta\in D_{n,s}$ excludes $\eta$ from
+$\overline\varphi_n(T_{n,s}^{*})=
+  \overline\varphi_n(T_{n,s})$.
+Because $T_{n,s}$ is an ordered prefix of $T$, the definition
+\noderef{HierarchyFirstMissingPosition} then puts the first
+$\eta$-missing position at or after $|T_{n,s}|$ (with the last position
+used if there is no missing witness at all).  Thus the minimum occurring
+in \noderef{HierarchySegmentColors} is $|T_{n,s}|$.  Its exact
+edge-index definition becomes
+\[
+ \left\{c:\exists t\in\operatorname{Fin}|T_{n,s}|,
+   |T_{n,s-1}^{*}|\leq t,
+   \varphi_n(T_{n,s}.\mathit{edge}(t))=c\right\}.
+\]
+The avoidance field and (6) say that $\alpha$ is absent from this set.
+In other words,
+\[
+ \alpha\notin
+ \varphi_n\langle T_{n,s}-T_{n,s-1}^{*}\rangle.               \tag{7}
+\]
+
+Equation (7) holds for every $s=r+1,\ldots,q$.  The starred stage with
+positive index $s-1$ is the preceding unstarred stage, while at
+$s=1$ it is the base core.  The ordered-prefix equalities in
+\noderef{TashkinovHierarchy} therefore partition the exact half-open
+edge-index interval
+\[
+              [,|T_{n,r}^{*}|,|T_{n,q}|,)
+\]
+into precisely the intervals used in (7).  Initial-segment equality
+identifies each displayed stage edge with the edge of $T_{n,q}$ at the
+same index.  Taking the finite union of (7) proves (1).
+
+Now suppose that no starred stage is $\alpha$-closed.  Applying (5) for
+every $1\leq j\leq q$, and repeating the minus-closed argument above,
+gives
+\[
+        \alpha\in\bigcup_{\eta\in D_{n,j}}
+                            \Gamma^{j-1}_{\eta}.                \tag{8}
+\]
+For a witness $\eta\in D_{n,j}$ in (8),
+\noderef{HierarchyStoredColorsAntitone} gives
+$\eta\in D_{n,j-1}$.  The same color belongs to the same pair
+$\Gamma^{j-1}_{\eta}$, so (8) also gives
+\[
+        \alpha\in\bigcup_{\eta\in D_{n,j-1}}
+                            \Gamma^{j-1}_{\eta}=\Gamma^{j-1}.
+\]
+This proves both memberships in (2), including the larger paper union.
+
+At $j=1$, choose $\eta\in D_{n,1}$ with
+$\alpha\in\Gamma^0_\eta$.  Antitonicity gives
+$\eta\in D_{n,0}$.  The avoidance field of
+\noderef{GoodHierarchy} at index $0$ puts every member of
+$\Gamma^0_\eta$ in
+\noderef{HierarchyStageMissingColors} at index $0$, which by definition
+is $\overline\varphi_n(T_n)$.  Therefore
+\[
+                         \alpha\in\overline\varphi_n(T_n).     \tag{9}
+\]
+
+We prove that the last extension is PE by inspecting its actual
+certificate.  The positive-rung data in
+\noderef{ExtendedTashkinovTree} identifies $\varphi_n$ with the last
+coloring in \noderef{TashkinovSeries}; its positive-index certificate is
+one of the SE, PE, or RE constructors in
+\noderef{TashkinovSeriesStep}.  Suppose it is not PE.
+
+In the RE constructor, the current coloring is the pre-step coloring,
+and the constructor says that $V(T_n)$ is closed under that coloring.
+Together with (9), the definition
+\noderef{ColoredVertexSetClosed} makes the boundary of $\alpha$ at
+$T_n$ empty.  In the SE constructor, write $\pi$ for the selected current
+coloring.  The `previousClosed' field closes $T_n$ under the pre-step
+coloring, while the `selectedStable' field of
+\noderef{MaximumDefectiveChoice} says that $\pi$ is stable on $T_n$.
+Both colorings are proper and leave exactly $e_0$ uncolored.  Symmetry
+from \noderef{sc2} therefore gives the reverse stable relation.  If a
+boundary identity had color $c$ under $\pi$, with $c$ missing at a tree
+vertex under $\pi$, then \noderef{BoundaryEdges} and
+\noderef{TreeIncidentEdge} say that this identity is incident with
+$T_n$.  Reverse stability would give the same edge value under the
+pre-step coloring, and the vertex clause of
+\noderef{StableColoring} would make $c$ missing at the same vertex
+there.  This contradicts `previousClosed'.  Thus $T_n$ is closed under
+$\pi=\varphi_n$ in the SE case as well.  In either non-PE case, (9)
+makes $T_n$ $\alpha$-closed.  The nonparallel field of
+\noderef{HierarchyBase} identifies $T_{n,0}^{*}$ with $T_n$, contrary
+to the no-closed-stage hypothesis.  Hence
+\[
+                              \Theta_n=PE.                       \tag{10}
+\]
+
+Let $a=\noderef{HierarchyFirstMissingPosition}
+(\varphi_n,T,\alpha)$ and $v_\alpha=T.\mathit{vertex}(a)$.  Since
+$T_n$ is an ordered initial segment of $T$, (9) and the least-candidate
+definition of $a$ show that $v_\alpha$ is an actual missing-color witness
+and
+\[
+                              v_\alpha\in V(T_n).                \tag{11}
+\]
+We now use the pre-step elementarity premise, and only here use the
+special PE closure theorem.  Apply
+\noderef{ParallelCommonMissingClosed} with (10), the generating-coloring
+identity from \noderef{ExtendedTashkinovTree}, and the stated
+elementarity of $V(T_n)$ under $\varphi_{n-1}$.  It says that the PE core
+$T_n\vee R_n$ is closed for every color missing on both $T_n$ and
+$R_n$.  If $v_\alpha$ also belonged to $V(R_n)$, then it would itself
+witness that $\alpha$ is missing on $R_n$; equation (9) would make
+$\alpha$ common-missing.  The cited lemma would make
+$T_{n,0}^{*}=T_n\vee R_n$ $\alpha$-closed, contradicting the
+no-closed-stage hypothesis at index $0$.  Therefore (11) strengthens to
+\[
+                        v_\alpha\in V(T_n)\setminus V(R_n),
+\]
+which is (3).  Notice that the PE certificate alone was not used to
+deduce common-missing closure: the exact lower-rung elementarity premise
+of \noderef{ParallelCommonMissingClosed} was supplied.
+
+For completeness, we next derive the two PE-base exclusions used in the
+last edge argument.  The parallel field of
+\noderef{HierarchyBase} and \noderef{OrderedTreeUnion} identify the
+core vertex set with $V(T_n)\cup V(R_n)$.  Its elementarity was already
+obtained by restricting (6.6).  Since $v_\alpha$ lies in this core and
+misses $\alpha$, no different core vertex can miss $\alpha$.  In
+particular,
+\[
+ \alpha\notin
+ \bigcup_{w\in V(R_n)\setminus V(T_n)}
+          \overline\varphi_n(w).                                \tag{12}
+\]
+
+The same elementarity excludes $\alpha$ from every exact edge of
+$R_n$ not already in $T_n$.  Indeed, the PE field of
+\noderef{HierarchyBase} supplies a
+\noderef{TashkinovClosure} of the exact support prefix $T_n(v_n)$ whose
+terminal tree is $R_n$.  By
+\noderef{TashkinovAugmentationSequence}, this is a finite sequence of
+steps from \noderef{TashkinovAugmentation}.  In one such step the unique
+new last edge has a color missing on the preceding tree.  Every preceding
+tree is an initial segment of $R_n$, so a hypothetical new edge of color
+$\alpha$ would supply a vertex $w\in V(R_n)$ missing $\alpha$.
+Equation (3) gives $v_\alpha\notin V(R_n)$, hence $w\ne v_\alpha$;
+both vertices lie in the elementary core, contradicting that both miss
+$\alpha$.  Induction along the finite augmentation sequence excludes
+$\alpha$ from every edge added after the support prefix.  Every edge of
+that prefix is the same exact edge identity as an edge of $T_n$, by
+\noderef{TreeSequencePrefix}.  Consequently
+\[
+ \text{no identity in }E(R_n)\setminus E(T_n)
+       \text{ has color }\alpha,                               \tag{13}
+\]
+where the exact edge sets are those of
+\noderef{TreeSequenceEdgeSet}.
+This proves the missing-color exclusion (12) and the edge-color exclusion
+(13) directly from (6.6) and the Tashkinov augmentation data.
+
+It remains to pass from the PE base to $T_{n,q}$.  For every
+$1\leq s\leq q$, the witness in (8), antitonicity, avoidance, and the
+exact first-missing-position calculation used for (7) give
+\[
+ \alpha\notin
+ \varphi_n\langle T_{n,s}-T_{n,s-1}^{*}\rangle.                \tag{14}
+\]
+Uniting the adjacent half-open index intervals in (14) gives
+\[
+ \alpha\notin
+ \varphi_n\langle T_{n,q}-T_{n,0}^{*}\rangle.                 \tag{15}
+\]
+Finally, the `leftSegment' and `newEntryFromRight' fields of
+\noderef{OrderedTreeUnion} say that every exact entry of
+$T_{n,0}^{*}=T_n\vee R_n$ after $T_n$ is an entry of $R_n$ with the
+same edge identity.  Injectivity of tree-sequence edge entries ensures
+that this right-hand identity is not already an edge of $T_n$.
+Therefore (13) excludes $\alpha$ from the entire interval between
+$T_n$ and the PE base, while (15) excludes it from the interval after
+the base.  These two adjacent exact index intervals form
+$[|T_n|,|T_{n,q}|)$, so their union is precisely (*) for
+$T_{n,q}-T_n$.  This proves (4) and completes the second branch.
+\end{proof}

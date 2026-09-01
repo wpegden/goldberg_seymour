@@ -29,6 +29,7 @@ import Tablet.MaximumDegree
 import Tablet.MissingColorIncidenceEndpoint
 import Tablet.ModColoring
 import Tablet.NineN
+import Tablet.rutcor
 import Tablet.ParallelExtensionUndoStable
 import Tablet.ParallelClosureUnionElementary
 import Tablet.ParallelCommonMissingClosed
