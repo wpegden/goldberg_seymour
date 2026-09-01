@@ -40,57 +40,231 @@ $\varphi_n$, it is so under $\sigma_n$.
 \end{enumerate}
 \end{lemma}
 \begin{proof}
-Apply \noderef{HierarchyOutsideKempeStable}.  It gives every assertion in
-(i), and in the PE case it also gives
-$(T_n\oplus R_n,D_n,\varphi_n)$-stability.  Since every edge incident
-with $T$ and every missing-color set on $T$ is fixed, the original
-terminal construction from $T_n$ remains the identical Tashkinov
-augmentation construction under $\sigma_n$: in a PE the seed is $T_n$,
-and in an SE or RE the same individual connecting edge is adjoined before
-the same augmentation tail.  Restricting the stable relation from $T$
-to $T_n$ gives $(T_n,D_n,\varphi_n)$-stability.  Apply \noderef{Td} to
-the lower-rung package, maximum property, properness, and this restricted
-stability.  It gives that $\sigma_n$ is a
-$\varphi_n\bmod T_n$ coloring.  The eligibility alternative in
-\noderef{ModColoring} therefore applies to the displayed tree $T$.
-It supplies an actual
-\noderef{CorrespondingExtendedTashkinovTree} certificate under
-$\sigma_n$.  Now \noderef{MaximumPropertyTransport}, using the given
-maximum property, proves (ii).
+Write $n$ for the terminal rung, $T_n$ for the terminal ladder tree,
+$T_{n+1}$ for the last tree of the certified series, and
+$D_n$ for the terminal stored-color set.  Apply
+\noderef{HierarchyOutsideKempeStable} with the given ETT, hierarchy base,
+hierarchy, properness, one-uncolored-edge hypothesis, and outside
+recoloring.  It gives that $\sigma_n$ is proper, leaves exactly $e_0$
+uncolored, is $(T,D_n,\varphi_n)$-stable, and is
+$(T,\varphi_n)$-invariant.  It also gives
+$(T_n\oplus R_n,D_n,\varphi_n)$-stability whenever the terminal kind is
+PE.  This proves every assertion in (i).
 
-We next transport the hierarchy base.  In the PE case, the hypotheses
-just established meet \noderef{HierarchySplitter}; it uses
-\noderef{CombinedStableClosurePreserved} to retain the same ordered
-$R_n$, the same union $T_n\vee R_n$, and all stages and dividers; its
-stable vertex clause also supplies the terminal-ladder missing-color
-equality required by \noderef{HierarchyBase}.  In the non-PE cases the
-starred base is $T_n$, and the outside recoloring fixes its vertexwise
-missing-color sets.  Thus a compatible base exists there without
-constraining the unused closure field.  The corresponding-ETT certificate
-identifies every ladder tree, raw stored set, extension kind, and support
-datum.  Copying all stages and divider positions therefore yields a
-hierarchy for the corresponding ETT satisfying the paper-extensional
-relation \noderef{SameHierarchyStages}.
+We shall need the stronger pointwise form of the outside-recoloring
+observation, so we obtain it independently rather than reading it from
+the preceding lemma's proof.  Apply
+\noderef{OutsideKempeRecoloringStable} directly, with control set $D_n$,
+to the stated proper coloring, the fact that exactly $e_0$ is uncolored,
+and the given outside recoloring.  Its last conclusion gives
+\[
+ \sigma_n(f)=\varphi_n(f)
+ \quad\text{for every edge identity $f$ incident with $T$.}   \tag{1}
+\]
+Its stable-coloring conclusion, expanded using the vertex clause of
+\noderef{StableColoring}, also gives
+\[
+ \overline{\sigma_n}(v)=\overline{\varphi_n}(v)
+ \quad\text{for every $v\in V(T)$.}                           \tag{2}
+\]
 
-Apply \noderef{OutsideKempeGoodHierarchy} to these two corresponding
-presentations.  Its hypotheses have just been verified: the stage data
-are identical, the raw stored sets agree by correspondence, and the
-recoloring is outside $T$.  It supplies a good hierarchy under
-$\sigma_n$ with the same Gamma family, proving (iii).  Here this means
-the paper-extensional relation \noderef{SameGoodHierarchy}:
-corresponding stages have equal $D_{n,j}$ sets and their Gamma values
-agree on every color of that common set.  The total Lean functions may
-differ away from these sets, where the paper defines no Gamma set.
+We next produce the corresponding ETT certificate required in (ii).
+By \noderef{ExtendedTashkinovTree}, $T_n$ is an ordered initial segment
+of $T$, its length is strictly smaller than that of $T$, $T$ is an
+ordered initial segment of $T_{n+1}$, and the generating coloring is the
+terminal series coloring $\varphi_n$.  The entrywise definition in
+\noderef{TreeSequenceInitialSegment}, together with
+\noderef{TreeSequenceVertexSet}, therefore gives
+$V(T_n)\subseteq V(T)$.  Equations (1) and (2) restrict to the edge and
+vertex clauses of $(T_n,D_n,\varphi_n)$-stability: for the edge clause,
+an edge incident with $T_n$ is incident with the same vertex in $T$ by
+\noderef{TreeIncidentEdge}; for the vertex clause, use the displayed
+vertex inclusion.  Apply \noderef{Td} to this restricted stability,
+the given lower-rung package, positivity, and maximum property.  Its
+conclusion is
+\[
+                 \sigma_n\text{ is a }\varphi_n\bmod T_n
+                 \text{ coloring}.                           \tag{3}
+\]
 
-For (iv), set
-$C=\bigcup_{\eta\in D_{n,q+1}}\Gamma^q_\eta$, where
-$D_{n,q+1}$ is \noderef{HierarchyTerminalStoredColors}.  Its stored
-union and terminal subtraction are compatible by the hierarchy-base
-missing-color invariant.  The two
-colorings agree on every edge incident with $T$ and have identical
-missing-color sets at every vertex of $T$.  Hence
-$\overline{\sigma_n}(T)-C=\overline{\varphi_n}(T)-C$, and for each color
-in this common set the two exact colored boundary-edge sets are equal.
-Expanding \noderef{TreeColorSetMinusClosed} transports the assumed
-minus-closedness from $\varphi_n$ to $\sigma_n$, completing the proof.
+It remains to verify, rather than merely assert, that $T$ is eligible
+for the universal clause of \noderef{ModColoring}.  The final certificate
+in \noderef{TashkinovSeries} is a
+\noderef{TashkinovSeriesStep}.  Positivity of $n$ excludes its initial
+constructor.  In the PE constructor, its closure field is a
+\noderef{TashkinovClosure} of $T_n$ under $\varphi_n$ whose last tree is
+$T_{n+1}$.  In either the SE or RE constructor, it supplies an individual
+edge identity $f_n$, the exact equality $F_n=\{f_n\}$, a tree $A$ with
+\[
+              A=T_n+f_n
+              \quad\text{in the sense of }
+              \noderef{TreeSequenceAdjoinEdge},               \tag{4}
+\]
+and a $\varphi_n$-closure from $A$ to $T_{n+1}$.
+
+We first truncate the appropriate old closure at the displayed tree
+$T$.  Expanding \noderef{TashkinovClosure}, its first field is a finite
+\noderef{TashkinovAugmentationSequence}.  Each step in that sequence is
+a \noderef{TashkinovAugmentation}; hence it increases the length by
+exactly one and retains the preceding tree as the exact ordered initial
+segment.  In the PE case the seed $T_n$ is strictly shorter than $T$.
+In the SE/RE case (4) has length $|T_n|+1\leq |T|$, because $T$ strictly
+extends $T_n$.  Moreover, both $A$ and $T$ are initial segments of
+$T_{n+1}$: composing the one-step initial-segment fields in the SE/RE
+closure sequence gives this for $A$, and the ETT certificate gives it for
+$T$.  Their entries agree through the shorter length by
+\noderef{TreeSequenceInitialSegment}, so $A$ is an initial segment of
+$T$.
+
+The augmentation lengths in the closure sequence consequently pass
+through the length of $T$.  The member having that length and $T$ are
+both ordered initial segments of $T_{n+1}$ of the same length; equality
+of every vertex and edge entry makes them the same ordered tree-sequence.
+Taking the initial part of the finite sequence therefore gives
+\[
+ \begin{cases}
+  T_n\longrightarrow T,&\text{in the PE case},\\
+  T_n+f_n=A\longrightarrow T,&\text{in the SE/RE cases},
+ \end{cases}                                                   \tag{5}
+\]
+as augmentation sequences under $\varphi_n$.  The second route retains
+the exact edge identity and singleton equality in (4), not just its
+endpoints.
+
+We now transport every step of (5) from $\varphi_n$ to $\sigma_n$.
+Consider one step $A_i\to A_{i+1}$.  Its new last edge $g_i$ joins a
+vertex of $A_i$ to the new vertex by
+\noderef{TashkinovAugmentation}.  Since $A_i$ is an initial segment of
+$T$, that old endpoint lies in $V(T)$ by
+\noderef{TreeSequenceVertexSet}; hence $g_i$ is incident with $T$ in the
+sense of \noderef{TreeIncidentEdge}.  Equation (1) preserves the exact
+color of $g_i$.  The same augmentation supplies a color missing at some
+vertex of $A_i$ after expanding \noderef{TreeMissingColors}; that vertex
+also lies in $V(T)$, so (2) preserves this missing-color witness.  Its
+length and initial-segment clauses do not mention a coloring.  Thus all
+clauses of
+\noderef{TashkinovAugmentation} hold for the same ordered step under
+$\sigma_n$.  Induction over the finite sequence, using
+\noderef{TashkinovAugmentationSequence}, proves
+\[
+ \begin{cases}
+  T_n\longrightarrow T,&\text{under $\sigma_n$ in the PE case},\\
+  T_n+f_n=A\longrightarrow T,&\text{under $\sigma_n$ in the SE/RE cases}.
+ \end{cases}                                                   \tag{6}
+\]
+
+The initial-segment and strict-extension premises for $T_n\subset T$
+come directly from \noderef{ExtendedTashkinovTree}.  In PE, the first
+route in (6) is exactly the PE eligibility alternative of
+\noderef{ModColoring}.  In SE or RE, (4), $F_n=\{f_n\}$, and the second
+route in (6) are exactly its other alternative.  Applying the universal
+clause of (3) now supplies an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate on the same
+terminal tree $T$.  By \noderef{MaximumPropertyTransport}, the given
+maximum property transfers to its replacement ETT.  This proves (ii).
+Retain the PE augmentation sequence in (6), since it is an explicit
+hypothesis needed below.
+
+We construct the transported hierarchy, separating the PE and non-PE
+cases.  In the PE case, all hypotheses of
+\noderef{HierarchySplitter} have now been named: the lower-rung package,
+maximum property and positivity, properness and exact one-uncoloredness
+of both colorings, the PE combined-stability conclusion of
+\noderef{HierarchyOutsideKempeStable}, and the first $\sigma_n$-sequence
+in (6).  That lemma supplies a corresponding ETT with maximum property,
+a hierarchy base using the same $R_n$ and starred core, and a hierarchy
+with the same stages and divider positions.
+
+Suppose instead that the terminal step is SE or RE.  Use the corresponding
+ETT already obtained from \noderef{ModColoring}.  The definition
+\noderef{CorrespondingExtendedTashkinovTree} gives equality of the rung
+numbers, equality of every positive ladder tree (in particular the two
+copies of $T_n$), equality of the raw stored sets and connecting-edge
+sets, and equality of the extension kinds.  It does not assert equality
+of internal PE or RE support data, and no such equality is used here.
+
+Rebuild \noderef{HierarchyBase} for the replacement ETT as follows.
+Take its core to be its terminal ladder tree $T_n$, transport the old
+positive support position across the equality of the two copies of
+$T_n$, and copy the unused closure field.  The terminal missing-color
+field is reflexive because both the base coloring and the replacement
+ETT's generating coloring are $\sigma_n$.  The parallel implication has
+a false premise: equality of the terminal extension kinds and the present
+SE/RE assumption rule out PE.  The nonparallel field is the defining
+choice that the core is $T_n$.  Thus every field of the new base has been
+specified.  For the old base, its nonparallel clause gives the same
+identity $\mathcal B.\mathit{core}=T_n$.
+
+Now construct a \noderef{TashkinovHierarchy} by copying the old divider
+count, every ordered stage, and every divider position.  Its base-stage
+field follows from the old base-stage equality and the corresponding
+certificate's equality of the two terminal ladder trees.  Its terminal
+stage remains literally $T$.  Every nested initial-segment relation,
+every strict length inequality, positivity and increasing order of the
+divider positions, and every divider-prefix identity is the corresponding
+old field because the ordered stages and terminal tree were copied.  Its
+core-inside-first field is the old one after rewriting both cores as
+$T_n$.  This verifies every field of the hierarchy definition.
+
+The two non-PE presentations satisfy
+\noderef{SameHierarchyStages} field by field: their cores are both
+$T_n$; their divider counts, stage families, and divider positions are
+the copied data; equality of terminal kinds makes both PE propositions
+false; and the conditional closure-equality clause is therefore vacuous.
+Together with the PE output of \noderef{HierarchySplitter}, this gives in
+all cases a corresponding maximum ETT, a hierarchy base, and a hierarchy
+with the same paper-relevant stages and dividers as the original.
+
+Apply \noderef{OutsideKempeGoodHierarchy} to these two presentations.
+Its rung-equality and raw-stored-set hypotheses are precisely fields of
+the chosen \noderef{CorrespondingExtendedTashkinovTree}; its same-stage
+hypothesis was just proved, and its remaining hypotheses are the given
+good hierarchy, properness, one-uncoloredness, and outside recoloring.
+It supplies a good hierarchy under $\sigma_n$ and proves the relation
+\noderef{SameGoodHierarchy}.  Consequently the corresponding
+$D_{n,j}$ sets are equal and the Gamma values agree for every color in
+each such common set.  This is exactly assertion (iii), including the
+paper's meaning of ``the same Gamma sets.''
+
+It remains to prove the final implication.  Put
+\[
+ C=\bigcup_{\eta\in D_{n,q+1}}\Gamma^q_\eta,
+ \qquad
+ D_{n,q+1}=\noderef{HierarchyTerminalStoredColors}.
+\]
+First we identify the control set appearing after subtraction.  By
+\noderef{TreeMissingColors}, a color is in
+$\overline{\varphi_n}(T)$ exactly when it is missing at some
+$v\in V(T)$, and similarly for $\sigma_n$.  Applying (2) to that same
+vertex in each direction proves
+\[
+       \overline{\varphi_n}(T)=\overline{\sigma_n}(T),
+ \quad\text{hence}\quad
+       \overline{\varphi_n}(T)-C
+        =\overline{\sigma_n}(T)-C.                            \tag{7}
+\]
+
+Next fix a color $c$.  The set \noderef{BoundaryEdges} depends only on
+$G$ and $V(T)$, so it is common to the two colorings.  If $f$ is one of
+these exact boundary-edge identities, that definition supplies an
+endpoint $u\in V(T)$ incident with $f$; hence
+\noderef{TreeIncidentEdge} says that $f$ is incident with $T$, and (1)
+gives $\sigma_n(f)=\varphi_n(f)$.  Filtering the common boundary by the
+condition that the exact edge value is $c$, as in
+\noderef{BoundaryColorEdges}, therefore gives
+\[
+ \partial_{\varphi_n,c}(V(T))
+   =\partial_{\sigma_n,c}(V(T))                              \tag{8}
+\]
+as sets of edge identities, for every $c$.
+
+Assume that $T$ is $C^{-}$-closed under $\varphi_n$.
+By \noderef{TreeColorSetMinusClosed} and
+\noderef{TreeColorSetClosed}, this says that for every
+$c\in\overline{\varphi_n}(T)-C$, the left side of (8) is empty.
+Equation (7) makes the quantified color set exactly
+$\overline{\sigma_n}(T)-C$, and (8) makes the corresponding right side
+empty.  A second application of \noderef{TreeColorSetClosed} and
+\noderef{TreeColorSetMinusClosed} proves that $T$ is $C^{-}$-closed
+under $\sigma_n$.  This proves (iv) and completes the lemma.
 \end{proof}

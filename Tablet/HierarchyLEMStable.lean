@@ -1,12 +1,31 @@
+import Tablet.BoundaryColorEdges
+import Tablet.BoundaryEdges
+import Tablet.ExtendedTashkinovTree
+import Tablet.HierarchyBase
 import Tablet.HierarchyOutsideKempeStable
 import Tablet.HierarchySplitter
 import Tablet.HierarchyTerminalStoredColors
 import Tablet.MaximumPropertyTransport
 import Tablet.ModColoring
 import Tablet.OutsideKempeGoodHierarchy
+import Tablet.OutsideKempeRecoloringStable
 import Tablet.SameGoodHierarchy
+import Tablet.SameHierarchyStages
+import Tablet.StableColoring
+import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovClosure
+import Tablet.TashkinovHierarchy
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
 import Tablet.Td
+import Tablet.TreeColorSetClosed
 import Tablet.TreeColorSetMinusClosed
+import Tablet.TreeIncidentEdge
+import Tablet.TreeMissingColors
+import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: HierarchyLEMStable]
 theorem HierarchyLEMStable {V E : Type*}
