@@ -6,7 +6,7 @@ import Tablet.MissingColors
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeVertexOrder
 import Tablet.TwoColorComponent
-import Tablet.TwoColorPathComponent
+import Tablet.TwoColorNontrivialPathComponent
 
 -- [TABLET NODE: ExtensionBaseRestorationInvariant]
 def ExtensionBaseRestorationInvariant {V E : Type*}
@@ -36,7 +36,7 @@ def ExtensionBaseRestorationInvariant {V E : Type*}
           (ett.series.data.tree (trace.slot a).succ.castSucc) ∧
         trace.delta a ∈
           MissingColors G (trace.coloring a.castSucc) (trace.support a) ∧
-        TwoColorPathComponent G (trace.coloring a.castSucc)
+        TwoColorNontrivialPathComponent G (trace.coloring a.castSucc)
           (trace.gamma a) (trace.delta a) (Sum.inl (trace.support a)) ∧
         (∀ w : V,
           w ∈ TreeSequenceVertexSet

@@ -7,7 +7,7 @@ import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceVertexSet
 import Tablet.TwoColorComponent
 import Tablet.TwoColorIncidenceGraph
-import Tablet.TwoColorPathComponent
+import Tablet.TwoColorNontrivialPathComponent
 
 -- [TABLET NODE: ExtensionBaseAlgorithmBInvariant]
 def ExtensionBaseAlgorithmBInvariant {V E : Type*}
@@ -32,7 +32,7 @@ def ExtensionBaseAlgorithmBInvariant {V E : Type*}
           (ett.series.data.tree (trace.slot a).succ.castSucc) ∧
         trace.delta a ∈
           MissingColors G (trace.coloring a.castSucc) u ∧
-        TwoColorPathComponent G (trace.coloring a.castSucc)
+        TwoColorNontrivialPathComponent G (trace.coloring a.castSucc)
           (trace.gamma a) (trace.delta a) (Sum.inl u) ∧
         (∀ w : V,
           w ∈ TreeSequenceVertexSet

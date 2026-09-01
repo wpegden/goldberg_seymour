@@ -93,7 +93,7 @@ gives
 \]
 
 At the root \(x=v_{t_a}\), unpacking
-\noderef{TwoColorPathComponent} supplies an edge node in \(K_a\).
+\noderef{TwoColorNontrivialPathComponent} supplies an edge node in \(K_a\).
 Because \(K_a\) is the connected component of the vertex root by
 \noderef{TwoColorComponent}, a walk from the root to that edge has a
 first edge node adjacent to the root.  The adjacency formula in
@@ -102,7 +102,7 @@ color \(\gamma_{t_a}\) or \(\delta_{t_a}\).  But the invariant says
 that \(\delta_{t_a}\) is missing; after unfolding
 \noderef{MissingColors} and \noderef{PresentColors}, no incident edge
 has that color.  The distinct-color clause of
-\noderef{TwoColorPathComponent} therefore shows that
+the path clause of \noderef{TwoColorNontrivialPathComponent} therefore shows that
 \(\gamma_{t_a}\) is present at the root.
 Moreover, every incident edge of color \(\gamma_{t_a}\) is adjacent to
 the root in the incidence graph and therefore has its edge node in
@@ -182,7 +182,7 @@ transition in (5) deletes \(\delta_{i_p}\) and adjoins the delta needed
 by the next transition; each following transition deletes precisely that
 adjoined delta and adjoins the next one.  We also check that no deletion
 removes a color which was initially missing.  For \(a>0\), the root-path
-argument preceding (6), using \noderef{TwoColorPathComponent}, says that
+argument preceding (6), using \noderef{TwoColorNontrivialPathComponent}, says that
 \(\gamma_{i_a}=\delta_{i_{a-1}}\) is present immediately before the
 step at \(i_a\).  Every earlier trace step supported at \(w\) has
 index \(i_b\) with \(b>a\), and by (6) it touches only

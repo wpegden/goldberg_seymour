@@ -41,6 +41,7 @@ import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorCycle
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
 import Tablet.TwoColorPathComponent
+import Tablet.TwoColorNontrivialPathComponent
 import Tablet.sc1
 import Tablet.sc2
 

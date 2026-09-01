@@ -12,7 +12,7 @@ import Tablet.TreeSequenceVertexSet
 import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorIncidenceGraph
-import Tablet.TwoColorPathComponent
+import Tablet.TwoColorNontrivialPathComponent
 
 -- [TABLET NODE: ExtensionBaseClaim43MissingColors]
 theorem ExtensionBaseClaim43MissingColors {V E : Type*}

@@ -36,6 +36,7 @@ import Tablet.TwoColorComponentsDisjoint
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
 import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorPathComponent
+import Tablet.TwoColorNontrivialPathComponent
 
 -- [TABLET NODE: Tchange]
 theorem Tchange {V E : Type*} [Fintype V] [Fintype E] [DecidableEq E]

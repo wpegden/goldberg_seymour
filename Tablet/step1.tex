@@ -164,31 +164,46 @@ hierarchy having $d<q$ dividers.  The same-rung hypothesis (6.1) makes
 $V(U)$ elementary.  If $a$ is missing and singleton-closed on $U$ and
 $a,b$ are not $U$-interchangeable, the negation of
 \noderef{TreeInterchangeable}, with
-\noderef{TwoColorPathComponent} unfolded, gives two distinct nontrivial
-path components meeting $U$.  Each has a simple spanning path by
-\noderef{TwoColorComponentSpanningPath}; properness and
-\noderef{TwoColorIncidenceDegreeAtMostTwo} show that its two ends are
-vertex-nodes missing $a$ or $b$.  The two components and hence their end
-sets are disjoint by \noderef{TwoColorComponentsDisjoint}.
+\noderef{TwoColorPathComponent} unfolded, gives two distinct paper path
+components meeting $U$; one may initially be a singleton.  Their full
+node sets are disjoint by \noderef{TwoColorComponentsDisjoint}.
 
-If $b$ is missing on $U$, elementarity permits at most one of the four
-ends in $U$ to miss $a$ and at most one to miss $b$.  If $b$ is not
-missing on $U$, only the unique $a$-missing vertex can be an end in $U$.
-Thus at least two ends are outside in the first case and at least three
-are outside in the second.  From each selected outside end, follow its
-component's spanning path only as far as its first vertex-node in $U$.
-The component meets $U$, so this portion exists.  Its outside end misses
-one of the two colors, it has at least one edge, and its only tree vertex
-is its last vertex; hence it is a \noderef{TreeExitPath}.  Portions in
-different full components are disjoint.  Two portions selected from
-opposite ends of one spanning path are also disjoint: if their first
-contacts were equal, their distinct last edge-nodes would both be
-$b$-colored, because the closed color $a$ has no boundary identity, and
-properness would fail at that contact.  Selecting the required ends
-therefore yields pairwise disjoint first-contact portions.  In
-particular, failure of interchangeability implies
-$\mathsf{LegBad}(U,\psi,a,b)$, and when $b$ is not missing it supplies a
-qualifying triple of disjoint exit legs with distinct outside endpoints.
+If $b$ is not missing on $U$, a singleton component meeting $U$ is
+impossible: its unique tree vertex would have no incident edge of either
+path color and hence would miss $b$.  Thus both components contain edge
+nodes and satisfy \noderef{TwoColorNontrivialPathComponent}.  Each has a
+simple spanning path by \noderef{TwoColorComponentSpanningPath};
+properness and \noderef{TwoColorIncidenceDegreeAtMostTwo} show that its
+two ends are vertex-nodes missing $a$ or $b$.  Only the unique
+$a$-missing vertex can be an end in $U$, so at least three of the four
+ends are outside $U$.
+
+Now suppose that $b$ is missing on $U$.  If both components are
+nontrivial, the same spanning-path argument applies, and elementariness
+permits at most one of their four ends in $U$ to miss $a$ and at most one
+to miss $b$; hence at least two ends are outside.  If, after relabeling,
+the first component is a singleton at $x\in U$, then both $a$ and $b$
+are missing at $x$.  Elementariness makes the other component nontrivial
+and prevents either end of its spanning path from lying in $U$, since
+every such end misses $a$ or $b$.  Its two ends therefore supply the two
+required outside ends.  There cannot be two distinct singleton
+components, since their two tree vertices would repeat both missing
+colors.
+
+From each selected outside end, follow its component's spanning path only
+as far as its first vertex-node in $U$.  The component meets $U$, so this
+portion exists.  Its outside end misses one of the two colors, it has at
+least one edge, and its only tree vertex is its last vertex; hence it is a
+\noderef{TreeExitPath}.  Portions in different full components are
+disjoint.  Two portions selected from opposite ends of one spanning path
+are also disjoint: if their first contacts were equal, their distinct
+last edge-nodes would both be $b$-colored, because the closed color $a$
+has no boundary identity, and properness would fail at that contact.
+Selecting the required ends therefore yields pairwise disjoint
+first-contact portions.  In particular, failure of interchangeability
+implies $\mathsf{LegBad}(U,\psi,a,b)$, and when $b$ is not missing it
+supplies a qualifying triple of disjoint exit legs with distinct outside
+endpoints.
 
 Second, the same qualifying triple exists whenever
 $\mathsf{LegBad}(U,\psi,a,b)$ holds and $b$ is not missing, even though

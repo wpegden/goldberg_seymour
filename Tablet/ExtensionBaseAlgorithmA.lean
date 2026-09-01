@@ -21,7 +21,7 @@ import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
 import Tablet.TwoColorIncidenceGraph
-import Tablet.TwoColorPathComponent
+import Tablet.TwoColorNontrivialPathComponent
 
 -- [TABLET NODE: ExtensionBaseAlgorithmA]
 theorem ExtensionBaseAlgorithmA {V E : Type*}

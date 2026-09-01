@@ -3,7 +3,8 @@ Let $(G,e_0,\varphi)$ be a $k$-triple, and let $T$ be a Tashkinov
 tree with respect to $e_0$ and $\varphi$ whose vertex set is closed under
 $\varphi$.  If $\alpha$ or $\beta$ is missing on $T$, then $\alpha$ and
 $\beta$ are $T$-interchangeable under $\varphi$; equivalently, at most one
-nontrivial $(\alpha,\beta)$-path component meets $V(T)$.
+$(\alpha,\beta)$-path component meets $V(T)$, including an isolated
+vertex component.
 \end{lemma}
 \begin{proof}
 We use path component in the precise sense of
@@ -20,9 +21,37 @@ $V(T)$.  By
 \noderef{TwoColorComponentsDisjoint}, they are disjoint.  The properness
 clause of the $k$-triple in \noderef{KTriple}, together with
 \noderef{TwoColorIncidenceDegreeAtMostTwo}, says that every node of either
-component has incidence-graph degree at most two.  Each component contains
-an edge-node and has a node of degree at most one by
-\noderef{TwoColorPathComponent}.  The spanning path supplied by
+component has incidence-graph degree at most two.  The hypotheses of
+\noderef{TashTree} are exactly the $k$-triple and the Tashkinov-tree
+hypotheses here.  Consequently $V(T)$ is elementary under $\varphi$ in
+the sense of \noderef{ColoredVertexSetElementary}.
+
+We first exclude the new singleton possibility.  Suppose, after relabeling,
+that $Q_1$ contains no edge-node, and choose
+$v\in V(T)$ whose vertex-node lies in $Q_1$.  In the bipartite graph
+\noderef{TwoColorIncidenceGraph}, distinct vertex-nodes have no adjacency.
+Since the connected component of $v$ contains no edge-node, it is exactly
+the singleton $\{\operatorname{inl}v\}$.  If either color occurred on an
+edge incident with $v$, that edge-node would be adjacent to
+$\operatorname{inl}v$ and hence belong to $Q_1$.  Thus both $\alpha$ and
+$\beta$ are missing at $v$.
+
+Closedness of $T$ now forbids every $\alpha$- and every $\beta$-colored
+boundary edge.  Hence $Q_2$, which meets $T$, cannot contain a vertex
+outside $T$: the first incidence edge on a route from a tree vertex to an
+outside vertex would represent such a boundary identity.  If $Q_2$ also
+contains no edge-node, it is a singleton at a second tree vertex missing
+both colors, contrary to elementariness and the disjointness of $Q_1,Q_2$.
+Otherwise its path certificate together with its edge-node makes it a
+\noderef{TwoColorNontrivialPathComponent}.  The spanning-path and degree
+argument in the next paragraph gives a vertex-node end of $Q_2$ missing
+$\alpha$ or $\beta$; that end lies in $T$, again contradicting the fact
+that $v$ already misses both colors and $V(T)$ is elementary.  Therefore
+both $Q_1$ and $Q_2$ contain an edge-node.
+
+Each component has a node of degree at most one by
+\noderef{TwoColorPathComponent}; together with the edge-node just proved,
+each satisfies \noderef{TwoColorNontrivialPathComponent}.  The spanning path supplied by
 \noderef{TwoColorComponentSpanningPath} uses every node of the component.
 Because the component also meets $V(T)$, its stipulated edge-node is not an
 isolated node, so this spanning path is nontrivial.
@@ -40,9 +69,7 @@ the component path.  At each vertex-node end at least one of
 $\alpha,\beta$ is missing, by the definitions of
 \noderef{PresentColors} and \noderef{MissingColors}.
 
-The hypotheses of \noderef{TashTree} are exactly the $k$-triple and the
-Tashkinov-tree hypotheses here.  Consequently $V(T)$ is elementary under
-$\varphi$ in the sense of \noderef{ColoredVertexSetElementary}.  Thus at
+By the established elementariness, at
 most one vertex of $T$ misses $\alpha$, and at most one misses $\beta$.
 In particular, among the four ends of the two disjoint paths, at most two
 can lie in $V(T)$.
@@ -277,8 +304,8 @@ neighbor of $a_i$, so the degree is exactly one.
 As recorded above, $\gamma\ne\beta$: under $\sigma_1$ the color $\gamma$
 is missing at $b_3$, while its incident edge $f_3$ has color $\beta$.
 The component $C_i$ contains the edge-node $g_i$ and has the degree-one
-node $a_i$, so it is a path component in the sense of
-\noderef{TwoColorPathComponent}.  Apply
+node $a_i$, so it is a nontrivial path component in the sense of
+\noderef{TwoColorNontrivialPathComponent}.  Apply
 \noderef{TwoColorComponentSpanningPath} to the proper coloring $\sigma_2$
 and orient the resulting simple spanning path $R_i$ from $a_i$.  This
 orientation is possible because $a_i$ cannot be internal in $R_i$: an

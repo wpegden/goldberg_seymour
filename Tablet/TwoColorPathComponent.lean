@@ -7,6 +7,5 @@ def TwoColorPathComponent {V E : Type*} (G : LooplessMultigraph V E)
     (z : Sum V E) : Prop :=
 -- BODY
   alpha ≠ beta ∧
-    (∃ f : E, Sum.inr f ∈ TwoColorComponent G phi alpha beta z) ∧
     ∃ x ∈ TwoColorComponent G phi alpha beta z,
       Set.Subsingleton ((TwoColorIncidenceGraph G phi alpha beta).neighborSet x)

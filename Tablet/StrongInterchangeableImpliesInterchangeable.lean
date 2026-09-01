@@ -42,7 +42,7 @@ theorem StrongInterchangeableImpliesInterchangeable {V E : Type*}
             (Sum.inl v) =
           (TwoColorIncidenceGraph G phi alpha beta).connectedComponentMk z := by
       exact (SimpleGraph.ConnectedComponent.mem_supp_iff _ _).mp hvz
-    rcases hz with ⟨hzab, hzedge, x, hxcomp, hxleaf⟩
+    rcases hz with ⟨hzab, x, hxcomp, hxleaf⟩
     rcases hcv with ⟨cycle, cycleSupport⟩
     have hxcycle : x ∈ cycle.walk.support := by
       apply (cycleSupport x).2
@@ -58,7 +58,7 @@ theorem StrongInterchangeableImpliesInterchangeable {V E : Type*}
             (Sum.inl u) =
           (TwoColorIncidenceGraph G phi alpha beta).connectedComponentMk w := by
       exact (SimpleGraph.ConnectedComponent.mem_supp_iff _ _).mp huw
-    rcases hw with ⟨hwab, hwedge, x, hxcomp, hxleaf⟩
+    rcases hw with ⟨hwab, x, hxcomp, hxleaf⟩
     rcases hcu with ⟨cycle, cycleSupport⟩
     have hxcycle : x ∈ cycle.walk.support := by
       apply (cycleSupport x).2

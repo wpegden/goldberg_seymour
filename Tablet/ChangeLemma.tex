@@ -80,10 +80,9 @@ $\{\alpha,\beta\}\cap D_n=\varnothing$.
 \item $\alpha\in\overline\varphi_n(A)$ and the singleton
 $\{\alpha\}$ is closed on $A$ under $\varphi_n$.
 \end{enumerate}
-In case 3 the colors are also $A$-interchangeable: at most one nontrivial
-$(\alpha,\beta)$-path component meets $A$.  This does not assert that the
-common component through $v_\alpha$ and $v_\beta$ itself contains an edge
-node; that common component may be an isolated-vertex chain.
+In case 3 the colors are also $A$-interchangeable: at most one paper
+$(\alpha,\beta)$-path component meets $A$, with an isolated vertex
+component counted as a path.
 \end{lemma}
 \begin{proof}
 Unpack $C$.  Its fields give positivity, the displayed
@@ -182,7 +181,7 @@ $\alpha$ is not missing at $v_\beta$.  By the complementary definitions
 incident with an edge of the other color.  Properness makes it a
 degree-one end in the two-color incidence graph.  Hence $K_{v_\alpha}$
 and $K_{v_\beta}$ are nontrivial path components in the sense of
-\noderef{TwoColorPathComponent}.  This verifies the path-component
+\noderef{TwoColorNontrivialPathComponent}.  This verifies the path-component
 premise each time \noderef{TreeInterchangeable} is used below.           \tag{2}
 
 We shall repeatedly use the following endpoint observation.  Under the
@@ -448,7 +447,7 @@ last-divider instance of \noderef{step1} makes $\alpha,\beta$
 $A$-interchangeable.  If $q=0$, use conclusion (iii) of
 \noderef{interchange} in PE, or the terminal-ladder conclusion of
 \noderef{TechnicalTheoremBase} and the lower-rung induction interface in
-the non-PE endpoint.  Thus $K_a$ is the only nontrivial path component
+the non-PE endpoint.  Thus $K_a$ is the only path component
 meeting $A$.  If $K_a\ne K_b$, then $K_b$ is vertex-disjoint from $A$
 by \noderef{TwoColorComponentsDisjoint}.  Swap $K_b$.  The outside-chain
 lemma \noderef{OutsideKempeRecoloringStable}, (13), and the exact
@@ -573,7 +572,7 @@ changes no membership in the two-color incidence graph.  By
 \noderef{TwoColorComponentSwap} and
 \noderef{TwoColorComponent}, the old supports $K_a$ and $K_b$ are
 therefore the same two distinct full components under $\sigma_n$.
-The definition \noderef{TwoColorPathComponent} and (2) show that they
+The definition \noderef{TwoColorNontrivialPathComponent} and (2) show that they
 remain nontrivial path components.  The component $K_a$
 meets $A$ at $a$.  The boundary identity $f$ in (19a) has exactly one
 endpoint in $A$ by \noderef{BoundaryEdges}; incidence with that
@@ -848,8 +847,8 @@ Location 3.  Together with Locations 1 and 2, this proves the component
 equality in alternatives 1 and 2.  Under alternative 3, Location 2 is
 impossible, and (7), (8), or (14) gives
 \noderef{TreeInterchangeable} on $A$.  By its definition, at most one
-nontrivial path component meets $A$; it does not follow that the common
-component $K_a=K_b$ itself contains an edge node.  Thus we have exactly
+paper path component meets $A$, including an isolated path.  Thus we have
+exactly
 the component equality and $A$-interchangeability asserted in alternative
 3.  This completes the proof.
 \end{proof}

@@ -14,7 +14,7 @@ import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
 import Tablet.TwoColorCycle
 import Tablet.TwoColorIncidenceGraph
-import Tablet.TwoColorPathComponent
+import Tablet.TwoColorNontrivialPathComponent
 
 -- [TABLET NODE: StrongInterchangeabilityKempePreserved]
 theorem StrongInterchangeabilityKempePreserved {V E : Type*}
@@ -35,7 +35,7 @@ theorem StrongInterchangeabilityKempePreserved {V E : Type*}
     (hrelative : vs ≠ vt ∨ s.val < t.val)
     (hdifferentColors : vs ≠ vt →
       Disjoint ({gammaS, deltaS} : Finset (Fin k)) {gammaT, deltaT})
-    (hpath : TwoColorPathComponent G phi gammaT deltaT z)
+    (hpath : TwoColorNontrivialPathComponent G phi gammaT deltaT z)
     (htSI : ETTStrongInterchangeable ett t vt phi gammaT deltaT)
     (hsSI : ETTStrongInterchangeable ett s vs phi gammaS deltaS) :
     let phiStar := TwoColorComponentSwap G phi gammaT deltaT z

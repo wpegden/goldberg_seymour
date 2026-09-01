@@ -64,6 +64,7 @@ import Tablet.TwoColorComponentsDisjoint
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
 import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorPathComponent
+import Tablet.TwoColorNontrivialPathComponent
 import Tablet.interchange
 import Tablet.sc2
 

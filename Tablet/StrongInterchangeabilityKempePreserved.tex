@@ -6,7 +6,8 @@ Let \(s,t\) be PE slots with respective supporting vertices
 corresponding exact gamma and delta fields of the certified slots.  Let
 \(\varphi\) be a proper coloring
 leaving exactly \(e_0\) uncolored, and let \(P\) be an arbitrary
-\((\gamma_t,\delta_t)\)-path component.  Suppose that both displayed
+nontrivial \((\gamma_t,\delta_t)\)-path component in the sense of
+\noderef{TwoColorNontrivialPathComponent}.  Suppose that both displayed
 color pairs are strongly interchangeable at their respective trees.
 Assume either that \(v_s\ne v_t\), in which case
 \(S_s\cap S_t=\varnothing\), or that \(s<t\).  Then the coloring
@@ -24,7 +25,8 @@ Let
  K=\noderef{TwoColorComponent}(G,\varphi,
        \gamma_t,\delta_t,z).
 \]
-The first clause of \noderef{TwoColorPathComponent} gives
+The path clause of \noderef{TwoColorNontrivialPathComponent}, followed by
+the distinct-color clause of \noderef{TwoColorPathComponent}, gives
 \(\gamma_t\ne\delta_t\).  Thus
 \noderef{TwoColorComponentSwapProper}, applied to the assumed properness
 of \(\varphi\), proves that
@@ -162,7 +164,8 @@ Strong interchangeability at \(t\) makes the
 \((\gamma_t,\delta_t)\)-component through \(y\) a full component cycle.
 Because \(y\in K\), connected-component equality identifies this
 component with \(K\).  On the other hand,
-\noderef{TwoColorPathComponent} supplies a node of \(K\) whose neighbor
+\noderef{TwoColorNontrivialPathComponent} supplies, through its path
+clause, a node of \(K\) whose neighbor
 set is subsingleton.  The full-support equality in
 \noderef{TwoColorComponentCycle} places that node on the simple closed
 walk from \noderef{TwoColorCycle}; at an occurrence of that node, the two

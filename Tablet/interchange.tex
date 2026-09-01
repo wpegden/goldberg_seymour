@@ -296,10 +296,15 @@ $b\ne\gamma_n$, (8) is (6).  If $b=\gamma_n$, then (3), unfolded using
 \noderef{ColoredVertexSetElementary}, makes $X\subseteq U$ elementary, the
 $a$-boundary of $X$ is empty, and the $\gamma_n$-boundary contains
 only $f_n$.  Properness and
-\noderef{TwoColorComponentSpanningPath} then allow at most one nontrivial
-$(a,\gamma_n)$-path component to meet $X$: two such paths would
-require two distinct boundary edge identities, or would give a repeated
-missing color in $X$.  This proves (8).
+\noderef{TwoColorComponentSpanningPath} then allow at most one paper
+$(a,\gamma_n)$-path component to meet $X$.  For two nontrivial components,
+the spanning paths would require two distinct boundary identities or give
+a repeated missing color in $X$.  If one component were a singleton at a
+tree vertex, both colors would be missing there; any second singleton or
+any tree end of a trapped nontrivial component would repeat a missing
+color, while a nontrivial component crossing $X$ cannot have both ends
+outside through the sole boundary identity $f_n$.  Thus a singleton cannot
+coexist with a second path component meeting $X$.  This proves (8).
 
 We prove (iii) by contradiction, beginning with the component bookkeeping
 which will also be used below.  Expanding the negation of
@@ -307,13 +312,15 @@ which will also be used below.  Expanding the negation of
 there, and there are roots $z_1,z_2$ whose full incidence components in
 \noderef{TwoColorComponent}
 $P_1,P_2$ are unequal, each meets $U$, and each satisfies
-\noderef{TwoColorPathComponent}.  Unpacking the last condition for each
-$z_i$ gives $a\ne b$, an exact edge-node in $P_i$, and a node of $P_i$
-with at most one neighbor.  Apply
-\noderef{TwoColorComponentSpanningPath} to $z_i$.  Its simple spanning path
-has support exactly $P_i$.
+\noderef{TwoColorPathComponent}.  Unpacking either path condition gives
+$a\ne b$, and each component has a node with at most one neighbor.  By
+\noderef{TwoColorComponentsDisjoint}, the unequal full components are
+node-disjoint.
 
-We verify the nature of its two ends.  By
+For every $P_i$ which contains an edge-node, its path certificate and
+that witness give \noderef{TwoColorNontrivialPathComponent}.  Apply
+\noderef{TwoColorComponentSpanningPath} to $z_i$; its simple spanning path
+has support exactly $P_i$.  We verify the nature of its two ends.  By
 \noderef{TwoColorIncidenceGraph}, every neighbor of an edge-node is a
 vertex-node incident with that exact edge identity.  The two ends of an
 edge are distinct by \noderef{LooplessMultigraph}, and incidence is the
@@ -334,17 +341,22 @@ At such a vertex end $x$, at least one of $a,b$ is missing.  Indeed, if
 both were present, \noderef{PresentColors} would give incident exact edge
 identities of the two respective colors.  They are distinct because
 $a\ne b$, and \noderef{TwoColorIncidenceGraph} would give $x$ two
-neighbors, contrary to its degree one.  The two ends of each $P_i$ are
-distinct.  Moreover, applying \noderef{TwoColorComponentsDisjoint} to
-$z_1,z_2$ shows that the unequal full components are disjoint.  Therefore
-all four vertex ends are distinct.
+neighbors, contrary to its degree one.  The two ends of every nontrivial
+$P_i$ are therefore distinct vertex-nodes missing $a$ or $b$.
 
 Only now use (3), with elementariness unfolded by
-\noderef{ColoredVertexSetElementary}.  If three of the four ends lay in
-$U$, assigning to each one of its missing alternatives $a$ or $b$ would
-assign the same color to two distinct vertices of $U$, contrary to
-elementariness.  Thus at least
-two ends are outside $U$.  From each of two such ends, follow its spanning
+\noderef{ColoredVertexSetElementary}.  If both $P_i$ are nontrivial,
+their four ends are distinct by component disjointness, and at least two
+lie outside $U$: otherwise three tree ends would assign the same one of
+$a,b$ to two distinct vertices of $U$.  If, after relabeling, $P_1$ has
+no edge-node, its connectedness and its meeting with $U$ make it the
+singleton component at some $x\in U$.  Both $a$ and $b$ are missing at
+$x$, since an incident edge of either color would be an adjacent edge-node
+in $P_1$.  Elementariness makes $P_2$ nontrivial and forces both ends of
+its spanning path outside $U$.  The two components cannot both be
+singletons, because their distinct tree vertices would repeat both
+missing colors.  Thus in all cases there are at least two outside ends of
+nontrivial component paths.  From each selected end, follow its spanning
 path up to its first vertex in $U$; this exists because each $P_i$ meets
 $U$.  If the ends belong to different components, the resulting exit
 subpaths are disjoint by the preceding component disjointness.  If they
@@ -355,7 +367,7 @@ would both have color $b$, since the closed color $a$ has no boundary
 identity, contradicting properness.  Hence these portions too are
 vertex-disjoint.  Denote the resulting exit subpaths by $Q_1,Q_2$ and
 their distinct outside vertex ends by $r_1,r_2$.  Each $r_i$ is one of the
-four full-component ends just analyzed.
+nontrivial full-component ends just analyzed.
 
 We may reduce to
 \[
@@ -390,9 +402,12 @@ $U$.  The color $a$ is missing and closed on $U$ by the present
 hypothesis.  A connected $(a,b)$-component which meets $U$ could then
 have no vertex outside $U$: the first exact edge identity on an incidence
 walk from an inside vertex to an outside vertex would be an $a$- or
-$b$-colored boundary identity.  Thus all four distinct ends of $P_1,P_2$
-would lie in $U$, although each misses $a$ or $b$, contradicting (3) by
-\noderef{ColoredVertexSetElementary}.
+$b$-colored boundary identity.  Thus both components would be trapped in
+$U$.  If both are nontrivial, their four distinct ends lie in $U$ and
+repeat one of the two missing colors.  If one is a singleton, its tree
+vertex misses both colors, while an end of the other component is a
+distinct tree vertex missing one of them.  Either possibility contradicts
+(3) by \noderef{ColoredVertexSetElementary}.
 So $b$ is present at $v_n$, whereas $c$ is missing there; in particular
 $c\ne b$.
 
@@ -409,13 +424,13 @@ to the full $(c,b)$-component containing the transformed $Q_i$.
 Let $K$ be the full $(c,b)$-component through $v_n$.  Since $c$ is
 missing and $b$ is present there, properness gives $v_n$ exactly one
 $(c,b)$-neighbor.  Thus $K$ contains an exact $b$-edge and, by
-\noderef{TwoColorPathComponent}, is a nontrivial path component.  It can
+\noderef{TwoColorNontrivialPathComponent}, is a nontrivial path component.  It can
 contain at most one of $Q_1,Q_2$.  Otherwise it contains the three
 distinct degree-one vertex-nodes $v_n,r_1,r_2$, whereas its spanning path
 from \noderef{TwoColorComponentSpanningPath} has only two ends.  Retain a
 transformed $Q_i$ not contained in $K$, and let $L$ be its full component.
 The exact edge-node on $Q_i$ and its degree-one outside end $r_i$ verify
-that $L$ also satisfies \noderef{TwoColorPathComponent}.  It meets $U$ at
+that $L$ also satisfies \noderef{TwoColorNontrivialPathComponent}.  It meets $U$ at
 the inside end of $Q_i$.  The dichotomy in
 \noderef{TwoColorComponentsDisjoint} makes $K$ and $L$ disjoint, since
 otherwise they would be equal and $Q_i$ would lie in $K$.  We have
@@ -510,14 +525,14 @@ there, and $c\ne b$.
 
 The $c,b$-component $K'$ through $q$ is therefore nontrivial and has
 $q$ as a degree-one vertex, so it satisfies
-\noderef{TwoColorPathComponent}.  Each $Q'_i$ becomes a $(c,b)$-exit
+\noderef{TwoColorNontrivialPathComponent}.  Each $Q'_i$ becomes a $(c,b)$-exit
 portion: its boundary identity has color $b$, all later
 $\delta_n$-values become $c$, and its outside end remains degree one by
 the same exact-neighbor comparison.  The spanning-path argument forbids
 $K'$ from containing both $r'_1,r'_2$.  Choose a transformed $Q'_i$ not
 in $K'$.  Its full component $L'$ contains its exact edge-node, has the
 degree-one end $r'_i$, and meets $U$, hence is another
-\noderef{TwoColorPathComponent}.  By
+\noderef{TwoColorNontrivialPathComponent}.  By
 \noderef{TwoColorComponentsDisjoint}, $K'$ and $L'$ are distinct full
 components.  The root component $K'$ meets both $X$ and $Y$ at $q$, while
 $L'$ meets $U=X\cup Y$ at the inside end of its retained exit portion.  If
@@ -537,8 +552,9 @@ and interchangeability on $U$ restricts to $T_n$.  This proves (ii).
 
 It remains to prove (iv).  Choose
 $u\in X$ missing $\alpha$ and $v\in Y$ missing $\beta$.
-Suppose that roots $z_1,z_2$ witness two unequal full nontrivial
-$\alpha,\beta$-path components $C_1,C_2$ meeting $U$, as in the expanded
+Suppose that roots $z_1,z_2$ witness two unequal full paper
+$\alpha,\beta$-path components $C_1,C_2$ meeting $U$, possibly including
+a singleton component, as in the expanded
 definition \noderef{TreeInterchangeable}.  In particular,
 \noderef{TwoColorPathComponent} for either root gives
 $\alpha\ne\beta$.
@@ -562,8 +578,9 @@ $\beta$ is present at $u$ and $\alpha$ is present at $v$.  Properness
 then makes each of these present colors occur on one exact incident edge.
 Consequently the full components $P_u,P_v$ through the vertex-nodes
 $u,v$ each contain a genuine edge-node and have their root vertex of
-degree one.  Along with $\alpha\ne\beta$, these are precisely the three
-clauses of \noderef{TwoColorPathComponent}.
+degree one.  Along with $\alpha\ne\beta$, these give
+\noderef{TwoColorNontrivialPathComponent}, and in particular
+\noderef{TwoColorPathComponent}.
 
 We now identify them with the counterexample components.  By (1), each
 $C_i$ meets $X$ or $Y$.  Conclusion (i), applied with the common
