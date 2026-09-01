@@ -265,9 +265,29 @@ colored $\alpha$ or $\beta$, by
 \noderef{TreeColorSetClosed} and
 \noderef{BoundaryColorEdges}.  The component through $a$ cannot leave
 $A$.  Observation (3) says that its other path end must be $b$, so
-$K_a=K_b$.  The same argument applied to an arbitrary nontrivial
-$(\alpha,\beta)$-path component meeting $A$ forces its two ends to be
-$a,b$; hence this common component is the only one meeting $A$.          \tag{6}
+$K_a=K_b$.  Now let $Q$ be an arbitrary paper
+$(\alpha,\beta)$-path component meeting $A$.  If $Q$ contains an
+edge-node, then it is nontrivial, and the same argument forces its two
+ends to be $a,b$; hence $Q=K_a=K_b$.
+
+It remains to exclude the case that $Q$ has no edge-node.  Choose
+$x\in V(A)$ whose vertex-node lies in $Q$.  By
+\noderef{TwoColorIncidenceGraph}, any exact edge $e$ incident with $x$
+and colored $\alpha$ or $\beta$ is adjacent to the vertex-node $x$ in
+the two-color incidence graph.  The definition
+\noderef{TwoColorPathComponent} makes $Q$ the connected component
+containing $x$, so \noderef{TwoColorComponent} puts the exact edge-node
+$e$ in $Q$, contrary to the present assumption.  Thus neither $\alpha$
+nor $\beta$ is present at $x$ in the sense of
+\noderef{PresentColors}; by the complementary definition
+\noderef{MissingColors}, both colors are missing at $x$.  The vertices
+$a,b,x$ all lie in the elementary set $V(A)$.  If $x\ne a$, the missing
+sets of $x$ and $a$ both contain $\alpha$, contradicting
+\noderef{ColoredVertexSetElementary}; hence $x=a$.  Applying the same
+argument with $\beta$ and $b$ gives $x=b$.  This contradicts the already
+established $a\ne b$, so no edge-free path component meets $A$.
+Consequently $K_a=K_b$ is the only paper path component meeting $A$,
+including among isolated-vertex paths.                                   \tag{6}
 
 Suppose precisely one of the two colors is closed on $A$.  If $q>0$,
 then $A=T_{n,q}$ and the last-divider instance of
@@ -845,7 +865,7 @@ minimality.                                                            \tag{27}
 All possibilities under (15) contradict minimality, so $K_a=K_b$ in
 Location 3.  Together with Locations 1 and 2, this proves the component
 equality in alternatives 1 and 2.  Under alternative 3, Location 2 is
-impossible, and (7), (8), or (14) gives
+impossible, and (6), (7), (8), or (14) gives
 \noderef{TreeInterchangeable} on $A$.  By its definition, at most one
 paper path component meets $A$, including an isolated path.  Thus we have
 exactly
