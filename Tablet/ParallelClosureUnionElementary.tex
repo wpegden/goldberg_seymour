@@ -192,15 +192,22 @@ has maximum property.  Lower assertion (i), instantiated with that actual
 replacement input and ETT, makes $V(J_n)$ elementary under $\sigma_n$.
 
 For interchangeability, let $L$ be the final ladder closure in this
-replacement series.  The ETT certificate makes $J_n$ an ordered initial
-segment of $L$.  A color missing at a vertex of $J_n$ is therefore also
-missing on $L$ by the vertex-union definition
+replacement series.  The \noderef{ExtendedTashkinovTree} certificate makes
+$J_n$ an ordered initial segment of $L$ in the sense of
+\noderef{TreeSequenceInitialSegment}.  A color missing at a vertex of
+$J_n$ is therefore also missing on $L$ by the vertex-union definition
 \noderef{TreeMissingColors}.  Apply lower assertion (ii) to the reflexive
 stable coloring $\sigma_n$ of $L$; it makes $L$ interchangeable for every
-pair of which one color is missing on $J_n$.  Any two nontrivial path
-components meeting $J_n$ also meet $L$, so the definition
-\noderef{TreeInterchangeable} restricts this conclusion from $L$ to
-$J_n$.
+pair of which one color is missing on $J_n$.  To restrict this conclusion,
+fix arbitrary roots $z,w$ whose two-color components are path components
+meeting $J_n$; this includes isolated vertex components.  Choose a meeting
+vertex from each component.  Entrywise agreement in the ordered
+initial-segment certificate, together with the vertex-union definition
+\noderef{TreeSequenceVertexSet}, puts both chosen vertices in $V(L)$.
+Thus both full two-color components meet $L$, and the universal
+\noderef{TreeInterchangeable} conclusion on $L$ identifies their full
+connected-component node sets.  Since $z,w$ were arbitrary, this is exactly
+$\noderef{TreeInterchangeable}$ on $J_n$.
 
 If $j=1$, no positive lower ETT exists, so we construct the initial
 series rather than infer it from the base theorem.  Retain the original
