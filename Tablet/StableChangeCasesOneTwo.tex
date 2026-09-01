@@ -201,10 +201,36 @@ If $r>0$, the hypotheses just established, the lower package,
 fewer-divider induction, maximum property, and (L) are exactly those of
 \noderef{step1}.  If $r=0$ and the terminal kind is PE, conclusion (iii)
 of \noderef{interchange} applies to the exact core, with the reflexive
-\noderef{CombinedStableColoring}.  If $r=0$ and the kind is SE or RE, the
-core is $T_n$ by \noderef{HierarchyBase}; the predecessor lower assertion
-(ii), or \noderef{TechnicalTheoremBase} when $n=1$, gives terminal-ladder
-interchangeability.  If the closed color was $\beta$, these conclusions
+\noderef{CombinedStableColoring}.
+
+Suppose $r=0$ and the terminal kind is SE or RE.  The nonparallel field of
+\noderef{HierarchyBase} identifies the exact core with $T_n$.  Eliminate
+the actual positive terminal constructor of
+\noderef{TashkinovSeriesStep}, and write $\varphi_{n-1}$ and $D_{n-1}$ for
+the predecessor coloring and stored set exposed by that constructor.  In
+the SE constructor, its choice is a
+\noderef{MaximumDefectiveChoice}.  The fields `selectedProper',
+`selectedOneUncolored', and `selectedStable' say respectively that the
+selected coloring is proper, leaves exactly $e_0$ uncolored, and is
+$(T_n,D_{n-1},\varphi_{n-1})$-stable.  The constructor's
+`currentColoring' equation identifies this selected coloring with
+$\varphi_n$, so all three assertions transport to $\varphi_n$.  In the RE
+constructor, `previousProper' and `previousOneUncolored' give the first
+two assertions, while `currentColoring' is the literal equality
+$\varphi_n=\varphi_{n-1}$.  After this equality, the two clauses of
+\noderef{StableColoring} are reflexive: every controlled incident edge
+value and every vertex missing-color set equals itself.  Thus RE supplies
+the same stable-coloring premise.
+
+If $n=1$, these are exactly the properness, one-uncoloredness, and
+stability inputs to the interchangeability conclusion of
+\noderef{TechnicalTheoremBase} on the initial closure $T_n$.  If $n>1$,
+restrict the certified series through rung $n-1$ as in (2); maximum
+property restricts, and lower assertion (ii) applies to the same three
+inputs.  The chosen first-slot color is missing on $T_n$, so the remaining
+disjunctive missing-color premise is satisfied.  Hence $T_n$ is
+interchangeable also in the non-PE case.  If the closed color was $\beta$,
+these conclusions
 are initially written with the displayed color order reversed; the
 definitions of \noderef{TwoColorComponent},
 \noderef{TwoColorPathComponent}, and \noderef{TreeInterchangeable} are
@@ -229,9 +255,17 @@ PE core and (7) say that neither affected color is missing on $R_n$.
 Every exact edge added in the Tashkinov closure of the support prefix to
 $R_n$ has, by \noderef{TashkinovAugmentation}, a color missing on its
 preceding subtree; consequently no such edge has color $\alpha$ or
-$\beta$.  The support prefix lies in $T_n$ and is fixed by (1).  Hence the
-missing sets on $R_n$ and all its displayed edge values are preserved,
-which supplies the second clause of combined stability.                \tag{8}
+$\beta$.  The support prefix lies in $T_n$ and is fixed by (1), so all
+displayed edge values of $R_n$ are preserved.  More directly, neither
+affected color is missing at any vertex of $R_n$.  Since the swap changes
+only $\alpha$ and $\beta$, every $R_n$ vertex has the same missing-color
+set.  If an edge identity incident with $R_n$ has old color in
+$\overline\varphi_n(R_n)$, that color is not $\alpha$ or $\beta$, so the
+swap fixes the edge.  These are precisely the vertex and incident-edge
+clauses of \noderef{StableColoring} for
+$(R_n,\varnothing,\varphi_n)$.  Together with the
+$(T_n,D_n,\varphi_n)$-stable relation supplied by (1), this is the second
+conjunct required by \noderef{CombinedStableColoring}.                  \tag{8}
 
 Return to the alternative $v_\beta\notin V(A)$.  Now $\beta$ is missing
 at no vertex of $A$.  If some starred stage is singleton-closed for
@@ -244,9 +278,19 @@ earlier prefix.  Since $v_\beta$ is the first $\beta$-missing vertex and
 lies after $A$, none of those ordinary identities has color $\beta$.
 There is exactly one possible exception: $r=0$, the core is $T_n$, and
 the first displayed edge is the SE/RE connecting seed $f_n$ with
-$\beta\in D_n$.  The SE or RE constructor of
-\noderef{TashkinovSeriesStep} identifies this exact edge and makes it
-incident with $T_n$; (1) therefore fixes its value.  This is precisely the
+$\beta\in D_n$.  Eliminate the actual SE or RE constructor of
+\noderef{TashkinovSeriesStep}.  In SE, the singleton connecting-edge
+equation identifies $f_n$ with the exact edge of its
+\noderef{MaximumDefectiveChoice}.  The field `vertexDefective.1' puts the
+chosen vertex in $V(T_n)$, and `edgeIncident' says that this exact edge is
+incident with that vertex.  In RE, the singleton equation identifies
+$f_n$ with the edge of the
+\noderef{RevisitingExtensionCertificate}; `insideInCurrent' puts its
+inside endpoint in $V(T_n)$, and `edgeEnds' says that this exact edge is
+incident with that endpoint.  Thus in either constructor the singleton
+equation first identifies the stored seed and the constructor payload then
+proves that this same identity is incident with $T_n$.  Only now does (1)
+fix its value.  This is precisely the
 stored-seed exception, not a claim that every later segment color is
 unchanged.                                                              \tag{9}
 
@@ -256,10 +300,15 @@ $v_\alpha\in V(T_n)-V(R_n)$, membership of $\alpha$ in every later
 reserved Gamma union, and absence of $\alpha$ from $A-T_n$.
 Again \noderef{interchange}(ii) makes $T_n$ interchangeable and (1) makes
 $Q$ outside it.  The color $\beta$ is missing nowhere on $A$, so neither
-it nor $\alpha$ is missing on $R_n$, and the closure argument in (8)
-preserves the PE base.  Tashkinov augmentation excludes $\beta$ from the
-displayed edges after the base because it is missing nowhere on the
-preceding prefixes.                                                     \tag{10}
+it nor $\alpha$ is missing at any vertex of $R_n$.  Therefore the swap
+preserves every vertex missing-color set on $R_n$, and every edge incident
+with $R_n$ whose old color lies in $\overline\varphi_n(R_n)$ has an
+unaffected color and is fixed.  By the two clauses of
+\noderef{StableColoring}, this is
+$(R_n,\varnothing,\varphi_n)$-stability; together with the relation from
+(1), \noderef{CombinedStableColoring} preserves the PE base.  Tashkinov
+augmentation excludes $\beta$ from the displayed edges after the base
+because it is missing nowhere on the preceding prefixes.               \tag{10}
 
 We summarize what (5)--(10) prove in every subcase of Case 1.  Every exact
 displayed edge of $A$ has the same value under $\varphi_n$ and $\sigma_n$.
@@ -272,7 +321,7 @@ Thus
 \[
  \sigma_n(A.\mathit{edge}(i))=\varphi_n(A.\mathit{edge}(i)),
  \qquad
- \overline\sigma_n(v)=\overline\varphi_n(v)quad(v\in V(A)).  \tag{11}
+ \overline\sigma_n(v)=\overline\varphi_n(v)\qquad(v\in V(A)). \tag{11}
 \]
 The base stability in (6), or the combined stability in (8) and (10),
 together with the tree invariant (11), is exactly
@@ -291,22 +340,64 @@ singleton-closed on $A$.  This explicit conjunction is the formal meaning
 of choosing a closed tree-missing color; mere boundary emptiness is not
 used as missingness.  If the terminal kind is PE, apply conclusion (iii)
 of \noderef{interchange}, putting that missing closed color first and
-using reflexive combined stability.  If the terminal kind is SE or RE,
-\noderef{HierarchyBase} identifies $A=T_n$, and lower assertion (ii), or
-\noderef{TechnicalTheoremBase} at $n=1$, gives the same interchangeability.
+using reflexive combined stability.
+
+Suppose instead that the terminal kind is SE or RE.
+\noderef{HierarchyBase} identifies $A=T_n$.  Eliminate the actual terminal
+\noderef{TashkinovSeriesStep}.  In SE, the terminal
+\noderef{MaximumDefectiveChoice} supplies `selectedProper',
+`selectedOneUncolored', and `selectedStable', and `currentColoring'
+transports all three fields to $\varphi_n$; hence $\varphi_n$ is proper,
+leaves exactly $e_0$ uncolored, and is
+$(T_n,D_{n-1},\varphi_{n-1})$-stable.  In RE, `previousProper' and
+`previousOneUncolored' supply the first two facts, `currentColoring'
+identifies $\varphi_n$ with $\varphi_{n-1}$, and reflexivity of the
+incident-edge and vertex clauses in \noderef{StableColoring} supplies the
+stable relation.  For $n=1$, the interchangeability conclusion of
+\noderef{TechnicalTheoremBase} applies to these exact inputs.  For $n>1$,
+the restricted predecessor ETT has maximum property and lower assertion
+(ii) applies.  In both cases the chosen closed color is also missing on
+$T_n$, discharging the last premise and giving the same interchangeability.
 When the missing closed color is $\beta$, symmetry of
 \noderef{TwoColorComponent}, \noderef{TwoColorPathComponent}, and
 \noderef{TreeInterchangeable} restores the displayed $\alpha,\beta$ order.
-Observation (1) makes $Q$ an outside recoloring of all of $A$.  It follows
-at once that the appropriate PE combined stability, or the non-PE
-terminal-ladder stability, holds.                                      \tag{13}
+Observation (1) makes $Q$ an outside recoloring of all of $A$.  In the
+non-PE case $A=T_n$, so \noderef{OutsideKempeRecoloringStable}, read with
+control set $D_n$, gives the required
+$(T_n,D_n,\varphi_n)$-relation in the sense of
+\noderef{StableColoring}.  In PE, both $T_n$ and $R_n$ lie in the core
+$A$; applying the same outside-stability conclusion to $T_n$ with control
+set $D_n$ and to $R_n$ with the empty control set gives the two conjuncts
+of \noderef{CombinedStableColoring}.                                    \tag{13}
 
 It remains that neither affected color which is missing on $A$ is closed
-there.  The terminal kind cannot be SE or RE.  In that event $A=T_n$, and
-the actual non-PE constructor in \noderef{TashkinovSeriesStep}, together
-with reverse stability from \noderef{sc2} in the SE case, closes every
-terminal missing color;
-this contradicts the choice of the present branch.  Thus
+there.  We show in detail that the terminal kind cannot be SE or RE.  In
+either event the nonparallel field of \noderef{HierarchyBase} gives
+$A=T_n$.  Eliminate the actual non-PE constructor in
+\noderef{TashkinovSeriesStep}.  In RE, `previousClosed' says that
+$V(T_n)$ is \noderef{ColoredVertexSetClosed} under $\varphi_{n-1}$, and
+`currentColoring' is the equality $\varphi_n=\varphi_{n-1}$, so the same
+closedness holds under $\varphi_n$.  By the boundary-edge meaning of this
+definition, every color missing at a vertex of $T_n$ has empty singleton
+boundary, which is exactly singleton closedness in
+\noderef{TreeColorSetClosed}.
+
+In SE, write $\pi$ for the selected coloring.  The predecessor is proper
+and leaves exactly $e_0$ uncolored by the constructor, while
+\noderef{MaximumDefectiveChoice} says that $\pi$ is proper, leaves exactly
+$e_0$ uncolored, and is $(T_n,D_{n-1},\varphi_{n-1})$-stable.  Symmetry in
+\noderef{sc2} gives the reverse relation: $\varphi_{n-1}$ is
+$(T_n,D_{n-1},\pi)$-stable.  Suppose a color $c$ is missing on $T_n$ under
+$\pi$ and an exact boundary identity has color $c$ under $\pi$.  The
+vertex clause of \noderef{StableColoring} makes $c$ missing at the same
+vertex under $\varphi_{n-1}$; the boundary edge is incident with $T_n$, so
+the incident-edge clause of the reverse stable relation fixes its value.
+This contradicts `previousClosed' after expanding
+\noderef{ColoredVertexSetClosed}.  Thus every $\pi$-missing color is
+singleton-closed.  The `currentColoring' equation identifies
+$\pi=\varphi_n$.  In both non-PE constructors, therefore, $\alpha$, which
+is missing on $A=T_n$, is closed there, contradicting the present branch.
+Thus
 $\Theta_n=PE$.  The common-missing closure conclusion of
 \noderef{ParallelCommonMissingClosed}, with predecessor elementarity (2),
 shows that a first missing vertex lying in $V(T_n)\cap V(R_n)$ would make
@@ -319,7 +410,10 @@ and the same holds for $v_\beta$ whenever $v_\beta\in A$.              \tag{14}
 If the two first-missing vertices lie in opposite constituents, conclusion
 (iv) of \noderef{interchange}, with the color names ordered according to
 the two locations, makes the whole core $A$ interchangeable.  Hence $Q$
-is outside $A$ by (1), and combined stability follows.                 \tag{15}
+is outside $A$ by (1).  Apply \noderef{OutsideKempeRecoloringStable} to
+the two subtrees of $A$: with control set $D_n$ on $T_n$ and the empty set
+on $R_n$, its two \noderef{StableColoring} conclusions are exactly
+\noderef{CombinedStableColoring}.                                      \tag{15}
 
 Suppose next that $v_\alpha\in V(T_n)-V(R_n)$.  If $v_\beta\in A$, then
 (12), (14), and the same-constituent alternative put it in
@@ -330,8 +424,10 @@ Elementarity of the core says that neither affected color is missing on
 $R_n$.  Thus every $R_n$ vertex retains its missing set under the swap.
 Moreover, any edge incident with $R_n$ whose old color is missing on
 $R_n$ has a color different from $\alpha,\beta$ and is fixed.  This is
-precisely $(R_n,\varnothing,\varphi_n)$-stability, so combined stability
-holds.                                                                  \tag{16}
+precisely the incident-edge clause of \noderef{StableColoring}, while the
+preceding sentence is its vertex clause.  Thus
+$(R_n,\varnothing,\varphi_n)$-stability, together with the stable relation
+on $T_n$, gives \noderef{CombinedStableColoring}.                       \tag{16}
 
 Finally suppose that $v_\alpha\in V(R_n)-V(T_n)$.  If $v_\beta\in A$ it
 lies in the same exclusive constituent, and otherwise it lies outside the
@@ -345,18 +441,21 @@ displayed edge of $T_n$, since a used tree color lies in
 $\overline\varphi_n(T_n)\cup D_n$.  Any incident edge whose color belongs
 to $\overline\varphi_n(T_n)\cup D_n$ likewise has an unaffected color and
 is fixed.  Missing sets on $T_n$ are preserved because both affected
-colors are present at every one of its vertices.  This gives the first
-stable relation, while outside stability on $R_n$ gives the second.
-Thus combined stability again holds.                                   \tag{17}
+colors are present at every one of its vertices.  These are exactly the
+incident-edge and vertex clauses of \noderef{StableColoring}, and give the
+first stable relation.  Outside stability on $R_n$ gives the second, so
+\noderef{CombinedStableColoring} holds again.                            \tag{17}
 
 Equations (13), (15), (16), and (17) prove
 \noderef{HierarchyWeaklyStable} at the zero index.  They also prove the
 analogue of (11) for the exact core $A$.  In (16), every edge added in the
 closure $R_n$ has a color missing on its preceding subtree and hence is
 neither $\alpha$ nor $\beta$; in (17), the $R_n$ edges are fixed by
-outside stability and the $T_n$ edges are fixed by
-\noderef{HkuTreeColorsControlled}.  Thus in every Case-2 branch all
-displayed edge identities of $A$ and all vertexwise missing sets agree. \tag{18}
+outside stability, hence by \noderef{StableColoring}, and the $T_n$ edges
+are fixed by \noderef{HkuTreeColorsControlled}.  The vertex clauses of the
+same stable relations give equality of all missing sets.  Thus in every
+Case-2 branch all displayed edge identities of $A$ and all vertexwise
+missing sets agree.                                                     \tag{18}
 
 We now establish the ETT and mod-coloring conclusions uniformly.  Inspect
 the terminal positive \noderef{TashkinovSeriesStep}.  In PE it supplies a
@@ -437,25 +536,36 @@ pairs agree.                                                            \tag{24}
 
 For the PE base field, the common-missing cardinality is unchanged by
 combined stability.  Consider an old exact boundary witness to failure of
-minus-closedness.  In a maximal-closed branch the base core lies inside
+minus-closedness.  More explicitly,
+\noderef{TreeColorSetMinusClosed} expands the old failure into failure of
+\noderef{TreeColorSetClosed}: there is an old-missing color outside the
+stage-zero reserved union and an exact boundary identity having that old
+color.  In a maximal-closed branch the base core lies inside
 the controlled outside stage, so (1) fixes that boundary identity.  In a
 no-closed Case-1 branch, \noderef{rutcor} puts every affected color which
 is missing on the core into the stage-zero reserved Gamma union; hence a
-witness color outside that union is not $\alpha$ or $\beta$ and its edge
-is fixed.  Thus the same witness proves the new non-minus-closed clause.
-The non-PE implication is vacuous.                                      \tag{25}
+witness color outside that union is not $\alpha$ or $\beta$ and its exact
+edge value is fixed.  Combined stability makes the witness color
+new-missing as well, and boundary membership depends only on its endpoints.
+Thus the same color and edge witness failure of the new
+\noderef{TreeColorSetClosed} predicate, hence the new non-minus-closed
+clause.  The non-PE implication is vacuous.                              \tag{25}
 
 For an internal minus-closed field, expand
-\noderef{TreeColorSetMinusClosed}: let $c$ be missing on the retained
-stage but outside its reserved union, and suppose a boundary identity has
-new color $c$.  At or below the controlled outside stage, (1) fixes the
+\noderef{TreeColorSetMinusClosed} through
+\noderef{TreeColorSetClosed}: let $c$ be missing on the retained stage but
+outside its reserved union, and suppose an exact boundary identity has new
+color $c$.  At or below the controlled outside stage, (1) fixes the
 identity.  Above it, maximality says no affected color is singleton-closed.
 If an affected color is missing there, the old minus-closed field of
-\noderef{GoodHierarchy} forces it into the relevant reserved union; an
+\noderef{GoodHierarchy}, read as the corresponding
+\noderef{TreeColorSetClosed} assertion, forces it into the relevant
+reserved union; an
 affected color not missing there cannot be $c$.  Therefore $c$ is
 unaffected, the swap fixes the boundary identity, and (11) makes $c$
-old-missing as well.  The old minus-closed field is a contradiction.  This
-proves every internal field, including its last instance.              \tag{26}
+old-missing as well.  The exact identity is therefore an old
+$c$-colored boundary edge, contradicting the old closedness of the color
+set.  This proves every internal field, including its last instance.    \tag{26}
 
 Equations (22)--(26) construct the required good hierarchy on $A$, with
 the exact retained base, stages, stored sets, and paper Gamma pairs.  The
