@@ -207,66 +207,261 @@ $T_n$ and, in the PE case, on $R_n$, while the displayed-edge and vertex
 clauses give invariance on $A$.  This is precisely
 \noderef{HierarchyWeaklyStable} at the last starred stage.
 
-The original terminal constructor gives an exact augmentation sequence
-from $T_n$ in the PE case, or from the exact one-edge seed $T_n+f_n$ in
-the SE/RE case, to its final closure.  Since $T$ is an ordered prefix of
-that closure, retain exactly the initial augmentation steps whose new
-entries occur in $T$.  In the PE base, the
-\noderef{OrderedTreeUnion} certificate for $A=T_n\vee R_n$ says that
-every entry after $T_n$ is an entry of the closure $R_n$, in the same
-relative order; hence filtering the closure sequence gives the exact
-route to $A$.  For $q>0$, hierarchy strictness makes $A$ a later strict
-prefix of the same route.  Thus no vertex-set inclusion is being used as
-a substitute for an augmentation certificate.
+We next extract the terminal construction with all of its exact seed
+data.  Let $\widehat T$ be the last closure tree in the certified series.
+The positive terminal instance of \noderef{TashkinovSeriesStep} has
+exactly one of the following forms.
+\begin{itemize}
+\item If $\Theta_n=PE$, its closure field is a
+$\varphi_n$-\noderef{TashkinovClosure} from the exact ordered tree $T_n$
+to $\widehat T$.
+\item If $\Theta_n=SE$ or $RE$, it supplies an individual edge identity
+$f_n$, the exact equality $F_n=\{f_n\}$, an exact
+\noderef{TreeSequenceAdjoinEdge} seed $S=T_n+f_n$, and a
+$\varphi_n$-closure from $S$ to $\widehat T$.
+\end{itemize}
+In either case, unfolding \noderef{TashkinovClosure} gives the displayed
+augmentation sequence from its stated seed to $\widehat T$.  Each
+one-edge step has its predecessor as an exact ordered
+\noderef{TreeSequenceInitialSegment} by
+\noderef{TashkinovAugmentation}; composing the entrywise vertex and edge
+equalities makes the seed an exact ordered initial segment of
+$\widehat T$.
 
-The same edge-by-edge check transports every retained Tashkinov
-augmentation from $A$ through $T(v_\beta)$.  Beyond $b$, if an old augmentation used
-$\alpha$ or $\beta$, equation (8) exchanges its earlier missing witness
-between $a$ and $b$; both vertices already precede that edge.  Every
-other augmentation is unchanged.  Thus the exact sequence from the
-terminal seed through $T$ remains a
-\noderef{TashkinovAugmentationSequence} under $\sigma_n$.  Apply
-\noderef{Td} to the $T_n$-part of weak stability and then its
-\noderef{ModColoring} conclusion to this exact sequence.  We obtain a
-\noderef{CorrespondingExtendedTashkinovTree} on $T$ under $\sigma_n$;
-\noderef{MaximumPropertyTransport} gives maximum property.
+The ETT certificate makes $T$ an exact ordered initial segment of
+$\widehat T$.  The base-stage, nested-stage, and terminal-stage fields of
+\noderef{TashkinovHierarchy} make $A$ an exact ordered initial segment of
+$T$, hence of $\widehat T$.  At $q=0$ this uses the two alternatives in
+\noderef{HierarchyBase}: in PE, $A=T_n\vee R_n$ and the left part of
+\noderef{OrderedTreeUnion} is the exact prefix $T_n$; in SE/RE,
+$A=T_n$.  At $q>0$, $A=H.\mathit{stage}(q)$ and the same conclusion is
+the composite of the hierarchy's exact nested-stage maps.
 
-The application of \noderef{Td} already proves the first assertion in
-conclusion 2, namely \noderef{ModColoring}$(\mathit{ett},\sigma_n)$.
-If $A=T_n$, this is the endpoint alternative stated there.  Otherwise,
-the old exact route from the prescribed terminal seed to $A$ is still a
-$\sigma_n$-augmentation sequence by the stability check above.  It is a
-strict eligible extension of $T_n$, so the universal clause of the mod
-coloring supplies an actual corresponding ETT on $A$;
-\noderef{MaximumPropertyTransport} gives maximum property.  This proves
-conclusion 2 in both branches.
+It follows that the terminal seed is an exact prefix of every target to
+which it must be restricted.  In PE the seed is $T_n$, already an exact
+prefix of both $A$ and $T$.  In SE/RE, the seed $S$ has length
+$|T_n|+1$.  If $q>0$, strictness of the first hierarchy stage gives
+$|T_n|+1\leq |H.\mathit{stage}(1)|\leq |A|$.  Both $S$ and $A$ are exact
+prefixes of $\widehat T$, so their entries through $|S|$ are the same
+entries of $\widehat T$; hence $S$ is an exact ordered prefix of $A$.
+The identical comparison with $T$, using the strict ETT inequality
+$|T_n|<|T|$, makes $S$ an exact prefix of $T$.  Thus
+\noderef{TashkinovAugmentationSequenceRestrict}, first with intermediate
+tree $A$ when $A\ne T_n$ and then with intermediate tree $T$, gives the
+exact old-coloring routes
+\[
+ \begin{array}{ll}
+ T_n\longrightarrow A,\ T_n\longrightarrow T,&\Theta_n=PE,\\
+ T_n+f_n\longrightarrow A,\ T_n+f_n\longrightarrow T,
+     &\Theta_n\in\{SE,RE\},\ q>0,
+ \end{array}                                                    \tag{9}
+\]
+and the second SE/RE route also holds when $q=0$.  When $q=0$ in the
+non-PE case there is intentionally no route to repackage $A$, because
+$A=T_n$ is the endpoint alternative in conclusion 2.
 
-Rebuild the hierarchy base with the same core, closure, and support
-position.  In the PE case
-\noderef{CombinedStableClosurePreserved} supplies the same closure; in
-the non-PE case the core equality is literal.  Copy every ordered stage
-and divider.  By (6), neither affected color is missing on any hierarchy
-stage, and by (7) neither is in a paper-defined stored set.  The
-avoidance, pair-cardinality, disjointness, refresh, parallel-base, and
-minus-closed fields of \noderef{GoodHierarchy} are therefore unchanged
-under the swap.  At each retained index the definition
-\noderef{HierarchyStoredColorsAt} gives the same $D_{n,j}$, and the old
-Gamma function is copied on that set.  These statements are exactly
-\noderef{SameGoodHierarchy}.  This proves the full-tree conclusion.
+We now transport every one-edge step in (9) under $\sigma_n$.  Any such
+route adds the displayed identities in their order in $T$.  Through the
+prefix $T(b)$, equation (7) says that no new or previously displayed
+identity has old color $\alpha$ or $\beta$.  The component swap therefore
+fixes its color.  A color $c\notin\{\alpha,\beta\}$ is missing at a
+vertex under $\sigma_n$ exactly when it is missing there under
+$\varphi_n$, since the swap changes only the two affected incident
+colors.  Hence every augmentation through $T(b)$ retains the same new
+edge color and the same missing-color witness.
 
-Finally, when $q>0$, apply the same mod-coloring
-construction to the exact prefix $A=T_{n,q}$.  Retain the stages
-$T_{n,0},\ldots,T_{n,q}$ and the first $q-1$ divider positions.  The
-resulting hierarchy has divider count $q-1$, its core and closure are
-the original ones, and its stage at each retained finite index is
-literally the old stage at that index.  Restrict the original Gamma
-family through index $q-1$.  The preceding case checks show equality of
-all retained missing sets and segment colors, so the corresponding
-$D$-sets and all Gamma pairs agree.  Pair size, avoidance, disjointness,
-refresh, and the internal minus-closed fields restrict directly.
-The old final minus-closed field, whose stage is $T_{n,q}$ and whose
-reserved set is
-$\bigcup_{\eta\in D_{n,q}}\Gamma^{q-1}_\eta$, transports by the
-reserved-boundary checks above and gives exactly (M).  This establishes
-conclusion 3 and completes the proof.
+Consider a later augmentation, whose predecessor already contains both
+$a$ and $b$.  The definitions of the first-missing positions give that
+$\alpha$ is missing at $a$ and $\beta$ is missing at $b$.  Since both
+vertices lie in the elementary prefix $T(y_{p-1})$, $\beta$ is present at
+$a$ and $\alpha$ is present at $b$; properness makes the relevant present
+edge unique.  By (8) their common component is $K=K_a=K_b$.
+\noderef{TwoColorComponentsDisjoint} says that the swapped component $Q$
+is either $K$ or is disjoint from it.
+
+If $Q=K$, the swap makes $\beta$ missing at $a$ and $\alpha$ missing at
+$b$.  If $Q\ne K$, neither $a$ nor $b$, nor any affected edge incident
+with either vertex, belongs to $Q$, so $\alpha$ remains missing at $a$
+and $\beta$ remains missing at $b$.  Now let $f$ be the exact new edge of
+the augmentation.  If its old color is outside
+$\{\alpha,\beta\}$, both its color and its old missing witness are fixed.
+If its old color is $\alpha$ or $\beta$, inspect whether the edge-node
+$f$ lies in $Q$.  Inside $Q$ its color is transposed and outside $Q$ it
+is fixed.  In the case $Q=K$, choose respectively the post-swap witness
+among $a,b$ just recorded; in the case $Q\ne K$, choose $a$ for color
+$\alpha$ and $b$ for color $\beta$, exchanging these choices when $f$
+lies in $Q$ and its color is transposed.  In all four combinations the
+post-swap color of $f$ is missing at the chosen one of $a,b$, and that
+vertex precedes $f$.  The exact length, attachment, and ordered-prefix
+clauses are independent of the coloring.  This verifies every clause of
+\noderef{TashkinovAugmentation} at every retained step, and hence turns
+all applicable routes in (9) into
+$\sigma_n$-\noderef{TashkinovAugmentationSequence}s.             \tag{10}
+
+The weak stability already proved contains its base-stability clause.
+In the PE case that clause is precisely
+\noderef{CombinedStableColoring} on $T_n$ and $R_n$; in the SE/RE case
+it is $(T_n,D_n,\varphi_n)$-stability.  In particular, in all cases it
+contains the latter terminal-ladder stability.  Apply \noderef{Td} with
+the stated six lower-rung assertions, the original maximum property, and
+the properness and unique-uncolored facts proved above.  We obtain
+\[
+                      \noderef{ModColoring}(\mathit{ett},\sigma_n). \tag{11}
+\]
+This proves the first assertion in conclusion 2.  If $A=T_n$, its first
+alternative holds.  Otherwise $T_n\prec A$, and (10) supplies exactly the
+PE route from $T_n$, or the exact SE/RE seed $T_n+f_n$ and route, required
+by the universal clause of (11).  That clause gives an actual
+\noderef{CorrespondingExtendedTashkinovTree} on $A$, and
+\noderef{MaximumPropertyTransport} gives its maximum property.  This
+proves the rest of conclusion 2.
+
+We next construct the full-tree hierarchy certificate under $\sigma_n$.
+First suppose the terminal kind is PE.  Apply
+\noderef{HierarchySplitter} to the original maximum ETT and hierarchy.
+Its combined-stability premise is the PE projection of the already proved
+\noderef{HierarchyWeaklyStable}; its properness and one-uncolored-edge
+premises were proved above; and its final augmentation premise is the
+$T_n\longrightarrow T$ route in (10).  The lower-rung package is exactly
+the one stated here.  The lemma returns an actual corresponding ETT on
+$T$, maximum property, a hierarchy base under $\sigma_n$, and a hierarchy
+$K$ with the same exact starred core, closure, ordered stages, and divider
+positions as $H$.
+
+If the terminal kind is SE or RE, use the exact seed and route in (10) in
+the universal clause of (11).  It returns an actual corresponding ETT on
+$T$, and \noderef{MaximumPropertyTransport} again gives maximum property.
+Rebuild its \noderef{HierarchyBase} field by field: correspondence gives
+the same terminal ladder tree and the same non-PE kind; take the core to
+be the common exact tree $T_n$, copy the unused closure and the positive
+support position, use reflexivity for the terminal missing-color equation
+under the generating coloring $\sigma_n$, and use the common non-PE kind
+for the nonparallel field.  Copy $H$'s divider count, every exact ordered
+stage, and every divider position.  The base-stage equation now has the
+same two sides $T_n$, while terminality, nestedness, strictness, divider
+prefixes, and core-inside-first are literally the old fields.  This gives
+a hierarchy $K$ with the same stages and dividers as $H$.  In both
+branches, denote the resulting corresponding ETT, maximum witness, base,
+and hierarchy by $\mathcal E^\sigma,m^\sigma,B^\sigma,K$; their base core
+and closure equal those of the original base, including the PE closure
+equality returned by \noderef{HierarchySplitter}.               \tag{12}
+
+It remains to construct, rather than assert, the good-hierarchy witness
+on $K$.  Use the equality of divider counts in (12) to identify its stage
+indices with those of $H$, and define
+\[
+                    \Gamma^{\sigma,j}_\eta=\Gamma^j_\eta       \tag{13}
+\]
+for every value of the total Gamma function.  Every starred stage and
+every ordinary stage occurring at an index $j\leq q$ is an exact ordered
+subtree of $A$.  At each of its vertices both affected colors are present
+by (6).  If the vertex-node lies in $Q$, properness puts its unique
+$\alpha$- and $\beta$-edges in the same component and the swap exchanges
+them together; if it does not lie in $Q$, neither incident affected edge
+is changed.  All other colors are fixed.  Therefore the complete missing
+set at every such vertex is the same under $\varphi_n$ and $\sigma_n$.
+Taking unions proves equality of all the controlled sets in
+\noderef{HierarchyStageMissingColors} and of the missing-color sets of
+all starred stages.                                                   \tag{14}
+
+The corresponding ETT certificate identifies every raw set $S_h$ through
+the terminal index, while (14) identifies the terminal-ladder missing
+sets.  The union-and-difference definition of
+\noderef{TashkinovStoredColors} therefore gives the same terminal stored
+set; (14) also identifies the starred-stage set subtracted from it in
+\noderef{HierarchyStoredColorsAt}.  Consequently
+\[
+                  D^K_{n,j}=D^H_{n,j}\quad(0\leq j\leq q).     \tag{15}
+\]
+The earlier deduction from (6)--(7) gave
+$\alpha,\beta\notin D_n$, while every set in (15) is a subset of $D_n$.
+Thus neither affected color is an index in any set (15).  More
+importantly, the avoidance field of the old \noderef{GoodHierarchy} and
+(14) say that every color in every copied pair (13) is missing on a
+controlled stage.  Since neither $\alpha$ nor $\beta$ is missing on such
+a stage, neither affected color belongs to any copied Gamma pair.       \tag{16}
+
+We check the five fields of \noderef{GoodHierarchy}.
+Pair cardinality and pairwise disjointness follow immediately from
+(13)--(15).  For avoidance, fix $j,\eta$ in the common stored set and
+$c\in\Gamma^j_\eta$.  By (16), $c\notin\{\alpha,\beta\}$.  The indexed
+color also satisfies $\eta\notin\{\alpha,\beta\}$, by (15) and
+$\alpha,\beta\notin D_n$.  Swapping the two affected colors preserves,
+vertex by vertex on the full tree, whether $\eta$ is missing.  Hence the
+candidate set and the totalized value of
+\noderef{HierarchyFirstMissingPosition} for $\eta$ are unchanged.  The old and
+new $(j,\eta)$ segments in \noderef{HierarchySegmentColors} therefore
+contain exactly the same individual edge positions.  If one of those
+edges had new color $c$, then, since $c$ is unaffected by the swap, it
+would have old color $c$, contrary to the old avoidance field.  This is
+the required pointwise avoidance proof.  It does not assert equality of
+the full segment-color sets: their irrelevant $\alpha$- and $\beta$-parts
+may indeed be exchanged.
+
+For unique refresh, the two relevant ordered stages and starred stage are
+the same by (12), their vertex-set difference is the same, and (14)
+identifies the missing-color set at each vertex in that difference.
+Together with (13)--(15), the old existence-and-uniqueness witness is
+therefore exactly a witness for the new field.
+
+For the parallel-base field, suppose the common terminal kind is PE.
+The base-stability clause is \noderef{CombinedStableColoring}; its two
+vertex clauses identify the missing sets on $T_n$ and on $R_n$.
+Equations (13) and (15) identify the reserved union $\Gamma^0$, so the
+old common-missing cardinality inequality is unchanged.  To transport
+non-minus-closedness, unpack the old witness: there are a color $c$
+missing on the old core but outside $\Gamma^0$ and an individual boundary
+edge $g$ of that core with $\varphi_n(g)=c$.  The core lies in $A$, so
+(6) forces $c\notin\{\alpha,\beta\}$.  Thus the swap fixes $g$ and gives
+$\sigma_n(g)=c$; (14) preserves the missingness of $c$, and (12)
+preserves the exact core and its boundary.  The same $c,g$ witness that
+the new core is not $(\Gamma^0)^-$-closed.  This proves both PE clauses.
+In the common non-PE case the implication defining the parallel-base
+field has a false PE premise and is immediate.
+
+Finally fix an internal index $i<q$.  Put
+\[
+ U=H.\mathit{stage}(i+1)=K.\mathit{stage}(i+1),\qquad
+ R=\bigcup_{\eta\in D_{n,i+1}}\Gamma^i_\eta .
+\]
+To verify the new minus-closed field, let $c$ be missing on $U$ under
+$\sigma_n$ with $c\notin R$, and suppose that an individual boundary edge
+$g$ of $U$ has $\sigma_n(g)=c$.  Since $U\subseteq A$, neither affected
+color is missing there, so $c\notin\{\alpha,\beta\}$.  Equation (14) says
+$c$ is missing on $U$ under $\varphi_n$, (13)--(15) give the same reserved
+set $R$, and the swap rule gives $\varphi_n(g)=c$.  This contradicts the
+old minus-closed field.  Thus every internal minus-closed field holds for
+$K$.  Notice that its final instance, at $i=q-1$, has been proved here
+once and will be reused below.  We have now checked every field and obtain
+a good hierarchy $\Gamma^\sigma$ on $K$.  Equations (12), (15), and (13)
+are exactly \noderef{SameGoodHierarchy}$(C.\mathit{good},\Gamma^\sigma)$,
+which proves the full-tree conclusion.                                \tag{17}
+
+Assume at last that $q>0$.  Apply
+\noderef{GoodHierarchyPrefixRepackage} to
+$\mathcal E^\sigma,m^\sigma,B^\sigma,K,\Gamma^\sigma$ at its last
+positive internal stage $r=q$.  Because $q>0$, the definition of
+\noderef{HierarchyStarredStage}, followed by the exact stage equality in
+(12), identifies
+\[
+ K.\mathit{stage}(r)=H.\mathit{stage}(q)=A=T_{n,q}.
+\]
+The theorem therefore returns an actual maximum ETT on the exact ordered
+tree $A$, a base with the same core and closure, and a good hierarchy with
+divider count $q-1$ and exactly the retained stages through $A$.  Its
+retained stored-set and total Gamma equalities, composed with (13)--(15),
+give precisely the $D_{n,j}$ and paper Gamma equalities required in
+conclusion 3.
+
+The prefix theorem also returns separately the final internal
+minus-closed field of the full hierarchy (17).  Under the same exact stage,
+stored-set, and Gamma equalities, that returned assertion is
+\[
+ T_{n,q}\text{ is }
+ \left(\bigcup_{\eta\in D_{n,q}}\Gamma^{q-1}_\eta\right)^-
+ \text{-closed under }\sigma_n,
+\]
+which is (M).  Thus (M) is the already verified last boundary argument,
+not a second unsupported transport claim.  All three conclusions and the
+full-tree certificate now follow.
 \end{proof}

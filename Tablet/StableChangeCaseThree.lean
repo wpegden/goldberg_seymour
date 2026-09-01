@@ -1,6 +1,8 @@
 import Tablet.ChangeLemma
 import Tablet.CombinedStableClosurePreserved
 import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.GoodHierarchyPrefixRepackage
+import Tablet.HierarchySplitter
 import Tablet.HierarchyWeaklyStable
 import Tablet.HkuTreeColorsControlled
 import Tablet.MaximumPropertyTransport
