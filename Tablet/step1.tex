@@ -1,0 +1,644 @@
+\begin{lemma}[Interchangeability at a positive hierarchy stage]
+Let $T$ be a positive-rung ETT of rung number $n$, constructed from an
+arbitrary certified input coloring and with generating coloring
+$\varphi_n$.  Assume that $T$ has maximum property, that $\varphi_n$ is
+proper and leaves exactly the distinguished edge $e_0$ uncolored, and
+fix a hierarchy base.  Let
+\[
+ T_n=T_{n,0}\subset T_{n,1}\subset\cdots\subset
+ T_{n,q}\subset T_{n,q+1}=T
+\]
+be a good hierarchy $H$ over that base, with its actual family of
+two-color sets $\Gamma^j_\eta$.
+
+Assume, uniformly over every certified input coloring and generating
+coloring, that every positive-rung ETT $U$ of rung number $s<n$ with
+maximum property satisfies all six lower-rung assertions:
+\begin{enumerate}
+\item $V(U)$ is elementary under its generating coloring;
+\item under every proper coloring leaving exactly $e_0$ uncolored and
+stable on the final ladder closure, that closure is interchangeable for
+two colors whenever at least one is missing there;
+\item stability descends at every PE support to the prefix before that
+support and to its first-appearance ladder stage, and the stored pairs at
+distinct PE slots with distinct supports and the same first-appearance
+index are disjoint;
+\item at a terminal PE, the stored two-color component through the
+support meets the terminal ladder tree only at the support;
+\item every nonminimum endpoint of a defective boundary color precedes
+each later PE support or SE extension vertex allowed by its
+first-appearance index; and
+\item every proper terminal stable coloring leaving exactly $e_0$
+uncolored is a mod-coloring of $U$.
+\end{enumerate}
+
+Assume also the induction hypothesis (6.1) in the following explicit
+form.  For every arbitrary certified input coloring and generating
+coloring $\psi$, every ETT $U$ of the same rung number $n$ as $T$ which
+has maximum property, and every good hierarchy $K$ of $U$ with strictly
+fewer than $q$ dividers, $V(U)$ is elementary under $\psi$.  Finally
+assume the large-branch estimate
+\[
+              |\overline{\varphi_n}(T_n)|\geq 2n+11.       \tag{L}
+\]
+
+Let $1\leq p\leq q$, let
+$S=T_{n,p}$ (formally, for $i=p-1$ this is
+`$H.\mathit{stage}(i.\mathit{succ}.\mathit{castSucc})$'), and let
+$\alpha,\beta\in[k]$ be distinct.  If
+$\alpha\in\overline{\varphi_n}(S)$ and the singleton
+$\{\alpha\}$ is closed on $S$ under $\varphi_n$, then $\alpha$ and
+$\beta$ are $S$-interchangeable under $\varphi_n$.  All tree sequences,
+paths, and recolorings retain the individual identities of parallel
+edges.
+\end{lemma}
+\begin{proof}
+Write $\varphi=\varphi_n$.  We first isolate two truncation operations
+which will be used repeatedly.  If $1\leq r\leq q$, restrict the ordered
+stage data of $H$ through $T_{n,r}$ and declare $T_{n,r}$ to be the
+terminal tree.  The fields of \noderef{TashkinovHierarchy} restrict
+entry by entry: the retained stages are
+\[
+ T_{n,0},\ldots,T_{n,r-1},T_{n,r},
+\]
+the retained divider positions are the first $r-1$, and the terminal
+field becomes $T_{n,r}$.  Its divider count is therefore $r-1$.
+The same certified series gives an \noderef{ExtendedTashkinovTree} on
+$T_{n,r}$: the base and strict-prefix clauses follow from the base-stage,
+core-inside-first, nested, and strict fields of
+\noderef{TashkinovHierarchy}, while the upper initial-segment clause is
+obtained by composing those ordered segments with the old ETT upper
+segment.  The definition \noderef{MaximumProperty} depends only on the
+certified ladder series, not on which intermediate terminal prefix is
+displayed, so the given maximum-property certificate is unchanged.
+
+Restrict the family $\Gamma$ to stages $0,\ldots,r-1$.  Pair sizes,
+avoidance, and pairwise disjointness are literally the corresponding
+fields of \noderef{GoodHierarchy}.  Its unique-refresh and minus-closed
+fields are restricted to indices below $r-1$; its parallel-base field is
+unchanged.  Thus this is a good hierarchy with $r-1<q$ dividers.  The
+same-rung induction hypothesis (6.1), applied to this exact truncated
+ETT and hierarchy, gives
+\[
+             V(T_{n,r})\text{ is elementary under }\varphi.
+                                                               \tag{1}
+\]
+This construction works for arbitrary certified input and generating
+colorings, which is essential when we repeat it after a recoloring.
+
+We shall also truncate at a vertex $b$ lying strictly after
+$T_{n,r-1}^{*}$ and no later than $T_{n,r}$.  Use
+\noderef{TreeSequencePrefix} to take the ordered prefix through $b$, or
+the prefix immediately before $b$.  Every retained vertex and edge is
+the same indexed identity by \noderef{TreeSequenceInitialSegment}.
+Keeping stages only through $T_{n,r-1}$ and using the chosen prefix as
+terminal again gives $r-1$ dividers.  All five good-hierarchy clauses
+which remain quantified are old clauses.  If this shorter prefix still
+strictly extends $T_n$ and the coloring is changed only on full
+components outside it, the output of \noderef{HierarchyLEMStable}
+supplies the corresponding ETT, maximum property, the same ordered
+stages and dividers, the same stored sets and $\Gamma$-pairs, and
+preservation of the required minus-closed clause.  If the shorter prefix
+is exactly $T_n$, it is not falsely presented as an ETT: lower assertion
+(ii), with the zero-rung endpoint from \noderef{TechnicalTheoremBase},
+supplies the base stability and interchangeability data, and lower
+assertion (vi) through \noderef{Td} supplies the mod-coloring needed for
+the first strict enlargement.
+For a one-edge enlargement from the prefix before $b$ to the prefix
+through $b$, the old final certified closure in
+\noderef{TashkinovSeriesStep} and \noderef{TashkinovClosure} supplies the
+exact finite augmentation sequence.  Because the recoloring fixes every
+edge identity and every missing-color witness on the shorter prefix,
+each retained augmentation still satisfies
+\noderef{TashkinovAugmentation}; the universal clause of
+\noderef{ModColoring}, obtained from lower assertion (vi) via
+\noderef{Td}, then supplies the corresponding ETT on the enlarged
+prefix.  \noderef{MaximumPropertyTransport} transfers maximum property,
+and copying the retained stages verifies the same good hierarchy.  This
+is the precise truncated presentation used below; no endpoint pair is
+substituted for a graph-edge identity.
+
+Suppose the conclusion is false.  Among the indices $1\leq r\leq p$
+for which there are colors $a\ne b$, with $a$ missing and closed on
+$T_{n,r}$, but $a,b$ not interchangeable there, choose the least one.
+This finite set is nonempty by the supposed counterexample at $p$.
+Rename the chosen index and colors $p,\alpha,\beta$, and put
+$S=T_{n,p}$ and $A=T_{n,p-1}^{*}$.
+
+By (1), $S$ is elementary.  Since $\alpha$ is missing on $S$, it is
+missing at exactly one vertex: existence is
+\noderef{TreeMissingColors}, and uniqueness is
+\noderef{ColoredVertexSetElementary}.  Properness says that every other
+vertex is incident with exactly one $\alpha$-edge.  The singleton
+closedness hypothesis, expanded using \noderef{TreeColorSetClosed} and
+\noderef{BoundaryColorEdges}, says that no such edge is a boundary edge.
+Counting incidences of exact $\alpha$-edge identities inside $S$ therefore
+gives
+\[
+                         |V(S)|\text{ is odd}.                \tag{2}
+\]
+Indeed, the $|V(S)|-1$ present incidences are paired by the two endpoints
+of each internal $\alpha$-edge.  Finally the `minusClosed' field of
+\noderef{GoodHierarchy}, instantiated at $i=p-1$, gives
+\[
+ S\text{ is }
+ \left(\bigcup_{\eta\in D_{n,p}}\Gamma^{p-1}_\eta\right)^{-}
+ \text{-closed under }\varphi.                               \tag{3}
+\]
+This is exactly the finite-set predicate
+\noderef{TreeColorSetMinusClosed}, not an unstated closure convention.
+
+The negation of \noderef{TreeInterchangeable} supplies two distinct
+nontrivial $(\alpha,\beta)$ path components meeting $S$.  By
+\noderef{TwoColorPathComponent} each has a genuine edge node and a path
+endpoint; by \noderef{TwoColorComponentSpanningPath} it has a simple
+spanning path, and \noderef{TwoColorIncidenceDegreeAtMostTwo} controls
+all its incidences.  Since $\alpha$ has no boundary edge, every crossing
+from $S$ is an exact $\beta$-colored edge identity.  The endpoint and
+parity counts in the two cases below show how many outside endpoint
+portions occur; each such portion ends at its first vertex of $S$, so it
+satisfies \noderef{TreeExitPath}.  Distinct components are vertex-disjoint
+by \noderef{TwoColorComponentsDisjoint}.  These observations justify all
+exit paths below directly in the incidence graph
+\noderef{TwoColorIncidenceGraph}, where parallel edges are separate
+nodes.
+
+\textbf{Case 1: $\beta\in\overline\varphi(S)$.}
+Elementarity makes $\beta$ missing at exactly one vertex, different from
+the unique $\alpha$-missing vertex because $\alpha\ne\beta$.  Counting
+$\beta$-incidences as above gives
+\[
+                  |\partial_{\varphi,\beta}(S)|\equiv
+                  |V(S)|-1\equiv0\pmod2.                    \tag{4}
+\]
+If one witness component is wholly inside $S$, its two path endpoints
+must be the unique $\alpha$-missing and $\beta$-missing vertices.  Every
+other witness component then has both path endpoints outside $S$ and
+contributes two disjoint exit portions.  If no witness component is
+wholly inside, take one outside endpoint portion from each of the two
+distinct components.  In either event (4) and the component dichotomy
+give two vertex-disjoint exit paths $P_1,P_2$.  Write $a_j$ for the
+outside end and $b_j$ for the inside end of $P_j$, and order them so that
+$b_1\prec b_2$ in \noderef{TreeVertexOrder}.
+
+\emph{Subcase 1.1: $b_2\notin V(A)$.}
+The first edge of $P_2$ at $b_2$ is a $\beta$-colored boundary identity.
+If $\beta$ were outside
+$\bigcup_{\eta\in D_{n,p}}\Gamma^{p-1}_\eta$, (3) would make its boundary
+empty.  Hence there is $\eta\in D_{n,p}$ with
+$\beta\in\Gamma^{p-1}_\eta$.  The inclusion
+\noderef{HierarchyStoredColorsAntitone} puts $\eta$ in the preceding
+stored set, and \noderef{GoodHierarchyReservedDisjoint} puts this exact
+pair in the colors missing on $A$.  Thus
+\[
+                         \beta\in\overline\varphi(A).         \tag{5}
+\]
+
+Choose $\gamma\in\overline\varphi(b_2)$.  This choice is justified from
+the certificate rather than assumed: the initial constructor in
+\noderef{TashkinovSeriesStep} contains a \noderef{KTriple}, hence
+$k\geq\Delta(G)+1$; properness gives at most
+$d_G(b_2)\leq\Delta(G)$ distinct present colors by \noderef{Degree} and
+\noderef{MaximumDegree}; the complement definition
+\noderef{MissingColors} is therefore nonempty.  If $\gamma$ belonged to
+the reserved union in (3), the preceding-stage conclusion of
+\noderef{GoodHierarchyReservedDisjoint} would make it missing at a
+vertex of $A$.  That vertex differs from $b_2$, contradicting (1).
+Consequently $\gamma$ is outside the union, and (3) gives
+\[
+                \alpha\text{ and }\gamma\text{ are closed on }S.
+                                                               \tag{6}
+\]
+
+Let $\mu_1$ be obtained by exchanging $\alpha,\gamma$ on every full
+component disjoint from $S$.  This is an
+\noderef{OutsideKempeRecoloring}.  By
+\noderef{OutsideKempeRecoloringStable}, $\mu_1$ is proper, leaves exactly
+$e_0$ uncolored, fixes every exact edge incident with $S$, and is stable
+on every displayed stage.  Applying \noderef{HierarchyLEMStable} to the
+truncated ETT on $S$ checks all the data required later: its inputs are
+the stated lower six-assertion package, maximum property, positivity,
+the stated properness and exact one-uncoloredness, the truncated
+hierarchy base and good hierarchy, and the outside recoloring just
+defined.  Its output is a corresponding same-rung ETT under $\mu_1$,
+with maximum property, identical stages, identical $\Gamma$-sets, and
+the transported instance of (3).
+
+Because both colors in (6) have empty boundary, every
+$\alpha$-edge on the portion of $P_1$ or $P_2$ outside $S$ lies in a
+full $(\alpha,\gamma)$ component disjoint from $S$.  Inspection of
+\noderef{TwoColorComponentSwap} therefore changes precisely those
+external $\alpha$-edges to $\gamma$ and fixes the $\beta$-edges.  Hence
+$P_1,P_2$ are two distinct $(\gamma,\beta)$ exit paths under $\mu_1$.
+
+Let $K_2$ be the full $(\gamma,\beta)$ component through $b_2$ under
+$\mu_1$, and let
+$\mu_2=\mu_1/K_2$.  The vertex $b_2$ misses $\gamma$ and is incident
+with the first $\beta$-edge of $P_2$, so properness makes its
+incidence-graph degree one.  The outside end $a_2$ misses one of the two
+path colors by \noderef{TreeExitPath}; because the path is nontrivial it
+is incident with the other color, and it too has degree one.  Every node
+has degree at most two by
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  A node of $K_2$ outside the
+simple path $P_2$ would attach at an internal node, producing degree
+three, or at an endpoint, producing degree two there.  Both are
+impossible.  Thus $P_2$ exhausts $K_2$.  Its exit-path clause says that
+its only vertex in $S$ is $b_2$, so $K_2$ is disjoint from the prefix
+strictly before $b_2$.  This swap is therefore an outside Kempe
+recoloring for that shorter prefix.  The colors are distinct because one
+is missing and the other is present on the first boundary identity at
+$b_2$.  Therefore
+\noderef{TwoColorComponentSwapProper} gives properness of $\mu_2$;
+\noderef{TwoColorComponentSwap} fixes the value $\mathsf{none}$ and only
+transposes two nonempty colors, so \noderef{IsOneEdgeUncolored} shows
+that exactly $e_0$ remains uncolored.
+
+If the prefix immediately before $b_2$ strictly extends $T_n$, apply
+\noderef{HierarchyLEMStable} to that exact truncated ETT, with the
+$\mu_1$ hierarchy just obtained and this outside recoloring.  If it is
+exactly $T_n$, use the base alternative recorded in the truncation
+paragraph instead.  In either case the preceding construction then
+adjoins the exact next edge and vertex $b_2$ and uses \noderef{Td} and
+\noderef{MaximumPropertyTransport} to obtain a same-rung maximum ETT
+$C=S(b_2)$ under $\mu_2$.  Its retained hierarchy has $p-1$ dividers,
+the same stages through $A$, the same $\Gamma$-sets, and every required
+minus-closed field.  These are precisely all properness,
+one-uncoloredness, corresponding-ETT, maximum-property, same-stage,
+same-$\Gamma$, and minus-closed obligations; none is inferred merely
+from the word ``stable.''
+
+Now (5) is preserved on $A$, since the swapped component is disjoint
+from the prefix before $b_2$.  The swap makes $\beta$ missing at $b_2$.
+Both vertices lie in $C$ and are distinct.  Applying (6.1) to the newly
+constructed good hierarchy, whose $p-1$ dividers are fewer than $q$,
+makes $V(C)$ elementary under $\mu_2$.  The same color $\beta$ is
+missing at the two displayed vertices, a contradiction.
+
+\emph{Subcase 1.2: $b_2\in V(A)$.}
+We first construct a color $\theta$ with the exact properties used in
+the recoloring.  The stored-color bound
+\noderef{HierarchyStoredColorsCardinality} gives
+$|D_{n,j}|\leq n$ at every stage.  For each fixed $j$,
+`twoColors' and `disjointPairs' in \noderef{GoodHierarchy} say that the
+pairs indexed by $D_{n,j}$ have cardinality two and are pairwise
+disjoint.  Hence
+\[
+ \left|\bigcup_{\eta\in D_{n,j}}\Gamma^j_\eta\right|
+       =2|D_{n,j}|\leq2n.                                    \tag{7}
+\]
+This is the required use of the actual stored-pair fields, not an
+uncited cardinality shortcut.
+
+If $p=1$ and the terminal kind is not PE, (L) and (7) choose
+\[
+ \theta\in\overline\varphi(T_n)
+       -\bigcup_{\eta\in D_{n,1}}\Gamma^0_\eta.
+\]
+To verify closure on $T_n$, inspect the last non-PE constructor in
+\noderef{TashkinovSeriesStep}.  In RE its generating coloring equals the
+previous coloring, under which $T_n$ is explicitly closed.  In SE,
+\noderef{MaximumDefectiveChoice} says that the selected generating
+coloring is stable on $T_n$ relative to the previous coloring.  Its
+vertex clause in \noderef{StableColoring} preserves the missing set;
+properness and exact one-uncoloredness on both sides let the symmetry
+clause of \noderef{sc2} transfer a hypothetical boundary identity of a
+missing color back to the previous coloring, contradicting
+\noderef{ColoredVertexSetClosed}.  Hence $T_n$ is closed under the actual
+generating coloring in either non-PE case, while (3) closes $\theta$ on
+$T_{n,1}$.
+If $p=1$ and the terminal kind is PE, the `parallelBase' field of
+\noderef{GoodHierarchy} gives at least four colors in
+\[
+ (\overline\varphi(T_n)\cap\overline\varphi(\mathcal B.\mathit{closure}))
+       -\bigcup_{\eta\in D_{n,0}}\Gamma^0_\eta.
+\]
+Choose $\theta$ there distinct from the terminal connecting colors.  It
+is missing on both $T_n$ and the base closure.  The pre-step
+elementarity premise of \noderef{ParallelCommonMissingClosed} is lower
+assertion (i) for the one-rung restriction, with
+\noderef{TechnicalTheoremBase} at its zero-rung endpoint.  That lemma
+therefore makes the singleton $\{\theta\}$ closed on the exact hierarchy
+base core $T_n\vee R_n$.  Thus the missingness and singleton-closedness
+hypotheses of the exact third conclusion of \noderef{interchange} are
+both available; clause (3) also closes $\theta$ on $T_{n,1}$.
+
+If $p\geq2$, (L), inclusion of terminal-ladder missing colors along the
+ordered stages, and (7) choose
+\[
+ \theta\in\overline\varphi(T_{n,p-2})
+       -\bigcup_{\eta\in D_{n,p-1}}\Gamma^{p-2}_\eta.         \tag{8}
+\]
+The minus-closed field at $p-1$ makes $\theta$ closed on
+$T_{n,p-1}$.  For a stored color whose pair is not refreshed, the
+`uniqueRefresh' field of \noderef{GoodHierarchy} identifies its new pair
+with the old $\Gamma^{p-2}$-pair, which (8) avoids.  The unique refreshed
+pair is missing on
+$V(T_{n,p-1})-V(T_{n,p-2}^{*})$; if it contained $\theta$, then
+$\theta$ would be missing both on $T_{n,p-2}$ and at a distinct new
+vertex, contradicting elementarity of $T_{n,p-1}$.  Thus $\theta$ is not in
+$\bigcup_{\eta\in D_{n,p}}\Gamma^{p-1}_\eta$; it is still missing on
+$S$, and (3) closes it on $S$.  In all three alternatives we have
+\[
+ \begin{cases}
+ \theta\in\overline\varphi(T_n),\quad
+ \theta\text{ closed on }T_{n,0}^{*}\text{ and }T_{n,1},&p=1,\\
+ \theta\in\overline\varphi(T_{n,p-1}),\quad
+ \theta\text{ closed on }T_{n,p-1}\text{ and }S,&p>1.
+ \end{cases}                                                  \tag{9}
+\]
+
+Let $\mu_3$ exchange $\alpha,\theta$ on every full component outside
+$S$.  By (6) with $\gamma=\theta$ and
+\noderef{OutsideKempeRecoloringStable}, it is proper, leaves exactly
+$e_0$ uncolored, and fixes all stage-incident edge identities and
+missing sets.  \noderef{HierarchyLEMStable}, applied with every
+hypothesis listed in Subcase 1.1, supplies a corresponding same-rung
+maximum ETT and the same good hierarchy and $\Gamma$ data under $\mu_3$.
+The external $\alpha$-edges of $P_1,P_2$ become $\theta$-edges, so the
+same exact paths witness failure of $(\theta,\beta)$ interchangeability.
+
+When $p=1$ and the terminal kind is PE, apply conclusion (iii) of
+\noderef{interchange} to the truncated ETT: properness and exact
+one-uncoloredness are supplied by the preceding outside-recoloring
+lemma; \noderef{HierarchyOutsideKempeStable} supplies the required
+combined stability on the exact terminal $T_n$ and base closure; the
+terminal-PE equation, hierarchy base, maximum property, positivity, and
+the complete lower six-assertion package are the stated hypotheses; and
+(9) supplies missingness and singleton closedness on `base.core'.  This
+contradicts the two paths.  When $p=1$ and the kind is not PE, the
+terminal ladder is the starred base.  If $n>1$, restrict the certified
+series by one rung and display $T_n$ as its final ETT.  Its maximum
+property is the restriction of \noderef{MaximumProperty}.  In RE the
+generating color is already the preceding color; in SE the
+`selectedStable' field of \noderef{MaximumDefectiveChoice}, followed by
+transitivity in \noderef{sc2}, combines with the outside stability of
+$\mu_3$ to give exactly the preceding-rung stability relation.  Lower
+assertion (ii) therefore applies to $\mu_3$.  If $n=1$, the same
+interchangeability conclusion, with its properness, one-uncoloredness,
+and stability premises just checked, is
+\noderef{TechnicalTheoremBase}.  In either event the two paths contradict
+interchangeability.  When $p>1$, (9) makes the
+same two paths a counterexample at $p-1$ for the newly certified good
+maximum hierarchy, contradicting the minimal choice of $p$.  This
+finishes Case 1.
+
+\textbf{Case 2: $\beta\notin\overline\varphi(S)$.}
+No vertex of $S$ misses $\beta$.  Counting $\beta$-incidences now gives
+\[
+                  |\partial_{\varphi,\beta}(S)|\equiv
+                  |V(S)|\equiv1\pmod2.                      \tag{10}
+\]
+No nontrivial path component meeting $S$ can be wholly inside it: such a
+path has two endpoints missing one of its two colors, whereas $\beta$ is
+missing nowhere on $S$ and elementarity permits $\alpha$ to be missing
+at only one vertex.  Thus the two witness components supply crossings.
+Equation (10) raises their total number to at least three.  In each
+max-degree-two path component take the portions from its outside
+endpoints to its first encountered vertices of $S$.  These outer portions
+are pairwise vertex-disjoint; the odd total and the two witness
+components provide at least three of them.  Select three and call them
+$P_1,P_2,P_3$, with outside ends $a_j$, inside ends $b_j$, and distinct
+exact first boundary-edge identities $f_j$, ordered so that
+$b_1\prec b_2\prec b_3$.  The paths, their outside ends, and their first
+edge identities are pairwise distinct, though two paths may arise from
+the two ends of one full component.
+
+Among all data at this minimal hierarchy index which have a closed first
+color, a proper one-uncolored generating coloring, a certified same-rung
+maximum ETT and good hierarchy with the same lower package and (6.1),
+and three distinct exit paths, choose the triple minimizing
+$|P_1|+|P_2|+|P_3|$.  The current data belong to this finite nonempty
+class.  Allowing the first color merely to be closed, rather than also
+missing, only enlarges the comparison class and therefore makes the
+minimality argument below stronger; the original counterexample is
+still admissible.
+
+\emph{Subcase 2.1: $b_3\notin V(A)$.}
+Choose $\gamma\in\overline\varphi(b_3)$ by the same certified degree
+argument as in Subcase 1.1.  Elementarity and
+\noderef{GoodHierarchyReservedDisjoint} again imply that $\gamma$ is
+outside the reserved union in (3), so (3) closes it on $S$.  Recolor all
+outside $(\alpha,\gamma)$ components to obtain $\mu_4$.  The exact
+application of \noderef{HierarchyLEMStable} is the one already checked
+for $\mu_1$: it gives properness, exact one-uncoloredness, a corresponding
+same-rung ETT, maximum property, the same stages and $\Gamma$-sets, and
+the transported minus-closed data.  The three $P_j$ become
+$(\gamma,\beta)$ exit paths.
+
+Swap the full $(\gamma,\beta)$ component through $b_3$ and call the
+result $\mu_5$.  As at $b_2$, $b_3$ has incidence degree one because it
+misses $\gamma$ and is incident with a $\beta$-edge, while the outside
+end of $P_3$ has degree one by the exit-path condition.  The bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo} shows that $P_3$ exhausts
+this component.  Hence the component meets $S$ only at $b_3$ and is
+disjoint from the prefix before $b_3$.  If that prefix strictly
+extends $T_n$, it has the exact truncated ETT and hierarchy described
+above and \noderef{HierarchyLEMStable} applies; if it equals $T_n$, use
+the explicitly separated base alternative.  Thus
+\noderef{TwoColorComponentSwapProper},
+\noderef{IsOneEdgeUncolored}, \noderef{HierarchyLEMStable},
+\noderef{Td}, and \noderef{MaximumPropertyTransport} construct the exact
+prefix $C=S(b_3)$ as a corresponding same-rung maximum ETT with the
+same stages through $A$, the same $\Gamma$ data, and all retained
+minus-closed fields.  The swap makes $\beta$ missing at $b_3$.
+
+Adjoin the two individual edge identities $f_1$ and $f_2$, in that
+order, to $C$.  Their old endpoints are $b_1,b_2\in V(C)$, their other
+endpoints are the next vertices on the two simple exit paths, and they
+are distinct because the paths lie in distinct components.  Hence each
+application of \noderef{TreeSequenceAdjoinEdge} retains the ordered tree
+and does not identify parallel edges.  Call the resulting tree $J$.
+Copying the stages through $A$ and taking $J$ as terminal gives a
+hierarchy with $p-1$ dividers and the old $\Gamma$ family.  Its five
+good-hierarchy fields are the retained old fields; maximum property is
+the already transported series property.
+
+Starting from $J$, perform the manuscript's finite Step-2 augmentation.
+At a current tree $U$, append an exact boundary edge $f$ only when its
+$\mu_5$-color is missing on $U$ and, for every
+$\eta\in D_{n,p-1}$, the appended segment before the first vertex
+missing $\eta$ uses no color in $\Gamma^{p-1}_\eta$.  This condition is
+exactly the avoidance predicate encoded by
+\noderef{HierarchySegmentColors}.  Each step is a
+\noderef{TashkinovAugmentation}: the old endpoint is in $U$, the other
+endpoint is new, the exact edge identity is appended, and its displayed
+color has a missing witness in $U$.  Since $E$ and $V$ are finite and
+each step strictly increases the ordered vertex list, a maximal finite
+sequence exists.  Let $T'$ be its last tree.
+
+Put
+\[
+ D'_{n,p}=\left(\bigcup_{h\leq n}S_h\right)
+               -\overline{\mu_5}(T').
+\]
+Every member of this set belongs to $D_{n,p-1}$: the raw union is fixed
+by the corresponding-series fields, while the ordered inclusion of the
+preceding starred stage into $T'$ makes missing colors monotone, exactly
+as in \noderef{HierarchyStoredColorsAntitone}.  If a color missing on
+$T'$ but outside
+$\bigcup_{\eta\in D'_{n,p}}\Gamma^{p-1}_\eta$ had a colored boundary
+identity of color $c$, that identity would satisfy the Step-2 rule.
+Indeed, fix $\eta\in D_{n,p-1}$.  If $\eta\notin D'_{n,p}$, then
+$\eta$ is already missing on $T'$, so its first missing vertex precedes
+the proposed new last edge and that edge does not enter the tested
+segment.  If $\eta\in D'_{n,p}$, the hypothesis on $c$ says
+$c\notin\Gamma^{p-1}_\eta$, while all older segment edges already pass
+the avoidance test.  Thus every $\eta$ passes, and maximality forbids
+the boundary identity.  This gives the exact statement
+\[
+ T'\text{ is }
+ \left(\bigcup_{\eta\in D'_{n,p}}\Gamma^{p-1}_\eta\right)^{-}
+ \text{-closed under }\mu_5.                                 \tag{11}
+\]
+Pair sizes, pairwise disjointness, unique refresh below $p$, and all old
+minus-closed clauses were unchanged; the Step-2 rule gives the last
+avoidance field, while (11) is the additional terminal closure used in
+the comparison argument.  Thus the stages
+$T_{n,0},\ldots,T_{n,p-1},T'$ with the exact old $\Gamma$ family form a
+good hierarchy.  The augmentation sequence supplies a corresponding
+ETT through \noderef{Td} and \noderef{ModColoring}, and
+\noderef{MaximumPropertyTransport} gives maximum property.  Its
+$p-1<q$ dividers let (6.1) conclude
+\[
+                       V(T')\text{ is elementary under }\mu_5. \tag{12}
+\]
+
+We show that no $a_j$ lies in $T'$.  If some $a_j$ did, the endpoint
+property of the path component says that it misses $\gamma$ or $\beta$.
+It cannot miss $\beta$, because $b_3$ already misses $\beta$ and (12)
+is elementary; hence it misses $\gamma$.  Both colors are outside the
+reserved pairs: $\gamma$ was excluded by elementarity; if $\beta$ lay in
+a $\Gamma^{p-1}$-pair, \noderef{GoodHierarchyReservedDisjoint} would
+make it missing on the preceding starred stage and hence on $S$,
+contrary to Case 2.  Follow each $P_j$ edge by edge from its inside end,
+which already lies in $S\subseteq T'$.  The assumed $a_i\in T'$
+supplies a missing $\gamma$-witness and $b_3$ supplies a missing
+$\beta$-witness, so every next $\gamma$- or $\beta$-colored boundary
+edge has a color missing on $T'$.  The pair-avoidance condition holds
+because neither path color is reserved.
+The maximal Step-2 rule must therefore have appended that exact edge.
+Induction along the three finite simple paths puts all $a_1,a_2,a_3$ in
+$T'$.  Since $b_3$ already misses $\beta$, elementarity forces each
+outside end to miss $\gamma$.  The degree-two path structure and the
+three distinct first boundary identities give at least two distinct
+outside ends, contradicting (12).  Thus all three outside ends lie
+outside $T'$.
+
+For each $j$, take the last portion $L_j$ of $P_j$ from its last vertex
+in $T'$ to $a_j$.  It is a $T'$-exit path.  The three paths have distinct
+outside endpoints, while a finite max-degree-two path component has only
+two endpoints; hence at least two full components meet $T'$, giving the
+failure of interchangeability required in the comparison class.  The
+identity $f_1$ was deliberately
+adjoined to $J\subseteq T'$, so it is not in $L_1$; all other deletions
+are nonnegative.  Consequently
+\[
+       |L_1|+|L_2|+|L_3|<|P_1|+|P_2|+|P_3|.                 \tag{13}
+\]
+The coloring, corresponding ETT, maximum property, good hierarchy,
+exact $\Gamma$ family, and minus-closed condition are those checked in
+(11)--(12).  Thus $(\mu_5,T',\gamma,\beta,L_1,L_2,L_3)$ belongs to the
+comparison class but violates the chosen minimal total length (13), a
+contradiction.
+
+\emph{Subcase 2.2: $b_3\in V(A)$.}
+We repeat every choice.  At a fixed stage $j$, the theorem
+\noderef{HierarchyStoredColorsCardinality} gives $|D_{n,j}|\leq n$.
+The `twoColors' and `disjointPairs' fields of
+\noderef{GoodHierarchy} make the union of the pairs indexed by this set
+have cardinality exactly $2|D_{n,j}|$, hence at most $2n$.
+
+Suppose first that $p=1$ and the terminal kind is not PE.  The
+$2n+11$ colors in (L) therefore include a color
+\[
+ \theta\in\overline\varphi(T_n)-
+      \bigcup_{\eta\in D_{n,1}}\Gamma^0_\eta.                 \tag{14}
+\]
+In RE the terminal generating coloring is the previous coloring and the
+constructor of \noderef{TashkinovSeriesStep} states that $T_n$ was
+closed.  In SE, the `selectedStable' field of
+\noderef{MaximumDefectiveChoice}, symmetry from \noderef{sc2}, and the
+old closedness transfer every hypothetical boundary identity of a
+missing color back to the previous coloring.  Thus $\theta$ is closed on
+$T_n=T_{n,0}^{*}$.  Equation (14) and the minus-closed statement (3)
+also make it closed on $S=T_{n,1}$.
+
+Suppose next that $p=1$ and the terminal kind is PE.  The `parallelBase'
+field of \noderef{GoodHierarchy} supplies at least four colors in
+\[
+ (\overline\varphi(T_n)\cap
+   \overline\varphi(\mathcal B.\mathit{closure}))-
+      \bigcup_{\eta\in D_{n,0}}\Gamma^0_\eta.
+\]
+Choose $\theta$ after deleting the two terminal connecting colors.  The
+pre-step elementarity required by \noderef{ParallelCommonMissingClosed}
+is lower assertion (i) for $n>1$ and
+\noderef{TechnicalTheoremBase} for $n=1$.  Hence $\theta$ is missing and
+singleton-closed on the exact base core $T_n\vee R_n=T_{n,0}^{*}$.
+Since $D_{n,1}\subseteq D_{n,0}$ by
+\noderef{HierarchyStoredColorsAntitone}, the chosen color is outside the
+reserved union in (3), so it is also closed on $S=T_{n,1}$.
+
+Finally suppose $p>1$.  Missing-color monotonicity along the ordered
+stages and (L) give at least $2n+11$ colors missing on $T_{n,p-2}$.
+Delete the at most $2n$ colors in
+$\bigcup_{\eta\in D_{n,p-1}}\Gamma^{p-2}_\eta$ and choose $\theta$ in
+the remainder.  The minus-closed field at $p-1$ closes $\theta$ on
+$T_{n,p-1}$.  For every nonrefreshed stored color, `uniqueRefresh'
+identifies its $\Gamma^{p-1}$-pair with the old pair just avoided.  The
+refreshed pair is missing on the new segment above
+$T_{n,p-2}^{*}$; membership of $\theta$ in it would give one
+$\theta$-missing vertex in that segment and another in
+$T_{n,p-2}$, contradicting elementarity of $T_{n,p-1}$.  Thus $\theta$
+lies outside the reserved union in (3), remains missing on $S$, and is
+closed there.  We have proved, independently in this subcase, the two
+alternatives displayed in (9).
+
+Now exchange $\alpha,\theta$ on every full component outside $S$ and
+call the coloring $\nu$.  Both colors are closed on $S$, so this is an
+\noderef{OutsideKempeRecoloring}.  The theorem
+\noderef{OutsideKempeRecoloringStable} proves that $\nu$ is proper,
+leaves exactly $e_0$ uncolored, fixes every stage-incident edge identity
+and every stage missing set, and is stable for every required control
+set.  Applying \noderef{HierarchyLEMStable} to the exact truncated ETT
+on $S$ supplies a corresponding same-rung ETT under $\nu$, maximum
+property, the identical ordered hierarchy and $\Gamma$ family, and the
+transported minus-closed field.  Since the three $P_j$ have their inside
+ends in $A$, all their external $\alpha$-edges lie in components disjoint
+from $S$ and become $\theta$-edges; their $\beta$-edges and exact inside
+portions are fixed.  The three pairwise disjoint exit paths have three
+distinct outside endpoints, so the max-degree-two component structure
+puts them in at least two full $(\theta,\beta)$ components.  Thus
+interchangeability fails on the preceding tree.
+
+In the PE case with $p=1$, apply conclusion (iii) of
+\noderef{interchange} to the exact base core.  Its terminal-PE equation,
+hierarchy base, maximum property, positivity, and complete lower package
+are the hypotheses of this lemma.  Properness and exact
+one-uncoloredness of $\nu$ were just proved, and
+\noderef{HierarchyOutsideKempeStable} gives the required combined
+stability on the exact terminal ladder and base closure.  The PE choice
+above, transported across the incident-edge and missing-set equalities,
+gives missingness and singleton closedness on `base.core'.  The resulting
+interchangeability contradicts the two components.
+
+In the non-PE case with $p=1$, display $T_n$ as the terminal tree of the
+one-rung restriction when $n>1$.  Maximum property restricts, and the RE
+color equality or the SE `selectedStable' field combined with
+transitivity in \noderef{sc2} gives precisely the preceding-rung stable
+relation for $\nu$.  Lower assertion (ii) makes $\theta,\beta$
+interchangeable on $T_n$; when $n=1$, this is exactly the second
+conclusion of \noderef{TechnicalTheoremBase}.  Again the two components
+contradict it.
+
+If $p>1$, the transported hierarchy still has the missingness and
+closedness of $\theta$ on $T_{n,p-1}$, while its large terminal-ladder
+bound is unchanged because the outside recoloring fixes every edge
+incident with $T_n$.  The two components therefore give a counterexample
+at $p-1$, contradicting the minimal definition of $p$.  This disposes of
+Subcase 2.2 without appealing to omitted manuscript details.
+
+All possibilities following the assumed failure have produced a
+contradiction.  Therefore $\alpha$ and $\beta$ are
+$T_{n,p}$-interchangeable under $\varphi_n$, as claimed.
+\end{proof}

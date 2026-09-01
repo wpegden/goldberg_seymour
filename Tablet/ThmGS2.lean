@@ -89,6 +89,7 @@ import Tablet.ThmScheide
 import Tablet.TashTree
 import Tablet.Tchange
 import Tablet.interchange
+import Tablet.step1
 import Tablet.TashkinovAugmentationSequencePreservesTashkinovTree
 import Tablet.TashkinovClosure
 import Tablet.TashkinovClosureExists
