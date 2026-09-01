@@ -1,0 +1,140 @@
+\begin{lemma}[Exact prefix repackaging of a good hierarchy]
+Let $G$ be a finite loopless multigraph with distinguished uncolored edge
+$e_0$, let $[k]$ be the color set, and let $\varphi_{\rm in}$,
+$\varphi_{\rm gen}$, and $\varphi$ be partial edge colorings.  Let
+$\mathcal E$ be a positive-rung \noderef{ExtendedTashkinovTree} on the
+exact ordered tree sequence $T$ with input coloring $\varphi_{\rm in}$ and
+generating coloring $\varphi_{\rm gen}$.  Suppose that $\mathcal E$ has
+\noderef{MaximumProperty}.  Let $B$ be a \noderef{HierarchyBase} for
+$\mathcal E$ under $\varphi$, let $H$ be a
+\noderef{TashkinovHierarchy} with divider count $q$, and let $\Gamma$ be a
+\noderef{GoodHierarchy} for $H$.
+
+For every integer $r$ with $1\leq r\leq q$, put $T_r=H.\mathit{stage}(r)$.
+There exist an ETT $\mathcal E_r$ on the exact ordered tree sequence $T_r$,
+a hierarchy base $B_r$, a hierarchy $H_r$, and a good hierarchy
+$\Gamma_r$ such that all of the following hold.
+\begin{enumerate}
+\item $\mathcal E_r$ has the same rung number and the same entire certified
+Tashkinov series as $\mathcal E$, including the exact ordered tree sequences
+and the individual identities of every connecting edge, and
+$\mathcal E_r$ has maximum property.
+\item The core, closure, and numerical support position of $B_r$ are exactly
+those of $B$.
+\item The divider count of $H_r$ is $r-1$.  For every $0\leq j\leq r$,
+$H_r.\mathit{stage}(j)=H.\mathit{stage}(j)$ as ordered tree sequences, so
+all displayed vertex and individual edge identities agree.  For every
+$0\leq i<r-1$, the numerical divider position in $H_r$ is the corresponding
+divider position in $H$.
+\item For every $0\leq j<r$, the stored-color sets agree exactly,
+$D^{H_r}_j=D^H_j$, and for every color $\eta$ the total Gamma data agree,
+$\Gamma^j_{r,\eta}=\Gamma^j_\eta$.  In particular, this equality holds for
+every paper-relevant $\eta\in D^H_j$.
+\item The old last internal closure field is retained separately:
+\[
+ T_r\text{ is }
+ \left(\bigcup_{\eta\in D^H_r}\Gamma^{r-1}_\eta\right)^{-}
+ \text{-closed under }\varphi.
+\]
+\end{enumerate}
+All equalities of tree sequences above are equalities of the ordered
+edge-valued sequences, not merely equalities of their vertex sets.
+\end{lemma}
+\begin{proof}
+Write the stages of $H$ as $T_0,T_1,\ldots,T_q,T$.  Repeatedly composing
+the ordered initial-segment maps in \noderef{TashkinovHierarchy} shows that
+$T_a$ is an ordered initial segment of $T_b$ whenever
+$0\leq a\leq b\leq q+1$, with $T_{q+1}=T$.  These maps preserve the actual
+vertex entries and edge entries at every retained index, by
+\noderef{TreeSequenceInitialSegment}.
+
+We first construct $\mathcal E_r$.  Its rung number and certified series
+are literally those of $\mathcal E$, and its displayed terminal tree is
+$T_r$.  The last ladder tree is $T_0$ by the base-stage field of $H$, so it
+is an initial segment of $T_r$.  It is strictly shorter: the strict
+containment $T_0\subset T_1$ is followed by $T_1\subseteq T_r$, using
+$r\geq1$.  Also $T_r\subseteq T$, and composing this inclusion with the
+old upper inclusion of $T$ into the final certified closure gives the
+required upper inclusion for $T_r$.  Thus every field of
+\noderef{ExtendedTashkinovTree} is satisfied, with the same certified
+series and hence with the same exact connecting-edge identities.  The
+definition \noderef{MaximumProperty} refers only to that rung and certified
+series; therefore the old maximum-property witness is also a witness for
+$\mathcal E_r$.
+
+Because the ladder series did not change, the core, closure, support
+position, terminal missing-color equation, PE data, and non-PE data of $B$
+have exactly the types required for a \noderef{HierarchyBase} of
+$\mathcal E_r$.  Copy them to obtain $B_r$.
+
+Define $H_r$ to have divider count $r-1$ and stage list
+$T_0,T_1,\ldots,T_r$.  Its base-stage, terminal-stage, nestedness,
+strictness, and base-inside-first-stage fields are the corresponding fields
+of $H$.  For $0\leq i<r-1$, define its $i$-th divider position to be
+$|T_{i+1}|$.  The old divider-stage identity says
+\[
+ T_{i+1}=\noderef{TreeSequencePrefix}(T,d_i),
+\]
+where $d_i$ is the old numerical divider position; taking lengths gives
+$d_i=|T_{i+1}|$.  Since $T_{i+1}$ is an initial segment of $T_r$, it is
+also the exact prefix of $T_r$ of that length.  Hence the new divider-stage
+identity holds, the numerical positions are unchanged, and positivity and
+strict increase follow from positivity and strict nesting of the retained
+stages.  This constructs the claimed \noderef{TashkinovHierarchy} $H_r$
+and proves all equalities in item 3 at the level of the complete ordered
+tree sequences.
+
+We next record the only point not obtained by copying record fields.  If an
+ordered tree sequence $A$ is an initial segment of $C$, a color $\eta$, and
+an index $s<|A|$ satisfy
+\[
+ s<\noderef{HierarchyFirstMissingPosition}(\varphi,A,\eta),
+\]
+then $s$ is also smaller than the first missing position in $C$.  Indeed,
+if the candidate set in $C$ is empty, its totalized first position satisfies
+$s<|C|$.  Otherwise, if its least candidate had index at most $s$, that
+index would lie in $A$ and the initial-segment vertex identity would make
+it a missing-color candidate in $A$.  If the candidate set in $A$ is
+nonempty, its minimum would then be at most $s$, a contradiction; if it is
+empty, the exhibited candidate is itself a contradiction.
+
+Apply this observation to $A=T_r$ and $C=T$.  At a retained Gamma index
+$j<r$, the starred stage and the next stage used by
+\noderef{HierarchySegmentColors} are literally the same in $H_r$ and $H$.
+Every edge index in the new segment lies before $T_{j+1}\subseteq T_r$.
+The observation therefore shows that every color in the new segment-color
+set also lies in the old segment-color set.  Notice that only this inclusion
+is needed; no recoloring or generic equality of segment-color sets is being
+asserted.
+
+Now define $\Gamma_r^j(\eta)=\Gamma^j(\eta)$ for $0\leq j<r$.  Unfolding
+\noderef{HierarchyStoredColorsAt}, the certified stored set is unchanged
+and the starred stage is unchanged, so $D^{H_r}_j=D^H_j$.  The stage
+missing-color sets defined by \noderef{HierarchyStageMissingColors} also
+agree.  We verify the five fields of
+\noderef{GoodHierarchy}.  Pair cardinality and pairwise disjointness are
+the old fields after the stored-set equality.  For avoidance, the old pair
+lies in the common stage-missing set and avoids the old segment-color set;
+the inclusion proved in the preceding paragraph implies that it avoids the
+new segment-color set as well.  For every $i<r-1$, the two stages, the
+starred stage, their vertex-set difference, both stored sets, and both
+Gamma families occurring in unique refresh are unchanged, so the old
+existence-and-uniqueness witness is exactly the new one.  The parallel-base
+field uses only the unchanged series, base, zeroth stored set, and zeroth
+Gamma family, and hence copies verbatim.  Finally, for $i<r-1$ the stage,
+stored set, and preceding Gamma family in the internal minus-closed field
+are unchanged, so that field also restricts verbatim.  Thus $\Gamma_r$ is a
+good hierarchy and item 4 holds.
+
+It remains to prove item 5.  Since $r\geq1$, the index $r-1$ is a valid old
+internal index.  The `minusClosed' field of the original good hierarchy at
+that index states exactly that $T_r$ is
+\[
+ \left(\bigcup_{\eta\in D^H_r}\Gamma^{r-1}_\eta\right)^{-}
+\text{-closed}.
+\]
+This is precisely the predicate \noderef{TreeColorSetMinusClosed}.
+We return this old field separately rather than treating it as an internal
+field of $H_r$, whose internal indices stop at $r-2$.  This proves all five
+items.
+\end{proof}

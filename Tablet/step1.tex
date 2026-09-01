@@ -54,35 +54,18 @@ edges.
 \end{lemma}
 \begin{proof}
 Write $\varphi=\varphi_n$.  We first isolate the presentations on which
-the induction will range.  If $1\leq r\leq q$, restrict the ordered
-stage data of $H$ through $T_{n,r}$ and declare $T_{n,r}$ to be the
-terminal tree.  The fields of \noderef{TashkinovHierarchy} restrict
-entry by entry: the retained stages are
-\[
- T_{n,0},\ldots,T_{n,r-1},T_{n,r},
-\]
-the retained divider positions are the first $r-1$, and the terminal
-field becomes $T_{n,r}$.  Its divider count is therefore $r-1$.
-The same certified series gives an \noderef{ExtendedTashkinovTree} on
-$T_{n,r}$: the base and strict-prefix clauses follow from the base-stage,
-core-inside-first, nested, and strict fields of
-\noderef{TashkinovHierarchy}, while the upper initial-segment clause is
-obtained by composing those ordered segments with the old ETT upper
-segment.  The definition \noderef{MaximumProperty} depends only on the
-certified ladder series, not on which intermediate terminal prefix is
-displayed, so the given maximum-property certificate is unchanged.
-
-Restrict the family $\Gamma$ to stages $0,\ldots,r-1$.  Pair sizes,
-avoidance, and pairwise disjointness are literally the corresponding
-fields of \noderef{GoodHierarchy}.  Its unique-refresh and minus-closed
-fields are restricted to indices below $r-1$; its parallel-base field is
-unchanged.  Thus this is a good hierarchy with $r-1<q$ dividers.  In
-addition, the old `minusClosed' field at index $r-1$, after unfolding
-\noderef{HierarchyStoredColorsAt} and terminal missing colors, says that
-the new terminal tree is
-$(\bigcup_{\eta\in D_{n,r}}\Gamma^{r-1}_\eta)^-$-closed.  We retain this
-as a separate terminal-closure certificate; it is not incorrectly
-claimed to be one of the good hierarchy's remaining internal fields.
+the induction will range.  For each $1\leq r\leq q$, apply
+\noderef{GoodHierarchyPrefixRepackage} to the given maximum ETT, base,
+hierarchy $H$, and good family $\Gamma$.  It returns a maximum ETT on the
+exact ordered tree $T_{n,r}$ with the same certified series and individual
+connecting-edge identities, the same base data, and a good hierarchy whose
+divider count is $r-1$.  Its retained stages and divider positions are
+exactly the old ones, and its stored sets and paper Gamma values agree at
+every retained index.  The theorem also returns, separately, the old
+`minusClosed' field at index $r-1$, namely that the new terminal tree is
+$(\bigcup_{\eta\in D_{n,r}}\Gamma^{r-1}_\eta)^-$-closed; it does not
+incorrectly claim this terminal certificate as one of the shorter good
+hierarchy's internal fields.
 The same-rung induction hypothesis (6.1), applied to this exact
 truncated ETT and hierarchy, gives
 \[

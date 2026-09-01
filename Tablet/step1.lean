@@ -10,6 +10,7 @@ import Tablet.Degree
 import Tablet.ETTFirstAppearanceIndex
 import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
+import Tablet.GoodHierarchyPrefixRepackage
 import Tablet.GoodHierarchyReservedDisjoint
 import Tablet.HierarchyBase
 import Tablet.HierarchyLEMStable
