@@ -56,7 +56,7 @@ $U=V(T_n\vee R_n)$, with vertex sets understood as in
 coloring of the certified series.  Eliminate the last certificate in
 \noderef{TashkinovSeries} using the terminal-PE hypothesis.  The PE
 constructor of \noderef{TashkinovSeriesStep} supplies the exact support
-$v_n$, exact connecting-edge identity $f_n$, and distinct colors
+$v_n$, exact connecting-edge identity $f_n$, and colors
 $\gamma_n,\delta_n$.  It also supplies properness and exact
 one-uncoloredness of $\varphi_n$, and the equations recording the
 terminal $\gamma_n,\delta_n$-switch.  No endpoint pair is substituted
@@ -113,15 +113,28 @@ the same assertion is the elementarity conclusion of
                                                                \tag{4}
 \]
 The vertex clauses of the two stable relations identify both constituent
-missing-color sets under $\varphi_n$ and $\sigma_n$.  If an exact
-edge identity is in \noderef{BoundaryEdges} for $U$, (1) gives an inside
-endpoint in $X$ or $Y$; hence \noderef{TreeIncidentEdge} makes it
-incident with the corresponding tree.  The color filter is exactly
-\noderef{BoundaryColorEdges}.  For a common missing color, the
-appropriate stable edge clause fixes its
-color.  Therefore a boundary identity of that color under $\sigma_n$
-would be the same boundary identity of that color under $\varphi_n$,
-contrary to (4).  Consequently
+missing-color sets under $\varphi_n$ and $\sigma_n$.  The PE constructor
+of \noderef{TashkinovSeriesStep} says that $\varphi_n$ is proper and
+leaves exactly $e_0$ uncolored; the same two facts for $\sigma_n$ are
+hypotheses.  We may therefore apply the symmetry clause of \noderef{sc2}
+separately to the two constituent stable relations.  It gives the reverse
+relations saying that $\varphi_n$ is $(T_n,D_n,\sigma_n)$-stable and is
+also $(R_n,\varnothing,\sigma_n)$-stable.
+
+Now let $c$ be common missing under $\sigma_n$, and suppose that an exact
+edge identity $g$ lies in the $c$-colored boundary of $U$ under
+$\sigma_n$.  By \noderef{BoundaryEdges}, name its endpoints so that the
+inside endpoint $p$ lies in $U$ and the other lies outside $U$.  Equation
+(1) gives $p\in X$ or $p\in Y$, and \noderef{TreeIncidentEdge} makes $g$
+incident with the corresponding constituent tree.  If $p\in X$, then
+$c\in\overline\sigma_n(T_n)$ and the edge clause of the reverse
+$T_n$-stable relation gives $\varphi_n(g)=\sigma_n(g)=c$.  If $p\in Y$,
+the reverse $R_n$-stable relation gives the same equality.  Boundary
+membership depends only on the exact edge endpoints, while the color
+filter is \noderef{BoundaryColorEdges}; hence $g$ is a $c$-colored
+boundary identity of $U$ under $\varphi_n$.  The vertex clauses also put
+$c$ in both constituent missing-color sets under $\varphi_n$, so this
+contradicts (4).  Consequently
 \[
  c\in\overline\sigma_n(T_n)\cap\overline\sigma_n(R_n)
  \quad\Longrightarrow\quad
@@ -150,12 +163,30 @@ $v_n$.  Thus all hypotheses of
 \[
  \tau=\sigma_n/P_{v_n}(\gamma_n,\delta_n,\sigma_n),
 \]
-that lemma makes $\tau$ proper, leaves exactly $e_0$ uncolored, and
-makes it stable on $T_n$ relative to the preceding stored set and
-preceding generating coloring.  Since $(a,b)$ avoid the two switched
-colors, the definition \noderef{TwoColorComponentSwap} shows edge by
-edge that the $(a,b)$-incidence graph, its components, and the missingness
-of $a$ on $T_n$ are identical for $\tau$ and $\sigma_n$.
+the PE certificate gives $\gamma_n\ne\delta_n$: the rule
+\noderef{ParallelExtensionColor} makes $\gamma_n$ missing at $v_n$ under
+the selected coloring, while \noderef{MaximumDefectiveChoice} supplies the
+exact edge identity $f_n$ incident with $v_n$ and colored $\delta_n$.
+Thus \noderef{PresentColors} and \noderef{MissingColors} put the two colors
+on opposite sides of the same complement.  Hence
+\noderef{TwoColorComponentSwapProper},
+applied to the stated properness of $\sigma_n$, proves that $\tau$ is
+proper.  To verify its uncolored edge exactly, unfold
+\noderef{IsOneEdgeUncolored}.  The value $\sigma_n(e_0)=\mathsf{none}$
+is fixed by the definition \noderef{TwoColorComponentSwap}, so
+$\tau(e_0)=\mathsf{none}$.  If $g\ne e_0$, the same hypothesis supplies
+a color $d$ with $\sigma_n(g)=\mathsf{some}(d)$.  The swap either fixes
+this value or, when the edge-node of $g$ is in the selected component and
+$d\in\{\gamma_n,\delta_n\}$, replaces it by the other displayed color.
+In every case $\tau(g)$ is still a colored value.  Thus $\tau$ leaves
+exactly $e_0$ uncolored.
+
+The actual conclusion of \noderef{ParallelExtensionUndoStable} now makes
+$\tau$ stable on $T_n$ relative to the preceding stored set and preceding
+generating coloring.  Since $(a,b)$ avoid the two switched colors,
+\noderef{TwoColorComponentSwap} shows edge by edge that the
+$(a,b)$-incidence graph, its components, and the missingness of $a$ on
+$T_n$ are identical for $\tau$ and $\sigma_n$.
 When $n>1$, lower assertion (ii), applied to the restricted rung
 $n-1$ ETT and to $\tau$, gives interchangeability on its final
 ladder closure $T_n$.  When $n=1$, use the corresponding conclusion
@@ -170,15 +201,17 @@ $v_n$ with the corresponding prefix of $T_j$.  Apply
 \noderef{ExtensionRules} to the current ETT and the full displayed
 lower-rung package.  Its first conclusion says that $\sigma_n$ is
 stable, with the correct earlier stored set and generating coloring,
-both before $v_n$ and on $T_{j-1}$.
+both before $v_n$ in the sense of
+\noderef{StableColoringBeforeVertex} and on $T_{j-1}$.
 
 We next check the construction, rather than merely naming $R_n$ a
 lower-rung ETT.  Each augmentation which constructs the prefix through
 $v_n$ has an exact new edge identity and a missing-color witness at an
-earlier vertex by \noderef{TashkinovAugmentation}.  Stability before
-$v_n$ preserves that witness and the controlled color of that same
-edge identity.  Hence every original augmentation can be copied under
-$\sigma_n$.  Compose this copied finite sequence with the
+earlier vertex by \noderef{TashkinovAugmentation}.  Unfolding the vertex
+and incident-edge clauses of \noderef{StableColoringBeforeVertex},
+stability before $v_n$ preserves that witness and the controlled color of
+that same edge identity.  Hence every original augmentation can be copied
+under $\sigma_n$.  Compose this copied finite sequence with the
 $\sigma_n$-closure sequence for $R_n$ obtained above; transitivity of
 \noderef{TashkinovAugmentationSequence} proves that $R_n$ is a closure
 of the exact seed prescribed at stage (j-1).
@@ -225,14 +258,42 @@ Before proving (iii), we strengthen (6) to the paper's observation
  a,b\text{ are }T_n\text{-interchangeable}.                 \tag{8}
  \end{split}
 \]
-The conditional conclusion of
-\noderef{HkuParallelBoundaryStructure}, using the same pre-step
-elementarity used for (4), says that every $T_n$-missing color other
-than $\delta_n$ has empty $T_n$-boundary under $\varphi_n$, while
-the $\gamma_n$-boundary is the singleton containing the exact identity
-$f_n$.  Stability transports both assertions to $\sigma_n$.  Hence
-$a\ne\gamma_n$.  If $b\ne\gamma_n$, (8) is (6).  If
-$b=\gamma_n$, then (3) makes $X\subseteq U$ elementary, the
+The unconditional clause of \noderef{HkuParallelBoundaryStructure} gives
+\[
+ \partial_{\varphi_n,\gamma_n}(T_n)=\{f_n\}.                  \tag{8a}
+\]
+The same lemma's conditional clause uses the pre-step elementarity already
+established for (4).  Since $\gamma_n\ne\delta_n$, if $\gamma_n$ were
+missing on $T_n$ under $\varphi_n$, that clause would make the left side
+of (8a) empty, contradicting the membership of the exact identity $f_n$
+in its singleton right side.  Therefore
+$\gamma_n\notin\overline\varphi_n(T_n)$.  The PE constructor of
+\noderef{TashkinovSeriesStep} gives the exact current stored-pair equation
+$S_n=\{\delta_n,\gamma_n\}$.  In the set difference defining $D_n$ in
+\noderef{TashkinovStoredColors}, this puts $\gamma_n$ in the cumulative
+stored-color union, and the just-proved nonmissingness prevents its
+removal.  Hence $\gamma_n\in D_n$.
+
+Use now both directions of the $T_n$-stable relation: the forward
+relation is a constituent of \noderef{CombinedStableColoring}, and its
+reverse was obtained from \noderef{sc2} above.  Since $\gamma_n\in D_n$,
+their edge clauses apply whether a tree-incident edge is
+$\gamma_n$-colored under $\varphi_n$ or under $\sigma_n$.  Exact boundary
+membership is coloring-independent, so the two inclusions obtained from
+the forward and reverse relations transport (8a) to
+\[
+ \partial_{\sigma_n,\gamma_n}(T_n)=\{f_n\}.                  \tag{8b}
+\]
+
+Now take $a$ as in (8).  The stable vertex clause makes it missing on
+$T_n$ under $\varphi_n$.  Since $a\ne\delta_n$, the conditional clause of
+\noderef{HkuParallelBoundaryStructure} makes its $\varphi_n$-boundary
+empty.  If its $\sigma_n$-boundary contained an exact identity, the edge
+clause of the reverse $T_n$-stable relation would give that identity color
+$a$ under $\varphi_n$, a contradiction.  Thus the $a$-boundary under
+$\sigma_n$ is empty.  Equation (8b) then gives $a\ne\gamma_n$.  If
+$b\ne\gamma_n$, (8) is (6).  If $b=\gamma_n$, then (3), unfolded using
+\noderef{ColoredVertexSetElementary}, makes $X\subseteq U$ elementary, the
 $a$-boundary of $X$ is empty, and the $\gamma_n$-boundary contains
 only $f_n$.  Properness and
 \noderef{TwoColorComponentSpanningPath} then allow at most one nontrivial
@@ -278,9 +339,11 @@ distinct.  Moreover, applying \noderef{TwoColorComponentsDisjoint} to
 $z_1,z_2$ shows that the unequal full components are disjoint.  Therefore
 all four vertex ends are distinct.
 
-Only now use (3).  If three of the four ends lay in $U$, assigning to each
-one of its missing alternatives $a$ or $b$ would assign the same color to
-two distinct vertices of $U$, contrary to elementariness.  Thus at least
+Only now use (3), with elementariness unfolded by
+\noderef{ColoredVertexSetElementary}.  If three of the four ends lay in
+$U$, assigning to each one of its missing alternatives $a$ or $b$ would
+assign the same color to two distinct vertices of $U$, contrary to
+elementariness.  Thus at least
 two ends are outside $U$.  From each of two such ends, follow its spanning
 path up to its first vertex in $U$; this exists because each $P_i$ meets
 $U$.  If the ends belong to different components, the resulting exit
@@ -328,7 +391,8 @@ hypothesis.  A connected $(a,b)$-component which meets $U$ could then
 have no vertex outside $U$: the first exact edge identity on an incidence
 walk from an inside vertex to an outside vertex would be an $a$- or
 $b$-colored boundary identity.  Thus all four distinct ends of $P_1,P_2$
-would lie in $U$, although each misses $a$ or $b$, contradicting (3).
+would lie in $U$, although each misses $a$ or $b$, contradicting (3) by
+\noderef{ColoredVertexSetElementary}.
 So $b$ is present at $v_n$, whereas $c$ is missing there; in particular
 $c\ne b$.
 
@@ -363,7 +427,8 @@ composes with the two constituent stable relations by \noderef{sc2}, so
 (2)--(8) remain available for this replacement.  We henceforth rename it
 $\sigma_n$, and rename the two constructed components $P_1,P_2$.
 
-By (3), the witnesses for (9) in $X$ and $Y$ must be the same vertex;
+By (3) and \noderef{ColoredVertexSetElementary}, the witnesses for (9) in
+$X$ and $Y$ must be the same vertex;
 otherwise $U$ would have two vertices missing $a$.  Call it $v$.
 Take $P_1$ to be the component through $v$.  By (7), every other
 $(a,b)$-component meeting $R_n$ equals $P_1$, so $P_2$ is disjoint
@@ -377,8 +442,11 @@ $T_n$-interchangeable, and (8) implies
 Suppose first that $b=\delta_n$.  The delta-boundary clause of
 \noderef{HkuParallelBoundaryStructure} says that every exact
 $\delta_n$-boundary identity of $T_n$ is incident with a vertex
-strictly preceding $v_n$.  By \noderef{TreeSequencePrefix} that vertex
-lies in $R_n$.  Stability fixes this incidence and color assertion.
+strictly preceding $v_n$.  The positional definition
+\noderef{TreeVertexOrder}, together with the prefix definition
+\noderef{TreeSequencePrefix}, puts that vertex in the ordered prefix
+$T_n(v_n)$ and hence in its closure $R_n$.  Stability fixes this incidence
+and color assertion.
 Fix one of the nontrivial $a,\delta_n$-components meeting $T_n$.  If it
 has a vertex outside $T_n$, a shortest incidence walk from a vertex in
 $T_n$ to one outside it uses an $a$- or $\delta_n$-boundary identity.
@@ -401,7 +469,8 @@ colors.  The terminal \noderef{TwoColorComponentSwap} contains that exact
 $\delta_n$-edge and interchanges the two colors on it, so afterward
 $\delta_n$ is missing at $v_n$; terminal stability transfers this to
 $\sigma_n$.  The support belongs to the ordered prefix and hence
-$v_n\in X\cap Y$.  By elementariness (3), an end which misses $a$ must
+$v_n\in X\cap Y$.  By elementariness (3), unfolded through
+\noderef{ColoredVertexSetElementary}, an end which misses $a$ must
 equal $v$, and an end which misses $\delta_n$ must equal $v_n$.  Thus
 every end belongs to $\{v,v_n\}\subseteq Y$ (or the distinctness of the
 ends already makes this internal case impossible).  In either event the
@@ -428,13 +497,15 @@ every incident value and missing-color set on $U$.
 We repeat, at this new swap, the full-component check rather than merely
 reusing vertex-disjointness.  Apply the endpoint construction above afresh
 to the current $P_1,P_2$, obtaining two vertex-disjoint exit portions
-$Q'_1,Q'_2$ with distinct outside degree-one ends $r'_1,r'_2$.  By (3),
+$Q'_1,Q'_2$ with distinct outside degree-one ends $r'_1,r'_2$.  By (3)
+and \noderef{ColoredVertexSetElementary},
 the witnesses that the chosen $c$ is missing on $T_n$ and on $R_n$ are
 the same vertex; call it $q\in X\cap Y$.  If $b$ were missing at $q$,
 then (5) would close $b$ on $U$.  The colors $\delta_n$ and $b$ would
 both be missing and closed on $U$, so the boundary and four-end argument
 given above would put all four distinct ends of $P_1,P_2$ in $U$ and
-contradict elementariness.  Thus $b$ is present at $q$, $c$ is missing
+contradict \noderef{ColoredVertexSetElementary}.  Thus $b$ is present at
+$q$, $c$ is missing
 there, and $c\ne b$.
 
 The $c,b$-component $K'$ through $q$ is therefore nontrivial and has
@@ -484,7 +555,8 @@ Thus $v\notin X$, and
 \[
                          u\in X-Y,\qquad v\in Y-X.             \tag{11}
 \]
-In particular $u\ne v$.  Elementariness (3), together with $\beta$
+In particular $u\ne v$.  Elementariness (3), in the sense of
+\noderef{ColoredVertexSetElementary}, together with $\beta$
 missing at $v$ and $\alpha$ missing at $u$, shows respectively that
 $\beta$ is present at $u$ and $\alpha$ is present at $v$.  Properness
 then makes each of these present colors occur on one exact incident edge.
@@ -537,7 +609,8 @@ available here.
 We next preserve the part of the closure preceding $v$.  In the
 augmentation sequence from $T_n(v_n)$ to $R_n$, consider an edge
 adjoined before $v$.  Its color is missing at an earlier vertex.  By
-(3), $\alpha$, missing at $u\in X-Y$, is missing at no vertex of
+(3) and \noderef{ColoredVertexSetElementary}, $\alpha$, missing at
+$u\in X-Y$, is missing at no vertex of
 $Y$; and $\beta$, missing at $v$, is missing at no earlier vertex
 of $Y$.  Therefore none of these exact adjoined edge identities has
 color $\alpha$ or $\beta$.  The swap on $P_v$ fixes every one of
@@ -583,7 +656,8 @@ $u$.  At the end $v$ of $P_v$, swapping the component changes the
 missing color from $\beta$ to $\alpha$.  The copied augmentation
 sequence puts $v$ in $R'_n$.  Thus the two distinct vertices $u,v$
 of $T_n\vee R'_n$ both miss $\alpha$ under $\sigma'_n$, contradicting
-the elementarity just obtained.  Therefore two distinct components
+the elementarity just obtained by
+\noderef{ColoredVertexSetElementary}.  Therefore two distinct components
 cannot meet $U$, which is conclusion (iv).
 
 Every use of a boundary, augmentation, component swap, or ordered union

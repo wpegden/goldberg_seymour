@@ -56,6 +56,7 @@ import Tablet.TreeVertexOrder
 import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorComponentSwapProper
 import Tablet.TwoColorComponentsDisjoint
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
 import Tablet.TwoColorIncidenceGraph
