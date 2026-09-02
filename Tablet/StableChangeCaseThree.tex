@@ -29,18 +29,18 @@ dividers is elementary.  Finally assume the large-color estimate
                  2n+11\leq |\overline\varphi_n(T_n)|.          \tag{L}
 \]
 
-Put $p=\noderef{HierarchyPathNumber}(H)$ and
+Put $\ell=|T|-|A|$, the number of exact tail additions above $A$, and
 \[
- T(y_{p-1})=T\big|_{\min\{|A|+p-1,|T|\}}.
+ T(y_{\ell-1})=T\big|_{\min\{|A|+(\ell-1),|T|\}}.
 \]
-Assume (6.6), namely that $V(T(y_{p-1}))$ is elementary under
+Assume (6.6), namely that $V(T(y_{\ell-1}))$ is elementary under
 $\varphi_n$, and assume that $C$ is lexicographically minimal among
 all hierarchy counterexamples on the fixed graph, palette, and edge
 having exactly $q$ dividers, in the sense of
 \noderef{HierarchyCounterexampleLess} and
 \noderef{HierarchyCounterexampleMeasure}.
 
-Let $\alpha\ne\beta$ be colors missing on $T(y_{p-1})$.  For a color
+Let $\alpha\ne\beta$ be colors missing on $T(y_{\ell-1})$.  For a color
 $c$, put
 \[
  i_c=\noderef{HierarchyFirstMissingPosition}(\varphi_n,T,c),
@@ -110,27 +110,18 @@ have the same endpoints.
 
 We first record two facts used below.  The hypothesis (6.6)
 and the initial-segment fields of the hierarchy make every displayed
-stage through $A$ elementary under $\varphi_n$.  Here the zero value in
-the total Lean definition of the path number must be discharged.  Let
-$\ell=|T|-|A|$ and let $\mathcal P$ be the candidate set in
-\noderef{HierarchyPathNumber}.  The core-inside-first, nested, and
+stage through $A$ elementary under $\varphi_n$.  The core-inside-first, nested, and
 terminal fields of \noderef{TashkinovHierarchy} compose to an ordered
-initial-segment relation $A\preccurlyeq T$, so $|A|\leq|T|$.  Every
-member of $\mathcal P$ lies in $\{1,\ldots,\ell\}$.  If $p=0$ and
-$\mathcal P$ were nonempty, its minimum would be at least one,
-contradicting the nonempty branch of the definition of $p$.  Therefore
-the fallback branch is in force and
-\[
-                       0=p=|T|-|A|.
-\]
-Thus $|A|=|T|$; equal length together with the ordered initial-segment
-equalities identifies $A=T$ entry by entry.  At $p=0$ the prefix length
+initial-segment relation $A\preccurlyeq T$, so $|A|\leq|T|$.  If
+$\ell=0$, the definition $\ell=|T|-|A|$ forces $|A|=|T|$; equal length
+together with the ordered initial-segment
+equalities identifies $A=T$ entry by entry.  At $\ell=0$ the prefix length
 in (6.6) is
-$\min\{|A|+(p-1),|T|\}=|T|$, because subtraction is truncated.
+$\min\{|A|+(\ell-1),|T|\}=|T|$, because subtraction is truncated.
 The full-length \noderef{TreeSequencePrefix} is $T$, so (6.6) would make
 $V(T)$ elementary, contrary to the `notElementary' field of $C$.
-Hence $p\geq1$.  The same initial-segment chain now puts $A$ and every
-earlier hierarchy stage inside $T(y_{p-1})$ entry by entry; restricting
+Hence $\ell\geq1$.  The same initial-segment chain now puts $A$ and every
+earlier hierarchy stage inside $T(y_{\ell-1})$ entry by entry; restricting
 \noderef{ColoredVertexSetElementary} gives the claim.  In particular,
 whenever a color in the proof is missing on one of these stages, its
 first missing vertex there is unique.
@@ -273,7 +264,7 @@ edge color and the same missing-color witness.
 Consider a later augmentation, whose predecessor already contains both
 $a$ and $b$.  The definitions of the first-missing positions give that
 $\alpha$ is missing at $a$ and $\beta$ is missing at $b$.  Since both
-vertices lie in the elementary prefix $T(y_{p-1})$, $\beta$ is present at
+vertices lie in the elementary prefix $T(y_{\ell-1})$, $\beta$ is present at
 $a$ and $\alpha$ is present at $b$; properness makes the relevant present
 edge unique.  By (8) their common component is $K=K_a=K_b$.
 \noderef{TwoColorComponentsDisjoint} says that the swapped component $Q$

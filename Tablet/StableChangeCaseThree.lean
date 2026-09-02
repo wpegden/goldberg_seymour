@@ -153,9 +153,9 @@ theorem StableChangeCaseThree {V E : Type*}
     (hprefixElementary :
       let H := C.hierarchy
       let A := HierarchyStarredStage H (Fin.last H.dividerCount)
-      let p := HierarchyPathNumber H
+      let ell := T.length - A.length
       let Ty := TreeSequencePrefix T
-        (min (A.length + (p - 1)) T.length)
+        (min (A.length + (ell - 1)) T.length)
         (by have hA := A.positive; have hT := T.positive; omega)
         (Nat.min_le_right _ _)
       ColoredVertexSetElementary G phi (TreeSequenceVertexSet Ty))
@@ -167,9 +167,9 @@ theorem StableChangeCaseThree {V E : Type*}
     (hmissingPrefix :
       let H := C.hierarchy
       let A := HierarchyStarredStage H (Fin.last H.dividerCount)
-      let p := HierarchyPathNumber H
+      let ell := T.length - A.length
       let Ty := TreeSequencePrefix T
-        (min (A.length + (p - 1)) T.length)
+        (min (A.length + (ell - 1)) T.length)
         (by have hA := A.positive; have hT := T.positive; omega)
         (Nat.min_le_right _ _)
       alpha ∈ TreeMissingColors phi Ty ∧

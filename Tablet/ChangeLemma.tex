@@ -31,12 +31,12 @@ Finally assume the large-color estimate
  2n+11\leq |\overline\varphi_n(T_n)|.
 \]
 
-Put $p=\noderef{HierarchyPathNumber}(H)$ and let
+Put $\ell=|T|-|A|$, the number of exact tail additions above $A$, and let
 \[
- T(y_{p-1})=T\big|_{\min\{|A|+p-1,|T|\}}
+ T(y_{\ell-1})=T\big|_{\min\{|A|+(\ell-1),|T|\}}
 \]
 be the exact ordered prefix supplied by \noderef{TreeSequencePrefix}.
-Assume (6.6): $V(T(y_{p-1}))$ is elementary under $\varphi_n$.
+Assume (6.6): $V(T(y_{\ell-1}))$ is elementary under $\varphi_n$.
 Assume moreover that $C$ is lexicographically minimal among all
 \noderef{HierarchyCounterexample}s on the fixed graph, palette, and
 $e_0$ which have exactly $q$ dividers, allowing their certified input
@@ -48,7 +48,7 @@ vary.  Explicitly, no such counterexample $C'$ satisfies
         \noderef{HierarchyCounterexampleMeasure}(C)\bigr).
 \]
 
-Let $\alpha\ne\beta$ be colors missing on $T(y_{p-1})$.  Write
+Let $\alpha\ne\beta$ be colors missing on $T(y_{\ell-1})$.  Write
 \[
  i_c=\noderef{HierarchyFirstMissingPosition}(\varphi_n,T,c),
  \qquad v_c=T.\mathit{vertex}(i_c).
@@ -93,14 +93,7 @@ node $x$.  All components below therefore contain the actual edge nodes
 of the multigraph; parallel edges are never identified by their endpoint
 pairs.
 
-We first discharge the zero value permitted by the total Lean definition
-of the path number.  Put
-\[
- \ell=|T|-|A|
-\]
-and let $\mathcal P$ be the candidate set in
-\noderef{HierarchyPathNumber}; thus every member of $\mathcal P$ lies
-in $\{1,\ldots,\ell\}$.  The nested-stage and terminal fields of
+We first discharge the zero-tail endpoint.  The nested-stage and terminal fields of
 \noderef{TashkinovHierarchy}, together with the two cases of
 \noderef{HierarchyStarredStage}, make $A$ an ordered initial segment of
 $T$.  At index zero this is the `coreInsideFirst' field followed by the
@@ -110,36 +103,29 @@ stage followed by that chain.  Hence
                          |A|\leq |T|.                         \tag{0a}
 \]
 
-Suppose that $p=0$.  If $\mathcal P$ were nonempty, its minimum would
-itself belong to $\mathcal P$ and hence would be at least $1$; the
-nonempty branch of \noderef{HierarchyPathNumber} would then give
-$p\geq1$, a contradiction.  Therefore the empty fallback branch is in
-force, so
-\[
-                         0=p=|T|-|A|.
-\]
-Together with (0a), this gives $|A|=|T|$.  Expanding
+Suppose that $\ell=0$.  Since $\ell=|T|-|A|$ and (0a) gives
+$|A|\leq |T|$, we have $|A|=|T|$.  Expanding
 \noderef{TreeSequenceInitialSegment}, the already established inclusion
 $A\subseteq T$ identifies every vertex entry and every exact edge entry;
 because the lengths are equal, it identifies the ordered tree-sequences
 themselves, so $A=T$.
 
-For $p=0$, truncated subtraction gives $p-1=0$, and the length of the
+For $\ell=0$, truncated subtraction gives $\ell-1=0$, and the length of the
 displayed prefix in the statement is therefore
 \[
- \min\{|A|+(p-1),|T|\}=\min\{|T|,|T|\}=|T|.
+ \min\{|A|+(\ell-1),|T|\}=\min\{|T|,|T|\}=|T|.
 \]
 The full-length instance of \noderef{TreeSequencePrefix} is entrywise
 equal to $T$.  Thus (6.6), the assumed elementarity of this prefix, says
 that $V(T)$ is elementary under $\varphi_n$, contradicting the
 `notElementary' field of $C$ in
-\noderef{HierarchyCounterexample}.  We have proved $p\ne0$, and hence
-$p\geq1$.
+\noderef{HierarchyCounterexample}.  We have proved $\ell\ne0$, and hence
+$\ell\geq1$.
 
 It follows that $A$, every starred stage, and every ordinary hierarchy
 stage through $T_{n,q}$ are ordered initial segments of
-$T(y_{p-1})$.  Indeed, the prefix length is at least $|A|$ by (0a) and
-$p\geq1$, while \noderef{HierarchyBase},
+$T(y_{\ell-1})$.  Indeed, the prefix length is at least $|A|$ because
+$\ell\geq1$, while \noderef{HierarchyBase},
 \noderef{TashkinovHierarchy},
 \noderef{HierarchyStarredStage}, and
 \noderef{TreeSequenceInitialSegment} put all the named stages inside
@@ -234,16 +220,34 @@ Then these data and (4) form an actual
 The terminal stage is the exact prefix $T(v_\beta)$, not an abstract
 tree having the same vertex set.
 
-We also check its measure.  The vertex $v_\beta$ belongs to
-$T(y_{p-1})$.  If it lies outside $A$, then its index is at most
-$|A|+p-1$.  The terminal tail of $T(v_\beta)$ after $A$ consequently
-has length at most $p-1$.  In
-\noderef{HierarchyPathNumber}, the fallback is that tail length and
-every candidate lies between $1$ and that length.  Thus the new path
-number is at most $p-1<p$, which strictly lowers the first coordinate of
-\noderef{HierarchyCounterexampleMeasure}.  Therefore
+We also check its measure.  Put
+$r=\noderef{HierarchyPathNumber}(H)$, keeping this path number distinct
+from the full tail length $\ell$.  The vertex $v_\beta$ belongs to
+$T(y_{\ell-1})$.  If it lies outside $A$, let $s$ be the length of the
+tail of $T(v_\beta)$ after $A$.  Its position in the displayed prefix
+gives $s\leq\ell-1<\ell$.  Let $r'$ be the path number of the truncated
+hierarchy on $T(v_\beta)$.  Let $B=T_{n,q}$ be the ordinary last stage
+used in the second coordinate of
+\noderef{HierarchyCounterexampleMeasure}.  The old and truncated
+hierarchies have the same $B$ and the same starred stage $A$.  Since
+$B\preccurlyeq A\preccurlyeq T(v_\beta)\preccurlyeq T$, put
+$d=|A|-|B|$; cancellation along these ordered initial segments gives
+\[
+ |T|-|B|=d+\ell,
+ \qquad |T(v_\beta)|-|B|=d+s.                              \tag{4a}
+\]
+
+If $s<r$, the fallback-and-candidate definition in
+\noderef{HierarchyPathNumber} gives $r'\leq s<r$.  If $r\leq s$, then
+the original tail beginning at its $r$-th added vertex is a path, by the
+defining candidate for $r$ (the fallback value $r=\ell$ is impossible
+here because $r\leq s<\ell$); its
+initial segment ending at $v_\beta$ is again a path, with a singleton
+vertex allowed.  Hence $r$ is a candidate for the truncated hierarchy
+and $r'\leq r$.  Thus either $r'<r$, or $r'=r$ and (4a), together with
+$s<\ell$, shows that the second measure coordinate strictly decreases
+from $d+\ell$ to $d+s$.  In both cases
 \noderef{HierarchyCounterexampleLess} gives
-\noderef{HierarchyCounterexampleLess} give
 \[
                   \mathfrak m(C')<_{\rm hier}\mathfrak m(C). \tag{5}
 \]

@@ -10,7 +10,6 @@ import Tablet.GoodHierarchyNewMissingClosed
 import Tablet.GoodHierarchyPrefixRepackage
 import Tablet.HierarchyBase
 import Tablet.HierarchyCounterexample
-import Tablet.HierarchyCounterexampleCoreProper
 import Tablet.HierarchyCounterexampleLess
 import Tablet.HierarchyCounterexampleMeasure
 import Tablet.HierarchyLEMStable

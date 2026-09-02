@@ -33,13 +33,13 @@ of \noderef{HierarchyCounterexampleLess} and
                  2n+11\leq |\overline\varphi_n(T_n)|.          \tag{L}
 \]
 
-Put $p=\noderef{HierarchyPathNumber}(H)$ and
+Put $\ell=|T|-|A|$, the number of exact tail additions above $A$, and
 \[
- T(y_{p-1})=T\big|_{\min\{|A|+p-1,|T|\}}.
+ T(y_{\ell-1})=T\big|_{\min\{|A|+(\ell-1),|T|\}}.
 \]
-Assume (6.6), namely that $V(T(y_{p-1}))$ is elementary under
+Assume (6.6), namely that $V(T(y_{\ell-1}))$ is elementary under
 $\varphi_n$.  Let $\alpha\ne\beta$ be colors missing on
-$T(y_{p-1})$, and put
+$T(y_{\ell-1})$, and put
 \[
  i_c=\noderef{HierarchyFirstMissingPosition}(\varphi_n,T,c),
  \qquad v_c=T.\mathit{vertex}(i_c).
@@ -98,16 +98,15 @@ non-elementarity.  Every component below is a
 \noderef{TwoColorComponent} in the vertex--edge incidence graph, so its
 edge nodes retain individual parallel-edge identities.
 
-We first dispose of the totalized path-number endpoint.  The ordered
-initial-segment fields of the hierarchy put $A$ inside $T$.  If
-$p=0$, the candidate set in \noderef{HierarchyPathNumber} must be empty,
-because every genuine candidate is at least one.  Its fallback value then
-gives $0=|T|-|A|$, so $A=T$ entry by entry.  Truncated subtraction makes
-the prefix in (6.6) the full-length
+We first dispose of the zero-tail endpoint.  The ordered
+initial-segment fields of the hierarchy put $A$ inside $T$, so
+$|A|\leq|T|$.  If $\ell=0$, the definition $\ell=|T|-|A|$ forces equal
+lengths, and the ordered vertex and exact-edge equalities give $A=T$
+entry by entry.  Truncated subtraction makes the prefix in (6.6) the full-length
 \noderef{TreeSequencePrefix} $T$, contradicting the non-elementarity
-field of $C$.  Hence $p\geq1$.  It follows from the exact prefix and
+field of $C$.  Hence $\ell\geq1$.  It follows from the exact prefix and
 hierarchy inclusions that $A$, every displayed stage, the PE closure, and
-the PE core all have vertex sets contained in $T(y_{p-1})$.  Restricting
+the PE core all have vertex sets contained in $T(y_{\ell-1})$.  Restricting
 \noderef{ColoredVertexSetElementary} makes each of these sets elementary.
 In particular $v_\alpha$ and $v_\beta$ are actual first missing witnesses,
 and a color missing on a displayed stage has a unique missing vertex there.
