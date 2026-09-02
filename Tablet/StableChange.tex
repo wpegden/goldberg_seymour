@@ -1,0 +1,148 @@
+\begin{lemma}[Stable change]
+Fix a finite loopless multigraph with its exact edge set, a palette of
+$k$ colors, and a distinguished edge $e_0$.  Let $(T,\varphi_n)$ be a
+positive-rung extended Tashkinov tree.  Let $\mathcal B$ be a hierarchy
+base and let
+\[
+ T_n=T_{n,0}\subset T_{n,1}\subset\cdots\subset
+ T_{n,q}\subset T_{n,q+1}=T
+\]
+be a good hierarchy $H$ under $\varphi_n$.  Put
+\[
+ A=T_{n,q}^{*}=\noderef{HierarchyStarredStage}(H,q),\qquad
+ D_n=\noderef{TashkinovStoredColors}(\mathcal E,q_n),
+ \qquad D_{n,q}=\noderef{HierarchyStoredColorsAt}(H,q).
+\]
+Assume that $T$ has maximum property, that $V(T)$ is not elementary,
+that $\varphi_n$ is proper and leaves exactly $e_0$ uncolored, and that
+these data form a \noderef{HierarchyCounterexample} $C$.
+
+Assume, uniformly for every positive-rung maximum ETT on the same graph,
+palette, and distinguished edge, with arbitrary certified input and
+generating colorings and with rung number smaller than that of $T$, the
+six lower-rung assertions of the technical theorem: elementarity,
+terminal interchangeability, the two PE stability and stored-pair
+assertions, the terminal PE component assertion, the defective-endpoint
+order assertion, and the mod-coloring assertion.  Assume also that every
+same-rung maximum ETT with a good hierarchy having fewer than $q$
+dividers is elementary.  Assume that $C$ is lexicographically minimal
+among hierarchy counterexamples with exactly $q$ dividers, in the sense
+of \noderef{HierarchyCounterexampleLess} and
+\noderef{HierarchyCounterexampleMeasure}, and assume
+\[
+                 2n+11\leq |\overline\varphi_n(T_n)|.          \tag{L}
+\]
+
+Put $p=\noderef{HierarchyPathNumber}(H)$ and
+\[
+ T(y_{p-1})=T\big|_{\min\{|A|+p-1,|T|\}}.
+\]
+Assume (6.6), namely that $V(T(y_{p-1}))$ is elementary under
+$\varphi_n$.  Let $\alpha\ne\beta$ be colors missing on
+$T(y_{p-1})$, and put
+\[
+ i_c=\noderef{HierarchyFirstMissingPosition}(\varphi_n,T,c),
+ \qquad v_c=T.\mathit{vertex}(i_c).
+\]
+Let $z$ be an arbitrary node of the two-color incidence graph, let $Q$
+be the full $(\alpha,\beta)$-component through $z$, and put
+\[
+ \sigma_n=\noderef{TwoColorComponentSwap}
+       (G,\varphi_n,\alpha,\beta,z).
+\]
+Suppose at least one of the following three cases occurs:
+\begin{enumerate}
+\item $q\geq1$, $\alpha\in\overline\varphi_n(T_{n,q})$, $Q$ is a
+possibly singleton \noderef{TwoColorPathComponent}, and the full node
+support of $Q$ is disjoint from the full component through
+$\operatorname{inl}v_\alpha$;
+\item $q=0$, either $\alpha\in\overline\varphi_n(T_n)$ or
+$\alpha\in\overline\varphi_n(A)$ with $\alpha,\beta\notin D_n$, $Q$ is
+a possibly singleton \noderef{TwoColorPathComponent}, and the full node
+support of $Q$ is disjoint from the full component through
+$\operatorname{inl}v_\alpha$; or
+\item every vertex of $A$ precedes $v_\alpha$,
+$v_\alpha\prec v_\beta$, $\alpha,\beta\notin D_{n,q}$, and
+\[
+ \alpha\notin
+ \{c:\exists t\in\operatorname{Fin}|T|,
+        i_\alpha\leq t<i_\beta,
+        \ \varphi_n(T.\mathit{edge}(t))=c\}.                 \tag{U}
+\]
+In this third case $Q$ is an arbitrary full component; no path or
+component-disjointness condition is imposed.
+\end{enumerate}
+
+Then the following common conclusion holds.
+\begin{enumerate}
+\item The coloring $\sigma_n$ is
+$(T_{n,q}^{*},D_n,\varphi_n)$-weakly stable in the exact sense of
+\noderef{HierarchyWeaklyStable}.
+\item The coloring $\sigma_n$ is a
+$\varphi_n\bmod T_n$ coloring in the sense of \noderef{ModColoring}.
+Either $A=T_n$, the non-strict endpoint which the tablet's positive-rung
+ETT type intentionally does not repackage, or $A$ has an actual maximum
+ETT presentation under $\sigma_n$.
+\item If $q\geq1$, the same ordered base core and closure and the stages
+\[
+ T_n=T_{n,0}\subset\cdots\subset T_{n,q}=A
+\]
+form a good hierarchy of an actual maximum ETT on $A$ under $\sigma_n$.
+Its divider count is $q-1$; at every retained index the sets $D_{n,j}$
+agree exactly, and $\Gamma^j_\eta$ agrees exactly for every
+$\eta\in D_{n,j}$.  In addition,
+\[
+ T_{n,q}\text{ is }
+ \left(\bigcup_{\eta\in D_{n,q}}\Gamma^{q-1}_\eta\right)^{-}
+ \text{-closed under }\sigma_n.                              \tag{M}
+\]
+\end{enumerate}
+Furthermore, whenever the complete certificate in Case 3 holds, the
+full tree $T$ has an actual corresponding maximum ETT presentation under
+$\sigma_n$, and the displayed hierarchy remains good with the same
+ordered base, stages, dividers, $D$-sets, and all paper-defined
+$\Gamma$-sets, in the precise sense of \noderef{SameGoodHierarchy}.
+This last assertion is an implication from the Case 3 certificate; it
+does not assert that Cases 1 and 2 are exclusive from Case 3.
+\end{lemma}
+\begin{proof}
+Denote by $\mathcal C_i$ the complete certificate displayed in Case
+$i$, and denote by $\mathcal K$ the three-part common conclusion.
+The assumed case disjunction is
+$\mathcal C_1\vee\mathcal C_2\vee\mathcal C_3$.
+
+Suppose first that $\mathcal C_1$ holds.  It supplies, in addition to all
+the common ambient hypotheses, the positive-divider missing-color
+condition, the possibly singleton path-component certificate, and
+disjointness of its full incidence-component support from the component
+through $v_\alpha$.  These are exactly the first-case inputs of
+\noderef{StableChangeCasesOneTwo}.  That lemma therefore gives
+$\mathcal K$.
+
+Suppose instead that $\mathcal C_2$ holds.  Its zero-divider alternative
+is exactly the second alternative in
+\noderef{StableChangeCasesOneTwo}, and it supplies the same path and full
+component-disjointness certificates required there.  Applying that lemma
+with its second case therefore again gives $\mathcal K$.
+
+Finally suppose that $\mathcal C_3$ holds.  Its four conjuncts are,
+respectively, the assertion that $A$ precedes $v_\alpha$, the order
+$v_\alpha\prec v_\beta$, exclusion of both colors from $D_{n,q}$, and
+the exact segment-unused assertion (U).  Together with the shared
+ambient hypotheses and the arbitrary component through $z$, these are
+exactly the inputs of \noderef{StableChangeCaseThree}.  Its first four
+conclusion fields are precisely $\mathcal K$, so $\mathcal K$ follows in
+this case as well.  Dispatching the assumed three-way disjunction through
+these three applications proves the common conclusion.
+
+It remains to prove the stated implication.  Assume the complete
+certificate $\mathcal C_3$, independently of which disjunct was used for
+the preceding common conclusion.  Apply
+\noderef{StableChangeCaseThree} once more to this certificate.  Its final
+conclusion field is an actual corresponding maximum ETT on $T$, together
+with a maximum-property witness and a good hierarchy related to the
+original one by the full \noderef{SameGoodHierarchy} relation.  This is
+exactly the asserted full-tree conclusion.  Since this argument assumes
+$\mathcal C_3$ directly, it requires no exclusivity among the three case
+predicates and completes the proof.
+\end{proof}
