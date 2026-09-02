@@ -91,13 +91,19 @@ $(\alpha,\beta)$-path component meets $A$, with an isolated vertex
 component counted as a path.
 \end{lemma}
 \begin{proof}
-Unpack $C$.  Its fields give positivity, the displayed
-\noderef{TashkinovHierarchy}, its \noderef{GoodHierarchy} witness,
-\noderef{MaximumProperty}, and non-elementarity.  Let
-$K_x$ denote the full \noderef{TwoColorComponent} through the vertex
-node $x$.  All components below therefore contain the actual edge nodes
-of the multigraph; parallel edges are never identified by their endpoint
-pairs.
+Unpack $C$ through \noderef{HierarchyCounterexample}, and explicitly set
+\[
+ H=C.\mathit{hierarchy},\qquad
+ a=v_\alpha=T.\mathit{vertex}(i_\alpha),\qquad
+ b=v_\beta=T.\mathit{vertex}(i_\beta).
+\]
+Thus $H$ is the displayed \noderef{TashkinovHierarchy}, its good-family
+witness is $C.\mathit{good}$, its maximum-property witness is
+$C.\mathit{maximum}$, and $C.\mathit{notElementary}$ says that $V(T)$ is
+not elementary.  For every vertex $x$, let $K_x$ denote the full
+\noderef{TwoColorComponent} through the vertex-node $x$.  All components
+below therefore contain the actual edge nodes of the multigraph; parallel
+edges are never identified by their endpoint pairs.
 
 We first discharge the zero-tail endpoint.  The nested-stage and terminal fields of
 \noderef{TashkinovHierarchy}, together with the two cases of
@@ -141,156 +147,151 @@ all these stages, including $A$, are elementary under $\varphi_n$.     \tag{1}
 
 Because $\alpha$ and $\beta$ are missing on this elementary prefix,
 the least-candidate clause of
-\noderef{HierarchyFirstMissingPosition} makes $v_\alpha$ and
-$v_\beta$ actual vertices of the prefix missing the indicated colors.
-They are distinct unless the two first-missing positions name the same
-vertex.  In that equality branch
-$K_{v_\alpha}=K_{v_\beta}$ is immediate, but alternative 3 still requires
-interchangeability on $A$.  If $q>0$, then
-$A=T_{n,q}$ by \noderef{HierarchyStarredStage}, and the last-stage
+\noderef{HierarchyFirstMissingPosition} makes $a=v_\alpha$ and
+$b=v_\beta$ actual vertices of the prefix missing the indicated colors.
+The location hypothesis puts both in $A$.  Hence $a$ is the unique
+vertex of $A$ missing $\alpha$, and $b$ is the unique vertex of $A$
+missing $\beta$.
+
+We now establish once the paper's non-PE terminal closedness consequence.
+Let $n$ be the last rung index and let $T_n$ be its terminal ladder tree.
+Suppose the terminal extension kind is not PE, and let
+$c\in\overline\varphi_n(T_n)$.  The \noderef{TashkinovSeries} stored in
+the \noderef{ExtendedTashkinovTree} certifies its last positive step by
+\noderef{TashkinovSeriesStep}; positivity excludes the initial
+constructor, and the extension-kind assumption excludes PE, so the step
+is SE or RE.
+
+In the SE case, let $\varphi_{n-1}$ be the preceding coloring and let
+`choice' be its maximum-defective certificate.  The `currentColoring'
+field identifies $\varphi_n$ with `choice.selected'.  The
+`selectedStable' field of \noderef{MaximumDefectiveChoice} says that
+this selected coloring is stable on the exact tree $T_n$ relative to
+$\varphi_{n-1}$ and the preceding stored set.  Expanding
+\noderef{StableColoring}, its vertex clause gives
+\[
+ \overline{\varphi_n}(x)=\overline{\varphi_{n-1}}(x)
+       \quad\text{for every }x\in V(T_n),                    \tag{2a}
+\]
+and hence equality of the two tree-missing sets.  The SE constructor
+gives properness and exact one-uncoloredness for $\varphi_{n-1}$, while
+\noderef{MaximumDefectiveChoice} gives the same two facts for
+`choice.selected'.  The symmetry clause of \noderef{sc2} therefore
+supplies the reverse stable relation, from $\varphi_n$ to
+$\varphi_{n-1}$, with the same tree and stored set.
+
+Choose $x\in V(T_n)$ missing $c$ under $\varphi_n$.  Equation (2a) says
+that $x$ also misses $c$ under $\varphi_{n-1}$.  If an exact boundary-edge
+identity $f$ of $T_n$ had color $c$ under $\varphi_n$, then $f$ would be
+incident with $T_n$.  Since $c$ is tree-missing, the protected
+incident-edge clause of the reverse \noderef{StableColoring} relation
+would give
+\[
+                    \varphi_{n-1}(f)=\varphi_n(f)=c.
+\]
+This contradicts the `previousClosed' field of the SE constructor:
+expanding \noderef{ColoredVertexSetClosed}, a boundary edge cannot have
+a color missing at the inside vertex $x$.
+
+In the RE case, the `currentColoring' field of
+\noderef{TashkinovSeriesStep} identifies the current coloring literally
+with the preceding coloring.  Thus the ETT generating-color equation
+identifies $\varphi_n$ with the coloring for which `previousClosed'
+certifies $T_n$ closed.  The definitions
+\noderef{ColoredVertexSetClosed} and \noderef{BoundaryColorEdges} again
+show directly that no $c$-colored boundary edge exists.  We have proved
+\[
+ \Theta_n\ne PE,\quad c\in\overline\varphi_n(T_n)
+ \quad\Longrightarrow\quad
+ T_n\text{ is }\{c\}\text{-closed under }\varphi_n.          \tag{2b}
+\]
+In particular, when $q=0$ and the terminal kind is not PE,
+\noderef{HierarchyBase} and \noderef{HierarchyStarredStage} identify
+$A=T_n$.  Since $a$ and $b$ miss $\alpha$ and $\beta$ there, respectively,
+(2b) makes both colors closed on $A$.
+
+If $a=b$, then $K_a=K_b$ immediately.  Alternative 3 additionally asks
+for interchangeability.  If $q>0$, then $A=T_{n,q}$ and the last-stage
 instance of \noderef{step1} applies to the missing, closed color
 $\alpha$.  If $q=0$ and the terminal kind is PE, conclusion (iii) of
 \noderef{interchange} applies to the exact core $A$: reflexivity gives
-both clauses of \noderef{CombinedStableColoring}, and the given
-lower-rung package supplies its induction hypothesis.  Finally suppose
-$q=0$ and the terminal kind is not PE.  Then
-\noderef{HierarchyBase} identifies $A$ with $T_n$.  When the rung number
-is greater than one, restrict the certified series through the preceding
-rung; its final ladder closure is this exact $T_n$, maximum property
-restricts, and the RE constructor of \noderef{TashkinovSeriesStep} gives
-the required generating coloring while the SE constructor, together
-with the reverse stability relation from \noderef{sc2}, gives the
-stable-coloring premise.  Lower assertion (ii) therefore makes
-$\alpha,\beta$ interchangeable on $T_n$.  At the one-rung endpoint the
-same conclusion is the interchangeability clause of
-\noderef{TechnicalTheoremBase}.  Thus the coincident-vertex branch proves
-both every requested component equality and, under alternative 3, the
-additional interchangeability conclusion.  We may henceforth assume
-that the two vertices are distinct.  Elementarity says that $\beta$,
-which is missing at $v_\beta$, is not missing at $v_\alpha$, and symmetrically
-$\alpha$ is not missing at $v_\beta$.  By the complementary definitions
+both clauses of \noderef{CombinedStableColoring}, while
+$C.\mathit{maximum}$, $C.\mathit{positive}$ and the stated lower-rung
+package give its remaining structural premises.  If $q=0$ and the
+terminal kind is not PE, (2b) makes both colors closed.  Let $Q$ be any
+\noderef{TwoColorPathComponent} meeting $A$.  Closedness prevents it
+from crossing the boundary.  If it contains an edge-node, its path
+witness, \noderef{TwoColorComponentSpanningPath}, and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} give two distinct graph-vertex
+ends in $A$, each missing $\alpha$ or $\beta$.  Elementarity would force
+both ends to equal the common unique vertex $a=b$, a contradiction.  If
+$Q$ has no edge-node, its tree vertex misses both colors by
+\noderef{MissingColors}; elementarity identifies that vertex with
+$a=b$, so $Q=K_a$.  Hence $K_a$ is the unique path component meeting
+$A$, which is exactly \noderef{TreeInterchangeable}.  Thus the
+coincident-vertex branch is complete without any appeal to a truncated
+lower-rung ETT.
+
+We may henceforth assume $a\ne b$.  Elementarity says that $\beta$,
+which is missing at $b$, is not missing at $a$, and symmetrically
+$\alpha$ is not missing at $b$.  By the complementary definitions
 \noderef{MissingColors} and \noderef{PresentColors}, each vertex is
 incident with an edge of the other color.  Properness makes it a
-degree-one end in the two-color incidence graph.  Hence $K_{v_\alpha}$
-and $K_{v_\beta}$ are nontrivial path components in the sense of
-\noderef{TwoColorNontrivialPathComponent}.  This verifies the path-component
-premise each time \noderef{TreeInterchangeable} is used below.           \tag{2}
+degree-one end in the two-color incidence graph.  Hence $K_a$ and $K_b$
+are nontrivial path components in the sense of
+\noderef{TwoColorNontrivialPathComponent}.  This verifies the explicit
+\noderef{TwoColorPathComponent} premise each time
+\noderef{TreeInterchangeable} is used below.                             \tag{2}
 
-We shall repeatedly use the following endpoint observation.  Under the
-proper coloring $\varphi_n$, every two-color component has a simple
-spanning path by \noderef{TwoColorComponentSpanningPath}; the incidence
-degree is at most two by
-\noderef{TwoColorIncidenceDegreeAtMostTwo}.  An end vertex of a
-nontrivial such path is a graph vertex missing one of its two colors:
-an edge-node has two incidence neighbors because the graph is loopless,
-whereas at a graph vertex properness permits at most one edge of either
-color, and degree one means that the other color is absent.  Thus a
-nontrivial component which cannot cross the boundary of an elementary
-set has both ends among the unique vertices of that set missing its two
-colors.  Distinct components are vertex-disjoint by
-\noderef{TwoColorComponentsDisjoint}.                                  \tag{3}
+We shall repeatedly use the following endpoint observation, always with
+its path hypothesis explicit.  Let $B$ be an elementary hierarchy stage
+which contains $a$ and $b$, and let $Q$ be a
+\noderef{TwoColorPathComponent} meeting $B$.  If both $\alpha$ and
+$\beta$ are closed on $B$, then $Q$ cannot cross the boundary of $B$:
+the first incidence step from a graph vertex in $B$ to one outside it
+would use an exact boundary-edge identity colored $\alpha$ or $\beta$,
+contrary to \noderef{TreeColorSetClosed} and
+\noderef{BoundaryColorEdges}.
 
-We next make explicit the preservation argument used whenever a
-component through $v_\beta$ is changed.  Suppose $K_{v_\alpha}\ne
-K_{v_\beta}$ and set
+Suppose first that $Q$ contains an edge-node.  The leaf witness in
+\noderef{TwoColorPathComponent}, together with the spanning path from
+\noderef{TwoColorComponentSpanningPath} and the degree bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, makes $Q$ a nontrivial path
+whose two spanning-path ends have incidence degree one.  They are
+graph-vertex nodes: a colored edge-node has the two distinct endpoint
+neighbors because the graph is loopless.  Properness permits at most one
+incident edge of either color at a graph vertex, so each degree-one end
+misses at least one of $\alpha,\beta$.  Both ends lie in $B$.  They cannot
+both miss the same color, because $B$ is elementary.  Hence they are the
+unique $\alpha$-missing and $\beta$-missing vertices $a$ and $b$, and
+$Q=K_a=K_b$.
+
+Suppose instead that $Q$ has no edge-node.  Choose $x\in V(B)$ whose
+vertex-node lies in $Q$.  By \noderef{TwoColorIncidenceGraph}, any exact
+edge incident with $x$ and colored $\alpha$ or $\beta$ would be adjacent
+to $x$ and hence, by \noderef{TwoColorComponent}, its edge-node would
+belong to $Q$.  Thus neither color is present at $x$, so
+\noderef{MissingColors} and \noderef{PresentColors} show that both are
+missing there.  Elementarity forces $x=a$ and $x=b$, and again
+$Q=K_a=K_b$.  Applying this conclusion to two arbitrary path components
+meeting $B$ proves
 \[
- \sigma_n=\varphi_n/K_{v_\beta}.
+ \begin{gathered}
+ B\text{ elementary},\quad a,b\in V(B),\quad
+ B\text{ is }\{\alpha\}\text{- and }\{\beta\}\text{-closed}\\
+ \Longrightarrow\quad K_a=K_b\text{ and }\alpha,\beta
+     \text{ are }B\text{-interchangeable}.
+ \end{gathered}                                                         \tag{3}
 \]
-By \noderef{TwoColorComponentSwap} the swap changes only the exact
-edge nodes of $K_{v_\beta}$ and only interchanges $\alpha$ and $\beta$.
-It fixes the value $\mathsf{none}$, and
-\noderef{TwoColorComponentSwapProper} makes $\sigma_n$ proper.
-Consequently \noderef{IsOneEdgeUncolored} shows that precisely $e_0$
-remains uncolored.  Since $v_\beta$ misses $\beta$ before the swap, it
-misses $\alpha$ afterwards; the different component through
-$v_\alpha$ is untouched and $v_\alpha$ still misses $\alpha$.
-Therefore any certified prefix containing both vertices is
-non-elementary under $\sigma_n$.                                       \tag{4}
-
-Here is the exact smaller-counterexample test which will be cited in the
-the location case below.  Let $B$ be a hierarchy stage or starred stage
-which is an ordered prefix of the prefix $T(v_\beta)$, and suppose:
-\begin{enumerate}
-\item the swap is stable on $B$ with every control set required by its
-hierarchy presentation, and every displayed edge identity of $B$ keeps
-its value;
-\item every displayed edge identity of $T(v_\beta)-B$ has the same
-value under $\sigma_n$ and $\varphi_n$;
-\item every vertex of $T(v_\beta)-v_\beta$ has the same missing-color
-set under the two colorings;
-\item the corresponding ETT, maximum property, hierarchy base, and all
-five good-hierarchy fields have been verified under $\sigma_n$.
-\end{enumerate}
-Then these data and (4) form an actual
-\noderef{HierarchyCounterexample} $C'$ with the same $q$ dividers.
-The terminal stage is the exact prefix $T(v_\beta)$, not an abstract
-tree having the same vertex set.
-
-We also check its measure.  Put
-$r=\noderef{HierarchyPathNumber}(H)$, keeping this path number distinct
-from the full tail length $\ell$.  The vertex $v_\beta$ belongs to
-$T(y_{\ell-1})$.  If it lies outside $A$, let $s$ be the length of the
-tail of $T(v_\beta)$ after $A$.  Its position in the displayed prefix
-gives $s\leq\ell-1<\ell$.  Let $r'$ be the path number of the truncated
-hierarchy on $T(v_\beta)$.  Let $B=T_{n,q}$ be the ordinary last stage
-used in the second coordinate of
-\noderef{HierarchyCounterexampleMeasure}.  The old and truncated
-hierarchies have the same $B$ and the same starred stage $A$.  Since
-$B\preccurlyeq A\preccurlyeq T(v_\beta)\preccurlyeq T$, put
-$d=|A|-|B|$; cancellation along these ordered initial segments gives
-\[
- |T|-|B|=d+\ell,
- \qquad |T(v_\beta)|-|B|=d+s.                              \tag{4a}
-\]
-
-If $s<r$, the fallback-and-candidate definition in
-\noderef{HierarchyPathNumber} gives $r'\leq s<r$.  If $r\leq s$, then
-the original tail beginning at its $r$-th added vertex is a path, by the
-defining candidate for $r$ (the fallback value $r=\ell$ is impossible
-here because $r\leq s<\ell$); its
-initial segment ending at $v_\beta$ is again a path, with a singleton
-vertex allowed.  Hence $r$ is a candidate for the truncated hierarchy
-and $r'\leq r$.  Thus either $r'<r$, or $r'=r$ and (4a), together with
-$s<\ell$, shows that the second measure coordinate strictly decreases
-from $d+\ell$ to $d+s$.  In both cases
-\noderef{HierarchyCounterexampleLess} gives
-\[
-                  \mathfrak m(C')<_{\rm hier}\mathfrak m(C). \tag{5}
-\]
-The assumed minimality forbids $C'$.  Notice that (5) is applied only
-after the actual base, hierarchy, maximum property, non-elementarity,
-path number, and terminal-tail coordinate have all been checked.
+This observation makes no endpoint claim for a cycle: a cycle is not a
+\noderef{TwoColorPathComponent} and does not enter the definition of
+\noderef{TreeInterchangeable}.
 
 \textbf{Location 1: $a,b\in V(A)$.}
 By (1), $A$ is elementary; hence $a$ and $b$ are respectively the
 unique vertices of $A$ missing $\alpha$ and $\beta$.  If both singleton
-colors are closed on $A$, no exact boundary edge identity of $A$ is
-colored $\alpha$ or $\beta$, by
-\noderef{TreeColorSetClosed} and
-\noderef{BoundaryColorEdges}.  The component through $a$ cannot leave
-$A$.  Observation (3) says that its other path end must be $b$, so
-$K_a=K_b$.  Now let $Q$ be an arbitrary paper
-$(\alpha,\beta)$-path component meeting $A$.  If $Q$ contains an
-edge-node, then it is nontrivial, and the same argument forces its two
-ends to be $a,b$; hence $Q=K_a=K_b$.
-
-It remains to exclude the case that $Q$ has no edge-node.  Choose
-$x\in V(A)$ whose vertex-node lies in $Q$.  By
-\noderef{TwoColorIncidenceGraph}, any exact edge $e$ incident with $x$
-and colored $\alpha$ or $\beta$ is adjacent to the vertex-node $x$ in
-the two-color incidence graph.  The definition
-\noderef{TwoColorPathComponent} makes $Q$ the connected component
-containing $x$, so \noderef{TwoColorComponent} puts the exact edge-node
-$e$ in $Q$, contrary to the present assumption.  Thus neither $\alpha$
-nor $\beta$ is present at $x$ in the sense of
-\noderef{PresentColors}; by the complementary definition
-\noderef{MissingColors}, both colors are missing at $x$.  The vertices
-$a,b,x$ all lie in the elementary set $V(A)$.  If $x\ne a$, the missing
-sets of $x$ and $a$ both contain $\alpha$, contradicting
-\noderef{ColoredVertexSetElementary}; hence $x=a$.  Applying the same
-argument with $\beta$ and $b$ gives $x=b$.  This contradicts the already
-established $a\ne b$, so no edge-free path component meets $A$.
-Consequently $K_a=K_b$ is the only paper path component meeting $A$,
+colors are closed on $A$, apply (3) with $B=A$.  It gives $K_a=K_b$ and
+also proves that this is the unique paper path component meeting $A$,
 including among isolated-vertex paths.                                   \tag{6}
 
 Suppose precisely one of the two colors is closed on $A$.  If $q>0$,
@@ -299,19 +300,22 @@ then $A=T_{n,q}$ and the last-divider instance of
 applies.  Its lower-rung premise is exactly the six-assertion hypothesis
 of this lemma, its fewer-divider premise is our same-rung induction
 hypothesis, and its numerical premise is the displayed $2n+11$ estimate.
-It makes the two colors $A$-interchangeable.  If $q=0$ and the terminal
+It makes the two colors $A$-interchangeable, placing whichever color is
+closed in the first slot.  If $q=0$ and the terminal
 kind is PE, use the core conclusion (iii) of
 \noderef{interchange}; reflexivity of the two clauses in
 \noderef{CombinedStableColoring} supplies its stability premise, and
 our six lower-rung package supplies its induction premise.  If $q=0$
-and the terminal kind is not PE, \noderef{HierarchyBase} identifies
-$A$ with $T_n$.  Inspecting the SE or RE constructor in
-\noderef{TashkinovSeriesStep}, and using symmetry of stability from
-\noderef{sc2} in the SE case, shows that every color missing on $T_n$
-is closed there.  Thus the assumed ``precisely one'' subcase cannot
-occur.  Interchangeability in the two possible cases gives both
-$K_a=K_b$ and uniqueness of the path component meeting $A$ by the
-definition \noderef{TreeInterchangeable}.                              \tag{7}
+and the terminal kind is not PE, the already proved consequence (2b)
+makes both colors closed on $A=T_n$.  Thus the assumed ``precisely one''
+subcase cannot occur.  The definition \noderef{TwoColorIncidenceGraph}
+is symmetric in $\alpha,\beta$, so interchanging their slots does not
+change any component or the meaning of interchangeability.  In the two
+possible cases, (2) says explicitly
+that $K_a$ and $K_b$ are path components meeting $A$; applying the
+resulting interchangeability through the definition
+\noderef{TreeInterchangeable} gives $K_a=K_b$ and uniqueness of the path
+component meeting $A$.                                                 \tag{7}
 
 It remains in this location to consider the case in which neither color
 is closed on $A$.  Before choosing a first missing stage, we justify the
@@ -350,16 +354,37 @@ in this same starred stage; thus both $a$ and $b$ lie there, as required
 before the descent.  If $r>0$, the $\beta$ witness is new above the
 preceding starred stage; (1) and
 \noderef{GoodHierarchyNewMissingClosed} make $\beta$ closed on
-$T_{n,r}=T_{n,r}^{*}$.  If $\alpha$ is also closed there, apply (6) to
-that stage; otherwise apply (7) with $r$ in place of $q$.  Either way
-$K_a=K_b$.  If $r=0$ and the last extension is non-PE, the same SE/RE
-closedness argument makes both colors closed on $T_n=A$, and (6)
-applies.  If $r=0$ and the extension is PE, place $a$ and $b$ in the
-two constituents $T_n$ and $R_n$ of the exact union $A$.  Conclusions
-(i), (ii), and (iv) of \noderef{interchange}, according to those two
-locations, show that their two path components coincide.  This is the
-paper's descent to the first starred stage; it uses the PE base interface
-rather than pretending that the union itself is a ladder ETT.           \tag{8}
+$T_{n,r}=T_{n,r}^{*}$.  If $\alpha$ is also closed there, apply the
+path-qualified observation (3) to this elementary stage.  Otherwise the
+stage-$r$ instance of \noderef{step1} gives interchangeability.  In the
+latter case, (2) supplies the path-component hypotheses for $K_a,K_b$,
+and \noderef{TreeInterchangeable} gives $K_a=K_b$.
+
+Suppose $r=0$.  Then $a,b$ both lie in the base core
+$T_{n,0}^{*}$.  If the last extension is non-PE,
+\noderef{HierarchyBase} identifies this core with $T_n$.  Both colors
+are tree-missing there, so the already established SE/RE consequence
+(2b) makes both closed.  Observation (3), applied to this elementary
+base stage, gives $K_a=K_b$.
+
+If the last extension is PE, its base clause gives the exact union
+\[
+                         T_{n,0}^{*}=T_n\vee R_n.
+\]
+The vertex-set clause of \noderef{OrderedTreeUnion} places each of $a,b$
+in $T_n$ or $R_n$.  If both lie in $T_n$, conclusion (ii) of
+\noderef{interchange}, applied to the color $\alpha$ missing at $a$,
+makes their path components equal.  If both lie in $R_n$, conclusion (i)
+does the same.  If $a\in T_n$ and $b\in R_n$, conclusion (iv) applies to
+$\alpha,\beta$; if $a\in R_n$ and $b\in T_n$, apply (iv) after exchanging
+the two colors.  In each use, reflexivity gives
+\noderef{CombinedStableColoring}; the other premises are
+$C.\mathit{maximum}$, $C.\mathit{positive}$, properness, exact
+one-uncoloredness, and the stated lower-rung package.  The two components
+are path components by (2), so the asserted interchangeability really
+does imply $K_a=K_b$.  This is the paper's descent to the first starred
+stage; it uses the PE base interface and the exact union rather than
+pretending that the union itself is a ladder ETT.                       \tag{8}
 
 Equations (6)--(8) prove the required component equality in Location 1
 under each of alternatives 1--3 in the statement.  They also prove the

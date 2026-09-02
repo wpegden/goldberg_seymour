@@ -1,8 +1,10 @@
 import Tablet.BoundaryColorEdges
+import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved
 import Tablet.CombinedStableColoring
 import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.GoodHierarchyNewMissingClosed
 import Tablet.HierarchyBase
@@ -17,10 +19,12 @@ import Tablet.HierarchyStoredColorsAt
 import Tablet.HkuTreeColorsControlled
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
+import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumProperty
 import Tablet.MaximumPropertyTransport
 import Tablet.ModColoring
 import Tablet.MissingColors
+import Tablet.OrderedTreeUnion
 import Tablet.OutsideKempeRecoloringStable
 import Tablet.ParallelCommonMissingClosed
 import Tablet.PresentColors
@@ -29,12 +33,14 @@ import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovClosure
 import Tablet.TashkinovHierarchy
+import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.Td
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeColorSetClosed
 import Tablet.TreeInterchangeable
+import Tablet.TreeSequence
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix
 import Tablet.TreeVertexOrder
@@ -44,6 +50,7 @@ import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
 import Tablet.TwoColorComponentsDisjoint
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorPathComponent
 import Tablet.TwoColorNontrivialPathComponent
 import Tablet.interchange
