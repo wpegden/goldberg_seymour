@@ -1,5 +1,6 @@
 import Tablet.Critical
 import Tablet.ChangeLemma
+import Tablet.HierarchyCounterexampleTailAtLeastTwo
 import Tablet.StableChange
 import Tablet.IncidentCoreReduction
 import Tablet.Basic2
