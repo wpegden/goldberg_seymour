@@ -1,9 +1,11 @@
 import Tablet.ChangeLemmaBothInside
 import Tablet.ChangeLemmaBothOutside
 import Tablet.ChangeLemmaInsideOutside
+import Tablet.HierarchyCounterexample
 import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchyStarredStage
 import Tablet.TashkinovHierarchy
+import Tablet.TreeSequence
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceVertexSet
 import Tablet.TreeVertexOrder
