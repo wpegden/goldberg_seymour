@@ -1,8 +1,10 @@
 import Tablet.ChangeLemma
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
+import Tablet.CombinedStableColoring
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.Degree
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.GoodHierarchyNewMissingClosed
 import Tablet.GoodHierarchyPrefixRepackage
@@ -31,6 +33,7 @@ import Tablet.ParallelCommonMissingClosed
 import Tablet.ParallelExtensionColor
 import Tablet.RevisitingExtensionCertificate
 import Tablet.SameGoodHierarchy
+import Tablet.SameHierarchyStages
 import Tablet.StableChange
 import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
@@ -39,12 +42,15 @@ import Tablet.TashkinovClosure
 import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
+import Tablet.TashkinovStoredColors
 import Tablet.Td
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeColorSetClosed
 import Tablet.TreeColorSetMinusClosed
+import Tablet.TreeColoringInvariant
 import Tablet.TreeInterchangeable
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequencePrefix
