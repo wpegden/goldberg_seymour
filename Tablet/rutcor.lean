@@ -2,7 +2,7 @@ import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetElementary
 import Tablet.GoodHierarchyNewMissingClosed
 import Tablet.HierarchyFirstMissingPosition
-import Tablet.HierarchyPathNumber
+import Tablet.HierarchyStarredStage
 import Tablet.HierarchySegmentColors
 import Tablet.HierarchyStoredColorsAntitone
 import Tablet.MaximumDefectiveChoice
@@ -30,9 +30,9 @@ theorem rutcor {V E : Type*}
     (hq : 0 < H.dividerCount)
     (hprefixElementary :
       let A := HierarchyStarredStage H (Fin.last H.dividerCount)
-      let p := HierarchyPathNumber H
+      let ell := T.length - A.length
       let Ty := TreeSequencePrefix T
-        (min (A.length + (p - 1)) T.length)
+        (min (A.length + (ell - 1)) T.length)
         (by have hA := A.positive; have hT := T.positive; omega)
         (Nat.min_le_right _ _)
       ColoredVertexSetElementary G phi (TreeSequenceVertexSet Ty))

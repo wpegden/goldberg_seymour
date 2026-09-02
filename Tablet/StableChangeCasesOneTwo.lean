@@ -1,5 +1,6 @@
 import Tablet.ChangeLemma
 import Tablet.ColoredVertexSetClosed
+import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved
 import Tablet.GoodHierarchyNewMissingClosed
 import Tablet.GoodHierarchyPrefixRepackage
@@ -18,6 +19,8 @@ import Tablet.Td
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeColorSetClosed
 import Tablet.TreeColorSetMinusClosed
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequencePrefix
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
 import Tablet.interchange

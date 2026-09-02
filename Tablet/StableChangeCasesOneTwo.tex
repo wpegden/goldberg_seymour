@@ -149,7 +149,12 @@ pre-step coloring.  If $n>1$, restrict the certified
 the exact ordered tree $T_n$, its rung number is $n-1$, and the stagewise
 definition of \noderef{MaximumProperty} restricts.  Lower assertion (i)
 then gives the same elementarity.  Denote this established pre-step fact
-by (2).
+by (2).  The other nonstructural premise of every use of
+\noderef{rutcor} below is exactly the ambient (6.6): the corrected lemma
+uses the same last starred stage $A$, the same full-tail length
+$\ell=|T|-|A|$, and the same prefix
+$T(y_{\ell-1})$.  No comparison with the hierarchy path number is
+needed.
 
 We now treat the two cases.
 
@@ -181,7 +186,7 @@ that later stage, contradicting maximality.  Hence
  v_\alpha,v_\beta\in V(T_{n,r}^{*}).                           \tag{4}
 \]
 
-Apply \noderef{rutcor}, with (2), separately to each affected color.  For
+Apply \noderef{rutcor}, with (6.6) and (2), separately to each affected color.  For
 a color closed at $r$, its maximal-closed conclusion excludes that color
 from every exact displayed edge after $T_{n,r}^{*}$ through $A$.  For the
 other color, choose its own largest singleton-closed stage if one exists

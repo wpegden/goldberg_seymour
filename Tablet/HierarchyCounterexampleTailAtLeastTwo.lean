@@ -14,7 +14,6 @@ import Tablet.HierarchyCounterexampleLess
 import Tablet.HierarchyCounterexampleMeasure
 import Tablet.HierarchyLEMStable
 import Tablet.HierarchyNonparallelFirstEdge
-import Tablet.HierarchyPathNumber
 import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStageMissingColors
 import Tablet.HierarchyStoredColorsAntitone
@@ -201,9 +200,9 @@ theorem HierarchyCounterexampleTailAtLeastTwo {V E : Type*}
     (hprefixElementary :
       let H := C.hierarchy
       let A := HierarchyStarredStage H (Fin.last H.dividerCount)
-      let p := HierarchyPathNumber H
+      let ell := T.length - A.length
       let Ty := TreeSequencePrefix T
-        (min (A.length + (p - 1)) T.length)
+        (min (A.length + (ell - 1)) T.length)
         (by have hA := A.positive; have hT := T.positive; omega)
         (Nat.min_le_right _ _)
       ColoredVertexSetElementary G phi (TreeSequenceVertexSet Ty))

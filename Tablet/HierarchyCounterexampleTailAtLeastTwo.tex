@@ -29,10 +29,10 @@ $C'$ has
    (\noderef{HierarchyCounterexampleMeasure}(C'),
     \noderef{HierarchyCounterexampleMeasure}(C)).
 \]
-Let $p_H=\noderef{HierarchyPathNumber}(H)$ and let
+Put $\ell=|T|-|A|$ and let
 \[
- T(y_{p_H-1})=
- T\big|_{\min\{|A|+p_H-1,|T|\}}
+ T(y_{\ell-1})=
+ T\big|_{\min\{|A|+(\ell-1),|T|\}}
 \]
 be the exact ordered prefix supplied by \noderef{TreeSequencePrefix}.
 Assume (6.6), namely that this prefix is elementary under $\varphi_n$,
@@ -46,7 +46,7 @@ Then
                          2\leq |T|-|A|.
 \]
 Here $|T|-|A|$ is the number of exact edge/vertex additions above the
-last starred stage.  It is not the path number $p_H$.
+last starred stage.
 \end{lemma}
 \begin{proof}
 All tree inclusions in this proof are inclusions of ordered
@@ -72,9 +72,7 @@ We next exclude $\ell=0$.  There is nothing to prove when $q>0$, by the
 strictness just noted.  Suppose $q=0$ and $\ell=0$.  Equality of lengths
 in (1), followed by the vertex and edge clauses of
 \noderef{TreeSequenceInitialSegment}, gives $A=T$ as complete ordered
-tree-sequences.  Moreover, the candidate interval in
-\noderef{HierarchyPathNumber} is then empty, so its fallback gives
-$p_H=0$.  Truncated subtraction gives $p_H-1=0$, and hence the prefix in
+tree-sequences.  Truncated subtraction gives $\ell-1=0$, and hence the prefix in
 the hypothesis has length
 \[
  \min\{|A|+0,|T|\}=|T|.
@@ -88,12 +86,9 @@ contradicting the `notElementary' field of
                               1\leq\ell.                       \tag{2}
 \]
 
-Assume for a contradiction that $\ell<2$.  By (2), $\ell=1$.  The
-candidate interval in \noderef{HierarchyPathNumber} is now the singleton
-$\{1\}$.  If its filtered candidate set is nonempty, its minimum is one;
-if it is empty, the fallback tail length is one.  Thus
+Assume for a contradiction that $\ell<2$.  By (2), the full-tail index is
 \[
-                              p_H=1.                           \tag{3}
+                              \ell=1.                          \tag{3}
 \]
 Combining (1), $|T|=|A|+1$, and the defining vertex and edge equalities
 of \noderef{TreeSequenceInitialSegment}, write the exact last addition as
@@ -102,7 +97,8 @@ of \noderef{TreeSequenceInitialSegment}, write the exact last addition as
 \]
 where $e_1$ is the entry of $T$ at edge index $|A|$ and $y_1$ is the
 new vertex entry at vertex index $|A|+1$.  No endpoint pair has been
-substituted for $e_1$.  By (3), the prefix in (6.6) has length $|A|$;
+substituted for $e_1$.  By (3), truncated subtraction gives
+$\ell-1=0$, so the prefix in (6.6) has length $|A|$;
 the exact-prefix equality in \noderef{TreeSequencePrefix} and (1) make it
 equal to $A$.  Consequently
 \[
@@ -628,14 +624,14 @@ property was proved above.  These data form an actual
 $\mathcal B_T^\sigma$ on the same ordered $T$.
 
 Its measure equals that of $C$: the ordered tree, divider count, complete
-stage family, and hence both the path number and the ordinary last-stage
-tail in \noderef{HierarchyCounterexampleMeasure} are unchanged.  To
+stage family, and hence both coordinates in
+\noderef{HierarchyCounterexampleMeasure} are unchanged.  To
 check the minimality hypothesis required with $C_\sigma$, take any
 counterexample $C'$ with $q$ dividers.  If its measure were smaller than
 that of $C_\sigma$, rewriting the displayed measure equality would make
 it smaller than that of $C$, contrary to the stated minimality of $C$.
-The path number $p_H$ is still one.  Separately, the full tail length is
-still $\ell=1$, so the corrected penultimate prefix is still $A$;
+The full tail length is still $\ell=1$, so the corrected penultimate
+prefix is still $A$;
 vertexwise missing-set invariance on $A$ transfers its elementarity.
 The common terminal ladder tree and terminal stability in
 $\mathcal C_T$ preserve the missing-color set of $T_n$, so the large

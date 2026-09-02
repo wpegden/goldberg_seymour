@@ -1,16 +1,16 @@
-\begin{lemma}[Lemma 9n: available colors before the path tail]
+\begin{lemma}[Lemma 9n: available colors along the full tail]
 Let $(T,\varphi_n)$ be a positive-rung extended Tashkinov tree, let
 $T_n$ be its last ladder tree, and let
 $T_n=T_{n,0}\subset\cdots\subset T_{n,q+1}=T$ be a good hierarchy with
 base $T_{n,0}^{*}$.  Put
 \[
- A=T_{n,q}^{*},\qquad p=p(T),\qquad
+ A=T_{n,q}^{*},\qquad \ell=|T|-|A|,\qquad
  D_{n,q}=\noderef{HierarchyStoredColorsAt}(H,q),
  \qquad
  \Gamma^q=\bigcup_{\eta\in D_{n,q}}\Gamma^q_\eta.
 \]
 Here $A$ is \noderef{HierarchyStarredStage} at the last divider and
-$p$ is \noderef{HierarchyPathNumber}.  For a natural number $i$, let
+$\ell$ is the number of exact tail additions above $A$.  For a natural number $i$, let
 $T(y_i)$ be the ordered prefix of $T$ ending after the first $i$ entries
 above $A$; here and below $|A|$ denotes its tree-sequence length, and
 formally the prefix length is
@@ -27,13 +27,13 @@ edge identities in that index interval, and put
  X_i=\overline\varphi_n(T(y_i))\setminus B\setminus U_i.
 \]
 Assume the exact prefix-elementarity assertion (6.6), namely that
-$V(T(y_{p-1}))$ is elementary with respect to $\varphi_n$, and assume
+$V(T(y_{\ell-1}))$ is elementary with respect to $\varphi_n$, and assume
 \[
  2n+11\le |\overline\varphi_n(T_n)|,
  \qquad n=\mathit{ett.rounds}.
 \]
-Then, for every $0\le i\le p-1$ (equivalently, every natural number
-$i<p$),
+Then, for every $0\le i\le \ell-1$ (equivalently, every natural number
+$i<\ell$),
 \[
                          |X_i|\ge 2n+11.                 \tag{1}
 \]
@@ -50,7 +50,7 @@ $(\eta_h)_{h\in\operatorname{Fin}7}$ such that, for every $h$,
 \]
 \end{lemma}
 \begin{proof}
-Write $m=|A|$ and $\ell=|T|-m$.  We first verify that all displayed
+Write $m=|A|$.  We first verify that all displayed
 prefixes and edge indices in the statement are the paper's actual ones.
 The nested and terminal-stage fields of \noderef{TashkinovHierarchy}
 show that $A$ is an ordered initial segment of $T$.  Indeed, if $q>0$,
@@ -58,19 +58,17 @@ the last nested inclusion is $T_{n,q}^{*}=T_{n,q}\subset T_{n,q+1}=T$;
 if $q=0$, this is the core-inside-first field followed by the terminal-stage
 identity.  Thus $m\le |T|$.
 
-Unfold \noderef{HierarchyPathNumber}.  Its candidates form a subset of
-$\{1,\ldots,\ell\}$.  If that set is nonempty, its minimum $p$ belongs
-to it, so $1\le p\le\ell$; if it is empty, the fallback definition gives
-$p=\ell$.  In either case $p\le\ell$.  Now fix $i<p$.  This inequality
-itself gives $p>0$ and $i\le p-1$, while
+From $m\le |T|$ and the definition $\ell=|T|-m$, we have
+$m+\ell=|T|$.  Now fix $i<\ell$.  This inequality gives
+$\ell>0$ and $i\le \ell-1$, while
 \[
-              m+i<m+p\le m+\ell=|T|.
+              m+i<m+\ell=|T|.
 \]
 Consequently the minimum in the formal definition of $T(y_i)$ is
-$m+i$, and the one in $T(y_{p-1})$ is $m+p-1$.  This proves rather than
+$m+i$, and the one in $T(y_{\ell-1})$ is $m+\ell-1$.  This proves rather than
 assumes both the positivity and the prefix-bound side conditions.  By
 \noderef{TreeSequencePrefix}, $T(y_i)$ is the entry-by-entry prefix of
-$T(y_{p-1})$, so (6.6) and
+$T(y_{\ell-1})$, so (6.6) and
 \noderef{ColoredVertexSetElementary} imply that $V(T(y_i))$ is elementary.
 
 We next expand the first count.  Let

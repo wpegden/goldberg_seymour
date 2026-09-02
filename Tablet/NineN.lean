@@ -1,7 +1,20 @@
 import Tablet.ColoredVertexSetElementary
+import Tablet.Degree
 import Tablet.GoodHierarchy
-import Tablet.HierarchyPathNumber
+import Tablet.HierarchyBase
+import Tablet.HierarchyStarredStage
+import Tablet.HierarchyStoredColorsAt
 import Tablet.HierarchyStoredColorsCardinality
+import Tablet.KTriple
+import Tablet.MaximumDegree
+import Tablet.MissingColors
+import Tablet.OrderedTreeUnion
+import Tablet.PresentColors
+import Tablet.TashkinovHierarchy
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
+import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequencePrefix
 
 -- [TABLET NODE: NineN]
@@ -17,13 +30,13 @@ theorem NineN {V E : Type*}
     (good : GoodHierarchy H)
     (hprefixElementary :
       let A := HierarchyStarredStage H (Fin.last H.dividerCount)
-      let p := HierarchyPathNumber H
+      let ell := T.length - A.length
       let Ty := fun i : ℕ =>
         TreeSequencePrefix T (min (A.length + i) T.length)
           (by have hA := A.positive; have hT := T.positive; omega)
           (Nat.min_le_right _ _)
       ColoredVertexSetElementary G phi
-        (TreeSequenceVertexSet (Ty (p - 1))))
+        (TreeSequenceVertexSet (Ty (ell - 1))))
     (hlarge :
       let n : Fin (ett.rounds + 1) := Fin.last ett.rounds
       let Tn := ett.series.data.tree n.castSucc
@@ -32,7 +45,7 @@ theorem NineN {V E : Type*}
     let Tn := ett.series.data.tree n.castSucc
     let q : Fin (H.dividerCount + 1) := Fin.last H.dividerCount
     let A := HierarchyStarredStage H q
-    let p := HierarchyPathNumber H
+    let ell := T.length - A.length
     let Ty := fun i : ℕ =>
       TreeSequencePrefix T (min (A.length + i) T.length)
         (by have hA := A.positive; have hT := T.positive; omega)
@@ -49,7 +62,7 @@ theorem NineN {V E : Type*}
       (TreeMissingColors phi (Ty i) \ baseExtraMissing) \ tailUsed i
     let D := HierarchyStoredColorsAt H q
     let Gamma := D.biUnion (good.gamma q)
-    ∀ i : ℕ, i < p →
+    ∀ i : ℕ, i < ell →
       2 * ett.rounds + 11 ≤ (available i).card ∧
       ((available i \ (Gamma ∪ D)).card ≤ 4 →
         ∃ eta : Fin 7 → Fin k, Function.Injective eta ∧

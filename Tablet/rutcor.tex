@@ -8,13 +8,16 @@ base with closure tree $R_n$.  Let
 \]
 be a good hierarchy, where $q\geq1$, and put
 $T_{n,j}^{*}=\noderef{HierarchyStarredStage}(H,j)$.  Thus
-$T_{n,q}^{*}=T_{n,q}$.  Let $p=\noderef{HierarchyPathNumber}(H)$ and
-let $T(y_{p-1})$ be the ordered prefix of $T$ of length
+$T_{n,q}^{*}=T_{n,q}$.  Put
 \[
- \min\{|T_{n,q}|+(p-1),|T|\}.
+ A=T_{n,q}^{*},\qquad \ell=|T|-|A|,
+\]
+and let $T(y_{\ell-1})$ be the ordered prefix of $T$ of length
+\[
+ \min\{|A|+(\ell-1),|T|\}.
 \]
 Assume the exact prefix-elementarity assertion (6.6), namely that
-$V(T(y_{p-1}))$ is elementary under $\varphi_n$.  Also assume that
+$V(T(y_{\ell-1}))$ is elementary under $\varphi_n$.  Also assume that
 $V(T_n)$ is elementary under the pre-step coloring
 $\varphi_{n-1}$; formally this is the coloring at the predecessor of
 the last positive index in the certified series.
@@ -71,15 +74,20 @@ The nested and terminal fields of \noderef{TashkinovHierarchy} make it
 an ordered initial segment of $T$, and every earlier hierarchy stage and
 the base core $T_{n,0}^{*}$ is an ordered initial segment of it.
 
-Unfold \noderef{HierarchyPathNumber}.  The final strict hierarchy
-inclusion gives $|T_{n,q}|<|T|$.  The path number is either an element of
-the nonempty candidate interval beginning at $1$, or the positive tail
-length $|T|-|T_{n,q}|$; hence $p\geq1$.  Consequently the prefix
-$T(y_{p-1})$ contains $T_{n,q}$ entry by entry.  The exact-prefix
-property of \noderef{TreeSequencePrefix} and transitivity of the
-initial-segment relations therefore put the vertex set of every
+Because $q>0$, the positive-index clause of
+\noderef{HierarchyStarredStage} identifies $A$ with $T_{n,q}$.  The
+final `nested' and `strict' fields of \noderef{TashkinovHierarchy} then
+give $A\preccurlyeq T$ and $|A|<|T|$.  Hence
+$\ell=|T|-|A|\geq1$ and $|T|=|A|+\ell$.  In particular
+\[
+ |A|\leq |A|+(\ell-1)<|A|+\ell=|T|,
+\]
+so the minimum defining $T(y_{\ell-1})$ is
+$|A|+(\ell-1)$ and this exact prefix contains $A$ entry by entry.  The
+exact-prefix property of \noderef{TreeSequencePrefix} and transitivity
+of the initial-segment relations therefore put the vertex set of every
 $T_{n,j}$ and every $T_{n,j}^{*}$ inside
-$V(T(y_{p-1}))$.  Restricting the pairwise-disjointness condition in the
+$V(T(y_{\ell-1}))$.  Restricting the pairwise-disjointness condition in the
 assumed \noderef{ColoredVertexSetElementary} property proves that all
 these vertex sets, including the PE core when it occurs, are elementary
 under $\varphi_n$.  This is the promised derivation of stage
