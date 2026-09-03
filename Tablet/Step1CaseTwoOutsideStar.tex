@@ -45,207 +45,544 @@ $|P_1|+|P_2|+|P_3|$.
 Then the displayed Subcase 2.1 data are contradictory.
 \end{lemma}
 \begin{proof}
-Put $D^+=D^H_{n,d+1}$ and
-$C_\Gamma=\bigcup_{\eta\in D^+}\Gamma^d_\eta$.
-Choose a color $\gamma$ missing at $b_3$.  The initial
-\noderef{KTriple} inside \noderef{TashkinovSeriesStep} gives
-$k\geq\Delta(G)+1$, while properness, \noderef{Degree}, and
-\noderef{MaximumDegree} give at most $d_G(b_3)\leq\Delta(G)$ present
-colors, so \noderef{MissingColors} has such an element.  For every
-$\eta\in D^H_{n,d}$,
-\noderef{GoodHierarchyReservedDisjoint} puts $\Gamma^d_\eta$ among the
-colors missing on $A$.  Since $b_3\notin V(A)$ and $V(T)$ is elementary,
-$\gamma$ belongs to none of those pairs.  Unfolding
+Write $n$ for the positive rung, $T_n$ for the last ladder tree,
+$D_n$ for its computed stored-color set, $\mathcal E$ for the given ETT,
+and $\mathcal G$ for the given good-hierarchy witness.  Put
+\[
+ A=H.\mathit{starred}(d),\qquad D^+=D^H_{n,d+1},\qquad
+ C_\Gamma=\bigcup_{\eta\in D^+}\Gamma^d_\eta .
+\]
+
+We first establish the exact prefix and color-set facts used later.
+Unfold \noderef{ExtendedTashkinovTree}: its generating-coloring field
+identifies $\varphi$ with the coloring in the final certified slot, its
+lower field puts $T_n$ strictly before $T$, and its upper field puts $T$
+before the last closure tree.  Unfold \noderef{TashkinovHierarchy}.  If
+$d>0$, \noderef{HierarchyStarredStage} identifies $A$ with the $d$-th
+ordinary stage, and the nestedness and terminal fields put $A$ before
+$T$.  If $d=0$, $A$ is the hierarchy core and the core-inside-first and
+terminal fields give the same conclusion.  These are entrywise ordered
+prefixes in \noderef{TreeSequenceInitialSegment}, so
+\noderef{TreeSequenceVertexSet} gives
+\[
+                     V(T_n)\subseteq V(A)\subseteq V(T).       \tag{1}
+\]
+For the first inclusion, the non-PE field of \noderef{HierarchyBase}
+identifies the core with $T_n$, while its PE field and
+\noderef{OrderedTreeUnion} put $T_n$ before the core; the hierarchy then
+puts the core before $A$.
+
+The initial member of the certified \noderef{TashkinovSeries} is the
+initial constructor of \noderef{TashkinovSeriesStep}, whose
+\noderef{KTriple} field gives $k\geq\Delta(G)+1$.  Unfold
+\noderef{IsProperEdgeColoring}.  Two different exact edges incident with
+$b_3$ are adjacent by \noderef{AdjacentEdges}, so they cannot carry the
+same nonempty color.  Consequently the map choosing, for every member of
+\noderef{PresentColors} at $b_3$, its unique incident edge witness is
+injective.  By \noderef{Degree} and \noderef{MaximumDegree}, there are
+at most $d_G(b_3)\leq\Delta(G)$ present colors.  Since
+\noderef{MissingColors} is the complementary subset of $[k]$, choose
+\[
+                         \gamma\in\overline\varphi(b_3).       \tag{2}
+\]
+
+The ordered-prefix inclusion $A\preccurlyeq T$ and
+\noderef{TreeMissingColors} give
+$\overline\varphi(A)\subseteq\overline\varphi(T)$.  Expanding
+\noderef{TashkinovStoredColors},
+\noderef{HierarchyStoredColorsAt}, and
+\noderef{HierarchyTerminalStoredColors} therefore gives
+\[
+ D^+=D_n\setminus\overline\varphi(T)
+       \subseteq D_n\setminus\overline\varphi(A)=D^H_{n,d}.  \tag{3}
+\]
+If $\gamma\in\Gamma^d_\eta$ for some $\eta\in D^H_{n,d}$, then
+\noderef{GoodHierarchyReservedDisjoint} supplies a vertex of $A$ missing
+$\gamma$.  It is different from $b_3$, because $b_3\notin V(A)$, while
+both vertices lie in $T$ by (1).  Together with (2) this contradicts the
+stated \noderef{ColoredVertexSetElementary} property.  Thus $\gamma$
+belongs to no last indexed Gamma pair, and in particular
+$\gamma\notin C_\Gamma$ by (3).  Since it is missing on $T$, the terminal
+\noderef{TreeColorSetMinusClosed} certificate, unfolded through
+\noderef{TreeColorSetClosed}, says that its exact colored boundary is
+empty.  The same is true for $\alpha$ by hypothesis.  Finally
+$\gamma\ne\beta$: the retained identity $f_3$ is incident with $b_3$
+and has color $\beta$, whereas (2), expanded using
+\noderef{PresentColors} and \noderef{MissingColors}, excludes every
+incident $\gamma$-edge.
+
+We next construct the first recoloring and all three transformed exit
+paths.  If $\alpha=\gamma$, put $\mu_4=\varphi$.  Otherwise select every
+full $(\alpha,\gamma)$ component containing an $\alpha$-edge node of one
+of $P_1,P_2,P_3$, and also the component through $a_j$ whenever the
+outside-end alternative of $P_j$ says that $a_j$ misses $\alpha$.
+Every selected component is wholly outside $T$.  Indeed, if one met
+$T$, take in the connected support of \noderef{TwoColorComponent} a
+shortest walk in \noderef{TwoColorIncidenceGraph} from its selected
+outside node to a vertex-node of $T$.  The edge-node immediately before
+the first such vertex represents, by \noderef{BoundaryEdges}, an exact
+boundary identity of color $\alpha$ or $\gamma$, contradicting the two
+singleton-closed conclusions.  The same first-crossing argument applies
+to a component selected through an outside endpoint.  Finiteness now
+gives an \noderef{OutsideKempeRecoloring}; swap all selected components
+and call the result $\mu_4$.
+
+In the unequal branch
+\noderef{OutsideKempeRecoloringStable} makes $\mu_4$ proper, leaves
+exactly $e_0$ uncolored, fixes every exact edge incident with $T$,
+preserves every missing-color set on $T$, and gives stability there for
+every control set.  The equality branch has the same properties by
+reflexivity in \noderef{sc2}.  Apply \noderef{HierarchyLEMStable} in the
+unequal branch and use the original data in the equality branch.  In
+both cases retain an arbitrary replacement input, a corresponding
+same-rung ETT $\mathcal E_1$ under $\mu_4$, maximum property, a base
+$B_1$, a hierarchy $H_1$, and a good witness $\mathcal G_1$.  The
+\noderef{CorrespondingExtendedTashkinovTree} and
+\noderef{SameGoodHierarchy} conclusions identify all ordered ladder
+trees, exact connecting-edge sets, raw stored sets, extension kinds,
+hierarchy stages, dividers, indexed stored sets, and Gamma pairs; the
+terminal minus-closed certificate is also transported.
+
+For $j=1,2,3$, let $Q_j$ have exactly the ordered vertex- and edge-node
+list of $P_j$.  We check every \noderef{TreeExitPath} field for
+$(T,\mu_4,\gamma,\beta,a_j,b_j,Q_j)$.  An old $\beta$-edge remains
+$\beta$, because $\beta$ is different from both colors of the first
+swap.  Every old $\alpha$-edge of $P_j$ lies in one of the selected
+outside components and becomes $\gamma$.  Hence every consecutive pair
+of nodes is adjacent in $I_G(\mu_4;\gamma,\beta)$ by
+\noderef{TwoColorIncidenceGraph}; the unchanged node list is simple and
+has the same positive length, ends, and support.  Its only vertex-node in
+$T$ remains $b_j$.
+
+The outside-end alternative needs a separate check.  If $a_j$ missed
+$\beta$ under $\varphi$, no edge acquires color $\beta$, so
+\noderef{PresentColors} and \noderef{MissingColors} show that it still
+misses $\beta$.  If it missed $\alpha$, then in the identity branch it
+already misses $\gamma=\alpha$.  In the unequal branch the full component
+through $a_j$ was selected.  Every incident edge of either selected
+color belongs to it by \noderef{TwoColorIncidenceGraph}; after the swap,
+the incident $\gamma$-edges are precisely the old incident
+$\alpha$-edges, of which there were none.  Thus it misses $\gamma$.
+This proves, field by field,
+\[
+ Q_j:\operatorname{TreeExitPath}(T,\mu_4,\gamma,\beta,a_j,b_j)
+ \quad(j=1,2,3).                                               \tag{4}
+\]
+Their exact supports remain pairwise disjoint and their outside ends
+remain pairwise distinct.  No separation of their full transformed
+components has been assumed.
+
+Let $K_3$ be the full $(\gamma,\beta)$ component of $b_3$ under
+$\mu_4$.  We prove that its support is exactly the support of $Q_3$.
+At $b_3$, (2) and preservation of its missing set give no incident
+$\gamma$-edge, while the fixed identity $f_3$ is an incident
+$\beta$-edge.  Properness, unfolded from
+\noderef{IsProperEdgeColoring}, excludes a second edge of that color;
+hence $b_3$ has degree exactly one in
+\noderef{TwoColorIncidenceGraph}.  At $a_3$, (4) says one of the two
+colors is missing and the positive walk supplies an incident edge of
+the other color; properness again gives degree exactly one.  Every
+internal node of the simple walk has its two distinct walk neighbors,
+and \noderef{TwoColorIncidenceDegreeAtMostTwo} excludes a third.
+
+If a node of $K_3$ lay outside $Q_3$, take a shortest component walk from
+it to the support of $Q_3$.  Its first attachment cannot be internal,
+where the degree is already two, and cannot be at either endpoint, whose
+unique neighbor is already the path neighbor.  This contradicts the
+connected-support definition in \noderef{TwoColorComponent}.  Thus
+\[
+                         K_3=\operatorname{supp}(Q_3),         \tag{5}
+\]
+also agreeing with the spanning path supplied by
+\noderef{TwoColorComponentSpanningPath}.  In particular $K_3$ has
+exactly the one vertex-node $b_3$ in $T$.
+
+Unfold \noderef{TreeVertexOrder}.  Let $s$ be the unique displayed
+position of $b_3$ in $T$.  The two order hypotheses put $b_1$ and $b_2$
+at earlier positions.  Because $A$ is an exact prefix and
+$b_3\notin V(A)$, every entry of $A$ occurs before $s$.  Since every
+\noderef{TreeSequence} has positive length and $T_n\preccurlyeq A$, we
+have $s\geq1$.  Define the exact \noderef{TreeSequencePrefix} objects
+\[
+ B^-:=T\text{ through the position immediately before }s,
+ \qquad C:=T\text{ through }b_3.                              \tag{6}
+\]
+Entrywise comparison gives
+\[
+              T_n\preccurlyeq A\preccurlyeq B^-\prec C
+                 \preccurlyeq T.                             \tag{7}
+\]
+If $g$ is the displayed edge at position $s$, then
+\noderef{TreeSequenceAdjoinEdge} says exactly that $C=B^-+g$ and that
+$g$ joins an old vertex of $B^-$ to $b_3$.  By (5), $K_3$ contains no
+vertex of $B^-$.  It contains no edge-node incident with $B^-$ either,
+since that node would be adjacent to a vertex-node of $B^-$ in the
+incidence graph.  In particular $g\notin K_3$.
+
+Swap $\gamma$ and $\beta$ on $K_3$ and call the result $\mu_5$.
+The inequality $\gamma\ne\beta$ permits
+\noderef{TwoColorComponentSwapProper};
+\noderef{TwoColorComponentSwap} changes only those two nonempty colors,
+so \noderef{IsOneEdgeUncolored} still singles out $e_0$.  The preceding
+disjointness shows that this swap fixes every exact edge incident with
+$B^-$ and every vertex missing-color set there.  It therefore gives
+$(T_n,D_n,\mu_4)$-stability after (7), and transitivity in
+\noderef{sc2} with the first outside recoloring gives
+\[
+       \mu_5\text{ is }(T_n,D_n,\varphi)\text{-stable}.        \tag{8}
+\]
+At $b_3$, the unique incident edge of the component was the
+$\beta$-edge $f_3$; it becomes $\gamma$, and no incident edge becomes
+$\beta$.  Thus
+\[
+                         \beta\in\overline{\mu_5}(b_3).       \tag{9}
+\]
+
+We also rebuild all three exit paths after this second swap.  For
+$j=1,2$, support disjointness and (5) put every node of $Q_j$ outside
+$K_3$, so its exact edges and endpoint missing alternative are fixed.
+For $j=3$, the same node list is still a simple positive walk because
+every $\gamma$-edge and $\beta$-edge on its full component merely
+exchange labels.  If $a_3$ missed $\gamma$ before, all incident
+$\gamma,\beta$ edges belong to $K_3$, and after the swap it misses
+$\beta$; if it missed $\beta$, it now misses $\gamma$.  Its ends,
+support, and unique vertex in $T$ do not change.  Calling these walks
+$R_1,R_2,R_3$, we have checked every field of
+\[
+ R_j:\operatorname{TreeExitPath}(T,\mu_5,\gamma,\beta,a_j,b_j)
+ \quad(j=1,2,3),                                               \tag{10}
+\]
+with the same pairwise-disjoint exact supports and the same three
+outside ends.
+
+We now construct an actual corresponding ETT on the exact prefix $C$.
+Inspect the last positive certificate in \noderef{TashkinovSeries} and
+\noderef{TashkinovSeriesStep}; positivity excludes the initial
+constructor.  In PE it contains a \noderef{TashkinovClosure} of $T_n$
+under $\varphi$.  In SE or RE it contains an exact edge identity $f_n$,
+the equality $F_n=\{f_n\}$, the exact seed $T_n+f_n$, and a closure of
+that seed.  The upper field of \noderef{ExtendedTashkinovTree} says that
+the last tree of this closure contains $T$, hence $C$, as an exact
+prefix.  In PE, truncate its finite
+\noderef{TashkinovAugmentationSequence} when its length first reaches
+$|C|$.  In SE/RE, both the seed and $C$ are prefixes of the same closure,
+and (7) gives $|T_n|+1\leq|C|$; equality of entries through the shorter
+length shows that the exact seed, including $f_n$, is a prefix of $C$.
+Truncate the closure at $C$.  Thus the appropriate old augmentation
+route ends exactly at $C$.
+
+Transport that route step by step from $\varphi$ to $\mu_5$.  For each
+step before $B^-\to C$, its new displayed edge is incident with its old
+prefix inside $B^-$, and its old-prefix missing witness is also there.
+The first recoloring fixes every edge incident with $T$ and every missing
+set on $T$; the second fixes every edge incident with $B^-$ and every
+missing set there.  Hence the same exact displayed edge has the same
+color and the same old vertex still misses that color.  For the last
+step, the missing witness remains in $B^-$ and the new edge is the exact
+identity $g$, proved outside $K_3$.  Length, attachment, and ordered
+prefix fields are coloring-free.  These are all fields of
+\noderef{TashkinovAugmentation}; induction gives the exact
+\noderef{TashkinovAugmentationSequence} under $\mu_5$, from $T_n$ in PE
+or from the same exact SE/RE seed $T_n+f_n$.
+
+Apply \noderef{Td} to properness, exact one-uncoloredness, (8), positivity,
+maximum property, and the complete lower-rung package.  It says precisely
+that $\mu_5$ is a \noderef{ModColoring} of $\mathcal E$.  The transported
+route, the strict prefix $T_n\prec C$, and the retained exact SE/RE
+singleton identity verify the appropriate eligibility alternative in
+that definition.  Its universal clause therefore supplies an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate $\mathcal C_C$
+on $C$.  By \noderef{MaximumPropertyTransport}, its replacement ETT
+$\mathcal E_C$ has maximum property and the same positive rung $n$.
+
+We construct its hierarchy base rather than copying an ill-typed old PE
+witness through correspondence.  The certificate $\mathcal C_C$
+identifies every ladder tree, raw stored set, exact connecting-edge set,
+and extension kind.  If the terminal kind is not PE, take the new core
+to be the common $T_n$, copy the old positive support position and its
+positivity proof, and copy the mathematically unused closure field.  The
+nonparallel clause of \noderef{HierarchyBase} is then definitional.
+
+If the terminal kind is PE, extract separately the actual terminal PE
+constructors of the original and replacement
+\noderef{TashkinovSeriesStep}.  Write their maximum-defective data as
+$(v,u,f,\delta_n,\gamma_n)$ and
+$(v',u',f',\delta'_n,\gamma'_n)$.  Their singleton connecting-edge
+equations and connecting-edge agreement in $\mathcal C_C$ give
+\[
+                        \{f'\}=F'_n=F_n=\{f\},\qquad f'=f.     \tag{11}
+\]
+The endpoint fields of \noderef{MaximumDefectiveChoice} identify the
+ends of this individual edge both with $\{v,u\}$ and with $\{v',u'\}$.
+Their \noderef{DefectiveVertex} fields put $v,v'$ in the common $T_n$,
+while their other-end fields put $u,u'$ outside it.  Equality of the
+unordered endpoint pairs therefore has only the orientation
+$v'=v, u'=u$.  The original PE clause of \noderef{HierarchyBase} says
+that $v$ occurs at its recorded positive support position; the same
+position now certifies the actual replacement support $v'$.
+
+Use the original core and closure $R_n$ for the new PE base.  Both $T_n$
+and $R_n$ are exact prefixes of that core by
+\noderef{OrderedTreeUnion}, and the core is a prefix of $A$, hence of
+$B^-$ by (7).  Every displayed edge and old-prefix missing witness of
+the old closure is therefore fixed by both recolorings.  Checking the
+same new-edge color and missing witness at every
+\noderef{TashkinovAugmentation} transports the whole closure sequence to
+$\mu_5$.  A hypothetical $\mu_5$-colored boundary edge of $R_n$ whose
+color is missing there would have the same exact identity, color, and
+missing witness under $\varphi$, contradicting the original closedness.
+Thus the actual \noderef{TashkinovClosure} is rebuilt under $\mu_5$; the
+ordered-union witness is coloring-free.  Together with (11) and the
+support equality, these are every PE-base field.  In both terminal-kind
+branches, (8) gives the terminal missing-set compatibility.  Call the
+resulting base $B_C$.
+
+We next build a genuine $d$-divider good hierarchy on $C$.  If
+$A\prec B^-$, apply \noderef{GoodHierarchyTerminalPrefixRepackage} to
+$\mathcal E_1,B_1,H_1,\mathcal G_1$ and the exact prefix $B^-$.  It
+returns the same rung and complete certified series, maximum property,
+the same $d$ stages, base core and closure, all stored and Gamma data,
+and every good-hierarchy field on $B^-$.  If $B^-=A$ and $d>0$, apply
+\noderef{GoodHierarchyPrefixRepackage} at its exact last ordinary stage.
+It returns the same-rung maximum ETT on $A$, a good $(d-1)$-divider
+prefix, and separately the last internal minus-closed certificate; append
+$A$ as the $d$-th ordinary stage below $C$.  If $B^-=A$ and $d=0$, work
+directly with the positive-rung ETT $\mathcal E_C$: take stage zero to be
+$T_n$, terminal stage $C$, and core $A$ from the rebuilt base $B_C$.
+The inclusions $T_n\preccurlyeq A=B^-\prec C$ supply all base, nesting,
+and strictness fields.  No zero-rung ETT and no initial-tuple theorem is
+used as a constructor.
+
+In all three cases define a hierarchy $K_C$ over $B_C$ with exactly $d$
+dividers, the old stages through $A$, and terminal stage $C$.  Every
+starred stage lies in $A\subseteq B^-$, where the two colorings have the
+same incident-edge values and vertex missing sets.  Correspondence gives
+the same raw stored sets; unfolding \noderef{TashkinovStoredColors} and
+\noderef{HierarchyStoredColorsAt} proves equality of every indexed stored
+set.  Use the Gamma family of $\mathcal G_1$.
+
+We check every field of \noderef{GoodHierarchy}.  Pair cardinality and
+pairwise disjointness copy through the stored-set equalities.  Ordinary
+stages, their starred predecessors, and missing sets on their differences
+are unchanged, so the unique-refresh existence and uniqueness clauses
+copy.  All internal exact colored boundaries are fixed; the appropriate
+prefix theorem supplies the last internal minus-closed field in the
+equality case.  In PE, $B_C$ was rebuilt with the same support, core, and
+closure, and all their incident edges and missing sets were fixed, so the
+parallel-base cardinality and non-minus-closed clauses copy.  In non-PE
+that implication is vacuous.
+
+For avoidance, unfold \noderef{HierarchySegmentColors} and the totalized
+\noderef{HierarchyFirstMissingPosition}.  At every $j<d$ the next stage
+lies in $A\subseteq B^-$, so its exact displayed colors and first-missing
+positions are unchanged.  At $j=d$, the displayed edges of $C$ are also
+unchanged: the only new one over $B^-$ is $g\notin K_3$.  For
+$\eta\notin\{\beta,\gamma\}$ all missing sets on $C$ are unchanged, and
+the terminal-prefix argument makes the new segment a subset of the old
+one.  For $\eta=\gamma$, elementarity under $\varphi$ and (2) make $b_3$
+its unique missing vertex in $T$; after the second swap no vertex of $C$
+misses $\gamma$, so both the old first position and the new no-candidate
+fallback cap the relevant segment at position $s$.  For $\eta=\beta$,
+the old coloring has no missing $\beta$ on $T$, while (9) makes $b_3$
+the first new missing vertex; the new segment is again only the unchanged
+part before $s$.  Old avoidance therefore implies new avoidance in every
+case.  This constructs a good witness $\mathcal G_C$ with all fields,
+including terminal avoidance.
+
+We now adjoin the two retained boundary identities.  By (5) and pairwise
+support disjointness, the exact edge-nodes $f_1,f_2$ lie outside $K_3$;
+\noderef{TwoColorComponentSwap} therefore fixes them, so both remain
+$\beta$-colored under $\mu_5$.  Their inside endpoints $b_1,b_2$ occur
+before $b_3$ and hence lie in $C$.  Their other endpoints lie outside
+$T$ by \noderef{BoundaryColorEdges} and \noderef{BoundaryEdges}, and are
+distinct because the two exact walk supports are disjoint.  Adjoin first
+$f_1$ and then $f_2$, with those other endpoints as the new vertices.
+Each step satisfies every field of \noderef{TreeSequenceAdjoinEdge}.
+The color $\beta$ is missing at $b_3\in C$ by (9), so it supplies the
+old-prefix missing witness for both \noderef{TashkinovAugmentation}
+steps.  Call the result $J$.
+
+Compose the already transported route to $C$ with these two exact steps.
+The universal clause of the same \noderef{ModColoring} gives a
+corresponding certificate $\mathcal C_J$ on $J$, and
+\noderef{MaximumPropertyTransport} gives maximum property.  Rebuild its
+base $B_J$ from its actual terminal constructor.  In non-PE use the
+common $T_n$.  In PE, the two terminal singleton equations and the exact
+connecting-edge equality again give $f'_n=f_n$; the inside
+\noderef{DefectiveVertex} and outside-end fields of the two
+\noderef{MaximumDefectiveChoice} records again force $v'_n=v_n$.
+The core and closure lie in $B^-$ and the previously checked
+edge-by-edge transport is unchanged.  Hence they form the replacement
+PE closure and ordered union under $\mu_5$.  This verifies every field of
+$B_J$ without copying an internal PE witness from generic correspondence.
+
+Use the stages of $K_C$ through $A$ and terminal stage $J$ to define
+$K_J$ over $B_J$.  Nesting and strictness follow from
+$A\preccurlyeq B^-\prec C\prec J$.  Stored sets, Gamma pairs, unique
+refresh, internal minus-closedness, and the rebuilt parallel-base field
+are as above.  For final avoidance, the portion through $C$ was checked
+for $\mathcal G_C$, and the only two new displayed edges have color
+$\beta$.  Neither $\gamma$ nor $\beta$ belongs to any indexed last Gamma
+pair: this was proved for $\gamma$ above, and membership of $\beta$ would
+make $\beta$ missing on $A$ by
+\noderef{GoodHierarchyReservedDisjoint}, hence missing on $T$, contrary
+to the Case 2 hypothesis.  The two new colors therefore avoid every
+Gamma pair even when a new vertex changes a totalized first-missing
+position.  Thus every field of a good hierarchy $\mathcal G_J$ holds.
+
+Starting at $J$, perform the paper's finite restricted augmentation.
+At a current tree $U$, append an exact boundary identity $h$ only when
+its $\mu_5$-color is missing on $U$ and, for every
+$\eta\in D^H_{n,d}$, the segment of $U+h$ before its first
+$\eta$-missing vertex uses no color in $\Gamma^d_\eta$.  The boundary
+identity supplies one old and one new endpoint, so together with its
+missing-color witness this checks every field of
+\noderef{TashkinovAugmentation}; the additional condition is exactly the
+last \noderef{HierarchySegmentColors} avoidance test.  Each step adds a
+new vertex to the ordered list.  Since $V$ is finite, iteration stops;
+choose a maximal finite sequence and call its last tree $T'$.
+
+We certify every intermediate tree $U$, including $T'$, by induction.
+Compose its accumulated exact steps with the route from the terminal
+seed through $C$ and $J$; this is a
+\noderef{TashkinovAugmentationSequence}.  The universal mod-coloring
+clause gives a corresponding ETT $\mathcal E_U$, and
+\noderef{MaximumPropertyTransport} gives maximum property.  At this
+point we again reconstruct, rather than copy, its base.  In non-PE its
+core is the common $T_n$.  In PE compare the two actual terminal
+constructors: equality of their singleton connecting-edge sets fixes the
+individual defective edge; the inside/outside endpoint fields of their
+maximum-defective choices fix the replacement support vertex; and the
+original core and closure, lying inside $B^-$, retain every displayed
+edge color, old-prefix missing witness, and closedness property under
+$\mu_5$.  Thus they supply the actual replacement closure, ordered union,
+and support field.  This checks every \noderef{HierarchyBase} field at
+every restricted augmentation, not only at $C$ and $J$.
+
+Take the old internal stages through $A$ and terminal $U$.  They satisfy
+all \noderef{TashkinovHierarchy} fields and have exactly $d$ dividers.
+The stored-set, Gamma, unique-refresh, internal minus-closed, and
+parallel-base arguments are unchanged.  The induction hypothesis gives
+old avoidance, and the selection condition is precisely avoidance for
+the newly appended edge, including the totalized first-missing fallback.
+Hence every intermediate tree has a good witness $\mathcal G_U$ with all
+fields.  Apply this construction at $T'$ and denote its hierarchy by
+$K'$ and its corresponding certificate by $\mathcal C'$.
+
+We now derive the separate terminal certificate.  Correspondence and
+(8) identify the raw stored sets and the missing-color set on $T_n$ with
+the originals.  Since $A\preccurlyeq T'$ and $\mu_5$ agrees with
+$\varphi$ at every vertex of $A$, unfolding
 \noderef{TashkinovStoredColors},
 \noderef{HierarchyStoredColorsAt}, and
 \noderef{HierarchyTerminalStoredColors} gives
-$D^+\subseteq D^H_{n,d}$, so $\gamma\notin C_\Gamma$.  The terminal
-\noderef{TreeColorSetMinusClosed} certificate closes $\gamma$ on $T$.
-The exact boundary edge $f_3$ has color $\beta$ at $b_3$, so
-$\gamma\ne\beta$.
-
-If $\alpha=\gamma$, put $\mu_4=\varphi$ and retain the identity ETT,
-hierarchy, maximum property, and terminal certificate.  Otherwise swap
-$\alpha,\gamma$ on all full components outside $T$.  Their singleton
-closedness proves that this is an
-\noderef{OutsideKempeRecoloring};
-\noderef{OutsideKempeRecoloringStable} gives properness, exact
-one-uncoloredness, and stability on every displayed stage.  Then
-\noderef{HierarchyLEMStable} supplies an arbitrary replacement input,
-the corresponding same-rung ETT under $\mu_4$, maximum property, the same
-ordered stages and individual connecting edges, the same stored sets and
-Gamma pairs, all five \noderef{GoodHierarchy} fields, and the transported
-terminal certificate.  In both equality branches every $P_j$ becomes a
-$(\gamma,\beta)$ exit path on the same exact walk support.  Its
-$\beta$-edges are fixed because $\beta$ differs from both
-$\alpha$ and $\gamma$.
-
-Swap the full $(\gamma,\beta)$ component through $b_3$ and call the
-result $\mu_5$.  The vertex $b_3$ misses $\gamma$ and is incident with
-the $\beta$-edge $f_3$, so it has incidence degree one.  The outside end
-$a_3$ also has degree one by \noderef{TreeExitPath}.  The degree-two
-bound \noderef{TwoColorIncidenceDegreeAtMostTwo} and the spanning path
-from \noderef{TwoColorComponentSpanningPath} show that $P_3$ exhausts
-the whole component: an extra attachment internally would create degree
-three, and an attachment at either endpoint would destroy degree one.
-Consequently the swapped component meets $T$ only at $b_3$ and is
-disjoint from the exact prefix $B^-$ immediately before $b_3$.
-
-The distinctness $\gamma\ne\beta$ permits
-\noderef{TwoColorComponentSwapProper}; the swap changes only those two
-nonempty colors, so \noderef{IsOneEdgeUncolored} still singles out
-$e_0$.  If $A\subsetneq B^-$, repackage the $d$-divider hierarchy with
-terminal $B^-$.  If $B^-=A$ and $d>0$, first use the $(d-1)$-divider
-presentation ending at $A$; if $B^-=A$ and $d=0$, use the actual initial
-tuple through \noderef{TechnicalTheoremBase}.  In each branch the exact
-finite augmentation sequence supplied by \noderef{TashkinovClosure} and
-\noderef{TashkinovAugmentationSequence}, the mod-coloring conclusion of
-\noderef{Td}, and \noderef{MaximumPropertyTransport} restore the one
-exact edge and vertex at $b_3$.  Thus the exact prefix $C$ through $b_3$
-is the terminal tree of a corresponding same-rung maximum ETT under
-$\mu_5$, with the same stages through $A$, the same stored and Gamma
-data, all retained minus-closed fields, strict final containment, and
-terminal avoidance checked on the restored edge.  The swap makes
-$\beta$ missing at $b_3$.
-
-The pairwise support-disjoint choice puts the exact edge-nodes $f_1,f_2$
-outside the support of $P_3$, which is the full swapped component.  By
-\noderef{TwoColorComponentsDisjoint}, their full components are disjoint
-from that component, for equality would put the corresponding $f_i$ in
-$P_3$.  Hence \noderef{TwoColorComponentSwap} fixes the exact identities
-$f_1,f_2$, and they remain $\beta$-colored under $\mu_5$.  Neither is
-incident with $b_3$: its inside endpoint is the distinct $b_i$, and its
-other endpoint lies outside $T$, whereas $b_3\in V(T)$.
-
-Adjoin $f_1$ and then $f_2$ to $C$, always retaining their individual
-identities.  Their old endpoints $b_1,b_2$ lie in $C$, their opposite
-endpoints are the next vertices of the two simple exit paths, and those
-new vertices are distinct even when the two tails came from opposite
-ends of one full component, because the selected supports are disjoint.
-Thus each step satisfies \noderef{TreeSequenceAdjoinEdge}.  The color
-$\beta$ is missing at $b_3\in C$, so the first is a
-\noderef{TashkinovAugmentation}; since $f_1$ is not incident with $b_3$,
-the same witness remains missing and the second step is also a Tashkinov
-augmentation.  Call the result $J$.
-
-We next construct all certified data on $J$ before using elementarity.
-The second swapped component is disjoint from $B^-\supseteq T_n$, so it
-is an outside $(\gamma,\beta)$ recoloring relative to $T_n$.
-\noderef{OutsideKempeRecoloringStable} makes $\mu_5$ stable there
-relative to $\mu_4$; composing with the first outside recoloring by
-\noderef{sc2} gives exactly the $(T_n,D_n,\varphi)$-stability premise of
-\noderef{Td}.  Thus $\mu_5$ is a \noderef{ModColoring} of the current
-ETT.  Compose the exact augmentation sequence ending at $C$ with the two
-steps for $f_1,f_2$.  The universal mod-coloring clause supplies the
-\noderef{CorrespondingExtendedTashkinovTree} on $J$, and
-\noderef{MaximumPropertyTransport} supplies maximum property.
-
-Copy the base and stages through $A$ and take $J$ as terminal.  This is a
-\noderef{TashkinovHierarchy} with exactly $d$ dividers: all old
-nestedness and strictness fields remain, and
-$A\subsetneq C\subsetneq J$ proves the last strict containment.  The
-corresponding-ETT fields identify every replacement ladder tree, raw
-stored set, connecting edge, and extension kind.  Choose the same Gamma
-family.  Pair size, pairwise disjointness, unique refresh, parallel base,
-and every internal minus-closed field are transported because the swaps
-fix every edge incident with the internal stages and preserve their
-missing sets.
-
-The final avoidance field requires a direct check.  For
-$\eta\notin\{\beta,\gamma\}$ both recolorings preserve its first-missing
-segment through $C$.  For $\eta=\beta$, the swap makes $b_3$ the first
-new missing vertex, so the tested segment only shortens.  For
-$\eta=\gamma$, elementarity before the swap makes $b_3$ its old first
-missing vertex; after the swap the only extra displayed edges are
-$f_1,f_2$, both colored $\beta$.  The color $\gamma$ belongs to no
-indexed Gamma pair by the first paragraph.  The color $\beta$ belongs to
-none either: \noderef{GoodHierarchyReservedDisjoint} would otherwise
-make it missing on $A$, hence on $T$, contrary to the Case 2 hypothesis.
-Unfolding \noderef{HierarchySegmentColors} therefore proves final
-avoidance on $J$.  All five good-hierarchy fields have now been checked.
-
-Starting at $J$, perform the manuscript's finite restricted
-augmentation.  At a current tree $U$, append an exact boundary identity
-$f$ only if its $\mu_5$-color is missing on $U$ and, for every
-$\eta\in D^H_{n,d}$, the appended segment before the first
-$\eta$-missing vertex uses no color in $\Gamma^d_\eta$.  This is exactly
-the avoidance test encoded by \noderef{HierarchySegmentColors}.  Every
-step is a \noderef{TashkinovAugmentation}: it records the old endpoint,
-new endpoint, exact edge identity, displayed edge color, and its missing
-witness.  Since $V$ and $E$ are finite and every step strictly lengthens
-the ordered vertex list, a maximal finite sequence exists.
-
-Induct along this finite sequence.  At each step the accumulated edges
-form a \noderef{TashkinovAugmentationSequence}; the mod-coloring clause
-gives the corresponding ETT and \noderef{MaximumPropertyTransport} gives
-maximum property.  Copy the base, dividers, and internal stages.  The
-pair-size, disjointness, unique-refresh, parallel-base, and internal
-minus-closed fields do not change, while the selection test is precisely
-the new final avoidance field.  Thus all five good-hierarchy fields hold
-at every step.  Let $T'$ be a maximal last tree.
-
-Unfold \noderef{TashkinovStoredColors} for the corresponding ETT and
-\noderef{HierarchyTerminalStoredColors} for its terminal stage.  The raw
-stored sets agree with the originals, while $T_n\subseteq A\subseteq T'$.
-Consequently its terminal stored set
 \[
- D'_{n,d+1}=D_n^{\mu_5}-\overline{\mu_5}(T')
+ D^{K'}_{n,d+1}=D_n\setminus\overline{\mu_5}(T')
+       \subseteq D_n\setminus\overline{\mu_5}(A)
+       =D^H_{n,d}.                                             \tag{12}
 \]
-is contained in $D^H_{n,d}$.  This is also the terminal instance of
-\noderef{HierarchyStoredColorsAntitone}.  If a color missing on $T'$ but
-outside
-$\bigcup_{\eta\in D'_{n,d+1}}\Gamma^d_\eta$ had a boundary edge, that
-edge would pass the selection rule.  Indeed, if
-$\eta\notin D'_{n,d+1}$, its first missing vertex already precedes the
-new edge; if $\eta\in D'_{n,d+1}$, the proposed edge color is outside its
-Gamma pair and all older edges already passed.  Maximality forbids the
-edge.  Hence
+This is the terminal subtraction argument recorded abstractly by
+\noderef{HierarchyStoredColorsAntitone}.
+
+Suppose that a color $c$ missing on $T'$ and outside
+$\bigcup_{\eta\in D^{K'}_{n,d+1}}\Gamma^d_\eta$ had an exact
+$c$-colored boundary identity.  It is a permissible next Tashkinov
+augmentation.  For $\eta\in D^H_{n,d}$ not in the terminal set, the
+definition in (12) says that $\eta$ is already missing on $T'$, so its
+first missing position precedes the proposed new edge.  For $\eta$ in
+the terminal set, the proposed color $c$ is outside
+$\Gamma^d_\eta$, and every older segment already passes the avoidance
+test.  Thus the proposed edge satisfies the restricted selection rule,
+contrary to maximality.  Therefore
 \[
  T'\text{ is }
- \left(\bigcup_{\eta\in D'_{n,d+1}}\Gamma^d_\eta\right)^-
- \text{-closed under }\mu_5. \tag{1}
+ \left(\bigcup_{\eta\in D^{K'}_{n,d+1}}\Gamma^d_\eta\right)^-
+ \text{-closed under }\mu_5.                                  \tag{13}
 \]
-The verified hierarchy has $d<q_0$ dividers, so the same-rung hypothesis
-makes $V(T')$ elementary under $\mu_5$.
+The ETT $\mathcal E_{T'}$ has the original rung, maximum property, and
+the good hierarchy $K'$ with $d<q_0$ dividers.  The stated same-rung
+hypothesis consequently gives
+\[
+          \noderef{ColoredVertexSetElementary}
+          (G,\mu_5,V(T')).                                    \tag{14}
+\]
 
-No $a_j$ belongs to $T'$.  Suppose instead that some $a_j$ does.  Its
-path-end property says that it misses $\gamma$ or $\beta$.  It cannot
-miss $\beta$, since $b_3$ already does and $T'$ is elementary, so it
-misses $\gamma$.  Both colors are outside the terminal reserved union:
-this was proved above and
-$D'_{n,d+1}\subseteq D^H_{n,d}$.  Equation (1), the $\gamma$-missing
-witness $a_j$, and the $\beta$-missing witness $b_3$ make both colors
+Before using minimality, we locate all three outside endpoints.  Suppose
+$a_j\in V(T')$ for some $j$.  By (10) it misses $\gamma$ or $\beta$.
+It cannot miss $\beta$, since $b_3\in C\subseteq T'$ already misses
+$\beta$ by (9), $a_j\ne b_3$, and (14) forbids a repeated missing color.
+Thus $a_j$ misses $\gamma$.  Both $\gamma$ and $\beta$ lie outside the
+reserved union in (13): (12) reduces this to the two exclusions from all
+Gamma pairs proved above.  Equation (13), together with the missing
+witnesses $a_j$ and $b_3$, therefore makes both singleton color classes
 closed on $T'$.
 
-Every $P_i$ meets $T'$ at $b_i\in C$.  If $a_i$ were outside $T'$, the
-first edge by which $P_i$ leaves $T'$ would be a $\gamma$- or
-$\beta$-colored boundary identity, contradicting the two closedness
-conclusions.  Hence all three $a_i$ lie in $T'$.  None can miss
-$\beta$, since $b_3$ already does and $T'$ is elementary.  Therefore all
-three distinct vertices $a_i$ miss $\gamma$, contradicting elementarity
-already for $a_1,a_2$.  This proves that all three $a_j$ lie outside
-$T'$.
-
-For each $j$, take the final portion $L_j$ from its last vertex in $T'$
-to $a_j$.  It is an exact $T'$-exit path.  The three outside endpoints
-remain distinct and the exact incidence-walk supports remain pairwise
-disjoint.  Since $f_1$ was adjoined to $J\subseteq T'$, it is absent
-from $L_1$, while every other deletion is nonnegative.  Hence
+For every $i$, the path $R_i$ meets $T'$ at $b_i\in C$.  If its outside
+end $a_i$ were outside $T'$, traverse the simple incidence walk from
+$b_i$ toward $a_i$ and take the first edge-node crossing from a vertex in
+$T'$ to one outside.  By \noderef{TwoColorIncidenceGraph} and
+\noderef{BoundaryEdges}, this is an exact $\gamma$- or $\beta$-colored
+boundary identity, contradicting the two closedness conclusions.  Hence
+all three $a_i$ lie in $T'$.  None can miss $\beta$ because $b_3$ does,
+so all three miss $\gamma$ by (10), contradicting (14) already at the
+distinct vertices $a_1,a_2$.  This contradiction proves
 \[
- |L_1|+|L_2|+|L_3|<|P_1|+|P_2|+|P_3|. \tag{2}
+                         a_1,a_2,a_3\notin V(T').              \tag{15}
 \]
-The first comparison color for this replacement is $\beta$: it is
-missing at $b_3$, and it belongs to no indexed Gamma pair, so (1) makes
-the singleton $\{\beta\}$ closed on $T'$.  The second comparison color
-is $\gamma\ne\beta$.  Properness, exact one-uncoloredness, stability,
-the arbitrary replacement input, corresponding same-rung ETT, maximum
-property, exact $d$-divider good hierarchy with all five fields, large
-bound, and separate terminal certificate were all verified above.
 
-Any two $L_j$ give the required two-leg witness.  If $\gamma$ is missing
-on $T'$, the replacement has secondary coordinate zero.  If it is not
-missing, all three $L_j$ are admissible and (2) gives a strictly smaller
-three-leg total.  These are exactly the two alternatives in the stated
-universal no-better-presentation property.  Either alternative is
-forbidden, so Subcase 2.1 is impossible.
+For each $j$, traverse $R_j$ from $a_j$ toward $b_j$ and let $t_j$ be
+the first vertex-node belonging to $V(T')$; it exists because
+$b_j\in C\subseteq T'$, and (15) makes its position positive.  Let
+$L_j$ be the initial subwalk from $a_j$ through $t_j$.  A subwalk of a
+simple walk is simple; it has positive length, the same outside endpoint
+$a_j$, and tree endpoint $t_j$.  By first choice of $t_j$, that endpoint
+is its unique vertex-node in $T'$.  Its edges still alternate between
+$\gamma$ and $\beta$ under $\mu_5$, and the outside-end missing
+alternative is exactly the one already checked in (10).  These are every
+field of
+\[
+ L_j:\operatorname{TreeExitPath}(T',\mu_5,\gamma,\beta,a_j,t_j)
+ \quad(j=1,2,3).                                               \tag{16}
+\]
+Each support is a subset of the corresponding support in (10), so the
+three remain pairwise support-disjoint and their outside ends remain
+pairwise distinct.
+
+The tree $J\subseteq T'$ contains both endpoints of the exact edge
+$f_1$: $b_1$ was already in $C$ and its other endpoint was adjoined with
+$f_1$.  Consequently the first $T'$ vertex encountered from $a_1$ occurs
+strictly before the walk reaches $f_1$; hence $f_1$ is absent from
+$L_1$ although it belongs to the support of $R_1$.  Thus $L_1$ is a
+proper initial subwalk of $R_1$, while $L_2,L_3$ are initial subwalks of
+$R_2,R_3$.  The latter have exactly the original node lists of
+$P_2,P_3$, and likewise for the first.  Therefore
+\[
+ |L_1|+|L_2|+|L_3|<|P_1|+|P_2|+|P_3|.                        \tag{17}
+\]
+
+We finally enumerate the premises of the universal no-better-presentation
+hypothesis.  Take $\sigma=\mu_5$, terminal tree $T'$, and the actual
+certificate $\mathcal C'$.  Properness and exact one-uncoloredness were
+proved after the two swaps; (8) is precisely the required stability on
+the original final ladder tree; maximum property, the rebuilt base,
+$K'$, its good witness, equality of divider counts, and the separate
+certificate (13) were proved above.  The vertex clause of (8) identifies
+$\overline{\mu_5}(T_n)$ with $\overline\varphi(T_n)$, while
+correspondence identifies the replacement last ladder tree with the same
+ordered $T_n$.  Hence the stated large bound transports with exactly the
+same cardinality.
+
+Use first comparison color $\beta$ and second color $\gamma$.  They are
+distinct; (9) makes $\beta$ missing on $T'$, and its exclusion from the
+reserved union together with (13) makes $T'$ singleton-$\beta$-closed.
+The adjacency predicate in \noderef{TwoColorIncidenceGraph} and the
+outside-end alternative in \noderef{TreeExitPath} are symmetric in their
+two displayed colors.  Thus the three fieldwise certificates (16) may
+equally be read as $(\beta,\gamma)$ exit paths.  Their inherited pairwise
+support disjointness and the three distinct outside ends supply every
+path premise.  If $\gamma$ is missing on $T'$, choose any two $L_j$ and
+use the first, zero-secondary-coordinate alternative.  If it is not
+missing, use all three and (17) in the second alternative.  Each is
+forbidden by the stated universal hypothesis.  This final contradiction
+proves that the Subcase 2.1 data cannot occur.
 \end{proof}
