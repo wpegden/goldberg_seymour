@@ -1,3 +1,4 @@
+import Tablet.AdjacentEdges
 import Tablet.BoundaryColorVertex
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved
@@ -6,6 +7,7 @@ import Tablet.DefectiveColor
 import Tablet.ETTFirstAppearanceIndex
 import Tablet.ExtendedTashkinovTree
 import Tablet.HierarchyBase
+import Tablet.Incident
 import Tablet.InterchangePEClosedCore
 import Tablet.InterchangePEClosureConstituent
 import Tablet.InterchangePECommonMissingClosed
@@ -14,15 +16,19 @@ import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.LooplessMultigraph
 import Tablet.MaximumProperty
+import Tablet.MissingColors
 import Tablet.ModColoring
 import Tablet.OrderedTreeUnion
 import Tablet.OutsideKempeRecoloring
 import Tablet.OutsideKempeRecoloringStable
 import Tablet.ParallelClosureUnionElementary
 import Tablet.PartialEdgeColoring
+import Tablet.PresentColors
 import Tablet.StableColoring
 import Tablet.StableColoringBeforeVertex
 import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovAugmentationSequenceRestrict
 import Tablet.TashkinovClosure
 import Tablet.TashkinovClosureExists
 import Tablet.TashkinovExtensionKind
@@ -32,11 +38,14 @@ import Tablet.TashkinovStoredColors
 import Tablet.TreeInterchangeable
 import Tablet.TreeMissingColors
 import Tablet.TreeSequence
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequencePrefix
 import Tablet.TreeSequenceVertexSet
 import Tablet.TreeVertexOrder
 import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentsDisjoint
+import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorNontrivialPathComponent
 import Tablet.TwoColorPathComponent
 import Tablet.sc2

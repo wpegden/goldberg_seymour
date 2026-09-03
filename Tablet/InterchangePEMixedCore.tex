@@ -91,64 +91,152 @@ assertions are precisely the hypotheses of
 \]
 
 By \noderef{InterchangePECommonMissingClosed}, a color missing
-on both constituents is closed on $U$.  By
-\noderef{InterchangePEClosureConstituent}, $R_n$ is interchangeable
-whenever one of the two colors is missing there.  By
-\noderef{InterchangePETreeConstituent}, the analogous statement holds
-for $T_n$.  Finally, \noderef{InterchangePEClosedCore} gives
-interchangeability on $U$ whenever a missing color there is closed.
-These statements include singleton components through
+on both constituents is closed on $U$:
+\[
+ c\in\overline\sigma_n(T_n)\cap\overline\sigma_n(R_n)
+ \Longrightarrow \{c\}\text{ is closed on }U.                \tag{4}
+\]
+By \noderef{InterchangePEClosureConstituent},
+\[
+ c\in\overline\sigma_n(R_n)
+ \Longrightarrow c,d\text{ are $R_n$-interchangeable},       \tag{5}
+\]
+and \noderef{InterchangePETreeConstituent} gives
+\[
+ c\in\overline\sigma_n(T_n)
+ \Longrightarrow c,d\text{ are $T_n$-interchangeable}.       \tag{6}
+\]
+Finally, \noderef{InterchangePEClosedCore} gives
+\[
+ c\in\overline\sigma_n(U),\quad \{c\}\text{ closed on }U
+ \Longrightarrow c,d\text{ are $U$-interchangeable}.         \tag{7}
+\]
+Each conclusion uses the full incidence-graph definition of
+\noderef{TreeInterchangeable}, so it includes singleton components under
 \noderef{TwoColorPathComponent}, not only components containing an
 edge-node.
 
-It remains to prove (iv).  Choose
-$u\in X$ missing $\alpha$ and $v\in Y$ missing $\beta$.
-Suppose that roots $z_1,z_2$ witness two unequal full paper
-$\alpha,\beta$-path components $C_1,C_2$ meeting $U$, possibly including
-a singleton component, as in the expanded
-definition \noderef{TreeInterchangeable}.  In particular,
-\noderef{TwoColorPathComponent} for either root gives
-$\alpha\ne\beta$.
-
-We first locate the two missing-color witnesses.  If $u\in Y$, then
-$\alpha$ is common missing, so (5) makes it closed on $U$; conclusion
-(iii) would say that $\alpha,\beta$ are $U$-interchangeable, contrary to
-$C_1,C_2$.  Hence $u\notin Y$.  If $v\in X$, then $\beta$ is common
-missing and closed by (5).  Applying conclusion (iii) with the two colors
-reversed gives $\beta,\alpha$ interchangeability.  The incidence graph,
-path-component predicate, and \noderef{TreeInterchangeable} are symmetric
-in their two displayed colors, so this again contradicts $C_1,C_2$.
-Thus $v\notin X$, and
+It remains to prove the mixed assertion (iv).  Unfold the two hypotheses
+with \noderef{TreeMissingColors}.  Choose
 \[
-                         u\in X-Y,\qquad v\in Y-X.             \tag{11}
+ u\in X\quad\hbox{with }\alpha\in\overline\sigma_n(u),
+ \qquad
+ v\in Y\quad\hbox{with }\beta\in\overline\sigma_n(v).        \tag{8}
 \]
-In particular $u\ne v$.  Elementariness (3), in the sense of
-\noderef{ColoredVertexSetElementary}, together with $\beta$
-missing at $v$ and $\alpha$ missing at $u$, shows respectively that
-$\beta$ is present at $u$ and $\alpha$ is present at $v$.  Properness
-then makes each of these present colors occur on one exact incident edge.
-Consequently the full components $P_u,P_v$ through the vertex-nodes
-$u,v$ each contain a genuine edge-node and have their root vertex of
-degree one.  Along with $\alpha\ne\beta$, these give
-\noderef{TwoColorNontrivialPathComponent}, and in particular
-\noderef{TwoColorPathComponent}.
+Suppose, contrary to the desired conclusion, that the universal statement
+\noderef{TreeInterchangeable} fails.  Then there are roots $z_1,z_2$ such
+that the full sets
+\[
+ C_i=\noderef{TwoColorComponent}
+       (G,\sigma_n;\alpha,\beta;z_i)
+\]
+are unequal, each is a \noderef{TwoColorPathComponent}, and each contains
+a vertex-node belonging to $U$.  Unfolding either path-component
+certificate gives $\alpha\ne\beta$.
 
-We now identify them with the counterexample components.  By (1), each
-$C_i$ meets $X$ or $Y$.  Conclusion (i), applied with the common
-$Y$-missing color $\beta$ and using color symmetry, permits at most one
-of $C_1,C_2$ to meet $Y$.  Conclusion (ii), using $\alpha$ missing on
+We first locate the two witnesses in (8).  If $u\in Y$, then $\alpha$ is
+missing on both constituents.  Applying
+\noderef{InterchangePECommonMissingClosed}, rather than appealing to an
+unnamed intermediate assertion, gives the closedness in (4).  Since
+$u\in U$, equation (7) makes $\alpha,\beta$ interchangeable on $U$,
+contrary to $C_1\ne C_2$.  Hence $u\notin Y$.  If $v\in X$, the same
+argument with $\beta$ gives its closedness from
+\noderef{InterchangePECommonMissingClosed}; equation (7), applied with
+the colors reversed, gives $\beta,\alpha$ interchangeability.  The
+adjacency rule in \noderef{TwoColorIncidenceGraph}, the connected set in
+\noderef{TwoColorComponent}, the leaf condition in
+\noderef{TwoColorPathComponent}, and the universal condition in
+\noderef{TreeInterchangeable} are unchanged when the two displayed colors
+are exchanged.  Thus this also contradicts $C_1\ne C_2$.  We have proved
+\[
+                         u\in X-Y,\qquad v\in Y-X,             \tag{9}
+\]
+and in particular $u\ne v$.
+
+We next construct, from definitions, the two path components rooted at
+$u$ and $v$.  If $\beta$ were also missing at $u$, then (3), unfolded as
+\noderef{ColoredVertexSetElementary}, would give disjoint missing-color
+sets at the distinct vertices $u,v\in U$, contradicting that both contain
+$\beta$.  Hence $\beta\notin\overline\sigma_n(u)$.  Since
+\noderef{MissingColors} is the complement of \noderef{PresentColors},
+$\beta$ is present at $u$.  The definition of
+\noderef{PresentColors} therefore supplies an exact edge identity $b_u$
+such that
+\[
+          \noderef{Incident}(G,u,b_u),\qquad
+          \sigma_n(b_u)=\beta.                               \tag{10}
+\]
+Likewise, $\alpha$ cannot be missing at $v$, because it is missing at the
+distinct vertex $u$; hence there is an exact edge identity $a_v$ with
+\[
+          \noderef{Incident}(G,v,a_v),\qquad
+          \sigma_n(a_v)=\alpha.                              \tag{11}
+\]
+
+There is no $\alpha$-colored edge incident with $u$: such an edge would
+put $\alpha$ in \noderef{PresentColors} at $u$, contrary to (8) and the
+complement definition \noderef{MissingColors}.  There is at most one
+$\beta$-colored edge incident with $u$.  Indeed, if two distinct exact
+identities had that color and were incident with $u$, they would be
+\noderef{AdjacentEdges} with common incident vertex $u$, and
+\noderef{IsProperEdgeColoring} would contradict their equal nonempty
+colors.  Together with (10), this says that $b_u$ is the unique incident
+$\beta$-edge at $u$.  By the explicit bipartite adjacency rule in
+\noderef{TwoColorIncidenceGraph}, the neighbor set of the vertex-node
+$\operatorname{inl}u$ is therefore exactly
+$\{\operatorname{inr}b_u\}$.  In particular it is subsingleton.
+
+The root $\operatorname{inl}u$ belongs to its own
+\noderef{TwoColorComponent}, by the reflexive connectedness used in that
+definition.  Adjacency from (10) gives a one-edge incidence-graph walk
+from $\operatorname{inl}u$ to $\operatorname{inr}b_u$, so the latter
+edge-node belongs to the same full component.  Taking
+$\operatorname{inl}u$ as the subsingleton-neighbor witness and using
+$\alpha\ne\beta$ proves that the component
+\[
+ P_u:=\noderef{TwoColorComponent}
+          (G,\sigma_n;\alpha,\beta;\operatorname{inl}u)
+\]
+satisfies \noderef{TwoColorPathComponent}; the membership of the exact
+edge-node $\operatorname{inr}b_u$ also proves
+\noderef{TwoColorNontrivialPathComponent}.
+
+The symmetric calculation at $v$ is equally explicit.  Missingness of
+$\beta$ rules out every incident $\beta$-edge, (11) and properness make
+$a_v$ the unique incident $\alpha$-edge, and hence
+\[
+ N_{I_G(\sigma_n;\alpha,\beta)}(\operatorname{inl}v)
+     =\{\operatorname{inr}a_v\}.
+\]
+The root lies in its own \noderef{TwoColorComponent}; the adjacency
+certified by (11) puts $\operatorname{inr}a_v$ in it.  Thus
+\[
+ P_v:=\noderef{TwoColorComponent}
+          (G,\sigma_n;\alpha,\beta;\operatorname{inl}v)
+\]
+also satisfies both \noderef{TwoColorPathComponent} and
+\noderef{TwoColorNontrivialPathComponent}.  This completes the
+definition-level certification needed before invoking either constituent
+interchangeability conclusion.
+
+We now identify these rooted components with the counterexample components.
+By (1), each
+$C_i$ meets $X$ or $Y$.  Equation (5), applied with the common
+$Y$-missing color $\beta$, permits at most one
+of $C_1,C_2$ to meet $Y$.  Equation (6), using $\alpha$ missing on
 $X$, permits at most one to meet $X$.  Since both components meet
 $X\cup Y$, no one of them can meet both constituents: the other component
 would then have to meet one constituent and violate the corresponding
 uniqueness.  After relabeling, $C_1$ meets $X$ and not $Y$, while $C_2$
 meets $Y$ and not $X$.  Since $P_u$ is a path component meeting $X$,
-conclusion (ii), applied to $P_u$ and $C_1$, identifies them.  Similarly
-conclusion (i) identifies $P_v$ with $C_2$.  Thus $P_u\ne P_v$,
+(6), applied to $P_u$ and $C_1$, identifies their full
+\noderef{TwoColorComponent} sets.  Similarly (5) identifies $P_v$ with
+$C_2$.  Thus $P_u\ne P_v$,
 and \noderef{TwoColorComponentsDisjoint} makes their full node supports
 disjoint.  If any vertex-node of $P_v$ lay in $X$, then $P_v$ and $P_u$
-would be two path components meeting $T_n$, and conclusion (ii) would
-force them equal.  Therefore the full component $P_v$ has no vertex in
-$X$.
+would be two path components meeting $T_n$, and (6) would force them
+equal.  Therefore the full component $P_v$ has no
+vertex-node belonging to $X$.
 
 Define $\sigma'_n$ by \noderef{TwoColorComponentSwap}, swapping
 $\alpha,\beta$ on the full component rooted at the vertex-node $v$.
@@ -174,26 +262,124 @@ for which the manuscript invokes LEM-Stable; the direct
 \noderef{OutsideKempeRecoloringStable} interface has exactly the hypotheses
 available here.
 
-We next preserve the part of the closure preceding $v$.  In the
-augmentation sequence from $T_n(v_n)$ to $R_n$, consider an edge
-adjoined before $v$.  Its color is missing at an earlier vertex.  By
-(3) and \noderef{ColoredVertexSetElementary}, $\alpha$, missing at
-$u\in X-Y$, is missing at no vertex of
-$Y$; and $\beta$, missing at $v$, is missing at no earlier vertex
-of $Y$.  Therefore none of these exact adjoined edge identities has
-color $\alpha$ or $\beta$.  The swap on $P_v$ fixes every one of
-them and preserves the missing-color witness at every preceding vertex.
-Expanding \noderef{TashkinovAugmentation} at each step proves that the
-same initial augmentation sequence is valid under $\sigma'_n$, and it
-still reaches a tree containing $v$.
+Before copying the closure, we record the swap's exact effect at the two
+witness vertices.  The stability just obtained has the vertex clause of
+\noderef{StableColoring} on every vertex of $X$.  Hence its equality of
+\noderef{MissingColors} at $u\in X$ preserves
+$\alpha\in\overline\sigma'_n(u)$.  At $v$, equation (11) and the adjacency
+rule in \noderef{TwoColorIncidenceGraph} put the exact edge-node
+$\operatorname{inr}a_v$ in $P_v$.  The definition
+\noderef{TwoColorComponentSwap} therefore changes $a_v$ from $\alpha$ to
+$\beta$.  If $f\ne a_v$ is any other exact edge identity incident with
+$v$, then $\sigma_n(f)\ne\beta$ because $\beta$ is missing at $v$, and
+$\sigma_n(f)\ne\alpha$ because $a_v$ is the unique incident
+$\alpha$-edge proved above.  Such an $f$ is fixed by the component-swap
+formula, whether or not its edge-node is tested for component membership.
+Thus no edge incident with $v$ has color $\alpha$ under $\sigma'_n$.
+Using \noderef{PresentColors} and its complement
+\noderef{MissingColors}, we obtain
+\[
+       \alpha\in\overline\sigma'_n(u)
+          \cap\overline\sigma'_n(v).                         \tag{12}
+\]
 
-Let $S$ be the last tree of that copied finite sequence, so
-$v\in V(S)$.  By \noderef{TashkinovClosureExists}, choose a
-$\sigma'_n$-closure $R'_n$ of $S$.  Compose its augmentation sequence
-with the copied sequence from $T_n(v_n)$ to $S$.  Its final closedness
-is unchanged, so the definition of \noderef{TashkinovClosure} makes
-$R'_n$ a closure of the original ordered prefix, and it still contains
-$v$.
+We now construct the precise finite part of the closure which must be
+copied.  Let
+\[
+ A=T_n(v_n)
+\]
+be the exact ordered prefix given by \noderef{HierarchyBase}.  By
+\noderef{TreeSequencePrefix}, every vertex of $A$ is a vertex of $T_n$;
+hence $v\notin V(A)$ by (9).  The $\sigma_n$-closure supplied by
+\noderef{CombinedStableClosurePreserved}, unfolded through
+\noderef{TashkinovClosure}, contains a finite
+\noderef{TashkinovAugmentationSequence} from $A$ to $R_n$.  Write an
+explicit finite presentation of this reflexive-transitive chain as
+\[
+ A=A_0\longrightarrow A_1\longrightarrow\cdots
+   \longrightarrow A_m=R_n,                                 \tag{13}
+\]
+where every arrow is one \noderef{TashkinovAugmentation} under
+$\sigma_n$.  Since $v\in Y=V(R_n)$ but $v\notin V(A_0)$, there is a least
+$t\in\{1,\ldots,m\}$ for which $v\in V(A_t)$.  Put $S=A_t$.
+
+At every arrow in (13), \noderef{TashkinovAugmentation} gives a one-step
+length increase and an exact \noderef{TreeSequenceInitialSegment}; these
+relations compose entry by entry.  Consequently $A$ is an exact ordered
+initial segment of $S$, and $S$ is an exact ordered initial segment of
+$R_n$.  Equivalently, using the inherited data in
+\noderef{TreeSequencePrefix}, $S$ is the prefix of $R_n$ through its
+$t$-th newly added vertex.  Applying
+\noderef{TashkinovAugmentationSequenceRestrict} to the closure sequence,
+these two exact initial-segment certificates, and $S$, isolates the
+$\sigma_n$-augmentation sequence
+\[
+                    A=A_0\longrightarrow\cdots\longrightarrow A_t=S.
+                                                               \tag{14}
+\]
+The last arrow is included.  The length-one extension and vertex
+injectivity in \noderef{TreeSequence} say that its newly displayed vertex
+is precisely $v$: it is in $A_t$ and, by minimality of $t$, not in
+$A_{t-1}$.
+
+We copy (14) one exact step at a time.  For $1\le i\le t$, let $g_i$ be
+the exact new last edge identity of $A_i$, and unfold its
+\noderef{TashkinovAugmentation} certificate.  It supplies a color $c_i$
+with
+\[
+                 \sigma_n(g_i)=c_i,
+       \qquad c_i\in\overline\sigma_n(A_{i-1}).               \tag{15}
+\]
+Unfold \noderef{TreeMissingColors} in the second clause and choose a
+vertex
+\[
+       w_i\in V(A_{i-1}),\qquad
+       c_i\in\overline\sigma_n(w_i).                          \tag{16}
+\]
+Every $A_{i-1}$ is an exact initial segment of $R_n$, so
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet} put $w_i$ in $Y$.  Hence $w_i\ne u$ by
+(9).  Minimality of $t$ says that $v$ is absent from every
+$A_{i-1}$ for $i\le t$, so $w_i\ne v$ as well.  All three vertices lie
+in $U=X\cup Y$.  Elementariness (3), applied first to the missing colors
+$\alpha$ at $u$ and $c_i$ at $w_i$, gives $c_i\ne\alpha$; applied to
+$\beta$ at $v$ and $c_i$ at $w_i$, it gives $c_i\ne\beta$.
+
+Now unfold \noderef{TwoColorComponentSwap} on the exact identity $g_i$.
+Because $c_i$ is neither switch color, (15) gives
+\[
+                         \sigma'_n(g_i)=c_i.                 \tag{17}
+\]
+For every exact edge identity $f$ incident with $w_i$, the same component
+swap formula gives
+\[
+       \sigma'_n(f)=c_i\quad\Longleftrightarrow\quad
+       \sigma_n(f)=c_i,                                      \tag{18}
+\]
+because the swap exchanges only $\alpha$ and $\beta$ and fixes every
+other color and the uncolored value.  By \noderef{PresentColors}, (16)
+says that no incident $f$ satisfies the right side of (18); hence none
+satisfies the left side.  The complement definition
+\noderef{MissingColors} now says that $c_i$ remains missing at $w_i$ under
+$\sigma'_n$, and \noderef{TreeMissingColors} puts it in
+$\overline\sigma'_n(A_{i-1})$.  Equations (17)--(18) verify the color and
+missing-witness clauses of the same one-step
+\noderef{TashkinovAugmentation}; its length and exact initial-segment
+clauses are independent of the coloring.  Induction on
+$i=1,\ldots,t$ therefore copies all of (14), including the arrow which
+adjoins $v$, into a
+$\sigma'_n$-\noderef{TashkinovAugmentationSequence} from $A$ to $S$.
+
+By \noderef{TashkinovClosureExists}, choose a $\sigma'_n$-closure
+$R'_n$ of $S$.  Its augmentation sequence retains $S$ as an exact ordered
+initial segment, so $v\in V(S)\subseteq V(R'_n)$.  Concatenate that finite
+sequence with the copied sequence from $A$ to $S$.  Transitivity of the
+reflexive-transitive relation in
+\noderef{TashkinovAugmentationSequence} gives a sequence from $A$ to
+$R'_n$, and the final closedness clause is the one in the chosen closure
+of $S$.  These are exactly the two clauses of
+\noderef{TashkinovClosure}; therefore $R'_n$ is a closure of the original
+seed $A=T_n(v_n)$ and contains $v$.
 
 Construct the exact ordered union $T_n\vee R'_n$ by starting with all
 entries of $T_n$ and then appending, in their $R'_n$-order, precisely
@@ -219,14 +405,13 @@ arbitrary-input lower package, properness, exact one-uncoloredness,
 $(T_n,D_n,\varphi_n)$-stability, and the newly constructed base.  Hence
 $V(T_n\vee R'_n)$ is elementary under $\sigma'_n$.
 
-The swap is disjoint from $T_n$, so $\alpha$ remains missing at
-$u$.  At the end $v$ of $P_v$, swapping the component changes the
-missing color from $\beta$ to $\alpha$.  The copied augmentation
-sequence puts $v$ in $R'_n$.  Thus the two distinct vertices $u,v$
-of $T_n\vee R'_n$ both miss $\alpha$ under $\sigma'_n$, contradicting
-the elementarity just obtained by
-\noderef{ColoredVertexSetElementary}.  Therefore two distinct components
-cannot meet $U$, which is conclusion (iv).
+The left initial-segment field of the new ordered union puts $u\in X$ in
+$V(T_n\vee R'_n)$, while the vertex-union field and the copied final step
+put $v\in V(R'_n)$ there.  They are distinct by (9), and (12) says that
+both miss $\alpha$ under $\sigma'_n$.  This contradicts the elementarity
+just obtained, after unfolding
+\noderef{ColoredVertexSetElementary}.  Therefore two distinct path
+components cannot meet $U$, which is precisely conclusion (iv).
 
 Every use of a boundary, augmentation, component swap, or ordered union
 above carries elements of the original edge type $E$; consequently no
