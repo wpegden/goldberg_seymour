@@ -1,0 +1,137 @@
+\begin{lemma}[Step 1, Subcase 1.1: the later end is outside the starred predecessor]
+Let $G$ be a finite loopless multigraph with individual edge identities,
+$e_0$ a distinguished edge, and $[k]$ the color set.  Let $T$ be a
+positive-rung ETT with generating coloring $\varphi$, maximum property,
+and a certified Tashkinov series.  Assume that $\varphi$ is proper and
+leaves exactly $e_0$ uncolored.  Assume the complete lower-rung package:
+for every positive-rung maximum ETT of smaller rung, its terminal vertex
+set is elementary, its final ladder closure has the stated stable
+interchangeability property, PE stability descends and equal-level PE
+stored pairs are disjoint, a terminal PE component meets its ladder tree
+only at its support, nonminimum defective endpoints precede the later
+allowed PE/SE vertices, and every terminal stable coloring is a
+mod-coloring.
+
+Let $B$ be a hierarchy base for $T$, let $H$ be a good hierarchy with
+$d$ dividers, and fix an integer $q_0>d$.  Assume uniformly that every
+same-rung maximum ETT, built from an arbitrary certified input and
+generating coloring and carrying a good hierarchy with fewer than $q_0$
+dividers, is elementary.  Assume also the large-branch estimate
+$|\overline\varphi(T_n)|\geq 2n+11$.  Write
+$A=H.\mathit{starred}(d)$ for the final starred predecessor.  Besides all
+five fields of the good hierarchy, assume separately that the terminal
+tree is
+\[
+ \left(\bigcup_{\eta\in D^H_{n,d+1}}\Gamma^d_\eta\right)^-
+ \text{-closed under }\varphi,
+\]
+and assume that $V(T)$ is elementary under $\varphi$.
+
+Let $\alpha\ne\beta$, with $\alpha$ missing and singleton-closed on $T$
+and $\beta$ missing on $T$.  Let $P_1,P_2$ be exact
+$(T,\varphi,\{\alpha,\beta\})$-exit paths, with respective outside ends
+$a_1,a_2$, tree ends $b_1,b_2$, disjoint incidence-walk supports, and
+distinct outside and tree ends.  Order them so that $b_1\prec_T b_2$.
+For each $j$, retain the exact edge identity $f_j$ on $P_j$ incident
+with $b_j$, and assume that $f_j$ is a $\beta$-colored boundary edge of
+$T$.  If $b_2\notin V(A)$, then these data are contradictory.
+\end{lemma}
+\begin{proof}
+Put
+$C_\Gamma=\bigcup_{\eta\in D^H_{n,d+1}}\Gamma^d_\eta$.
+The exact boundary identity $f_2$ has color $\beta$.  If $\beta$ were
+outside $C_\Gamma$, the stated terminal
+\noderef{TreeColorSetMinusClosed} certificate, together with the fact
+that $\beta$ is missing on $T$, would make its boundary empty.  Hence
+$\beta\in\Gamma^d_\eta$ for some
+$\eta\in D^H_{n,d+1}$.  Unfolding
+\noderef{TashkinovStoredColors},
+\noderef{HierarchyStoredColorsAt}, and
+\noderef{HierarchyTerminalStoredColors}, and using $A\subseteq T$, gives
+$D^H_{n,d+1}\subseteq D^H_{n,d}$.  The exact preceding-stage conclusion
+of \noderef{GoodHierarchyReservedDisjoint} therefore makes $\beta$
+missing on $A$.
+
+Choose a color $\gamma$ missing at $b_2$.  The choice is not an extra
+assumption: the initial constructor of \noderef{TashkinovSeriesStep}
+contains a \noderef{KTriple}, so $k\geq\Delta(G)+1$, whereas properness,
+\noderef{Degree}, and \noderef{MaximumDegree} give at most
+$d_G(b_2)\leq\Delta(G)$ present colors.  Thus the complement in
+\noderef{MissingColors} is nonempty.  If $\gamma$ belonged to
+$C_\Gamma$, \noderef{GoodHierarchyReservedDisjoint} would make it
+missing at a vertex of $A$.  That vertex differs from $b_2$ because
+$b_2\notin V(A)$, contradicting the assumed
+\noderef{ColoredVertexSetElementary} property of $V(T)$.  Hence
+$\gamma\notin C_\Gamma$, and the terminal minus-closed certificate makes
+$\gamma$ closed on $T$.  The color $\alpha$ is closed there by
+hypothesis.  Since $f_2$ is a $\beta$-edge incident with $b_2$, while
+$\gamma$ is missing at $b_2$, we also have $\gamma\ne\beta$.
+
+If $\alpha=\gamma$, set $\mu_1=\varphi$ and retain the original certified
+ETT, maximum property, hierarchy, and terminal certificate.  Otherwise
+exchange $\alpha$ and $\gamma$ on every full two-color component outside
+$T$.  The two singleton closedness assertions show that this is an
+\noderef{OutsideKempeRecoloring}.  By
+\noderef{OutsideKempeRecoloringStable}, $\mu_1$ is proper, leaves exactly
+$e_0$ uncolored, fixes every individual edge incident with $T$, and is
+stable on every displayed stage.  Applying \noderef{HierarchyLEMStable}
+with the stated lower package gives a corresponding same-rung ETT under
+$\mu_1$, maximum property, the identical ordered hierarchy and Gamma
+family, all five good-hierarchy fields, and the transported terminal
+minus-closed certificate.  This lists the replacement data explicitly;
+none is inferred merely from stability.
+
+Because $\alpha$ and $\gamma$ are both closed on $T$, every external
+$\alpha$-edge of $P_1$ or $P_2$ lies in one of the exchanged components.
+It becomes a $\gamma$-edge.  Every $\beta$-edge is fixed, using both
+$\beta\ne\alpha$ and $\beta\ne\gamma$.  In the equality branch the paths
+are unchanged.  Thus the same exact edge-node walks $P_1,P_2$ are
+$(\gamma,\beta)$-exit paths under $\mu_1$.
+
+Let $K_2$ be the full $(\gamma,\beta)$ component through $b_2$, and let
+$\mu_2$ be obtained by swapping that component.  The vertex $b_2$ misses
+$\gamma$ and is incident with the $\beta$-edge $f_2$, so it has incidence
+degree one.  The outside end $a_2$ misses one path color by
+\noderef{TreeExitPath} and is incident with the other along the nontrivial
+path, so it also has degree one.  By
+\noderef{TwoColorIncidenceDegreeAtMostTwo} and
+\noderef{TwoColorComponentSpanningPath}, no further node can attach to
+$P_2$: attachment internally would create degree three, while attachment
+at an endpoint would raise its degree from one.  Therefore $P_2$ is the
+whole component $K_2$.  Its exit-path condition says that it meets $T$
+only at $b_2$; in particular it is disjoint from the exact ordered prefix
+$T^-$ immediately before $b_2$.
+
+The colors of the swapped component are distinct.  Hence
+\noderef{TwoColorComponentSwapProper} makes $\mu_2$ proper, and
+\noderef{TwoColorComponentSwap} changes only two nonempty colors, so the
+unique uncolored identity remains exactly $e_0$.  Repackage the hierarchy
+on $T^-$ as follows.  If $A\subsetneq T^-$, retain all $d$ dividers and
+use $T^-$ as terminal.  If $T^-=A$ and $d>0$, first use the valid
+$(d-1)$-divider presentation ending at $A$.  If $T^-=A$ and $d=0$, use
+the actual initial-tuple route through \noderef{TechnicalTheoremBase}; no
+zero-rung ETT is constructed.  The exact finite closure sequence in
+\noderef{TashkinovClosure} and
+\noderef{TashkinovAugmentationSequence} restricts to the retained prefix.
+The mod-coloring conclusion of \noderef{Td} then permits the single exact
+edge-and-vertex extension through $b_2$.  Thus
+\noderef{CorrespondingExtendedTashkinovTree} and
+\noderef{MaximumPropertyTransport} produce the exact prefix $C$ through
+$b_2$ as a corresponding same-rung maximum ETT.
+
+On $C$, copy every old stage through $A$.  The last containment is now
+strict because the individual edge and vertex at $b_2$ were restored.
+The stored sets, pair sizes, disjointness, unique refresh, parallel-base
+field, and internal minus-closed fields are unchanged; terminal avoidance
+is checked on that exact restored edge.  Hence this is a genuine good
+hierarchy with $d<q_0$ dividers, not a record asserted by name.
+
+The component swap is disjoint from $T^-$, so the earlier missing witness
+for $\beta$ in $A\subseteq T^-$ remains a missing witness under $\mu_2$.
+The swap makes $\beta$ missing at $b_2$.  These are two distinct vertices
+of $C$.  The same-rung fewer-divider hypothesis applies to the newly
+constructed arbitrary-input, corresponding maximum ETT and its verified
+good hierarchy, and makes $V(C)$ elementary under $\mu_2$.  The two
+$\beta$-missing vertices contradict this elementarity.  Therefore the
+data of Subcase 1.1 cannot occur.
+\end{proof}

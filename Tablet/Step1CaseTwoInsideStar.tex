@@ -1,0 +1,131 @@
+\begin{lemma}[Step 1, Subcase 2.2: the third end is inside the starred predecessor]
+Let $G,e_0,[k],T,\varphi$ be a finite loopless multigraph with exact edge
+identities, distinguished uncolored edge, color set, positive-rung
+certified ETT, and generating coloring.  Assume maximum property,
+properness, exact one-uncoloredness, and the complete six-part lower-rung
+package.  Let $H$ be a good hierarchy over a hierarchy base, with
+$d<q_0$ dividers.  Assume the same-rung fewer-than-$q_0$ elementarity
+hypothesis for arbitrary certified inputs and generating colorings, the
+large bound $|\overline\varphi(T_n)|\geq2n+11$, the separate terminal
+certificate
+\[
+ T\text{ is }
+ \left(\bigcup_{\eta\in D^H_{n,d+1}}\Gamma^d_\eta\right)^-
+ \text{-closed under }\varphi,
+\]
+and elementarity of $V(T)$.  Put $A=H.\mathit{starred}(d)$.
+
+Let $\alpha\ne\beta$, with $\alpha$ missing and singleton-closed on $T$
+and $\beta$ not missing on $T$.  Let $P_1,P_2,P_3$ be pairwise
+support-disjoint exact $(T,\varphi,\{\alpha,\beta\})$-exit paths.  Their
+outside ends $a_1,a_2,a_3$ and tree ends $b_1,b_2,b_3$ are pairwise
+distinct, with $b_1\prec_T b_2\prec_T b_3$.  Retain the exact
+$\beta$-colored boundary-edge identity $f_j$ of each path incident with
+$b_j$.  Suppose $b_3\in V(A)$.
+
+Assume that a selected color $\theta\ne\alpha,\beta$ is missing and
+singleton-closed on $A$ and singleton-closed on $T$.  Assume also the
+explicit no-smaller-presentation consequence of the global minimum: for
+every proper, exactly one-uncolored coloring $\sigma$ stable from
+$\varphi$ on the final ladder tree, arbitrary replacement input,
+corresponding same-rung maximum ETT $T'$, good hierarchy with fewer than
+$d$ dividers, its own large estimate, and its separate terminal
+minus-closed certificate, there do not exist two support-disjoint exact
+exit legs with distinct outside ends for a missing singleton-closed first
+color.  Then the displayed Subcase 2.2 data are contradictory.
+\end{lemma}
+\begin{proof}
+Exchange $\alpha$ and $\theta$ on every full component outside $T$, and
+call the resulting coloring $\nu$.  The colors are distinct and both are
+closed on $T$, so \noderef{OutsideKempeRecoloring} applies.
+\noderef{OutsideKempeRecoloringStable} proves properness, exact
+one-uncoloredness, stability on the final ladder tree, and equality on
+every individual edge incident with a displayed stage.  Applying
+\noderef{HierarchyLEMStable} gives an arbitrary-input
+\noderef{CorrespondingExtendedTashkinovTree} of the same rung under
+$\nu$, maximum property, the identical ordered hierarchy and exact
+connecting edges, the same stored sets and Gamma family, all five
+\noderef{GoodHierarchy} fields, and the transported terminal
+\noderef{TreeColorSetMinusClosed} certificate.  The final ladder tree is
+fixed, so the large estimate is unchanged.
+
+Every external $\alpha$-edge on each $P_j$ lies in an exchanged component
+and becomes a $\theta$-edge.  Every $\beta$-edge and in particular every
+exact identity $f_j$ is fixed, because $\beta$ differs from both
+exchanged colors.  Since all three tree ends lie in $A$, the same three
+edge-node walks are $(A,\nu,\{\theta,\beta\})$-exit paths.  Their outside
+ends remain pairwise distinct, their supports remain pairwise disjoint,
+and the original \noderef{TreeExitPath} condition excludes any other
+vertex even from $T\supseteq A$.  In particular, any two paths supply the
+two exact legs required below.  This support transport does not assert
+that the transformed full $(\theta,\beta)$ components are distinct.
+
+If $d>0$, apply \noderef{GoodHierarchyPrefixRepackage} to the transported
+hierarchy and terminate it at the exact ordered tree $A$.  It yields a
+corresponding same-rung maximum ETT and good hierarchy with $d-1$
+dividers, the unchanged certified series and edge identities, all five
+good fields, and the old last internal minus-closed field as the required
+separate terminal certificate.  The large bound remains true, while
+$\theta$ is missing and singleton-closed on $A$.  Taking any two of the
+three transported paths satisfies every clause of the explicit
+no-smaller-presentation hypothesis.  Since $d-1<d$, this is a
+contradiction.
+
+Suppose now that $d=0$, so $A$ is the actual core from
+\noderef{HierarchyBase}.  We prove the base contradiction directly.  If
+the terminal extension kind is not PE, then $A=T_n$.  Choose a vertex
+$x\in V(T_n)$ and a missing color $c$ there.  The initial
+\noderef{KTriple} gives $k\geq\Delta(G)+1$, while properness,
+\noderef{Degree}, and \noderef{MaximumDegree} bound the number of present
+colors at $x$ by $d_G(x)\leq\Delta(G)$.  The RE constructor in
+\noderef{TashkinovSeriesStep} identifies the relevant generating
+coloring, and the SE constructor's \noderef{MaximumDefectiveChoice}
+stability, reversed using \noderef{sc2}, transports closedness.  Thus
+every color missing on $T_n$ under $\nu$, and in particular $c$, is
+closed there.
+
+Retain $\nu$ if $\theta=c$, and otherwise exchange $\theta,c$ outside
+$T_n$.  By \noderef{OutsideKempeRecoloringStable} the result $\rho$ is
+proper, exactly one-uncolored, and stable on the final ladder tree.  The
+three paths become support-disjoint $(c,\beta)$ exit legs.  The color
+$\beta$ is present at $x$: if it were missing, its closedness together
+with that of $c$ would forbid the last boundary edge of every leg.  Hence
+the full $(c,\beta)$ component through $x$ is a nontrivial path with
+degree-one end $x$.  Each of the three outside leg ends also has degree
+one.  The degree-two bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo} and the spanning path from
+\noderef{TwoColorComponentSpanningPath} show that the component through
+$x$ cannot contain all these ends.  It and a component containing one of
+the legs are therefore distinct path components meeting $T_n$.
+
+For rung greater than one, \noderef{CertifiedETTPredecessor} supplies the
+actual positive-rung predecessor and its restricted maximum property.
+The RE equality or SE selected stability, composed with the outside
+stability via \noderef{sc2}, gives the stable-coloring premise of lower
+assertion (ii), contradicting those two components.  At rung one,
+\noderef{TechnicalTheoremBase} applies to the actual initial tuple with
+the same proper, exactly one-uncolored, stable coloring and gives the
+same contradiction.  No zero-rung ETT is introduced.
+
+If the terminal extension kind is PE, let $x$ be its actual support and
+$R_n$ its certified closure.  The parallel field of
+\noderef{HierarchyBase} identifies $A=T_n\vee R_n$ and puts $x$ in both
+constituents.  Choose $c$ missing at $x$ by the same degree count.
+When the rung exceeds one, \noderef{CertifiedETTPredecessor} supplies the
+actual predecessor and lower assertion (i) supplies its elementarity;
+\noderef{TechnicalTheoremBase} supplies initial-tuple elementarity at
+rung one.  The theorem \noderef{ParallelCommonMissingClosed} makes $c$ closed
+on $A$.  It also shows that $\beta$ is present at $x$, since otherwise
+$\beta$ would be closed on $A$ and the displayed boundary edges could not
+exist.
+
+Retain $\nu$ if $\theta=c$ and otherwise exchange $\theta,c$ outside
+$A$.  Apply \noderef{OutsideKempeRecoloringStable} separately on $T_n$
+with its stored control and on $R_n$ with empty control.  This is exactly
+the \noderef{CombinedStableColoring} premise of \noderef{interchange}.
+The component through $x$ and a component containing at least one of the
+three transformed legs are distinct nontrivial path components meeting
+$A$, by the same degree-one argument.  Conclusion (iii) of
+\noderef{interchange} makes $c,\beta$ interchangeable on $A$, a final
+contradiction.  Hence Subcase 2.2 is impossible.
+\end{proof}

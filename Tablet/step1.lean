@@ -36,6 +36,10 @@ import Tablet.ParallelCommonMissingClosed
 import Tablet.SameGoodHierarchy
 import Tablet.SameHierarchyStages
 import Tablet.StableColoring
+import Tablet.Step1CaseOneInsideStar
+import Tablet.Step1CaseOneOutsideStar
+import Tablet.Step1CaseTwoInsideStar
+import Tablet.Step1CaseTwoOutsideStar
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovClosure
