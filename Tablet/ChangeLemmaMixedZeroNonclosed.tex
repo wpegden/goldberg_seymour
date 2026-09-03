@@ -1,0 +1,270 @@
+\begin{lemma}[Change lemma, mixed location: zero-divider nonclosed case]
+Fix a finite loopless multigraph with its exact edge set, a palette of
+$k$ colors, and a distinguished edge $e_0$.  Let $(T,\varphi_n)$ be a
+positive-rung extended Tashkinov tree.  Let $\mathcal B$ be a hierarchy
+base and let
+\[
+ T_n=T_{n,0}\subset T_{n,1}\subset\cdots\subset
+ T_{n,q}\subset T_{n,q+1}=T
+\]
+be a good hierarchy under $\varphi_n$, where $q$ is its last divider
+index and
+\[
+ A=T_{n,q}^{*}=\noderef{HierarchyStarredStage}(H,q).
+\]
+Assume that $T$ has maximum property, that $V(T)$ is not elementary,
+that $\varphi_n$ is proper and leaves exactly $e_0$ uncolored, and that
+the rung number is positive.  These data form a
+\noderef{HierarchyCounterexample} $C$.
+
+Assume the six lower-rung assertions of the technical theorem, uniformly
+for every positive-rung maximum ETT on the same graph, palette, and
+distinguished edge, with arbitrary certified input and generating
+colorings and with rung number smaller than that of $T$: lower-rung
+elementarity, terminal interchangeability, the two PE stability and
+stored-pair assertions, the terminal PE component assertion, the
+defective-endpoint order assertion, and the mod-coloring assertion.
+Assume also the same-rung induction hypothesis that every maximum ETT
+with a good hierarchy having fewer than $q$ dividers is elementary.
+Finally assume the large-color estimate
+\[
+ 2n+11\leq |\overline\varphi_n(T_n)|.
+\]
+
+Put $\ell=|T|-|A|$, the number of exact tail additions above $A$, and let
+\[
+ T(y_{\ell-1})=T\big|_{\min\{|A|+(\ell-1),|T|\}}
+\]
+be the exact ordered prefix supplied by \noderef{TreeSequencePrefix}.
+Assume (6.6): $V(T(y_{\ell-1}))$ is elementary under $\varphi_n$.
+Assume moreover that $C$ is lexicographically minimal among all
+\noderef{HierarchyCounterexample}s on the fixed graph, palette, and
+$e_0$ which have exactly $q$ dividers, allowing their certified input
+colorings, generating colorings, bases, ETTs, and good hierarchies to
+vary.  Explicitly, no such counterexample $C'$ satisfies
+\[
+ \noderef{HierarchyCounterexampleLess}
+  \bigl(\noderef{HierarchyCounterexampleMeasure}(C'),
+        \noderef{HierarchyCounterexampleMeasure}(C)\bigr).
+\]
+
+Let $\alpha\ne\beta$ be colors missing on $T(y_{\ell-1})$.  Write
+\[
+ i_c=\noderef{HierarchyFirstMissingPosition}(\varphi_n,T,c),
+ \qquad v_c=T.\mathit{vertex}(i_c).
+\]
+If at least one of $\alpha,\beta$ is not missing on $A$, assume both
+\[
+ v_\alpha\prec v_\beta                                      \tag{a}
+\]
+and the exact edge-identity exclusion
+\[
+ \alpha\notin
+ \left\{c:\exists t\in\operatorname{Fin}|T|,
+       |A|\leq t<i_\beta,
+       \ \varphi_n(T.\mathit{edge}(t))=c\right\}.             \tag{b}
+\]
+Thus (b) is precisely
+$\alpha\notin\varphi_n\langle T(v_\beta)-A\rangle$; it is not
+an endpoint-only abbreviation.
+
+
+Assume in addition that the first $\alpha$-missing vertex lies in the
+last starred stage and the first $\beta$-missing vertex lies outside it:
+\[
+        v_\alpha\in V(A),\qquad v_\beta\notin V(A).
+\]
+Assume that $q=0$, that $\{\alpha\}$ is not closed on $A$, and
+that
+\[
+ \alpha\in\overline\varphi_n(T_n)
+ \quad\hbox{or}\quad
+ \{\alpha,\beta\}\cap D_n=\varnothing.
+\]
+Then
+\[
+ \noderef{TwoColorComponent}(G,\varphi_n,\alpha,\beta,
+       \operatorname{inl}v_\alpha)
+ =
+ \noderef{TwoColorComponent}(G,\varphi_n,\alpha,\beta,
+       \operatorname{inl}v_\beta).
+\]
+\end{lemma}
+\begin{proof}
+Put $H=C.\mathit{hierarchy}$ and use the notation of the statement.  In
+particular, $q=0$ and
+$A=\noderef{HierarchyStarredStage}(H,0)$.  For a vertex $x$, write
+\[
+ K_x=\noderef{TwoColorComponent}
+       (G,\varphi_n,\alpha,\beta,\operatorname{inl}x).
+\]
+
+As in the exact-prefix argument of the paper, the nestedness and terminal
+fields of \noderef{TashkinovHierarchy} make $A$ an ordered initial
+segment of $T$.  The full tail length $\ell=|T|-|A|$ is positive:
+otherwise \noderef{TreeSequenceInitialSegment} identifies $A=T$, and
+the full-length instance of \noderef{TreeSequencePrefix} makes the
+assumed elementary prefix equal to $T$, contrary to the
+non-elementarity field of \noderef{HierarchyCounterexample}.  Hence
+$A$ is an initial segment of $T(y_{\ell-1})$.  By
+\noderef{ColoredVertexSetElementary}, $A$ and both constituents of its
+hierarchy core are elementary.
+
+The least-candidate clause of
+\noderef{HierarchyFirstMissingPosition} says that $v_\alpha$ misses
+$\alpha$ and $v_\beta$ misses $\beta$.  Their mixed locations make them
+distinct.  Elementarity of $T(y_{\ell-1})$ implies that neither misses
+the other color.  Thus \noderef{MissingColors},
+\noderef{PresentColors}, and properness make $K_{v_\alpha}$ and
+$K_{v_\beta}$ nontrivial path components as defined by
+\noderef{TwoColorNontrivialPathComponent}.
+
+Suppose, for contradiction, that $K_{v_\alpha}\ne K_{v_\beta}$, and set
+\[
+             \sigma_n=\varphi_n/K_{v_\beta}
+\]
+using \noderef{TwoColorComponentSwap}.  By
+\noderef{TwoColorComponentSwapProper}, $\sigma_n$ is proper; the switch
+preserves the value \textsf{none}, so the exact edge $e_0$ remains the
+unique uncolored edge.  The component through $v_\alpha$ is untouched,
+while $v_\beta$ now misses $\alpha$.
+
+The branch alternative implies $\alpha\notin D_n$.  Under pair
+avoidance this is immediate.  Under
+$\alpha\in\overline\varphi_n(T_n)$ it follows from the definition
+\noderef{TashkinovStoredColors}, which removes colors missing on the
+terminal ladder tree.  If the terminal extension were SE or RE, its
+constructor in \noderef{TashkinovSeriesStep} would make every terminal
+missing color outside $D_n$ closed on $T_n$; in SE the selected stable
+relation and its reverse from \noderef{sc2} identify the relevant
+missing sets, and in RE the coloring is unchanged.  Since
+\noderef{HierarchyBase} identifies $A=T_n$ in the non-PE case, this
+would contradict the assumed nonclosedness of $\alpha$ on $A$.
+Therefore the terminal extension is PE, and the base gives the exact
+ordered union
+\[
+                            A=T_n\vee R_n.                     \tag{1}
+\]
+
+We need the genuine elementarity premise for the PE closure argument.
+If the rung is greater than one, restrict the certified series and
+maximum property through the preceding rung and apply lower assertion
+(i).  If it is one, use the elementarity assertion of
+\noderef{TechnicalTheoremBase}.  Thus the pre-step coloring is
+elementary on $T_n$, and
+\noderef{ParallelCommonMissingClosed} applies.  If $v_\alpha$ lay in
+$V(T_n)\cap V(R_n)$, its missing color $\alpha$ would be common-missing
+on the two constituents and would be closed on their exact union,
+contrary to the branch hypothesis.  Consequently
+\[
+ v_\alpha\in V(T_n)\setminus V(R_n)
+ \quad\hbox{or}\quad
+ v_\alpha\in V(R_n)\setminus V(T_n).                           \tag{2}
+\]
+
+In the first case of (2), conclusion (ii) of
+\noderef{interchange} makes $K_{v_\alpha}$ the unique
+$(\alpha,\beta)$ path component meeting $T_n$; in the second case,
+conclusion (i) makes it the unique such component meeting $R_n$.
+Hence the distinct component $K_{v_\beta}$ is disjoint from the
+corresponding constituent.  On the other constituent, elementarity of
+the core, the uniqueness of the vertex $v_\alpha$ missing $\alpha$,
+and the fact that $v_\beta$ is the first vertex missing $\beta$ imply
+that every vertex of $K_{v_\beta}$ encountered there has both colors
+present.  Switching the full component exchanges those two incident
+colors and preserves the missing-color set pointwise.  No protected
+incident edge has a controlled color there, since
+$\{\alpha,\beta\}\cap D_n=\varnothing$ in that alternative; in the
+other alternative the relevant conclusion of \noderef{interchange}
+keeps the component away from the protected exact edges.  These two
+constituent checks are precisely
+\[
+ \noderef{CombinedStableColoring}(T_n,R_n,D_n,\varphi_n,\sigma_n).
+                                                                  \tag{3}
+\]
+
+Let $B=T(v_\beta)$ be the exact ordered prefix ending at the entry
+$v_\beta$.  The mixed location and membership in
+$T(y_{\ell-1})$ give, for $s=|B|-|A|$,
+\[
+                         1\leq s\leq\ell-1<\ell.               \tag{4}
+\]
+Before changing any ETT data, restrict the old terminal
+\noderef{TashkinovClosure} to $B$.  This produces the old-color ETT
+$\mathcal E_B$ with the identical ladder series, PE extension,
+maximum property, hierarchy base, and zero-divider hierarchy.
+
+The ordered-unused premise excludes $\alpha$ from every displayed edge
+of $B-A$.  The first-missing definition excludes $\beta$ from every
+ordinary augmentation edge before $v_\beta$.  The only possible
+exception is the individual first connecting edge of the PE core.
+Equation (3) handles that identity before reconstruction.
+Apply \noderef{CombinedStableClosurePreserved}: it fixes all displayed
+edge identities of $T_n$ and $R_n$ and makes the same ordered $R_n$ a
+closure of the same exact support prefix.  Together with the two color
+exclusions, every edge in the PE seed and the augmentation sequence to
+$B$ keeps its value.  At each displayed augmentation witness, the
+component switch either fixes the vertex or exchanges two present
+colors, so the missing witness is unchanged.  The exact sequence
+restricts by \noderef{TashkinovAugmentationSequenceRestrict} and remains
+a sequence of \noderef{TashkinovAugmentation}s under $\sigma_n$.
+
+Apply \noderef{Td} to the first stable relation in (3), using the stated
+lower-rung package, to obtain \noderef{ModColoring}.  Now apply
+\noderef{HierarchySplitter} to the old-color prefix ETT
+$\mathcal E_B$, its maximum property, (3), the transported closure, and
+the verified augmentation sequence.  It returns an actual
+\noderef{CorrespondingExtendedTashkinovTree} on the same exact $B$,
+a transported \noderef{MaximumProperty}, a base, and a hierarchy with
+the same core and divider data.  No hierarchy goodness has yet been
+inferred.
+
+We construct the zero-divider \noderef{GoodHierarchy} field by field,
+using the old Gamma pairs.  Pair size and disjointness are literal.
+Avoidance follows from equality of all displayed prefix edges.  Unique
+refresh is vacuous at zero dividers.  For the PE parallel-base field,
+the two vertexwise clauses in (3) identify the missing-color sets on
+$T_n$ and $R_n$ and hence preserve the stored index set, Gamma union,
+and the required cardinality.
+
+It remains to preserve the assertion that $A$ is not
+$(\Gamma^0)^-$-closed.  Unfold the old witness using
+\noderef{TreeColorSetMinusClosed}, \noderef{TreeColorSetClosed}, and
+\noderef{BoundaryColorEdges}.  It consists of a color
+$c\in\overline\varphi_n(A)-\Gamma^0$ and an individual boundary edge
+$f$ of color $c$.  If $f$ is fixed, it remains a witness.  If it is
+changed, then \noderef{TwoColorComponentSwap} gives
+$c\in\{\alpha,\beta\}$ and places $f$ in $K_{v_\beta}$.  The color
+$\beta$ is not missing on $A$ because its first missing vertex is
+outside $A$, so $c=\alpha$ and $\alpha\notin\Gamma^0$.
+
+Assume in this last case that $A$ became $(\Gamma^0)^-$-closed under
+$\sigma_n$.  Pointwise missing-set preservation in (3) would make
+$\alpha$ missing and singleton-closed on $A$ under $\sigma_n$.
+Conclusion (iii) of \noderef{interchange}, applied with (3), would make
+$\alpha,\beta$ interchangeable on $A$ under $\sigma_n$.  But the old
+distinct full components $K_{v_\alpha}$ and $K_{v_\beta}$ remain the
+same two distinct full components after a complete swap; the first
+meets $A$ at $v_\alpha$, and the changed boundary edge $f$ makes the
+second meet $A$.  They remain nontrivial path components, contradicting
+\noderef{TreeInterchangeable}.  Thus the non-minus-closed assertion is
+preserved.  There are no positive-stage minus-closed fields.  We have
+therefore constructed the complete good witness.  Only now does
+\noderef{SameGoodHierarchy} record equality of the stages, stored sets,
+and Gamma pairs.
+
+The two vertices of $B$ missing $\alpha$ show that this corresponding
+ETT is non-elementary.  Hence the reconstructed data form a
+\noderef{HierarchyCounterexample} $C'$ with the same zero divider count.
+The exact measure is smaller.  Indeed, let
+$r_0=\noderef{HierarchyPathNumber}(H)$ and let $r'_0$ be the value for
+the truncated hierarchy.  If $s<r_0$, then $r'_0\leq s<r_0$; if
+$r_0\leq s$, the path tail at $r_0$ restricts to $B$, so
+$r'_0\leq r_0$.  In the equality case the second coordinate of
+\noderef{HierarchyCounterexampleMeasure} drops from
+$|T|-|T_{n,0}|$ to $|B|-|T_{n,0}|$ by (4).  Thus
+\noderef{HierarchyCounterexampleLess} holds from $C'$ to $C$, contrary
+to minimality.  The supposition of two components was false, proving
+the desired equality.
+\end{proof}
+
