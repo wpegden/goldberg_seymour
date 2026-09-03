@@ -189,10 +189,15 @@ $T(y_{\ell-1})$ give, for $s=|B|-|A|$,
 \[
                          1\leq s\leq\ell-1<\ell.               \tag{4}
 \]
-Before changing any ETT data, restrict the old terminal
-\noderef{TashkinovClosure} to $B$.  This produces the old-color ETT
-$\mathcal E_B$ with the identical ladder series, PE extension,
-maximum property, hierarchy base, and zero-divider hierarchy.
+Before changing any ETT data, apply
+\noderef{GoodHierarchyTerminalPrefixRepackage} to
+$A\prec B\preccurlyeq T$.  It produces an old-color ETT
+$\mathcal E_B$ on the exact prefix $B$ with the identical ladder series
+and maximum property, a copied hierarchy base, the same zero-divider
+hierarchy with terminal tree $B$, and a genuine old-color good witness.
+It also proves equality of the computed stored sets and Gamma pairs and
+the fallback-sensitive containment of every new segment-color set in its
+old counterpart; no equality of full segment-color functions is assumed.
 
 The ordered-unused premise excludes $\alpha$ from every displayed edge
 of $B-A$.  The first-missing definition excludes $\beta$ from every
@@ -267,4 +272,3 @@ $|T|-|T_{n,0}|$ to $|B|-|T_{n,0}|$ by (4).  Thus
 to minimality.  The supposition of two components was false, proving
 the desired equality.
 \end{proof}
-

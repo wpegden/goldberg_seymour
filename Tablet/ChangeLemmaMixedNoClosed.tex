@@ -166,14 +166,16 @@ $v_\beta\in T(y_{\ell-1})$ give
 The two vertices of $B$ now missing $\alpha$ make $B$ non-elementary
 under $\sigma_n$.
 
-Construct the old-color ETT on $B$ first.  Restrict the final
-\noderef{TashkinovClosure} of the original ETT at the displayed length
-$|B|$ while retaining its ladder series, exact connecting edges,
-extension kinds, and maximum-property data.  Restrict only the terminal
-hierarchy stage to $B$, keeping the base, all divider positions,
-ordinary and starred stages, and Gamma pairs.  Since $A\prec B\prec T$,
-the required terminal containments are strict.  Denote this positive
-maximum ETT and hierarchy by $\mathcal E_B$.
+Construct the old-color package first by applying
+\noderef{GoodHierarchyTerminalPrefixRepackage} to
+$A\prec B\preccurlyeq T$.  It gives the positive maximum ETT
+$\mathcal E_B$ on the exact ordered prefix $B$, a copied base, the
+same-divider hierarchy with terminal stage $B$, and a complete old-color
+good witness.  The conclusion includes equality of every computed
+stored set, stage-missing set, and Gamma pair, together with the
+fallback-sensitive containment of each new segment-color set in the old
+one.  Thus no unsupported equality of full
+\noderef{HierarchySegmentColors} functions is used.
 
 Combine (3) with the ordered-unused condition beyond $A$ to exclude
 $\alpha$ from every exact displayed edge of $B-T_n$.  The exact
@@ -251,4 +253,3 @@ by (5).  Hence \noderef{HierarchyCounterexampleLess} holds between the
 two \noderef{HierarchyCounterexampleMeasure}s, contradicting the
 minimality of $C$.  Therefore the two original components are equal.
 \end{proof}
-

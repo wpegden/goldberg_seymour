@@ -1,0 +1,165 @@
+\begin{lemma}[Terminal-prefix repackaging of a good hierarchy]
+Let $G$ be a finite loopless multigraph with distinguished edge $e_0$
+and palette $[k]$.  Let $\varphi_{\rm in},\varphi_{\rm gen},\varphi$
+be partial edge colorings, and let $\mathcal E$ be a positive-rung
+\noderef{ExtendedTashkinovTree} with input coloring
+$\varphi_{\rm in}$, generating coloring $\varphi_{\rm gen}$, exact
+terminal tree $T$, and \noderef{MaximumProperty}.  Let $\mathcal B$ be
+a \noderef{HierarchyBase} under $\varphi$, let $H$ be a
+\noderef{TashkinovHierarchy} with divider count $q$, and let $\Gamma$
+be a \noderef{GoodHierarchy} on $H$.  Put
+\[
+                    A=\noderef{HierarchyStarredStage}(H,q).
+\]
+Suppose that $B$ is an exact ordered tree-sequence prefix satisfying
+$A\prec B\preccurlyeq T$, where both comparisons retain every displayed
+vertex and individual edge identity as in
+\noderef{TreeSequenceInitialSegment}.
+
+Then there exist an ETT $\mathcal E_B$ on the actual tree $B$, a base
+$\mathcal B_B$, a hierarchy $H_B$, and a good hierarchy $\Gamma_B$
+such that all of the following hold.
+\begin{enumerate}
+\item $\mathcal E_B$ has the same rung number and the same complete
+certified series as $\mathcal E$, and has maximum property.
+\item The core, closure, and numerical support position of
+$\mathcal B_B$ are those of $\mathcal B$.
+\item $H_B$ has divider count $q$.  Its stages at indices
+$0,\ldots,q$, its starred stages, and all numerical divider positions
+are exactly the corresponding data of $H$; only its terminal stage is
+changed from $T$ to $B$.
+\item For every $0\leq j\leq q$, the computed stored-color and
+stage-missing-color sets agree:
+\[
+ D^{H_B}_{n,j}=D^H_{n,j},\qquad
+ \noderef{HierarchyStageMissingColors}(H_B,j)
+  =\noderef{HierarchyStageMissingColors}(H,j).
+\]
+For every color $\eta$, the Gamma data agree and the new segment-color
+set is contained in the old one:
+\[
+ \Gamma^j_{B,\eta}=\Gamma^j_\eta,\qquad
+ \noderef{HierarchySegmentColors}(H_B,j,\eta)
+ \subseteq \noderef{HierarchySegmentColors}(H,j,\eta).
+\]
+\end{enumerate}
+All equalities here concern the complete ordered edge-valued sequences,
+not merely their vertex sets.
+\end{lemma}
+\begin{proof}
+Write the nonterminal stages of $H$ as
+$T_0,T_1,\ldots,T_q$ and its terminal stage as $T_{q+1}=T$.
+The nestedness and terminal clauses of
+\noderef{TashkinovHierarchy} show, by composition, that every $T_j$ is
+an exact initial segment of $T$.  If $q>0$, the definition
+\noderef{HierarchyStarredStage} gives $A=T_q$.  If $q=0$, it gives
+$A=\mathcal B.\mathit{core}$.  In the latter case, the non-PE clause of
+\noderef{HierarchyBase} identifies this core with $T_0$, while its PE
+clause supplies an exact \noderef{OrderedTreeUnion} in which $T_0$ is
+an ordered initial segment of the core.  Thus in both cases
+the last ladder tree $T_0$ is an initial segment of $A$ and hence of
+$B$.  It is strictly shorter than $B$: this follows through
+$T_0\preccurlyeq A\prec B$ when $q=0$, and from the strict hierarchy
+stages followed by $A=T_q\prec B$ when $q>0$.
+
+Construct $\mathcal E_B$ by retaining the rung number and the entire
+certified series of $\mathcal E$ and replacing only its displayed tree
+$T$ by $B$.  The preceding paragraph supplies its strict lower
+containment.  Composing $B\preccurlyeq T$ with the old upper containment
+of $T$ in the final certified closure supplies its upper containment.
+The generating-coloring equation is unchanged.  These are every field
+of \noderef{ExtendedTashkinovTree}.  Since
+\noderef{MaximumProperty} depends only on the retained rung number and
+certified series, its old witness proves maximum property for
+$\mathcal E_B$.
+
+The series, its terminal ladder tree, and its terminal kind did not
+change.  Copy the core, closure, support position, support positivity,
+terminal missing-color equality, PE clause, and non-PE clause of
+$\mathcal B$.  Each copied term has exactly the required type, so these
+data construct the asserted \noderef{HierarchyBase} $\mathcal B_B$.
+
+Define $H_B$ with divider count $q$, stages $T_0,\ldots,T_q,B$, and the
+old divider positions.  The base stage, all retained nestedness and
+strictness clauses, and divider positivity and increase copy from $H$.
+If $q>0$, the first ordinary stage is retained, so core-inside-first
+also copies.  If $q=0$, the first stage of $H_B$ is its terminal stage
+$B$, and core-inside-first is the assumed relation $A\preccurlyeq B$
+because $A$ is the copied core.  The only new nesting and
+strictness clause is $T_q\prec B$ when $q>0$, which follows from
+$T_q=A\prec B$; when $q=0$ it is $T_0\prec B$, proved above.  For a
+divider $i<q$, the old divider-stage identity writes $T_{i+1}$ as the
+prefix of $T$ at the old numerical divider position.  Both
+$T_{i+1}$ and $B$ are exact prefixes of $T$, and
+$T_{i+1}\preccurlyeq T_q=A\prec B$, so entrywise comparison in
+\noderef{TreeSequenceInitialSegment} identifies $T_{i+1}$ with the
+prefix of $B$ at that same position.  Hence every divider-stage identity
+also holds.  This checks every field of
+\noderef{TashkinovHierarchy} and proves item 3.
+
+We isolate the totalized first-missing argument needed for goodness.
+Let $P\preccurlyeq Q$ be exact ordered tree sequences, let $\eta$ be a
+color, and let $s<|P|$ satisfy
+\[
+ s<\noderef{HierarchyFirstMissingPosition}(\varphi,P,\eta).
+                                                               \tag{1}
+\]
+Then $s$ is smaller than the first missing position in $Q$.  There are
+two cases in the definition.  If $Q$ has no vertex missing $\eta$, its
+totalized position is its last index $|Q|$, and $s<|P|\leq|Q|$.  If it
+has a missing candidate and its least candidate $t$ were at most $s$,
+then $t<|P|$.  Exact prefix equality would make the vertex of $P$ at
+$t$ miss $\eta$.  If $P$ has a missing candidate, its least candidate
+would be at most $t\leq s$, contradicting (1); if $P$ has none, the
+candidate at $t$ is already a contradiction.  This proves
+\[
+ s<\noderef{HierarchyFirstMissingPosition}(\varphi,Q,\eta).   \tag{2}
+\]
+The argument explicitly includes both no-candidate fallback branches.
+
+Apply (1)--(2) to $P=B$ and $Q=T$.  Fix $j\leq q$, a color $\eta$,
+and a color $c$ in the $(j,\eta)$ segment-color set of $H_B$.  By
+\noderef{HierarchySegmentColors}, there is an exact edge position $s$
+above the common starred stage, with
+$s<|H_B.\mathit{stage}(j+1)|\leq|B|$, such that the displayed edge has
+color $c$ and $s$ is below the first $\eta$-missing position in $B$.
+The preceding observation puts $s$ below the first $\eta$-missing
+position in $T$.  When $j<q$, the next stage is retained literally.
+When $j=q$, the new next stage is $B$ and the old one is $T$; the exact
+prefix relation $B\preccurlyeq T$ identifies their edge at $s$ and gives
+$s<|T|$.  Thus in both cases the same position, with the same exact edge
+and $\varphi$-color, witnesses that $c$ lies in the old $(j,\eta)$
+segment-color set.  Therefore
+\[
+ \noderef{HierarchySegmentColors}(H_B,j,\eta)
+ \subseteq\noderef{HierarchySegmentColors}(H,j,\eta).         \tag{3}
+\]
+Only this direction is proved or needed; in particular, no equality of
+the two full segment-color functions is asserted.
+
+Define $\Gamma_B^j(\eta)=\Gamma^j(\eta)$.  The corresponding raw
+certified stored set and starred stage are unchanged, so unfolding
+\noderef{HierarchyStoredColorsAt} gives
+$D^{H_B}_{n,j}=D^H_{n,j}$.  At $j=0$ the stage-missing set is the
+missing-color set of the unchanged terminal ladder tree; at $j>0$ it is
+the missing-color set of the unchanged ordinary stage.  Thus
+\noderef{HierarchyStageMissingColors} gives the second equality in
+item 4.
+
+It remains to verify all six fields of
+\noderef{GoodHierarchy}.  The two-color cardinality and pairwise
+disjointness fields are the old fields after the stored-set and Gamma
+equalities.  For avoidance, an old Gamma color lies in the common
+stage-missing set and outside the old segment-color set; containment
+(3) puts it outside the new segment-color set as required.  In every
+unique-refresh clause, both ordinary stages, the preceding starred
+stage, their exact vertex-set difference, the stored sets, and all Gamma
+pairs are unchanged, so the old unique witness and its uniqueness proof
+copy verbatim.  The parallel-base clause uses only the unchanged series,
+core, closure, zeroth stored set, zeroth Gamma union, and their
+$\varphi$-missing sets, so both its non-minus-closed and cardinality
+parts copy.  Finally, each positive-stage minus-closed clause concerns
+an unchanged ordinary stage, stored set, and preceding Gamma union, and
+is exactly the corresponding old clause.  These six checks construct
+$\Gamma_B$ and prove every assertion of the lemma.
+\end{proof}

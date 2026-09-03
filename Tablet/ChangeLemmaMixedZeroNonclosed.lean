@@ -4,6 +4,7 @@ import Tablet.CombinedStableClosurePreserved
 import Tablet.CombinedStableColoring
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.GoodHierarchy
+import Tablet.GoodHierarchyTerminalPrefixRepackage
 import Tablet.GoodHierarchyNewMissingClosed
 import Tablet.HierarchyBase
 import Tablet.HierarchyCounterexample

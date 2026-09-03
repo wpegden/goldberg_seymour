@@ -132,18 +132,57 @@ $A=T_{n,q}$ by \noderef{HierarchyStarredStage}.  The last-stage instance
 of \noderef{step1} applies: the statement supplies maximum property,
 the six lower-rung assertions, the fewer-divider hypothesis, the
 large-color bound, elementarity of the full-tail prefix, and the
-missing and singleton-closed color $\alpha$.  If $q=0$ and the terminal
-extension is PE, conclusion (iii) of \noderef{interchange} applies to
-the exact PE core $A$; the identity recoloring satisfies both clauses
-of \noderef{CombinedStableColoring}.  If $q=0$ and the terminal
-extension is SE or RE, \noderef{HierarchyBase} identifies $A$ with
-$T_n$.  Restricting the certified series to the preceding rung and its
-maximum-property data allows the lower-rung terminal-interchangeability
-assertion to be used when the rung number exceeds one; the SE stable
-relation is reversed by \noderef{sc2}, while in RE the generating
-coloring is unchanged.  At rung one the same assertion is the
-interchangeability conclusion of \noderef{TechnicalTheoremBase}.
-Thus
+missing and singleton-closed color $\alpha$.
+
+Suppose $q=0$.  The positive terminal certificate in
+\noderef{TashkinovSeries} is, by the constructors of
+\noderef{TashkinovSeriesStep}, exactly one of PE, SE, or RE.  In PE,
+\noderef{HierarchyBase} and \noderef{HierarchyStarredStage} identify
+$A$ with the exact core $T_n\vee R_n$.  The identity coloring is proper,
+leaves exactly $e_0$ uncolored, and is stable on both constituents, so
+it satisfies \noderef{CombinedStableColoring}; conclusion (iii) of
+\noderef{interchange} applies to the assumed missing and singleton-closed
+color $\alpha$.
+
+It remains to justify the SE/RE assertion without treating ``the
+preceding rung'' as implicit data.  In either case the nonparallel field
+of \noderef{HierarchyBase} gives $A=T_n$.  Write $n$ for the rung number.
+When $n>1$, restrict every array in the certified series to indices
+$0,\ldots,n-1$, retaining tree slots $0,\ldots,n$.  Each retained
+certificate in \noderef{TashkinovSeries} has the same constructor and
+the same witnesses because it refers only to these retained slots.  Its
+last noninitial constructor supplies the strict inclusion from
+$T_{n-1}$ to $T_n$.  Taking $T_n$ itself as displayed terminal tree,
+this restricted series, the strict inclusion, and the reflexive upper
+inclusion form an actual \noderef{ExtendedTashkinovTree}
+$\mathcal E^{-}$ of rung $n-1$ and terminal tree $T_n$.  Its generating
+coloring is the preceding coloring $\varphi_{n-1}$.  Every bound in
+\noderef{MaximumProperty} for $\mathcal E^{-}$ is one of the old bounds
+at an index $i<n-1<n$, and the initial maximum-order equality is
+unchanged; hence $\mathcal E^{-}$ has maximum property.
+
+In the SE case the last constructor provides a
+\noderef{MaximumDefectiveChoice}.  Its selected coloring is exactly
+$\varphi_n$; its `selectedProper' and `selectedOneUncolored' fields give
+the two coloring premises, and its `selectedStable' field says precisely
+that $\varphi_n$ is
+$(T_n,D_{n-1},\varphi_{n-1})$-stable.  The symmetric clause of
+\noderef{sc2} also gives the reverse stable relation, so in particular
+the two colorings have the same missing sets on $T_n$; no unmentioned
+coloring is substituted here.  In the RE case its constructor gives the
+literal equation $\varphi_n=\varphi_{n-1}$, and reflexivity in
+\noderef{sc2} supplies the same stable premise.  We may therefore apply
+lower assertion (ii) to the actual maximum ETT $\mathcal E^{-}$ and the
+actual stable coloring $\varphi_n$.  Since $\alpha$ is missing on
+$A=T_n$, it yields $T_n$-interchangeability of $\alpha,\beta$.
+
+When $n=1$, slot zero of the original certified series is its initial
+constructor and $T_n=T_1$.  The same SE `selectedStable' field, or the
+RE coloring equality and reflexive stability, supplies exactly the
+stable-coloring premise of \noderef{TechnicalTheoremBase}; the proper
+and unique-uncolored premises are again constructor fields.  Its
+interchangeability conclusion applies because $\alpha$ is missing on
+$T_1=A$.  Thus in every case
 \[
                  \alpha,\beta\text{ are }A\text{-interchangeable}.
                                                                \tag{1}
@@ -173,18 +212,19 @@ $s=|B|-|A|$, then
 Both $v_\alpha$ and $v_\beta$ lie in $B$, so $B$ is not elementary
 under $\sigma_n$.
 
-Before transporting the coloring, form the old-color ETT on this exact
-prefix.  Restrict the final certified
-\noderef{TashkinovClosure} of the given ETT at the displayed length
-$|B|$, retaining the entire ladder series and its exact edges.  The
-terminal ladder tree is an initial segment of $A$, while
-$A\prec B\prec T$, so the terminal containment fields remain strict.
-This gives an ETT $\mathcal E_B$ on the actual ordered tree $B$ under
-$\varphi_n$.  Its rung and ladder data are unchanged; consequently its
-\noderef{MaximumProperty} witness is the one carried by $C$.  Restrict
-the terminal hierarchy stage to $B$ and retain the same base, divider
-positions, starred stages, and Gamma pairs.  Every such stage lies in
-$A$.
+Before transporting the coloring, apply
+\noderef{GoodHierarchyTerminalPrefixRepackage} to
+$A\prec B\preccurlyeq T$.  It returns an old-color ETT
+$\mathcal E_B$ on the actual ordered tree $B$, with the same complete
+certified series and maximum property, a copied base $\mathcal B_B$, a
+same-divider hierarchy $H_B$ whose nonterminal and starred stages are
+the old ones, and a genuine good witness $\mathcal G_B$.  In particular,
+the computed $D_{n,j}$ sets, stage-missing sets, and Gamma values agree
+at every index.  Its proof handles the totalized no-candidate case of
+\noderef{HierarchyFirstMissingPosition} and gives only the needed
+containment of the new segment-color set in the old one.  Thus no
+unsupported equality of full \noderef{HierarchySegmentColors} functions
+is being used here.
 
 The switch is outside $A$.  Applying
 \noderef{OutsideKempeRecoloringStable} first to the terminal ladder tree
@@ -220,34 +260,120 @@ one supplied by
 \noderef{TashkinovAugmentationSequenceRestrict}.
 
 Now apply \noderef{Td} to the terminal stable relation, using the given
-six lower-rung assertions, and obtain the required
-\noderef{ModColoring}.  In PE, apply \noderef{HierarchySplitter} to
-the old-color prefix ETT $\mathcal E_B$, using the combined stability,
-transported closure, and verified exact augmentation sequence.  It
-returns a \noderef{CorrespondingExtendedTashkinovTree}, maximum property,
-and the same hierarchy stages.  In SE or RE, the exact one-edge seed
-and its verified route are an eligible tree in the universal clause of
-\noderef{ModColoring}; its corresponding ETT retains the non-PE kind,
-and \noderef{MaximumPropertyTransport} transports maximum property.
+six lower-rung assertions and the maximum property of $\mathcal E_B$.
+This gives a \noderef{ModColoring} of $\mathcal E_B$.
 
-It remains to construct the good hierarchy; it is not inferred from the
-correspondence certificate.  Since every hierarchy stage lies in $A$
-and the switched component is disjoint from $A$, every missing set at a
-stage vertex and every exact edge incident with a stage is unchanged.
-Use the old Gamma pairs.  Their two-element size and pairwise
-disjointness are literal.  Avoidance holds because every segment edge
-keeps its exact color.  The unique-refresh field holds because both the
-stage differences and all their vertexwise missing sets are unchanged.
-In PE, the two constituent stable relations and
-\noderef{CombinedStableClosurePreserved} preserve both clauses of the
-parallel-base field.  Finally, every boundary edge relevant to every
-positive-stage minus-closed field is incident with its stage and hence
-fixed.  The old minus-closed witnesses therefore prove the new ones.
-These five verifications construct a
-\noderef{GoodHierarchy} witness under $\sigma_n$.  Only after constructing
-that witness do we compare it with the old witness by
-\noderef{SameGoodHierarchy}; the stages, stored sets, and Gamma pairs
-are pointwise identical.
+We separate the reconstruction by the actual terminal kind.  In PE,
+apply \noderef{HierarchySplitter} only after supplying the old-color
+prefix ETT $\mathcal E_B$, the two clauses of combined stability, the
+same closure supplied by \noderef{CombinedStableClosurePreserved}, and
+the verified restricted augmentation sequence.  It returns a
+\noderef{CorrespondingExtendedTashkinovTree} $\mathcal E'_B$ on $B$,
+maximum property, a base $\mathcal B'_B$ with the same core and closure,
+and a hierarchy $H'_B$ satisfying \noderef{SameHierarchyStages}.
+
+In SE or RE, use instead the exact edge $f_n$, singleton equality
+$F_n=\{f_n\}$, exact one-edge extension $T_n+f_n$, and the verified route
+to $B$ in the universal non-PE clause of \noderef{ModColoring}.  This
+returns a corresponding ETT $\mathcal E'_B$; its equality of rung
+numbers, positive ladder trees, raw stored sets, connecting-edge sets,
+and extension kinds is exactly the data in
+\noderef{CorrespondingExtendedTashkinovTree}.  Apply
+\noderef{MaximumPropertyTransport} to obtain its maximum property.
+Construct $\mathcal B'_B$ explicitly: take its core to be the replacement
+terminal ladder tree, copy the unused closure and numerical support
+position, use reflexivity for the terminal missing-color equality because
+both displayed colorings are $\sigma_n$, use the retained non-PE kind to
+make the PE implication vacuous, and use the chosen core equality for the
+nonparallel field.  The old non-PE base has the same core $T_n$.
+
+Still in SE/RE, construct $H'_B$ with the old divider count, the
+nonterminal stages of $H_B$, terminal stage $B$, and the old numerical
+divider positions.  The base-stage equality follows from equality of the
+terminal ladder trees.  Terminal equality is reflexive; nestedness,
+strictness, divider positivity and increase, and every exact
+divider-prefix identity are the corresponding fields of $H_B$; and the
+core-inside-first condition follows after rewriting both cores as $T_n$.
+Thus every field of \noderef{TashkinovHierarchy} is present.  The copied
+cores, counts, stages, and dividers satisfy
+\noderef{SameHierarchyStages}; its PE closure clause is vacuous in this
+branch.  This gives the same replacement package as the PE branch
+without misusing \noderef{HierarchySplitter} outside PE.
+
+It remains to construct, rather than assume, goodness under $\sigma_n$.
+Transport the Gamma function of $\mathcal G_B$ along the established
+divider-count equality.  First compare the raw inputs to the computed
+stored sets.  The correspondence certificate makes each raw certified
+stored set equal.  Every starred stage is contained in $A$, and the
+switched component is vertex-disjoint from $A$ and has no incident
+$\alpha$- or $\beta$-edge there.  All other edge colors are fixed by
+\noderef{TwoColorComponentSwap}.  Hence the incident color set, and
+therefore \noderef{MissingColors}, agrees under $\varphi_n$ and
+$\sigma_n$ at every starred-stage vertex.  Unfolding
+\noderef{HierarchyStoredColorsAt}, which subtracts exactly the starred
+stage's missing colors from the raw stored set, proves
+\[
+                         D'_{n,j}=D_{n,j}                     \tag{4}
+\]
+for every $j$.  The same pointwise argument on $T_n$ and each unchanged
+ordinary stage proves equality of all
+\noderef{HierarchyStageMissingColors} sets.  This checks the raw
+stored-set and starred-stage missing-set equalities separately; neither
+is inferred from the other.
+
+We next locate every totalized first-missing position in $B$.  Before
+$v_\alpha$, no vertex misses $\alpha$ under $\varphi_n$ by the defining
+minimality of $i_\alpha$.  Any such earlier vertex on the switched
+component also lies in the elementary prefix $T(y_{\ell-1})$ and is
+distinct from $v_\alpha$ and $v_\beta$, so it has both $\alpha$ and
+$\beta$ present; switching exchanges the two incident colors and creates
+no missing color.  The vertex $v_\alpha$ is on the other component and
+still misses $\alpha$.  Thus its position remains the first
+$\alpha$-missing position.  Similarly, every vertex of $B-v_\beta$
+has $\beta$ present before and after the switch.  At $v_\beta$ the
+switch replaces the missing color $\beta$ by $\alpha$, so no vertex of
+$B$ misses $\beta$ under $\sigma_n$.  The fallback clause of
+\noderef{HierarchyFirstMissingPosition} therefore assigns $\beta$ the
+last position of $B$, which is exactly the displayed position of
+$v_\beta$.  Finally, for every $\eta\notin\{\alpha,\beta\}$ the swap
+does not change any incident $\eta$-edge, so its missing candidates in
+$B$ agree pointwise; their minima agree when nonempty, and their common
+last-position fallback agrees when empty.
+
+We can now verify all six fields of \noderef{GoodHierarchy}.  Pair size
+and pairwise disjointness are literal properties of the transported
+Gamma pairs, using (4).  For avoidance, fix $j$, a relevant
+$\eta\in D'_{n,j}$, and one exact edge position in the new
+$(j,\eta)$ segment.  The preceding paragraph identifies the appropriate
+first-missing bound in all three cases $\eta=\alpha$, $\eta=\beta$, and
+$\eta\notin\{\alpha,\beta\}$.  Same hierarchy stages identify the
+starred and next-stage bounds, while the component's disjointness from
+$A$ fixes the color of this individual displayed edge.  It is therefore
+an old segment edge avoided by the corresponding old Gamma pair.  This
+is the required pointwise avoidance proof, not a claim that arbitrary
+segment-color functions survive a Kempe switch.
+
+For unique refresh, same hierarchy stages identify both exact stage
+differences, (4) identifies the stored sets, the pointwise missing-set
+equality identifies the union of missing colors on the difference, and
+the Gamma pairs agree; the old existence-and-uniqueness witness is thus
+the new one.  In PE, the same core and the closure transported by
+\noderef{CombinedStableClosurePreserved}, together with pointwise
+missing-set equality on both constituents, preserve the common-missing
+cardinality part of the parallel-base field.  For its non-minus-closed
+part, retain the old witness color and exact boundary edge: the whole
+core lies in $A$, so the component disjointness fixes that edge and its
+inside vertex's missing set.  In SE/RE the parallel premise is false.
+Finally, every positive ordinary stage lies in $A$.  Each exact boundary
+edge relevant to its minus-closed field is therefore fixed, as is every
+stage missing set; (4) and Gamma equality identify the excluded union.
+The old minus-closed proof applies at every index.
+
+These are respectively the `twoColors', `avoidance', `disjointPairs',
+`uniqueRefresh', `parallelBase', and `minusClosed' fields, so they
+construct a complete good witness $\mathcal G'_B$.  Only now apply
+\noderef{SameGoodHierarchy}: same hierarchy stages, (4), and the
+transported Gamma equations give its required pointwise data.
 
 The resulting ETT on $B$, its maximum property, base, hierarchy,
 newly constructed good witness, and the two vertices missing $\alpha$
@@ -273,4 +399,3 @@ holds.  This contradicts the stated minimality of $C$.  Therefore
 $K_{v_\alpha}=K_{v_\beta}$, and (1) supplies the asserted
 singleton-inclusive interchangeability.
 \end{proof}
-

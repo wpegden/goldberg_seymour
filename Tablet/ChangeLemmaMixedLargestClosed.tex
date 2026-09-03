@@ -177,15 +177,16 @@ $v_\beta\in T(y_{\ell-1})$ give
 \]
 Both vertices are in $B$, so $B$ is non-elementary under $\sigma_n$.
 
-We construct the old-color prefix presentation before applying any
-transport result.  Restrict the terminal
-\noderef{TashkinovClosure} of the original ETT at the exact displayed
-length $|B|$; keep the complete ladder series, connecting edges,
-extension kinds, and maximum-property data.  Restrict only the terminal
-hierarchy stage to $B$, retaining its base, ordinary stages, starred
-stages, divider positions, and Gamma pairs.  Since $A\prec B\prec T$,
-this gives a positive-rung maximum ETT $\mathcal E_B$ and hierarchy
-under $\varphi_n$ on the actual ordered prefix $B$.
+Before applying any transport result, apply
+\noderef{GoodHierarchyTerminalPrefixRepackage} to
+$A\prec B\preccurlyeq T$.  It returns the old-color maximum ETT
+$\mathcal E_B$ on the actual ordered prefix $B$, its copied base, the
+same-divider hierarchy with unchanged nonterminal and starred stages,
+and a genuine good witness with the old Gamma pairs.  In particular it
+proves equality of the computed stored and stage-missing sets.  Its
+avoidance proof treats the totalized first-missing fallback and gives the
+needed new-to-old segment containment, without asserting equality of
+the full \noderef{HierarchySegmentColors} functions.
 
 The switched component is outside $T_{n,r}^{*}$ but may meet later
 stages, including $A$.  Therefore we do not invoke an outside-terminal
@@ -294,4 +295,3 @@ by (4).  Thus
 to the minimality assumption.  Therefore
 $K_{v_\alpha}=K_{v_\beta}$.
 \end{proof}
-
