@@ -1,0 +1,201 @@
+\begin{lemma}[Certified predecessor of a positive-rung ETT]
+Let $G$ be a finite loopless multigraph with palette $[k]$ and
+distinguished edge $e_0$.  Let $\varphi_{\mathrm{in}}$ be the input
+partial edge coloring, and let $\mathcal E$ be an
+\noderef{ExtendedTashkinovTree} with displayed terminal tree $T$,
+displayed generating coloring $\varphi_n$, rung number $n>1$, certified
+series data $\mathcal D$, and \noderef{MaximumProperty}.  In the
+zero-based arrays of \noderef{TashkinovSeriesData}, put
+\[
+ T_n=\mathcal D.\mathit{tree}(n),\qquad
+ \varphi_{n-1}=\mathcal D.\mathit{coloring}(n-1).
+\]
+Then there is an actual extended Tashkinov tree $\mathcal E^-$ on the
+same graph, palette, distinguished edge, and input coloring whose
+displayed terminal tree is exactly $T_n$, whose displayed generating
+coloring is exactly $\varphi_{n-1}$, and which has the following
+properties.
+\begin{enumerate}
+\item Its rung number is $n-1$, and it has maximum property.
+\item Under the canonical order-preserving inclusions of finite index
+types, every tree slot $0\leq a\leq n$ of its certified series equals
+$\mathcal D.\mathit{tree}(a)$.
+\item Under the corresponding inclusions, for every $0\leq a\leq n-1$
+its coloring, raw stored-color set, exact connecting-edge set, extension
+kind, chosen vertex, outside vertex, delta, and gamma slots equal the
+respective slots of $\mathcal D$.
+\item At each retained index, the
+\noderef{TashkinovSeriesStep} certification term is the original term at
+the included index, after dependent transport along the preceding data
+equalities.  Equivalently, the two proof terms are heterogeneously equal.
+\end{enumerate}
+No predecessor ETT is asserted at rung $n=1$.
+\end{lemma}
+\begin{proof}
+Write $m=n-1$.  Since $1<n$, we have $1\leq m$, $m+1=n$, and
+$m+2=n+1$.  There are consequently two canonical initial-segment
+inclusions of Lean finite index types:
+\[
+ \iota_T:\operatorname{Fin}(m+2)\longrightarrow
+             \operatorname{Fin}(n+2),\qquad
+ \iota_D:\operatorname{Fin}(m+1)\longrightarrow
+             \operatorname{Fin}(n+1),
+\]
+both sending an index to the index with the same numerical value.  For
+$a<m+2=n+1$ one has $a<n+2$, so $\iota_T(a)$ is well-defined; for
+$a<m+1=n$ one has $a<n+1$, so $\iota_D(a)$ is well-defined.  These are
+exactly the canonical `Fin.castLE' embeddings appearing in the Lean
+statement.
+
+Define truncated \noderef{TashkinovSeriesData} $\mathcal D^-$ for $m$
+rounds by
+\[
+ \mathcal D^-.\mathit{tree}(a)=\mathcal D.\mathit{tree}(\iota_T(a))
+\]
+for $a\in\operatorname{Fin}(m+2)$, and, for each
+$a\in\operatorname{Fin}(m+1)$, by composing each of the other eight
+arrays with $\iota_D$.  Thus the coloring, raw stored set, exact
+connecting-edge set, kind, chosen vertex, outside vertex, delta, and
+gamma at $a$ are literally the old entries at $\iota_D(a)$.  This
+definition proves all pointwise equalities in items 2 and 3, including
+equality of edge identities rather than merely equality of endpoints.
+
+We next certify every slot of the truncated data.  Fix
+$a\in\operatorname{Fin}(m+1)$ and inspect the original certificate at
+$\iota_D(a)$, supplied by \noderef{TashkinovSeries}.  If $a=0$, the
+certificate must be the initial constructor of
+\noderef{TashkinovSeriesStep}: the other three constructors have a
+positive successor as their output index.  Reuse its same $k$-triple,
+one-edge seed length, input-coloring equality, eight initial empty or
+absent data equalities, and exact \noderef{TashkinovClosure} from tree
+slot $0$ to tree slot $1$.  Both of those tree slots and data slot $0$
+are retained, so after unfolding $\mathcal D^-$ every required equality
+is the original one.
+
+Now suppose $a>0$, and write $a=b+1$.  From $a<m+1$ we obtain
+$b<m$.  Hence the old current data slot $b+1$, the old previous slot
+$b$, and the old tree slots $b+1$ and $b+2$ all lie in the retained
+ranges: explicitly,
+\[
+ b<m,\quad b+1\leq m<n+1,
+ \quad b+2\leq m+1=n<n+2.                 \tag{1}
+\]
+Before treating the three constructors, observe that the computed
+stored-color set at every retained current index is unchanged.  By
+\noderef{TashkinovStoredColors}, it is the union of raw stored sets at
+indices $h$ satisfying $h\leq a$, followed by deletion of the colors
+missing on tree slot $a$.  Every such $h$ is at most $a\leq m$, hence
+is retained.  Conversely every contributing truncated index is the
+image of exactly one such old index.  The raw stored sets, current
+coloring, and current tree are pointwise equal by construction, so the
+two finite unions, the deleted missing-color set, and therefore the
+computed stored-color sets are equal.                              \tag{2}
+
+Case-split the original positive certificate.
+
+If it is an SE certificate, reuse the same properness and one-uncolored
+proofs, closedness and failure of strong closedness, maximum-defective
+choice in the sense of \noderef{MaximumDefectiveChoice}, universal
+series alternative, current coloring, all seven
+current witness equalities, exact adjoined tree, closure, ordered
+extension, and strict length inequality.  The maximum-defective choice
+has the same tree, coloring, and computed stored set by (1)--(2).  A
+purported revisiting certificate at the retained previous slot uses only
+an earlier index at most that slot, intervening indices bounded by that
+slot, its current coloring, and tree slots no later than the current
+tree.  All are retained by (1); mapping each bounded index through
+$\iota_D$ turns it into an old revisiting certificate.  Thus the old
+nonexistence of a revisiting certificate proves the truncated
+nonexistence.  These observations make every reused SE witness have
+exactly the required truncated type.
+
+If it is a PE certificate, make the same bounded-index argument for the
+absence of a revisiting certificate and reuse the maximum-defective
+choice and the same witness to failure of the universal alternative.
+For the history-sensitive parallel color rule, an earlier PE index is
+required to be positive and at most $b$; every such index is retained,
+and the order-preserving inclusion preserves both those inequalities.
+The universal latest-index alternative is likewise quantified only over
+indices at most $b$.  Hence the same gamma satisfies
+\noderef{ParallelExtensionColor} for $\mathcal D^-$.  Reuse the exact
+second stable coloring, its properness and one-uncolored certificates,
+its stability relation, the same exit witness, the same component swap,
+the resulting properness and one-uncolored certificates, all seven
+current witness equalities, and the same closure, ordered extension, and
+strict inequality.  Equations (1)--(2) identify every tree, coloring,
+stored set, and history entry in these witnesses.
+
+If it is an RE certificate, rebuild its
+\noderef{RevisitingExtensionCertificate} using the very same earlier PE
+index, two colors, cycle, individual edge, endpoints, return vertex, and
+return path.  Its earlier index is at most $b$, and every intervening
+index is explicitly bounded by $b$, so all such indices map into and
+back from the truncated range.  The pointwise data equalities identify
+the earlier kind, gamma and delta, the current coloring, and every tree
+used by its membership and boundary conditions.  Reuse the original
+current-coloring equation, the same two-color raw stored set, the same
+singleton connecting-edge identity, the RE kind and four optional
+witness equalities, the same exact adjoined tree, closure, ordered
+extension, and strict inequality.  This constructs the truncated RE
+certificate with the original witnesses.
+
+The initial and three positive cases exhaust
+\noderef{TashkinovSeriesStep}.  They define a certificate at every
+index of $\mathcal D^-$ and hence a certified
+\noderef{TashkinovSeries} $\mathcal S^-$.  By construction, its
+certificate at $a$ was obtained from the original certificate at
+$\iota_D(a)$ with the same constructor and witnesses.  Conversely, the
+same case split transports any truncated certificate back to the old
+slot: every index quantified in a step constructor is bounded by its
+current slot, so no discarded array entry can occur, and (2) again
+identifies the sole computed stored-color expression.  Thus the two
+step propositions are equivalent; propositional extensionality
+identifies their dependent types.  Since certificates live in `Prop',
+proof irrelevance identifies the transported original proof with the
+chosen field of $\mathcal S^-$.  This is precisely the heterogeneous
+equality asserted in item 4.
+
+It remains to construct the predecessor ETT.  Give it rung number $m$,
+series $\mathcal S^-$, displayed tree
+\[
+ \mathcal D.\mathit{tree}(n)
+   =\mathcal D^-.\mathit{tree}(m+1),
+\]
+and displayed generating coloring
+\[
+ \mathcal D.\mathit{coloring}(n-1)
+   =\mathcal D^-.\mathit{coloring}(m).
+\]
+Its rung is positive because $1\leq m$.  Inspect the last retained step,
+at positive index $m$.  In each of its SE, PE, and RE cases, the
+`orderedExtension' and `strictExtension' fields say exactly that
+$\mathcal D^-.\mathit{tree}(m)$ is an ordered initial segment of
+$\mathcal D^-.\mathit{tree}(m+1)$ and has strictly smaller length.
+These are the above-penultimate and strict-above-penultimate fields of
+\noderef{ExtendedTashkinovTree}.  The displayed tree is the final stored
+tree of $\mathcal S^-$, so its below-final field is the reflexive
+\noderef{TreeSequenceInitialSegment}: the length inequality is
+reflexivity and the vertex and individual-edge comparisons are
+pointwise reflexivity.  The displayed generating-color equation is
+literal from the preceding definition.  Thus every ETT field is
+certified, not merely its terminal cardinality.
+
+Finally unfold \noderef{MaximumProperty}.  Its first clause for
+$\mathcal E^-$ uses tree slot $1$.  Since $m\geq1$, that slot is retained
+and is literally the old tree slot $1$; the original maximum property
+therefore gives the required equality with the Tashkinov order of $G$.
+For the second clause, fix $i$ with $1\leq i<m$.  Then $i<n$, so the
+original maximum-property bound applies at exactly the same numerical
+index.  The stage tree, current coloring, extension kind, and exact
+connecting-edge set agree by construction, and (2) identifies the
+computed stored-color set.  Consequently a proper one-uncolored coloring
+stable for the truncated data is the same coloring with the same
+stability assertion for the original data.  In the PE branch its seed is
+the same exact tree; in the SE or RE branch it is the same exact one-edge
+extension using the same edge identity.  The candidate closure is
+unchanged.  The old bound concludes that its vertex cardinality is at
+most that of old tree slot $i+1$, which is precisely truncated tree slot
+$i+1$.  This proves every bound with $i<m$ and hence maximum property for
+$\mathcal E^-$.  Taking the literal equality $m=n-1$ supplies item 1,
+and the construction supplies all remaining conclusions.
+\end{proof}
