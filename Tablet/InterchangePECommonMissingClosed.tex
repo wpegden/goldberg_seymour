@@ -1,0 +1,143 @@
+\begin{lemma}[Stable common-missing colors are closed on the PE core]
+Let $T$ be a positive-rung extended Tashkinov tree constructed from a
+$k$-triple $G,e_0,\varphi$, with arbitrary certified input coloring,
+terminal ladder tree $T_n$, terminal generating coloring $\varphi_n$,
+and terminal stored-color set $D_n$.  Assume that $T$ has maximum
+property and that its terminal extension is a PE.  Let $R_n$ and
+$T_n\vee R_n$ be the closure and exact ordered union in a hierarchy
+base under $\varphi_n$ (respectively `base.closure' and `base.core'
+in Lean).
+
+Assume, uniformly over every certified input coloring and generating
+coloring, that every positive-rung ETT $T'$ of rung number $s<n$ with
+maximum property satisfies all six lower-rung assertions:
+\begin{enumerate}
+\item $V(T')$ is elementary under its generating coloring;
+\item under every proper coloring leaving exactly $e_0$ uncolored and
+stable on its final ladder closure, that closure is interchangeable for
+two colors whenever at least one of them is missing there;
+\item stability descends at each PE support to the prefix before the
+support and to its first-appearance ladder stage, and stored pairs at
+distinct PE slots with distinct supports and the same first-appearance
+index are disjoint;
+\item at a terminal PE, the stored two-color component through the
+support meets the terminal ladder tree only at that support;
+\item every nonminimum endpoint of a defective boundary color precedes
+each later PE support or SE extension vertex allowed by its
+first-appearance index; and
+\item every proper terminal stable coloring leaving exactly $e_0$
+uncolored is a mod-coloring of the ETT.
+\end{enumerate}
+
+Let $\sigma_n$ be proper, leave exactly $e_0$ uncolored, and be
+$T_n\oplus R_n,D_n,\varphi_n$-stable.
+
+For every color $c\in[k]$, if
+$c\in\overline\sigma_n(T_n)\cap\overline\sigma_n(R_n)$, then
+$\{c\}$ is closed on $T_n\vee R_n$ under $\sigma_n$.
+All boundaries, trees, and two-color components use the original edge
+type, so distinct parallel edges retain their identities.
+\end{lemma}
+\begin{proof}
+Write $X=V(T_n)$, $Y=V(R_n)$, and
+$U=V(T_n\vee R_n)$, with vertex sets understood as in
+\noderef{TreeSequenceVertexSet}.  The generating-color field of
+\noderef{ExtendedTashkinovTree} identifies $\varphi_n$ with the last
+coloring of the certified series.  Eliminate the last certificate in
+\noderef{TashkinovSeries} using the terminal-PE hypothesis.  The PE
+constructor of \noderef{TashkinovSeriesStep} supplies the exact support
+$v_n$, exact connecting-edge identity $f_n$, and colors
+$\gamma_n,\delta_n$.  It also supplies properness and exact
+one-uncoloredness of $\varphi_n$, and the equations recording the
+terminal $\gamma_n,\delta_n$-switch.  No endpoint pair is substituted
+for $f_n$.
+
+The parallel clause of \noderef{HierarchyBase} says that $R_n$ is a
+$\varphi_n$-closure of the ordered prefix $T_n(v_n)$, and supplies
+an \noderef{OrderedTreeUnion} certificate with
+\[
+                         U=X\cup Y.                       \tag{1}
+\]
+It also says that the missing-color set of $T_n$ under the base
+coloring is its missing-color set under $\varphi_n$.
+The two conjuncts of \noderef{CombinedStableColoring}, with stability
+expanded as in \noderef{StableColoring}, say that
+$\sigma_n$ is $(T_n,D_n,\varphi_n)$-stable and simultaneously
+$(R_n,\varnothing,\varphi_n)$-stable.  Applying
+\noderef{CombinedStableClosurePreserved} gives, for every displayed edge
+identity $g$ of either tree,
+\[
+             \sigma_n(g)=\varphi_n(g),                    \tag{2}
+\]
+and proves that the same ordered tree $R_n$, with the same edge
+identities, is a $\sigma_n$-closure of $T_n(v_n)$.
+
+We record three preliminary facts, with their hypotheses checked at the
+coloring at which they will be used.
+
+First, $U$ is elementary under $\sigma_n$.  Indeed, retain the same
+core, closure, and support position from the hierarchy base.  Equality
+of missing-color sets on $T_n$ is the vertex clause of the first stable
+relation.  The preceding paragraph supplies the required
+$\sigma_n$-closure, and the old ordered-union certificate is unchanged.
+These data form a hierarchy base under $\sigma_n$.  The first stable
+relation, properness, exact one-uncoloredness, positivity, maximum
+property, the terminal-PE equation, and the displayed six lower-rung
+assertions are precisely the hypotheses of
+\noderef{ParallelClosureUnionElementary}.  Hence
+\[
+                  U\text{ is elementary under }\sigma_n.   \tag{3}
+\]
+
+Second, every color missing on both $T_n$ and $R_n$ is closed on
+their union under $\sigma_n$.  For the pre-step elementarity premise of
+\noderef{ParallelCommonMissingClosed}, distinguish the two permitted
+positive-rung cases.  If $n>1$, apply
+\noderef{CertifiedETTPredecessor}.  It returns an actual certified ETT
+of rung $n-1$, with maximum property, terminal tree exactly $T_n$,
+generating coloring exactly $\varphi_{n-1}$, and entrywise equality of
+all retained arrays and certificates.  Its rung is positive and smaller
+than $n$, so lower assertion (i), instantiated with its displayed input
+and generating coloring, proves that $V(T_n)$ is elementary under
+$\varphi_{n-1}$.  If $n=1$, slot zero is the initial tuple and the same
+claim is the first conclusion of \noderef{TechnicalTheoremBase}.
+Thus every hypothesis of \noderef{ParallelCommonMissingClosed} is now
+verified, and that lemma gives
+\[
+ T_n\vee R_n\text{ is }
+ \bigl(\overline\varphi_n(T_n)\cap
+       \overline\varphi_n(R_n)\bigr)\text{-closed under }\varphi_n.
+                                                               \tag{4}
+\]
+The vertex clauses of the two stable relations identify both constituent
+missing-color sets under $\varphi_n$ and $\sigma_n$.  The PE constructor
+of \noderef{TashkinovSeriesStep} says that $\varphi_n$ is proper and
+leaves exactly $e_0$ uncolored; the same two facts for $\sigma_n$ are
+hypotheses.  We may therefore apply the symmetry clause of \noderef{sc2}
+separately to the two constituent stable relations.  It gives the reverse
+relations saying that $\varphi_n$ is $(T_n,D_n,\sigma_n)$-stable and is
+also $(R_n,\varnothing,\sigma_n)$-stable.
+
+Now let $c$ be common missing under $\sigma_n$, and suppose that an exact
+edge identity $g$ lies in the $c$-colored boundary of $U$ under
+$\sigma_n$.  By \noderef{BoundaryEdges}, name its endpoints so that the
+inside endpoint $p$ lies in $U$ and the other lies outside $U$.  Equation
+(1) gives $p\in X$ or $p\in Y$, and \noderef{TreeIncidentEdge} makes $g$
+incident with the corresponding constituent tree.  If $p\in X$, then
+$c\in\overline\sigma_n(T_n)$ and the edge clause of the reverse
+$T_n$-stable relation gives $\varphi_n(g)=\sigma_n(g)=c$.  If $p\in Y$,
+the reverse $R_n$-stable relation gives the same equality.  Boundary
+membership depends only on the exact edge endpoints, while the color
+filter is \noderef{BoundaryColorEdges}; hence $g$ is a $c$-colored
+boundary identity of $U$ under $\varphi_n$.  The vertex clauses also put
+$c$ in both constituent missing-color sets under $\varphi_n$, so this
+contradicts (4).  Consequently
+\[
+ c\in\overline\sigma_n(T_n)\cap\overline\sigma_n(R_n)
+ \quad\Longrightarrow\quad
+ \partial_{\sigma_n,c}(U)=\varnothing.                       \tag{5}
+\]
+This is a statement about exact members of the boundary set in
+\noderef{TreeColorSetClosed}; common missing membership has its vertex
+witness by \noderef{TreeMissingColors}.
+\end{proof}

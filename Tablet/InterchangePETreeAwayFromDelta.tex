@@ -1,0 +1,220 @@
+\begin{lemma}[Terminal PE tree interchangeability away from delta]
+Let $T$ be a positive-rung extended Tashkinov tree constructed from a
+$k$-triple $G,e_0,\varphi$, with arbitrary certified input coloring,
+terminal ladder tree $T_n$, terminal generating coloring $\varphi_n$,
+and terminal stored-color set $D_n$.  Assume that $T$ has maximum
+property and that its terminal extension is a PE.  Let $R_n$ and
+$T_n\vee R_n$ be the closure and exact ordered union in a hierarchy
+base under $\varphi_n$ (respectively `base.closure' and `base.core'
+in Lean).
+
+Assume, uniformly over every certified input coloring and generating
+coloring, that every positive-rung ETT $T'$ of rung number $s<n$ with
+maximum property satisfies all six lower-rung assertions:
+\begin{enumerate}
+\item $V(T')$ is elementary under its generating coloring;
+\item under every proper coloring leaving exactly $e_0$ uncolored and
+stable on its final ladder closure, that closure is interchangeable for
+two colors whenever at least one of them is missing there;
+\item stability descends at each PE support to the prefix before the
+support and to its first-appearance ladder stage, and stored pairs at
+distinct PE slots with distinct supports and the same first-appearance
+index are disjoint;
+\item at a terminal PE, the stored two-color component through the
+support meets the terminal ladder tree only at that support;
+\item every nonminimum endpoint of a defective boundary color precedes
+each later PE support or SE extension vertex allowed by its
+first-appearance index; and
+\item every proper terminal stable coloring leaving exactly $e_0$
+uncolored is a mod-coloring of the ETT.
+\end{enumerate}
+
+Let $\sigma_n$ be proper, leave exactly $e_0$ uncolored, and be
+$T_n\oplus R_n,D_n,\varphi_n$-stable.
+
+Let $v_n\in V(G)$ and $\gamma_n,\delta_n\in[k]$ be exposed by the
+exact terminal option-slot equalities
+\[
+ \mathcal T.\mathrm{chosenVertex}(n)=\mathsf{some}(v_n),\qquad
+ \mathcal T.\mathrm{gamma}(n)=\mathsf{some}(\gamma_n),\qquad
+ \mathcal T.\mathrm{delta}(n)=\mathsf{some}(\delta_n).
+\]
+For arbitrary $\alpha,\beta\in[k]$, if
+$\alpha\in\overline\sigma_n(T_n)$,
+$\alpha\ne\delta_n$, and $\beta\ne\delta_n$, then
+$\alpha,\beta$ are $T_n$-interchangeable under $\sigma_n$.
+All boundaries, trees, and two-color components use the original edge
+type, so distinct parallel edges retain their identities.
+\end{lemma}
+\begin{proof}
+Write $X=V(T_n)$, $Y=V(R_n)$, and
+$U=V(T_n\vee R_n)$, with vertex sets understood as in
+\noderef{TreeSequenceVertexSet}.  The generating-color field of
+\noderef{ExtendedTashkinovTree} identifies $\varphi_n$ with the last
+coloring of the certified series.  Eliminate the last certificate in
+\noderef{TashkinovSeries} using the terminal-PE hypothesis.  The PE
+constructor of \noderef{TashkinovSeriesStep}, together with the three
+assumed last-slot equalities, identifies its support and colors with the
+displayed $v_n,\gamma_n,\delta_n$ and supplies the exact connecting-edge
+identity $f_n$.  It also supplies properness and exact
+one-uncoloredness of $\varphi_n$, and the equations recording the
+terminal $\gamma_n,\delta_n$-switch.  No endpoint pair is substituted
+for $f_n$.
+
+The parallel clause of \noderef{HierarchyBase} says that $R_n$ is a
+$\varphi_n$-closure of the ordered prefix $T_n(v_n)$, and supplies
+an \noderef{OrderedTreeUnion} certificate with
+\[
+                         U=X\cup Y.                       \tag{1}
+\]
+It also says that the missing-color set of $T_n$ under the base
+coloring is its missing-color set under $\varphi_n$.
+The two conjuncts of \noderef{CombinedStableColoring}, with stability
+expanded as in \noderef{StableColoring}, say that
+$\sigma_n$ is $(T_n,D_n,\varphi_n)$-stable and simultaneously
+$(R_n,\varnothing,\varphi_n)$-stable.  Applying
+\noderef{CombinedStableClosurePreserved} gives, for every displayed edge
+identity $g$ of either tree,
+\[
+             \sigma_n(g)=\varphi_n(g),                    \tag{2}
+\]
+and proves that the same ordered tree $R_n$, with the same edge
+identities, is a $\sigma_n$-closure of $T_n(v_n)$.
+
+We record three preliminary facts, with their hypotheses checked at the
+coloring at which they will be used.
+
+First, $U$ is elementary under $\sigma_n$.  Indeed, retain the same
+core, closure, and support position from the hierarchy base.  Equality
+of missing-color sets on $T_n$ is the vertex clause of the first stable
+relation.  The preceding paragraph supplies the required
+$\sigma_n$-closure, and the old ordered-union certificate is unchanged.
+These data form a hierarchy base under $\sigma_n$.  The first stable
+relation, properness, exact one-uncoloredness, positivity, maximum
+property, the terminal-PE equation, and the displayed six lower-rung
+assertions are precisely the hypotheses of
+\noderef{ParallelClosureUnionElementary}.  Hence
+\[
+                  U\text{ is elementary under }\sigma_n.   \tag{3}
+\]
+
+The vertex clauses of the two stable relations identify both constituent
+missing-color sets under $\varphi_n$ and $\sigma_n$.  The PE constructor
+of \noderef{TashkinovSeriesStep} says that $\varphi_n$ is proper and
+leaves exactly $e_0$ uncolored; the same two facts for $\sigma_n$ are
+hypotheses.  We may therefore apply the symmetry clause of \noderef{sc2}
+separately to the two constituent stable relations.  It gives the reverse
+relations saying that $\varphi_n$ is $(T_n,D_n,\sigma_n)$-stable and is
+also $(R_n,\varnothing,\sigma_n)$-stable.
+
+Third, we establish the following restricted terminal-tree assertion:
+\[
+ \begin{split}
+ a\in\overline\sigma_n(T_n),\quad
+ a,b\notin\{\gamma_n,\delta_n\}
+ \quad\Longrightarrow\quad
+ a,b\text{ are }T_n\text{-interchangeable under }\sigma_n.
+                                                               \tag{6}
+ \end{split}
+\]
+Apply \noderef{ExtensionBase} with the six lower-rung assertions, the
+given maximum property, properness, exact one-uncoloredness, and the
+first stable relation.  Its terminal-PE conclusion says that the
+$\gamma_n,\delta_n$-component through $v_n$ meets $X$ exactly at
+$v_n$.  Thus all hypotheses of
+\noderef{ParallelExtensionUndoStable} hold.  If
+\[
+ \tau=\sigma_n/P_{v_n}(\gamma_n,\delta_n,\sigma_n),
+\]
+the PE certificate gives $\gamma_n\ne\delta_n$: the rule
+\noderef{ParallelExtensionColor} makes $\gamma_n$ missing at $v_n$ under
+the selected coloring, while \noderef{MaximumDefectiveChoice} supplies the
+exact edge identity $f_n$ incident with $v_n$ and colored $\delta_n$.
+Thus \noderef{PresentColors} and \noderef{MissingColors} put the two colors
+on opposite sides of the same complement.  Hence
+\noderef{TwoColorComponentSwapProper},
+applied to the stated properness of $\sigma_n$, proves that $\tau$ is
+proper.  To verify its uncolored edge exactly, unfold
+\noderef{IsOneEdgeUncolored}.  The value $\sigma_n(e_0)=\mathsf{none}$
+is fixed by the definition \noderef{TwoColorComponentSwap}, so
+$\tau(e_0)=\mathsf{none}$.  If $g\ne e_0$, the same hypothesis supplies
+a color $d$ with $\sigma_n(g)=\mathsf{some}(d)$.  The swap either fixes
+this value or, when the edge-node of $g$ is in the selected component and
+$d\in\{\gamma_n,\delta_n\}$, replaces it by the other displayed color.
+In every case $\tau(g)$ is still a colored value.  Thus $\tau$ leaves
+exactly $e_0$ uncolored.
+
+The actual conclusion of \noderef{ParallelExtensionUndoStable} now makes
+$\tau$ stable on $T_n$ relative to the preceding stored set and preceding
+generating coloring.  Since $(a,b)$ avoid the two switched colors,
+\noderef{TwoColorComponentSwap} shows edge by edge that the
+$(a,b)$-incidence graph, its components, and the missingness of $a$ on
+$T_n$ are identical for $\tau$ and $\sigma_n$.
+When $n>1$, \noderef{CertifiedETTPredecessor} supplies the actual
+rung-$n-1$ ETT with inherited maximum property, terminal tree exactly
+$T_n$, preceding generating coloring, and all retained certificate
+arrays equal to the corresponding arrays of $T$.  Lower assertion (ii)
+applied to that predecessor and to $\tau$ gives interchangeability on
+its final ladder closure $T_n$.  When $n=1$, the same conclusion is the
+interchangeability clause of \noderef{TechnicalTheoremBase}.  Transport across the identical
+incidence graphs proves (6).
+
+Before proving (iii), we strengthen (6) to the paper's observation
+\[
+ \begin{split}
+ a\in\overline\sigma_n(T_n),\qquad
+ a\ne\delta_n,\quad b\ne\delta_n
+ \quad\Longrightarrow\quad
+ a,b\text{ are }T_n\text{-interchangeable}.                 \tag{8}
+ \end{split}
+\]
+The unconditional clause of \noderef{HkuParallelBoundaryStructure} gives
+\[
+ \partial_{\varphi_n,\gamma_n}(T_n)=\{f_n\}.                  \tag{8a}
+\]
+For the conditional clause of the same lemma, pre-step elementarity is
+available from the identical predecessor argument just used: lower
+assertion (i) applies to the certified predecessor when $n>1$, and
+\noderef{TechnicalTheoremBase} applies when $n=1$.  Since $\gamma_n\ne\delta_n$, if $\gamma_n$ were
+missing on $T_n$ under $\varphi_n$, that clause would make the left side
+of (8a) empty, contradicting the membership of the exact identity $f_n$
+in its singleton right side.  Therefore
+$\gamma_n\notin\overline\varphi_n(T_n)$.  The PE constructor of
+\noderef{TashkinovSeriesStep} gives the exact current stored-pair equation
+$S_n=\{\delta_n,\gamma_n\}$.  In the set difference defining $D_n$ in
+\noderef{TashkinovStoredColors}, this puts $\gamma_n$ in the cumulative
+stored-color union, and the just-proved nonmissingness prevents its
+removal.  Hence $\gamma_n\in D_n$.
+
+Use now both directions of the $T_n$-stable relation: the forward
+relation is a constituent of \noderef{CombinedStableColoring}, and its
+reverse was obtained from \noderef{sc2} above.  Since $\gamma_n\in D_n$,
+their edge clauses apply whether a tree-incident edge is
+$\gamma_n$-colored under $\varphi_n$ or under $\sigma_n$.  Exact boundary
+membership is coloring-independent, so the two inclusions obtained from
+the forward and reverse relations transport (8a) to
+\[
+ \partial_{\sigma_n,\gamma_n}(T_n)=\{f_n\}.                  \tag{8b}
+\]
+
+Now take $a$ as in (8).  The stable vertex clause makes it missing on
+$T_n$ under $\varphi_n$.  Since $a\ne\delta_n$, the conditional clause of
+\noderef{HkuParallelBoundaryStructure} makes its $\varphi_n$-boundary
+empty.  If its $\sigma_n$-boundary contained an exact identity, the edge
+clause of the reverse $T_n$-stable relation would give that identity color
+$a$ under $\varphi_n$, a contradiction.  Thus the $a$-boundary under
+$\sigma_n$ is empty.  Equation (8b) then gives $a\ne\gamma_n$.  If
+$b\ne\gamma_n$, (8) is (6).  If $b=\gamma_n$, then (3), unfolded using
+\noderef{ColoredVertexSetElementary}, makes $X\subseteq U$ elementary, the
+$a$-boundary of $X$ is empty, and the $\gamma_n$-boundary contains
+only $f_n$.  Properness and
+\noderef{TwoColorComponentSpanningPath} then allow at most one paper
+$(a,\gamma_n)$-path component to meet $X$.  For two nontrivial components,
+the spanning paths would require two distinct boundary identities or give
+a repeated missing color in $X$.  If one component were a singleton at a
+tree vertex, both colors would be missing there; any second singleton or
+any tree end of a trapped nontrivial component would repeat a missing
+color, while a nontrivial component crossing $X$ cannot have both ends
+outside through the sole boundary identity $f_n$.  Thus a singleton cannot
+coexist with a second path component meeting $X$.  This proves (8).
+\end{proof}

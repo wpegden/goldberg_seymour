@@ -1,69 +1,7 @@
-import Tablet.BoundaryColorEdges
-import Tablet.BoundaryColorVertex
-import Tablet.BoundaryEdges
-import Tablet.CertifiedETTPredecessor
-import Tablet.ColoredVertexSetElementary
-import Tablet.CombinedStableClosurePreserved
-import Tablet.CombinedStableColoring
-import Tablet.CorrespondingExtendedTashkinovTree
-import Tablet.DefectiveColor
-import Tablet.ETTFirstAppearanceIndex
-import Tablet.ExtendedTashkinovTree
-import Tablet.ExtensionBase
-import Tablet.ExtensionRules
-import Tablet.HierarchyBase
-import Tablet.HkuParallelBoundaryStructure
-import Tablet.Incident
-import Tablet.IsOneEdgeUncolored
-import Tablet.IsProperEdgeColoring
-import Tablet.KTriple
-import Tablet.LooplessMultigraph
-import Tablet.MaximumDefectiveChoice
-import Tablet.MaximumDegree
-import Tablet.MaximumProperty
-import Tablet.MaximumPropertyTransport
-import Tablet.MissingColors
-import Tablet.ModColoring
-import Tablet.OrderedTreeUnion
-import Tablet.OutsideKempeRecoloringStable
-import Tablet.OutsideKempeRecoloring
-import Tablet.OutsideTreeColorSwap
-import Tablet.ParallelClosureUnionElementary
-import Tablet.ParallelCommonMissingClosed
-import Tablet.ParallelExtensionColor
-import Tablet.ParallelExtensionUndoStable
-import Tablet.PresentColors
-import Tablet.StableColoring
-import Tablet.StableColoringBeforeVertex
-import Tablet.TashkinovAugmentation
-import Tablet.TashkinovAugmentationSequence
-import Tablet.TashkinovClosure
-import Tablet.TashkinovClosureExists
-import Tablet.TashkinovExtensionKind
-import Tablet.TashkinovSeries
-import Tablet.TashkinovSeriesStep
-import Tablet.TashkinovStoredColors
-import Tablet.Td
-import Tablet.TechnicalTheoremBase
-import Tablet.TreeColorSetClosed
-import Tablet.TreeIncidentEdge
-import Tablet.TreeInterchangeable
-import Tablet.TreeMissingColors
-import Tablet.TreeSequence
-import Tablet.TreeSequenceInitialSegment
-import Tablet.TreeSequencePrefix
-import Tablet.TreeSequenceVertexSet
-import Tablet.TreeVertexOrder
-import Tablet.TwoColorComponent
-import Tablet.TwoColorComponentSpanningPath
-import Tablet.TwoColorComponentSwap
-import Tablet.TwoColorComponentSwapProper
-import Tablet.TwoColorComponentsDisjoint
-import Tablet.TwoColorIncidenceDegreeAtMostTwo
-import Tablet.TwoColorIncidenceGraph
-import Tablet.TwoColorPathComponent
-import Tablet.TwoColorNontrivialPathComponent
-import Tablet.sc2
+import Tablet.InterchangePEClosedCore
+import Tablet.InterchangePEClosureConstituent
+import Tablet.InterchangePEMixedCore
+import Tablet.InterchangePETreeConstituent
 
 -- [TABLET NODE: interchange]
 theorem interchange {V E : Type*}
@@ -200,4 +138,13 @@ theorem interchange {V E : Type*}
       beta ∈ TreeMissingColors sigma base.closure →
       TreeInterchangeable G base.core sigma alpha beta) := by
 -- BODY
-  sorry
+  dsimp
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · exact InterchangePEClosureConstituent G k e0 input T generating sigma
+      ett hMP hpositive hlower hPE base hproper hone hstable alpha beta
+  · exact InterchangePETreeConstituent G k e0 input T generating sigma
+      ett hMP hpositive hlower hPE base hproper hone hstable alpha beta
+  · exact InterchangePEClosedCore G k e0 input T generating sigma
+      ett hMP hpositive hlower hPE base hproper hone hstable alpha beta
+  · exact InterchangePEMixedCore G k e0 input T generating sigma
+      ett hMP hpositive hlower hPE base hproper hone hstable alpha beta

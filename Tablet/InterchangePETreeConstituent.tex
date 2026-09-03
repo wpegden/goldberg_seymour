@@ -1,0 +1,86 @@
+\begin{lemma}[Interchangeability on the terminal tree constituent of a PE]
+Let $T$ be a positive-rung extended Tashkinov tree constructed from a
+$k$-triple $G,e_0,\varphi$, with arbitrary certified input coloring,
+terminal ladder tree $T_n$, terminal generating coloring $\varphi_n$,
+and terminal stored-color set $D_n$.  Assume that $T$ has maximum
+property and that its terminal extension is a PE.  Let $R_n$ and
+$T_n\vee R_n$ be the closure and exact ordered union in a hierarchy
+base under $\varphi_n$ (respectively `base.closure' and `base.core'
+in Lean).
+
+Assume, uniformly over every certified input coloring and generating
+coloring, that every positive-rung ETT $T'$ of rung number $s<n$ with
+maximum property satisfies all six lower-rung assertions:
+\begin{enumerate}
+\item $V(T')$ is elementary under its generating coloring;
+\item under every proper coloring leaving exactly $e_0$ uncolored and
+stable on its final ladder closure, that closure is interchangeable for
+two colors whenever at least one of them is missing there;
+\item stability descends at each PE support to the prefix before the
+support and to its first-appearance ladder stage, and stored pairs at
+distinct PE slots with distinct supports and the same first-appearance
+index are disjoint;
+\item at a terminal PE, the stored two-color component through the
+support meets the terminal ladder tree only at that support;
+\item every nonminimum endpoint of a defective boundary color precedes
+each later PE support or SE extension vertex allowed by its
+first-appearance index; and
+\item every proper terminal stable coloring leaving exactly $e_0$
+uncolored is a mod-coloring of the ETT.
+\end{enumerate}
+
+Let $\sigma_n$ be proper, leave exactly $e_0$ uncolored, and be
+$T_n\oplus R_n,D_n,\varphi_n$-stable.
+
+For arbitrary $\alpha,\beta\in[k]$,
+\[
+ \alpha\in\overline\sigma_n(T_n)
+ \quad\Longrightarrow\quad
+ \alpha,\beta\text{ are $T_n$-interchangeable under }\sigma_n.
+\]
+All boundaries, trees, and two-color components use the original edge
+type, so distinct parallel edges retain their identities.
+\end{lemma}
+\begin{proof}
+Eliminate the certified terminal step using
+\noderef{TashkinovSeries} and its PE-kind equation.  The PE constructor
+of \noderef{TashkinovSeriesStep} supplies the exact support $v_n$,
+connecting-edge identity $f_n$, and colors $\gamma_n,\delta_n$, along
+with the last-slot chosen-vertex, gamma, and delta equalities required by
+\noderef{InterchangePETreeAwayFromDelta}.  Its selected coloring has
+$\gamma_n$ missing at $v_n$ by \noderef{ParallelExtensionColor}, while
+the exact identity $f_n$ is incident there and has color $\delta_n$ by
+\noderef{MaximumDefectiveChoice}.  Properness makes these colors
+distinct.  The terminal \noderef{TwoColorComponentSwap} changes that
+unique incident $\delta_n$-edge to $\gamma_n$, so $\delta_n$ is
+missing at $v_n$ under $\varphi_n$; the vertex clause of
+\noderef{CombinedStableColoring} transfers this missingness to
+$\sigma_n$.
+
+The parallel field of \noderef{HierarchyBase} puts $v_n$ in the
+ordered prefix of $T_n$ used to generate $R_n$.  The augmentation
+sequence in \noderef{TashkinovClosure} retains that prefix, so
+$v_n\in V(T_n)\cap V(R_n)$, and hence $\delta_n$ is missing on both
+constituents.  Applying
+\noderef{InterchangePECommonMissingClosed} shows that $\delta_n$ is
+closed on the exact ordered union $T_n\vee R_n$.
+
+Now let $\alpha$ be missing on $T_n$.  If
+$\alpha\ne\delta_n$ and $\beta\ne\delta_n$, apply
+\noderef{InterchangePETreeAwayFromDelta} to the exact terminal data.
+If $\alpha=\delta_n$, then $\delta_n$ is missing and closed on the
+core, so \noderef{InterchangePEClosedCore} makes
+$\delta_n,\beta$ interchangeable on the core.  Expanding
+\noderef{TreeInterchangeable}, two path components meeting $T_n$ also
+meet the core, so this conclusion restricts to $T_n$.
+
+The only remaining case has $\beta=\delta_n$.  Apply
+\noderef{InterchangePEClosedCore} with the colors in reverse order:
+it gives $\delta_n,\alpha$ interchangeability on the core.
+The definitions \noderef{TwoColorIncidenceGraph},
+\noderef{TwoColorComponent}, \noderef{TwoColorPathComponent}, and
+\noderef{TreeInterchangeable} are invariant when their two displayed
+colors are exchanged.  Hence $\alpha,\delta_n$ is interchangeable on
+the core and therefore on $T_n$.  This proves the claim in every case,
+including singleton path components.
+\end{proof}

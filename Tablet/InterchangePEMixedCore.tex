@@ -1,0 +1,234 @@
+\begin{lemma}[Interchangeability across the two PE constituents]
+Let $T$ be a positive-rung extended Tashkinov tree constructed from a
+$k$-triple $G,e_0,\varphi$, with arbitrary certified input coloring,
+terminal ladder tree $T_n$, terminal generating coloring $\varphi_n$,
+and terminal stored-color set $D_n$.  Assume that $T$ has maximum
+property and that its terminal extension is a PE.  Let $R_n$ and
+$T_n\vee R_n$ be the closure and exact ordered union in a hierarchy
+base under $\varphi_n$ (respectively `base.closure' and `base.core'
+in Lean).
+
+Assume, uniformly over every certified input coloring and generating
+coloring, that every positive-rung ETT $T'$ of rung number $s<n$ with
+maximum property satisfies all six lower-rung assertions:
+\begin{enumerate}
+\item $V(T')$ is elementary under its generating coloring;
+\item under every proper coloring leaving exactly $e_0$ uncolored and
+stable on its final ladder closure, that closure is interchangeable for
+two colors whenever at least one of them is missing there;
+\item stability descends at each PE support to the prefix before the
+support and to its first-appearance ladder stage, and stored pairs at
+distinct PE slots with distinct supports and the same first-appearance
+index are disjoint;
+\item at a terminal PE, the stored two-color component through the
+support meets the terminal ladder tree only at that support;
+\item every nonminimum endpoint of a defective boundary color precedes
+each later PE support or SE extension vertex allowed by its
+first-appearance index; and
+\item every proper terminal stable coloring leaving exactly $e_0$
+uncolored is a mod-coloring of the ETT.
+\end{enumerate}
+
+Let $\sigma_n$ be proper, leave exactly $e_0$ uncolored, and be
+$T_n\oplus R_n,D_n,\varphi_n$-stable.
+
+For arbitrary $\alpha,\beta\in[k]$, if
+$\alpha\in\overline\sigma_n(T_n)$ and
+$\beta\in\overline\sigma_n(R_n)$, then $\alpha,\beta$ are
+$T_n\vee R_n$-interchangeable under $\sigma_n$.
+All boundaries, trees, and two-color components use the original edge
+type, so distinct parallel edges retain their identities.
+\end{lemma}
+\begin{proof}
+Write $X=V(T_n)$, $Y=V(R_n)$, and
+$U=V(T_n\vee R_n)$, with vertex sets understood as in
+\noderef{TreeSequenceVertexSet}.  The generating-color field of
+\noderef{ExtendedTashkinovTree} identifies $\varphi_n$ with the last
+coloring of the certified series.  Eliminate the last certificate in
+\noderef{TashkinovSeries} using the terminal-PE hypothesis.  The PE
+constructor of \noderef{TashkinovSeriesStep} supplies the exact support
+$v_n$, exact connecting-edge identity $f_n$, and colors
+$\gamma_n,\delta_n$.  It also supplies properness and exact
+one-uncoloredness of $\varphi_n$, and the equations recording the
+terminal $\gamma_n,\delta_n$-switch.  No endpoint pair is substituted
+for $f_n$.
+
+The parallel clause of \noderef{HierarchyBase} says that $R_n$ is a
+$\varphi_n$-closure of the ordered prefix $T_n(v_n)$, and supplies
+an \noderef{OrderedTreeUnion} certificate with
+\[
+                         U=X\cup Y.                       \tag{1}
+\]
+It also says that the missing-color set of $T_n$ under the base
+coloring is its missing-color set under $\varphi_n$.
+The two conjuncts of \noderef{CombinedStableColoring}, with stability
+expanded as in \noderef{StableColoring}, say that
+$\sigma_n$ is $(T_n,D_n,\varphi_n)$-stable and simultaneously
+$(R_n,\varnothing,\varphi_n)$-stable.  Applying
+\noderef{CombinedStableClosurePreserved} gives, for every displayed edge
+identity $g$ of either tree,
+\[
+             \sigma_n(g)=\varphi_n(g),                    \tag{2}
+\]
+and proves that the same ordered tree $R_n$, with the same edge
+identities, is a $\sigma_n$-closure of $T_n(v_n)$.
+
+We record three preliminary facts, with their hypotheses checked at the
+coloring at which they will be used.
+
+First, $U$ is elementary under $\sigma_n$.  Indeed, retain the same
+core, closure, and support position from the hierarchy base.  Equality
+of missing-color sets on $T_n$ is the vertex clause of the first stable
+relation.  The preceding paragraph supplies the required
+$\sigma_n$-closure, and the old ordered-union certificate is unchanged.
+These data form a hierarchy base under $\sigma_n$.  The first stable
+relation, properness, exact one-uncoloredness, positivity, maximum
+property, the terminal-PE equation, and the displayed six lower-rung
+assertions are precisely the hypotheses of
+\noderef{ParallelClosureUnionElementary}.  Hence
+\[
+                  U\text{ is elementary under }\sigma_n.   \tag{3}
+\]
+
+By \noderef{InterchangePECommonMissingClosed}, a color missing
+on both constituents is closed on $U$.  By
+\noderef{InterchangePEClosureConstituent}, $R_n$ is interchangeable
+whenever one of the two colors is missing there.  By
+\noderef{InterchangePETreeConstituent}, the analogous statement holds
+for $T_n$.  Finally, \noderef{InterchangePEClosedCore} gives
+interchangeability on $U$ whenever a missing color there is closed.
+These statements include singleton components through
+\noderef{TwoColorPathComponent}, not only components containing an
+edge-node.
+
+It remains to prove (iv).  Choose
+$u\in X$ missing $\alpha$ and $v\in Y$ missing $\beta$.
+Suppose that roots $z_1,z_2$ witness two unequal full paper
+$\alpha,\beta$-path components $C_1,C_2$ meeting $U$, possibly including
+a singleton component, as in the expanded
+definition \noderef{TreeInterchangeable}.  In particular,
+\noderef{TwoColorPathComponent} for either root gives
+$\alpha\ne\beta$.
+
+We first locate the two missing-color witnesses.  If $u\in Y$, then
+$\alpha$ is common missing, so (5) makes it closed on $U$; conclusion
+(iii) would say that $\alpha,\beta$ are $U$-interchangeable, contrary to
+$C_1,C_2$.  Hence $u\notin Y$.  If $v\in X$, then $\beta$ is common
+missing and closed by (5).  Applying conclusion (iii) with the two colors
+reversed gives $\beta,\alpha$ interchangeability.  The incidence graph,
+path-component predicate, and \noderef{TreeInterchangeable} are symmetric
+in their two displayed colors, so this again contradicts $C_1,C_2$.
+Thus $v\notin X$, and
+\[
+                         u\in X-Y,\qquad v\in Y-X.             \tag{11}
+\]
+In particular $u\ne v$.  Elementariness (3), in the sense of
+\noderef{ColoredVertexSetElementary}, together with $\beta$
+missing at $v$ and $\alpha$ missing at $u$, shows respectively that
+$\beta$ is present at $u$ and $\alpha$ is present at $v$.  Properness
+then makes each of these present colors occur on one exact incident edge.
+Consequently the full components $P_u,P_v$ through the vertex-nodes
+$u,v$ each contain a genuine edge-node and have their root vertex of
+degree one.  Along with $\alpha\ne\beta$, these give
+\noderef{TwoColorNontrivialPathComponent}, and in particular
+\noderef{TwoColorPathComponent}.
+
+We now identify them with the counterexample components.  By (1), each
+$C_i$ meets $X$ or $Y$.  Conclusion (i), applied with the common
+$Y$-missing color $\beta$ and using color symmetry, permits at most one
+of $C_1,C_2$ to meet $Y$.  Conclusion (ii), using $\alpha$ missing on
+$X$, permits at most one to meet $X$.  Since both components meet
+$X\cup Y$, no one of them can meet both constituents: the other component
+would then have to meet one constituent and violate the corresponding
+uniqueness.  After relabeling, $C_1$ meets $X$ and not $Y$, while $C_2$
+meets $Y$ and not $X$.  Since $P_u$ is a path component meeting $X$,
+conclusion (ii), applied to $P_u$ and $C_1$, identifies them.  Similarly
+conclusion (i) identifies $P_v$ with $C_2$.  Thus $P_u\ne P_v$,
+and \noderef{TwoColorComponentsDisjoint} makes their full node supports
+disjoint.  If any vertex-node of $P_v$ lay in $X$, then $P_v$ and $P_u$
+would be two path components meeting $T_n$, and conclusion (ii) would
+force them equal.  Therefore the full component $P_v$ has no vertex in
+$X$.
+
+Define $\sigma'_n$ by \noderef{TwoColorComponentSwap}, swapping
+$\alpha,\beta$ on the full component rooted at the vertex-node $v$.
+To instantiate \noderef{OutsideKempeRecoloring}, take the singleton root
+set $\{\operatorname{inl}v\}$.  The required distinct-color field is
+$\alpha\ne\beta$ above.  The selected object is the full component
+$P_v$, not merely a tail.  Its outside-$T_n$ field is exactly the absence
+of all $X$-vertex-nodes just proved.  Finally, expanding
+\noderef{TwoColorComponentSwap} says for each exact identity $f\in E$
+that its value is transposed precisely when the edge-node
+$\operatorname{inr}f$ belongs to $P_v$, and is fixed otherwise.  This is
+word-for-word the edge-value field of
+\noderef{OutsideKempeRecoloring} for the singleton root set.  Hence
+$\sigma'_n$ is an outside Kempe recoloring of $T_n$.
+Apply \noderef{OutsideKempeRecoloringStable} to $T_n$, with control
+set $D_n$, the stated properness and one-uncoloredness, and this
+outside-chain fact.  It proves that $\sigma'_n$ is proper, leaves
+exactly $e_0$ uncolored, and is
+$T_n,D_n,\sigma_n$-stable.  Composing with the given
+$(T_n,D_n,\varphi_n)$-stability via \noderef{sc2} makes it
+$(T_n,D_n,\varphi_n)$-stable.  This is exactly the stability conclusion
+for which the manuscript invokes LEM-Stable; the direct
+\noderef{OutsideKempeRecoloringStable} interface has exactly the hypotheses
+available here.
+
+We next preserve the part of the closure preceding $v$.  In the
+augmentation sequence from $T_n(v_n)$ to $R_n$, consider an edge
+adjoined before $v$.  Its color is missing at an earlier vertex.  By
+(3) and \noderef{ColoredVertexSetElementary}, $\alpha$, missing at
+$u\in X-Y$, is missing at no vertex of
+$Y$; and $\beta$, missing at $v$, is missing at no earlier vertex
+of $Y$.  Therefore none of these exact adjoined edge identities has
+color $\alpha$ or $\beta$.  The swap on $P_v$ fixes every one of
+them and preserves the missing-color witness at every preceding vertex.
+Expanding \noderef{TashkinovAugmentation} at each step proves that the
+same initial augmentation sequence is valid under $\sigma'_n$, and it
+still reaches a tree containing $v$.
+
+Let $S$ be the last tree of that copied finite sequence, so
+$v\in V(S)$.  By \noderef{TashkinovClosureExists}, choose a
+$\sigma'_n$-closure $R'_n$ of $S$.  Compose its augmentation sequence
+with the copied sequence from $T_n(v_n)$ to $S$.  Its final closedness
+is unchanged, so the definition of \noderef{TashkinovClosure} makes
+$R'_n$ a closure of the original ordered prefix, and it still contains
+$v$.
+
+Construct the exact ordered union $T_n\vee R'_n$ by starting with all
+entries of $T_n$ and then appending, in their $R'_n$-order, precisely
+the entries whose new vertex is not already in $T_n$.  Every appended
+edge attaches its new vertex to $T_n$ or to an earlier appended vertex,
+because $R'_n$ is an augmentation sequence from a prefix of $T_n$.
+Its new vertex and edge identity have not appeared earlier, by the
+distinct-entry and attachment clauses of \noderef{TreeSequence} for
+$T_n$ and $R'_n$.  Thus this is a
+tree-sequence.  Directly from the construction, $T_n$ is its ordered
+initial segment, its vertex set is the union, every new entry is the
+same exact entry of $R'_n$, every required right-hand entry occurs, and
+their relative order is retained.  These are all five fields of
+\noderef{OrderedTreeUnion}.
+
+The stable vertex clause identifies
+the terminal missing-color set with that under $\varphi_n$; together
+with the copied support, closure, and ordered union, this is a hierarchy
+base under $\sigma'_n$.  Now all actual hypotheses of
+\noderef{ParallelClosureUnionElementary} have been discharged: the
+original ETT and terminal PE, positivity and maximum property, the full
+arbitrary-input lower package, properness, exact one-uncoloredness,
+$(T_n,D_n,\varphi_n)$-stability, and the newly constructed base.  Hence
+$V(T_n\vee R'_n)$ is elementary under $\sigma'_n$.
+
+The swap is disjoint from $T_n$, so $\alpha$ remains missing at
+$u$.  At the end $v$ of $P_v$, swapping the component changes the
+missing color from $\beta$ to $\alpha$.  The copied augmentation
+sequence puts $v$ in $R'_n$.  Thus the two distinct vertices $u,v$
+of $T_n\vee R'_n$ both miss $\alpha$ under $\sigma'_n$, contradicting
+the elementarity just obtained by
+\noderef{ColoredVertexSetElementary}.  Therefore two distinct components
+cannot meet $U$, which is conclusion (iv).
+
+Every use of a boundary, augmentation, component swap, or ordered union
+above carries elements of the original edge type $E$; consequently no
+step identifies distinct parallel edges having the same endpoints.
+\end{proof}
