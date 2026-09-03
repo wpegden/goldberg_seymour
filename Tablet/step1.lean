@@ -72,6 +72,7 @@ import Tablet.TwoColorPathComponent
 import Tablet.TwoColorNontrivialPathComponent
 import Tablet.interchange
 import Tablet.sc2
+import Tablet.Step1ExitLegGlobalMinimum
 
 -- [TABLET NODE: step1]
 theorem step1 {V E : Type*}

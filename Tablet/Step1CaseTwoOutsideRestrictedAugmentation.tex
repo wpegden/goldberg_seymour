@@ -1,0 +1,227 @@
+\begin{lemma}[Step 1, Subcase 2.1: restricted augmentation and minimality]
+Let $G$ be a finite loopless multigraph retaining individual parallel-edge
+identities, let $e_0$ be distinguished, and let $[k]$ be the color set.
+Let $T$ be a positive-rung certified ETT with generating coloring
+$\varphi$, maximum property, properness, and exactly $e_0$ uncolored.
+Assume the complete six-part lower-rung package.  Let $H$ be a good
+hierarchy over a hierarchy base, with $d<q_0$ dividers.  Assume uniformly
+that every same-rung maximum ETT built from an arbitrary certified input
+and generating coloring and having a good hierarchy with fewer than
+$q_0$ dividers is elementary.  Assume the large bound
+$|\overline\varphi(T_n)|\geq2n+11$, the separate terminal certificate
+\[
+ T\text{ is }
+ \left(\bigcup_{\eta\in D^H_{n,d+1}}\Gamma^d_\eta\right)^-
+ \text{-closed under }\varphi,
+\]
+and elementarity of $V(T)$.  Put $A=H.\mathit{starred}(d)$.
+
+Let $\alpha\ne\beta$, with $\alpha$ missing and singleton-closed on $T$
+and $\beta$ not missing on $T$.  Let $P_1,P_2,P_3$ be pairwise
+support-disjoint exact exit paths for $\alpha,\beta$.  Their outside ends
+$a_1,a_2,a_3$ and tree ends $b_1,b_2,b_3$ are pairwise distinct and
+$b_1\prec_T b_2\prec_T b_3$.  Retain, for every $j$, the exact
+$\beta$-colored boundary-edge identity $f_j$ on $P_j$ incident with
+$b_j$.  Suppose $b_3\notin V(A)$.
+
+Assume the following universal secondary-minimality property, ranging
+over arbitrary certified replacement inputs rather than only over paths
+on the current display.  Let $\sigma$ be any proper coloring leaving
+exactly $e_0$ uncolored and stable from $\varphi$ on the final ladder
+tree.  Let $T'$ be the exact terminal tree of any corresponding
+same-rung ETT under $\sigma$, with maximum property, a hierarchy base,
+a good hierarchy $K$ with exactly $d$ dividers, its own large estimate,
+and its separate terminal minus-closed certificate.  For distinct colors
+$a,b$, suppose $a$ is missing and singleton-closed on $T'$ and two exact
+support-disjoint $(a,b)$ exit legs have distinct outside ends.  Such a
+replacement is forbidden if either
+\begin{enumerate}
+\item $b$ is missing on $T'$, so its secondary coordinate is zero; or
+\item $b$ is not missing and there is a third exact exit leg, pairwise
+support-disjoint from the first two and with a third outside end, such
+that the total of the three exact walk lengths is strictly less than
+$|P_1|+|P_2|+|P_3|$.
+\end{enumerate}
+Assume in addition that the following prefix-plus-two-edges package has
+been constructed.  There are a color $\gamma\ne\beta$, a proper coloring
+$\mu$ leaving exactly $e_0$ uncolored, and an exact ordered tree $J$,
+together with a corresponding same-rung ETT $\mathcal E_J$ under $\mu$,
+a maximum-property certificate, and a good hierarchy $K_J$ on $J$ with
+exactly $d$ dividers.  The coloring $\mu$ is
+$(T_n,D_n,\varphi)$-stable and is a mod-coloring of the original ETT; the
+replacement has the same large missing-color estimate; neither $\gamma$
+nor $\beta$ belongs to the union of the last indexed Gamma pairs of
+$K_J$; and $\beta$ is missing at $b_3$.  There are three exact
+$(T,\mu,\{\gamma,\beta\})$-exit paths $R_1,R_2,R_3$ with the same
+respective endpoints, supports, and lengths as $P_1,P_2,P_3$, so their
+supports remain pairwise disjoint.  Finally $C$ is the exact prefix of
+$T$ ending at $b_3$, $J_1=C+f_1$, $J=J_1+f_2$ by exact
+\noderef{TreeSequenceAdjoinEdge} certificates, $b_1,b_2,b_3\in V(J)$,
+and both endpoints of each exact identity $f_1,f_2$ lie in $V(J)$.
+Then the displayed Subcase 2.1 data are contradictory.
+\end{lemma}
+\begin{proof}
+Unpack the asserted prefix-plus-two-edges package and retain its exact
+witnesses, writing them as
+$\gamma,\mu_5,C,J_1,J,\mathcal C_J,B_J,K_J,\mathcal G_J$ and
+$R_1,R_2,R_3$.  We now perform the paper's finite restricted augmentation.
+At a current tree $U$, append an exact boundary identity $h$ only when
+its $\mu_5$-color is missing on $U$ and, for every color $\eta$ in the
+last indexed stored set of $K_J$, the segment of $U+h$ before its first
+$\eta$-missing vertex uses no color in the corresponding last Gamma pair
+of $\mathcal G_J$.  The boundary
+identity supplies one old and one new endpoint, so together with its
+missing-color witness this checks every field of
+\noderef{TashkinovAugmentation}; the additional condition is exactly the
+last \noderef{HierarchySegmentColors} avoidance test.  Each step adds a
+new vertex to the ordered list.  Since $V$ is finite, iteration stops;
+choose a maximal finite sequence and call its last tree $T'$.
+
+We certify every intermediate tree $U$, including $T'$, by induction.
+Compose its accumulated exact steps with the exact terminal-seed route
+through $J$ supplied by $\mathcal C_J$; this is a
+\noderef{TashkinovAugmentationSequence}.  The universal mod-coloring
+clause gives a corresponding ETT $\mathcal E_U$, and
+\noderef{MaximumPropertyTransport} gives maximum property.  At this
+point we again reconstruct, rather than copy, its base.  In non-PE its
+core is the common $T_n$.  In PE compare the two actual terminal
+constructors of $\mathcal E_J$ and $\mathcal E_U$: equality of their
+singleton connecting-edge sets, both identified by correspondence with
+the original exact set, fixes the individual defective edge.  The
+inside/outside endpoint fields of their maximum-defective choices then
+fix the replacement support vertex.  Reuse the exact closure in $B_J$:
+it is already a \noderef{TashkinovClosure} under $\mu_5$, and the same
+support prefix is forced by the support equality just proved.  The
+unchanged coloring-free ordered-union witness from $B_J$ supplies the
+core.  This checks every \noderef{HierarchyBase} field at every restricted
+augmentation.
+
+Take the internal stages of $K_J$ and replace only its terminal stage by
+$U$.  They satisfy
+all \noderef{TashkinovHierarchy} fields and have exactly $d$ dividers.
+The stored-set, Gamma, unique-refresh, internal minus-closed, and
+parallel-base arguments are unchanged.  The induction hypothesis gives
+old avoidance, and the selection condition is precisely avoidance for
+the newly appended edge, including the totalized first-missing fallback.
+Hence every intermediate tree has a good witness $\mathcal G_U$ with all
+fields.  Apply this construction at $T'$ and denote its hierarchy by
+$K'$ and its corresponding certificate by $\mathcal C'$.
+
+We now derive the separate terminal certificate.  Correspondence
+identifies the raw stored sets throughout the restricted sequence.
+Because every internal stage is copied from $K_J$, unfolding
+\noderef{TashkinovStoredColors},
+\noderef{HierarchyStoredColorsAt}, and
+\noderef{HierarchyTerminalStoredColors} gives
+\[
+ D^{K'}_{n,d+1}=D_n\setminus\overline{\mu_5}(T')
+       \subseteq D_n\setminus\overline{\mu_5}
+          (K_J.\mathit{starred}(d))
+       =D^{K_J}_{n,d}.                                         \tag{12}
+\]
+This is the terminal subtraction argument recorded abstractly by
+\noderef{HierarchyStoredColorsAntitone}.
+
+Suppose that a color $c$ missing on $T'$ and outside
+$\bigcup_{\eta\in D^{K'}_{n,d+1}}\Gamma^d_\eta$ had an exact
+$c$-colored boundary identity.  It is a permissible next Tashkinov
+augmentation.  For $\eta\in D^{K_J}_{n,d}$ not in the terminal set, the
+definition in (12) says that $\eta$ is already missing on $T'$, so its
+first missing position precedes the proposed new edge.  For $\eta$ in
+the terminal set, the proposed color $c$ is outside
+$\Gamma^d_\eta$, and every older segment already passes the avoidance
+test.  Thus the proposed edge satisfies the restricted selection rule,
+contrary to maximality.  Therefore
+\[
+ T'\text{ is }
+ \left(\bigcup_{\eta\in D^{K'}_{n,d+1}}\Gamma^d_\eta\right)^-
+ \text{-closed under }\mu_5.                                  \tag{13}
+\]
+The ETT $\mathcal E_{T'}$ has the original rung, maximum property, and
+the good hierarchy $K'$ with $d<q_0$ dividers.  The stated same-rung
+hypothesis consequently gives
+\[
+          \noderef{ColoredVertexSetElementary}
+          (G,\mu_5,V(T')).                                    \tag{14}
+\]
+
+Before using minimality, we locate all three outside endpoints.  Suppose
+$a_j\in V(T')$ for some $j$.  The seed path $R_j$ says it misses
+$\gamma$ or $\beta$.  It cannot miss $\beta$, since
+$b_3\in J\subseteq T'$ already misses $\beta$ by the seed package,
+$a_j\ne b_3$, and (14) forbids a repeated missing color.
+Thus $a_j$ misses $\gamma$.  Both $\gamma$ and $\beta$ lie outside the
+reserved union in (13): (12) reduces this to the two last-pair exclusions
+in the seed package.  Equation (13), together with the missing
+witnesses $a_j$ and $b_3$, therefore makes both singleton color classes
+closed on $T'$.
+
+For every $i$, the path $R_i$ meets $T'$ at $b_i\in J$.  If its outside
+end $a_i$ were outside $T'$, traverse the simple incidence walk from
+$b_i$ toward $a_i$ and take the first edge-node crossing from a vertex in
+$T'$ to one outside.  By \noderef{TwoColorIncidenceGraph} and
+\noderef{BoundaryEdges}, this is an exact $\gamma$- or $\beta$-colored
+boundary identity, contradicting the two closedness conclusions.  Hence
+all three $a_i$ lie in $T'$.  None can miss $\beta$ because $b_3$ does,
+so all three miss $\gamma$ by their seed paths, contradicting (14) already at the
+distinct vertices $a_1,a_2$.  This contradiction proves
+\[
+                         a_1,a_2,a_3\notin V(T').              \tag{15}
+\]
+
+For each $j$, traverse $R_j$ from $a_j$ toward $b_j$ and let $t_j$ be
+the first vertex-node belonging to $V(T')$; it exists because
+$b_j\in J\subseteq T'$, and (15) makes its position positive.  Let
+$L_j$ be the initial subwalk from $a_j$ through $t_j$.  A subwalk of a
+simple walk is simple; it has positive length, the same outside endpoint
+$a_j$, and tree endpoint $t_j$.  By first choice of $t_j$, that endpoint
+is its unique vertex-node in $T'$.  Its edges still alternate between
+$\gamma$ and $\beta$ under $\mu_5$, and the outside-end missing
+alternative is exactly the one in the seed path.  These are every
+field of
+\[
+ L_j:\operatorname{TreeExitPath}(T',\mu_5,\gamma,\beta,a_j,t_j)
+ \quad(j=1,2,3).                                               \tag{16}
+\]
+Each support is a subset of the corresponding seed-path support, so the
+three remain pairwise support-disjoint and their outside ends remain
+pairwise distinct.
+
+The tree $J\subseteq T'$ contains both endpoints of the exact edge
+$f_1$ by the seed endpoint clause.  Consequently the first $T'$ vertex
+encountered from $a_1$ occurs
+strictly before the walk reaches $f_1$; hence $f_1$ is absent from
+$L_1$ although it belongs to the support of $R_1$.  Thus $L_1$ is a
+proper initial subwalk of $R_1$, while $L_2,L_3$ are initial subwalks of
+$R_2,R_3$.  The latter have exactly the original node lists of
+$P_2,P_3$, and likewise for the first, by the seed equalities.  Therefore
+\[
+ |L_1|+|L_2|+|L_3|<|P_1|+|P_2|+|P_3|.                        \tag{17}
+\]
+
+We finally enumerate the premises of the universal no-better-presentation
+hypothesis.  Take $\sigma=\mu_5$, terminal tree $T'$, and the actual
+certificate $\mathcal C'$.  Properness, exact one-uncoloredness, and
+stability on the original final ladder tree are clauses of the seed
+package; maximum property, the rebuilt base,
+$K'$, its good witness, equality of divider counts, and the separate
+certificate (13) were proved above.  The seed package already contains
+the replacement large estimate, and every later corresponding ETT has
+the same exact ladder tree and generating coloring $\mu_5$; hence that
+same estimate is the one required for $\mathcal C'$.
+
+Use first comparison color $\beta$ and second color $\gamma$.  They are
+distinct; the seed missingness at $b_3\in J\subseteq T'$ makes $\beta$
+missing on $T'$, and its exclusion from the
+reserved union together with (13) makes $T'$ singleton-$\beta$-closed.
+The adjacency predicate in \noderef{TwoColorIncidenceGraph} and the
+outside-end alternative in \noderef{TreeExitPath} are symmetric in their
+two displayed colors.  Thus the three fieldwise certificates (16) may
+equally be read as $(\beta,\gamma)$ exit paths.  Their inherited pairwise
+support disjointness and the three distinct outside ends supply every
+path premise.  If $\gamma$ is missing on $T'$, choose any two $L_j$ and
+use the first, zero-secondary-coordinate alternative.  If it is not
+missing, use all three and (17) in the second alternative.  Each is
+forbidden by the stated universal hypothesis.  This final contradiction
+proves that the Subcase 2.1 data cannot occur.
+\end{proof}

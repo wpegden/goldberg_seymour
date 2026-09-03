@@ -1,0 +1,113 @@
+\begin{lemma}[Step 1 zero-divider anchor]
+Let $T$ be a positive-rung ETT of rung $n$ on a finite loopless
+multigraph with individual edge identities, generating coloring $\psi$,
+maximum property, properness, and exactly the distinguished edge $e_0$
+uncolored.  Assume uniformly for every positive-rung maximum ETT of rung
+strictly below $n$ the complete six assertions used in Step 1:
+terminal elementarity; stable interchangeability of the final ladder
+closure, including isolated path components; PE stability descent and
+disjointness of stored pairs at distinct supports with the same first
+appearance; the terminal PE component intersection assertion; the
+defective-endpoint precedence assertion; and the terminal mod-coloring
+assertion.
+
+Let $B$ be a hierarchy base and $H$ a hierarchy over $B$ with zero
+dividers.  Put $A=H.\mathit{starred}(0)$, the exact hierarchy core.  Let
+$a\ne b$ be colors such that $a$ is missing and singleton-closed on $A$.
+Suppose there are exact $(A,\psi,\{a,b\})$-exit paths $P_1,P_2$ with
+distinct outside endpoints and disjoint incidence-walk supports.  Then
+these data are contradictory.
+\end{lemma}
+\begin{proof}
+Write $T_n$ for the last ladder tree and $D_n$ for its exact computed
+stored-color set.  Since the divider count is zero,
+\noderef{HierarchyStarredStage} identifies $A$ with the core of the
+given \noderef{HierarchyBase}.  We split according to the exact terminal
+extension kind.
+
+Suppose first that it is not PE.  The nonparallel field of
+\noderef{HierarchyBase} identifies $A=T_n$.  Every color missing on
+$T_n$ under $\psi$ is singleton-closed there.  Indeed, positivity lets us
+inspect the final positive certificate in \noderef{TashkinovSeries}.  It
+is not the initial constructor, and the PE constructor is excluded.  In
+the RE constructor of \noderef{TashkinovSeriesStep}, $\psi$ is exactly
+the preceding coloring and $T_n$ is its certified closure.  In the SE
+constructor, \noderef{MaximumDefectiveChoice} says that $\psi$ is stable
+on $T_n$ relative to the preceding coloring, while that preceding
+coloring closes $T_n$.  Reverse stability by \noderef{sc2}: the vertex
+clause of \noderef{StableColoring} transports a missing witness and its
+incident-edge clause transports the color of any alleged boundary edge.
+The closedness of the preceding coloring then excludes that edge.
+
+Consequently $b$ is not missing on $T_n$, since otherwise both $a$ and
+$b$ would have empty colored boundary whereas the last exact edge of
+either positive exit path is an $a$- or $b$-colored boundary identity by
+\noderef{TreeExitPath}, \noderef{TwoColorIncidenceGraph}, and
+\noderef{BoundaryEdges}.  Choose a vertex $x\in V(T_n)$.  The initial
+\noderef{KTriple} gives $k\geq\Delta(G)+1$.  Properness injects colors
+present at $x$ into exact incident edges, so \noderef{Degree} and
+\noderef{MaximumDegree} give at most $\Delta(G)$ present colors.  Choose
+a missing color $c$ at $x$.  The preceding paragraph makes $c$
+singleton-closed on $T_n$, and $b$ is present at $x$.
+
+If $a=c$, retain $\psi$; otherwise exchange $a,c$ on all their full
+components outside $T_n$.  The two singleton closedness assertions give
+the usual first-crossing proof that every selected component is outside.
+Thus \noderef{OutsideKempeRecoloringStable} gives a proper coloring
+$\rho$, still leaving exactly $e_0$ uncolored and stable on $T_n$.  The
+same exact node lists as $P_1,P_2$ are support-disjoint
+$(T_n,\rho,\{c,b\})$ exit paths: $b$ is not exchanged, every old
+$a$-edge becomes $c$, and the outside missing-color alternative is
+transported componentwise.
+
+In the full $(c,b)$ incidence graph, $x$ has degree one because it misses
+$c$ and is incident with one $b$-edge.  Each outside endpoint of the two
+exit paths also has degree one.  A full path component cannot contain all
+three distinct degree-one vertex nodes: by
+\noderef{TwoColorComponentSpanningPath} and
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, every such node is an endpoint
+of one simple spanning path, which has only two endpoints.  Hence the
+component through $x$ and the component containing at least one exit path
+are distinct path components meeting $T_n$.
+
+If $n>1$, \noderef{CertifiedETTPredecessor} gives the exact positive-rung
+predecessor displayed on $T_n$, with maximum property and the preceding
+generating coloring.  The RE equality or the SE selected-stability field,
+composed with the outside stability by \noderef{sc2}, supplies the stable
+coloring premise of lower assertion (ii).  If $n=1$, the same data are
+the initial tuple hypotheses of \noderef{TechnicalTheoremBase}.  Either
+result makes $c,b$ interchangeable on $T_n$, including isolated path
+components, and therefore equates the two distinct path components just
+constructed.  This proves the non-PE contradiction.
+
+Suppose now that the terminal kind is PE.  Its base field gives an actual
+support vertex $x\in V(T_n)$, a \noderef{TashkinovClosure} $R_n$ of the
+exact prefix through $x$, and the ordered-union equation
+$A=T_n\vee R_n$.  The support belongs to both constituent trees.  Choose
+a color $c$ missing at $x$ by the same certified degree count.  For
+$n>1$, lower assertion (i) applied to the certified predecessor gives
+the required pre-step elementarity; for $n=1$ use the elementarity clause
+of \noderef{TechnicalTheoremBase}.  Therefore
+\noderef{ParallelCommonMissingClosed} makes $c$ singleton-closed on the
+exact union core $A$.
+
+The color $b$ must be present at $x$.  If it were missing there, it would
+be missing on both $T_n$ and $R_n$, so the same
+\noderef{ParallelCommonMissingClosed} theorem would make $b$ closed on
+$A$, contradicting the boundary edge at the end of either alleged exit
+path.  Exchange $a,c$ on every full component outside $A$, unless the
+colors agree.  Apply \noderef{OutsideKempeRecoloringStable} separately
+to $T_n$ with control $D_n$ and to $R_n$ with empty control.  The two
+clauses are exactly a \noderef{CombinedStableColoring}; the two original
+walk supports become disjoint exact $(A,\rho,\{c,b\})$ exit paths.
+
+Again the component through $x$ and at least one component containing an
+outside endpoint are distinct nontrivial path components meeting $A$:
+otherwise one spanning path would contain three distinct degree-one
+vertices.  Conclusion (iii) of \noderef{interchange}, applied to the
+actual PE base and the combined stable coloring, makes $c,b$
+interchangeable on $A$.  Unfolding \noderef{TreeInterchangeable} equates
+the two distinct components, the required contradiction.  The two
+terminal-kind alternatives are exhaustive, so the zero-divider anchor is
+proved without constructing any zero-rung ETT.
+\end{proof}

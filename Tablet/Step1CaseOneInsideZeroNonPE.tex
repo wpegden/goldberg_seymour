@@ -1,0 +1,349 @@
+\begin{lemma}[Step 1, Subcase 1.2 at a non-PE zero divider]
+Let $G$ be a finite loopless multigraph on finite vertex and edge types,
+with the elements of the edge type retained as individual edge identities.
+Let $e_0$ be a distinguished edge and let $[k]$ be the color set.  Fix an
+arbitrary certified input coloring, a terminal tree-sequence $T$, and a
+generating coloring $\varphi$.  Let $\mathcal T$ certify that $T$ is an ETT
+on exactly these data, with positive rung number $n$, and assume that
+$\mathcal T$ has the maximum property.  Assume also that $\varphi$ is
+proper and leaves exactly $e_0$ uncolored.
+
+Assume the following complete lower-rung package.  For every arbitrary
+certified input coloring, terminal tree-sequence $U$, generating coloring
+$\psi$, and positive-rung maximum ETT $\mathcal U$ on those data whose rung
+number $m$ is strictly smaller than $n$, all six of the following hold.
+Write $U_m$ and $U_{m+1}$ for the last ladder tree and final series tree of
+$\mathcal U$, respectively, and write $D_i$, $\psi_i$, $\Theta_i$, and the
+chosen vertex at slot $i$ for its exact indexed series data.
+\begin{enumerate}
+\item $V(U)$ is elementary under $\psi$.
+\item For every proper coloring $\sigma$ leaving exactly $e_0$ uncolored
+which is $(U_{m+1},D_m,\psi_m)$-stable, and every two colors $a,b$, if at
+least one of $a,b$ is missing on $U_{m+1}$ under $\sigma$, then $a,b$ are
+$U_{m+1}$-interchangeable under $\sigma$, with isolated vertex components
+included.
+\item PE support stability descends with the exact indexed control data,
+and equal-first-appearance PE stored sets are disjoint.  More precisely,
+if a positive slot $i$ is PE with chosen support $v\in V(U)$, the
+first-appearance index of $v$ is $j+1$, and a proper coloring $\sigma$
+leaving exactly $e_0$ uncolored is $(U_i,D_i,\psi_i)$-stable, then it is
+both $(U(v)-v,D_j,\psi_j)$-stable and $(U_j,D_j,\psi_j)$-stable.  Moreover,
+if two distinct positive PE slots have distinct chosen supports in $V(U)$
+with the same first-appearance index, then the exact stored-color sets at
+those two slots are disjoint.
+\item If the terminal slot $m$ is PE with chosen support $v$ and recorded
+colors $\gamma_m,\delta_m$, then for every proper coloring $\sigma$ leaving
+exactly $e_0$ uncolored and $(U_m,D_m,\psi_m)$-stable, the full
+$(\gamma_m,\delta_m)$ incidence component through $v$ meets $V(U_m)$
+exactly in $v$.
+\item Let $\sigma$ be proper, leave exactly $e_0$ uncolored, and be
+$(U_m,D_m,\psi_m)$-stable.  If $\delta$ is defective on $V(U_m)$, if
+$v\in V(U)$ is an endpoint in $V(U_m)$ of a $\delta$-colored boundary
+edge, and if another such endpoint precedes $v$ in the tree order, then
+the following precedence conclusion holds.  Whenever $v$ first appears
+no later than a positive slot $i$ which is PE or SE and whose chosen
+vertex is $v_i$, either $v=v_i$ or $v\prec_U v_i$.
+\item Every proper coloring $\sigma$ leaving exactly $e_0$ uncolored and
+$(U_m,D_m,\psi_m)$-stable is a $\psi\bmod U_m$ coloring for
+$\mathcal U$.
+\end{enumerate}
+
+Let $B$ be a hierarchy base for $\mathcal T$ under $\varphi$, and let $H$
+be a good hierarchy over $B$.  Put $d=H.\mathit{dividerCount}$, and fix an
+integer $q_0>d$.  Assume uniformly that, for every ETT of rung $n$ built
+from an arbitrary certified input and arbitrary generating coloring, if it
+has maximum property and carries a good hierarchy with fewer than $q_0$
+dividers, then its displayed terminal vertex set is elementary under its
+generating coloring.  Assume the large-branch bound
+$|\overline\varphi(T_n)|\geq2n+11$, where $T_n$ is the last ladder tree of
+$\mathcal T$.  Put $A=H.\mathit{starred}(d)$.  In addition to all five
+fields of the good hierarchy, assume separately the terminal certificate
+\[
+ T\text{ is }
+ \left(\bigcup_{\eta\in D^H_{n,d+1}}\Gamma^d_\eta\right)^-
+ \text{-closed under }\varphi,
+\]
+and assume that $V(T)$ is elementary under $\varphi$.
+
+Let $\alpha,\beta\in[k]$ be distinct.  Assume that $\alpha$ is missing and
+singleton-closed on $T$ under $\varphi$, and that $\beta$ is missing on
+$T$.  For $j=1,2$, let $P_j$ be an exact
+$(T,\varphi,\{\alpha,\beta\})$-exit path from the outside end $a_j$ to the
+tree end $b_j$.  Assume that the two incidence-walk supports are disjoint,
+that $a_1\ne a_2$, that $b_1\ne b_2$, and that $b_1\prec_T b_2$.  Retain
+an exact edge identity $f_j$ on $P_j$ which is a $\beta$-colored boundary
+edge of $T$ incident with $b_j$.  Suppose $b_2\in V(A)$.
+
+Assume that a color $\theta\in[k]$ has already been selected with
+$\theta\ne\alpha$ and $\theta\ne\beta$, that $\theta$ is missing and
+singleton-closed on $A$ under $\varphi$, and that it is singleton-closed
+on $T$ under $\varphi$.
+
+Finally assume the following explicit no-smaller-presentation consequence
+of the chosen global minimum.  Let $\sigma$ be any proper coloring leaving
+exactly $e_0$ uncolored which is $(T_n,D_n,\varphi)$-stable.  Let $T'$ be
+any tree-sequence carrying an exact corresponding same-rung ETT under
+$\sigma$ (and hence its own arbitrary certified replacement input), and
+assume that this replacement has maximum property.  For every hierarchy
+base of the replacement and every good hierarchy $K$ over that base with
+fewer than $d$ dividers, suppose that the replacement satisfies
+\[
+ |\overline\sigma(T'_n)|\geq2n+11
+ \quad\hbox{and}\quad
+ T'\text{ is }
+ \left(\bigcup_{\eta\in D^K_{n,K.\mathit{dividerCount}+1}}
+   \Gamma^{K.\mathit{dividerCount}}_\eta\right)^-
+ \text{-closed under }\sigma .
+\]
+Assume additionally that $d=0$ and that the terminal extension kind is
+not PE.  Then, for any distinct colors $a,b$ with $a$ missing and singleton-closed
+on $T'$ under $\sigma$, there do not exist two exact
+$(T',\sigma,\{a,b\})$-exit paths having disjoint incidence-walk supports
+and distinct outside ends.  Under all these hypotheses, the displayed
+Subcase 1.2 data are contradictory.
+\end{lemma}
+\begin{proof}
+Write $n$ for the rung number, $T_n$ for the last ladder tree, $D_i$ for
+the exact cumulative stored-color set at slot $i$, and $\varphi_i$ for
+the exact coloring at that slot.  Thus $\varphi=\varphi_n$ by the
+generating-coloring field of \noderef{ExtendedTashkinovTree}.  We first
+make the two exit legs used in every branch completely explicit.
+
+The starred tree $A$ is an ordered initial segment of $T$.  Unfold
+\noderef{TashkinovHierarchy}.  If
+$d>0$, then \noderef{HierarchyStarredStage} identifies $A$ with the
+$d$-th hierarchy stage, and repeated use of the nestedness field of the
+hierarchy gives the required initial-segment map to its terminal stage
+$T$.  If $d=0$, the same conclusion follows from the core-inside-first
+field and then the nestedness and terminal-stage fields of the hierarchy.
+All these are entrywise statements by
+\noderef{TreeSequenceInitialSegment}.  Unfold
+\noderef{TreeVertexOrder}: there are positions $r<s$ in $T$ displaying
+$b_1$ and $b_2$.  Since $b_2\in V(A)$ and the entries of $A$ form an
+initial block of those of $T$, its occurrence has position $s$ also in
+$A$.  The earlier position $r$ is consequently in that same block, and
+so $b_1\in V(A)$ by \noderef{TreeSequenceVertexSet}.
+
+Unfold each given \noderef{TreeExitPath}.  The edge-node immediately
+preceding the terminal vertex-node $b_j$ represents an exact boundary
+edge of $T$: its other adjacent vertex-node on the path is outside $T$,
+because $b_j$ is the only vertex-node of the path in $V(T)$.  By
+\noderef{TwoColorIncidenceGraph} that edge has color $\alpha$ or
+$\beta$.  It cannot have color $\alpha$, since
+\noderef{TreeColorSetClosed} says that the exact $\alpha$-colored
+boundary set is empty.  Hence this last boundary edge is
+$\beta$-colored.  The separately retained identity $f_j$ has the same
+two properties by hypothesis; unfolding \noderef{BoundaryColorEdges}
+and \noderef{BoundaryEdges} shows in particular that its end other than
+$b_j$ lies outside $T$.  Since $b_j\in V(A)\subseteq V(T)$, the same
+identity $f_j$ is also a $\beta$-colored boundary edge of $A$.
+
+We next justify which $\alpha,\theta$ components may be exchanged.  If an
+$\alpha$-edge node occurs on $P_j$, it is not incident with $T$: otherwise
+one of its incident vertex-nodes on this alternating path would be in
+$T$, hence would be $b_j$, and the edge would be an $\alpha$-colored
+boundary edge, contrary to the preceding closedness.  More generally,
+its full \noderef{TwoColorComponent} for $\alpha,\theta$ contains no
+vertex of $T$.  For if it did, take a shortest incidence-graph walk from
+the external edge to a vertex-node in $T$ and its first vertex-node in
+$T$.  The preceding exact edge identity crosses the boundary of $T$ and,
+by \noderef{TwoColorIncidenceGraph}, has color $\alpha$ or $\theta$.
+This contradicts respectively the assumed singleton closedness of
+$\alpha$ or of $\theta$ on $T$.  The identical first-crossing argument
+shows that every $\alpha,\theta$ component containing an outside vertex
+is wholly outside $T$.
+
+Exchange $\alpha$ and $\theta$ on every full $\alpha,\theta$ component
+outside $T$, and call the result $\nu$.  Finiteness makes this a finite
+choice of roots, and the preceding paragraph verifies the outside-support
+clause of \noderef{OutsideKempeRecoloring}.  By
+\noderef{OutsideKempeRecoloringStable}, $\nu$ is proper, leaves exactly
+$e_0$ uncolored, fixes every exact edge incident with $T$, preserves the
+missing-color set at each vertex of $T$, and is $(T_n,C,\varphi_n)$-stable
+for every chosen control set $C$: after unfolding
+\noderef{StableColoring}, restrict its incident-edge and vertex clauses
+from $T$ to the ordered initial segment $T_n$.
+
+For $j=1,2$, form a walk $Q_j$ with the same ordered vertex- and
+edge-nodes as $P_j$.  Each old $\beta$-edge remains $\beta$ because
+$\beta\ne\alpha,\theta$.  Every old $\alpha$-edge lies in one of the
+selected outside components just proved and becomes $\theta$.  Thus every
+successive pair of nodes of $P_j$ is adjacent in
+$I_G(\nu;\theta,\beta)$, so $Q_j$ is a walk there; it is the same simple
+node list and has the same positive length and support as $P_j$.
+Its outside end still misses one of its two colors.  Explicitly, if
+$\beta$ was missing at $a_j$, then the definition
+\noderef{MissingColors}, together with \noderef{PresentColors}, says
+that no incident edge had color $\beta$; none acquires that color in an
+$\alpha,\theta$ exchange, so $\beta$ remains missing.  If instead
+$\alpha$ was missing, then no incident edge had color $\alpha$.  The
+whole $\alpha,\theta$ component through the outside vertex $a_j$ was
+selected, so the $\theta$-edges incident with $a_j$ become $\alpha$ and
+the new $\theta$-edges are exactly its old $\alpha$-edges; hence $\theta$
+is missing there under $\nu$.  We already proved that both tree ends lie
+in $A$, while $a_j\notin V(T)$ implies $a_j\notin V(A)$.  Finally, the
+only vertex-node of $Q_j$ in $A$ is $b_j$, because the corresponding
+claim for $P_j$ excludes every other vertex even from the larger tree
+$T$.  This checks every field of
+\[
+       \operatorname{TreeExitPath}(A,\nu,\theta,\beta,a_j,b_j,Q_j).
+       \tag{1}
+\]
+The supports remain disjoint, $a_1\ne a_2$, and no claim about separation
+of the two transformed full components has been made.
+
+Apply \noderef{HierarchyLEMStable} to the just constructed outside
+recoloring.  It supplies a corresponding ETT $\mathcal T^\nu$ displayed
+on $T$, a hierarchy base $B^\nu$, a hierarchy $H^\nu$, and a good
+hierarchy on it.  The corresponding certificate retains the rung, all
+ordered ladder trees, exact connecting-edge sets, stored sets, and kinds;
+the same-hierarchy conclusion retains every ordered stage, divider,
+stored-color set, and Gamma pair.  The result also supplies maximum
+property and transports the given terminal minus-closed certificate.
+The stability established above identifies the missing-color sets on
+$T_n$ under $\nu$ and $\varphi_n$, so the large bound is unchanged.
+
+By the zero-divider hypothesis, $d=0$.  By \noderef{HierarchyStarredStage}, $A$ is the
+actual hierarchy core.  We treat the two possible terminal constructions
+separately.
+
+The terminal extension is not PE by hypothesis.  The nonparallel field of
+\noderef{HierarchyBase} identifies $A=T_n$.  Positivity permits us to
+inspect the actual last certificate
+$\mathcal T.\mathit{series.certified}(n)$ in
+\noderef{TashkinovSeries}.  It cannot be the initial constructor.  The PE
+constructor is excluded, so \noderef{TashkinovSeriesStep} leaves exactly
+two cases.  In the RE case it gives the exact equation
+$\varphi_n=\varphi_{n-1}$ and says $T_n$ is closed under
+$\varphi_{n-1}$.  In the SE case it gives a
+\noderef{MaximumDefectiveChoice} whose selected coloring is exactly
+$\varphi_n$, whose selected-stability field says that $\varphi_n$ is
+$(T_n,D_{n-1},\varphi_{n-1})$-stable, and again says that $T_n$ is closed
+under $\varphi_{n-1}$.
+
+We claim that every color missing somewhere on $T_n$ under $\nu$ is
+singleton-closed there under $\nu$.  Fix such a color $c'$ and a witness
+$y\in V(T_n)$.  Suppose an exact identity $g$ belonged to its
+$\nu$-colored boundary.  By \noderef{BoundaryColorEdges}, $g$ is a
+boundary edge and $\nu(g)=c'$.  The first outside recoloring is
+$(T_n,D_{n-1},\varphi_n)$-stable.  Reverse it using \noderef{sc2}; its
+two clauses are those of \noderef{StableColoring}: the vertex clause
+transfers the missingness of $c'$ at $y$ to $\varphi_n$, and the edge
+clause, now applied to the incident boundary identity $g$, gives
+$\varphi_n(g)=\nu(g)=c'$.  In the RE case substitute the exact
+equality $\varphi_n=\varphi_{n-1}$.  In the SE case reverse the selected
+stability using \noderef{sc2}; the common missingness at $y$ and its edge
+clause give $\varphi_{n-1}(g)=c'$.  In either case
+\noderef{ColoredVertexSetClosed}, applied to the same exact boundary
+identity $g$, the inside vertex $y$, and the color $c'$ missing at $y$,
+is contradicted.  Thus the $c'$-colored boundary is empty, proving the
+claim from the definition \noderef{TreeColorSetClosed}.
+
+Choose any $x\in V(T_n)$.  The initial constructor of the certified
+series supplies \noderef{KTriple}, hence $k\geq\Delta(G)+1$.  Properness
+means that the map from colors present at $x$ to incident edges is
+injective: two distinct incident identities cannot both have the same
+color.  Thus \noderef{PresentColors}, \noderef{Degree}, and
+\noderef{MaximumDegree} give at most $d_G(x)\leq\Delta(G)$ present
+colors.  At least one color $c$ is therefore in
+\noderef{MissingColors}$(G,\nu,x)$.  It belongs to
+$\overline\nu(T_n)$ by \noderef{TreeMissingColors}, and the preceding
+claim makes $T_n$ singleton-$c$-closed.
+
+Before making another recoloring, note that $c\ne\beta$.  The retained
+identity $f_2$ is a $\beta$-colored boundary edge of $A=T_n$ under
+$\varphi_n$, and the first outside recoloring fixes this exact incident
+edge, so it is such a boundary edge under $\nu$ as well.  Equality
+$c=\beta$ would contradict the singleton-$c$-closedness just proved.
+The same boundary identity also proves that $\beta$ is present at $x$.
+Indeed, if it were missing at $x$, the preceding claim, applied to
+$c'=\beta$, would make the $\beta$-colored boundary of $T_n$ empty,
+contrary to $f_2$.  By the complementary definitions
+\noderef{MissingColors} and \noderef{PresentColors}, there is therefore
+an exact $\beta$-colored edge incident with $x$.
+
+If $\theta=c$, put $\rho=\nu$ and retain the walks $Q_j$.  Otherwise,
+exchange $\theta$ and $c$ on every full component outside $T_n$ and call
+the result $\rho$.  The first recoloring fixed the boundary of $T_n$, so
+the assumed singleton-$\theta$-closedness persists under $\nu$; together
+with singleton-$c$-closedness, the same first-crossing argument used above
+proves that these are genuine outside components.  Hence
+\noderef{OutsideKempeRecoloringStable} gives properness, exact
+one-uncoloredness, unchanged missing sets on $T_n$, and
+$(T_n,C,\nu)$-stability for every control set $C$.  The identity case has
+the same conclusions by reflexivity in \noderef{sc2}.
+
+Exactly as in the construction of (1), replace each $\theta$-edge of
+$Q_j$ by its new label $c$ and retain each exact $\beta$-edge.  The
+inequalities $\theta\ne\beta$ and $c\ne\beta$ ensure that $\beta$ is
+never exchanged.  If the old outside end missed $\beta$, it still does;
+if it missed $\theta$, all incident $\theta,c$ edges lie in its selected
+outside component and its new $c$-edges are precisely its old
+$\theta$-edges, so it misses $c$.  The tree ends and the unique-tree-node
+condition are unchanged.  We thus obtain two exact
+$(T_n,\rho,\{c,\beta\})$-exit paths $L_1,L_2$ with the same respective
+supports as $P_1,P_2$, so they remain disjoint and have different outside
+ends.  The fixed boundary identity $f_2$ also shows directly that
+$\beta$ remains present at $x$ under $\rho$, while stability preserves
+the missingness of $c$ there.
+
+We next certify the full path components that will contradict
+interchangeability.  In \noderef{TwoColorIncidenceGraph}, the vertex-node
+$x$ has no $c$-colored neighbor because $c$ is missing, and it has at
+least one $\beta$-colored neighbor because $\beta$ is present.  Unfolding
+\noderef{IsProperEdgeColoring}, properness allows at most one edge of
+either color at a vertex, so $x$ has degree exactly one.  Each outside
+end $a_j$ also has degree exactly one: the
+nontrivial exit path $L_j$ supplies an incident edge of one of the two
+colors, its missing-color clause excludes the other color, and properness
+excludes a second edge of the present color.  In particular, $x,a_1,a_2$
+are three distinct degree-one vertex-nodes, since $x\in V(T_n)$ whereas
+the $a_j$ lie outside it and $a_1\ne a_2$.
+
+Let $X$ be the full \noderef{TwoColorComponent} through $x$, and let
+$Y_j$ be the full component through $a_j$.  The degree-one witness just
+proved verifies \noderef{TwoColorPathComponent} for each of $X,Y_1,Y_2$
+(and $c\ne\beta$ supplies its distinct-color field).  The component $X$
+meets $T_n$ at $x$; connectivity along $L_j$ puts $b_j\in V(T_n)$ in
+$Y_j$.  At least one of $Y_1,Y_2$ is different from $X$.  Otherwise one
+component would contain the three distinct degree-one nodes
+$x,a_1,a_2$.  To see the contradiction without assuming separation of
+the transformed legs, use \noderef{TwoColorComponentSpanningPath}: a
+simple path spans that full component.  Any ambient degree-one node in
+its support must be an endpoint of the spanning path, since an internal
+node has its two distinct predecessor and successor as neighbors.  A
+path has only two endpoints.  This also accords with the global degree
+bound \noderef{TwoColorIncidenceDegreeAtMostTwo}.  Choose $j$ with
+$X\ne Y_j$.
+
+We verify the exact stable-coloring premise needed to make these two path
+components equal.  The second outside recoloring gives
+$\rho$ $(T_n,D_{n-1},\nu)$-stable, and the first gives
+$\nu$ $(T_n,D_{n-1},\varphi_n)$-stable.  In the RE case substitute
+$\varphi_n=\varphi_{n-1}$; in the SE case append the selected-stability
+field, which is exactly
+$(T_n,D_{n-1},\varphi_{n-1})$-stability of $\varphi_n$.  Transitivity in
+\noderef{sc2} therefore gives
+\[
+        \rho\text{ is }(T_n,D_{n-1},\varphi_{n-1})\text{-stable}.
+        \tag{2}
+\]
+All intermediate colorings are proper and leave precisely $e_0$
+uncolored, by the two outside-recoloring results and the corresponding
+certified constructors.
+
+If $n>1$, \noderef{CertifiedETTPredecessor} applied to the original ETT
+gives an actual positive-rung ETT of rung $n-1$, displayed terminal tree
+exactly $T_n$, generating coloring exactly $\varphi_{n-1}$, exact stored
+set $D_{n-1}$, and maximum property.  Apply lower assertion (ii) to it,
+using (2), properness, exact one-uncoloredness, and the color $c$ missing
+at $x$.  If $n=1$, the initial tuple of the original certified series has
+tree $T_1=T_n$, coloring $\varphi_0=\varphi_{n-1}$, and stored set
+$D_0=D_{n-1}$; hence the same data (2) are exactly the hypotheses of
+\noderef{TechnicalTheoremBase}.  In both cases the result says that
+$c,\beta$ are $T_n$-interchangeable.  Unfold
+\noderef{TreeInterchangeable} and apply it to the two certified path
+components $X$ and $Y_j$, each of which meets $T_n$.  It gives $X=Y_j$,
+contrary to their choice.  No zero-rung ETT has been used.
+
+\end{proof}

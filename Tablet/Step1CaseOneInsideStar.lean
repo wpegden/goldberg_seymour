@@ -66,6 +66,9 @@ import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorPathComponent
 import Tablet.interchange
 import Tablet.sc2
+import Tablet.Step1CaseOneInsidePositiveDivider
+import Tablet.Step1CaseOneInsideZeroNonPE
+import Tablet.Step1CaseOneInsideZeroPE
 
 -- [TABLET NODE: Step1CaseOneInsideStar]
 lemma Step1CaseOneInsideStar {V E : Type*}

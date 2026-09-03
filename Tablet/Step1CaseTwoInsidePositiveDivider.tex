@@ -1,0 +1,191 @@
+\begin{lemma}[Step 1, Subcase 2.2 with a positive divider]
+Let $G,e_0,[k],T,\varphi$ be a finite loopless multigraph with exact edge
+identities, distinguished uncolored edge, color set, positive-rung
+certified ETT, and generating coloring.  Assume maximum property,
+properness, exact one-uncoloredness, and the complete six-part lower-rung
+package.  Let $H$ be a good hierarchy over a hierarchy base, with
+$d<q_0$ dividers.  Assume the same-rung fewer-than-$q_0$ elementarity
+hypothesis for arbitrary certified inputs and generating colorings, the
+large bound $|\overline\varphi(T_n)|\geq2n+11$, the separate terminal
+certificate
+\[
+ T\text{ is }
+ \left(\bigcup_{\eta\in D^H_{n,d+1}}\Gamma^d_\eta\right)^-
+ \text{-closed under }\varphi,
+\]
+and elementarity of $V(T)$.  Put $A=H.\mathit{starred}(d)$.
+
+Let $\alpha\ne\beta$, with $\alpha$ missing and singleton-closed on $T$
+and $\beta$ not missing on $T$.  Let $P_1,P_2,P_3$ be pairwise
+support-disjoint exact $(T,\varphi,\{\alpha,\beta\})$-exit paths.  Their
+outside ends $a_1,a_2,a_3$ and tree ends $b_1,b_2,b_3$ are pairwise
+distinct, with $b_1\prec_T b_2\prec_T b_3$.  Retain the exact
+$\beta$-colored boundary-edge identity $f_j$ of each path incident with
+$b_j$.  Suppose $b_3\in V(A)$.
+
+Assume that a selected color $\theta\ne\alpha,\beta$ is missing and
+singleton-closed on $A$ and singleton-closed on $T$.  Assume also the
+explicit no-smaller-presentation consequence of the global minimum: for
+every proper, exactly one-uncolored coloring $\sigma$ stable from
+$\varphi$ on the final ladder tree, arbitrary replacement input,
+corresponding same-rung maximum ETT $T'$, good hierarchy with fewer than
+$d$ dividers, its own large estimate, and its separate terminal
+minus-closed certificate, there do not exist two support-disjoint exact
+exit legs with distinct outside ends for a missing singleton-closed first
+color.  Assume additionally that $d>0$.  Then the displayed Subcase 2.2
+data are contradictory.
+\end{lemma}
+\begin{proof}
+Write $n$ for the rung number, $T_n$ for the last ladder tree, $D_i$ for
+the exact cumulative stored-color set at slot $i$, and $\varphi_i$ for
+the exact coloring at that slot.  Thus $\varphi=\varphi_n$ by the
+generating-coloring field of \noderef{ExtendedTashkinovTree}.  We first
+make the three exit legs used in every branch completely explicit.
+
+The starred tree $A$ is an ordered initial segment of $T$.  Unfold
+\noderef{TashkinovHierarchy}.  If $d>0$, then
+\noderef{HierarchyStarredStage} identifies $A$ with the $d$-th hierarchy
+stage, and repeated use of the nestedness field of the hierarchy gives
+the required initial-segment map to its terminal stage $T$.  If $d=0$,
+the same conclusion follows from the core-inside-first field and then the
+nestedness and terminal-stage fields of the hierarchy.  All these are
+entrywise statements by \noderef{TreeSequenceInitialSegment}.
+Unfolding \noderef{TreeVertexOrder} in the two displayed order
+relations gives the occurrences of $b_1,b_2,b_3$ at strictly increasing
+positions of $T$.  Since $b_3\in V(A)$ and the entries of $A$ form an
+initial block of those of $T$, the occurrence of $b_3$ is in that block.
+The two earlier occurrences are consequently in the same block, so
+$b_1,b_2,b_3\in V(A)$ by \noderef{TreeSequenceVertexSet}.
+
+Unfold each given \noderef{TreeExitPath}.  The edge-node immediately
+preceding the terminal vertex-node $b_j$ represents an exact boundary
+edge of $T$: its other adjacent vertex-node on the path is outside $T$,
+because $b_j$ is the only vertex-node of the path in $V(T)$.  By
+\noderef{TwoColorIncidenceGraph} that edge has color $\alpha$ or
+$\beta$.  It cannot have color $\alpha$, since
+\noderef{TreeColorSetClosed} says that the exact $\alpha$-colored
+boundary set is empty.  Hence this last boundary edge is
+$\beta$-colored.  The separately retained identity $f_j$ has the same
+two properties by hypothesis; unfolding \noderef{BoundaryColorEdges}
+and \noderef{BoundaryEdges} shows in particular that its end other than
+$b_j$ lies outside $T$.  Since $b_j\in V(A)\subseteq V(T)$, the same
+identity $f_j$ is also a $\beta$-colored boundary edge of $A$.
+
+We next justify which $\alpha,\theta$ components may be exchanged.  If an
+$\alpha$-edge node occurs on $P_j$, it is not incident with $T$:
+otherwise one of its incident vertex-nodes on this alternating path
+would be in $T$, hence would be $b_j$, and the edge would be an
+$\alpha$-colored boundary edge, contrary to the preceding closedness.
+More generally, its full \noderef{TwoColorComponent} for
+$\alpha,\theta$ contains no vertex of $T$.  For if it did, take a
+shortest incidence-graph walk from the external edge to a vertex-node in
+$T$ and its first vertex-node in $T$.  The preceding exact edge identity
+crosses the boundary of $T$ and, by
+\noderef{TwoColorIncidenceGraph}, has color $\alpha$ or $\theta$.
+This contradicts respectively the assumed singleton closedness of
+$\alpha$ or of $\theta$ on $T$.  The identical first-crossing argument
+shows that every $\alpha,\theta$ component containing an outside vertex
+is wholly outside $T$.
+
+Exchange $\alpha$ and $\theta$ on every full $\alpha,\theta$ component
+outside $T$, and call the result $\nu$.  Finiteness makes this a finite
+choice of roots, and the preceding paragraph verifies the outside-support
+clause of \noderef{OutsideKempeRecoloring}.  By
+\noderef{OutsideKempeRecoloringStable}, $\nu$ is proper, leaves exactly
+$e_0$ uncolored, fixes every exact edge incident with $T$, preserves the
+missing-color set at each vertex of $T$, and is
+$(T_n,C,\varphi_n)$-stable for every chosen control set $C$: after
+unfolding \noderef{StableColoring}, restrict its incident-edge and vertex
+clauses from $T$ to the ordered initial segment $T_n$.
+
+For $j=1,2,3$, form a walk $Q_j$ with the same ordered vertex- and
+edge-nodes as $P_j$.  Each old $\beta$-edge remains $\beta$ because
+$\beta\ne\alpha,\theta$.  Every old $\alpha$-edge lies in one of the
+selected outside components just proved and becomes $\theta$.  Thus
+every successive pair of nodes of $P_j$ is adjacent in
+$I_G(\nu;\theta,\beta)$, so $Q_j$ is a walk there; it is the same simple
+node list and has the same positive length and support as $P_j$.
+Its outside end still misses one of its two colors.  Explicitly, if
+$\beta$ was missing at $a_j$, then the definition
+\noderef{MissingColors}, together with \noderef{PresentColors}, says
+that no incident edge had color $\beta$; none acquires that color in an
+$\alpha,\theta$ exchange, so $\beta$ remains missing.  If instead
+$\alpha$ was missing, then no incident edge had color $\alpha$.  The
+whole $\alpha,\theta$ component through the outside vertex $a_j$ was
+selected, so the $\theta$-edges incident with $a_j$ become $\alpha$ and
+the new $\theta$-edges are exactly its old $\alpha$-edges; hence
+$\theta$ is missing there under $\nu$.  We already proved that all three
+tree ends lie in $A$, while $a_j\notin V(T)$ implies
+$a_j\notin V(A)$.  Finally, the only vertex-node of $Q_j$ in $A$ is
+$b_j$, because the corresponding claim for $P_j$ excludes every other
+vertex even from the larger tree $T$.  This checks every field of
+\[
+       \operatorname{TreeExitPath}(A,\nu,\theta,\beta,a_j,b_j,Q_j).
+       \tag{1}
+\]
+The supports remain pairwise disjoint, the three outside ends remain
+pairwise distinct, and no claim about separation of the three
+transformed full components has been made.
+
+Apply \noderef{HierarchyLEMStable} to the just constructed outside
+recoloring.  It supplies a corresponding ETT $\mathcal T^\nu$ displayed
+on $T$, a hierarchy base $B^\nu$, a hierarchy $H^\nu$, and a good
+hierarchy on it.  The corresponding certificate retains the rung, all
+ordered ladder trees, exact connecting-edge sets, stored sets, and kinds;
+the same-hierarchy conclusion retains every ordered stage, divider,
+stored-color set, and Gamma pair.  The result also supplies maximum
+property and transports the given terminal minus-closed certificate.
+The stability established above identifies the missing-color sets on
+$T_n$ under $\nu$ and $\varphi_n$, so the large bound is unchanged.
+
+By the additional hypothesis, $d>0$.  In $H^\nu$, the tree $A$ is again the exact
+$d$-th stage.  Apply \noderef{GoodHierarchyPrefixRepackage} with $r=d$.
+It returns an ETT $\mathcal E_A$ displayed on the exact ordered tree
+$A$, having generating coloring $\nu$, the same rung and literally the
+same dependent certified series as $\mathcal T^\nu$, together with
+maximum property, a base $B_A$, a hierarchy $K$ with $d-1$ dividers,
+and all five \noderef{GoodHierarchy} fields.
+
+We now construct, rather than assume, the corresponding certificate for
+$\mathcal E_A$ relative to the original $\mathcal T$.  Take its
+replacement input, replacement series, and displayed ETT to be those of
+$\mathcal E_A$.  The prefix theorem identifies that series with the
+series of $\mathcal T^\nu$.  Compose this equality, slot by slot, with
+the certificate already carried by
+\noderef{CorrespondingExtendedTashkinovTree} for $\mathcal T^\nu$.
+This proves equality with the original series of every retained ordered
+ladder tree, every exact stored set, every exact connecting-edge set,
+and every extension kind.  It also transports unchanged the properness,
+one-uncoloredness, and exact stable-coloring fields at all replacement
+slots.  The prefix theorem gives the same rung and generating coloring
+$\nu$.  These are precisely all fields of a corresponding ETT; call the
+resulting certificate $\mathcal C_A$.
+
+The remaining hypotheses of the no-smaller-presentation clause also hold
+with their exact indices.  First, its stability is the
+$(T_n,D_n,\varphi_n)$-stability of $\nu$ already obtained directly from
+\noderef{OutsideKempeRecoloringStable}; this refers to the original final
+ladder tree, not merely to the new displayed tree $A$.  Second,
+$\mathcal E_A$ has the same series and rung, so its last ladder tree is
+the original $T_n$, and equality of its missing sets under $\nu$ and
+$\varphi_n$ proves the unchanged large bound.  Third, unfold
+\noderef{HierarchyTerminalStoredColors}.  Since $K$ has $d-1$ dividers,
+its terminal stored set is $D_n\setminus\overline\nu(A)$.  Unfolding
+\noderef{HierarchyStoredColorsAt} at the old index $d$ gives exactly the
+same set, because the old $d$-th starred stage is $A$.  The Gamma at the
+last index of $K$ is the old Gamma at $d-1$ by the prefix theorem.
+Consequently its separately returned closure
+\[
+ A\text{ is }
+ \left(\bigcup_{\eta\in D^{H^\nu}_{n,d}}\Gamma^{d-1}_\eta\right)^-
+ \text{-closed under }\nu
+\]
+is literally the terminal minus-closed expression demanded for $K$.
+Finally $d-1<d$, $\theta$ is still missing and singleton-closed on $A$
+because the first recoloring fixes every edge incident with $A$ and every
+missing set there, and the paths $Q_1,Q_2$ from (1) have disjoint
+supports and different outside ends.  Applying the stated
+no-smaller-presentation hypothesis to
+$\nu,A,\mathcal C_A,B_A,K$ now gives a contradiction.
+
+\end{proof}
