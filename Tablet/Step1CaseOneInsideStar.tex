@@ -1,13 +1,63 @@
 \begin{lemma}[Step 1, Subcase 1.2: the later end is inside the starred predecessor]
-Use the same finite loopless multigraph, distinguished edge, color set,
-positive-rung certified ETT $T$ with generating coloring $\varphi$, maximum
-property, properness, and exact one-uncoloredness as in Subcase 1.1.
-Assume the complete six-part lower-rung package.  Let $H$ be a good
-hierarchy over a hierarchy base, with $d<q_0$ dividers; assume the
-same-rung fewer-than-$q_0$ elementarity hypothesis for arbitrary certified
-inputs and generating colorings, and the bound
-$|\overline\varphi(T_n)|\geq2n+11$.  Put
-$A=H.\mathit{starred}(d)$.  Assume separately the terminal certificate
+Let $G$ be a finite loopless multigraph on finite vertex and edge types,
+with the elements of the edge type retained as individual edge identities.
+Let $e_0$ be a distinguished edge and let $[k]$ be the color set.  Fix an
+arbitrary certified input coloring, a terminal tree-sequence $T$, and a
+generating coloring $\varphi$.  Let $\mathcal T$ certify that $T$ is an ETT
+on exactly these data, with positive rung number $n$, and assume that
+$\mathcal T$ has the maximum property.  Assume also that $\varphi$ is
+proper and leaves exactly $e_0$ uncolored.
+
+Assume the following complete lower-rung package.  For every arbitrary
+certified input coloring, terminal tree-sequence $U$, generating coloring
+$\psi$, and positive-rung maximum ETT $\mathcal U$ on those data whose rung
+number $m$ is strictly smaller than $n$, all six of the following hold.
+Write $U_m$ and $U_{m+1}$ for the last ladder tree and final series tree of
+$\mathcal U$, respectively, and write $D_i$, $\psi_i$, $\Theta_i$, and the
+chosen vertex at slot $i$ for its exact indexed series data.
+\begin{enumerate}
+\item $V(U)$ is elementary under $\psi$.
+\item For every proper coloring $\sigma$ leaving exactly $e_0$ uncolored
+which is $(U_{m+1},D_m,\psi_m)$-stable, and every two colors $a,b$, if at
+least one of $a,b$ is missing on $U_{m+1}$ under $\sigma$, then $a,b$ are
+$U_{m+1}$-interchangeable under $\sigma$, with isolated vertex components
+included.
+\item PE support stability descends with the exact indexed control data,
+and equal-first-appearance PE stored sets are disjoint.  More precisely,
+if a positive slot $i$ is PE with chosen support $v\in V(U)$, the
+first-appearance index of $v$ is $j+1$, and a proper coloring $\sigma$
+leaving exactly $e_0$ uncolored is $(U_i,D_i,\psi_i)$-stable, then it is
+both $(U(v)-v,D_j,\psi_j)$-stable and $(U_j,D_j,\psi_j)$-stable.  Moreover,
+if two distinct positive PE slots have distinct chosen supports in $V(U)$
+with the same first-appearance index, then the exact stored-color sets at
+those two slots are disjoint.
+\item If the terminal slot $m$ is PE with chosen support $v$ and recorded
+colors $\gamma_m,\delta_m$, then for every proper coloring $\sigma$ leaving
+exactly $e_0$ uncolored and $(U_m,D_m,\psi_m)$-stable, the full
+$(\gamma_m,\delta_m)$ incidence component through $v$ meets $V(U_m)$
+exactly in $v$.
+\item Let $\sigma$ be proper, leave exactly $e_0$ uncolored, and be
+$(U_m,D_m,\psi_m)$-stable.  If $\delta$ is defective on $V(U_m)$, if
+$v\in V(U)$ is an endpoint in $V(U_m)$ of a $\delta$-colored boundary
+edge, and if another such endpoint precedes $v$ in the tree order, then
+the following precedence conclusion holds.  Whenever $v$ first appears
+no later than a positive slot $i$ which is PE or SE and whose chosen
+vertex is $v_i$, either $v=v_i$ or $v\prec_U v_i$.
+\item Every proper coloring $\sigma$ leaving exactly $e_0$ uncolored and
+$(U_m,D_m,\psi_m)$-stable is a $\psi\bmod U_m$ coloring for
+$\mathcal U$.
+\end{enumerate}
+
+Let $B$ be a hierarchy base for $\mathcal T$ under $\varphi$, and let $H$
+be a good hierarchy over $B$.  Put $d=H.\mathit{dividerCount}$, and fix an
+integer $q_0>d$.  Assume uniformly that, for every ETT of rung $n$ built
+from an arbitrary certified input and arbitrary generating coloring, if it
+has maximum property and carries a good hierarchy with fewer than $q_0$
+dividers, then its displayed terminal vertex set is elementary under its
+generating coloring.  Assume the large-branch bound
+$|\overline\varphi(T_n)|\geq2n+11$, where $T_n$ is the last ladder tree of
+$\mathcal T$.  Put $A=H.\mathit{starred}(d)$.  In addition to all five
+fields of the good hierarchy, assume separately the terminal certificate
 \[
  T\text{ is }
  \left(\bigcup_{\eta\in D^H_{n,d+1}}\Gamma^d_\eta\right)^-
@@ -15,25 +65,41 @@ $A=H.\mathit{starred}(d)$.  Assume separately the terminal certificate
 \]
 and assume that $V(T)$ is elementary under $\varphi$.
 
-Let $\alpha\ne\beta$, where $\alpha$ is missing and singleton-closed on
-$T$ and $\beta$ is missing on $T$.  Let $P_1,P_2$ be exact exit paths
-for $\alpha,\beta$, with disjoint incidence-walk supports, distinct
-outside ends $a_1,a_2$, distinct tree ends $b_1,b_2$, and
-$b_1\prec_T b_2$.  Retain exact $\beta$-colored boundary-edge identities
-$f_j$ on $P_j$ incident with $b_j$.  Suppose $b_2\in V(A)$.
+Let $\alpha,\beta\in[k]$ be distinct.  Assume that $\alpha$ is missing and
+singleton-closed on $T$ under $\varphi$, and that $\beta$ is missing on
+$T$.  For $j=1,2$, let $P_j$ be an exact
+$(T,\varphi,\{\alpha,\beta\})$-exit path from the outside end $a_j$ to the
+tree end $b_j$.  Assume that the two incidence-walk supports are disjoint,
+that $a_1\ne a_2$, that $b_1\ne b_2$, and that $b_1\prec_T b_2$.  Retain
+an exact edge identity $f_j$ on $P_j$ which is a $\beta$-colored boundary
+edge of $T$ incident with $b_j$.  Suppose $b_2\in V(A)$.
 
-Assume that a color $\theta$ has already been selected with
-$\theta\ne\alpha,\beta$, that $\theta$ is missing and singleton-closed on
-$A$, and that it is singleton-closed on $T$.  Finally assume the explicit
-no-smaller-presentation consequence of the chosen global minimum: for
-every coloring $\sigma$ stable from $\varphi$ on the final ladder tree,
-every arbitrary replacement input, exact corresponding same-rung ETT
-$T'$ under $\sigma$, properness, exact one-uncoloredness, maximum property,
-hierarchy base, and good hierarchy $K$ with fewer than $d$ dividers, if
-the replacement satisfies its own large bound and the separate terminal
-minus-closed certificate, then no two disjoint exact exit legs with
-distinct outside ends can witness a missing singleton-closed first color.
-Then the displayed Subcase 1.2 data are contradictory.
+Assume that a color $\theta\in[k]$ has already been selected with
+$\theta\ne\alpha$ and $\theta\ne\beta$, that $\theta$ is missing and
+singleton-closed on $A$ under $\varphi$, and that it is singleton-closed
+on $T$ under $\varphi$.
+
+Finally assume the following explicit no-smaller-presentation consequence
+of the chosen global minimum.  Let $\sigma$ be any proper coloring leaving
+exactly $e_0$ uncolored which is $(T_n,D_n,\varphi)$-stable.  Let $T'$ be
+any tree-sequence carrying an exact corresponding same-rung ETT under
+$\sigma$ (and hence its own arbitrary certified replacement input), and
+assume that this replacement has maximum property.  For every hierarchy
+base of the replacement and every good hierarchy $K$ over that base with
+fewer than $d$ dividers, suppose that the replacement satisfies
+\[
+ |\overline\sigma(T'_n)|\geq2n+11
+ \quad\hbox{and}\quad
+ T'\text{ is }
+ \left(\bigcup_{\eta\in D^K_{n,K.\mathit{dividerCount}+1}}
+   \Gamma^{K.\mathit{dividerCount}}_\eta\right)^-
+ \text{-closed under }\sigma .
+\]
+Then, for any distinct colors $a,b$ with $a$ missing and singleton-closed
+on $T'$ under $\sigma$, there do not exist two exact
+$(T',\sigma,\{a,b\})$-exit paths having disjoint incidence-walk supports
+and distinct outside ends.  Under all these hypotheses, the displayed
+Subcase 1.2 data are contradictory.
 \end{lemma}
 \begin{proof}
 Exchange $\alpha$ and $\theta$ on every full component outside $T$, and
