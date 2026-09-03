@@ -1,8 +1,10 @@
 import Tablet.BoundaryColorEdges
+import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved
 import Tablet.CombinedStableColoring
 import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.GoodHierarchyTerminalPrefixRepackage
 import Tablet.GoodHierarchyNewMissingClosed
@@ -14,6 +16,7 @@ import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchyLEMStable
 import Tablet.HierarchyPathNumber
 import Tablet.HierarchySegmentColors
+import Tablet.HierarchyStageMissingColors
 import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsAt
 import Tablet.HierarchySplitter
@@ -26,6 +29,7 @@ import Tablet.MaximumDefectiveChoice
 import Tablet.ModColoring
 import Tablet.MissingColors
 import Tablet.OutsideKempeRecoloringStable
+import Tablet.OrderedTreeUnion
 import Tablet.ParallelCommonMissingClosed
 import Tablet.PresentColors
 import Tablet.RevisitingExtensionCertificate
@@ -33,15 +37,20 @@ import Tablet.SameGoodHierarchy
 import Tablet.SameHierarchyStages
 import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceRestrict
 import Tablet.TashkinovClosure
 import Tablet.TashkinovHierarchy
+import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.Td
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeColorSetClosed
+import Tablet.TreeColorSetMinusClosed
+import Tablet.TreeIncidentEdge
 import Tablet.TreeInterchangeable
+import Tablet.TreeMissingColors
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix
 import Tablet.TreeVertexOrder
