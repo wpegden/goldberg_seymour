@@ -34,6 +34,7 @@ import Tablet.SameGoodHierarchy
 import Tablet.SameHierarchyStages
 import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceRestrict
 import Tablet.TashkinovClosure
 import Tablet.TashkinovHierarchy
@@ -43,6 +44,7 @@ import Tablet.TashkinovStoredColors
 import Tablet.Td
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeColorSetClosed
+import Tablet.TreeColorSetMinusClosed
 import Tablet.TreeInterchangeable
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix

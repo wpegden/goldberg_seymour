@@ -240,24 +240,79 @@ theorem.  The ordered-unused hypothesis gives
  \alpha\notin\varphi_n\langle B-A\rangle,                     \tag{3}
 \]
 and the definition of $i_\beta$ gives
-$\beta\notin\overline\varphi_n(B-v_\beta)$.  Each ordinary displayed
-edge of $B-A$ is supplied by \noderef{TashkinovAugmentation}; if it had
-color $\beta$, its preceding prefix would already contain a vertex
-missing $\beta$, contrary to the minimality of $i_\beta$.  The only
-nominal exception is the exact first SE/RE connecting seed when
-$q=0$, $A=T_n$, and $\beta\in D_n$.  That individual seed is incident
-with $T_n$ by the SE or RE constructor of
-\noderef{TashkinovSeriesStep}, so the incident-edge clause of the
-terminal \noderef{StableColoring} fixes its color.  Thus (3), the
-first-missing property, and this exact first-seed check show that every
-displayed edge used from the appropriate PE or SE/RE seed to $B$ has
-the same color under $\sigma_n$ and $\varphi_n$.  At every old
-augmentation witness before $v_\beta$, the switched component either
-does not meet the vertex or exchanges two present incident colors; the
-missing set is therefore unchanged.  The exact old augmentation route
-to $B$ remains valid.  Equivalently, its required restriction is the
-one supplied by
-\noderef{TashkinovAugmentationSequenceRestrict}.
+$\beta\notin\overline\varphi_n(B-v_\beta)$.
+
+Let $T_{n+1}$ denote the final closure stored by the terminal constructor
+of the certified series.  In the PE case its seed is $S=T_n$; in the SE
+or RE case its seed is the exact one-edge tree $S=T_n+f_n$.  Unfolding
+\noderef{TashkinovClosure} in that constructor of
+\noderef{TashkinovSeriesStep} supplies, before any change of coloring, a
+$\varphi_n$-\noderef{TashkinovAugmentationSequence} from $S$ to
+$T_{n+1}$.  The seed is an exact ordered prefix of $B$.  In PE this
+follows from $T_n\preccurlyeq A\prec B$.  In SE/RE, both $S$ and $B$ are
+exact ordered prefixes of $T_{n+1}$, while the exact one-edge seed has
+$|S|=|T_n|+1\leq |B|$ because $T_n\preccurlyeq A\prec B$.  Comparing
+their vertex and individual edge entries in the common extension, as in
+\noderef{TreeSequenceInitialSegment}, gives $S\preccurlyeq B$; this also
+covers $q=0$ and $A=T_n$.  Moreover
+$B\preccurlyeq T\preccurlyeq T_{n+1}$.  Hence
+\noderef{TashkinovAugmentationSequenceRestrict}, applied with the fixed
+coloring $\varphi_n$, gives a $\varphi_n$-augmentation sequence from
+$S$ to $B$.  This restriction has not yet asserted anything about
+$\sigma_n$.
+
+We now induct through that restricted sequence, using the finite
+reflexive-transitive-chain meaning of
+\noderef{TashkinovAugmentationSequence}.  First compare the two colorings
+on the seed.  In PE, $S=T_n\preccurlyeq A$, and no edge-node of the
+switched component is incident with $A$, so every displayed seed identity
+is fixed.  In SE/RE the same argument fixes the displayed identities of
+$T_n$.  If the extra exact seed $f_n$ is already displayed in $A$, the
+same disjointness argument fixes it.  Otherwise $A=T_n$ and $f_n$ is the
+first displayed identity of $B-A$, so (3) excludes color $\alpha$.  If its
+color is outside $\{\alpha,\beta\}$, it is fixed directly by
+\noderef{TwoColorComponentSwap}.  The only remaining possibility is the
+paper's exact exception $q=0$, $A=T_n$, and
+$\varphi_n(f_n)=\beta$.  Here $v_\beta$ is the first
+$\beta$-missing vertex and lies outside $A=T_n$, so $\beta$ is not
+missing on $T_n$.  The SE
+constructor records $f_n$ with its defective color in the terminal raw
+stored set, while the RE constructor records both colors of the cycle
+containing $f_n$ in that set.  Unfolding
+\noderef{TashkinovStoredColors} therefore gives $\beta\in D_n$.  The SE
+or RE constructor of \noderef{TashkinovSeriesStep} also makes $f_n$
+incident with $T_n$, and the incident-edge clause of terminal
+\noderef{StableColoring} fixes this particular stored-color edge.  Thus
+$\sigma_n$ and $\varphi_n$ agree on every displayed identity of $S$.
+
+For the induction step, write the old augmentation as $X\longrightarrow Y$.
+Unfolding \noderef{TashkinovAugmentation} gives the exact new last edge
+$f$, its color $c=\varphi_n(f)$, and an old vertex $w\in V(X)$ at which
+$c$ is missing.  If the position of $f$ is below $|A|$, then $f$ and
+every edge incident with $w$ are fixed because $w\in V(A)$ and the
+switched component has no edge-node incident with $A$.  Hence
+$\sigma_n(f)=c$ and $c$ is still missing at $w$.
+
+Otherwise $f$ is a displayed tail edge in $B-A$.  It is not the possible
+SE/RE seed edge, because that identity is already part of $S$.  Equation
+(3) gives $c\ne\alpha$.  If $c=\beta$, the old augmentation witness $w$
+would be a vertex preceding $v_\beta$ at which $\beta$ is missing,
+contrary to the defining minimality of $i_\beta$.  Thus
+$c\notin\{\alpha,\beta\}$.  The definition
+\noderef{TwoColorComponentSwap} consequently fixes every $c$-colored
+edge identity, in particular $f$, and does not create any new incident
+$c$-edge at $w$; so $c$ remains missing at $w$ under $\sigma_n$.
+In either positional case, the length and exact-initial-segment clauses
+are coloring-independent, and all clauses of
+\noderef{TashkinovAugmentation} hold for $\sigma_n,X,Y$.  Induction gives
+a $\sigma_n$-\noderef{TashkinovAugmentationSequence} from the appropriate
+PE or SE/RE seed $S$ to $B$.  At the same time the seed check and the
+inductive equality for each new exact edge prove the tail identity
+statement
+\[
+ \sigma_n(f)=\varphi_n(f)
+ \quad\text{for every displayed edge identity }f\text{ of }B-A. \tag{4}
+\]
 
 Now apply \noderef{Td} to the terminal stable relation, using the given
 six lower-rung assertions and the maximum property of $\mathcal E_B$.
@@ -313,7 +368,7 @@ $\sigma_n$ at every starred-stage vertex.  Unfolding
 \noderef{HierarchyStoredColorsAt}, which subtracts exactly the starred
 stage's missing colors from the raw stored set, proves
 \[
-                         D'_{n,j}=D_{n,j}                     \tag{4}
+                         D'_{n,j}=D_{n,j}                     \tag{5}
 \]
 for every $j$.  The same pointwise argument on $T_n$ and each unchanged
 ordinary stage proves equality of all
@@ -342,37 +397,59 @@ last-position fallback agrees when empty.
 
 We can now verify all six fields of \noderef{GoodHierarchy}.  Pair size
 and pairwise disjointness are literal properties of the transported
-Gamma pairs, using (4).  For avoidance, fix $j$, a relevant
+Gamma pairs, using (5).  For avoidance, fix $j$, a relevant
 $\eta\in D'_{n,j}$, and one exact edge position in the new
 $(j,\eta)$ segment.  The preceding paragraph identifies the appropriate
 first-missing bound in all three cases $\eta=\alpha$, $\eta=\beta$, and
-$\eta\notin\{\alpha,\beta\}$.  Same hierarchy stages identify the
-starred and next-stage bounds, while the component's disjointness from
-$A$ fixes the color of this individual displayed edge.  It is therefore
-an old segment edge avoided by the corresponding old Gamma pair.  This
-is the required pointwise avoidance proof, not a claim that arbitrary
-segment-color functions survive a Kempe switch.
+$\eta\notin\{\alpha,\beta\}$.  Same hierarchy stages identify the starred
+and next-stage bounds and the exact edge identity.  If this segment edge
+lies at or below $A$, the switched component's disjointness from $A$
+fixes its color.  If it lies in $B-A$, the full tail-edge equality (4)
+fixes its color.  The first-missing bound therefore makes this very edge,
+with its unchanged color, an edge of the corresponding old segment.
+The old avoidance field excludes the old Gamma pair, and hence the equal
+new Gamma pair, from that color.  This is the required pointwise
+avoidance proof; it covers arbitrary segment edges in $B-A$ and makes no
+claim that full segment-color functions survive a Kempe switch.
 
 For unique refresh, same hierarchy stages identify both exact stage
-differences, (4) identifies the stored sets, the pointwise missing-set
+differences, (5) identifies the stored sets, the pointwise missing-set
 equality identifies the union of missing colors on the difference, and
 the Gamma pairs agree; the old existence-and-uniqueness witness is thus
 the new one.  In PE, the same core and the closure transported by
 \noderef{CombinedStableClosurePreserved}, together with pointwise
 missing-set equality on both constituents, preserve the common-missing
 cardinality part of the parallel-base field.  For its non-minus-closed
-part, retain the old witness color and exact boundary edge: the whole
-core lies in $A$, so the component disjointness fixes that edge and its
-inside vertex's missing set.  In SE/RE the parallel premise is false.
-Finally, every positive ordinary stage lies in $A$.  Each exact boundary
-edge relevant to its minus-closed field is therefore fixed, as is every
-stage missing set; (4) and Gamma equality identify the excluded union.
-The old minus-closed proof applies at every index.
+part, unfold \noderef{TreeColorSetMinusClosed}: the old negation of
+$\Gamma^0$-minus-closedness supplies a color $c$ missing on the core but
+not in the old reserved union, and an exact boundary-edge identity $g$
+of that core with $\varphi_n(g)=c$.  The core lies in $A$.  Hence the
+component disjointness fixes every edge identity incident with the core,
+including $g$, and preserves the missing colors at every core vertex.
+Equation (5) and Gamma equality identify the old and new reserved unions.
+Thus $c$ is still missing on the core, still outside the reserved union,
+and $\sigma_n(g)=c$ on the same exact boundary edge.  Unfolding
+\noderef{TreeColorSetClosed} now shows that this retained witness proves
+the required failure of minus-closedness.  In SE/RE the parallel premise
+is false.
+
+Finally fix a positive ordinary stage and unfold
+\noderef{TreeColorSetMinusClosed} for its minus-closed field.  The stage
+lies in $A$, so its missing-color set is unchanged, and (5) with Gamma
+equality identifies the excluded reserved union.  If the new
+minus-closed assertion failed, unfolding \noderef{TreeColorSetClosed}
+would give a color $c$ in that common missing set but outside the common
+reserved union, together with an exact boundary-edge identity $g$ of the
+stage satisfying $\sigma_n(g)=c$.  Since $g$ is incident with a stage
+vertex in $A$, the switched component has no such edge-node and therefore
+$\varphi_n(g)=\sigma_n(g)=c$.  The same color and the same exact boundary
+edge would contradict the old minus-closed field.  This excludes every
+possible witness and proves the positive-stage field at every index.
 
 These are respectively the `twoColors', `avoidance', `disjointPairs',
 `uniqueRefresh', `parallelBase', and `minusClosed' fields, so they
 construct a complete good witness $\mathcal G'_B$.  Only now apply
-\noderef{SameGoodHierarchy}: same hierarchy stages, (4), and the
+\noderef{SameGoodHierarchy}: same hierarchy stages, (5), and the
 transported Gamma equations give its required pointwise data.
 
 The resulting ETT on $B$, its maximum property, base, hierarchy,
