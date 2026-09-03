@@ -116,14 +116,38 @@ paths.  If $\alpha=\gamma$, put $\mu_4=\varphi$.  Otherwise select every
 full $(\alpha,\gamma)$ component containing an $\alpha$-edge node of one
 of $P_1,P_2,P_3$, and also the component through $a_j$ whenever the
 outside-end alternative of $P_j$ says that $a_j$ misses $\alpha$.
-Every selected component is wholly outside $T$.  Indeed, if one met
-$T$, take in the connected support of \noderef{TwoColorComponent} a
-shortest walk in \noderef{TwoColorIncidenceGraph} from its selected
-outside node to a vertex-node of $T$.  The edge-node immediately before
-the first such vertex represents, by \noderef{BoundaryEdges}, an exact
-boundary identity of color $\alpha$ or $\gamma$, contradicting the two
-singleton-closed conclusions.  The same first-crossing argument applies
-to a component selected through an outside endpoint.  Finiteness now
+We first verify that each of these components has an outside vertex-node
+from which a first-crossing argument may start.  Let $e$ be an
+$\alpha$-edge node of $P_j$.  Unfold \noderef{TreeExitPath}.  Since
+$P_j$ is a simple path whose two ends are vertex-nodes, the occurrence
+of $e$ is internal and has two distinct neighboring vertex-nodes, say
+$x$ and $y$.  By the adjacency definition in
+\noderef{TwoColorIncidenceGraph}, $x$ and $y$ are the two distinct ends
+of the exact edge identity $e$.  The unique-$T$-vertex field of the exit
+path says that either endpoint, if in $V(T)$, must equal $b_j$.  The two
+cannot both equal $b_j$.  If exactly one did, the other would be outside
+$T$, so the $\alpha$-colored identity $e$ would belong to
+$\partial_G(V(T))$ by \noderef{BoundaryEdges}, contrary to the assumed
+singleton-$\alpha$ closedness after unfolding
+\noderef{TreeColorSetClosed}.  Thus
+\[
+                 x,y\notin V(T)                               \tag{3a}
+\]
+for every selected $\alpha$-edge node.  A component selected through
+$a_j$ also has an outside vertex-node, namely $a_j$, by the outside-end
+field of \noderef{TreeExitPath}.
+
+Now let a selected component meet $T$, start at one of the outside
+vertex-nodes just identified, and take in the connected support of
+\noderef{TwoColorComponent} a shortest walk in
+\noderef{TwoColorIncidenceGraph} to a vertex-node of $T$.  Immediately
+before the first vertex-node in $T$ the walk has an edge-node, and the
+preceding vertex-node is outside $T$ by first choice.  Hence that exact
+edge has precisely one end in $V(T)$ and, by
+\noderef{TwoColorIncidenceGraph}, has color $\alpha$ or $\gamma$.
+It is therefore an exact boundary identity by \noderef{BoundaryEdges},
+contradicting the singleton closedness of those two colors.  Every
+selected component is consequently wholly outside $T$.  Finiteness now
 gives an \noderef{OutsideKempeRecoloring}; swap all selected components
 and call the result $\mu_4$.
 
@@ -198,16 +222,29 @@ also agreeing with the spanning path supplied by
 exactly the one vertex-node $b_3$ in $T$.
 
 Unfold \noderef{TreeVertexOrder}.  Let $s$ be the unique displayed
-position of $b_3$ in $T$.  The two order hypotheses put $b_1$ and $b_2$
-at earlier positions.  Because $A$ is an exact prefix and
-$b_3\notin V(A)$, every entry of $A$ occurs before $s$.  Since every
-\noderef{TreeSequence} has positive length and $T_n\preccurlyeq A$, we
-have $s\geq1$.  Define the exact \noderef{TreeSequencePrefix} objects
+vertex position of $b_3$ in $T$, viewed as a natural number, so
+$s\leq |T|$.  The two order hypotheses put $b_1$ and $b_2$ at earlier
+positions.  Write $a=|A|$.  Because $A$ is an exact ordered prefix of
+$T$ and $b_3\notin V(A)$, the position $s$ is strictly beyond every
+vertex position of $A$, hence $a<s$.  The positive-length field of
+\noderef{TreeSequence} gives $1\leq |T_n|$, while
+$T_n\preccurlyeq A$ gives $|T_n|\leq a$.  Consequently
+$1\leq a<s$, and therefore
 \[
- B^-:=T\text{ through the position immediately before }s,
- \qquad C:=T\text{ through }b_3.                              \tag{6}
+                         2\leq s.                              \tag{5a}
 \]
-Entrywise comparison gives
+In particular $1\leq s-1$, and $s-1\leq |T|$ follows from
+$s\leq |T|$; also $1\leq s\leq |T|$.  These are respectively the
+positive-length and upper-bound witnesses required by
+\noderef{TreeSequencePrefix}.  We may therefore define the exact prefix
+objects
+\[
+ B^-:=\operatorname{TreeSequencePrefix}(T,s-1),
+ \qquad C:=\operatorname{TreeSequencePrefix}(T,s).             \tag{6}
+\]
+Since $a\leq s-1$, entrywise comparison in
+\noderef{TreeSequenceInitialSegment} gives, with the strict inequality
+of lengths between the middle two prefixes,
 \[
               T_n\preccurlyeq A\preccurlyeq B^-\prec C
                  \preccurlyeq T.                             \tag{7}
@@ -225,9 +262,23 @@ The inequality $\gamma\ne\beta$ permits
 \noderef{TwoColorComponentSwap} changes only those two nonempty colors,
 so \noderef{IsOneEdgeUncolored} still singles out $e_0$.  The preceding
 disjointness shows that this swap fixes every exact edge incident with
-$B^-$ and every vertex missing-color set there.  It therefore gives
-$(T_n,D_n,\mu_4)$-stability after (7), and transitivity in
-\noderef{sc2} with the first outside recoloring gives
+$B^-$ and every vertex missing-color set there.  We now unfold both
+fields of \noderef{StableColoring}.  For its incident-edge field, an
+exact edge incident with $T_n$ is incident with $B^-$ by (7), so the
+second swap fixes its value; this proves the required equality whenever
+its $\mu_4$-color lies in
+$\overline{\mu_4}(T_n)\cup D_n$ (indeed, without needing that
+restriction).  For its vertex field, every vertex of $T_n$ belongs to
+$B^-$, and no incident edge at such a vertex was changed, so its
+\noderef{PresentColors}, hence its \noderef{MissingColors}, is identical
+under $\mu_4$ and $\mu_5$.  Thus $\mu_5$ is
+$(T_n,D_n,\mu_4)$-stable.
+
+The first outside recoloring fixes every edge incident with $T$ and
+every missing set at a vertex of $T$ by
+\noderef{OutsideKempeRecoloringStable}.  Since $T_n\preccurlyeq T$,
+the same two clauses of \noderef{StableColoring} make $\mu_4$
+$(T_n,D_n,\varphi)$-stable.  Transitivity in \noderef{sc2} now gives
 \[
        \mu_5\text{ is }(T_n,D_n,\varphi)\text{-stable}.        \tag{8}
 \]
@@ -321,21 +372,44 @@ $v'=v, u'=u$.  The original PE clause of \noderef{HierarchyBase} says
 that $v$ occurs at its recorded positive support position; the same
 position now certifies the actual replacement support $v'$.
 
-Use the original core and closure $R_n$ for the new PE base.  Both $T_n$
-and $R_n$ are exact prefixes of that core by
-\noderef{OrderedTreeUnion}, and the core is a prefix of $A$, hence of
-$B^-$ by (7).  Every displayed edge and old-prefix missing witness of
-the old closure is therefore fixed by both recolorings.  Checking the
-same new-edge color and missing witness at every
-\noderef{TashkinovAugmentation} transports the whole closure sequence to
-$\mu_5$.  A hypothetical $\mu_5$-colored boundary edge of $R_n$ whose
-color is missing there would have the same exact identity, color, and
-missing witness under $\varphi$, contradicting the original closedness.
-Thus the actual \noderef{TashkinovClosure} is rebuilt under $\mu_5$; the
-ordered-union witness is coloring-free.  Together with (11) and the
-support equality, these are every PE-base field.  In both terminal-kind
-branches, (8) gives the terminal missing-set compatibility.  Call the
-resulting base $B_C$.
+Use the original core and closure $R_n$ for the new PE base, but do not
+treat $R_n$ as a prefix of the core.  The vertex-set field of
+\noderef{OrderedTreeUnion}, followed by the hierarchy-core prefix and
+(7), gives only the inclusions that are needed:
+\[
+ V(R_n)\subseteq V(\mathit{core})\subseteq V(A)\subseteq V(B^-).
+                                                                  \tag{11a}
+\]
+The exact-entry bookkeeping supplied by that ordered union is as
+follows.  Its left-segment field retains the common $T_n$ entries.
+For a later right-hand entry of $R_n$ whose new vertex is outside
+$V(T_n)$, its \emph{everyNewRightEntry} field places the same exact edge
+identity and new vertex in the added part of the core.  No field asserts,
+or is used to infer, that the ordered route of $R_n$ is a core prefix.
+
+We instead transport the closure by incidence using (11a).  Every exact
+displayed edge of $R_n$, and in particular every new edge in its
+\noderef{TashkinovAugmentationSequence}, is incident with its displayed
+new vertex in $V(R_n)\subseteq V(B^-)$.  The first outside recoloring
+therefore fixes its exact color because $B^-\preccurlyeq T$, and the
+second swap fixes it because it is incident with $B^-$.  Every old-prefix
+missing witness used by an augmentation is a vertex of $R_n$, hence lies
+in $B^-$ by (11a), so its missing-color set is fixed by both swaps.
+Checking these two facts at every \noderef{TashkinovAugmentation}
+transports the full augmentation sequence from $\varphi$ to $\mu_5$.
+Finally, any exact boundary edge of $V(R_n)$ is incident with its endpoint
+in $V(R_n)\subseteq V(B^-)$, and every color missing on $R_n$ has a
+missing witness at such a vertex.  Thus a $\mu_5$ boundary edge whose
+color is missing on $R_n$ would have the same identity and color and the
+same missing witness under $\varphi$, contrary to the original
+closedness.  We have established once and for all the actual
+\noderef{TashkinovClosure} of the same $R_n$ under $\mu_5$ from the same
+support prefix of $T_n$; call this the PE closure-transport certificate
+(11b).  The original \noderef{OrderedTreeUnion} witness is coloring-free
+and is reused unchanged.  Together with (11), the support equality, and
+(11b), these are every PE-base field.  In both terminal-kind branches,
+(8) gives the terminal missing-set compatibility.  Call the resulting
+base $B_C$.
 
 We next build a genuine $d$-divider good hierarchy on $C$.  If
 $A\prec B^-$, apply \noderef{GoodHierarchyTerminalPrefixRepackage} to
@@ -368,9 +442,10 @@ are unchanged, so the unique-refresh existence and uniqueness clauses
 copy.  All internal exact colored boundaries are fixed; the appropriate
 prefix theorem supplies the last internal minus-closed field in the
 equality case.  In PE, $B_C$ was rebuilt with the same support, core, and
-closure, and all their incident edges and missing sets were fixed, so the
-parallel-base cardinality and non-minus-closed clauses copy.  In non-PE
-that implication is vacuous.
+closure, and certificate (11b) fixes the closure colors and missing sets
+without making the closure a core prefix, so the parallel-base
+cardinality and non-minus-closed clauses copy.  In non-PE that implication
+is vacuous.
 
 For avoidance, unfold \noderef{HierarchySegmentColors} and the totalized
 \noderef{HierarchyFirstMissingPosition}.  At every $j<d$ the next stage
@@ -411,10 +486,11 @@ common $T_n$.  In PE, the two terminal singleton equations and the exact
 connecting-edge equality again give $f'_n=f_n$; the inside
 \noderef{DefectiveVertex} and outside-end fields of the two
 \noderef{MaximumDefectiveChoice} records again force $v'_n=v_n$.
-The core and closure lie in $B^-$ and the previously checked
-edge-by-edge transport is unchanged.  Hence they form the replacement
-PE closure and ordered union under $\mu_5$.  This verifies every field of
-$B_J$ without copying an internal PE witness from generic correspondence.
+The vertex inclusions (11a) still apply; the already established
+certificate (11b), rather than any prefix claim about $R_n$, supplies the
+replacement PE closure.  The same coloring-free ordered-union witness
+then supplies the core.  This verifies every field of $B_J$ without
+copying an internal PE witness from generic correspondence.
 
 Use the stages of $K_C$ through $A$ and terminal stage $J$ to define
 $K_J$ over $B_J$.  Nesting and strictness follow from
@@ -452,12 +528,13 @@ point we again reconstruct, rather than copy, its base.  In non-PE its
 core is the common $T_n$.  In PE compare the two actual terminal
 constructors: equality of their singleton connecting-edge sets fixes the
 individual defective edge; the inside/outside endpoint fields of their
-maximum-defective choices fix the replacement support vertex; and the
-original core and closure, lying inside $B^-$, retain every displayed
-edge color, old-prefix missing witness, and closedness property under
-$\mu_5$.  Thus they supply the actual replacement closure, ordered union,
-and support field.  This checks every \noderef{HierarchyBase} field at
-every restricted augmentation, not only at $C$ and $J$.
+maximum-defective choices fix the replacement support vertex.  The vertex
+inclusions (11a) and the same closure-transport certificate (11b) retain
+every displayed edge color, old-prefix missing witness, and closedness
+property under $\mu_5$.  Thus (11b) supplies the actual replacement
+closure, while the unchanged coloring-free union witness supplies the
+ordered union and core.  This checks every \noderef{HierarchyBase} field
+at every restricted augmentation, not only at $C$ and $J$.
 
 Take the old internal stages through $A$ and terminal $U$.  They satisfy
 all \noderef{TashkinovHierarchy} fields and have exactly $d$ dividers.
@@ -566,11 +643,15 @@ certificate $\mathcal C'$.  Properness and exact one-uncoloredness were
 proved after the two swaps; (8) is precisely the required stability on
 the original final ladder tree; maximum property, the rebuilt base,
 $K'$, its good witness, equality of divider counts, and the separate
-certificate (13) were proved above.  The vertex clause of (8) identifies
-$\overline{\mu_5}(T_n)$ with $\overline\varphi(T_n)$, while
-correspondence identifies the replacement last ladder tree with the same
-ordered $T_n$.  Hence the stated large bound transports with exactly the
-same cardinality.
+certificate (13) were proved above.  Unfold \noderef{StableColoring} in
+(8) once more.  Its vertex clause says separately for every
+$v\in V(T_n)$ that
+$\overline{\mu_5}(v)=\overline\varphi(v)$.  Taking the union over those
+vertices in the definition of \noderef{TreeMissingColors} gives
+$\overline{\mu_5}(T_n)=\overline\varphi(T_n)$.  Correspondence identifies
+the replacement last ladder tree with the same ordered $T_n$; hence the
+two finite color sets have exactly the same cardinality and the stated
+large bound transports.
 
 Use first comparison color $\beta$ and second color $\gamma$.  They are
 distinct; (9) makes $\beta$ missing on $T'$, and its exclusion from the
