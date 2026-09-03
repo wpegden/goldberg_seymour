@@ -108,7 +108,8 @@ the exact coloring at that slot.  Thus $\varphi=\varphi_n$ by the
 generating-coloring field of \noderef{ExtendedTashkinovTree}.  We first
 make the two exit legs used in every branch completely explicit.
 
-The starred tree $A$ is an ordered initial segment of $T$.  Indeed, if
+The starred tree $A$ is an ordered initial segment of $T$.  Unfold
+\noderef{TashkinovHierarchy}.  If
 $d>0$, then \noderef{HierarchyStarredStage} identifies $A$ with the
 $d$-th hierarchy stage, and repeated use of the nestedness field of the
 hierarchy gives the required initial-segment map to its terminal stage
@@ -158,8 +159,9 @@ clause of \noderef{OutsideKempeRecoloring}.  By
 \noderef{OutsideKempeRecoloringStable}, $\nu$ is proper, leaves exactly
 $e_0$ uncolored, fixes every exact edge incident with $T$, preserves the
 missing-color set at each vertex of $T$, and is $(T_n,C,\varphi_n)$-stable
-for every chosen control set $C$ (restrict the asserted stability from
-$T$ to the ordered initial segment $T_n$).
+for every chosen control set $C$: after unfolding
+\noderef{StableColoring}, restrict its incident-edge and vertex clauses
+from $T$ to the ordered initial segment $T_n$.
 
 For $j=1,2$, form a walk $Q_j$ with the same ordered vertex- and
 edge-nodes as $P_j$.  Each old $\beta$-edge remains $\beta$ because
@@ -274,9 +276,10 @@ $y\in V(T_n)$.  Suppose an exact identity $g$ belonged to its
 $\nu$-colored boundary.  By \noderef{BoundaryColorEdges}, $g$ is a
 boundary edge and $\nu(g)=c'$.  The first outside recoloring is
 $(T_n,D_{n-1},\varphi_n)$-stable.  Reverse it using \noderef{sc2}; its
-vertex clause transfers the missingness of $c'$ at $y$ to $\varphi_n$,
-and its edge clause, now applied to the incident boundary identity $g$,
-gives $\varphi_n(g)=\nu(g)=c'$.  In the RE case substitute the exact
+two clauses are those of \noderef{StableColoring}: the vertex clause
+transfers the missingness of $c'$ at $y$ to $\varphi_n$, and the edge
+clause, now applied to the incident boundary identity $g$, gives
+$\varphi_n(g)=\nu(g)=c'$.  In the RE case substitute the exact
 equality $\varphi_n=\varphi_{n-1}$.  In the SE case reverse the selected
 stability using \noderef{sc2}; the common missingness at $y$ and its edge
 clause give $\varphi_{n-1}(g)=c'$.  In either case
@@ -336,9 +339,10 @@ the missingness of $c$ there.
 We next certify the full path components that will contradict
 interchangeability.  In \noderef{TwoColorIncidenceGraph}, the vertex-node
 $x$ has no $c$-colored neighbor because $c$ is missing, and it has at
-least one $\beta$-colored neighbor because $\beta$ is present.  Properness
-allows at most one edge of either color at a vertex, so $x$ has degree
-exactly one.  Each outside end $a_j$ also has degree exactly one: the
+least one $\beta$-colored neighbor because $\beta$ is present.  Unfolding
+\noderef{IsProperEdgeColoring}, properness allows at most one edge of
+either color at a vertex, so $x$ has degree exactly one.  Each outside
+end $a_j$ also has degree exactly one: the
 nontrivial exit path $L_j$ supplies an incident edge of one of the two
 colors, its missing-color clause excludes the other color, and properness
 excludes a second edge of the present color.  In particular, $x,a_1,a_2$
@@ -398,8 +402,11 @@ vertex $x$ in $T_n$, an exact closure $R_n$ of the prefix through $x$,
 and identifies its core with the ordered union $T_n\vee R_n=A$.  The
 prefix contains $x$ by the entrywise definition
 \noderef{TreeSequencePrefix}.  The augmentation sequence in
-\noderef{TashkinovClosure} consists of ordered initial-segment steps, so
-$x\in V(R_n)$ as well.  Choose a color $c$ missing at $x$ by the same
+\noderef{TashkinovClosure}, after unfolding
+\noderef{TashkinovAugmentationSequence} and
+\noderef{TashkinovAugmentation}, consists of ordered initial-segment
+steps.  Induction through those steps therefore retains the support
+prefix in $R_n$, so $x\in V(R_n)$ as well.  Choose a color $c$ missing at $x$ by the same
 $k\geq\Delta(G)+1$ degree count as above.  Thus
 \noderef{TreeMissingColors} puts $c$ in both
 $\overline\nu(T_n)$ and $\overline\nu(R_n)$.

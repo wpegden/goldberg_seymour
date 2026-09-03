@@ -39,6 +39,7 @@ import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovClosure
 import Tablet.TashkinovExtensionKind
+import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovSeries
 import Tablet.TashkinovStoredColors
