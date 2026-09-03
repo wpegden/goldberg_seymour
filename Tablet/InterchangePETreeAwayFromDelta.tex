@@ -146,18 +146,65 @@ exactly $e_0$ uncolored.
 
 The actual conclusion of \noderef{ParallelExtensionUndoStable} now makes
 $\tau$ stable on $T_n$ relative to the preceding stored set and preceding
-generating coloring.  Since $(a,b)$ avoid the two switched colors,
-\noderef{TwoColorComponentSwap} shows edge by edge that the
-$(a,b)$-incidence graph, its components, and the missingness of $a$ on
-$T_n$ are identical for $\tau$ and $\sigma_n$.
+generating coloring.  We spell out the transport which will be used with
+the lower-rung assertion.  For every exact edge identity $g$, expansion of
+\noderef{TwoColorComponentSwap} gives
+\[
+ \tau(g)=a\iff\sigma_n(g)=a,
+ \qquad
+ \tau(g)=b\iff\sigma_n(g)=b.                                \tag{4}
+\]
+Indeed, outside the selected component the value is fixed.  Inside it the
+only possible change is the transposition of $\gamma_n$ and $\delta_n$;
+neither $a$ nor $b$ is one of those colors, so neither displayed value is
+created or destroyed.  This verifies both directions of both equivalences,
+also when $a=b$.
+
+Incidence with $G$ does not depend on a coloring.  Thus (4), substituted
+in the adjacency formula of \noderef{TwoColorIncidenceGraph}, proves for
+every pair of nodes $r,s\in V(G)\sqcup E(G)$ that
+\[
+ I_G(\tau;a,b).\operatorname{Adj}(r,s)
+ \quad\Longleftrightarrow\quad
+ I_G(\sigma_n;a,b).\operatorname{Adj}(r,s).                  \tag{5}
+\]
+Every walk for one graph is consequently the same node sequence with the
+same stepwise adjacencies for the other.  Connectedness is identical, and
+unfolding \noderef{TwoColorComponent} therefore identifies, for every
+root $r$, its full component under $\tau$ with its full component under
+$\sigma_n$.
+
+For a graph vertex $x$, (4) and \noderef{PresentColors} identify the
+presence of $a$ at $x$ under the two colorings.  Taking complements via
+\noderef{MissingColors} identifies its missingness.  Taking the union over
+$x\in X$ in \noderef{TreeMissingColors} gives
+\[
+       a\in\overline\tau(T_n)
+       \quad\Longleftrightarrow\quad
+       a\in\overline\sigma_n(T_n).                           \tag{5a}
+\]
+Finally, (5), the component equality, and equality of neighbor sets
+transport both clauses of \noderef{TwoColorPathComponent}: the color
+inequality is unchanged, and the same low-degree witness works in the
+same full component.  Now unfold the quantified definition
+\noderef{TreeInterchangeable}.  For any two $\sigma_n$ path-component
+roots meeting $X$, the preceding equivalences make them $\tau$
+path-component roots meeting the same $X$; interchangeability under
+$\tau$ equates their full $\tau$-components, and the component equalities
+transport that equality back to $\sigma_n$.  Thus interchangeability
+under $\tau$ implies interchangeability under $\sigma_n$ for $(a,b)$.
+
 When $n>1$, \noderef{CertifiedETTPredecessor} supplies the actual
 rung-$n-1$ ETT with inherited maximum property, terminal tree exactly
 $T_n$, preceding generating coloring, and all retained certificate
 arrays equal to the corresponding arrays of $T$.  Lower assertion (ii)
-applied to that predecessor and to $\tau$ gives interchangeability on
-its final ladder closure $T_n$.  When $n=1$, the same conclusion is the
-interchangeability clause of \noderef{TechnicalTheoremBase}.  Transport across the identical
-incidence graphs proves (6).
+applied to that predecessor and to $\tau$ gives interchangeability on its
+final ladder closure $T_n$: its missing-color premise follows from the
+given $a\in\overline\sigma_n(T_n)$ and (5a).  When $n=1$, the same
+properness, exact one-uncoloredness, stability, and missingness are the
+hypotheses of the interchangeability clause of
+\noderef{TechnicalTheoremBase}.  The quantified transport just proved
+then establishes (6).
 
 Before proving (iii), we strengthen (6) to the paper's observation
 \[
@@ -188,33 +235,72 @@ removal.  Hence $\gamma_n\in D_n$.
 
 Use now both directions of the $T_n$-stable relation: the forward
 relation is a constituent of \noderef{CombinedStableColoring}, and its
-reverse was obtained from \noderef{sc2} above.  Since $\gamma_n\in D_n$,
-their edge clauses apply whether a tree-incident edge is
-$\gamma_n$-colored under $\varphi_n$ or under $\sigma_n$.  Exact boundary
-membership is coloring-independent, so the two inclusions obtained from
-the forward and reverse relations transport (8a) to
+reverse was obtained from \noderef{sc2} above.  We prove the two required
+colored-boundary inclusions separately.  Let
+$g\in\noderef{BoundaryColorEdges}(G,\varphi_n,X,\gamma_n)$.  Its defining
+conjunction says both that
+$g\in\noderef{BoundaryEdges}(G,X)$ and that
+$\varphi_n(g)=\gamma_n$.  The geometric boundary condition supplies an
+endpoint in $X$, so \noderef{TreeIncidentEdge} makes $g$ incident with
+$T_n$.  Since $\gamma_n\in D_n$, the edge clause of the forward
+\noderef{StableColoring} relation applies and gives
+$\sigma_n(g)=\varphi_n(g)=\gamma_n$.  Keeping the same geometric boundary
+membership puts $g$ in
+$\partial_{\sigma_n,\gamma_n}(X)$.
+
+Conversely, if
+$g\in\partial_{\sigma_n,\gamma_n}(X)$, the definition
+\noderef{BoundaryColorEdges} again retains the same coloring-independent
+membership $g\in\partial_G(X)$ and makes $g$ tree-incident, but now gives
+$\sigma_n(g)=\gamma_n$.  The reverse stable relation has reference
+coloring $\sigma_n$; because $\gamma_n\in D_n$, its edge clause gives
+$\varphi_n(g)=\sigma_n(g)=\gamma_n$.  Hence $g$ lies in the
+$\varphi_n$-colored boundary.  These two inclusions and (8a) prove
 \[
  \partial_{\sigma_n,\gamma_n}(T_n)=\{f_n\}.                  \tag{8b}
 \]
 
-Now take $a$ as in (8).  The stable vertex clause makes it missing on
-$T_n$ under $\varphi_n$.  Since $a\ne\delta_n$, the conditional clause of
-\noderef{HkuParallelBoundaryStructure} makes its $\varphi_n$-boundary
-empty.  If its $\sigma_n$-boundary contained an exact identity, the edge
-clause of the reverse $T_n$-stable relation would give that identity color
-$a$ under $\varphi_n$, a contradiction.  Thus the $a$-boundary under
-$\sigma_n$ is empty.  Equation (8b) then gives $a\ne\gamma_n$.  If
-$b\ne\gamma_n$, (8) is (6).  If $b=\gamma_n$, then (3), unfolded using
-\noderef{ColoredVertexSetElementary}, makes $X\subseteq U$ elementary, the
-$a$-boundary of $X$ is empty, and the $\gamma_n$-boundary contains
-only $f_n$.  Properness and
-\noderef{TwoColorComponentSpanningPath} then allow at most one paper
-$(a,\gamma_n)$-path component to meet $X$.  For two nontrivial components,
-the spanning paths would require two distinct boundary identities or give
-a repeated missing color in $X$.  If one component were a singleton at a
-tree vertex, both colors would be missing there; any second singleton or
-any tree end of a trapped nontrivial component would repeat a missing
-color, while a nontrivial component crossing $X$ cannot have both ends
-outside through the sole boundary identity $f_n$.  Thus a singleton cannot
-coexist with a second path component meeting $X$.  This proves (8).
+Now take $a$ as in (8).  By \noderef{TreeMissingColors}, choose
+$x\in X$ at which $a$ is missing under $\sigma_n$.  The vertex clause of
+the forward \noderef{StableColoring} relation identifies the missing set
+at $x$ with its $\varphi_n$ missing set.  Hence
+$a\in\overline\varphi_n(T_n)$, again by
+\noderef{TreeMissingColors}.  Since $a\ne\delta_n$, the conditional clause
+of \noderef{HkuParallelBoundaryStructure} gives
+\[
+              \partial_{\varphi_n,a}(X)=\varnothing.         \tag{8c}
+\]
+Suppose that $g\in\partial_{\sigma_n,a}(X)$.  Unfolding
+\noderef{BoundaryColorEdges} supplies the geometric membership
+$g\in\partial_G(X)$ and the value $\sigma_n(g)=a$; as above,
+\noderef{BoundaryEdges} and \noderef{TreeIncidentEdge} make $g$ incident
+with $T_n$.  The given membership
+$a\in\overline\sigma_n(T_n)$ puts its reference-color value in the
+controlled missing-color set of the reverse stable relation.  Its edge
+clause therefore gives $\varphi_n(g)=\sigma_n(g)=a$.  With the unchanged
+geometric boundary membership, the definition of
+\noderef{BoundaryColorEdges} puts $g$ in the empty set (8c), a
+contradiction.  Thus
+\[
+              \partial_{\sigma_n,a}(X)=\varnothing.          \tag{8d}
+\]
+
+Equations (8b) and (8d) imply $a\ne\gamma_n$, since the former set
+contains the exact identity $f_n$ and the latter is empty.  If
+$b\ne\gamma_n$, all of $a,b$ avoid $\gamma_n,\delta_n$, so (8) follows
+from (6).  It remains that $b=\gamma_n$.
+
+We verify exactly the hypotheses of
+\noderef{ElementarySingleBoundaryInterchangeable}.  Equation (1) gives
+$X\subseteq U$.  Given distinct $r,s\in X$, regard them as elements of
+$U=X\cup Y$ and apply the elementary relation (3); after unfolding
+\noderef{ColoredVertexSetElementary}, this says that their missing-color
+sets under $\sigma_n$ are disjoint.  Thus $X$ is elementary under
+$\sigma_n$.  Properness is a standing hypothesis, (8d) is the empty
+$a$-colored boundary, and (8b) says that the
+$\gamma_n$-colored boundary is the singleton containing the exact edge
+identity $f_n$, hence has cardinality one.  The cited lemma therefore
+gives that $a,\gamma_n=b$ are $T_n$-interchangeable under $\sigma_n$.
+This proves (8), and substituting the original $\alpha,
+\beta$ proves the stated conclusion.
 \end{proof}

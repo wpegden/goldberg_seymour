@@ -1,0 +1,166 @@
+\begin{lemma}[Elementary sets with at most one colored boundary edge are interchangeable]
+Let $G$ be a finite loopless multigraph, let $\varphi$ be a proper partial
+$k$-edge-coloring, and let $T$ be a tree-sequence.  Put $X=V(T)$.  If $X$
+is elementary under $\varphi$ and, for colors $\alpha,\beta\in[k]$,
+\[
+ \partial_{\varphi,\alpha}(X)=\varnothing,
+ \qquad
+ \bigl|\partial_{\varphi,\beta}(X)\bigr|\leq 1,
+\]
+then $\alpha$ and $\beta$ are $T$-interchangeable under $\varphi$.
+The boundary sets and the two-color components retain exact edge identities,
+so the assertion also applies in the presence of parallel edges and includes
+isolated two-color path components.
+\end{lemma}
+\begin{proof}
+Write
+\[
+ I=\noderef{TwoColorIncidenceGraph}(G,\varphi;\alpha,\beta),
+ \qquad X=\noderef{TreeSequenceVertexSet}(T).
+\]
+We prove the quantified condition in \noderef{TreeInterchangeable}.
+Fix nodes $z,w\in V(G)\sqcup E(G)$ such that their full components
+\[
+ K_z=\noderef{TwoColorComponent}(G,\varphi,\alpha,\beta,z),
+ \qquad
+ K_w=\noderef{TwoColorComponent}(G,\varphi,\alpha,\beta,w)
+\]
+are path components and each contains a vertex-node belonging to $X$.
+Unfolding \noderef{TwoColorPathComponent}, either path-component
+hypothesis first gives $\alpha\ne\beta$ and supplies in its component a
+node whose neighbor set in $I$ has at most one member.
+
+By \noderef{TwoColorComponentsDisjoint}, either $K_z=K_w$, which is the
+required conclusion, or $K_z$ and $K_w$ are disjoint.  Suppose for a
+contradiction that they are disjoint.  We first classify either one of
+these two components; call it $K$.
+
+Apply \noderef{TwoColorComponentSpanningPath} using the assumed
+properness.  It gives a simple path $P$ in $I$ whose support is exactly
+$K$.  There are two cases.
+
+Suppose first that $K$ contains no edge-node.  Since $K$ meets $X$, it
+contains a vertex-node $\mathsf{inl}(x)$ with $x\in X$.  Any adjacency in
+$I$ has one vertex-node and one edge-node by
+\noderef{TwoColorIncidenceGraph}.  Hence no node of $K$ can be adjacent
+to $\mathsf{inl}(x)$.  Since $K$ is a connected component, it follows
+that
+\[
+                         K=\{\mathsf{inl}(x)\}.              \tag{1}
+\]
+The same adjacency definition says that there is no edge identity
+incident with $x$ having color $\alpha$ or $\beta$.  Thus neither color
+belongs to \noderef{PresentColors}$(G,\varphi,x)$, and the complementary
+definition \noderef{MissingColors} gives
+\[
+ \alpha,\beta\in\overline\varphi(x).                         \tag{2}
+\]
+This is exactly the isolated path-component case; it has not been
+discarded.
+
+Suppose instead that $K$ contains an edge-node.  Because $K$ also contains
+a vertex-node and is connected, every edge-node occurring in $K$ lies on
+an incidence walk from a vertex-node.  At the first adjacency to that
+edge-node, \noderef{TwoColorIncidenceGraph} says that its edge identity
+$f$ has value $\varphi(f)=\alpha$ or $\varphi(f)=\beta$.  Conversely,
+both endpoints of such an $f$ are neighbors of its edge-node: incidence
+is endpoint membership by \noderef{Incident}.  The two endpoints are
+distinct, because equality of them would make the endpoint pair
+$G.\operatorname{ends}(f)$ a loop, contrary to
+\noderef{LooplessMultigraph}.  Therefore every edge-node in $K$ has
+degree exactly two in $I$.                                      \tag{3}
+
+Every node of $I$ has degree at most two by
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  The low-degree node supplied
+by \noderef{TwoColorPathComponent} lies on the spanning path $P$ because
+the support of $P$ is $K$.  By (3) it is a vertex-node.  It cannot be an
+internal node of $P$, since the two distinct neighboring nodes on a simple
+path would contradict that its neighbor set is a subsingleton.  Orient
+$P$ so this node is its first end.  The other end cannot have an extra
+neighbor in $K$: an extra neighbor which is internal on $P$ would give
+that internal node three distinct neighbors, while an extra adjacency to
+the first end would give the first end two neighbors.  Every neighbor of
+a node of $K$ lies again in its full connected component, so there is no
+extra neighbor outside $K$.  Consequently both ends of $P$ have degree
+one in $I$.  By (3), neither is an edge-node.  Thus for distinct vertices
+$r,s$,
+\[
+       \text{the ends of }P\text{ are }\mathsf{inl}(r),
+       \mathsf{inl}(s).                                      \tag{4}
+\]
+They are distinct because $P$ contains an edge-node and an edge-node has
+two distinct endpoint neighbors.
+
+At either end in (4), its unique neighbor is the identity of an incident
+edge colored $\alpha$ or $\beta$.  If that identity has color $\alpha$,
+then no incident edge can have color $\beta$, since it would give a second
+neighbor; hence $\beta$ is absent from \noderef{PresentColors} and belongs
+to \noderef{MissingColors}.  The same argument with the colors reversed
+applies when the unique edge has color $\beta$.  We have proved that each
+of $r,s$ is missing at least one of the two displayed colors.             \tag{5}
+
+We next determine how a nontrivial $K$ can meet $X$.  If all vertex-nodes
+of $K$ belong to $X$, call $K$ trapped.  Then (4)--(5) give two distinct
+vertices $r,s\in X$, each missing one of $\alpha,\beta$.                  \tag{6}
+
+Otherwise $K$ contains both a vertex of $X$ and a vertex outside $X$.
+Traverse $P$ between such vertices.  At the first change from a vertex in
+$X$ to a vertex outside $X$, the intervening edge-node is an exact edge
+identity $f$ incident with both vertices.  The definition
+\noderef{BoundaryEdges}, together with endpoint membership in
+\noderef{Incident} and the distinct-end condition of
+\noderef{LooplessMultigraph}, gives
+\[
+                            f\in\partial_G(X).                \tag{7}
+\]
+The definition of $I$ says $\varphi(f)=\alpha$ or
+$\varphi(f)=\beta$.  In the first alternative, (7) would put $f$ in
+\noderef{BoundaryColorEdges}$(G,\varphi,X,\alpha)$, contrary to the
+assumed emptiness of that finite set.  Therefore
+\[
+             f\in\partial_{\varphi,\beta}(X).                 \tag{8}
+\]
+Thus every component which reaches outside $X$ consumes an exact identity
+from the $\beta$-colored boundary.  Two disjoint components cannot consume
+the same identity, because its edge-node would then lie in both components.
+The bound
+$|\partial_{\varphi,\beta}(X)|\leq1$ therefore shows that at most one of
+$K_z,K_w$ reaches outside $X$.                                \tag{9}
+
+Moreover, a nontrivial component which reaches outside has at least one
+of its two ends in $X$.  Indeed, if both ends in (4) were outside while
+the path met $X$, traversing the simple path would give a first entrance
+into $X$ and a later last departure from $X$.  The two intervening
+edge-nodes are distinct because $P$ is simple.  Repeating (7)--(8) for
+both would give two distinct identities in
+$\partial_{\varphi,\beta}(X)$, contradicting its cardinality bound.
+Together with (5), every reaching component therefore supplies a vertex
+of $X$ missing $\alpha$ or $\beta$.                           \tag{10}
+
+We now apply the classification to the disjoint $K_z,K_w$.  If one is an
+edge-free singleton, let its tree vertex be $x$.  By (2), $x$ misses both
+colors.  The other component cannot be another singleton, since its
+distinct tree vertex would repeat either missing color.  If it is
+nontrivial, it is either trapped and supplies an end in $X$ by (6), or it
+reaches outside and supplies such an end by (10).  That end is distinct
+from $x$ by disjointness and misses one of $\alpha,\beta$, while $x$
+misses the same color.  In every subcase this contradicts elementariness
+as defined in \noderef{ColoredVertexSetElementary}.
+
+It remains that both components are nontrivial.  By (9), at least one is
+trapped.  Its two distinct ends lie in $X$ and each misses one displayed
+color by (6).  The other component supplies at least one end in $X$: use
+(6) if it is trapped and (10) if it reaches outside.  Disjointness makes
+these three tree vertices distinct.  Label each by one of
+$\alpha,\beta$ which it misses, as provided by (5).  Among three vertices
+and two labels, two vertices receive the same label.  Their missing-color
+sets are not disjoint, contradicting the assumed
+\noderef{ColoredVertexSetElementary} property of $X$.
+
+Hence the disjoint alternative is impossible, and $K_z=K_w$.  Since
+$z,w$ were arbitrary path components meeting $X$, the full quantified
+definition \noderef{TreeInterchangeable} holds.  Throughout the argument
+$f$ denotes an element of the original edge type, and component
+disjointness is applied to its node $\mathsf{inr}(f)$; parallel edges are
+therefore never identified by their common endpoints.
+\end{proof}

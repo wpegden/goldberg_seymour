@@ -1,9 +1,12 @@
+import Tablet.BoundaryColorEdges
 import Tablet.BoundaryColorVertex
+import Tablet.BoundaryEdges
 import Tablet.CertifiedETTPredecessor
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved
 import Tablet.CombinedStableColoring
 import Tablet.DefectiveColor
+import Tablet.ElementarySingleBoundaryInterchangeable
 import Tablet.ETTFirstAppearanceIndex
 import Tablet.ExtendedTashkinovTree
 import Tablet.ExtensionBase
@@ -30,6 +33,7 @@ import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeInterchangeable
+import Tablet.TreeIncidentEdge
 import Tablet.TreeMissingColors
 import Tablet.TreeSequence
 import Tablet.TreeSequenceVertexSet
@@ -38,6 +42,8 @@ import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorIncidenceGraph
+import Tablet.TwoColorPathComponent
 import Tablet.sc2
 
 -- [TABLET NODE: InterchangePETreeAwayFromDelta]
