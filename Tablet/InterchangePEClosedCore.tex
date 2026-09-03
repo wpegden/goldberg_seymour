@@ -73,6 +73,75 @@ identity $g$ of either tree,
 and proves that the same ordered tree $R_n$, with the same edge
 identities, is a $\sigma_n$-closure of $T_n(v_n)$.
 
+We shall need the delta-boundary assertion under a stable coloring rather
+than merely under $\varphi_n$, so we establish that transport now.  Write
+$\pi$ for the maximum-defective coloring and $\rho$ for the second stable
+coloring in the terminal PE constructor of
+\noderef{TashkinovSeriesStep}.  The choice certificate
+\noderef{MaximumDefectiveChoice} gives an exact edge $f_n$ incident with
+$v_n$ such that $\pi(f_n)=\delta_n$.  It also puts $v_n$ in $X$.  The rule
+\noderef{ParallelExtensionColor} says that $\gamma_n$ is missing at
+$v_n$ under $\pi$.  The vertex clause of the stable relation from $\pi$
+to $\rho$ in \noderef{StableColoring} therefore says that $\gamma_n$ is
+missing at $v_n$ under $\rho$.  Since $f_n$ is incident with $T_n$ by
+\noderef{TreeIncidentEdge}, and $\delta_n$ belongs to the enlarged
+control set of that stable relation, its edge clause gives
+\[
+                       \rho(f_n)=\delta_n.                    \tag{2a}
+\]
+Thus $\gamma_n\ne\delta_n$.  There is no $\gamma_n$-edge incident with
+$v_n$, by the complement definition \noderef{MissingColors}.  Moreover,
+$f_n$ is the only $\delta_n$-edge incident with $v_n$: any different such
+edge would be adjacent to $f_n$ by \noderef{AdjacentEdges} and would
+contradict properness in \noderef{IsProperEdgeColoring}.
+
+The edge-node of $f_n$ is adjacent to the vertex-node $v_n$ in
+\noderef{TwoColorIncidenceGraph}, so it lies in the full
+$(\gamma_n,\delta_n)$-component of $v_n$ in
+\noderef{TwoColorComponent}.  The terminal-color equation says that
+$\varphi_n$ is the \noderef{TwoColorComponentSwap} of $\rho$ on exactly
+that full component.  It changes $f_n$ from $\delta_n$ to $\gamma_n$.
+It cannot change any other edge incident with $v_n$ to $\delta_n$, since
+such an edge would have had color $\gamma_n$ under $\rho$, and there is no
+such edge; every incident edge carrying neither switch color is fixed.
+Consequently
+\[
+              \delta_n\in\overline\varphi_n(v_n).             \tag{2b}
+\]
+
+More generally, let $\tau$ be any proper coloring leaving exactly $e_0$
+uncolored which is $(T_n,D_n,\varphi_n)$-stable.  Its vertex clause at
+$v_n$ transfers (2b) to
+$\delta_n\in\overline\tau(v_n)$.  The witness $v_n\in X$ and the union
+definition \noderef{TreeMissingColors} then give
+$\delta_n\in\overline\tau(T_n)$.  The PE constructor supplies properness
+and exact one-uncoloredness of $\varphi_n$, while these are assumptions on
+$\tau$.  Package the two colorings with these two properties and apply the
+symmetry clause of \noderef{sc2}; it says that $\varphi_n$ is
+$(T_n,D_n,\tau)$-stable.
+
+Now fix an exact identity
+$g\in\partial_{\tau,\delta_n}(T_n)$.  Unfolding the color filter
+\noderef{BoundaryColorEdges} retains both
+$g\in\partial_G(X)$ and $\tau(g)=\delta_n$.  By
+\noderef{BoundaryEdges}, the first membership supplies an endpoint
+$p\in X$ and the other endpoint outside $X$.  The endpoint relation is
+\noderef{Incident}, and hence the inside endpoint witnesses
+\noderef{TreeIncidentEdge} for $g$ and $T_n$.  Because $\delta_n$ is in
+$\overline\tau(T_n)$, the edge clause of the reverse stable relation gives
+\[
+                 \varphi_n(g)=\tau(g)=\delta_n.                \tag{2c}
+\]
+The geometric boundary membership is unchanged, and a second use of
+\noderef{BoundaryColorEdges} therefore gives
+\[
+ \partial_{\tau,\delta_n}(T_n)
+       \subseteq\partial_{\varphi_n,\delta_n}(T_n).             \tag{2d}
+\]
+This derivation applies both to the original $\sigma_n$ and to either
+outside-swap coloring used below, once its properness,
+one-uncoloredness, and forward stability have been checked.
+
 We record three preliminary facts, with their hypotheses checked at the
 coloring at which they will be used.
 
@@ -97,6 +166,14 @@ on $U$:
  c\in\overline\sigma_n(T_n)\cap\overline\sigma_n(R_n)
  \Longrightarrow \partial_{\sigma_n,c}(U)=\varnothing.       \tag{5}
 \]
+Precisely, that node returns the singleton instance of
+\noderef{TreeColorSetClosed}; evaluating its universal clause at the sole
+member $c\in\{c\}$ and unfolding \noderef{BoundaryColorEdges} gives the
+displayed equality of exact boundary-edge sets.  Conversely, whenever we
+use membership $c\in\overline\tau(S)$ below, the definition
+\noderef{TreeMissingColors} supplies a displayed vertex $x\in V(S)$ with
+$c\in\overline\tau(x)$.  We will name those witnesses rather than treating
+tree-missing membership as vertexwise missingness without explanation.
 By \noderef{InterchangePEClosureConstituent},
 \[
  a\in\overline\sigma_n(R_n)
@@ -122,6 +199,15 @@ $P_1,P_2$ are unequal, each meets $U$, and each satisfies
 $a\ne b$, and each component has a node with at most one neighbor.  By
 \noderef{TwoColorComponentsDisjoint}, the unequal full components are
 node-disjoint.
+
+Here the hypotheses of the present lemma say, literally, that
+$a\in\overline\sigma_n(U)$ and that $U$ is
+$\{a\}$-closed in the sense of \noderef{TreeColorSetClosed}.
+The former has a vertex witness by \noderef{TreeMissingColors}; the latter,
+at the singleton member $a$, says
+$\partial_{\sigma_n,a}(U)=\varnothing$, with this exact colored boundary
+set defined by \noderef{BoundaryColorEdges}.  Every later assertion that
+an $a$-edge cannot cross the boundary uses this equality.
 
 For every $P_i$ which contains an edge-node, its path certificate and
 that witness give \noderef{TwoColorNontrivialPathComponent}.  Apply
@@ -183,16 +269,24 @@ We may reduce to
 Here is the reduction with the recoloring hypotheses explicit.  The
 support $v_n$ lies in both constituents: it lies in the ordered prefix
 and that prefix lies in its closure.  Since $k\geq\Delta(G)+1$ by
-\noderef{KTriple}, properness and \noderef{MaximumDegree}, together with
-the complement definition \noderef{MissingColors}, give a color
-$c$ missing at $v_n$.  Thus $c$ is common missing, and is closed on
-$U$ by (5).  Apply the outside-tree transposition
+\noderef{KTriple}, the number of colors exceeds the number of exact edge
+identities incident with $v_n$: the latter number is at most
+$\Delta(G)$ by \noderef{MaximumDegree}.  Properness permits at most one
+incident edge of each present color, so the complement definition
+\noderef{MissingColors}, together with the edge-witness definition
+\noderef{PresentColors}, gives a color $c$ missing at $v_n$.
+As $v_n\in X\cap Y$, the same vertex is a witness in both unions of
+\noderef{TreeMissingColors}; hence $c$ is common missing.  Formula (5),
+expanded through \noderef{TreeColorSetClosed} and
+\noderef{BoundaryColorEdges}, says exactly that neither a $c$-colored nor
+an $a$-colored exact edge identity lies in the boundary of $U$.
+Apply the outside-tree transposition
 \noderef{OutsideTreeColorSwap} to $(a,c)$: it fixes every exact edge
 identity incident with $U$ and interchanges $(a,c)$ on every other edge
 identity.  We verify its coloring properties here because only the two
 displayed colors, rather than every color missing on $U$, are assumed
-closed.  There is no $a$- or $c$-colored boundary identity, by the
-hypothesis on $a$ and by (5) for $c$.  At a vertex of $U$ all incident
+closed.  There is no $a$- or $c$-colored boundary identity by the two
+exact empty-boundary equalities just obtained.  At a vertex of $U$ all incident
 values are fixed.  At a vertex outside $U$, all nonboundary incident
 values undergo the same transposition, while every boundary value avoids
 $(a,c)$ and is fixed.  Thus injectivity of the transposition and the
@@ -200,15 +294,22 @@ adjacent-edge clause of \noderef{IsProperEdgeColoring} prove properness
 of the new coloring.  The transposition fixes the uncolored value, so
 exactly $e_0$ remains uncolored by \noderef{IsOneEdgeUncolored}.  It also
 fixes all incident values and hence all missing-color
-sets on $U$, proving stability there for every control set.
+sets on $U$, by the complement and witness definitions
+\noderef{MissingColors} and \noderef{PresentColors}.  Its edge values are
+equal on every identity incident with either constituent, so both clauses
+of \noderef{StableColoring} hold there for every control set.
 
 We first show that $b$ is present at $v_n$.  If it were missing there,
-then, because $v_n\in X\cap Y$, equation (5) would make $b$ closed on
-$U$.  The color $a$ is missing and closed on $U$ by the present
-hypothesis.  A connected $(a,b)$-component which meets $U$ could then
-have no vertex outside $U$: the first exact edge identity on an incidence
-walk from an inside vertex to an outside vertex would be an $a$- or
-$b$-colored boundary identity.  Thus both components would be trapped in
+then $v_n\in X\cap Y$ would, by \noderef{TreeMissingColors}, put $b$ in
+both constituent tree-missing sets.  Equation (5), unfolded through
+\noderef{TreeColorSetClosed} and \noderef{BoundaryColorEdges}, would give
+$\partial_{\sigma_n,b}(U)=\varnothing$.  We already have
+$\partial_{\sigma_n,a}(U)=\varnothing$.  A connected
+$(a,b)$-component which meets $U$ could then have no vertex outside $U$:
+the first exact edge identity on an incidence walk from an inside vertex
+to an outside vertex belongs geometrically to \noderef{BoundaryEdges},
+and its color filter in \noderef{BoundaryColorEdges} would make it an
+$a$- or $b$-colored boundary identity.  Thus both components would be trapped in
 $U$.  If both are nontrivial, their four distinct ends lie in $U$ and
 repeat one of the two missing colors.  If one is a singleton, its tree
 vertex misses both colors, while an end of the other component is a
@@ -217,14 +318,17 @@ distinct tree vertex missing one of them.  Either possibility contradicts
 So $b$ is present at $v_n$, whereas $c$ is missing there; in particular
 $c\ne b$.
 
-On each $Q_i$, the first boundary identity is fixed and has color $b$
-because $a$ is closed.  Every later vertex lies outside $U$, so every
+On each $Q_i$, the first geometric boundary identity belongs to the set
+in \noderef{BoundaryEdges}.  It is fixed and has color $b$, because its
+alternating color is $a$ or $b$ and the exact set
+$\partial_{\sigma_n,a}(U)$ supplied by \noderef{TreeColorSetClosed} and
+\noderef{BoundaryColorEdges} is empty.  Every later vertex lies outside $U$, so every
 later edge identity of this exit portion is outside $U$ and its alternating
 $(a,b)$-colors become alternating $(c,b)$-colors.  At the outside end
 $r_i$, the new $(c,b)$-neighbor set is exactly the old $(a,b)$-neighbor
 set: nonincident identities undergo the transposition, while identities
-incident with $U$ have neither color $a$ nor $c$ by their two closedness
-properties and are fixed.  Hence $r_i$ still has degree one and belongs
+incident with $U$ have neither color $a$ nor $c$ by the two empty exact
+colored-boundary sets and are fixed.  Hence $r_i$ still has degree one and belongs
 to the full $(c,b)$-component containing the transformed $Q_i$.
 
 Let $K$ be the full $(c,b)$-component through $v_n$.  Since $c$ is
@@ -245,7 +349,9 @@ meeting $U$, while $c$ is missing at the common vertex
 $v_n\in X\cap Y$.  Replacing the coloring and $a$ by this new coloring
 and $c$ yields (9).  The stable relation with the original coloring composes with the two
 constituent stable relations by \noderef{sc2}.  Thus the replacement
-coloring again satisfies the hypotheses of
+coloring is proper, leaves exactly $e_0$ uncolored, and is forward stable
+from $\varphi_n$ on $T_n$ and $R_n$.  In particular, the general
+calculation (2b)--(2d) applies to it.  It again satisfies the hypotheses of
 \noderef{InterchangePECommonMissingClosed},
 \noderef{InterchangePEClosureConstituent}, and
 \noderef{InterchangePETreeAwayFromDelta}; reapplying those three nodes
@@ -255,9 +361,11 @@ hierarchy base under the replacement, and
 henceforth rename this coloring $\sigma_n$ and rename the two
 constructed components $P_1,P_2$.
 
-By (3) and \noderef{ColoredVertexSetElementary}, the witnesses for (9) in
-$X$ and $Y$ must be the same vertex;
-otherwise $U$ would have two vertices missing $a$.  Call it $v$.
+By \noderef{TreeMissingColors}, choose a witness in $X$ and a witness in
+$Y$ for the two memberships in (9).  By (3) and
+\noderef{ColoredVertexSetElementary}, those witnesses must be the same
+vertex; otherwise $U$ would have two vertices missing $a$.  Call the
+common witness $v$.
 Take $P_1$ to be the component through $v$.  By (7), every other
 $(a,b)$-component meeting $R_n$ equals $P_1$, so $P_2$ is disjoint
 from $R_n$.  It nevertheless meets $T_n$.  Thus $(a,b)$ are not
@@ -268,17 +376,45 @@ $T_n$-interchangeable, and (8) implies
 \]
 
 Suppose first that $b=\delta_n$.  The delta-boundary clause of
-\noderef{HkuParallelBoundaryStructure} says that every exact
-$\delta_n$-boundary identity of $T_n$ is incident with a vertex
-strictly preceding $v_n$.  The positional definition
+\noderef{HkuParallelBoundaryStructure} is stated for $\varphi_n$, so we
+first perform the exact transport proved in (2b)--(2d).  Namely,
+$\delta_n$ is missing at $v_n$ under $\varphi_n$ by (2b), and the vertex
+clause of the present forward stable relation makes it missing at $v_n$
+under the current $\sigma_n$.  Since $v_n\in X$,
+\noderef{TreeMissingColors} gives
+$\delta_n\in\overline\sigma_n(T_n)$.  Properness and
+\noderef{IsOneEdgeUncolored} hold for both $\varphi_n$ and $\sigma_n$;
+symmetry in \noderef{sc2} therefore supplies the reverse
+$(T_n,D_n,\sigma_n)$-stable relation.
+
+Take an arbitrary exact
+$g\in\partial_{\sigma_n,\delta_n}(T_n)$.  By
+\noderef{BoundaryColorEdges}, $g$ retains its membership in the geometric
+set \noderef{BoundaryEdges} and satisfies $\sigma_n(g)=\delta_n$.
+The geometric membership gives an inside endpoint $p\in X$; by
+\noderef{Incident} this endpoint witnesses
+\noderef{TreeIncidentEdge}.  The reverse edge clause of
+\noderef{StableColoring} now gives
+$\varphi_n(g)=\sigma_n(g)=\delta_n$.  Thus the same exact $g$ lies in
+$\partial_{\varphi_n,\delta_n}(T_n)$.  Only now apply
+\noderef{HkuParallelBoundaryStructure}: it supplies a tree vertex $w$
+incident with $g$ and strictly preceding $v_n$.  The positional definition
 \noderef{TreeVertexOrder}, together with the prefix definition
-\noderef{TreeSequencePrefix}, puts that vertex in the ordered prefix
-$T_n(v_n)$ and hence in its closure $R_n$.  Stability fixes this incidence
-and color assertion.
+\noderef{TreeSequencePrefix}, puts $w$ in the ordered prefix $T_n(v_n)$.
+The \noderef{HierarchyBase} closure certificate, expanded through
+\noderef{TashkinovClosure}, \noderef{TashkinovAugmentationSequence},
+\noderef{TashkinovAugmentation}, and
+\noderef{TreeSequenceInitialSegment}, retains every prefix vertex in
+$R_n$.  Hence every current $\delta_n$-boundary identity of $T_n$ is
+incident with a vertex of $Y$.
 Fix one of the nontrivial $a,\delta_n$-components meeting $T_n$.  If it
 has a vertex outside $T_n$, a shortest incidence walk from a vertex in
-$T_n$ to one outside it uses an $a$- or $\delta_n$-boundary identity.
-An $a$-boundary identity cannot leave $U$, because $a$ is closed on $U$;
+$T_n$ to one outside it uses an $a$- or $\delta_n$-boundary identity, by
+the exact geometric/color filters in \noderef{BoundaryEdges} and
+\noderef{BoundaryColorEdges}.
+An $a$-boundary identity cannot leave $U$, because
+$\partial_{\sigma_n,a}(U)=\varnothing$ by
+\noderef{TreeColorSetClosed};
 if it leaves $T_n$, its outside endpoint is therefore in $U-X\subseteq
 Y$ by (1).  A $\delta_n$-boundary identity has an inside endpoint in the
 prefix and hence in $Y$, by the preceding paragraph.  In either subcase
@@ -287,16 +423,10 @@ the component meets $R_n$.
 It remains possible that every vertex-node of the component lies in $X$.
 Apply the endpoint analysis above to this component.  Its two distinct
 vertex ends each miss $a$ or $\delta_n$.  The common witness $v$ from
-(9) lies in $X\cap Y$ and misses $a$.  The terminal PE switch recorded by
-\noderef{TashkinovSeriesStep}, with its
-\noderef{MaximumDefectiveChoice} and \noderef{ParallelExtensionColor}
-fields, starts with $\gamma_n$ missing at $v_n$ and an exact incident
-$\delta_n$-edge, with the two colors distinct.  By
-properness these are respectively zero and one incident edges of those
-colors.  The terminal \noderef{TwoColorComponentSwap} contains that exact
-$\delta_n$-edge and interchanges the two colors on it, so afterward
-$\delta_n$ is missing at $v_n$; terminal stability transfers this to
-$\sigma_n$.  The support belongs to the ordered prefix and hence
+(9) lies in $X\cap Y$ and misses $a$.  The explicit terminal calculation
+(2a)--(2b) proves that $\delta_n$ is missing at $v_n$ under $\varphi_n$;
+the vertex clause of \noderef{StableColoring} transfers this to the
+present $\sigma_n$.  The support belongs to the ordered prefix and hence
 $v_n\in X\cap Y$.  By elementariness (3), unfolded through
 \noderef{ColoredVertexSetElementary}, an end which misses $a$ must
 equal $v$, and an end which misses $\delta_n$ must equal $v_n$.  Thus
@@ -307,30 +437,104 @@ nontrivial component meeting $T_n$ meets $R_n$.  In particular both
 $P_1,P_2$ meet $R_n$, contradicting (7).
 
 Suppose instead that $a=\delta_n$.  Equation (5) says that
-$\delta_n$ is closed on $U$.  Both ends of the root edge $e_0$
-belong to the initial two vertices of every tree-sequence, hence to
-$X\cap Y$.  Since $e_0$ alone is uncolored and
-$k\geq\Delta(G)+1$, each end has at least two missing colors under the
-proper coloring.  Choose
+$\delta_n$ is closed on $U$; by \noderef{TreeColorSetClosed} and
+\noderef{BoundaryColorEdges}, this means the exact set
+$\partial_{\sigma_n,\delta_n}(U)$ is empty.
+
+We next construct the second common missing color without suppressing the
+root-edge argument.  Put
+$x_0=T_n.\operatorname{vertex}(0)$ and
+$x_1=T_n.\operatorname{vertex}(1)$.  These indices exist because every
+\noderef{TreeSequence} has positive length.  Its first-edge clause says
+$T_n.\operatorname{edge}(0)=e_0$.  Its attaches clause at index zero has
+an earlier index in the one-element set, hence that index is zero and
+\[
+                  \operatorname{ends}(e_0)=\{x_1,x_0\}.
+\]
+Its vertex-injectivity clause gives $x_0\ne x_1$.  Thus these are the two
+distinct exact endpoints of $e_0$, up to the immaterial order in the
+unordered endpoint pair.  The image definition
+\noderef{TreeSequenceVertexSet} puts both in $X$.
+
+Let $r$ be the support position recorded by \noderef{HierarchyBase}.
+Its support-positive clause gives $1\leq r$, so the prefix definition
+\noderef{TreeSequencePrefix} retains the vertex entries at indices zero
+and one.  The same parallel clause makes $R_n$ a
+\noderef{TashkinovClosure} of this prefix.  Expanding that definition gives
+a \noderef{TashkinovAugmentationSequence}; each one-step
+\noderef{TashkinovAugmentation} retains its old tree as a
+\noderef{TreeSequenceInitialSegment}.  Induction along the finite sequence
+therefore retains $x_0$ and $x_1$ in its final tree $R_n$.  Hence
+\[
+                         x_0,x_1\in X\cap Y.                  \tag{11}
+\]
+
+We count missing colors at $x_0$.  By the endpoint equation above,
+$e_0$ is incident with $x_0$.  Let $I$ be the finite set of exact edge
+identities incident with $x_0$.  The definition \noderef{Degree} gives
+$|I|=d_G(x_0)$, and \noderef{MaximumDegree} gives
+$d_G(x_0)\leq\Delta(G)$.  The definition
+\noderef{IsOneEdgeUncolored} says that $e_0$ has value uncolored and every
+other member of $I$ has some color.  Every color in
+\noderef{PresentColors} at $x_0$ is supplied by such a member of
+$I-\{e_0\}$.  Conversely, each member of $I-\{e_0\}$ supplies a present
+color, and two distinct members supply distinct colors: they are adjacent
+at $x_0$ by \noderef{AdjacentEdges}, so equality of their colors would
+contradict \noderef{IsProperEdgeColoring}.  Thus
+\[
+ |\operatorname{PresentColors}(x_0)|=|I|-1=d_G(x_0)-1.
+\]
+In particular
+$|\operatorname{PresentColors}(x_0)|+2\leq\Delta(G)+1\leq k$, where the
+last inequality is the numerical clause of \noderef{KTriple}.  It is
+available here because certification at slot zero in
+\noderef{TashkinovSeries} forces the initial constructor of
+\noderef{TashkinovSeriesStep}, which supplies that $k$-triple.  Since
+\noderef{MissingColors} is the complement of the present-color set in the
+$k$ colors, at least two colors are missing at $x_0$.  A set with at least
+two elements cannot be contained in the singleton $\{\delta_n\}$, so
+choose a missing color $c\ne\delta_n$.  By (11), the same $x_0$ is a
+vertex witness in both union definitions of \noderef{TreeMissingColors};
+hence
 \[
  c\in\overline\sigma_n(T_n)\cap\overline\sigma_n(R_n),
  \qquad c\ne\delta_n.
 \]
-By (5), $c$ also is closed on $U$.  Apply
-\noderef{OutsideTreeColorSwap} to $(\delta_n,c)$.  Both colors are missing
-and closed on $U$, so the same mixed-adjacency check used above proves
-that the result is proper, leaves exactly $e_0$ uncolored, and fixes
-every incident value and missing-color set on $U$.
+By (5), evaluated through \noderef{TreeColorSetClosed} and
+\noderef{BoundaryColorEdges}, the exact $c$-colored boundary of $U$ also
+is empty.  Apply
+\noderef{OutsideTreeColorSwap} to $(\delta_n,c)$.  The color $\delta_n$ is
+tree-missing by (9), the color $c$ is missing at the common vertex $x_0$,
+and both exact colored boundaries are empty.  Thus the same edge-by-edge
+mixed-adjacency check used above proves that the result is proper and
+leaves exactly $e_0$ uncolored.  It fixes every edge identity incident
+with $U$, hence \noderef{PresentColors} and \noderef{MissingColors} give
+the same missing-color set at every vertex of $U$; both clauses of
+\noderef{StableColoring} hold on each constituent relative to the old
+coloring.  Transitivity in \noderef{sc2} composes these relations with the
+old forward relations from $\varphi_n$.  Therefore the new coloring again
+satisfies the stable hypotheses of
+\noderef{InterchangePECommonMissingClosed},
+\noderef{InterchangePEClosureConstituent}, and
+\noderef{InterchangePETreeAwayFromDelta}; these give (5), (7), and (8)
+for the new coloring.  Since all vertex missing sets on $U$ are unchanged,
+(3) also holds for it.  We now regard this new coloring as the current
+coloring in the remainder of the argument.
 
 We repeat, at this new swap, the full-component check rather than merely
 reusing vertex-disjointness.  Apply the endpoint construction above afresh
 to the current $P_1,P_2$, obtaining two vertex-disjoint exit portions
 $Q'_1,Q'_2$ with distinct outside degree-one ends $r'_1,r'_2$.  By (3)
 and \noderef{ColoredVertexSetElementary},
-the witnesses that the chosen $c$ is missing on $T_n$ and on $R_n$ are
-the same vertex; call it $q\in X\cap Y$.  If $b$ were missing at $q$,
-then (5) would close $b$ on $U$.  The colors $\delta_n$ and $b$ would
-both be missing and closed on $U$, so the boundary and four-end argument
+any witnesses that the chosen $c$ is missing on $T_n$ and on $R_n$ must
+coincide.  The explicit common witness is still $q=x_0$, because the
+outside swap fixes every identity incident with $U$.  If $b$ were missing
+at $q$, then \noderef{TreeMissingColors} would make $b$ common missing,
+and (5), via \noderef{TreeColorSetClosed} and
+\noderef{BoundaryColorEdges}, would give
+$\partial_{\sigma_n,b}(U)=\varnothing$.  The colors $\delta_n$ and $b$
+would both be missing and have empty exact colored boundaries on $U$, so
+the \noderef{BoundaryEdges} and four-end argument
 given above would put all four distinct ends of $P_1,P_2$ in $U$ and
 contradict \noderef{ColoredVertexSetElementary}.  Thus $b$ is present at
 $q$, $c$ is missing
