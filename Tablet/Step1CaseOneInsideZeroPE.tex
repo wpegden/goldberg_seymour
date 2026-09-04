@@ -195,33 +195,94 @@ of the two transformed full components has been made.
 Apply \noderef{HierarchyLEMStable} to the just constructed outside
 recoloring.  It supplies a corresponding ETT $\mathcal T^\nu$ displayed
 on $T$, a hierarchy base $B^\nu$, a hierarchy $H^\nu$, and a good
-hierarchy on it.  The corresponding certificate retains the rung, all
-ordered ladder trees, exact connecting-edge sets, stored sets, and kinds;
-the same-hierarchy conclusion retains every ordered stage, divider,
-stored-color set, and Gamma pair.  The result also supplies maximum
-property and transports the given terminal minus-closed certificate.
-The stability established above identifies the missing-color sets on
-$T_n$ under $\nu$ and $\varphi_n$, so the large bound is unchanged.
+hierarchy witness $g^\nu$ on it.  Retain also the supplied maximum
+property, transported terminal minus-closed certificate, and the proof
+that the old and new witnesses satisfy
+\noderef{SameGoodHierarchy}.  Its first conjunct is precisely
+\noderef{SameHierarchyStages}$(H,H^\nu)$.  Unfolding that conjunct gives
+the equality
+\[
+                 B.\mathit{core}=B^\nu.\mathit{core}.          \tag{2}
+\]
+Indeed, this is the first field of `SameHierarchyStages'; it is not an
+identification inferred merely from equality of divider counts or Gamma
+sets.  The \noderef{CorrespondingExtendedTashkinovTree} certificate also
+retains the rung, every ordered ladder tree, exact connecting-edge set,
+stored set, and extension kind.  The stability established above identifies
+the missing-color sets on $T_n$ under $\nu$ and $\varphi_n$, so the large
+bound is unchanged.
 
-By the zero-divider hypothesis, $d=0$.  By \noderef{HierarchyStarredStage}, $A$ is the
-actual hierarchy core.  We treat the two possible terminal constructions
-separately.
+By the zero-divider hypothesis, $d=0$.  The unique index
+$\operatorname{last}(d)$ is therefore zero, and direct evaluation of
+\noderef{HierarchyStarredStage} at zero gives
+\[
+                       A=B.\mathit{core}.                       \tag{3}
+\]
+Combining (2) and (3) proves the exact ordered-tree equality
+\[
+                       B^\nu.\mathit{core}=A.                   \tag{4}
+\]
 
-The terminal extension is PE by hypothesis.  Use the transported
-corresponding ETT $\mathcal T^\nu$ and its transported base $B^\nu$, not
-the obsolete pre-recoloring PE data.  Its PE field gives an actual support
-vertex $x$ in $T_n$, an exact closure $R_n$ of the prefix through $x$,
-and identifies its core with the ordered union $T_n\vee R_n=A$.  The
-prefix contains $x$ by the entrywise definition
-\noderef{TreeSequencePrefix}.  The augmentation sequence in
-\noderef{TashkinovClosure}, after unfolding
-\noderef{TashkinovAugmentationSequence} and
-\noderef{TashkinovAugmentation}, consists of ordered initial-segment
-steps.  Induction through those steps therefore retains the support
-prefix in $R_n$, so $x\in V(R_n)$ as well.  Choose a color $c$ missing at $x$ by the same
-$k\geq\Delta(G)+1$ degree count as above.  Thus
-\noderef{TreeMissingColors} puts $c$ in both
-$\overline\nu(T_n)$ and $\overline\nu(R_n)$.
+The terminal extension is PE by hypothesis, and the extension-kind field
+of the corresponding ETT makes the transported terminal extension PE as
+well.  Apply the `parallel' field of \noderef{HierarchyBase} to the
+transported base $B^\nu$.  If $r$ is its positive support position and
+$x$ is the displayed vertex of the transported $T_n$ at $r$, this field
+states all three of the following: the chosen last-slot vertex is exactly
+$x$; $R_n:=B^\nu.\mathit{closure}$ is a
+\noderef{TashkinovClosure} of the exact
+\noderef{TreeSequencePrefix} of $T_n$ through $x$ under $\nu$; and there
+is an \noderef{OrderedTreeUnion} certificate for
+\[
+             (T_n,R_n,B^\nu.\mathit{core}).                    \tag{5}
+\]
+The corresponding ladder-tree equality lets us write the transported
+tree here as the original ordered $T_n$.  Rewriting the third entry of
+(5) by (4) gives an ordered-union certificate for $(T_n,R_n,A)$, rather
+than an unsupported informal identification of two cores.
+
+The prefix through position $r$ contains $x$ as its last displayed
+vertex by the entrywise formula in \noderef{TreeSequencePrefix}.  The
+augmentation sequence in the closure, after unfolding
+\noderef{TashkinovAugmentationSequence}, is a finite reflexive-transitive
+chain of steps from \noderef{TashkinovAugmentation}.  Each step retains
+the preceding tree as an ordered initial segment.  Induction along that
+chain, including the empty-chain case, therefore retains the whole support
+prefix in $R_n$.  Hence $x\in V(R_n)$; its defining position also gives
+$x\in V(T_n)$.  The vertex-set field of the ordered-union certificate (5),
+rewritten using (4), consequently gives $x\in V(A)$ as well.
+
+We now prove, rather than assume, that some palette color is missing at
+$x$.  Inspect the certificate at index zero of the replacement series in
+$\mathcal T^\nu$, supplied at every index by \noderef{TashkinovSeries}.
+Since none of the positive constructors of
+\noderef{TashkinovSeriesStep} can have index zero, eliminating that
+certificate leaves its initial constructor and hence an initial
+\noderef{KTriple}.  Unfolding the latter gives
+\[
+                         \Delta(G)+1\leq k.                     \tag{6}
+\]
+Let $C=\noderef{PresentColors}(G,\nu,x)$, and let $I$ be the finite set
+of exact edge identities incident with $x$.  For every $z\in C$, the
+definition of `PresentColors' supplies an edge $e_z\in I$ with
+$\nu(e_z)=z$.  Choose one such identity for each $z$.  If
+$e_z=e_{z'}$, then the single value of the partial coloring on this exact
+edge is both $z$ and $z'$, so $z=z'$.  Thus $z\mapsto e_z$ is injective,
+and
+\[
+ |C|\leq |I|=\noderef{Degree}(G,x)\leq
+ \noderef{MaximumDegree}(G)=\Delta(G).                          \tag{7}
+\]
+The last inequality follows directly because the defining maximum contains
+the image of $x$.  If \noderef{MissingColors}$(G,\nu,x)$ were empty,
+its definition as the complement of $C$ in $[k]$ would give
+$C=[k]$ and hence $k=|C|$.  Equations (6) and (7) would then give
+$\Delta(G)+1\leq\Delta(G)$, a contradiction.  Choose
+$c\in\overline\nu(x)$.  Since $x$ lies in both displayed trees, the
+biunion definition \noderef{TreeMissingColors} now puts
+\[
+                 c\in\overline\nu(T_n)\cap\overline\nu(R_n). \tag{8}
+\]
 
 The pre-step elementarity required next is available for these transported
 data.  If $n>1$, apply \noderef{CertifiedETTPredecessor} to
@@ -266,19 +327,59 @@ edge-by-edge and outside-end argument used to construct (1) gives two
 exact $(A,\rho,\{c,\beta\})$-exit paths with the old disjoint supports
 and distinct outside ends.
 
-The leaf argument above now applies verbatim in
-$I_G(\rho;c,\beta)$.  It certifies, via
-\noderef{TwoColorPathComponent}, the full component through $x$ and the
-full components through the two outside ends as path components; the
-first meets $A$ at $x$, and each latter component meets $A$ along its
-exit path.  The spanning-path argument chooses one outside component
-distinct from the component through $x$, again without asserting that
-the two transformed leg components are mutually distinct.  Apply
-conclusion (iii) of \noderef{interchange} to $\mathcal T^\nu$, its PE
-base $B^\nu$, the just constructed
-\noderef{CombinedStableColoring}, and the proved $c$-missing and
-singleton-$c$-closed properties on $A$.  It says that $c,\beta$ are
-$A$-interchangeable.  The definition \noderef{TreeInterchangeable} then
-equates the two distinct full path components meeting $A$, the final
-contradiction.  This completes Subcase 1.2.
+It remains to prove the component contradiction in full.  Put
+$I=\noderef{TwoColorIncidenceGraph}(G,\rho;c,\beta)$.  At the vertex-node
+$x$, the color $c$ is missing and an exact $\beta$-colored incident edge
+was retained.  Thus $x$ has at least one neighbor in $I$, no neighbor
+arising from a $c$-edge, and at most one neighbor arising from a
+$\beta$-edge: two distinct such edge identities would be adjacent and
+would violate \noderef{IsProperEdgeColoring}.  Hence $x$ has degree
+exactly one in $I$.
+
+For $j=1,2$, unfold the exact exit-path certificate just constructed for
+$Q_j$.  Its length is at least two, so the first edge-node of $Q_j$ is a
+neighbor of the outside vertex-node $a_j$ in $I$.  The same certificate
+says that one of $c,\beta$ is missing at $a_j$.  Consequently no incident
+edge there has that color, while properness permits at most one incident
+edge of the other color.  Thus each $a_j$ also has degree exactly one.
+This local count is consistent with, and may equivalently be read through,
+the global bound \noderef{TwoColorIncidenceDegreeAtMostTwo} for every
+node of $I$.
+
+These are three distinct vertex-nodes.  Indeed, $x\in V(A)$ whereas
+$a_1,a_2\notin V(A)$ by the two exit-path certificates, and
+$a_1\ne a_2$ is retained.  A node belongs to its own full
+\noderef{TwoColorComponent}, and a singleton neighbor set is
+subsingleton.  Since $c\ne\beta$, the definition
+\noderef{TwoColorPathComponent} therefore certifies the full components
+through $x,a_1,a_2$ as path components.
+
+Let these full components be $K_x,K_1,K_2$.  Suppose for contradiction
+that both $K_1=K_x$ and $K_2=K_x$.  Apply
+\noderef{TwoColorComponentSpanningPath} to $K_x$.  It supplies a simple
+path whose support is all of $K_x$.  Each of the three nodes
+$x,a_1,a_2$ lies on this spanning path.  Any one of them occurring at an
+internal path position would have the two distinct adjacent path nodes as
+neighbors in $I$, contrary to its degree being one.  Hence all three must
+belong to the two-element set consisting of the path's two endpoints.
+That is impossible because they are pairwise distinct.  We may therefore
+choose $j\in\{1,2\}$ such that
+\[
+                              K_j\ne K_x.                       \tag{9}
+\]
+Notice that this proves only the needed alternative; it makes no assertion
+that $K_1$ and $K_2$ are distinct.
+
+Both components in (9) meet $A$.  The component $K_x$ contains the
+vertex-node $x$ with $x\in V(A)$.  The walk $Q_j$ connects $a_j$ to its
+tree end $b_j$, so every node of that walk lies in $K_j$; in particular
+$b_j\in V(A)$ witnesses that $K_j$ meets $A$.  Finally apply conclusion
+(iii) of \noderef{interchange} to $\mathcal T^\nu$, its PE base $B^\nu$,
+the just constructed \noderef{CombinedStableColoring}, and the proved
+$c$-missing and singleton-$c$-closed properties.  Its conclusion is
+formulated on $B^\nu.\mathit{core}$, which is exactly $A$ by (4), and
+says that $c,\beta$ are $A$-interchangeable.  Applying the definition
+\noderef{TreeInterchangeable} to the two certified path components
+$K_x,K_j$ and their displayed witnesses in $A$ forces $K_x=K_j$,
+contradicting (9).  This completes Subcase 1.2.
 \end{proof}

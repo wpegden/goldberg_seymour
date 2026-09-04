@@ -32,8 +32,11 @@ import Tablet.MissingColors
 import Tablet.ModColoring
 import Tablet.OutsideKempeRecoloring
 import Tablet.OutsideKempeRecoloringStable
+import Tablet.OrderedTreeUnion
 import Tablet.ParallelCommonMissingClosed
 import Tablet.PresentColors
+import Tablet.SameGoodHierarchy
+import Tablet.SameHierarchyStages
 import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
