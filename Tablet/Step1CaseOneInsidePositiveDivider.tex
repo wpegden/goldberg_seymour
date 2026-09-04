@@ -199,8 +199,24 @@ ordered ladder trees, exact connecting-edge sets, stored sets, and kinds;
 the same-hierarchy conclusion retains every ordered stage, divider,
 stored-color set, and Gamma pair.  The result also supplies maximum
 property and transports the given terminal minus-closed certificate.
-The stability established above identifies the missing-color sets on
-$T_n$ under $\nu$ and $\varphi_n$, so the large bound is unchanged.
+To transport the large bound explicitly, unfold
+\noderef{TreeMissingColors} at the common ordered tree $T_n$.  Its value
+under either coloring is the finite union, over the same finset
+$V(T_n)$ from \noderef{TreeSequenceVertexSet}, of the corresponding
+vertex finsets of missing colors.  For every $v\in V(T_n)$, the initial
+segment inclusion $V(T_n)\subseteq V(T)$ and the vertex clause of
+\noderef{StableColoring} supplied by
+\noderef{OutsideKempeRecoloringStable} give
+\[
+             \overline\nu(v)=\overline{\varphi_n}(v).
+\]
+Thus every summand in the two finite unions is equal.  Finite-union
+congruence (formally, \texttt{Finset.biUnion\_congr}) gives
+\[
+             \overline\nu(T_n)=\overline{\varphi_n}(T_n).
+\]
+Taking finset cardinalities transports the assumed
+$|\overline{\varphi_n}(T_n)|\geq 2n+11$ bound unchanged.
 
 By the additional hypothesis, $d>0$.  In $H^\nu$, the tree $A$ is again the exact
 $d$-th stage.  Apply \noderef{GoodHierarchyPrefixRepackage} with
@@ -231,8 +247,14 @@ $(T_n,D_n,\varphi_n)$-stability of $\nu$ already obtained directly from
 \noderef{OutsideKempeRecoloringStable}; this refers to the original final
 ladder tree, not merely to the new displayed tree $A$.  Second,
 $\mathcal E_A$ has the same series and rung, so its last ladder tree is
-the original $T_n$, and the equality of its missing sets under $\nu$ and
-$\varphi_n$ proves the unchanged large bound.  Third, unfold
+the original $T_n$.  Unfold \noderef{TreeMissingColors} again at this
+tree.  Its two values are finite unions over the same vertex finset
+$V(T_n)$, and the vertex clause of \noderef{StableColoring} furnished by
+\noderef{OutsideKempeRecoloringStable} identifies the two
+\noderef{MissingColors} summands at every indexed vertex.  Hence
+\texttt{Finset.biUnion\_congr} identifies the tree-level finsets, and
+equality of their cardinalities proves the unchanged large bound for
+$\mathcal E_A$.  Third, unfold
 \noderef{HierarchyTerminalStoredColors}.  Since $K$ has $d-1$ dividers,
 its terminal stored set is
 $D_n\setminus\overline\nu(A)$.  Unfolding
@@ -246,10 +268,25 @@ Consequently its separately returned closure
  \text{-closed under }\nu
 \]
 is literally the terminal minus-closed expression demanded for $K$.
-Finally $d-1<d$, $\theta$ is still missing and singleton-closed on $A$
-because the first recoloring fixes every edge incident with $A$ and every
-missing set there, and the two paths (1) have disjoint supports and
-different outside ends.  Applying the stated no-smaller-presentation
-hypothesis to $\nu,A,\mathcal C_A,B_A,K$ now gives a contradiction.
+Finally $d-1<d$.  For the missingness assertion, unfold
+\noderef{TreeMissingColors} for the original hypothesis
+$\theta\in\overline{\varphi_n}(A)$ and retain a witnessing vertex
+$v\in V(A)$ with $\theta\in\overline{\varphi_n}(v)$.  Since $A$ is an
+initial segment of $T$, this vertex belongs to $V(T)$; the vertex clause
+of \noderef{StableColoring} supplied by
+\noderef{OutsideKempeRecoloringStable} therefore preserves that exact
+membership as $\theta\in\overline\nu(v)$.  The same witness and the
+defining finite union in \noderef{TreeMissingColors} show
+$\theta\in\overline\nu(A)$.
+
+Singleton closedness is separate.  Every exact edge incident with $A$ is
+incident with $T$, and \noderef{OutsideKempeRecoloringStable} fixes its
+color.  Unfolding \noderef{TreeColorSetClosed},
+\noderef{BoundaryColorEdges}, and \noderef{BoundaryEdges}, the empty set
+of $\theta$-colored boundary edges of $A$ under $\varphi_n$ is therefore
+also empty under $\nu$.  Thus $\theta$ is still singleton-closed on $A$.
+The two paths (1) have disjoint supports and different outside ends.
+Applying the stated no-smaller-presentation hypothesis to
+$\nu,A,\mathcal C_A,B_A,K$ now gives a contradiction.
 
 \end{proof}
