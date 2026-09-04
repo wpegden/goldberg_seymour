@@ -1,4 +1,6 @@
 import Tablet.BoundaryColorVertex
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetElementary
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.DefectiveColor
 import Tablet.DefectiveVertex
@@ -32,9 +34,11 @@ import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.Td
+import Tablet.TreeColorSetMinusClosed
 import Tablet.TreeIncidentEdge
 import Tablet.TreeInterchangeable
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceVertexSet

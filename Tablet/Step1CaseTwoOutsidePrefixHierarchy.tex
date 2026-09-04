@@ -31,12 +31,15 @@ retains the large estimate, and both $\gamma$ and $\beta$ are absent from
 the last indexed Gamma union of $K_C$.
 \end{lemma}
 \begin{proof}
-Write $d=H.\mathit{dividerCount}$ and $A=H.\mathit{starred}(d)$.  The
+Write $d=H.\mathit{dividerCount}$ and
+$A=H.\mathit{starred}(d)$ as in \noderef{HierarchyStarredStage}.  The
 lower field of \noderef{ExtendedTashkinovTree}, the PE and non-PE clauses
 of \noderef{HierarchyBase}, the left-segment field of
 \noderef{OrderedTreeUnion}, and the nesting clauses of
 \noderef{TashkinovHierarchy} place the last ladder tree $T_n$ below $A$,
-hence below $B^-$.  Therefore
+hence below $B^-$.  Transitivity of the exact entrywise prefix relation in
+\noderef{TreeSequenceInitialSegment}, using the ordered vertex and edge data
+of \noderef{TreeSequence}, therefore gives
 \[
                     T_n\preccurlyeq A\preccurlyeq B^-
                        \prec C\preccurlyeq T.                 \tag{1}
@@ -49,19 +52,26 @@ constructor.  In PE, the certificate contains a
 \noderef{TashkinovClosure} of $T_n$ under $\varphi$.  In SE or RE it
 contains an individual identity $f_n$, the exact equality $F_n=\{f_n\}$,
 the exact seed $T_n+f_n$, and a closure of that seed.  The upper field of
-\noderef{ExtendedTashkinovTree} puts $T$, and hence $C$, below the last
-tree of this closure.
+\noderef{ExtendedTashkinovTree} puts $T$ below the last tree of this
+closure; prefix transitivity in \noderef{TreeSequenceInitialSegment} then
+puts $C$ below that last tree as well.
 
 In PE, truncate the finite
 \noderef{TashkinovAugmentationSequence} at the first member whose length
 is $|C|$.  Such a member exists because every augmentation increases the
 length by one, starts at $T_n$, and ends at a tree containing $C$ as an
-exact prefix.  The member and $C$ are equal: both are exact initial
-segments of the closure tree with equal lengths, so every vertex and
-individual edge entry agrees.  In SE/RE, the seed and $C$ are exact
-initial segments of the same closure tree.  Relation (1) gives
-$|T_n|+1\leq |C|$, so entrywise comparison makes the exact seed, including
-$f_n$, an initial segment of $C$.  The same truncation argument then gives
+exact prefix.  Here the length and index arithmetic are those of
+\noderef{TreeSequence}, and the containment is the entrywise relation of
+\noderef{TreeSequenceInitialSegment}.  The member and $C$ are equal: both
+are exact initial segments of the closure tree with equal lengths, so the
+definition of \noderef{TreeSequenceInitialSegment} makes every vertex and
+individual edge entry agree.  In SE/RE, prefix transitivity gives that the
+seed and $C$ are exact initial segments of the same closure tree.  Relation
+(1), the one-edge displayed attachment in \noderef{TreeSequence}, and the
+associated length arithmetic give $|T_n|+1\leq |C|$; entrywise comparison
+in \noderef{TreeSequenceInitialSegment} then makes the exact seed,
+including $f_n$, an initial segment of $C$.  The same equal-length-prefix
+argument then gives
 \[
  \begin{cases}
  T_n\longrightarrow C,&\Theta_n=\mathrm{PE},\\
@@ -72,15 +82,22 @@ under $\varphi$, retaining $F_n=\{f_n\}$ and the exact one-edge seed in
 the second case.
 
 Transport (2) step by step to $\mu$.  Before the final step into $C$,
-the old prefix is contained in $B^-$.  Its new displayed edge is incident
-with that old prefix, so the assumed incident-edge agreement fixes the
-color of the exact identity.  The missing-color witness for the
-augmentation is a vertex of the old prefix, so the assumed vertexwise
-missing-set equality preserves it.  For the final step, its old prefix is
-$B^-$ and its exact new edge is the identity $g$ in the stated
-\noderef{TreeSequenceAdjoinEdge} certificate, so the same two arguments
-apply.  Length, attachment, and exact initial-segment fields are
-coloring-free.  These are all fields of
+the old prefix is contained in $B^-$ by
+\noderef{TreeSequenceInitialSegment}.  The attachment clause of
+\noderef{TreeSequence} and the definition of \noderef{TreeIncidentEdge}
+make its new displayed edge incident with that old prefix, so exact-prefix
+vertex-set inclusion from \noderef{TreeSequenceVertexSet} makes it incident
+with $B^-$ and the assumed incident-edge agreement fixes its color.  The
+missing-color witness for the augmentation belongs to the vertex set of
+the old prefix, so the same vertex-set inclusion and the assumed
+vertexwise missing-set equality preserve it.  For the final step, its old
+prefix is $B^-$ and its exact new edge is the identity $g$ in the stated
+\noderef{TreeSequenceAdjoinEdge} certificate; the displayed-edge
+attachment in \noderef{TreeSequence} and \noderef{TreeIncidentEdge} give
+the required incidence, so the same two arguments apply.  Length,
+attachment, and exact initial-segment fields are coloring-free by
+\noderef{TreeSequence} and \noderef{TreeSequenceInitialSegment}.  These
+are all fields of
 \noderef{TashkinovAugmentation}; induction over the finite sequence gives
 the same alternatives (2) under $\mu$.  Denote their disjunction by
 $\mathsf{Elig}_C$.
@@ -104,9 +121,10 @@ certificate identifies every ladder tree, raw stored set, exact
 connecting-edge set, and extension kind.  If the terminal kind is not PE,
 take the replacement core to be the common $T_n$, and copy the old
 positive support position and the mathematically unused closure field.
-The terminal missing-set compatibility is the vertex clause of the given
-stability, and the nonparallel field of \noderef{HierarchyBase} is then
-definitional.
+The vertexwise missing-set clause of \noderef{StableColoring}, combined
+with the witness-union definition of \noderef{TreeMissingColors}, gives
+the terminal missing-set compatibility; the nonparallel field of
+\noderef{HierarchyBase} is then definitional.
 
 Suppose the terminal kind is PE.  Extract the actual terminal PE
 constructors of the original and replacement
@@ -128,23 +146,34 @@ old support position therefore records the actual replacement support.
 Use the original core and closure $R_n$ for the replacement PE base.  We
 do not assert that $R_n$ is an ordered prefix of the core.
 The vertex-set field of \noderef{OrderedTreeUnion}, followed by the
-hierarchy-core prefix and (1), gives only the inclusions that are needed:
+hierarchy-core prefix, the PE clause of
+\noderef{HierarchyStarredStage}, and (1), gives only the inclusions that
+are needed.  The exact-prefix-to-vertex-set implication used here is the
+one obtained by unfolding \noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}:
 \[
  V(R_n)\subseteq V(\mathit{core})\subseteq V(A)\subseteq V(B^-).\tag{5}
 \]
 Its left-segment field retains the common $T_n$ entries, and its
-every-new-right-entry field retains the exact edge and vertex identities
-of the added closure portion.
+every-new-right-entry field, interpreted through the ordered entries of
+\noderef{TreeSequence}, retains the exact edge and vertex identities of
+the added closure portion.
 
 Transport the closure by incidence.  Every displayed edge of $R_n$,
 including every new edge in its augmentation sequence, is incident with
-its displayed new vertex in $V(R_n)\subseteq V(B^-)$.  Its exact color is
-therefore fixed.  Every missing witness used by an augmentation also lies
-in $V(R_n)$, so its missing set is fixed.  Hence every
+its displayed new vertex by the attachment clause of
+\noderef{TreeSequence}; (5), \noderef{TreeSequenceVertexSet}, and
+\noderef{TreeIncidentEdge} therefore make that exact identity incident
+with $B^-$.  Its color is fixed.  Every augmentation color missing on
+$R_n$ has a vertex witness in $V(R_n)$ by
+\noderef{TreeMissingColors}, so its missing set is fixed.  Hence every
 \noderef{TashkinovAugmentation} in the closure remains valid under $\mu$.
 If a boundary identity of $V(R_n)$ under $\mu$ had a color missing on
-$R_n$, both its exact color and a missing witness would be unchanged on
-$B^-$; it would be the same forbidden boundary identity under $\varphi$.
+$R_n$, \noderef{BoundaryEdges} gives its retained inside endpoint and
+\noderef{TreeMissingColors} gives a missing vertex witness in $V(R_n)$.
+By (5) and \noderef{TreeIncidentEdge}, both its exact color and that
+missing witness are unchanged on $B^-$; its endpoints are coloring-free,
+so it would be the same forbidden boundary identity under $\varphi$.
 Thus the same $R_n$ is a genuine \noderef{TashkinovClosure} under $\mu$.
 Together with (4), the retained support, and the coloring-free
 \noderef{OrderedTreeUnion}, this proves every PE field of a replacement
@@ -156,47 +185,76 @@ We construct the hierarchy on $C$.  If $A\prec B^-$, apply
 and the exact prefix $B^-$.  It yields the same $d$ nonterminal stages,
 core, closure, stored sets, Gamma pairs, and a good hierarchy whose
 terminal stage is $B^-$.  If $B^-=A$ and $d>0$, apply
-\noderef{GoodHierarchyPrefixRepackage} at the last ordinary stage.  It
+\noderef{GoodHierarchyPrefixRepackage} at the last ordinary stage, which
+is $A$ by the positive-index clause of \noderef{HierarchyStarredStage}.  It
 returns the good $(d-1)$-divider prefix and the separate last internal
 minus-closed certificate; append $A$ as the $d$-th ordinary stage below
 $C$.  If $B^-=A$ and $d=0$, take stage zero to be $T_n$, terminal stage
-$C$, and core $A$ from $B_C$.  Relation (1) supplies every nesting and
+$C$, and core $A$ from $B_C$, using the zero-index clause of
+\noderef{HierarchyStarredStage}.  Relation (1), with the length and exact
+entry content of \noderef{TreeSequence} and
+\noderef{TreeSequenceInitialSegment}, supplies every nesting and
 strictness field.  In no case is a zero-rung ETT used.
 
 Thus define $K_C$ over $B_C$ with exactly $d$ dividers, the old stages
 through $A$, and terminal stage $C$.  Every starred stage lies in
-$B^-$, where edge colors and vertex missing sets agree.  Correspondence
-gives the same raw stored sets; expanding
-\noderef{TashkinovStoredColors} and
-\noderef{HierarchyStoredColorsAt} gives equality of every indexed stored
-set.  Use the old Gamma family.  Pair cardinality, disjointness, and
-unique refresh therefore copy.  All internal exact colored boundaries
-are fixed, and the applicable prefix-repackaging result supplies the last
-internal minus-closed clause.  In PE, the rebuilt base and the transported
-closure above copy the parallel-base cardinality and non-minus-closed
-clauses; in non-PE the implication is vacuous.
+$B^-$ by \noderef{HierarchyStarredStage}, prefix transitivity in
+\noderef{TreeSequenceInitialSegment}, and vertex-set inclusion from
+\noderef{TreeSequenceVertexSet}; there edge colors and vertex missing sets
+agree.  Correspondence gives the same raw stored sets.  The vertexwise
+clause of \noderef{StableColoring}, read through
+\noderef{TreeMissingColors}, first identifies the two terminal-ladder
+missing sets; expanding \noderef{TashkinovStoredColors} and
+\noderef{HierarchyStoredColorsAt}, and using the assumed missing-set
+equality on the remaining starred-stage vertices, then gives equality of
+every indexed stored set.  Use the old Gamma family.  Pair cardinality,
+disjointness, and unique refresh therefore copy.  Every internal boundary
+identity has an inside endpoint by \noderef{BoundaryEdges}; the stage
+vertex-set inclusion and \noderef{TreeIncidentEdge} therefore fix its
+exact color.  The applicable prefix-repackaging result supplies the last
+internal clause, whose meaning is the one in
+\noderef{TreeColorSetMinusClosed}.  In PE, the rebuilt base and the
+transported closure above copy the parallel-base cardinality and the
+non-minus-closed clause of \noderef{TreeColorSetMinusClosed}; in non-PE
+the implication is vacuous.
 
 It remains to check terminal avoidance.  Expand
 \noderef{HierarchySegmentColors} and the totalized
 \noderef{HierarchyFirstMissingPosition}.  At indices below $d$, the next
 stage lies in $B^-$ and all relevant data are unchanged.  At index $d$,
-all displayed edges of $C$ retain their colors: old displayed edges are
-incident with $B^-$, and the last identity $g$ is incident with $B^-$ by
-the adjoin certificate.  For a color outside $\{\gamma,\beta\}$, the
-assumed comparison of missing sets on $C$ and terminal prefixhood make
-the new segment a subset of the old one.
+all displayed edges of $C$ retain their colors: by
+\noderef{TreeSequenceInitialSegment}, its old entries are the displayed
+entries of $B^-$, whose attachment fields in \noderef{TreeSequence} and
+the definition of \noderef{TreeIncidentEdge} make them incident with
+$B^-$; the last identity $g$ is incident with $B^-$ by the same attachment
+field in the adjoin certificate.  For a color outside
+$\{\gamma,\beta\}$, the assumed comparison of missing sets on $C$, the
+length/index data of \noderef{TreeSequence}, and terminal prefixhood in
+\noderef{TreeSequenceInitialSegment} make the new segment a subset of the
+old one.
 
-For $\gamma$, elementarity of $V(T)$ and its old missingness at the last
-vertex $b$ make $b$ its unique missing vertex in $T$.  No vertex of
-$B^-$ therefore misses $\gamma$ under either coloring, and the stated
+For $\gamma$, \noderef{ColoredVertexSetElementary}, the inclusion
+$V(C)\subseteq V(T)$ supplied by \noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}, and its old missingness at the last
+vertex $b$ make $b$ its unique missing vertex in $T$.  The strict prefix
+$B^-\prec C$ and the distinct-vertex clause of \noderef{TreeSequence}
+show that $b\notin V(B^-)$.  No vertex of $B^-$ therefore misses $\gamma$
+under either coloring, and the stated
 incident $\gamma$-edge under $\mu$, together with
 \noderef{PresentColors} and \noderef{MissingColors}, says that $b$ does
-not miss it under $\mu$.  Thus no vertex of $C$ misses $\gamma$, and the
-old first position and new no-candidate fallback both cap the relevant
-segment at the last position.  For $\beta$, the hypothesis that it is not
-missing on $T$ says it is absent from every old missing set, while its
-new missingness at $b$ makes $b$ the first new missing vertex.  The new
-segment is again only the unchanged portion before the last position.
+not miss it under $\mu$.  Since $C=B^-+g$, the exact-entry and vertex-set
+descriptions in \noderef{TreeSequence} and
+\noderef{TreeSequenceVertexSet} now show that no vertex of $C$ misses
+$\gamma$.  The old first position and new no-candidate fallback, together
+with the length/index data of \noderef{TreeSequence}, both cap the relevant
+segment at the last position.  For $\beta$, the witness-union definition
+in \noderef{TreeMissingColors} turns the hypothesis that it is not missing
+on $T$ into its absence from every old vertex missing set.  Its new
+missingness at $b$, the prefix and vertex-set inclusions from
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}, and the assumed equality on $B^-$ make
+$b$ the first new missing vertex.  The new segment is again only the
+unchanged portion before the last position.
 Old avoidance implies new avoidance in every case.  We have now checked
 every field of a genuine \noderef{GoodHierarchy} witness $\mathcal G_C$.
 
@@ -206,8 +264,11 @@ Gamma union, \noderef{GoodHierarchyReservedDisjoint} would make it
 missing on $A$ and hence on $T$, contradicting the hypothesis.  Thus
 $\beta$ is excluded as well.  Finally, correspondence identifies the
 replacement last ladder tree with the exact old $T_n$, and the vertex
-clause of stability identifies its missing-color set under $\mu$ with
-the old one.  Taking cardinalities transports the large estimate.  The
+clause of \noderef{StableColoring}, together with the vertex-union
+definition in \noderef{TreeMissingColors} and exact vertex-set identity in
+\noderef{TreeSequenceVertexSet}, identifies its missing-color set under
+$\mu$ with the old one.  Taking cardinalities transports the large
+estimate.  The
 objects $\mathcal C_C,B_C,K_C,\mathcal G_C$, (2), and (3) therefore
 satisfy every conclusion.
 \end{proof}
