@@ -25,27 +25,55 @@ $b_1,b_2,b_3$, belong to $V(J)$.
 \end{lemma}
 \begin{proof}
 Expand \noderef{BoundaryColorEdges} and \noderef{BoundaryEdges}.  For
-$i=1,2$, the exact identity $f_i$ has one endpoint in $V(C)$ and one
-endpoint $u_i$ outside it, and $\mu(f_i)=\beta$.  Since $b_i\in V(C)$ is
-incident with $f_i$, looplessness and the unordered endpoint equation
-identify its inside endpoint with $b_i$ and its outside endpoint with
-$u_i$.  By hypothesis $u_1\ne u_2$.
+$i=1,2$, there are vertices $x_i\in V(C)$ and $u_i\notin V(C)$ such that
+$\operatorname{ends}(f_i)=\{x_i,u_i\}$ and $\mu(f_i)=\beta$.  By
+\noderef{Incident}, the assumption that $b_i$ is incident with $f_i$ says
+that $b_i$ is one of these two ends.  Since $b_i\in V(C)$ whereas
+$u_i\notin V(C)$, it follows that $b_i=x_i$.  Thus
+$\operatorname{ends}(f_i)=\{b_i,u_i\}$.  The inside/outside memberships
+give $b_i\ne u_i$; in particular the endpoint pair is nondegenerate, as
+required by the looplessness axiom in \noderef{LooplessMultigraph}.  The
+outside-endpoint hypothesis now gives
+$u_1\ne u_2$ by taking these particular incidences and outside
+certificates.
 
-Append the vertex $u_1$ along the individual edge identity $f_1$ to form
-$J_1$, then append $u_2$ along $f_2$ to form $J$.  The second append is
-legal because $u_2\notin V(C)$ and $u_2\ne u_1$, whereas
-$V(J_1)=V(C)\cup\{u_1\}$.  In both cases the new edge has one old and one
-new endpoint, and injectivity follows from the boundary property and the
-distinctness just proved.  Thus every field of
-\noderef{TreeSequenceAdjoinEdge} holds and
+Put $m=\operatorname{length}(C)$.  Using the record in
+\noderef{TreeSequence}, form $J_1$ with length $m+1$, with all vertex and
+edge entries through $C$ unchanged, and with last vertex $u_1$ and last
+edge $f_1$.  Form $J$ similarly from $J_1$ by adjoining last vertex $u_2$
+and last edge $f_2$.  Vertex injectivity holds because $u_1\notin V(C)$,
+$u_2\notin V(C)$, and $u_1\ne u_2$, where the vertex sets here are the
+images specified by \noderef{TreeSequenceVertexSet}.  For edge
+injectivity, each displayed edge of $C$ has both ends in $V(C)$ by the
+attachment field of \noderef{TreeSequence}, whereas each $f_i$ has an
+outside end.  Hence neither $f_i$ is an old displayed edge.  Moreover
+$f_1\ne f_2$, since equality of the exact identities would give
+$\{b_1,u_1\}=\{b_2,u_2\}$.  An inside vertex cannot equal an outside
+vertex, so this equality forces $b_1=b_2$ and $u_1=u_2$, contrary to the
+distinctness of the outside ends.  The
+new attachment witnesses are respectively the old vertices $b_1,b_2$;
+$b_2$ remains an old vertex at the second append.  Positivity, the first
+edge, and all old attachment witnesses are inherited from $C$.  Thus
+$J_1$ and $J$ satisfy every field of \noderef{TreeSequence}.
+
+Their lengths, entrywise agreement, and last edge identities give the two
+ordered initial-segment relations of
+\noderef{TreeSequenceInitialSegment} and hence every field of
+\noderef{TreeSequenceAdjoinEdge}:
 \[
                          J_1=C+f_1,\qquad J=J_1+f_2.           \tag{1}
 \]
+In particular, transitivity of entrywise agreement gives $C\preccurlyeq
+J$, and the displayed lengths give
+$\operatorname{length}(J)=\operatorname{length}(C)+2$.
 
 The color $\beta$ is missing at $b_3\in V(C)$, hence belongs to
-\noderef{TreeMissingColors} of $C$ and of $J_1$.  The two new exact
-identities have color $\beta$.  Combining these facts with (1) verifies
-every field of
+\noderef{TreeMissingColors} of $C$.  Entrywise vertex transport in
+\noderef{TreeSequenceInitialSegment}, followed by the image definition in
+\noderef{TreeSequenceVertexSet}, puts the same vertex $b_3$ in $V(J_1)$;
+so $\beta$ also belongs to the tree-missing set of $J_1$.  The two new
+exact identities have color $\beta$.  Combining these facts with (1)
+verifies every field of
 \[
    \noderef{TashkinovAugmentation}(\mu,C,J_1),\qquad
    \noderef{TashkinovAugmentation}(\mu,J_1,J).                \tag{2}
@@ -56,8 +84,15 @@ reflexive-transitive closure in
 route from the last ladder tree $T_n$ to $J$.  In the SE/RE case it gives
 a route from the same exact seed $T_n+f_n$ to $J$, retaining both the
 individual identity $f_n$ and the equality $F_n=\{f_n\}$.  Since the
-corresponding ETT on $C$ strictly extends $T_n$, so does $J$.  These are
-exactly the eligibility alternatives in \noderef{ModColoring}.
+replacement ETT on $C$ is an \noderef{ExtendedTashkinovTree}, its
+above-penultimate and strict-above-penultimate fields give
+$T_n\preccurlyeq C$ and
+$\operatorname{length}(T_n)<\operatorname{length}(C)$.  Composing the
+first relation with $C\preccurlyeq J$ using
+\noderef{TreeSequenceInitialSegment}, and composing the strict length
+inequality with $\operatorname{length}(C)<\operatorname{length}(J)$,
+shows that $J$ strictly extends $T_n$.  These are exactly the eligibility
+alternatives in \noderef{ModColoring}.
 
 Apply the universal clause of the given mod-coloring to $J$.  It supplies
 an actual \noderef{CorrespondingExtendedTashkinovTree} certificate
@@ -66,12 +101,16 @@ ETT, and \noderef{MaximumPropertyTransport} transfers the original
 maximum property
 to its replacement ETT $\mathcal E_J$.
 
-We rebuild its hierarchy base from the actual terminal constructor.  If
-the terminal kind is not PE, both corresponding ETTs have the common last
-ladder tree $T_n$ as core; copy the support position and unused closure
-field from the $C$-level base.  The missing-color compatibility is
-unchanged because both bases use the same coloring $\mu$ and exact ladder
-tree.
+We next construct every field of a \noderef{HierarchyBase} $B_J$ for
+$\mathcal E_J$.  The two corresponding certificates identify their last
+ladder trees, raw stored sets, exact connecting-edge sets, and extension
+kinds with the same data of the original ETT.  In particular their last
+ladder tree is the same ordered tree $T_n$.  If the common terminal kind
+is not PE, set the new core equal to the old core, hence to $T_n$ by the
+nonparallel field of the $C$-level base, and copy its support position and
+unused closure.  The support remains positive.  The terminal missing-set
+compatibility is unchanged because both the base coloring and displayed
+generating coloring are $\mu$ on the same exact $T_n$.
 
 Suppose the terminal kind is PE.  Extract separately the terminal PE
 constructors of $\mathcal E_C$ and $\mathcal E_J$.  Their connecting-edge
@@ -85,33 +124,127 @@ identities.  The endpoint equations in
 common unordered pair exactly as in the $C$-level construction.  Hence
 the actual support vertex and its positive position agree.
 
-Copy the core and closure from the $C$-level base.  Its PE field already
-says that this closure is a genuine \noderef{TashkinovClosure} under the
-same coloring $\mu$, and its \noderef{OrderedTreeUnion} witness is
-coloring-free.  Thus no new prefix assertion about the closure is used:
-the copied closure certificate, the support identity just proved, and the
-ordered union verify every PE field of a base $B_J$ for $\mathcal E_J$.
+In the PE case, copy the core and closure from the $C$-level base.  Its PE
+field already says that this closure is a genuine
+\noderef{TashkinovClosure} under the same coloring $\mu$, and its
+\noderef{OrderedTreeUnion} witness is coloring-free.  Thus no new prefix
+assertion about the closure is used: the copied closure certificate, the
+support identity just proved, and the ordered union verify the PE field.
+Together with the common terminal missing-set compatibility and the
+positive copied support position, this finishes every field of $B_J$.
 
-Define $K_J$ using all nonterminal stages and divider positions of $K_C$
-and replacing only the terminal stage $C$ by $J$.  The two exact adjoin
-steps give $C\prec J$, so all nesting and strictness fields hold and the
-divider count is unchanged.  The last ladder tree, raw stored sets,
-starred stages, and coloring are unchanged.  Expanding
+We now construct a \noderef{TashkinovHierarchy} $K_J$ field by field.  Put
+$d=K_C.\operatorname{dividerCount}$ and give $K_J$ the same divider count.
+For stage indices $r=0,\ldots,d$, set
+$K_J.\operatorname{stage}(r)=K_C.\operatorname{stage}(r)$, and set only
+the terminal stage $K_J.\operatorname{stage}(d+1)$ equal to $J$.  The
+base-stage equation follows from the old equation and the equality of the
+two terminal ladder trees $T_n$; the terminal-stage equation is immediate.
+
+Consider a transition from stage $r$ to stage $r+1$.  If $r<d$, both
+stages are unchanged, so copy the old nesting and strictness fields.  If
+$r=d$, the old fields give
+\[
+ K_C.\operatorname{stage}(d)\preccurlyeq C,\qquad
+ \operatorname{length}(K_C.\operatorname{stage}(d))
+       <\operatorname{length}(C).
+\]
+Compose the first relation with $C\preccurlyeq J$ using the entrywise
+definition in \noderef{TreeSequenceInitialSegment}.  Combine the second
+inequality with
+$\operatorname{length}(C)<\operatorname{length}(J)$ from (1).  This gives
+the required nesting and strictness for the last transition.  Hence all
+stage-chain fields hold, including when $d=0$.
+
+For every old divider position
+$p=K_C.\operatorname{dividerPosition}(i)\in
+\operatorname{Fin}(\operatorname{length}(C)+1)$, define
+\[
+ \widehat p\in\operatorname{Fin}(\operatorname{length}(J)+1),
+ \qquad \widehat p.\operatorname{val}=p.\operatorname{val}.
+\]
+The new bound follows from $p.\operatorname{val}<
+\operatorname{length}(C)+1$ and the length inequality supplied by
+$C\preccurlyeq J$.  Thus the divider-position field is well typed.
+Positivity and strict increasingness copy verbatim because natural values
+were not changed.
+
+It remains to check the divider-stage equations.  Fix $i<d$ and put
+$p=K_C.\operatorname{dividerPosition}(i)$.  By
+\noderef{TreeSequencePrefix}, both
+$\operatorname{TreeSequencePrefix}(J,p)$ and
+$\operatorname{TreeSequencePrefix}(C,p)$ have length $p$.  For every
+vertex index at most $p$ their vertex entries agree because
+$C\preccurlyeq J$, and for every edge index below $p$ their edge entries
+agree for the same reason.  Their inherited positivity, injectivity, first
+edge, and attachment fields are propositions, so proof irrelevance and
+these entrywise equalities give
+\[
+ \operatorname{TreeSequencePrefix}(J,p)
+   =\operatorname{TreeSequencePrefix}(C,p).
+\]
+The stage $i+1$ was left unchanged.  Substituting the old
+$K_C.\operatorname{dividerStage}(i)$ equation therefore proves the new
+divider-stage equation.
+
+Finally check the core-inside-first field.  If $d>0$, stage $1$ is among
+the unchanged stages $0,\ldots,d$, and $B_J.\operatorname{core}$ is the
+copied $B_C.\operatorname{core}$, so the old field applies directly.  If
+$d=0$, the new first stage is the terminal stage $J$.  The old
+core-inside-first field gives
+$B_C.\operatorname{core}\preccurlyeq C$; composing it with
+$C\preccurlyeq J$ gives
+$B_J.\operatorname{core}\preccurlyeq J$.  Thus every hierarchy field has
+been proved before any good-hierarchy data are transported.
+
+Only now define the Gamma family of $K_J$ to equal that of $K_C$.  For
+each good-hierarchy index $0\leq j\leq d$, the starred stage is unchanged:
+at $j=0$ it is the copied base core, and at $j>0$ it is one of the copied
+stages through index $d$.  The stage-missing set is also unchanged: at
+$j=0$ it uses the common last ladder tree $T_n$, and at $j>0$ it uses the
+unchanged stage $j$.  The raw stored sets and coloring are common by the
+corresponding certificates.  Expanding
 \noderef{HierarchyStoredColorsAt} therefore identifies every indexed
-stored set.  Use the same Gamma family.  Pair cardinality, pairwise
-disjointness, unique refresh, internal minus-closedness, and the rebuilt
-parallel-base clause all copy from the given
+stored set.  Consequently the two-color cardinalities and pairwise
+disjointness copy.  In every unique-refresh clause, the stage and starred
+stage involved have index at most $d$, so their vertex sets agree by
+\noderef{TreeSequenceVertexSet}; the unique witness and all unchanged-pair
+equalities copy.  The parallel-base clause uses only the common terminal
+kind and ladder tree and the copied base core, closure, stored set, and
+Gamma pair, so it copies.  Each internal minus-closed clause also concerns
+only a stage through $d$ and therefore copies from the given
 \noderef{GoodHierarchy} on $K_C$.
 
-For avoidance, expand the totalized first-missing position and
-\noderef{HierarchySegmentColors}.  A first missing position already in
-$C$ is unchanged, since $C$ is an exact prefix of $J$.  If a color had no
-missing vertex in $C$, adjoining $u_1,u_2$ can only move its totalized
-first-missing position beyond the end of $C$.  The only displayed edges
-new in that enlarged segment are $f_1,f_2$, both colored $\beta$.  By
-hypothesis $\beta$ is in none of the indexed last Gamma pairs.  Hence no
-Gamma pair acquires a forbidden segment color, and every avoidance clause
-remains true.  The copied data therefore form a genuine good hierarchy
+It remains only to verify avoidance.  Fix $j<d$.  Its starred and next
+stages are unchanged.  If an indexed color $\eta$ is missing in $C$, its
+first missing position is unchanged in $J$.  If it is not missing in $C$,
+its old totalized position is $\operatorname{length}(C)$ and its new
+position is larger, while strictness of the old hierarchy gives
+$\operatorname{length}(K_C.\operatorname{stage}(j+1))<
+\operatorname{length}(C)$.  In both cases, taking the smaller of the
+first-missing position and the unchanged next-stage length selects exactly
+the same displayed edge indices.  Thus the segment-color set at $j<d$ is
+unchanged and the old avoidance clause applies.
+
+Now let $j=d$ and fix an indexed stored color $\eta$.  Expand the totalized definition
+\noderef{HierarchyFirstMissingPosition}.  If $\eta$ is missing at some
+vertex of $C$, the least such index is the same in $J$: all vertices of
+$C$ occur first and entrywise in $J$, and their missing sets, as defined
+by \noderef{MissingColors}, depend only on $G$ and $\mu$.  Thus the old
+least witness remains least.  If $\eta$ is
+missing at no vertex of $C$, its old totalized position is the last vertex
+of $C$, while its new first-missing position is either one of the two new
+vertex positions or, if neither is missing $\eta$, the last vertex of
+$J$; in every case the new position is strictly beyond the old last
+vertex.  By \noderef{HierarchySegmentColors}, the enlarged last segment
+therefore contains the old segment and possibly only the two newly
+displayed edges $f_1,f_2$.  Both have color $\beta$.  Since $\beta$ is
+absent from the last indexed Gamma union, it is absent from the particular
+pair $\Gamma^d_\eta$.  The old avoidance clause excludes all old segment
+colors, and this exclusion of $\beta$ excludes both possible new edge
+colors.  The source stage-missing set at index $d$ was already shown
+unchanged.  Hence the avoidance clause holds at $d$ as well.  All fields
+of \noderef{GoodHierarchy} are now verified, giving the required
 $\mathcal G_J$.
 
 The indexed stored sets and Gamma pairs were copied, so the given
@@ -122,7 +255,11 @@ generating coloring is the same $\mu$.  The large estimate for
 $\mathcal E_C$ is consequently the required estimate for
 $\mathcal E_J$.
 
-Finally, (1) includes every vertex of $C$ in $J$ and adds the two outside
-endpoints $u_1,u_2$.  Each endpoint of $f_1$ or $f_2$ is therefore in
-$V(J)$, as are $b_1,b_2,b_3$.  This proves all asserted conclusions.
+Finally, (1) and \noderef{TreeSequenceInitialSegment} transport every
+vertex of $C$ into $J$, and the construction adds $u_1,u_2$.  If a vertex
+$v$ is incident with $f_i$, then \noderef{Incident} and
+$\operatorname{ends}(f_i)=\{b_i,u_i\}$ give $v=b_i$ or $v=u_i$; both are
+in $V(J)$ by \noderef{TreeSequenceVertexSet}.  Thus every endpoint of each
+exact identity $f_i$ is in $V(J)$.  The same prefix transport puts
+$b_1,b_2,b_3$ in $V(J)$.  This proves all asserted conclusions.
 \end{proof}

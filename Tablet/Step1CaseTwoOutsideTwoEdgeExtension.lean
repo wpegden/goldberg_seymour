@@ -2,12 +2,15 @@ import Tablet.BoundaryColorEdges
 import Tablet.BoundaryEdges
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.DefectiveVertex
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.GoodHierarchyReservedDisjoint
 import Tablet.HierarchyBase
+import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchySegmentColors
 import Tablet.HierarchyStoredColorsAt
 import Tablet.Incident
+import Tablet.LooplessMultigraph
 import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumProperty
 import Tablet.MaximumPropertyTransport
@@ -21,7 +24,10 @@ import Tablet.TashkinovExtensionKind
 import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeriesStep
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequencePrefix
 import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: Step1CaseTwoOutsideTwoEdgeExtension]
