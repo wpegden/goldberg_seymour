@@ -1,0 +1,152 @@
+\begin{lemma}[Two exit legs from closed noninterchangeability]
+Let $G=(V,E)$ be a finite loopless multigraph whose elements of $E$ are
+the exact edge identities, let $T$ be a tree-sequence, and let $\varphi$
+be a proper partial $k$-edge-coloring.  Suppose that $V(T)$ is elementary
+under $\varphi$.  Let $a,b\in[k]$ be distinct colors such that
+$a\in\overline\varphi(T)$, the singleton $\{a\}$ is closed on $T$, and
+$a,b$ are not $T$-interchangeable.
+
+Then there are vertices $a_1,b_1,a_2,b_2$, two walks $P_1,P_2$ in the
+two-color incidence graph from $a_i$ to $b_i$, and exact edges $f_1,f_2$
+such that, for $i=1,2$, $P_i$ is a $T$-exit path with outside end $a_i$
+and tree end $b_i$, while
+\[
+ a_1\ne a_2,\qquad b_1\ne b_2,\qquad
+ \operatorname{supp}(P_1)\cap\operatorname{supp}(P_2)=\varnothing.
+\]
+Moreover, $f_i$ lies on $P_i$, is incident with $b_i$, and is an exact
+$b$-colored boundary-edge identity of $V(T)$.
+\end{lemma}
+\begin{proof}
+Put $X=V(T)$, with $X$ understood as the exact finite set defined by
+\noderef{TreeSequenceVertexSet}.  Negating the universal assertion in
+\noderef{TreeInterchangeable} gives nodes $z_1,z_2$ such that the two sets
+\[
+ C_i=\operatorname{Comp}_{a,b}(z_i)\quad(i=1,2)
+\]
+from \noderef{TwoColorComponent} are unequal
+\noderef{TwoColorPathComponent}s, and each $C_i$ contains a vertex-node
+belonging to $X$.  The equality-or-disjointness assertion of
+\noderef{TwoColorComponentsDisjoint} therefore makes $C_1$ and $C_2$
+disjoint as sets of incidence-graph nodes.  In particular, they cannot
+meet at either a vertex-node or an exact edge-node.
+
+We first record the precise shape of every $C_i$ that contains an edge-node.
+Because it also contains a vertex-node of $X$, connectedness shows that its
+edge-node is not an isolated uncolored edge-node; it is joined along the
+component to a vertex-node.  Thus the path-component certificate together
+with this edge-node is exactly a
+\noderef{TwoColorNontrivialPathComponent}.  Apply
+\noderef{TwoColorComponentSpanningPath}.  It gives a simple path $R_i$
+whose support is all of $C_i$.  Properness, in the sense of
+\noderef{IsProperEdgeColoring}, and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} bound the degree of every node
+of $C_i$ by two.  Hence an internal node of $R_i$ has no neighbor outside
+its two path neighbors.  The two ends cannot have an extra adjacency to
+one another: that would make every node of $C_i$ have degree two, contrary
+to the node with at most one neighbor supplied by
+\noderef{TwoColorPathComponent}.  Nor can an end have any other extra
+neighbor, since that neighbor already lies on the spanning support and
+would give an internal node or that end a third neighbor.  Consequently
+$C_i$ itself is the simple nontrivial path $R_i$, and the two ends of
+$R_i$ have degree one in the full two-color incidence graph.
+
+Both ends of $R_i$ are vertex-nodes.  Indeed, by
+\noderef{TwoColorIncidenceGraph}, the neighbors of a colored edge-node
+$f$ are precisely the vertex-nodes incident with the exact identity $f$.
+Here incidence is membership in the unordered endpoint pair, by
+\noderef{Incident}.  The loopless law of \noderef{LooplessMultigraph}
+makes the two entries of that pair distinct.  Thus a colored edge-node has
+two distinct neighbors and cannot be a degree-one end.
+
+Every vertex end $x$ of $R_i$ misses at least one of $a,b$.  If both were
+present, \noderef{PresentColors} would provide an $a$-colored and a
+$b$-colored exact edge incident with $x$.  They are distinct because
+$a\ne b$, and \noderef{TwoColorIncidenceGraph} would make their two
+edge-nodes distinct neighbors of $x$, contradicting degree one.  By the
+complement definition \noderef{MissingColors}, $x$ therefore misses $a$
+or misses $b$.
+
+We also treat components with no edge-node.  Such a component meeting
+$X$ is the singleton consisting of one vertex-node $x$ with $x\in X$:
+the incidence graph is bipartite by \noderef{TwoColorIncidenceGraph}, so
+there is no other kind of node to which it could be connected.  An edge
+of color $a$ or $b$ incident with $x$ would give an adjacent edge-node in
+the same component.  Hence \noderef{PresentColors} and
+\noderef{MissingColors} show that both $a$ and $b$ are missing at $x$.
+There cannot be two such singleton components, since their disjointness
+would give distinct vertices of $X$ missing $a$, contrary to elementarity
+in \noderef{ColoredVertexSetElementary}.
+
+We now select two outside ends, splitting according to the status of $b$
+on $T$, as required by \noderef{TreeMissingColors}.  First suppose
+$b\notin\overline\varphi(T)$.  No $C_i$ is a singleton, since its tree
+vertex would miss $b$.  The preceding analysis gives two disjoint
+nontrivial paths and hence four distinct vertex ends.  A path end in $X$
+cannot miss $b$, so it misses $a$.  Elementarity permits at most one such
+tree vertex.  At least three of the four ends are therefore outside $X$;
+choose any two of them.
+
+Next suppose $b\in\overline\varphi(T)$.  If both $C_i$ are nontrivial,
+each of their four distinct ends misses $a$ or $b$.  Elementarity permits
+at most one end in $X$ missing $a$ and at most one end in $X$ missing
+$b$.  Thus at least two ends are outside $X$.  If, after exchanging the
+indices, $C_1$ is the singleton at $x\in X$, then $x$ misses both colors.
+The component $C_2$ is nontrivial by the preceding singleton argument,
+and neither end of its spanning path can lie in $X$: either missing color
+at such an end would be repeated at the distinct vertex $x$.  Its two
+ends are therefore outside $X$.  These cases produce two distinct
+outside vertex ends of nontrivial component paths in every event.
+
+For each selected outside end $a_i$, orient its spanning path toward the
+component's first vertex-node belonging to $X$, and call that first vertex
+$b_i$.  Such a vertex exists because the full component meets $X$.  More
+explicitly, among the finitely many positions of the oriented simple path
+whose node is $\operatorname{inl}(v)$ with $v\in X$, choose the least
+position, and restrict the walk to the prefix ending there.  Call the
+result $P_i$.  Its initial vertex is outside $X$ and misses $a$ or $b$;
+its final vertex $b_i$ belongs to $X$; and no earlier vertex-node on the
+prefix belongs to $X$.  The endpoints are both vertex-nodes and are
+distinct, while \noderef{TwoColorIncidenceGraph} is bipartite, so the
+prefix has incidence length at least two.  A prefix of a simple path is
+simple.  These facts are precisely every clause of
+\noderef{TreeExitPath}, so $P_i$ is a $T$-exit path.
+
+If the selected ends came from different $C_i$, their $P_i$ are support-
+disjoint because the full components are disjoint.  Their tree ends are
+then distinct as well, since a common vertex-node would lie in both
+supports.  It remains to check the only other possibility: the chosen
+ends are the opposite ends of one spanning path.  View that simple path
+as an ordered list from the first chosen end to the second.  The support
+of the first-contact prefix from the left occupies the positions through
+the first encounter with $X$, while the support of the reversed
+first-contact prefix from the right occupies the positions from the last
+encounter with $X$ to the right end.  They can overlap only if the first
+and last encounters coincide, say at $b_1=b_2$.
+
+In that exceptional situation, let $f_i$ be the exact edge-node immediately
+before $\operatorname{inl}(b_i)$ on $P_i$.  Simplicity of the full path
+makes $f_1\ne f_2$.  The preceding vertex-node on each $P_i$ is outside
+$X$, by first contact, whereas $b_i\in X$.  The two incidences given by
+\noderef{TwoColorIncidenceGraph}, interpreted by \noderef{Incident} and
+the two-entry endpoint description in \noderef{LooplessMultigraph}, show
+that $f_i$ has one end in $X$ and one outside.  Hence $f_i$ is an exact
+member of \noderef{BoundaryEdges}.  Its incidence-graph adjacency also
+says that its color is $a$ or $b$.  The hypothesis
+\noderef{TreeColorSetClosed}, expanded through
+\noderef{BoundaryColorEdges}, excludes color $a$ for every such exact
+boundary identity.  Thus both $f_1$ and $f_2$ have color $b$.  They are
+distinct exact edges incident with their common vertex, so they are
+adjacent by \noderef{AdjacentEdges}; this contradicts properness in
+\noderef{IsProperEdgeColoring}.  Therefore the two first-contact portions
+are support-disjoint and $b_1\ne b_2$ also in this case.
+
+The same last-edge argument applies without the exceptional equality and
+shows, for each $i$, that the final exact edge-node $f_i$ of $P_i$ lies on
+$P_i$, is incident with $b_i$, belongs to
+$\partial_{\varphi,b}(X)$ as defined by
+\noderef{BoundaryColorEdges}, and retains its individual edge identity.
+Finally, the selected full-path ends $a_1,a_2$ are distinct, and each is
+the outside end of its corresponding $P_i$.  All asserted witness fields
+now follow.
+\end{proof}

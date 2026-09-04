@@ -8,6 +8,8 @@ import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.DefectiveColor
 import Tablet.Degree
 import Tablet.ETTFirstAppearanceIndex
+import Tablet.ElementaryClosedExitPairExtendsTriple
+import Tablet.ElementaryClosedNoninterchangeableExitPair
 import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.GoodHierarchyPrefixRepackage
