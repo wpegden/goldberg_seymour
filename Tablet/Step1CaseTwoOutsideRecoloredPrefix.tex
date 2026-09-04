@@ -59,17 +59,21 @@ For the first relation, if the terminal kind is not PE then the
 nonparallel field of \noderef{HierarchyBase} identifies the core with
 $T_n$.  In PE, its parallel field and \noderef{OrderedTreeUnion} make
 $T_n$ the left ordered segment of the core.  The hierarchy then places
-the core below $A$.  Applying \noderef{TreeSequenceVertexSet} to these
-exact prefixes gives the corresponding inclusions of vertex sets.
+the core below $A$.  Unfolding \noderef{TreeSequenceInitialSegment},
+the entrywise vertex and edge equalities compose, so these exact
+ordered-prefix relations are transitive.  Applying
+\noderef{TreeSequenceVertexSet} to the resulting prefixes gives the
+corresponding inclusions of vertex sets.
 
 The initial member of the certified \noderef{TashkinovSeries} is the
 initial constructor of \noderef{TashkinovSeriesStep}; its
 \noderef{KTriple} field gives $k\geq\Delta(G)+1$.  Under the proper
-coloring, two distinct exact edges incident with $b_3$ are adjacent by
-\noderef{AdjacentEdges} and therefore cannot have the same nonempty
-color.  Choosing the unique incident edge witnessing each member of
-\noderef{PresentColors} at $b_3$ consequently gives an injection into
-the incident-edge set counted by \noderef{Degree}.  By
+coloring, \noderef{IsProperEdgeColoring} says that two distinct exact
+edges incident with $b_3$, which are adjacent by
+\noderef{AdjacentEdges}, cannot have the same nonempty color.
+Unfolding \noderef{Incident}, choosing an incident edge witnessing each
+member of \noderef{PresentColors} at $b_3$ consequently gives an
+injection into the incident-edge set counted by \noderef{Degree}.  By
 \noderef{MaximumDegree}, at most $\Delta(G)$ colors are present.  Since
 \noderef{MissingColors} is the complementary subset of $[k]$, choose
 \[
@@ -108,10 +112,13 @@ alternative of $P_j$ says that $a_j$ misses $\alpha$.
 Each selected component has a vertex-node outside $T$.  Indeed, an
 $\alpha$-edge node of a simple exit path is internal and has the two
 distinct endpoints of that exact edge as its neighboring vertex-nodes,
-by \noderef{TwoColorIncidenceGraph}.  The unique-tree-vertex clause of
-\noderef{TreeExitPath} says that either endpoint in $T$ would have to be
-$b_j$.  They cannot both be $b_j$ in a loopless graph.  If exactly one
-were $b_j$, the edge would be an $\alpha$-colored member of
+by \noderef{TwoColorIncidenceGraph}.  Here adjacency to the edge-node
+is exactly endpoint incidence by \noderef{Incident}.  The
+unique-tree-vertex clause of \noderef{TreeExitPath} says that either
+endpoint in $T$ would have to be $b_j$.  They cannot both be $b_j$,
+since the endpoint pair $(b_j,b_j)$ is forbidden by
+\noderef{LooplessMultigraph}.  If exactly one were $b_j$, the edge
+would be an $\alpha$-colored member of
 \noderef{BoundaryEdges}, contrary to singleton-$\alpha$ closedness.
 Thus both endpoints are outside $T$.  A component selected through
 $a_j$ has the outside vertex $a_j$ itself.
@@ -119,9 +126,10 @@ $a_j$ has the outside vertex $a_j$ itself.
 No selected component meets $T$.  Otherwise start from the outside
 vertex just found and take a shortest component walk to a vertex-node
 of $T$.  The edge-node immediately before the first such vertex has one
-end outside and one inside $T$, and its color is $\alpha$ or $\gamma$.
-It is therefore an exact boundary identity of one of the two singleton
-closed colors, a contradiction.  Finiteness gives an
+end outside and one inside $T$ by the endpoint-incidence definition
+\noderef{Incident}, and its color is $\alpha$ or $\gamma$.  It is
+therefore an exact boundary identity of one of the two singleton closed
+colors, a contradiction.  Finiteness gives an
 \noderef{OutsideKempeRecoloring} on precisely these components; call its
 result $\mu_4$.
 
@@ -129,7 +137,8 @@ In the unequal branch, \noderef{OutsideKempeRecoloringStable} shows that
 $\mu_4$ is proper, leaves exactly $e_0$ uncolored, fixes every exact edge
 incident with $T$, preserves every missing set on $T$, and is stable on
 $T$ for every control set.  In the equality branch these conclusions
-hold by reflexivity, using \noderef{sc2} for stability.
+hold by reflexivity, using \noderef{sc2} for stability and the assumed
+instance of \noderef{IsOneEdgeUncolored} for the assertion about $e_0$.
 
 For $j=1,2,3$, retain the ordered node list of $P_j$ and call it $Q_j$.
 Every old $\beta$-edge stays $\beta$, while every old $\alpha$-edge on
@@ -151,12 +160,13 @@ with the old pairwise-disjoint supports.
 Let $K_3$ be the full $(\gamma,\beta)$ component through $b_3$ under
 $\mu_4$.  Its support equals the support of $Q_3$.  At $b_3$, (2) and
 preservation of its missing set exclude an incident $\gamma$-edge,
-while $f_3$ is an incident $\beta$-edge.  Properness excludes a second
-edge of that color, so $b_3$ has degree one in
-\noderef{TwoColorIncidenceGraph}.  At $a_3$, (4) makes one color missing
-and the positive walk supplies an edge of the other color; properness
-again gives degree one.  Each internal node of the simple walk has its
-two distinct walk neighbors, while
+while $f_3$ is an incident $\beta$-edge.  The conflict clause of
+\noderef{IsProperEdgeColoring}, applied through \noderef{Incident},
+excludes a second incident edge of that color, so $b_3$ has degree one
+in \noderef{TwoColorIncidenceGraph}.  At $a_3$, (4) makes one color
+missing and the positive walk supplies an edge of the other color; the
+same properness clause again gives degree one.  Each internal node of
+the simple walk has its two distinct walk neighbors, while
 \noderef{TwoColorIncidenceDegreeAtMostTwo} excludes a third.  If a node
 of $K_3$ lay outside $Q_3$, a shortest component walk from it to the
 support of $Q_3$ could attach neither at an internal degree-two node nor
@@ -172,36 +182,51 @@ identity through the first recoloring.
 
 Unfold \noderef{TreeVertexOrder}.  Let $s$ be the displayed position of
 $b_3$ in $T$.  The two strict order hypotheses put $b_1,b_2$ at earlier
-positions.  Writing $a=|A|$, exact prefixhood and $b_3\notin V(A)$ give
-$a<s$.  Also $1\leq|T_n|\leq a$, so $2\leq s$.  The bounds needed by
+positions.  Writing $a=|A|$, the entrywise vertex equality in
+\noderef{TreeSequenceInitialSegment}, together with the vertex
+injectivity field of \noderef{TreeSequence}, shows that exact
+prefixhood and $b_3\notin V(A)$ give $a<s$.  The positivity field of
+\noderef{TreeSequence} and the prefix length inequality give
+$1\leq|T_n|\leq a$, so $2\leq s$.  The bounds needed by
 \noderef{TreeSequencePrefix} therefore hold for $s-1$ and $s$.  Define
 \[
  B^-=\operatorname{TreeSequencePrefix}(T,s-1),\qquad
  C=\operatorname{TreeSequencePrefix}(T,s).                    \tag{6}
 \]
-Entrywise comparison yields
+The defining entrywise equalities of
+\noderef{TreeSequenceInitialSegment}, composed as above, yield
 \[
               T_n\preccurlyeq A\preccurlyeq B^-\prec C
                  \preccurlyeq T.                              \tag{7}
 \]
 The displayed edge $g$ at position $s$ gives exactly
-$C=B^-+g$ under \noderef{TreeSequenceAdjoinEdge}, and $C$ ends at
-$b_3$.  By (5), $K_3$ has no vertex-node in $B^-$ and no edge-node
-incident with $B^-$; in particular $g\notin K_3$.
+$C=B^-+g$ under \noderef{TreeSequenceAdjoinEdge}; the attachment field
+of \noderef{TreeSequence} records its old endpoint, while the prefix
+vertex equality and the choice of $s$ show that the new last vertex of
+$C$ is $b_3$.  By (5), $K_3$ has no vertex-node in $B^-$.  If an
+edge-node of $K_3$ were incident with $B^-$, unfolding
+\noderef{TreeIncidentEdge} and \noderef{Incident} would give an
+adjacent vertex-node of $K_3$ in $B^-$, a contradiction.  Thus $K_3$
+has no edge-node incident with $B^-$; in particular $g\notin K_3$.
 
 Swap $\gamma$ and $\beta$ on $K_3$ and call the result $\mu$.
 The inequality $\gamma\ne\beta$ permits
 \noderef{TwoColorComponentSwapProper};
 \noderef{TwoColorComponentSwap} changes only those two nonempty colors,
-so exactly $e_0$ remains uncolored.  Since $K_3$ has no edge-node
-incident with $B^-$, every such exact edge keeps its color.  Consequently
-every \noderef{PresentColors} set, hence every \noderef{MissingColors}
-set, at a vertex of $B^-$ also stays fixed.
+so the two clauses of \noderef{IsOneEdgeUncolored} show that exactly
+$e_0$ remains uncolored.  Since $K_3$ has no edge-node incident with
+$B^-$, every exact edge satisfying \noderef{TreeIncidentEdge} for
+$B^-$ keeps its color.  Consequently every \noderef{PresentColors}
+set, hence every \noderef{MissingColors} set, at a vertex of $B^-$ also
+stays fixed.
 
 These facts prove both clauses of stability on $T_n$.  An edge incident
-with $T_n$ is incident with $B^-$ by (7), so its color is fixed whenever
-the edge clause of \noderef{StableColoring} asks for it.  Every vertex of
-$T_n$ lies in $B^-$, so the vertex clause follows from the missing-set
+with $T_n$ has a vertex witness which the entrywise prefix equality in
+\noderef{TreeSequenceInitialSegment} transports into $B^-$; hence the
+definition \noderef{TreeIncidentEdge} makes it incident with $B^-$, so
+its color is fixed whenever the edge clause of
+\noderef{StableColoring} asks for it.  Every vertex of $T_n$ similarly
+lies in $B^-$, so the vertex clause follows from the missing-set
 equality.  Thus $\mu$ is $(T_n,D_n,\mu_4)$-stable.  The corresponding
 restriction of the first recoloring is
 $(T_n,D_n,\varphi)$-stable; transitivity in \noderef{sc2} gives
@@ -229,24 +254,36 @@ with precisely the old supports, lengths, endpoints, and pairwise
 support disjointness.
 
 It remains to check the interface facts about $C$.  The one-step
-certificate in (6) says that every vertex of $C$ is either a vertex of
-$B^-$ or the new last vertex $b_3$.  Missing sets agree completely in
-the first case.  At $b_3$, the first recoloring fixed every incident
-edge, and the second recoloring changed only $\gamma,\beta$.  Membership
-of every other color in its missing set is therefore unchanged.  This
-proves the asserted pointwise non-$\{\gamma,\beta\}$ comparison on $C$.
+certificate in (6), unfolded through
+\noderef{TreeSequenceAdjoinEdge} and
+\noderef{TreeSequenceInitialSegment}, says that every vertex of $C$ is
+either a vertex of $B^-$ or the new last vertex $b_3$; vertex
+injectivity in \noderef{TreeSequence} rules out any further occurrence.
+Missing sets agree completely in the first case because every edge
+incident with that vertex is a \noderef{TreeIncidentEdge} of $B^-$ and
+is fixed.  At $b_3$, the first recoloring fixed every incident edge, and
+the second recoloring changed only $\gamma,\beta$.  Membership of every
+other color in its missing set is therefore unchanged.  This proves the
+asserted pointwise non-$\{\gamma,\beta\}$ comparison on $C$.
 
 The order inequalities place $b_1,b_2$ before the last vertex $b_3$,
-so all three belong to $V(C)$.  The original boundary identities
-$f_1,f_2$ have their inside endpoints $b_1,b_2$ in $C$, while their
-other endpoints lie outside $T$ by \noderef{BoundaryColorEdges} and
-\noderef{BoundaryEdges}, hence outside $C$.  The first recoloring never
+so the entrywise prefix relation
+\noderef{TreeSequenceInitialSegment} places all three in $V(C)$.  The
+original boundary identities $f_1,f_2$ have their inside endpoints
+$b_1,b_2$ in $C$, while their other endpoints lie outside $T$ by
+\noderef{BoundaryColorEdges} and \noderef{BoundaryEdges}, hence outside
+$C$.  The endpoint statements here are incidences in the sense of
+\noderef{Incident}; \noderef{LooplessMultigraph} ensures that the two
+ends of each boundary edge are distinct.  The first recoloring never
 changes a $\beta$-edge.  The second does not change $f_1$ or $f_2$,
 because their edge-nodes lie in the supports of $Q_1,Q_2$, which are
 disjoint from $K_3$ by (5).  Thus they remain the exact
-$\beta$-colored boundary identities of $C$.  Each outside endpoint is a
-vertex-node of the corresponding retained walk $R_1$ or $R_2$ adjacent
-to its edge-node $f_1$ or $f_2$.  Equality of those two vertices would
+$\beta$-colored boundary identities of $C$.  Each outside endpoint, by
+\noderef{Incident} and the incidence rule of
+\noderef{TwoColorIncidenceGraph}, is a vertex-node of the corresponding
+retained walk $R_1$ or $R_2$ adjacent to its edge-node $f_1$ or $f_2$;
+it is the non-$b_j$ endpoint because it lies outside $C$.  Equality of
+those two vertices would
 put the same vertex-node in the two supports, contrary to their proved
 support disjointness.  Their outside endpoints are therefore distinct.
 Equations (2)--(10) and these final observations establish every asserted

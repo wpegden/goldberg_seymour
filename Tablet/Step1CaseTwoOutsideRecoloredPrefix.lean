@@ -14,6 +14,7 @@ import Tablet.Incident
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.KTriple
+import Tablet.LooplessMultigraph
 import Tablet.MaximumDegree
 import Tablet.MissingColors
 import Tablet.OrderedTreeUnion
@@ -30,6 +31,7 @@ import Tablet.TreeColorSetMinusClosed
 import Tablet.TreeExitPath
 import Tablet.TreeIncidentEdge
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix

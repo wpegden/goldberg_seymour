@@ -291,4 +291,35 @@ lemma Step1CaseTwoOutsidePrefixTwoEdges {V E : Type*}
       b₂ ∈ TreeSequenceVertexSet J ∧
       b₃ ∈ TreeSequenceVertexSet J := by
 -- BODY
-  sorry
+  set_option maxHeartbeats 800000 in
+    obtain ⟨gamma, mu, Bminus, C, R₁, R₂, R₃, hgamma, hproperMu, honeMu,
+      hstable, hfixed, hmissingFixed, hreserved, hgammaMissing, hbetaMissing,
+      hcolor, hotherMissing, hR₁, hR₂, hR₃, hd₁₂, hd₁₃, hd₂₃, hs₁, hs₂, hs₃,
+      hl₁, hl₂, hl₃, hAB, hBCstrict, hCT, hlast, hadjoin, hf₁mu, hf₂mu,
+      houtDistinct, hb₁C, hb₂C, hb₃C⟩ :=
+      Step1CaseTwoOutsideRecoloredPrefix G k e0 input T phi ett hproper hone
+        base H good hterminal hElementary alpha beta halpha hclosed hne hbeta
+        a₁ b₁ a₂ b₂ a₃ b₃ P₁ P₂ P₃ hP₁ hP₂ hP₃ hpaths₁₂ hpaths₁₃
+        hpaths₂₃ ha₁₂ ha₁₃ ha₂₃ hb₁₂ hb₁₃ hb₂₃ horder₁₂ horder₂₃ f₁ f₂ f₃
+        hf₁ hf₂ hf₃ hif₁ hif₂ hif₃ hPf₁ hPf₂ hPf₃ houtside
+    obtain ⟨corrC, baseC, KC, goodC, hmod, hMPC, heligible, hcount, hlargeC,
+      hgammaC, hbetaC⟩ :=
+      Step1CaseTwoOutsidePrefixHierarchy G k e0 input T phi ett hMP hpositive
+        hlower base H good hlarge hElementary beta gamma hbeta mu hgamma
+        hproperMu honeMu hstable Bminus C hfixed hmissingFixed
+        (by simpa [hlast] using hgammaMissing)
+        (by simpa [hlast] using hbetaMissing) f₃
+        (by simpa [hlast] using hif₃) hcolor hotherMissing
+        hreserved hAB hBCstrict hCT
+        hadjoin
+    obtain ⟨J₁, J, corrJ, baseJ, KJ, goodJ, hMPCJ, hcountJ, hlargeJ,
+      hgammaJ, hbetaJ, had₁, had₂, hf₁J, hf₂J, hb₁J, hb₂J, hb₃J⟩ :=
+      Step1CaseTwoOutsideTwoEdgeExtension G k e0 input T phi mu ett hMP C
+        corrC baseC KC goodC hmod hMPC heligible hlargeC beta gamma hgammaC
+        hbetaC b₁ b₂ b₃ f₁ f₂ hbetaMissing hf₁mu hf₂mu hif₁ hif₂
+        houtDistinct hb₁C hb₂C hb₃C
+    exact ⟨gamma, mu, C, J₁, J, corrJ, baseJ, KJ, goodJ, R₁, R₂, R₃,
+      hgamma, hproperMu, honeMu, hstable, hmod, hMPCJ,
+      hcountJ.trans hcount, hlargeJ, hgammaJ, hbetaJ, hbetaMissing,
+      hR₁, hR₂, hR₃, hd₁₂, hd₁₃, hd₂₃, hs₁, hs₂, hs₃, hl₁, hl₂, hl₃,
+      hCT, hlast, had₁, had₂, hf₁J, hf₂J, hb₁J, hb₂J, hb₃J⟩
