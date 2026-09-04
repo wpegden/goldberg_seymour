@@ -14,6 +14,7 @@ import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.GoodHierarchyPrefixRepackage
 import Tablet.GoodHierarchyReservedDisjoint
+import Tablet.GoodHierarchyRestrictedAugmentation
 import Tablet.GoodHierarchyTerminalPrefixRepackage
 import Tablet.HierarchyBase
 import Tablet.HierarchyFirstMissingPosition

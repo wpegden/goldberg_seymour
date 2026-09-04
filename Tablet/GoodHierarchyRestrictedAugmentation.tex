@@ -1,0 +1,356 @@
+\begin{lemma}[Restricted augmentation of a good hierarchy]
+Let $G$ be a finite loopless multigraph retaining individual edge
+identities, let $e_0$ be distinguished, and let $[k]$ be the color set.
+Let $\mathcal E$ be a positive-rung ETT with generating coloring
+$\varphi$, maximum property, terminal ladder tree $T_n$, and final
+extension kind $\Theta_n$.  Let $\sigma$ be a $\varphi\bmod T_n$
+coloring.  Suppose that an ordered tree $J$ carries a corresponding ETT
+$\mathcal E_J$ for $(\sigma,T_n)$, a hierarchy base $B_J$, a hierarchy
+$K_J$, and a good-hierarchy witness $\mathcal G_J$.  Put
+\[
+ d=K_J.\mathit{dividerCount},\qquad
+ A=K_J.\mathit{starred}(d),\qquad D=D^{K_J}_{n,d},
+\]
+and write $\Gamma_\eta=\mathcal G_J.\Gamma^d_\eta$.
+
+For an exact ordered extension $W$ of $A$, let $C_W(\eta)$ be the set of
+colors on the exact displayed edges of $W$ whose positions are at least
+$|A|$ and strictly below both $|W|$ and the totalized first position in
+$W$ missing $\eta$.  Then there are a natural number $m$, exact ordered
+trees
+\[
+                  U_0=J,U_1,\ldots,U_m=U,
+\]
+and a terminal tree $U$ such that all of the following hold.
+\begin{enumerate}
+\item For every $r<m$, $U_{r+1}$ is one
+  $\sigma$-\noderef{TashkinovAugmentation} of $U_r$, and
+  $\Gamma_\eta\cap C_{U_{r+1}}(\eta)=\varnothing$ for every $\eta\in D$.
+  Moreover $|U_r|=|J|+r$, every $U_r$ is an exact ordered initial segment
+  of every later $U_s$, and $V(U_r)$ is a proper subset of
+  $V(U_{r+1})$.  In particular, the displayed chain is an actual
+  $\sigma$-\noderef{TashkinovAugmentationSequence} from $J$ to $U$.
+\item The terminal tree still satisfies
+  $\Gamma_\eta\cap C_U(\eta)=\varnothing$ for every $\eta\in D$, and it
+  is maximal for this property: no one-step Tashkinov augmentation $W$ of
+  $U$ satisfies all these same fixed last-index avoidance conditions.
+\item The tree $U$ carries a corresponding ETT $\mathcal E_U$ for
+  $(\sigma,T_n)$ with maximum property, a reconstructed hierarchy base
+  $B_U$, and a hierarchy $K_U$ with $d$ dividers.  The core, closure, and
+  numerical supporting-vertex position of $B_U$ equal those of $B_J$.
+  After the canonical identification of divider indices, all nonterminal
+  stages, starred stages, indexed stored sets, and stage-missing sets of
+  $K_U$ equal those of $K_J$, and the numerical divider positions agree.
+  There is a good witness $\mathcal G_U$ whose every indexed Gamma pair
+  equals the corresponding pair of $\mathcal G_J$.
+\item The terminal stored set satisfies
+  \[
+                  D^{K_U}_{n,d+1}\subseteq D^{K_J}_{n,d},
+  \]
+  and $U$ is
+  $\bigl(\bigcup_{\eta\in D^{K_U}_{n,d+1}}
+  \mathcal G_U.\Gamma^d_\eta\bigr)^-$-closed under $\sigma$.
+\end{enumerate}
+Here every initial-segment assertion and every equality of stages concerns
+the complete ordered edge-valued tree-sequences, not merely their vertex
+sets.
+\end{lemma}
+\begin{proof}
+Write $D=D^{K_J}_{n,d}$ and $\Gamma_\eta=\Gamma^d_\eta$ throughout.
+By \noderef{HierarchySegmentColors}, the set denoted $C_W(\eta)$ in the
+statement is exactly the last-stage segment-color expression obtained by
+using the fixed starred tree $A$, the next stage $W$, and
+\noderef{HierarchyFirstMissingPosition}$(\sigma,W,\eta)$.  In particular,
+the last avoidance clause of \noderef{GoodHierarchy} for $K_J$ says
+\[
+                    \Gamma_\eta\cap C_J(\eta)=\varnothing
+                    \quad(\eta\in D).                 \tag{1}
+\]
+
+We first make the one-edge construction used by the restricted loop
+completely explicit.  Let $X$ be a current tree and suppose that an exact
+edge identity $f$ belongs to
+$\noderef{BoundaryColorEdges}(G,\sigma,V(X),c)$ for a color
+$c\in\noderef{TreeMissingColors}(\sigma,X)$.  Unfolding
+\noderef{BoundaryColorEdges} and \noderef{BoundaryEdges} supplies vertices
+$x\in V(X)$ and $y\notin V(X)$ with
+$G.\mathit{ends}(f)=\{x,y\}$.  Define $X+f$ to have length $|X|+1$; copy
+all old vertex and edge entries, put $y$ in the new last vertex position,
+and put the individual identity $f$ in the new last edge position.
+
+We verify every field of this new \noderef{TreeSequence}.  Positivity
+follows from the positivity of $X$.  For vertex injectivity, two old
+indices reduce to injectivity in $X$, while equality involving the new
+last entry would put $y$ in $V(X)$, contrary to its choice.  For edge
+injectivity, two old indices again reduce to injectivity in $X$.  The new
+identity $f$ cannot equal an old displayed edge: the attachment field of
+$X$ puts both endpoints of every old edge in $V(X)$, whereas $f$ has the
+endpoint $y\notin V(X)$.  The first-edge equation is copied because the
+old positive tree already contains its distinguished first edge.  Every
+old attachment equation is copied.  For the new last edge, choose the old
+position occupied by $x$; symmetry of the unordered endpoint pair rewrites
+$\{x,y\}$ as $\{y,x\}$, giving precisely the required attachment equation.
+Thus the constructed object is an actual tree-sequence with fresh vertex
+and edge entries, not merely a vertex-set extension.
+
+Its length equation, entrywise old vertex equalities, and entrywise old
+edge equalities give
+$\noderef{TreeSequenceInitialSegment}(X,X+f)$; the same data and the exact
+last-edge equality give \noderef{TreeSequenceAdjoinEdge}$(X,f,X+f)$.
+Together with $\sigma(f)=c$ and $c\in\overline\sigma(X)$, these are all
+fields of \noderef{TashkinovAugmentation}$(\sigma,X,X+f)$.  Directly from
+the copied entries, the fresh last vertex, and
+\noderef{TreeSequenceVertexSet},
+\[
+                V(X+f)=V(X)\cup\{y\},\qquad V(X)\subsetneq V(X+f).
+                                                               \tag{2}
+\]
+
+Call a finite chain admissible if it starts at $J$, every successor is a
+one-step $\sigma$-Tashkinov augmentation, and at every successor $W$ it
+satisfies
+\[
+                    \Gamma_\eta\cap C_W(\eta)=\varnothing
+                    \quad(\eta\in D).                 \tag{3}
+\]
+The length-zero chain is admissible by (1).  At every successor the
+definition of \noderef{TashkinovAugmentation} gives one-more length and an
+exact prefix.  Thus there is exactly one new vertex position.  Injectivity
+of the successor's vertex array makes its entry different from every old
+entry, while exact prefix equality identifies all the old entries; this
+directly gives (2) at every step.  The identical argument for its edge
+array identifies one fresh edge identity as well.  Since all these
+vertex sets are subsets of the fixed finite type $V$, an admissible chain
+has at most $|V|-|V(J)|$ successors.  The nonempty finite set of attainable
+chain lengths therefore has a largest member.  Choose an admissible chain
+$U_0,\ldots,U_m$ of largest length and put $U=U_m$.  If an admissible
+one-step successor of $U$ existed, appending it would give an admissible
+chain of length $m+1$, a contradiction.  This proves the asserted
+maximality.  The asserted avoidance at the endpoint also holds: it is (1)
+when $m=0$, and it is the defining successor condition (3) at $r=m-1$
+when $m>0$.
+
+Induction on $s-r$, using the exact initial segment at each successor and
+entrywise composition, proves that $U_r$ is an exact
+\noderef{TreeSequenceInitialSegment} of $U_s$ whenever $r\leq s$.
+The one-more length equation similarly gives $|U_r|=|J|+r$.  The same
+induction, now on the relation defined in
+\noderef{TashkinovAugmentationSequence}, proves that the whole displayed
+chain is a Tashkinov augmentation sequence from $J$ to $U$.  Thus every
+chain and exact-prefix assertion in items 1 and 2 has been obtained.
+
+We next construct a corresponding ETT on every $U_r$; retaining all of
+them during the construction will also justify the terminal certificate.
+Let $n$ be the last rung, let $T_n$ be the common terminal ladder tree,
+and let $Z$ be the final closure tree in the replacement series displayed
+by the given \noderef{CorrespondingExtendedTashkinovTree} certificate on
+$J$.  That certificate and \noderef{ExtendedTashkinovTree} give the exact
+segments
+\[
+                         T_n\preccurlyeq J\preccurlyeq Z,
+                         \qquad |T_n|<|J|.              \tag{4}
+\]
+Because the rung is positive, the certified step at its last rung is one
+of the SE, PE, or RE constructors of \noderef{TashkinovSeriesStep}, not
+the initial constructor: the certification function itself is the field of
+\noderef{TashkinovSeries} carried by the replacement ETT.
+
+In the PE case, that constructor contains a
+\noderef{TashkinovClosure} from $T_n$ to $Z$.  Its first field is a
+$\sigma$-Tashkinov augmentation sequence.  Apply
+\noderef{TashkinovAugmentationSequenceRestrict} to this sequence and the
+two exact segments in (4); it gives an augmentation sequence from $T_n$
+to $J$.  Appending the accumulated chain from $J$ to $U_r$ gives one from
+$T_n$ to $U_r$.
+
+In the SE and RE cases, the terminal constructor displays an individual
+edge $f_n$, an exact one-edge seed $S=T_n+f_n$, and a
+\noderef{TashkinovClosure} from $S$ to $Z$.  The seed has length
+$|T_n|+1\leq|J|$ by (4).  Both $S$ and $J$ are exact prefixes of $Z$: for
+$S$ this follows by induction along the closure's augmentation sequence,
+and for $J$ it is (4).  Comparing their entries up to $|S|$ therefore gives
+$S\preccurlyeq J$.  Apply
+\noderef{TashkinovAugmentationSequenceRestrict} to the closure route
+$S\leadsto Z$ and the segments $S\preccurlyeq J\preccurlyeq Z$; this
+gives $S\leadsto J$, which again appends to $J\leadsto U_r$.
+The SE or RE constructor also says that its replacement connecting-edge
+set is exactly $\{f_n\}$.  Connecting-edge agreement in
+\noderef{CorrespondingExtendedTashkinovTree} therefore identifies the
+base series' exact set with the same singleton $\{f_n\}$.  We have now
+checked the appropriate PE or SE/RE antecedent, including the exact
+connecting-edge identity, in the universal clause of
+\noderef{ModColoring}.
+
+Equation (4) and $J\preccurlyeq U_r$ give
+$T_n\preccurlyeq U_r$ and $|T_n|<|U_r|$.  The universal mod-coloring clause
+therefore supplies a corresponding ETT $\mathcal E_{U_r}$ for every
+$U_r$.  In particular it supplies $\mathcal E_U$.  Apply
+\noderef{MaximumPropertyTransport} to the given
+\noderef{MaximumProperty} of $\mathcal E$: the resulting ETT
+$\mathcal E_U$ has maximum property.
+
+We now reconstruct the hierarchy base $B_U$, checking its fields rather
+than transporting the old structure across unlike dependent types.  The
+two corresponding certificates identify their terminal ladder trees,
+raw stored sets, exact connecting-edge sets, and extension kinds with the
+same data of $\mathcal E$.  Transport the numerical support position of
+$B_J$ through the equality of the terminal ladder trees, and retain its
+positivity.  Retain also the old closure tree and core.  The terminal
+missing-color compatibility field follows from the identical ladder tree
+and the common coloring $\sigma$.
+
+If $\Theta_n$ is not PE, the nonparallel field of
+\noderef{HierarchyBase} identifies the old core with the old terminal
+ladder tree.  Ladder-tree agreement identifies this with the new terminal
+ladder tree, proving the new nonparallel field.  The parallel implication
+has a false antecedent in this case.
+
+Suppose instead that $\Theta_n$ is PE.  Unpack the terminal PE constructors
+of the certified replacement series for $\mathcal E_J$ and
+$\mathcal E_U$.  Each constructor contains a
+\noderef{MaximumDefectiveChoice}.  Connecting-edge agreement and the two
+singleton constructor equations give equality of the individual chosen
+edge identities $f_J=f_U$.  For each choice,
+\noderef{DefectiveVertex} and \noderef{MaximumDefectiveChoice} put its
+chosen vertex inside the common $V(T_n)$, put its other endpoint outside
+$V(T_n)$, give \noderef{Incident} of the chosen vertex with that edge, and
+give the exact unordered endpoint equation.  Equality of the edge
+identities makes the two unordered pairs equal.  The inside endpoint of
+one pair cannot equal the outside endpoint of the other, so the
+inside/inside alternatives are forced; hence the two support vertices are
+equal.  The old parallel field now identifies that common support vertex
+with the vertex at the retained numerical support position.
+
+The closure stored in $B_J$ is already a
+\noderef{TashkinovClosure} under $\sigma$ of the prefix of $T_n$ at that
+position.  Equality of $T_n$, of the support position, and the fieldwise
+definition of \noderef{TreeSequencePrefix} identify the new prefix with
+the old one, so the same closure proof applies.  Finally the old
+\noderef{OrderedTreeUnion} witness depends only on this common $T_n$, the
+retained closure, and the retained core; reuse it verbatim.  Support
+positivity is unchanged, and the terminal missing-color equality was
+checked above.  These arguments construct every field of $B_U$ and prove
+the three advertised data equalities.
+
+Construct $K_U$ with divider count $d$, with stages
+\[
+ K_U(0)=K_J(0),\ldots,K_U(d)=K_J(d),\qquad K_U(d+1)=U.
+                                                               \tag{5}
+\]
+The base-stage equation copies.  All nesting and strictness fields before
+the last one copy.  The last follows by composing the old last segment
+$K_J(d)\preccurlyeq J$ with $J\preccurlyeq U$; its strictness already
+holds before that composition.  Embed each old divider position
+$p<|J|+1$ into $\operatorname{Fin}(|U|+1)$ using $|J|\leq|U|$.  Numerical
+values, positivity, and strict increase are consequently unchanged.
+
+For a divider position $p$, the old divider-stage field identifies the
+relevant stage with \noderef{TreeSequencePrefix}$(J,p)$.  Since
+$J\preccurlyeq U$, the prefixes of $J$ and $U$ through $p$ have the same
+length and the same vertex and edge entries.  Their attachment and
+injectivity fields are propositions, so proof irrelevance identifies the
+two tree-sequences.  This proves every new divider-stage equation
+entrywise.  If $d>0$, the first ordinary stage in (5) is unchanged, and
+the old core-inside-first field copies.  If $d=0$, the first ordinary stage
+is now the terminal $U$; compose the old relation
+$B_J.\mathit{core}\preccurlyeq J$ with $J\preccurlyeq U$, and use equality
+of the reconstructed cores.  This separately proves core-inside-first in
+the zero-divider case.  All fields of \noderef{TashkinovHierarchy} have
+now been checked.  Equation (5), the definition of
+\noderef{HierarchyStarredStage}, and the direct definitions of
+\noderef{HierarchyStoredColorsAt} and
+\noderef{HierarchyStageMissingColors} give all indexed stage, starred,
+stored-set, and stage-missing equalities asserted in item 3.
+
+Define $\mathcal G_U.\Gamma^j_\eta=\mathcal G_J.\Gamma^j_\eta$ under
+these index identifications.  We check every field of
+\noderef{GoodHierarchy}.  Pair cardinality and pairwise disjointness copy
+using indexed stored-set equality.  Every unique-refresh clause has index
+$i<d$; its two ordinary stages, preceding starred stage, vertex-set
+difference, stored sets, and all Gamma pairs are unchanged, so its old
+unique witness and uniqueness clause copy.  The PE base clause uses only
+the common terminal series data, reconstructed equal core and closure,
+zeroth stored set, zeroth Gamma pairs, and their $\sigma$-missing sets, so
+both its non-minus-closed and cardinality assertions copy.  Every internal
+minus-closed clause likewise concerns an unchanged nonterminal stage,
+stored set, and preceding Gamma union, and therefore copies.
+
+For avoidance at an index $j<d$, the starred stage and next ordinary stage
+are unchanged, so \noderef{HierarchySegmentColors} is unchanged and the
+old avoidance clause copies.  At $j=d$, its stage-missing set is unchanged,
+and the terminal admissibility condition (3) at $U$ says exactly that the
+old Gamma pair is disjoint from the new last segment-color set.  To check
+that this includes all totalized cases, unfold
+\noderef{HierarchyFirstMissingPosition}.  If $U$ has an $\eta$-missing
+vertex, the least such position is used.  If it has none, the fallback is
+the last vertex position $|U|$, so the strict cutoff in $C_U(\eta)$ still
+includes precisely every eligible displayed edge and no nonexistent one.
+Thus (3) is exactly the required avoidance clause in both the genuine and
+no-missing branches.  This completes the construction of $\mathcal G_U$
+and proves all indexed Gamma equalities.
+
+It remains to prove the two terminal assertions.  We do the stored-set
+comparison directly.  Unfold \noderef{TashkinovStoredColors},
+\noderef{HierarchyStoredColorsAt}, and
+\noderef{HierarchyTerminalStoredColors}.  The corresponding certificates
+identify every raw set $S_h$ and hence their union $R$; the terminal ladder
+trees and their $\sigma$-missing sets agree as well.  Thus the terminal
+Tashkinov stored set on either side is
+$R\setminus\overline\sigma(T_n)$.  Exact prefix composition gives
+$T_n\preccurlyeq A\preccurlyeq J\preccurlyeq U$, and hence
+$\overline\sigma(T_n)\subseteq\overline\sigma(A)
+\subseteq\overline\sigma(U)$ by the union definition in
+\noderef{TreeMissingColors}.  Consequently the iterated differences in
+the two hierarchy definitions reduce, element by element, as follows:
+\[
+ (R\setminus\overline\sigma(T_n))
+       \setminus\overline\sigma(U)=R\setminus\overline\sigma(U),
+ \qquad
+ (R\setminus\overline\sigma(T_n))
+       \setminus\overline\sigma(A)=R\setminus\overline\sigma(A).
+\]
+Therefore
+\[
+ D^{K_U}_{n,d+1}=R\setminus\overline\sigma(U),\qquad
+ D^{K_J}_{n,d}=R\setminus\overline\sigma(A).             \tag{6}
+\]
+Taking differences from the same $R$ in (6) proves
+$D^{K_U}_{n,d+1}\subseteq D^{K_J}_{n,d}$.  Notice that this is a direct
+raw-set and missing-set calculation; no adjacent-stage antitonicity result
+is being used.
+
+Finally suppose, contrary to the desired
+\noderef{TreeColorSetMinusClosed} certificate, that a color
+\[
+ c\in\overline\sigma(U)\setminus
+       \bigcup_{\eta\in D^{K_U}_{n,d+1}}\Gamma_\eta       \tag{7}
+\]
+has a $c$-colored boundary edge identity $f$.  Apply the fieldwise
+one-edge construction above to obtain the exact Tashkinov augmentation
+$W=U+f$.  We show that $W$ obeys (3), contradicting maximality.
+
+Fix $\eta\in D$.  If $\eta\in D^{K_U}_{n,d+1}$, (7) gives
+$c\notin\Gamma_\eta$.  Every old edge in $C_W(\eta)$ already lies in
+$C_U(\eta)$, while the only possible new member is the color $c$ of the
+new last edge; hence the old admissibility and $c\notin\Gamma_\eta$ prove
+disjointness.  This reasoning covers both possibilities for the totalized
+first-missing position.  If the new vertex is the first vertex missing
+$\eta$, its position is the new last vertex and the new edge lies below
+that position.  If no vertex of $W$ misses $\eta$, the fallback is the
+same new last vertex position and the conclusion is identical.
+
+If instead $\eta\notin D^{K_U}_{n,d+1}$, equations (6) and $\eta\in D$
+show that $\eta$ is missing on $U$.  Its genuine first missing position is
+therefore at most $|U|$ and is unchanged in the exact extension $W$.
+The new edge has position $|U|$, so it is not strictly below that first
+missing position.  Consequently $C_W(\eta)=C_U(\eta)$, and old
+admissibility again gives disjointness.  Thus $W$ satisfies every fixed
+last-Gamma avoidance condition, contradicting the maximality of $U$.
+
+No color satisfying (7) can therefore have a colored boundary edge.
+Unfolding \noderef{TreeColorSetClosed} and
+\noderef{TreeColorSetMinusClosed} says exactly that $U$ is
+$\bigl(\bigcup_{\eta\in D^{K_U}_{n,d+1}}\Gamma_\eta\bigr)^-$-closed.
+Together with the reconstructed ETT, base, hierarchy, and good witness,
+this proves every assertion of the lemma.
+\end{proof}
