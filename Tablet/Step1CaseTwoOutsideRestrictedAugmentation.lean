@@ -19,9 +19,7 @@ import Tablet.GoodHierarchyTerminalPrefixRepackage
 import Tablet.HierarchyBase
 import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchyLEMStable
-import Tablet.HierarchySegmentColors
 import Tablet.HierarchyStarredStage
-import Tablet.HierarchyStoredColorsAntitone
 import Tablet.HierarchyStoredColorsAt
 import Tablet.HierarchyTerminalStoredColors
 import Tablet.Incident
@@ -31,7 +29,6 @@ import Tablet.KTriple
 import Tablet.MaximumDegree
 import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumProperty
-import Tablet.MaximumPropertyTransport
 import Tablet.MissingColors
 import Tablet.ModColoring
 import Tablet.OrderedTreeUnion
@@ -41,9 +38,6 @@ import Tablet.ParallelCommonMissingClosed
 import Tablet.PresentColors
 import Tablet.SameGoodHierarchy
 import Tablet.StableColoring
-import Tablet.TashkinovAugmentation
-import Tablet.TashkinovAugmentationSequence
-import Tablet.TashkinovClosure
 import Tablet.TashkinovExtensionKind
 import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeries
@@ -58,7 +52,6 @@ import Tablet.TreeMissingColors
 import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
-import Tablet.TreeSequencePrefix
 import Tablet.TreeSequenceVertexSet
 import Tablet.TreeVertexOrder
 import Tablet.TwoColorComponent

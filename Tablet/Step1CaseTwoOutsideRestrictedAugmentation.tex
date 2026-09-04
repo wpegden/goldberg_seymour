@@ -64,164 +64,205 @@ Then the displayed Subcase 2.1 data are contradictory.
 Unpack the asserted prefix-plus-two-edges package and retain its exact
 witnesses, writing them as
 $\gamma,\mu_5,C,J_1,J,\mathcal C_J,B_J,K_J,\mathcal G_J$ and
-$R_1,R_2,R_3$.  We now perform the paper's finite restricted augmentation.
-At a current tree $U$, append an exact boundary identity $h$ only when
-its $\mu_5$-color is missing on $U$ and, for every color $\eta$ in the
-last indexed stored set of $K_J$, the segment of $U+h$ before its first
-$\eta$-missing vertex uses no color in the corresponding last Gamma pair
-of $\mathcal G_J$.  The boundary
-identity supplies one old and one new endpoint, so together with its
-missing-color witness this checks every field of
-\noderef{TashkinovAugmentation}; the additional condition is exactly the
-last \noderef{HierarchySegmentColors} avoidance test.  Each step adds a
-new vertex to the ordered list.  Since $V$ is finite, iteration stops;
-choose a maximal finite sequence and call its last tree $T'$.
+$R_1,R_2,R_3$.  Retain separately all of the package's conjuncts:
+properness and exact one-uncoloredness of $\mu_5$, its stability from
+$\varphi$ on $T_n$, its mod-coloring certificate, maximum property of
+$\mathcal C_J.\mathit{replacementETT}$, the equality
+$K_J.\mathit{dividerCount}=H.\mathit{dividerCount}$, the replacement
+large estimate, the two last-Gamma-union exclusions, the missingness of
+$\beta$ at $b_3$, the three \noderef{TreeExitPath} certificates and their
+support and length data, and every exact prefix, adjoin-edge, endpoint,
+and vertex-membership assertion involving $C,J_1,J,f_1,f_2$.
 
-We certify every intermediate tree $U$, including $T'$, by induction.
-Compose its accumulated exact steps with the exact terminal-seed route
-through $J$ supplied by $\mathcal C_J$; this is a
-\noderef{TashkinovAugmentationSequence}.  The universal mod-coloring
-clause gives a corresponding ETT $\mathcal E_U$, and
-\noderef{MaximumPropertyTransport} gives maximum property.  At this
-point we again reconstruct, rather than copy, its base.  In non-PE its
-core is the common $T_n$.  In PE compare the two actual terminal
-constructors of $\mathcal E_J$ and $\mathcal E_U$: equality of their
-singleton connecting-edge sets, both identified by correspondence with
-the original exact set, fixes the individual defective edge.  The
-inside/outside endpoint fields of their maximum-defective choices then
-fix the replacement support vertex.  Reuse the exact closure in $B_J$:
-it is already a \noderef{TashkinovClosure} under $\mu_5$, and the same
-support prefix is forced by the support equality just proved.  The
-unchanged coloring-free ordered-union witness from $B_J$ supplies the
-core.  This checks every \noderef{HierarchyBase} field at every restricted
-augmentation.
-
-Take the internal stages of $K_J$ and replace only its terminal stage by
-$U$.  They satisfy
-all \noderef{TashkinovHierarchy} fields and have exactly $d$ dividers.
-The stored-set, Gamma, unique-refresh, internal minus-closed, and
-parallel-base arguments are unchanged.  The induction hypothesis gives
-old avoidance, and the selection condition is precisely avoidance for
-the newly appended edge, including the totalized first-missing fallback.
-Hence every intermediate tree has a good witness $\mathcal G_U$ with all
-fields.  Apply this construction at $T'$ and denote its hierarchy by
-$K'$ and its corresponding certificate by $\mathcal C'$.
-
-We now derive the separate terminal certificate.  Correspondence
-identifies the raw stored sets throughout the restricted sequence.
-Because every internal stage is copied from $K_J$, unfolding
-\noderef{TashkinovStoredColors},
-\noderef{HierarchyStoredColorsAt}, and
-\noderef{HierarchyTerminalStoredColors} gives
+Apply \noderef{GoodHierarchyRestrictedAugmentation} to the original ETT,
+its given maximum-property certificate, the seed mod-coloring $\mu_5$,
+and the objects $J,\mathcal C_J,B_J,K_J,\mathcal G_J$.  Unpack the entire
+conclusion.  It gives a number $m$, an exact chain
 \[
- D^{K'}_{n,d+1}=D_n\setminus\overline{\mu_5}(T')
-       \subseteq D_n\setminus\overline{\mu_5}
-          (K_J.\mathit{starred}(d))
-       =D^{K_J}_{n,d}.                                         \tag{12}
+                         U_0=J,U_1,\ldots,U_m=U,               \tag{12}
 \]
-This is the terminal subtraction argument recorded abstractly by
-\noderef{HierarchyStoredColorsAntitone}.
-
-Suppose that a color $c$ missing on $T'$ and outside
-$\bigcup_{\eta\in D^{K'}_{n,d+1}}\Gamma^d_\eta$ had an exact
-$c$-colored boundary identity.  It is a permissible next Tashkinov
-augmentation.  For $\eta\in D^{K_J}_{n,d}$ not in the terminal set, the
-definition in (12) says that $\eta$ is already missing on $T'$, so its
-first missing position precedes the proposed new edge.  For $\eta$ in
-the terminal set, the proposed color $c$ is outside
-$\Gamma^d_\eta$, and every older segment already passes the avoidance
-test.  Thus the proposed edge satisfies the restricted selection rule,
-contrary to maximality.  Therefore
+and the following named data: every successor is an exact restricted
+Tashkinov augmentation; every chain member has the asserted length; each
+earlier member is an exact \noderef{TreeSequenceInitialSegment} of each
+later member; each successor has strictly larger vertex set; and the
+whole chain is the certified exact augmentation sequence from $J$ to $U$.
+Retain also its terminal avoidance and maximality clauses.  Most
+importantly, the same conclusion gives a corresponding ETT certificate
+$\mathcal C_U$, maximum property of
+$\mathcal C_U.\mathit{replacementETT}$, a reconstructed base $B_U$, a
+hierarchy $K_U$, the equality
 \[
- T'\text{ is }
- \left(\bigcup_{\eta\in D^{K'}_{n,d+1}}\Gamma^d_\eta\right)^-
- \text{-closed under }\mu_5.                                  \tag{13}
+ K_U.\mathit{dividerCount}=K_J.\mathit{dividerCount},          \tag{13}
 \]
-The ETT $\mathcal E_{T'}$ has the original rung, maximum property, and
-the good hierarchy $K'$ with $d<q_0$ dividers.  The stated same-rung
-hypothesis consequently gives
+equality of all canonically indexed nonterminal stages, starred stages,
+stored sets, stage-missing sets, and divider positions, and a good witness
+$\mathcal G_U$ whose indexed Gamma pairs equal those of $\mathcal G_J$.
+Finally retain, as two separate returned clauses,
 \[
-          \noderef{ColoredVertexSetElementary}
-          (G,\mu_5,V(T')).                                    \tag{14}
+ D^{K_U}_{n,d+1}\subseteq D^{K_J}_{n,d}                       \tag{14}
+\]
+and
+\[
+ U\text{ is }
+ \left(\bigcup_{\eta\in D^{K_U}_{n,d+1}}
+       \mathcal G_U.\Gamma^d_\eta\right)^-
+ \text{-closed under }\mu_5.                                  \tag{15}
+\]
+Here $d=K_U.\mathit{dividerCount}$ in the left-hand notation of (14),
+and the canonical identification in (13) sends the last index of $K_U$
+to the last index of $K_J$.
+
+By the defining same-rung field of
+\noderef{CorrespondingExtendedTashkinovTree},
+$\mathcal C_U.\mathit{replacementETT}$ has rung number equal to that of
+the original ETT.  Its maximum property was just returned.  Moreover,
+(13), the seed equality
+$K_J.\mathit{dividerCount}=H.\mathit{dividerCount}$, and
+$H.\mathit{dividerCount}<q_0$ give
+$K_U.\mathit{dividerCount}<q_0$.  The uniform fewer-divider hypothesis,
+applied to this actual replacement ETT, $B_U,K_U$, and $\mathcal G_U$,
+therefore gives
+\[
+          \noderef{ColoredVertexSetElementary}(G,\mu_5,V(U)). \tag{16}
 \]
 
-Before using minimality, we locate all three outside endpoints.  Suppose
-$a_j\in V(T')$ for some $j$.  The seed path $R_j$ says it misses
-$\gamma$ or $\beta$.  It cannot miss $\beta$, since
-$b_3\in J\subseteq T'$ already misses $\beta$ by the seed package,
-$a_j\ne b_3$, and (14) forbids a repeated missing color.
-Thus $a_j$ misses $\gamma$.  Both $\gamma$ and $\beta$ lie outside the
-reserved union in (13): (12) reduces this to the two last-pair exclusions
-in the seed package.  Equation (13), together with the missing
-witnesses $a_j$ and $b_3$, therefore makes both singleton color classes
-closed on $T'$.
-
-For every $i$, the path $R_i$ meets $T'$ at $b_i\in J$.  If its outside
-end $a_i$ were outside $T'$, traverse the simple incidence walk from
-$b_i$ toward $a_i$ and take the first edge-node crossing from a vertex in
-$T'$ to one outside.  By \noderef{TwoColorIncidenceGraph} and
-\noderef{BoundaryEdges}, this is an exact $\gamma$- or $\beta$-colored
-boundary identity, contradicting the two closedness conclusions.  Hence
-all three $a_i$ lie in $T'$.  None can miss $\beta$ because $b_3$ does,
-so all three miss $\gamma$ by their seed paths, contradicting (14) already at the
-distinct vertices $a_1,a_2$.  This contradiction proves
+We next record two consequences of (14) before considering the paths.
+Suppose, for example, that $\gamma$ belonged to the terminal union in
+(15).  Then some
+$\eta\in D^{K_U}_{n,d+1}$ would have
+$\gamma\in\mathcal G_U.\Gamma^d_\eta$.  Inclusion (14) puts the
+canonically corresponding $\eta$ in $D^{K_J}_{n,d}$, and indexed Gamma
+equality changes the latter membership to
+$\gamma\in\mathcal G_J.\Gamma^d_\eta$.  This contradicts the seed
+exclusion of $\gamma$ from the last Gamma union of $K_J$.  The identical
+argument with $\beta$ and the other seed exclusion proves
 \[
-                         a_1,a_2,a_3\notin V(T').              \tag{15}
+ \{\gamma,\beta\}\cap
+ \bigcup_{\eta\in D^{K_U}_{n,d+1}}
+       \mathcal G_U.\Gamma^d_\eta=\varnothing.                 \tag{17}
 \]
 
-For each $j$, traverse $R_j$ from $a_j$ toward $b_j$ and let $t_j$ be
-the first vertex-node belonging to $V(T')$; it exists because
-$b_j\in J\subseteq T'$, and (15) makes its position positive.  Let
-$L_j$ be the initial subwalk from $a_j$ through $t_j$.  A subwalk of a
-simple walk is simple; it has positive length, the same outside endpoint
-$a_j$, and tree endpoint $t_j$.  By first choice of $t_j$, that endpoint
-is its unique vertex-node in $T'$.  Its edges still alternate between
-$\gamma$ and $\beta$ under $\mu_5$, and the outside-end missing
-alternative is exactly the one in the seed path.  These are every
-field of
+The exact segment $J\preccurlyeq U$ is the $r=0,s=m$ instance returned
+in (12).  Unfolding \noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet} transports each seed membership
+$b_i\in V(J)$ to $b_i\in V(U)$ and transports every vertex of $J$,
+including every endpoint of the exact identities $f_1,f_2$, to $V(U)$.
+In particular the seed fact $\beta\in\noderef{MissingColors}(G,\mu_5,b_3)$
+and the union definition in \noderef{TreeMissingColors} show that
+$\beta$ is missing on $U$.
+
+We claim that none of $a_1,a_2,a_3$ lies in $V(U)$.  Suppose instead that
+$a_j\in V(U)$ for some $j$.  Unfolding the seed
+\noderef{TreeExitPath} certificate for $R_j$ says that $a_j$ misses
+$\gamma$ or $\beta$.  The same definition puts every $a_i$ outside
+$V(T)$ and every $b_i$ inside $V(T)$, so $a_j\ne b_3$.  Since $b_3$ in
+$V(U)$ misses $\beta$, elementarity (16) rules out $\beta$ missing at
+$a_j$; hence $\gamma$ is missing at $a_j$, and thus on $U$ by
+\noderef{TreeMissingColors}.
+
+Now unfold \noderef{TreeColorSetMinusClosed}: (15) is
+\noderef{TreeColorSetClosed} for the colors missing on $U$ outside its
+terminal reserved union.  The missingness of $\beta$ and $\gamma$ just
+proved, together with (17), puts both colors in that difference.  The
+definition of \noderef{TreeColorSetClosed} therefore gives
 \[
- L_j:\operatorname{TreeExitPath}(T',\mu_5,\gamma,\beta,a_j,t_j)
- \quad(j=1,2,3).                                               \tag{16}
+ \noderef{BoundaryColorEdges}(G,\mu_5,V(U),\gamma)=\varnothing,
+ \qquad
+ \noderef{BoundaryColorEdges}(G,\mu_5,V(U),\beta)=\varnothing. \tag{18}
 \]
-Each support is a subset of the corresponding seed-path support, so the
-three remain pairwise support-disjoint and their outside ends remain
-pairwise distinct.
 
-The tree $J\subseteq T'$ contains both endpoints of the exact edge
-$f_1$ by the seed endpoint clause.  Consequently the first $T'$ vertex
-encountered from $a_1$ occurs
-strictly before the walk reaches $f_1$; hence $f_1$ is absent from
-$L_1$ although it belongs to the support of $R_1$.  Thus $L_1$ is a
-proper initial subwalk of $R_1$, while $L_2,L_3$ are initial subwalks of
-$R_2,R_3$.  The latter have exactly the original node lists of
-$P_2,P_3$, and likewise for the first, by the seed equalities.  Therefore
+Fix $i$.  If $a_i\notin V(U)$, traverse $R_i$ backwards from
+$b_i\in V(U)$ toward $a_i$ and take the first transition from a
+vertex-node in $V(U)$ to a vertex-node outside it.  By the adjacency
+definition in \noderef{TwoColorIncidenceGraph}, the intervening edge-node
+is an individual edge identity $e$ incident with both vertices and
+$\mu_5(e)$ is either $\gamma$ or $\beta$.  Unfolding
+\noderef{BoundaryEdges}, the two endpoint memberships put
+$e\in\partial_G(V(U))$; unfolding \noderef{BoundaryColorEdges} then puts
+$e$ in one of the two sets in (18), a contradiction.  Hence every
+$a_i$ lies in $V(U)$.  The missing-color alternative in each seed
+\noderef{TreeExitPath}, elementarity with the distinct vertex $b_3$ that
+misses $\beta$, and the fact that $a_i\notin V(T)$ whereas
+$b_3\in V(T)$ force every $a_i$ to miss $\gamma$.  The distinct vertices
+$a_1,a_2$ in $V(U)$ now both miss $\gamma$, contradicting (16).  This
+proves
 \[
- |L_1|+|L_2|+|L_3|<|P_1|+|P_2|+|P_3|.                        \tag{17}
+                         a_1,a_2,a_3\notin V(U).               \tag{19}
 \]
 
-We finally enumerate the premises of the universal no-better-presentation
-hypothesis.  Take $\sigma=\mu_5$, terminal tree $T'$, and the actual
-certificate $\mathcal C'$.  Properness, exact one-uncoloredness, and
-stability on the original final ladder tree are clauses of the seed
-package; maximum property, the rebuilt base,
-$K'$, its good witness, equality of divider counts, and the separate
-certificate (13) were proved above.  The seed package already contains
-the replacement large estimate, and every later corresponding ETT has
-the same exact ladder tree and generating coloring $\mu_5$; hence that
-same estimate is the one required for $\mathcal C'$.
+For each $j$, write the node list of the simple incidence path $R_j$ in
+its given direction from $a_j$ to $b_j$.  Since $a_j\notin V(U)$ by
+(19) and $b_j\in V(U)$, there is a least position $s_j$ occupied by a
+vertex-node $t_j\in V(U)$.  The bipartite adjacency definition in
+\noderef{TwoColorIncidenceGraph} shows that vertex- and edge-nodes
+alternate.  Thus $s_j$ is a positive even position, in particular
+$s_j\geq2$.  Let $L_j$ be the walk prefix through that occurrence of
+$t_j$.  A prefix of the simple path $R_j$ is simple, its length is
+$s_j\geq2$, its outside end is $a_j\notin V(U)$, its other end is
+$t_j\in V(U)$, and the seed missing-color alternative at $a_j$ is
+unchanged.  Minimality of $s_j$ says that no earlier vertex-node of the
+prefix belongs to $V(U)$, while simplicity says the final occurrence of
+$t_j$ is unique.  These are, field by field, precisely
+\[
+ L_j:\noderef{TreeExitPath}(U,\mu_5,\gamma,\beta,a_j,t_j)
+ \quad(j=1,2,3).                                               \tag{20}
+\]
+Because every $L_j$ is a walk prefix of $R_j$, its support is contained
+in the support of $R_j$.  The seed support-disjointness therefore makes
+the three $L_j$ pairwise support-disjoint, and their outside ends remain
+the seed's pairwise distinct $a_1,a_2,a_3$.
 
-Use first comparison color $\beta$ and second color $\gamma$.  They are
-distinct; the seed missingness at $b_3\in J\subseteq T'$ makes $\beta$
-missing on $T'$, and its exclusion from the
-reserved union together with (13) makes $T'$ singleton-$\beta$-closed.
-The adjacency predicate in \noderef{TwoColorIncidenceGraph} and the
-outside-end alternative in \noderef{TreeExitPath} are symmetric in their
-two displayed colors.  Thus the three fieldwise certificates (16) may
-equally be read as $(\beta,\gamma)$ exit paths.  Their inherited pairwise
-support disjointness and the three distinct outside ends supply every
-path premise.  If $\gamma$ is missing on $T'$, choose any two $L_j$ and
-use the first, zero-secondary-coordinate alternative.  If it is not
-missing, use all three and (17) in the second alternative.  Each is
-forbidden by the stated universal hypothesis.  This final contradiction
-proves that the Subcase 2.1 data cannot occur.
+For the strict comparison, use the exact edge identity $f_1$, not an
+equality of node lists.  The seed says that $\operatorname{inr}(f_1)$
+occurs in the support of $R_1$ and that every endpoint incident with
+$f_1$ lies in $V(J)$, hence in $V(U)$.  When $R_1$ is traversed from
+$a_1$, the vertex-node immediately preceding its occurrence of
+$\operatorname{inr}(f_1)$ is therefore already in $V(U)$, by the
+incidence clause of \noderef{TwoColorIncidenceGraph}.  The least entry
+position $s_1$ occurs strictly before that edge-node.  Thus $L_1$ is a
+proper walk prefix of $R_1$, whereas $L_2,L_3$ are walk prefixes of
+$R_2,R_3$.  Consequently
+\[
+ |L_1|<|R_1|=|P_1|,\qquad
+ |L_2|\leq|R_2|=|P_2|,\qquad
+ |L_3|\leq|R_3|=|P_3|.                                       \tag{21}
+\]
+The three displayed comparisons, added term by term, give
+\[
+ |L_1|+|L_2|+|L_3|<|P_1|+|P_2|+|P_3|.                        \tag{22}
+\]
+
+It remains to instantiate the universal no-better-presentation
+hypothesis.  Take $\sigma=\mu_5$, terminal tree $U$, corresponding
+certificate $\mathcal C_U$, base $B_U$, hierarchy $K_U$, and good witness
+$\mathcal G_U$.  Properness, exact one-uncoloredness, and stability on the
+original terminal ladder tree are seed clauses.  The helper returned
+maximum property and (15), while (13) together with the seed count equality
+gives exactly the required equality with the $d$ dividers of $H$.
+For the large estimate, the defining fields of
+\noderef{CorrespondingExtendedTashkinovTree} identify the rung numbers,
+terminal ladder tree, and generating coloring of both
+$\mathcal C_J.\mathit{replacementETT}$ and
+$\mathcal C_U.\mathit{replacementETT}$ with those of the original ETT;
+hence the seed estimate for $\mathcal C_J$ is exactly the required estimate
+for $\mathcal C_U$.
+
+Use first comparison color $\beta$ and second comparison color $\gamma$.
+They are distinct.  The missingness of $\beta$ on $U$, (17), (15), and
+the unfolded definitions of \noderef{TreeColorSetMinusClosed} and
+\noderef{TreeColorSetClosed} give singleton-$\beta$-closedness on $U$.
+The adjacency predicate in \noderef{TwoColorIncidenceGraph} is symmetric
+in the two colors, and the outside-missing alternative in
+\noderef{TreeExitPath} is a symmetric disjunction.  Thus each certificate
+in (20), with the same exact walk and all the same remaining fields, is
+also a $(\beta,\gamma)$ exit-path certificate.
+
+If $\gamma\in\overline{\mu_5}(U)$, use $L_1,L_2$ with their inherited
+support disjointness and $a_1\ne a_2$ in the zero-secondary-coordinate
+alternative of the no-better hypothesis.  If
+$\gamma\notin\overline{\mu_5}(U)$, use all three paths, all three support
+and outside-end inequalities, and the strict sum (22) in its other
+alternative.  Both alternatives yield the forbidden replacement
+presentation.  This final contradiction proves that the Subcase 2.1 data
+cannot occur.
 \end{proof}
