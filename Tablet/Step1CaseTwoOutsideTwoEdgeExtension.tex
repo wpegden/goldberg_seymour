@@ -1,0 +1,128 @@
+\begin{lemma}[Step 1, Subcase 2.1: adjoining the two retained edges]
+Let $\mu$ be a mod-coloring of a positive-rung maximum ETT $\mathcal E$,
+and let
+$C$ carry a corresponding ETT $\mathcal E_C$ with maximum property, an
+actual hierarchy base, and a good hierarchy $K_C$.  Assume explicitly
+that the terminal PE augmentation sequence to $C$, or the exact terminal
+SE/RE seed followed by its augmentation sequence to $C$, is available.
+Assume the replacement large missing-color estimate and suppose colors
+$\gamma,\beta$ are both absent from the last indexed Gamma union of
+$K_C$.
+
+Let $b_1,b_2,b_3\in V(C)$, with $\beta$ missing at $b_3$.  Let $f_1,f_2$
+be retained individual $\beta$-colored boundary-edge identities of $C$,
+incident with $b_1,b_2$ respectively, and suppose their outside endpoints
+are distinct.  Then there are exact tree-sequences
+\[
+                         J_1=C+f_1,\qquad J=J_1+f_2,
+\]
+a corresponding ETT $\mathcal E_J$ under $\mu$, an actual hierarchy
+base, and a good hierarchy $K_J$ on $J$.  The replacement has maximum
+property and the same divider count and large estimate as the $C$-level
+package; $\gamma,\beta$ remain absent from its last indexed Gamma union.
+Both endpoints of each exact identity $f_1,f_2$, and all three vertices
+$b_1,b_2,b_3$, belong to $V(J)$.
+\end{lemma}
+\begin{proof}
+Expand \noderef{BoundaryColorEdges} and \noderef{BoundaryEdges}.  For
+$i=1,2$, the exact identity $f_i$ has one endpoint in $V(C)$ and one
+endpoint $u_i$ outside it, and $\mu(f_i)=\beta$.  Since $b_i\in V(C)$ is
+incident with $f_i$, looplessness and the unordered endpoint equation
+identify its inside endpoint with $b_i$ and its outside endpoint with
+$u_i$.  By hypothesis $u_1\ne u_2$.
+
+Append the vertex $u_1$ along the individual edge identity $f_1$ to form
+$J_1$, then append $u_2$ along $f_2$ to form $J$.  The second append is
+legal because $u_2\notin V(C)$ and $u_2\ne u_1$, whereas
+$V(J_1)=V(C)\cup\{u_1\}$.  In both cases the new edge has one old and one
+new endpoint, and injectivity follows from the boundary property and the
+distinctness just proved.  Thus every field of
+\noderef{TreeSequenceAdjoinEdge} holds and
+\[
+                         J_1=C+f_1,\qquad J=J_1+f_2.           \tag{1}
+\]
+
+The color $\beta$ is missing at $b_3\in V(C)$, hence belongs to
+\noderef{TreeMissingColors} of $C$ and of $J_1$.  The two new exact
+identities have color $\beta$.  Combining these facts with (1) verifies
+every field of
+\[
+   \noderef{TashkinovAugmentation}(\mu,C,J_1),\qquad
+   \noderef{TashkinovAugmentation}(\mu,J_1,J).                \tag{2}
+\]
+Append the two steps (2) to the stated $C$-level route using the
+reflexive-transitive closure in
+\noderef{TashkinovAugmentationSequence}.  In the PE case this gives a
+route from the last ladder tree $T_n$ to $J$.  In the SE/RE case it gives
+a route from the same exact seed $T_n+f_n$ to $J$, retaining both the
+individual identity $f_n$ and the equality $F_n=\{f_n\}$.  Since the
+corresponding ETT on $C$ strictly extends $T_n$, so does $J$.  These are
+exactly the eligibility alternatives in \noderef{ModColoring}.
+
+Apply the universal clause of the given mod-coloring to $J$.  It supplies
+an actual \noderef{CorrespondingExtendedTashkinovTree} certificate
+$\mathcal C_J$ under $\mu$.  The rung is the same as that of the original
+ETT, and \noderef{MaximumPropertyTransport} transfers the original
+maximum property
+to its replacement ETT $\mathcal E_J$.
+
+We rebuild its hierarchy base from the actual terminal constructor.  If
+the terminal kind is not PE, both corresponding ETTs have the common last
+ladder tree $T_n$ as core; copy the support position and unused closure
+field from the $C$-level base.  The missing-color compatibility is
+unchanged because both bases use the same coloring $\mu$ and exact ladder
+tree.
+
+Suppose the terminal kind is PE.  Extract separately the terminal PE
+constructors of $\mathcal E_C$ and $\mathcal E_J$.  Their connecting-edge
+sets each agree, by their respective
+\noderef{CorrespondingExtendedTashkinovTree} certificates, with the same
+exact connecting-edge set of the original ETT.  The singleton equations
+in \noderef{TashkinovSeriesStep} therefore identify the two PE edge
+identities.  The endpoint equations in
+\noderef{MaximumDefectiveChoice}, the inside assertions in
+\noderef{DefectiveVertex}, and the outside-end assertions orient the
+common unordered pair exactly as in the $C$-level construction.  Hence
+the actual support vertex and its positive position agree.
+
+Copy the core and closure from the $C$-level base.  Its PE field already
+says that this closure is a genuine \noderef{TashkinovClosure} under the
+same coloring $\mu$, and its \noderef{OrderedTreeUnion} witness is
+coloring-free.  Thus no new prefix assertion about the closure is used:
+the copied closure certificate, the support identity just proved, and the
+ordered union verify every PE field of a base $B_J$ for $\mathcal E_J$.
+
+Define $K_J$ using all nonterminal stages and divider positions of $K_C$
+and replacing only the terminal stage $C$ by $J$.  The two exact adjoin
+steps give $C\prec J$, so all nesting and strictness fields hold and the
+divider count is unchanged.  The last ladder tree, raw stored sets,
+starred stages, and coloring are unchanged.  Expanding
+\noderef{HierarchyStoredColorsAt} therefore identifies every indexed
+stored set.  Use the same Gamma family.  Pair cardinality, pairwise
+disjointness, unique refresh, internal minus-closedness, and the rebuilt
+parallel-base clause all copy from the given
+\noderef{GoodHierarchy} on $K_C$.
+
+For avoidance, expand the totalized first-missing position and
+\noderef{HierarchySegmentColors}.  A first missing position already in
+$C$ is unchanged, since $C$ is an exact prefix of $J$.  If a color had no
+missing vertex in $C$, adjoining $u_1,u_2$ can only move its totalized
+first-missing position beyond the end of $C$.  The only displayed edges
+new in that enlarged segment are $f_1,f_2$, both colored $\beta$.  By
+hypothesis $\beta$ is in none of the indexed last Gamma pairs.  Hence no
+Gamma pair acquires a forbidden segment color, and every avoidance clause
+remains true.  The copied data therefore form a genuine good hierarchy
+$\mathcal G_J$.
+
+The indexed stored sets and Gamma pairs were copied, so the given
+exclusions of $\gamma$ and $\beta$ transfer directly.  Both
+$\mathcal E_C$ and $\mathcal E_J$ correspond to the same original ETT;
+their rung numbers and exact last ladder trees agree, and their displayed
+generating coloring is the same $\mu$.  The large estimate for
+$\mathcal E_C$ is consequently the required estimate for
+$\mathcal E_J$.
+
+Finally, (1) includes every vertex of $C$ in $J$ and adds the two outside
+endpoints $u_1,u_2$.  Each endpoint of $f_1$ or $f_2$ is therefore in
+$V(J)$, as are $b_1,b_2,b_3$.  This proves all asserted conclusions.
+\end{proof}

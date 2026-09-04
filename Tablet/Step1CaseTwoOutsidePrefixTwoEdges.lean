@@ -69,6 +69,9 @@ import Tablet.TwoColorIncidenceDegreeAtMostTwo
 import Tablet.TwoColorIncidenceGraph
 import Tablet.interchange
 import Tablet.sc2
+import Tablet.Step1CaseTwoOutsidePrefixHierarchy
+import Tablet.Step1CaseTwoOutsideRecoloredPrefix
+import Tablet.Step1CaseTwoOutsideTwoEdgeExtension
 
 -- [TABLET NODE: Step1CaseTwoOutsidePrefixTwoEdges]
 lemma Step1CaseTwoOutsidePrefixTwoEdges {V E : Type*}

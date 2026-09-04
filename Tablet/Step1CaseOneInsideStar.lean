@@ -266,4 +266,10 @@ lemma Step1CaseOneInsideStar {V E : Type*}
               (∀ x, x ∈ Q₁.support → x ∉ Q₂.support) →
               u₁ ≠ u₂ → False) : False := by
 -- BODY
-  sorry
+  by_cases hpositiveDivider : 0 < H.dividerCount
+  · exact Step1CaseOneInsidePositiveDivider G k e0 input T phi ett hMP hpositive hproper hone hlower base H good q hdivider hfewer hlarge hterminal hElementary alpha beta halpha hclosed hne hbeta a₁ b₁ a₂ b₂ P₁ P₂ hP₁ hP₂ hpaths ha hb horder f₁ f₂ hf₁ hf₂ hif₁ hif₂ hPf₁ hPf₂ hinside theta hthetaAlpha hthetaBeta hthetaMissing hthetaClosedStar hthetaClosed hnoSmaller hpositiveDivider
+  · have hzeroDivider : H.dividerCount = 0 := Nat.eq_zero_of_not_pos hpositiveDivider
+    by_cases hpe : ett.series.data.kind (Fin.last ett.rounds) =
+        some TashkinovExtensionKind.PE
+    · exact Step1CaseOneInsideZeroPE G k e0 input T phi ett hMP hpositive hproper hone hlower base H good q hdivider hfewer hlarge hterminal hElementary alpha beta halpha hclosed hne hbeta a₁ b₁ a₂ b₂ P₁ P₂ hP₁ hP₂ hpaths ha hb horder f₁ f₂ hf₁ hf₂ hif₁ hif₂ hPf₁ hPf₂ hinside theta hthetaAlpha hthetaBeta hthetaMissing hthetaClosedStar hthetaClosed hnoSmaller hzeroDivider hpe
+    · exact Step1CaseOneInsideZeroNonPE G k e0 input T phi ett hMP hpositive hproper hone hlower base H good q hdivider hfewer hlarge hterminal hElementary alpha beta halpha hclosed hne hbeta a₁ b₁ a₂ b₂ P₁ P₂ hP₁ hP₂ hpaths ha hb horder f₁ f₂ hf₁ hf₂ hif₁ hif₂ hPf₁ hPf₂ hinside theta hthetaAlpha hthetaBeta hthetaMissing hthetaClosedStar hthetaClosed hnoSmaller hzeroDivider hpe

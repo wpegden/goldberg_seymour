@@ -1,0 +1,213 @@
+\begin{lemma}[Step 1, Subcase 2.1: the hierarchy on the recolored prefix]
+Let $G,e_0,[k],T,\varphi,\mathcal E$ be as in the positive-rung setting,
+with maximum property, and assume the complete six-part lower-rung package.
+Let $H$ be a good hierarchy over a hierarchy base, and assume the large
+estimate $|\overline\varphi(T_n)|\geq2n+11$ and elementarity of $V(T)$.
+
+Let $\gamma\ne\beta$ and let $\mu$ be proper, leave exactly $e_0$
+uncolored, and be $(T_n,D_n,\varphi)$-stable.  Suppose exact ordered
+prefixes satisfy
+\[
+ H.\mathit{starred}(d)\preccurlyeq B^-\prec C\preccurlyeq T,
+ \qquad C=B^-+g
+\]
+for some exact edge identity $g$.  Assume every exact edge incident with
+$B^-$ has the same color under $\mu$ and $\varphi$, and every vertex of
+$B^-$ has the same missing-color set under the two colorings.  At the last
+vertex $b$ of $C$, assume $\gamma$ is missing under $\varphi$, $\beta$ is
+missing under $\mu$, and an incident exact edge has color $\gamma$ under
+$\mu$.  On every vertex of $C$, assume that membership in the missing set
+is unchanged for colors other than $\gamma,\beta$.  Finally assume that
+$\beta$ is not missing on $T$ under $\varphi$ and that $\gamma$ is absent
+from the last indexed Gamma union of $H$.
+
+Then $\mu$ is a \noderef{ModColoring} of $\mathcal E$, and $C$ carries a
+\noderef{CorrespondingExtendedTashkinovTree} $\mathcal E_C$ under $\mu$
+with maximum property, an actual \noderef{HierarchyBase}, and a genuine
+good hierarchy $K_C$ with the same divider count as $H$.  The old terminal
+PE route, or the exact old SE/RE seed followed by its route, transports to
+a \noderef{TashkinovAugmentationSequence} ending at $C$.  The replacement
+retains the large estimate, and both $\gamma$ and $\beta$ are absent from
+the last indexed Gamma union of $K_C$.
+\end{lemma}
+\begin{proof}
+Write $d=H.\mathit{dividerCount}$ and $A=H.\mathit{starred}(d)$.  The
+lower field of \noderef{ExtendedTashkinovTree}, the PE and non-PE clauses
+of \noderef{HierarchyBase}, the left-segment field of
+\noderef{OrderedTreeUnion}, and the nesting clauses of
+\noderef{TashkinovHierarchy} place the last ladder tree $T_n$ below $A$,
+hence below $B^-$.  Therefore
+\[
+                    T_n\preccurlyeq A\preccurlyeq B^-
+                       \prec C\preccurlyeq T.                 \tag{1}
+\]
+
+We first construct the exact terminal augmentation route to $C$.  Inspect
+the last positive certificate in \noderef{TashkinovSeries} and
+\noderef{TashkinovSeriesStep}.  Positivity excludes the initial
+constructor.  In PE, the certificate contains a
+\noderef{TashkinovClosure} of $T_n$ under $\varphi$.  In SE or RE it
+contains an individual identity $f_n$, the exact equality $F_n=\{f_n\}$,
+the exact seed $T_n+f_n$, and a closure of that seed.  The upper field of
+\noderef{ExtendedTashkinovTree} puts $T$, and hence $C$, below the last
+tree of this closure.
+
+In PE, truncate the finite
+\noderef{TashkinovAugmentationSequence} at the first member whose length
+is $|C|$.  Such a member exists because every augmentation increases the
+length by one, starts at $T_n$, and ends at a tree containing $C$ as an
+exact prefix.  The member and $C$ are equal: both are exact initial
+segments of the closure tree with equal lengths, so every vertex and
+individual edge entry agrees.  In SE/RE, the seed and $C$ are exact
+initial segments of the same closure tree.  Relation (1) gives
+$|T_n|+1\leq |C|$, so entrywise comparison makes the exact seed, including
+$f_n$, an initial segment of $C$.  The same truncation argument then gives
+\[
+ \begin{cases}
+ T_n\longrightarrow C,&\Theta_n=\mathrm{PE},\\
+ T_n+f_n\longrightarrow C,&\Theta_n\in\{\mathrm{SE},\mathrm{RE}\},
+ \end{cases}                                                  \tag{2}
+\]
+under $\varphi$, retaining $F_n=\{f_n\}$ and the exact one-edge seed in
+the second case.
+
+Transport (2) step by step to $\mu$.  Before the final step into $C$,
+the old prefix is contained in $B^-$.  Its new displayed edge is incident
+with that old prefix, so the assumed incident-edge agreement fixes the
+color of the exact identity.  The missing-color witness for the
+augmentation is a vertex of the old prefix, so the assumed vertexwise
+missing-set equality preserves it.  For the final step, its old prefix is
+$B^-$ and its exact new edge is the identity $g$ in the stated
+\noderef{TreeSequenceAdjoinEdge} certificate, so the same two arguments
+apply.  Length, attachment, and exact initial-segment fields are
+coloring-free.  These are all fields of
+\noderef{TashkinovAugmentation}; induction over the finite sequence gives
+the same alternatives (2) under $\mu$.  Denote their disjunction by
+$\mathsf{Elig}_C$.
+
+Apply \noderef{Td} to the given maximum property, positivity, complete
+lower-rung package, properness, exact one-uncoloredness, and terminal
+stability of $\mu$.  Its conclusion is precisely
+\[
+                         \noderef{ModColoring}(\mathcal E,\mu).\tag{3}
+\]
+Relation (1) supplies the exact strict extension of $T_n$, and
+$\mathsf{Elig}_C$ supplies the appropriate PE or exact SE/RE alternative
+in the universal clause of (3).  That clause yields an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate
+$\mathcal C_C$ on $C$.  By \noderef{MaximumPropertyTransport}, its
+replacement ETT $\mathcal E_C$ has maximum property and the same positive
+rung number $n$.
+
+We next build the actual hierarchy base under $\mu$.  The correspondence
+certificate identifies every ladder tree, raw stored set, exact
+connecting-edge set, and extension kind.  If the terminal kind is not PE,
+take the replacement core to be the common $T_n$, and copy the old
+positive support position and the mathematically unused closure field.
+The terminal missing-set compatibility is the vertex clause of the given
+stability, and the nonparallel field of \noderef{HierarchyBase} is then
+definitional.
+
+Suppose the terminal kind is PE.  Extract the actual terminal PE
+constructors of the original and replacement
+\noderef{TashkinovSeriesStep}; write their maximum-defective data as
+$(v,u,f,\delta_n,\gamma_n)$ and
+$(v',u',f',\delta'_n,\gamma'_n)$.  Their singleton connecting-edge
+equations, together with connecting-edge agreement in $\mathcal C_C$,
+give
+\[
+                         \{f'\}=F'_n=F_n=\{f\},\qquad f'=f.    \tag{4}
+\]
+The endpoint fields of \noderef{MaximumDefectiveChoice} identify the
+ends of this individual edge with both $\{v,u\}$ and $\{v',u'\}$.  The
+two \noderef{DefectiveVertex} clauses put $v,v'$ in the common $T_n$,
+while their other-end clauses put $u,u'$ outside it.  Thus the equality of
+unordered endpoint pairs has only the orientation $v'=v$, $u'=u$.  The
+old support position therefore records the actual replacement support.
+
+Use the original core and closure $R_n$ for the replacement PE base.  We
+do not assert that $R_n$ is an ordered prefix of the core.
+The vertex-set field of \noderef{OrderedTreeUnion}, followed by the
+hierarchy-core prefix and (1), gives only the inclusions that are needed:
+\[
+ V(R_n)\subseteq V(\mathit{core})\subseteq V(A)\subseteq V(B^-).\tag{5}
+\]
+Its left-segment field retains the common $T_n$ entries, and its
+every-new-right-entry field retains the exact edge and vertex identities
+of the added closure portion.
+
+Transport the closure by incidence.  Every displayed edge of $R_n$,
+including every new edge in its augmentation sequence, is incident with
+its displayed new vertex in $V(R_n)\subseteq V(B^-)$.  Its exact color is
+therefore fixed.  Every missing witness used by an augmentation also lies
+in $V(R_n)$, so its missing set is fixed.  Hence every
+\noderef{TashkinovAugmentation} in the closure remains valid under $\mu$.
+If a boundary identity of $V(R_n)$ under $\mu$ had a color missing on
+$R_n$, both its exact color and a missing witness would be unchanged on
+$B^-$; it would be the same forbidden boundary identity under $\varphi$.
+Thus the same $R_n$ is a genuine \noderef{TashkinovClosure} under $\mu$.
+Together with (4), the retained support, and the coloring-free
+\noderef{OrderedTreeUnion}, this proves every PE field of a replacement
+base $B_C$.  This incidence argument, rather than a false prefix claim
+about $R_n$, is the promised PE closure transport.
+
+We construct the hierarchy on $C$.  If $A\prec B^-$, apply
+\noderef{GoodHierarchyTerminalPrefixRepackage} to the original hierarchy
+and the exact prefix $B^-$.  It yields the same $d$ nonterminal stages,
+core, closure, stored sets, Gamma pairs, and a good hierarchy whose
+terminal stage is $B^-$.  If $B^-=A$ and $d>0$, apply
+\noderef{GoodHierarchyPrefixRepackage} at the last ordinary stage.  It
+returns the good $(d-1)$-divider prefix and the separate last internal
+minus-closed certificate; append $A$ as the $d$-th ordinary stage below
+$C$.  If $B^-=A$ and $d=0$, take stage zero to be $T_n$, terminal stage
+$C$, and core $A$ from $B_C$.  Relation (1) supplies every nesting and
+strictness field.  In no case is a zero-rung ETT used.
+
+Thus define $K_C$ over $B_C$ with exactly $d$ dividers, the old stages
+through $A$, and terminal stage $C$.  Every starred stage lies in
+$B^-$, where edge colors and vertex missing sets agree.  Correspondence
+gives the same raw stored sets; expanding
+\noderef{TashkinovStoredColors} and
+\noderef{HierarchyStoredColorsAt} gives equality of every indexed stored
+set.  Use the old Gamma family.  Pair cardinality, disjointness, and
+unique refresh therefore copy.  All internal exact colored boundaries
+are fixed, and the applicable prefix-repackaging result supplies the last
+internal minus-closed clause.  In PE, the rebuilt base and the transported
+closure above copy the parallel-base cardinality and non-minus-closed
+clauses; in non-PE the implication is vacuous.
+
+It remains to check terminal avoidance.  Expand
+\noderef{HierarchySegmentColors} and the totalized
+\noderef{HierarchyFirstMissingPosition}.  At indices below $d$, the next
+stage lies in $B^-$ and all relevant data are unchanged.  At index $d$,
+all displayed edges of $C$ retain their colors: old displayed edges are
+incident with $B^-$, and the last identity $g$ is incident with $B^-$ by
+the adjoin certificate.  For a color outside $\{\gamma,\beta\}$, the
+assumed comparison of missing sets on $C$ and terminal prefixhood make
+the new segment a subset of the old one.
+
+For $\gamma$, elementarity of $V(T)$ and its old missingness at the last
+vertex $b$ make $b$ its unique missing vertex in $T$.  No vertex of
+$B^-$ therefore misses $\gamma$ under either coloring, and the stated
+incident $\gamma$-edge under $\mu$, together with
+\noderef{PresentColors} and \noderef{MissingColors}, says that $b$ does
+not miss it under $\mu$.  Thus no vertex of $C$ misses $\gamma$, and the
+old first position and new no-candidate fallback both cap the relevant
+segment at the last position.  For $\beta$, the hypothesis that it is not
+missing on $T$ says it is absent from every old missing set, while its
+new missingness at $b$ makes $b$ the first new missing vertex.  The new
+segment is again only the unchanged portion before the last position.
+Old avoidance implies new avoidance in every case.  We have now checked
+every field of a genuine \noderef{GoodHierarchy} witness $\mathcal G_C$.
+
+The old exclusion of $\gamma$ transfers through the equality of indexed
+stored sets and Gamma pairs.  If $\beta$ belonged to the last indexed
+Gamma union, \noderef{GoodHierarchyReservedDisjoint} would make it
+missing on $A$ and hence on $T$, contradicting the hypothesis.  Thus
+$\beta$ is excluded as well.  Finally, correspondence identifies the
+replacement last ladder tree with the exact old $T_n$, and the vertex
+clause of stability identifies its missing-color set under $\mu$ with
+the old one.  Taking cardinalities transports the large estimate.  The
+objects $\mathcal C_C,B_C,K_C,\mathcal G_C$, (2), and (3) therefore
+satisfy every conclusion.
+\end{proof}

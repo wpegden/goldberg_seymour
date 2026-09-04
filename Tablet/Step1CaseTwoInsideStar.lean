@@ -276,4 +276,28 @@ lemma Step1CaseTwoInsideStar {V E : Type*}
               (∀ x, x ∈ Q₁.support → x ∉ Q₂.support) →
               u₁ ≠ u₂ → False) : False := by
 -- BODY
-  sorry
+  by_cases hpos : 0 < H.dividerCount
+  · exact Step1CaseTwoInsidePositiveDivider G k e0 input T phi ett hMP hpositive
+      hproper hone hlower base H good q hdivider hfewer hlarge hterminal
+      hElementary alpha beta halpha hclosed hne hbeta a₁ b₁ a₂ b₂ a₃ b₃
+      P₁ P₂ P₃ hP₁ hP₂ hP₃ hpaths₁₂ hpaths₁₃ hpaths₂₃ ha₁₂ ha₁₃ ha₂₃
+      hb₁₂ hb₁₃ hb₂₃ horder₁₂ horder₂₃ f₁ f₂ f₃ hf₁ hf₂ hf₃ hif₁ hif₂
+      hif₃ hPf₁ hPf₂ hPf₃ hinside theta hthetaAlpha hthetaBeta
+      hthetaMissing hthetaClosedStar hthetaClosed hnoSmaller hpos
+  · have hzero : H.dividerCount = 0 := Nat.eq_zero_of_not_pos hpos
+    by_cases hpe : ett.series.data.kind (Fin.last ett.rounds) =
+        some TashkinovExtensionKind.PE
+    · exact Step1CaseTwoInsideZeroPE G k e0 input T phi ett hMP hpositive
+        hproper hone hlower base H good q hdivider hfewer hlarge hterminal
+        hElementary alpha beta halpha hclosed hne hbeta a₁ b₁ a₂ b₂ a₃ b₃
+        P₁ P₂ P₃ hP₁ hP₂ hP₃ hpaths₁₂ hpaths₁₃ hpaths₂₃ ha₁₂ ha₁₃ ha₂₃
+        hb₁₂ hb₁₃ hb₂₃ horder₁₂ horder₂₃ f₁ f₂ f₃ hf₁ hf₂ hf₃ hif₁ hif₂
+        hif₃ hPf₁ hPf₂ hPf₃ hinside theta hthetaAlpha hthetaBeta
+        hthetaMissing hthetaClosedStar hthetaClosed hnoSmaller hzero hpe
+    · exact Step1CaseTwoInsideZeroNonPE G k e0 input T phi ett hMP hpositive
+        hproper hone hlower base H good q hdivider hfewer hlarge hterminal
+        hElementary alpha beta halpha hclosed hne hbeta a₁ b₁ a₂ b₂ a₃ b₃
+        P₁ P₂ P₃ hP₁ hP₂ hP₃ hpaths₁₂ hpaths₁₃ hpaths₂₃ ha₁₂ ha₁₃ ha₂₃
+        hb₁₂ hb₁₃ hb₂₃ horder₁₂ horder₂₃ f₁ f₂ f₃ hf₁ hf₂ hf₃ hif₁ hif₂
+        hif₃ hPf₁ hPf₂ hPf₃ hinside theta hthetaAlpha hthetaBeta
+        hthetaMissing hthetaClosedStar hthetaClosed hnoSmaller hzero hpe
