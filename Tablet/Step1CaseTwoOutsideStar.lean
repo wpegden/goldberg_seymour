@@ -283,4 +283,36 @@ lemma Step1CaseTwoOutsideStar {V E : Type*}
                       P₁.length + P₂.length + P₃.length)) →
               False) : False := by
 -- BODY
-  sorry
+  apply Step1CaseTwoOutsideRestrictedAugmentation
+    (G := G) (k := k) (e0 := e0) (input := input) (T := T) (phi := phi)
+    (ett := ett) (hMP := hMP) (hpositive := hpositive) (hproper := hproper)
+    (hone := hone) (hlower := hlower) (base := base) (H := H) (good := good)
+    (q := q) (hdivider := hdivider) (hfewer := hfewer) (hlarge := hlarge)
+    (hterminal := hterminal) (hElementary := hElementary) (alpha := alpha)
+    (beta := beta) (halpha := halpha) (hclosed := hclosed) (hne := hne)
+    (hbeta := hbeta) (a₁ := a₁) (b₁ := b₁) (a₂ := a₂) (b₂ := b₂)
+    (a₃ := a₃) (b₃ := b₃) (P₁ := P₁) (P₂ := P₂) (P₃ := P₃)
+    (hP₁ := hP₁) (hP₂ := hP₂) (hP₃ := hP₃) (hpaths₁₂ := hpaths₁₂)
+    (hpaths₁₃ := hpaths₁₃) (hpaths₂₃ := hpaths₂₃) (ha₁₂ := ha₁₂)
+    (ha₁₃ := ha₁₃) (ha₂₃ := ha₂₃) (hb₁₂ := hb₁₂) (hb₁₃ := hb₁₃)
+    (hb₂₃ := hb₂₃) (horder₁₂ := horder₁₂) (horder₂₃ := horder₂₃)
+    (f₁ := f₁) (f₂ := f₂) (f₃ := f₃) (hf₁ := hf₁) (hf₂ := hf₂)
+    (hf₃ := hf₃) (hif₁ := hif₁) (hif₂ := hif₂) (hif₃ := hif₃)
+    (hPf₁ := hPf₁) (hPf₂ := hPf₂) (hPf₃ := hPf₃) (houtside := houtside)
+    (hnoBetter := hnoBetter)
+    (Step1CaseTwoOutsidePrefixTwoEdges
+      (G := G) (k := k) (e0 := e0) (input := input) (T := T) (phi := phi)
+      (ett := ett) (hMP := hMP) (hpositive := hpositive) (hproper := hproper)
+      (hone := hone) (hlower := hlower) (base := base) (H := H) (good := good)
+      (q := q) (hdivider := hdivider) (hfewer := hfewer) (hlarge := hlarge)
+      (hterminal := hterminal) (hElementary := hElementary) (alpha := alpha)
+      (beta := beta) (halpha := halpha) (hclosed := hclosed) (hne := hne)
+      (hbeta := hbeta) (a₁ := a₁) (b₁ := b₁) (a₂ := a₂) (b₂ := b₂)
+      (a₃ := a₃) (b₃ := b₃) (P₁ := P₁) (P₂ := P₂) (P₃ := P₃)
+      (hP₁ := hP₁) (hP₂ := hP₂) (hP₃ := hP₃) (hpaths₁₂ := hpaths₁₂)
+      (hpaths₁₃ := hpaths₁₃) (hpaths₂₃ := hpaths₂₃) (ha₁₂ := ha₁₂)
+      (ha₁₃ := ha₁₃) (ha₂₃ := ha₂₃) (hb₁₂ := hb₁₂) (hb₁₃ := hb₁₃)
+      (hb₂₃ := hb₂₃) (horder₁₂ := horder₁₂) (horder₂₃ := horder₂₃)
+      (f₁ := f₁) (f₂ := f₂) (f₃ := f₃) (hf₁ := hf₁) (hf₂ := hf₂)
+      (hf₃ := hf₃) (hif₁ := hif₁) (hif₂ := hif₂) (hif₃ := hif₃)
+      (hPf₁ := hPf₁) (hPf₂ := hPf₂) (hPf₃ := hPf₃) (houtside := houtside))

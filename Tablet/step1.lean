@@ -211,4 +211,48 @@ theorem step1 {V E : Type*}
       (H.stage i.succ.castSucc) {alpha}) :
     TreeInterchangeable G (H.stage i.succ.castSucc) phi alpha beta := by
 -- BODY
-  sorry
+  by_contra hnot
+  obtain ⟨input', T', psi, other, base', K, good', hround, hmp', hdiv,
+    hproper', hone', hlarge', hterm', helem', hrest⟩ :=
+    Step1ExitLegGlobalMinimum G k e0 input T phi ett hMP hpositive hproper hone
+      hlower base H good hfewer hlarge i alpha beta halpha hne hclosed hnot
+  rcases hrest with ⟨a, b, theta, a₁, b₁, a₂, b₂, P₁, P₂, f₁, f₂,
+    hab, ha, hac, hp₁, hp₂, hpaths, haa, hbb, horder, hf₁, hf₂,
+    hi₁, hi₂, hpf₁, hpf₂, hta, htb, htm, htcstar, htc, hnoSmaller,
+    hcases⟩
+  have hpos : 0 < other.rounds := by omega
+  rcases hcases with hmissing | ⟨hnotmissing, hthird⟩
+  · by_cases hinside : b₂ ∈ TreeSequenceVertexSet
+      (HierarchyStarredStage K (Fin.last K.dividerCount))
+    · exact Step1CaseOneInsideStar G k e0 input' T' psi other hmp' hpos
+        hproper' hone' (fun lower hp hlt hm => hlower lower hp (by omega) hm)
+        base' K good' H.dividerCount hdiv
+        (fun lower hr hm => hfewer lower (by omega) hm) hlarge' hterm' helem'
+        a b ha hac hab hmissing a₁ b₁ a₂ b₂ P₁ P₂ hp₁ hp₂ hpaths haa hbb horder
+        f₁ f₂ hf₁ hf₂ hi₁ hi₂ hpf₁ hpf₂ hinside theta hta htb htm htcstar htc
+        hnoSmaller
+    · exact Step1CaseOneOutsideStar G k e0 input' T' psi other hmp' hpos
+        hproper' hone' (fun lower hp hlt hm => hlower lower hp (by omega) hm)
+        base' K good' H.dividerCount hdiv
+        (fun lower hr hm => hfewer lower (by omega) hm) hlarge' hterm' helem'
+        a b ha hac hab hmissing a₁ b₁ a₂ b₂ P₁ P₂ hp₁ hp₂ hpaths haa hbb horder
+        f₁ f₂ hf₁ hf₂ hi₁ hi₂ hpf₁ hpf₂ hinside
+  · rcases hthird with ⟨a₃, b₃, P₃, f₃, hp₃, hpaths₁₃, hpaths₂₃,
+      haa₃, haa₃', hbb₃, hbb₃', horder₃, hf₃, hi₃, hpf₃, hnoBetter⟩
+    by_cases hinside : b₃ ∈ TreeSequenceVertexSet
+        (HierarchyStarredStage K (Fin.last K.dividerCount))
+    · exact Step1CaseTwoInsideStar G k e0 input' T' psi other hmp' hpos
+        hproper' hone' (fun lower hp hlt hm => hlower lower hp (by omega) hm)
+        base' K good' H.dividerCount hdiv
+        (fun lower hr hm => hfewer lower (by omega) hm) hlarge' hterm' helem'
+        a b ha hac hab hnotmissing a₁ b₁ a₂ b₂ a₃ b₃ P₁ P₂ P₃ hp₁ hp₂ hp₃
+        hpaths hpaths₁₃ hpaths₂₃ haa haa₃ haa₃' hbb hbb₃ hbb₃' horder horder₃
+        f₁ f₂ f₃ hf₁ hf₂ hf₃ hi₁ hi₂ hi₃ hpf₁ hpf₂ hpf₃ hinside theta hta htb
+        htm htcstar htc hnoSmaller
+    · exact Step1CaseTwoOutsideStar G k e0 input' T' psi other hmp' hpos
+        hproper' hone' (fun lower hp hlt hm => hlower lower hp (by omega) hm)
+        base' K good' H.dividerCount hdiv
+        (fun lower hr hm => hfewer lower (by omega) hm) hlarge' hterm' helem'
+        a b ha hac hab hnotmissing a₁ b₁ a₂ b₂ a₃ b₃ P₁ P₂ P₃ hp₁ hp₂ hp₃
+        hpaths hpaths₁₃ hpaths₂₃ haa haa₃ haa₃' hbb hbb₃ hbb₃' horder horder₃
+        f₁ f₂ f₃ hf₁ hf₂ hf₃ hi₁ hi₂ hi₃ hpf₁ hpf₂ hpf₃ hinside hnoBetter
