@@ -36,9 +36,10 @@ color.  Assume additionally that $d=0$ and that the terminal extension
 kind is not PE.  Then the displayed Subcase 2.2 data are contradictory.
 \end{lemma}
 \begin{proof}
-Write $n$ for the rung number, $T_n$ for the last ladder tree, $D_i$ for
-the exact cumulative stored-color set at slot $i$, and $\varphi_i$ for
-the exact coloring at that slot.  Thus $\varphi=\varphi_n$ by the
+Write $n$ for the rung number, $T_i$ for the exact tree at series slot
+$i$ (so $T_n$ is the last ladder tree), $D_i$ for the exact cumulative
+stored-color set at slot $i$, and $\varphi_i$ for the exact coloring at
+that slot.  Thus $\varphi=\varphi_n$ by the
 generating-coloring field of \noderef{ExtendedTashkinovTree}.  We first
 make the three exit legs used in every branch completely explicit.
 
@@ -49,12 +50,27 @@ stage, and repeated use of the nestedness field of the hierarchy gives
 the required initial-segment map to its terminal stage $T$.  If $d=0$,
 the same conclusion follows from the core-inside-first field and then the
 nestedness and terminal-stage fields of the hierarchy.  All these are
-entrywise statements by \noderef{TreeSequenceInitialSegment}.
-Unfolding \noderef{TreeVertexOrder} in the two displayed order
-relations gives the occurrences of $b_1,b_2,b_3$ at strictly increasing
-positions of $T$.  Since $b_3\in V(A)$ and the entries of $A$ form an
-initial block of those of $T$, the occurrence of $b_3$ is in that block.
-The two earlier occurrences are consequently in the same block, so
+entrywise statements by \noderef{TreeSequenceInitialSegment}.  Let
+$\iota$ be the order-preserving inclusion of the vertex positions of $A$
+into those of $T$ supplied by this initial-segment relation.  Unfolding
+\noderef{TreeVertexOrder} in $b_1\prec_T b_2$ gives positions $i_1<i_2$
+with $T(i_1)=b_1$ and $T(i_2)=b_2$; unfolding it in
+$b_2\prec_T b_3$ gives positions $j_2<j_3$ with $T(j_2)=b_2$ and
+$T(j_3)=b_3$.  The vertices in a \noderef{TreeSequence} are pairwise
+distinct: applying its vertex-injectivity field to the two occurrences of
+$b_2$ gives $i_2=j_2$.
+
+Unfolding \noderef{TreeSequenceVertexSet} in the hypothesis
+$b_3\in V(A)$ supplies a position $a_3$ of $A$ with $A(a_3)=b_3$.
+Entrywise agreement gives $T(\iota(a_3))=A(a_3)=b_3$.  Apply the same
+vertex-injectivity field, now to this occurrence and $T(j_3)=b_3$, to get
+$\iota(a_3)=j_3$.  Hence $j_3$ lies in the initial block: numerically,
+$\operatorname{val}(j_3)=\operatorname{val}(a_3)
+\leq\operatorname{length}(A)$.  Since
+$i_1<i_2=j_2<j_3$, the numerical positions $i_1$ and $j_2$ also define
+positions $a_1,a_2$ of $A$.  Their images under $\iota$ are respectively
+$i_1,j_2$ (the inclusions preserve numerical values), so entrywise
+agreement gives $A(a_1)=b_1$ and $A(a_2)=b_2$.  Thus
 $b_1,b_2,b_3\in V(A)$ by \noderef{TreeSequenceVertexSet}.
 
 Unfold each given \noderef{TreeExitPath}.  The edge-node immediately
@@ -94,9 +110,34 @@ clause of \noderef{OutsideKempeRecoloring}.  By
 \noderef{OutsideKempeRecoloringStable}, $\nu$ is proper, leaves exactly
 $e_0$ uncolored, fixes every exact edge incident with $T$, preserves the
 missing-color set at each vertex of $T$, and is
-$(T_n,C,\varphi_n)$-stable for every chosen control set $C$: after
-unfolding \noderef{StableColoring}, restrict its incident-edge and vertex
-clauses from $T$ to the ordered initial segment $T_n$.
+$(T,C,\varphi_n)$-stable for every chosen control set $C$.  We verify
+rather than assume that this stability restricts to $T_n$.  By
+\noderef{ExtendedTashkinovTree}, $T_n$ is an ordered initial segment of
+$T$.  Unfold \noderef{TreeSequenceInitialSegment}.  If
+$v\in V(T_n)$, then \noderef{TreeSequenceVertexSet} supplies a position
+of $v$ in $T_n$; mapping that position to the equal entry of $T$ proves
+$v\in V(T)$.  Thus $V(T_n)\subseteq V(T)$.
+
+Now fix an edge identity $f$ incident with $T_n$.  Unfolding
+\noderef{TreeIncidentEdge} supplies a vertex $v\in V(T_n)$ incident with
+$f$.  The preceding inclusion puts the same $v$ in $V(T)$, so the same
+witness proves that $f$ is incident with $T$.  Likewise, if a color $c$
+is missing on $T_n$ under $\varphi_n$, then unfolding
+\noderef{TreeMissingColors} supplies $v\in V(T_n)$ at which $c$ is
+missing; the same vertex lies in $V(T)$, and the same missingness witness
+proves $c\in\overline{\varphi_n}(T)$.  Consequently
+\[
+ \overline{\varphi_n}(T_n)\subseteq
+ \overline{\varphi_n}(T).
+\]
+For the controlled-edge clause of \noderef{StableColoring}, an edge
+incident with $T_n$ is therefore incident with $T$, and a controlling
+color in $\overline{\varphi_n}(T_n)\cup C$ belongs to
+$\overline{\varphi_n}(T)\cup C$; the stable-edge clause on $T$ fixes that
+edge.  For its vertex clause, every vertex of $T_n$ is a vertex of $T$,
+so the missing-set equality on $T$ applies unchanged.  These are exactly
+the two clauses saying that $\nu$ is
+$(T_n,C,\varphi_n)$-stable, for every $C$.
 
 For $j=1,2,3$, form a walk $Q_j$ with the same ordered vertex- and
 edge-nodes as $P_j$.  Each old $\beta$-edge remains $\beta$ because
@@ -269,14 +310,50 @@ All intermediate colorings are proper and leave precisely $e_0$
 uncolored, by the two outside-recoloring results and the corresponding
 certified constructors.
 
-If $n>1$, \noderef{CertifiedETTPredecessor} applied to the original ETT
-gives an actual positive-rung ETT of rung $n-1$, displayed terminal tree
-exactly $T_n$, generating coloring exactly $\varphi_{n-1}$, exact stored
-set $D_{n-1}$, and maximum property.  Apply lower assertion (ii) to it,
-using (2), properness, exact one-uncoloredness, and the color $c$ missing
-at $x$.  If $n=1$, the initial tuple of the original certified series has
-tree $T_1=T_n$, coloring $\varphi_0=\varphi_{n-1}$, and stored set
-$D_0=D_{n-1}$; hence the same data (2) are exactly the hypotheses of
+If $n>1$, put $m=n-1$.  Applying
+\noderef{CertifiedETTPredecessor} to the original ETT gives an actual
+positive-rung predecessor of rung $m$, with maximum property, displayed
+terminal tree exactly $T_n$, and generating coloring exactly
+$\varphi_{n-1}$.  Its statement identifies every retained tree slot and,
+at every retained data index, the coloring and raw stored-color slot with
+the corresponding original entries.  We now derive the equality of the
+computed control sets, which is not merely a raw-slot equality.  Write
+$S^-_h,\varphi^-_h,T^-_h$ for the predecessor's raw stored, coloring,
+and tree entries at a retained numerical index $h$.
+
+At the predecessor's last data index $m>0$, unfold
+\noderef{TashkinovStoredColors}.  Its computed set is
+\[
+ \left(\bigcup_{0\leq h\leq m}S^-_h\right)
+ \setminus
+ \overline{\varphi^-_m}(T^-_m).                         \tag{3}
+\]
+The canonical retained-index inclusion preserves numerical values, and
+$m=n-1$; hence its indices $h\leq m$ are in bijection with exactly the
+original indices $h\leq n-1$.  The raw stored-slot equalities from
+\noderef{CertifiedETTPredecessor} identify every $S^-_h$ in (3) with
+$S_h$, so they identify the two finite unions.  Its coloring equality at
+$m$ gives $\varphi^-_m=\varphi_{n-1}$, and its tree-slot equality at the
+same numerical index gives $T^-_m=T_{n-1}$.  Unfolding
+\noderef{TreeMissingColors}, these two equalities identify the set
+deleted in (3) with
+$\overline{\varphi_{n-1}}(T_{n-1})$.  A second use of
+\noderef{TashkinovStoredColors} therefore turns (3) into the original
+computed set $D_{n-1}$.  Notice separately that the predecessor tree
+slot after this control index is slot $m+1=n$; the retained tree-slot
+equality identifies it with the original $T_n$, exactly the tree used in
+lower assertion (ii).  Thus (2), properness, exact one-uncoloredness, and
+the color $c$ missing at $x$ satisfy that assertion for this predecessor.
+
+If $n=1$, the relevant original data index is $n-1=0$.  The zero branch
+in the definition \noderef{TashkinovStoredColors} is taken before any
+finite union or missing-color deletion and gives
+$D_{n-1}=D_0=\varnothing$ explicitly.  The initial certificate in
+\noderef{TashkinovSeries}, through the initial constructor of
+\noderef{TashkinovSeriesStep}, has next tree $T_1=T_n$ and coloring
+$\varphi_0=\varphi_{n-1}$.  Consequently (2) says precisely that $\rho$
+is $(T_1,D_0,\varphi_0)$-stable, and its properness and exact
+one-uncoloredness are the remaining hypotheses of
 \noderef{TechnicalTheoremBase}.  In both cases the result says that
 $c,\beta$ are $T_n$-interchangeable.  Unfold
 \noderef{TreeInterchangeable} and apply it to the two certified path

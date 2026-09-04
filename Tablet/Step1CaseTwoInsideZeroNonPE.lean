@@ -51,6 +51,7 @@ import Tablet.TreeExitPath
 import Tablet.TreeIncidentEdge
 import Tablet.TreeInterchangeable
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix
