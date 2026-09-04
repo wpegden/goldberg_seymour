@@ -119,10 +119,17 @@ field and then the nestedness and terminal-stage fields of the hierarchy.
 All these are entrywise statements by
 \noderef{TreeSequenceInitialSegment}.  Unfold
 \noderef{TreeVertexOrder}: there are positions $r<s$ in $T$ displaying
-$b_1$ and $b_2$.  Since $b_2\in V(A)$ and the entries of $A$ form an
-initial block of those of $T$, its occurrence has position $s$ also in
-$A$.  The earlier position $r$ is consequently in that same block, and
-so $b_1\in V(A)$ by \noderef{TreeSequenceVertexSet}.
+$b_1$ and $b_2$.  Unfolding \noderef{TreeSequenceVertexSet} in the
+assumption $b_2\in V(A)$ gives a position $t$ of $A$ displaying $b_2$.
+The vertex-entry clause of the initial-segment relation says that the
+image of $t$ under the canonical index inclusion is another position of
+$T$ displaying $b_2$.  The vertex map of a \noderef{TreeSequence} is
+injective, so this image of $t$ is exactly $s$.  In particular
+$s\leq A.\mathit{length}$, and $r<s$ gives
+$r<A.\mathit{length}+1$.  The position of $A$ with numerical value $r$
+therefore exists; the same entrywise initial-segment equality says that
+it displays $b_1$.  Hence $b_1\in V(A)$, while the membership of $b_2$
+was assumed.
 
 Unfold each given \noderef{TreeExitPath}.  The edge-node immediately
 preceding the terminal vertex-node $b_j$ represents an exact boundary
@@ -158,11 +165,30 @@ outside $T$, and call the result $\nu$.  Finiteness makes this a finite
 choice of roots, and the preceding paragraph verifies the outside-support
 clause of \noderef{OutsideKempeRecoloring}.  By
 \noderef{OutsideKempeRecoloringStable}, $\nu$ is proper, leaves exactly
-$e_0$ uncolored, fixes every exact edge incident with $T$, preserves the
-missing-color set at each vertex of $T$, and is $(T_n,C,\varphi_n)$-stable
-for every chosen control set $C$: after unfolding
-\noderef{StableColoring}, restrict its incident-edge and vertex clauses
-from $T$ to the ordered initial segment $T_n$.
+$e_0$ uncolored, fixes every exact edge incident with $T$, and is
+$(T,C,\varphi_n)$-stable for every chosen control set $C$.  We verify its
+restriction to $T_n$.  The above-penultimate field of
+\noderef{ExtendedTashkinovTree} and
+\noderef{TreeSequenceInitialSegment} give the canonical entrywise
+inclusion $V(T_n)\subseteq V(T)$ after unfolding
+\noderef{TreeSequenceVertexSet}.  If an exact edge $f$ is incident with
+$T_n$, unfold \noderef{TreeIncidentEdge} and retain its witnessing
+endpoint; the vertex inclusion makes the same endpoint witness that $f$
+is incident with $T$.  Likewise, unfolding \noderef{TreeMissingColors}
+as the finite union of the vertex missing-color sets shows
+\[
+ \overline{\varphi_n}(T_n)\subseteq
+ \overline{\varphi_n}(T):
+\]
+a witness vertex in $V(T_n)$ is sent by the same inclusion to $V(T)$,
+with its \noderef{MissingColors} membership unchanged.  Now unfold
+\noderef{StableColoring}.  For its edge clause on $T_n$, transport the
+incident-edge witness as just described; a controlling color in
+$\overline{\varphi_n}(T_n)\cup C$ lies in
+$\overline{\varphi_n}(T)\cup C$ by the displayed inclusion, so the edge
+clause on $T$ fixes $f$.  For its vertex clause, transport the vertex to
+$V(T)$ and apply the vertex clause there.  Thus both clauses hold and
+$\nu$ is $(T_n,C,\varphi_n)$-stable for every $C$.
 
 For $j=1,2$, form a walk $Q_j$ with the same ordered vertex- and
 edge-nodes as $P_j$.  Each old $\beta$-edge remains $\beta$ because
