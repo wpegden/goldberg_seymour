@@ -314,35 +314,13 @@ If $n>1$, put $m=n-1$.  Applying
 \noderef{CertifiedETTPredecessor} to the original ETT gives an actual
 positive-rung predecessor of rung $m$, with maximum property, displayed
 terminal tree exactly $T_n$, and generating coloring exactly
-$\varphi_{n-1}$.  Its statement identifies every retained tree slot and,
-at every retained data index, the coloring and raw stored-color slot with
-the corresponding original entries.  We now derive the equality of the
-computed control sets, which is not merely a raw-slot equality.  Write
-$S^-_h,\varphi^-_h,T^-_h$ for the predecessor's raw stored, coloring,
-and tree entries at a retained numerical index $h$.
-
-At the predecessor's last data index $m>0$, unfold
-\noderef{TashkinovStoredColors}.  Its computed set is
-\[
- \left(\bigcup_{0\leq h\leq m}S^-_h\right)
- \setminus
- \overline{\varphi^-_m}(T^-_m).                         \tag{3}
-\]
-The canonical retained-index inclusion preserves numerical values, and
-$m=n-1$; hence its indices $h\leq m$ are in bijection with exactly the
-original indices $h\leq n-1$.  The raw stored-slot equalities from
-\noderef{CertifiedETTPredecessor} identify every $S^-_h$ in (3) with
-$S_h$, so they identify the two finite unions.  Its coloring equality at
-$m$ gives $\varphi^-_m=\varphi_{n-1}$, and its tree-slot equality at the
-same numerical index gives $T^-_m=T_{n-1}$.  Unfolding
-\noderef{TreeMissingColors}, these two equalities identify the set
-deleted in (3) with
-$\overline{\varphi_{n-1}}(T_{n-1})$.  A second use of
-\noderef{TashkinovStoredColors} therefore turns (3) into the original
-computed set $D_{n-1}$.  Notice separately that the predecessor tree
-slot after this control index is slot $m+1=n$; the retained tree-slot
-equality identifies it with the original $T_n$, exactly the tree used in
-lower assertion (ii).  Thus (2), properness, exact one-uncoloredness, and
+$\varphi_{n-1}$.  At its final data index $m$, the computed-stored-set
+conclusion of \noderef{CertifiedETTPredecessor} identifies its control
+set directly with the original set at the canonically included index
+$m=n-1$, namely $D_{n-1}$.  Separately, the predecessor tree slot after
+this control index is slot $m+1=n$; the retained tree-slot equality
+identifies it with the original $T_n$, exactly the tree used in lower
+assertion (ii).  Thus (2), properness, exact one-uncoloredness, and
 the color $c$ missing at $x$ satisfy that assertion for this predecessor.
 
 If $n=1$, the relevant original data index is $n-1=0$.  The zero branch

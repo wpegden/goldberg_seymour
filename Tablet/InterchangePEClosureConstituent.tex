@@ -102,21 +102,38 @@ If $j>1$, repeatedly apply \noderef{CertifiedETTPredecessor}, beginning
 with $T$ and stopping after the certified rung $j-1$ is reached.  Its
 array equalities identify the terminal tree and generating coloring at
 every step, while its maximum-property conclusion is inherited at every
-step.  Hence the resulting displayed ETT has positive rung $j-1<n$,
-terminal tree exactly the required $T_j$, and the exact retained input,
-coloring, stored-set, kind, support, and connecting-edge data.  Apply
-\noderef{Td} to this restricted ETT; its lower hypotheses are obtained
-by restricting the displayed universal package once more.  The stable
-relation just proved makes $\sigma_n$ a \noderef{ModColoring} of that
+step.  At every truncation and every retained data index, its
+computed-stored-set conclusion identifies the new control set with the
+old one under the canonical inclusion.  Composing these equalities along
+the successive inclusions identifies each retained control set directly
+with the corresponding control set of $T$.  Hence the resulting
+displayed ETT has positive rung $j-1<n$, terminal tree exactly the
+required $T_j$, and the exact retained input, coloring, computed stored
+sets, kind, support, and connecting-edge data.
+
+Apply \noderef{Td} to this restricted ETT.  Its lower hypotheses are
+obtained by restricting the displayed universal package once more, and
+the preceding computed-set equalities ensure that every stability premise
+in that restriction uses the restricted ETT's actual
+\noderef{TashkinovStoredColors}, rather than merely the original raw
+stored slots.  The stable relation just proved has the original retained
+control set; transport across the equality at slot $j-1$ makes it the
+stable relation required by the restricted ETT.  The conclusion of
+\noderef{Td} therefore makes $\sigma_n$ a \noderef{ModColoring} of that
 ETT.  Its universal extension clause, applied only after the exact seed,
 strict extension, and augmentation sequence have been verified, returns
 a genuine \noderef{CorrespondingExtendedTashkinovTree} displayed on
 $R_n$.  By
 \noderef{MaximumPropertyTransport} it has maximum property.  Lower
 assertion (ii), instantiated with its actual replacement input and
-generating coloring, makes its final ladder closure interchangeable for
-$\alpha,\beta$, since $\alpha$ is missing already on its displayed
-initial segment $R_n$.  Expanding \noderef{TreeInterchangeable}, any
+generating coloring $\sigma_n$, is now applied to $\sigma_n$ itself.
+Its stability premise uses the replacement ETT's own computed terminal
+control set and is reflexive after unfolding \noderef{StableColoring};
+properness and exact one-uncoloredness are supplied by the mod-coloring
+construction.  The assertion makes the final ladder closure
+interchangeable for $\alpha,\beta$,
+since $\alpha$ is missing already on its displayed initial segment
+$R_n$.  Expanding \noderef{TreeInterchangeable}, any
 two path components meeting $R_n$ also meet that closure, so the
 conclusion restricts to $R_n$.
 

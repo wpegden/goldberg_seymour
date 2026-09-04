@@ -362,19 +362,10 @@ Suppose first that $n>1$, and put $m=n-1$.  Apply
 \noderef{CertifiedETTPredecessor} to the original ETT.  It gives an
 actual positive-rung ETT of rung $m$, displayed terminal tree exactly
 $T_n$, generating coloring exactly $\varphi_{n-1}$, and maximum
-property.  We must still identify its computed last control set; this is
-not merely one of the theorem's raw-slot equalities.  Unfold
-\noderef{TashkinovStoredColors} at the predecessor's final index $m$.
-Since $m>0$, its value is the union of the predecessor's raw stored slots
-with index at most $m$, minus the colors missing under its coloring at
-$m$ on its tree slot $m$.  The predecessor theorem identifies every raw
-slot $0,\ldots,m$, its coloring at $m$, and its tree slot $m$ with the
-respective entries of the original series.  In the original computation
-at index $n-1=m$, the only additional raw-array index is $n$ and its
-test $n\leq m$ is false; hence the bounded raw unions are equal.  The
-coloring and tree equalities identify the two deleted
-\noderef{TreeMissingColors} sets as well.  Therefore the predecessor's
-computed final control set is exactly the original $D_{n-1}$.  Apply
+property.  At its final data index $m$, the computed-stored-set
+conclusion of \noderef{CertifiedETTPredecessor} identifies the
+predecessor's control set directly with the original set at the included
+index $m=n-1$, namely $D_{n-1}$.  Apply
 lower assertion (ii) to this predecessor using (2), properness, exact
 one-uncoloredness, and the color $c$ missing at $x$.
 

@@ -43,6 +43,9 @@ theorem CertifiedETTPredecessor {V E : Type*}
               ett.series.data.delta (Fin.castLE (by omega) i) ∧
           predecessor.series.data.gamma i =
               ett.series.data.gamma (Fin.castLE (by omega) i) ∧
+          TashkinovStoredColors predecessor.series.data i =
+              TashkinovStoredColors ett.series.data
+                (Fin.castLE (by omega) i) ∧
           HEq (predecessor.series.certified i)
             (ett.series.certified (Fin.castLE (by omega) i))) := by
 -- BODY
