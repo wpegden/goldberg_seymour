@@ -8,6 +8,7 @@ import Tablet.GoodHierarchyReservedDisjoint
 import Tablet.HierarchyBase
 import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchySegmentColors
+import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsAt
 import Tablet.Incident
 import Tablet.LooplessMultigraph
