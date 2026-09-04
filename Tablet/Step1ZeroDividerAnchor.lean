@@ -1,6 +1,7 @@
 import Tablet.BoundaryColorEdges
 import Tablet.BoundaryColorVertex
 import Tablet.BoundaryEdges
+import Tablet.CertifiedETTPredecessor
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableColoring
@@ -21,6 +22,7 @@ import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsAntitone
 import Tablet.HierarchyStoredColorsAt
 import Tablet.HierarchyStoredColorsCardinality
+import Tablet.Incident
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.KTriple
@@ -30,16 +32,14 @@ import Tablet.MaximumProperty
 import Tablet.MaximumPropertyTransport
 import Tablet.MissingColors
 import Tablet.ModColoring
+import Tablet.OrderedTreeUnion
 import Tablet.OutsideKempeRecoloring
 import Tablet.OutsideKempeRecoloringStable
 import Tablet.ParallelCommonMissingClosed
+import Tablet.PresentColors
 import Tablet.SameGoodHierarchy
 import Tablet.SameHierarchyStages
 import Tablet.StableColoring
-import Tablet.Step1CaseOneInsideStar
-import Tablet.Step1CaseOneOutsideStar
-import Tablet.Step1CaseTwoInsideStar
-import Tablet.Step1CaseTwoOutsideStar
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovClosure
