@@ -30,10 +30,13 @@ import Tablet.MaximumProperty
 import Tablet.MaximumPropertyTransport
 import Tablet.MissingColors
 import Tablet.ModColoring
+import Tablet.OrderedTreeUnion
 import Tablet.OutsideKempeRecoloring
 import Tablet.OutsideKempeRecoloringStable
 import Tablet.ParallelCommonMissingClosed
 import Tablet.PresentColors
+import Tablet.SameGoodHierarchy
+import Tablet.SameHierarchyStages
 import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
@@ -51,6 +54,7 @@ import Tablet.TreeExitPath
 import Tablet.TreeIncidentEdge
 import Tablet.TreeInterchangeable
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix

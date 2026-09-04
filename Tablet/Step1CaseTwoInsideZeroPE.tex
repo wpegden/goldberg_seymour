@@ -50,12 +50,30 @@ the required initial-segment map to its terminal stage $T$.  If $d=0$,
 the same conclusion follows from the core-inside-first field and then the
 nestedness and terminal-stage fields of the hierarchy.  All these are
 entrywise statements by \noderef{TreeSequenceInitialSegment}.
-Unfolding \noderef{TreeVertexOrder} in the two displayed order
-relations gives the occurrences of $b_1,b_2,b_3$ at strictly increasing
-positions of $T$.  Since $b_3\in V(A)$ and the entries of $A$ form an
-initial block of those of $T$, the occurrence of $b_3$ is in that block.
-The two earlier occurrences are consequently in the same block, so
-$b_1,b_2,b_3\in V(A)$ by \noderef{TreeSequenceVertexSet}.
+
+We record the positions carefully, since the two order hypotheses initially
+give two possibly different witnesses for $b_2$.  Unfold the first
+\noderef{TreeVertexOrder}: there are positions $r_1<s_2$ in $T$ displaying
+$b_1$ and $b_2$.  Unfold the second one: there are positions $r_2<s_3$ in
+$T$ displaying $b_2$ and $b_3$.  The vertex map of the
+\noderef{TreeSequence} $T$ is injective.  Since the entries at $s_2$ and
+$r_2$ are both $b_2$, injectivity gives
+\[
+                         s_2=r_2,\qquad r_1<s_2=r_2<s_3.       \tag{1}
+\]
+Unfolding \noderef{TreeSequenceVertexSet} in $b_3\in V(A)$ gives a
+position $t_3$ of $A$ displaying $b_3$.  The vertex-entry clause of the
+initial-segment relation says that the canonical image of $t_3$ is a
+position of $T$ displaying $b_3$.  Injectivity of the vertex map of $T$
+identifies that image with $s_3$.  Hence the numerical value of $s_3$ is
+within the initial block occupied by $A$.  By (1), the numerical values of
+$s_2=r_2$ and $r_1$ are strictly smaller.  The positions of $A$ having
+these two numerical values therefore exist, and the same entrywise
+initial-segment equalities say that they display $b_2$ and $b_1$,
+respectively.  Together with the assumed membership of $b_3$, this proves
+\[
+                         b_1,b_2,b_3\in V(A).                  \tag{2}
+\]
 
 Unfold each given \noderef{TreeExitPath}.  The edge-node immediately
 preceding the terminal vertex-node $b_j$ represents an exact boundary
@@ -94,9 +112,39 @@ clause of \noderef{OutsideKempeRecoloring}.  By
 \noderef{OutsideKempeRecoloringStable}, $\nu$ is proper, leaves exactly
 $e_0$ uncolored, fixes every exact edge incident with $T$, preserves the
 missing-color set at each vertex of $T$, and is
-$(T_n,C,\varphi_n)$-stable for every chosen control set $C$: after
-unfolding \noderef{StableColoring}, restrict its incident-edge and vertex
-clauses from $T$ to the ordered initial segment $T_n$.
+$(T,C,\varphi_n)$-stable for every chosen control set $C$.  We now verify
+the restriction to $T_n$, including both clauses.  The
+above-penultimate field of \noderef{ExtendedTashkinovTree} and
+\noderef{TreeSequenceInitialSegment} give the canonical entrywise
+inclusion
+\[
+                         V(T_n)\subseteq V(T).                  \tag{3}
+\]
+Indeed, a position witnessing membership in
+\noderef{TreeSequenceVertexSet} for $T_n$ is sent to the position with the
+same numerical value in $T$, and the two displayed vertex entries agree.
+If an exact edge $f$ is incident with $T_n$, unfold
+\noderef{TreeIncidentEdge} and retain an endpoint $v\in V(T_n)$ incident
+with $f$; (3) makes the same $v$ witness that $f$ is incident with $T$.
+Likewise, unfolding \noderef{TreeMissingColors} gives
+\[
+              \overline{\varphi_n}(T_n)
+                    \subseteq\overline{\varphi_n}(T):          \tag{4}
+\]
+if a color is missing at a witnessing vertex $v\in V(T_n)$, then (3) puts
+that same vertex in $V(T)$, and its \noderef{MissingColors} membership is
+unchanged.
+
+Unfold \noderef{StableColoring}.  For its edge clause on $T_n$, let $f$
+be incident with $T_n$ and suppose that its old color belongs to
+$\overline{\varphi_n}(T_n)\cup C$.  The preceding incident-edge transport
+makes $f$ incident with $T$, while (4) puts that old color in
+$\overline{\varphi_n}(T)\cup C$.  The edge clause of stability on $T$
+therefore gives $\nu(f)=\varphi_n(f)$.  For the vertex clause, take
+$v\in V(T_n)$, use (3) to regard it as a vertex of $T$, and apply the
+vertex clause on $T$ to obtain
+$\overline\nu(v)=\overline{\varphi_n}(v)$.  Thus both clauses hold, and
+$\nu$ is $(T_n,C,\varphi_n)$-stable for every $C$.
 
 For $j=1,2,3$, form a walk $Q_j$ with the same ordered vertex- and
 edge-nodes as $P_j$.  Each old $\beta$-edge remains $\beta$ because
@@ -121,7 +169,7 @@ $b_j$, because the corresponding claim for $P_j$ excludes every other
 vertex even from the larger tree $T$.  This checks every field of
 \[
        \operatorname{TreeExitPath}(A,\nu,\theta,\beta,a_j,b_j,Q_j).
-       \tag{1}
+       \tag{5}
 \]
 The supports remain pairwise disjoint, the three outside ends remain
 pairwise distinct, and no claim about separation of the three
@@ -130,42 +178,117 @@ transformed full components has been made.
 Apply \noderef{HierarchyLEMStable} to the just constructed outside
 recoloring.  It supplies a corresponding ETT $\mathcal T^\nu$ displayed
 on $T$, a hierarchy base $B^\nu$, a hierarchy $H^\nu$, and a good
-hierarchy on it.  The corresponding certificate retains the rung, all
-ordered ladder trees, exact connecting-edge sets, stored sets, and kinds;
-the same-hierarchy conclusion retains every ordered stage, divider,
-stored-color set, and Gamma pair.  The result also supplies maximum
-property and transports the given terminal minus-closed certificate.
-The stability established above identifies the missing-color sets on
-$T_n$ under $\nu$ and $\varphi_n$, so the large bound is unchanged.
+hierarchy witness $g^\nu$ on it.  Retain also the supplied maximum
+property, transported terminal minus-closed certificate, and the proof
+that the old and new witnesses satisfy \noderef{SameGoodHierarchy}.
+The first conjunct in that definition is precisely
+\noderef{SameHierarchyStages}$(H,H^\nu)$.  Its first field gives the
+equality of the two hierarchy-base cores
+\[
+                         B.\mathit{core}=B^\nu.\mathit{core}.   \tag{6}
+\]
+This equality is obtained from the explicit same-stages field, not inferred
+from the equality of divider counts, stored-color sets, or Gamma pairs.
+The \noderef{CorrespondingExtendedTashkinovTree} certificate separately
+retains the rung, every ordered ladder tree, each exact connecting-edge
+set, each raw stored set, and each extension kind.  The stability proved
+above identifies the missing-color sets on $T_n$ under $\nu$ and
+$\varphi_n$.  Consequently the finite-union-and-deletion formula in
+\noderef{TashkinovStoredColors} identifies the replacement terminal
+control set with the same $D_n$: the cumulative raw stored sets agree and
+the deleted terminal tree-missing set agrees.  The large bound is unchanged
+for the same reason.
 
-By the zero-divider hypothesis, $d=0$.  By \noderef{HierarchyStarredStage}, $A$ is the
-actual hierarchy core.  We treat the two possible terminal constructions
-separately.
+By hypothesis $d=0$.  The unique index $\operatorname{last}(d)$ is
+therefore zero, and direct evaluation of
+\noderef{HierarchyStarredStage} at zero gives
+\[
+                              A=B.\mathit{core}.                \tag{7}
+\]
+Combining (6) and (7) proves the exact equality of ordered tree-sequences
+\[
+                              B^\nu.\mathit{core}=A.            \tag{8}
+\]
 
-The terminal extension is PE by hypothesis.  Use the transported
-corresponding ETT $\mathcal T^\nu$ and its transported base $B^\nu$, not
-the obsolete pre-recoloring PE data.  Its PE field gives an actual
-support vertex $x$ in $T_n$, an exact closure $R_n$ of the prefix through
-$x$, and identifies its core with the ordered union $T_n\vee R_n=A$.
-The prefix contains $x$ by the entrywise definition
-\noderef{TreeSequencePrefix}.  The augmentation sequence in
-\noderef{TashkinovClosure}, after unfolding
-\noderef{TashkinovAugmentationSequence} and
-\noderef{TashkinovAugmentation}, consists of ordered initial-segment
-steps.  Induction through those steps therefore retains the support
-prefix in $R_n$, so $x\in V(R_n)$ as well.  Choose a color $c$ missing
-at $x$ by the same $k\geq\Delta(G)+1$ degree count as above.  Thus
-\noderef{TreeMissingColors} puts $c$ in both
-$\overline\nu(T_n)$ and $\overline\nu(R_n)$.
+The terminal extension is PE by hypothesis.  Equality of terminal kinds
+in \noderef{CorrespondingExtendedTashkinovTree} makes the terminal
+extension of $\mathcal T^\nu$ PE as well.  Apply the `parallel' field of
+\noderef{HierarchyBase} to the transported base $B^\nu$.  Let $r$ be its
+positive support position and let $x$ be the vertex displayed at position
+$r$ in the transported terminal ladder tree.  The parallel field states
+all of the following exact data: the chosen last-slot vertex is $x$;
+$R_n:=B^\nu.\mathit{closure}$ is a
+\noderef{TashkinovClosure} under $\nu$ of the
+\noderef{TreeSequencePrefix} of that ladder tree through $x$; and there is
+an \noderef{OrderedTreeUnion} certificate whose first two trees are that
+ladder tree and $R_n$ and whose union is $B^\nu.\mathit{core}$.  Equality
+of the terminal ladder trees in the corresponding certificate identifies
+the transported ladder tree with the original ordered $T_n$.  Rewriting
+the union by (8) therefore gives the exact certificate
+\[
+                         A=T_n\vee R_n.                         \tag{9}
+\]
 
-The pre-step elementarity required next is available for these
-transported data.  If $n>1$, apply \noderef{CertifiedETTPredecessor} to
-$\mathcal T^\nu$ and then lower assertion (i); if $n=1$, apply the
-elementarity conclusion of \noderef{TechnicalTheoremBase} to the exact
-initial tuple of the replacement series.  Therefore
-\noderef{ParallelCommonMissingClosed}, with $\mathcal T^\nu$ and
-$B^\nu$, makes every common missing color, and in particular $c$,
-singleton-closed on the exact core $A$.
+The position $r$ itself witnesses $x\in V(T_n)$.  By the entrywise formula
+in \noderef{TreeSequencePrefix}, the prefix through $r$ contains $x$ as
+its last displayed vertex.  The augmentation sequence in the closure,
+after unfolding \noderef{TashkinovAugmentationSequence}, is a finite
+reflexive-transitive chain of steps from \noderef{TashkinovAugmentation}.
+Each step retains the preceding ordered tree as an initial segment.
+Induction along this chain, including the empty-chain case, therefore
+retains the support prefix in $R_n$, so $x\in V(R_n)$.  The vertex-set
+field of the \noderef{OrderedTreeUnion} certificate (9) also gives
+$x\in V(A)$.
+
+We now prove that a palette color is missing at $x$.  Inspect the
+certificate at index zero of the replacement series in $\mathcal T^\nu$,
+which \noderef{TashkinovSeries} supplies at every index.  The SE, PE, and
+RE constructors of \noderef{TashkinovSeriesStep} all certify a positive
+successor index, so none can occur at index zero.  Eliminating the
+certificate leaves the initial constructor and its initial
+\noderef{KTriple}.  Unfolding the latter gives
+\[
+                              \Delta(G)+1\leq k.                \tag{10}
+\]
+Let $C=\noderef{PresentColors}(G,\nu,x)$, and let $I_x$ be the finite set
+of exact edge identities incident with $x$.  For every $z\in C$, the
+definition of `PresentColors' supplies an edge identity $e_z\in I_x$ with
+$\nu(e_z)=z$.  Choose one such identity for each $z$.  If
+$e_z=e_{z'}$, then the single value of the partial coloring on that exact
+edge is both $z$ and $z'$, whence $z=z'$.  The map $z\mapsto e_z$ is
+therefore injective, and
+\[
+ |C|\leq |I_x|=\noderef{Degree}(G,x)
+          \leq\noderef{MaximumDegree}(G)=\Delta(G).            \tag{11}
+\]
+The last inequality follows directly from the defining maximum, which
+contains the degree of $x$.  If
+\noderef{MissingColors}$(G,\nu,x)$ were empty, its definition as the
+complement of $C$ in $[k]$ would give $C=[k]$ and hence $|C|=k$.
+Equations (10) and (11) would then imply
+$\Delta(G)+1\leq\Delta(G)$, a contradiction.  Choose
+$c\in\overline\nu(x)$.  Since $x$ belongs to both constituent trees, the
+biunion definition \noderef{TreeMissingColors} gives
+\[
+                 c\in\overline\nu(T_n)\cap\overline\nu(R_n).  \tag{12}
+\]
+
+The pre-step elementarity required next is available for these exact
+transported data.  If $n>1$, put $m=n-1$.  Then $m>0$, and
+\noderef{CertifiedETTPredecessor} applied to $\mathcal T^\nu$ supplies an
+actual rung-$m$ ETT whose displayed terminal tree is this same $T_n$, whose
+generating coloring is the replacement series coloring at slot $n-1$, and
+which has maximum property.  Lower assertion (i), applied to that certified
+predecessor, makes $V(T_n)$ elementary under precisely this pre-step
+coloring.  If $n=1$, $T_n$ is the tree $T_1$ of the replacement series'
+initial tuple and its pre-step coloring is the slot-zero coloring;
+the elementarity conclusion of \noderef{TechnicalTheoremBase} applies to
+that exact tuple and gives the same conclusion.  Thus in both cases the
+explicit pre-step elementarity premise of
+\noderef{ParallelCommonMissingClosed} is satisfied.  Apply that lemma to
+$\mathcal T^\nu$ and $B^\nu$.  In view of (8)--(9), it makes every color
+common-missing on $T_n$ and $R_n$ singleton-closed on the exact core $A$;
+by (12), this holds in particular for $c$.
 
 The retained identity $f_3$ is still a $\beta$-colored boundary edge of
 $A$: its inside endpoint is $b_3\in V(A)$, its other endpoint is outside
@@ -179,42 +302,141 @@ $f_3$.  Unfolding \noderef{MissingColors} and
 \noderef{PresentColors} therefore supplies an exact $\beta$-colored edge
 incident with $x$.
 
-If $\theta=c$, put $\rho=\nu$; otherwise exchange $\theta,c$ on all
-full components outside $A$.  The first outside recoloring fixes incident
-edges and missing sets on $A$, so the original $\theta$-missingness and
-singleton closedness on $A$ hold under $\nu$; singleton-$c$-closedness
-was just proved.  The first-crossing argument again verifies the outside
-support required by \noderef{OutsideKempeRecoloring}.  In the
-nonidentity case, apply \noderef{OutsideKempeRecoloringStable} first to
-$T_n$ with control set $D_n$ and then to $R_n$ with empty control;
-components outside $A$ are outside each constituent.  In the identity
-case use reflexivity of stability.  The two resulting clauses are
-exactly \noderef{CombinedStableColoring} relative to the transported
-generating coloring $\nu$.  They also give properness, exact
-one-uncoloredness, and preserve the missing sets at every vertex of $A$.
+The first outside recoloring fixes every exact edge incident with $T$ and
+every vertex missing-color set on $T$.  Since $A$ is an initial segment of
+$T$, the original $\theta$-missingness and singleton-$\theta$-closedness
+on $A$ therefore hold under $\nu$.  We have just proved singleton-$c$-
+closedness there.  If $\theta=c$, put $\rho=\nu$.  Suppose instead that
+$\theta\ne c$.  If a full $\theta,c$ component containing an outside
+vertex met $A$, choose a shortest incidence-graph walk to its first
+vertex-node in $A$.  The edge-node immediately before that first vertex
+would be an exact boundary edge of $A$ colored $\theta$ or $c$, contrary
+to the two singleton closedness statements.  Thus every such component is
+wholly outside $A$.  Exchange $\theta,c$ on all full components outside
+$A$; finiteness and the preceding first-crossing argument verify every
+field of \noderef{OutsideKempeRecoloring}, and define the result to be
+$\rho$.
 
-In particular $c$ remains missing at $x$, hence belongs to
-$\overline\rho(A)$.  Every exact edge incident with $A$ is fixed, so the
-empty $c$-colored boundary under $\nu$ remains empty under $\rho$; thus
-$A$ is singleton-$c$-closed under $\rho$.  The exact $\beta$-edge at
-$x$ is fixed as well, so $\beta$ remains present there.  Repeating the
-edge-by-edge and outside-end argument used to construct (1) gives three
-exact $(A,\rho,\{c,\beta\})$-exit paths with the old pairwise-disjoint
-supports and pairwise-distinct outside ends.
+In the nonidentity case, (9) gives
+$V(A)=V(T_n)\cup V(R_n)$, so every selected component is outside both
+constituents.  Apply \noderef{OutsideKempeRecoloringStable} to $T_n$ with
+control set $D_n$, and separately to $R_n$ with empty control.  This makes
+$\rho$ proper, leaves exactly $e_0$ uncolored, and gives simultaneously
+\[
+ \rho\text{ is }(T_n,D_n,\nu)\text{-stable},\qquad
+ \rho\text{ is }(R_n,\varnothing,\nu)\text{-stable}.           \tag{13}
+\]
+In the identity case, properness and exact one-uncoloredness are those of
+$\nu$, and both relations in (13) follow directly from reflexivity in the
+two clauses of \noderef{StableColoring}.  Thus in either case (13) is
+exactly the \noderef{CombinedStableColoring} relation relative to the
+transported generating coloring $\nu$.  Its two vertex clauses, together
+with (9), preserve the missing-color set at every vertex of $A$.
 
-The leaf argument above now applies verbatim in
-$I_G(\rho;c,\beta)$.  It certifies, via
-\noderef{TwoColorPathComponent}, the full component through $x$ and the
-full components through the three outside ends as path components; the
-first meets $A$ at $x$, and each latter component meets $A$ along its
-exit path.  The spanning-path argument chooses one outside component
-distinct from the component through $x$, again without asserting that
-the three transformed leg components are mutually distinct.  Apply
-conclusion (iii) of \noderef{interchange} to $\mathcal T^\nu$, its PE
-base $B^\nu$, the just constructed
-\noderef{CombinedStableColoring}, and the proved $c$-missing and
-singleton-$c$-closed properties on $A$.  It says that $c,\beta$ are
-$A$-interchangeable.  The definition \noderef{TreeInterchangeable} then
-equates the two distinct full path components meeting $A$, the final
-contradiction.  This completes Subcase 2.2.
+In particular $c$ remains missing at $x$, and $x\in V(A)$ gives
+$c\in\overline\rho(A)$ by \noderef{TreeMissingColors}.  In the
+nonidentity case \noderef{OutsideKempeRecoloringStable} fixes every exact
+edge incident with each constituent, hence, by (9), every exact edge
+incident with $A$; the identity case is immediate.  The empty $c$-colored
+boundary under $\nu$ therefore remains empty under $\rho$, so $A$ is
+singleton-$c$-closed under $\rho$.  The exact $\beta$-edge incident with
+$x$ is also fixed, so $\beta$ remains present at $x$.
+
+We next construct the three final exit paths rather than importing any
+component identity through the recolorings.  In the identity case put
+$\widehat Q_j=Q_j$.  In the nonidentity case give $\widehat Q_j$ the same ordered node list
+as $Q_j$.  Every $\beta$-edge remains $\beta$, since both $\theta$ and $c$
+are distinct from $\beta$.  Consider a $\theta$-edge on $Q_j$.  It cannot
+be incident with $A$: the only vertex-node of $Q_j$ in $A$ is $b_j$, and
+an incident $\theta$-edge would be a $\theta$-colored boundary edge of
+$A$, contrary to singleton-$\theta$-closedness.  The first-crossing
+argument of the preceding paragraph then shows that its full $\theta,c$
+component is outside $A$, so that component was selected and the edge
+becomes $c$.  Consequently the same successive node pairs form a walk
+$\widehat Q_j$ in $I_G(\rho;c,\beta)$, with the same simplicity, positive length,
+and support as $Q_j$.
+
+The outside-end missing-color clause also transports explicitly.  The
+certificate (5) says that either $\beta$ or $\theta$ is missing at $a_j$
+under $\nu$.  If $\beta$ is missing, no incident edge has that color by
+\noderef{MissingColors} and \noderef{PresentColors}, and the
+$\theta,c$ swap creates no $\beta$-edge, so it remains missing.  If
+$\theta$ is missing, the full $\theta,c$ component through the outside
+vertex $a_j$ is selected; after its swap, the new $c$-edges incident with
+$a_j$ are exactly its old $\theta$-edges, of which there were none.  Thus
+$c$ is missing at $a_j$.  In the identity case these conclusions are just
+the corresponding clauses of (5), since $\theta=c$.  The tree end remains
+$b_j\in V(A)$, the outside end remains outside $A$, and the only
+vertex-node of the unchanged support belonging to $A$ remains $b_j$.
+This proves every field of
+\[
+          \operatorname{TreeExitPath}(A,\rho,c,\beta,a_j,b_j,\widehat Q_j)
+          \qquad(j=1,2,3).                                    \tag{14}
+\]
+The three supports in (14) are the old supports, so they remain pairwise
+disjoint; the three outside ends remain pairwise distinct.  No old
+two-color component equality or inequality has been transported.
+
+It remains to prove the component contradiction locally.  Put
+$I=\noderef{TwoColorIncidenceGraph}(G,\rho;c,\beta)$.  At the vertex-node
+$x$, the color $c$ is missing and an exact $\beta$-colored incident edge
+was retained.  Hence $x$ has at least one neighbor in $I$ and no neighbor
+arising from a $c$-edge.  Properness allows at most one incident
+$\beta$-edge: two distinct such exact identities would be adjacent edges
+of the same nonempty color, contrary to
+\noderef{IsProperEdgeColoring}.  Therefore $x$ has degree exactly one in
+$I$.
+
+For each $j=1,2,3$, unfold the exact exit-path certificate (14).  Its
+incidence-graph length is at least two, so its first edge-node is a
+neighbor of the outside vertex-node $a_j$ in $I$.  The certificate also
+says that one of $c,\beta$ is missing at $a_j$.  By
+\noderef{MissingColors} and \noderef{PresentColors}, no incident edge at
+$a_j$ has that missing color; properness permits at most one incident edge
+of the other color.  Thus $a_j$ also has degree exactly one.  This sharper
+local calculation is consistent with the global conclusion of
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, which gives degree at most two
+for every node of $I$ under the proper coloring $\rho$.
+
+The four vertex-nodes $x,a_1,a_2,a_3$ are pairwise distinct.  Indeed,
+$x\in V(A)$ while every $a_j\notin V(A)$ by (14), and the three outside
+ends are pairwise distinct by hypothesis.  Let
+\[
+ K_x=\noderef{TwoColorComponent}(G,\rho,c,\beta,\operatorname{inl}x),
+ \qquad
+ K_j=\noderef{TwoColorComponent}(G,\rho,c,\beta,\operatorname{inl}a_j).
+\]
+Each root belongs to its own full connected component.  Since
+$c\ne\beta$ and each of the four displayed roots has at most one neighbor,
+the root itself supplies the leaf witness required by
+\noderef{TwoColorPathComponent}.  Thus $K_x,K_1,K_2,K_3$ are certified
+full two-color path components, not merely the components of the displayed
+exit subwalks.
+
+Suppose for contradiction that $K_1=K_x$, $K_2=K_x$, and $K_3=K_x$.
+Apply \noderef{TwoColorComponentSpanningPath} to $K_x$.  It supplies a
+simple path whose support is all of $K_x$, so all four distinct nodes
+$x,a_1,a_2,a_3$ occur on this path.  If any one occurred at an internal
+position, its two adjacent path nodes would be distinct neighbors in $I$,
+contradicting its degree being one.  Hence all four would have to lie in
+the two-element set of the path's endpoints, which is impossible.  We may
+therefore choose $j\in\{1,2,3\}$ such that
+\[
+                              K_j\ne K_x.                       \tag{15}
+\]
+This alternative asserts no pairwise distinction among $K_1,K_2,K_3$.
+
+Both components in (15) meet $A$.  The component $K_x$ contains its root
+$x\in V(A)$.  The walk $\widehat Q_j$ connects $a_j$ to $b_j$, so every node on
+that walk is in $K_j$; its endpoint $b_j\in V(A)$ proves that $K_j$ meets
+$A$.  Finally apply conclusion (iii) of \noderef{interchange} to
+$\mathcal T^\nu$, its PE base $B^\nu$, the maximum property supplied by
+\noderef{HierarchyLEMStable}, the complete lower-rung package, the
+\noderef{CombinedStableColoring} (13), and the proved $c$-missing and
+singleton-$c$-closed properties on $A$.  Its conclusion is formulated on
+$B^\nu.\mathit{core}$, which is exactly $A$ by (8), and says that
+$c,\beta$ are $A$-interchangeable under $\rho$.  Applying
+\noderef{TreeInterchangeable} to the two certified full path components
+$K_x,K_j$ and their displayed witnesses in $A$ forces $K_x=K_j$,
+contradicting (15).  This completes Subcase 2.2.
 \end{proof}
