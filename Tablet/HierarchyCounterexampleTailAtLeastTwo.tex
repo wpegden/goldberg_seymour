@@ -21,9 +21,10 @@ same-rung maximum ETT with a good hierarchy having fewer than $q$
 dividers is elementary.
 
 Assume that $C$ is lexicographically minimal among hierarchy
-counterexamples with exactly $q$ dividers, allowing the input coloring,
+counterexamples whose ETTs have the same rung number as $T$ and whose
+hierarchies have exactly $q$ dividers, allowing the input coloring,
 generating coloring, ETT, base, and hierarchy to vary.  Thus no such
-$C'$ has
+same-rung $C'$ has
 \[
  \noderef{HierarchyCounterexampleLess}
    (\noderef{HierarchyCounterexampleMeasure}(C'),
@@ -621,15 +622,23 @@ $\theta$.  Since $y_1\notin V(A)$, the full replacement tree is not
 elementary.  Positivity follows from the common rung number, and maximum
 property was proved above.  These data form an actual
 \noderef{HierarchyCounterexample} $C_\sigma$ over
-$\mathcal B_T^\sigma$ on the same ordered $T$.
+$\mathcal B_T^\sigma$ on the same ordered $T$.  More precisely, the
+`rungAgreement' field of the
+\noderef{CorrespondingExtendedTashkinovTree} certificate $\mathcal C_T$
+gives that $\mathcal E_T^\sigma$ has the same rung number as the original
+ETT on $T$.  Thus $C_\sigma$ is a same-rung counterexample to $C$.
 
 Its measure equals that of $C$: the ordered tree, divider count, complete
 stage family, and hence both coordinates in
 \noderef{HierarchyCounterexampleMeasure} are unchanged.  To
 check the minimality hypothesis required with $C_\sigma$, take any
-counterexample $C'$ with $q$ dividers.  If its measure were smaller than
-that of $C_\sigma$, rewriting the displayed measure equality would make
-it smaller than that of $C$, contrary to the stated minimality of $C$.
+counterexample $C'$ with $q$ dividers and with the same rung as
+$C_\sigma$.  Compose this candidate rung equality with the rung equality
+from $\mathcal C_T$ just established.  This proves that the ETT underlying
+$C'$ has the same rung as the original ETT and hence makes $C'$ eligible
+for the original minimality hypothesis.  If its measure were smaller
+than that of $C_\sigma$, rewriting the displayed measure equality would make it
+smaller than that of $C$, contrary to that hypothesis.
 The full tail length is still $\ell=1$, so the corrected penultimate
 prefix is still $A$;
 vertexwise missing-set invariance on $A$ transfers its elementarity.

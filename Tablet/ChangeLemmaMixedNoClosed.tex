@@ -39,9 +39,10 @@ be the exact ordered prefix supplied by \noderef{TreeSequencePrefix}.
 Assume (6.6): $V(T(y_{\ell-1}))$ is elementary under $\varphi_n$.
 Assume moreover that $C$ is lexicographically minimal among all
 \noderef{HierarchyCounterexample}s on the fixed graph, palette, and
-$e_0$ which have exactly $q$ dividers, allowing their certified input
-colorings, generating colorings, bases, ETTs, and good hierarchies to
-vary.  Explicitly, no such counterexample $C'$ satisfies
+$e_0$ whose ETTs have the same rung number as $T$ and which have exactly
+$q$ dividers, allowing their certified input colorings, generating
+colorings, bases, ETTs, and good hierarchies to vary.  Explicitly, no
+such same-rung counterexample $C'$ satisfies
 \[
  \noderef{HierarchyCounterexampleLess}
   \bigl(\noderef{HierarchyCounterexampleMeasure}(C'),
@@ -488,6 +489,13 @@ The corresponding ETT on $B$, transported maximum property, base,
 hierarchy, newly constructed good witness, and the two distinct vertices
 $v_\alpha,v_\beta$ missing $\alpha$ form a
 \noderef{HierarchyCounterexample} $C'$ with the same divider count $q$.
+The explicit rounds equality returned by
+\noderef{GoodHierarchyTerminalPrefixRepackage} identifies the rung of
+$\mathcal E_B$ with that of the original ETT, while the `rungAgreement'
+field of the \noderef{CorrespondingExtendedTashkinovTree} certificate
+identifies the rung of $\mathcal E'_B$ with that of $\mathcal E_B$.
+Thus the ETT underlying $C'$ has the same rung as the ETT underlying
+$C$.
 It remains to compare the actual measures.  Put
 $p=\noderef{HierarchyPathNumber}(H)$ and let $p'$ be the path number of
 $K$.  If $s_B<p$, the fallback bound in the path-number definition gives
@@ -499,8 +507,10 @@ $q>0$ gives $A=T_{n,q}$, equation (8) yields
 \[
        |B|-|T_{n,q}|=s_B<\ell=|T|-|T_{n,q}|.
 \]
-Therefore \noderef{HierarchyCounterexampleLess} holds from $C'$ to $C$,
-contrary to the stated minimality.  The supposition that the two path
+Therefore \noderef{HierarchyCounterexampleLess} holds from $C'$ to $C$.
+The same-rung equality just proved and the divider-count equality make
+$C'$ eligible for the stated minimality, a contradiction.  The
+supposition that the two path
 components were distinct is false, and hence
 $K_{v_\alpha}=K_{v_\beta}$ as required.
 \end{proof}

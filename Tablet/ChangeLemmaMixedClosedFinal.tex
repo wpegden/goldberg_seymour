@@ -39,9 +39,10 @@ be the exact ordered prefix supplied by \noderef{TreeSequencePrefix}.
 Assume (6.6): $V(T(y_{\ell-1}))$ is elementary under $\varphi_n$.
 Assume moreover that $C$ is lexicographically minimal among all
 \noderef{HierarchyCounterexample}s on the fixed graph, palette, and
-$e_0$ which have exactly $q$ dividers, allowing their certified input
-colorings, generating colorings, bases, ETTs, and good hierarchies to
-vary.  Explicitly, no such counterexample $C'$ satisfies
+$e_0$ whose ETTs have the same rung number as $T$ and which have exactly
+$q$ dividers, allowing their certified input colorings, generating
+colorings, bases, ETTs, and good hierarchies to vary.  Explicitly, no
+such same-rung counterexample $C'$ satisfies
 \[
  \noderef{HierarchyCounterexampleLess}
   \bigl(\noderef{HierarchyCounterexampleMeasure}(C'),
@@ -455,7 +456,13 @@ transported Gamma equations give its required pointwise data.
 The resulting ETT on $B$, its maximum property, base, hierarchy,
 newly constructed good witness, and the two vertices missing $\alpha$
 form a \noderef{HierarchyCounterexample} $C'$ with the same divider
-count as $C$.  We finally compare the actual measures.  Put
+count as $C$.  The explicit rounds equality returned by
+\noderef{GoodHierarchyTerminalPrefixRepackage} identifies the rung of
+$\mathcal E_B$ with that of the original ETT.  The `rungAgreement' field
+of the \noderef{CorrespondingExtendedTashkinovTree} certificate identifies
+the rung of $\mathcal E'_B$ with that of $\mathcal E_B$.  Their composition
+proves that the ETT underlying $C'$ has the same rung as the ETT
+underlying $C$.  We finally compare the actual measures.  Put
 $r_0=\noderef{HierarchyPathNumber}(H)$ and let $r'_0$ be the path
 number of the hierarchy truncated at $B$.  If $s<r_0$, the fallback
 clause gives $r'_0\leq s<r_0$.  If $r_0\leq s$, the path tail beginning
@@ -472,7 +479,9 @@ Hence
    \bigl(\noderef{HierarchyCounterexampleMeasure}(C'),
          \noderef{HierarchyCounterexampleMeasure}(C)\bigr)
 \]
-holds.  This contradicts the stated minimality of $C$.  Therefore
+holds.  The established same-rung equality and divider-count equality
+make $C'$ eligible for the stated minimality of $C$, giving a
+contradiction.  Therefore
 $K_{v_\alpha}=K_{v_\beta}$, and (1) supplies the asserted
 singleton-inclusive interchangeability.
 \end{proof}

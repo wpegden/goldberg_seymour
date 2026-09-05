@@ -175,6 +175,7 @@ theorem ChangeLemmaBothOutside {V E : Type*}
       {other : ExtendedTashkinovTree G k e0 input' T' generating'}
       {base' : HierarchyBase other generating'}
       (C' : HierarchyCounterexample base'),
+      other.rounds = ett.rounds →
       C'.hierarchy.dividerCount = C.hierarchy.dividerCount →
       ¬ HierarchyCounterexampleLess
         (HierarchyCounterexampleMeasure C')

@@ -39,9 +39,10 @@ be the exact ordered prefix supplied by \noderef{TreeSequencePrefix}.
 Assume (6.6): $V(T(y_{\ell-1}))$ is elementary under $\varphi_n$.
 Assume moreover that $C$ is lexicographically minimal among all
 \noderef{HierarchyCounterexample}s on the fixed graph, palette, and
-$e_0$ which have exactly $q$ dividers, allowing their certified input
-colorings, generating colorings, bases, ETTs, and good hierarchies to
-vary.  Explicitly, no such counterexample $C'$ satisfies
+$e_0$ whose ETTs have the same rung number as $T$ and which have exactly
+$q$ dividers, allowing their certified input colorings, generating
+colorings, bases, ETTs, and good hierarchies to vary.  Explicitly, no
+such same-rung counterexample $C'$ satisfies
 \[
  \noderef{HierarchyCounterexampleLess}
   \bigl(\noderef{HierarchyCounterexampleMeasure}(C'),
@@ -441,7 +442,13 @@ $\sigma_n$, so $V(B)$ is not elementary.  Positivity is unchanged by the
 corresponding ETT.  Together with the maximum property, base, hierarchy,
 and actual good witness just constructed, these facts form a
 \noderef{HierarchyCounterexample} $C'$ on $B$, and (12) gives it exactly
-$q$ dividers.
+$q$ dividers.  The old prefix ETT $\mathcal E_B$ was defined with a
+literal copy of the certified series of the original ETT, so their rung
+numbers are equal.  The `rungAgreement' field of the
+\noderef{CorrespondingExtendedTashkinovTree} certificate then gives
+$(\mathcal E'_B).\mathit{rounds}=\mathcal E_B.\mathit{rounds}$.
+Composing these two exported equalities proves that the ETT underlying
+$C'$ has the same rung number as the ETT underlying $C$.
 
 It remains to compare measures.  Put
 \[
@@ -466,7 +473,9 @@ By \noderef{HierarchyCounterexampleMeasure} and
  <_{\mathrm{hier}}
  \noderef{HierarchyCounterexampleMeasure}(C).                  \tag{15}
 \]
-The divider counts agree, so (15) contradicts the assumed minimality.
+The just-proved rung equality and the divider-count equality make $C'$
+eligible for the stated comparison class, so (15) contradicts the
+assumed minimality.
 Therefore $K_a=K_b$ for the chosen applicable alternative.  Applying the
 same argument separately to alternatives 1 and 2 proves both implications
 in the statement.
