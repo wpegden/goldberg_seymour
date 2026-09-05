@@ -148,5 +148,34 @@ theorem HierarchyCounterexamplePathNumberBounds {V E : Type*}
     let r := HierarchyPathNumber H
     1 ≤ r ∧ r ≤ ell := by
 -- BODY
-  sorry
-
+  classical
+  have htail := HierarchyCounterexampleTailAtLeastTwo G k e0 input T phi ett base C
+    hproper hone hlower hfewer hminimal hlarge
+  let H := C.hierarchy
+  let A := HierarchyStarredStage H (Fin.last H.dividerCount)
+  let ell := T.length - A.length
+  let candidates := (Finset.Icc 1 ell).filter fun i =>
+    ∀ q : Fin T.length, A.length + i ≤ q.val →
+      G.ends (T.edge q) = s(T.vertex q.castSucc, T.vertex q.succ)
+  have htail' : 2 ≤ ell := by
+    dsimp [ell, A, H]
+    exact htail
+  have hAle : A.length ≤ T.length := by omega
+  have hsum : A.length + ell = T.length := Nat.add_sub_of_le hAle
+  have hellpos : 1 ≤ ell := by omega
+  have hellmem : ell ∈ candidates := by
+    apply Finset.mem_filter.mpr
+    refine ⟨Finset.mem_Icc.mpr ⟨hellpos, le_rfl⟩, ?_⟩
+    intro q hq
+    exfalso
+    omega
+  have hnonempty : candidates.Nonempty := ⟨ell, hellmem⟩
+  have hminmem : candidates.min' hnonempty ∈ candidates :=
+    Finset.min'_mem candidates hnonempty
+  have hminbounds : 1 ≤ candidates.min' hnonempty ∧
+      candidates.min' hnonempty ≤ ell := by
+    exact (Finset.mem_Icc.mp (Finset.mem_filter.mp hminmem).1)
+  change (1 ≤ (if h : candidates.Nonempty then candidates.min' h else ell) ∧
+    (if h : candidates.Nonempty then candidates.min' h else ell) ≤ ell)
+  rw [dif_pos hnonempty]
+  exact hminbounds
