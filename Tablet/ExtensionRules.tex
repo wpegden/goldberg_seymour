@@ -92,19 +92,21 @@ and its second inclusion whenever the tree is enlarged.  With
  \overline\varphi_n(T_n)\cup D_n.                              \tag{1}
 \]
 In particular \(D_{j-1}\) is contained in the right-hand side.  The
-terminal PE certificate puts \(v_n\) in \(T_n\), and the ordered
-initial-segment clauses of \noderef{TashkinovSeriesStep}, expanded using
-\noderef{TreeSequenceInitialSegment}, imply that every vertex preceding
-\(v_n\) in the final display also belongs to \(T_n\).  Thus
-\(V(T^*)\subseteq V(T_n)\).
+step-at-index field of \noderef{TashkinovSeries} supplies the terminal PE
+certificate.  Its support and ordered initial-segment clauses in
+\noderef{TashkinovSeriesStep}, expanded using
+\noderef{TreeSequenceInitialSegment}, put \(v_n\) in \(T_n\) and imply that
+every vertex preceding \(v_n\) in the final display also belongs to
+\(T_n\).  Thus \(V(T^*)\subseteq V(T_n)\).
 
 Here is the missing-color restriction explicitly.  If
 \(c\in\overline\varphi_n(T^*)\), then the union definition
 \noderef{TreeMissingColors} supplies a vertex \(w\in V(T^*)\) at which
 \(c\) is missing.  The displayed inclusion transports this same witness to
-\(V(T_n)\), so \(c\in\overline\varphi_n(T_n)\).  Likewise, an edge
-incident with \(V(T^*)\) is incident with \(V(T_n)\), using the same
-vertex witness.  Therefore the vertex clause of the given
+\(V(T_n)\), so \(c\in\overline\varphi_n(T_n)\).  Likewise, by the
+vertex-witness definition \noderef{TreeIncidentEdge}, an edge incident with
+\(V(T^*)\) is incident with \(V(T_n)\), using the same vertex witness.
+Therefore the vertex clause of the given
 \noderef{StableColoring} restricts to \(T^*\); for its edge clause, a
 controlling color lies either in \(\overline\varphi_n(T^*)\), hence in
 \(\overline\varphi_n(T_n)\) by the witness just transported, or in
@@ -121,10 +123,11 @@ puts that same color in the controlling union for the first relation, which
 fixes its value under \(\sigma_n\).  These are exactly the two clauses of
 the required stability relation.
 
-Suppose first that \(j=n\).  Eliminating the terminal PE certificate in
-\noderef{TashkinovSeriesStep} gives its maximum-defective selected
-coloring \(\pi_{n-1}\), its second coloring \(\pi'_{n-1}\), and colors
-\(\gamma_n,\delta_n\).  It states that \(\pi_{n-1}\) is
+Suppose first that \(j=n\).  The step-at-index field of
+\noderef{TashkinovSeries} supplies the terminal certificate; eliminating
+its PE constructor in \noderef{TashkinovSeriesStep} gives its
+maximum-defective selected coloring \(\pi_{n-1}\), its second coloring
+\(\pi'_{n-1}\), and colors \(\gamma_n,\delta_n\).  It states that \(\pi_{n-1}\) is
 \((T_n,D_{n-1},\varphi_{n-1})\)-stable, that \(\pi'_{n-1}\) is stable from
 \(\pi_{n-1}\) with control \(D_{n-1}\cup\{\delta_n\}\), and that
 \(\varphi_n\) is obtained by switching the
@@ -148,34 +151,40 @@ control set, the edge clause of the same stability relation gives
 has degree one.  At the outside end,
 \noderef{TreeExitPath} makes one of the two colors missing, while the path
 edge incident there has the other color; properness again makes that the
-unique two-color incidence.  Every internal node of \(R\) already has its
-two path neighbors.  If the component contained a node outside \(R\), a
-shortest route from that node to \(R\) would add a third neighbor at an
-internal path node, contradicting
+unique two-color incidence.  By the adjacency definition
+\noderef{TwoColorIncidenceGraph}, every internal node of \(R\) already has
+its two path neighbors.  If the connected support in
+\noderef{TwoColorComponent} contained a node outside \(R\), a shortest route
+from that node to \(R\) would add a third neighbor at an internal path node,
+contradicting
 \noderef{TwoColorIncidenceDegreeAtMostTwo}, or a second neighbor at an
 endpoint, contradicting the endpoint's just-proved total degree one.  Hence
 \(R\) is the entire component, and it meets \(T_n\) only in \(v_n\).
 
 By \noderef{TwoColorComponentSwap}, the switch consequently changes no
-edge incident with \(T^*\): if a component edge were incident with a
-vertex \(w\) of \(T^*\), the corresponding incidence would put the
-vertex-node \(w\) in the same component, contrary to its intersection with
-\(T_n\).  It therefore changes no missing set at a vertex of \(T^*\).
-Restrict the two certified stability relations to \(T^*\), use the two
-clauses of \noderef{StableColoring}, drop the unused extra control color
-\(\delta_n\), and compose the resulting edge-value and vertexwise
-missing-set equalities.  This proves (2) when \(j=n\).
+edge incident with \(T^*\): by \noderef{TwoColorIncidenceGraph} and
+\noderef{TwoColorComponent}, if a component edge were incident with a
+vertex \(w\) of \(T^*\), the corresponding adjacency would put the
+vertex-node \(w\) in the same connected support, contrary to its intersection
+with \(T_n\).  It therefore changes no missing set at a vertex of \(T^*\).
+Using the incidence witness of \noderef{TreeIncidentEdge}, restrict the two
+certified stability relations to \(T^*\), use the two clauses of
+\noderef{StableColoring}, drop the unused extra control color \(\delta_n\),
+and compose the resulting edge-value and vertexwise missing-set equalities.
+This proves (2) when \(j=n\).
 
-Now suppose \(j<n\).  The same terminal certificate and
-\noderef{MaximumDefectiveChoice} say that \(\pi_{n-1}\) is proper, leaves
+Now suppose \(j<n\).  The same terminal certificate, supplied at its index
+by \noderef{TashkinovSeries}, and \noderef{MaximumDefectiveChoice} say that
+\(\pi_{n-1}\) is proper, leaves
 exactly \(e_0\) uncolored, and is
 \((T_n,D_{n-1},\varphi_{n-1})\)-stable.  Because \(T_{n-1}\) is an ordered
 initial segment of \(T_n\) by \noderef{TashkinovSeriesStep} and
 \noderef{TreeSequenceInitialSegment}, this stability restricts to
-\(T_{n-1}\): for the only nonformal point, if a color is missing on
-\(T_{n-1}\), \noderef{TreeMissingColors} supplies a vertex witness in
-\(V(T_{n-1})\), and the initial-segment inclusion makes the same vertex a
-witness that it is missing on \(T_n\).
+\(T_{n-1}\).  The incidence witness in \noderef{TreeIncidentEdge} makes
+every edge incident with \(T_{n-1}\) incident with \(T_n\).  If a color is
+missing on \(T_{n-1}\), \noderef{TreeMissingColors} supplies a vertex
+witness in \(V(T_{n-1})\), and the initial-segment inclusion makes the same
+vertex a witness that it is missing on \(T_n\).
 
 We now verify the two boundary hypotheses of lower-rung assertion (v) using
 exact edge identities.  The choice certificate in
@@ -264,8 +273,9 @@ positivity is essential: \(T_{j-1}\) is now a completed ladder stage, not
 the auxiliary one-edge seed \(T_0\).  The minimum in
 \noderef{ETTFirstAppearanceIndex} ranges over the complete stages
 \(T_1,\ldots,T_n,T\); hence \(m(v_n)=j\) says both that \(v_n\in V(T_j)\)
-and that \(v_n\notin V(T_{j-1})\).  By the ordered-prefix certificate in
-\noderef{TashkinovSeriesStep}, expanded with
+and that \(v_n\notin V(T_{j-1})\).  The step-at-index field of
+\noderef{TashkinovSeries} supplies the certificate at the predecessor index.
+Its ordered-prefix clause in \noderef{TashkinovSeriesStep}, expanded with
 \noderef{TreeSequenceInitialSegment}, \(T_{j-1}\) is an entrywise initial
 segment of \(T_j\).  Fix \(w\in V(T_{j-1})\), choose its displayed index
 there using \noderef{TreeSequenceVertexSet}, and transport that index to
@@ -278,8 +288,10 @@ positions unambiguous.  Finally the successive series-step prefixes, followed
 by the final ordered containment in \noderef{ExtendedTashkinovTree}, carry
 \(T_j\) into the final display \(T\) while preserving both indices, so
 \noderef{TreeVertexOrder} gives \(w\prec_Tv_n\).  Since \(w\) was
-arbitrary, \(V(T_{j-1})\subseteq V(T^*)\).  Restrict the incident-edge
-and vertexwise missing-set clauses already proved on \(T^*\) to this
+arbitrary, \(V(T_{j-1})\subseteq V(T^*)\).  By
+\noderef{TreeIncidentEdge}, the same endpoint witness makes every edge
+incident with \(T_{j-1}\) incident with \(T^*\).  Restrict that edge clause
+and the vertexwise missing-set clause already proved on \(T^*\) to this
 subset (transporting a missing color by its vertex witness, exactly as
 above).  This proves
 \((T_{j-1},D_{j-1},\varphi_{j-1})\)-stability when \(j>1\), and makes no
@@ -294,10 +306,13 @@ earlier PE support with \(m(v_h)=m(v_n)\).  The PE constructor gives
 We show that both colors of \(S_h\) occur on internal edges at \(v_n\)
 under \(\varphi_n\).
 
-In the second stable coloring used at slot \(h\), let \(P\) be the
-\((\gamma_h,\delta_h)\)-component through \(v_h\), and let \(Q\) be the
-component through \(v_n\).  The PE certificate at slot \(h\) in
-\noderef{TashkinovSeriesStep} puts its support \(v_h\) in \(T_h\).
+In the second stable coloring used at slot \(h\), let \(P\) and \(Q\) be the
+connected supports of \noderef{TwoColorComponent} through \(v_h\) and
+\(v_n\), respectively, in the incidence graph
+\noderef{TwoColorIncidenceGraph}.  The step-at-index field of
+\noderef{TashkinovSeries} supplies the certificate at slot \(h\), whose PE
+constructor in \noderef{TashkinovSeriesStep} puts its support \(v_h\) in
+\(T_h\).
 Therefore the least-index definition
 \noderef{ETTFirstAppearanceIndex} gives \(m(v_h)\leq h\).  Since
 \(m(v_n)=m(v_h)\), \(v_n\) first appears no later than that same stage, and
@@ -310,14 +325,16 @@ constructor gives a path in the sense of \noderef{TreeExit} and
 only in \(v_h\).  The rule \noderef{ParallelExtensionColor} makes
 \(\gamma_h\) missing at \(v_h\), while the selected connecting edge is
 incident there with color \(\delta_h\); stability fixes this incidence in
-the second coloring.  Thus \(v_h\) has degree one in the two-color
-incidence graph.  At the outside end, \noderef{TreeExitPath} says one of
+the second coloring.  By the adjacency rule in
+\noderef{TwoColorIncidenceGraph}, \(v_h\) therefore has degree one in the
+two-color incidence graph.  At the outside end, \noderef{TreeExitPath} says one of
 the two colors is missing and its last path edge has the other color, so
 that end also has degree one.  All internal nodes of the path already have
 their two path neighbors, and
 \noderef{TwoColorIncidenceDegreeAtMostTwo} forbids any third neighbor.
-Consequently the exit path is the whole component \(P\), and \(P\) meets
-\(T_h\) exactly in \(v_h\).  Since \(v_n\ne v_h\), this gives \(P\ne Q\);
+Consequently the exit path exhausts the connected support
+\noderef{TwoColorComponent}, namely the whole component \(P\), and \(P\)
+meets \(T_h\) exactly in \(v_h\).  Since \(v_n\ne v_h\), this gives \(P\ne Q\);
 \noderef{TwoColorComponentsDisjoint} makes them vertex-disjoint.  The
 definition \noderef{TwoColorComponentSwap} of the switch to
 \(\varphi_h\) changes only \(P\), so \(Q\) remains the component through
@@ -331,8 +348,10 @@ closed stage \(T_{h+1}\), and the definition
 unique \((\gamma_h,\delta_h)\)-path component meeting that stage.
 
 We next prove explicitly that the second pre-switch coloring
-\(\pi'_{h-1}\) is closed on \(T_h\).  The noninitial PE clause of
-\noderef{TashkinovSeriesStep} first says that \(T_h\) is closed under
+\(\pi'_{h-1}\) is closed on \(T_h\).  The step-at-index field of
+\noderef{TashkinovSeries} supplies the slot-\(h\) certificate, and its
+noninitial PE clause in \noderef{TashkinovSeriesStep} first says that
+\(T_h\) is closed under
 \(\varphi_{h-1}\) in the sense of \noderef{ColoredVertexSetClosed}.
 That clause and \noderef{MaximumDefectiveChoice} also say that all three
 colorings \(\varphi_{h-1},\pi_{h-1},\pi'_{h-1}\) are proper and leave the
@@ -378,13 +397,16 @@ Thus it is not missing at \(v_n\), and the same
 \noderef{MissingColors}--\noderef{PresentColors} conversion supplies an
 incident \(\delta_h\)-colored edge there.
 
-Both incident edge identities belong to the component \(Q\) through
-\(v_n\).  Since the switch affects only the disjoint component \(P\), they
+By \noderef{TwoColorIncidenceGraph}, each of these two colored incident edge
+identities is adjacent to the vertex-node \(v_n\), so the connected-support
+definition \noderef{TwoColorComponent} puts both in the component \(Q\)
+through \(v_n\).  Since the switch affects only the disjoint component \(P\), they
 retain their colors under \(\varphi_h\).  Consequently \(Q\) has both
 colored incidences at \(v_n\) under \(\varphi_h\) and is nonisolated.
-Properness in \noderef{IsProperEdgeColoring} and
-\noderef{TwoColorIncidenceDegreeAtMostTwo} say that a finite nonisolated
-two-color component is a path or a cycle.  After the switch, \(P\) remains
+Properness in \noderef{IsProperEdgeColoring}, the connected-support
+interpretation in \noderef{TwoColorComponent}, and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} say that this finite nonisolated
+two-color incidence support is a path or a cycle.  After the switch, \(P\) remains
 a nontrivial path component meeting \(T_{h+1}\), whereas \(Q\) is the
 distinct component through \(v_n\).  If \(Q\) were also a path, these
 would be two distinct path components meeting \(T_{h+1}\), contrary to
@@ -392,8 +414,11 @@ the uniqueness clause in \noderef{TreeInterchangeable}.  Hence \(Q\) is a
 two-color cycle.
 
 Let \(r>h\) be the first slot which is not an RE.  Such an \(r\leq n\)
-exists because the terminal slot is a PE.  The priority and cycle fields of
-\noderef{RevisitingExtensionCertificate} show that \(Q\) is contained in
+exists because the terminal slot is a PE.  The step-at-index field of
+\noderef{TashkinovSeries} supplies the certificate at slot \(r\).  Its
+priority field, together with the cycle support just obtained via
+\noderef{TwoColorIncidenceGraph} and \noderef{TwoColorComponent}, lets the
+cycle fields of \noderef{RevisitingExtensionCertificate} show that \(Q\) is contained in
 \(G[T_r]\): if a node of \(Q\) still lay outside \(T_r\), the part of this
 same cycle meeting \(T_h\) and leaving \(T_r\) would be an available RE
 certificate at slot \(r\), contrary to the choice of \(r\) as non-RE.
@@ -403,8 +428,9 @@ We justify the required initial union one color at a time.  Fix
 vertex-union definition \noderef{TreeMissingColors} puts
 \(c\in\overline\varphi_h(T_{h+1})\).  Otherwise unfold
 \noderef{TashkinovStoredColors}: membership \(c\in S_h\) puts \(c\) in the
-accumulated union \(\bigcup_{a\leq h}S_a\).  Also \(T_h\) is an ordered
-initial segment of \(T_{h+1}\) by \noderef{TashkinovSeriesStep} and
+accumulated union \(\bigcup_{a\leq h}S_a\).  Also the slot-\(h\) certificate
+provided by \noderef{TashkinovSeries} makes \(T_h\) an ordered initial segment
+of \(T_{h+1}\) through \noderef{TashkinovSeriesStep} and
 \noderef{TreeSequenceInitialSegment}.  Were \(c\) missing on \(T_h\),
 \noderef{TreeMissingColors} would supply a vertex witness in \(T_h\), and
 the initial-segment inclusion would transport it to \(T_{h+1}\), contrary
@@ -416,16 +442,18 @@ accumulated-union membership is not removed in the defining difference for
                  \overline\varphi_h(T_{h+1})\cup D_h.
 \]
 Repeated \noderef{HkuMissingStoredMonotone} carries these two colors into
-\(\overline\varphi_{r-1}(T_r)\cup D_{r-1}\).  Every edge of \(Q\) is
-internal to \(T_r\), so the internal-edge conclusion of
+\(\overline\varphi_{r-1}(T_r)\cup D_{r-1}\).  The containment of \(Q\) in
+\(G[T_r]\) means by \noderef{InternalEdges} that every edge identity of
+\(Q\) is internal to \(T_r\).  Hence the internal-edge conclusion of
 \noderef{SameColorSeriesPreserved} fixes its color from \(\varphi_h\)
 through \(\varphi_n\).  Thus \(Q\) is still a
 \((\gamma_h,\delta_h)\)-cycle through \(v_n\) under \(\varphi_n\).  At
 \(v_n\) it supplies two internal incident edge identities, one colored
 \(\gamma_h\) and one colored \(\delta_h\).
 
-Finally, the terminal PE certificate and
-\noderef{HkuParallelBoundaryStructure} identify the connecting edge
+Finally, the step-at-index field of \noderef{TashkinovSeries} supplies the
+terminal PE certificate, which together with
+\noderef{HkuParallelBoundaryStructure} identifies the connecting edge
 incident with \(v_n\) as the unique \(\gamma_n\)-colored boundary edge,
 and we now verify the other endpoint-color fact used here.  The PE rule
 \noderef{ParallelExtensionColor} makes \(\gamma_n\) missing at \(v_n\)

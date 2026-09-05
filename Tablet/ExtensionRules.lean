@@ -13,6 +13,7 @@ import Tablet.ExtendedTashkinovTree
 import Tablet.HkuMissingStoredMonotone
 import Tablet.HkuParallelBoundaryStructure
 import Tablet.HkuUnsupportedVertexColors
+import Tablet.InternalEdges
 import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.MaximumDefectiveChoice
@@ -30,6 +31,7 @@ import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.TechnicalTheoremBase
+import Tablet.TreeIncidentEdge
 import Tablet.TreeInterchangeable
 import Tablet.TreeSequence
 import Tablet.TreeSequenceInitialSegment
@@ -43,6 +45,7 @@ import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentsDisjoint
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 import Tablet.sc1
 
 -- [TABLET NODE: ExtensionRules]
