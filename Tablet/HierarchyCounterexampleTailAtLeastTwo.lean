@@ -1,68 +1,6 @@
-import Tablet.ChangeLemma
-import Tablet.CertifiedETTRestriction
-import Tablet.ColoredVertexSetClosed
-import Tablet.ColoredVertexSetElementary
-import Tablet.CombinedStableColoring
-import Tablet.CorrespondingExtendedTashkinovTree
-import Tablet.Degree
-import Tablet.ExtendedTashkinovTree
-import Tablet.GoodHierarchy
-import Tablet.GoodHierarchyNewMissingClosed
-import Tablet.GoodHierarchyPrefixRepackage
-import Tablet.HierarchyBase
-import Tablet.HierarchyCounterexample
-import Tablet.HierarchyCounterexampleLess
-import Tablet.HierarchyCounterexampleMeasure
 import Tablet.HierarchyCounterexamplePenultimateElementary
-import Tablet.HierarchyLEMStable
-import Tablet.HierarchyNonparallelFirstEdge
-import Tablet.HierarchyStarredStage
-import Tablet.HierarchyStageMissingColors
-import Tablet.HierarchyStoredColorsAntitone
-import Tablet.HierarchyWeaklyStable
-import Tablet.IsProperEdgeColoring
-import Tablet.KTriple
-import Tablet.MaximumDefectiveChoice
-import Tablet.MaximumDegree
-import Tablet.MaximumProperty
-import Tablet.MaximumPropertyTransport
-import Tablet.MissingColors
-import Tablet.ModColoring
-import Tablet.OutsideKempeRecoloring
-import Tablet.ParallelCommonMissingClosed
-import Tablet.ParallelExtensionColor
-import Tablet.RevisitingExtensionCertificate
-import Tablet.SameGoodHierarchy
-import Tablet.SameHierarchyStages
-import Tablet.StableChange
-import Tablet.StableColoring
-import Tablet.TashkinovAugmentation
-import Tablet.TashkinovAugmentationSequence
-import Tablet.TashkinovClosure
-import Tablet.TashkinovHierarchy
-import Tablet.TashkinovSeries
-import Tablet.TashkinovSeriesStep
-import Tablet.TashkinovStoredColors
-import Tablet.Td
-import Tablet.TechnicalTheoremBase
-import Tablet.TreeColorSetClosed
-import Tablet.TreeColorSetMinusClosed
-import Tablet.TreeColoringInvariant
-import Tablet.TreeInterchangeable
-import Tablet.TreeMissingColors
-import Tablet.TreeSequence
-import Tablet.TreeSequenceInitialSegment
-import Tablet.TreeSequenceAdjoinEdge
-import Tablet.TreeSequencePrefix
-import Tablet.TreeSequenceVertexSet
-import Tablet.TwoColorComponent
-import Tablet.TwoColorComponentSpanningPath
-import Tablet.TwoColorComponentSwap
-import Tablet.TwoColorCycle
-import Tablet.TwoColorIncidenceDegreeAtMostTwo
-import Tablet.TwoColorPathComponent
-import Tablet.interchange
-import Tablet.step1
+import Tablet.HierarchyCounterexampleOneAdditionPositiveDividerImpossible
+import Tablet.HierarchyCounterexampleOneAdditionZeroDividerImpossible
 
 -- [TABLET NODE: HierarchyCounterexampleTailAtLeastTwo]
 theorem HierarchyCounterexampleTailAtLeastTwo {V E : Type*}
@@ -220,4 +158,22 @@ theorem HierarchyCounterexampleTailAtLeastTwo {V E : Type*}
       ColoredVertexSetElementary G phi (TreeSequenceVertexSet Ty) :=
     HierarchyCounterexamplePenultimateElementary G k e0 input T phi ett base C
       hproper hone hlower hfewer hminimal hlarge
-  sorry
+  dsimp only
+  by_contra hnotTwo
+  have hpositiveTail :
+      0 < T.length -
+        (HierarchyStarredStage C.hierarchy
+          (Fin.last C.hierarchy.dividerCount)).length := by
+    sorry
+  have honeAddition :
+      T.length -
+        (HierarchyStarredStage C.hierarchy
+          (Fin.last C.hierarchy.dividerCount)).length = 1 := by
+    omega
+  rcases Nat.eq_zero_or_pos C.hierarchy.dividerCount with hzero | hpositive
+  · exact HierarchyCounterexampleOneAdditionZeroDividerImpossible
+      G k e0 input T phi ett base C hproper hone hlower hfewer hminimal hlarge
+      honeAddition hprefixElementary hzero
+  · exact HierarchyCounterexampleOneAdditionPositiveDividerImpossible
+      G k e0 input T phi ett base C hproper hone hlower hfewer hminimal hlarge
+      honeAddition hprefixElementary hpositive
