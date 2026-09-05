@@ -1,4 +1,5 @@
 import Tablet.Basic2
+import Tablet.CertifiedETTRestriction
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.CorrespondingExtendedTashkinovTree

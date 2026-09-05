@@ -267,10 +267,13 @@ four colors in
 Choose $\theta$ from this set distinct from $\alpha$ and $\beta$.
 The elementarity premise needed below is obtained without manufacturing
 a zero-rung ETT.  If $n=1$, it is the first conclusion of
-\noderef{TechnicalTheoremBase}.  If $n>1$, restrict the certified series
-through index $n-1$ and display its exact last closure $T_n$; the
-quantified fields of \noderef{MaximumProperty} restrict with the series, so lower
-assertion (i) applies.  Thus the hypothesis of
+\noderef{TechnicalTheoremBase}.  If $n>1$, apply
+\noderef{CertifiedETTRestriction} with target $r=n-1$.  It returns an
+actual rung-$(n-1)$ ETT on the original input, displayed on the exact old
+tree $T_n$ with generating coloring $\varphi_{n-1}$, together with
+maximum property, equality of every retained raw and computed data slot,
+and transported certification terms.  Lower assertion (i) applies to
+this certified ETT.  Thus the hypothesis of
 \noderef{ParallelCommonMissingClosed} holds, and that lemma makes
 $\theta$ closed on the union (12).  In the notation of
 \noderef{TreeColorSetClosed},

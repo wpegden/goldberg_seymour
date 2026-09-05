@@ -1,4 +1,5 @@
 import Tablet.BoundaryColorEdges
+import Tablet.CertifiedETTRestriction
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved

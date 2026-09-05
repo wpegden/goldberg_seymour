@@ -143,20 +143,16 @@ positive certificate in \noderef{TashkinovSeries}; by
 the generating-coloring field of \noderef{ExtendedTashkinovTree}
 identifies its current coloring with $\varphi_n$.
 
-If $n>1$, restrict every array of the certified series to slots through
-$n-1$, retaining its tree slots through $T_n$.  Every retained
-certificate has the same constructor and the same witnesses because it
-only refers to retained slots.  The last retained noninitial certificate
-gives the strict exact inclusion from $T_{n-1}$ to $T_n$.  Use $T_n$
-itself as the displayed terminal tree; the upper inclusion in its last
-certified closure is reflexive.  These data give an actual
-\noderef{ExtendedTashkinovTree} $\mathcal E^{-}$ of rung $n-1$, exact
-terminal tree $T_n$, and generating coloring $\varphi_{n-1}$.  The
-initial maximum-order equality in \noderef{MaximumProperty} is unchanged,
-and every closure bound indexed below $n-1$ is literally the corresponding
-old bound.  Hence every field of maximum property restricts to
-$\mathcal E^{-}$.  Lower assertion (i), applied to this actual maximum
-ETT, gives
+If $n>1$, apply \noderef{CertifiedETTRestriction} to the original ETT
+and maximum property with target $r=n-1$.  It returns an actual
+$\mathcal E^{-}$ on the same input data, with rung exactly $n-1$,
+displayed terminal tree exactly the original $T_n$, displayed generating
+coloring exactly $\varphi_{n-1}$, and maximum property.  Its pointwise
+tree and data equalities preserve all retained raw slots and exact edge
+identities, its computed-set equalities preserve every retained $D_i$,
+and its heterogeneous equalities transport every retained
+\noderef{TashkinovSeriesStep} certificate.  Lower assertion (i), applied
+to this certified maximum ETT, gives
 \[
              V(T_n)\text{ is elementary under }\varphi_{n-1}. \tag{1}
 \]

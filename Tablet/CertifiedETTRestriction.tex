@@ -1,0 +1,163 @@
+\begin{lemma}[Certified restriction to every earlier positive rung]
+Let $G$ be a finite loopless multigraph with palette $[k]$ and
+distinguished edge $e_0$.  Let $\varphi_{\mathrm{in}}$ be an input
+partial edge coloring, and let $\mathcal E$ be an
+\noderef{ExtendedTashkinovTree} on these data, with displayed terminal
+tree $T$, displayed generating coloring $\varphi_n$, rung number $n$,
+certified \noderef{TashkinovSeriesData} $\mathcal D$, and
+\noderef{MaximumProperty}.
+For every integer $r$ satisfying
+\[
+                         1\leq r<n,
+\]
+there is an actual extended Tashkinov tree $\mathcal E^{\leq r}$ on the
+same graph, palette, distinguished edge, and input coloring whose
+displayed terminal tree is exactly the original tree slot
+$\mathcal D.\mathit{tree}(r+1)$ and whose displayed generating coloring
+is exactly $\mathcal D.\mathit{coloring}(r)$.  Writing
+$\mathcal D^{\leq r}$ for its certified series data, it has all of the
+following properties.
+\begin{enumerate}
+\item Its rung number is exactly $r$, and it has maximum property.
+\item Under the canonical order-preserving inclusion
+$\iota_T:\operatorname{Fin}(r+2)\to\operatorname{Fin}(n+2)$, every
+retained tree slot agrees pointwise:
+\[
+ \mathcal D^{\leq r}.\mathit{tree}(a)
+   =\mathcal D.\mathit{tree}(\iota_T(a)).
+\]
+\item Under the canonical inclusion
+$\iota_D:\operatorname{Fin}(r+1)\to\operatorname{Fin}(n+1)$, the
+coloring, raw stored-color set, exact connecting-edge set, extension
+kind, chosen vertex, outside vertex, delta, and gamma arrays all agree
+pointwise with their original arrays.
+\item At every retained data index $a$, the computed stored-color set is
+preserved exactly:
+\[
+ \noderef{TashkinovStoredColors}(\mathcal D^{\leq r},a)
+  =\noderef{TashkinovStoredColors}(\mathcal D,\iota_D(a)).
+\]
+\item At every retained data index, the
+\noderef{TashkinovSeriesStep} certificate is the original certificate at
+the included index after dependent transport along these equalities; in
+particular, the two certificate terms are heterogeneously equal.
+\end{enumerate}
+No restriction ETT is asserted at target rung zero.
+\end{lemma}
+\begin{proof}
+We prove the assertion simultaneously for all $\mathcal E$ and all
+admissible $r$ by strong induction on the positive gap
+\[
+                              d=n-r.
+\]
+Because $r\geq1$ and $r<n$, one has $n>1$, so
+\noderef{CertifiedETTPredecessor} applies to $\mathcal E$.  It returns an
+actual maximum ETT $\mathcal P$ whose rung number is $n-1$, whose
+displayed terminal tree and generating coloring are exactly the original
+slots $\mathcal D.\mathit{tree}(n)$ and
+$\mathcal D.\mathit{coloring}(n-1)$, and whose retained series data,
+computed stored-color sets, and dependent step certificates agree with
+those of $\mathcal E$ under the canonical inclusions.  Denote its series
+data by $\mathcal D^-$.  The cited result also supplies the exact rung
+equation and maximum property for $\mathcal P$.
+
+Suppose first that $d=1$.  Natural-number arithmetic gives $n=r+1$ and
+$n-1=r$.  Thus $\mathcal P$ already has the required rung, displayed
+tree $\mathcal D.\mathit{tree}(r+1)$, and displayed coloring
+$\mathcal D.\mathit{coloring}(r)$.  The tree inclusion
+$\operatorname{Fin}((n-1)+2)\to\operatorname{Fin}(n+2)$ and the data
+inclusion
+$\operatorname{Fin}((n-1)+1)\to\operatorname{Fin}(n+1)$ supplied by
+\noderef{CertifiedETTPredecessor} become exactly $\iota_T$ and
+$\iota_D$ after substituting $n-1=r$.  Its pointwise equalities therefore
+give items 2--4, its heterogeneous certificate equality gives item 5,
+and its rung equation and inherited maximum property give item 1.  This
+proves the base case without constructing a zero-rung ETT.
+
+Now suppose $d>1$.  Then $r<n-1$, while $r\geq1$, so the induction
+hypothesis applies to the maximum ETT $\mathcal P$ at the same target
+rung $r$.  Its gap is
+\[
+                    (n-1)-r=(n-r)-1=d-1<d.
+\]
+It gives an ETT $\mathcal R$ of rung $r$, initially displayed on
+$\mathcal D^-.\mathit{tree}(r+1)$ and
+$\mathcal D^-.\mathit{coloring}(r)$, with maximum property and the full
+five-part agreement package relative to $\mathcal D^-$.
+
+The predecessor tree equality at index $r+1$ and coloring equality at
+index $r$ identify those two displayed objects with
+$\mathcal D.\mathit{tree}(r+1)$ and
+$\mathcal D.\mathit{coloring}(r)$.  Transport $\mathcal R$ along these
+two exact equalities in the dependent displayed-tree and
+displayed-coloring parameters of
+\noderef{ExtendedTashkinovTree}.  Call the transported ETT
+$\mathcal E^{\leq r}$.  Equality elimination changes no rung or retained
+series datum; it transports the maximum-property proof and the recursive
+agreement proofs to their required types.  Hence
+$\mathcal E^{\leq r}$ is an actual ETT on the original input data, has
+rung $r$, has the two exact displayed objects asserted in the statement,
+and has maximum property.
+
+It remains to verify that the two layers of retained-data equalities have
+the single canonical inclusions stated in the conclusion.  Let
+\[
+ \jmath_T:\operatorname{Fin}(r+2)\to
+              \operatorname{Fin}((n-1)+2),\qquad
+ \kappa_T:\operatorname{Fin}((n-1)+2)\to
+              \operatorname{Fin}(n+2)
+\]
+be respectively the tree inclusions from the recursive restriction and
+the predecessor restriction.  Both are the `Fin.castLE' map: they retain
+the numerical value of their argument and merely enlarge its upper
+bound.  Consequently, for every $a$, the elements
+$\kappa_T(\jmath_T(a))$ and $\iota_T(a)$ have the same value.  Extensionality
+for finite indices gives
+\[
+                         \kappa_T(\jmath_T(a))=\iota_T(a).       \tag{1}
+\]
+The corresponding data inclusions
+\[
+ \jmath_D:\operatorname{Fin}(r+1)\to
+              \operatorname{Fin}((n-1)+1),\qquad
+ \kappa_D:\operatorname{Fin}((n-1)+1)\to
+              \operatorname{Fin}(n+1)
+\]
+also preserve values, and the same argument gives
+\[
+                         \kappa_D(\jmath_D(a))=\iota_D(a).       \tag{2}
+\]
+
+For a tree index $a$, the recursive equality identifies the retained
+tree with $\mathcal D^-.\mathit{tree}(\jmath_T(a))$; the predecessor
+equality identifies this with
+$\mathcal D.\mathit{tree}(\kappa_T(\jmath_T(a)))$; and (1) replaces the
+composite index by $\iota_T(a)$.  This proves item 2.  Apply the identical
+three-equality chain using (2) separately to the coloring, raw stored
+set, exact connecting-edge set, kind, chosen vertex, outside vertex,
+delta, and gamma entries.  This proves every clause of item 3, including
+equality of individual parallel-edge identities.
+
+For the computed set at $a$, the induction hypothesis gives equality
+with
+$\noderef{TashkinovStoredColors}(\mathcal D^-,\jmath_D(a))$.
+The predecessor theorem gives equality of that set with the original
+computed set at $\kappa_D(\jmath_D(a))$, and (2) changes that index to
+$\iota_D(a)$.  Transitivity proves item 4; no equality of raw stored slots
+is being substituted for equality of the computed bounded union and
+missing-color deletion.
+
+Finally, the induction hypothesis gives heterogeneous equality between
+the retained certificate and the certificate of $\mathcal P$ at
+$\jmath_D(a)$.  The predecessor theorem gives heterogeneous equality
+from that certificate to the original certificate at
+$\kappa_D(\jmath_D(a))$.  Heterogeneous equality is transitive, and
+transport along (2) identifies the latter dependent term with the
+original certificate at $\iota_D(a)$.  Equality transport in the two
+displayed parameters does not change this proposition-valued
+certificate; proof irrelevance identifies any transported proof terms.
+This proves item 5.
+
+Thus all five conclusions hold for gap $d$.  Strong induction proves them
+for every $1\leq r<n$, completing the construction.
+\end{proof}

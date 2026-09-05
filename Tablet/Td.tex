@@ -146,15 +146,17 @@ the same color to that exact identity under \(\varphi_{n-1}\), contrary
 to the old closure.  Thus (T_n) is a closure of the same exact seed
 under \(\sigma_{n-1}\).                                      \tag{4}
 
-Suppose first that (n>1).  Restrict the original certified series
-through rung (n-1), and use (T_n) as the ETT displayed between its
-last two stages.  The strict ordered-extension clauses of
-\noderef{TashkinovSeriesStep} give an
-\noderef{ExtendedTashkinovTree} (B) with (n-1) rungs and generating
-coloring \(\varphi_{n-1}\).  The initial maximum clause and every
-stage-bound below (n-1) are literally restrictions of the corresponding
-clauses of the given \noderef{MaximumProperty}, so (B) has the maximum
-property.  Apply lower assertion (vi) to (B) and (3).  It gives
+Suppose first that (n>1).  Apply
+\noderef{CertifiedETTRestriction} to the original ETT and maximum
+property with target rung (r=n-1).  It returns an actual ETT (B) on the
+original input, with rung exactly (n-1), displayed terminal tree exactly
+the old slot (T_n), displayed generating coloring exactly
+\(\varphi_{n-1}\), and inherited maximum property.  Its pointwise
+equalities preserve all retained tree and raw data slots, its computed-set
+equalities preserve every retained (D_i), and its heterogeneous
+equalities transport every retained \noderef{TashkinovSeriesStep}
+certificate.  Apply lower assertion (vi) to this certified (B) and (3).
+It gives
 \[
                          \noderef{ModColoring}(B,\sigma_{n-1}). \tag{5}
 \]

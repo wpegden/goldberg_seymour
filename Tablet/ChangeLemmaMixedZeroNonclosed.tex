@@ -208,20 +208,16 @@ The actual last constructor is therefore PE.  Its parallel base clause and
 where $R_n$ is the recorded closure of the supporting prefix of $T_n$.
 
 We now construct, rather than assume, the predecessor elementarity needed
-for the PE argument.  If $n>1$, restrict the certified data and every
-certificate in \noderef{TashkinovSeries} to slots $0,\ldots,n-1$, retaining
-tree slots through $n$.  The last retained positive constructor supplies
-the strict ordered inclusion into the exact tree $T_n$.  Taking $T_n$ as
-displayed terminal tree, using that strict inclusion as the lower ETT
-containment and the reflexive initial-segment relation as the upper
-containment, constructs an \noderef{ExtendedTashkinovTree}
-$\mathcal E^{-}$ of rung $n-1$, terminal tree exactly $T_n$, and generating
-coloring exactly $\varphi_{n-1}$.  Every field of
-\noderef{MaximumProperty} restricts: the equality giving the global order
-of $T_1$ is unchanged, and for $1\leq i<n-1$ its stable-coloring, exact-seed,
-closure, and cardinality bound is literally the old bound at the same
-index, where $i<n$.  Thus $\mathcal E^{-}$ has maximum property, and lower
-assertion (i) makes $V(T_n)$ elementary under $\varphi_{n-1}$.
+for the PE argument.  If $n>1$, apply
+\noderef{CertifiedETTRestriction} with $r=n-1$.  It returns an actual
+$\mathcal E^{-}$ on the original input, with rung exactly $n-1$,
+displayed terminal tree exactly the old slot $T_n$, generating coloring
+exactly $\varphi_{n-1}$, and inherited maximum property.  Its pointwise
+equalities preserve every retained tree, coloring, raw stored set, exact
+connecting-edge set, kind, and witness slot; its additional equalities
+preserve each computed $D_i$ and transport each dependent step
+certificate.  Lower assertion (i) therefore applies to this certified
+maximum ETT and makes $V(T_n)$ elementary under $\varphi_{n-1}$.
 
 If $n=1$, no zero-rung ETT is introduced.  Slot zero of the given series is
 the initial tuple, $T_n=T_1$, and the first conclusion of

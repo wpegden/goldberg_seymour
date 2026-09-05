@@ -1,5 +1,6 @@
 import Tablet.AdjacentEdges
 import Tablet.BoundaryEdges
+import Tablet.CertifiedETTRestriction
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.Degree

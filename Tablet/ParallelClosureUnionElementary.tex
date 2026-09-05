@@ -52,14 +52,14 @@ $v_n$ under $\pi_{n-1}$.  The vertex and edge clauses of
 \noderef{StableColoring} give the same two facts under $\pi'_{n-1}$;
 thus $\gamma_n\ne\delta_n$.
 
-First restrict the original series through slot $n-1$.  Its last
-displayed tree is $T_n$ and its generating coloring is
-$\varphi_{n-1}$.  The ordered initial-segment and strict-extension fields
-are restrictions of \noderef{TashkinovSeriesStep}, and the initial
-maximum clause and all stage bounds below $n-1$ are restrictions of
-\noderef{MaximumProperty}.  Hence, when $n>1$, this is a positive-rung
-ETT with maximum property and smaller rung number, so lower assertion (i)
-makes $V(T_n)$ elementary under $\varphi_{n-1}$.  When $n=1$, the same
+When $n>1$, apply \noderef{CertifiedETTRestriction} with target
+$r=n-1$.  It returns an actual positive-rung ETT on the original input,
+with rung exactly $n-1$, displayed tree exactly the old $T_n$,
+generating coloring exactly $\varphi_{n-1}$, and inherited maximum
+property.  Its pointwise raw-data equalities, computed stored-set
+equalities, and heterogeneous step-certificate equalities identify the
+entire retained series with the original one.  Lower assertion (i) on
+this ETT makes $V(T_n)$ elementary under $\varphi_{n-1}$.  When $n=1$, the same
 claim is the elementarity conclusion of
 \noderef{TechnicalTheoremBase} for the original initial tuple.  The two
 vertex clauses of the stable relations just extracted therefore make
@@ -174,13 +174,15 @@ $\sigma_n$-closure of $T_j(v_n)$ supplied by
 closedness field of \noderef{TashkinovClosure}, proves that $J_n$ is a
 $\sigma_n$-closure of that exact prescribed seed.
 
-Suppose first that $j>1$.  Restrict the original series through rung
-$j-1$ and take the displayed ETT ending between $T_{j-1}$ and $T_j$.
-As above, the relevant clauses of \noderef{MaximumProperty} restrict to
-give it maximum property.  Its rung number $j-1$ is positive and below
-$n$.  Lower assertion (vi), applied to the $T_{j-1}$-stability already
-obtained, says precisely that $\sigma_n$ is a
-\noderef{ModColoring} of this restricted ETT.  Only now do we apply the
+Suppose first that $j>1$.  Apply
+\noderef{CertifiedETTRestriction} with target rung $r=j-1$, which is
+positive and below $n$.  Call its returned maximum ETT $B$.  Its terminal
+ladder stage is exactly $T_{j-1}$, its displayed next tree is exactly
+$T_j$, its generating coloring is $\varphi_{j-1}$, and its retained
+arrays, computed stored sets, and certificates agree with the original
+ones under the canonical inclusions.  Lower assertion (vi), applied to
+$B$ and the $T_{j-1}$-stability already obtained, says precisely that
+$\sigma_n$ is a \noderef{ModColoring} of $B$.  Only now do we apply the
 universal extension clause of that definition: the exact seed and the
 augmentation sequence just checked make $J_n$ an eligible strict
 extension: the first-appearance definition puts $v_n$ outside
@@ -256,8 +258,9 @@ color $a$ or $b$ under $\tau$ exactly when it has the same color under
 $\sigma_n$.  Thus the two $(a,b)$-incidence graphs, their connected
 components, their nontriviality, and the colors missing at their vertices
 are identical.  In particular $a,b$ are still missing on $T_n$ under
-$\tau$.  If $n>1$, lower assertion (ii) for the restricted rung-$(n-1)$
-ETT makes $T_n$ interchangeable under $\tau$ for $a,b$; if $n=1$, this
+$\tau$.  If $n>1$, lower assertion (ii) for the certified rung-$(n-1)$
+ETT supplied above by \noderef{CertifiedETTRestriction} makes $T_n$
+interchangeable under $\tau$ for $a,b$; if $n=1$, this
 is the interchangeability conclusion of
 \noderef{TechnicalTheoremBase} for the original initial tuple.  Equality
 of the two incidence graphs transports that conclusion back to

@@ -144,11 +144,14 @@ $\mathsf{none}$ and exchanges only the two displayed nonempty values, so
 We need one standard predecessor instance for the uses of
 \noderef{rutcor}.  If $n=1$, the first conclusion of
 \noderef{TechnicalTheoremBase} gives elementarity of $T_n$ under the
-pre-step coloring.  If $n>1$, restrict the certified
-\noderef{TashkinovSeries} through its predecessor: its final ladder tree is
-the exact ordered tree $T_n$, its rung number is $n-1$, and the stagewise
-definition of \noderef{MaximumProperty} restricts.  Lower assertion (i)
-then gives the same elementarity.  Denote this established pre-step fact
+pre-step coloring.  If $n>1$, apply
+\noderef{CertifiedETTRestriction} with target $r=n-1$.  It returns an
+actual ETT on the original input, with rung exactly $n-1$, displayed tree
+exactly $T_n$, generating coloring exactly $\varphi_{n-1}$, inherited
+maximum property, full pointwise equality of retained raw and computed
+data, and heterogeneous equality of retained certificates.  Lower
+assertion (i) on that certified ETT gives the same elementarity.  Denote
+this established pre-step fact
 by (2).  The other nonstructural premise of every use of
 \noderef{rutcor} below is exactly the ambient (6.6): the corrected lemma
 uses the same last starred stage $A$, the same full-tail length
@@ -229,8 +232,9 @@ the same stable-coloring premise.
 If $n=1$, these are exactly the properness, one-uncoloredness, and
 stability inputs to the interchangeability conclusion of
 \noderef{TechnicalTheoremBase} on the initial closure $T_n$.  If $n>1$,
-restrict the certified series through rung $n-1$ as in (2); maximum
-property restricts, and lower assertion (ii) applies to the same three
+use the certified rung-$(n-1)$ ETT supplied by
+\noderef{CertifiedETTRestriction} in (2); lower assertion (ii) applies
+to its inherited maximum property and the same three
 inputs.  The chosen first-slot color is missing on $T_n$, so the remaining
 disjunctive missing-color premise is satisfied.  Hence $T_n$ is
 interchangeable also in the non-PE case.  If the closed color was $\beta$,
@@ -359,8 +363,8 @@ identifies $\varphi_n$ with $\varphi_{n-1}$, and reflexivity of the
 incident-edge and vertex clauses in \noderef{StableColoring} supplies the
 stable relation.  For $n=1$, the interchangeability conclusion of
 \noderef{TechnicalTheoremBase} applies to these exact inputs.  For $n>1$,
-the restricted predecessor ETT has maximum property and lower assertion
-(ii) applies.  In both cases the chosen closed color is also missing on
+the certified predecessor ETT from \noderef{CertifiedETTRestriction}
+has maximum property and lower assertion (ii) applies.  In both cases the chosen closed color is also missing on
 $T_n$, discharging the last premise and giving the same interchangeability.
 When the missing closed color is $\beta$, symmetry of
 \noderef{TwoColorComponent}, \noderef{TwoColorPathComponent}, and

@@ -86,12 +86,16 @@ occurrence of \(v_n\) in \(T_j\).  The ordered-stage clauses of
  j_{\rm slot}.\mathrm{val}+1=j\leq n=q.\mathrm{val}+1,
  \qquad T_{j-1}\prec T_j(v_n)\preccurlyeq T_j\preccurlyeq T_n,
 \]
-with all edge identities retained.  Restricting the certified series at
-any earlier positive rung gives an \noderef{ExtendedTashkinovTree}; its
-certified input coloring is still the original \(\varphi_0\), and the
-corresponding clauses of \noderef{MaximumProperty} restrict with it.
-Thus every use of the six displayed hypotheses on an ordinary restricted
-stage below instantiates \(\varphi'_0=\varphi_0\) explicitly.
+with all edge identities retained.  For every earlier positive target
+rung \(s<n\), \noderef{CertifiedETTRestriction} gives an actual ETT on
+the original input \(\varphi_0\), with rung \(s\), displayed tree the
+original slot \(T_{s+1}\), generating coloring \(\varphi_s\), and
+inherited maximum property.  Its returned pointwise equalities preserve
+all retained raw slots and exact connecting-edge identities, its
+computed-set equalities preserve every retained \(D_a\), and its
+heterogeneous equalities transport all retained step certificates.  Thus
+every use of the six displayed hypotheses on such a stage instantiates
+\(\varphi'_0=\varphi_0\) explicitly.
 At the initial rung, the two initial conclusions used in this preparation
 are supplied by \noderef{TechnicalTheoremBase}.
 
@@ -162,10 +166,15 @@ Writing \(\varrho_1\) for the output, we have the exact conclusions
   strongly interchangeable under \(\varrho_1\).
 \end{enumerate}
 
-We next construct the closure used in both cases.  If \(j>1\), let \(B\)
-be the exact restricted positive-rung ETT ending at \(T_{j-1}\).  This is
-an ordinary restriction of the original series, so its input in the lower
-package is \(\varphi'_0=\varphi_0\).
+We next construct the closure used in both cases.  If \(j>1\), apply
+\noderef{CertifiedETTRestriction} with target rung \(r=j-1\); the
+inequalities \(1\leq j-1<n\) follow from \(j>1\) and \(j\leq n\).
+Call the returned ETT \(B\).  Its terminal ladder stage used by
+\noderef{ModColoring} is exactly the old \(T_{j-1}\), its displayed next
+tree is exactly \(T_j\), its generating coloring is
+\(\varphi_{j-1}\), its input is \(\varphi'_0=\varphi_0\), and it has
+maximum property.  The returned data and computed-set equalities identify
+all of these expressions with the original series slots.
 Restrict (b1) to \(T_{j-1}\); its vertex and controlled-edge clauses are
 exactly \noderef{StableColoring} there.  Assertion (vi) from precisely this
 original-input instance makes \(\varrho_1\) a \noderef{ModColoring} of
@@ -598,8 +607,9 @@ order.
 
 Suppose first that \(z\ne v_n\).  The displayed vertices of
 \noderef{TreeSequence} are injective, so the weak position inequality is
-strict: \(v_n\) occurs strictly before \(z\).  If \(j>1\), restrict the
-certified series through \(T_{j-1}\).  This lower ETT is \(B\) with the
+strict: \(v_n\) occurs strictly before \(z\).  If \(j>1\), use the
+certified lower ETT \(B\) already returned by
+\noderef{CertifiedETTRestriction} at target rung \(j-1\).  It has the
 original input \(\varphi'_0=\varphi_0\), so its instance of assertion
 (vi) is the one supplied to
 \noderef{ExtensionBaseCaseTwoContradiction}.  Its assertion-(i) premise is

@@ -1,5 +1,6 @@
 import Tablet.Basic2
 import Tablet.BoundaryEdges
+import Tablet.CertifiedETTRestriction
 import Tablet.ColoredVertexSetStronglyClosed
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.DefectiveColor

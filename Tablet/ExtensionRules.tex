@@ -55,19 +55,20 @@ supporting vertices and \(m(v_i)=m(v_h)\), then
 The universal result \noderef{TechnicalTheoremBase} supplies the two
 nonvacuous assertions at rung zero directly from the certified initial
 tuple; there are no positive PE slots for assertion (iii) at that rung.
-For every \(s<n\), restrict the arrays and step certificates of
-\noderef{TashkinovSeries} to slots through \(s\).  The ordered-extension
-clauses in \noderef{TashkinovSeriesStep} make the resulting final stage an
-ETT in the sense of \noderef{ExtendedTashkinovTree}.  The maximum property
-of this restriction follows by retaining the initial maximum clause and
-the stage-maximality clauses with index below \(s\) from
-\noderef{MaximumProperty}.  When \(s>0\), the explicit local lower-rung
-hypothesis supplies assertions (i)--(vi) for this restriction.
+For every \(s\) with \(1\leq s<n\), apply
+\noderef{CertifiedETTRestriction} with target rung \(r=s\).  It returns
+an actual ETT on the original input, with rung exactly \(s\), displayed
+tree exactly the original slot \(T_{s+1}\), generating coloring exactly
+\(\varphi_s\), and inherited maximum property.  Its pointwise equalities
+preserve every retained tree and data slot, its computed-set equalities
+preserve every \(D_a\), and its heterogeneous equalities transport all
+retained step certificates.  The explicit local lower-rung hypothesis
+therefore supplies assertions (i)--(vi) for this certified restriction.
 
 Apply this observation first to the stability assertion with \(i<n\), and
 then to a pair of PE indices whose larger index is below \(n\).  In either
-case lower-rung assertion (iii) is literally the desired assertion:
-restriction does not change any of the relevant
+case lower-rung assertion (iii) is literally the desired assertion: the
+equalities returned by \noderef{CertifiedETTRestriction} do not change any of the relevant
 trees, colorings, \(S\)-sets, or their order.  Thus it remains only to
 prove the two conclusions when the current PE index is \(i=n\).  This is
 the manuscript's reduction to the terminal slot.

@@ -223,14 +223,16 @@ distinct identities \(a,b\) in
 defective on \(T_{n-1}\), and \(v\) is still a nonminimum vertex of its
 \(d\)-boundary incidence set.
 
-Restrict \(\mathcal T\) through the preceding iteration. The certified
-steps and strict ordered extension in \noderef{TashkinovSeriesStep},
-together with \noderef{ExtendedTashkinovTree}, give a positive-rung ETT
-\(B\) with \(n-1\) rungs, final ordered tree \(T_n\), terminal tree
-\(T_{n-1}\), generating coloring \(\varphi_{n-1}\), and original input
-\(\varphi_0\). Positivity follows from \(1\leq i<n\). The initial
-maximum clause and all stage clauses below \(n-1\) restrict directly from
-\noderef{MaximumProperty}, so \(B\) has maximum property. Relation (7)
+Since \(1\leq i<n\), we have \(n>1\).  Apply
+\noderef{CertifiedETTRestriction} to the given ETT and maximum property
+with target rung \(r=n-1\).  It returns an actual positive-rung ETT
+\(B\), on the original input \(\varphi_0\), whose displayed tree is
+exactly the old slot \(T_n\), whose generating coloring is exactly
+\(\varphi_{n-1}\), whose rung is exactly \(n-1\), and which has maximum
+property.  Its pointwise tree and data equalities identify its terminal
+ladder tree with the old \(T_{n-1}\), every computed stored set with the
+old \(D_a\), and every retained step certificate with the old certificate
+after dependent transport.  Relation (7)
 restricts to
 \((T_{n-1},D_{n-1},\varphi_{n-1})\)-stability: its vertex equalities
 restrict to the smaller vertex set, and any color missing on the smaller

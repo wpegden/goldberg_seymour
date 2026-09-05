@@ -148,19 +148,17 @@ color $\alpha$.
 It remains to justify the SE/RE assertion without treating ``the
 preceding rung'' as implicit data.  In either case the nonparallel field
 of \noderef{HierarchyBase} gives $A=T_n$.  Write $n$ for the rung number.
-When $n>1$, restrict every array in the certified series to indices
-$0,\ldots,n-1$, retaining tree slots $0,\ldots,n$.  Each retained
-certificate in \noderef{TashkinovSeries} has the same constructor and
-the same witnesses because it refers only to these retained slots.  Its
-last noninitial constructor supplies the strict inclusion from
-$T_{n-1}$ to $T_n$.  Taking $T_n$ itself as displayed terminal tree,
-this restricted series, the strict inclusion, and the reflexive upper
-inclusion form an actual \noderef{ExtendedTashkinovTree}
-$\mathcal E^{-}$ of rung $n-1$ and terminal tree $T_n$.  Its generating
-coloring is the preceding coloring $\varphi_{n-1}$.  Every bound in
-\noderef{MaximumProperty} for $\mathcal E^{-}$ is one of the old bounds
-at an index $i<n-1<n$, and the initial maximum-order equality is
-unchanged; hence $\mathcal E^{-}$ has maximum property.
+When $n>1$, apply \noderef{CertifiedETTRestriction} with target
+$r=n-1$.  It returns an actual ETT $\mathcal E^{-}$ on the same graph,
+palette, distinguished edge, and input coloring, with rung exactly
+$n-1$, displayed terminal tree exactly the original slot $T_n$,
+displayed generating coloring exactly $\varphi_{n-1}$, and inherited
+maximum property.  Its pointwise equalities identify every retained tree,
+coloring, raw stored set, exact connecting-edge set, kind, and auxiliary
+slot with the original one; it also identifies every computed $D_i$ and
+heterogeneously transports every retained step certificate.  Thus this is
+the certified predecessor object required by the lower-rung hypothesis,
+not merely an informal truncation of its arrays.
 
 In the SE case the last constructor provides a
 \noderef{MaximumDefectiveChoice}.  Its selected coloring is exactly
