@@ -1,6 +1,9 @@
 import Tablet.Critical
 import Tablet.ChangeLemma
+import Tablet.HierarchyCounterexamplePathNumberBounds
 import Tablet.HierarchyCounterexampleTailAtLeastTwo
+import Tablet.HierarchyCounterexampleTerminalCommonMissing
+import Tablet.HierarchyTailMissingColorExclusion
 import Tablet.StableChange
 import Tablet.IncidentCoreReduction
 import Tablet.Basic2

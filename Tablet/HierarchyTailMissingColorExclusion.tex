@@ -1,0 +1,188 @@
+\begin{lemma}[Missing colors are excluded from an elementary tail]
+Let $(T,\varphi_n)$ be a positive-rung extended Tashkinov tree in a
+finite loopless multigraph with individual edge identities, let
+$\mathcal B$ be a hierarchy base under $\varphi_n$, and let $H$ be a
+hierarchy on this base.  Put
+\[
+ q=H.\mathit{dividerCount},\qquad
+ A=\noderef{HierarchyStarredStage}(H,q),\qquad
+ \ell=|T|-|A|,
+\]
+and, for a natural number $j$, let
+\[
+ T(y_j)=\noderef{TreeSequencePrefix}
+       \bigl(T,\min\{|A|+j,|T|\}\bigr).
+\]
+Let $n$ be the terminal rung index and let $T_n$ be the terminal ladder
+tree.  Assume that $V(T(y_{\ell-1}))$ is elementary under $\varphi_n$.
+
+Fix $i$ with $1\leq i<\ell$, and suppose that a color $\beta$ is missing
+at the exact last vertex $y_i$ of $T(y_i)$.  If $t$ is an edge position
+satisfying
+\[
+             |A|\leq t<|A|+i
+ \quad\hbox{and}\quad
+             \varphi_n(T(y_i).\mathit{edge}(t))=\beta,
+\]
+then all of the following exceptional conclusions hold:
+\begin{enumerate}
+\item $q=0$, $A=\mathcal B.\mathit{core}=T_n$, and $t=|A|$;
+\item the actual certified step at index $n$ is an SE or RE constructor;
+\item for an individual edge identity $f_n$, one has
+\[
+ F_n=\{f_n\},\qquad
+ T(y_i).\mathit{edge}(t)=f_n,\qquad
+ \varphi_n(f_n)=\beta\in D_n,
+\]
+where $D_n=\noderef{TashkinovStoredColors}(\mathcal T,n)$.
+\end{enumerate}
+Thus no $\beta$-colored exact edge occurs from $A$ through $y_i$, apart
+from the first displayed SE/RE connecting seed in precisely the stated
+zero-divider case.  The assertion concerns edge identities, not endpoint
+pairs, so it remains valid in the presence of parallel edges.
+\end{lemma}
+\begin{proof}
+Write $B=T(y_{\ell-1})$.  The range $1\leq i<\ell$ gives
+$i\leq\ell-1$.  The last-starred-stage definition and the nested,
+core-inside-first, and terminal-stage fields of
+\noderef{TashkinovHierarchy} show that $A$ is an exact ordered initial
+segment of $T$.  Hence $|A|+\ell=|T|$, the minimum defining $T(y_i)$ is
+$|A|+i$, and $T(y_i)$ is an exact ordered initial segment of $B$.
+By \noderef{TreeSequencePrefix}, its last vertex is the entry of $T$ at
+index $|A|+i$.  All vertex and edge equalities used below are the
+entrywise equalities of \noderef{TreeSequenceInitialSegment}; no equality
+of endpoint pairs is substituted for an edge identity.
+
+Let $n=\operatorname{Fin.last}(\mathit{ett.rounds})$.  Since the ETT has
+positive rung, $n$ is a positive series index.  Inspect the actual
+certificate $\mathcal T.\mathit{certified}(n)$ supplied by
+\noderef{TashkinovSeries}.  The initial constructor of
+\noderef{TashkinovSeriesStep} is impossible at this positive index, so
+the certificate is PE, SE, or RE.  The generating-coloring field of
+\noderef{ExtendedTashkinovTree} identifies its current coloring with
+$\varphi_n$.
+
+We next locate the certified Tashkinov-augmentation route.  In the PE
+case, the constructor supplies a
+$\varphi_n$-\noderef{TashkinovClosure} from $T_n$ to the final certified
+output.  Thus it supplies a
+$\varphi_n$-\noderef{TashkinovAugmentationSequence} from $T_n$ to that
+output.  The PE clause of \noderef{HierarchyBase} makes $T_n$ an exact
+ordered initial segment of the base core, and the hierarchy places the
+core inside $A$, then $T(y_i)$, then $T$, and finally the certified
+output.  Applying
+\noderef{TashkinovAugmentationSequenceRestrict} at these exact intermediate
+prefixes gives the route through $A$ and $T(y_i)$.
+
+In an SE or RE constructor, the certificate instead supplies an
+individual edge $f_n$, the singleton equation $F_n=\{f_n\}$, the exact
+one-edge seed $S=T_n+f_n$ in the sense of
+\noderef{TreeSequenceAdjoinEdge}, and a $\varphi_n$-Tashkinov closure from
+$S$ to the final output.  If $q>0$, the exact conclusion of
+\noderef{HierarchyNonparallelFirstEdge} places this same identity $f_n$
+at position $|T_n|$ of the first positive hierarchy stage.  The seed and
+that stage are prefixes of the same certified output and the seed has
+length $|T_n|+1$, so their entrywise equations make $S$ a prefix of the
+first stage and hence of $A$.  Restriction again gives the augmentation
+route through $A$ and $T(y_i)$.
+
+If $q=0$ in the SE/RE case, the nonparallel clause of
+\noderef{HierarchyBase} gives
+\[
+                              A=T_n.                           \tag{1}
+\]
+Here the only displayed edge immediately after $A$ that is not itself a
+Tashkinov-augmentation edge is the adjoined seed $f_n$.  Every later
+edge lies in the closure route from $S$ and is an augmentation edge.
+For completeness, this last assertion follows directly by induction on
+the finite augmentation chain.  Every step increases the length by one
+and retains every earlier entry.  If the chain starts at a length at
+most $t$ and ends at $T(y_i)$, whose length is greater than $t$, take
+the first member whose length is greater than $t$.  Its predecessor has
+length at most $t$, and the one-step length equation forces the two
+lengths to be $t$ and $t+1$.  The new last edge of that step is therefore
+the exact displayed identity at position $t$.
+We have therefore proved the following exact dichotomy for the position
+$t$ in the statement:
+\[
+ \begin{array}{l}
+ \text{either the edge at }t\text{ is the new last edge of a certified }
+ \varphi_n\text{-Tashkinov augmentation,}\quad\text{or}\\[1mm]
+ q=0,\ A=T_n,\ t=|A|,\ \Theta_n\in\{\mathrm{SE},\mathrm{RE}\},
+ \ F_n=\{f_n\},\text{ and the edge at }t\text{ is }f_n.
+ \end{array}                                                   \tag{2}
+\]
+The second line uses \noderef{HierarchyNonparallelFirstEdge} with the
+zero-divider terminal-stage identity, so its equality is the exact
+$e_1=f_n$ equality required in the manuscript.
+
+We rule out the first line of (2).  Expand the corresponding one-step
+\noderef{TashkinovAugmentation}.  Its predecessor $X$ has length $t$,
+its new last edge is the exact edge at position $t$, and its
+$\varphi_n$-color is missing at some vertex $z$ of $X$.  Under the
+hypothesis that this edge has color $\beta$, we have
+\[
+             \beta\in\overline\varphi_n(z).                   \tag{3}
+\]
+The predecessor is an exact prefix of $T(y_i)$, so $z$ occurs at an
+index at most $t$.  The assumed strict inequality $t<|A|+i$ and vertex
+injectivity in \noderef{TreeSequence} show that $z$ is not the last
+vertex $y_i$, whose index is $|A|+i$.  Both $z$ and $y_i$ lie in
+$V(T(y_i))\subseteq V(B)$.  Equation (3) and the assumed
+$\beta\in\overline\varphi_n(y_i)$ now contradict the elementarity of
+$B$ as defined by \noderef{ColoredVertexSetElementary}.  Therefore only
+the exceptional second line of (2) can occur.  This proves $q=0$, (1),
+$t=|A|$, the actual certified SE/RE alternative, $F_n=\{f_n\}$, the
+exact edge identity, and $\varphi_n(f_n)=\beta$.
+
+It remains to verify the asserted membership in $D_n$, rather than
+merely label the seed exceptional.  In the SE constructor, the fields of
+the actual \noderef{TashkinovSeriesStep} certificate and its
+\noderef{MaximumDefectiveChoice} identify $f_n$ with the selected
+defective edge, identify its color with the selected color
+$\delta_n=\beta$, and put $\delta_n$ in the raw stored set $S_n$.  In the
+RE constructor, the \noderef{RevisitingExtensionCertificate} return path
+begins with the exact edge $f_n$ and alternates the certified colors
+$\gamma_h,\delta_h$; hence
+$\beta$ is one of these two colors, and the constructor puts both in
+$S_n$.  Thus in either case
+\[
+                              \beta\in S_n.                    \tag{4}
+\]
+
+We claim that $\beta$ is not missing anywhere on $T_n$.  In the RE
+constructor, the current coloring $\varphi_n$ is exactly the preceding
+coloring and the constructor states that $T_n$ is closed under that
+coloring.  The exact edge $f_n$ is a boundary edge of $T_n$ carrying
+$\beta$.  The definition \noderef{ColoredVertexSetClosed} therefore
+immediately excludes $\beta$ from the missing-color set of every vertex
+of $T_n$.
+
+For SE, write $\psi$ for the preceding coloring and $\pi=\varphi_n$ for
+the selected coloring.  The constructor gives that $T_n$ is closed under
+$\psi$, that $\pi$ is
+$\bigl(T_n,D_{n-1},\psi\bigr)$-stable, that $\pi$ is proper, and that
+$f_n$ is a boundary edge incident with the selected inside vertex $v$
+and has $\pi(f_n)=\beta$.  Suppose that $\beta$ were missing somewhere
+on $T_n$ under $\pi$.  The vertexwise clause of
+\noderef{StableColoring} then makes $\beta$ missing somewhere on $T_n$
+under $\psi$.  On the other hand, $\pi(f_n)=\beta$ and incidence with
+$v$ show from \noderef{MissingColors} that $\beta$ is not missing at
+$v$ under $\pi$; vertexwise stability says the same under $\psi$.
+Thus some edge $g$ incident with $v$ has $\psi(g)=\beta$.  Because
+$\beta$ is tree-missing under $\psi$, the incident-edge clause of
+\noderef{StableColoring} fixes this exact edge, so $\pi(g)=\beta$.
+Properness of $\pi$ from \noderef{IsProperEdgeColoring}, applied to the
+two $\beta$-colored edges $f_n$ and $g$ incident with $v$, gives
+$g=f_n$.  Hence $\psi(f_n)=\beta$.  This contradicts the
+$\psi$-closedness of $T_n$, since $f_n$ is its boundary edge and
+$\beta$ is missing somewhere on it.  This proves in SE as well that
+\[
+                    \beta\notin\overline\varphi_n(T_n).        \tag{5}
+\]
+Finally, \noderef{TashkinovStoredColors} defines $D_n$ as the union of
+the raw stored sets through index $n$, with
+$\overline\varphi_n(T_n)$ removed.  Combining (4) and (5) gives
+$\beta\in D_n$.  This completes every clause of the exceptional
+conclusion.
+\end{proof}

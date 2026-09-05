@@ -1,0 +1,99 @@
+\begin{lemma}[A terminal common-missing color]
+Fix a finite loopless multigraph with individual edge identities, a
+palette of $k$ colors, and a distinguished edge $e_0$.  Let
+$(T,\varphi_n)$ be a positive-rung extended Tashkinov tree constructed
+from an arbitrary certified input coloring, let $\mathcal B$ be a
+hierarchy base under $\varphi_n$, and let $C$ be a hierarchy
+counterexample over that base.  Assume that $\varphi_n$ is proper and
+leaves exactly $e_0$ uncolored.
+
+Assume, uniformly for every positive-rung maximum ETT on the same graph,
+palette, and distinguished edge, with arbitrary certified input and
+generating colorings and with smaller rung number, all six lower-rung
+assertions of the technical theorem: elementarity; terminal
+interchangeability; at every PE slot, unconditional stability before the
+support, stability on the preceding ladder tree when the first-appearance
+index is greater than one, and disjointness of stored pairs at distinct PE
+slots with distinct supports and equal first-appearance index; the terminal
+PE component assertion; the defective-endpoint order assertion; and the
+mod-coloring assertion.  Assume also that every
+same-rung maximum ETT with a good hierarchy having fewer dividers than
+$C$ is elementary.
+
+Assume that $C$ is lexicographically minimal among hierarchy
+counterexamples whose ETTs have the same rung number as $T$ and whose
+hierarchies have the same divider count, allowing the certified input
+coloring, generating coloring, ETT, base, and hierarchy to vary.  Finally
+assume
+\[
+ 2n+11\leq |\overline\varphi_n(T_n)|,
+\]
+where $n$ is the rung number and $T_n$ is the terminal ladder tree.
+
+Write $H=C.\mathit{hierarchy}$ and
+\[
+ A=\noderef{HierarchyStarredStage}
+      (H,\operatorname{Fin.last}(H.\mathit{dividerCount})),
+ \qquad \ell=|T|-|A|.
+\]
+Let
+\[
+ B=\noderef{TreeSequencePrefix}
+       \bigl(T,\min\{|A|+(\ell-1),|T|\}\bigr)
+\]
+be the exact ordered penultimate full-tail prefix, and let $y_\ell$ be
+the final displayed vertex of $T$.  Then there is an actual color
+$\alpha$ such that
+\[
+ \alpha\in\overline\varphi_n(B)
+       \cap\overline\varphi_n(y_\ell).                         \tag{7.1}
+\]
+The prefix $B$ inherits all displayed edge identities from $T$, including
+the identities of parallel edges.
+\end{lemma}
+\begin{proof}
+Apply \noderef{HierarchyCounterexampleTailAtLeastTwo} to the complete
+ambient package in the statement.  It gives
+\[
+                              2\leq\ell.                       \tag{1}
+\]
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} to the same
+package.  Its conclusion is exactly
+\[
+             V(B)\text{ is elementary under }\varphi_n.        \tag{2}
+\]
+
+Since $\ell=|T|-|A|$ and (1) implies $|A|\leq |T|$, elementary arithmetic
+gives
+\[
+ |A|+\ell=|T|,
+ \qquad
+ \min\{|A|+\ell-1,|T|\}=|T|-1.                                \tag{3}
+\]
+Consequently \noderef{TreeSequencePrefix} says that $B$ consists of the
+first $|T|-1$ exact edges and the first $|T|$ vertices of $T$, entry by
+entry.  By the vertex injectivity field of \noderef{TreeSequence}, the
+only vertex of $T$ not in $B$ is its final vertex $y_\ell$; in particular
+$y_\ell\notin V(B)$.  The corresponding edge clause of the prefix
+construction is why no parallel edge identities are identified in this
+argument.
+
+Suppose that (7.1) were false.  We show that $V(T)$ would then be
+elementary.  Let $u,v$ be distinct vertices of $T$.  By the preceding
+paragraph, each belongs either to $V(B)$ or is $y_\ell$.  They cannot
+both be $y_\ell$.  If both belong to $V(B)$, their missing-color sets are
+disjoint by (2) and \noderef{ColoredVertexSetElementary}.  In the remaining
+case, after interchanging $u$ and $v$ if necessary, we have
+$u\in V(B)$ and $v=y_\ell$.  If a color $\alpha$ were missing at both,
+then the union definition \noderef{TreeMissingColors} would put
+$\alpha$ in $\overline\varphi_n(B)$, contrary to the assumed failure of
+(7.1).  Thus the two missing-color sets are disjoint in this case as well.
+
+We have proved pairwise disjointness of the missing-color sets at every
+two distinct vertices of $T$.  By
+\noderef{ColoredVertexSetElementary}, this says that $V(T)$ is elementary
+under $\varphi_n$, contradicting the `notElementary' field of
+\noderef{HierarchyCounterexample}.  Hence (7.1) holds, and choosing a
+member of its nonempty finite intersection supplies the asserted color
+$\alpha$.
+\end{proof}

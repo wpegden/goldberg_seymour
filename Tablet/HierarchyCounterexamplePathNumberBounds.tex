@@ -1,0 +1,77 @@
+\begin{lemma}[The hierarchy path number lies in the full-tail range]
+Fix a finite loopless multigraph with individual edge identities, a
+palette of $k$ colors, and a distinguished edge $e_0$.  Let
+$(T,\varphi_n)$ be a positive-rung extended Tashkinov tree constructed
+from an arbitrary certified input coloring, let $\mathcal B$ be a
+hierarchy base under $\varphi_n$, and let $C$ be a hierarchy
+counterexample over that base.  Assume that $\varphi_n$ is proper and
+leaves exactly $e_0$ uncolored.
+
+Assume, uniformly for every positive-rung maximum ETT on the same graph,
+palette, and distinguished edge, with arbitrary certified input and
+generating colorings and with smaller rung number, all six lower-rung
+assertions of the technical theorem: elementarity; terminal
+interchangeability; at every PE slot, unconditional stability before the
+support, stability on the preceding ladder tree when the first-appearance
+index is greater than one, and disjointness of stored pairs at distinct PE
+slots with distinct supports and equal first-appearance index; the terminal
+PE component assertion; the defective-endpoint order assertion; and the
+mod-coloring assertion.  Assume also that every
+same-rung maximum ETT with a good hierarchy having fewer dividers than
+$C$ is elementary.
+
+Assume that $C$ is lexicographically minimal among hierarchy
+counterexamples whose ETTs have the same rung number as $T$ and whose
+hierarchies have the same divider count, allowing the certified input
+coloring, generating coloring, ETT, base, and hierarchy to vary.  Finally
+assume
+\[
+ 2n+11\leq |\overline\varphi_n(T_n)|,
+\]
+where $n$ is the rung number and $T_n$ is the terminal ladder tree.
+
+Write $H=C.\mathit{hierarchy}$, let
+\[
+ A=\noderef{HierarchyStarredStage}
+      (H,\operatorname{Fin.last}(H.\mathit{dividerCount})),
+ \qquad \ell=|T|-|A|,
+\]
+and put $r=\noderef{HierarchyPathNumber}(H)$.  Then
+\[
+                         1\leq r\leq \ell .
+\]
+In particular, $r$ is bounded by the full-tail length $\ell$; no
+equality between these two parameters is asserted.
+\end{lemma}
+\begin{proof}
+Apply \noderef{HierarchyCounterexampleTailAtLeastTwo} to the ETT, base,
+counterexample, properness and unique-uncoloredness assumptions, the
+complete lower-rung package, the fewer-divider induction hypothesis, the
+fixed-rung equal-divider minimality hypothesis, and the large-branch
+estimate stated here.  Its conclusion is
+\[
+                              2\leq\ell.                       \tag{1}
+\]
+In particular $|A|\leq |T|$, and the definition of truncated subtraction
+now gives
+\[
+                         |A|+\ell=|T|.                         \tag{2}
+\]
+
+Unfold \noderef{HierarchyPathNumber}.  Its candidate set is
+\[
+ S=\{j\in\{1,\ldots,\ell\}:\text{every exact tail edge after }y_j
+       \text{ has endpoint pair prescribed by the displayed path}\}.
+\]
+The index $j=\ell$ lies in this set.  Indeed, (1) gives
+$1\leq\ell\leq\ell$, and the path condition at $\ell$ asks about an edge
+position $s$ satisfying $|A|+\ell\leq s<|T|$.  Equation (2) makes these
+two inequalities inconsistent.  Thus the condition is vacuous exactly
+as for the one-vertex terminal path, and $S$ is nonempty.
+
+The nonempty branch of \noderef{HierarchyPathNumber} defines $r$ as the
+least member of the finite set $S$.  Membership of this minimum in $S$
+gives $1\leq r\leq\ell$ from the defining interval of $S$.  The fallback
+branch is not entered because $\ell\in S$.  This proves both asserted
+bounds while keeping $r$ and $\ell$ distinct.
+\end{proof}
