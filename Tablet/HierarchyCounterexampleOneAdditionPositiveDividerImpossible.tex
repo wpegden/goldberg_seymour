@@ -89,15 +89,47 @@ $u,v$ if needed and expanding \noderef{TreeMissingColors} and
        \cap\overline\varphi_n(y_1).                           \tag{3}
 \]
 
-The individual SE or RE connecting seed, if the terminal series step is
-nonparallel, already lies in the first positive hierarchy stage by
-\noderef{HierarchyNonparallelFirstEdge}; because $q>0$, that stage is an
-ordered prefix of $A$.  Thus $e_1$ is not the stored-seed exception.
-The final \noderef{TashkinovClosure}, expanded as its finite
-\noderef{TashkinovAugmentationSequence}, increases length by one at each
-\noderef{TashkinovAugmentation}.  Both $A$ and $T$ are ordered prefixes
-of the closure's last tree and their lengths differ by one, so the
-intervening augmentation is precisely $(e_1,y_1)$.  Write
+Write $n$ for the rung number, $T_n$ for the terminal ladder tree, and
+$T_{n+1}$ for the last output tree of the certified series.  The
+`certified' field of \noderef{TashkinovSeries}, evaluated at the actual
+last index $\operatorname{Fin.last}(n)$, supplies a
+\noderef{TashkinovSeriesStep} certificate at that index.  The
+`roundsPositive' field of \noderef{ExtendedTashkinovTree} says $n\geq1$,
+so this is a positive index and the certificate cannot be the initial
+constructor.  It is therefore an actual SE, PE, or RE constructor.  The
+other fields of \noderef{ExtendedTashkinovTree} give the exact ordered
+relations and coloring identity
+\[
+                 T_n\prec T\preceq T_{n+1},
+        \qquad \varphi_n=\varphi^{\rm series}_n.              \tag{4a}
+\]
+In the PE constructor the certified final
+\noderef{TashkinovClosure} starts at $T_n$.  In either the SE or RE
+constructor it records an individual edge identity $f_n$, the singleton
+connecting-set equality $F_n=\{f_n\}$, the exact seed $T_n+f_n$ in the
+sense of \noderef{TreeSequenceAdjoinEdge}, and a certified closure from
+that seed to $T_{n+1}$.  By
+\noderef{HierarchyNonparallelFirstEdge}, this same $f_n$ is the first
+edge of the first positive hierarchy stage.  Since $q>0$, that stage is
+an ordered prefix of $A$.  The exact seed and that stage are also ordered
+prefixes of the same closure output; the edge and vertex entry clauses of
+\noderef{TreeSequenceInitialSegment}, together with the outside vertex
+recorded by \noderef{TreeSequenceAdjoinEdge}, identify their complete
+first new pair.  Hence the whole nonparallel seed $T_n+f_n$ lies in $A$,
+and $e_1$ is not the SE/RE stored-seed exception.
+
+In PE, $T_n$ is an ordered prefix of the hierarchy base core and hence
+of $A$; in SE/RE the exact seed $T_n+f_n$ is an ordered prefix of $A$ by
+the preceding paragraph.  Also $A\preceq T\preceq T_{n+1}$ by the
+hierarchy nesting and (4a).  Expand the certified closure as its finite
+\noderef{TashkinovAugmentationSequence}.  Each
+\noderef{TashkinovAugmentation} raises the length by exactly one and
+retains all earlier vertex and exact edge entries.  The sequence must
+therefore contain unique members of lengths $|A|$ and $|T|$; since both
+members and $A,T$ are ordered prefixes of $T_{n+1}$ of those respective
+lengths, entrywise equality in \noderef{TreeSequenceInitialSegment}
+identifies them with $A$ and $T$.  As $|T|=|A|+1$, the intervening
+augmentation is precisely the exact addition $(e_1,y_1)$.  Write
 \[
                          \varphi_n(e_1)=\gamma.                \tag{4}
 \]
@@ -219,23 +251,51 @@ $\alpha$ is missing.  The cases in
 The same support argument fixes every edge incident with $A$, so every
 missing-color set on $A$ is preserved.
 
-Inspect the final certificate in \noderef{TashkinovSeriesStep}.  In the
-PE case it is an augmentation sequence from $T_n$; in the SE/RE case it
-first records the exact seed $T_n+f_n$ by
-\noderef{TreeSequenceAdjoinEdge}.  The exceptional $f_n$ already lies
-in $A$, as proved above.  Truncate the original closure sequence at
-$A$.  Every retained exact edge and its old endpoint are incident with
-$A$, so the preceding pointwise identity preserves both its color and
-its missing-color witness.  Thus the same exact sequence reaches $A$
-under $\sigma_n$.  Append the exact augmentation $(e_1,y_1)$, using
-(13) and the original $\gamma$-missing witness on $A$.  This verifies
-the proper PE or SE/RE eligibility disjunct of
-\noderef{ModColoring} for the same ordered $T$, retaining $f_n$ as the
-same edge identity in the nonparallel cases.  The universal clause of
-(11) supplies a full \noderef{CorrespondingExtendedTashkinovTree}
-certificate $\mathcal C_T$ on $T$; write its replacement ETT as
-$\mathcal E_T^\sigma$.  By \noderef{MaximumPropertyTransport}, this ETT
-has maximum property.
+Return to the certified last positive step selected above from
+\noderef{TashkinovSeries}; its generating coloring is $\varphi_n$ and
+its exact closure output contains $T$ by
+\noderef{ExtendedTashkinovTree}.  In the PE case, truncate its certified
+augmentation sequence $T_n\longrightarrow T_{n+1}$ at the already
+identified member $A$.  In the SE/RE cases, retain the certified exact
+seed $T_n+f_n$, which is a prefix of $A$, and truncate the certified
+sequence $T_n+f_n\longrightarrow T_{n+1}$ at $A$.  Every augmentation
+retained before $A$ uses an exact new edge incident with its old endpoint
+in $A$ and a color missing at an old vertex in $A$.  The edge and vertex
+clauses of \noderef{TreeColoringInvariant} from (11) preserve,
+respectively, that exact edge color and that missing-color witness.
+Induction through \noderef{TashkinovAugmentationSequence} therefore
+gives the same exact route to $A$ under $\sigma_n$.  Append the exact
+augmentation $(e_1,y_1)$, using (13) and the preserved original
+$\gamma$-missing witness on $A$.  Thus in PE there is a certified route
+$T_n\longrightarrow T$, while in SE/RE there is a certified route
+$T_n+f_n\longrightarrow T$ retaining both the same edge identity $f_n$
+and $F_n=\{f_n\}$.
+
+These are precisely the two eligibility alternatives in
+\noderef{ModColoring}; moreover (4a) supplies their required exact
+$T_n\prec T$ ordered prefix.  The universal clause of (11) consequently
+supplies a full \noderef{CorrespondingExtendedTashkinovTree} certificate
+$\mathcal C_T$ on this same ordered $T$; write its replacement ETT as
+$\mathcal E_T^\sigma$.  This is an actual ETT presentation, not merely a
+tree inclusion.  Indeed, the `certified' field of its replacement
+\noderef{TashkinovSeries} supplies the actual SE/PE/RE certificate at
+its last positive index, while the fields of its replacement
+\noderef{ExtendedTashkinovTree} give
+\[
+ T_n^\sigma\prec T\preceq T_{n+1}^\sigma,
+ \qquad \sigma_n=(\varphi^{\rm replacement})_n.              \tag{13a}
+\]
+The series-presentation field of $\mathcal C_T$ identifies that ETT
+series with its certified replacement series.  Its rung agreement,
+positive-ladder-tree agreement, raw stored-set agreement, exact
+connecting-edge-set agreement, and extension-kind agreement then
+identify $T_n^\sigma$ with the original ordered $T_n$ and match the
+replacement last constructor to the selected original PE, SE, or RE
+constructor.  Thus (13a) and the two transported routes above justify
+the replacement terminal presentation, including the retained exact
+nonparallel seed rather than only its endpoint pair.  By
+\noderef{MaximumPropertyTransport}, $\mathcal E_T^\sigma$ has maximum
+property.
 
 The prefix repackage used the original series.  Consequently the
 corresponding certificates for $\mathcal E_A^\sigma$ and
@@ -282,18 +342,43 @@ corresponding fields of \noderef{TashkinovHierarchy}.  The
 proved.  Hence $K_T$ is an actual hierarchy of the replacement, with no
 dependent field borrowed from the separately chosen $K_A$.
 
-Give $K_T$ the same Gamma function as $C.\mathit{good}$.  Raw stored-set
-agreement in $\mathcal C_T$ and terminal
-\noderef{StableColoring} make the computed terminal stored sets equal
-after expanding \noderef{TashkinovStoredColors}.  Since $q>0$, the weak
-stability in (11), expanded through \noderef{HierarchyWeaklyStable},
-contains \noderef{TreeColoringInvariant} on $A$.  Thus vertex missing
-sets agree on every ordinary and starred stage through $A$.  Expanding
-the stored and missing-set definitions yields
+Give $K_T$ the same Gamma function as $C.\mathit{good}$.  We now derive,
+rather than assume, equality of its indexed stored sets.  Raw stored-set
+agreement in $\mathcal C_T$, equality of the two terminal ladder trees,
+and the terminal \noderef{StableColoring} vertex clause make the
+computed terminal stored sets equal after expanding
+\noderef{TashkinovStoredColors}: the bounded unions of raw slots agree,
+and the sets of colors subtracted as missing on $T_n$ agree.  Denote this
+common computed set by $D_n$.
+
+Since $q>0$, the weak stability in (11), expanded through
+\noderef{HierarchyWeaklyStable}, contains
+\noderef{TreeColoringInvariant} on $A$.  The copied stages of $K_T$ and
+$H$ are identical ordered trees, and every ordinary or starred stage at
+an index $j\leq q$ is a prefix of $A$.  The vertex clause of that
+invariant therefore gives
+\[
+ \overline{\sigma_n}(\noderef{HierarchyStarredStage}(K_T,j))
+ =\overline{\varphi_n}(\noderef{HierarchyStarredStage}(H,j)). \tag{13b}
+\]
+For each transported index $j$, expand the directly cited definition
+\noderef{HierarchyStoredColorsAt} on both sides:
+\[
+ \begin{aligned}
+ D^\sigma_{n,j}
+   &=D_n^\sigma-
+     \overline{\sigma_n}(\noderef{HierarchyStarredStage}(K_T,j)),\\
+ D_{n,j}
+   &=D_n-
+     \overline{\varphi_n}(\noderef{HierarchyStarredStage}(H,j)).
+ \end{aligned}
+\]
+The computed-terminal equality $D_n^\sigma=D_n$ and (13b) make these
+two set differences equal.  Hence
 \[
  D^\sigma_{n,j}=D_{n,j}\quad(0\leq j\leq q),                 \tag{14}
 \]
-and equality of every corresponding
+The same vertex invariant gives equality of every corresponding
 \noderef{HierarchyStageMissingColors} set.
 
 The segment-color sets agree as well.  For $j<q$, every displayed edge
@@ -306,16 +391,34 @@ clause preserves them; all other colors are untouched by
 \noderef{HierarchySegmentColors} set agrees.                   \tag{15}
 
 Now verify the five \noderef{GoodHierarchy} fields.  `twoColors' and
-`disjointPairs' copy using (14).  `avoidance' copies using (14), equality
-of the stage-missing sets, and (15).  `uniqueRefresh' copies because the
-ordered stage differences, their vertex missing sets, stored indices,
-and Gamma pairs agree.  In the PE case, `parallelBase' is the field of
-$g_A$, after the proved equalities of $T_n$, support position, closure,
-core, stored set, and Gamma data; in the non-PE case its antecedent is
-false.  Every `minusClosed' field before the last divider comes from
-$g_A$, while the last one, including $q=1$, is exactly (12).  This
-constructs a good witness $g_T$ and proves
-\noderef{SameGoodHierarchy} with the original hierarchy.
+`disjointPairs' copy after (14) rewrites every quantified stored index.
+For `avoidance', fix $j$ and
+$\eta\in D^\sigma_{n,j}$; equation (14) makes this precisely the old
+membership $\eta\in D_{n,j}$, so the old avoidance field applies, while
+the stage-missing equality and (15) identify its two target sets.
+For `uniqueRefresh' at $i$, equation (14) at $i+1$ identifies both the
+distinguished stored-color membership and every competing stored index;
+the copied ordered stage difference, its vertex missing sets, and the
+Gamma pairs then transport both existence and uniqueness from the old
+field.  In the PE case, equation (14) at $j=0$ identifies the stored set
+and therefore the stored-indexed Gamma union in `parallelBase'; together
+with the proved equalities of $T_n$, support position, closure, and core,
+this is exactly the field of $g_A$.  In the non-PE case its antecedent is
+false.
+
+For `minusClosed' at an index before the last divider, equation (14) at
+$i+1$ identifies the stored set in its control union, and the copied
+Gamma data make the field exactly the corresponding field of $g_A$.
+At the last divider, including when $q=1$, equation (14) at $j=q$
+identifies the replacement control union with the $D_{n,q}$-indexed
+union in (12), so (12) is exactly the required final `minusClosed'
+field.  Thus all five fields are verified.  Finally, the definition of
+\noderef{SameGoodHierarchy} asks for the already proved same stages and
+dividers, equality of every transported indexed stored set, and equality
+of Gamma values on that common set.  Equation (14) supplies its stored-set
+clause, and the copied Gamma function supplies its remaining clause.
+This constructs the good witness $g_T$ and proves the claimed
+\noderef{SameGoodHierarchy} relation with the original hierarchy.
 
 The swap makes $\theta$ missing at $y_1$, while it preserves the missing
 $\theta$ at the vertex $x\in A$ from (6).  Since $y_1\notin V(A)$, the

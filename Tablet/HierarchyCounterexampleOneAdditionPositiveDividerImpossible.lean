@@ -18,6 +18,7 @@ import Tablet.HierarchySegmentColors
 import Tablet.HierarchyStageMissingColors
 import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsAntitone
+import Tablet.HierarchyStoredColorsAt
 import Tablet.HierarchyWeaklyStable
 import Tablet.IsProperEdgeColoring
 import Tablet.MaximumDefectiveChoice

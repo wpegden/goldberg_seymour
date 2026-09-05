@@ -164,7 +164,115 @@ theorem HierarchyCounterexampleTailAtLeastTwo {V E : Type*}
       0 < T.length -
         (HierarchyStarredStage C.hierarchy
           (Fin.last C.hierarchy.dividerCount)).length := by
-    sorry
+    have lastStage : ∀ (d : ℕ) (s : Fin (d + 2) → TreeSequence G e0)
+        (core : TreeSequence G e0), 0 < d →
+        Fin.cases core (fun i : Fin d => s i.castSucc.succ) (Fin.last d) =
+          s (Fin.last d).castSucc := by
+      intro d s core hd
+      cases d with
+      | zero => omega
+      | succ n =>
+        have hi : Fin.last (n + 1) = (Fin.last n).succ := by
+          apply Fin.ext
+          rfl
+        rw [hi]
+        rfl
+    have zeroStage : ∀ (d : ℕ) (s : Fin (d + 2) → TreeSequence G e0)
+        (core : TreeSequence G e0), d = 0 →
+        Fin.cases core (fun i : Fin d => s i.castSucc.succ) (Fin.last d) =
+          core := by
+      intro d s core hd
+      subst d
+      rfl
+    by_cases hq : 0 < C.hierarchy.dividerCount
+    · have hAeq : HierarchyStarredStage C.hierarchy
+          (Fin.last C.hierarchy.dividerCount) =
+          C.hierarchy.stage (Fin.last C.hierarchy.dividerCount).castSucc := by
+        unfold HierarchyStarredStage
+        exact lastStage _ _ _ hq
+      have hstep := C.hierarchy.strict (Fin.last C.hierarchy.dividerCount)
+      have hlenA := congrArg TreeSequence.length hAeq
+      have hterm : C.hierarchy.stage (Fin.last C.hierarchy.dividerCount).succ = T := by
+        rw [show (Fin.last C.hierarchy.dividerCount).succ =
+            Fin.last (C.hierarchy.dividerCount + 1) by
+              apply Fin.ext
+              rfl]
+        exact C.hierarchy.terminalStage
+      have hlenT := congrArg TreeSequence.length hterm
+      omega
+    · have hzero : C.hierarchy.dividerCount = 0 := Nat.eq_zero_of_not_pos hq
+      have hAeq : HierarchyStarredStage C.hierarchy
+          (Fin.last C.hierarchy.dividerCount) = base.core := by
+        unfold HierarchyStarredStage
+        exact zeroStage _ _ _ hzero
+      have hseg : TreeSequenceInitialSegment
+          (HierarchyStarredStage C.hierarchy
+            (Fin.last C.hierarchy.dividerCount)) T := by
+        have hc := C.hierarchy.coreInsideFirst
+        rw [show (⟨1, by omega⟩ : Fin (C.hierarchy.dividerCount + 2)) =
+            Fin.last (C.hierarchy.dividerCount + 1) by
+              apply Fin.ext
+              simp [hzero]] at hc
+        rw [hAeq]
+        simpa [C.hierarchy.terminalStage, hzero] using hc
+      by_contra hnon
+      have hle :
+          (HierarchyStarredStage C.hierarchy
+            (Fin.last C.hierarchy.dividerCount)).length ≤ T.length := hseg.1
+      have heq :
+          (HierarchyStarredStage C.hierarchy
+            (Fin.last C.hierarchy.dividerCount)).length = T.length := by
+        omega
+      have equalTrees : ∀ {X Y : TreeSequence G e0},
+          TreeSequenceInitialSegment X Y → X.length = Y.length → X = Y := by
+        intro X Y hXY hlen
+        rcases hXY with ⟨hle, hv, he⟩
+        cases X with
+        | mk lx px vx ex vix eix fx ax =>
+          cases Y with
+          | mk ly py vy ey viy eiy fy ay =>
+            simp only at hlen
+            subst ly
+            rw [TreeSequence.mk.injEq]
+            refine ⟨rfl, ?_, ?_⟩
+            · apply heq_of_eq
+              funext j
+              simpa only [Fin.castLE] using (hv j).symm
+            · apply heq_of_eq
+              funext j
+              simpa only [Fin.castLE] using (he j).symm
+      have htrees :
+          HierarchyStarredStage C.hierarchy
+            (Fin.last C.hierarchy.dividerCount) = T := by
+        exact equalTrees hseg heq
+      have htailzero : T.length -
+          (HierarchyStarredStage C.hierarchy
+            (Fin.last C.hierarchy.dividerCount)).length = 0 :=
+        Nat.eq_zero_of_not_pos hnon
+      have prefixFull : ∀ (X : TreeSequence G e0) (hp : 1 ≤ X.length)
+          (hq : X.length ≤ X.length),
+          TreeSequencePrefix X X.length hp hq = X := by
+        intro X hp hq
+        apply equalTrees
+        refine ⟨le_rfl, ?_, ?_⟩
+        · intro i
+          apply congrArg X.vertex
+          apply Fin.ext
+          rfl
+        · intro i
+          apply congrArg X.edge
+          apply Fin.ext
+          rfl
+        · rfl
+      have helem : ColoredVertexSetElementary G phi
+          (TreeSequenceVertexSet T) := by
+        dsimp only at hprefixElementary
+        intro u hu v hv huv
+        apply hprefixElementary (u := u) (v := v)
+        · simpa [htailzero, htrees, prefixFull] using hu
+        · simpa [htailzero, htrees, prefixFull] using hv
+        · exact huv
+      exact C.notElementary helem
   have honeAddition :
       T.length -
         (HierarchyStarredStage C.hierarchy
