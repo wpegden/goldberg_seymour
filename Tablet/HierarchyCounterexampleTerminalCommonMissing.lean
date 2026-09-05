@@ -6,6 +6,7 @@ import Tablet.MissingColors
 import Tablet.TreeMissingColors
 import Tablet.TreeSequence
 import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: HierarchyCounterexampleTerminalCommonMissing]
 theorem HierarchyCounterexampleTerminalCommonMissing {V E : Type*}

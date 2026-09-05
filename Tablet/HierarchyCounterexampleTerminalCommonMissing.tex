@@ -72,19 +72,50 @@ gives
 \]
 Consequently \noderef{TreeSequencePrefix} says that $B$ consists of the
 first $|T|-1$ exact edges and the first $|T|$ vertices of $T$, entry by
-entry.  By the vertex injectivity field of \noderef{TreeSequence}, the
-only vertex of $T$ not in $B$ is its final vertex $y_\ell$; in particular
-$y_\ell\notin V(B)$.  The corresponding edge clause of the prefix
-construction is why no parallel edge identities are identified in this
-argument.
+entry.  We verify the resulting vertex-set decomposition directly.
+By \noderef{TreeSequenceVertexSet}, $V(B)$ is the image of the vertex
+map of $B$ over all its vertex indices.  The defining restricted vertex
+map in \noderef{TreeSequencePrefix} sends an index
+$i\in\operatorname{Fin}(|T|)$ to the vertex of $T$ with the same
+numerical index $\operatorname{val}(i)<|T|$.  On the other hand, the
+index of the final vertex $y_\ell$ in $T$ is
+$\operatorname{Fin.last}(|T|)$, whose numerical value is $|T|$.  If
+$y_\ell$ belonged to $V(B)$, the image definition
+would therefore give an $i$ with $\operatorname{val}(i)<|T|$ for which
+the two corresponding values of the vertex map of $T$ agree.  The
+vertex injectivity field of
+\noderef{TreeSequence} would make their indices equal, contradicting
+$\operatorname{val}(i)<|T|$.  Hence
+\[
+                         y_\ell\notin V(B).                    \tag{4}
+\]
+
+Conversely, let $u\in V(T)$.  Again unfolding
+\noderef{TreeSequenceVertexSet}, write $u=T.\mathit{vertex}(j)$ for
+$j\in\operatorname{Fin}(|T|+1)$.  If $\operatorname{val}(j)<|T|$, the
+index with the same numerical value in $\operatorname{Fin}(|T|)$ maps
+under the restricted vertex map of \noderef{TreeSequencePrefix} to $u$,
+so $u\in V(B)$.  If
+$\operatorname{val}(j)\not<|T|$, then
+$\operatorname{val}(j)<|T|+1$ forces $\operatorname{val}(j)=|T|$, hence
+$j=\operatorname{Fin.last}(|T|)$ and $u=y_\ell$.  We have thus proved
+the exact alternatives
+\[
+ u\in V(T)\quad\Longrightarrow\quad
+ u\in V(B)\ \hbox{or}\ u=y_\ell.                              \tag{5}
+\]
+The edge map in \noderef{TreeSequencePrefix} is restricted in the same
+entrywise fashion, which is why no parallel edge identities are
+identified in this argument.
 
 Suppose that (7.1) were false.  We show that $V(T)$ would then be
 elementary.  Let $u,v$ be distinct vertices of $T$.  By the preceding
-paragraph, each belongs either to $V(B)$ or is $y_\ell$.  They cannot
+decomposition (5), each belongs either to $V(B)$ or is $y_\ell$.  They cannot
 both be $y_\ell$.  If both belong to $V(B)$, their missing-color sets are
 disjoint by (2) and \noderef{ColoredVertexSetElementary}.  In the remaining
 case, after interchanging $u$ and $v$ if necessary, we have
-$u\in V(B)$ and $v=y_\ell$.  If a color $\alpha$ were missing at both,
+$u\in V(B)$ and $v=y_\ell$: indeed, (4) ensures that the vertex assigned
+to $V(B)$ is not also $y_\ell$.  If a color $\alpha$ were missing at both,
 then the union definition \noderef{TreeMissingColors} would put
 $\alpha$ in $\overline\varphi_n(B)$, contrary to the assumed failure of
 (7.1).  Thus the two missing-color sets are disjoint in this case as well.
