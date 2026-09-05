@@ -1,3 +1,4 @@
+import Tablet.AdjacentEdges
 import Tablet.ColoredVertexSetElementary
 import Tablet.ColoredVertexSetClosed
 import Tablet.ExtendedTashkinovTree
@@ -7,6 +8,8 @@ import Tablet.HierarchyStarredStage
 import Tablet.IsProperEdgeColoring
 import Tablet.MaximumDefectiveChoice
 import Tablet.MissingColors
+import Tablet.OrderedTreeUnion
+import Tablet.PresentColors
 import Tablet.RevisitingExtensionCertificate
 import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
@@ -18,11 +21,14 @@ import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.TreeMissingColors
+import Tablet.TreeIncidentEdge
 import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix
 import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorCycle
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: HierarchyTailMissingColorExclusion]
 theorem HierarchyTailMissingColorExclusion {V E : Type*}
