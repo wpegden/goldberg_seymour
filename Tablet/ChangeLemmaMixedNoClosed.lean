@@ -1,5 +1,6 @@
 import Tablet.BoundaryColorEdges
 import Tablet.BoundaryEdges
+import Tablet.CertifiedETTPredecessor
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved
 import Tablet.CombinedStableColoring

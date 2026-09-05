@@ -142,20 +142,20 @@ positive certificate; \noderef{TashkinovSeriesStep} says that it is one of
 the actual SE, PE, or RE constructors and that its current coloring is
 $\varphi_n$.
 
-If $n>1$, restrict every array in the certified series to the slots through
-$n-1$, retaining tree slots through $T_n$.  Every retained step has the same
-constructor and witnesses, since it refers only to retained entries.  The
-last retained noninitial certificate gives the strict exact inclusion from
-$T_{n-1}$ into $T_n$.  Use $T_n$ as the displayed terminal tree; the upper
-initial-segment relation into that retained output is reflexive.  These data
-construct an actual \noderef{ExtendedTashkinovTree} $\mathcal E^{-}$ of
-rung $n-1$, terminal tree exactly $T_n$, and generating coloring exactly
-$\varphi_{n-1}$.  Every field of \noderef{MaximumProperty} restricts:
-the global-order equality for $T_1$ is unchanged, and every indexed stable
-coloring, exact seed, closure, and cardinality bound below $n-1$ is literally
-the corresponding old field at the same index below $n$.  Thus
-$\mathcal E^{-}$ has maximum property.  Lower assertion (i), applied to
-this actual positive-rung ETT, gives
+If $n>1$, apply \noderef{CertifiedETTPredecessor} to $\mathcal E$ and its
+given maximum property.  It supplies an actual ETT $\mathcal E^{-}$, with
+the same input coloring, whose displayed terminal tree is exactly the
+original tree slot $n$, namely $T_n$, and whose displayed generating coloring
+is exactly the original coloring slot $n-1$, namely $\varphi_{n-1}$.  It also
+supplies the equation
+$\mathcal E^{-}.\mathit{rounds}=n-1$ and maximum property for
+$\mathcal E^{-}$.  From $1<n$, ordinary natural-number arithmetic gives
+$0<n-1$ and $n-1<n$; using the displayed rung equation, these are precisely
+$0<\mathcal E^{-}.\mathit{rounds}$ and
+$\mathcal E^{-}.\mathit{rounds}<\mathcal E.\mathit{rounds}$.  We may therefore
+instantiate the assumed lower-rung package on this actual ETT and its inherited
+maximum property.  Its elementarity conjunct, together with the exact returned
+identities of the displayed tree and generating coloring, gives
 \[
              V(T_n)\text{ is elementary under }\varphi_{n-1}. \tag{1}
 \]
