@@ -437,16 +437,36 @@ component cannot be disjoint from $R_n$.  Consequently every
 nontrivial component meeting $T_n$ meets $R_n$.  In particular both
 $P_1,P_2$ meet $R_n$, contradicting (7).
 
-Suppose instead that $a=\delta_n$.  Equation (5) says that
-$\delta_n$ is closed on $U$; by \noderef{TreeColorSetClosed} and
-\noderef{BoundaryColorEdges}, this means the exact set
-$\partial_{\sigma_n,\delta_n}(U)$ is empty.
+  Suppose instead that $a=\delta_n$.  Equation (5) says that
+  $\delta_n$ is closed on $U$; by \noderef{TreeColorSetClosed} and
+  \noderef{BoundaryColorEdges}, this means the exact set
+  $\partial_{\sigma_n,\delta_n}(U)$ is empty.
 
-We next construct the second common missing color without suppressing the
-root-edge argument.  Put
-$x_0=T_n.\operatorname{vertex}(0)$ and
-$x_1=T_n.\operatorname{vertex}(1)$.  These indices exist because every
-\noderef{TreeSequence} has positive length.  Its first-edge clause says
+  Before changing the coloring, freeze it under the name $\tau=\sigma_n$
+  and freeze two exit portions of the two full
+  $(\delta_n,b)$-components $P_1,P_2$.  At the conclusion of the reduction
+  to (9), both $P_1$ and $P_2$ were constructed as nontrivial path
+  components.  Apply the endpoint and exit-portion construction above to
+  these components under $\tau$.  It gives vertex-disjoint simple incidence
+  paths $Q'_1,Q'_2$, with inside ends $s'_1,s'_2\in U$ and distinct outside
+  ends $r'_1,r'_2\notin U$.  Each $r'_i$ has degree one in
+  $I_G(\tau;\delta_n,b)$.  More explicitly, write the node sequence of
+  $Q'_i$ as
+  \[
+   s'_i,g_{i,0},w_{i,1},g_{i,1},\ldots,
+         g_{i,m_i-1},w_{i,m_i}=r'_i,\qquad m_i\geq1,             \tag{11}
+  \]
+  where every $g_{i,j}$ is an exact edge identity, $w_{i,j}\notin U$
+  for $j\geq1$, and incidence of consecutive nodes is the membership
+  relation in \noderef{Incident}.  The first identity $g_{i,0}$ is in
+  \noderef{BoundaryEdges}, while every $g_{i,j}$ with $j\geq1$ has both
+  ends outside $U$.
+
+  We next construct the second common missing color without suppressing the
+  root-edge argument.  Put
+  $x_0=T_n.\operatorname{vertex}(0)$ and
+  $x_1=T_n.\operatorname{vertex}(1)$.  These indices exist because every
+  \noderef{TreeSequence} has positive length.  Its first-edge clause says
 $T_n.\operatorname{edge}(0)=e_0$.  Its attaches clause at index zero has
 an earlier index in the one-element set, hence that index is zero and
 \[
@@ -466,12 +486,33 @@ a \noderef{TashkinovAugmentationSequence}; each one-step
 \noderef{TashkinovAugmentation} retains its old tree as a
 \noderef{TreeSequenceInitialSegment}.  Induction along the finite sequence
 therefore retains $x_0$ and $x_1$ in its final tree $R_n$.  Hence
-\[
-                         x_0,x_1\in X\cap Y.                  \tag{11}
-\]
+  \[
+                           x_0,x_1\in X\cap Y.                  \tag{12}
+  \]
 
-We count missing colors at $x_0$.  By the endpoint equation above,
-$e_0$ is incident with $x_0$.  Let $I$ be the finite set of exact edge
+  Still under the pre-swap coloring $\tau$, the color $b$ is present at
+  $x_0$.  Otherwise $b$ is missing there, and the common membership
+  $x_0\in X\cap Y$ in (12), expanded through
+  \noderef{TreeMissingColors}, puts $b$ in both constituent tree-missing
+  sets.  Apply \noderef{InterchangePECommonMissingClosed} at $b$; evaluating
+  its singleton closedness with \noderef{TreeColorSetClosed} and
+  \noderef{BoundaryColorEdges} gives
+  $\partial_{\tau,b}(U)=\varnothing$.  We already have
+  $\partial_{\tau,\delta_n}(U)=\varnothing$.  Hence a full
+  $(\delta_n,b)$-component meeting $U$ cannot contain a vertex outside
+  $U$: along any incidence path to an outside vertex, the first exact edge
+  identity leaving $U$ lies in \noderef{BoundaryEdges}, and its
+  $\delta_n$- or $b$-value would put it in one of the two empty sets from
+  \noderef{BoundaryColorEdges}.  Thus both $P_1$ and $P_2$ would be
+  contained in $U$.  They are disjoint nontrivial path components, so their
+  four ends are four distinct vertices of $U$; by the endpoint calculation
+  above, each misses $\delta_n$ or $b$.  Two of those four vertices must
+  miss the same one of the two colors, contrary to (3) and
+  \noderef{ColoredVertexSetElementary}.  This proves that $b$ is present
+  at $x_0$ before the swap.
+
+  We count missing colors at $x_0$.  By the endpoint equation above,
+  $e_0$ is incident with $x_0$.  Let $I$ be the finite set of exact edge
 identities incident with $x_0$.  The definition \noderef{Degree} gives
 $|I|=d_G(x_0)$, and \noderef{MaximumDegree} gives
 $d_G(x_0)\leq\Delta(G)$.  The definition
@@ -494,68 +535,144 @@ available here because certification at slot zero in
 \noderef{MissingColors} is the complement of the present-color set in the
 $k$ colors, at least two colors are missing at $x_0$.  A set with at least
 two elements cannot be contained in the singleton $\{\delta_n\}$, so
-choose a missing color $c\ne\delta_n$.  By (11), the same $x_0$ is a
-vertex witness in both union definitions of \noderef{TreeMissingColors};
-hence
-\[
- c\in\overline\sigma_n(T_n)\cap\overline\sigma_n(R_n),
- \qquad c\ne\delta_n.
-\]
-By (5), evaluated through \noderef{TreeColorSetClosed} and
-\noderef{BoundaryColorEdges}, the exact $c$-colored boundary of $U$ also
-is empty.  Apply
-\noderef{OutsideTreeColorSwap} to $(\delta_n,c)$.  The color $\delta_n$ is
-tree-missing by (9), the color $c$ is missing at the common vertex $x_0$,
-and both exact colored boundaries are empty.  Thus the same edge-by-edge
-mixed-adjacency check used above proves that the result is proper and
-leaves exactly $e_0$ uncolored.  It fixes every edge identity incident
-with $U$, hence \noderef{PresentColors} and \noderef{MissingColors} give
-the same missing-color set at every vertex of $U$; both clauses of
-\noderef{StableColoring} hold on each constituent relative to the old
-coloring.  Transitivity in \noderef{sc2} composes these relations with the
-old forward relations from $\varphi_n$.  Therefore the new coloring again
-satisfies the stable hypotheses of
-\noderef{InterchangePECommonMissingClosed},
-\noderef{InterchangePEClosureConstituent}, and
-\noderef{InterchangePETreeAwayFromDelta}; these give (5), (7), and (8)
-for the new coloring.  Since all vertex missing sets on $U$ are unchanged,
-(3) also holds for it.  We now regard this new coloring as the current
-coloring in the remainder of the argument.
+  choose a missing color $c\ne\delta_n$.  By (12), the same $x_0$ is a
+  vertex witness in both union definitions of \noderef{TreeMissingColors};
+  hence
+  \[
+   c\in\overline\tau(T_n)\cap\overline\tau(R_n),
+   \qquad c\ne\delta_n.
+  \]
+  Since $b$ is present at $x_0$ and $c$ is missing there, $c\ne b$.
+  Apply \noderef{InterchangePECommonMissingClosed} to the displayed common
+  missing membership of $c$.  After unfolding
+  \noderef{TreeColorSetClosed} and \noderef{BoundaryColorEdges}, it gives
+  \[
+                   \partial_{\tau,c}(U)=\varnothing.           \tag{13}
+  \]
 
-We repeat, at this new swap, the full-component check rather than merely
-reusing vertex-disjointness.  Apply the endpoint construction above afresh
-to the current $P_1,P_2$, obtaining two vertex-disjoint exit portions
-$Q'_1,Q'_2$ with distinct outside degree-one ends $r'_1,r'_2$.  By (3)
-and \noderef{ColoredVertexSetElementary},
-any witnesses that the chosen $c$ is missing on $T_n$ and on $R_n$ must
-coincide.  The explicit common witness is still $q=x_0$, because the
-outside swap fixes every identity incident with $U$.  If $b$ were missing
-at $q$, then \noderef{TreeMissingColors} would make $b$ common missing,
-and (5), via \noderef{TreeColorSetClosed} and
-\noderef{BoundaryColorEdges}, would give
-$\partial_{\sigma_n,b}(U)=\varnothing$.  The colors $\delta_n$ and $b$
-would both be missing and have empty exact colored boundaries on $U$, so
-the \noderef{BoundaryEdges} and four-end argument
-given above would put all four distinct ends of $P_1,P_2$ in $U$ and
-contradict \noderef{ColoredVertexSetElementary}.  Thus $b$ is present at
-$q$, $c$ is missing
-there, and $c\ne b$.
+  Only now define the post-swap coloring
+  \[
+         \widehat\sigma=\tau/(G-U,\delta_n,c)
+  \]
+  using \noderef{OutsideTreeColorSwap}.  Thus every exact edge identity
+  incident with $U$ is fixed, while an identity not incident with $U$ has
+  its $\delta_n$- and $c$-values interchanged and every other value fixed.
+  In particular, the old full components $P_1,P_2$ will not be called
+  components of $\widehat\sigma$.
 
-The $c,b$-component $K'$ through $q$ is therefore nontrivial and has
-$q$ as a degree-one vertex, so it satisfies
-\noderef{TwoColorNontrivialPathComponent}.  Each $Q'_i$ becomes a $(c,b)$-exit
-portion: its boundary identity has color $b$, all later
-$\delta_n$-values become $c$, and its outside end remains degree one by
-the same exact-neighbor comparison.  The spanning-path argument forbids
-$K'$ from containing both $r'_1,r'_2$.  Choose a transformed $Q'_i$ not
-in $K'$.  Its full component $L'$ contains its exact edge-node, has the
-degree-one end $r'_i$, and meets $U$, hence is another
-\noderef{TwoColorNontrivialPathComponent}.  By
-\noderef{TwoColorComponentsDisjoint}, $K'$ and $L'$ are distinct full
-components.  The root component $K'$ meets both $X$ and $Y$ at $q$, while
-$L'$ meets $U=X\cup Y$ at the inside end of its retained exit portion.  If
-that inside end lies in $X$, then $K',L'$ contradict (8), because
-$c\ne\delta_n$ and $b\ne\delta_n$ in this branch.  If it lies in $Y$,
-then they contradict (7), since $c$ is missing on $R_n$.  Both
-alternatives in (10) are impossible, proving (iii).
-\end{proof}
+  We instead transport each already fixed node sequence (11) edge by edge.
+  The first identity $g_{i,0}$ is a boundary identity and has old color
+  $\delta_n$ or $b$, because $Q'_i$ is a path in
+  $I_G(\tau;\delta_n,b)$ by \noderef{TwoColorIncidenceGraph}.  It cannot
+  have color $\delta_n$, since
+  $\partial_{\tau,\delta_n}(U)=\varnothing$; hence
+  $\tau(g_{i,0})=b$.  It is incident with $U$, so
+  \noderef{OutsideTreeColorSwap} fixes this exact identity and
+  $\widehat\sigma(g_{i,0})=b$.  For $j\geq1$, both ends of $g_{i,j}$ are
+  outside $U$, so that identity is not incident with the displayed core.
+  Consecutive exact edge identities in (11) share their intervening vertex
+  and hence are adjacent by \noderef{AdjacentEdges}; properness in
+  \noderef{IsProperEdgeColoring} therefore makes their old
+  $(\delta_n,b)$-values alternate.
+  If $\tau(g_{i,j})=\delta_n$, the swap gives
+  $\widehat\sigma(g_{i,j})=c$; if $\tau(g_{i,j})=b$, it remains $b$
+  because $b\ne\delta_n,c$.  Consequently the same node sequence has
+  alternating $(c,b)$ edge values under $\widehat\sigma$.  Its consecutive
+  vertex-edge incidences are unchanged, and
+  \noderef{TwoColorIncidenceGraph} therefore makes it a path
+  $\widehat Q_i$ in $I_G(\widehat\sigma;c,b)$.  Its node identities and
+  adjacencies, including the first boundary identity, are exactly those of
+  $Q'_i$; in particular $\widehat Q_1,\widehat Q_2$ remain vertex-disjoint
+  and have the same distinct outside ends $r'_1,r'_2$.
+
+  We also verify, rather than assume, that each $r'_i$ remains degree one.
+  Fix an exact edge identity $h$ incident with $r'_i$.  Since
+  $r'_i\notin U$, if $h$ is incident with $U$ then $h$ is a boundary
+  identity by \noderef{BoundaryEdges}.  The empty $\delta_n$-boundary and
+  (13) say that its old value is neither $\delta_n$ nor $c$, and the outside
+  swap fixes it.  Thus in this case $h$ has new color $c$ or $b$ exactly
+  when it had old color $\delta_n$ or $b$, namely exactly when its fixed
+  value is $b$.  If $h$ is not incident with $U$, the transposition sends
+  the old pair of values $\{\delta_n,b\}$ bijectively to the new pair
+  $\{c,b\}$, using $b\ne\delta_n,c$.  In either case the edge-node $h$ is
+  adjacent to $r'_i$ in the new two-color incidence graph exactly when it
+  was adjacent there in the old one, by
+  \noderef{TwoColorIncidenceGraph}.  Hence the full neighbor set of $r'_i$
+  is unchanged, and $r'_i$ has degree one under $\widehat\sigma$.
+
+  The coloring $\widehat\sigma$ is proper.  At a vertex of $U$ every
+  incident edge value is fixed.  At an outside vertex, all incident
+  nonboundary values undergo the same injective transposition, while every
+  boundary value avoids $\delta_n,c$ by the two empty exact colored
+  boundaries and is fixed.  Thus no pair of distinct adjacent colored edges
+  can acquire a common value; this is precisely the clause of
+  \noderef{IsProperEdgeColoring}.  The uncolored value is fixed, so
+  \noderef{IsOneEdgeUncolored} shows that exactly $e_0$ is still uncolored.
+
+  Let $K'$ now denote the full $(c,b)$-component through the vertex-node
+  $x_0$ under $\widehat\sigma$, in the sense of
+  \noderef{TwoColorComponent}.  The outside swap fixes every identity
+  incident with $x_0\in U$, so \noderef{PresentColors} and
+  \noderef{MissingColors} show that $c$ is still missing and $b$ is still
+  present there.  Properness gives exactly one incident $b$-edge identity
+  and no incident $c$-edge identity.  Thus $x_0$ has degree one in the new
+  two-color incidence graph, and that $b$-edge node lies in $K'$.  Unfolding
+  \noderef{TwoColorPathComponent} and
+  \noderef{TwoColorNontrivialPathComponent}, $K'$ is therefore a
+  nontrivial path component.
+
+  The component $K'$ cannot contain both transported paths.  Indeed, if it
+  did, it would contain the three distinct vertex-nodes
+  $x_0,r'_1,r'_2$: the first lies in $U$, the other two lie outside $U$,
+  and they are distinct by construction.  All three have incidence degree
+  one.  Apply \noderef{TwoColorComponentSpanningPath} to $K'$.  Properness
+  and \noderef{TwoColorIncidenceDegreeAtMostTwo} show, exactly as in the
+  endpoint analysis above, that its spanning simple path has no extra chord
+  and that only its two ends can have degree one.  This contradicts the
+  three displayed degree-one vertices.
+
+  Because each $\widehat Q_i$ is a connected path beginning at $r'_i$,
+  membership $r'_i\in K'$ would put every node of $\widehat Q_i$ in that
+  full connected component by \noderef{TwoColorComponent}.  We may
+  therefore choose $i$ so that $r'_i\notin K'$.  Let $L'$ be the full
+  $(c,b)$-component through $r'_i$ under $\widehat\sigma$.  The connected
+  path $\widehat Q_i$ puts all its nodes in $L'$, including the exact
+  edge-node $g_{i,0}$ and its inside end $s'_i\in U$.  The degree-one vertex
+  $r'_i$ and the edge-node $g_{i,0}$ show, through
+  \noderef{TwoColorPathComponent} and
+  \noderef{TwoColorNontrivialPathComponent}, that $L'$ is a nontrivial path
+  component.  Since $r'_i\notin K'$, the dichotomy
+  \noderef{TwoColorComponentsDisjoint} makes $K'$ and $L'$ distinct and
+  disjoint full components.
+
+  We finally re-establish every post-swap hypothesis before using either
+  component.  The swap fixes every exact identity incident with $U$, and
+  hence every identity incident with $T_n$ or $R_n$.  It also fixes every
+  vertex missing-color set on $U$, by \noderef{PresentColors} and
+  \noderef{MissingColors}.  These are the two clauses of
+  \noderef{StableColoring} from $\tau$ to $\widehat\sigma$ on each
+  constituent.  Transitivity in \noderef{sc2} composes them with the old
+  forward stable relations from $\varphi_n$; together they give the required
+  \noderef{CombinedStableColoring}.  The equality of all missing-color sets
+  on $U$ transfers elementariness (3) to $\widehat\sigma$ via
+  \noderef{ColoredVertexSetElementary}.  Properness, exact
+  one-uncoloredness, and the composed stability allow
+  \noderef{InterchangePECommonMissingClosed},
+  \noderef{InterchangePEClosureConstituent}, and
+  \noderef{InterchangePETreeAwayFromDelta} to be applied under
+  $\widehat\sigma$.  Thus (5), (7), and (8), respectively, all hold for the
+  post-swap coloring; here $c$ is still missing at
+  $x_0\in X\cap Y$, $c\ne\delta_n$, and $b\ne\delta_n$ because the original
+  $(\delta_n,b)$-path condition had distinct colors.
+
+  The component $K'$ meets both $X$ and $Y$ at $x_0$, while $L'$ meets
+  $U=X\cup Y$ at $s'_i$.  If $s'_i\in X$, then the two distinct full
+  nontrivial $(c,b)$-path components $K',L'$ contradict (8), since $c$ is
+  missing on $T_n$ and both $c,b$ differ from $\delta_n$.  If
+  $s'_i\in Y$, the same two components contradict (7), since $c$ is
+  missing on $R_n$.  These cases exhaust (1).  Both alternatives in (10)
+  are impossible, proving (iii), including the isolated-component cases
+  allowed by \noderef{TreeInterchangeable}: those cases were retained in
+  the initial negation and eliminated by the singleton analysis before the
+  nontrivial components used here were constructed.
+  \end{proof}
