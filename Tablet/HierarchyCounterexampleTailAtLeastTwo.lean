@@ -13,6 +13,7 @@ import Tablet.HierarchyBase
 import Tablet.HierarchyCounterexample
 import Tablet.HierarchyCounterexampleLess
 import Tablet.HierarchyCounterexampleMeasure
+import Tablet.HierarchyCounterexamplePenultimateElementary
 import Tablet.HierarchyLEMStable
 import Tablet.HierarchyNonparallelFirstEdge
 import Tablet.HierarchyStarredStage
@@ -200,15 +201,6 @@ theorem HierarchyCounterexampleTailAtLeastTwo {V E : Type*}
       ¬ HierarchyCounterexampleLess
         (HierarchyCounterexampleMeasure C')
         (HierarchyCounterexampleMeasure C))
-    (hprefixElementary :
-      let H := C.hierarchy
-      let A := HierarchyStarredStage H (Fin.last H.dividerCount)
-      let ell := T.length - A.length
-      let Ty := TreeSequencePrefix T
-        (min (A.length + (ell - 1)) T.length)
-        (by have hA := A.positive; have hT := T.positive; omega)
-        (Nat.min_le_right _ _)
-      ColoredVertexSetElementary G phi (TreeSequenceVertexSet Ty))
     (hlarge :
       let n : Fin (ett.rounds + 1) := Fin.last ett.rounds
       let Tn := ett.series.data.tree n.castSucc
@@ -217,4 +209,15 @@ theorem HierarchyCounterexampleTailAtLeastTwo {V E : Type*}
     let A := HierarchyStarredStage H (Fin.last H.dividerCount)
     2 ≤ T.length - A.length := by
 -- BODY
+  have hprefixElementary :
+      let H := C.hierarchy
+      let A := HierarchyStarredStage H (Fin.last H.dividerCount)
+      let ell := T.length - A.length
+      let Ty := TreeSequencePrefix T
+        (min (A.length + (ell - 1)) T.length)
+        (by have hA := A.positive; have hT := T.positive; omega)
+        (Nat.min_le_right _ _)
+      ColoredVertexSetElementary G phi (TreeSequenceVertexSet Ty) :=
+    HierarchyCounterexamplePenultimateElementary G k e0 input T phi ett base C
+      hproper hone hlower hfewer hminimal hlarge
   sorry

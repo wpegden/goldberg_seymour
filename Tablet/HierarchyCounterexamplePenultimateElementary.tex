@@ -1,0 +1,264 @@
+\begin{lemma}[The penultimate full-tail prefix is elementary]
+Fix a finite loopless multigraph with its individual edge identities, a
+palette of $k$ colors, and a distinguished edge $e_0$.  Let
+$(T,\varphi_n)$ be a positive-rung extended Tashkinov tree constructed
+from an arbitrary certified input coloring, let $\mathcal B$ be a
+hierarchy base under $\varphi_n$, and let $C$ be a hierarchy
+counterexample over that base.  Write $H=C.\mathit{hierarchy}$, let $q$
+be its divider count, and put
+\[
+ A=\noderef{HierarchyStarredStage}(H,q),\qquad
+ \ell=|T|-|A|.
+\]
+Assume that $\varphi_n$ is proper and leaves exactly $e_0$ uncolored.
+
+Assume, uniformly for every positive-rung maximum ETT on the same graph,
+palette, and distinguished edge, with arbitrary certified input and
+generating colorings and with rung number smaller than that of $T$, all
+six lower-rung assertions of the technical theorem: elementarity;
+terminal interchangeability; at every PE slot, unconditional stability
+before the support, stability on the preceding ladder tree when the
+first-appearance index is greater than one, and disjointness of stored
+pairs at distinct PE slots with distinct supports and equal
+first-appearance index; the terminal PE component assertion; the
+defective-endpoint order assertion; and the mod-coloring assertion.
+Assume also that every same-rung maximum ETT with a good hierarchy having
+fewer than $q$ dividers is elementary.
+
+Assume that $C$ is lexicographically minimal among hierarchy
+counterexamples whose ETTs have the same rung number as $T$ and whose
+hierarchies have exactly $q$ dividers, allowing their certified input
+coloring, generating coloring, ETT, base, and hierarchy to vary.  Thus no
+such $C'$ has
+\[
+ \noderef{HierarchyCounterexampleLess}
+   (\noderef{HierarchyCounterexampleMeasure}(C'),
+    \noderef{HierarchyCounterexampleMeasure}(C)).
+\]
+Finally assume the large-branch estimate
+\[
+ 2n+11\leq |\overline\varphi_n(T_n)|,
+\]
+where $n$ is the rung number and $T_n$ is the terminal ladder tree.
+
+Let
+\[
+ b=\min\{|A|+(\ell-1),|T|\},\qquad
+ B=\noderef{TreeSequencePrefix}(T,b).
+\]
+Then
+\[
+        V(B)\text{ is elementary under }\varphi_n.             \tag{6.6}
+\]
+All prefixes and equalities here retain the displayed individual edge
+identities, including identities of parallel edges.
+\end{lemma}
+\begin{proof}
+We first establish the ordered position of $A$.  If $q>0$, the
+positive-index clause of \noderef{HierarchyStarredStage} gives
+$A=H.\mathit{stage}(q)$.  The nested and terminal-stage fields of
+\noderef{TashkinovHierarchy} therefore give
+\[
+                     A\prec T.                                 \tag{1}
+\]
+If $q=0$, the same definition gives $A=\mathcal B.\mathit{core}$,
+and `coreInsideFirst' and the terminal-stage field give
+\[
+                     A\preccurlyeq T.                           \tag{2}
+\]
+Each relation is a \noderef{TreeSequenceInitialSegment}, so its vertex
+and edge equations identify every retained entry, not just the vertex
+sets.
+
+We shall also need the following consequence of the hypotheses:
+\[
+ q=0\quad\Longrightarrow\quad
+ V(A)\text{ is elementary under }\varphi_n.                    \tag{3}
+\]
+Let $i=\operatorname{Fin.last}(n)$ be the last data index and let
+$T_n$ be the tree in slot $i$ of the certified series.  The `positive'
+field of \noderef{HierarchyCounterexample} gives $n>0$.  Hence the
+certificate at $i$ supplied by \noderef{TashkinovSeries} cannot use the
+initial constructor of \noderef{TashkinovSeriesStep}; it is exactly one
+of PE, SE, and RE.
+
+Suppose first that this constructor is PE.  The reflexive coloring
+$\varphi_n$ is stable on $T_n$ relative to its own stored set: both the
+vertex-missing-set and controlled-incident-edge clauses in
+\noderef{StableColoring} are equalities by reflexivity.  Apply
+\noderef{ParallelClosureUnionElementary} to the present ETT, its maximum
+property and positivity from $C$, the stated lower-rung package, the PE
+kind equation, the assumed properness and unique-uncoloredness, this
+reflexive stability, and the present base $\mathcal B$.  Its conclusion
+is precisely that the core $A$ is elementary under $\varphi_n$.
+
+It remains to treat SE and RE.  In either case the nonparallel clause of
+\noderef{HierarchyBase} identifies
+\[
+                              A=T_n.                            \tag{4}
+\]
+Write $\varphi_{n-1}$ for the coloring in the data slot immediately
+preceding $i$.  We first prove that $T_n$ is elementary under
+$\varphi_{n-1}$ without introducing a rung-zero ETT.  If $n=1$, the
+tree and coloring are exactly slots $1$ and $0$ of the original
+certified series, so the elementarity conclusion of
+\noderef{TechnicalTheoremBase} applies directly.  If $n>1$, apply
+\noderef{CertifiedETTRestriction} at target rung $n-1$.  It returns an
+actual positive-rung ETT whose displayed tree is exactly the old slot
+$T_n$, whose generating coloring is exactly $\varphi_{n-1}$, whose rung
+is $n-1<n$, and which has maximum property.  Assertion (i) of the
+assumed lower-rung package applied to this returned ETT makes $V(T_n)$
+elementary under $\varphi_{n-1}$.  These two cases prove
+\[
+ V(T_n)\text{ is elementary under }\varphi_{n-1}.              \tag{5}
+\]
+
+In the SE case, the constructor contains a
+\noderef{MaximumDefectiveChoice}.  Its `selectedStable' field says that
+the missing-color set at every vertex of $T_n$ is the same under
+$\varphi_{n-1}$ and under its selected coloring.  The SE
+`currentColoring' equation in \noderef{TashkinovSeriesStep}, followed by
+the generating-coloring equation in
+\noderef{ExtendedTashkinovTree}, identifies that selected coloring with
+$\varphi_n$.  Therefore (5) transports vertex by vertex to
+$\varphi_n$: by \noderef{ColoredVertexSetElementary}, pairwise
+disjointness is a statement only about those vertex missing-color sets.
+In the RE case, the constructor's `currentColoring'
+equation directly identifies the current coloring $\varphi_n$ with
+$\varphi_{n-1}$, so (5) already has the desired coloring.  Combining
+either conclusion with (4) proves (3).  Notice that the SE transport
+uses exactly the certified selected stable coloring, whereas the RE
+transport uses exactly the constructor equality; no equality of
+generating colorings is asserted in the SE case.
+
+We now compute the prefix length.  From (1)--(2), $|A|\leq|T|$.
+Elementary arithmetic with truncated subtraction gives
+\[
+\begin{array}{rcl}
+ \ell=0&\Longrightarrow& b=|T|,\\
+ \ell=1&\Longrightarrow& b=|A|,\\
+ 2\leq\ell&\Longrightarrow& |A|<b<|T|\text{ and }b+1=|T|.
+\end{array}                                                     \tag{6}
+\]
+Indeed, in the first case $|T|=|A|$; in the second
+$|T|=|A|+1$; and in the third
+$|A|+(|T|-|A|-1)=|T|-1$.  The two defining entrywise equations of
+\noderef{TreeSequencePrefix}, together with (1)--(2), have the following
+exact consequences.  In the first line of (6), $B=T$; in the second,
+$B=A$; and in the third,
+\[
+                      A\prec B\prec T.                         \tag{7}
+\]
+For example, $A$ and the prefix of $T$ of length $|A|$ have the same
+length and the same vertex and edge entries, which proves their equality
+as ordered edge-valued tree-sequences.
+
+We finish by the three cases in (6).
+
+If $\ell=0$, (1) rules out $q>0$, because then $|A|<|T|$.  Hence
+$q=0$.  Now $A=B=T$, and (3) proves the desired elementarity of $B$.
+
+Suppose $\ell=1$.  Then $B=A$.  If $q=0$, conclusion (3) again proves
+the result.  If $q>0$, apply
+\noderef{GoodHierarchyPrefixRepackage} with the old stage index $r=q$.
+The cited theorem is applicable because $1\leq q$; it returns an actual
+same-rung maximum ETT whose displayed tree is the exact old ordinary
+stage $H.\mathit{stage}(q)=A=B$, together with a base and a good
+hierarchy having exactly $q-1$ dividers.  Since $q-1<q$, the assumed
+fewer-divider elementarity assertion applies to those returned objects
+and makes $V(B)$ elementary under $\varphi_n$.
+
+It remains to suppose $2\leq\ell$.  Then (7) holds and $B$ is obtained
+from $T$ by deleting exactly its final displayed edge and vertex.  Assume
+for contradiction that $V(B)$ is not elementary under $\varphi_n$.
+Apply \noderef{GoodHierarchyTerminalPrefixRepackage} to $A\prec
+B\preccurlyeq T$.  It supplies an actual ETT $\mathcal E_B$ displayed
+on $B$, maximum property, the exact rung equality
+$r(\mathcal E_B)=r(\mathcal E)$, a base $\mathcal B_B$, a hierarchy
+$H_B$, and a good hierarchy on $H_B$.  It also gives
+\[
+ q(H_B)=q(H),                                                     \tag{8}
+\]
+equality of all ordinary stages through index $q$, equality of all
+starred stages through that index, and retention of the complete
+certified series and all its individual connecting-edge identities.
+Together with the assumed non-elementarity, the returned positivity,
+goodness, and maximum property package a genuine
+\noderef{HierarchyCounterexample} $C_B$ over $\mathcal B_B$.
+
+We next check the first coordinate of the measure, rather than assuming
+that truncation preserves it.  Put
+\[
+       p=\noderef{HierarchyPathNumber}(H),\qquad
+       p_B=\noderef{HierarchyPathNumber}(H_B).
+\]
+The old and new last starred stages agree by the repackaging theorem.
+Their tail lengths are respectively $\ell$ and $\ell-1$, by (6).
+In the finite candidate set defining $p$, the value $\ell$ is always a
+candidate: its endpoint condition concerns an edge position at least
+$|A|+\ell=|T|$, of which there is none.  Likewise $\ell-1$ is a
+candidate for $p_B$.  Thus both finite minima use their nonempty branch.
+
+If $p=\ell$, minimality of the new candidate set gives
+\[
+                    p_B\leq\ell-1\leq p.                      \tag{9}
+\]
+If $p<\ell$, then $p\leq\ell-1$.  We claim that $p$ itself is a
+candidate for $H_B$.  Let $s$ be an edge position of $B$ with
+$|A|+p\leq s$.  The exact initial-segment relation $B\preccurlyeq T$
+maps $s$ to the position with the same numerical value in $T$ and
+identifies the individual edge there and both adjacent displayed
+vertices.  Since $p$ is an old candidate, that old edge has endpoint
+pair equal to those two consecutive vertices.  Transporting this
+equation across the three entrywise equalities gives the same endpoint
+equation in $B$.  This holds for every such $s$, so $p$ is a new
+candidate and $p_B\leq p$.  Together with (9),
+\[
+                    p_B\leq p.                                \tag{10}
+\]
+This is exactly the two-branch minimum argument in the definition of
+\noderef{HierarchyPathNumber}; it does not confuse the full-tail length
+$\ell$ with the path number $p$.
+
+If the inequality in (10) is strict, the first coordinate of
+\noderef{HierarchyCounterexampleMeasure} already gives
+\[
+ \noderef{HierarchyCounterexampleLess}
+   (\noderef{HierarchyCounterexampleMeasure}(C_B),
+    \noderef{HierarchyCounterexampleMeasure}(C)).              \tag{11}
+\]
+Suppose instead that $p_B=p$.  The second coordinate must be computed
+from the ordinary stage, not from $A$.  Put
+\[
+                         S=H.\mathit{stage}(q).
+\]
+The terminal-prefix repackaging theorem identifies the corresponding
+ordinary stage of $H_B$ exactly with $S$.  Also
+$S\preccurlyeq A\preccurlyeq B$: for $q>0$ the first relation is
+equality, while for $q=0$ it is the inclusion of the terminal ladder
+tree $H.\mathit{stage}(0)=T_n$ in the hierarchy core.  In the non-PE
+case this is the equality supplied by \noderef{HierarchyBase}; in the PE
+case it is the left initial-segment field of that base's exact
+\noderef{OrderedTreeUnion} certificate.  In particular $|S|\leq|B|$.  Since
+$|B|+1=|T|$, subtraction by $|S|$ gives
+\[
+                 |B|-|S|+1=|T|-|S|,
+\]
+and hence
+\[
+                 |B|-|S|<|T|-|S|.                             \tag{12}
+\]
+These are precisely the new and old second coordinates in
+\noderef{HierarchyCounterexampleMeasure}.  This includes $q=0$, where
+$S=T_n$ and may be strictly smaller than the PE core $A$.  Equal first
+coordinates and (12) again give (11) by
+\noderef{HierarchyCounterexampleLess}.
+
+Finally, $C_B$ has the same rung as $C$ and, by (8), the same divider
+count.  The rung-local lexicographic minimality hypothesis applied to
+$C_B$ forbids (11), a contradiction.  Thus $B$ is elementary in the
+case $2\leq\ell$ as well.  The three cases prove (6.6).  The
+large-branch estimate is retained as part of the fixed hierarchy
+counterexample package needed downstream; this prefix-minimality
+argument does not require its numerical value.
+\end{proof}

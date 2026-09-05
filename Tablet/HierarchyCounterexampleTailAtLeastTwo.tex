@@ -38,8 +38,7 @@ Put $\ell=|T|-|A|$ and let
  T\big|_{\min\{|A|+(\ell-1),|T|\}}
 \]
 be the exact ordered prefix supplied by \noderef{TreeSequencePrefix}.
-Assume (6.6), namely that this prefix is elementary under $\varphi_n$,
-and assume the large-branch estimate
+Assume the large-branch estimate
 \[
  2n+11\leq |\overline\varphi_n(T_n)|,
 \]
@@ -56,6 +55,14 @@ All tree inclusions in this proof are inclusions of ordered
 edge-valued tree-sequences.  In particular, every retained edge is the
 same element of the edge type, even when another parallel edge has the
 same endpoints.
+
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} to the
+present properness, unique-uncoloredness, lower-rung six-assertion
+package, fewer-divider induction hypothesis, rung-local lexicographic
+minimality, and large-branch estimate.  Its conclusion is exactly
+\[
+ V(T(y_{\ell-1}))\text{ is elementary under }\varphi_n.        \tag{6.6}
+\]
 
 Put $\ell=|T|-|A|$.  We first record the ordered inclusion
 \[
