@@ -83,297 +83,392 @@ $|P_1|+|P_2|+|P_3|$.  Every comparison ranges over arbitrary certified
 replacement inputs and retains individual parallel-edge identities.
 \end{lemma}
 \begin{proof}
-Write $\varphi=\varphi_n$.  We first isolate the presentations on which
-the induction will range.  For each $1\leq r\leq q$, apply
-\noderef{GoodHierarchyPrefixRepackage} to the given maximum ETT, base,
-hierarchy $H$, and good family $\Gamma$.  It returns a maximum ETT on the
-exact ordered tree $T_{n,r}$ with the same certified series and individual
-connecting-edge identities, the same base data, and a good hierarchy whose
-divider count is $r-1$.  Its retained stages and divider positions are
-exactly the old ones, and its stored sets and paper Gamma values agree at
-every retained index.  The theorem also returns, separately, the old
-`minusClosed' field at index $r-1$, namely that the new terminal tree is
-$(\bigcup_{\eta\in D_{n,r}}\Gamma^{r-1}_\eta)^-$-closed; it does not
-incorrectly claim this terminal certificate as one of the shorter good
-hierarchy's internal fields.
-The same-rung induction hypothesis (6.1), applied to this exact
-truncated ETT and hierarchy, gives
+Put $n=\mathcal E.\mathit{rounds}$ and $q=H.\mathit{dividerCount}$,
+where $\mathcal E$ denotes the ETT in the statement.  We first record two
+elementary consequences of the definitions that will be used for every
+comparison presentation.
+
+Let $\mathcal U$ be a same-rung maximum ETT with generating coloring
+$\psi$, base $B$, good hierarchy $K$, terminal tree $U$, and
+$d=K.\mathit{dividerCount}<q$.  Write
 \[
-             V(T_{n,r})\text{ is elementary under }\varphi.
-                                                               \tag{1}
+ X=\mathcal U.\mathit{series.tree}(n),\qquad
+ A=K.\mathit{starred}(d),
 \]
-This construction works for arbitrary certified input and generating
-colorings, which is essential when we repeat it after a recoloring.
-
-We shall also truncate at a vertex $b$ lying strictly after
-$A=T_{n,r-1}^{*}$ and no later than $T_{n,r}$.  Use
-\noderef{TreeSequencePrefix} to take the ordered prefix through $b$, or
-the prefix $B$ immediately before $b$.  Every retained vertex and edge
-is the same indexed identity by \noderef{TreeSequenceInitialSegment}.
-There are three genuinely different cases.
-
-If $A$ is a strict initial segment of $B$, keep the stages through
-$T_{n,r-1}$ and use $B$ as terminal.  The last strictness field of
-\noderef{TashkinovHierarchy} is now exactly $A\subsetneq B$, so this is
-the valid $r-1$-divider presentation.  If instead $B=A$ and $r>1$, do
-not use that presentation: retain only the stages through
-$T_{n,r-2}$ and take $T_{n,r-1}=A$ as terminal.  This is the valid
-$r-2$-divider presentation, with its terminal minus-closed certificate
-given by the old field at $r-2$.  In either case a recoloring on a full
-component disjoint from $B$ is an \noderef{OutsideKempeRecoloring} of
-this displayed ETT.  Once its two colors have been proved distinct,
-\noderef{HierarchyLEMStable} supplies properness, exact
-one-uncoloredness, the corresponding ETT, maximum property, the same
-ordered stages, stored sets and $\Gamma$-pairs, and the transported
-terminal minus-closed certificate.
-
-The remaining case is $r=1$ and $B=A=T_{n,0}^{*}$.  We do not present
-the starred base as an ETT.  The component is disjoint from $A$ and hence
-from $T_n$.  Thus \noderef{OutsideKempeRecoloringStable} supplies the
-proper, one-uncolored, terminal-ladder stability data.  Lower assertion
-(vi), instantiated by \noderef{Td}, makes the changed coloring a
-\noderef{ModColoring}; the zero-rung stability and interchangeability
-endpoint is \noderef{TechnicalTheoremBase}.  This is the separate base
-route used below.
-
-For the one-edge enlargement from $B$ to the prefix $C$ through $b$,
-the old final certified closure in
-\noderef{TashkinovSeriesStep} and \noderef{TashkinovClosure} supplies the
-exact finite augmentation sequence.  Because the recoloring fixes every
-edge identity and every missing-color witness on $B$,
-each retained augmentation still satisfies
-\noderef{TashkinovAugmentation}; the universal clause of
-\noderef{ModColoring}, obtained from lower assertion (vi) via
-\noderef{Td}, then supplies the corresponding ETT on the enlarged
-prefix.  \noderef{MaximumPropertyTransport} transfers maximum property.
-When $B=A$ and $r>1$, adjoining $b$ restores the $r-1$-divider
-presentation: the last strict containment is the exact one-edge
-containment $A\subsetneq C$.  Pair size, disjointness, unique refresh,
-parallel base, and every old minus-closed field are copied; final
-avoidance is checked on that exact new edge.  When $r=1$, the same check
-constructs the zero-divider hierarchy with base stage $T_n$, terminal
-$C$, and core inside $C$.  Thus no hierarchy is ever asserted with its
-last retained stage equal to its terminal tree, and no endpoint pair is
-substituted for a graph-edge identity.
-
-For a displayed tree $U$, a proper coloring $\psi$, and distinct colors
-$a,b$, define the following local proof predicate:
+where the first expression means the terminal ladder tree.  The last
+starred stage is an initial segment of $U$.  Indeed, if $d>0$, then
+\noderef{HierarchyStarredStage} identifies $A$ with $K.\mathit{stage}(d)$,
+and the last `nested' and `terminalStage' fields of
+\noderef{TashkinovHierarchy} give
+$K.\mathit{stage}(d)\preccurlyeq K.\mathit{stage}(d+1)=U$.  If $d=0$,
+then $A=B.\mathit{core}$, and the `coreInsideFirst' and `terminalStage'
+fields give $A\preccurlyeq K.\mathit{stage}(1)=U$.  Thus in both cases
 \[
- \mathsf{LegBad}(U,\psi,a,b)
+                       A\preccurlyeq U.                       \tag{1}
 \]
-means that $a\in\overline\psi(U)$, the singleton $\{a\}$ is closed on
-$U$ in the sense of \noderef{TreeColorSetClosed} (so
-\noderef{BoundaryColorEdges} contains no $a$-colored boundary identity),
-and there are two \noderef{TreeExitPath} witnesses for the colors
-$a,b$ whose outside endpoints are distinct and whose node sets as walks
-in \noderef{TwoColorIncidenceGraph} are disjoint.  In particular, the
-two witnesses have distinct tree ends and distinct first boundary-edge
-identities.  This predicate says nothing about whether their full
-two-color components are distinct.
-
-We record two consequences which will be used repeatedly.  First, let
-$U$ be the terminal tree of any same-rung maximum ETT with a good
-hierarchy having $d<q$ dividers.  The same-rung hypothesis (6.1) makes
-$V(U)$ elementary.  If $a$ is missing and singleton-closed on $U$ and
-$a,b$ are not $U$-interchangeable, the negation of
-\noderef{TreeInterchangeable}, with
-\noderef{TwoColorPathComponent} unfolded, gives two distinct paper path
-components meeting $U$; one may initially be a singleton.  Their full
-node sets are disjoint by \noderef{TwoColorComponentsDisjoint}.
-
-If $b$ is not missing on $U$, a singleton component meeting $U$ is
-impossible: its unique tree vertex would have no incident edge of either
-path color and hence would miss $b$.  Thus both components contain edge
-nodes and satisfy \noderef{TwoColorNontrivialPathComponent}.  Each has a
-simple spanning path by \noderef{TwoColorComponentSpanningPath};
-properness and \noderef{TwoColorIncidenceDegreeAtMostTwo} show that its
-two ends are vertex-nodes missing $a$ or $b$.  Only the unique
-$a$-missing vertex can be an end in $U$, so at least three of the four
-ends are outside $U$.
-
-Now suppose that $b$ is missing on $U$.  If both components are
-nontrivial, the same spanning-path argument applies, and elementariness
-permits at most one of their four ends in $U$ to miss $a$ and at most one
-to miss $b$; hence at least two ends are outside.  If, after relabeling,
-the first component is a singleton at $x\in U$, then both $a$ and $b$
-are missing at $x$.  Elementariness makes the other component nontrivial
-and prevents either end of its spanning path from lying in $U$, since
-every such end misses $a$ or $b$.  Its two ends therefore supply the two
-required outside ends.  There cannot be two distinct singleton
-components, since their two tree vertices would repeat both missing
-colors.
-
-From each selected outside end, follow its component's spanning path only
-as far as its first vertex-node in $U$.  The component meets $U$, so this
-portion exists.  Its outside end misses one of the two colors, it has at
-least one edge, and its only tree vertex is its last vertex; hence it is a
-\noderef{TreeExitPath}.  Portions in different full components are
-disjoint.  Two portions selected from opposite ends of one spanning path
-are also disjoint: if their first contacts were equal, their distinct
-last edge-nodes would both be $b$-colored, because the closed color $a$
-has no boundary identity, and properness would fail at that contact.
-Selecting the required ends therefore yields pairwise disjoint
-first-contact portions.  In particular, failure of interchangeability
-implies $\mathsf{LegBad}(U,\psi,a,b)$, and when $b$ is not missing it
-supplies a qualifying triple of disjoint exit legs with distinct outside
-endpoints.
-
-Second, the same qualifying triple exists whenever
-$\mathsf{LegBad}(U,\psi,a,b)$ holds and $b$ is not missing, even though
-the two given legs may belong to one full component.  The outside end of
-each given leg is a degree-one vertex-node: it misses one path color and
-is incident with the other along the nontrivial leg.  If the two ends
-belong to distinct full components, those components have four ends and
-at most the unique $a$-missing vertex can lie in $U$, so three ends are
-outside.  If they belong to one full component, they are its two ends.
-Let $x$ be the unique vertex of $U$ missing $a$.  Since $b$ is present at
-$x$, the full component through $x$ is nontrivial and has degree-one end
-$x$; it differs from the component already having the two outside ends.
-Its other end cannot lie in $U$, since no vertex of $U$ misses $b$ and
-no second vertex there misses $a$.  It is therefore a third outside end.
-Taking first-contact portions as in the preceding paragraph gives the
-claimed disjoint triple component by component.  No parity assertion
-about raw cut edges is used.
-
-For the zero-divider endpoint, apply \noderef{Step1ZeroDividerAnchor} to the exact hierarchy core and the two retained exit legs.  Its non-PE and PE branches prove that no admissible zero-divider presentation exists.  This supplies the anchor required below.
-
-We now define the well-founded comparison domain.  An
-\emph{admissible leg presentation} consists of an arbitrary certified
-input coloring, a proper generating coloring $\psi$ leaving exactly
-$e_0$ uncolored, a corresponding same-rung ETT $U$ with maximum
-property, a hierarchy base and a good hierarchy $K$ with $d<q$
-dividers, the fixed lower six-assertion package and (6.1), the analogue
-of (L) for its own terminal ladder tree, colors $a\ne b$ satisfying
-$\mathsf{LegBad}(U,\psi,a,b)$, and the separate terminal certificate
+Unfolding \noderef{TreeSequenceInitialSegment} in (1) shows entry by
+entry that $V(A)\subseteq V(U)$, using
+\noderef{TreeSequenceVertexSet}.  Taking the unions of vertex-missing
+sets in \noderef{TreeMissingColors} therefore gives
+\[
+                 \overline\psi(A)\subseteq\overline\psi(U).
+\]
+Subtract this inclusion from the common raw set
+$\noderef{TashkinovStoredColors}(\mathcal U.\mathit{series},n)$.
+The definitions \noderef{HierarchyTerminalStoredColors} and
+\noderef{HierarchyStoredColorsAt} then give the required direction
+\[
+ D^K_{n,d+1}=\mathit{HierarchyTerminalStoredColors}(K)
+       \subseteq D^K_{n,d}
+       =\mathit{HierarchyStoredColorsAt}(K,d).                 \tag{2}
+\]
+In particular, the terminal set in (2), rather than an additional
+internal-stage value, is the index set in the certificate
 \[
  U\text{ is }
  \left(\bigcup_{\eta\in D^K_{n,d+1}}\Gamma^d_\eta\right)^-
  \text{-closed under }\psi.                                  \tag{C}
 \]
-Here the displayed $D^K_{n,d+1}$ is the terminal expression obtained by
-unfolding \noderef{TashkinovStoredColors} and
-\noderef{HierarchyStoredColorsAt}; it is not an extra good-hierarchy
-field.
 
-Give a presentation primary coordinate $d$.  If $b$ is missing on $U$,
-give it secondary coordinate $0$.  Otherwise the second consequence of
-$\mathsf{LegBad}$ above supplies qualifying triples of pairwise disjoint
-exit legs with distinct outside ends; give it secondary coordinate one
-plus the least total length of such a triple.  The sets minimized are
-nonempty finite-length subsets of $\mathbb N$, and lexicographic order on
-$\mathbb N\times\mathbb N$ is well founded.
+We also make explicit how two exit legs supply the exact edge data used
+below.  Suppose $c$ is missing and singleton-closed on $U$, and $Q_1,Q_2$
+are support-disjoint $c,d'$ exit paths with distinct outside ends.  By
+\noderef{TreeExitPath}, the final vertex-node of $Q_j$ is in $V(U)$, all
+earlier vertex-nodes are outside, and the walk has positive incidence
+length.  Hence the edge-node immediately before its final vertex exists.
+Call its exact edge identity $g_j$.  The two adjacencies encoded by
+\noderef{TwoColorIncidenceGraph}, interpreted through
+\noderef{Incident}, show that $g_j$ has an end in $V(U)$ and an end
+outside; these are distinct ends, consistently with
+\noderef{LooplessMultigraph}.  Thus
+$g_j\in\noderef{BoundaryEdges}(V(U))$.  Its color is $c$
+or $d'$.  The first possibility is excluded by singleton closedness,
+unfolded through \noderef{TreeColorSetClosed} and
+\noderef{BoundaryColorEdges}; consequently $g_j$ is an exact
+$d'$-colored boundary identity, lies on $Q_j$, and is incident with its
+tree end.  Support disjointness makes the two tree ends distinct.  The
+pairwise-distinct vertex list in \noderef{TreeSequence}, together with
+\noderef{TreeVertexOrder}, then orders those two tree ends strictly; if
+necessary we exchange all subscripts, walks, and edge identities.
 
-The assumed failure of interchangeability makes the comparison class
-nonempty.  Indeed, the truncation through the stated $T_{n,p}$ has
-$p-1<q$ dividers, maximum property, its inherited
-good hierarchy and terminal certificate (C).  By (6.1) it is elementary,
-and the first consequence above converts the two full components from
-the failure of interchangeability into $\mathsf{LegBad}$.  Thus the
-comparison class is nonempty.  Choose a lexicographically least member,
-rename its coloring $\varphi$, terminal tree $S$, and colors
-$\alpha,\beta$, put $p=d+1$, and write
-$A=T_{n,p-1}^{*}$.  The input coloring, corresponding ETT, hierarchy and
-generating coloring are allowed to vary in this minimum; only
-$G,k,e_0,n$, the lower package, (6.1), $q$, and the large estimate remain
-fixed.
-
-The chosen presentation gives two disjoint exit legs $P_1,P_2$ with
-distinct outside ends.  By (6.1), $S$ is elementary.  The color $\alpha$
-is missing at a unique vertex by \noderef{TreeMissingColors} and
-\noderef{ColoredVertexSetElementary}, and is singleton-closed by
-$\mathsf{LegBad}$.  Terminal certificate (C) says exactly
+Define an \emph{admissible presentation} to consist of the following
+data, and no induction hypotheses.  It has an arbitrary certified input,
+a generating coloring $\psi$, a tree $U$, a same-rung ETT $\mathcal U$
+on $U$ with maximum property, a base $B$, and a good hierarchy $K$ with
+$d<q$.  It requires that $\psi$ be proper and leave exactly $e_0$
+uncolored, that its own terminal-ladder bound be
 \[
- S\text{ is }
- \left(\bigcup_{\eta\in D_{n,p}}\Gamma^{p-1}_\eta\right)^-
- \text{-closed under }\varphi.                               \tag{3}
+             2n+11\leq |\overline\psi(X)|,                    \tag{3}
 \]
-in the sense of \noderef{TreeColorSetMinusClosed}.  Write $a_j$ for the
-outside end and $b_j$ for the tree end of $P_j$, and order the two so
-that $b_1\prec b_2$ using \noderef{TreeVertexOrder}.
+and that (C) hold with the genuine terminal set of (2).  Finally it has
+distinct colors $a,b$, with $a$ missing and singleton-closed on $U$, and
+two exact, support-disjoint \noderef{TreeExitPath}s with distinct outside
+ends.  We include the distinct tree ends, their strict order, and the two
+individual $b$-colored boundary identities just derived.  The hypotheses
+`hlower' and `hfewer' of the statement are fixed ambient hypotheses, not
+fields of an admissible presentation.
 
-We also establish once the predecessor color used in Subcases 1.2 and
-2.2.  The bound \noderef{HierarchyStoredColorsCardinality} gives
-$|D_{n,j}|\leq n$.  The `twoColors' and `disjointPairs' fields of
+Every admissible presentation has elementary terminal vertex set.  Its
+rung number is $n$, it has maximum property, its hierarchy is good, and
+$d<q$, so the hypothesis `hfewer' applies literally and yields
+\[
+                    V(U)\text{ is elementary under }\psi.      \tag{4}
+\]
+If $b\notin\overline\psi(U)$, apply
+\noderef{ElementaryClosedExitPairExtendsTriple} to (4), properness, and
+the two stored legs.  It returns a third exit path support-disjoint from
+both, third outside and tree ends distinct from the preceding ends, and
+an exact $b$-colored boundary identity on that path.  Thus the set of
+qualifying triples of exit paths is nonempty.  For an admissible
+presentation define its secondary number to be $0$ if
+$b\in\overline\psi(U)$; otherwise define it to be one plus the least
+total walk length among all qualifying triples for the same structural
+presentation and colors.  The least length exists by well-ordering of
+$\mathbb N$.  Give the presentation the lexicographic coordinate
+\[
+                      (d,\text{secondary number}).             \tag{5}
+\]
+
+We next prove that the class just defined is nonempty.  Put
+$r=i+1$, so $1\leq r\leq q$, and apply
+\noderef{GoodHierarchyPrefixRepackage} at $r$.  It gives an ETT
+$\mathcal U_0$ on the exact ordered tree
+$U_0=H.\mathit{stage}(r)$, with the same entire certified series and rung
+number as $\mathcal E$, maximum property, a base $B_0$, and a good
+hierarchy $K_0$ having $r-1<q$ dividers.  Its exact retained stages,
+stored sets, and Gamma values are those of $H$.  The equality of entire
+series transports (3) from the assumed large bound.
+
+The separate last conclusion of
+\noderef{GoodHierarchyPrefixRepackage} says that $U_0$ is
+\[
+ \left(\bigcup_{\eta\in D^H_{n,r}}\Gamma^{r-1}_\eta\right)^-
+ \text{-closed}.                                              \tag{6}
+\]
+This is exactly (C) for $K_0$, rather than an internal closure field of
+$K_0$.  To check this assertion, unfold
+\noderef{HierarchyTerminalStoredColors}: its raw set is the same because
+the two ETTs have the same certified series, and its subtracted missing
+set is $\overline\varphi(U_0)$.  Since $r>0$,
+\noderef{HierarchyStarredStage} identifies the tree subtracted in
+$D^H_{n,r}$ with $H.\mathit{stage}(r)=U_0$.  Hence
+$\mathit{HierarchyTerminalStoredColors}(K_0)=D^H_{n,r}$.  The retained
+Gamma equality at the last index is
+$\Gamma^{K_0,r-1}_\eta=\Gamma^{H,r-1}_\eta$, so (6) is precisely (C).
+
+Apply `hfewer' to $\mathcal U_0,K_0$ to obtain elementariness.  The
+original hypotheses on $H.\mathit{stage}(r)$ say that $\alpha$ is
+missing and singleton-closed there and that $\alpha,\beta$ are not
+interchangeable.  Therefore
+\noderef{ElementaryClosedNoninterchangeableExitPair} supplies two exact
+support-disjoint exit legs, distinct outside and tree ends, and their
+individual $\beta$-colored boundary identities.  Order the tree ends as
+above.  Properness and the exactly-one-uncolored condition are the given
+ones for $\varphi$, while all remaining structural data came from the
+prefix theorem.  We have therefore constructed an admissible
+presentation.
+
+Choose an admissible presentation with least coordinate (5), first
+minimizing the nonempty set of divider counts and then the nonempty set of
+secondary numbers at that divider count.  Denote its data by
+\[
+ (\chi,U,\psi,\mathcal U,B,K,\Gamma; a,b),
+ \qquad d=K.\mathit{dividerCount},
+\]
+and retain two qualifying legs for now.  Notice that $d=0$ is allowed.
+Only $G,k,e_0,n,q$ and the ambient hypotheses are fixed in this minimum;
+the certified input, generating coloring, ETT, base, hierarchy, terminal
+tree, colors, and paths all vary.
+
+Before constructing the requested color $\theta$, we state the counting
+fact with all indices visible.  By
+\noderef{HierarchyStoredColorsCardinality},
+$|D^K_{n,j}|\leq n$ at every internal index $0\leq j\leq d$.
+The `twoColors' and `disjointPairs' fields of
 \noderef{GoodHierarchy} therefore give
 \[
- \left|\bigcup_{\eta\in D_{n,j}}\Gamma^j_\eta\right|
-       =2|D_{n,j}|\leq2n.                                    \tag{7}
+ \left|\bigcup_{\eta\in D^K_{n,j}}\Gamma^j_\eta\right|
+       =2|D^K_{n,j}|\leq2n.                                  \tag{7}
 \]
-If $p=1$ and the terminal kind is not PE, (L) and (7), after deleting
-$\alpha,\beta$, leave at least nine choices for
-$\theta\in\overline\varphi(T_n)$ outside the terminal reserved union.
-The RE/SE argument used in the non-PE base case closes every missing
-color on $T_n=A$, while (3) closes $\theta$ on $S$.
-
-If $p=1$ and the kind is PE, the `parallelBase' field of
-\noderef{GoodHierarchy} gives at least four common missing colors of
-$T_n$ and $R_n$ outside $\Gamma^0$.  Delete $\alpha,\beta$ and choose
-$\theta$ from the at least two remaining colors.
-\noderef{ParallelCommonMissingClosed}, with the pre-step elementarity
-verified in the PE base case, closes $\theta$ on $A=T_n\vee R_n$.
-Since $D_{n,1}\subseteq D_{n,0}$ follows directly by unfolding
-\noderef{HierarchyStoredColorsAt} and using $A\subseteq S$, the choice
-also avoids the reserved union in (3), which closes $\theta$ on $S$.
-
-If $p>1$, missing-color monotonicity along the stages and (L) give at
-least $2n+11$ colors missing on $T_{n,p-2}$.  Delete
-$\alpha,\beta$ and the at most $2n$ colors in
-$\bigcup_{\eta\in D_{n,p-1}}\Gamma^{p-2}_\eta$, and choose $\theta$.
-The minus-closed field at $p-1$ closes $\theta$ on
-$T_{n,p-1}=A$.  The `uniqueRefresh' field of
-\noderef{GoodHierarchy} keeps every nonrefreshed pair equal to its old
-pair.  If the refreshed pair contained $\theta$, its missing vertex in
-$V(T_{n,p-1})-V(T_{n,p-2}^{*})$ and a $\theta$-missing vertex in
-$T_{n,p-2}$ would contradict elementarity of $T_{n,p-1}$.  Thus
-$\theta$ avoids the terminal reserved union and (3) closes it on $S$.
-In every case $\theta\ne\alpha,\beta$ and
+The terminal inclusion (2) also gives, explicitly,
 \[
- \begin{cases}
- \theta\in\overline\varphi(T_n),\quad
- \theta\text{ closed on }A\text{ and }S,&p=1,\\
- \theta\in\overline\varphi(T_{n,p-1}),\quad
- \theta\text{ closed on }A\text{ and }S,&p>1.
-\end{cases}                                                  \tag{9}
+ \bigcup_{\eta\in D^K_{n,d+1}}\Gamma^d_\eta
+ \subseteq
+ \bigcup_{\eta\in D^K_{n,d}}\Gamma^d_\eta.                  \tag{8}
+\]
+We construct $\theta$ in three cases.
+
+Suppose first that $d=0$ and the last certified step is not PE.  The ETT
+identity in \noderef{ExtendedTashkinovTree} identifies $\psi$ with the
+last series coloring.  Since $n>0$, the last certificate supplied by
+\noderef{TashkinovSeries} is a noninitial constructor of
+\noderef{TashkinovSeriesStep}; under the present assumption it is RE or
+SE.  In the RE case its `currentColoring' field identifies $\psi$ with
+the preceding coloring, and its `previousClosed' field
+\noderef{ColoredVertexSetClosed} says directly that every color missing
+on $X$ is closed on $X$ under $\psi$.
+
+In the SE case write $\pi$ for the preceding coloring and $\rho$ for the
+selected coloring.  The `currentColoring' field gives $\psi=\rho$, while
+the `selectedStable' field of
+\noderef{MaximumDefectiveChoice} gives stability from $\pi$ to $\rho$ on
+$X$.  Both are proper and leave exactly $e_0$ uncolored by the SE fields
+and the selected-choice fields.  Symmetry in \noderef{sc2} therefore
+gives stability from $\rho$ to $\pi$.  By
+\noderef{StableColoring}, the two colorings have identical missing sets
+at every vertex of $X$.  If a color $c\in\overline\psi(X)$ occurred on
+an exact $\psi$-boundary edge $f$, symmetric stability would fix $f$
+because $c$ is missing on $X$: hence $\pi(f)=\psi(f)=c$.  But $c$ is
+also missing on $X$ under $\pi$, contradicting the SE `previousClosed'
+field after unfolding \noderef{BoundaryColorEdges}.  Thus every color
+missing on $X$ is singleton-closed there under $\psi$ in the SE case as
+well.
+
+Now (3), (7) at $j=0$, and deletion of the two colors $a,b$ leave at
+least nine colors in
+\[
+ \overline\psi(X)\setminus
+ \left(\{a,b\}\cup
+   \bigcup_{\eta\in D^K_{n,0}}\Gamma^0_\eta\right).
+\]
+Choose one and call it $\theta$.  The `nonparallel' field of
+\noderef{HierarchyBase} identifies $B.\mathit{core}=X$, and
+\noderef{HierarchyStarredStage} identifies this core with $A$.  Hence
+$\theta$ is missing and closed on $A$.  The terminal tree contains $X$
+by \noderef{TashkinovHierarchy}, so $\theta$ is also missing on $U$.
+Its avoidance of the larger internal union and (8) show that it avoids
+the terminal reserved union.  Certificate (C), unfolded through
+\noderef{TreeColorSetMinusClosed}, therefore closes $\theta$ on $U$.
+
+Suppose next that $d=0$ and the last step is PE.  The `parallelBase'
+field of \noderef{GoodHierarchy} gives
+\[
+ 4\leq\left|
+ (\overline\psi(X)\cap\overline\psi(B.\mathit{closure}))
+ \setminus\bigcup_{\eta\in D^K_{n,0}}\Gamma^0_\eta
+ \right|.                                                     \tag{9}
+\]
+After deleting $a,b$, choose a remaining color $\theta$; it is missing
+on both $X$ and $B.\mathit{closure}$ and avoids the internal reserved
+union.
+
+We verify, rather than assume, the pre-step elementariness needed here.
+If $n=1$, the first conjunct of \noderef{TechnicalTheoremBase}, applied
+to the certified series of $\mathcal U$, says exactly that $V(X)$ is
+elementary under the pre-step coloring.  If $n>1$, apply
+\noderef{CertifiedETTPredecessor} to $\mathcal U$ and its maximum
+property.  It returns a maximum ETT of rung $n-1>0$, with terminal tree
+exactly $X$ and generating coloring exactly the pre-step coloring.  Its
+rung is strictly below $n$, so the first conjunct of the ambient `hlower'
+hypothesis gives the same elementariness conclusion.  Thus
+\noderef{ParallelCommonMissingClosed} applies and closes every color in
+the intersection in (9) on $B.\mathit{core}$.  The `parallel' field of
+\noderef{HierarchyBase} and \noderef{OrderedTreeUnion} identify this
+core with the exact ordered union $X\vee B.\mathit{closure}$, while
+\noderef{HierarchyStarredStage} identifies it with $A$.  Therefore
+$\theta$ is missing on $A$ (already on the initial segment $X$) and is
+closed there.  As in the preceding case, (8) and (C) close it on $U$.
+
+Finally suppose $d>0$.  Put
+\[
+ B_-=K.\mathit{stage}(d-1),\qquad A=K.\mathit{stage}(d),
+\]
+where the second equality is \noderef{HierarchyStarredStage}.  Repeated
+use of the `nested' field of \noderef{TashkinovHierarchy} gives
+$X\preccurlyeq B_-\preccurlyeq A\preccurlyeq U$.  Unfolding
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeMissingColors} at each inclusion gives
+\[
+ \overline\psi(X)\subseteq\overline\psi(B_-)
+ \subseteq\overline\psi(A)\subseteq\overline\psi(U).         \tag{10}
+\]
+There is also an initial-segment inclusion
+$K.\mathit{starred}(d-1)\preccurlyeq A$: for $d>1$ it is the hierarchy
+inclusion from stage $d-1$ to stage $d$, while for $d=1$ it is exactly
+the `coreInsideFirst' field.  Repeating the missing-set subtraction
+argument of (2), now for these two internal starred stages, gives
+\[
+                         D^K_{n,d}\subseteq D^K_{n,d-1}.       \tag{11}
+\]
+Consequently the `twoColors' and `disjointPairs' fields of
+\noderef{GoodHierarchy} at index $d-1$ apply to every index in
+$D^K_{n,d}$.  Together with
+\noderef{HierarchyStoredColorsCardinality} at index $d$, they give the
+specific bound
+\[
+ \left|\bigcup_{\eta\in D^K_{n,d}}\Gamma^{d-1}_\eta\right|
+       =2|D^K_{n,d}|\leq2n.                                  \tag{12}
+\]
+Use (3), (10), (12), and deletion of $a,b$ to choose
+\[
+ \theta\in\overline\psi(B_-)
+ \setminus\left(\{a,b\}\cup
+   \bigcup_{\eta\in D^K_{n,d}}\Gamma^{d-1}_\eta\right).       \tag{13}
+\]
+There are again at least nine choices.  By (10), $\theta$ is missing on
+$A$.  The last `minusClosed' field of \noderef{GoodHierarchy} says that
+$A$ is
+$(\bigcup_{\eta\in D^K_{n,d}}\Gamma^{d-1}_\eta)^-$-closed;
+thus (13) and \noderef{TreeColorSetMinusClosed} close $\theta$ on $A$.
+
+It remains to show that $\theta$ avoids the terminal union in (C), whose
+Gamma superscript is $d$.  By (2), every terminal index $\eta$ lies in
+$D^K_{n,d}$.  Apply the last `uniqueRefresh' field of
+\noderef{GoodHierarchy}, and let $\eta_g$ be its unique refreshed index.
+For $\eta\ne\eta_g$, that field gives
+$\Gamma^d_\eta=\Gamma^{d-1}_\eta$, so (13) excludes $\theta$.
+For $\eta=\eta_g$, every color in $\Gamma^d_{\eta_g}$ is missing at a
+vertex of
+\[
+             V(A)\setminus V(K.\mathit{starred}(d-1)).         \tag{14}
+\]
+Every vertex of $B_-$ lies in $K.\mathit{starred}(d-1)$: this is equality
+when $d-1>0$ by \noderef{HierarchyStarredStage}; when $d-1=0$, it follows
+from the base-stage identity, the `parallel' or `nonparallel' field of
+\noderef{HierarchyBase}, and the vertex-union clause of
+\noderef{OrderedTreeUnion}.  If $\theta$ lay in the refreshed pair,
+(13) would give a $\theta$-missing vertex in $B_-$, while (14) would give
+a distinct $\theta$-missing vertex in $A$.  This contradicts (4) and the
+definition \noderef{ColoredVertexSetElementary}.  Hence $\theta$ avoids
+every $\Gamma^d_\eta$ indexed by the terminal set.  By (10) it is missing
+on $U$, so (C) closes it on $U$.
+
+All three cases produce
+\[
+ \theta\ne a,b,\qquad
+ \theta\in\overline\psi(A),\qquad
+ A\text{ is }\{\theta\}\text{-closed},\qquad
+ U\text{ is }\{\theta\}\text{-closed}.                       \tag{15}
 \]
 
-For each retained exit path, take the final edge-node before its tree
-end.  It is an exact boundary identity by \noderef{TreeExitPath} and
-\noderef{BoundaryEdges}.  Its color is $\alpha$ or $\beta$ by
-\noderef{TwoColorIncidenceGraph}, and it cannot be $\alpha$ because the
-singleton $\{\alpha\}$ is closed on $S$.  Thus these are the required
-individual $\beta$-colored identities $f_1,f_2$, incident with
-$b_1,b_2$ and lying on the respective path supports.
+We now derive the primary universal clause.  Take data quantified there
+and suppose, toward a contradiction, that its two exit legs exist.
+Unfold \noderef{CorrespondingExtendedTashkinovTree}.  The object
+`corr' contains its actual `replacementInput', actual certified
+replacement series, and `replacementETT' on the displayed tree; its
+generating-coloring field is the quantified coloring $\sigma$, and its
+`rungAgreement' gives
+\[
+ \mathit{corr.replacementETT.rounds}=\mathcal U.\mathit{rounds}=n.
+\]
+The quantified hypotheses give properness, exact one-uncoloredness,
+maximum property, the base and good hierarchy $L$, its own large bound,
+and its terminal certificate with
+\noderef{HierarchyTerminalStoredColors}.  The stable-coloring premise is
+part of the certified replacement-family comparison; it is not confused
+with the globally fixed lower package.  Since
+\[
+ L.\mathit{dividerCount}<d<q,
+\]
+`hfewer', applied using `rungAgreement', also gives elementariness of the
+replacement terminal tree.  From the two quantified exit paths,
+support-disjointness, distinct outside ends, and singleton closedness,
+the explicit final-edge argument preceding the definition of admissible
+presentations supplies the distinct tree ends, their order, and exact
+second-color boundary identities.  Thus these data are literally an
+admissible presentation with primary coordinate
+$L.\mathit{dividerCount}<d$, contradicting the choice of (5).  This is
+exactly the asserted primary `False' conclusion.
 
-The lexicographic choice gives the two asserted comparison clauses.
-Any presentation with fewer than $d$ dividers has smaller primary
-coordinate, so it cannot contain two qualifying exit legs; this is the
-primary no-better clause, with all of its coloring, correspondence,
-maximum, large-bound, good-hierarchy, and terminal-certificate premises
-exactly those in the definition of the comparison class.  If $\beta$ is
-missing on $S$, the secondary coordinate is zero and the first
-alternative in the theorem holds.
+If $b\in\overline\psi(U)$, retain the chosen pair, ordered tree ends, and
+boundary identities; the first alternative of the theorem holds.  Now
+suppose $b\notin\overline\psi(U)$.  Among all qualifying triples used to
+define the selected presentation's secondary number, choose one of least
+total length.  Pairwise support disjointness makes its three tree ends
+distinct.  The linear order of their three unique positions in
+\noderef{TreeSequence} lets us relabel the complete path-and-end packages
+so that $b_1\prec b_2\prec b_3$ in
+\noderef{TreeVertexOrder}.  Apply the explicit final-edge argument to
+each path to obtain the retained exact $b$-colored boundary identities
+$f_1,f_2,f_3$.  Relabeling preserves total walk length, all three support
+disjointness statements, and all outside-end inequalities.  This gives
+the stated three-leg alternative.
 
-Otherwise, the component-by-component exit-leg construction above gives
-three pairwise support-disjoint legs with distinct outside ends.  Order
-their three distinct tree ends using \noderef{TreeVertexOrder}, calling
-them $b_1\prec b_2\prec b_3$, and retain the corresponding ordered paths
-$P_1,P_2,P_3$.  Their last boundary identities are again exact
-$\beta$-colored edges $f_1,f_2,f_3$.  Choose such a triple of least total
-walk length.  A same-divider comparison presentation with its second
-color missing would have secondary coordinate zero; one with that color
-present and a shorter qualifying triple would have a strictly smaller
-positive secondary coordinate.  Either contradicts lexicographic
-minimality.  This is precisely the asserted secondary no-better clause,
-and the construction includes all pairwise support and endpoint
-inequalities required there.
+For its secondary universal clause, take the quantified comparison data
+and again unfold \noderef{CorrespondingExtendedTashkinovTree}.  Its
+replacement input, replacement ETT, rung agreement, certified series,
+and generating-coloring data are genuine fields.  The assumed properness,
+one-uncoloredness, maximum property, same-divider good hierarchy, large
+bound, terminal certificate, and two exact exit legs provide every field
+of an admissible presentation; the missing exact boundary identities,
+tree-end distinction, and order follow from the same final-edge argument.
+Moreover,
+$L.\mathit{dividerCount}=d<q$, so `hfewer' applies and supplies the
+elementariness used by the comparison class.  If the comparison color is
+missing, this admissible presentation has secondary number $0$, smaller
+than the selected positive number.  If it is present and the displayed
+third leg makes a qualifying triple of total length smaller than
+$|P_1|+|P_2|+|P_3|$, its least triple length is no larger than that
+displayed length, again giving a smaller secondary number.  Either case
+contradicts lexicographic minimality and proves the quantified `False'.
 
-Finally take as the witnesses the chosen arbitrary input, coloring
-$\varphi$, same-rung ETT, base, hierarchy and good family, followed by
-$\alpha,\beta,\theta$, the ordered exit legs, and their exact final edge
-identities.  The definition of the comparison class supplies properness,
-one-uncoloredness, maximum property, the large estimate and (C); (6.1)
-supplies elementarity; (9) supplies every field for $\theta$; and the two
-preceding paragraphs supply the two minimality clauses and the final
-missing-versus-three-leg alternative.  Thus every component of the
-claimed global-minimum witness package has been constructed.
+Finally use the selected certified input, $U,\psi,\mathcal U,B,K,\Gamma$,
+the ordered pair (or the first two paths of the ordered minimal triple),
+their exact edge identities, and the color $\theta$ from (15) as the
+witnesses.  Admissibility supplies the same rung, maximum property,
+$d<q$, properness, exact one-uncoloredness, (3), and (C); (4) supplies
+elementariness; the two support lemmas and the final-edge argument supply
+all exact exit-leg fields; and the last two paragraphs supply the two
+universal minimality clauses.  Every field of the asserted witness package
+has therefore been proved, including the formerly omitted $d=0$ cases.
 \end{proof}
