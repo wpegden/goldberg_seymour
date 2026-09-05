@@ -22,8 +22,11 @@ import Tablet.StableColoring
 import Tablet.StableColoringBeforeVertex
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovAugmentationSequenceRestrict
+import Tablet.TashkinovClosure
 import Tablet.TashkinovExtensionKind
 import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesData
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.Td
@@ -31,7 +34,9 @@ import Tablet.TechnicalTheoremBase
 import Tablet.TreeInterchangeable
 import Tablet.TreeMissingColors
 import Tablet.TreeSequence
+import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequencePrefix
 import Tablet.TreeSequenceVertexSet
 import Tablet.TreeVertexOrder
 import Tablet.TwoColorComponent
