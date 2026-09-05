@@ -17,9 +17,9 @@ leaving precisely \(e_0\) uncolored, \(T'_{s+1}\) is interchangeable for
 any pair of colors of which at least one is missing on \(T'_{s+1}\).
 \item For each PE slot \(a\leq s\) with supporting vertex \(u_a\) and
 \(m(u_a)=b\), every proper \((T'_a,D'_a,\varphi'_a)\)-stable coloring
-leaving precisely \(e_0\) uncolored is both
-\((T'(u_a)-u_a,D'_{b-1},\varphi'_{b-1})\)-stable and
-\((T'_{b-1},D'_{b-1},\varphi'_{b-1})\)-stable.  Moreover, the stored
+leaving precisely \(e_0\) uncolored is
+\((T'(u_a)-u_a,D'_{b-1},\varphi'_{b-1})\)-stable.  When \(b>1\), it is
+also \((T'_{b-1},D'_{b-1},\varphi'_{b-1})\)-stable.  Moreover, the stored
 color pairs at two distinct PE slots with distinct supporting vertices
 and the same first-appearance index are disjoint.
 \item If the terminal slot is PE with supporting vertex \(u_s\) and
@@ -41,12 +41,9 @@ Then assertion (iii) holds at rung \(n\):
 for every \(1\leq i\leq n\), if \(\Theta_i=\mathrm{PE}\) has supporting
 vertex \(v_i\) with \(m(v_i)=j\), every proper
 \((T_i,D_i,\varphi_i)\)-stable coloring \(\sigma_i\) leaving precisely
-\(e_0\) uncolored is both
-\[
- (T(v_i)-v_i,D_{j-1},\varphi_{j-1})\text{-stable}
- \quad\text{and}\quad
- (T_{j-1},D_{j-1},\varphi_{j-1})\text{-stable}.
-\]
+\(e_0\) uncolored is
+\((T(v_i)-v_i,D_{j-1},\varphi_{j-1})\)-stable.  If \(j>1\), it is also
+\((T_{j-1},D_{j-1},\varphi_{j-1})\)-stable.
 Furthermore, if two distinct PE slots \(i,h\leq n\) have distinct
 supporting vertices and \(m(v_i)=m(v_h)\), then
 \(S_i\cap S_h=\varnothing\).
@@ -67,10 +64,12 @@ therefore supplies assertions (i)--(vi) for this certified restriction.
 
 Apply this observation first to the stability assertion with \(i<n\), and
 then to a pair of PE indices whose larger index is below \(n\).  In either
-case lower-rung assertion (iii) is literally the desired assertion: the
+case lower-rung assertion (iii), including its conditional predecessor
+clause, is literally the desired assertion: the
 equalities returned by \noderef{CertifiedETTRestriction} do not change any of the relevant
 trees, colorings, \(S\)-sets, or their order.  Thus it remains only to
-prove the two conclusions when the current PE index is \(i=n\).  This is
+prove the stability conclusion and its conditional predecessor consequence
+when the current PE index is \(i=n\).  This is
 the manuscript's reduction to the terminal slot.
 
 Let \(v_n\) be the terminal supporting vertex, put \(m(v_n)=j\), and let
@@ -254,17 +253,37 @@ with \(T^*\), that supporting vertex would precede \(v_n\), contradicting
                          \varphi_n(f)=\varphi_{j-1}(f).         \tag{6}
 \]
 Equations (5) and (6) are precisely the two clauses of (2).  Transitivity
-of those same edge-value and missing-set equalities now proves that
+of those same edge-value and missing-set equalities now proves, for every
+value of \(j\), that
 \(\sigma_n\) is stable on \(T^*\) relative to
-\((D_{j-1},\varphi_{j-1})\).  More explicitly,
-\noderef{ETTFirstAppearanceIndex} puts \(v_n\) in the complete ladder stage
-\(T_j\).  Together with the entrywise ordered-prefix relations supplied by
-\noderef{TashkinovSeriesStep} and defined in
-\noderef{TreeSequenceInitialSegment}, its least-index consequence is that
-every vertex of \(T_{j-1}\) occurs strictly before \(v_n\) in the final
-display.  Thus \(V(T_{j-1})\subseteq V(T^*)\), and restricting the same
-two stability clauses to that subset proves the asserted
-\((T_{j-1},D_{j-1},\varphi_{j-1})\)-stability.
+\((D_{j-1},\varphi_{j-1})\).  This is the unconditional before-support
+conclusion.
+
+For the separate predecessor-stage conclusion, assume \(j>1\).  This
+positivity is essential: \(T_{j-1}\) is now a completed ladder stage, not
+the auxiliary one-edge seed \(T_0\).  The minimum in
+\noderef{ETTFirstAppearanceIndex} ranges over the complete stages
+\(T_1,\ldots,T_n,T\); hence \(m(v_n)=j\) says both that \(v_n\in V(T_j)\)
+and that \(v_n\notin V(T_{j-1})\).  By the ordered-prefix certificate in
+\noderef{TashkinovSeriesStep}, expanded with
+\noderef{TreeSequenceInitialSegment}, \(T_{j-1}\) is an entrywise initial
+segment of \(T_j\).  Fix \(w\in V(T_{j-1})\), choose its displayed index
+there using \noderef{TreeSequenceVertexSet}, and transport that index to
+\(T_j\).  Choose also the displayed index of \(v_n\) in \(T_j\).  If the latter index were no larger than the
+length of \(T_{j-1}\), entrywise agreement would put \(v_n\) in
+\(V(T_{j-1})\), contrary to minimality.  Thus every index representing a
+vertex of \(T_{j-1}\) is strictly smaller than the index of \(v_n\).
+The vertex-injectivity field of \noderef{TreeSequence} makes these displayed
+positions unambiguous.  Finally the successive series-step prefixes, followed
+by the final ordered containment in \noderef{ExtendedTashkinovTree}, carry
+\(T_j\) into the final display \(T\) while preserving both indices, so
+\noderef{TreeVertexOrder} gives \(w\prec_Tv_n\).  Since \(w\) was
+arbitrary, \(V(T_{j-1})\subseteq V(T^*)\).  Restrict the incident-edge
+and vertexwise missing-set clauses already proved on \(T^*\) to this
+subset (transporting a missing color by its vertex witness, exactly as
+above).  This proves
+\((T_{j-1},D_{j-1},\varphi_{j-1})\)-stability when \(j>1\), and makes no
+claim at \(j=1\).
 
 It remains to prove stored-pair disjointness.  Let \(v_h\ne v_n\) be an
 earlier PE support with \(m(v_h)=m(v_n)\).  The PE constructor gives

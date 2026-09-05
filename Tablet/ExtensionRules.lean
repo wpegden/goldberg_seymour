@@ -31,6 +31,7 @@ import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeInterchangeable
+import Tablet.TreeSequence
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceVertexSet
 import Tablet.TreeMissingColors
@@ -87,9 +88,10 @@ theorem ExtensionRules {V E : Type*} [Fintype V] [Fintype E]
               StableColoringBeforeVertex T' v hvFinal
                   (TashkinovStoredColors lower.series.data j)
                   (lower.series.data.coloring j) sigma ∧
-                StableColoring (lower.series.data.tree j.castSucc)
-                  (TashkinovStoredColors lower.series.data j)
-                  (lower.series.data.coloring j) sigma) ∧
+                (0 < j.val →
+                  StableColoring (lower.series.data.tree j.castSucc)
+                    (TashkinovStoredColors lower.series.data j)
+                    (lower.series.data.coloring j) sigma)) ∧
           ∀ (q r : Fin lower.rounds) (vq vr : V),
             q ≠ r → vq ≠ vr →
             lower.series.data.kind q.succ =
@@ -169,9 +171,10 @@ theorem ExtensionRules {V E : Type*} [Fintype V] [Fintype E]
           StableColoringBeforeVertex T v hvFinal
               (TashkinovStoredColors ett.series.data j)
               (ett.series.data.coloring j) sigma ∧
-            StableColoring (ett.series.data.tree j.castSucc)
-              (TashkinovStoredColors ett.series.data j)
-              (ett.series.data.coloring j) sigma) ∧
+            (0 < j.val →
+              StableColoring (ett.series.data.tree j.castSucc)
+                (TashkinovStoredColors ett.series.data j)
+                (ett.series.data.coloring j) sigma)) ∧
     ∀ (q r : Fin ett.rounds) (vq vr : V),
       q ≠ r → vq ≠ vr →
       ett.series.data.kind q.succ = some TashkinovExtensionKind.PE →

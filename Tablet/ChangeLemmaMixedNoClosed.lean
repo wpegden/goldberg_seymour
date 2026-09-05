@@ -113,9 +113,10 @@ theorem ChangeLemmaMixedNoClosed {V E : Type*}
               StableColoringBeforeVertex T' v hvFinal
                   (TashkinovStoredColors lower.series.data j)
                   (lower.series.data.coloring j) sigma ∧
-                StableColoring (lower.series.data.tree j.castSucc)
-                  (TashkinovStoredColors lower.series.data j)
-                  (lower.series.data.coloring j) sigma) ∧
+                (0 < j.val →
+                  StableColoring (lower.series.data.tree j.castSucc)
+                    (TashkinovStoredColors lower.series.data j)
+                    (lower.series.data.coloring j) sigma)) ∧
           ∀ (q r : Fin lower.rounds) (vq vr : V),
             q ≠ r → vq ≠ vr →
             lower.series.data.kind q.succ =

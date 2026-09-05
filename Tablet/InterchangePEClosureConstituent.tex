@@ -16,8 +16,9 @@ maximum property satisfies all six lower-rung assertions:
 \item under every proper coloring leaving exactly $e_0$ uncolored and
 stable on its final ladder closure, that closure is interchangeable for
 two colors whenever at least one of them is missing there;
-\item stability descends at each PE support to the prefix before the
-support and to its first-appearance ladder stage, and stored pairs at
+\item stability descends unconditionally at each PE support to the prefix before the
+support and, when its first-appearance index is greater than one, also to
+the preceding ladder stage; stored pairs at
 distinct PE slots with distinct supports and the same first-appearance
 index are disjoint;
 \item at a terminal PE, the stored two-color component through the
@@ -81,10 +82,11 @@ stage containing the support, as represented by
 \noderef{TreeSequenceInitialSegment} identify the prefix through
 $v_n$ with the corresponding prefix of $T_j$.  Apply
 \noderef{ExtensionRules} to the current ETT and the full displayed
-lower-rung package.  Its first conclusion says that $\sigma_n$ is
-stable, with the correct earlier stored set and generating coloring,
-both before $v_n$ in the sense of
-\noderef{StableColoringBeforeVertex} and on $T_{j-1}$.
+lower-rung package.  Its first conclusion says unconditionally that
+$\sigma_n$ is stable, with the correct earlier stored set and generating
+coloring, before $v_n$ in the sense of
+\noderef{StableColoringBeforeVertex}; when $j>1$ it additionally gives
+stability on the genuine predecessor ladder stage $T_{j-1}$.
 
 We next check the construction, rather than merely naming $R_n$ a
 lower-rung ETT.  Each augmentation which constructs the prefix through
