@@ -18,82 +18,294 @@ specified Kempe change while preserving the exact first edge, and reduces
 to either the unused-tail case or the first-use-\(j\geq2\) case.
 \end{lemma}
 \begin{proof}
-Let \(\mu_n,H,A,q\) be the coloring, hierarchy, starred stage, and divider
-count of the supplied \noderef{HierarchyReplacementPresentation}.  The
-transported context gives
-\(|\overline\mu_n(T_n)|\geq2n+11\), and
-\noderef{HierarchyStoredColorsCardinality} gives
-\(|D_{n,q}|\leq n\).  Each Gamma set is a two-element set and the sets for
-distinct stored colors are disjoint by \noderef{GoodHierarchy}.  We now
-construct the color \(\gamma\) in the two divider cases.
+Write
+\[
+ \mu_n=P.\mathit{coloring},\quad
+ H=P.\mathit{counterexample}.\mathit{hierarchy},\quad
+ A=\noderef{HierarchyStarredStage}(H,q),\quad
+ \ell=\noderef{HierarchyFullTailLength}(C),
+\]
+where \(q\) is the last stored index.  The
+\noderef{SameGoodHierarchy} field of \(P\), unfolded through
+\noderef{SameHierarchyStages}, identifies the original and current
+divider counts, base core, stages, last starred stage, and hence all
+full-tail prefixes.  Let
+\[
+ X=T(y_1)=\noderef{HierarchyFullTailPrefix}(C,1),\qquad
+ B=T(y_{\ell-1})=\noderef{HierarchyFullTailPrefix}(C,\ell-1),
+\]
+and let \(y\) be the final displayed vertex of \(T\).
+\noderef{HierarchyCounterexampleTailAtLeastTwo} and
+\noderef{HierarchyCounterexamplePenultimateElementary}, applied to
+\(P.\mathit{minimumContext}\), give
+\[
+ 2\le\ell,\qquad
+ \noderef{ColoredVertexSetElementary}
+       (G,\mu_n,\noderef{TreeSequenceVertexSet}(B)).          \tag{1}
+\]
+The exact hierarchy and prefix equations give
+\[
+ A\prec X\preccurlyeq B\prec T,\quad |X|=|A|+1,\quad
+ e_1=T.\mathit{edge}(|A|).                                  \tag{2}
+\]
 
-If \(q>0\), the preceding Gamma union has size at most \(2n\), while the
-new Gamma pair at the last stage has size two.  Thus at least nine colors
-of \(\overline\mu_n(T_{n,q})\) lie outside both unions.  The last-stage
-minus-closed field of \noderef{GoodHierarchy} makes each such color
-singleton-closed on \(A=T_{n,q}\).  Choose one and call it \(\gamma\).
-
-If \(q=0\) and the terminal kind is not PE, choose
-\(\gamma\in\overline\mu_n(T_n)-\Gamma^0\); the same cardinal estimate
-shows this set is nonempty, and the actual SE/RE closure field in
-\noderef{TashkinovSeriesStep} makes it closed on \(A=T_n\).  If \(q=0\)
-and the kind is PE, use the parallel-base clause of
-\noderef{GoodHierarchy}: together with the \(2n+11\) estimate it supplies
-a color in
-\(\overline\mu_n(T_n)\cap\overline\mu_n(R_n)-\Gamma^0\), and the PE
-closure makes it closed on the exact core \(A=T_n\vee R_n\).  In all cases
+We first choose the auxiliary color with the exclusion required by the
+paper:
 \[
  \gamma\in\overline\mu_n(A),\qquad
- \gamma\notin\Gamma^q,\qquad \gamma\ne\alpha,
+ \gamma\notin\bigcup_{\eta\in D_{n,q}}
+       P.\mathit{counterexample}.\mathit{good}.\Gamma^q_\eta,
+ \qquad \gamma\ne\alpha,                                    \tag{3}
 \]
-the last inequality following because the exact first edge has color
-\(\alpha\) while \(\gamma\) is missing at an incident predecessor vertex.
+and \(\{\gamma\}\) is closed on \(A\).  Here are the three cases proving
+existence.
 
-The closed-color alternative of \noderef{ChangeLemma} says that the
-\((\alpha,\gamma)\)-component meeting \(A\) is unique.  Since \(\alpha\) is
-missing at \(y_\ell\), the component through \(y_\ell\) is a
-\noderef{TwoColorPathComponent} and is disjoint from \(A\); in particular
-it does not contain the supplied exact first-edge identity \(e_1\).
-Let \(\nu_n\) be the component swap through \(y_\ell\).
+Suppose \(q>0\).  Then \(A=T_{n,q}\).  The terminal-ladder missing set is
+contained in the missing set of \(A\), since \(T_n\preccurlyeq A\), so
+the context bound gives at least \(2n+11\) colors missing on \(A\).
+\noderef{HierarchyStoredColorsCardinality} gives
+\(|D_{n,q}|\le n\), and every Gamma pair has size two by
+\noderef{GoodHierarchy}.twoColors.  At the last refresh,
+\noderef{HierarchyStoredColorsAntitone} puts every currently stored color
+in the preceding stored set, and
+\noderef{GoodHierarchy}.uniqueRefresh says that all pairs except one are
+copied from the preceding index; the exceptional new pair has size two.
+Consequently the union of the preceding Gamma family and the full last
+Gamma family has size at most \(2n+2\).  After also deleting the singleton
+\(\{\alpha\}\), at least eight of the \(2n+11\) missing colors remain.
+Choose \(\gamma\) among them.  The last
+\noderef{GoodHierarchy}.minusClosed clause says that every color missing
+on \(T_{n,q}=A\) outside the preceding Gamma union has empty boundary
+there.  Thus (3) holds and \(\{\gamma\}\) is
+\noderef{TreeColorSetClosed} on \(A\).
 
-We next prove the full-tail transport data.  The component through
-\(y_\ell\) is disjoint from the unique component meeting \(A\).  Every
-affected exact tail edge has an earlier missing witness from its
-\noderef{TashkinovAugmentation}; hence it belongs to the component meeting
-\(A\).  The sole edge not covered by this statement is the zero-divider
-SE/RE seed from \noderef{HierarchyTailMissingColorExclusion}; it is either
-the given \(\alpha\)-colored \(e_1\), already outside the selected component,
-or has a stored color distinct from \(\alpha,\gamma\).  Thus every exact
-tail-edge value, and especially \(\nu_n(e_1)=\mu_n(e_1)=\alpha\), is fixed.
-Component separation and penultimate-prefix elementarity likewise give
-vertexwise equality of missing sets throughout
-\noderef{HierarchyFullTailPrefix}\((C,\ell-1)\).  Unaffected colors retain
-their first candidates; \(\alpha\) and \(\gamma\) have unchanged witnesses
-on \(A\).  Hence every last stored color has the same
-\noderef{HierarchyFirstMissingPosition}.
+Suppose \(q=0\) and the final kind is SE or RE.  The nonparallel clause of
+\noderef{HierarchyBase} gives \(A=T_n\).  Again the context gives at
+least \(2n+11\) missing colors, while the zeroth Gamma union has size at
+most \(2n\); deleting it and \(\{\alpha\}\) leaves a choice for
+\(\gamma\).  We prove that every color missing on \(T_n\) is closed under
+\(\mu_n\).  Inspect the actual final
+\noderef{TashkinovSeriesStep}.  In RE, its current-coloring equality and
+preceding \noderef{ColoredVertexSetClosed} field give this immediately.
+In SE, its \noderef{MaximumDefectiveChoice}.selectedStable field and the
+symmetry theorem \noderef{sc2} make the preceding coloring stable relative
+to \(\mu_n\).  If a \(\mu_n\)-colored boundary edge had a color missing
+on \(T_n\), the reverse incident-edge stability clause would give the
+same edge the same color under the preceding coloring, while vertexwise
+stability would preserve the missing witness.  This contradicts the
+preceding closedness.  Hence the selected \(\gamma\) is singleton-closed
+on \(A=T_n\).
 
-The normalized positive- or zero-divider alternative supplies the
-Cases 1/2 hypothesis of \noderef{StableChangeCasesOneTwoFullTail}.
-Apply that theorem.  It constructs an actual corresponding ETT on \(T\),
-maximum property, a rebuilt base and full good hierarchy, and
-\noderef{SameGoodHierarchy} data.  Rung agreement rewrites the lower-rung
-and fewer-divider functions.  Same stages and divider count give equality
-of \noderef{HierarchyCounterexampleMeasure}, so the old lexicographic
-minimality field transfers.  Ladder-tree equality and terminal stability
-transfer the \(2n+11\) estimate, and the corresponding certificate supplies
-properness and exact one-uncoloredness.  These are all fields of
-\noderef{HierarchyMinimumCounterexampleContext}, so the outputs form a new
+Finally suppose \(q=0\) and the final kind is PE.  The
+\noderef{GoodHierarchy}.parallelBase cardinality clause gives at least
+four colors in
+\[
+ \bigl(\overline\mu_n(T_n)\cap
+       \overline\mu_n(P.\mathit{replacementBase}.\mathit{closure})\bigr)
+       \setminus\Gamma^0.
+\]
+After excluding \(\alpha\), choose \(\gamma\) from the at least three
+remaining colors.  To establish closedness, use actual predecessor
+elementarity.  If the rung is one, it is the first conclusion of
+\noderef{TechnicalTheoremBase}.  If the rung is greater than one,
+\noderef{CertifiedETTRestriction} at rung \(n-1\) supplies an actual
+maximum predecessor ETT on \(T_n\), and the lower-rung elementarity field
+of the minimum context applies.  Therefore
+\noderef{ParallelCommonMissingClosed} says that every color in the
+displayed intersection, including \(\gamma\), is closed on the exact PE
+ordered-union core \(A\).  This completes the proof of (3) in all cases.
+In particular, \(\gamma\ne\alpha\) follows from the deliberate singleton
+exclusion, not from incidence of \(e_1\).
+
+We apply \noderef{ChangeLemma} with the closed color \(\gamma\) as its
+first color and \(\alpha\) as its second color.  Both colors are missing
+on \(A\preccurlyeq B\), so the conditional order-and-unused-edge premise
+is vacuous.  The third, closed-color conclusion gives
+\[
+ K_A:=\noderef{TwoColorComponent}(G,\mu_n,\gamma,\alpha,
+            \operatorname{inl}v_\gamma)
+     =\noderef{TwoColorComponent}(G,\mu_n,\gamma,\alpha,
+            \operatorname{inl}v_\alpha),                    \tag{4}
+\]
+and says that \(\gamma,\alpha\) are interchangeable on \(A\), including
+possibly singleton path components.
+
+Let \(Q\) be the full \((\gamma,\alpha)\)-component through
+\(\operatorname{inl}y\).  It is a
+\noderef{TwoColorPathComponent}, because \(\alpha\) is missing at \(y\),
+properness gives incidence degree at most one there by
+\noderef{MissingColorIncidenceEndpoint}, and
+\noderef{TwoColorComponentSpanningPath} spans its component by a simple
+path.  We claim \(Q\) does not meet \(V(A)\).  Otherwise interchangeability
+from (4) identifies \(Q\) with the path component \(K_A\) meeting \(A\).
+The latter is indeed a path component: its root \(v_\gamma\) is missing
+\(\gamma\), so \noderef{MissingColorIncidenceEndpoint} bounds the root
+degree by one and \noderef{TwoColorComponentSpanningPath} supplies a
+simple spanning path.
+If \(v_\gamma=v_\alpha\), both colors are missing at that one vertex, so
+its incidence node is isolated and its component cannot also contain the
+distinct vertex \(y\).  If they are distinct, the two missing vertices
+and \(y\) are three distinct incidence nodes of degree at most one in the
+same component.  This contradicts
+\noderef{TwoColorIncidenceDegreeAtMostTwo} and the two-ended spanning
+path, exactly as in the unused-tail case.  Hence \(Q\cap V(A)=\varnothing\).
+In particular \(Q\ne K_A\), and
+\noderef{TwoColorComponentsDisjoint} upgrades this inequality to
+disjointness of their full vertex-and-edge-node supports.
+By adjacency in \noderef{TwoColorIncidenceGraph}, no edge-node of \(Q\)
+can be incident with a vertex of \(A\).
+
+The exact edge \(e_1\) is incident with its predecessor \(A\) by the
+attachment field of \noderef{TreeSequence}; therefore its edge-node is
+outside \(Q\).  Define
+\[
+ \sigma_n=\noderef{TwoColorComponentSwap}
+       (G,\mu_n,\gamma,\alpha,\operatorname{inl}y).           \tag{5}
+\]
+Then
+\[
+                 \sigma_n(e_1)=\mu_n(e_1)=\alpha.            \tag{6}
+\]
+
+We invoke \noderef{StableChangeCasesOneTwo}, still with \(\gamma\) as the
+first color.  Its component-disjointness premise is the disjointness of
+\(Q\) from \(K_A\) proved above.  Its Cases 1/2 premise holds as follows:
+for \(q>0\), (3) says \(\gamma\) is missing on \(T_{n,q}=A\); for \(q=0\)
+non-PE, it is missing on \(T_n=A\); and for \(q=0\) PE, its construction
+put it in \(\overline\mu_n(T_n)\).  Both colors are missing on the
+elementary prefix \(B\) because they are missing on \(A\preccurlyeq B\).
+Together with (1), the path certificate, (4), and the projections of the
+minimum context, the theorem gives
+\[
+              \noderef{HierarchyWeaklyStable}(H,q,\sigma_n). \tag{7}
+\]
+\noderef{TwoColorComponentSwapProper} gives properness, and the component
+swap preserves the unique uncolored edge.
+
+We prove the pointwise missing-set equality
+\[
+ \overline\sigma_n(v)=\overline\mu_n(v)
+                    \quad(v\in V(B)).                        \tag{8}
+\]
+If \(\operatorname{inl}v\notin Q\), no changed edge is incident with
+\(v\).  If \(\operatorname{inl}v\in Q\), then \(v\notin V(A)\), and in
+particular it is distinct from the first missing witnesses
+\(v_\gamma,v_\alpha\in V(A)\).  Elementarity of \(B\) makes both affected
+colors present at \(v\).  Expanding \noderef{MissingColors} and using
+\noderef{IsProperEdgeColoring}, there is a unique incident edge of each
+color.  Both edge-nodes lie in \(Q\), so (5) transposes them and keeps
+both colors present; all other colors are fixed.  This proves (8), even
+if \(Q\) passes through internal degree-two vertices of \(B\).
+It follows in particular that \(\gamma,\alpha\) remain missing on
+\(X\), using their old witnesses in \(A\).                         \(\tag{9}\)
+
+The old certified final step gives an augmentation route to \(T\), from
+\(T_n\) in PE and from its exact adjoined seed in SE/RE.  Restrict this
+route to \(X\) using
+\noderef{TashkinovAugmentationSequenceRestrict}.  Weak stability (7)
+transports the route through \(A\).  For \(q>0\), its
+\noderef{TreeColoringInvariant} clause on \(A\) preserves each old
+new-edge value and missing witness.  For \(q=0\) PE, the base presents
+\(A\) as the exact \noderef{OrderedTreeUnion} of \(T_n\) and the PE
+closure, and the two \noderef{StableColoring} clauses of the
+\noderef{CombinedStableColoring} relation preserve the corresponding
+constituent augmentation routes.  For \(q=0\) SE/RE, the nonparallel
+base clause says \(A=T_n\).  Above \(A\) and before \(X\) there is
+only the exact edge \(e_1\), fixed by (6); its old missing witness lies in
+\(A\), where (8) preserves missingness.  Thus the one-step
+\noderef{TashkinovAugmentation} transports.  In the zero-divider SE/RE
+case, the first edge is the actual connecting seed:
+the final \noderef{TashkinovSeriesStep}, the exact position in (2), and
+the \noderef{TreeSequenceAdjoinEdge} equality identify \(e_1=f_n\), so
+the same singleton \(F_n=\{f_n\}\) and the same exact seed are retained.
+We have therefore constructed the verified route
+\[
+\begin{cases}
+T_n\longrightarrow X,&\text{in PE},\\
+T_n+f_n\longrightarrow X,&\text{in SE/RE},
+\end{cases}                                                   \tag{10}
+\]
+under \(\sigma_n\).
+
+Because every augmentation raises length by one and \(X\) is an exact
+intermediate prefix, induction through the original finite chain splits
+off the original-color suffix
+\[
+                         X\longrightarrow T.                 \tag{11}
+\]
+No assertion about the colors of its affected edges is made.
+
+Every \(\eta\in\noderef{HierarchyStoredColorsAt}(H,q)\) is not missing on
+\(A\), whereas both \(\gamma\) and \(\alpha\) are missing there.  Hence
+\(\eta\ne\gamma,\alpha\).  The component swap changes no edge to or from
+color \(\eta\), and therefore
+\[
+ \noderef{HierarchyFirstMissingPosition}(\sigma_n,T,\eta)
+ =\noderef{HierarchyFirstMissingPosition}(\mu_n,T,\eta).     \tag{12}
+\]
+The affected-Gamma cutoff is vacuous.  The construction (3) excludes
+\(\gamma\) from every last Gamma pair.  The color \(\alpha\) is also
+excluded: if \(\alpha\in
+P.\mathit{counterexample}.\mathit{good}.\Gamma^q_\eta\), then storedness
+of \(\eta\) makes its first missing position strictly larger than
+\(|A|\).  The exact edge \(e_1=T.\mathit{edge}(|A|)\) has old color
+\(\alpha\), so unfolding \noderef{HierarchySegmentColors} puts
+\(\alpha\) in the last \((q,\eta)\)-segment, contradicting
+\noderef{GoodHierarchy}.avoidance.                            \(\tag{13}\)
+
+Now apply \noderef{StableChangeCasesOneTwoSplitTail} with the exact split
+\(A\prec X\preccurlyeq B\).  Its fixed-prefix premise is exactly (6),
+its route and suffix premises are (10)--(11), its split missingness is
+(9), its vertexwise equality is (8), its stored first-position equality
+is (12), and its affected-Gamma premise is vacuous by (3) and (13).
+The path, disjointness, swap, and Cases 1/2 premises were established
+above.  The provider constructs an actual corresponding ETT on the full
+tree \(T\), maximum property, a replacement base, a full good hierarchy,
+and \noderef{SameGoodHierarchy} relative to
+\(P.\mathit{counterexample}\).
+
+At \(y\), the old color \(\alpha\) is missing.  If \(\gamma\) is also
+missing there, it remains so; otherwise properness gives a unique
+incident \(\gamma\)-edge in \(Q\), and (5) changes it to \(\alpha\).
+Thus \(\gamma\) is missing at \(y\) under \(\sigma_n\), while (8) keeps
+it missing on \(A\).  As in the preceding branch, these outputs form a
+new \noderef{HierarchyCounterexample}: rung agreement transports the
+lower-rung field, same-good data transport divider count, stages,
+fewer-divider induction, and
+\noderef{HierarchyCounterexampleMeasure}, terminal ladder-tree stability
+transports the \(2n+11\) estimate, and the corresponding certificate
+supplies properness and exactly-one-uncoloredness.  Hence all five fields
+of a new \noderef{HierarchyMinimumCounterexampleContext} hold.  Compose
+the new same-good relation with \(P.\mathit{sameGood}\) to obtain a
 replacement presentation \(P_1\).
 
-Under \(P_1\), \(\gamma\) is missing at \(y_\ell\) and still missing on
-\(A\), while the exact first edge remains colored \(\alpha\ne\gamma\).
-If some \(y_i\), \(1\leq i\leq\ell-1\), is already common-missing with
-\(y_\ell\), then \(i,P_1\), and that color directly witness membership in
-\noderef{HierarchyEligibleCommonMissingIndices}.  Otherwise inspect the
-finite list of exact tail positions colored \(\gamma\).  If it is empty,
-apply \noderef{HierarchyClaimNineUnusedTailColor} to \(P_1,\gamma\).  If it
-is nonempty, take its least subscript \(j\).  Since \(e_1\) is still colored
-\(\alpha\), \(j\geq2\); its leastness gives all exact earlier-edge
-exclusions, so \noderef{HierarchyClaimNineFirstUseAfterSeed} applies.
-Either cited branch concludes that the eligible-index set is nonempty.
+The Situation 7.1 condition also transports to \(P_1\).  Indeed,
+\noderef{SameGoodHierarchy} gives equal divider counts and
+\noderef{SameHierarchyStages}; their exact last starred stages agree.
+The definition of \noderef{HierarchyPathNumber} then has the same tail
+length, the same exact displayed edges and endpoints, and the same
+candidate filter, so
+\[
+ \noderef{HierarchyPathNumber}
+       (P_1.\mathit{counterexample}.\mathit{hierarchy})=1.    \tag{14}
+\]
+The selection of \(\gamma\), together with (8) on \(A\), also gives the
+normalized positive- or zero-divider missingness for \(P_1\).
+
+If some \(1\le i\le\ell-1\) already has a color common-missing at
+\(y_i,y_\ell\) under \(P_1\), then \(i,P_1\), and that color directly
+witness membership in
+\noderef{HierarchyEligibleCommonMissingIndices}.  Otherwise we have the
+full no-common premise required by both earlier branches.  Inspect the
+finite set of exact tail positions whose \(\sigma_n\)-value is
+\(\gamma\).  If it is empty, apply
+\noderef{HierarchyClaimNineUnusedTailColor} to
+\(P_1,\gamma\), using (14) and the transported normalization.  If it is
+nonempty, choose its least position and write it as
+\(|A|+j-1\).  Equation (6) and \(\gamma\ne\alpha\) show \(j\ne1\);
+the tail bounds give \(2\le j\le\ell\), and minimality gives the exact
+earlier-edge exclusions.  Apply
+\noderef{HierarchyClaimNineFirstUseAfterSeed} to
+\(P_1,\gamma,j\), again using (14).  Both branches conclude that the
+eligible-index set is nonempty, as required.
 \end{proof}
