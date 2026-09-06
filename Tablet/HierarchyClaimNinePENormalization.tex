@@ -207,8 +207,9 @@ witnesses \(v_\alpha,v_\beta\in V(A)\subseteq V(B)\), interpreted via
 \noderef{ColoredVertexSetElementary}, imply that neither
 \(\alpha\) nor \(\beta\) is missing at \(v\).  Expanding
 \noderef{MissingColors} and \noderef{PresentColors}, each of the two
-colors is therefore carried by an incident edge identity.  Properness
-makes that identity unique for each color.  Its edge-node is adjacent to
+colors is therefore carried by an incident edge identity.  Properness,
+in the local uniqueness form of \noderef{IsProperEdgeColoring}, makes that
+identity unique for each color.  Its edge-node is adjacent to
 \(\operatorname{inl}v\), hence belongs to the same component \(Q\).
 The swap transposes these two incident values.  Thus both colors remain
 present at \(v\), while every color outside
@@ -406,8 +407,9 @@ same-good data relative to the originally fixed \(C\).
 
 The vertex \(v_\beta\in V(T_n)\subseteq V(B)\) remains
 \(\beta\)-missing by (11).  At \(y_\ell\), the component swap turns the
-old missing \(\alpha\) into a missing \(\beta\): if a \(\beta\)-edge is
-present there it lies in \(Q\) and becomes the unique \(\alpha\)-edge,
+old missing \(\alpha\) into a missing \(\beta\): by the local uniqueness
+clause of \noderef{IsProperEdgeColoring}, if a \(\beta\)-edge is present
+there it lies in \(Q\) and becomes the unique \(\alpha\)-edge,
 while if no such edge is present then both colors were already missing.
 The two vertices are distinct by (2).  Thus \(V(T)\) is not elementary
 under \(\sigma_n\).  Positivity follows from rung agreement in
