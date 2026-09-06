@@ -1,5 +1,7 @@
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.CombinedStableColoring
+import Tablet.BoundaryColorEdges
+import Tablet.BoundaryEdges
 import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.HierarchyBase
@@ -32,8 +34,10 @@ import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.TreeColorSetMinusClosed
+import Tablet.TreeColorSetClosed
 import Tablet.TreeColoringInvariant
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix

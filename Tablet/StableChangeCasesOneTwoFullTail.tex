@@ -179,13 +179,19 @@ hypothesis therefore preserves the value of \(g\).
 
 The old \noderef{TashkinovAugmentation} also supplies a color \(c\) with
 \(\varphi_n(g)=c\) and
-\(c\in\noderef{TreeMissingColors}(\varphi_n,X)\).  Expand the latter
-membership and choose a vertex \(v\in V(X)\) missing \(c\).  If \(Y=T\),
+\(c\in\noderef{TreeMissingColors}(\varphi_n,X)\).  By the definitions of
+\noderef{TreeMissingColors} and \noderef{TreeSequenceVertexSet}, the latter
+membership supplies an index \(i<|X|+1\) such that
+\(v=X.\mathit{vertex}(i)\) is missing \(c\).  If \(Y=T\),
 then \(|X|=|T|-1=|B|\), so \(X=B\) by entrywise equality of equal-length
 initial segments.  If \(Y\ne T\), the one-step length inequalities give
 \(|X|<|T|-1=|B|\), and the common terminal extension shows
-\(X\subset B\).  Thus in every case \(v\in V(B)\), and the second
-transport hypothesis gives
+\(X\subset B\).  Unfold this exact
+\noderef{TreeSequenceInitialSegment}: it sends the displayed index \(i\)
+to the same bounded index of \(B\) and identifies
+\(B.\mathit{vertex}(i)=X.\mathit{vertex}(i)=v\).  Unfolding
+\noderef{TreeSequenceVertexSet} once more therefore proves
+\(v\in V(B)\).  The second transport hypothesis gives
 \(c\in\overline{\sigma_n}(v)\), hence
 \(c\in\noderef{TreeMissingColors}(\sigma_n,X)\).  Length and
 initial-segment clauses are coloring-free.  Consequently the same exact
@@ -277,27 +283,125 @@ stored set.  By \noderef{TashkinovStoredColors}, the computed terminal set
 deleted.  Weak stability identifies the missing-color sets at every
 vertex of \(T_n\), so the two computed copies of \(D_n\) agree.  Weak
 stability and the second transport premise also identify missing-color
-sets at every vertex of \(A\), hence at every starred stage.  Expanding
+sets at every vertex of \(A\), hence at every starred stage.  Here the
+last implication is literal, not an implicit conversion of tree inclusion
+to set inclusion: if \(S\) is one of the retained starred stages and
+\(v\in V(S)\), unfold \noderef{TreeSequenceVertexSet} to write
+\(v=S.\mathit{vertex}(i)\).  The nested exact
+\noderef{TreeSequenceInitialSegment}s from \(S\) through \(A\), followed
+by \(A\subset B\) from (3), carry \(i\) to a bounded displayed index of
+\(B\) with the same vertex value.  A second unfolding of
+\noderef{TreeSequenceVertexSet} gives \(v\in V(B)\), where the second
+transport premise applies.  Expanding
 \noderef{HierarchyStoredColorsAt} therefore gives, at every index \(j\),
 \[
                          D^K_{n,j}=D^H_{n,j}.                  \tag{9}
 \]
-The same vertexwise argument and
-\noderef{HierarchyStageMissingColors} identify the two stage-missing sets.
+For \noderef{HierarchyStageMissingColors}, unfold its zero case as the
+terminal ladder tree and its positive cases as the displayed hierarchy
+stages.  Each positive stage in question is an exact prefix of \(A\), so
+the identical \noderef{TreeSequenceVertexSet} index argument through
+\(B\) identifies the two stage-missing sets as well.
 
 Define \(g_K.\Gamma^j_\eta=C.\mathit{good}.\Gamma^j_\eta\), with the
 canonical casts supplied by the equal divider counts.  The two-color and
 pairwise-disjointness fields of \noderef{GoodHierarchy} transport
-immediately using (9).  The parallel-base field transports from the old
-one: the base core and PE closure agree, the two
-\noderef{StableColoring} clauses in combined stability preserve their
-vertex missing sets and every boundary edge whose color is missing or
-reserved, and (9) preserves the reserved union.  Unfolding
-\noderef{TreeColorSetMinusClosed} therefore transports its failure for
-the core.  Vertexwise missing-set equality on \(T_n\) and the PE closure,
-together with the same reserved union, identifies the two finite-set
-differences in the cardinality-\(4\) clause, so that clause transports as
-well.
+immediately using (9).  We next verify the parallel-base field, assuming
+that the common terminal kind is PE, and split according to \(q\).
+
+If \(q>0\), use the actual prefix good-hierarchy witness in (S4).  Its
+base core and PE closure are exactly the rebuilt full hierarchy's base
+core and closure.  Its retained index zero has, by (S4), exactly the
+same \noderef{HierarchyStoredColorsAt} set and the same copied Gamma
+pairs as \(g_K\).  Consequently its complete
+\noderef{GoodHierarchy}.parallelBase assertion rewrites verbatim to the
+parallel-base assertion for \(g_K\).  This transports both the failure of
+minus-closedness and the cardinality clause; no assertion about all
+boundary-edge colors is involved.
+
+Suppose instead that \(q=0\).  By
+\noderef{HierarchyStarredStage}, \(A\) is the base core, while the first
+stage after it is \(T\) by the terminal-stage field of
+\noderef{TashkinovHierarchy}.  The exact strict inclusions in (3) give
+\(|A|<|T|\).  The transported route (6) is nonempty; take its first step
+\(A\to Y\), remembering both
+the old and transported augmentation certificates.  The old
+\noderef{TashkinovAugmentation} supplies
+\(g=Y.\mathit{edge}(|A|)\), a color \(c\), and
+\(\varphi_n(g)=c\) with \(c\in\overline{\varphi_n}(A)\).  The exact
+prefix identities identify \(g\) with \(T.\mathit{edge}(|A|)\), so the
+first tail-edge transport hypothesis gives \(\sigma_n(g)=\varphi_n(g)=c\).
+
+To transport the missingness of \(c\), expand
+\noderef{TreeMissingColors} and \noderef{TreeSequenceVertexSet} and choose
+an index \(i<|A|+1\) such that \(c\) is missing at
+\(v=A.\mathit{vertex}(i)\).  The exact prefix \(A\subset B\) carries this
+same displayed index and vertex into \(B\); unfolding
+\noderef{TreeSequenceVertexSet} on \(B\) makes the second tail hypothesis
+applicable.  It says that \(c\) is also missing at \(v\) under
+\(\sigma_n\), hence \(c\in\overline{\sigma_n}(A)\).  We have therefore
+proved
+\[
+ \varphi_n(g)=\sigma_n(g)=c,qquad
+ c\in\overline{\varphi_n}(A)\cap\overline{\sigma_n}(A).       \tag{9a}
+\]
+
+We record that \(g\) is an exact boundary identity of \(A\).  Unfold
+\noderef{TreeSequence} for \(Y\).  Its attachment field says that \(g\)
+joins the newly displayed vertex at position \(|A|+1\) to a vertex at an
+earlier displayed position.  The exact prefix \(A\subset Y\) identifies
+the latter with a vertex of \(A\), while vertex injectivity and the
+one-step length equality show that the new vertex is not in \(A\).
+Unfolding \noderef{TreeSequenceVertexSet} and then
+\noderef{BoundaryEdges} proves \(g\in\partial_G(V(A))\); (9a) and
+\noderef{BoundaryColorEdges} then give
+\[
+             g\in\partial_{\sigma_n,c}(V(A)).                 \tag{9b}
+\]
+
+It remains to show that \(c\) is not reserved at index zero.  Suppose to
+the contrary that
+\[
+ c\in\bigcup_{\eta\in\noderef{HierarchyStoredColorsAt}(H,0)}
+                  C.\mathit{good}.\Gamma^0_\eta .              \tag{9c}
+\]
+Choose the corresponding \(\eta\).  Expanding
+\noderef{HierarchyStoredColorsAt}, membership of \(\eta\) says in
+particular that \(\eta\notin\overline{\varphi_n}(A)\).  By
+\noderef{TreeMissingColors} and \noderef{TreeSequenceVertexSet}, \(\eta\)
+is therefore missing at none of the displayed vertices through position
+\(|A|\): the exact prefix \(A\subset T\) from (3) identifies each such
+vertex of \(T\) with the corresponding displayed vertex of \(A\).  Unfold
+\noderef{HierarchyFirstMissingPosition}.  If an
+\(\eta\)-missing vertex exists on \(T\), its least position is strictly
+after \(|A|\); if none exists, the definition returns the terminal
+fallback position \(|T|\), which is also strictly after \(|A|\).
+
+Thus the exact position \(r=|A|\) satisfies
+\[
+ |A|\le r<\min\{
+ \noderef{HierarchyFirstMissingPosition}(\varphi_n,T,\eta),|T|\}.
+\]
+The index-zero next stage is \(T\), and the old augmentation identifies
+its edge there with \(g\) of old color \(c\).  Hence the definition of
+\noderef{HierarchySegmentColors} puts
+\(c\in\operatorname{Seg}(H,0,\eta)\).  But (9c) puts
+\(c\in C.\mathit{good}.\Gamma^0_\eta\), whereas old
+\noderef{GoodHierarchy}.avoidance makes that Gamma pair disjoint from
+this segment.  This contradiction proves that \(c\) lies outside the
+stage-zero Gamma union.
+
+Now unfold \noderef{TreeColorSetMinusClosed} and
+\noderef{TreeColorSetClosed}.  The missing-color clause in (9a), the
+just-proved exclusion from the reserved union, and the exact colored
+boundary witness (9b) show that the core is not minus-closed under
+\(\sigma_n\).  For the separate cardinality clause, the two
+\noderef{StableColoring} conjuncts of the combined stability in (S1)
+identify vertexwise missing-color sets on \(T_n\) and the PE closure.
+Together with (9) and the copied Gamma pairs, this identifies the two
+finite-set differences in the old and new cardinality-\(4\) assertions.
+Thus the old cardinality bound transports.  This uses no claim that all
+boundary edges of the union core retain their colors.
 
 Suppose \(q>0\).  Use the prefix good hierarchy in (S4) for all
 unique-refresh and minus-closed clauses strictly before the last divider.
