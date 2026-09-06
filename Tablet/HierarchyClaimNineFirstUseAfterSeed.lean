@@ -1,5 +1,6 @@
 import Tablet.HierarchyClaimNineUnusedTailColor
 import Tablet.ChangeLemma
+import Tablet.CombinedStableClosurePreserved
 import Tablet.CombinedStableColoring
 import Tablet.HierarchyClaimNinePENormalization
 import Tablet.GoodHierarchy

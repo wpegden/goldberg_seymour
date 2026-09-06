@@ -187,19 +187,60 @@ The same-good stage equalities and the actual terminal
 transports the route through \(A\), as follows.  If \(q>0\), its
 \noderef{TreeColoringInvariant} clause on \(A\) fixes every displayed
 edge of the old prefix route and preserves each missing witness there.
-If \(q=0\) and the final kind is PE, the
-\noderef{HierarchyBase}.parallel field writes \(A\) as an exact
-\noderef{OrderedTreeUnion} of \(T_n\) and the PE closure.  The two
-\noderef{StableColoring} clauses in the
-\noderef{CombinedStableColoring} part of (8) preserve the missing
-witnesses and exact incident edges in the two constituent routes, so
-their ordered union is again generated under \(\sigma_n\).  If \(q=0\)
-and the kind is SE or RE, the nonparallel base clause gives \(A=T_n\),
-so there is no route before \(A\) to transport.  For each subsequent old
-\noderef{TashkinovAugmentation} before \(X\), (9)
-fixes its individual new-edge value, while its old missing witness lies
-in the predecessor, hence in \(X\preccurlyeq B\), where (10) preserves
-that missingness.  Induction over these unit-length steps gives exactly
+
+Suppose \(q=0\) and the final kind is PE.  In this case (8) is the
+\noderef{CombinedStableColoring} relation on the terminal ladder tree
+\(T_n\) and the PE closure \(R_n\).  Apply
+\noderef{CombinedStableClosurePreserved}, using the positivity and
+terminal-color identity of \(P\)'s actual replacement ETT, the PE
+identity, and the properness and exactly-one-uncoloredness already
+established for both \(\mu_n\) and \(\sigma_n\).  Its three conclusions
+say, respectively, that
+\[
+ \sigma_n(f)=\mu_n(f)\quad(f\in E(T_n)),\qquad
+ \sigma_n(f)=\mu_n(f)\quad(f\in E(R_n)),                    \tag{11a}
+\]
+and that the same ordered tree \(R_n\) is the exact
+\(\sigma_n\)-Tashkinov closure of the recorded supporting prefix of
+\(T_n\).  In particular, this last conclusion preserves the actual PE
+closure certificate; it is not being used as an unstated assertion that
+an arbitrary route through the union is fixed.
+
+The \noderef{HierarchyBase}.parallel field writes
+\(A=T_n\oplus R_n\) as an exact \noderef{OrderedTreeUnion}.  Its
+left-prefix clause puts every displayed edge of \(A\) before
+\(|T_n|\) at the identical position of \(T_n\), and its
+new-entry-from-right clause identifies every later displayed edge of
+\(A\) with an exact displayed edge identity of \(R_n\).  Thus (11a)
+fixes every displayed edge identity of \(A\).  Its vertex-set equation
+also gives
+\[
+                         V(A)=V(T_n)\cup V(R_n).              \tag{11b}
+\]
+The two vertexwise clauses of \noderef{StableColoring} in the combined
+relation (8), one on \(T_n\) and one on \(R_n\), together with (11b),
+therefore give
+\(\overline\sigma_n(v)=\overline\mu_n(v)\) for every \(v\in V(A)\).
+
+Now take the old restricted augmentation chain from \(T_n\) to \(A\).
+At each old \noderef{TashkinovAugmentation}, its exact new edge is a
+displayed edge of the terminal tree \(A\), so its value is unchanged by
+(11a) and the two ordered-union edge clauses.  Its missing-color witness
+is a vertex of the predecessor and hence, by the successive ordered
+initial-segment inclusions, a vertex of \(A\); its missing set is
+unchanged by the two stable-coloring vertexwise clauses and (11b).
+The length and exact initial-segment clauses are independent of the
+coloring.  Induction over the finite chain therefore gives an explicit
+\(\sigma_n\)-augmentation route from \(T_n\) to \(A\).
+
+If \(q=0\) and the kind is SE or RE, the nonparallel base clause gives
+\(A=T_n\), so there is no route before \(A\) to transport.  In all three
+cases we have now obtained the required route to \(A\).  For each
+subsequent old \noderef{TashkinovAugmentation} from \(A\) toward \(X\),
+(9) fixes its individual new-edge value, while its old missing witness
+lies in the predecessor, hence in \(X\preccurlyeq B\), where (10)
+preserves that missingness.  A second induction over these unit-length
+steps gives exactly
 \[
 \begin{cases}
 T_n\longrightarrow X,&\text{in PE},\\
