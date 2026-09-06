@@ -45,7 +45,8 @@ and let \(x\) and \(y\) be respectively the last displayed vertices of
 Apply \noderef{HierarchyCounterexamplePenultimateElementary} to
 \(P.\mathit{minimumContext}\).  It gives elementarity of
 \(V(B)=\noderef{TreeSequenceVertexSet}(B)\).  The hierarchy inclusions and
-the definition of \(\ell\) give \(A\preccurlyeq T\).  Since
+the nested and terminal-stage fields of \noderef{TashkinovHierarchy},
+together with the definition of \(\ell\), give \(A\preccurlyeq T\).  Since
 \(2\le j\le\ell\), arithmetic in the two prefix definitions and the
 entrywise clauses of \noderef{TreeSequencePrefix} give
 \[
@@ -282,7 +283,9 @@ the original-color suffix
                          X\longrightarrow T.                 \tag{12}
 \]
 Equation (10) preserves the old \(\alpha\)-missing witness in
-\(A\preccurlyeq X\) and the old \(\beta\)-missing witness \(x\), so both
+\(A\preccurlyeq X\) and the old \(\beta\)-missing witness \(x\).
+By \noderef{TreeMissingColors}, each preserved vertex witness is exactly a
+witness for membership in the tree-missing-color set.  Hence both
 \(\alpha,\beta\) are missing on \(X\) under \(\sigma_n\).              \(\tag{13}\)
 
 We check the stored first-position and Gamma-cutoff conditions separately.
@@ -334,36 +337,143 @@ Therefore
 Together with the exclusion of \(\beta\), this is exactly the affected
 Gamma cutoff.
 
-All hypotheses of \noderef{StableChangeCasesOneTwoSplitTail} are now
-available: (1), (3), the old missing colors on \(B\), the path and
-component data (6)--(7), the normalized Cases 1/2 alternative, the fixed
-exact prefix (9), the verified route (11), the old suffix (12), split
-missingness (13), vertexwise equality (10), stored first-position equality
-(14), and cutoff (15).  The theorem constructs an actual corresponding
-full-tree ETT under \(\sigma_n\), its maximum property, a base, a full
-good hierarchy, and same-good data relative to
-\(P.\mathit{counterexample}\).
+Set \(\mathcal C_0=P.\mathit{corresponding}\), and write
+\(\mathcal E_0\) for the original fixed ETT and
+\(\mathcal E_m=\mathcal C_0.\mathit{replacementETT}\) for the
+intermediate ETT.  Apply
+\noderef{StableChangeCasesOneTwoSplitTail} with replacement input
+\(\mathcal C_0.\mathit{replacementInput}\), ETT \(\mathcal E_m\), base
+\(P.\mathit{replacementBase}\), counterexample
+\(P.\mathit{counterexample}\), and context
+\(P.\mathit{minimumContext}\).  Its remaining hypotheses are exactly (1),
+(3), the old missing colors on \(B\), the path and component data
+(6)--(7), the normalized Cases 1/2 alternative, the fixed exact prefix
+(9), the verified route (11), the old suffix (12), split missingness (13),
+vertexwise equality (10), stored first-position equality (14), and cutoff
+(15).  Retain the returned maximum property, base, hierarchy, good
+hierarchy, and same-good data, and denote its returned correspondence
+certificate by
+\[
+ \mathcal C_1:\quad
+ \noderef{CorrespondingExtendedTashkinovTree}
+   (\mathcal E_m,\sigma_n,T).
+\]
+Thus \(\mathcal C_1\) is relative to the intermediate ETT
+\(\mathcal E_m\), not to \(\mathcal E_0\).
 
 The swap makes \(\beta\) missing at \(y\): originally \(\alpha\) is
 missing and \(\beta\) is present there, so properness gives the unique
 incident \(\beta\)-edge in \(Q\), which is changed to \(\alpha\).
 Equation (10) keeps \(\beta\) missing at \(x\).  Thus the replacement full
 tree is non-elementary.  Form the resulting
-\noderef{HierarchyCounterexample}.  Unpack the supplied
-\noderef{CorrespondingExtendedTashkinovTree} certificate at this point.
-Its rung-agreement field transports the lower-rung package; its replacement
-series, series-presentation, and ladder-tree-agreement fields give the
-exact replacement series and ladder trees; its replacement-stability field
-transports the terminal \(2n+11\) estimate; and its replacement-proper and
-replacement-one-uncolored fields give those two coloring hypotheses.
-Meanwhile \noderef{SameGoodHierarchy} transports the divider count,
-stages, fewer-divider field, and
-\noderef{HierarchyCounterexampleMeasure}, so the old rung-local minimality
-field applies.  These are all fields of the replacement
-\noderef{HierarchyMinimumCounterexampleContext}.  Composing the new
-same-good relation with \(P.\mathit{sameGood}\) constructs a genuine
-replacement presentation \(P'\) using that same corresponding ETT and
-replacement-series certificate.
+\noderef{HierarchyCounterexample} from the returned maximum property,
+base, hierarchy, and good hierarchy.
+
+We next compose correspondence back to the original ETT.  Construct
+\[
+ \mathcal C_{10}:\quad
+ \noderef{CorrespondingExtendedTashkinovTree}
+   (\mathcal E_0,\sigma_n,T)
+\]
+field by field as follows.  Take its replacement input, final series, and
+final ETT from \(\mathcal C_1\), transporting the series' round parameter
+along \(\mathcal C_0.\mathit{rungAgreement}\).  Its rung equality is the
+transitive composite
+\[
+ \mathcal C_1.\mathit{rungAgreement}\mathbin{;}
+ \mathcal C_0.\mathit{rungAgreement}.
+\]
+The heterogeneous series-presentation equality of \(\mathcal C_1\)
+remains the required one after this cast.
+
+Here are the component equalities explicitly.  For a positive ladder
+index of \(\mathcal E_0\), cast it first to the corresponding index of
+\(\mathcal E_m\) using the inverse of
+\(\mathcal C_0.\mathit{rungAgreement}\).  The new ladder tree equals the
+ladder tree in \(\mathcal E_m.\mathit{series}\) by
+\(\mathcal C_1.\mathit{ladderTreesAgree}\); the
+\(\mathcal C_0.\mathit{seriesPresentation}\) field identifies that series,
+with the same dependent index cast, with
+\(\mathcal C_0.\mathit{replacementSeries}\); and
+\(\mathcal C_0.\mathit{ladderTreesAgree}\) identifies the latter tree with
+the ladder tree of \(\mathcal E_0\).  This three-step chain is the
+ladder-tree field of \(\mathcal C_{10}\).  At an index in the full
+round-plus-one range, the identical chain, using first
+\(\mathcal C_1\)'s equality, then
+\(\mathcal C_0.\mathit{seriesPresentation}\), and finally the corresponding
+equality of \(\mathcal C_0\), gives respectively the stored-set,
+connecting-edge-set, and extension-kind fields.  All four chains use the
+dependent casts induced by
+\(\mathcal C_1.\mathit{rungAgreement}\) followed by
+\(\mathcal C_0.\mathit{rungAgreement}\); hence they compare the final
+series with the original series, rather than stopping at
+\(\mathcal E_m\).  Take final-generating-coloring, replacement properness,
+and replacement one-uncoloredness from \(\mathcal C_1\), after the same
+round-index casts.
+
+It remains to construct the replacement-stability field of
+\(\mathcal C_{10}\).  Fix a positive ladder index \(i\) of
+\(\mathcal E_0\), and use the rung cast above for every intermediate
+index.  The \(i\)-th relation in
+\(\mathcal C_0.\mathit{replacementStable}\) is stability from the original
+series coloring to the intermediate series coloring.  Transport
+\(\mathcal C_1.\mathit{replacementStable}\) through
+\(\mathcal C_0.\mathit{seriesPresentation}\) and the ladder-tree equality;
+it is stability from that same intermediate coloring to the new series
+coloring on the original ladder tree.  The stable vertexwise equality in
+the first relation, together with the raw stored-set and ladder-tree
+equalities just proved, gives equality of the two computed
+\noderef{TashkinovStoredColors} sets, so both relations use the same tree
+and protected set.
+
+The subtype hypotheses required for transitivity in \noderef{sc2} are
+available at this exact index.  The intermediate coloring is proper and
+leaves exactly \(e_0\) uncolored by the two corresponding fields of
+\(\mathcal C_0\), and the new coloring has those properties by the two
+fields of \(\mathcal C_1\).  For the original coloring, inspect the
+certified positive \noderef{TashkinovSeriesStep}; its initial constructor
+cannot occur at \(i+1\).  In the SE constructor, the current-coloring
+equality identifies the coloring with the selected coloring, whose
+properness and one-uncoloredness are fields of
+\noderef{MaximumDefectiveChoice}.  In the PE constructor they are the
+current-proper and current-one-uncolored fields.  In the RE constructor
+the current-coloring equality identifies the coloring with the preceding
+one, for which the constructor supplies previous-proper and
+previous-one-uncolored.  Put these three colorings into the subtype in
+\noderef{sc2}; its transitivity clause composes the original-to-intermediate
+and intermediate-to-new stable relations.  This is exactly the
+\(i\)-th replacement-stability field of \(\mathcal C_{10}\), completing
+the composite certificate.
+
+The returned maximum property, base, hierarchy, good hierarchy, and the
+new counterexample remain indexed by
+\(\mathcal C_1.\mathit{replacementETT}\), which is definitionally the final
+ETT in \(\mathcal C_{10}\); likewise both certificates use
+\(\mathcal C_1.\mathit{replacementInput}\) after the cast above.  Unpack
+the fields of \(\mathcal C_{10}\).  Its composite rung agreement
+transports the lower-rung package.  Its composite replacement-stability
+at the terminal ladder tree transports the \(2n+11\) estimate, and its
+properness and one-uncoloredness fields supply those coloring hypotheses.
+The returned same-good relation identifies the intermediate and final
+divider counts and stages.  Together with \(P.\mathit{sameGood}\), it
+therefore transports the fewer-divider field and
+\noderef{HierarchyCounterexampleMeasure}, so the original rung-local
+minimality field applies.  These data give every field of the replacement
+\noderef{HierarchyMinimumCounterexampleContext}, now with precisely
+\(\mathcal C_{10}.\mathit{replacementInput}\), its final ETT, base, and
+counterexample as indices.
+
+Finally compose the two \noderef{SameGoodHierarchy} witnesses field by
+field.  In their \noderef{SameHierarchyStages} components, compose the
+core equalities, divider-count equalities, heterogeneous stage and
+divider-position equalities, PE equivalences, and, in the PE case, closure
+equalities.  At each divider index cast along the composite count equality,
+compose the two stored-set equalities and then the two Gamma-set
+equalities for every color in that common stored set.  This yields
+same-good data from the original \(C.\mathit{good}\) directly to the final
+good hierarchy.  Using \(\mathcal C_{10}\), rather than \(\mathcal C_1\),
+as the corresponding field, all the preceding data construct a genuine
+replacement presentation \(P'\) relative to the original fixed ETT.
 
 Finally \(1\le j-1\le\ell-1\), and under \(P'\) the color \(\beta\) is
 missing at both \(x=y_{j-1}\) and \(y=y_\ell\).  The witnesses

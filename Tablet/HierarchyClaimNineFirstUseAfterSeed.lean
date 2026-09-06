@@ -37,6 +37,7 @@ import Tablet.SameHierarchyStages
 import Tablet.StableColoring
 import Tablet.StableChangeCasesOneTwo
 import Tablet.StableChangeCasesOneTwoSplitTail
+import Tablet.sc2
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceRestrict
@@ -44,6 +45,7 @@ import Tablet.TashkinovClosure
 import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
+import Tablet.TashkinovStoredColors
 import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
