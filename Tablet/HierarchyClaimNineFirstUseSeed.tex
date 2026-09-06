@@ -1,0 +1,96 @@
+\begin{lemma}[Claim 9: first tail use at the seed]
+Fix the Section 7 minimum context and a
+\noderef{HierarchyReplacementPresentation} \(P\).  Let \(\alpha\) be
+missing on \(P\)'s last starred stage \(A\) and at \(y_\ell\).  Assume
+the normalized alternative that \(\alpha\) is missing on \(T_{n,q}\)
+when \(q>0\), and on \(T_n\) when \(q=0\).  Suppose no
+\(y_i\), \(1\leq i\leq\ell-1\), has a color common-missing with
+\(y_\ell\) under \(P\)'s coloring, and assume every proper
+exactly-one-uncolored replacement coloring has a missing color at every
+vertex.  If the exact first edge after \(A\), at position \(|A|\), is
+colored \(\alpha\), then
+\noderef{HierarchyEligibleCommonMissingIndices} is nonempty.
+The proof constructs the paper's closed color \(\gamma\), performs the
+specified Kempe change while preserving the exact first edge, and reduces
+to either the unused-tail case or the first-use-\(j\geq2\) case.
+\end{lemma}
+\begin{proof}
+Let \(\mu_n,H,A,q\) be the coloring, hierarchy, starred stage, and divider
+count of the supplied \noderef{HierarchyReplacementPresentation}.  The
+transported context gives
+\(|\overline\mu_n(T_n)|\geq2n+11\), and
+\noderef{HierarchyStoredColorsCardinality} gives
+\(|D_{n,q}|\leq n\).  Each Gamma set is a two-element set and the sets for
+distinct stored colors are disjoint by \noderef{GoodHierarchy}.  We now
+construct the color \(\gamma\) in the two divider cases.
+
+If \(q>0\), the preceding Gamma union has size at most \(2n\), while the
+new Gamma pair at the last stage has size two.  Thus at least nine colors
+of \(\overline\mu_n(T_{n,q})\) lie outside both unions.  The last-stage
+minus-closed field of \noderef{GoodHierarchy} makes each such color
+singleton-closed on \(A=T_{n,q}\).  Choose one and call it \(\gamma\).
+
+If \(q=0\) and the terminal kind is not PE, choose
+\(\gamma\in\overline\mu_n(T_n)-\Gamma^0\); the same cardinal estimate
+shows this set is nonempty, and the actual SE/RE closure field in
+\noderef{TashkinovSeriesStep} makes it closed on \(A=T_n\).  If \(q=0\)
+and the kind is PE, use the parallel-base clause of
+\noderef{GoodHierarchy}: together with the \(2n+11\) estimate it supplies
+a color in
+\(\overline\mu_n(T_n)\cap\overline\mu_n(R_n)-\Gamma^0\), and the PE
+closure makes it closed on the exact core \(A=T_n\vee R_n\).  In all cases
+\[
+ \gamma\in\overline\mu_n(A),\qquad
+ \gamma\notin\Gamma^q,\qquad \gamma\ne\alpha,
+\]
+the last inequality following because the exact first edge has color
+\(\alpha\) while \(\gamma\) is missing at an incident predecessor vertex.
+
+The closed-color alternative of \noderef{ChangeLemma} says that the
+\((\alpha,\gamma)\)-component meeting \(A\) is unique.  Since \(\alpha\) is
+missing at \(y_\ell\), the component through \(y_\ell\) is a
+\noderef{TwoColorPathComponent} and is disjoint from \(A\); in particular
+it does not contain the supplied exact first-edge identity \(e_1\).
+Let \(\nu_n\) be the component swap through \(y_\ell\).
+
+We next prove the full-tail transport data.  The component through
+\(y_\ell\) is disjoint from the unique component meeting \(A\).  Every
+affected exact tail edge has an earlier missing witness from its
+\noderef{TashkinovAugmentation}; hence it belongs to the component meeting
+\(A\).  The sole edge not covered by this statement is the zero-divider
+SE/RE seed from \noderef{HierarchyTailMissingColorExclusion}; it is either
+the given \(\alpha\)-colored \(e_1\), already outside the selected component,
+or has a stored color distinct from \(\alpha,\gamma\).  Thus every exact
+tail-edge value, and especially \(\nu_n(e_1)=\mu_n(e_1)=\alpha\), is fixed.
+Component separation and penultimate-prefix elementarity likewise give
+vertexwise equality of missing sets throughout
+\noderef{HierarchyFullTailPrefix}\((C,\ell-1)\).  Unaffected colors retain
+their first candidates; \(\alpha\) and \(\gamma\) have unchanged witnesses
+on \(A\).  Hence every last stored color has the same
+\noderef{HierarchyFirstMissingPosition}.
+
+The normalized positive- or zero-divider alternative supplies the
+Cases 1/2 hypothesis of \noderef{StableChangeCasesOneTwoFullTail}.
+Apply that theorem.  It constructs an actual corresponding ETT on \(T\),
+maximum property, a rebuilt base and full good hierarchy, and
+\noderef{SameGoodHierarchy} data.  Rung agreement rewrites the lower-rung
+and fewer-divider functions.  Same stages and divider count give equality
+of \noderef{HierarchyCounterexampleMeasure}, so the old lexicographic
+minimality field transfers.  Ladder-tree equality and terminal stability
+transfer the \(2n+11\) estimate, and the corresponding certificate supplies
+properness and exact one-uncoloredness.  These are all fields of
+\noderef{HierarchyMinimumCounterexampleContext}, so the outputs form a new
+replacement presentation \(P_1\).
+
+Under \(P_1\), \(\gamma\) is missing at \(y_\ell\) and still missing on
+\(A\), while the exact first edge remains colored \(\alpha\ne\gamma\).
+If some \(y_i\), \(1\leq i\leq\ell-1\), is already common-missing with
+\(y_\ell\), then \(i,P_1\), and that color directly witness membership in
+\noderef{HierarchyEligibleCommonMissingIndices}.  Otherwise inspect the
+finite list of exact tail positions colored \(\gamma\).  If it is empty,
+apply \noderef{HierarchyClaimNineUnusedTailColor} to \(P_1,\gamma\).  If it
+is nonempty, take its least subscript \(j\).  Since \(e_1\) is still colored
+\(\alpha\), \(j\geq2\); its leastness gives all exact earlier-edge
+exclusions, so \noderef{HierarchyClaimNineFirstUseAfterSeed} applies.
+Either cited branch concludes that the eligible-index set is nonempty.
+\end{proof}

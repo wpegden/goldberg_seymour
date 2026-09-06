@@ -1,0 +1,129 @@
+\begin{lemma}[Claim 9: zero-divider PE normalization]
+Fix the Section 7 minimum-counterexample data and a
+\noderef{HierarchyReplacementPresentation} \(P\) on the same exact terminal
+tree \(T\).  Assume every proper coloring leaving exactly \(e_0\) uncolored
+has a missing color at every vertex.  Suppose the replacement hierarchy has
+zero dividers, its terminal series step is PE, and a color \(\alpha\) is
+missing on its starred core and at the final vertex \(y_\ell\), but not on
+its terminal ladder tree \(T_n\).  Suppose also that no index
+\(1\leq i\leq\ell-1\) is already common-missing with \(y_\ell\) under the
+coloring of \(P\).
+
+Then either the finite set
+\noderef{HierarchyEligibleCommonMissingIndices} is already nonempty, or
+there are another replacement presentation \(P'\) and a color \(\beta\)
+which is missing under \(P'\) on \(T_n\), on the starred core, and at
+\(y_\ell\), while no eligible tail index is common-missing with \(y_\ell\)
+under \(P'\).  All ladder trees, hierarchy stages, and terminal-tree edge
+identities in \(P'\) are the exact ones in \(P\) and in the originally fixed
+counterexample.
+\end{lemma}
+\begin{proof}
+Write \(\mu_n\) for the coloring of \(P\), \(H\) for its hierarchy, and
+\(A\) for its last starred stage.  The fields of
+\noderef{HierarchyReplacementPresentation} give an actual corresponding
+ETT, its maximum property, the full good hierarchy, and the transported
+\noderef{HierarchyMinimumCounterexampleContext}.  In particular \(\mu_n\)
+is proper, leaves exactly \(e_0\) uncolored, and satisfies the lower-rung,
+minimality, and \(2n+11\) hypotheses.
+
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} and
+\noderef{HierarchyCounterexampleTailAtLeastTwo} to that transported
+context.  Since \noderef{SameGoodHierarchy} fixes the base core, divider
+count, stages, and divider positions, its full-tail length and exact prefix
+are the originally fixed
+\(\ell=\noderef{HierarchyFullTailLength}(C)\) and
+\(B=\noderef{HierarchyFullTailPrefix}(C,\ell-1)\).  We obtain
+\(2\leq\ell\) and elementarity of \(V(B)\) under \(\mu_n\).
+
+Because \(q=0\) and the terminal kind is PE,
+\noderef{HierarchyBase} expresses \(A\) as the exact ordered union
+\(T_n\vee R_n\).  The hypotheses place \(\alpha\) in
+\(\overline\mu_n(R_n-V(T_n))\).  The good-hierarchy Gamma pairs at index
+zero are pairwise disjoint two-element sets indexed by \(D_{n,0}\).
+By \noderef{HierarchyStoredColorsCardinality},
+\(|D_{n,0}|\leq n\), and hence their union has size at most \(2n\).
+The transported large-set inequality gives
+\(|\overline\mu_n(T_n)|\geq2n+11\).  Choose
+\[
+  \beta\in\overline\mu_n(T_n)-\Gamma^0.
+\]
+This is an actual color; no membership conclusion about either affected
+color in \(D_n\) is needed here.
+
+Apply clause (iv) of \noderef{interchange} to \(\alpha\), which is missing
+on \(R_n\), and \(\beta\), which is missing on \(T_n\).  It says that their
+two-color path components meeting the exact core \(A=T_n\vee R_n\) are
+unique.  Properness and missingness make the components through their
+first missing vertices path components: at a vertex missing one of the two
+colors the corresponding incidence-graph neighbor set has at most one
+member.  The component through \(y_\ell\) is therefore disjoint from the
+component meeting \(A\); otherwise interchangeability would identify the
+two components, while the assumed absence of a common-missing tail index
+and elementarity of \(B\) give distinct endpoint components.
+
+Let \(\nu_n\) be the \noderef{TwoColorComponentSwap} on the component
+through \(y_\ell\).  We verify, rather than assume, the three transport
+conditions of \noderef{StableChangeCasesOneTwoFullTail}.
+
+First, every displayed tail edge carrying \(\alpha\) or \(\beta\) belongs
+to the component meeting their first missing vertex in \(A\) or \(B\).
+For an ordinary Tashkinov augmentation this follows from the augmentation's
+earlier missing-color witness.  The only non-augmentation possibility is
+the zero-divider SE/RE first seed isolated by
+\noderef{HierarchyTailMissingColorExclusion}; it cannot occur here because
+the actual terminal kind is PE.  Hence no exact tail-edge node lies in the
+component through \(y_\ell\), and unfolding
+\noderef{TwoColorComponentSwap} gives equality of every displayed
+tail-edge value.
+
+Second, if the changed component met a vertex of \(B\), properness would
+make its maximal alternating path in \(B\) end at a vertex missing one of
+\(\alpha,\beta\).  Elementarity of \(B\), together with the first-missing
+component in the core, would then identify that endpoint component with
+the core component, contradicting disjointness.  Thus the changed component
+is outside \(B\).  At every vertex of \(B\), either both incident affected
+edges are unchanged or neither is present, so the missing-color set is
+unchanged.
+
+Third, colors outside \(\{\alpha,\beta\}\) have identical missing witnesses
+by definition of the swap.  The first \(\alpha\)-missing and
+\(\beta\)-missing witnesses lie in the unchanged prefix \(B\), so their
+least indices are unchanged as well.  This proves equality of
+\noderef{HierarchyFirstMissingPosition} for every color in the last
+\noderef{HierarchyStoredColorsAt}; it does not assert missing-set equality
+at \(y_\ell\).
+
+All remaining hypotheses of \noderef{StableChangeCasesOneTwoFullTail}
+are now present after orienting its ordered color pair as
+\((\beta,\alpha)\): both colors are missing on \(B\), the selected component
+is a \noderef{TwoColorPathComponent}, the component disjointness was proved
+above, and its \(q=0\) Cases 1/2 alternative is supplied directly by
+\(\beta\in\overline\mu_n(T_n)\).  The component swap is symmetric in the
+two named colors, so it is still exactly the coloring \(\nu_n\) constructed
+above.  The cited lift returns
+an actual corresponding ETT on the full exact tree \(T\), maximum property,
+a rebuilt base, a full good hierarchy, and
+\noderef{SameGoodHierarchy} data under \(\nu_n\).
+
+Swapping at \(y_\ell\) makes \(\beta\) missing there while leaving its
+missing witness on \(T_n\) unchanged.  Thus the rebuilt full tree is still
+non-elementary, and these data construct a
+\noderef{HierarchyCounterexample}.  Transport the minimum context as
+follows.  Rung agreement transfers the lower-rung and fewer-divider
+quantifiers.  Same hierarchy stages give equality of divider counts and
+of \noderef{HierarchyCounterexampleMeasure}; hence the original
+lexicographic-minimality field gives the replacement one.  Correspondence
+and terminal stability identify the ladder-tree missing sets, so the
+\(2n+11\) inequality transfers.  Properness and exact one-uncoloredness are
+fields of the corresponding certificate.  These are precisely all fields
+of \noderef{HierarchyMinimumCounterexampleContext}, and therefore give a
+new replacement presentation \(P'\).
+
+If \(P'\) has a common-missing tail index, its presentation and color are
+immediately witnesses in the filter defining
+\noderef{HierarchyEligibleCommonMissingIndices}; this is the first
+alternative.  Otherwise the swap has made \(\beta\) missing on \(T_n\),
+hence on \(A\), and at \(y_\ell\), and the failed filter condition is exactly
+the final universal disjointness assertion.  This is the second alternative.
+\end{proof}

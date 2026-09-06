@@ -1,0 +1,34 @@
+\begin{lemma}[Situation 7.1: the maximal eligible index is penultimate]
+Assume the Situation 7.1 data, including
+\(\noderef{HierarchyPathNumber}=1\), and suppose the finite set
+\(\noderef{HierarchyEligibleCommonMissingIndices}\) is nonempty.  Assume
+also that every proper exactly-one-uncolored replacement coloring has a
+missing color at every vertex.  Then
+\[
+ \ell-1\in\noderef{HierarchyEligibleCommonMissingIndices}.
+\]
+Thus some full replacement presentation has a color missing at both
+\(y_{\ell-1}\) and \(y_\ell\).
+\end{lemma}
+\begin{proof}
+Let \(I\) be the eligible-index finite set and choose its maximum \(i\);
+this uses only finiteness of the interval filter, not a finite type of
+replacement presentations.  Membership in the defining filter gives
+\[
+ 1\leq i\leq\ell-1                                      \tag{3}
+\]
+and supplies an actual
+\noderef{HierarchyReplacementPresentation} \(P\) and a color \(\alpha\)
+missing at both \(y_i\) and \(y_\ell\).
+
+Suppose \(i<\ell-1\).  Let \(D_{n,q}\) be the last
+\noderef{HierarchyStoredColorsAt} of the good hierarchy carried by \(P\).
+If \(\alpha\notin D_{n,q}\), apply
+\noderef{HierarchySituationOneAdvanceOutsideStored} with (3), the same
+presentation, and the same exact common-missing witnesses.  It gives
+\(i+1\in I\).  If \(\alpha\in D_{n,q}\), apply
+\noderef{HierarchySituationOneAdvanceInsideStored}; it gives the identical
+conclusion.  In either case \(i+1>i\), contradicting maximality of \(i\).
+Therefore \(i=\ell-1\), and rewriting the original membership proves the
+claim.
+\end{proof}

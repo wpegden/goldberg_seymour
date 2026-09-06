@@ -4,6 +4,7 @@ import Tablet.HierarchyCounterexamplePathNumberBounds
 import Tablet.HierarchyCounterexampleTailAtLeastTwo
 import Tablet.HierarchyCounterexampleTerminalCommonMissing
 import Tablet.HierarchyTailMissingColorExclusion
+import Tablet.HierarchySituationOneImpossible
 import Tablet.StableChange
 import Tablet.StableChangeCasesOneTwoFullTail
 import Tablet.IncidentCoreReduction

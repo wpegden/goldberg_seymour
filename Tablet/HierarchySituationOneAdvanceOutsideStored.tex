@@ -1,0 +1,119 @@
+\begin{lemma}[Situation 7.1: advance an unstored common color]
+Fix a replacement presentation \(P\) and an index
+\(1\leq i<\ell-1\).  Suppose a color \(\alpha\notin D_{n,q}\) is missing,
+under the coloring of \(P\), at both exact vertices \(y_i\) and \(y_\ell\).
+Assume \(\noderef{HierarchyPathNumber}=1\) and the explicit
+palette-surplus consequence that every vertex has a missing color under
+every proper exactly-one-uncolored replacement coloring.  Then
+\[
+ i+1\in\noderef{HierarchyEligibleCommonMissingIndices}.
+\]
+Thus the paper's replacement family contains a member having a color
+missing at both \(y_{i+1}\) and \(y_\ell\).
+\end{lemma}
+\begin{proof}
+Write \(\mu_n,H,A\) for the coloring, hierarchy, and last starred stage
+of \(P\).  Its \noderef{HierarchyReplacementPresentation} fields give
+the actual corresponding ETT, maximum property, good hierarchy, and
+transported minimum context.  Apply
+\noderef{HierarchyCounterexamplePenultimateElementary} to this context:
+the exact prefix through \(y_{\ell-1}\) is elementary under \(\mu_n\).
+Since \(\alpha\) is missing at \(y_i\), it is not missing at any other
+vertex of this prefix.
+
+Choose \(\theta\in\overline\mu_n(y_{i+1})\) by the palette-surplus
+hypothesis.  Elementarity gives
+\[
+ \theta\notin\overline\mu_n(T(y_i)),\qquad \theta\ne\alpha.   \tag{1}
+\]
+Because the path number is one, the defining condition of
+\noderef{HierarchyPathNumber} identifies every exact edge after the first
+tail edge with the edge joining consecutive displayed vertices.  Apply
+\noderef{HierarchyTailMissingColorExclusion} to \(\alpha\) at \(y_i\)
+and to \(\theta\) at \(y_{i+1}\).  It says that neither color occurs on an
+earlier exact tail edge, except that at divider zero the first identity
+may be the certified SE/RE seed and may carry that color in \(D_n\).
+This is the paper's assertion (1), with the exception retained as an
+edge identity rather than only by its endpoints.
+
+We split according as \(\theta\) is stored.
+
+\emph{First suppose \(\theta\notin D_{n,q}\).}
+The first \(\alpha\)-missing vertex is \(y_i\), and the first
+\(\theta\)-missing vertex is \(y_{i+1}\).  Indeed, all earlier vertices
+belong to the elementary penultimate prefix and (1) excludes the other
+missing witness; the totalized definition
+\noderef{HierarchyFirstMissingPosition} therefore chooses these exact
+indices.  Every vertex of \(A\) precedes \(y_i\), and \(y_i\) precedes
+\(y_{i+1}\).  The exact tail exclusion above says that \(\alpha\) is not
+used between those two positions.  Together with
+\(\alpha,\theta\notin D_{n,q}\), these are precisely the external
+first-missing hypotheses of \noderef{StableChangeCaseThree}.
+
+Let \(\nu_n\) be the \((\alpha,\theta)\)-component swap through
+\(y_\ell\).  Properness and the missing \(\alpha\) at \(y_\ell\) make this
+a possibly singleton \noderef{TwoColorPathComponent}.  Apply
+\noderef{StableChangeCaseThree}; this is the only branch here using that
+theorem.  Its conclusion directly supplies the actual corresponding ETT
+on \(T\), maximum property, and a full good hierarchy with
+\noderef{SameGoodHierarchy} data.  The swap leaves \(\theta\) missing at
+\(y_{i+1}\) and makes it missing at \(y_\ell\).  Rung agreement rewrites
+the lower-rung and fewer-divider functions.  \noderef{SameGoodHierarchy}
+gives equal divider counts, stages, and
+\noderef{HierarchyCounterexampleMeasure}, so lexicographic minimality
+transfers.  Ladder-tree equality and terminal stability transfer the
+\(2n+11\) estimate, and the corresponding certificate supplies properness
+and exact one-uncoloredness.  Thus every field of
+\noderef{HierarchyMinimumCounterexampleContext} is reconstructed, these
+data form a replacement presentation \(P'\), and \(i+1,P',\theta\) witness the
+required filter membership.
+
+\emph{Now suppose \(\theta=\eta_h\in D_{n,q}\).}
+Let
+\(\Gamma^q_{\eta_h}=\{\gamma_1,\gamma_2\}\) be its two reserved colors.
+The pair-cardinality, disjointness, and avoidance fields of
+\noderef{GoodHierarchy} imply that each \(\gamma_s\) is missing on the
+appropriate last ordinary stage, lies outside \(D_{n,q}\), and is absent
+from every exact segment before the first \(\eta_h\)-missing vertex.
+Choose \(\gamma_1\).
+
+Apply \noderef{ChangeLemma} to \(\alpha,\gamma_1\).  The first component
+meets the first \(\alpha\)-missing vertex \(y_i\), whereas the component
+through \(y_\ell\) is disjoint.  Swap on the latter and call the coloring
+\(\nu_n\).  We explicitly verify the full-tail lift interface.  The
+segment avoidance for \(\gamma_1\), the elementary-prefix exclusion for
+\(\alpha\), and \noderef{HierarchyTailMissingColorExclusion} put every
+affected displayed edge in the component through \(y_i\), apart from the
+possible exact SE/RE seed.  If that seed carries \(\alpha\), its certified
+membership in \(D_n\) and \(\alpha\notin D_{n,q}\) put its first missing
+witness before \(y_i\), again in the other component.  Hence all exact
+tail-edge values agree.  Component separation gives equality of every
+vertex missing set through \(T(y_{\ell-1})\).  Unaffected colors retain
+their first missing candidates, \(\alpha\) retains \(y_i\), and
+\(\gamma_1\) retains its earlier stage witness, so every stored color has
+the same \noderef{HierarchyFirstMissingPosition}.
+
+The appropriate positive- or zero-divider missingness alternative follows
+from the stage location of \(\gamma_1\).  Therefore
+\noderef{StableChangeCasesOneTwoFullTail} applies.  Its corresponding
+certificate and same-hierarchy output are converted into \(P_1\) by the
+explicit rung, divider-count, measure, ladder-missing-set, properness, and
+one-uncolored transports proved in the preceding paragraph.
+Under its coloring, \(\gamma_1\) is missing at \(y_\ell\) and on the last
+ordinary stage, while \(\eta_h=\theta\) remains missing at \(y_{i+1}\).
+
+Apply \noderef{ChangeLemma} a second time, now to
+\(\eta_h,\gamma_1\), and swap the component through \(y_\ell\).
+The Gamma avoidance clause ends before the already fixed first
+\(\eta_h\)-missing vertex \(y_{i+1}\), so the same exact-edge argument
+proves tail-edge equality; the component is outside the penultimate
+prefix, proving vertexwise missing-set equality; and the unchanged earlier
+witnesses prove equality of every stored first-missing position.  A second
+application of \noderef{StableChangeCasesOneTwoFullTail} consequently
+produces \(P_2\).  It makes \(\eta_h\) missing at \(y_\ell\) while
+preserving its missingness at \(y_{i+1}\).  Thus
+\(i+1,P_2,\eta_h\) witness membership in
+\noderef{HierarchyEligibleCommonMissingIndices}.
+
+The two stored-membership cases are exhaustive, proving the assertion.
+\end{proof}

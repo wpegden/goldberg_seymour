@@ -1,0 +1,141 @@
+\begin{lemma}[Situation 7.1: shortening at the last exact edge]
+Assume \(\noderef{HierarchyPathNumber}=1\) and suppose
+\[
+ \ell-1\in\noderef{HierarchyEligibleCommonMissingIndices}.
+\]
+Then the rung-local lexicographic minimality in the fixed
+\noderef{HierarchyMinimumCounterexampleContext} is contradicted.  More
+explicitly, recoloring the individual last edge of \(T\) with the common
+missing color yields a hierarchy counterexample on the exact prefix
+\(T(y_{\ell-1})\), with the same rung and divider count, equal first
+measure coordinate, and strictly smaller second coordinate.
+\end{lemma}
+\begin{proof}
+Expand the filter defining
+\noderef{HierarchyEligibleCommonMissingIndices}.  It supplies a
+\noderef{HierarchyReplacementPresentation} \(P\) and a color \(\alpha\)
+missing under its coloring \(\mu_n\) at both
+\[
+ y_{\ell-1}=
+   \noderef{HierarchyFullTailPrefix}(C,\ell-1).\mathit{lastVertex}
+ \quad\hbox{and}\quad y_\ell=T.\mathit{lastVertex}.            \tag{4}
+\]
+The presentation supplies an actual corresponding ETT \(\mathcal E_P\)
+on the same exact \(T\), maximum property, a base, a counterexample
+\(C_P\), a full good hierarchy \(H_P\), and its transported minimum
+context.
+
+Apply \noderef{HierarchyCounterexampleTailAtLeastTwo} to that context.
+The \noderef{SameGoodHierarchy} data identify the last starred stage with
+the original one, so the resulting full-tail length is the same \(\ell\);
+hence \(2\leq\ell\).  Put
+\[
+ B=\noderef{HierarchyFullTailPrefix}(C,\ell-1).
+\]
+Arithmetic from \(|A|+\ell=|T|\) gives \(|B|=|T|-1\).
+The definition of \noderef{HierarchyFullTailPrefix} gives an exact
+\noderef{TreeSequenceInitialSegment} \(B\preccurlyeq T\), retaining every
+edge identity before the last one.
+
+Let \(e_\ell=T.\mathit{edge}(\operatorname{Fin.last}|T|)\) be the actual
+last edge.  Since
+\(\noderef{HierarchyPathNumber}(H_P)=1\), its candidate condition at this
+last exact index gives
+\[
+ G.\mathit{ends}(e_\ell)
+       =\{y_{\ell-1},y_\ell\}.                                \tag{5}
+\]
+The equality of path numbers follows from the same stage and exact terminal
+tree data in \noderef{SameGoodHierarchy}.  Because \(\ell\geq2\), this last
+edge is not the exceptional first SE/RE seed.  Restrict the certified
+terminal closure route to its final two prefixes.  Its last step is an
+actual \noderef{TashkinovAugmentation}; hence
+\[
+ \mu_n(e_\ell)=\beta
+\]
+for some color \(\beta\), and \(\beta\) is missing at a vertex of the
+predecessor of that step.  This predecessor is exactly \(B\), and the
+witness occurs before the newly attached vertex \(y_{\ell-1}\); equivalently
+\[
+ \beta\in\overline\mu_n(T(y_{\ell-2})).                       \tag{6}
+\]
+The edge identity in this argument is \(e_\ell\), not merely an edge with
+the endpoint pair in (5).
+
+Define \(\sigma_n\) by changing only the value of this exact edge from
+\(\beta\) to \(\alpha\).  Equation (4) and (5) say that \(\alpha\) is
+missing at both endpoints, so no edge adjacent to \(e_\ell\) has color
+\(\alpha\).  Thus \(\sigma_n\) is proper.  The augmentation gives
+\(\mu_n(e_\ell)=\operatorname{some}\beta\), so this replacement neither
+creates nor removes an uncolored edge; exactly \(e_0\) remains uncolored.
+On every exact edge displayed in \(B\), \(\sigma_n=\mu_n\).
+At vertices of \(B\) other than \(y_{\ell-1}\), all incident values are
+unchanged.  At \(y_{\ell-1}\), \(\alpha\) ceases to be missing and
+\(\beta\) becomes missing.
+
+Apply \noderef{GoodHierarchyTerminalPrefixRepackage} to
+\(\mathcal E_P\), its maximum property, base, hierarchy and goodness, and
+the exact prefix \(B\).  The last starred stage is strictly inside \(B\)
+because \(\ell\geq2\).  The theorem gives an ETT on \(B\) with the same
+rung and complete certified series, maximum property, a rebuilt base and
+hierarchy with the same divider count, every old nonterminal stage and
+divider position, and a good hierarchy under \(\mu_n\).
+
+We now verify goodness under \(\sigma_n\), rather than treating it as an
+output of prefix repackaging.  Every hierarchy stage and starred stage is
+contained in \(T(y_{\ell-2})\); hence its displayed edges and vertex
+missing sets are unchanged.  The only changed boundary identity is
+\(e_\ell\).  Its new color \(\alpha\) is not missing on any of these stages:
+it is missing at \(y_{\ell-1}\) in the elementary penultimate prefix, so
+elementarity excludes it at every earlier stage vertex.  Every Gamma color
+is stage-missing by \noderef{GoodHierarchy}, and therefore \(\alpha\) is
+not a Gamma color.  Replacing the old boundary color \(\beta\) by
+\(\alpha\) consequently cannot create a forbidden Gamma-colored boundary
+edge; if \(\beta\) was controlled, removing it only helps closedness.  This
+preserves the positive-stage minus-closed and PE parallel-base boundary
+clauses.  For the terminal
+avoidance condition, only the first-missing positions of \(\alpha\) and
+\(\beta\) can change.  The color \(\beta\) already has the earlier witness
+in (6), so its least position is unchanged.  If \(\alpha\) has an earlier
+missing witness, that witness is unchanged; if its only missing witness in
+\(B\) was \(y_{\ell-1}\), after recoloring it has no witness, and the
+totalized fallback in \noderef{HierarchyFirstMissingPosition} is the same
+last index \(y_{\ell-1}\).  Thus every stored color has the same first
+missing position.  The segment-color sets in
+\noderef{HierarchySegmentColors} consequently use the same exact bounds
+and the same displayed edge values.
+
+The Gamma pairs, their cardinalities and disjointness, all stage-missing
+sets, every positive-stage minus-closed clause, and the PE parallel-base
+clause therefore copy from the repackaged good hierarchy.  This checks all
+fields of \noderef{GoodHierarchy} under \(\sigma_n\).  It is important here
+that no equality of the full terminal missing-color set was asserted:
+the controlled exchange at \(y_{\ell-1}\) is handled by (6) and by the
+first-position fallback.
+
+The new vertex set \(V(B)\) is not elementary under \(\sigma_n\):
+equation (6) gives an earlier vertex missing \(\beta\), and the last-edge
+recoloring makes \(\beta\) missing at \(y_{\ell-1}\); the two vertices are
+distinct by the injective displayed vertex map in
+\noderef{TreeSequence}.  Together with positivity, maximum property, the
+rebuilt hierarchy, and the goodness just proved, this constructs a
+\noderef{HierarchyCounterexample} \(C'\) on the exact shorter tree \(B\).
+
+The ETT of \(C'\) retains the complete series of \(\mathcal E_P\), so the
+rung numbers agree, and prefix repackaging retained the divider count.
+Its path number is one: the old candidate \(1\) still satisfies the
+consecutive-edge condition on every exact tail edge remaining in \(B\),
+and \noderef{HierarchyCounterexamplePathNumberBounds} excludes zero.
+The last ordinary hierarchy stage is unchanged, while
+\(|B|=|T|-1\).  Therefore
+\[
+ \noderef{HierarchyCounterexampleMeasure}(C')
+   =\bigl(1,\ |T|-1-|T_{n,q}|\bigr)
+   <_{\rm lex}
+    \bigl(1,\ |T|-|T_{n,q}|\bigr)
+   =\noderef{HierarchyCounterexampleMeasure}(C_P)
+\]
+in the exact order \noderef{HierarchyCounterexampleLess}.  This contradicts
+the lexicographic-minimality field of the transported minimum context in
+\(P\).  Hence the assumed eligible penultimate index is impossible.
+\end{proof}

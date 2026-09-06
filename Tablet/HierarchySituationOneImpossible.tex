@@ -1,0 +1,22 @@
+\begin{lemma}[Situation 7.1 is impossible]
+Let \(C\) be the fixed same-rung lexicographically minimum hierarchy
+counterexample in a
+\noderef{HierarchyMinimumCounterexampleContext}.  Assume the paper's
+ambient palette-surplus consequence for every proper
+exactly-one-uncolored replacement coloring.  Then
+\[
+ \noderef{HierarchyPathNumber}(C.\mathit{hierarchy})\ne1.
+\]
+Equivalently, the Situation 7.1 hypothesis
+\(\noderef{HierarchyPathNumber}=1\) yields a contradiction.
+\end{lemma}
+\begin{proof}
+Assume the path number is one.  By \noderef{HierarchyClaimNine}, the
+finite set \noderef{HierarchyEligibleCommonMissingIndices} is nonempty.
+Apply \noderef{HierarchySituationOnePenultimateCommonMissing}; it shows
+that \(\ell-1\) belongs to this set.  Finally,
+\noderef{HierarchySituationOneShorteningContradiction} recolors the exact
+last edge, constructs the shorter same-rung equal-divider hierarchy
+counterexample, and contradicts lexicographic minimality.  Hence Situation
+7.1 is impossible.
+\end{proof}
