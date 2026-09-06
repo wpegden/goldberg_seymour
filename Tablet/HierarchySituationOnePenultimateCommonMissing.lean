@@ -27,4 +27,60 @@ theorem HierarchySituationOnePenultimateCommonMissing {V E : Type*}
       HierarchyEligibleCommonMissingIndices
         G k e0 input T phi ett base C ctx := by
 -- BODY
-  sorry
+  classical
+  let I := HierarchyEligibleCommonMissingIndices
+    G k e0 input T phi ett base C ctx
+  have hI : I.Nonempty := hnonempty
+  let i := I.max' hI
+  have hiI : i ∈ I := Finset.max'_mem I hI
+  have hiBounds : 1 ≤ i ∧ i ≤ HierarchyFullTailLength C - 1 := by
+    have hiFiltered : i ∈
+        (Finset.Icc 1 (HierarchyFullTailLength C - 1)).filter (fun j =>
+          ∃ P : HierarchyReplacementPresentation
+              G k e0 input T phi ett base C ctx,
+            ∃ alpha : Fin k,
+              alpha ∈ MissingColors G P.coloring
+                  ((HierarchyFullTailPrefix C j).vertex
+                    (Fin.last (HierarchyFullTailPrefix C j).length)) ∧
+                alpha ∈ MissingColors G P.coloring
+                  (T.vertex (Fin.last T.length))) := by
+      simpa [I, HierarchyEligibleCommonMissingIndices] using hiI
+    exact (Finset.mem_Icc.mp (Finset.mem_filter.mp hiFiltered).1)
+  have hiData : ∃ P : HierarchyReplacementPresentation
+        G k e0 input T phi ett base C ctx,
+      ∃ alpha : Fin k,
+        alpha ∈ MissingColors G P.coloring
+            ((HierarchyFullTailPrefix C i).vertex
+              (Fin.last (HierarchyFullTailPrefix C i).length)) ∧
+          alpha ∈ MissingColors G P.coloring
+            (T.vertex (Fin.last T.length)) := by
+    have hiFiltered : i ∈
+        (Finset.Icc 1 (HierarchyFullTailLength C - 1)).filter (fun j =>
+          ∃ P : HierarchyReplacementPresentation
+              G k e0 input T phi ett base C ctx,
+            ∃ alpha : Fin k,
+              alpha ∈ MissingColors G P.coloring
+                  ((HierarchyFullTailPrefix C j).vertex
+                    (Fin.last (HierarchyFullTailPrefix C j).length)) ∧
+                alpha ∈ MissingColors G P.coloring
+                  (T.vertex (Fin.last T.length))) := by
+      simpa [I, HierarchyEligibleCommonMissingIndices] using hiI
+    exact (Finset.mem_filter.mp hiFiltered).2
+  obtain ⟨P, alpha, hcommon⟩ := hiData
+  have heq : i = HierarchyFullTailLength C - 1 := by
+    by_contra hne
+    have hlt : i < HierarchyFullTailLength C - 1 :=
+      Nat.lt_of_le_of_ne hiBounds.2 hne
+    have hnext : i + 1 ∈ I := by
+      by_cases hstored :
+          alpha ∈ HierarchyStoredColorsAt P.counterexample.hierarchy
+            (Fin.last P.counterexample.hierarchy.dividerCount)
+      · exact HierarchySituationOneAdvanceInsideStored G k e0 input T phi ett
+          base C ctx hsituation hvertexMissing i hiBounds.1 hlt P alpha hcommon
+          hstored
+      · exact HierarchySituationOneAdvanceOutsideStored G k e0 input T phi ett
+          base C ctx hsituation hvertexMissing i hiBounds.1 hlt P alpha hcommon
+          hstored
+    have hle : i + 1 ≤ i := Finset.le_max' I (i + 1) hnext
+    exact (Nat.not_succ_le_self i) hle
+  simpa [I, heq] using hiI

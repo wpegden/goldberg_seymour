@@ -21,4 +21,9 @@ theorem HierarchySituationOneImpossible {V E : Type*}
       IsProperEdgeColoring G mu → IsOneEdgeUncolored mu e0 →
         ∀ v : V, (MissingColors G mu v).Nonempty) : False := by
 -- BODY
-  sorry
+  have hnonempty := HierarchyClaimNine G k e0 input T phi ett base C ctx
+    hsituation hvertexMissing
+  have hlast := HierarchySituationOnePenultimateCommonMissing G k e0 input T phi
+    ett base C ctx hsituation hvertexMissing hnonempty
+  exact HierarchySituationOneShorteningContradiction G k e0 input T phi ett base C
+    ctx hsituation hlast

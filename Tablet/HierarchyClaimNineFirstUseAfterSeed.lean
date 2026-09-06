@@ -66,7 +66,7 @@ theorem HierarchyClaimNineFirstUseAfterSeed {V E : Type*}
         (Fin.last P.counterexample.hierarchy.dividerCount)
       ∀ t : Fin T.length, A.length ≤ t.val → t.val < ej.val →
         P.coloring (T.edge t) ≠ some alpha) :
-    (HierarchyEligibleCommonMissingIndices
-      G k e0 input T phi ett base C ctx).Nonempty := by
+    j - 1 ∈ HierarchyEligibleCommonMissingIndices
+      G k e0 input T phi ett base C ctx := by
 -- BODY
   sorry
