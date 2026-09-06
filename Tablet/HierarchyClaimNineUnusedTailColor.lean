@@ -28,6 +28,7 @@ import Tablet.SameHierarchyStages
 import Tablet.StableChangeCasesOneTwo
 import Tablet.StableChangeCasesOneTwoFullTail
 import Tablet.StableColoring
+import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.TreeIncidentEdge

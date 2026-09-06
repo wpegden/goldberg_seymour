@@ -45,6 +45,8 @@ original full-tail lengths and prefixes agree.  Put
  \qquad y^-=B.\mathit{vertex}(\operatorname{Fin.last}|B|),
  \qquad y=T.\mathit{vertex}(\operatorname{Fin.last}|T|).
 \]
+Write \(V(B)=\noderef{TreeSequenceVertexSet}(B)\) for the displayed
+vertex set of this prefix.
 Applying \noderef{HierarchyCounterexampleTailAtLeastTwo} and
 \noderef{HierarchyCounterexamplePenultimateElementary} to the transported
 minimum context yields
@@ -52,7 +54,21 @@ minimum context yields
  2\leq\ell,\qquad
  \noderef{ColoredVertexSetElementary}(G,\mu_n,V(B)).           \tag{1}
 \]
-Since \(A\preccurlyeq T\), arithmetic in
+We first derive \(A\preccurlyeq T\) as an ordered initial-segment
+relation.  Split according to the divider count.  If
+\(H.\mathit{dividerCount}=0\), the definition of
+\noderef{HierarchyStarredStage} identifies \(A\) with the base core.
+The \(\mathit{coreInsideFirst}\) field of
+\noderef{TashkinovHierarchy} places that core as an ordered initial
+segment of \(H.\mathit{stage}(1)\); with zero dividers, this is the final
+stage, which the \(\mathit{terminalStage}\) field identifies with \(T\).
+If \(H.\mathit{dividerCount}>0\), the definition of
+\noderef{HierarchyStarredStage} identifies \(A\) with the last
+nonterminal hierarchy stage.  The \(\mathit{nested}\) field of
+\noderef{TashkinovHierarchy}, applied at the final divider, places it as
+an ordered initial segment of the next stage, and
+\(\mathit{terminalStage}\) identifies that next stage with \(T\).
+Thus \(A\preccurlyeq T\) in both cases.  Arithmetic in
 \(\ell=|T|-|A|\), together with \(2\leq\ell\), gives
 \(|A|+\ell=|T|\).  The defining
 \noderef{TreeSequencePrefix} and
@@ -61,8 +77,8 @@ Since \(A\preccurlyeq T\), arithmetic in
  |B|=|T|-1,\qquad
  y^-=T.\mathit{vertex}(|T|-1),\qquad A\preccurlyeq B\prec T.  \tag{2}
 \]
-In particular \(y\notin V(B)\), by vertex injectivity in
-\noderef{TreeSequence}.
+By the definition of \noderef{TreeSequenceVertexSet}, equation (2), and
+vertex injectivity in \noderef{TreeSequence}, \(y\notin V(B)\).
 
 Apply the stated palette-surplus hypothesis to \(\mu_n\), using the
 properness and one-uncolored fields above, and choose
@@ -86,8 +102,12 @@ We now discharge every first-position premise of
  \quad v_\alpha=T.\mathit{vertex}(i_\alpha),
  \quad v_\beta=T.\mathit{vertex}(i_\beta).
 \]
-The first part of the start hypothesis gives an \(\alpha\)-missing vertex
-in \(A\).  Since \(A\preccurlyeq B\), the least-position definition gives
+By the definition of \noderef{TreeMissingColors}, the first part of the
+start hypothesis gives an \(\alpha\)-missing vertex in
+\(\noderef{TreeSequenceVertexSet}(A)\).  The ordered inclusion
+\(A\preccurlyeq B\), together with the definition of
+\noderef{TreeSequenceVertexSet}, transports that vertex into \(V(B)\).
+The least-position definition therefore gives
 \[
                  i_\alpha.\mathit{val}\leq |A|.               \tag{5}
 \]
@@ -98,7 +118,9 @@ the elementarity in (1).  Thus the least-position definition gives
 \[
  i_\beta.\mathit{val}=|B|=|T|-1,\qquad v_\beta=y^-.          \tag{6}
 \]
-The same argument shows that \(\beta\) is missing nowhere on \(A\).
+The same argument, using \(A\preccurlyeq B\) and
+\noderef{TreeSequenceVertexSet}, shows that \(\beta\) is missing nowhere
+on \(A\).
 Equations (1), (2), (5), and (6) give
 \(i_\alpha.\mathit{val}<i_\beta.\mathit{val}\), so
 \(v_\alpha\) precedes \(v_\beta\) in the exact order of \(T\).
@@ -108,8 +130,10 @@ Moreover, whenever
 order-and-unused-interval premise of \noderef{ChangeLemma} holds: its
 antecedent is true because \(\beta\) is not missing on \(A\), its order
 conclusion is (5)--(6), and its edge conclusion is the supplied universal
-unused-tail assertion.  Both colors are missing on \(B\), by the
-\(\alpha\)-witness in \(A\preccurlyeq B\) and (3).  Finally, the
+unused-tail assertion.  By \noderef{TreeMissingColors} and
+\noderef{TreeSequenceVertexSet}, the \(\alpha\)-witness in
+\(A\preccurlyeq B\) proves that \(\alpha\) is missing on \(B\), while
+(3) proves the same for \(\beta\).  Finally, the
 positive-divider or zero-divider case premise is exactly the stated
 normalization.  The corresponding conclusion of
 \noderef{ChangeLemma} is therefore
@@ -128,7 +152,8 @@ Let
 We prove \(Q\ne K_\alpha\), rather than assuming that no component can
 meet \(B\).  The vertices \(v_\alpha,v_\beta,y\) are pairwise distinct:
 the first two have strictly ordered positions by (5)--(6), and the first
-two lie in \(B\) whereas \(y\notin V(B)\) by (2).
+two belong to \(V(B)\) by \noderef{TreeSequenceVertexSet}, whereas
+\(y\notin V(B)\) by (2) and the same definition.
 By \noderef{MissingColorIncidenceEndpoint}, the vertex-nodes at
 \(v_\alpha\) and \(y\) have incidence degree at most one because
 \(\alpha\) is missing there.  Applying the same lemma with the two colors
@@ -191,10 +216,12 @@ It also supplies the actual terminal
 connecting-edge equation.  Eliminate that certified step.  In the SE
 constructor, the singleton equation identifies \(f_n\) with the edge of
 the recorded \noderef{MaximumDefectiveChoice}; its vertex-defective and
-edge-incidence fields put one end of that exact identity in \(V(T_n)\).
+edge-incidence fields put one end of that exact identity in
+\(\noderef{TreeSequenceVertexSet}(T_n)\).
 In the RE constructor, it identifies \(f_n\) with the edge of the
 \noderef{RevisitingExtensionCertificate}; its inside-current and exact
-endpoint fields again put one end in \(V(T_n)\).  Thus in either case
+endpoint fields again put one end in
+\(\noderef{TreeSequenceVertexSet}(T_n)\).  Thus in either case
 \(f_n\) is a \noderef{TreeIncidentEdge} of \(T_n\).
 
 Because the divider count is zero and the terminal kind is SE or RE,
@@ -232,14 +259,17 @@ preceding paragraph and the fact that (9) fixes every value outside
        \quad\text{for every }|A|\leq t.\mathit{val}<|T|.       \tag{14}
 \]
 
-We now prove, vertex by vertex, the missing-set equality on \(B\):
+We now prove, vertex by vertex, the missing-set equality on \(B\), with
+membership in its displayed vertex set interpreted via
+\noderef{TreeSequenceVertexSet}:
 \[
  \overline{\sigma_n}(v)=\overline{\mu_n}(v)
                          \quad(v\in V(B)).                    \tag{15}
 \]
 Fix \(v\in V(B)\).  If \(\operatorname{inl}v\in Q\), then (7)--(8)
 imply \(v\ne v_\alpha,v_\beta\).  The elementarity in (1), applied to
-the missing witnesses \(v_\alpha,v_\beta\in V(B)\), says that neither
+the missing witnesses \(v_\alpha,v_\beta\in V(B)\), whose memberships
+follow from \noderef{TreeSequenceVertexSet} and (2), says that neither
 \(\alpha\) nor \(\beta\) is missing at \(v\).  Expanding
 \noderef{MissingColors} and \noderef{PresentColors}, there is an incident
 edge of each affected color.  Properness in the local form of
@@ -255,8 +285,8 @@ If \(\operatorname{inl}v\notin Q\), an edge-node of \(Q\) incident with
 forcing that vertex-node into \(Q\).  Hence no changed edge is incident
 with \(v\), and its missing set is again unchanged.  These two cases prove
 (15).  In particular, this argument permits internal degree-two vertices
-of \(Q\) to lie in \(B\); it does not claim that \(Q\) is vertex-disjoint
-from the prefix.
+of \(Q\) to belong to \(\noderef{TreeSequenceVertexSet}(B)\); it does not
+claim that \(Q\) is vertex-disjoint from the prefix.
 
 Finally fix
 \(\eta\in\noderef{HierarchyStoredColorsAt}(H,q)\).  By the definition of
