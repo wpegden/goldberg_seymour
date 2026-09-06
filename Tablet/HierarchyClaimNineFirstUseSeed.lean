@@ -5,6 +5,8 @@ import Tablet.CertifiedETTRestriction
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableColoring
+import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.HierarchyClaimNinePENormalization
 import Tablet.HierarchyBase
@@ -40,11 +42,13 @@ import Tablet.StableChangeCasesOneTwoSplitTail
 import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovAugmentationSequenceComponentSwap
 import Tablet.TashkinovAugmentationSequenceRestrict
 import Tablet.TashkinovClosure
 import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
+import Tablet.TashkinovStoredColors
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeColorSetClosed
 import Tablet.TreeColoringInvariant
