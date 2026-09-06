@@ -13,113 +13,290 @@ a color missing both at the exact tail vertex \(y_i\) and at the final
 vertex \(y_\ell\).
 \end{lemma}
 \begin{proof}
-We first construct the original member of \(\mathcal K\), rather than
-assuming it.  In \noderef{CorrespondingExtendedTashkinovTree}, take the
-replacement input and series to be the original input and series, the
-replacement ETT to be the original ETT, and every agreement proof to be
-reflexivity.  Its properness, one-uncoloredness, and stability fields are
-the corresponding fields of the supplied
-\noderef{HierarchyMinimumCounterexampleContext} and the reflexive
-stability relation.  Reuse the original maximum property, base,
-\noderef{HierarchyCounterexample}, good hierarchy, and minimum context;
-\noderef{SameGoodHierarchy} is reflexive.  This constructs a
-\noderef{HierarchyReplacementPresentation} \(P_0\) with coloring
-\(\varphi_n\), on the same exact edge-valued tree \(T\).
+We first exhibit the original presentation as an actual member of the
+replacement family.  Let \(\mathcal S\) be the certified series of the
+given ETT.  In the structure
+\noderef{CorrespondingExtendedTashkinovTree}, set the replacement input
+equal to the original input, the replacement series equal to
+\(\mathcal S\), and the replacement ETT equal to the given ETT.  The
+rung, dependent-series, ladder-tree, stored-set, connecting-edge, and
+extension-kind agreements are then literal reflexivities.  The required
+final-color equation is not a reflexivity: it is exactly the
+\(\mathit{generatingColoring}\) field of
+\noderef{ExtendedTashkinovTree}.
 
-Apply \noderef{HierarchyCounterexampleTerminalCommonMissing} to the fields
-of the minimum context.  It gives a color \(\alpha\) missing both somewhere
-on
+We verify the remaining coloring fields at every series index.  By
+\noderef{TashkinovSeries}, each index has a certified
+\noderef{TashkinovSeriesStep}.  At index zero its initial constructor
+identifies the indexed coloring with the input coloring, and its
+\noderef{KTriple} field says that this input is proper and leaves exactly
+\(e_0\) uncolored.  At a positive SE index the constructor identifies the
+current coloring with the selected coloring in its
+\noderef{MaximumDefectiveChoice}; the
+\(\mathit{selectedProper}\) and \(\mathit{selectedOneUncolored}\) fields
+give the two required assertions.  At a PE index they are the
+\(\mathit{currentProper}\) and \(\mathit{currentOneUncolored}\) fields of
+the constructor.  At an RE index the \(\mathit{currentColoring}\) equation
+identifies the current coloring with the preceding one, to which the
+\(\mathit{previousProper}\) and
+\(\mathit{previousOneUncolored}\) fields apply.  These four constructors
+exhaust all certified steps.
+
+At every positive series index the replacement and original colorings are
+the same function.  Both clauses in \noderef{StableColoring} are therefore
+checked directly: every controlled incident edge keeps its value by
+reflexivity, and at every vertex of the ladder tree the two missing-color
+sets are equal by reflexivity.  This finishes the identity
+correspondence certificate.  Reuse the \(\mathit{maximum}\) field of
+\noderef{HierarchyCounterexample}, the original base and counterexample,
+and the supplied \noderef{HierarchyMinimumCounterexampleContext}.
+Finally,
+\noderef{SameGoodHierarchy} holds reflexively: its underlying
+\noderef{SameHierarchyStages} data, every transported stored set, and
+every relevant Gamma set are unchanged.  The fields just listed form a
+\noderef{HierarchyReplacementPresentation} \(P_0\) whose coloring is
+\(\varphi_n\) and whose terminal tree is the same exact edge-valued
+tree \(T\).
+
+Write
 \[
- B=\noderef{HierarchyFullTailPrefix}(C,\ell-1)
+ H_0=C.\mathit{hierarchy},\qquad
+ q=H_0.\mathit{dividerCount},\qquad
+ A=\noderef{HierarchyStarredStage}(H_0,\operatorname{Fin.last}q),
+ \qquad
+ \ell=\noderef{HierarchyFullTailLength}(C).
 \]
-and at the final displayed vertex \(y_\ell\).  The same context and
-\noderef{HierarchyCounterexampleTailAtLeastTwo} give \(2\leq\ell\).
-If \(\alpha\), or any other color, is missing both at some exact
-\(y_i\), \(1\leq i\leq\ell-1\), and at \(y_\ell\), then
-\(i,P_0\), and that color satisfy the filter defining
-\noderef{HierarchyEligibleCommonMissingIndices}, and we are done.
-Hence assume the finite intersections are empty for every such \(i\).
+Apply \noderef{HierarchyCounterexampleTerminalCommonMissing} to the
+properness, one-uncoloredness, lower-rung package, fewer-divider
+induction, lexicographic minimality, and large-missing-set fields of the
+supplied \noderef{HierarchyMinimumCounterexampleContext}.  It gives a
+color \(\alpha\) such that
+\[
+ \alpha\in\overline{\varphi_n}(B),\qquad
+ \alpha\in\overline{\varphi_n}(y_\ell),\qquad
+ B=\noderef{HierarchyFullTailPrefix}(C,\ell-1).               \tag{1}
+\]
+The same fields, through
+\noderef{HierarchyCounterexampleTailAtLeastTwo}, give
+\[
+                              2\leq\ell.                      \tag{2}
+\]
 
-The exact prefix \(B\) consists of the last starred stage \(A\), followed
-by \(y_1,\ldots,y_{\ell-1}\).  This follows entry by entry from
-\noderef{HierarchyFullTailPrefix}, the hierarchy's nested exact prefixes,
-and the equality \(|A|+\ell=|T|\).  Since \(\alpha\) is missing somewhere
-on \(B\), but its missingness at \(y_\ell\) and the assumed empty
-intersections exclude every \(y_i\) with \(1\leq i\leq\ell-1\), it is
-missing on \(A\).
+If some \(i\) with \(1\leq i\leq\ell-1\) and some color \(\xi\)
+are missing both at the last vertex of
+\(\noderef{HierarchyFullTailPrefix}(C,i)\) and at \(y_\ell\),
+then \(i,P_0,\xi\) are exactly the witnesses in the filter defining
+\noderef{HierarchyEligibleCommonMissingIndices}; this proves the
+conclusion.  We may consequently assume that, for every such \(i\), the
+two missing-color sets are disjoint.                              \(\tag{3}\)
 
-We normalize the zero-divider PE exception exactly as in the manuscript.
-If the divider count is positive, \noderef{HierarchyStarredStage}
-identifies \(A\) with \(T_{n,q}\), so \(\alpha\) already satisfies the
-positive normalization.  If the divider count is zero and the terminal
-kind is SE or RE, \noderef{HierarchyBase} identifies \(A=T_n\), giving the
-zero-divider normalization.  If the kind is PE and \(\alpha\) is missing
-on \(T_n\), the same conclusion holds.  In the remaining case apply
-\noderef{HierarchyClaimNinePENormalization}.  If its eligible-index
-alternative holds we are done.  Otherwise replace \(P_0,\alpha\) by its
-new presentation \(P,\alpha'\).  The theorem gives explicitly that
-\(\alpha'\) is missing on \(T_n\), on \(A\), and at \(y_\ell\), and that
-the no-common condition remains true.  Thus in every case we now have a
-replacement presentation \(P\), a color still denoted \(\alpha\), and
-the exact positive- or zero-divider normalization required in Cases 1/2.
+We now locate the first witness in (1) exactly.  First,
+\(A\) is an ordered initial segment of \(T\).  If \(q=0\), the
+zero-index branch of \noderef{HierarchyStarredStage} makes \(A\) the
+base core, and the \(\mathit{coreInsideFirst}\) and
+\(\mathit{terminalStage}\) fields of
+\noderef{TashkinovHierarchy} give \(A\preccurlyeq T\).  If \(q>0\), the
+positive-index branch makes \(A\) the last ordinary hierarchy stage, and
+the last \(\mathit{nested}\) relation together with
+\(\mathit{terminalStage}\) gives the same conclusion.  These are exact
+ordered initial segments in the sense of
+\noderef{TreeSequenceInitialSegment}, so every vertex and individual edge
+entry agrees at its numerical index.
 
-We also transport the Situation 7.1 hypothesis to this current
-presentation; it is not inherited merely by notation.  The field
-\(P.\mathit{sameGood}\) in
+By \noderef{HierarchyFullTailLength}, \(\ell=|T|-|A|\).
+The length inequality in \(A\preccurlyeq T\) removes the truncated
+subtraction and gives
+\[
+                         |A|+\ell=|T|.                        \tag{4}
+\]
+Using (2) and (4), the minimum in
+\noderef{HierarchyFullTailPrefix} evaluates to
+\[
+ |B|=\min\{|A|+\ell-1,|T|\}=|T|-1=|A|+\ell-1.                \tag{5}
+\]
+The same definition identifies every entry of \(B\) with the entry of
+\(T\) at the same index, and the common-extension clauses of
+\noderef{TreeSequenceInitialSegment} give \(A\preccurlyeq B\).
+
+Expand the first membership in (1) using
+\noderef{TreeMissingColors}.  It supplies a vertex \(v\) of \(B\) at
+which \(\alpha\) is missing.  By
+\noderef{TreeSequenceVertexSet}, \(v\) is the vertex entry of \(B\) at
+some index \(r\) with \(0\leq r\leq |B|\).  If \(r\leq |A|\), the exact
+initial-segment equality \(A\preccurlyeq B\) puts \(v\) in \(V(A)\).
+If \(r>|A|\), set \(i=r-|A|\).  Equations (2) and (5) give
+\(1\leq i\leq\ell-1\), and the entrywise prefix equation says that
+\(v\) is precisely the displayed vertex \(y_i\), namely the vertex of
+\(T\) at position \(|A|+i\).  But \(\alpha\) is also missing at
+\(y_\ell\) by (1), contradicting (3).  Therefore the first case holds,
+and
+\[
+             \alpha\in\overline{\varphi_n}(A),\qquad
+             \alpha\in\overline{\varphi_n}(y_\ell).           \tag{6}
+\]
+
+We next obtain the manuscript's normalization.  Let \(n\) be the last
+series index of the given ETT.  Its \(\mathit{roundsPositive}\) field in
+\noderef{ExtendedTashkinovTree} says that \(n\) is a positive index.
+Inspecting the certificate at \(n\) from
+\noderef{TashkinovSeries}, the initial constructor of
+\noderef{TashkinovSeriesStep} is therefore impossible; its
+\(\mathit{currentKind}\) field in the remaining constructors says that
+the terminal kind is exactly one of SE, PE, and RE.
+
+If \(q>0\), the positive branch of
+\noderef{HierarchyStarredStage} identifies \(A\) with \(T_{n,q}\), so
+(6) is the required positive-divider normalization.  Suppose \(q=0\).
+For terminal kind SE or RE, the nonparallel clause of
+\noderef{HierarchyBase} identifies the base core, hence \(A\), with
+\(T_n\), and (6) is the required zero-divider normalization.  For
+terminal kind PE, the same conclusion holds if \(\alpha\) is already
+missing on \(T_n\).  In the only remaining case, apply
+\noderef{HierarchyClaimNinePENormalization} to \(P_0\), the ambient
+vertex-missing hypothesis, (3), and (6).
+Its first alternative proves the desired nonemptiness.  Its second
+alternative supplies a new replacement presentation and a new color
+which is missing on \(T_n\), on the new starred core, and at
+\(y_\ell\), and for which (3) remains true.  Its
+\noderef{SameGoodHierarchy} field preserves the original zero divider
+count, so this output also satisfies the zero-divider disjunct below.
+
+Thus, after replacing \(P_0,\alpha\) only in that last alternative, we
+have a replacement presentation \(P\), a color still called \(\alpha\),
+and all three facts
+\[
+\begin{split}
+ &\alpha\text{ is missing on the last starred stage of }P
+       \text{ and at }y_\ell,\\
+ &(q_P>0\ \text{and }\alpha\in\overline{P.\mathit{coloring}}(T_{n,q_P}))
+ \quad\text{or}\quad
+ (q_P=0\ \text{and }\alpha\in\overline{P.\mathit{coloring}}(T_n)),\\
+ &\text{the disjointness assertion (3) holds for }P.
+\end{split}                                                    \tag{7}
+\]
+
+We must also transport the Situation 7.1 premise.  The
+\(\mathit{sameGood}\) field of
 \noderef{HierarchyReplacementPresentation}, unfolded through
 \noderef{SameGoodHierarchy}, supplies
-\noderef{SameHierarchyStages} between the original hierarchy
-\(C.\mathit{hierarchy}\) and
-\(H=P.\mathit{counterexample}.\mathit{hierarchy}\).  Hence their divider
-counts agree.  At divider count zero the same-stages base-core equality,
-and at positive divider count the transported equality of the last
-ordinary stage, show from the two defining branches of
+\noderef{SameHierarchyStages} between \(H_0\) and
+\[
+                 H=P.\mathit{counterexample}.\mathit{hierarchy}.
+\]
+Its fields identify the divider counts and base cores, and identify the
+full stage families after transport across that count equality.  At
+divider count zero the base-core equality, and at positive divider count
+the equality of the last ordinary stage, show from the two branches of
 \noderef{HierarchyStarredStage} that the two last starred stages are the
-same exact ordered tree.  The definition of
-\noderef{HierarchyPathNumber} depends only on the common terminal tree
-\(T\), that last starred stage, and the endpoint equations for the exact
-displayed edge identities.  Its two candidate finite sets are therefore
-equal, including the empty-set fallback.  Consequently
+same exact ordered tree.  The definition
+\noderef{HierarchyPathNumber} uses only \(T\), this last starred stage,
+and endpoint equations for the exact edges of \(T\).  Hence its candidate
+finite sets, their minima, and their empty-set fallback are identical for
+\(H_0\) and \(H\).  The assumed Situation 7.1 equation therefore gives
 \[
- \noderef{HierarchyPathNumber}(H)
- =\noderef{HierarchyPathNumber}(C.\mathit{hierarchy})=1.       \tag{7.1a}
+                 \noderef{HierarchyPathNumber}(H)=1.          \tag{8}
 \]
 
-The equality
-\(\noderef{HierarchyPathNumber}(H)=1\) says, by its defining filtered
-minimum, that every exact displayed tail edge from the second tail
-position onward joins consecutive displayed vertices.  The first edge
-is the certified PE augmentation or the individual SE/RE seed, and all
-subsequent edges are exact Tashkinov augmentations.  Thus the manuscript
-case split can be made on individual edge identities.
+For completeness, we now verify the exact augmentation structure to
+which the remaining Claim 9 cases apply.  Let \(\mathcal E_P\) be the
+replacement ETT in \(P\), let \(T_n\) be its last penultimate ladder
+tree, and inspect its last certified
+\noderef{TashkinovSeriesStep}.  Positivity of its rung again excludes
+the initial constructor.
 
-Consider the finite set of tail positions \(t\) at or above \(A\) whose
-exact edge has color \(\alpha\) under the coloring of \(P\).  If it is
-empty, its defining universal negation is precisely the hypothesis of
-\noderef{HierarchyClaimNineUnusedTailColor}; that node produces a
-replacement presentation with a color common-missing at
-\(y_{\ell-1},y_\ell\), and hence an eligible index.  Its explicit
-current-presentation path-number hypothesis is (7.1a).
+In the PE constructor, the \(\mathit{closedExtension}\) field is a
+\noderef{TashkinovClosure} from \(T_n\) to the final ladder tree.
+Unfolding that definition gives a
+\noderef{TashkinovAugmentationSequence}; the
+\(\mathit{belowFinal}\) field of
+\noderef{ExtendedTashkinovTree} makes \(T\) an exact intermediate
+prefix.  Since \(T_n\preccurlyeq T\) by
+\(\mathit{abovePenultimate}\), applying
+\noderef{TashkinovAugmentationSequenceRestrict} gives a route from
+\(T_n\) to \(T\).  If the current divider count is positive, the
+\(\mathit{baseStage}\) and iterated \(\mathit{nested}\) fields of
+\noderef{TashkinovHierarchy} put \(T_n\preccurlyeq A\).  If the count is
+zero, the PE clause of \noderef{HierarchyBase} makes \(A\) an
+\noderef{OrderedTreeUnion} with \(T_n\) as its left ordered initial
+segment.  Thus in either case \(T_n\preccurlyeq A\preccurlyeq T\).
 
-Otherwise choose the least such position.  Because tail positions are
-exactly
+In the SE and RE constructors, the closure begins at the recorded
+adjoined tree \(T_n+f_n\).  Its
+\noderef{TreeSequenceAdjoinEdge} certificate says that this exact tree
+has length \(|T_n|+1\), begins with \(T_n\), and has new last edge the
+individual connecting edge \(f_n\).  The strict
+\(\mathit{abovePenultimate}\) inequality gives
+\(|T_n|+1\leq |T|\).  Both \(T_n+f_n\) and \(T\) are exact ordered
+initial segments of the final ladder tree: the first fact follows by
+composing the one-step prefix relations in the augmentation sequence
+inside \noderef{TashkinovClosure}, and the second is
+\(\mathit{belowFinal}\).  Comparing their common vertex and edge entries
+with \noderef{TreeSequenceInitialSegment} therefore gives
+\(T_n+f_n\preccurlyeq T\), and
+\noderef{TashkinovAugmentationSequenceRestrict} gives the route from this
+exact seed to \(T\).  When the divider count is zero,
+\noderef{HierarchyBase} identifies \(A=T_n\), so this seed supplies the
+exact first tail edge.  When the count is positive, the strict hierarchy
+stages give \(|T_n|+1\leq |A|\), and the same common-extension argument
+puts the seed before \(A\).
+
+Finally, by \noderef{TashkinovAugmentationSequence}, each route just
+obtained is a finite reflexive-transitive chain of one-step
+\noderef{TashkinovAugmentation}s.  Each such step has one additional
+exact edge and retains every preceding ordered entry.  In the PE case,
+and in the positive-divider SE/RE cases, induction on this finite chain
+splits it at the unique member of length \(|A|\); hence every displayed
+addition after \(A\) is a Tashkinov augmentation.  In the zero-divider
+SE/RE case the route starts at length \(|A|+1\): its first addition is
+the exact certified seed \(f_n\), and every later addition is a
+Tashkinov augmentation.
+To extract the endpoint statement from (8), observe first that the
+empty-set fallback in \noderef{HierarchyPathNumber} would equal
+\(\ell\), which is at least two by (2), and so cannot equal one.
+The candidate set is therefore nonempty.  Its minimum is one, hence one
+itself belongs to the filtered set; the filter condition says that every
+exact edge in position at least \(|A|+1\), that is, every edge from the
+second tail position onward, joins consecutive displayed vertices.
+Together with the augmentation route above, this is exactly the paper's
+Situation 7.1 tail.
+
+It remains to dispatch the first use of \(\alpha\).  Consider the finite
+set
 \[
- |A|,\ |A|+1,\ldots,|A|+\ell-1,
+ \mathcal U=\{t:\operatorname{Fin}|T|:\ |A|\leq t.\mathit{val}
+       \text{ and }P.\mathit{coloring}(T.\mathit{edge}(t))
+                    =\alpha\}.
 \]
-there are a unique subscript \(j\) with \(1\leq j\leq\ell\) and an exact
-index \(e_j\) satisfying
+If \(\mathcal U\) is empty, its defining negation says for every exact
+tail position \(t\) that
+\(P.\mathit{coloring}(T.\mathit{edge}(t))\ne\alpha\).
+Together with (7), (8), and the ambient vertex-missing hypothesis, these
+are precisely the hypotheses of
+\noderef{HierarchyClaimNineUnusedTailColor}.  That node returns the
+eligible index \(\ell-1\), so the eligible-index set is nonempty.
+
+Otherwise let \(e_j\) be the least element of \(\mathcal U\) and define
+\[
+                  j=e_j.\mathit{val}-|A|+1.
+\]
+The lower bound in the definition of \(\mathcal U\) gives \(1\leq j\).
+Also \(e_j.\mathit{val}<|T|=|A|+\ell\) by (4), so \(j\leq\ell\), and
+arithmetic gives
 \[
  e_j.\mathit{val}=|A|+j-1,\qquad
- P.\mathit{coloring}(T.\mathit{edge}(e_j))=\alpha.
+ P.\mathit{coloring}(T.\mathit{edge}(e_j))=\alpha.            \tag{9}
 \]
-Leastness gives the universal exclusion at all earlier exact positions.
-If \(j\geq2\), apply
-\noderef{HierarchyClaimNineFirstUseAfterSeed}; its output is the desired
-eligible index \(j-1\), with (7.1a) supplying its Situation 7.1 premise.
-If \(j=1\), apply
-\noderef{HierarchyClaimNineFirstUseSeed}; it constructs the manuscript
-closed color \(\gamma\), keeps the exact first edge fixed, and reduces to
-one of the preceding two branches; again its path-number premise is
-(7.1a).  Its conclusion is nonemptiness of the eligible-index set.  These
-cases exhaust the finite tail positions and prove Claim 9.
+Leastness says that no exact tail position strictly before \(e_j\) has
+color \(\alpha\).
+
+If \(2\leq j\), equations (7)--(9), the leastness assertion, and the
+ambient vertex-missing hypothesis are exactly the premises of
+\noderef{HierarchyClaimNineFirstUseAfterSeed}.  Its conclusion puts
+\(j-1\) in the eligible-index set.  Otherwise \(1\leq j\) gives \(j=1\);
+then (9) says that the exact first edge after \(A\) has color \(\alpha\).
+Apply \noderef{HierarchyClaimNineFirstUseSeed} with (7), (8), and the
+ambient vertex-missing hypothesis.  Its
+conclusion is directly the nonemptiness of the eligible-index set.  The
+empty and nonempty cases for \(\mathcal U\), and the two possible values
+of its first subscript, exhaust all possibilities and prove Claim 9.
 \end{proof}

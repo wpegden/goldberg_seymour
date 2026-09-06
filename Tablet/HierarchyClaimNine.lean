@@ -1,4 +1,5 @@
 import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.ExtendedTashkinovTree
 import Tablet.HierarchyBase
 import Tablet.HierarchyClaimNineFirstUseAfterSeed
 import Tablet.HierarchyClaimNineFirstUseSeed
@@ -8,13 +9,29 @@ import Tablet.HierarchyCounterexample
 import Tablet.HierarchyCounterexampleTailAtLeastTwo
 import Tablet.HierarchyCounterexampleTerminalCommonMissing
 import Tablet.HierarchyEligibleCommonMissingIndices
+import Tablet.HierarchyFullTailLength
 import Tablet.HierarchyFullTailPrefix
 import Tablet.HierarchyMinimumCounterexampleContext
 import Tablet.HierarchyPathNumber
 import Tablet.HierarchyReplacementPresentation
 import Tablet.HierarchyStarredStage
+import Tablet.KTriple
+import Tablet.MaximumDefectiveChoice
+import Tablet.OrderedTreeUnion
 import Tablet.SameGoodHierarchy
 import Tablet.SameHierarchyStages
+import Tablet.StableColoring
+import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovAugmentationSequenceRestrict
+import Tablet.TashkinovClosure
+import Tablet.TashkinovHierarchy
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
+import Tablet.TreeMissingColors
+import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: HierarchyClaimNine]
 theorem HierarchyClaimNine {V E : Type*}
