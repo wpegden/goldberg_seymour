@@ -2,9 +2,11 @@ import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.BoundaryColorEdges
 import Tablet.BoundaryEdges
 import Tablet.CombinedStableColoring
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.HierarchyBase
 import Tablet.HierarchyCounterexample
+import Tablet.HierarchyCounterexamplePenultimateElementary
 import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchyFullTailLength
 import Tablet.HierarchyFullTailPrefix

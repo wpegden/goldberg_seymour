@@ -72,12 +72,40 @@ no assertion that all affected tail-edge values are fixed.
 \end{lemma}
 \begin{proof}
 Let \(T_n\) be the terminal ladder tree and retain the notation
-\(H,q,A,B,Q\) from the statement.  Apply
-\noderef{StableChangeCasesOneTwo} to the supplied minimum context, the
-two colors missing on \(B\), the path certificate for \(Q\), the component
-disjointness, and the Cases 1/2 alternative.  Every ambient argument of
-that lemma is literally a projection of the stated
-\noderef{HierarchyMinimumCounterexampleContext}.  We obtain
+\(H,q,A,B,Q\) from the statement.  First derive the fact (6.6) which is
+not a field of the minimum context.  Apply
+\noderef{HierarchyCounterexamplePenultimateElementary}, in order, to
+\(G,k,e_0\), the input coloring, \(T\), \(\varphi_n\), the present ETT,
+base, and counterexample, followed by exactly
+\[
+ \mathit{ctx.proper},\quad \mathit{ctx.oneEdgeUncolored},\quad
+ \mathit{ctx.lowerRung},\quad \mathit{ctx.fewerDividers},\quad
+ \mathit{ctx.lexicographicMinimality},\quad
+ \mathit{ctx.largeMissingSet}.
+\]
+The six displayed arguments are respectively the properness,
+exactly-one-uncoloredness, complete lower-rung six-pack, fewer-divider
+induction, rung-local lexicographic minimality, and \(2n+11\) projections
+of the stated \noderef{HierarchyMinimumCounterexampleContext}.  By the
+definitions of \noderef{HierarchyFullTailLength} and
+\noderef{HierarchyFullTailPrefix}, the exact conclusion of the cited
+lemma is
+\[
+ h_B:\quad
+ V(B)\text{ is elementary under }\varphi_n.                      \tag{0}
+\]
+Thus \(h_B\) is derived from those six projections; it is not itself a
+context projection.
+
+Now apply \noderef{StableChangeCasesOneTwo} to the same
+\(G,k,e_0\), input coloring, \(T\), \(\varphi_n\), ETT, base, and
+counterexample; pass, in its displayed order, the six context projections
+above with the newly derived fact \(h_B\) between
+\(\mathit{ctx.lexicographicMinimality}\) and
+\(\mathit{ctx.largeMissingSet}\); and then pass \(\alpha\ne\beta\), the
+two supplied colors missing on \(B\), the path certificate for \(Q\), the
+defining component-swap equality for \(\sigma_n\), the Cases 1/2
+alternative, and the component disjointness.  We obtain
 \[
  \tag{1}
  \noderef{HierarchyWeaklyStable}(H,q,\sigma_n),\qquad
@@ -119,7 +147,9 @@ Thus (3P) and (3N) have exactly the two shapes required by the universal
 clause of \noderef{ModColoring}; no seed is reconstructed from endpoint
 data, and parallel edges remain distinguished.
 
-The old ETT supplies \(T_n\preccurlyeq T\) and \(|T_n|<|T|\).
+The `abovePenultimate' and `strictAbovePenultimate' fields in the
+definition \noderef{ExtendedTashkinovTree} say, for this old ETT, exactly
+that \(T_n\preccurlyeq T\) and \(|T_n|<|T|\).
 Instantiate the second conclusion in (1) at the actual tree \(T\) and
 the relevant route (3P) or (3N).  It returns a nonempty
 \noderef{CorrespondingExtendedTashkinovTree}; choose a certificate
