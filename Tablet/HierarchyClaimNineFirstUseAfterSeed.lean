@@ -7,6 +7,7 @@ import Tablet.HierarchyEligibleCommonMissingIndices
 import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchyFullTailPrefix
 import Tablet.HierarchyMinimumCounterexampleContext
+import Tablet.HierarchyPathNumber
 import Tablet.HierarchyReplacementPresentation
 import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsAt
@@ -32,6 +33,7 @@ theorem HierarchyClaimNineFirstUseAfterSeed {V E : Type*}
         ∀ v : V, (MissingColors G mu v).Nonempty)
     (P : HierarchyReplacementPresentation
       G k e0 input T phi ett base C ctx)
+    (hsituation : HierarchyPathNumber P.counterexample.hierarchy = 1)
     (alpha : Fin k)
     (hstart :
       let H := P.counterexample.hierarchy

@@ -1,19 +1,49 @@
 import Tablet.HierarchyEligibleCommonMissingIndices
 import Tablet.ChangeLemma
+import Tablet.ColoredVertexSetElementary
+import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.HierarchyClaimNinePENormalization
+import Tablet.HierarchyCounterexample
 import Tablet.HierarchyCounterexamplePenultimateElementary
 import Tablet.HierarchyCounterexampleMeasure
 import Tablet.HierarchyCounterexampleTailAtLeastTwo
 import Tablet.HierarchyFirstMissingPosition
+import Tablet.HierarchyFullTailLength
 import Tablet.HierarchyFullTailPrefix
 import Tablet.HierarchyMinimumCounterexampleContext
+import Tablet.HierarchyPathNumber
 import Tablet.HierarchyReplacementPresentation
 import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsAt
 import Tablet.HierarchyTailMissingColorExclusion
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
+import Tablet.MaximumDefectiveChoice
+import Tablet.MissingColorIncidenceEndpoint
+import Tablet.MissingColors
+import Tablet.PresentColors
+import Tablet.RevisitingExtensionCertificate
 import Tablet.SameGoodHierarchy
+import Tablet.SameHierarchyStages
+import Tablet.StableChangeCasesOneTwo
 import Tablet.StableChangeCasesOneTwoFullTail
+import Tablet.StableColoring
+import Tablet.TashkinovSeriesStep
+import Tablet.TashkinovStoredColors
+import Tablet.TreeIncidentEdge
+import Tablet.TreeSequence
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorComponent
+import Tablet.TwoColorComponentsDisjoint
+import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorPathComponent
+import Tablet.HierarchyWeaklyStable
 import Tablet.TreeMissingColors
 
 -- [TABLET NODE: HierarchyClaimNineUnusedTailColor]
@@ -32,6 +62,7 @@ theorem HierarchyClaimNineUnusedTailColor {V E : Type*}
         ∀ v : V, (MissingColors G mu v).Nonempty)
     (P : HierarchyReplacementPresentation
       G k e0 input T phi ett base C ctx)
+    (hsituation : HierarchyPathNumber P.counterexample.hierarchy = 1)
     (alpha : Fin k)
     (hstart :
       let H := P.counterexample.hierarchy

@@ -14,6 +14,7 @@ import Tablet.HierarchyPathNumber
 import Tablet.HierarchyReplacementPresentation
 import Tablet.HierarchyStarredStage
 import Tablet.SameGoodHierarchy
+import Tablet.SameHierarchyStages
 
 -- [TABLET NODE: HierarchyClaimNine]
 theorem HierarchyClaimNine {V E : Type*}

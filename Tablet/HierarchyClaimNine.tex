@@ -63,6 +63,28 @@ the no-common condition remains true.  Thus in every case we now have a
 replacement presentation \(P\), a color still denoted \(\alpha\), and
 the exact positive- or zero-divider normalization required in Cases 1/2.
 
+We also transport the Situation 7.1 hypothesis to this current
+presentation; it is not inherited merely by notation.  The field
+\(P.\mathit{sameGood}\) in
+\noderef{HierarchyReplacementPresentation}, unfolded through
+\noderef{SameGoodHierarchy}, supplies
+\noderef{SameHierarchyStages} between the original hierarchy
+\(C.\mathit{hierarchy}\) and
+\(H=P.\mathit{counterexample}.\mathit{hierarchy}\).  Hence their divider
+counts agree.  At divider count zero the same-stages base-core equality,
+and at positive divider count the transported equality of the last
+ordinary stage, show from the two defining branches of
+\noderef{HierarchyStarredStage} that the two last starred stages are the
+same exact ordered tree.  The definition of
+\noderef{HierarchyPathNumber} depends only on the common terminal tree
+\(T\), that last starred stage, and the endpoint equations for the exact
+displayed edge identities.  Its two candidate finite sets are therefore
+equal, including the empty-set fallback.  Consequently
+\[
+ \noderef{HierarchyPathNumber}(H)
+ =\noderef{HierarchyPathNumber}(C.\mathit{hierarchy})=1.       \tag{7.1a}
+\]
+
 The equality
 \(\noderef{HierarchyPathNumber}(H)=1\) says, by its defining filtered
 minimum, that every exact displayed tail edge from the second tail
@@ -76,7 +98,8 @@ exact edge has color \(\alpha\) under the coloring of \(P\).  If it is
 empty, its defining universal negation is precisely the hypothesis of
 \noderef{HierarchyClaimNineUnusedTailColor}; that node produces a
 replacement presentation with a color common-missing at
-\(y_{\ell-1},y_\ell\), and hence an eligible index.
+\(y_{\ell-1},y_\ell\), and hence an eligible index.  Its explicit
+current-presentation path-number hypothesis is (7.1a).
 
 Otherwise choose the least such position.  Because tail positions are
 exactly
@@ -92,10 +115,11 @@ index \(e_j\) satisfying
 Leastness gives the universal exclusion at all earlier exact positions.
 If \(j\geq2\), apply
 \noderef{HierarchyClaimNineFirstUseAfterSeed}; its output is the desired
-eligible index \(j-1\).  If \(j=1\), apply
+eligible index \(j-1\), with (7.1a) supplying its Situation 7.1 premise.
+If \(j=1\), apply
 \noderef{HierarchyClaimNineFirstUseSeed}; it constructs the manuscript
 closed color \(\gamma\), keeps the exact first edge fixed, and reduces to
-one of the preceding two branches.  Its conclusion is again nonemptiness
-of the eligible-index set.  These cases exhaust the finite tail positions
-and prove Claim 9.
+one of the preceding two branches; again its path-number premise is
+(7.1a).  Its conclusion is nonemptiness of the eligible-index set.  These
+cases exhaust the finite tail positions and prove Claim 9.
 \end{proof}
