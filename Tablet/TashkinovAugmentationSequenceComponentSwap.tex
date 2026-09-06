@@ -1,0 +1,88 @@
+\begin{lemma}[Tashkinov augmentation sequences survive a component swap]
+Let \(G\) be a finite loopless multigraph with its individual edge type,
+let \(e_0\) be the distinguished edge, and let \(\varphi\) be a partial
+\(k\)-edge-coloring.  Fix distinct colors \(\alpha,\beta\), an incidence
+node \(z\), and put
+\[
+ \sigma=\noderef{TwoColorComponentSwap}(G,\varphi,\alpha,\beta,z).
+\]
+If \(Y\) is obtained from \(X\) by a
+\(\varphi\)-\noderef{TashkinovAugmentationSequence} and both
+\(\alpha\) and \(\beta\) belong to
+\(\noderef{TreeMissingColors}(\sigma,X)\), then the same exact ordered
+tree-sequences and the same individual new-edge identities form a
+\(\sigma\)-Tashkinov augmentation sequence from \(X\) to \(Y\).
+\end{lemma}
+\begin{proof}
+Write the given sequence, in the reflexive-transitive sense of
+\noderef{TashkinovAugmentationSequence}, as
+\[
+                 X=X_0,X_1,\ldots,X_m=Y,
+\]
+where each nonempty step is a
+\(\varphi\)-\noderef{TashkinovAugmentation}.  We induct on \(m\), while
+retaining the following two assertions at stage \(i\): \(X\) is an exact
+ordered \noderef{TreeSequenceInitialSegment} of \(X_i\), and the displayed
+chain through \(X_i\) is a \(\sigma\)-augmentation sequence.  Both
+assertions are immediate at \(i=0\).
+
+Suppose they hold at \(i<m\), and unpack the next augmentation.  It gives
+\[
+ |X_{i+1}|=|X_i|+1,
+ \qquad X_i\preccurlyeq X_{i+1},
+\]
+together with the exact new last-edge identity
+\(g=X_{i+1}.\mathit{edge}(|X_i|)\) and a color \(c\) such that
+\[
+                 \varphi(g)=c,
+        \qquad c\in\noderef{TreeMissingColors}(\varphi,X_i).  \tag{1}
+\]
+The old initial-segment assertion followed by
+\(X_i\preccurlyeq X_{i+1}\) gives
+\(X\preccurlyeq X_{i+1}\), entry by entry, so it remains only to verify
+the color and missing-witness clauses of the same one-step augmentation
+under \(\sigma\).
+
+First suppose \(c\notin\{\alpha,\beta\}\).  The definition of
+\noderef{TwoColorComponentSwap} changes only values \(\alpha\) and
+\(\beta\), hence \(\sigma(g)=\varphi(g)=c\).  Moreover it fixes, throughout
+the graph, every edge whose value is \(c\).  Expanding
+\noderef{TreeMissingColors} in (1) gives a vertex
+\(v\in\noderef{TreeSequenceVertexSet}(X_i)\) with
+\(c\in\noderef{MissingColors}(G,\varphi,v)\).  Since all incident
+\(c\)-colored edges are fixed, \(c\) is missing at \(v\) under \(\sigma\)
+if and only if it is missing there under \(\varphi\).  Thus
+\(c\in\noderef{TreeMissingColors}(\sigma,X_i)\), and all clauses of the
+same exact augmentation hold under \(\sigma\).
+
+Now suppose \(c\in\{\alpha,\beta\}\).  If the edge-node
+\(\operatorname{inr}g\) is outside the selected two-color component, the
+component-swap definition leaves its value equal to \(c\).  If it is
+inside, the definition transposes its old value, so the new value is the
+other member of \(\{\alpha,\beta\}\).  In either subcase there is a color
+\(d\in\{\alpha,\beta\}\) for which
+\[
+                            \sigma(g)=d.                       \tag{2}
+\]
+By the two hypotheses of the lemma, \(d\) has a missing witness
+\(w\in V(X)\) under \(\sigma\).  The induction invariant
+\(X\preccurlyeq X_i\), expanded through
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}, carries the very same vertex entry into
+\(V(X_i)\).  Missingness is a property of the fixed graph coloring at
+that vertex and is independent of which tree-sequence currently contains
+it.  Hence
+\[
+                   d\in\noderef{TreeMissingColors}(\sigma,X_i). \tag{3}
+\]
+Equations (2)--(3), together with the unchanged length and exact
+initial-segment data, verify every clause of
+\noderef{TashkinovAugmentation} for the step
+\(X_i\to X_{i+1}\) under \(\sigma\).
+
+In both cases the transported step uses the original individual edge
+identity \(g\), and appending it proves the two induction assertions at
+\(i+1\).  At \(i=m\), the transported finite chain is exactly a
+\(\sigma\)-\noderef{TashkinovAugmentationSequence} from \(X\) to \(Y\),
+as required.
+\end{proof}
