@@ -1,5 +1,6 @@
 import Tablet.CriticalCoreExists
 import Tablet.ElementaryTransfer
+import Tablet.HierarchySituationTwoSubcaseOneOne
 import Tablet.MaximumDegreeRestrict
 import Tablet.ThmGS2
 

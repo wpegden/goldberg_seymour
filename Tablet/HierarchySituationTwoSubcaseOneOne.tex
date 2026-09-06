@@ -1,0 +1,27 @@
+\begin{lemma}[Situation 7.2, Subcase 1.1]
+Every \noderef{HierarchySituationTwoCaseOneData} is impossible.
+Equivalently, in Situation 7.2, Case 1 cannot occur when the color
+\(\theta=\varphi_n(e_p)\) is present at \(y_{p-1}\).
+\end{lemma}
+\begin{proof}
+Let
+\[
+ D_{n,q}=\noderef{HierarchyStoredColorsAt}(C.\mathit{hierarchy},q),
+\qquad
+ \Gamma^q=\bigcup_{\eta\in D_{n,q}}
+   C.\mathit{good}.\Gamma^q_\eta .
+\]
+If \(\theta\notin\Gamma^q\), apply
+\noderef{HierarchySituationTwoSubcaseOneOneNonexceptional}, using its
+first alternative.
+
+Otherwise, the definition of the finite union supplies a color
+\(\eta_h\in D_{n,q}\) with
+\(\theta\in\Gamma^q_{\eta_h}\).  If \(\eta_h\) is not missing at
+\(y_{p-1}\), the second alternative of
+\noderef{HierarchySituationTwoSubcaseOneOneNonexceptional} gives a
+contradiction.  If it is missing there, all hypotheses of
+\noderef{HierarchySituationTwoSubcaseOneOneStoredException} hold, and
+that lemma gives a contradiction.  These cases exhaust membership in
+\(\Gamma^q\), so the Case 1 datum is impossible.
+\end{proof}

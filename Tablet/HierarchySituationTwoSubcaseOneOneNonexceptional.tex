@@ -1,0 +1,165 @@
+\begin{lemma}[Situation 7.2, Subcase 1.1 outside the stored exception]
+In the setting of a
+\noderef{HierarchySituationTwoCaseOneData} \(D\), write
+\[
+ q=C.\mathit{hierarchy}.\mathit{dividerCount},\qquad
+ D_{n,q}=\noderef{HierarchyStoredColorsAt}(C.\mathit{hierarchy},q),
+ \qquad
+ \Gamma^q=\bigcup_{\eta\in D_{n,q}}\Gamma^q_\eta .
+\]
+Suppose either \(\theta\notin\Gamma^q\), or there is
+\(\eta\in D_{n,q}\) such that
+\(\theta\in\Gamma^q_\eta\) and \(\eta\) is not missing at
+\(y_{p-1}\).  Then a contradiction follows.
+\end{lemma}
+\begin{proof}
+Put \(H=C.\mathit{hierarchy}\),
+\(A=\noderef{HierarchyStarredStage}(H,q)\),
+\(\ell=\noderef{HierarchyFullTailLength}(C)\), and
+\[
+ B=\noderef{HierarchyFullTailPrefix}(C,\ell-2),\qquad
+ B^+=\noderef{HierarchyFullTailPrefix}(C,\ell-1).
+\]
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} to the
+properness, exact one-uncoloredness, lower-rung, fewer-divider,
+lexicographic-minimality, and large-set fields of
+\noderef{HierarchyMinimumCounterexampleContext}.  It says exactly that
+\[
+                  V(B^+)\text{ is elementary under }\varphi_n.       \tag{1}
+\]
+The Case 1 datum makes \(\alpha\) missing at \(y_{p-1}\), whereas
+\(\alpha\in D_{n,q}\).  Unfolding
+\noderef{HierarchyStoredColorsAt} shows that \(\alpha\) is not missing
+on \(A\).  Since \(A\preccurlyeq B\preccurlyeq B^+\) by
+\noderef{TashkinovHierarchy} and
+\noderef{HierarchyFullTailPrefix}, elementarity (1) makes
+\(y_{p-1}\) the first displayed vertex missing \(\alpha\).
+
+The equality
+\(\Gamma^q_\alpha=\{\gamma_1,\gamma_2\}\), the avoidance field of
+\noderef{GoodHierarchy}, and the preceding first-position calculation
+give, for \(j=1,2\),
+\[
+ \gamma_j\in\overline\varphi_n(A),\qquad
+ \gamma_j\notin
+ \varphi_n\langle B^+-A\rangle .                              \tag{2}
+\]
+The tail-exclusion argument includes the divider-zero exception:
+if \(A=T_n\) and the first tail edge is the exact SE/RE seed, its color
+lies in the certified stored set, while each \(\gamma_j\) is
+stage-missing and hence is not in \(D_{n,q}\).  Thus that individual
+seed cannot be a \(\gamma_j\)-edge.  No assertion about a parallel edge
+with the same endpoints is used.
+
+Apply \noderef{ChangeLemma} to the ordered pairs
+\((\gamma_j,\alpha)\).  Its Cases 1/2 alternative is supplied by the
+stage-missing statement in (2), and its exact unused interval is the
+second statement in (2).  All of its minimum-context hypotheses are
+the fields already used above, and (1) is its derived (6.6) premise.
+It follows that the full two-color components satisfy
+\[
+ K_{\alpha,\gamma_j}(v_{\gamma_j})
+      =K_{\alpha,\gamma_j}(y_{p-1})\qquad(j=1,2),              \tag{3}
+\]
+where \(v_{\gamma_j}\in V(A)\) is the first
+\(\gamma_j\)-missing vertex.
+
+Invoke \noderef{HierarchySituationTwoReorderedTreesCertified} on the
+underlying \noderef{HierarchySituationTwoTailData}.  Retain the exact
+trees \(T^-,T^*\), their PE or exact-seed SE/RE augmentation routes,
+their actual \noderef{CorrespondingExtendedTashkinovTree}
+certificates, and maximum property for both replacement ETTs.  In
+particular,
+\[
+ V(T^-)=V(T)\setminus\{y_{p-1}\},\qquad V(T^*)=V(T).          \tag{4}
+\]
+
+We next put the old hierarchy on the reordered trees.  Correspondence
+identifies every positive ladder tree, raw stored set, exact connecting
+set, and extension kind with the original series.  Thus the core,
+closure, numerical support position, terminal missing-set equality, and
+PE/non-PE clauses of \noderef{HierarchyBase} copy to bases for the two
+replacement ETTs.  Copy all stages through \(T_{n,q}\), all divider
+positions, and all Gamma pairs.  Replace only the terminal stage by
+\(T^-\), or by \(T^*\).  The exact append relations in
+\noderef{HierarchySituationTwoReorderedTrees} verify the last nested
+and strict fields of \noderef{TashkinovHierarchy}; every earlier field
+is unchanged.  The stored sets and stage-missing sets are unchanged,
+because they use only the retained starred stages and series data.
+Cardinality, pairwise disjointness, refresh, parallel-base, and
+minus-closedness fields of \noderef{GoodHierarchy} therefore copy
+verbatim.  Only last-stage avoidance needs checking.
+
+If \(\theta\notin\Gamma^q\), moving the exact
+\(\theta\)-edge \(e_p\) earlier crosses no Gamma color.  Removing
+\((e_{p-1},y_{p-1})\) only removes possible segment colors, and in
+\(T^*\) reinserting that same exact pair after \((e_p,y_p)\) creates no
+new forbidden Gamma occurrence before a reserved color's first missing
+vertex: (1) and the original avoidance field put every such occurrence
+at or after its old cutoff.  Hence both copied hierarchies are good.
+
+In the second alternative choose
+\(\eta\in D_{n,q}\) with
+\(\theta\in\Gamma^q_\eta\) and
+\(\eta\notin\overline\varphi_n(y_{p-1})\).  The stored-set definition
+and the avoidance field say that the first \(\eta\)-missing vertex lies
+in \(B\); otherwise \(\eta\) would remain present through \(y_{p-1}\)
+while its Gamma color \(\theta\) occurs on the next exact edge, contrary
+to avoidance.  Thus \(e_p\) is still after the \(\eta\)-cutoff in both
+reordered displays.  Pairwise disjointness of Gamma pairs shows that
+this is the only pair whose avoidance could be affected by moving the
+\(\theta\)-edge.  All other pairs are handled exactly as in the first
+alternative.  Again both copied hierarchies are good.
+
+We now derive the contradiction in the two possibilities for
+\(\gamma_1\) at \(y_p\).  If
+\(\gamma_1\in\overline\varphi_n(y_p)\), then
+\(v_{\gamma_1}\in V(A)\subseteq V(T^-)\) and \(y_p\in V(T^-)\) are
+distinct by vertex injectivity in \noderef{TreeSequence}.  They both
+miss \(\gamma_1\), so \(V(T^-)\) is not elementary.  The corresponding
+ETT, its maximum property, and the copied good hierarchy construct a
+\noderef{HierarchyCounterexample} \(C^-\).  It has the same rung and
+divider count as \(C\).  Unfold \noderef{HierarchyPathNumber} for its
+unchanged last starred stage.  Its full tail has length \(\ell-1\), and
+the last index is always a candidate, so its path number is at most
+\(\ell-1\).  The datum says that the old path number is \(\ell\).
+Hence the first coordinate of
+\noderef{HierarchyCounterexampleMeasure} is strictly smaller, and
+\noderef{HierarchyCounterexampleLess}(C^-,C)\) contradicts the
+lexicographic-minimality field of the context.
+
+It remains that \(\gamma_1\) is present at \(y_p\).  Work in \(T^*\).
+By (4), its vertex set is the same as that of \(T\), so the original
+non-elementarity witness, the corresponding ETT, its maximum property,
+and the copied good hierarchy form a counterexample \(C^*\).  Its
+full-tail length is still \(\ell\), so its path number is at most
+\(\ell\).  If it is smaller, minimality is already contradicted.  We
+may therefore assume it equals the old value \(\ell\), and both
+coordinates of the counterexample measure then equal those of \(C\).
+Transport the minimum context to \(C^*\): properness and exact
+one-uncoloredness are unchanged; the corresponding-series fields
+transport the complete lower-rung and large-set packages; same rung and
+the copied good hierarchy transport the fewer-divider clause; and any
+counterexample smaller than \(C^*\) has the same comparison with \(C\),
+so the original lexicographic-minimality clause applies.
+
+The display of \(T^*\) reaches \(y_p\) before \(y_{p-1}\); (2), and the just-checked
+avoidance for the copied good hierarchy, allow a second application of
+\noderef{ChangeLemma}, with the ordered pair
+\((\gamma_1,\alpha)\), to this actual corresponding MP ETT and its
+copied minimum data.  It gives
+\[
+ K_{\alpha,\gamma_1}(v_{\gamma_1})
+      =K_{\alpha,\gamma_1}(y_p).                              \tag{5}
+\]
+Together with (3), this puts the three distinct vertices
+\(v_{\gamma_1},y_{p-1},y_p\) in one two-color component, with
+\(\gamma_1\) missing at the first and \(\alpha\) missing at the other
+two.  By \noderef{TwoColorIncidenceDegreeAtMostTwo}, each is a
+degree-at-most-one vertex in that component.  The component has a
+spanning path by \noderef{TwoColorComponentSpanningPath}; a finite path
+has at most two such endpoints.  Equivalently,
+\noderef{TwoColorComponentsDisjoint} forbids the two terminal components
+after the component through \(v_{\gamma_1}\) has been fixed.  This
+contradicts (3)--(5), completing the nonexceptional branch.
+\end{proof}

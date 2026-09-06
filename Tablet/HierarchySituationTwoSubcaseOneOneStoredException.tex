@@ -1,0 +1,283 @@
+\begin{lemma}[Situation 7.2, Subcase 1.1 stored exception]
+Let \(D\) be a \noderef{HierarchySituationTwoCaseOneData}.  Suppose
+there is a color \(\eta_h\in D_{n,q}\) such that
+\[
+       \theta\in\Gamma^q_{\eta_h}
+       \quad\hbox{and}\quad
+       \eta_h\in\overline\varphi_n(y_{p-1}).
+\]
+Then a contradiction follows.
+\end{lemma}
+\begin{proof}
+Put \(H=C.\mathit{hierarchy}\), let \(q\) be its last divider index,
+put \(A=\noderef{HierarchyStarredStage}(H,q)\), and set
+\[
+ \ell=\noderef{HierarchyFullTailLength}(C),\quad
+ B=\noderef{HierarchyFullTailPrefix}(C,\ell-2),\quad
+ B^+=\noderef{HierarchyFullTailPrefix}(C,\ell-1).
+\]
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} to the
+six relevant fields of
+\noderef{HierarchyMinimumCounterexampleContext}.  Thus
+\[
+                  V(B^+)\text{ is elementary under }\varphi_n.       \tag{1}
+\]
+Because \(\alpha,\eta_h\in D_{n,q}\) and both are missing at
+\(y_{p-1}\), (1) and the exact chain \(A\preccurlyeq B\preccurlyeq
+B^+\) make \(y_{p-1}\) their first missing vertex.  The avoidance
+field of \noderef{GoodHierarchy}, applied to
+\(\Gamma^q_\alpha=\{\gamma_1,\gamma_2\}\) and to
+\(\theta\in\Gamma^q_{\eta_h}\), gives
+\[
+ \begin{aligned}
+ &\gamma_1,\gamma_2\notin
+       \varphi_n\langle B^+-A\rangle,\\
+ &\theta\notin\varphi_n\langle B^+-A\rangle.                 \tag{2}
+ \end{aligned}
+\]
+For \(\alpha\), the same tail exclusion holds above \(A\), except for
+the exact divider-zero SE/RE seed when it carries the stored color
+\(\alpha\).  In that exception the singleton connecting-edge equality
+identifies the one protected edge; no other parallel edge is exempted.
+
+Apply \noderef{ChangeLemma} with the ordered pair
+\((\gamma_j,\alpha)\), using (1), (2), the stage-missing half of
+avoidance, and the minimum-context fields.  For \(j=1,2\) it gives
+\[
+ K_{\alpha,\gamma_j}(v_{\gamma_j})
+      =K_{\alpha,\gamma_j}(y_{p-1}),                          \tag{3}
+\]
+where \(v_{\gamma_j}\in V(A)\) is the first
+\(\gamma_j\)-missing vertex.
+
+The two members of \(\Gamma^q_\alpha\) are distinct.  At least one is
+different from \(\theta\); rename the displayed pair, if necessary, so
+that
+\[
+                           \theta\ne\gamma_2.                 \tag{4}
+\]
+Also \(\theta\ne\alpha\): the exact edge \(e_p\) is incident with
+\(y_p\) and has color \(\theta\), whereas \(\alpha\) is missing there.
+The component in (3) for \(j=2\) is disjoint from
+\(Q_1=K_{\alpha,\gamma_2}(y_p)\).  Indeed, \(\alpha\) is missing at
+both \(y_{p-1}\) and \(y_p\), while \(\gamma_2\) is missing at
+\(v_{\gamma_2}\).  These three vertices are distinct by the vertex
+injectivity field of \noderef{TreeSequence}.  If the components were
+equal, \noderef{TwoColorComponentSpanningPath} and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} would put three
+degree-at-most-one vertices on one path.  Hence
+\noderef{TwoColorComponentsDisjoint} gives the asserted disjointness,
+and \noderef{TwoColorComponentSpanningPath} supplies the required
+\noderef{TwoColorPathComponent} certificate rooted at \(y_p\), including
+the possible isolated-vertex case.
+
+Define the first recoloring explicitly by
+\[
+ \mu_1=\noderef{TwoColorComponentSwap}
+        (G,\varphi_n,\gamma_2,\alpha,\operatorname{inl}y_p).  \tag{5}
+\]
+The component \(Q_1\) meets the displayed tree only at \(y_p\).
+For a vertex of \(B^+\), membership in \(Q_1\) would connect it to
+one of the two components in (3), contradicting their disjointness and
+(1).  Thus every missing-color set on \(B^+\) is unchanged.  Likewise,
+an exact displayed edge changed by (5) would either lie below \(A\), in
+which case its incident tree vertex would put \(Q_1\) through the
+stage-missing component at \(v_{\gamma_2}\), or lie in \(B^+-A\), in
+which case (2) excludes its \(\gamma_2\)-color and the tail exclusion
+excludes its \(\alpha\)-color.  The possible SE/RE seed carrying
+\(\alpha\) is outside \(Q_1\), since its tree endpoint lies before
+\(y_{p-1}\).  The last edge \(e_p\) has color \(\theta\), distinct from
+both swapped colors by (4) and by properness at \(y_p\).  Therefore
+\[
+ \begin{aligned}
+ &\mu_1(T.\mathit{edge}(r))=\varphi_n(T.\mathit{edge}(r))
+       &&(|A|\leq r<|T|),\\
+ &\overline\mu_1(u)=\overline\varphi_n(u)
+       &&(u\in V(B^+)).
+ \end{aligned}                                                \tag{6}
+\]
+
+The first-missing position of every stored color is unchanged: the only
+affected stored color is \(\alpha\), and its witness \(y_{p-1}\) is
+outside \(Q_1\).  Apply
+\noderef{StableChangeCasesOneTwoFullTail}, ordered as
+\((\gamma_2,\alpha)\), with the exact identities
+(2), (3), and (6).  Its conclusion supplies weak stability,
+\noderef{ModColoring}, an actual corresponding ETT on \(T\), maximum
+property, a rebuilt base and full \noderef{GoodHierarchy}, and
+\noderef{SameGoodHierarchy}.  Compose the returned correspondence with
+the identity presentation of the original ETT, and use the transitivity
+of stable colorings from \noderef{sc2}; copying the context fields gives
+a genuine \noderef{HierarchyReplacementPresentation} \(P_1\) whose
+coloring is \(\mu_1\).  In particular (6) transports (1), and
+\(\gamma_2\) is missing at both \(v_{\gamma_2}\) and \(y_p\).
+
+We now make the manuscript's counting choice.  Apply \noderef{NineN}
+to \(P_1\) at \(i=\ell-2\).  Its available set consists of colors
+missing on \(B\), with the base-extra missing colors and all colors used
+on the exact prefix \(B-A\) removed, and it has cardinality at least
+\(2n+11\).  Passing from \(B\) to \(T\) adds exactly the individual
+edges \(e_{p-1},e_p\), so excluding every color used on \(T-A\) removes
+at most two more colors.  By
+\noderef{HierarchyStoredColorsCardinality},
+\[
+ |\Gamma^q|\leq2|D_{n,q}|\leq2n.                            \tag{7}
+\]
+The resulting set is nonempty.  Choose
+\[
+ \beta\in\overline\mu_1(B)
+   \setminus\overline\mu_1(\mathcal B_1.\mathit{core}-V(T_n^1))
+   \setminus\mu_1\langle T-A\rangle
+   \setminus\Gamma^q.                                       \tag{8}
+\]
+This records the selected color itself, not merely its cardinality
+bound.  In particular \(\beta\) is missing first at a vertex
+\(v_\beta\in V(B)\), it is not a Gamma color, and neither \(\beta\) nor
+\(\gamma_2\) is used on the exact tail segment relevant below.
+
+Apply \noderef{ChangeLemma} in the presentation \(P_1\), with the
+ordered pair \((\gamma_2,\beta)\).  Equations (6)--(8), the copied minimum context,
+and the copied Gamma data give
+\[
+ K_{\beta,\gamma_2}(v_\beta)
+       =K_{\beta,\gamma_2}(v_{\gamma_2}).                    \tag{9}
+\]
+This component is disjoint from
+\(Q_2=K_{\beta,\gamma_2}(y_p)\): otherwise the distinct missing
+vertices \(v_\beta,v_{\gamma_2},y_p\) again contradict
+\noderef{TwoColorComponentSpanningPath} and the degree bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  The spanning-path theorem
+also supplies the required path-component certificate for \(Q_2\).
+Define the second
+recoloring
+\[
+ \mu_2=\noderef{TwoColorComponentSwap}
+        (G,\mu_1,\gamma_2,\beta,\operatorname{inl}y_p).       \tag{10}
+\]
+By (8), (9), and disjointness, this swap fixes every exact displayed
+edge at a position from \(|A|\) through \(|T|-1\), and changes no
+missing-color set on \(B^+\).  It also preserves the possible protected
+seed.  As before, every stored first position is
+unchanged.  A second application of
+\noderef{StableChangeCasesOneTwoFullTail}, ordered as
+\((\gamma_2,\beta)\) and now relative to \(P_1\),
+gives an actual corresponding MP ETT, rebuilt full good hierarchy, and
+same-good data under \(\mu_2\).  Composing both correspondence
+certificates and both same-good relations, and using \noderef{sc2} at
+each positive rung, produces an original-relative replacement
+presentation \(P_2\).  It carries the full transported minimum context,
+and \(\beta\) is missing at both \(v_\beta\) and \(y_p\).
+
+The selected stored color \(\eta_h\) is still missing at
+\(y_{p-1}\), since (6) and its analogue for (10) preserve all missing
+sets on \(B^+\).  Its Gamma pair is unchanged and contains \(\theta\).
+The avoidance field therefore gives
+\[
+ \theta\notin\mu_2\langle B^+-A\rangle.                      \tag{11}
+\]
+Equation (8) gives the stronger
+\[
+ \beta\notin\mu_2\langle T-A\rangle.                         \tag{12}
+\]
+Apply \noderef{ChangeLemma} under \(P_2\), with the ordered pair
+\((\theta,\beta)\).  The first \(\theta\)-missing vertex lies in the
+unchanged last ordinary stage, while \(v_\beta\in B\); (11)--(12) give
+the exact unused intervals.  Thus their component is disjoint from
+\(Q_3=K_{\beta,\theta}(y_p)\), by the same explicit three-endpoint
+argument; the same spanning-path theorem supplies its path-component
+certificate.  Define the third recoloring
+\[
+ \mu_3=\noderef{TwoColorComponentSwap}
+        (G,\mu_2,\theta,\beta,\operatorname{inl}y_p).         \tag{13}
+\]
+Apply \noderef{StableChangeCasesOneTwo} to the presentation \(P_2\),
+with \(\theta\) as the stage-missing affected color and \(\beta\) as
+the other color.  The component separation just proved is its
+disjointness premise; (11)--(12) give its exact unused interval; the
+properness, one-uncoloredness, lower-rung, fewer-divider, (6.6),
+large-set, and minimality premises are the fields of \(P_2\)'s minimum
+context.  Retain in particular its
+\noderef{HierarchyWeaklyStable} conclusion for \(\mu_3\).
+
+We claim only the exact prefix transport justified by that weak
+stability and (11)--(12):
+\[
+ \mu_3(f)=\mu_2(f)\quad(f\in E(B^+)),\qquad
+ \overline\mu_3(u)=\overline\mu_2(u)\quad(u\in V(B^+)),       \tag{14}
+\]
+while
+\[
+                    \mu_3(e_p)=\beta.                        \tag{15}
+\]
+There is no assertion that the full tail is fixed.
+
+We verify the actual terminal construction needed for the split-tail
+provider.  Extract the PE or exact-seed SE/RE augmentation route for
+\(P_2\)'s ETT and restrict it to \(B^+\).  Apply
+\noderef{TashkinovAugmentationSequenceColoringTransport}.  Its
+missing-set premise is (14).  For route-added edges at or above \(A\),
+(14) supplies exact value equality.  If \(q>0\), the
+\noderef{HierarchyWeaklyStable} output of the stable-change provider
+contains pointwise invariance on \(A\), covering all earlier route
+edges.  At divider zero and non-PE, the route begins at the exact
+one-edge seed and \(A=T_n\).  At divider zero and PE, write \(R_n^2\)
+for the rebuilt base closure.  The base field supplies
+\[
+ U_2:\noderef{OrderedTreeUnion}(T_n^2,R_n^2,A).
+\]
+Apply \noderef{CombinedStableClosurePreserved} to (13).  It fixes every
+displayed edge of \(T_n^2\) and \(R_n^2\).  For each exact position
+\(r<|A|\), \(U_2.\mathit{leftSegment}\) covers \(r<|T_n^2|\), and
+\(U_2.\mathit{newEntryFromRight}\) supplies an exact edge of \(R_n^2\)
+when \(|T_n^2|\leq r\).  Hence every route edge below \(A\) is fixed as
+well.  These are precisely the two premises of the coloring-transport
+theorem, so an actual \(\mu_3\)-route reaches \(B^+\).
+
+Restrict and factor the actual terminal augmentation certificate of
+\(P_2\) at \(B^+\); because \(T\) has exactly one more edge, its suffix
+is the old one-step route \(B^+\to T\) under \(\mu_2\).
+Both \(\beta\) and \(\theta\) remain missing on \(B^+\) under
+\(\mu_3\), at their two component-disjoint witnesses.  Equation (14)
+preserves every stored first position.  For the Gamma cutoff, \(\beta\)
+belongs to no Gamma pair by (8), while any pair containing \(\theta\)
+is, by pairwise disjointness, the displayed pair for \(\eta_h\), whose
+first missing vertex is \(y_{p-1}\in B^+\).  All hypotheses of
+\noderef{StableChangeCasesOneTwoSplitTail} are therefore satisfied with
+split \(X=B^+\).  It rebuilds the full exact tree \(T\) under \(\mu_3\),
+with an actual corresponding ETT, maximum property, full good hierarchy,
+and same-good data.  Compose these with \(P_2\) exactly as above to
+obtain a replacement presentation \(P_3\) and its transported minimum
+context.
+
+Form a new \noderef{HierarchySituationTwoTailData} \(D_3\) for \(P_3\).
+Use the same structural indices and non-incidence equation.  Same-good
+data retain the last starred stage, so the path number and full-tail
+length remain those in \(D\).  Use \(\beta\) as its last-edge color;
+(15) is the color equation.  It is present at \(y_{p-1}\), since
+\(v_\beta\in V(B)\) is a distinct vertex missing \(\beta\) and (14)
+transports elementarity of \(B^+\).  Thus every field of \(D_3\) is
+verified.
+
+Apply \noderef{HierarchySituationTwoReorderedTreesCertified} to
+\(P_3\) and \(D_3\).  It supplies the actual reordered tree \(T^-_3\),
+its corresponding same-rung ETT, and maximum property.  Copy the
+hierarchy stages and Gamma pairs through the last ordinary stage and
+replace only the terminal stage by \(T^-_3\).  Because
+\(\mu_3(e_p)=\beta\notin\Gamma^q\), the exact avoidance check is the
+nonexceptional one: deleting \(e_{p-1}\) removes constraints and moving
+the non-Gamma edge \(e_p\) creates none.  Hence \(T^-_3\) has a full
+good hierarchy.
+
+Finally, the swap (13) makes \(\theta\) missing at \(y_p\), while its
+component-disjoint first witness in \(A\) remains missing.  Both
+distinct vertices lie in \(T^-_3\).  Its vertex set is therefore not
+elementary, and the corresponding ETT, maximum property, and copied
+good hierarchy form a \noderef{HierarchyCounterexample} \(C^-_3\).
+It has the same rung and divider count.  Its path number cannot exceed
+the old one; if it is smaller, the first coordinate of
+\noderef{HierarchyCounterexampleMeasure} decreases, and otherwise
+\(|T^-_3|=|T|-1\) decreases the second coordinate.  Thus
+\noderef{HierarchyCounterexampleLess}(C^-_3,C)\), contrary to the
+lexicographic-minimality field of the original context.  This is the
+required contradiction.
+\end{proof}

@@ -1,0 +1,38 @@
+\begin{definition}
+Let \(D\) be a \noderef{HierarchySituationTwoTailData} for the fixed
+minimum counterexample, and put
+\[
+ B=\noderef{HierarchyFullTailPrefix}(C,\ell-2),\qquad
+ B^+=\noderef{HierarchyFullTailPrefix}(C,\ell-1),\qquad
+ \ell=\noderef{HierarchyFullTailLength}(C).
+\]
+A pair of \emph{Situation 7.2 reordered trees} consists of an exact
+index \(r\in\operatorname{Fin}|T|\) with \(r+2=|T|\), the individual
+edge \(e_{p-1}=T.\mathit{edge}(r)\), and two ordered tree-sequences
+\(T^-\) and \(T^*\) satisfying all of the following.
+
+The original display is obtained by the two exact one-edge extensions
+\[
+ B\mathbin{+}(e_{p-1},y_{p-1})=B^+,\qquad
+ B^+\mathbin{+}(e_p,y_p)=T.
+\]
+The reordered displays are obtained by
+\[
+ B\mathbin{+}(e_p,y_p)=T^-,\qquad
+ T^-\mathbin{+}(e_{p-1},y_{p-1})=T^*.
+\]
+Each plus sign here is the exact ordered
+\noderef{TreeSequenceAdjoinEdge} relation, and the displayed last
+vertices are required literally.  Moreover
+\[
+ \begin{aligned}
+ V(T^-)&=V(T)\setminus\{y_{p-1}\},&
+ E(T^-)&=E(T)\setminus\{e_{p-1}\},\\
+ V(T^*)&=V(T),& E(T^*)&=E(T).
+ \end{aligned}
+\]
+Thus \(T^-\) is the manuscript's tree obtained by deleting
+\(y_{p-1}\) together with its displayed attachment edge, while \(T^*\)
+interchanges the final two attachment pairs.  The equalities concern
+sets of individual edge identities, not endpoint pairs.
+\end{definition}
