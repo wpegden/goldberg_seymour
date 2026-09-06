@@ -6,6 +6,7 @@ import Tablet.CombinedStableColoring
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
+import Tablet.HierarchyBase
 import Tablet.HierarchyCounterexample
 import Tablet.HierarchyCounterexamplePenultimateElementary
 import Tablet.HierarchyCounterexampleMeasure
@@ -27,6 +28,7 @@ import Tablet.MaximumDefectiveChoice
 import Tablet.MissingColorIncidenceEndpoint
 import Tablet.MissingColors
 import Tablet.ModColoring
+import Tablet.OrderedTreeUnion
 import Tablet.PresentColors
 import Tablet.RevisitingExtensionCertificate
 import Tablet.SameGoodHierarchy
@@ -39,6 +41,7 @@ import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceColoringTransport
 import Tablet.TashkinovAugmentationSequenceRestrict
 import Tablet.TashkinovClosure
+import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors

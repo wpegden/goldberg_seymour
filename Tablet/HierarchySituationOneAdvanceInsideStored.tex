@@ -26,7 +26,24 @@ where the last three trees are the corresponding
 \noderef{SameGoodHierarchy} identifies the
 original and replacement base cores, divider counts, stages, and exact
 last starred stage.  Hence it also identifies their full-tail lengths and
-all these exact prefixes.  The inequalities on \(i\) give
+all these exact prefixes.  We now use the actual stage data, rather than
+only this identification.  The \(\mathit{baseStage}\) field of
+\noderef{TashkinovHierarchy} identifies stage zero with the terminal
+ladder tree \(T_n\).  Successive \(\mathit{nested}\) fields are exact
+\noderef{TreeSequenceInitialSegment}s, the corresponding
+\(\mathit{strict}\) fields make every one of those stage inclusions
+proper, and \(\mathit{terminalStage}\) identifies the final stage with
+\(T\).  If \(q>0\), the positive branch of
+\noderef{HierarchyStarredStage} identifies \(A\) with the last ordinary
+stage, so the last nested and strict clauses give \(A\prec T\).  If
+\(q=0\), the zero branch identifies \(A\) with the base core, and the
+\(\mathit{coreInsideFirst}\) field followed by
+\(\mathit{terminalStage}\) gives \(A\preccurlyeq T\).  In this second
+case the assumed inequalities, together with the definitions of
+\noderef{HierarchyFullTailLength} and
+\noderef{HierarchyFullTailPrefix}, force the displayed prefixes below to
+lie strictly beyond \(A\) and strictly below \(T\).  Thus in both cases
+the inequalities on \(i\) give
 \[
  A\prec X^-\prec X\preccurlyeq B\prec T,
  \qquad |X|=|X^-|+1.                                      \tag{1}
@@ -165,11 +182,39 @@ constructors supply the exact singleton connecting edge, exact
 that seed.  The terminal exact-prefix field of
 \noderef{ExtendedTashkinovTree} and two applications of
 \noderef{TashkinovAugmentationSequenceRestrict} restrict this route first
-to \(T\) and then to \(X\).  The required source inclusions are exact:
-in PE, \(T_n\preccurlyeq A\preccurlyeq X\); in SE/RE with \(q=0\), the
-seed is the first tail edge and \(i\ge1\) puts it in \(X\); and with
-\(q>0\), the strict first hierarchy stage contains that one-edge seed and
-precedes \(A\).  Since every
+to \(T\) and then to \(X\).  Here are the required source inclusions in
+full.  In PE with \(q>0\), the \(\mathit{baseStage}\) identity and the
+iterated \(\mathit{nested}\) fields of
+\noderef{TashkinovHierarchy} give
+\(T_n\preccurlyeq A\preccurlyeq X\).  In PE with \(q=0\), the
+\(\mathit{parallel}\) field of \noderef{HierarchyBase} identifies
+\(A\), which is the base core, with an exact
+\noderef{OrderedTreeUnion} of \(T_n\) and the PE closure; its
+\(\mathit{leftSegment}\) field gives
+\(T_n\preccurlyeq A\preccurlyeq X\).
+
+In SE/RE with \(q=0\), the \(\mathit{nonparallel}\) field of
+\noderef{HierarchyBase} gives \(A=T_n\); the exact adjoin-edge seed has
+length \(|A|+1\), and \(i\ge1\) together with (1) puts that seed in
+\(X\).  Finally suppose SE/RE and \(q>0\).  The
+\(\mathit{baseStage}\) identity says that stage zero is \(T_n\), while
+the first \(\mathit{nested}\) and \(\mathit{strict}\) fields say that
+stage one is an exact extension of length at least \(|T_n|+1\).  The
+exact seed \(T_n+f_n\) has length exactly \(|T_n|+1\).  Both it and
+stage one are exact prefixes of the same final ladder tree: the former
+by the SE/RE closure route; the latter first by iterating
+\(\mathit{nested}\) and using \(\mathit{terminalStage}\) to reach
+\(T\), and then by the \(\mathit{belowFinal}\) field of
+\noderef{ExtendedTashkinovTree}.  Since the seed is no longer than stage
+one, comparing their entries through
+\noderef{TreeSequenceInitialSegment} gives
+\[
+             T_n+f_n\preccurlyeq H.\mathit{stage}(1)
+                 \preccurlyeq A\preccurlyeq X.
+\]
+Thus the strict first hierarchy stage contains the exact one-edge seed
+and precedes the last starred stage (with equality in the second relation
+when it is itself that last stage).  Since every
 \noderef{TashkinovAugmentation} increases length by one, induction on the
 same finite chain locates the unique member of length \(|X|\), identifies
 it with \(X\) by exact-prefix antisymmetry, and factors off an old-color
@@ -185,13 +230,30 @@ missing-set premise follows from (8) and \(X^-\preccurlyeq B\).  For its
 edge premise, route-added edges at or beyond \(A\) are fixed by (7).  If
 \(q>0\), the \noderef{TreeColoringInvariant} clause of (6) fixes all
 earlier displayed edges in \(A\).  If \(q=0\) and the kind is PE, (6)
-unfolds to \noderef{CombinedStableColoring};
-\noderef{CombinedStableClosurePreserved} fixes the displayed edges of
-\(T_n\) and its PE closure, and the ordered-union description of \(A\)
-therefore fixes every earlier route-added edge.  If \(q=0\) and the kind
-is SE/RE, then \(A=T_n\) and \(S\) is already the one-edge seed, so there
-is no earlier route-added edge.  The transport lemma now gives the exact
-new-color route
+unfolds to \noderef{CombinedStableColoring}.  Write \(R_n\) for the PE
+closure.  The \(\mathit{parallel}\) field of
+\noderef{HierarchyBase} supplies both that closure and a witness
+\[
+              U:\noderef{OrderedTreeUnion}(T_n,R_n,A).
+\]
+Apply \noderef{CombinedStableClosurePreserved} to the combined stability
+in (6); it gives
+\(\nu(f)=\mu(f)\) for every displayed edge identity of \(T_n\) and for
+every displayed edge identity of \(R_n\).  We check that this covers all
+of \(A\).  For a displayed position \(r<|A|\), if \(r<|T_n|\), the
+\(\mathit{leftSegment}\) field of \(U\) identifies
+\(A.\mathit{edge}(r)\) with \(T_n.\mathit{edge}(r)\).  If
+\(|T_n|\le r\), the \(\mathit{newEntryFromRight}\) field of \(U\)
+produces an exact position \(s<|R_n|\) with
+\(A.\mathit{edge}(r)=R_n.\mathit{edge}(s)\).  The two conclusions of
+\noderef{CombinedStableClosurePreserved} therefore fix, edge by edge,
+every displayed identity of \(A\).  Since \(A\preccurlyeq X\), this
+fixes every route-added edge whose position is below \(|A|\); (7) fixes
+all remaining route-added positions below \(|X|\).  If \(q=0\) and the
+kind is SE/RE, then \(A=T_n\) by \noderef{HierarchyBase} and \(S\) is
+already the one-edge seed, so there is no earlier route-added edge.  The
+two explicit premises of the transport lemma are now proved in every
+case, and it gives the exact new-color route
 \[
  \begin{cases}T_n\longrightarrow X,&\text{PE},\\
  T_n+f_n\longrightarrow X,&\text{SE/RE},\end{cases}
@@ -283,16 +345,52 @@ lemmas used above.  Swap that terminal component and call the coloring
 \(\rho\).  Apply \noderef{StableChangeCasesOneTwo} first, with
 \(\gamma_1\) as the stage-missing color.
 
-For this second swap the preceding arguments give, one by one: fixed
-edge values only for \(|A|\le r<|X|\), using Gamma avoidance,
+For this second swap the preceding arguments first give fixed edge values
+only for \(|A|\le r<|X|\), using Gamma avoidance,
 \noderef{HierarchyTailMissingColorExclusion}, and the protected exact
-seed; equality of missing sets on every vertex of \(B\), by treating
-vertices inside and outside the selected component; an old \(\nu\)-route
-to \(X\) and suffix \(X\to T\), by restricting and factoring the actual
-terminal certificate; and a \(\rho\)-route to \(X\), by applying
-\noderef{TashkinovAugmentationSequenceColoringTransport} with penultimate
-prefix \(X^-\).  Both \(\gamma_1\) and \(\theta\) remain missing on
-\(X\).  The only possibly affected stored first position is that of
+seed, and equality of missing sets on every vertex of \(B\), by treating
+vertices inside and outside the selected component.  Restricting and
+factoring the actual terminal certificate of \(P_1\) gives an old
+\(\nu\)-route to \(X\) and a suffix \(X\to T\).
+
+We verify separately, under this intermediate presentation, every
+earlier edge needed to transport that route.  Let \(H_1\),
+\(\mathcal B_1\), and \(T_n^1\) be the hierarchy, base, and terminal
+ladder tree of \(P_1\).  Its same-good data identify its last starred
+stage exactly with the displayed tree \(A\).  If \(q>0\), the
+\noderef{TreeColoringInvariant} clause obtained from the second
+\noderef{StableChangeCasesOneTwo} fixes all earlier displayed edges of
+\(A\).  If \(q=0\) and the kind is SE/RE, the nonparallel clause of
+\noderef{HierarchyBase} gives \(A=T_n^1\), and the route already starts
+at the exact one-edge seed, so again there is no earlier added edge.
+
+Suppose finally that \(q=0\) and the kind of \(P_1\) is PE.  Write
+\(R_n^1\) for \(\mathcal B_1\)'s closure.  The
+\(\mathit{parallel}\) field of \noderef{HierarchyBase}, now applied to
+\(\mathcal B_1\), supplies the exact intermediate-color union
+\[
+ U_1:\noderef{OrderedTreeUnion}(T_n^1,R_n^1,A).
+\]
+The weak stability produced for the second swap is a
+\noderef{CombinedStableColoring} from \(\nu\) to \(\rho\) on these exact
+two trees.  Hence \noderef{CombinedStableClosurePreserved}, applied now
+to \(P_1\), gives \(\rho(f)=\nu(f)\) separately for every displayed
+edge of \(T_n^1\) and every displayed edge of \(R_n^1\).  For each exact
+position \(r<|A|\), \(U_1.\mathit{leftSegment}\) identifies the edge
+with \(T_n^1.\mathit{edge}(r)\) when \(r<|T_n^1|\), whereas
+\(U_1.\mathit{newEntryFromRight}\) supplies an \(s<|R_n^1|\) and the
+individual identity
+\(A.\mathit{edge}(r)=R_n^1.\mathit{edge}(s)\) when
+\(|T_n^1|\le r\).  Thus every displayed edge of \(A\), and consequently
+every route-added edge below \(|A|\), is fixed in this second swap.  The
+already proved interval equality fixes the route-added positions from
+\(|A|\) through \(|X|-1\).
+
+Together with the vertexwise missing-set equality on
+\(X^-\preccurlyeq B\), this proves both premises of
+\noderef{TashkinovAugmentationSequenceColoringTransport} and gives the
+exact \(\rho\)-route to \(X\).  Both \(\gamma_1\) and \(\theta\) remain
+missing on \(X\).  The only possibly affected stored first position is that of
 \(\theta\), and its exact first witness \(y_{i+1}\) is preserved by the
 vertexwise equality.  The Gamma cutoff holds because \(\theta\) belongs
 to no Gamma pair and \(\gamma_1\in\Gamma^q_\alpha\) has the earlier
