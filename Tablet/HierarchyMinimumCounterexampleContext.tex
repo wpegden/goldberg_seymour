@@ -1,0 +1,40 @@
+\begin{definition}
+Fix explicitly a finite loopless multigraph \(G\) with its exact edge type,
+a palette of \(k\) colors, a distinguished edge \(e_0\), an input coloring,
+a terminal ordered tree-sequence \(T\), a generating coloring \(\varphi_n\),
+a positive-rung extended Tashkinov tree \(\mathcal E\) on \(T\), a hierarchy
+base \(\mathcal B\), and a hierarchy counterexample \(C\) based on these data.
+A \emph{minimum hierarchy-counterexample context} on this fixed tuple consists
+of the following hypotheses.
+\begin{enumerate}
+\item The coloring \(\varphi_n\) is proper and leaves exactly \(e_0\)
+uncolored.
+\item For every positive-rung maximum ETT \(\mathcal L\) on the same
+\(G,k,e_0\), with arbitrary certified input and generating colorings and
+with rung number strictly smaller than that of \(\mathcal E\), the complete
+six-assertion lower-rung package holds: its terminal vertex set is elementary;
+under every proper exactly-one-uncolored stable terminal coloring, every pair
+of colors of which at least one is terminal-missing is interchangeable;
+at each PE slot stability holds before its support, also holds on the
+predecessor ladder stage when the support first appears after the first
+stage, and distinct PE supports at the same first-appearance index have
+disjoint raw stored sets; at a terminal PE the prescribed two-color component
+through the support meets the terminal ladder tree only at that support;
+every nonminimum defective-color boundary vertex precedes every later
+permitted PE support or SE extension vertex; and every such stable terminal
+coloring is a mod-coloring of \(\mathcal L\).
+\item Every maximum ETT with the same rung number as \(\mathcal E\) and a
+good hierarchy with fewer dividers than \(C\) has an elementary terminal
+vertex set.
+\item Among hierarchy counterexamples with the same rung number and the
+same divider count, none has lexicographically smaller
+\(\noderef{HierarchyCounterexampleMeasure}\) in the strict order
+\(\noderef{HierarchyCounterexampleLess}\).
+\item If \(T_n\) is the terminal ladder tree of \(\mathcal E\), then
+\(2n+11\leq |\overline{\varphi_n}(T_n)|\), where \(n\) is the rung number.
+\end{enumerate}
+The positivity, maximum property, good hierarchy, and non-elementarity of
+\(T\) remain fields of the explicitly supplied
+\(\noderef{HierarchyCounterexample}\); in particular, this context does not
+postulate the derived penultimate-prefix elementarity fact (6.6).
+\end{definition}

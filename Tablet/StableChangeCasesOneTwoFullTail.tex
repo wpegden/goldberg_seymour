@@ -1,0 +1,341 @@
+\begin{lemma}[Stable change, Cases 1 and 2, with the exact full tail]
+Fix explicitly a finite loopless multigraph \(G\) with exact edge type, a
+palette of \(k\) colors, a distinguished edge \(e_0\), an input coloring,
+an ordered tree-sequence \(T\), a generating coloring \(\varphi_n\), a
+positive-rung ETT \(\mathcal E\) on \(T\), a hierarchy base \(\mathcal B\),
+and a hierarchy counterexample \(C\).  Assume the properness,
+exactly-one-uncolored, complete lower-rung six-pack, fewer-divider
+induction, same-rung equal-divider lexicographic minimality, and
+\(2n+11\) estimate recorded by a
+\noderef{HierarchyMinimumCounterexampleContext} on these explicit data.
+
+Write \(H\) for the good hierarchy of \(C\), \(q\) for its last stored
+index, \(T_n\) for the terminal ladder tree,
+\[
+ A=\noderef{HierarchyStarredStage}(H,q),\qquad
+ T_{n,q}=H.\mathit{stage}(q),\qquad
+ D_{n,q}=\noderef{HierarchyStoredColorsAt}(H,q),
+\]
+and put
+\[
+ \ell=\noderef{HierarchyFullTailLength}(C),\qquad
+ B=\noderef{HierarchyFullTailPrefix}(C,\ell-1).
+\]
+Let \(\alpha\ne\beta\) be colors missing on \(B\).  Let \(z\) certify a
+possibly singleton \noderef{TwoColorPathComponent} \(Q\) under
+\(\varphi_n\), suppose that \(Q\) is disjoint from the full
+\((\alpha,\beta)\)-component through the first vertex of \(T\) missing
+\(\alpha\), and put
+\[
+ \sigma_n=\noderef{TwoColorComponentSwap}
+       (G,\varphi_n,\alpha,\beta,z).
+\]
+Assume exactly the Cases 1/2 alternative:
+\[
+\begin{split}
+ &q>0\ \hbox{ and }\ \alpha\in\overline{\varphi_n}(T_{n,q}),\\
+ &\text{or}\\
+ &q=0\ \hbox{ and }\bigl(\alpha\in\overline{\varphi_n}(T_n)
+   \ \hbox{or}\ 
+   [\alpha\in\overline{\varphi_n}(A)
+     \text{ and }\alpha,\beta\notin D_n]\bigr).
+\end{split}
+\]
+Finally assume precisely the following full-tail transport data:
+\begin{enumerate}
+\item for every exact displayed edge position \(t\) with
+\(|A|\leq t<|T|\), \(\sigma_n(T.\mathit{edge}(t))=
+\varphi_n(T.\mathit{edge}(t))\);
+\item for every \(v\in V(B)\),
+\(\overline{\sigma_n}(v)=\overline{\varphi_n}(v)\); and
+\item for every \(\eta\in D_{n,q}\), the first position at which \(\eta\)
+is missing on \(T\), with the terminal fallback convention, is the same
+under \(\sigma_n\) and \(\varphi_n\).
+\end{enumerate}
+No equality of missing-color sets is assumed at the final vertex of \(T\).
+
+Then \(\sigma_n\) is weakly stable at \(A\) and is a mod-coloring of
+\(\mathcal E\).  Moreover, either \(A=T_n\), or there are an input coloring
+and an actual ETT presentation of \(A\) under \(\sigma_n\) having maximum
+property.  When \(q>0\), there are an input coloring, a maximum ETT on
+\(A\) under \(\sigma_n\), a hierarchy base, a hierarchy \(K_A\), and a
+good-hierarchy witness \(g_A\) such that
+\[
+ K_A.\mathit{dividerCount}+1=q,
+\]
+the new base core and closure are exactly those of \(\mathcal B\), and the
+\(j\)-th stage of \(K_A\) is exactly the \(j\)-th stage of \(H\) for every
+\(0\leq j\leq q\).  At every retained stored index \(0\leq j<q\), the two
+\(D_{n,j}\) sets agree, and
+\[
+ g_A.\Gamma^j_\eta=C.\mathit{good}.\Gamma^j_\eta
+ \quad\text{for every }\eta\in D_{n,j}.
+\]
+Finally, under \(\sigma_n\), \(T_{n,q}\) is
+\[
+ \left(\bigcup_{\eta\in D_{n,q}}
+   C.\mathit{good}.\Gamma^{q-1}_\eta\right)^{-}\text{-closed}.
+\]
+
+In addition, there exist an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate on the full
+ordered tree \(T\) under \(\sigma_n\), maximum property for its replacement
+ETT, a hierarchy base for that replacement, a full hierarchy \(K\), and a
+good-hierarchy witness \(g_K\), such that
+\[
+              \noderef{SameGoodHierarchy}(C.\mathit{good},g_K).
+\]
+Thus the full hierarchy has the same base core, the same PE closure when
+applicable, the same divider count, ordered stages and divider positions,
+and, after the canonical index identification, exactly the same
+\(D_{n,j}\) and \(\Gamma^j_\eta\) for every stored \(\eta\).
+\end{lemma}
+\begin{proof}
+Let \(H,q,A,T_n,T_{n,q},D_{n,q},\ell,B\) have the meanings in the
+statement.  The context fields are definitionally the properness,
+one-uncoloredness, lower-rung, fewer-divider, minimality, and large-set
+hypotheses in the approved Section 6 front end.  Apply
+\noderef{HierarchyCounterexamplePenultimateElementary} to those six
+projections and the maximum, positivity, good-hierarchy, and
+non-elementarity fields of the supplied
+\noderef{HierarchyCounterexample}.  Its conclusion is exactly
+\[
+       V(B)\text{ is elementary under }\varphi_n.              \tag{1}
+\]
+This derives (6.6); it is not a field of the context.
+
+We may therefore apply \noderef{StableChangeCasesOneTwo} with (1), the
+two missing colors, the path-component and disjointness hypotheses, and
+the displayed Cases 1/2 alternative.  Retain all four parts of its
+conclusion:
+\[
+\begin{array}{ll}
+\text{(S1)}&\sigma_n\text{ is weakly stable at }A,\\
+\text{(S2)}&\sigma_n\text{ is a mod-coloring of }\mathcal E,\\
+\text{(S3)}&A=T_n\text{ or }A\text{ has an actual maximum ETT
+presentation under }\sigma_n,\\
+\text{(S4)}&\text{when }q>0,\text{ the prefix through }A\text{ has the
+stated good-hierarchy certificate and final minus-closedness.}
+\end{array}                                                     \tag{2}
+\]
+These are already the first four asserted conclusions.  It remains to
+construct the full certificate without assuming any of its components.
+
+\textbf{The exact old route and its transported tail.}
+By \noderef{HierarchyCounterexampleTailAtLeastTwo}, applied to the same
+context projections, \(\ell\geq2\).  The ordered inclusions in
+\noderef{TashkinovHierarchy} give \(|A|\leq|T|\); hence the defining
+subtraction and \(\ell\geq2\) give
+\[
+ |B|=\min\{|A|+\ell-1,|T|\}=|T|-1,\qquad A\subset B\subset T.   \tag{3}
+\]
+Here both inclusions are exact ordered
+\noderef{TreeSequenceInitialSegment}s, since
+\noderef{HierarchyFullTailPrefix} is the corresponding
+\noderef{TreeSequencePrefix}; thus all individual parallel-edge identities
+are retained.
+
+Consider the final certificate in the
+\noderef{TashkinovSeries} carried by \(\mathcal E\).  Positivity excludes
+the initial constructor of \noderef{TashkinovSeriesStep}.  If the last
+kind is PE, that constructor gives a
+\(\varphi_n\)-\noderef{TashkinovClosure} from \(T_n\) to the last series
+tree.  If it is SE or RE, it gives an exact edge identity \(f_n\), the
+equality \(F_n=\{f_n\}\), an exact
+\noderef{TreeSequenceAdjoinEdge} seed \(T_n+f_n\), and a
+\(\varphi_n\)-closure from that seed to the last series tree.  The
+\noderef{ExtendedTashkinovTree} fields place \(T\) as an exact ordered
+initial segment of the same last series tree and strictly above \(T_n\).
+Expanding \noderef{TashkinovClosure}, and applying
+\noderef{TashkinovAugmentationSequenceRestrict} at the length of \(T\),
+therefore gives
+\[
+\begin{cases}
+T_n\longrightarrow T,&\text{if the last kind is PE},\\
+T_n+f_n\longrightarrow T,&\text{if it is SE or RE},
+\end{cases}                                                     \tag{4}
+\]
+as finite \(\varphi_n\)-\noderef{TashkinovAugmentationSequence}s.
+Every step raises the length by one, by
+\noderef{TashkinovAugmentation}.  Since \(A\) is an exact intermediate
+prefix of \(T\), induction through (4), comparing the current length with
+\(|A|\), splits off the exact suffix
+\[
+                       A\longrightarrow T.                    \tag{5}
+\]
+In the SE/RE case with \(A=T_n\), the non-TAA seed edge is kept separate:
+the same length comparison instead takes the suffix beginning at
+\(T_n+f_n\).  This is precisely the seed required later by the SE/RE
+alternative of the mod-coloring definition.
+
+We now transport each one-step augmentation in the suffix of (5).
+Write it as \(X\to Y\).  The length clause gives
+\(|Y|=|X|+1\), and the exact new edge is
+\(g=Y.\mathit{edge}(|X|)\).  Since \(A\subseteq X\subset Y\subseteq T\),
+the exact-edge identities in
+\noderef{TreeSequenceInitialSegment} identify \(g\) with
+\(T.\mathit{edge}(|X|)\), where \(|A|\leq |X|<|T|\).  The first transport
+hypothesis therefore preserves the value of \(g\).
+
+The old \noderef{TashkinovAugmentation} also supplies a color \(c\) with
+\(\varphi_n(g)=c\) and
+\(c\in\noderef{TreeMissingColors}(\varphi_n,X)\).  Expand the latter
+membership and choose a vertex \(v\in V(X)\) missing \(c\).  If \(Y=T\),
+then \(|X|=|T|-1=|B|\), so \(X=B\) by entrywise equality of equal-length
+initial segments.  If \(Y\ne T\), the one-step length inequalities give
+\(|X|<|T|-1=|B|\), and the common terminal extension shows
+\(X\subset B\).  Thus in every case \(v\in V(B)\), and the second
+transport hypothesis gives
+\(c\in\overline{\sigma_n}(v)\), hence
+\(c\in\noderef{TreeMissingColors}(\sigma_n,X)\).  Length and
+initial-segment clauses are coloring-free.  Consequently the same exact
+step \(X\to Y\) is a
+\(\sigma_n\)-\noderef{TashkinovAugmentation}.  Induction over the finite
+suffix proves the transported route
+\[
+                       A\longrightarrow T                     \tag{6}
+\]
+under \(\sigma_n\), or the corresponding route from \(T_n+f_n\) when
+\(A=T_n\) in the SE/RE case.  Notice that the final vertex of \(T\) was
+never used as a missing-color witness: every predecessor lies in \(B\).
+This is why no terminal missing-set equality is required.
+
+\textbf{Eligibility from the terminal ladder tree.}
+It remains only to connect the appropriate seed to \(A\).  Unfold (S1)
+using \noderef{HierarchyWeaklyStable}.  In the PE case it contains the
+\noderef{CombinedStableColoring} relation on \(T_n\) and the PE closure;
+in the SE/RE case it contains the ordinary stable relation on \(T_n\).
+When \(q>0\), it additionally contains
+\noderef{TreeColoringInvariant} on \(A\).  These clauses preserve every
+missing-color witness in the old prefix route to \(A\) and every displayed
+new-edge value on that route.
+
+For \(q=0\) and terminal kind PE, the parallel field of
+\noderef{HierarchyBase} supplies an
+\noderef{OrderedTreeUnion} certificate for \(A=T_n\vee R_n\), where \(R_n\)
+is the PE closure.  Thus every vertex of \(A\) lies in \(T_n\) or \(R_n\),
+and every displayed entry after \(T_n\) is an exact entry of \(R_n\).
+For a TAA step inside \(A\), choose its old missing-color witness.  The
+union certificate puts that vertex in \(T_n\) or \(R_n\), so the
+corresponding \noderef{StableColoring} clause preserves its missingness.
+Separately, every displayed entry of \(A\) after \(T_n\) is an exact entry
+of \(R_n\).  The \noderef{TashkinovClosure} route defining \(R_n\) says
+that the old color of such an edge is missing on an earlier \(R_n\)
+prefix, hence is missing on all of \(R_n\); the second stable relation
+therefore fixes that incident exact edge.  This verifies each transported
+augmentation field by field.  For \(q=0\) and terminal kind SE or RE, the
+nonparallel base field gives \(A=T_n\), so there is no prefix to transport.
+Repeating the preceding one-step argument on the remaining prefix
+transports (4) through \(A\).  Concatenating it with (6) yields exactly
+\[
+\begin{cases}
+T_n\longrightarrow T,&\text{under }\sigma_n\text{ in the PE case},\\
+T_n+f_n\longrightarrow T,&\text{under }\sigma_n\text{ in the SE/RE case}.
+\end{cases}                                                     \tag{7}
+\]
+The second line retains the exact identity \(f_n\), the singleton equality
+\(F_n=\{f_n\}\), and the same ordered adjoin-edge certificate.
+
+The initial-segment and strictness fields of
+\noderef{ExtendedTashkinovTree}, together with (7), are precisely one of
+the two eligibility alternatives in the universal clause of (S2), after
+unfolding \noderef{ModColoring}.  Hence (S2) produces an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate
+\(\mathcal C_T\) on the full ordered tree \(T\).  Apply
+\noderef{MaximumPropertyTransport} to (S2), \(\mathcal C_T\), and the
+maximum field of \(C\).  The replacement ETT of \(\mathcal C_T\) has
+maximum property.                                                     \(\tag{8}\)
+
+\textbf{Rebuilding the full hierarchy.}
+If the last kind is PE, (S1) supplies the combined-stability premise and
+the first line of (7) supplies the augmentation premise of
+\noderef{HierarchySplitter}.  Apply that lemma with the context's
+lower-rung projection and the maximum field of \(C\).  Choose its
+corresponding ETT certificate (and its transported maximum property) as
+\(\mathcal C_T\); it supplies a replacement
+\noderef{HierarchyBase} using the same core and PE closure and a
+\noderef{TashkinovHierarchy} \(K\) with the same stages and divider
+positions as \(H\).
+
+If the last kind is SE or RE, use the certificate from (8).
+\noderef{CorrespondingExtendedTashkinovTree} gives equality of the rung
+number, every positive ladder tree, every raw stored set, exact
+connecting-edge set, and extension kind.  Rebuild the base with its core
+equal to the replacement terminal ladder tree, transport the support
+position along the equality of that tree with \(T_n\), and copy the unused
+closure.  Its terminal missing-color field is reflexive under
+\(\sigma_n\); its parallel implication is vacuous because the common
+terminal kind is not PE; and its nonparallel field is the chosen core
+equality.  Copy the divider count, stages, and divider positions of \(H\).
+All nestedness, strictness, divider-prefix, and terminal-stage fields are
+unchanged ordered-tree statements.  This constructs a full hierarchy
+\(K\) on the replacement ETT, again with the same stages and dividers.
+
+In both cases the common corresponding certificate identifies every raw
+stored set.  By \noderef{TashkinovStoredColors}, the computed terminal set
+\(D_n\) is the union of those raw sets with the colors missing on \(T_n\)
+deleted.  Weak stability identifies the missing-color sets at every
+vertex of \(T_n\), so the two computed copies of \(D_n\) agree.  Weak
+stability and the second transport premise also identify missing-color
+sets at every vertex of \(A\), hence at every starred stage.  Expanding
+\noderef{HierarchyStoredColorsAt} therefore gives, at every index \(j\),
+\[
+                         D^K_{n,j}=D^H_{n,j}.                  \tag{9}
+\]
+The same vertexwise argument and
+\noderef{HierarchyStageMissingColors} identify the two stage-missing sets.
+
+Define \(g_K.\Gamma^j_\eta=C.\mathit{good}.\Gamma^j_\eta\), with the
+canonical casts supplied by the equal divider counts.  The two-color and
+pairwise-disjointness fields of \noderef{GoodHierarchy} transport
+immediately using (9).  The parallel-base field transports from the old
+one: the base core and PE closure agree, the two
+\noderef{StableColoring} clauses in combined stability preserve their
+vertex missing sets and every boundary edge whose color is missing or
+reserved, and (9) preserves the reserved union.  Unfolding
+\noderef{TreeColorSetMinusClosed} therefore transports its failure for
+the core.  Vertexwise missing-set equality on \(T_n\) and the PE closure,
+together with the same reserved union, identifies the two finite-set
+differences in the cardinality-\(4\) clause, so that clause transports as
+well.
+
+Suppose \(q>0\).  Use the prefix good hierarchy in (S4) for all
+unique-refresh and minus-closed clauses strictly before the last divider.
+Its exact retained stage, stored-set, and Gamma equalities identify these
+clauses with those just defined for \(K\).  The unique-refresh clause at
+the last divider transports directly from \(C.\mathit{good}\): all vertices
+in the relevant stage difference lie in \(A\subset B\), so the second
+transport premise identifies their missing sets, while (9) identifies the
+quantified stored colors and the copied Gamma pairs.  The remaining last
+minus-closed clause is exactly the separately stated minus-closed
+certificate in (S4).  When \(q=0\), there are no unique-refresh or
+minus-closed fields.  Thus only avoidance remains.
+
+For an index \(j<q\), avoidance is already part of the prefix good hierarchy
+in (S4).  Fix instead \(\eta\in D_{n,q}\) and
+\(c\in C.\mathit{good}.\Gamma^q_\eta\).  Old avoidance says, after
+unfolding \noderef{HierarchySegmentColors}, that \(c\) is stage-missing
+and that there is no exact position \(r\) satisfying
+\[
+ |A|\leq r<\min\{
+ \noderef{HierarchyFirstMissingPosition}(\varphi_n,T,\eta),|T|\}
+ \quad\text{and}\quad \varphi_n(T.\mathit{edge}(r))=c.         \tag{10}
+\]
+The third transport premise applies to this particular stored \(\eta\)
+and makes the first-position endpoint in (10) identical under the two
+colorings.  At every candidate \(r\), the first transport premise makes
+the exact displayed edge value identical.  Hence a witness placing \(c\)
+in the new segment would, point by point, be a witness placing \(c\) in
+the old segment, contradicting (10).  The stage-missing membership
+transports by the vertexwise equality already used above.  This proves
+the last avoidance clause.  It does not assert a generic equality of
+whole hierarchy segment-color sets.
+
+All fields of \(g_K:\noderef{GoodHierarchy}(K)\) have now been supplied.
+The construction gives equality of the base core, divider count, stage
+and divider arrays, and the PE closure when applicable; (9) and the
+definition of \(g_K\) give exact stored-set and Gamma agreement at every
+index.  These are precisely the two clauses of
+\noderef{SameGoodHierarchy}(C.\mathit{good},g_K).  Together with (2) and
+(8), this is the full asserted conclusion.
+\end{proof}

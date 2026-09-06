@@ -5,6 +5,7 @@ import Tablet.HierarchyCounterexampleTailAtLeastTwo
 import Tablet.HierarchyCounterexampleTerminalCommonMissing
 import Tablet.HierarchyTailMissingColorExclusion
 import Tablet.StableChange
+import Tablet.StableChangeCasesOneTwoFullTail
 import Tablet.IncidentCoreReduction
 import Tablet.Basic2
 import Tablet.DefectiveVertex
