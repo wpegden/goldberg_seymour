@@ -76,7 +76,9 @@ vertices.  The given \(\alpha\)-missing witness on \(A\) shows
 \(i_\alpha.\mathit{val}\le |A|\).  The vertex \(x\) is at position
 \(|X|>|A|\) and misses \(\beta\).  If an earlier vertex of \(B\) also
 missed \(\beta\), it would be a distinct vertex of the elementary set
-\(V(B)\), contradicting (2).  Thus
+\(V(B)\).  The pairwise-disjoint missing-set clause in
+\noderef{ColoredVertexSetElementary}, applied to that vertex and \(x\),
+would then contradict (2).  Thus
 \[
  i_\beta.\mathit{val}=|X|,\qquad v_\beta=x,\qquad
  i_\alpha.\mathit{val}<i_\beta.\mathit{val}.                \tag{4}
@@ -102,7 +104,13 @@ claiming that it avoids all of \(B\).  The vertices
 \(v_\alpha,x,y\) are distinct: the first two have the strict position
 order (4), both lie in \(B\), and \(y\notin V(B)\) by (1), vertex
 injectivity in \noderef{TreeSequence}, and the definition of
-\noderef{TreeSequenceVertexSet}.  By
+\noderef{TreeSequenceVertexSet}.  The pairwise-disjoint missing-set clause
+of \noderef{ColoredVertexSetElementary}, applied to the distinct vertices
+\(v_\alpha,x\in V(B)\), gives
+\(\beta\notin\overline\mu_n(v_\alpha)\) and
+\(\alpha\notin\overline\mu_n(x)\): the missing witness (2) supports the
+first conclusion, and
+\(\alpha\in\overline\mu_n(v_\alpha)\) supports the second.  By
 \noderef{MissingColorIncidenceEndpoint}, the incidence-graph degree at
 \(v_\alpha\) and \(y\) is at most one because \(\alpha\) is missing
 there; applying the same result with the colors reversed gives the same
@@ -169,9 +177,11 @@ We next establish the vertexwise equality required on \(B\):
 If \(\operatorname{inl}v\notin Q\), no changed edge-node can be incident
 with it, since adjacency in \noderef{TwoColorIncidenceGraph} would put the
 vertex-node in \(Q\).  If \(\operatorname{inl}v\in Q\), disjointness (6)
-shows \(v\ne v_\alpha,x\).  Elementarity of \(B\), using the distinct
-missing witnesses \(v_\alpha,x\in V(B)\), implies that neither
-\(\alpha\) nor \(\beta\) is missing at \(v\).  Expanding
+shows \(v\ne v_\alpha,x\).  Apply the pairwise-disjoint missing-set clause
+of \noderef{ColoredVertexSetElementary} first to \(v,v_\alpha\), using
+the \(\alpha\)-missing witness at \(v_\alpha\), and then to \(v,x\),
+using (2).  It implies that neither \(\alpha\) nor \(\beta\) is missing
+at \(v\).  Expanding
 \noderef{MissingColors} and \noderef{PresentColors} supplies incident
 edges of both colors, and \noderef{IsProperEdgeColoring} makes each
 identity unique.  Both edge-nodes lie in \(Q\), so (7) transposes the two
@@ -179,10 +189,20 @@ values and leaves both colors present.  Every other color is unchanged.
 This proves (10), including the case where \(Q\) meets \(B\) in internal
 degree-two vertices.
 
-The same-good stage equalities and the actual terminal
-\noderef{TashkinovSeries} certificate give an old augmentation route to
-\(T\): from \(T_n\) in the PE case and from the exact adjoined seed
-\(T_n+f_n\) in the SE/RE case.  Restrict it to \(X\), using
+The same-good stage equalities identify the actual terminal step in the
+\noderef{TashkinovSeries}.  Its PE or SE/RE
+\noderef{TashkinovSeriesStep} constructor supplies the final closure.
+The exact ordered-prefix and generating-coloring fields in
+\noderef{ExtendedTashkinovTree} identify \(T\) with an exact ordered
+prefix of that step's final series tree and identify the step coloring with
+\(\mu_n\).  Unpacking the augmentation-sequence component of the step's
+\noderef{TashkinovClosure} gives a route to the final series tree: from
+\(T_n\) in the PE case and from the exact adjoined seed \(T_n+f_n\) in the
+SE/RE case.  By
+\noderef{TashkinovAugmentationSequence}, this route is the finite
+reflexive-transitive chain of one-step augmentations under \(\mu_n\).
+First restrict that chain to its exact prefix \(T\), and then to the exact
+prefix \(X\), using
 \noderef{TashkinovAugmentationSequenceRestrict}.  Weak stability (8)
 transports the route through \(A\), as follows.  If \(q>0\), its
 \noderef{TreeColoringInvariant} clause on \(A\) fixes every displayed
@@ -250,11 +270,14 @@ T_n+f_n\longrightarrow X,&\text{in SE/RE},
 under \(\sigma_n\), retaining the old identity \(f_n\), its singleton
 connecting set, and its exact \noderef{TreeSequenceAdjoinEdge} seed.
 
-The same old finite chain passes through the exact intermediate prefix
-\(X\).  Indeed, each \noderef{TashkinovAugmentation} increases length by
-one, so induction on the chain reaches the unique stage of length
-\(|X|\); exact-prefix equality identifies it with \(X\).  Splitting the
-reflexive-transitive chain there gives the original-color suffix
+The same old finite reflexive-transitive chain from
+\noderef{TashkinovAugmentationSequence} passes through the exact
+intermediate prefix \(X\).  Indeed, each
+\noderef{TashkinovAugmentation} increases length by one, so induction on
+the chain reaches the unique stage of length \(|X|\); the exact-prefix
+field inherited from \noderef{ExtendedTashkinovTree} identifies it with
+\(X\).  Splitting the reflexive-transitive chain at that unique stage gives
+the original-color suffix
 \[
                          X\longrightarrow T.                 \tag{12}
 \]
@@ -280,9 +303,14 @@ The color \(\beta\) belongs to no last Gamma pair.  Indeed,
 \noderef{GoodHierarchy}.avoidance places every last Gamma color in
 \noderef{HierarchyStageMissingColors}(H,q).  That stage is \(T_n\) when
 \(q=0\) and \(T_{n,q}=A\) when \(q>0\); in both cases its vertex set is
-contained in \(A\preccurlyeq B\).  Since \(\beta\) is missing at the
-distinct vertex \(x\) of the elementary set \(B\), it is missing at no
-vertex of that stage.  Hence it is outside the entire last Gamma union.
+contained in \(A\preccurlyeq B\).  Since \(\beta\) is missing at \(x\),
+the pairwise-disjoint missing-set clause of
+\noderef{ColoredVertexSetElementary} says that \(\beta\) is missing at no
+distinct vertex of \(B\).  Every vertex of the stage occurs in \(A\),
+whereas \(x\) occurs at position \(|X|>|A|\), so vertex injectivity in
+\noderef{TreeSequence} makes each such vertex distinct from \(x\).
+Consequently \(\beta\) is missing at no vertex of the stage and is outside
+the entire last Gamma union.
 
 Suppose now that \(\alpha\in C.\mathit{good}.\Gamma^q_\eta\) for some
 stored \(\eta\).  The exact first-use edge is \(e_j=T.\mathit{edge}(|X|)\)
@@ -321,17 +349,21 @@ missing and \(\beta\) is present there, so properness gives the unique
 incident \(\beta\)-edge in \(Q\), which is changed to \(\alpha\).
 Equation (10) keeps \(\beta\) missing at \(x\).  Thus the replacement full
 tree is non-elementary.  Form the resulting
-\noderef{HierarchyCounterexample}.  Rung agreement transports the
-lower-rung field; \noderef{SameGoodHierarchy} transports the divider
-count, stages, fewer-divider field, and
-\noderef{HierarchyCounterexampleMeasure}; hence the old rung-local
-minimality field applies.  Corresponding ladder-tree equality and terminal
-stability transport the \(2n+11\) estimate, while the corresponding
-certificate supplies properness and exactly-one-uncoloredness.  These are
-all fields of the replacement
+\noderef{HierarchyCounterexample}.  Unpack the supplied
+\noderef{CorrespondingExtendedTashkinovTree} certificate at this point.
+Its rung-agreement field transports the lower-rung package; its replacement
+series, series-presentation, and ladder-tree-agreement fields give the
+exact replacement series and ladder trees; its replacement-stability field
+transports the terminal \(2n+11\) estimate; and its replacement-proper and
+replacement-one-uncolored fields give those two coloring hypotheses.
+Meanwhile \noderef{SameGoodHierarchy} transports the divider count,
+stages, fewer-divider field, and
+\noderef{HierarchyCounterexampleMeasure}, so the old rung-local minimality
+field applies.  These are all fields of the replacement
 \noderef{HierarchyMinimumCounterexampleContext}.  Composing the new
 same-good relation with \(P.\mathit{sameGood}\) constructs a genuine
-replacement presentation \(P'\).
+replacement presentation \(P'\) using that same corresponding ETT and
+replacement-series certificate.
 
 Finally \(1\le j-1\le\ell-1\), and under \(P'\) the color \(\beta\) is
 missing at both \(x=y_{j-1}\) and \(y=y_\ell\).  The witnesses

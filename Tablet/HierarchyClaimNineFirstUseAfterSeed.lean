@@ -2,6 +2,9 @@ import Tablet.HierarchyClaimNineUnusedTailColor
 import Tablet.ChangeLemma
 import Tablet.CombinedStableClosurePreserved
 import Tablet.CombinedStableColoring
+import Tablet.ColoredVertexSetElementary
+import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.ExtendedTashkinovTree
 import Tablet.HierarchyClaimNinePENormalization
 import Tablet.GoodHierarchy
 import Tablet.HierarchyBase
