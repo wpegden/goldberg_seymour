@@ -1,0 +1,83 @@
+\begin{lemma}[Transporting an exact Tashkinov augmentation route]
+Let \(S,B,X\) be ordered tree-sequences for the same distinguished edge,
+and let \(\varphi\) and \(\sigma\) be two partial edge colorings on the
+same finite loopless multigraph.  Suppose that
+\[
+ S\longrightarrow X
+\]
+is a \(\varphi\)-\noderef{TashkinovAugmentationSequence}, that
+\(B\preccurlyeq X\) is an exact
+\noderef{TreeSequenceInitialSegment} with
+\(|X|=|B|+1\), and that the following two pointwise conditions hold.
+\begin{enumerate}
+\item Every exact edge of \(X\) at a position \(t\) with
+\(|S|\leq t<|X|\) retains its color:
+\(\sigma(X.\mathit{edge}(t))=\varphi(X.\mathit{edge}(t))\).
+\item At every vertex \(v\in\noderef{TreeSequenceVertexSet}(B)\),
+\[
+ \noderef{MissingColors}(G,\sigma,v)
+   =\noderef{MissingColors}(G,\varphi,v).
+\]
+\end{enumerate}
+Then the identical ordered chain is a
+\(\sigma\)-\noderef{TashkinovAugmentationSequence} from \(S\) to \(X\).
+\end{lemma}
+\begin{proof}
+We first record the exact-prefix bookkeeping used at every step.  Exact
+initial segments compose: if \(A\preccurlyeq C\preccurlyeq D\), compose
+the two length inequalities, and at each retained vertex or edge index
+compose the two entrywise equalities in
+\noderef{TreeSequenceInitialSegment}.  Hence induction on the
+reflexive-transitive chain in
+\noderef{TashkinovAugmentationSequence} shows that the source and every
+intermediate member of a route are exact initial segments of its target.
+
+Let \(A\to C\) be a one-step
+\noderef{TashkinovAugmentation} occurring in the given route, and retain
+the remaining suffix \(C\to X\).  The one-step length equation gives
+\(|C|=|A|+1\), while the suffix gives \(C\preccurlyeq X\).  Thus
+\(|A|<|X|=|B|+1\), so \(|A|\leq|B|\).  Both \(A\) and \(B\) are exact
+initial segments of \(X\).  For each index of \(A\), compare its entry
+with the entry of \(X\), then with the corresponding entry of \(B\).
+This proves the exact inclusion
+\[
+                         A\preccurlyeq B.                    \tag{1}
+\]
+In particular, \(B\) contains every augmentation predecessor, including
+all of its individual displayed vertices.
+
+Unpack the one-step augmentation.  It supplies a color \(c\), the exact
+new edge
+\[
+ g=C.\mathit{edge}(|A|),\qquad \varphi(g)=c,                 \tag{2}
+\]
+and a witness to
+\(c\in\noderef{TreeMissingColors}(\varphi,A)\).  By the definition of
+tree-missing colors, choose a particular
+\(v\in\noderef{TreeSequenceVertexSet}(A)\) at which \(c\) is missing.
+The exact inclusion (1) puts the same vertex identity in
+\(\noderef{TreeSequenceVertexSet}(B)\).  Pointwise missing-set equality
+on \(B\) therefore says that \(c\) is missing at this same \(v\) under
+\(\sigma\).  Reusing the original membership of \(v\) in the predecessor
+gives
+\[
+                   c\in\noderef{TreeMissingColors}(\sigma,A). \tag{3}
+\]
+
+The edge identity in (2) occurs at position \(|A|\) in \(X\), because
+\(C\preccurlyeq X\) retains every exact edge.  Along the route the lengths
+never decrease, so \(|S|\leq|A|\).  The fixed-edge premise at precisely
+this position gives \(\sigma(g)=\varphi(g)=c\).  Together with (3), the
+unchanged one-step length and exact-prefix clauses prove
+\[
+                  \noderef{TashkinovAugmentation}(\sigma,A,C). \tag{4}
+\]
+
+Finally perform head induction on the original reflexive-transitive
+chain.  Maintain the numerical invariant \(|S|\leq|A|\) at the current
+source; (4) transports the head step, and its unit length increase gives
+the invariant for the next source.  The reflexive case is reflexive under
+\(\sigma\), and the induction step prepends (4) to the transported suffix.
+This constructs the claimed \(\sigma\)-augmentation sequence with the
+same intermediate tree-sequences and the same individual added edges.
+\end{proof}
