@@ -1,5 +1,9 @@
 import Tablet.ChangeLemma
+import Tablet.BoundaryEdges
+import Tablet.ColoredVertexSetElementary
+import Tablet.ColoredVertexSetClosed
 import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.GoodHierarchyReservedDisjoint
 import Tablet.HierarchyBase
@@ -7,11 +11,15 @@ import Tablet.HierarchyCounterexample
 import Tablet.HierarchyCounterexampleLess
 import Tablet.HierarchyCounterexamplePenultimateElementary
 import Tablet.HierarchyCounterexampleMeasure
+import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchyFullTailLength
 import Tablet.HierarchyFullTailPrefix
 import Tablet.HierarchyLEMStable
 import Tablet.HierarchyMinimumCounterexampleContext
+import Tablet.HierarchyNonparallelFirstEdge
+import Tablet.HierarchyPathNumber
 import Tablet.HierarchyReplacementPresentation
+import Tablet.HierarchySegmentColors
 import Tablet.HierarchySituationTwoCaseThreeData
 import Tablet.HierarchySituationTwoCaseThreeNormalizedData
 import Tablet.HierarchySituationTwoCommonTailData
@@ -19,21 +27,34 @@ import Tablet.HierarchySituationTwoOutsidePenultimateReconstruction
 import Tablet.HierarchyStageMissingColors
 import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsAt
+import Tablet.IsProperEdgeColoring
+import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumPropertyTransport
+import Tablet.MissingColors
 import Tablet.ModColoring
 import Tablet.NineN
+import Tablet.RevisitingExtensionCertificate
+import Tablet.SameGoodHierarchy
+import Tablet.sc1
+import Tablet.StableColoring
 import Tablet.StableChangeCasesOneTwoFullTail
 import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceRestrict
 import Tablet.TashkinovClosure
 import Tablet.TashkinovHierarchy
+import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.Td
+import Tablet.TreeSequence
+import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceInitialSegment
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentsDisjoint
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: HierarchySituationTwoCaseThreeNormalization]
 theorem HierarchySituationTwoCaseThreeNormalization {V E : Type*}

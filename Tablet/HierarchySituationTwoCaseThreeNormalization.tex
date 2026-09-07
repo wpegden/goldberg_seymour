@@ -179,57 +179,238 @@ otherwise form
 In either formula the union means: retain the indicated ordered prefix
 entry by entry, then append in traversal order the individual path-edge
 identities and new path vertices from \(u\) to \(y_p\).  Firstness of \(u\)
-and simplicity of the spanning path show that each appended vertex is new;
-looplessness and the edge/vertex incidence equations show that every append
-is an exact tree-sequence extension.  Both \(\alpha\) and \(\beta\) are
-missing on \(B\): the former because its raw witness precedes \(y_{p-1}\),
-and the latter by (12).  The alternating path can therefore be appended by
-\noderef{TashkinovAugmentation}s under \(\varphi_n\).  Here is the exact
-route argument.  In the PE terminal constructor of
-\noderef{TashkinovSeriesStep}, \noderef{TashkinovClosure} gives a route
-from \(T_n\) to the final closure.  In the SE or RE constructor it records
-the individual connecting edge \(f_n\), its one-edge seed, and the route
-from that seed.  Since \(B\), \(B^+\), and \(T\) are exact prefixes of the
-same final closure, \noderef{TashkinovAugmentationSequenceRestrict}
-retains the appropriate route up to the base used in (14).  Append the
-edges of \(Q[u,y_p]\) in their traversal order.  For the first append its
-edge color is one of \(\alpha,\beta\), both of which are tree-missing on
-the starting prefix.  Inductively, alternation shows that the next edge
-color is still missing either at its original witness in \(B\), or at the
-new endpoint of the preceding path edge.  Firstness of \(u\) ensures that
-this endpoint is new.  This proves a Tashkinov-augmentation sequence to
-the exact tree \(T'\).
+and simplicity of the path supplied by
+\noderef{TwoColorComponentSpanningPath} show that every vertex after
+\(u\) is outside \(B^+\), and in particular is new relative to the retained
+prefix.  The attachment and endpoint fields of \noderef{TreeSequence}
+therefore make each displayed path edge, with its individual identity, an
+exact one-edge extension.  Both \(\alpha\) and \(\beta\) belong to
+\(\overline\varphi_n(B)\): for \(\alpha\), the raw displayed witness has
+index strictly below the index of \(y_{p-1}\), hence lies in the exact
+prefix \(B\); for \(\beta\), this is (12).  These fixed witnesses remain
+in every intermediate extension.  Since every edge of the alternating
+segment has color \(\alpha\) or \(\beta\), each append is a
+\noderef{TashkinovAugmentation} under \(\varphi_n\).  Thus, once the
+correct terminal-series seed has reached the retained prefix, these
+appends form a finite \noderef{TashkinovAugmentationSequence} to the exact
+tree \(T'\).
 
-Apply \noderef{Td} to the original ETT with \(\sigma=\varphi_n\):
-properness and exact one-uncoloredness are fields of the minimum context,
-stability is reflexive, and the lower-rung package is the context's six
-assertions.  Thus \(\noderef{ModColoring}(\mathcal E,\varphi_n)\).
-The route just constructed satisfies the PE or exact SE/RE eligibility
-branch in its universal clause, and therefore gives an actual
-\noderef{CorrespondingExtendedTashkinovTree} on \(T'\).
-\noderef{MaximumPropertyTransport} transfers the original maximum
-property to it.  This accounts separately for the ETT and maximum data
-rather than treating them as automatic consequences of adjoining a path.
+We now verify that seed condition, including the non-PE corner.  Let
+\(T_n\) be the terminal ladder tree.  The certified terminal member of
+\noderef{TashkinovSeries}, expanded using
+\noderef{TashkinovSeriesStep}, is noninitial because the ETT is positive.
 
-The corresponding-ETT certificate identifies all ladder trees, extension
-kinds, connecting edges, and stored data.  Therefore the core, closure,
-support position, PE clause, and non-PE clause of
-\noderef{HierarchyBase} copy to a base on the new ETT.  Define a
-\noderef{TashkinovHierarchy} with the old divider count and all old
-nonterminal stages, and with terminal stage \(T'\).  Its nesting and
-strictness follow from the exact-prefix construction (14); its divider
-positions and divider-stage equalities are unchanged.  Thus all computed
-stored sets and all stage-missing sets are unchanged.  We retain the old
-Gamma pairs.  Their cardinality, pairwise disjointness, unique-refresh,
-PE-base, and minus-closed fields copy literally.  In the two branches
-below we check the sole remaining issue, namely avoidance from the new
-terminal segment-color sets.
+If its kind is PE, its \noderef{TashkinovClosure} contains an exact
+augmentation sequence from \(T_n\) to the final ladder closure.  The
+relations \(T_n\preccurlyeq A\preccurlyeq B\preccurlyeq B^+\preccurlyeq
+T\), together with the final-prefix field of
+\noderef{ExtendedTashkinovTree}, allow
+\noderef{TashkinovAugmentationSequenceRestrict} to stop this sequence at
+the retained prefix in (14a) or (14b).  Concatenating the path appends
+above gives the PE eligibility route \(T_n\longrightarrow T'\).
 
-By the choice of the first intersection, the new alternating segment
-begins no later than the final path tail of \(T\), and the definition in
-(14) discards at least one old path-tail step.  Hence
+Suppose instead that the terminal kind is SE or RE.  Its constructor
+records an individual edge \(f_n\), the exact singleton connecting-set
+equality \(F_n=\{f_n\}\), an exact
+\noderef{TreeSequenceAdjoinEdge} seed \(S=T_n+f_n\), and a closure route
+from \(S\).  We split according to whether \(B=T_n\).
+
+First assume \(B\ne T_n\).  Since \(T_n\preccurlyeq B\), the length
+inequality is then strict.  The lemma
+\noderef{HierarchyNonparallelFirstEdge} says that the first exact edge of
+the first hierarchy stage after \(T_n\) is \(f_n\).  If \(q>0\), that
+first stage is an exact prefix of \(A\preccurlyeq B\); if \(q=0\), it is
+the terminal stage \(T\), and strictness of \(T_n\preccurlyeq B\) still
+puts its first new entry in \(B\).  Hence the edge of \(B\) at position
+\(|T_n|\) is the individual edge \(f_n\).
+
+There is also no ambiguity in the new endpoint.  In the SE constructor,
+the exact singleton equation identifies \(f_n\) with the edge in its
+\noderef{MaximumDefectiveChoice}; that definition records one endpoint
+inside \(T_n\) and its other endpoint outside \(T_n\).  In the RE
+constructor the same inside/outside endpoint data are fields of
+\noderef{RevisitingExtensionCertificate}.  The attachment equation for
+the first new entry of \(B\), together with vertex injectivity in
+\noderef{TreeSequence}, rules out using the already displayed inside
+endpoint as the new vertex.  Thus its new vertex is exactly the recorded
+outside endpoint, just as in the adjoin-edge certificate for \(S\).
+Equality of the ordered entries through length \(|T_n|+1\) now gives
+\(S\preccurlyeq B\).  Restrict the old closure route first to the retained
+prefix of (14), and append the path segment.  This is precisely the
+SE/RE eligibility route \(S\longrightarrow T'\), retaining the exact edge
+identity \(f_n\).
+
+It remains within the non-PE case to assume \(B=T_n\).  Then
+\(|B^+|=|T_n|+1\).  If \(u=y_{p-1}\), the preceding first-edge and
+inside/outside endpoint argument identifies all entries of \(B^+\) with
+the adjoin-edge seed, so
 \[
-                         p(T')<p(T).                            \tag{15}
+                              B^+=S.                            \tag{14c}
+\]
+The path appends after \(u\) therefore again give the required SE/RE
+route from the exact seed.
+
+We show that the alternative \(u\ne y_{p-1}\) is impossible.  The only
+vertex of \(B^+-B\) is \(y_{p-1}\), by (1) and the exact
+\noderef{TreeSequenceInitialSegment} relations.  Hence \(u\in V(B)=V(T_n)\).
+Let \(w\) be the path vertex immediately preceding \(u\) as the path is
+traversed from \(y_p\), and let \(g\) be their individual path edge.
+Firstness of \(u\) gives \(w\notin V(B^+)\), while the path endpoint
+equation gives \(G[g]=\{u,w\}\).  Thus
+\(g\in\noderef{BoundaryEdges}(G,V(T_n))\), and its color is one of
+\(\alpha,\beta\).  Both colors are missing on \(B=T_n\), as proved above.
+
+For a terminal RE constructor, its `currentColoring' field identifies
+\(\varphi_n\) with the preceding coloring; after this rewrite its
+`previousClosed' field is exactly
+\noderef{ColoredVertexSetClosed}\((G,\varphi_n,V(T_n))\), contradicting
+the boundary edge \(g\).  For a terminal SE constructor, write \(\pi\)
+for the preceding coloring and \(\rho\) for the selected coloring in its
+\noderef{MaximumDefectiveChoice}.  The constructor gives
+\(\varphi_n=\rho\), says that \(T_n\) is closed under \(\pi\), and says
+that \(\rho\) is \(\noderef{StableColoring}(T_n,D_{n-1},\pi)\).  Its two
+colorings are proper and leave exactly \(e_0\) uncolored.  Stability makes
+the color \(c=\varphi_n(g)\) missing under \(\pi\) at the same witness in
+\(T_n\).  Applying the reverse edge criterion in \noderef{sc1} to the
+incident boundary edge \(g\), using that \(\rho(g)=c\) and that \(c\) is
+in the controlled missing set, gives \(\rho(g)=\pi(g)\).  The closedness
+of \(T_n\) under \(\pi\) is again contradicted.  These RE and SE
+contradictions exhaust the non-PE constructors.  Therefore every possible
+shorter-tree construction has the exact PE route from \(T_n\), or the
+exact SE/RE route from \(T_n+f_n\).
+
+Apply \noderef{Td} to the original ETT with \(\sigma=\varphi_n\).
+Properness and exact one-uncoloredness are fields of
+\noderef{HierarchyMinimumCounterexampleContext}; the two clauses of
+\noderef{StableColoring} are reflexive, and the complete six-part
+lower-rung package is the context's `lowerRung' field.  Hence
+\(\noderef{ModColoring}(\mathcal E,\varphi_n)\).  The eligible route just
+constructed is in the appropriate universal branch of that definition,
+so it yields an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate \(\mathcal C'\)
+on \(T'\).  Applying \noderef{MaximumPropertyTransport} to the mod-coloring,
+\(\mathcal C'\), and the old maximum field gives maximum property \(M'\)
+for the replacement ETT.
+
+We next build the replacement \noderef{HierarchyBase} field by field.
+The certificate \(\mathcal C'\) identifies the rung, the exact terminal
+ladder tree \(T_n\), the extension kind, the exact connecting-edge set,
+and the stored sets, but it does not assert equality of internal PE
+witnesses.  If the common terminal kind is PE, inspect separately the old
+and replacement PE constructors in \noderef{TashkinovSeriesStep}.  Write
+\((v,f,z)\) and \((v',f',z')\) for their inside vertex, connecting edge,
+and outside endpoint in the two \noderef{MaximumDefectiveChoice} records.
+The two constructor singleton equations and connecting-set agreement give
+\[
+                  \{f'\}=F'_n=F_n=\{f\},\qquad f'=f.          \tag{P1}
+\]
+Their endpoint fields give
+\[
+ G[f]=\{v,z\}=\{v',z'\},\qquad
+ v,v'\in V(T_n),\quad z,z'\notin V(T_n).                     \tag{P2}
+\]
+The crossed orientation of the unordered endpoint pairs would equate an
+inside vertex with an outside vertex.  It is impossible, so \(v'=v\).
+The two PE `currentVertex' equations therefore identify the replacement
+chosen vertex with the old chosen vertex.
+
+Transport the old support position across the exact equality of the two
+copies of \(T_n\), and take the replacement core and closure to be the old
+core and closure.  Support positivity is unchanged.  The terminal
+missing-set equation is reflexive because both the hierarchy coloring and
+the replacement ETT generating coloring are \(\varphi_n\).  In the PE
+case, (P1)--(P2) and the old base's PE field give the required chosen-vertex
+equation at that support position; its closure is still the same
+\(\varphi_n\)-closure of the same ordered prefix, and its exact ordered
+union is unchanged.  In the non-PE case, kind agreement makes the
+replacement kind non-PE and the old nonparallel field identifies the
+chosen core with the common \(T_n\); the unused closure has no condition.
+This supplies every field of a base \(\mathcal B'\).
+
+Define a \noderef{TashkinovHierarchy} \(H'\) on \(\mathcal B'\) by keeping
+the old divider count, every old nonterminal stage and every old numerical
+divider position, and replacing only the terminal stage \(T\) by \(T'\).
+For \(q>0\), the last ordinary stage is \(A\), which is an exact prefix of
+the retained \(B\); for \(q=0\), the core is an exact prefix of \(B\).
+This proves final nesting and strictness.  All earlier nesting and
+strictness fields are unchanged.  Each divider lies in an old ordinary
+stage contained in \(A\preccurlyeq B\), so exact prefix equality through
+\(B\) preserves every divider-stage equation.  The base-stage,
+terminal-stage, divider positivity and increasingness, and core-inside-first
+fields now follow term by term.  Thus \(H'\) has the old stages and
+dividers except for its displayed terminal tree.
+
+The individual stored arrays of the two ETTs agree by \(\mathcal C'\),
+while the terminal ladder tree and its coloring are literally the same.
+Expanding \noderef{TashkinovStoredColors} therefore identifies the two
+computed terminal sets \(D_n\).  The base core and every nonterminal stage
+also agreed exactly.  Expanding \noderef{HierarchyStoredColorsAt} now gives
+the old computed
+\(D_{n,j}\) at every \(j\).  Expanding
+\noderef{HierarchyStageMissingColors} gives the old stage-missing set at
+every \(j\), since that definition uses \(T_n\) at zero and the unchanged
+ordinary stage at a positive index.  Give \(H'\) the old Gamma pairs.
+Pair cardinality and pairwise disjointness now copy.  Unique refresh uses
+only the unchanged ordinary and starred stages, so it copies as well.  The
+PE-base clause uses the same core and closure under the same coloring, and
+every minus-closed clause uses an unchanged nonterminal ordinary stage;
+these clauses also copy.  It remains to verify avoidance, including all
+lower divider indices.
+
+Fix \(j<q\) and a stored color \(\eta\).  The next ordinary stage
+\(T_{n,j+1}\), and every displayed edge and vertex in it, are exactly the
+same in \(H\) and \(H'\) and lie in \(A\preccurlyeq B\).  Unfold
+\noderef{HierarchyFirstMissingPosition}.  If \(\eta\) has a first missing
+vertex inside that next stage, the identical preceding vertices show that
+the least position is the same in both terminal displays.  If it has none
+there, both first positions, whether attained later or replaced by the
+terminal fallback, truncate to the common length of that next stage.
+Consequently
+\[
+ \min\{i_\eta,|T_{n,j+1}|\}
+   =\min\{i'_\eta,|T_{n,j+1}|\}.                              \tag{17}
+\]
+The starred stage, next stage, exact edge identities, and coloring are all
+unchanged.  Unfolding \noderef{HierarchySegmentColors} and using (17)
+therefore proves equality of the old and new \((j,\eta)\) segment-color
+sets.  Old avoidance supplies avoidance for every \(j<q\).
+
+At \(j=q\), let \(R\) be the prefix retained in (14a) or (14b).  If a
+stored color has its old first missing position in \(R\), equality of all
+preceding displayed vertices makes its new first missing position the same.
+If it has no old missing position in \(R\), every retained edge lies before
+the old cutoff, and hence was controlled by old avoidance; whichever first
+missing position the appended path creates, the retained edges before the
+new cutoff are a subset of these controlled edges.  Thus old avoidance
+controls every retained edge that enters the new terminal segment-color
+set.  All newly appended edges have color \(\alpha\) or \(\beta\).  We
+check those colors in the two shorter-counterexample branches below; this
+is the only remaining avoidance issue.
+
+We also compute the decrease in path number directly.  The old common-tail
+datum says
+\[
+          \noderef{HierarchyPathNumber}(H)=\ell.              \tag{18}
+\]
+For (14a), \(|B^+|=|A|+\ell-1\), and at least one path edge is appended
+from \(u=y_{p-1}\) to the distinct vertex \(y_p\).  Hence
+\(1\leq\ell-1\leq |T'|-|A|\).  Every exact edge position
+\(r\geq|A|+\ell-1=|B^+|\) is an appended path edge and has endpoint pair
+\(\{T'.\mathit{vertex}(r),T'.\mathit{vertex}(r+1)\}\).
+Thus \(\ell-1\) belongs to the candidate set in the definition of
+\noderef{HierarchyPathNumber}(H')\).
+
+For (14b), \(|B|=|A|+\ell-2\), and the nonempty segment from \(u\) to
+\(y_p\) appends at least one edge, so again
+\(1\leq\ell-1\leq |T'|-|A|\).  The threshold
+\(|A|+\ell-1=|B|+1\) deliberately skips the first appended edge.  Every
+edge at or beyond it is a subsequent edge of the same simple path and has
+the required consecutive endpoints; if only one edge was appended, the
+universal condition is vacuous.  Therefore \(\ell-1\) is a candidate in
+this case as well.  The candidate set is nonempty, and its minimum gives
+\[
+ \noderef{HierarchyPathNumber}(H')\leq\ell-1<\ell
+    =\noderef{HierarchyPathNumber}(H).                        \tag{19}
 \]
 
 The candidate \(\beta\) is outside \(\Gamma^q\) in every alternative.
@@ -239,32 +420,50 @@ This is explicit in (6) and (8).  In (11), it follows from
 possible positions of the original \(\alpha\).
 
 If \(\alpha\notin\Gamma^q\), copy all old hierarchy stages and Gamma
-pairs to \(T'\).  Their avoidance clauses survive because both colors used
-to append (14) are outside \(\Gamma^q\).  Together with the copied fields
-checked above, this gives a good hierarchy with the same divider count.
+pairs to \(T'\).  For the terminal avoidance clause, every retained edge
+before the new cutoff was already controlled by the old clause, and every
+new edge has color \(\alpha\) or \(\beta\), both outside \(\Gamma^q\).
+Together with (17) and all copied fields checked above, this gives a
+\noderef{GoodHierarchy} on \(H'\) with the same divider count.
 The two old \(\alpha\)-missing vertices, the
 earlier one in \(B\) and \(y_p\) on the appended path, both lie in \(T'\),
-so \(T'\) is not elementary.  We have therefore constructed a genuine
-hierarchy counterexample \(C'\).
+so \(T'\) violates the pairwise-disjointness condition in
+\noderef{ColoredVertexSetElementary}.  Rung agreement supplies positivity,
+and \(H'\), the good witness just constructed, and \(M'\) supply the
+hierarchy, goodness, and maximum fields.  These are every field of a
+genuine \noderef{HierarchyCounterexample} \(C'\), with the same rung and
+divider count as \(C\).
 
 Suppose next that
 \(\alpha\in\Gamma^q\cap\varphi_n\langle T-A\rangle\).  The last edge is
-not colored \(\alpha\), since it is incident with the vertex \(y_p\) at
-which \(\alpha\) is missing.  Hence an \(\alpha\)-colored tail edge occurs
-already before \(B^+\).  Write \(\alpha\in\Gamma^q_\eta\).  The avoidance
-field of \noderef{GoodHierarchy}, evaluated at the first such segment,
-puts the stored color \(\eta\) in
-\(\overline\varphi_n(B)\).  Together with
-\(\beta\in\overline\varphi_n(B)\) and
-\(\beta\notin\Gamma^q\), this verifies the same avoidance clauses for the
-hierarchy on \(T'\): every newly appended \(\alpha\)-edge occurs after the
-first \(\eta\)-missing position, and the other appended color is not a
-Gamma color.  The preceding copied-field argument now constructs the
-complete good hierarchy.  Again the old \(\alpha\)-missing vertices make its
-terminal set non-elementary, so this branch also produces a genuine
-counterexample \(C'\) with the same rung and divider count.
+not colored \(\alpha\): the edge is incident with \(y_p\), whereas
+\(\alpha\in\noderef{MissingColors}(G,\varphi_n,y_p)\).  Hence an old
+\(\alpha\)-colored tail edge has position at most \(|T|-2=|B|\).  Choose
+\(\eta\in D_{n,q}\) with \(\alpha\in\Gamma^q_\eta\), and let \(r\) be
+such an edge position.  Unfolding the terminal clause of
+\noderef{HierarchySegmentColors}, old avoidance and
+\(\varphi_n(T.\mathit{edge}(r))=\alpha\) force the first
+\(\eta\)-missing position to be at most \(r\); otherwise that exact edge
+would belong to the forbidden segment-color set.  Thus \(\eta\) already
+has its first missing vertex in \(B\).  Since \(T'\) and \(T\) agree
+entrywise through \(B\), unfolding
+\noderef{HierarchyFirstMissingPosition} shows that this least position is
+unchanged in \(T'\).
 
-In each of these first two subbranches, (15) strictly decreases the first
+All new \(\alpha\)-edges have positions at least \(|B|\) in (14b), and at
+least \(|B^+|\) in (14a), so they occur at or after the just-established
+cutoff and do not enter the \(\eta\)-segment.  For every stored
+\(\xi\ne\eta\), pairwise disjointness in \noderef{GoodHierarchy} gives
+\(\alpha\notin\Gamma^q_\xi\); and \(\beta\notin\Gamma^q\) was proved
+above.  Hence no newly appended edge violates any terminal avoidance
+clause.  Together with (17), this supplies the complete good hierarchy on
+\(H'\).  The two retained \(\alpha\)-missing witnesses again make \(T'\)
+non-elementary by \noderef{ColoredVertexSetElementary}.  Together with
+the same positivity, \(H'\), goodness, and \(M'\), this branch also fills
+every field of a genuine counterexample \(C'\) with the same rung and
+divider count.
+
+In each of these first two subbranches, (19) strictly decreases the first
 coordinate of
 \noderef{HierarchyCounterexampleMeasure}.  Therefore
 \[
@@ -279,21 +478,23 @@ subbranches are eliminated.
 The only remaining case is
 \[
           \alpha\in\Gamma^q
-             \setminus\varphi_n\langle T-A\rangle.             \tag{16}
+             \setminus\varphi_n\langle T-A\rangle.             \tag{22}
 \]
 Choose \(\eta\in D_{n,q}\) with
 \(\alpha\in\Gamma^q_\eta\).  The avoidance field of
 \noderef{GoodHierarchy} puts \(\alpha\) in the corresponding
 \noderef{HierarchyStageMissingColors}: on the last ordinary stage when
 \(q>0\), and on \(T_n\) when \(q=0\).  In particular \(\alpha\) is missing
-on \(A\).  Both \(\alpha\) and \(\beta\) are missing on \(B^+\).
+on \(A\): at a positive divider that stage is \(A\), while at divider zero
+the missing witness in \(T_n\preccurlyeq A\) remains a witness in \(A\).
+Both \(\alpha\) and \(\beta\) are therefore missing on \(B^+\).
 
 We verify the conditional order premise of \noderef{ChangeLemma}.  If
 \(\beta\) is also missing on \(A\), the premise's antecedent is false,
 because both colors are missing there.  Otherwise the first
 \(\alpha\)-missing vertex lies in \(A\), while the first
 \(\beta\)-missing vertex lies after \(A\) and no later than its witness in
-\(B\).  Thus the former precedes the latter.  Equation (16) says that
+\(B\).  Thus the former precedes the latter.  Equation (22) says that
 \(\alpha\) is unused on every exact edge after \(A\), so in particular it
 is unused up to that first \(\beta\)-missing vertex.  This is precisely the
 required order-and-unused implication.  The lower-rung, fewer-divider,
@@ -304,59 +505,141 @@ lemma, or its \(T_n\)-missing divider-zero case.  Consequently
 \noderef{ChangeLemma} gives
 \[
  P_{v_\alpha}(\alpha,\beta,\varphi_n)
-   =P_{v_\beta}(\alpha,\beta,\varphi_n),                     \tag{17}
+   =P_{v_\beta}(\alpha,\beta,\varphi_n),                     \tag{23}
 \]
 where \(v_\alpha\) and \(v_\beta\) are the respective first missing
 vertices.  Both belong to \(B^+\).
 
-The component in (17) is not \(Q\).  If
+The component in (23) is not \(Q\).  If
 \(v_\alpha=v_\beta\), that vertex misses both colors and hence is an
-isolated vertex of the two-color incidence graph, whereas \(Q\) also
+isolated vertex of the \noderef{TwoColorIncidenceGraph}, whereas \(Q\) also
 contains the distinct terminal vertex \(y_p\).  If they are distinct,
-the common component in (17) contains one vertex missing \(\alpha\) and
+the common component in (23) contains one vertex missing \(\alpha\) and
 one missing \(\beta\); equality with \(Q\) would add the third distinct
 degree-at-most-one vertex \(y_p\), which misses \(\alpha\).  Properness,
 \noderef{TwoColorIncidenceDegreeAtMostTwo}, and
 \noderef{TwoColorComponentSpanningPath} make every such component a
 finite path, which has only two endpoints.  Both cases are impossible.
 The dichotomy in \noderef{TwoColorComponentsDisjoint} therefore makes
-\(Q\) disjoint from the component in (17).
+\(Q\) disjoint from the component in (23).
 
 Now let \(x\in V(B^+)\).  Elementarity (2) says that if \(x\) misses
 \(\alpha\), then \(x=v_\alpha\), and if it misses \(\beta\), then
-\(x=v_\beta\).  Hence a vertex of \(Q\cap V(B^+)\) misses neither color.
-Properness gives it one incident edge of each color, both in \(Q\), and
-the swap exchanges those two edges together; its missing set is unchanged.
-At a vertex outside \(Q\), every incident edge is unchanged.  Thus every
-vertex of \(B^+\) has the same missing set under \(\sigma_n\) as under
-\(\varphi_n\).
+\(x=v_\beta\).  Either equality would put \(x\) in the component from
+(23), which is disjoint from \(Q\).  Hence a vertex of
+\(Q\cap V(B^+)\) misses neither color.
+The local injectivity clause of \noderef{IsProperEdgeColoring} gives it
+exactly one incident edge of each affected color; their edge-nodes are in
+the same component \(Q\), so the pointwise definition of
+\noderef{TwoColorComponentSwap} exchanges both.  At a vertex of \(B^+\)
+outside \(Q\), every incident affected-color edge also lies outside \(Q\),
+and is unchanged.  Edges of all other colors are always unchanged.
+Therefore
+\[
+ \overline{\sigma_n}(x)=\overline{\varphi_n}(x)
+          \qquad(x\in V(B^+)).                                \tag{24}
+\]
 
-Equations (12) and (16) say that neither \(\alpha\) nor \(\beta\) colors
-an exact full-tail edge.  Hence the swap fixes every individual displayed
-edge of \(T\), including the two final edges.  The first missing position
-of every stored color is also fixed: a stored \(\alpha\) or \(\beta\)
-already has its first missing witness in \(B\), while all other colors are
-unchanged.  These facts verify, respectively, the full-tail edge,
-penultimate missing-set, and stored-first-position hypotheses of
+Equations (12) and (22) say that neither \(\alpha\) nor \(\beta\) colors
+an exact full-tail edge.  The definition of
+\noderef{TwoColorComponentSwap} therefore fixes every individual displayed
+edge at or above \(A\), including the two final edges.  The first missing
+position of every color in \(D_{n,q}\) is also fixed.  Indeed,
+\noderef{GoodHierarchyReservedDisjoint} makes \(\alpha\notin D_{n,q}\),
+because \(\alpha\in\Gamma^q\).  If a stored color is \(\beta\), its
+missing witness lies in \(B\) by (12), and (24) preserves every candidate
+through \(B^+\); if it is neither affected color, all of its incident-edge
+colors are unchanged everywhere.  Unfolding
+\noderef{HierarchyFirstMissingPosition}, including the no-candidate
+fallback, gives equality of the two least positions.  These facts verify,
+respectively, the full-tail edge, penultimate missing-set, and
+stored-first-position hypotheses of
 \noderef{StableChangeCasesOneTwoFullTail}.  Its Cases 1/2 premise is
 supplied with \(\alpha\) in the stage-missing slot, as just obtained from
-(16); no such premise is imposed on the candidate \(\beta\).  The cited
-theorem returns a weakly stable mod-coloring, an actual corresponding
-same-rung maximum ETT on the exact \(T\), and a rebuilt good hierarchy with
-the same stages, stored sets, and Gamma pairs.
+(22); no such premise is imposed on the candidate \(\beta\).  The cited
+theorem returns a weakly stable \noderef{ModColoring}, an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate \(\mathcal C^T\)
+on the same exact \(T\), maximum property \(M^T\) for its replacement ETT,
+a replacement \noderef{HierarchyBase} \(\mathcal B^T\), a full hierarchy
+\(K^T\), a \noderef{GoodHierarchy} witness \(g^T\), and
+\[
+                 \noderef{SameGoodHierarchy}(C.\mathit{good},g^T). \tag{25}
+\]
 
-Under the swap (13), \(\beta\) becomes missing at \(y_p\), while its
-missing witness in \(B\) is preserved by the \(B^+\) missing-set equality.
-Thus the returned terminal tree is non-elementary and gives a genuine
-replacement counterexample.  Build the replacement minimum context as in
-\noderef{HierarchySituationTwoOutsidePenultimateReconstruction}: retain
-the universal six lower-rung and fewer-divider fields, transport
-lexicographic minimality across equality of the two measure coordinates,
-and transport the \(2n+11\) estimate across ladder-tree stability.  This
-fills a \noderef{HierarchyReplacementPresentation}.  Finally (12) and
-the appropriate alternative among (6), (8), and (11), transported across
-the full-tail edge equality and copied Gamma data, fill the normalized
-datum with color \(\beta\).
+We now construct every remaining replacement field.  First, \(\beta\)
+becomes missing at \(y_p\).  Before the swap, \(\alpha\) is missing there
+and \(\beta\) is present.  Properness gives a unique incident
+\(\beta\)-edge; its edge-node is joined to the root \(y_p\) in the
+\noderef{TwoColorIncidenceGraph} and hence belongs to \(Q\).  The swap changes it
+to \(\alpha\), while the old missingness of \(\alpha\) excludes any other
+affected incident edge that could become \(\beta\).  Thus
+\(\beta\in\overline{\sigma_n}(y_p)\).  Its old missing witness in \(B\)
+remains missing by (24).  That witness and \(y_p\) are distinct because
+\(B\prec B^+\prec T\).  They share the missing color \(\beta\), so the
+terminal vertex set is not elementary by
+\noderef{ColoredVertexSetElementary}.  Together with the positivity
+transported by rung agreement, \(K^T,g^T\), and \(M^T\), this fills all
+fields of a replacement \noderef{HierarchyCounterexample} \(C^T\).
+
+Construct its \noderef{HierarchyMinimumCounterexampleContext} as follows.
+The properness and exact-one-uncolored fields are the first clauses of the
+returned mod-coloring.  The rung equality in \(\mathcal C^T\) rewrites the
+strict rung bound in every universally quantified instance of the old
+six-assertion `lowerRung' field, so that whole field applies unchanged.
+For `fewerDividers', the same rung equality and the divider-count equality
+in (25) turn a hierarchy with fewer dividers than \(K^T\) into one with
+fewer dividers than \(H\); the old universal field then proves its
+elementarity.
+
+For lexicographic minimality, (25) gives equality of every ordinary stage,
+divider position, computed stored set, and indexed Gamma pair, and gives
+the same base core (and the same PE closure when relevant).  The terminal
+tree is the same exact \(T\).  Expanding \noderef{HierarchyPathNumber}
+therefore identifies the first coordinates of
+\(\noderef{HierarchyCounterexampleMeasure}(C^T)\) and
+\(\noderef{HierarchyCounterexampleMeasure}(C)\); equality of the last
+ordinary stage identifies the second coordinates.  Hence the measures are
+equal.  Any same-rung, equal-divider counterexample strictly smaller than
+\(C^T\) in \noderef{HierarchyCounterexampleLess} would be strictly smaller
+than \(C\), contrary to the old minimality field.  Finally, the terminal
+instance of the replacement-stability clause in \(\mathcal C^T\), unfolded
+through \noderef{StableColoring}, identifies the old and new missing-color
+sets on the common ladder tree \(T_n\); rung agreement then transports the
+old \(2n+11\) inequality.  These are all five context fields, including
+all six assertions inside `lowerRung'.
+
+The coloring \(\sigma_n\), certificate \(\mathcal C^T\), maximum property
+\(M^T\), base \(\mathcal B^T\), counterexample \(C^T\), same-good witness
+(25), and the context just constructed fill every field of
+\noderef{HierarchyReplacementPresentation}.
+
+It remains to fill the normalized datum with color \(\beta\).  Retain the
+same exact last-edge, penultimate-vertex, and terminal-vertex indices.
+Choose an exact displayed index for the vertex of \(B\) missing \(\beta\);
+because \(|B|=|T|-2\), that index is strictly below the stored index of
+\(y_{p-1}\), and use it as the new earlier-witness index.  Equation (25),
+the fixed terminal tree, and the
+definitions of \noderef{HierarchyFullTailLength} and
+\noderef{HierarchyPathNumber} preserve \(\ell\) and the equation
+\(p(T)=\ell\).  The full-tail edge equality preserves the color \(\theta\)
+on the individual last edge and its nonincidence with \(y_{p-1}\).
+Missingness of \(\beta\) at the old witness in \(B\) and at \(y_p\) was
+proved above, and the old witness index is strictly below that of
+\(y_{p-1}\).  Thus all fields of the inherited raw Case 3 datum hold.
+
+The same equality (24) gives \(\beta\in\overline{\sigma_n}(B)\), and the
+pointwise full-tail edge equality transports (12), so \(\beta\) is unused
+on every exact edge above the common starred stage.  The corresponding
+certificate identifies every individual stored set, and its terminal
+\noderef{StableColoring} clause identifies missing sets on the common
+\(T_n\).  Expanding \noderef{TashkinovStoredColors} therefore identifies
+the raw terminal \(D_n\).  Equation (25) identifies every \(D_{n,q}\) and
+every indexed Gamma pair, and the full-tail edge equality identifies the
+exact tail-used color set.
+Therefore the appropriate alternative among (6), (8), and (11) transports
+term by term.  These facts fill all fields of
+\noderef{HierarchySituationTwoCaseThreeNormalizedData} with normalized
+color \(\beta\).
 
 Every branch that survives the shorter-\(T'\) contradiction has now
 returned both an actual replacement presentation and a complete normalized
