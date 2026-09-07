@@ -8,6 +8,7 @@ import Tablet.GoodHierarchyReservedDisjoint
 import Tablet.HierarchyCounterexample
 import Tablet.HierarchyCounterexampleMeasure
 import Tablet.HierarchyCounterexamplePenultimateElementary
+import Tablet.HierarchyBase
 import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchyFullTailLength
 import Tablet.HierarchyFullTailPrefix
