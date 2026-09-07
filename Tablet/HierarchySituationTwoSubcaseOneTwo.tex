@@ -163,11 +163,28 @@ witness \(g_1\), and
 \[
              \noderef{SameGoodHierarchy}(C.\mathit{good},g_1). \tag{11}
 \]
-The swap makes \(\gamma_1\) missing at \(y_p\): before the swap
-\(\alpha\) is missing there, while the unique incident affected edge in
-\(Q_1\) changes from \(\gamma_1\) to \(\alpha\).  The disjoint component
-(7) preserves the old \(\gamma_1\)-missing witness in \(A\).  These
-distinct witnesses make \(T\) non-elementary.  Together with the returned
+The swap makes \(\gamma_1\) missing at \(y_p\), including when \(Q_1\) is
+the permitted singleton component.  Indeed, first suppose that an edge
+\(f\) colored \(\gamma_1\) is incident with \(y_p\).  Properness makes
+\(f\) the unique such edge.  Its edge-node is adjacent to the root
+\(y_p\) in \noderef{TwoColorIncidenceGraph}, so it belongs to \(Q_1\),
+and (8), unfolded using \noderef{TwoColorComponentSwap}, changes its color
+from \(\gamma_1\) to \(\alpha\).  Every old incident
+\(\gamma_1\)-edge is therefore removed, while no new incident
+\(\gamma_1\)-edge can be created: such a new edge would have had old color
+\(\alpha\), contrary to \(\alpha\in\overline\varphi_n(y_p)\) and the
+definition of \noderef{MissingColors}.  Hence \(\gamma_1\) is missing at
+\(y_p\) under \(\mu_1\).  In the complementary case no
+\(\gamma_1\)-edge is incident with \(y_p\), so \(\gamma_1\) was already
+missing there.  Since \(\alpha\) is missing there as well, the root has no
+incident affected edge in the two-color incidence graph.  Thus \(Q_1\) is
+the isolated singleton allowed by \noderef{TwoColorPathComponent}; the
+swap changes no edge-node and preserves the \(\gamma_1\)-missingness of
+\(y_p\).
+
+The disjoint component (7) preserves the old \(\gamma_1\)-missing witness
+in \(A\).  By (2), that witness and \(y_p\) are distinct, so these two
+witnesses make \(T\) non-elementary.  Together with the returned
 ETT, maximum property, base, hierarchy, and goodness, they give an actual
 \noderef{HierarchyCounterexample} \(C_1\).
 
