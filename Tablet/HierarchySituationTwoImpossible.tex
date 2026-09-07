@@ -1,0 +1,160 @@
+\begin{lemma}[Situation 7.2 is impossible]
+Let \(C\) be the fixed same-rung lexicographically minimum hierarchy
+counterexample in a
+\noderef{HierarchyMinimumCounterexampleContext}.  Then the Situation 7.2
+equation
+\[
+ \noderef{HierarchyPathNumber}(C.\mathit{hierarchy})
+     =\noderef{HierarchyFullTailLength}(C)
+\]
+implies a contradiction.
+\end{lemma}
+\begin{proof}
+Write \(H=C.\mathit{hierarchy}\), let \(q\) be its last stored index, put
+\[
+ A=\noderef{HierarchyStarredStage}(H,q),\qquad
+ \ell=\noderef{HierarchyFullTailLength}(C),
+\]
+and assume
+\[
+                 \noderef{HierarchyPathNumber}(H)=\ell.      \tag{1}
+\]
+Apply \noderef{HierarchyCounterexampleTailAtLeastTwo} to the properness,
+exact one-uncoloredness, complete lower-rung package, fewer-divider
+induction, lexicographic minimality, and large-set fields of the supplied
+minimum context.  It gives
+\[
+                              2\le\ell.                       \tag{2}
+\]
+The hierarchy nesting and terminal-stage fields make \(A\) an exact
+\noderef{TreeSequenceInitialSegment} of \(T\), and hence
+\(|A|+\ell=|T|\).
+
+We first construct the common Situation 7.2 tail data from (1), rather
+than assuming it.  Let \(s\) be the last edge index of \(T\), let \(a\)
+be the preceding vertex index, and let \(b\) be the final vertex index.
+Thus
+\[
+ s+1=|T|,\qquad a+1=|T|,\qquad b=|T|.                        \tag{3}
+\]
+These finite indices exist because (2) and \(|A|+\ell=|T|\) imply
+\(|T|\ge2\).  Write
+\[
+        e_p=T.\mathit{edge}(s),\qquad
+        y_{p-1}=T.\mathit{vertex}(a),\qquad
+        y_p=T.\mathit{vertex}(b).                            \tag{4}
+\]
+
+The individual edge \(e_p\) is colored under \(\varphi_n\).  To see this
+from the certified objects, inspect the final positive-index certificate
+in the actual \noderef{TashkinovSeries} of the supplied
+\noderef{ExtendedTashkinovTree}.  In the PE constructor of
+\noderef{TashkinovSeriesStep}, the associated
+\noderef{TashkinovClosure} gives a
+\(\varphi_n\)-\noderef{TashkinovAugmentationSequence} from \(T_n\) to the
+final output.  In the SE and RE constructors it gives instead the exact
+singleton connecting edge, a literal one-edge seed, and such a route from
+that seed.  The ETT places \(T\) as an exact prefix of the final output and
+strictly above \(T_n\).  In the non-PE divider-zero case, (2) says that
+\(T\) has at least two additions above \(A=T_n\), so it is strictly above
+the one-edge seed as well; at positive divider count the hierarchy stages
+already put that seed below \(A\).  Thus
+\noderef{TashkinovAugmentationSequenceRestrict} restricts the actual route
+through the final edge of \(T\).  The last
+\noderef{TashkinovAugmentation} on this restricted finite route records a
+color for its exact new edge.  Since individual edge identities are
+retained by every prefix, this new edge is precisely \(e_p\).  Choose its
+color \(\theta\); then
+\[
+                         \varphi_n(e_p)=\theta.               \tag{5}
+\]
+
+We also derive the required nonincidence.  The attachment field of
+\noderef{TreeSequence} says that \(e_p\) joins the new vertex \(y_p\) to
+an earlier displayed vertex.  If it were incident with \(y_{p-1}\),
+looplessness and injectivity of the displayed vertex map would identify
+its endpoint pair exactly as \(\{y_{p-1},y_p\}\).  In the candidate set
+defining \noderef{HierarchyPathNumber}, the integer \(\ell-1\) lies in
+\([1,\ell]\) by (2), and the condition for edge positions
+\(r\ge|A|+\ell-1=|T|-1\) then concerns only \(e_p\).  The endpoint
+identity just obtained would make that condition true.  Hence the minimum
+candidate would be at most \(\ell-1\), contradicting (1).  Therefore
+\[
+                 \neg\noderef{Incident}(G,y_{p-1},e_p).      \tag{6}
+\]
+Equations (1)--(6) fill every field of an actual
+\noderef{HierarchySituationTwoCommonTailData} \(D_0\).
+
+Apply \noderef{HierarchyCounterexampleTerminalCommonMissing} to the same
+six fields of the minimum context.  After using (2) and the equality
+\(|A|+\ell=|T|\), its prefix is exactly
+\[
+ B^+=\noderef{HierarchyFullTailPrefix}(C,\ell-1),
+ \qquad |B^+|=|T|-1.
+\]
+It supplies a color \(\alpha\) such that
+\[
+ \alpha\in\noderef{TreeMissingColors}(\varphi_n,B^+),
+ \qquad
+ \alpha\in\overline\varphi_n(y_p).                           \tag{7}
+\]
+We split according to the precise paper cases.
+
+Suppose first that \(\alpha\) is missing at \(y_{p-1}\).  Decide whether
+\[
+       \alpha\in
+       D_{n,q}=\noderef{HierarchyStoredColorsAt}(H,q).        \tag{8}
+\]
+If (8) holds, the two-color cardinality field of
+\(C.\mathit{good}\) supplies distinct
+\(\gamma_1,\gamma_2\) whose pair is exactly
+\(C.\mathit{good}.\Gamma^q_\alpha\).  If theta is present at
+\(y_{p-1}\), combine \(D_0\), (7)--(8), that Gamma pair, and theta's
+presence into a \noderef{HierarchySituationTwoCaseOneData}.  The
+contradiction is \noderef{HierarchySituationTwoSubcaseOneOne}.  If theta
+is missing there, the same fields instead form a
+\noderef{HierarchySituationTwoCaseOneTwoData}, and
+\noderef{HierarchySituationTwoSubcaseOneTwo} gives the contradiction.
+
+If (8) fails, combine \(D_0\), the two alpha-missing assertions, and
+\(\alpha\notin D_{n,q}\).  When theta is present at \(y_{p-1}\), these
+are exactly the fields of a
+\noderef{HierarchySituationTwoCaseTwoData}, contradicted by
+\noderef{HierarchySituationTwoSubcaseTwoOne}.  When theta is missing
+there, they are exactly a
+\noderef{HierarchySituationTwoCaseTwoTwoData}, contradicted by
+\noderef{HierarchySituationTwoSubcaseTwoTwo}.  Thus every branch in which
+alpha is missing at the penultimate vertex is impossible.
+
+It remains that alpha is not missing at \(y_{p-1}\).  Expand the first
+membership in (7) using the definition of
+\noderef{TreeMissingColors}; choose a displayed vertex of \(B^+\) missing
+alpha.  It cannot be the last vertex \(y_{p-1}\), by the present branch.
+The injective displayed vertex map of \noderef{TreeSequence} therefore
+gives an index strictly before \(a\).  Cast that bounded index through the
+exact prefix \(B^+\preccurlyeq T\).  Together with \(D_0\) and alpha's
+terminal missingness in (7), this constructs an actual
+\noderef{HierarchySituationTwoCaseThreeData} \(D_3\); no disjunction is
+passed as a hypothesis.
+
+Apply \noderef{HierarchySituationTwoCaseThreeNormalization} once to
+\(D_3\).  Choose its returned
+\noderef{HierarchyReplacementPresentation} \(P\) and its
+\noderef{HierarchySituationTwoCaseThreeNormalizedData} \(D'_3\).  This
+is an actual same-rung maximum ETT on the same exact terminal tree, with a
+replacement base, good hierarchy, counterexample, and all minimum-context
+fields.  Now decide the missingness of the last-edge color recorded in
+\(D'_3\) at its penultimate vertex.  If it is present, adjoining exactly
+that assertion constructs a
+\noderef{HierarchySituationTwoCaseThreeOneData};
+\noderef{HierarchySituationTwoSubcaseThreeOne}, instantiated with \(P\),
+gives a contradiction.  If it is missing, adjoining the opposite
+assertion constructs a
+\noderef{HierarchySituationTwoCaseThreeTwoData};
+\noderef{HierarchySituationTwoSubcaseThreeTwo}, again instantiated with
+the complete presentation \(P\), gives a contradiction.
+
+The alpha penultimate-missing split, alpha storedness split, theta
+penultimate-missing split, and the single normalized Case 3 split exhaust
+all possibilities.  Hence the Situation 7.2 equation (1) is impossible.
+\end{proof}
