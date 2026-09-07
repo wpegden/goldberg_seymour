@@ -1,6 +1,7 @@
 import Tablet.ChangeLemma
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved
+import Tablet.CombinedStableColoring
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy

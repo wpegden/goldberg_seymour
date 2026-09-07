@@ -151,13 +151,14 @@ spanning-path theorem supplies the possibly singleton
 theorems.
 
 \textbf{First suppose \(\theta\in D_{n,q}\).}
-The two-color cardinality field of \(C.\mathit{good}\) supplies distinct
-colors \(\gamma_1,\gamma_2\) with
+The two-color cardinality field in \noderef{GoodHierarchy}, applied to
+\(C.\mathit{good}\), supplies distinct colors \(\gamma_1,\gamma_2\) with
 \[
                  \Gamma^q_\theta=\{\gamma_1,\gamma_2\}.       \tag{9}
 \]
 By \noderef{GoodHierarchyReservedDisjoint}, both Gamma colors are missing
-on \(A\) and neither is stored.  Good-hierarchy avoidance, (7), and (9)
+on \(A\) and neither is stored.  The avoidance field of
+\noderef{GoodHierarchy}, (7), and (9)
 exclude them from every exact edge of \(B^+-A\); neither colors \(e_p\),
 because \(e_p\) has the distinct stored color \(\theta\).  Equation (5)
 excludes \(\alpha\) on the entire tail, while (6) either makes \(\alpha\)
@@ -172,7 +173,8 @@ Apply \noderef{ChangeLemma} to the ordered colors
 \((\gamma_1,\alpha)\).  The first \(\gamma_1\)-missing witness lies in
 \(A\), the first \(\alpha\)-missing witness lies in \(B\), and (10)
 is the exact unused interval.  The first color is missing on
-\(T_{n,q}=A\) when \(q>0\), and on \(T_n\) when \(q=0\); thus the exact
+\(T_{n,q}=A\) when \(q>0\), and the stage-zero missingness clause of
+\noderef{GoodHierarchy} puts it on \(T_n\) when \(q=0\); thus the exact
 Cases 1/2 proposition holds.  The change lemma identifies their witness
 components.  Separate that component from the component \(Q_1\) rooted
 at \(y_p\) by the preceding endpoint argument, and set
@@ -201,7 +203,8 @@ Expanding \noderef{HierarchyFirstMissingPosition}, including the fallback
 case, proves equality of every stored first position.  These are precisely
 the three extra premises of
 \noderef{StableChangeCasesOneTwoFullTail}.  It returns an actual
-corresponding maximum ETT on the same exact \(T\), a replacement base,
+\noderef{CorrespondingExtendedTashkinovTree} certificate on the same exact
+\(T\), together with replacement maximum property, a replacement base,
 a hierarchy \(H_1\), goodness \(g_1\), and
 \(\noderef{SameGoodHierarchy}(C.\mathit{good},g_1)\).
 
@@ -212,7 +215,8 @@ make the replacement terminal tree non-elementary.  Package the returned
 objects into a \noderef{HierarchyReplacementPresentation} \(P_1\).
 Its minimum context is built field by field: properness is
 \noderef{TwoColorComponentSwapProper}; the swap fixes `none', so
-\noderef{IsOneEdgeUncolored} is retained; rung agreement transports the
+\noderef{IsOneEdgeUncolored} is retained; the rung-agreement field of
+\noderef{CorrespondingExtendedTashkinovTree} transports the
 universal lower-rung package; same-good divider equality transports the
 fewer-divider field; literal terminal-tree equality and same stages and
 positions identify both coordinates of
@@ -247,7 +251,8 @@ identifies the two witness components.  Separate them from the component
 Invoke \noderef{StableChangeCasesOneTwo} relative to \(P_1\) before using
 any weak-stability protection.
 
-Equation (13) excludes \(\gamma_1\) from the prefix tail.
+Equation (13), ultimately using the avoidance field of
+\noderef{GoodHierarchy}, excludes \(\gamma_1\) from the prefix tail.
 \noderef{HierarchyTailMissingColorExclusion}, applied under \(P_1\) at
 theta's exact first missing vertex \(y_{p-1}\), excludes \(\theta\) from
 each displayed edge of \(B^+-A\), apart from the possible divider-zero
@@ -269,9 +274,12 @@ gives
 \]
 
 We now construct the actual route required by the first split-tail call.
-Let \(\mathcal E_1=P_1.\mathit{corresponding}.\mathit{replacementETT}\)
-and let \(\widehat T_1\) be its last certified output tree.  Since its
-rung is positive, the actual certificate
+Unfold \noderef{CorrespondingExtendedTashkinovTree} for
+\(P_1.\mathit{corresponding}\), let
+\(\mathcal E_1=P_1.\mathit{corresponding}.\mathit{replacementETT}\), and
+let \(\widehat T_1\) be its last certified output tree.  Rung agreement
+with the original positive-rung ETT makes its rung positive, so the actual
+certificate
 \[
  \mathcal E_1.\mathit{series}.\mathit{certified}
        (\operatorname{Fin.last}\mathcal E_1.\mathit{rounds})
@@ -319,7 +327,8 @@ Transport the first piece of (18) under \(\mu_2\).  When \(q>0\), the
 every vertex missing set of \(A\); induction on the finite augmentation
 chain therefore reuses every old missing witness and every exact new edge.
 When \(q=0\) and the kind is PE, weak stability is combined stability on
-the terminal ladder tree and the PE closure.  Its two
+the terminal ladder tree and the PE closure.  Unfolding
+\noderef{CombinedStableColoring}, its two
 \noderef{StableColoring} constituents preserve the missing sets on those
 trees, while \noderef{CombinedStableClosurePreserved} fixes every displayed
 edge of both trees.  The parallel-base \noderef{OrderedTreeUnion} says that
@@ -356,7 +365,8 @@ on \(B^+\) under \(\mu_2\): gamma has its stage witness, theta has
 candidates through its first witness \(y_{p-1}\), while every other stored
 color is unaffected.  Finally \(\theta\) lies in no Gamma pair by
 \noderef{GoodHierarchyReservedDisjoint}.  If \(\gamma_1\) lies in the
-pair of a stored \(\eta\), pairwise disjointness of the Gamma pairs and
+pair of a stored \(\eta\), the pairwise-disjointness field of
+\noderef{GoodHierarchy} and
 (9) force \(\eta=\theta\), whose first missing position is
 \(|B^+|\).  Thus the stored-position and Gamma-cutoff premises both hold,
 not merely their intended conclusions.
@@ -364,7 +374,8 @@ not merely their intended conclusions.
 Apply \noderef{StableChangeCasesOneTwoSplitTail} using (16)--(19), the
 one-step old suffix, split missingness, stored-position equality, and the
 cutoff just proved.  It returns the second full corresponding maximum ETT,
-base, hierarchy, goodness, and same-good relation.  Compose it back to the
+base, hierarchy, goodness, and same-good relation.  Unfold
+\noderef{CorrespondingExtendedTashkinovTree} and compose it back to the
 original presentation: rung, ladder trees, raw stored sets, connecting
 edges, extension kinds, and generating colorings compose fieldwise; use
 transitivity \noderef{sc2} at every positive \noderef{StableColoring}
@@ -445,8 +456,10 @@ instantiation requested here, and it gives
 \]
 
 We construct the second split-tail route from the original ETT, rather
-than referring to the preceding construction.  Inspect the actual
-positive certificate
+than referring to the preceding construction.  This is the certified
+series against which the sought
+\noderef{CorrespondingExtendedTashkinovTree} records its replacement data.
+Inspect its actual positive certificate
 \[
  \mathit{ett.series.certified}(\operatorname{Fin.last}\mathit{ett.rounds})
 \]
@@ -467,8 +480,9 @@ factors the chain at the exact prefix \(A\).
 
 Transport the source-to-\(A\) piece using the
 \noderef{TreeColoringInvariant} in weak stability for \(q>0\).  For
-divider-zero PE, the two \noderef{StableColoring} constituents of combined
-stability preserve missing sets on \(T_n\) and on the base closure,
+divider-zero PE, unfolding \noderef{CombinedStableColoring} gives the two
+\noderef{StableColoring} constituents, which preserve missing sets on
+\(T_n\) and on the base closure,
 \noderef{CombinedStableClosurePreserved} fixes their exact displayed edges,
 and the parallel \noderef{OrderedTreeUnion} covers every edge and vertex of
 \(A\).  Induction on the first route piece therefore transports each
@@ -494,7 +508,8 @@ position.  The same equations put neither affected color in any last
 Gamma pair, so the Gamma cutoff is vacuous.  These separate checks,
 together with the actual route, are all inputs of
 \noderef{StableChangeCasesOneTwoSplitTail}; it returns a full-tree
-corresponding maximum ETT, base, hierarchy, goodness, and same-good data.
+\noderef{CorrespondingExtendedTashkinovTree} certificate, maximum property,
+base, hierarchy, goodness, and same-good data.
 
 In the complementary branch, failure of the exact Cases 1/2 proposition
 implies that alpha is not missing on \(A\).  For \(q>0\) this is immediate.
@@ -504,7 +519,8 @@ of \(A\) precedes alpha's first witness, which lies in \(B\), and that
 witness precedes \(y_{p-1}\).  Equations (21)--(22) give both last stored
 exclusions, and (5) gives the exact unused interval.  These are precisely
 the hypotheses of \noderef{StableChangeCaseThree} with ordered colors
-\((\alpha,\theta)\).  Use its full-tree corresponding ETT, maximum
+\((\alpha,\theta)\).  Use its full-tree
+\noderef{CorrespondingExtendedTashkinovTree} certificate, maximum
 property, base, hierarchy, goodness, and same-good outputs.  No split-tail
 route is asserted in this external-first-missing branch.
 
@@ -530,7 +546,8 @@ The transported common-tail fields and (25) form a genuine
 \noderef{HierarchySituationTwoCaseTwoData}, contradicting
 \noderef{HierarchySituationTwoSubcaseTwoOne}.
 
-It remains that \(\alpha\in D_{n,q}\).  Choose the two distinct colors
+It remains that \(\alpha\in D_{n,q}\).  The two-color field of
+\noderef{GoodHierarchy} lets us choose the two distinct colors
 \(\varepsilon_1,\varepsilon_2\) in \(\Gamma^q_\alpha\).  The first two
 alternatives of (6) are impossible, and the stored alternative gives
 manuscript (30):
@@ -538,8 +555,9 @@ manuscript (30):
  \{\alpha,\varepsilon_1,\varepsilon_2\}\cap
        \varphi_n\langle T-A\rangle=\varnothing.               \tag{26}
 \]
-Apply \noderef{ChangeLemma} to \((\varepsilon_1,\alpha)\).  Epsilon is
-stage-missing, alpha's first witness lies in \(B\), and (26) is the
+Apply \noderef{ChangeLemma} to \((\varepsilon_1,\alpha)\).  The missingness
+clause of \noderef{GoodHierarchy} makes epsilon stage-missing, alpha's first
+witness lies in \(B\), and (26) is the
 unused interval, so the exact Cases 1/2 alternative holds.  Separate the
 witness component from \(Q_1'\), the component rooted at \(y_p\), and set
 \[
@@ -562,7 +580,8 @@ The affected color epsilon is not stored by
 witness in \(B\), which (28) preserves.  All other stored colors are
 unaffected.  Hence every stored first position is unchanged, and
 \noderef{StableChangeCasesOneTwoFullTail} returns an actual replacement
-maximum ETT, base, hierarchy \(H_1'\), goodness \(g_1'\), and same-good
+\noderef{CorrespondingExtendedTashkinovTree} certificate, maximum property,
+base, hierarchy \(H_1'\), goodness \(g_1'\), and same-good
 data.  The terminal observation makes \(\varepsilon_1\) missing at
 \(y_p\), while its stage witness is retained.  Package the resulting
 non-elementary objects into a replacement presentation \(P_1'\), filling
@@ -594,8 +613,9 @@ put
 and invoke \noderef{StableChangeCasesOneTwo} relative to \(P_1'\) before
 using its weak stability.
 
-Equation (29) excludes epsilon from the prefix, and (21), transported
-through (28), excludes theta there.  The divider-zero seed exception is
+Equation (29), derived using the avoidance field of
+\noderef{GoodHierarchy}, excludes epsilon from the prefix, and (21),
+transported through (28), excludes theta there.  The divider-zero seed exception is
 impossible because (21) put theta outside raw \(D_n\), while epsilon is a
 Gamma color and hence not stored.  Therefore every exact edge from \(A\)
 through \(B^+\) is fixed.  Instantiate (8) for the fifth and final time,
@@ -609,7 +629,8 @@ It gives
 
 Construct the third split-tail route from the actual intermediate ETT
 \(\mathcal E_1'=P_1'.\mathit{corresponding}.\mathit{replacementETT}\).
-Its positive terminal certificate
+Unfolding \noderef{CorrespondingExtendedTashkinovTree}, rung agreement with
+the original ETT makes its terminal certificate positive:
 \[
  \mathcal E_1'.\mathit{series}.\mathit{certified}
        (\operatorname{Fin.last}\mathcal E_1'.\mathit{rounds})
@@ -634,8 +655,8 @@ route at \(B^+\), and at \(A\) whenever the source lies below \(A\).
 Unit-length induction on \noderef{TashkinovAugmentationSequence} factors
 it at the unique exact prefix of length \(|A|\).  Transport the first
 piece by the positive-divider \noderef{TreeColoringInvariant}; at
-divider-zero PE, use the two missing-set clauses of the combined
-\noderef{StableColoring}, the exact edge equalities from
+divider-zero PE, unfold \noderef{CombinedStableColoring} and use its two
+\noderef{StableColoring} missing-set clauses, the exact edge equalities from
 \noderef{CombinedStableClosurePreserved}, and the replacement base's exact
 \noderef{OrderedTreeUnion} to replay every first-piece augmentation.
 Transport the
@@ -655,17 +676,20 @@ Under \(\mu_1'\), the suffix \(B^+\to T\) is the one
 \noderef{TashkinovAugmentation} adding \(e_p\): (26) fixed that edge with
 color theta, and (28) preserves theta missing at \(y_{p-1}\).  Equation
 (32) leaves both epsilon and theta missing on the split prefix.  Neither
-affected color is stored: epsilon is in a Gamma pair and theta is excluded
+affected color is stored: \noderef{GoodHierarchyReservedDisjoint} puts
+epsilon outside the stored colors, and theta is excluded
 by (21), so every stored first position is globally unaffected.  Theta
 lies in no Gamma pair by (21).  If epsilon belongs to the Gamma pair of a
-stored \(\eta\), pairwise disjointness and its membership in
-\(\Gamma^q_\alpha\) force \(\eta=\alpha\); alpha's first missing witness
+stored \(\eta\), the pairwise-disjointness field of
+\noderef{GoodHierarchy} and its membership in \(\Gamma^q_\alpha\) force
+\(\eta=\alpha\); alpha's first missing witness
 lies in \(B\), so its position is at most \(|B|<|B^+|\).  This separately
 checks split missingness, every stored first position, and the Gamma cutoff.
 
 The hypotheses of \noderef{StableChangeCasesOneTwoSplitTail} are now all
-proved.  Its full-tree output is relative to \(P_1'\).  Compose its
-correspondence and same-good data back to the original ETT and hierarchy,
+proved.  Its full-tree output is relative to \(P_1'\).  Unfold
+\noderef{CorrespondingExtendedTashkinovTree} and compose its correspondence
+and same-good data back to the original ETT and hierarchy,
 using \noderef{sc2} in every positive stable slot, and build the
 counterexample and six minimum-context fields by the same explicit
 fieldwise construction as before.
