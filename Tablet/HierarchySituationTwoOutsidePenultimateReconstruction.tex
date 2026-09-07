@@ -1,0 +1,188 @@
+\begin{lemma}[Reconstruction after a component outside the penultimate prefix]
+Fix a minimum hierarchy counterexample and a raw
+\noderef{HierarchySituationTwoCaseThreeData} \(D\).  Put
+\[
+ B=T(y_{p-2})=\noderef{HierarchyFullTailPrefix}(C,\ell-2),
+ \qquad
+ B^+=T(y_{p-1})=\noderef{HierarchyFullTailPrefix}(C,\ell-1),
+\]
+and let \(y_p\) be the terminal vertex stored by \(D\).  Suppose that a
+color \(\beta\) is missing on \(B\), is absent from every exact edge of
+the full tail above \(T_{n,q}^{*}\), and satisfies one of the following
+three alternatives:
+\begin{enumerate}
+\item \(q>0\) and
+      \(\beta\notin D_{n,q}\cup\Gamma^q\);
+\item \(q=0\) and
+      \(\beta\notin D_n\cup\Gamma^0\), where \(D_n\) is the raw terminal
+      ladder stored set;
+\item \(\beta\in D_{n,q}\) and
+      \(\Gamma^q_\beta\) is disjoint from the colors of all exact edges
+      of the full tail.
+\end{enumerate}
+Assume that \(\beta\) is not missing at \(y_p\).  Let
+\[
+ Q=P_{y_p}(\alpha,\beta,\varphi_n),
+ \qquad
+ \sigma_n=\varphi_n/Q,
+\]
+where \(\alpha=D.\alpha\), and assume that every vertex of \(Q\) is
+outside \(B^+\).  Then \(Q\) contains \(y_p\), so it is not outside the
+full tree \(T\).  Nevertheless there is a
+\noderef{HierarchyReplacementPresentation} \(P\) on the same exact
+ordered tree \(T\), with \(P.\mathit{coloring}=\sigma_n\), and a
+\noderef{HierarchySituationTwoCaseThreeNormalizedData} \(N\) for \(P\)
+whose normalized color is \(N.\alpha=\beta\).  In particular the returned
+presentation contains an actual corresponding same-rung ETT, maximum
+property, a rebuilt good hierarchy and counterexample, and the transported
+minimum context with all six lower-rung assertions.
+\end{lemma}
+\begin{proof}
+Write \(H=C.\mathit{hierarchy}\), let \(q\) be its last divider index,
+put \(A=T_{n,q}^{*}\), and retain the exact displayed indices from \(D\).
+The two position equations in
+\noderef{HierarchySituationTwoCommonTailData} identify \(B^+\) with the
+prefix obtained by deleting precisely the last edge \(e_p\) and last
+vertex \(y_p\) from \(T\).  They also put \(y_p\) in
+\(\noderef{TreeSequenceVertexSet}(T)\).  The root of a
+\noderef{TwoColorComponent} belongs to its own component.  Hence
+\(y_p\in Q\), proving both the first asserted membership and the fact that
+\(Q\) meets \(T\).  The assumed disjointness says only that \(Q\) is
+outside \(B^+\), as required; it does not make \(Q\) an outside component
+of \(T\).
+
+The raw datum says that \(\alpha\) is missing at \(y_p\), whereas the
+present hypothesis says that \(\beta\) is not missing there.  Thus
+\(\alpha\ne\beta\).  Use the singleton root set \(\{y_p\}\) in the
+definition of \noderef{OutsideKempeRecoloring}.  The component-disjointness
+hypothesis gives its outside clause, and the pointwise equation defining
+\noderef{TwoColorComponentSwap} gives its coloring clause.  Therefore
+\[
+ \sigma_n\text{ is an outside Kempe recoloring of }B^+,
+                                                               \tag{1}
+\]
+but, by the preceding paragraph, (1) is deliberately not asserted for
+\(T\).
+
+We next repackage the old hierarchy on the exact prefix \(B^+\).  The
+common-tail inequality \(\ell\ge2\), together with the definition of
+\noderef{HierarchyFullTailPrefix}, gives
+\[
+ A\prec B^+\prec T,
+ \qquad |T|=|B^+|+1.                                      \tag{2}
+\]
+Apply \noderef{GoodHierarchyTerminalPrefixRepackage} to (2).  It gives a
+positive-rung ETT \(\mathcal E^+\) on \(B^+\), with maximum property, the
+same certified ladder series and rung number as the original ETT, a base
+with the same core and PE closure, and a good hierarchy \(H^+\).  At each
+divider its ordinary and starred stages, computed stored set, stage-missing
+set, and Gamma pair are the corresponding old objects; the segment-color
+sets are the exact restrictions to \(B^+\).
+
+Now apply \noderef{HierarchyLEMStable} to \(\mathcal E^+\), \(H^+\), and
+the outside recoloring (1).  Its lower-rung premise is exactly the
+lower-rung field of the supplied
+\noderef{HierarchyMinimumCounterexampleContext}; positivity and maximum
+property came from the prefix repackaging.  The result yields
+\[
+ \begin{split}
+ &\sigma_n\text{ proper and exactly-one-uncolored},\\
+ &\sigma_n\text{ stable on the terminal ladder tree and invariant on }B^+,
+                                                               \tag{3}\\
+ &\text{a corresponding maximum ETT and the copied good hierarchy on }B^+.
+ \end{split}
+\]
+This is the only invocation of the outside-Kempe hierarchy lemma; its tree
+argument is \(B^+\), never \(T\).
+
+We transport the old terminal augmentation route, including its last
+individual edge.  Let \(T_n\) be the last ladder tree.  In the PE case the
+terminal constructor in \noderef{TashkinovSeriesStep}, unfolded through
+\noderef{TashkinovClosure}, supplies a Tashkinov-augmentation route from
+\(T_n\) to the final closure.  In the SE or RE case it supplies the exact
+singleton connecting edge \(f_n\), the exact seed \(T_n+f_n\), and a route
+from that seed to the final closure.  Since the ETT places \(T\) as an
+exact initial segment of that closure,
+\noderef{TashkinovAugmentationSequenceRestrict} truncates the route at
+the exact \(T\).  It also truncates it at \(B^+\).  Thus the final step of
+the retained route is the displayed pair \((e_p,y_p)\), not an isomorphic
+or parallel replacement edge.
+
+The invariant part of (3) gives equality of the two missing-color sets at
+every vertex of \(B^+\).  Every route edge preceding \(e_p\) is incident
+with \(B^+\), and hence is fixed by (1).  For \(e_p\), the raw terminal
+missingness of \(\alpha\) and the incidence of \(e_p\) with \(y_p\) show
+\(\varphi_n(e_p)\ne\alpha\).  The candidate \(\beta\) is absent from every
+full-tail edge, so in particular
+\(\varphi_n(e_p)\ne\beta\).  Consequently the component swap fixes the
+individual edge \(e_p\) as well.  We may therefore apply
+\noderef{TashkinovAugmentationSequenceColoringTransport}, with \(B^+\) as
+the penultimate prefix and \(T\) as the target.  Its two pointwise premises
+are exactly the missing-set equality from (3) and the edge equalities just
+proved.  The result is the identical terminal augmentation route under
+\(\sigma_n\), including \(e_p\); call this conclusion (4).
+
+The stable ladder-tree clause of (3), together with properness and exact
+one-uncoloredness, may now be passed to \noderef{Td}.  We use the original
+ETT, whose terminal ladder data agree with those of \(\mathcal E^+\), and
+again use the lower-rung field of the minimum context.  This gives
+\[
+                 \noderef{ModColoring}(\mathcal E,\sigma_n).   \tag{5}
+\]
+For PE, (4) is the first eligibility branch of the universal clause in
+(5).  For SE or RE, the retained exact singleton \(f_n\), its exact
+one-edge seed, and (4) give the second branch.  Hence (5) produces an
+actual \noderef{CorrespondingExtendedTashkinovTree} on the full exact
+\(T\).  Applying \noderef{MaximumPropertyTransport} to this certificate
+and the old maximum property gives maximum property for the replacement
+ETT.
+
+It remains to rebuild the hierarchy and the minimum presentation, rather
+than merely naming alternative (a).  Copy the old core, closure, divider
+count, exact stages, and divider positions to the replacement ETT.  All
+nonterminal ordinary stages and every starred stage lie in \(B^+\), so (3) identifies
+their vertexwise missing sets.  The component swap changes no displayed
+edge of \(T\): the prefix edges are fixed by (1), while \(e_p\) was checked
+separately above.  Thus every computed stored set is unchanged.  For each
+stored color potentially affected by the swap, its first missing occurrence
+is already in $B^+$: if it is $\alpha$, use the raw earlier witness in $B$,
+and if it is $\beta$, use the candidate witness in $B$.  Every other stored
+color is untouched by the two-color swap.
+Consequently every hierarchy segment-color set is unchanged.  Copying the
+old Gamma function now verifies, one field at a time, the pair cardinality,
+avoidance, pairwise disjointness, unique refresh, PE-base clause, and
+minus-closed clauses of \noderef{GoodHierarchy}.  This constructs a
+same-good replacement hierarchy on \(T\), without applying
+\noderef{HierarchyLEMStable} to \(T\).
+
+The candidate \(\beta\) is missing at a vertex of \(B\).  That vertex lies
+in \(B^+\), so (3) preserves its missingness.  Swapping the component at
+\(y_p\), where \(\alpha\) was missing and \(\beta\) was present, makes
+\(\beta\) missing at \(y_p\).  These are distinct displayed vertices by
+(2); hence the replacement terminal vertex set is not elementary.  With
+the maximum and good-hierarchy data already established, this gives the
+replacement \noderef{HierarchyCounterexample}.
+
+Finally transport the minimum-context fields explicitly.  Properness and
+exact one-uncoloredness are in (3).  The six lower-rung assertions and the
+fewer-divider induction are graph- and rung-local universal hypotheses, so
+copy verbatim.  Same-goodness identifies the divider count and every exact
+stage.  It therefore identifies both coordinates of
+\noderef{HierarchyCounterexampleMeasure}; the old lexicographic-minimality
+field proves the new one after this equality.  Stability on \(T_n\) in (3)
+identifies its tree-missing set, so the old \(2n+11\) estimate is retained.
+These are precisely all fields of
+\noderef{HierarchyMinimumCounterexampleContext}, and hence all fields of
+the required \noderef{HierarchyReplacementPresentation}.
+
+For the normalized datum, retain all exact indices and the same last-edge
+color \(\theta\), since the individual edge \(e_p\) is fixed.  Choose as
+the earlier witness a displayed vertex of \(B\) at which \(\beta\) is
+missing; its index is strictly before that of \(y_{p-1}\) by (2).  The two
+missing-vertex assertions were proved above.  Missingness on (B), full
+tail nonuse, and the three-way normalized alternative are respectively
+the three hypotheses on \(\beta\), transported through the established
+prefix invariance and edge equality.  This fills every field of
+\noderef{HierarchySituationTwoCaseThreeNormalizedData}, with normalized
+color \(\beta\), and completes the reconstruction.
+\end{proof}

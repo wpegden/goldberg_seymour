@@ -1,0 +1,366 @@
+\begin{lemma}[Normalizing Situation 7.2 Case 3]
+Fix a minimum hierarchy counterexample and a raw
+\noderef{HierarchySituationTwoCaseThreeData} \(D\).  Thus
+\(p(T)=\ell\ge2\), and its color \(\alpha\) is missing at the terminal
+vertex \(y_p\) and at an explicitly displayed vertex
+\(v\prec y_{p-1}\).  Then there is a
+\noderef{HierarchyReplacementPresentation} \(P\) on the same exact
+terminal tree \(T\) for which Case 3 has a
+\noderef{HierarchySituationTwoCaseThreeNormalizedData}.  Equivalently,
+after passing to an actual corresponding same-rung maximum ETT and
+transporting the complete minimum context when necessary, condition (20)
+may be assumed.  The conclusion is independent of whether the last-edge
+color \(\theta\) is missing at \(y_{p-1}\).
+\end{lemma}
+\begin{proof}
+Write \(H=C.\mathit{hierarchy}\), let \(q\) denote its divider count and
+also use \(q\) for the last finite divider index, and put
+\[
+ A=T_{n,q}^{*}=\noderef{HierarchyStarredStage}(H,q),\qquad
+ \ell=\noderef{HierarchyFullTailLength}(C).
+\]
+For \(0\le i\le\ell\), write
+\(T(y_i)=\noderef{HierarchyFullTailPrefix}(C,i)\).  In particular set
+\[
+ B=T(y_{p-2})=T(y_{\ell-2}),
+ \qquad B^+=T(y_{p-1})=T(y_{\ell-1}).                           \tag{1}
+\]
+The common-tail data give \(\ell\ge2\).  Hence all indices in (1) are
+defined, \(A\preccurlyeq B\prec B^+\prec T\), and \(T-B\) consists of
+precisely the last two individual edges.  The position equations in
+\noderef{HierarchySituationTwoCommonTailData} identify those last two
+positions with the displayed penultimate and terminal additions; no count
+of endpoint pairs is being substituted for a count of edge identities.
+
+First derive the prefix-elementarity premise needed for counting.  Apply
+\noderef{HierarchyCounterexamplePenultimateElementary} using properness,
+exact one-uncoloredness, the six lower-rung assertions, fewer-divider
+induction, lexicographic minimality, and the \(2n+11\) estimate, all of
+which are fields of
+\noderef{HierarchyMinimumCounterexampleContext}.  We obtain
+\[
+                       V(B^+)\text{ is elementary}.            \tag{2}
+\]
+
+We now apply \noderef{NineN} at the exact index \(i=\ell-2<\ell\).
+Use the notation of that lemma:
+\[
+ X=(\overline\varphi_n(B)\setminus M_0)\setminus U_{\ell-2},
+ \quad D=D_{n,q},\quad
+ \Gamma^q=\bigcup_{\eta\in D}\Gamma^q_\eta,                  \tag{3}
+\]
+where \(M_0\) is the set of colors missing on
+\(T_{n,0}^{*}-V(T_n)\), and \(U_{\ell-2}\) is the set of colors on the
+exact prefix-tail edges from \(A\) through \(B\).  The hypotheses of
+\noderef{NineN} are (2) and the large-set field of the context.  Its first
+conclusion gives
+\[
+                         |X|\ge2n+11.                           \tag{4}
+\]
+
+We split according to the size of
+\(X\setminus(\Gamma^q\cup D)\).
+
+Suppose first that
+\[
+                 |X\setminus(\Gamma^q\cup D)|\ge5.             \tag{5}
+\]
+Passing from the edge interval ending at \(B\) to the full tail adds
+exactly the two final edge identities.  Their two colors delete at most
+two members of the set in (5).  Consequently at least three colors remain.
+Choose one and call it \(\beta\).  Directly from (3) and the choice,
+\[
+ \beta\in\overline\varphi_n(B),
+ \quad \beta\notin M_0,
+ \quad \beta\notin\varphi_n\langle T-A\rangle,
+ \quad \beta\notin D_{n,q}\cup\Gamma^q.                       \tag{6}
+\]
+When \(q>0\), (6) is the first alternative required in (21).
+
+At \(q=0\), the required statement is stronger: it excludes \(\beta\)
+from the raw \(D_n\), not only from \(D_{n,0}\).  We verify it rather than
+silently identifying the two sets.  By
+\noderef{HierarchyStoredColorsAt},
+\[
+                  D_{n,0}=D_n\setminus\overline\varphi_n(A).   \tag{7}
+\]
+If \(\beta\in D_n\), then \(\beta\notin D_{n,0}\) from (6) and (7)
+would force \(\beta\in\overline\varphi_n(A)\).  A raw stored color is
+not missing on \(T_n\), by the defining subtraction in
+\noderef{TashkinovStoredColors}.  Since at divider zero \(A\) is the
+hierarchy core, every remaining vertex of \(A\) lies in
+\(T_{n,0}^{*}-V(T_n)\).  Thus \(\beta\in M_0), contradicting (6).
+Therefore
+\[
+                 \beta\notin D_n\cup\Gamma^0                 \tag{8}
+\]
+when \(q=0\).  This is precisely the raw-set upgrade at paper line 4210.
+
+Now suppose instead that
+\[
+                 |X\setminus(\Gamma^q\cup D)|\le4.             \tag{9}
+\]
+The second conclusion of \noderef{NineN} supplies an injectively indexed
+family \((\eta_h)_{h\in\operatorname{Fin}7}\) such that, for every \(h\),
+\[
+ \eta_h\in D\cap\overline\varphi_n(B),
+ \qquad
+ (\Gamma^q_{\eta_h}\cup\{\eta_h\})\cap U_{\ell-2}=\varnothing.\tag{10}
+\]
+These seven three-color blocks are pairwise disjoint.  Indeed, injectivity
+makes their stored colors distinct; the `disjointPairs' field of
+\noderef{GoodHierarchy} separates their Gamma pairs; and
+\noderef{GoodHierarchyReservedDisjoint} says that the full Gamma union is
+disjoint from \(D\).  Each of the two final edge colors can therefore meet
+at most one block.  Since there are seven blocks, choose \(h\) whose entire
+block meets neither final edge color, and put \(\beta=\eta_h\).  Combining
+this choice with (10) gives
+\[
+ \beta\in D_{n,q}\cap\overline\varphi_n(B),
+ \qquad
+ (\Gamma^q_\beta\cup\{\beta\})
+       \cap\varphi_n\langle T-A\rangle=\varnothing.             \tag{11}
+\]
+
+Thus in both size branches we have selected a color \(\beta\) satisfying
+\[
+ \beta\in\overline\varphi_n(B)
+       \setminus\varphi_n\langle T-A\rangle,                   \tag{12}
+\]
+together with exactly one of: the positive-divider exclusion in (6), the
+divider-zero raw exclusion (8), or the stored-color alternative (11).
+This is condition (21), with every exact edge of the full tail accounted
+for.
+
+We next turn (12) into a normalized Case 3 presentation.  If
+\(\beta\in\overline\varphi_n(y_p)\), take the identity replacement
+presentation.  Concretely, reuse the original input, series, ETT, base,
+hierarchy, good-hierarchy certificate, counterexample, and all fields of
+the minimum context.  The identity equalities fill every field of
+\noderef{CorrespondingExtendedTashkinovTree}, so this is an actual
+\noderef{HierarchyReplacementPresentation}, not a bare assertion that no
+recoloring occurred.  Choose from (12) a vertex of \(B\) missing
+\(\beta\).  Its displayed index is strictly before \(y_{p-1}\) by (1),
+while \(\beta\) is also missing at \(y_p\).  Equations (6), (8), or (11),
+together with (12), fill the inherited raw Case 3 fields and all fields of
+\noderef{HierarchySituationTwoCaseThreeNormalizedData}.  This proves the
+theorem in this branch.
+
+Assume henceforth that \(\beta\notin\overline\varphi_n(y_p)\).  The raw
+Case 3 hypothesis gives
+\(\alpha\in\overline\varphi_n(y_p)\), so \(\alpha\ne\beta\).  Let
+\[
+ Q=P_{y_p}(\alpha,\beta,\varphi_n),
+ \qquad \sigma_n=\varphi_n/Q.                                 \tag{13}
+\]
+Properness from the context and
+\noderef{TwoColorComponentSpanningPath} allow us to traverse \(Q\) as a
+finite simple alternating path starting at \(y_p\).
+
+If \(Q\) has no vertex in \(B^+\), apply
+\noderef{HierarchySituationTwoOutsidePenultimateReconstruction}.  Its
+candidate hypotheses are exactly (12) and the appropriate one of (6),
+(8), and (11), and its terminal-present hypothesis is the present branch
+assumption.  The cited lemma returns an actual replacement presentation
+on \(T\) and normalized datum with color \(\beta\).  Notice that this use
+treats \(Q\) as outside \(B^+\) only; since \(y_p\in Q\cap V(T)\), it does
+not invoke \noderef{HierarchyLEMStable} on the full \(T\).
+
+It remains to suppose that \(Q\) meets \(B^+\).  Let \(u\) be the first
+vertex of \(B^+\) encountered while traversing the path from \(y_p\).  If
+\(u=y_{p-1}\), form the exact tree-sequence
+\[
+                      T'=B^+\cup Q[u,y_p];                     \tag{14a}
+\]
+otherwise form
+\[
+                      T'=B\cup Q[u,y_p].                       \tag{14b}
+\]
+In either formula the union means: retain the indicated ordered prefix
+entry by entry, then append in traversal order the individual path-edge
+identities and new path vertices from \(u\) to \(y_p\).  Firstness of \(u\)
+and simplicity of the spanning path show that each appended vertex is new;
+looplessness and the edge/vertex incidence equations show that every append
+is an exact tree-sequence extension.  Both \(\alpha\) and \(\beta\) are
+missing on \(B\): the former because its raw witness precedes \(y_{p-1}\),
+and the latter by (12).  The alternating path can therefore be appended by
+\noderef{TashkinovAugmentation}s under \(\varphi_n\).  Here is the exact
+route argument.  In the PE terminal constructor of
+\noderef{TashkinovSeriesStep}, \noderef{TashkinovClosure} gives a route
+from \(T_n\) to the final closure.  In the SE or RE constructor it records
+the individual connecting edge \(f_n\), its one-edge seed, and the route
+from that seed.  Since \(B\), \(B^+\), and \(T\) are exact prefixes of the
+same final closure, \noderef{TashkinovAugmentationSequenceRestrict}
+retains the appropriate route up to the base used in (14).  Append the
+edges of \(Q[u,y_p]\) in their traversal order.  For the first append its
+edge color is one of \(\alpha,\beta\), both of which are tree-missing on
+the starting prefix.  Inductively, alternation shows that the next edge
+color is still missing either at its original witness in \(B\), or at the
+new endpoint of the preceding path edge.  Firstness of \(u\) ensures that
+this endpoint is new.  This proves a Tashkinov-augmentation sequence to
+the exact tree \(T'\).
+
+Apply \noderef{Td} to the original ETT with \(\sigma=\varphi_n\):
+properness and exact one-uncoloredness are fields of the minimum context,
+stability is reflexive, and the lower-rung package is the context's six
+assertions.  Thus \(\noderef{ModColoring}(\mathcal E,\varphi_n)\).
+The route just constructed satisfies the PE or exact SE/RE eligibility
+branch in its universal clause, and therefore gives an actual
+\noderef{CorrespondingExtendedTashkinovTree} on \(T'\).
+\noderef{MaximumPropertyTransport} transfers the original maximum
+property to it.  This accounts separately for the ETT and maximum data
+rather than treating them as automatic consequences of adjoining a path.
+
+The corresponding-ETT certificate identifies all ladder trees, extension
+kinds, connecting edges, and stored data.  Therefore the core, closure,
+support position, PE clause, and non-PE clause of
+\noderef{HierarchyBase} copy to a base on the new ETT.  Define a
+\noderef{TashkinovHierarchy} with the old divider count and all old
+nonterminal stages, and with terminal stage \(T'\).  Its nesting and
+strictness follow from the exact-prefix construction (14); its divider
+positions and divider-stage equalities are unchanged.  Thus all computed
+stored sets and all stage-missing sets are unchanged.  We retain the old
+Gamma pairs.  Their cardinality, pairwise disjointness, unique-refresh,
+PE-base, and minus-closed fields copy literally.  In the two branches
+below we check the sole remaining issue, namely avoidance from the new
+terminal segment-color sets.
+
+By the choice of the first intersection, the new alternating segment
+begins no later than the final path tail of \(T\), and the definition in
+(14) discards at least one old path-tail step.  Hence
+\[
+                         p(T')<p(T).                            \tag{15}
+\]
+
+The candidate \(\beta\) is outside \(\Gamma^q\) in every alternative.
+This is explicit in (6) and (8).  In (11), it follows from
+\(\beta\in D_{n,q}\) and the disjointness conclusion of
+\noderef{GoodHierarchyReservedDisjoint}.  We now consider the three
+possible positions of the original \(\alpha\).
+
+If \(\alpha\notin\Gamma^q\), copy all old hierarchy stages and Gamma
+pairs to \(T'\).  Their avoidance clauses survive because both colors used
+to append (14) are outside \(\Gamma^q\).  Together with the copied fields
+checked above, this gives a good hierarchy with the same divider count.
+The two old \(\alpha\)-missing vertices, the
+earlier one in \(B\) and \(y_p\) on the appended path, both lie in \(T'\),
+so \(T'\) is not elementary.  We have therefore constructed a genuine
+hierarchy counterexample \(C'\).
+
+Suppose next that
+\(\alpha\in\Gamma^q\cap\varphi_n\langle T-A\rangle\).  The last edge is
+not colored \(\alpha\), since it is incident with the vertex \(y_p\) at
+which \(\alpha\) is missing.  Hence an \(\alpha\)-colored tail edge occurs
+already before \(B^+\).  Write \(\alpha\in\Gamma^q_\eta\).  The avoidance
+field of \noderef{GoodHierarchy}, evaluated at the first such segment,
+puts the stored color \(\eta\) in
+\(\overline\varphi_n(B)\).  Together with
+\(\beta\in\overline\varphi_n(B)\) and
+\(\beta\notin\Gamma^q\), this verifies the same avoidance clauses for the
+hierarchy on \(T'\): every newly appended \(\alpha\)-edge occurs after the
+first \(\eta\)-missing position, and the other appended color is not a
+Gamma color.  The preceding copied-field argument now constructs the
+complete good hierarchy.  Again the old \(\alpha\)-missing vertices make its
+terminal set non-elementary, so this branch also produces a genuine
+counterexample \(C'\) with the same rung and divider count.
+
+In each of these first two subbranches, (15) strictly decreases the first
+coordinate of
+\noderef{HierarchyCounterexampleMeasure}.  Therefore
+\[
+ \noderef{HierarchyCounterexampleLess}
+   (\noderef{HierarchyCounterexampleMeasure}(C'),
+    \noderef{HierarchyCounterexampleMeasure}(C))
+\]
+holds without inspecting the second coordinate.  This contradicts the
+lexicographic-minimality field of the supplied minimum context.  Thus both
+subbranches are eliminated.
+
+The only remaining case is
+\[
+          \alpha\in\Gamma^q
+             \setminus\varphi_n\langle T-A\rangle.             \tag{16}
+\]
+Choose \(\eta\in D_{n,q}\) with
+\(\alpha\in\Gamma^q_\eta\).  The avoidance field of
+\noderef{GoodHierarchy} puts \(\alpha\) in the corresponding
+\noderef{HierarchyStageMissingColors}: on the last ordinary stage when
+\(q>0\), and on \(T_n\) when \(q=0\).  In particular \(\alpha\) is missing
+on \(A\).  Both \(\alpha\) and \(\beta\) are missing on \(B^+\).
+
+We verify the conditional order premise of \noderef{ChangeLemma}.  If
+\(\beta\) is also missing on \(A\), the premise's antecedent is false,
+because both colors are missing there.  Otherwise the first
+\(\alpha\)-missing vertex lies in \(A\), while the first
+\(\beta\)-missing vertex lies after \(A\) and no later than its witness in
+\(B\).  Thus the former precedes the latter.  Equation (16) says that
+\(\alpha\) is unused on every exact edge after \(A\), so in particular it
+is unused up to that first \(\beta\)-missing vertex.  This is precisely the
+required order-and-unused implication.  The lower-rung, fewer-divider,
+same-rung minimality, prefix-elementarity, and large-set inputs are the
+corresponding fields of the minimum context and (2).  Finally, the
+stage-missing conclusion above supplies the positive-divider case of the
+lemma, or its \(T_n\)-missing divider-zero case.  Consequently
+\noderef{ChangeLemma} gives
+\[
+ P_{v_\alpha}(\alpha,\beta,\varphi_n)
+   =P_{v_\beta}(\alpha,\beta,\varphi_n),                     \tag{17}
+\]
+where \(v_\alpha\) and \(v_\beta\) are the respective first missing
+vertices.  Both belong to \(B^+\).
+
+The component in (17) is not \(Q\).  If
+\(v_\alpha=v_\beta\), that vertex misses both colors and hence is an
+isolated vertex of the two-color incidence graph, whereas \(Q\) also
+contains the distinct terminal vertex \(y_p\).  If they are distinct,
+the common component in (17) contains one vertex missing \(\alpha\) and
+one missing \(\beta\); equality with \(Q\) would add the third distinct
+degree-at-most-one vertex \(y_p\), which misses \(\alpha\).  Properness,
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, and
+\noderef{TwoColorComponentSpanningPath} make every such component a
+finite path, which has only two endpoints.  Both cases are impossible.
+The dichotomy in \noderef{TwoColorComponentsDisjoint} therefore makes
+\(Q\) disjoint from the component in (17).
+
+Now let \(x\in V(B^+)\).  Elementarity (2) says that if \(x\) misses
+\(\alpha\), then \(x=v_\alpha\), and if it misses \(\beta\), then
+\(x=v_\beta\).  Hence a vertex of \(Q\cap V(B^+)\) misses neither color.
+Properness gives it one incident edge of each color, both in \(Q\), and
+the swap exchanges those two edges together; its missing set is unchanged.
+At a vertex outside \(Q\), every incident edge is unchanged.  Thus every
+vertex of \(B^+\) has the same missing set under \(\sigma_n\) as under
+\(\varphi_n\).
+
+Equations (12) and (16) say that neither \(\alpha\) nor \(\beta\) colors
+an exact full-tail edge.  Hence the swap fixes every individual displayed
+edge of \(T\), including the two final edges.  The first missing position
+of every stored color is also fixed: a stored \(\alpha\) or \(\beta\)
+already has its first missing witness in \(B\), while all other colors are
+unchanged.  These facts verify, respectively, the full-tail edge,
+penultimate missing-set, and stored-first-position hypotheses of
+\noderef{StableChangeCasesOneTwoFullTail}.  Its Cases 1/2 premise is
+supplied with \(\alpha\) in the stage-missing slot, as just obtained from
+(16); no such premise is imposed on the candidate \(\beta\).  The cited
+theorem returns a weakly stable mod-coloring, an actual corresponding
+same-rung maximum ETT on the exact \(T\), and a rebuilt good hierarchy with
+the same stages, stored sets, and Gamma pairs.
+
+Under the swap (13), \(\beta\) becomes missing at \(y_p\), while its
+missing witness in \(B\) is preserved by the \(B^+\) missing-set equality.
+Thus the returned terminal tree is non-elementary and gives a genuine
+replacement counterexample.  Build the replacement minimum context as in
+\noderef{HierarchySituationTwoOutsidePenultimateReconstruction}: retain
+the universal six lower-rung and fewer-divider fields, transport
+lexicographic minimality across equality of the two measure coordinates,
+and transport the \(2n+11\) estimate across ladder-tree stability.  This
+fills a \noderef{HierarchyReplacementPresentation}.  Finally (12) and
+the appropriate alternative among (6), (8), and (11), transported across
+the full-tail edge equality and copied Gamma data, fill the normalized
+datum with color \(\beta\).
+
+Every branch that survives the shorter-\(T'\) contradiction has now
+returned both an actual replacement presentation and a complete normalized
+Case 3 datum.  The argument never uses any assertion about whether
+\(\theta\) is missing at \(y_{p-1}\), so the normalization is common to
+Subcases 3.1 and 3.2.
+\end{proof}
