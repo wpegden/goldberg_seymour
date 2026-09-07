@@ -76,8 +76,46 @@ theorem HierarchySituationTwoReorderedTreesCertified {V E : Type*}
         ∃ corrMinus : CorrespondingExtendedTashkinovTree
             G k e0 ett phi R.minus,
           MaximumProperty corrMinus.replacementETT ∧
-            ∃ corrStar : CorrespondingExtendedTashkinovTree
-                G k e0 ett phi R.star,
-              MaximumProperty corrStar.replacementETT := by
+            ∃ baseMinus : HierarchyBase corrMinus.replacementETT phi,
+              baseMinus.core = base.core ∧
+                baseMinus.closure = base.closure ∧
+                baseMinus.supportPosition.val = base.supportPosition.val ∧
+                ∃ HMinus : TashkinovHierarchy
+                    corrMinus.replacementETT baseMinus,
+                  ∃ hMinusCount :
+                      HMinus.dividerCount = C.hierarchy.dividerCount,
+                    (∀ j : Fin (HMinus.dividerCount + 1),
+                        HMinus.stage j.castSucc =
+                          C.hierarchy.stage
+                            (Fin.cast
+                              (congrArg (fun d => d + 1) hMinusCount) j).castSucc) ∧
+                      (∀ j : Fin HMinus.dividerCount,
+                        (HMinus.dividerPosition j).val =
+                          (C.hierarchy.dividerPosition
+                            (Fin.cast hMinusCount j)).val) ∧
+                      ∃ corrStar : CorrespondingExtendedTashkinovTree
+                          G k e0 ett phi R.star,
+                        MaximumProperty corrStar.replacementETT ∧
+                          ∃ baseStar : HierarchyBase
+                              corrStar.replacementETT phi,
+                            baseStar.core = base.core ∧
+                              baseStar.closure = base.closure ∧
+                              baseStar.supportPosition.val =
+                                base.supportPosition.val ∧
+                              ∃ HStar : TashkinovHierarchy
+                                  corrStar.replacementETT baseStar,
+                                ∃ hStarCount :
+                                    HStar.dividerCount =
+                                      C.hierarchy.dividerCount,
+                                  (∀ j : Fin (HStar.dividerCount + 1),
+                                      HStar.stage j.castSucc =
+                                        C.hierarchy.stage
+                                          (Fin.cast
+                                            (congrArg (fun d => d + 1)
+                                              hStarCount) j).castSucc) ∧
+                                    ∀ j : Fin HStar.dividerCount,
+                                      (HStar.dividerPosition j).val =
+                                        (C.hierarchy.dividerPosition
+                                          (Fin.cast hStarCount j)).val := by
 -- BODY
   sorry

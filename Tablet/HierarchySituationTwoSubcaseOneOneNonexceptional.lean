@@ -11,12 +11,15 @@ import Tablet.HierarchyMinimumCounterexampleContext
 import Tablet.HierarchyFullTailLength
 import Tablet.HierarchyFullTailPrefix
 import Tablet.HierarchyPathNumber
+import Tablet.HierarchySegmentColors
 import Tablet.HierarchySituationTwoCaseOneData
 import Tablet.HierarchySituationTwoReorderedTrees
 import Tablet.HierarchySituationTwoReorderedTreesCertified
 import Tablet.HierarchySituationTwoTailData
 import Tablet.HierarchyStarredStage
+import Tablet.HierarchyStageMissingColors
 import Tablet.HierarchyStoredColorsAt
+import Tablet.IsProperEdgeColoring
 import Tablet.MaximumProperty
 import Tablet.MissingColors
 import Tablet.SameGoodHierarchy
@@ -24,10 +27,7 @@ import Tablet.TashkinovHierarchy
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequence
 import Tablet.TreeSequenceVertexSet
-import Tablet.TwoColorComponent
-import Tablet.TwoColorComponentsDisjoint
 import Tablet.TwoColorComponentSpanningPath
-import Tablet.TwoColorIncidenceDegreeAtMostTwo
 
 -- [TABLET NODE: HierarchySituationTwoSubcaseOneOneNonexceptional]
 theorem HierarchySituationTwoSubcaseOneOneNonexceptional {V E : Type*}
