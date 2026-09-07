@@ -1,0 +1,201 @@
+\begin{lemma}[Situation 7.2, Subcase 2.1 outside the Gamma exception]
+Let \(D\) be a \noderef{HierarchySituationTwoCaseTwoData}.  Put
+\[
+ q=C.\mathit{hierarchy}.\mathit{dividerCount},\qquad
+ D_{n,q}=\noderef{HierarchyStoredColorsAt}(C.\mathit{hierarchy},q).
+\]
+Suppose that the paper's exceptional Gamma condition fails exactly, namely
+\[
+ \neg\exists\eta\in D_{n,q}\quad
+   \eta\in\overline\varphi_n(y_{p-1})
+   \quad\hbox{and}\quad \theta\in\Gamma^q_\eta .            \tag{1}
+\]
+Then a contradiction follows.
+\end{lemma}
+\begin{proof}
+Write \(\mathcal B\) for the supplied hierarchy base.  Put
+\(H=C.\mathit{hierarchy}\),
+\(A=\noderef{HierarchyStarredStage}(H,q)\),
+\(\ell=\noderef{HierarchyFullTailLength}(C)\), and
+\[
+ B=\noderef{HierarchyFullTailPrefix}(C,\ell-2),\qquad
+ B^+=\noderef{HierarchyFullTailPrefix}(C,\ell-1).
+\]
+The exact prefix definitions, the stage chain in
+\noderef{TashkinovHierarchy}, and \(\ell\ge2\) give
+\[
+ A\preccurlyeq B\preccurlyeq B^+\preccurlyeq T,\qquad
+ |B|=|T|-2,\quad |B^+|=|T|-1.                              \tag{2}
+\]
+Apply \noderef{HierarchySituationTwoCaseTwoExclusions}.  Its three
+conclusions are
+\[
+ \alpha\notin\overline\varphi_n(B),\qquad
+ \alpha\notin D_n,\qquad
+ \alpha\notin\varphi_n\langle T-A\rangle,                  \tag{3}
+\]
+where the last assertion quantifies over every exact displayed edge
+identity at a position at least \(|A|\).  Apply
+\noderef{HierarchyCounterexamplePenultimateElementary} to the six fields
+of the supplied \noderef{HierarchyMinimumCounterexampleContext}; it gives
+\[
+              V(B^+)\text{ is elementary under }\varphi_n. \tag{4}
+\]
+
+Invoke \noderef{HierarchySituationTwoReorderedTreesCertified} on the
+underlying tail datum of \(D\).  Retain its exact
+\noderef{HierarchySituationTwoReorderedTrees} \(R=(T^-,T^*)\), the PE or
+exact-seed SE/RE augmentation route for each tree, both actual
+\noderef{CorrespondingExtendedTashkinovTree} certificates and maximum
+properties, and bases \(\mathcal B^-,\mathcal B^*\) with hierarchies
+\(H^-,H^*\).  The certificate says, entry by entry,
+\[
+ B+(e_p,y_p)=T^-,\qquad
+ T^-+(e_{p-1},y_{p-1})=T^*,                                \tag{5}
+\]
+that \(V(T^-)=V(T)\setminus\{y_{p-1}\}\), that
+\(V(T^*)=V(T)\), and that both copied hierarchies have the old core,
+closure, divider count, internal stages, and numerical divider positions.
+
+We construct actual \noderef{GoodHierarchy} witnesses \(Q^-\) and
+\(Q^*\), rather than treating them as consequences of correspondence.
+Transport the old Gamma function across the certified divider-count
+equality.  Exact agreement of the raw stored series data, core, and every
+internal stage identifies each \noderef{HierarchyStoredColorsAt} and each
+stage-missing set.  Hence the two-color, disjoint-pair, refresh,
+parallel-base, and minus-closed fields are literally the corresponding
+old fields.  Avoidance for an index below \(q\) is also old avoidance,
+because both ends of its segment are retained stages.
+
+For avoidance at \(q\), fix \(\zeta\in D_{n,q}\) and
+\(c\in\Gamma^q_\zeta\).  If \(\zeta\) has a missing witness in \(B\),
+its least position and all earlier edge entries are unchanged in both
+reorderings, so old avoidance applies.  Suppose it has no witness in
+\(B\).  Deleting \(e_{p-1}\) can remove a constraint but cannot add one;
+the only individual edge moved earlier is \(e_p\), whose color is
+\(\theta\).  Thus only \(c=\theta\) could fail avoidance.  In that case
+\(\zeta\) cannot be missing at \(y_{p-1}\), by the exact negation (1).
+Old avoidance of the old last edge \(e_p\), located immediately after
+\(y_{p-1}\), then forces the first \(\zeta\)-missing position to be at
+most the last position of \(B\), contrary to the present assumption.
+For any different stored color, pairwise disjointness excludes \(\theta\)
+from its Gamma pair.  This verifies avoidance for every stored color in
+both reordered trees and completes all fields of \(Q^-\) and \(Q^*\).
+
+We now make the counting choice in manuscript equation~(11).  Apply
+\noderef{NineN} to \(C\) at the exact index \(i=\ell-2<\ell\), using
+(4) and the large-set field of the minimum context.  It supplies at least
+\(2n+11\) colors that are missing on \(B\), avoid the base-extra missing
+set, and are unused on the exact prefix segment \(B-A\).  Enlarging the
+used-edge exclusion from \(B-A\) to \(T-A\) adds exactly the two
+individual final edges \(e_{p-1}\) and \(e_p\).  Removing the first
+edge's color loses at most one color, and removing the second edge's color
+loses at most one further color, even if those colors coincide.  Finally
+\noderef{TashkinovStoredColorsCardinality} gives \(|D_n|\le n\).
+Consequently the remaining set has cardinality at least
+\[
+                    2n+11-1-1-n=n+9>0.                      \tag{6}
+\]
+Choose a concrete color \(\beta\) from it.  Thus
+\[
+ \begin{aligned}
+ &\beta\in\overline\varphi_n(B),\qquad
+ \beta\notin\overline\varphi_n
+      (\mathcal B.\mathit{core}-V(T_n)),\\
+ &\beta\notin\varphi_n\langle T-A\rangle,\qquad
+ \beta\notin D_n.                                          \tag{7}
+ \end{aligned}
+\]
+The first part of (3) and (7) give \(\alpha\ne\beta\).  Let
+\(v_\beta\) be the first displayed vertex missing \(\beta\).  It lies in
+\(B\), whereas (3), the missingness of \(\alpha\) at \(y_{p-1}\), and
+(4) show that the first \(\alpha\)-missing vertex is exactly
+\(y_{p-1}\).
+
+We first prove
+\[
+                    \beta\notin\overline\varphi_n(y_p).     \tag{8}
+\]
+If instead \(y_p\) missed \(\beta\), then \(v_\beta,y_p\in V(T^-)\)
+would be distinct missing witnesses by (2) and (5).  Together with the
+certified corresponding ETT, maximum property, base, hierarchy, and the
+explicit good hierarchy \(Q^-\), they form an actual
+\noderef{HierarchyCounterexample} \(C^-\).  Its rung and divider count
+are the old ones and its last starred stage is exactly \(A\).  Equation
+(5) gives full-tail length \(\ell-1\), so the finite-minimum definition
+of \noderef{HierarchyPathNumber} gives \(p(C^-)\le\ell-1\).  Since the
+tail datum gives \(p(C)=\ell\), the first coordinate of
+\noderef{HierarchyCounterexampleMeasure} strictly decreases.
+Thus \noderef{HierarchyCounterexampleLess}(C^-,C)\), contradicting the
+old lexicographic-minimality field.  This proves (8).
+
+Apply \noderef{ChangeLemma} on the original counterexample with ordered
+colors \((\beta,\alpha)\).  Both colors are missing on \(B^+\), at
+\(v_\beta\) and \(y_{p-1}\).  Since both lie outside \(D_n\), they are
+disjoint from \(D_{n,q}\) and supply the required positive-divider or
+zero-divider alternative.  The conditional first-position premise is
+active because \(\alpha\) is not missing on \(A\): the first
+\(\beta\)-witness lies in \(B\), strictly before \(y_{p-1}\), and (7)
+excludes \(\beta\) from every individual tail edge before that position.
+The remaining inputs are the six context fields and (4).  Therefore
+\[
+ K_{\alpha,\beta}(v_\beta)
+       =K_{\alpha,\beta}(y_{p-1}).                           \tag{9}
+\]
+
+For the second application we must use an actual minimum presentation on
+\(T^*\).  Since \(V(T^*)=V(T)\), the old two missing witnesses proving
+non-elementarity remain.  With the certified corresponding ETT, maximum
+property, base, hierarchy, and \(Q^*\), they form a counterexample
+\(C^*\).  Its path number is at most its full-tail length \(\ell\).  A
+strict inequality would already contradict minimality.  Otherwise its
+first measure coordinate equals that of \(C\); its terminal length and
+last ordinary hierarchy stage are both unchanged, so its second
+coordinate also agrees.  Hence
+\(\mathfrak m(C^*)=\mathfrak m(C)\).
+
+Construct a \noderef{HierarchyMinimumCounterexampleContext} \(\mathcal
+X^*\) field by field.  Properness and exact one-uncoloredness are the old
+facts about \(\varphi_n\).  Rung agreement transports the complete
+lower-rung package.  The common rung and divider count let the old
+fewer-divider assertion apply verbatim.  Equality of measures transports
+lexicographic minimality: anything smaller than \(C^*\) would be smaller
+than \(C\).  Finally, correspondence identifies the terminal ladder tree
+and its generating coloring and raw stored data, while rung agreement
+identifies the numeral \(2n+11\); this transports the large missing-set
+bound.  These are all six fields of the context.
+
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} to
+\(C^*\) and \(\mathcal X^*\).  Its penultimate full-tail prefix is
+exactly \(T^-\) by (5), so
+\[
+              V(T^-)\text{ is elementary under }\varphi_n. \tag{10}
+\]
+In the reordered display the first \(\alpha\)-missing vertex is \(y_p\):
+(3) excludes a witness in \(B\), and \(y_p\) is appended before
+\(y_{p-1}\).  The first \(\beta\)-missing vertex remains \(v_\beta\in
+V(B)\).  Equation (7) excludes \(\beta\) from every exact tail edge in
+the new order as well, because (5) reorders the same two individual
+edges.  Both colors are missing on the prefix \(T^-\); (8) says precisely
+that \(\beta\) is present, not missing, at its new last vertex, while
+\(\alpha\) is missing there, so their roles and first positions are
+unambiguous.  Using the disjointness from the raw stored set, the explicit
+first-position and unused premises just checked, (10), and every field of
+\(\mathcal X^*\), a second application of \noderef{ChangeLemma} gives
+\[
+ K_{\alpha,\beta}(v_\beta)
+       =K_{\alpha,\beta}(y_p).                              \tag{11}
+\]
+
+Equations (9) and (11) put the three vertices
+\(v_\beta,y_{p-1},y_p\) in one global two-color component.  They are
+distinct: the first lies in \(B\), while the other two occupy the two
+successive positions after \(B\), and the vertex map in
+\noderef{TreeSequence} is injective.  At \(v_\beta\), the color \(\beta\)
+is missing; at each other vertex, \(\alpha\) is missing.  Properness in
+\noderef{IsProperEdgeColoring} and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} therefore make all three
+vertex-nodes endpoints of the component's spanning path supplied by
+\noderef{TwoColorComponentSpanningPath}.  A finite path has at most two
+endpoints, a contradiction.
+\end{proof}

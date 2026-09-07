@@ -1,0 +1,23 @@
+\begin{lemma}[Situation 7.2, Subcase 2.1]
+Every \noderef{HierarchySituationTwoCaseTwoData} is impossible.
+Equivalently, Situation 7.2, Case 2 cannot occur when
+\(\theta=\varphi_n(e_p)\) is present at \(y_{p-1}\).
+\end{lemma}
+\begin{proof}
+Put
+\[
+ D_{n,q}=\noderef{HierarchyStoredColorsAt}(C.\mathit{hierarchy},q).
+\]
+If there is no \(\eta\in D_{n,q}\) which is missing at
+\(y_{p-1}\) and satisfies \(\theta\in\Gamma^q_\eta\), this is exactly
+the hypothesis of
+\noderef{HierarchySituationTwoSubcaseTwoOneNonexceptional}, which gives
+a contradiction.
+
+Otherwise choose such an \(\eta\).  Its stored membership, missingness at
+\(y_{p-1}\), and Gamma membership are exactly the three additional
+hypotheses of
+\noderef{HierarchySituationTwoSubcaseTwoOneStoredException}; that lemma
+also gives a contradiction.  The two alternatives are exhaustive, so the
+Case 2 datum is impossible.
+\end{proof}

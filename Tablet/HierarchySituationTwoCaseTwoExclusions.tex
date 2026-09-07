@@ -1,0 +1,167 @@
+\begin{lemma}[Equation (9) and tail exclusion in Situation 7.2, Case 2]
+Fix the graph, palette, distinguished edge, exact terminal tree \(T\),
+generating coloring \(\varphi_n\), positive-rung ETT \(\mathcal E\),
+hierarchy base, minimum hierarchy counterexample \(C\), its
+\noderef{HierarchyMinimumCounterexampleContext}, and a
+\noderef{HierarchySituationTwoCaseTwoData} \(D\).  Put
+\[
+ H=C.\mathit{hierarchy},\qquad
+ A=\noderef{HierarchyStarredStage}
+      (H,\operatorname{Fin.last}(H.\mathit{dividerCount})),\qquad
+ \ell=\noderef{HierarchyFullTailLength}(C),
+\]
+and put
+\[
+ B=\noderef{HierarchyFullTailPrefix}(C,\ell-2),\qquad
+ D_n=\noderef{TashkinovStoredColors}
+   (\mathcal E.\mathit{series}.\mathit{data},
+      \operatorname{Fin.last}(\mathcal E.\mathit{rounds})).
+\]
+Then the two assertions of manuscript equation~(9) hold:
+\[
+       \alpha\notin\overline\varphi_n(B),
+       \qquad \alpha\notin D_n.                         \tag{9}
+\]
+Moreover every individual displayed edge of the full tail has color
+different from \(\alpha\): for every exact index
+\(t\in\operatorname{Fin}|T|\),
+\[
+       |A|\leq t\quad\Longrightarrow\quad
+       \varphi_n(T.\mathit{edge}(t))\ne\alpha .          \tag{10}
+\]
+This conclusion retains exact edge identities, including identities of
+parallel edges.
+\end{lemma}
+\begin{proof}
+Let
+\[
+ q=H.\mathit{dividerCount},\qquad
+ B^+=\noderef{HierarchyFullTailPrefix}(C,\ell-1).
+\]
+We first locate these prefixes exactly.  If \(q=0\), the definition of
+\noderef{HierarchyStarredStage} identifies \(A\) with the hierarchy base
+core; the \texttt{coreInsideFirst} and \texttt{terminalStage} fields of
+\noderef{TashkinovHierarchy} put that core below \(T\).  If \(q>0\), the
+same definition identifies \(A\) with the last ordinary nonterminal stage,
+and the final \texttt{nested} relation and \texttt{terminalStage} again put
+\(A\) below \(T\).  In either case
+\[
+          A\preccurlyeq T,\qquad |A|\leq |T|.             \tag{11}
+\]
+Here and below \(\preccurlyeq\) is the entrywise
+\noderef{TreeSequenceInitialSegment} relation, so it preserves each
+displayed vertex and each individual displayed edge.
+
+The \texttt{tailAtLeastTwo} field inherited by \(D\) from
+\noderef{HierarchySituationTwoTailData} says \(2\leq\ell\).  Combining
+this with (11) and the definition \(\ell=|T|-|A|\) gives
+\[
+ |A|+\ell=|T|,\qquad |B|=|T|-2,\qquad |B^+|=|T|-1.         \tag{12}
+\]
+Indeed, after unfolding \noderef{HierarchyFullTailPrefix}, the two
+minima in the defining \noderef{TreeSequencePrefix}s are
+\(|A|+(\ell-2)=|T|-2\) and
+\(|A|+(\ell-1)=|T|-1\), respectively.  The restricted vertex and edge
+maps in that definition, together with (11), therefore give the exact
+chain
+\[
+                   A\preccurlyeq B\preccurlyeq B^+
+                     \preccurlyeq T.                       \tag{13}
+\]
+
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} with the
+six fields \texttt{proper}, \texttt{oneEdgeUncolored},
+\texttt{lowerRung}, \texttt{fewerDividers},
+\texttt{lexicographicMinimality}, and \texttt{largeMissingSet} of the
+supplied \noderef{HierarchyMinimumCounterexampleContext} (the first two
+are the coloring hypotheses, followed by its four induction/minimality/
+large-branch inputs).  Its conclusion, after the definitions above are
+unfolded, is
+\[
+        \noderef{ColoredVertexSetElementary}
+          (G,\varphi_n,V(B^+)).                             \tag{14}
+\]
+No elementarity assertion has been included in the Case 2 datum.
+
+Write \(y_{p-1}=T.\mathit{vertex}
+(D.\mathit{penultimateVertexIndex})\).  The position field of \(D\)
+says that this index has value \(|T|-1\).  By (12) and the restricted
+vertex map of \noderef{TreeSequencePrefix}, this is exactly the last
+vertex of \(B^+\).  Hence
+\[
+ y_{p-1}\in V(B^+),\qquad
+ \alpha\in\overline\varphi_n(y_{p-1}),                    \tag{15}
+\]
+where missingness is the \texttt{alphaMissingPenultimate} field of the
+\noderef{HierarchySituationTwoCaseTwoData}.
+
+Suppose that \(\alpha\in\overline\varphi_n(B)\).  Unfolding
+\noderef{TreeMissingColors} gives a vertex \(z\in V(B)\) with
+\(\alpha\in\overline\varphi_n(z)\).  Unfolding
+\noderef{TreeSequenceVertexSet}, choose an index \(j\leq|B|=|T|-2\)
+whose displayed vertex is \(z\).  The exact prefix maps in (13) place
+\(z\) in \(V(B^+)\) and identify it with the vertex of \(T\) at the same
+index \(j\).  The vertex \(y_{p-1}\) has index \(|T|-1\), so
+\(j\ne |T|-1\); vertex injectivity in \noderef{TreeSequence} gives
+\(z\ne y_{p-1}\).  The two missing-color memberships for
+\(\alpha\), (15), and the pairwise disjointness in (14), as defined by
+\noderef{ColoredVertexSetElementary}, are now contradictory.  Therefore
+\[
+                 \alpha\notin\overline\varphi_n(B).        \tag{16}
+\]
+
+Relation (13) also puts every vertex of \(A\) in \(B\), with its exact
+displayed identity.  Thus (16), again by the union definition
+\noderef{TreeMissingColors}, implies
+\[
+                 \alpha\notin\overline\varphi_n(A).        \tag{17}
+\]
+At the last divider index, \noderef{HierarchyStoredColorsAt} is
+definitionally
+\[
+                 D_{n,q}=D_n\setminus
+                    \overline\varphi_n(A).                  \tag{18}
+\]
+If \(\alpha\in D_n\), then (17) and (18) put \(\alpha\in D_{n,q}\),
+contrary to the \texttt{alphaOutsideStored} field of \(D\).  Hence
+\[
+                           \alpha\notin D_n.                 \tag{19}
+\]
+Equations (16) and (19) prove all of (9).
+
+It remains to prove (10).  Fix an exact index
+\(t\in\operatorname{Fin}|T|\) with \(|A|\leq t\), and suppose first that
+\(t<|T|-1\).  By (12), the same numerical index defines an exact index
+\(\widehat t\in\operatorname{Fin}|B^+|\).  The restricted edge map of
+\noderef{TreeSequencePrefix} gives the equality of individual edges
+\[
+                B^+.\mathit{edge}(\widehat t)
+                    =T.\mathit{edge}(t).                    \tag{20}
+\]
+Use (14) as the penultimate-elementarity input to
+\noderef{HierarchyTailMissingColorExclusion}, take
+\(i=\ell-1\), \(\beta=\alpha\), and the exact index \(\widehat t\).
+The inequalities needed there are explicit: \(1\leq\ell-1<\ell\)
+follows from \(2\leq\ell\), and
+\[
+       |A|\leq\widehat t<|T|-1=|A|+(\ell-1)
+\]
+follows from the choice of \(t\) and (12).  Its missing-color premise is
+(15), because the last vertex of \(B^+\) is exactly \(y_{p-1}\).
+Consequently, if the edge in (20) had color \(\alpha\), the cited lemma's
+exceptional conclusion would give \(\alpha\in D_n\).  This contradicts
+(19).  Thus (10) holds for every such earlier tail index.
+
+The only remaining possibility is \(t=|T|-1\).  The
+\texttt{lastEdgePosition} field of
+\noderef{HierarchySituationTwoTailData} identifies this index with
+\(D.\mathit{lastEdgeIndex}\), hence identifies the individual edge
+\(T.\mathit{edge}(t)\) with \(e_p\).  The
+\texttt{thetaOnLastEdge} field says \(\varphi_n(e_p)=\theta\).  If this
+same exact edge had color \(\alpha\), injectivity of the \texttt{some}
+constructor would give \(\theta=\alpha\).  But
+\texttt{thetaPresentPenultimate} says
+\(\theta\notin\overline\varphi_n(y_{p-1})\), whereas (15) says
+\(\alpha\in\overline\varphi_n(y_{p-1})\), a contradiction.  This proves
+(10) also for the last individual tail edge and completes the proof.
+\end{proof}

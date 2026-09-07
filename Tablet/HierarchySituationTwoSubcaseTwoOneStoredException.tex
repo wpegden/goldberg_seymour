@@ -1,0 +1,258 @@
+\begin{lemma}[Situation 7.2, Subcase 2.1 Gamma exception]
+Let \(D\) be a \noderef{HierarchySituationTwoCaseTwoData}.  Suppose
+there is a color \(\eta_h\) such that, at the last divider index \(q\),
+\[
+ \eta_h\in D_{n,q},\qquad
+ \eta_h\in\overline\varphi_n(y_{p-1}),\qquad
+ \theta\in\Gamma^q_{\eta_h}.                               \tag{1}
+\]
+Then a contradiction follows.
+\end{lemma}
+\begin{proof}
+Put \(H=C.\mathit{hierarchy}\),
+\(A=\noderef{HierarchyStarredStage}(H,q)\),
+\(\ell=\noderef{HierarchyFullTailLength}(C)\), and
+\[
+ B=\noderef{HierarchyFullTailPrefix}(C,\ell-2),\qquad
+ B^+=\noderef{HierarchyFullTailPrefix}(C,\ell-1).
+\]
+As in the exact prefix definitions,
+\[
+ A\preccurlyeq B\preccurlyeq B^+\preccurlyeq T,\qquad
+ |B|=|T|-2,\quad |B^+|=|T|-1.                              \tag{2}
+\]
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} to the six
+fields of the supplied \noderef{HierarchyMinimumCounterexampleContext};
+then
+\[
+              V(B^+)\text{ is elementary under }\varphi_n. \tag{3}
+\]
+Apply \noderef{HierarchySituationTwoCaseTwoExclusions} as well.  It gives
+\[
+ \alpha\notin\overline\varphi_n(B),\qquad
+ \alpha\notin D_n,\qquad
+ \alpha\notin\varphi_n\langle T-A\rangle.                  \tag{4}
+\]
+
+By the two-color field of \noderef{GoodHierarchy}, the Gamma set in
+(1) has exactly two members.  Since it contains \(\theta\), choose its
+other member \(\gamma_2\); explicitly,
+\[
+ \Gamma^q_{\eta_h}=\{\theta,\gamma_2\},\qquad
+ \theta\ne\gamma_2.                                       \tag{5}
+\]
+Membership of \(\eta_h\) in
+\noderef{HierarchyStoredColorsAt} says it is not missing on \(A\).
+It is missing at \(y_{p-1}\), and (3) shows it cannot also be missing at
+any earlier vertex of \(B\).  Thus \(y_{p-1}\) is its first missing
+vertex.  The avoidance field of \noderef{GoodHierarchy}, applied to
+(5), gives
+\[
+ \gamma_2\in\overline\varphi_n(A),\qquad
+ \gamma_2\notin\varphi_n\langle B^+-A\rangle.               \tag{6}
+\]
+The last edge has color \(\theta\ne\gamma_2\), so (6) excludes
+\(\gamma_2\) from every exact edge of \(T-A\).  Also
+\(\gamma_2\ne\alpha\), since \(\gamma_2\) is missing on \(A\) whereas
+(4) implies that \(\alpha\) is not missing there.
+
+Apply \noderef{ChangeLemma} with ordered colors
+\((\gamma_2,\alpha)\).  Both colors are missing on \(B^+\), witnessed
+in \(A\) and at \(y_{p-1}\), respectively.  For positive divider count,
+the first color is missing on the last ordinary stage; at divider zero it
+is missing on \(T_n\), exactly as supplied by the stage-missing part of
+avoidance.  Because \(\alpha\) is not missing on \(A\), the conditional
+order premise is active: the first \(\gamma_2\)-missing vertex
+\(v_{\gamma_2}\in V(A)\) precedes \(y_{p-1}\), and (6) is the exact
+unused interval.  The other inputs are (3) and the six minimum-context
+fields.  Hence
+\[
+ K_{\alpha,\gamma_2}(v_{\gamma_2})
+       =K_{\alpha,\gamma_2}(y_{p-1}).                        \tag{7}
+\]
+
+This component is disjoint from
+\(Q_1=K_{\alpha,\gamma_2}(y_p)\).  Indeed,
+\(v_{\gamma_2},y_{p-1},y_p\) are distinct by (2) and vertex injectivity
+in \noderef{TreeSequence}; the first misses \(\gamma_2\), while the
+other two miss \(\alpha\).  If the components were equal, properness,
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, and
+\noderef{TwoColorComponentSpanningPath} would put three distinct
+degree-at-most-one vertex-nodes at the two endpoints of one finite path.
+Thus \noderef{TwoColorComponentsDisjoint} gives disjointness, and the
+spanning-path result supplies the required
+\noderef{TwoColorPathComponent} certificate, including the isolated
+vertex possibility.
+
+Define the first recoloring explicitly by
+\[
+ \mu_1=\noderef{TwoColorComponentSwap}
+       (G,\varphi_n,\gamma_2,\alpha,\operatorname{inl}y_p). \tag{8}
+\]
+Apply \noderef{StableChangeCasesOneTwo} before using any stability
+conclusion.  Use the ordered colors \((\gamma_2,\alpha)\), (3), (6)--(8),
+the stage-missing alternative just used for the Change Lemma, and all six
+minimum-context inputs.  Retain in particular its
+\noderef{HierarchyWeaklyStable} conclusion for \(\mu_1\).
+
+We now verify, independently, every premise needed by the full-tail
+provider.  First fix \(u\in V(B^+)\).  If its vertex-node is outside
+\(Q_1\), no incident edge is changed.  If it lies in \(Q_1\), it cannot
+be an endpoint, since an endpoint misses one swapped color and (3), (7),
+and component disjointness put the unique such witness in the other
+component.  It is therefore an internal vertex.  Properness gives exactly
+one incident \(\alpha\)-edge and one incident \(\gamma_2\)-edge, so the
+swap exchanges them and preserves the full set of missing colors.  Thus
+\[
+ \overline\mu_1(u)=\overline\varphi_n(u)
+                    \quad(u\in V(B^+)).                     \tag{9}
+\]
+
+Next fix an exact tail-edge position.  Equation (4) excludes \(\alpha\)
+and (6), together with the last-edge equation and (5), excludes
+\(\gamma_2\).  Consequently its individual edge-node is outside the
+swapped component and its value is fixed.  This check includes the
+possible divider-zero SE/RE seed: if one instead reaches that edge through
+the exceptional conclusion of
+\noderef{HierarchyTailMissingColorExclusion}, the weak stability obtained
+before this paragraph is a \noderef{StableColoring} relation on \(T_n\); the exact
+singleton connecting-edge certificate makes the seed incident with
+\(T_n\), so the controlled-edge clause fixes that individual edge.  Hence
+\[
+ \mu_1(T.\mathit{edge}(t))=\varphi_n(T.\mathit{edge}(t))
+                    \quad(|A|\le t<|T|).                    \tag{10}
+\]
+No equality follows merely from component separation.
+
+Finally consider the least missing position of an arbitrary stored color.
+The color \(\gamma_2\) is not stored because it is missing on \(A\), and
+\(\alpha\) is not even in the raw set \(D_n\), by (4).  Every stored
+color is therefore different from both swapped colors, so its missing
+predicate is pointwise unchanged at every vertex; unfolding
+\noderef{HierarchyFirstMissingPosition} gives equality of its totalized
+least positions.  Thus (9), (10), and the stored-position equality verify
+the three separate transport premises of
+\noderef{StableChangeCasesOneTwoFullTail}.  Applying that theorem yields
+an actual corresponding ETT on the exact tree \(T\), maximum property, an
+actual base, a full good hierarchy, and
+\noderef{SameGoodHierarchy} under \(\mu_1\).
+
+We package these returned objects as a genuine
+\noderef{HierarchyReplacementPresentation} \(P_1\).  The component swap
+is proper by \noderef{TwoColorComponentSwapProper} and fixes the exact
+uncolored-edge set, giving the properness and
+\noderef{IsOneEdgeUncolored} fields.  The swap makes \(\gamma_2\) missing
+at \(y_p\), while component disjointness retains its missing witness
+\(v_{\gamma_2}\); these distinct witnesses make the returned good
+hierarchy a \noderef{HierarchyCounterexample}.  The corresponding ETT has
+the old rung.  Copy the complete rung-uniform lower assertion.  Same-good
+gives the old divider count, so the old fewer-divider field applies.
+Because the terminal tree is literally \(T\) and same-good identifies the
+ordinary stages, both coordinates of
+\noderef{HierarchyCounterexampleMeasure} are equal to the old ones; this
+transports lexicographic minimality.  Weak stability identifies missing
+sets on the terminal ladder tree and transports the \(2n+11\) bound.
+These arguments fill, separately, all six fields of the replacement
+\noderef{HierarchyMinimumCounterexampleContext}.  Correspondence and
+same-good are composed with the original presentation entry by entry,
+using the transitivity statement in \noderef{sc2} for every positive
+stable-coloring slot.
+
+Suppose first that \(\eta_h\) is missing at \(y_p\) under \(\mu_1\).
+Construct a \noderef{HierarchySituationTwoCaseOneData} for \(P_1\) as
+follows.  Use the original exact edge and vertex indices and non-incidence
+equation.  Literal equality of \(T\) and same-good preserve the full-tail
+length and path number.  Equations (9)--(10) preserve the last-edge color
+\(\theta\) and its presence at \(y_{p-1}\).  Use \(\eta_h\) as the Case
+1 color; it is missing at both terminal vertices by hypothesis and (1),
+and same-good transports its stored membership and the pair
+\(\{\theta,\gamma_2\}\) from (5).  The two members are distinct.  Every
+field is now present, so
+\noderef{HierarchySituationTwoSubcaseOneOne}, applied to this actual Case
+1 datum and the actual context of \(P_1\), gives a contradiction.
+
+It remains to assume that \(\eta_h\) is present at \(y_p\) under
+\(\mu_1\).  Under \(\mu_1\), the color \(\gamma_2\) is missing at both
+\(v_{\gamma_2}\) and \(y_p\), while \(\eta_h\) remains missing at
+\(y_{p-1}\) by (9).  Its stored membership says it is not missing on
+\(A\), and elementarity transported by (9) says its first missing vertex
+is \(y_{p-1}\).  Equation (10) and (6) show that \(\gamma_2\) is unused
+on the full tail under \(\mu_1\).  The colors are distinct because
+\(\gamma_2\) is missing on \(A\) while \(\eta_h\) is not.  Moreover,
+same-good transports (5), and avoidance in the replacement
+\noderef{GoodHierarchy} again places \(\gamma_2\) in the required
+replacement stage-missing set.  Apply \noderef{ChangeLemma} inside
+\(P_1\), with ordered colors \((\gamma_2,\eta_h)\), the explicit first
+positions, this exact unused premise, the stage-missing alternative for
+\(\gamma_2\), and all fields of the transported minimum context.  It
+gives
+\[
+ K_{\eta_h,\gamma_2}^{\mu_1}(v_{\gamma_2})
+       =K_{\eta_h,\gamma_2}^{\mu_1}(y_{p-1}).                \tag{11}
+\]
+The component in (11) is disjoint from the component rooted at \(y_p\):
+otherwise the three distinct vertices \(v_{\gamma_2},y_{p-1},y_p\),
+missing respectively \(\gamma_2,\eta_h,\gamma_2\), would again be three
+endpoints of the spanning path.  Let
+\[
+ \mu_2=\noderef{TwoColorComponentSwap}
+       (G,\mu_1,\gamma_2,\eta_h,\operatorname{inl}y_p).      \tag{12}
+\]
+Apply \noderef{StableChangeCasesOneTwo} immediately, relative to \(P_1\),
+before using stability to protect any edge.  The stage-missing color is
+again \(\gamma_2\); equation (11), the disjointness just proved, and the
+full-tail unusedness verify its remaining Cases 1/2 premises.
+
+We again check the full-tail inputs one by one.  The endpoint/internal
+vertex argument used for (9), now with (11), proves
+\[
+ \overline\mu_2(u)=\overline\mu_1(u)
+                    \quad(u\in V(B^+)).                     \tag{13}
+\]
+The color \(\gamma_2\) is unused on every tail edge by (6) and (10).
+Apply \noderef{HierarchyTailMissingColorExclusion} to \(\eta_h\), which
+is missing at the last vertex of the elementary tree \(B^+\).  It excludes
+\(\eta_h\) from every exact tail edge except possibly the individual
+divider-zero SE/RE seed carrying a raw stored color.  The weak stability
+obtained before this edge argument is a \noderef{StableColoring} relation
+on \(T_n\) and fixes precisely that seed through its
+controlled incident-edge clause.  The last edge has color \(\theta\),
+which is distinct from \(\eta_h\) because the former is present and the
+latter missing at \(y_{p-1}\), and distinct from \(\gamma_2\) by (5).
+Therefore every exact tail-edge value is fixed:
+\[
+ \mu_2(T.\mathit{edge}(t))=\mu_1(T.\mathit{edge}(t))
+                    \quad(|A|\le t<|T|).                    \tag{14}
+\]
+
+For stored least positions, \(\gamma_2\) is not stored.  The affected
+stored color \(\eta_h\) has first missing position \(y_{p-1}\), as proved
+above, and (13) identifies every candidate through that witness; hence its
+least position is unchanged.  Every other stored color is unaffected.
+Thus the full quantified stored-position equality also holds.  Apply
+\noderef{StableChangeCasesOneTwoFullTail} with (13), (14), and this
+equality.  It supplies an actual corresponding same-rung maximum ETT,
+base, hierarchy, goodness, and same-good data under \(\mu_2\).
+
+Build \(P_2\) field by field exactly as for \(P_1\).  Properness and the
+exact uncolored-edge property come from the swap theorem and its
+definition.  The swap makes \(\eta_h\) missing at \(y_p\), while (13)
+retains its missingness at the distinct vertex \(y_{p-1}\), so these
+witnesses provide non-elementarity.  Literal equality of \(T\), rung
+agreement, and same-good transport the lower-rung field, the
+fewer-divider field, equality of both measure coordinates and hence
+minimality, and the large-set bound, separately.  Compose the two
+correspondence certificates, every positive-stage stable relation, and
+the two same-good relations to obtain an original-relative
+\noderef{HierarchyReplacementPresentation} with all six context fields.
+
+Finally construct a \noderef{HierarchySituationTwoCaseOneData} for
+\(P_2\).  Copy the original exact tail indices, non-incidence, full-tail
+length, and path number.  Equations (10), (13), and (14) preserve the last
+edge's color \(\theta\) and its presence at \(y_{p-1}\).  Take
+\(\eta_h\) as the Case 1 color; it is missing at both terminal vertices,
+its stored membership is transported, and its Gamma pair remains exactly
+\(\{\theta,\gamma_2\}\) with distinct members.  Applying only the already
+proved \noderef{HierarchySituationTwoSubcaseOneOne} to this actual datum
+and the actual minimum context of \(P_2\) yields the final contradiction.
+\end{proof}
