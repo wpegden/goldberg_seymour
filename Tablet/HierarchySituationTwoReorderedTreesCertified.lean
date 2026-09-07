@@ -1,6 +1,9 @@
 import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetClosed
 import Tablet.ExtendedTashkinovTree
+import Tablet.HierarchyBase
+import Tablet.HierarchyCounterexample
 import Tablet.HierarchyCounterexamplePenultimateElementary
 import Tablet.HierarchyMinimumCounterexampleContext
 import Tablet.HierarchyFullTailLength
@@ -9,11 +12,13 @@ import Tablet.HierarchyNonparallelFirstEdge
 import Tablet.HierarchySituationTwoReorderedTrees
 import Tablet.HierarchySituationTwoTailData
 import Tablet.HierarchyStarredStage
+import Tablet.Incident
 import Tablet.TashkinovHierarchy
 import Tablet.MaximumPropertyTransport
 import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumProperty
 import Tablet.ModColoring
+import Tablet.OrderedTreeUnion
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceRestrict
 import Tablet.TashkinovAugmentation
@@ -23,9 +28,13 @@ import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.Td
 import Tablet.StableColoring
+import Tablet.TreeMissingColors
+import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceEdgeSet
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequence
 import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
 import Tablet.sc1
 
 -- [TABLET NODE: HierarchySituationTwoReorderedTreesCertified]

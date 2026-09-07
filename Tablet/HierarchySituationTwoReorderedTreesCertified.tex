@@ -21,136 +21,359 @@ sequence from that seed.  Finally, each reordered tree carries an actual
 \noderef{MaximumProperty}.
 \end{lemma}
 \begin{proof}
-Write \(H=C.\mathit{hierarchy}\), let \(q\) be its last divider index,
-put \(A=\noderef{HierarchyStarredStage}(H,q)\), and put
-\(\ell=\noderef{HierarchyFullTailLength}(C)\).  The tail datum gives
-\(\ell\geq2\) and exact indices for \(e_p,y_{p-1},y_p\).  The stage
-chain in \noderef{TashkinovHierarchy} gives \(|A|\leq|T|\).  Since
-\(\ell=|T|-|A|\),
+By the definition of a \noderef{HierarchyCounterexample}, the supplied
+object \(C\), rather than the minimum-context object, has the three fields
+that we shall use at the outset:
 \[
- |A|+\ell=|T|,\qquad |B|=|T|-2,\qquad |B^+|=|T|-1,           \tag{1}
+ H:=C.\mathit{hierarchy},\qquad 0<n:=C.\mathit{positive},
+ \qquad C.\mathit{maximum}:\noderef{MaximumProperty}(\mathcal E).
+                                                               \tag{1}
+\]
+Put \(q=H.\mathit{dividerCount}\),
+\(A=\noderef{HierarchyStarredStage}(H,\operatorname{Fin.last}q)\), and
+\(m=|T|\).  If \(q=0\), then \(A\) is the core of the
+\noderef{HierarchyBase}; its \texttt{coreInsideFirst} field and the stage
+chain of \noderef{TashkinovHierarchy} put \(A\) below \(T\).  If \(q>0\),
+then \(A=H.\mathit{stage}(q)\), and the nested-stage and terminal-stage
+fields give the same conclusion.  Composing the entrywise relations in
+\noderef{TreeSequenceInitialSegment} therefore gives
+\(A\preccurlyeq T\), so \(|A|\leq m\).
+
+Let \(\ell=\noderef{HierarchyFullTailLength}(C)=m-|A|\).  The field
+\texttt{tailAtLeastTwo} of \(D\) gives \(2\leq\ell\); hence the preceding
+length inequality yields
+\[
+ |A|+\ell=m,\qquad
+ |B|=|A|+(\ell-2)=m-2,\qquad
+ |B^+|=|A|+(\ell-1)=m-1,                                  \tag{2}
 \]
 where \(B=\noderef{HierarchyFullTailPrefix}(C,\ell-2)\) and
-\(B^+=\noderef{HierarchyFullTailPrefix}(C,\ell-1)\).
-The definition of \noderef{HierarchyFullTailPrefix} is an exact
-\noderef{TreeSequencePrefix}; consequently
-\(B\preccurlyeq B^+\preccurlyeq T\) retains every displayed vertex and
-individual edge identity.  The position equations in \(D\), together
-with (1), identify the last two attachment pairs of \(T\) as
-\((e_{p-1},y_{p-1})\) and \((e_p,y_p)\).
+\(B^+=\noderef{HierarchyFullTailPrefix}(C,\ell-1)\).  Indeed, after
+unfolding these two definitions, the minima in the two defining
+\noderef{TreeSequencePrefix}s have respectively the first arguments
+\(m-2\) and \(m-1\).  Their vertex and edge maps are the restrictions of
+those of \(T\).  Thus direct comparison of the restricted indices gives
+the exact ordered relations
+\[
+             B\preccurlyeq B^+\preccurlyeq T,               \tag{3}
+\]
+and each relation in (3) preserves every displayed vertex and individual
+edge identity, as required by \noderef{TreeSequenceInitialSegment}.
 
-The attachment field of \noderef{TreeSequence} for \(e_p\) gives
+We next construct the reordered displays and verify all four append
+relations.  The position equations in the
+\noderef{HierarchySituationTwoTailData} \(D\) say that its last-edge,
+penultimate-vertex, and terminal-vertex indices have numerical values
+\(m-1,m-1,m\), respectively.  Since \(m=|A|+\ell\geq3\), there is also
+the index \(r\) of numerical value \(m-2\).  Write
 \[
- G.\mathit{ends}(e_p)=
- \{y_p,T.\mathit{vertex}(i)\}\quad\hbox{for some }i<|T|.      \tag{2}
-\]
-The non-incidence field of \(D\) excludes
-\(T.\mathit{vertex}(i)=y_{p-1}\).  Vertex injectivity in
-\noderef{TreeSequence} therefore gives \(i<|T|-1\), so the old endpoint
-is already in \(B\).  The new endpoint \(y_p\) is absent from \(B\), by
-the same injectivity.  Append the individual edge \(e_p\) and \(y_p\)
-to \(B\).  Equation (2) verifies attachment; restriction of the old
-injective maps, the two vertex exclusions, and edge injectivity verify
-the remaining tree-sequence fields.  This gives
-\[
-                         B+(e_p,y_p)=T^-.                    \tag{3}
-\]
-
-The original attachment of \(e_{p-1}\) has its old endpoint below
-position \(|T|-1\), hence in \(B\), and its new endpoint is
-\(y_{p-1}\).  This vertex and this edge are absent from \(T^-\), by
-(3) and the injectivity fields.  Appending them gives
-\[
-                    T^-+(e_{p-1},y_{p-1})=T^*.              \tag{4}
-\]
-Restriction of the original display similarly gives
-\[
-                    B+(e_{p-1},y_{p-1})=B^+,\qquad
-                    B^++(e_p,y_p)=T.                        \tag{5}
-\]
-Equations (3)--(5), with injectivity, give
-\[
- V(T^-)=V(T)\setminus\{y_{p-1}\},\quad
- E(T^-)=E(T)\setminus\{e_{p-1}\},
-\]
-and \(V(T^*)=V(T)\), \(E(T^*)=E(T)\).  Thus these constructions fill
-every field of \noderef{HierarchySituationTwoReorderedTrees}; call the
-result \(R\).
-
-We extract the certified route to \(B\).  Analyze the terminal
-\noderef{TashkinovSeries} certificate using
-\noderef{TashkinovSeriesStep}.  In PE it supplies a
-\(\varphi_n\)-\noderef{TashkinovClosure} starting at \(T_n\).  In SE or
-RE it supplies an exact identity \(f_n\), the equality
-\(F_n=\{f_n\}\), the seed \(S=T_n+f_n\), and a closure starting at
-\(S\).  The upper-containment field of
-\noderef{ExtendedTashkinovTree} places \(T\) in the terminal closure.
-Expand the closure and apply
-\noderef{TashkinovAugmentationSequenceRestrict} first at \(T\), then at
-\(B\).  Since every \noderef{TashkinovAugmentation} raises length by
-one, this gives
-\[
- T_n\longrightarrow B\quad(\mathrm{PE}),\qquad
- S\longrightarrow B\quad(\mathrm{SE/RE}),                  \tag{6}
-\]
-except possibly when \(B=T_n\), before the non-PE seed has been added.
-
-We discharge that boundary explicitly.  Suppose \(B=T_n\) and the kind
-is SE or RE.  The singleton connecting equality and
-\noderef{HierarchyNonparallelFirstEdge} identify the first displayed
-edge above \(T_n\) with \(f_n\); (1) and (5) identify it with the
-individual edge \(e_{p-1}\).  Hence \(S=B^+\).  The next augmentation
-adds \(e_p\), of color \(\theta\), and its missing-color clause gives a
-vertex of \(B^+\) missing \(\theta\).  The only new vertex is
-\(y_{p-1}\), where \(\theta\) is present by \(D\).  Thus
-\[
-                       \theta\in\overline\varphi_n(T_n).     \tag{7}
+ e_{p-1}=T.\mathit{edge}(r),\quad
+ e_p=T.\mathit{edge}(D.\mathit{lastEdgeIndex}),\quad
+ y_{p-1}=T.\mathit{vertex}(D.\mathit{penultimateVertexIndex}),\quad
+ y_p=T.\mathit{vertex}(D.\mathit{terminalVertexIndex}).       \tag{4}
 \]
 
-In RE, the current-coloring equality in
-\noderef{TashkinovSeriesStep} and its preceding-closed field say that
-\(T_n\) is \noderef{ColoredVertexSetClosed} under \(\varphi_n\).  In SE, the preceding tree is
-closed and the \noderef{MaximumDefectiveChoice} selected coloring is
-\noderef{StableColoring} on \(T_n\).  If a boundary edge had a selected
-color missing on \(T_n\), the missing-set clause of stability and the
-edge criterion \noderef{sc1} would copy the same colored boundary edge
-to the preceding coloring, contradicting preceding closedness.  Hence
-\(T_n\) is closed under \(\varphi_n\) in SE too.  But (2) makes \(e_p\)
-a boundary edge of \(B=T_n\), while \(D\) gives
-\(\varphi_n(e_p)=\theta\) and (7) makes \(\theta\) tree-missing.  This
-contradicts closedness.  Therefore
+Apply the attachment field of \noderef{TreeSequence} to the last edge
+\(e_p\).  It supplies an index \(i<m\) such that
 \[
- B=T_n\quad\Longrightarrow\quad\Theta_n=\mathrm{PE}.        \tag{8}
+       G.\mathit{ends}(e_p)=\{y_p,T.\mathit{vertex}(i)\}.     \tag{5}
 \]
-This proves the manuscript's Algorithm 3.1 boundary alternative rather
-than invoking TAA without its certified seed.
+If \(T.\mathit{vertex}(i)=y_{p-1}\), then (5) would make \(e_p\)
+incident with \(y_{p-1}\) by \noderef{Incident}, contrary to the
+non-incidence field of \(D\).
+Consequently \(i\ne m-1\), and \(i<m\) gives \(i<m-1\).  The old endpoint
+in (5) is therefore a vertex of \(B\).  Vertex injectivity in
+\noderef{TreeSequence} also shows that \(y_p\), whose old index is \(m\),
+is not a vertex of \(B\).  Likewise, the attachment field for
+\(e_{p-1}\) supplies an old endpoint at an index below \(m-1\), hence in
+\(B\), while its new endpoint is \(y_{p-1}\).
 
-In the original order, the augmentation \(B\to B^+\) supplies a color
-missing on \(B\) for \(e_{p-1}\).  Its witness remains in \(T^-\), so
-(4) is a Tashkinov augmentation.  The augmentation \(B^+\to T\)
-supplies \(\varphi_n(e_p)=\theta\) and a vertex of \(B^+\) missing
-\(\theta\).  Since \(\theta\) is present at the sole new vertex
-\(y_{p-1}\), that witness lies in \(B\); hence (3) is also a
-Tashkinov augmentation.  Compose these two exact steps with (6), using
-(8) in the boundary case.  This gives both asserted PE or exact-seed
-SE/RE routes to \(T^-\) and \(T^*\).
+Define \(T^-\) by copying the ordered vertices and edges of \(B\) and
+then displaying the pair \((e_p,y_p)\).  Define \(T^*\) by copying
+\(T^-\) and then displaying \((e_{p-1},y_{p-1})\).  These are
+tree-sequences: positivity and the first-edge equation are inherited from
+\(B\); attachment for each copied edge is inherited from \(T\); attachment
+for the two new entries is given by (5) and by the preceding attachment
+for \(e_{p-1}\).  For injectivity, the copied entries are injective, the
+new vertices have old indices \(m\) and \(m-1\), and the new edges have old
+indices \(m-1\) and \(m-2\); the injectivity fields of
+\noderef{TreeSequence} separate each of these from all earlier copied
+entries and from one another.
 
-The fields of \noderef{HierarchyMinimumCounterexampleContext} say that
-\(\varphi_n\) is proper and leaves
-exactly \(e_0\) uncolored.  The generating-coloring field of
-\noderef{ExtendedTashkinovTree} identifies it with the terminal series
-coloring.  The reflexive \noderef{StableColoring} relation on \(T_n\),
-with its actual \noderef{TashkinovStoredColors}, therefore satisfies
-the hypotheses of \noderef{Td}; thus
+We now unfold \noderef{TreeSequenceAdjoinEdge}, rather than infer an
+append equation merely from the identity of its last edge.
+\begin{itemize}
+\item For \(B+(e_{p-1},y_{p-1})=B^+\), equation (2) gives
+\(|B^+|=|B|+1\); (3) gives the exact initial segment \(B\preccurlyeq B^+\);
+the last edge of \(B^+\) is literally the restriction of \(T\) at index
+\(m-2\), hence is \(e_{p-1}\); and its last vertex is literally the
+restriction of \(T\) at index \(m-1\), hence is \(y_{p-1}\).
+\item For \(B^++(e_p,y_p)=T\), equation (2) gives
+\(|T|=|B^+|+1\); (3) gives \(B^+\preccurlyeq T\); the individual last
+edge is \(T.\mathit{edge}(m-1)=e_p\); and the literal fresh last vertex is
+\(T.\mathit{vertex}(m)=y_p\).
+\item For \(B+(e_p,y_p)=T^-\), the definition of \(T^-\) gives
+\(|T^-|=|B|+1\), equality of every vertex and edge through \(B\), and
+individual last edge \(e_p\); separately, its fresh last vertex was
+defined to be the literal vertex \(y_p\).
+\item For \(T^-+(e_{p-1},y_{p-1})=T^*\), the definition of \(T^*\)
+gives \(|T^*|=|T^-|+1\), equality of every retained entry, and individual
+last edge \(e_{p-1}\); separately, its fresh last vertex is literally
+\(y_{p-1}\).
+\end{itemize}
+Thus every append has the unit-length, exact ordered-prefix, and
+individual-last-edge clauses of \noderef{TreeSequenceAdjoinEdge}, and
+each asserted fresh vertex has been identified independently from those
+three clauses.  Reading the four explicit entry maps through
+\noderef{TreeSequenceVertexSet} and \noderef{TreeSequenceEdgeSet} gives
 \[
-                         \noderef{ModColoring}(\mathcal E,\varphi_n).
-                                                                    \tag{9}
+\begin{aligned}
+ V(T^-)&=V(T)\setminus\{y_{p-1}\},&
+ E(T^-)&=E(T)\setminus\{e_{p-1}\},\\
+ V(T^*)&=V(T),& E(T^*)&=E(T).
+\end{aligned}                                                 \tag{6}
 \]
-The exact initial-segment and strict-length clauses above make both
-reordered trees eligible for the universal clause of (9), with the
-appropriate routes already proved.  It returns an actual
-\noderef{CorrespondingExtendedTashkinovTree} for each tree.  Apply
-\noderef{MaximumPropertyTransport} separately to these two
-certificates and the maximum field of \(C\).  Both replacement ETTs
-have maximum property, as required.
+The reverse inclusions in the first line use vertex and edge injectivity
+to see that the deleted entries occur nowhere else.  We have now filled
+every field of \noderef{HierarchySituationTwoReorderedTrees}; denote the
+result by \(R=(T^-,T^*)\).
+
+We turn to the augmentation routes.  Let
+\(Z=\mathcal E.\mathit{series}.\mathit{tree}(n+1)\), the output tree of
+the terminal certified step.  By (1), the certificate at the terminal
+index cannot be the initial constructor.  The certification field of
+\noderef{TashkinovSeries}, the three positive constructors in
+\noderef{TashkinovSeriesStep}, and the generating-coloring equation in
+\noderef{ExtendedTashkinovTree} give exactly the following alternatives:
+\begin{itemize}
+\item if \(\Theta_n=PE\), then
+\(\noderef{TashkinovClosure}(\varphi_n,T_n,Z)\), whose first field is a
+\(\varphi_n\)-augmentation sequence \(T_n\longrightarrow Z\);
+\item if \(\Theta_n=SE\) or \(RE\), there are an individual edge \(f_n\)
+and a tree-sequence \(S\) such that
+\[
+ F_n=\{f_n\},\qquad
+ \noderef{TreeSequenceAdjoinEdge}(T_n,f_n,S),\qquad
+ \noderef{TashkinovClosure}(\varphi_n,S,Z).                  \tag{7}
+\]
+\end{itemize}
+In every case the \texttt{belowFinal} field of
+\noderef{ExtendedTashkinovTree} is the exact relation \(T\preccurlyeq Z\).
+
+We first put the appropriate source below \(B\).  In the PE case, unfold
+the \texttt{parallel} field of \noderef{HierarchyBase}.  It supplies an
+object
+\[
+ U:\noderef{OrderedTreeUnion}(T_n,\mathcal B.\mathit{closure},
+                              \mathcal B.\mathit{core}).
+\]
+The \texttt{leftSegment} field of \(U\) is exactly
+\(T_n\preccurlyeq\mathcal B.\mathit{core}\).  If \(q=0\), this core is
+\(A\).  If \(q>0\), \texttt{coreInsideFirst} followed by the nested fields
+of \noderef{TashkinovHierarchy} puts the core below
+\(H.\mathit{stage}(q)=A\).  Finally, \(A\preccurlyeq B\) follows by
+comparing their entrywise prefixes of \(T\), since
+\(|A|\leq|B|=|A|+\ell-2\).  Transitivity of the three explicit
+\noderef{TreeSequenceInitialSegment} relations yields
+\[
+                         T_n\preccurlyeq B.                   \tag{8}
+\]
+
+Suppose next that the kind is SE or RE.  The \texttt{nonparallel} field
+of \noderef{HierarchyBase} identifies its core with \(T_n\).  The same
+hierarchy and full-tail prefix chain therefore again gives
+\(T_n\preccurlyeq B\).  Assume for the moment that \(B\ne T_n\).  If
+their lengths were equal, the length and entry equations of
+\noderef{TreeSequenceInitialSegment} would identify the two ordered
+tree-sequences; hence
+\[
+                         |T_n|<|B|.                           \tag{9}
+\]
+Apply \noderef{HierarchyNonparallelFirstEdge} to the kind alternative
+and the equality \(F_n=\{f_n\}\) in (7).  It says that the entry of the
+first hierarchy stage at edge position \(|T_n|\) is the individual edge
+\(f_n\).  Both that stage and \(B\) are exact prefixes of \(T\), and (9)
+makes this position exist in \(B\); the entrywise edge equations of
+\noderef{TreeSequenceInitialSegment} therefore give
+\[
+                    B.\mathit{edge}(|T_n|)=f_n.              \tag{10}
+\]
+
+Unfold the adjoin relation in (7).  It gives \(|S|=|T_n|+1\), the exact
+prefix \(T_n\preccurlyeq S\), and last edge \(f_n\).  These are also the
+length, prefix, and last-edge data for the first \(|T_n|+1\) entries of
+\(B\), by (8)--(10).  The last vertices agree as well, and this is a
+separate endpoint argument.  The attachment field of \(S\) writes the
+ends of \(f_n\) as its new last vertex together with a vertex of \(T_n\).
+The attachment field of \(B\) at (10) writes the same endpoint pair as
+the new vertex of \(B\) at position \(|T_n|+1\) together with a vertex of
+\(T_n\).  In each pair the new vertex is outside \(V(T_n)\), by vertex
+injectivity and the exact prefix, whereas the other endpoint lies in
+\(V(T_n)\).  Equality of the two endpoint pairs consequently identifies
+the two unique outside endpoints.  We have proved equality of every
+vertex and edge through length \(|S|\), and hence
+\[
+                         S\preccurlyeq B.                     \tag{11}
+\]
+
+It remains to exclude the non-PE boundary \(B=T_n\).  Suppose, toward a
+contradiction, that this equality holds and that the terminal kind is SE
+or RE.  The same application of
+\noderef{HierarchyNonparallelFirstEdge}, now compared with the exact
+prefix \(B^+\preccurlyeq T\), identifies \(f_n\) with the first edge
+after \(B=T_n\), namely the individual edge \(e_{p-1}\).  Both \(S\) in
+(7) and \(B^+\) are unit extensions of \(B\), have \(B\) as exact initial
+segment, and have this same individual last edge.  Their fresh last
+vertices agree by the endpoint-and-injectivity argument used above.
+Thus all ordered entries agree and
+\[
+                              S=B^+.                          \tag{12}
+\]
+
+The closure in (7) gives a \(\varphi_n\)-augmentation sequence from \(S\)
+to \(Z\).  Before applying
+\noderef{TashkinovAugmentationSequenceRestrict}, note both of its exact
+prefix premises: by (12) and (3), \(S=B^+\preccurlyeq T\), and by the
+\texttt{belowFinal} field, \(T\preccurlyeq Z\).  The restriction lemma
+therefore gives a route \(S\longrightarrow T\).  Its endpoints differ in
+length by one.  Since a \noderef{TashkinovAugmentation} increases length
+by exactly one, induction on the finite
+\noderef{TashkinovAugmentationSequence} shows that this route is the
+single augmentation \(B^+=S\longrightarrow T\).  The new individual edge
+is \(e_p\), and \(D\) gives \(\varphi_n(e_p)=\theta\); hence the
+missing-color clause of that augmentation says
+\(\theta\in\noderef{TreeMissingColors}(\varphi_n,B^+)\).  A witnessing
+vertex cannot be the sole new vertex \(y_{p-1}\), because \(D\) says that
+\(\theta\) is present there.  The explicit vertex entries of \(B^+\) thus
+put the witness in \(B=T_n\), so
+\[
+                 \theta\in\overline\varphi_n(T_n).           \tag{13}
+\]
+
+In the RE constructor, \texttt{previousClosed} and
+\texttt{currentColoring}, followed by the generating-coloring equation of
+\noderef{ExtendedTashkinovTree}, say directly that \(V(T_n)\) is
+\noderef{ColoredVertexSetClosed} under \(\varphi_n\).  In the SE
+constructor, \texttt{previousClosed} gives closedness under the preceding
+coloring, while the selected-coloring field of
+\noderef{MaximumDefectiveChoice} and \texttt{currentColoring} identify
+\(\varphi_n\) as a proper, exactly-one-uncolored
+\noderef{StableColoring} of \(T_n\) relative to that preceding coloring.
+If a boundary edge had \(\varphi_n\)-color missing on \(T_n\), the
+vertex-missing-set clause of stability would make that color missing under
+the preceding coloring as well, and the reverse edge criterion in
+\noderef{sc1} would give the same color to that exact boundary edge under
+the preceding coloring.  This contradicts \texttt{previousClosed}.  Hence
+\(V(T_n)\) is closed under \(\varphi_n\) in SE too.
+
+Finally, (5) has one endpoint of \(e_p\) in \(B=T_n\) and its other
+endpoint \(y_p\) outside \(B\), so the definition of
+\noderef{BoundaryEdges} makes \(e_p\) a boundary edge of \(V(T_n)\).
+Its color is \(\theta\) by \(D\), while (13) says that this color is
+tree-missing.  This contradicts the just-proved closedness in both SE and
+RE.  Since (1) excludes the initial constructor and
+\noderef{TashkinovSeriesStep} has only the PE, SE, and RE positive
+constructors, we have proved
+\[
+              B=T_n\quad\Longrightarrow\quad\Theta_n=PE.    \tag{14}
+\]
+
+We can now restrict the old route in every case.  Let \(S_0=T_n\) in PE,
+and let \(S_0=S\) from (7) in SE or RE.  In PE, (8) gives
+\(S_0\preccurlyeq B\).  In SE or RE, (14) gives \(B\ne T_n\), so (11)
+gives \(S_0\preccurlyeq B\).  Also the relevant closure in every case
+gives a \(\varphi_n\)-augmentation sequence \(S_0\longrightarrow Z\).
+We list both prefix premises before each use of
+\noderef{TashkinovAugmentationSequenceRestrict}:
+\begin{enumerate}
+\item \(S_0\preccurlyeq T\) is the composite
+\(S_0\preccurlyeq B\preccurlyeq T\), and
+\(T\preccurlyeq Z\) is \texttt{belowFinal}.  Restriction gives
+\(S_0\longrightarrow T\).
+\item \(S_0\preccurlyeq B\) was just proved, and
+\(B\preccurlyeq T\) is (3).  Restricting the route from item 1 gives
+\(S_0\longrightarrow B\).
+\item \(S_0\preccurlyeq B^+\) is the composite through \(B\), and
+\(B^+\preccurlyeq T\) is (3).  Restricting the route from item 1 gives
+\(S_0\longrightarrow B^+\).
+\end{enumerate}
+Thus no restriction is inferred from a vertex-set inclusion; every source
+and target relation above is an exact
+\noderef{TreeSequenceInitialSegment}.
+
+The route to \(B^+\) has a final augmentation whose predecessor has
+length \(|B^+|-1=|B|\).  That predecessor and \(B\) are both exact initial
+segments of \(B^+\) with the same length, so the entry equations in
+\noderef{TreeSequenceInitialSegment} identify them.  Hence
+\[
+                         B\longrightarrow B^+                \tag{15}
+\]
+is one \(\varphi_n\)-Tashkinov augmentation.  Applying the same argument
+to the route ending at \(T\), whose final predecessor has length
+\(|T|-1=|B^+|\), gives
+\[
+                         B^+\longrightarrow T.               \tag{16}
+\]
+These arguments are also valid when the route to \(B\) is empty.
+
+Let \(c\) be the color supplied by the missing-color clause of (15).
+Then \(\varphi_n(e_{p-1})=c\) and \(c\) has a missing witness in \(B\).
+The clause of (16), together with
+\(D.\mathit{thetaOnLastEdge}\), says that \(\theta\) has a missing
+witness in \(B^+\).  As in the derivation of (13),
+\(D.\mathit{thetaPresentPenultimate}\) excludes the sole vertex
+\(y_{p-1}\) of \(B^+-B\); hence
+\[
+                    \theta\in\overline\varphi_n(B).          \tag{17}
+\]
+The exact relation \(B+(e_p,y_p)=T^-\), the edge-color equation for
+\(e_p\), and (17) now verify all clauses of
+\noderef{TashkinovAugmentation} for \(B\longrightarrow T^-\).  The old
+witness for \(c\) in \(B\) remains a vertex of \(T^-\), so
+\(c\in\overline\varphi_n(T^-)\); together with the exact relation
+\(T^-+(e_{p-1},y_{p-1})=T^*\), this verifies
+\(T^-\longrightarrow T^*\).  Composing these two one-step augmentations
+with the route \(S_0\longrightarrow B\) gives
+\[
+ S_0\longrightarrow T^-,\qquad S_0\longrightarrow T^*.       \tag{18}
+\]
+For PE, \(S_0=T_n\).  For SE or RE, (7) retains the same individual
+\(f_n\), exact equality \(F_n=\{f_n\}\), and exact adjoined seed
+\(S_0=T_n+f_n\).  Thus (18) is precisely each route alternative asserted
+in the statement.
+
+It remains to produce the corresponding ETTs and their maximum property.
+Here the roles of \(C\) and the minimum context must again be kept
+separate.  The fields \texttt{proper}, \texttt{oneEdgeUncolored}, and
+\texttt{lowerRung} of
+\noderef{HierarchyMinimumCounterexampleContext} supply respectively
+properness of \(\varphi_n\), its unique uncolored edge \(e_0\), and the
+lower-rung package required by \noderef{Td}.  The generating-coloring
+field of \noderef{ExtendedTashkinovTree} identifies \(\varphi_n\) with
+the terminal series coloring.  After this rewrite, reflexivity in
+\noderef{StableColoring}, with the actual
+\noderef{TashkinovStoredColors}, gives the needed terminal stability.
+Apply \noderef{Td} with the positivity \(C.\mathit{positive}\) from
+(1), the maximum-property argument \(C.\mathit{maximum}\) from (1), and
+the package \(\mathit{ctx.lowerRung}\).  Its conclusion is
+\[
+                     \noderef{ModColoring}(\mathcal E,\varphi_n). \tag{19}
+\]
+
+Both reordered trees are exact strict extensions of \(T_n\).  In PE this
+follows from \(T_n\preccurlyeq B\prec T^-\preccurlyeq T^*\); in SE or RE
+it follows already from the unit extension
+\(T_n\prec S_0\preccurlyeq B\prec T^-\preccurlyeq T^*\).  Together with
+the corresponding alternatives in (18), these are all premises of the
+universal clause in (19).  That clause returns an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate
+\(\mathcal C^-\) on \(T^-\) and an actual certificate \(\mathcal C^*\)
+on \(T^*\).
+
+Finally apply \noderef{MaximumPropertyTransport} to
+\(\mathcal C^-\), using (19) and, explicitly, the base maximum-property
+field \(C.\mathit{maximum}\).  Apply it a second time to
+\(\mathcal C^*\), again using (19) and the same explicit argument
+\(C.\mathit{maximum}\).  The two conclusions are maximum property for
+the two replacement ETTs, which completes every asserted conjunct.
 \end{proof}
