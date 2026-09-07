@@ -2,6 +2,7 @@ import Tablet.ChangeLemma
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved
 import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.HierarchyBase
 import Tablet.HierarchyCounterexample
@@ -34,12 +35,18 @@ import Tablet.StableColoring
 import Tablet.StableChangeCasesOneTwo
 import Tablet.StableChangeCasesOneTwoFullTail
 import Tablet.StableChangeCasesOneTwoSplitTail
+import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceColoringTransport
 import Tablet.TashkinovAugmentationSequenceRestrict
+import Tablet.TashkinovClosure
 import Tablet.TashkinovHierarchy
+import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
+import Tablet.TreeColoringInvariant
 import Tablet.TreeIncidentEdge
 import Tablet.TreeSequence
+import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceVertexSet
 import Tablet.TwoColorComponent

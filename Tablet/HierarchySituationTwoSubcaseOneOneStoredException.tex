@@ -281,55 +281,201 @@ large-set, and minimality premises are the fields of \(P_2\)'s minimum
 context.  Retain in particular its
 \noderef{HierarchyWeaklyStable} conclusion for \(\mu_3\).
 
-We claim only the exact prefix transport justified by that weak
-stability and (11)--(12):
+We next extract the actual terminal construction of the replacement
+presentation.  Put
 \[
- \mu_3(f)=\mu_2(f)\quad(f\in E(B^+)),\qquad
- \overline\mu_3(u)=\overline\mu_2(u)\quad(u\in V(B^+)),       \tag{14}
+ \mathcal E_2=P_2.\mathit{corresponding}.\mathit{replacementETT},
+ \qquad
+ \mathcal S_2=P_2.\mathit{corresponding}.\mathit{replacementSeries},
 \]
-while
-\[
-                    \mu_3(e_p)=\beta.                        \tag{15}
-\]
-There is no assertion that the full tail is fixed.
+and let \(L_2\) be the last output tree of this series and \(T_n^2\) its
+terminal ladder tree.  The \(\mathit{seriesPresentation}\) field of
+\noderef{CorrespondingExtendedTashkinovTree} transports the dependent
+series of \(\mathcal E_2\) to \(\mathcal S_2\), and its
+\(\mathit{finalGeneratingColoring}\) field identifies the coloring at the
+terminal series index with \(\mu_2\), after casting that index along the
+\(\mathit{rungAgreement}\) field.  Thus the certificate
+\(\mathcal E_2.\mathit{series}.\mathit{certified}\) in the actual
+\noderef{TashkinovSeries} may be inspected at its last index.  The
+initial constructor is impossible by the positive-rung field of
+\noderef{ExtendedTashkinovTree}; unpacking the remaining actual
+\noderef{TashkinovSeriesStep} gives the following exhaustive alternatives.
 
-We verify the actual terminal construction needed for the split-tail
-provider.  Extract the PE or exact-seed SE/RE augmentation route for
-\(P_2\)'s ETT from its actual terminal
-\noderef{TashkinovSeriesStep}.  In the PE case its source is \(T_n^2\).
-In the SE/RE case retain the individual edge \(f_n\), the equality
-\(F_n=\{f_n\}\), the exact adjoined seed \(T_n^2+f_n\), and the route
-from that seed; \noderef{HierarchyNonparallelFirstEdge} identifies that
-same edge in the first positive ordinary stage.  In each case prove
-separately that the appropriate source is an exact initial segment of
-\(B^+\), and that \(B^+\) is an exact initial segment of the certified
-terminal output.  These are precisely the two premises of
-\noderef{TashkinovAugmentationSequenceRestrict}, which gives the old
-route to \(B^+\).  Apply
-\noderef{TashkinovAugmentationSequenceColoringTransport}.  Its
-missing-set premise is (14).  For route-added edges at or above \(A\),
-(14) supplies exact value equality.  If \(q>0\), the
-\noderef{HierarchyWeaklyStable} output of the stable-change provider
-contains pointwise invariance on \(A\), covering all earlier route
-edges.  At divider zero and non-PE, the route begins at the exact
-one-edge seed and \(A=T_n\).  At divider zero and PE, write \(R_n^2\)
-for the rebuilt base closure.  The base field supplies
+In the PE alternative, its closed-extension field is a
+\(\mu_2\)-\noderef{TashkinovClosure} of \(T_n^2\) to \(L_2\).  Unfolding
+that closure gives a
+\(\mu_2\)-\noderef{TashkinovAugmentationSequence}
+\(T_n^2\longrightarrow L_2\).  In the SE and RE alternatives, the
+constructor supplies an individual edge \(f_n^2\), the literal singleton
+connecting-edge equality, a tree \(S_2\) with
+\noderef{TreeSequenceAdjoinEdge}\((T_n^2,f_n^2,S_2)\), and a
+\(\mu_2\)-\noderef{TashkinovClosure} from \(S_2\) to \(L_2\); hence it
+supplies a \(\mu_2\)-augmentation sequence
+\(S_2\longrightarrow L_2\).  The extension-kind and connecting-edge
+fields of the same correspondence transport these exact alternatives
+back to the original-relative terminal arrays, while its
+\(\mathit{ladderTreesAgree}\) field identifies \(T_n^2\) with the
+original-relative terminal ladder tree.  In what follows write
+\(S\) for \(T_n^2\) in the PE alternative and for this exact seed
+\(S_2\) in the SE/RE alternatives, and write
+\(\rho:S\longrightarrow L_2\) for the resulting certified route.
+
+We now prove, case by case, the first exact prefix needed to restrict
+\(\rho\).  Transport the stages, core, and divider count through
+\(P_2.\mathit{sameGood}\), and call the replacement hierarchy \(H_2\).
+Thus its last starred stage is the same exact tree \(A\).
+If the terminal kind is PE and \(q>0\), the
+\(\mathit{baseStage}\) equality and the iterated
+\(\mathit{nested}\) fields of \noderef{TashkinovHierarchy} give
+\[
+                      T_n^2\preccurlyeq A\preccurlyeq B^+.
+\]
+If the kind is PE and \(q=0\), the
+\(\mathit{parallel}\) field of the replacement
+\noderef{HierarchyBase} supplies its closure \(R_n^2\) and
 \[
  U_2:\noderef{OrderedTreeUnion}(T_n^2,R_n^2,A).
 \]
-Apply \noderef{CombinedStableClosurePreserved} to (13).  It fixes every
-displayed edge of \(T_n^2\) and \(R_n^2\).  For each exact position
-\(r<|A|\), \(U_2.\mathit{leftSegment}\) covers \(r<|T_n^2|\), and
-\(U_2.\mathit{newEntryFromRight}\) supplies an exact edge of \(R_n^2\)
-when \(|T_n^2|\leq r\).  Hence every route edge below \(A\) is fixed as
-well.  These are precisely the two premises of the coloring-transport
-theorem, so an actual \(\mu_3\)-route reaches \(B^+\).
+The field \(U_2.\mathit{leftSegment}\), followed by
+\(A\preccurlyeq B^+\), again gives \(S=T_n^2\preccurlyeq B^+\).
 
-Use \noderef{TashkinovAugmentationSequenceRestrict} again with the two
-exact premises that the appropriate source is below \(T\) and \(T\) is
-below the certified output.  Factor this finite route at the proved
-exact intermediate prefix \(B^+\).  Since \(|T|=|B^+|+1\), the factor
-after \(B^+\) is the old one-step route \(B^+\to T\) under \(\mu_2\).
+Suppose next that the kind is SE or RE and \(q=0\).  The nonparallel
+base clause gives \(A=T_n^2\), while the exact adjoin certificate gives
+\(|S|=|A|+1\) and \(A\preccurlyeq S\).  The hypothesis
+\(D.\mathit{tailAtLeastTwo}\), together with the definitions of
+\(\ell\) and \(B^+\), gives \(|A|+1\leq|B^+|\).  The closure route makes
+\(S\) an exact prefix of \(L_2\): induct on its
+\noderef{TashkinovAugmentationSequence} and compose the exact-prefix
+clause of each \noderef{TashkinovAugmentation}.  Also
+\(B^+\preccurlyeq T\preccurlyeq L_2\).  Comparing the entries of these
+two prefixes of \(L_2\), using the displayed length inequality and
+\noderef{TreeSequenceInitialSegment}, proves \(S\preccurlyeq B^+\).
+
+Finally suppose that the kind is SE or RE and \(q>0\).  The base-stage
+identity gives \(H_2.\mathit{stage}(0)=T_n^2\), and the first strict
+nesting gives
+\[
+ |H_2.\mathit{stage}(1)|\geq |T_n^2|+1=|S|.
+\]
+Both \(S\) and \(H_2.\mathit{stage}(1)\) are exact prefixes of the same
+tree \(L_2\): for \(S\) this follows by induction along its closure
+route, and for stage one it follows from the iterated hierarchy nesting,
+the terminal-stage equality, and
+\(\mathcal E_2.\mathit{belowFinal}\).  Moreover
+\noderef{HierarchyNonparallelFirstEdge}, applied to \(H_2\) and the
+literal singleton edge equality, identifies the entry of stage one at
+position \(|T_n^2|\) with the same individual edge \(f_n^2\) adjoined in
+\(S\); no parallel edge is substituted.  Comparing all earlier entries
+in the common final output now gives
+\[
+ S\preccurlyeq H_2.\mathit{stage}(1)
+       \preccurlyeq A\preccurlyeq B^+.
+\]
+This completes the proof of \(S\preccurlyeq B^+\) in every terminal-kind
+and divider case.
+
+The other exact prefix required for restriction is independent of these
+cases.  The definition of \(B^+\) gives \(B^+\preccurlyeq T\), and the
+\(\mathit{belowFinal}\) field of
+\noderef{ExtendedTashkinovTree} for \(\mathcal E_2\) gives
+\(T\preccurlyeq L_2\).  Composing the length inequalities and the
+entrywise vertex and edge identities gives
+\[
+                         B^+\preccurlyeq L_2.                  \tag{14a}
+\]
+Apply \noderef{TashkinovAugmentationSequenceRestrict} to \(\rho\) with
+the two now proved premises \(S\preccurlyeq B^+\) and (14a).  This gives
+the old-color route \(S\longrightarrow B^+\).
+
+Separately, compose \(S\preccurlyeq B^+\preccurlyeq T\) and use again
+\(T\preccurlyeq L_2\).  A second application of
+\noderef{TashkinovAugmentationSequenceRestrict}, now with the exact
+intermediate tree \(T\), gives a \(\mu_2\)-route
+\(S\longrightarrow T\).  We obtain its suffix from \(B^+\) directly,
+not from the restriction theorem.  Unfold
+\noderef{TashkinovAugmentationSequence} as
+\(\operatorname{Relation.ReflTransGen}\) and induct on its constructors.
+Every one-step \noderef{TashkinovAugmentation} raises the length by
+exactly one and makes its predecessor an exact prefix of its successor;
+induction also makes every intermediate tree an exact prefix of the
+common endpoint \(T\).  Compare the length of each successive member
+with \(|B^+|\).  Since \(|S|\leq|B^+|\), while the definitions of the
+full-tail prefixes and \(D.\mathit{tailAtLeastTwo}\) give
+\(|T|=|B^+|+1\), a first member of length at least \(|B^+|\) exists.
+The unit length increase makes its length exactly \(|B^+|\).  That member
+and \(B^+\) are equal-length exact prefixes of \(T\), so their vertex and
+edge entries agree at every index by
+\noderef{TreeSequenceInitialSegment}, and proof irrelevance identifies
+the tree-sequences.  Splitting the reflexive-transitive chain at this
+member yields the required old-color suffix
+\[
+                         B^+\longrightarrow T.                \tag{14b}
+\]
+
+It remains to transport only the prefix route.  First, missing sets agree
+on every vertex of \(B^+\).  Indeed, reapplying
+\noderef{HierarchyCounterexamplePenultimateElementary} to
+the six relevant fields of \(P_2.\mathit{minimumContext}\), and using
+\(P_2.\mathit{sameGood}\) to identify the resulting full-tail prefix,
+makes \(B^+\) elementary under \(\mu_2\).
+If a vertex-node of \(B^+\) is outside \(Q_3\), no incident edge changes.
+If it lies in \(Q_3\), it cannot be an endpoint: an endpoint is missing
+one of \(\beta,\theta\), while elementarity and the retained missing
+witness for that color in the component disjoint from \(Q_3\) force that
+endpoint to be the retained witness.  It therefore cannot lie in
+\(Q_3\).  Thus it is an internal degree-two vertex.  Properness gives
+exactly one incident \(\beta\)-edge and one incident \(\theta\)-edge;
+the swap exchanges their values and fixes every other color.  Hence the
+set of present colors, and therefore the missing set, is unchanged.
+
+For the fixed-edge premise, take an exact position \(t\) of \(B^+\) with
+\(|S|\leq t\).  If \(|A|\leq t\), equations (11)--(12) exclude both
+swapped colors on that displayed edge, so (13) fixes it.  Suppose
+\(t<|A|\).  If \(q>0\), unfolding
+\noderef{HierarchyWeaklyStable} gives the
+\noderef{TreeColoringInvariant} clause on \(A\).  Since every tree source
+has positive length by \noderef{TreeSequence}, \(|S|\leq t\) excludes
+the root position, and that invariance fixes the displayed edge.  If
+\(q=0\) and the kind is PE,
+then \(S=T_n^2\); the inequalities
+\(|T_n^2|\leq t<|A|\) and
+\(U_2.\mathit{newEntryFromRight}\) identify the edge with an exact edge
+of \(R_n^2\).  Unfolding weak stability gives the combined-stability
+hypothesis of \noderef{CombinedStableClosurePreserved}.  The properness
+and exact-one-uncoloredness assumptions for \(\mu_2\) are fields of
+\(P_2.\mathit{minimumContext}\); those for \(\mu_3\) were established
+from \noderef{TwoColorComponentSwapProper} and preservation of the
+uncolored set before applying stable change.  The cited closure theorem
+therefore fixes every displayed edge of \(T_n^2\) and \(R_n^2\), hence
+this edge.  If \(q=0\)
+and the kind is SE or RE, then \(A=T_n^2\) and the source is the exact
+seed with \(|S|=|A|+1\), contradicting \(|S|\leq t<|A|\).  Notice in
+particular that transport asks for no equality at the seed position
+\(|A|\).  We have proved exactly
+\[
+ \begin{aligned}
+ &\overline\mu_3(u)=\overline\mu_2(u)
+       &&(u\in V(B^+)),\\
+ &\mu_3(B^+.\mathit{edge}(t))=\mu_2(B^+.\mathit{edge}(t))
+       &&(|S|\leq t<|B^+|).
+ \end{aligned}                                                \tag{14}
+\]
+There is no claim that all edges of \(B^+\), or any later tail edge, are
+fixed.
+
+Apply \noderef{TashkinovAugmentationSequenceColoringTransport} to the
+old route \(S\longrightarrow B^+\), with penultimate prefix \(B\).  The
+exact prefix \(B\preccurlyeq B^+\) and equality
+\(|B^+|=|B|+1\) follow from the full-tail-prefix definitions and
+\(D.\mathit{tailAtLeastTwo}\); the first line of (14), restricted to
+\(V(B)\), is its missing-set premise, and the second line of (14) is
+exactly its edge-value premise.  We obtain the required actual
+\(\mu_3\)-route \(S\longrightarrow B^+\).  Finally, the exact edge
+\(e_p\) has value \(\theta\) under \(\mu_2\) and is incident with the
+root \(y_p\) of \(Q_3\), so the component swap (13) gives
+\[
+                    \mu_3(e_p)=\beta.                         \tag{15}
+\]
 Both \(\beta\) and \(\theta\) remain missing on \(B^+\) under
 \(\mu_3\), at their two component-disjoint witnesses.  Equation (14)
 does not by itself settle the stored-position premise.  Unfold
