@@ -2,7 +2,7 @@ import Tablet.CriticalCoreExists
 import Tablet.ElementaryTransfer
 import Tablet.HierarchySituationTwoSubcaseOneOne
 import Tablet.HierarchySituationTwoSubcaseTwoOne
-import Tablet.HierarchySituationTwoCaseThreeNormalization
+import Tablet.HierarchySituationTwoSubcaseThreeOne
 import Tablet.MaximumDegreeRestrict
 import Tablet.ThmGS2
 
