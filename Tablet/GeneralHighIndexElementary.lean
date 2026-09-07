@@ -1,5 +1,6 @@
 import Tablet.CriticalCoreExists
 import Tablet.ElementaryTransfer
+import Tablet.HierarchySituationThreeClaimJMinusOneEmpty
 import Tablet.HierarchySituationTwoImpossible
 import Tablet.MaximumDegreeRestrict
 import Tablet.ThmGS2

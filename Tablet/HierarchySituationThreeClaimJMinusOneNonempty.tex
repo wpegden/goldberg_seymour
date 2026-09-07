@@ -1,0 +1,228 @@
+\begin{lemma}[Situation 7.3, Claim \(j-1\): nonempty case]
+Fix a rung-local minimum hierarchy counterexample \(C\), set
+
+\[
+ j=\noderef{HierarchyPathNumber}(C.\mathit{hierarchy}),\qquad
+ \ell=\noderef{HierarchyFullTailLength}(C),
+\]
+
+and assume \(2\le j<\ell\).  Assume every vertex has a missing color
+under every proper exactly-one-uncolored replacement coloring.  If
+\(\noderef{HierarchyEligibleCommonMissingIndices}\) is nonempty, then
+there are an actual \noderef{HierarchyReplacementPresentation} \(P\)
+and a color \(\alpha\) missing under \(P.\mathit{coloring}\) both at the
+terminal vertex and somewhere in the exact prefix \(T(y_{j-2})\), such
+that one of the following holds.  Writing \(H=P.H\), \(q\) for its last
+stored index, \(D=D_{n,q}\),
+\(\Gamma^q=\bigcup_{\eta\in D}P.\mathit{good}.\Gamma^q_\eta\), and
+\(M_0\) for the colors missing on
+\(P.\mathit{replacementBase}.\mathit{core}-T_n\), either
+
+\[
+                       \alpha\notin\Gamma^q\cup M_0,          \tag{A}
+\]
+
+or there is an \(\eta\in D\) such that
+\(\alpha\in P.\mathit{good}.\Gamma^q_\eta\) and the first vertex missing
+\(\eta\) occurs no later than \(y_{j-2}\).
+\end{lemma}
+\begin{proof}
+Let \(I\) denote the finite eligible-index set and choose
+\(i=\max I\).  Then \(i\in I\), and
+\noderef{HierarchySituationThreeEligibleIndexBound} gives
+
+\[
+                         1\le i<j.                            \tag{1}
+\]
+
+Unfolding membership in \(I\), choose the displayed replacement
+presentation \(P\) and color \(\alpha\) missing at both \(y_i\) and the
+terminal vertex \(y_\ell\).  Put \(\mu=P.\mathit{coloring}\), write
+\(H=P.H\), let \(q\) be its last stored index, and set
+
+\[
+ A=\noderef{HierarchyStarredStage}(H,q),\quad
+ B=T(y_{j-2}),\quad B^+=T(y_{j-1}),\quad
+ D=\noderef{HierarchyStoredColorsAt}(H,q).                    \tag{2}
+\]
+
+Here and below the \(T(y_s)\) are the exact
+\noderef{HierarchyFullTailPrefix}es.  The
+\noderef{SameGoodHierarchy} field of \(P\) identifies \(A\), all these
+prefixes, the stored sets, and the Gamma pairs with the original
+presentation.  Apply
+\noderef{HierarchyCounterexamplePenultimateElementary} to the six
+fields of \(P.\mathit{minimumContext}\).  We obtain
+
+\[
+              V(T(y_{\ell-1}))\text{ is elementary under }\mu.\tag{3}
+\]
+
+Since \(y_i\) lies after \(A\), (3) implies that \(\alpha\) is not
+missing on \(A\).  Every color in a terminal Gamma pair is missing on
+the corresponding hierarchy stage by the avoidance field of
+\noderef{GoodHierarchy} and
+\noderef{HierarchyStageMissingColors}; every color in the set \(M_0\)
+is missing on the base core outside \(T_n\), which is contained in \(A\)
+by \noderef{HierarchyBase} and \noderef{TashkinovHierarchy}.  Therefore
+
+\[
+                  \alpha\notin\Gamma^q\cup M_0.              \tag{4}
+\]
+
+If \(i\le j-2\), then the witness \(y_i\) belongs to \(B\), so
+\(P,\alpha\), and (4) give the required conclusion.  By (1), the only
+remaining case is
+
+\[
+                             i=j-1.                           \tag{5}
+\]
+
+We now make the paper's color choice (2) on the exact prefix \(B\).
+Instantiate \noderef{NineN} with the replacement ETT, base, hierarchy,
+goodness, the elementary prefix (3), and the large-missing-set field of
+\(P.\mathit{minimumContext}\), at index \(j-2\).  The inequalities
+\(2\le j<\ell\) verify its index premise.  Unfold its available set,
+its tail-used set, and \(M_0\).  If more than four available colors
+remain after deleting \(\Gamma^q\cup D\), the one exact edge of
+\(B^+-B\) uses at most one of them; choose a remaining color \(\beta\).
+Otherwise the second conclusion of \noderef{NineN} supplies seven
+distinct stored colors \(\eta_h\in D\cap
+\noderef{TreeMissingColors}(\mu,B)\) whose three-color sets
+
+\[
+                   P.\mathit{good}.\Gamma^q_{\eta_h}
+                              \cup\{\eta_h\}                 \tag{6}
+\]
+
+are disjoint from the tail through \(B\).  The Gamma pairs are pairwise
+disjoint by \noderef{GoodHierarchy}, and the seven \(\eta_h\) are
+distinct.  The single new edge in \(B^+-B\) has one color, so at least
+one set (6) also avoids that edge.  Calling its stored color \(\beta\),
+we have exactly one of
+
+\[
+\begin{split}
+ &\beta\in\noderef{TreeMissingColors}(\mu,B),\quad
+ \beta\notin M_0\cup\mu\langle B^+-A\rangle
+                  \cup(\Gamma^q\cup D),                     \tag{7a}\\
+ &\beta=\eta_h\in D\cap\noderef{TreeMissingColors}(\mu,B),
+ \quad (P.\mathit{good}.\Gamma^q_{\eta_h}\cup\{\eta_h\})
+                  \cap\mu\langle B^+-A\rangle=\varnothing, \tag{7b}
+\end{split}
+\]
+
+and in (7b) the first \(\eta_h\)-missing position is at most \(|B|\).
+This is the exact finite choice in manuscript assertion (2); the use of
+the single edge \(B^+-B\) is explicit.
+
+We record a reconstruction argument that will be invoked for each switch
+below.  Suppose a proper current replacement coloring \(\psi\) has
+\(V(T(y_{\ell-1}))\) elementary, two affected colors have their first
+missing witnesses in that prefix, and the component through those
+witnesses is disjoint from the component \(Q\) switched at \(y_\ell\).
+For \(v\) in the elementary prefix but outside \(Q\), adjacency in
+\noderef{TwoColorIncidenceGraph} shows that no affected incident edge is
+switched.  If \(v\in Q\), elementarity and component disjointness say
+that neither affected color is missing there.  Properness supplies one
+incident edge of each affected color; both edge-nodes lie in \(Q\), so
+\noderef{TwoColorComponentSwap} exchanges them and fixes every other
+incident color.  Thus the full missing-color set is unchanged at every
+prefix vertex.  This pointwise proof allows internal vertices of \(Q\)
+in the prefix and does not infer prefix avoidance from component
+separation.
+
+For the route, inspect the actual terminal
+\noderef{TashkinovSeriesStep} supplied by
+\(\mathcal E.\mathit{series}.\mathit{certified}
+(\operatorname{Fin.last}\mathcal E.\mathit{rounds})\), and use
+\noderef{ExtendedTashkinovTree}.\mathit{belowFinal} to place the desired
+split prefix below its output.  In PE, retain the terminal-ladder closure
+route and use \noderef{HierarchyBase}.parallel for the eligible core and
+closure.  In SE/RE, retain the individual connecting edge, its singleton
+set, the literal \noderef{TreeSequenceAdjoinEdge} seed, and its route.
+At positive divider count the seed lies below \(A\) by
+\noderef{HierarchyNonparallelFirstEdge}; at divider zero it is kept as
+the source.  Restrict the old route at the split prefix with
+\noderef{TashkinovAugmentationSequenceRestrict}, transport each step
+using the exact edge equalities and the pointwise missing-set equality,
+and concatenate the pieces using the reflexive-transitive definition of
+\noderef{TashkinovAugmentationSequence}.  Transport the remaining suffix
+by the component swap, since both affected colors are missing at the
+split.  Together with equality of all stored first missing positions and
+the relevant Gamma cutoff, these are precisely the premises of
+\noderef{StableChangeCasesOneTwoSplitTail}.  Its conclusion supplies an
+actual corresponding same-rung ETT on \(T\), maximum property, rebuilt
+base, hierarchy, goodness, and same-good data, separately in PE,
+divider-zero SE/RE, and positive-divider SE/RE.                    \(\tag{8}\)
+
+We finish by distinguishing whether the common color in (5) is stored.
+First suppose \(\alpha\notin D\).  Since \(\alpha\) is not missing on
+\(A\), the identity
+\(D=D_n\setminus\noderef{TreeMissingColors}(\mu,A)\) gives
+\(\alpha\notin D_n\).  Equations (4) and (7) exclude \(\alpha,\beta\)
+from the exact displayed interval through \(B^+\), including the
+divider-zero seed.  Apply \noderef{ChangeLemma} to their first missing
+witnesses.  The identified component is disjoint from the component
+through \(y_\ell\): equality would put three distinct missing endpoints
+in one spanning two-color path, contrary to
+\noderef{MissingColorIncidenceEndpoint},
+\noderef{TwoColorComponentSpanningPath}, and
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  Switch the terminal
+component.  Apply \noderef{StableChangeCasesOneTwo} and then the complete
+reconstruction (8), with split \(B^+\).  The terminal switch makes
+\(\beta\) missing at \(y_\ell\), while its old missing witness in \(B\)
+is in the disjoint component and remains missing.
+
+Package the returned data as a replacement presentation \(P'\).  The
+minimum context is rebuilt field by field: properness follows from
+\noderef{TwoColorComponentSwapProper}; the uncolored value is fixed;
+correspondence transports the complete lower-rung package and the
+\(2n+11\) estimate; same-good equality transports the fewer-divider
+assertion; and equality of path number, stages, and terminal excess
+identifies \noderef{HierarchyCounterexampleMeasure}, transporting
+lexicographic minimality.  Alternative (7a) gives (A) for \(\beta\),
+while (7b) gives the stated Gamma-pair alternative and its first-position
+bound.  Thus \(P',\beta\) prove the claim in the unstored case.
+
+Now suppose \(\alpha=\eta_t\in D\).  Choose the two distinct colors
+\(\gamma_1,\gamma_2\) of
+\(P.\mathit{good}.\Gamma^q_{\eta_t}\) using the two-colors field of
+\noderef{GoodHierarchy}.  Since \(\eta_t\) is missing at \(y_{j-1}\),
+Gamma avoidance and \noderef{HierarchyTailMissingColorExclusion} give
+
+\[
+ \{\gamma_1,\gamma_2\}\cap\mu\langle B^+-A\rangle=\varnothing,
+\]
+
+and \(\eta_t\) itself is absent there except possibly on the exact first
+SE/RE seed when \(q=0\).  Apply \noderef{ChangeLemma} to
+\((\gamma_1,\eta_t)\); the first witnesses lie in \(A\) and at
+\(y_{j-1}\).  Separate their component from the terminal component by
+the three-endpoint argument, switch the latter, and apply
+\noderef{StableChangeCasesOneTwo} and reconstruction (8).  In the
+divider-zero exceptional case, the stable-change terminal-seed clause
+fixes the individual seed before route transport.  Call the resulting
+presentation \(P_1\) and its coloring \(\mu_1\).  The pointwise argument
+above, not component separation alone, shows that all missing sets on
+\(T(y_{\ell-1})\) agree with those under \(\mu\).  In particular the first
+positions of every stored color agree.  The color \(\gamma_1\) is now
+missing at the terminal vertex and still at its witness in \(A\).
+
+Relative to \(P_1\), apply
+\noderef{HierarchyCounterexamplePenultimateElementary} again; this
+rederives prefix elementarity from \(P_1.\mathit{minimumContext}\).
+Equations (7a) or (7b) continue to hold because the first switch fixes
+the tail interval and preserves its missing sets pointwise.  Apply
+\noderef{ChangeLemma} to \((\gamma_1,\beta)\), separate the terminal
+component, and switch it.  The complete reconstruction (8), now using
+the actual terminal certificate of \(P_1.\mathit{replacementETT}\),
+produces \(P_2\), not merely a coloring.  The switch makes \(\beta\)
+missing at \(y_\ell\) and preserves its witness in \(B\).  Rebuild every
+field of \(P_2.\mathit{minimumContext}\) exactly as for \(P'\); the
+correspondence composition and same-good composition are taken relative
+to the original \(P\), so \(P_2\) is a presentation in the original
+family \(I\).  Finally (7a) gives (A), and (7b) gives the Gamma-pair and
+first-position alternative.  Hence \(P_2,\beta\) prove the claim also in
+the stored case.
+\end{proof}
