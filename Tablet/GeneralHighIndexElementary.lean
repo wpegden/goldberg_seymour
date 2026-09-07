@@ -3,6 +3,7 @@ import Tablet.ElementaryTransfer
 import Tablet.HierarchySituationTwoSubcaseOneOne
 import Tablet.HierarchySituationTwoSubcaseTwoOne
 import Tablet.HierarchySituationTwoSubcaseThreeOne
+import Tablet.HierarchySituationTwoSubcaseTwoTwo
 import Tablet.MaximumDegreeRestrict
 import Tablet.ThmGS2
 
