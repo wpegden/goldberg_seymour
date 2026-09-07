@@ -2,6 +2,7 @@ import Tablet.ChangeLemma
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved
 import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.GoodHierarchyReservedDisjoint
 import Tablet.HierarchyCounterexample
@@ -32,6 +33,7 @@ import Tablet.NineN
 import Tablet.OrderedTreeUnion
 import Tablet.SameGoodHierarchy
 import Tablet.StableColoring
+import Tablet.StableChangeCaseThree
 import Tablet.StableChangeCasesOneTwo
 import Tablet.StableChangeCasesOneTwoFullTail
 import Tablet.StableChangeCasesOneTwoSplitTail
