@@ -96,7 +96,8 @@ No corresponding ETT or good-hierarchy assertion for the full tree $T$
 is claimed in these two cases.
 \end{lemma}
 \begin{proof}
-Unpack $C$.  Its fields supply positivity, maximum property, the displayed
+Unpack $C$ using \noderef{HierarchyCounterexample}.  Its fields supply
+positivity, maximum property, the displayed
 \noderef{TashkinovHierarchy}, its \noderef{GoodHierarchy} witness, and
 non-elementarity.  Every component below is a
 \noderef{TwoColorComponent} in the vertex--edge incidence graph, so its
@@ -109,11 +110,14 @@ lengths, and the ordered vertex and exact-edge equalities give $A=T$
 entry by entry.  Truncated subtraction makes the prefix in (6.6) the full-length
 \noderef{TreeSequencePrefix} $T$, contradicting the non-elementarity
 field of $C$.  Hence $\ell\geq1$.  It follows from the exact prefix and
-hierarchy inclusions that $A$, every displayed stage, the PE closure, and
-the PE core all have vertex sets contained in $T(y_{\ell-1})$.  Restricting
+hierarchy inclusions, including the vertex-union field of
+\noderef{OrderedTreeUnion} for the PE core, that $A$, every displayed
+stage, the PE closure, and the PE core all have vertex sets contained in
+$T(y_{\ell-1})$.  Restricting
 \noderef{ColoredVertexSetElementary} makes each of these sets elementary.
-In particular $v_\alpha$ and $v_\beta$ are actual first missing witnesses,
-and a color missing on a displayed stage has a unique missing vertex there.
+By \noderef{HierarchyFirstMissingPosition}, $v_\alpha$ and $v_\beta$ are
+therefore actual first missing witnesses, and a color missing on a displayed
+stage has a unique missing vertex there.
 
 Properness and the fact that $\alpha$ is missing at $v_\alpha$ give the
 path certificate which was deliberately not assumed in the statement.
@@ -184,8 +188,9 @@ component rooted at $v_\beta$; neither first-missing vertex lies in $Q$.
 Assume that one of $\alpha,\beta$ is singleton-closed on some starred
 stage, and choose the largest index $r$ at which either singleton is
 closed.  We do not infer missingness from closedness.  Instead,
-missingness of both colors descends from $A$ to this stage.  Indeed, if
-one of their first missing vertices occurred for the first time at a
+missingness of both colors descends from $A$ to this stage.  Indeed, by
+the least-witness definition in \noderef{HierarchyFirstMissingPosition},
+if one of their first missing vertices occurred for the first time at a
 later positive stage, the stage elementarity proved above and
 \noderef{GoodHierarchyNewMissingClosed} would make that color closed at
 that later stage, contradicting maximality.  Hence
@@ -286,8 +291,9 @@ $\alpha$, choose the largest such index $r$.  The same descent,
 $v_\alpha\in T_{n,r}^{*}$, makes $Q$ outside that stage, and excludes
 $\alpha$ from the exact tail to $A$.  Every ordinary edge of that tail is
 introduced by \noderef{TashkinovAugmentation}; its color is missing on an
-earlier prefix.  Since $v_\beta$ is the first $\beta$-missing vertex and
-lies after $A$, none of those ordinary identities has color $\beta$.
+earlier prefix.  Since $v_\beta$ is the first $\beta$-missing vertex in the
+sense of \noderef{HierarchyFirstMissingPosition} and lies after $A$, none
+of those ordinary identities has color $\beta$.
 There is exactly one possible exception: $r=0$, the core is $T_n$, and
 the first displayed edge is the SE/RE connecting seed $f_n$ with
 $\beta\in D_n$.  Eliminate the actual SE or RE constructor of
@@ -412,12 +418,17 @@ is missing on $A=T_n$, is closed there, contradicting the present branch.
 Thus
 $\Theta_n=PE$.  The common-missing closure conclusion of
 \noderef{ParallelCommonMissingClosed}, with predecessor elementarity (2),
-shows that a first missing vertex lying in $V(T_n)\cap V(R_n)$ would make
-its color closed on $A=T_n\vee R_n$.  Therefore
+shows that an actual first missing witness, as specified by
+\noderef{HierarchyFirstMissingPosition}, lying in
+$V(T_n)\cap V(R_n)$ would make its color closed on $A=T_n\vee R_n$.
+Therefore
 \[
  v_\alpha\notin V(T_n)\cap V(R_n),
 \]
 and the same holds for $v_\beta$ whenever $v_\beta\in A$.              \tag{14}
+
+The vertex-set equality in \noderef{OrderedTreeUnion} makes the following
+constituent-location alternatives exhaustive.
 
 If the two first-missing vertices lie in opposite constituents, conclusion
 (iv) of \noderef{interchange}, with the color names ordered according to
@@ -477,8 +488,10 @@ closure.  In SE or RE it supplies an individual connecting edge $f_n$, the
 exact singleton equation $F_n=\{f_n\}$, a
 \noderef{TreeSequenceAdjoinEdge} seed $T_n+f_n$, and an augmentation
 sequence from that seed to the same final closure.  The hierarchy makes
-$A$ an exact ordered initial segment of $T$, and the ETT makes $T$ an exact
-ordered initial segment of that closure.  In the non-PE case with $q=0$,
+$A$ an exact ordered initial segment of $T$, and
+\noderef{ExtendedTashkinovTree} makes $T$ an exact ordered initial segment
+of that closure.  Both are entrywise prefix relations in the sense of
+\noderef{TreeSequenceInitialSegment}.  In the non-PE case with $q=0$,
 $A=T_n$ and no strict route is required.  In every other case the relevant
 seed is an initial segment of $A$; for the SE/RE seed this follows from its
 one-edge length, the strict hierarchy stage, and equality of entries in the

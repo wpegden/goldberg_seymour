@@ -3,13 +3,17 @@ import Tablet.CertifiedETTRestriction
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.CombinedStableClosurePreserved
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchyNewMissingClosed
 import Tablet.GoodHierarchyPrefixRepackage
+import Tablet.HierarchyCounterexample
+import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchySplitter
 import Tablet.HierarchyWeaklyStable
 import Tablet.HkuTreeColorsControlled
 import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumPropertyTransport
+import Tablet.OrderedTreeUnion
 import Tablet.OutsideKempeRecoloring
 import Tablet.OutsideKempeRecoloringStable
 import Tablet.ParallelCommonMissingClosed
