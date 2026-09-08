@@ -8,6 +8,7 @@ import Tablet.HierarchyBase
 import Tablet.HierarchyCounterexample
 import Tablet.HierarchyCounterexamplePenultimateElementary
 import Tablet.HierarchyFirstMissingPosition
+import Tablet.HierarchyFirstMissingPositionPrefixCutoff
 import Tablet.HierarchyFullTailLength
 import Tablet.HierarchyFullTailPrefix
 import Tablet.HierarchyMinimumCounterexampleContext
@@ -22,6 +23,7 @@ import Tablet.MaximumPropertyTransport
 import Tablet.ModColoring
 import Tablet.OrderedTreeUnion
 import Tablet.SameGoodHierarchy
+import Tablet.StableColoring
 import Tablet.StableChangeCasesOneTwo
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceComponentSwap
@@ -32,6 +34,7 @@ import Tablet.TashkinovStoredColors
 import Tablet.TreeColorSetMinusClosed
 import Tablet.TreeColoringInvariant
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceVertexSet
