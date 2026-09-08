@@ -102,12 +102,33 @@ its conclusions
 \begin{array}{ll}
 \text{(S1)}&\sigma_n\text{ is weakly stable at }A,\\
 \text{(S2)}&\sigma_n\text{ is a mod-coloring of }\mathcal E,\\
-\text{(S3)}&\text{if }q>0,\text{ the hierarchy through }A
- \text{ has an actual maximum ETT, base, and good-hierarchy}\\
-&\text{certificate with the old core, closure, retained stages,
-stored sets, Gamma pairs, and last minus-closed clause.}
+\text{(S3)}&\text{if }q>0,\text{ there are an input coloring, an actual
+ ETT }\mathcal E_A\text{ on }A,\\
+&\text{a base }\mathcal B_A,\text{ a hierarchy }H_A,\text{ and a good
+ hierarchy }g_A\text{ under }\sigma_n.
 \end{array}                                                     \tag{4}
 \]
+Retain every further conjunct of (S3): \(\mathcal E_A\) has maximum
+property; its terminal extension kind equals that of \(\mathcal E\);
+\(H_A\) has one fewer divider than \(H\); the core and closure of
+\(\mathcal B_A\) equal those of the original base; every stage of
+\(H_A\) is the corresponding retained stage of \(H\); and, at every
+retained stored index, the two \noderef{HierarchyStoredColorsAt} sets
+and every Gamma pair indexed by their common members agree.  Finally
+retain the separately stated last clause: \(T_{n,q}\) is minus-closed
+under \(\sigma_n\) for the union of the preceding Gamma pairs indexed
+by \(D_{n,q}\).  We use the names
+\[
+ \mathcal E_A,\quad \mathcal B_A,\quad H_A,\quad g_A,
+ \quad M_A,\quad \kappa_A=\kappa,
+ \quad d_A+1=q                                             \tag{4a}
+\]
+for these actual objects, its maximum witness, its terminal-kind
+equality, and its divider-count equality, respectively.  Thus (4a) is
+not a summary of unnamed existence data: all the core, closure, stage,
+stored-set, Gamma-pair, and last minus-closed equalities just listed are
+fixed witnesses from the conclusion of
+\noderef{StableChangeCasesOneTwo}.
 The first two are already the first two conclusions of this lemma.  We
 construct all objects in the remaining existential conclusion.
 
@@ -231,20 +252,33 @@ in (8), including the singleton and seed data in the non-PE line, are
 precisely the two eligibility alternatives in the universal clause of
 (S2), after unfolding \noderef{ModColoring}.  Consequently (S2) produces
 an actual \noderef{CorrespondingExtendedTashkinovTree} certificate
-\(\mathcal C_T\) on \(T\).  Apply \noderef{MaximumPropertyTransport} to
-(S2), \(\mathcal C_T\), and \(C.\mathit{maximum}\).  Its replacement ETT
-has maximum property.                                               \(\tag{9}\)
+\(\mathcal C_T^{\rm mod}\) on \(T\).  Apply
+\noderef{MaximumPropertyTransport} to (S2),
+\(\mathcal C_T^{\rm mod}\), and \(C.\mathit{maximum}\).  This gives a
+maximum witness \(M_T^{\rm mod}\) for its replacement ETT.  We retain
+these two objects for the SE/RE branch.
 
 If the terminal kind is PE, (S1) supplies the required combined stability
 and the first line of (8) supplies the full route required by
-\noderef{HierarchySplitter}.  Apply that lemma with the lower-rung
-projection of the context and \(C.\mathit{maximum}\), and choose its
-corresponding certificate as \(\mathcal C_T\).  It provides (9), a
-replacement \noderef{HierarchyBase} with the same core and PE closure,
-and a \noderef{TashkinovHierarchy} \(K\) with the same divider count,
-stages, and divider positions as \(H\).
+\noderef{HierarchySplitter}.  The properness and exactly-one-uncolored
+inputs for \(\sigma_n\) are the first two fields of (S2), while the
+corresponding inputs for \(\varphi_n\) and the lower-rung package are
+projections of the stated context.  Apply that lemma with these facts and
+\(C.\mathit{maximum}\).  Denote the
+objects returned by this single application by
+\[
+ \mathcal C_T,\qquad M_T,\qquad \mathcal B_T,\qquad K.          \tag{9}
+\]
+Thus \(\mathcal C_T\), rather than \(\mathcal C_T^{\rm mod}\), is the
+final PE correspondence certificate; \(M_T\) is the maximum witness
+returned with it; and \(\mathcal B_T,K\) are the returned base and
+hierarchy.  The last output of \noderef{HierarchySplitter} says that
+\(K\) has the same core, PE closure, divider count, ordered stages, and
+divider positions as \(H\).  We neither identify the two existential
+correspondence certificates nor transport objects between them.
 
-If the kind is SE or RE, use \(\mathcal C_T\) from (9).
+If the kind is SE or RE, set
+\(\mathcal C_T=\mathcal C_T^{\rm mod}\) and \(M_T=M_T^{\rm mod}\).
 \noderef{CorrespondingExtendedTashkinovTree} identifies the rung, every
 positive ladder tree, every raw stored set, every exact connecting-edge
 set, and every extension kind.  Define the new base core to be the
@@ -256,7 +290,10 @@ and the nonparallel field is the defining core equality.  Copy the
 divider count, stages, and divider positions of \(H\).  Every nestedness,
 strictness, divider-prefix, and terminal-stage field of
 \noderef{TashkinovHierarchy} is a coloring-free assertion about these
-same ordered trees, so this defines \(K\) field by field.
+same ordered trees, so this defines \(\mathcal B_T\) and \(K\) field by
+field.  In both terminal-kind branches, therefore, the objects in (9)
+are now fixed and satisfy the existential correspondence, maximum,
+base, and hierarchy requirements of the conclusion.
 
 We compare the hierarchy colors before rebuilding goodness.
 Correspondence identifies the raw stored arrays.  By
@@ -283,16 +320,52 @@ Define the new Gamma pairs by copying
 equal divider counts.  Equations (10)--(11) transport the two-color and
 pairwise-disjointness fields of \noderef{GoodHierarchy}.
 
-When \(q>0\), use the actual prefix good hierarchy in (S3).  Its retained
-base, stages, stored sets, and copied Gamma pairs transport the
-parallel-base clause and every unique-refresh and minus-closed clause
-strictly before the last divider.  Its separate last minus-closed
-conclusion is exactly the remaining minus-closed clause.  For the last
-unique-refresh clause, the quantified stage difference is contained in
-\(A\preccurlyeq B\); the third transport hypothesis, (10), and the copied
-Gamma pairs transport the old unique witness and its uniqueness.  When
-\(q=0\), there are no unique-refresh or minus-closed fields, and the
-parallel-base implication is vacuous in the SE/RE case.
+Suppose \(q>0\).  The actual prefix witness \(g_A\) in (4a) supplies every
+unique-refresh and minus-closed clause strictly before the last divider:
+its stages, stored sets, and Gamma pairs are exactly the retained ones,
+and all these objects are also the corresponding initial objects of
+\(K\).  The separate last minus-closed conclusion of (S3) is exactly the
+remaining clause for \(K\).  For the last unique-refresh clause, the
+quantified stage difference is contained in \(A\preccurlyeq B\); the
+third transport hypothesis, (10), and the copied Gamma pairs transport
+the old unique witness and its uniqueness.  When \(q=0\), there are no
+unique-refresh or minus-closed fields, and the parallel-base implication
+is vacuous in the SE/RE case.
+
+We next verify the PE parallel-base field, separating the two divider
+cases.  First let \(q>0\).  The kind equality
+\(\kappa_A=\kappa\) retained in (4a), together with the present assumption
+\(\kappa=PE\), makes the antecedent of \(g_A.\mathit{parallelBase}\)
+true.  Hence \(g_A\) gives both
+\[
+ \neg\noderef{TreeColorSetMinusClosed}
+   (G,\sigma_n,\mathcal B_A.\mathit{core},\Gamma_A^0)           \tag{12}
+\]
+and
+\[
+ 4\leq\bigl|(\overline{\sigma}_n(T_n^A)\cap
+       \overline{\sigma}_n(\mathcal B_A.\mathit{closure}))
+       -\Gamma_A^0\bigr|,                                      \tag{13}
+\]
+where \(T_n^A\) is the terminal ladder tree of \(\mathcal E_A\) and
+\(\Gamma_A^0\) is the union of the zeroth \(g_A\)-pairs over the zeroth
+stored set of \(H_A\).
+
+Every set in (12)--(13) is exactly the corresponding set for the full
+hierarchy \(K\).  Indeed, the core and closure equalities in (S3) identify
+\(\mathcal B_A\) with the original base on those two fields, while the
+PE output of \noderef{HierarchySplitter} identifies
+\(\mathcal B_T\) with the same original core and closure.  Next,
+the base-stage equation of \(H_A\), its retained stage-zero equality
+with \(H\), the stage-zero equality returned for \(K\), and the
+base-stage equation of \(K\) identify \(T_n^A\) with the terminal ladder
+tree of \(\mathcal C_T.\mathit{replacementETT}\).  Finally the retained
+zeroth stored-set and Gamma-pair equalities in (S3), equation (10), and
+the copied definition of the new Gamma pairs identify
+\(\Gamma_A^0\) with the zeroth union for \(K\).  Rewriting (12) and (13)
+along these exact equalities proves, respectively, the non-minus-closed
+and cardinality-at-least-four clauses for \(K\).  No edge-color transport
+is involved: both assertions already hold under \(\sigma_n\).
 
 It remains to verify the PE parallel-base clause when \(q=0\).  Its
 cardinality assertion involves only the missing-color sets on \(T_n\) and
@@ -306,20 +379,20 @@ For non-minus-closedness, (2) makes (7) nonreflexive.  Take its first
 exact new edge \(g=Y.\mathit{edge}(|A|)\) and a color \(c\) such that
 \[
                  \sigma_n(g)=c,\qquad
-                 c\in\noderef{TreeMissingColors}(\sigma_n,A). \tag{12}
+                 c\in\noderef{TreeMissingColors}(\sigma_n,A). \tag{14}
 \]
 The attachment and vertex-injectivity fields of
 \noderef{TreeSequence}, together with the exact one-step prefix, show
 that \(g\) has one endpoint in \(V(A)\) and the new endpoint outside it.
-Thus \(g\) is a \noderef{BoundaryEdges} identity of \(V(A)\), and (12)
+Thus \(g\) is a \noderef{BoundaryEdges} identity of \(V(A)\), and (14)
 makes it a \noderef{BoundaryColorEdges} identity of color \(c\).
 
 We claim \(c\notin\Gamma^0\).  If \(c=\alpha\) or \(c=\beta\), this is
 the second starred-stage hypothesis.  Otherwise the definition of
 \noderef{TwoColorComponentSwap} fixes every occurrence of the unaffected
-color \(c\), in both directions, so (12) gives
+color \(c\), in both directions, so (14) gives
 \(\varphi_n(g)=c\).  The third transport hypothesis, restricted along
-\(A\preccurlyeq B\), also turns the missing witness in (12) into a
+\(A\preccurlyeq B\), also turns the missing witness in (14) into a
 \(\varphi_n\)-missing witness on \(A\).  If \(c\) belonged to
 \(C.\mathit{good}.\Gamma^0_\eta\) for some
 \(\eta\in D_{n,0}\), then
@@ -334,14 +407,60 @@ avoidance field of \noderef{GoodHierarchy}.  Thus \(c\notin\Gamma^0\) in
 all cases.
 
 Unfold \noderef{TreeColorSetMinusClosed} and
-\noderef{TreeColorSetClosed}.  The boundary identity \(g\), (12), and
+\noderef{TreeColorSetClosed}.  The boundary identity \(g\), (14), and
 \(c\notin\Gamma^0\) witness that \(A\) is not
 \((\Gamma^0)^-\)-closed under \(\sigma_n\).  This finishes the
 parallel-base field without transporting an old boundary witness and
 without fixing any affected edge after \(A\).
 
-Finally verify avoidance.  Indices strictly below \(q\) are already
-handled by the prefix good hierarchy in (S3), when such indices exist.
+Finally verify avoidance.  Suppose first that \(q>0\), and fix a retained
+index \(j<q\), a color \(\eta\) in the stored set at that index, and a
+copied color \(c\in g_A.\Gamma^j_\eta\).  Let
+\[
+ U=H_A.\mathit{stage}(j+1)=K.\mathit{stage}(j+1)
+\]
+be the common next stage.  The retained stage equations give exact
+initial segments \(U\preccurlyeq A\preccurlyeq T\), and in particular
+\(|U|\leq|A|\).  We claim the exact numerical cutoff equality
+\[
+ \min\{\noderef{HierarchyFirstMissingPosition}
+          (\sigma_n,A,\eta),|U|\}
+ =
+ \min\{\noderef{HierarchyFirstMissingPosition}
+          (\sigma_n,T,\eta),|U|\}.                              \tag{15}
+\]
+Here and below the displayed first-missing positions mean their numeric
+values.
+
+To prove (15), unfold \noderef{HierarchyFirstMissingPosition}.  If
+\(\eta\) has a missing witness on \(A\), let \(m_A\) be its least such
+displayed index.  Entrywise vertex equality for the exact prefix
+\(A\preccurlyeq T\) makes \(m_A\) a witness on \(T\), so the least
+witness \(m_T\) on \(T\) satisfies \(m_T\leq m_A\).  This puts \(m_T\)
+within the displayed range of \(A\); the same entrywise equality makes
+it a witness on \(A\), and minimality of \(m_A\) gives
+\(m_A\leq m_T\).  Thus \(m_A=m_T\), and (15) follows.
+
+If \(\eta\) has no missing witness on \(A\), its totalized value on
+\(A\) is the fallback \(|A|\).  If it has a witness on \(T\), the least
+one has index at least \(|A|\), since any smaller witness would transport
+back along \(A\preccurlyeq T\); if it has no witness on \(T\), its value
+is the fallback \(|T|\geq|A|\).  In either subcase the right-hand
+first-missing value is at least \(|A|\).  Since \(|U|\leq|A|\), both
+minima in (15) equal \(|U|\).  This proves (15), including both fallback
+possibilities.
+
+The starred stage at \(j\), the next stage \(U\), and every exact edge of
+\(U\) are the same for \(H_A\) and \(K\).  Equation (15) makes the upper
+range bound in \noderef{HierarchySegmentColors} the same as well, and
+both segment predicates use the same coloring \(\sigma_n\).  Therefore
+the pointwise avoidance clause of \(g_A\) transfers to \(K\): its copied
+color \(c\) is missing on the common stage specified by
+\noderef{HierarchyStageMissingColors}, and no position in the common
+segment has value \(c\).  This proves avoidance for every \(j<q\); the
+fourth starred-stage hypothesis has not been used.
+
+It remains to prove avoidance at \(j=q\), including the case \(q=0\).
 Fix \(\eta\in D_{n,q}\) and
 \(c\in C.\mathit{good}.\Gamma^q_\eta\).  Membership in the Gamma union
 and the second transport hypothesis imply
@@ -363,5 +482,5 @@ positions; and (10) together with the copied definition of the Gamma
 pairs gives equality of every stored set and pair.  These are exactly the
 clauses of
 \(\noderef{SameGoodHierarchy}(C.\mathit{good},g_K)\).  Combining this
-with (S1), (S2), and (9) proves the lemma.
+with (S1), (S2), and the objects in (9) proves the lemma.
 \end{proof}
