@@ -7,6 +7,7 @@ import Tablet.GoodHierarchy
 import Tablet.HierarchyBase
 import Tablet.HierarchyCounterexample
 import Tablet.HierarchyFirstMissingPosition
+import Tablet.HierarchyFirstMissingPositionPrefixCutoff
 import Tablet.HierarchyFullTailLength
 import Tablet.HierarchyFullTailPrefix
 import Tablet.HierarchyMinimumCounterexampleContext

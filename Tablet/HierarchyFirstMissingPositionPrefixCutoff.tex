@@ -1,0 +1,47 @@
+\begin{lemma}[First-missing cutoffs agree below an exact prefix]
+Let \(G\) be a finite loopless multigraph with an exact edge type, let
+\(k\) be a palette size and \(e_0\) a distinguished edge, and let
+\(A,T\) be \noderef{TreeSequence}s based at \(e_0\).  Suppose that \(A\)
+is an exact ordered \noderef{TreeSequenceInitialSegment} of \(T\).  For
+every partial coloring \(\sigma\), color \(\eta\), and natural number
+\(u\leq |A|\),
+\[
+ \min\{\noderef{HierarchyFirstMissingPosition}(\sigma,A,\eta),u\}
+ =
+ \min\{\noderef{HierarchyFirstMissingPosition}(\sigma,T,\eta),u\},
+\]
+where first-missing positions are read as their numeric indices and use
+the terminal fallback convention.  Missingness here is the vertexwise
+notion given by \noderef{MissingColors}.
+\end{lemma}
+\begin{proof}
+For a tree \(S\in\{A,T\}\), let
+\[
+ I_S=\{i:0\leq i\leq |S|,
+       \ \eta\in\noderef{MissingColors}(G,\sigma,S.\mathit{vertex}(i))\}.
+\]
+By \noderef{HierarchyFirstMissingPosition}, the numeric first-missing
+position \(p_S\) is \(\min I_S\) when \(I_S\neq\varnothing\), and is
+\(|S|\) otherwise.  The exact ordered
+\noderef{TreeSequenceInitialSegment} relation gives \(|A|\leq|T|\) and
+identifies \(A.\mathit{vertex}(i)\) with
+\(T.\mathit{vertex}(i)\) for every \(0\leq i\leq|A|\).
+
+First suppose \(I_A\neq\varnothing\), and write \(m_A=\min I_A\).
+The vertex equality at \(m_A\) makes \(m_A\) an element of \(I_T\), so
+\(I_T\neq\varnothing\) and its least element \(m_T\) satisfies
+\(m_T\leq m_A\leq |A|\).  The same exact-prefix vertex equality is
+therefore available at \(m_T\), and it carries the missing-color
+membership defining \(m_T\in I_T\) back to \(m_T\in I_A\).  Minimality
+of \(m_A\) gives \(m_A\leq m_T\).  Thus \(p_A=m_A=m_T=p_T\), and taking
+the minimum with \(u\) gives the claimed equality.
+
+Now suppose \(I_A=\varnothing\).  Then \(p_A=|A|\).  If
+\(I_T\neq\varnothing\), its least element \(m_T\) must satisfy
+\(|A|\leq m_T\): otherwise \(m_T<|A|\), so the exact-prefix vertex
+equality at \(m_T\) would carry its missing-color membership back to an
+element of \(I_A\), a contradiction.  Hence \(p_T=m_T\geq|A|\).  If
+\(I_T=\varnothing\), then \(p_T=|T|\geq|A|\) instead.  In both subcases
+\(u\leq|A|\leq p_T\), while \(u\leq p_A=|A|\).  Consequently
+\(\min\{p_A,u\}=u=\min\{p_T,u\}\), as required.
+\end{proof}
