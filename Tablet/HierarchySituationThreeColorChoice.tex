@@ -1,0 +1,212 @@
+\begin{lemma}[The common color choice in Situation 7.3]
+Fix a finite loopless multigraph with its individual edge identities, a
+palette of \(k\) colors, a distinguished edge \(e_0\), an input coloring,
+an exact terminal tree-sequence \(T\), a generating coloring \(\varphi_n\),
+a positive-rung extended Tashkinov tree on these data, a hierarchy base, a
+hierarchy counterexample \(C\), and a minimum-counterexample context for
+\(C\).  Let \(P\) be a
+\noderef{HierarchyReplacementPresentation} and write
+\(\mu=P.\mathit{coloring}\), \(H=P.\mathit{counterexample.hierarchy}\),
+\(\mathcal G=P.\mathit{counterexample.good}\),
+\(q=H.\mathit{dividerCount}\), and
+\[
+ j=\noderef{HierarchyPathNumber}(C.\mathit{hierarchy}),\qquad
+ A=\noderef{HierarchyStarredStage}(H,q),\qquad
+ \ell=\noderef{HierarchyFullTailLength}(C),\qquad
+ B=\noderef{HierarchyFullTailPrefix}(C,j-2).
+\]
+Let \(T_n\) be the last ladder tree of \(P\)'s replacement ETT and put
+\[
+ D=D_{n,q}=\noderef{HierarchyStoredColorsAt}(H,q),\qquad
+ \Gamma=\bigcup_{\eta\in D}\mathcal G.\Gamma^q_\eta,
+\]
+\[
+ M_0=\bigcup_{v\in
+   V(P.\mathit{replacementBase.core})\setminus V(T_n)}
+        \overline\mu(v).
+\]
+For every natural number \(s\), define the finite set of colors on the
+displayed tail through index \(s\) by
+\[
+ U_s=\{c:\text{ for some }r<|T|,\ |A|\le r<|A|+s
+                 \text{ and }\mu(T.\mathit{edge}(r))=c\}.
+\]
+Thus the quantified \(r\) names an exact edge identity of \(T\), not merely
+an endpoint pair.
+
+Assume \(2\le j<\ell\).  Let \(\alpha\) be a color which is missing at the
+last displayed vertex of \(T\) and belongs to
+\(\overline\mu(B)\), and which satisfies the Claim \(j-1\) alternative
+\[
+ \alpha\notin\Gamma\cup M_0,
+ \quad\hbox{or}\quad
+ \alpha\in\Gamma^q_\eta\text{ for some }\eta\in D
+ \text{ whose first \(\mu\)-missing position is at most }|B|.
+\]
+Then there is a color \(\beta\) such that
+\[
+ \beta\ne\alpha,\qquad
+ \beta\in\overline\mu(B),\qquad
+ \beta\notin\Gamma,\qquad
+ \beta\notin U_j,
+\]
+and one of the following two alternatives holds:
+\[
+ \beta\notin M_0\cup D,
+ \quad\hbox{or}\quad
+ \beta\in D\ \text{ and }
+   (\mathcal G.\Gamma^q_\beta\cup\{\beta\})\cap U_j=\varnothing.
+\]
+\end{lemma}
+\begin{proof}
+Let \(H_0=C.\mathit{hierarchy}\), and let \(A_0\) be its last starred
+stage.  The \(\mathit{sameGood}\) field of the replacement presentation is a
+\noderef{SameGoodHierarchy}.  Its \noderef{SameHierarchyStages} component
+identifies the divider counts, every ordered hierarchy stage, and the
+starred bases of \(H_0\) and \(H\).  In particular,
+\[
+                         A_0=A.                              \tag{1}
+\]
+These are equalities of tree-sequences, so by
+\noderef{TreeSequenceInitialSegment} they preserve the complete order and
+every individual displayed edge identity.  From
+\noderef{HierarchyFullTailLength}, (1) gives
+\[
+ |T|-|A|=|T|-|A_0|=\ell.                                    \tag{2}
+\]
+Likewise, the definition \noderef{HierarchyFullTailPrefix}, together with
+\noderef{TreeSequencePrefix}, identifies \(B\) with the replacement
+hierarchy's ordered prefix of length
+\(\min\{|A|+(j-2),|T|\}\).                                  \tag{3}
+
+We next verify the hypotheses needed for Lemma 9n under the replacement
+coloring.  The field \(P.\mathit{minimumContext}\) is precisely a
+\noderef{HierarchyMinimumCounterexampleContext} for \(P\)'s replacement
+input, ETT, base, counterexample, and coloring \(\mu\).  Supply its
+properness, exact-one-uncoloredness, lower-rung package, fewer-divider
+induction, lexicographic-minimality, and large-missing-set fields to
+\noderef{HierarchyCounterexamplePenultimateElementary}.  The result is
+that the replacement prefix at full-tail index \(\ell-1\) is elementary
+under \(\mu\).  Here its full-tail length is \(\ell\) by (2), and its
+prefix is the exact prefix of the same \(T\) by (1)--(3).  The positivity
+and goodness premises for Lemma 9n are fields of the
+\noderef{HierarchyCounterexample} \(P.\mathit{counterexample}\), which is
+one of the certified objects supplied by
+\noderef{HierarchyReplacementPresentation}.
+
+Put
+\[
+                        i=j-2,\qquad m=|A|.
+\]
+Since \(2\le j\), natural-number subtraction gives \(j=i+2\).  Since
+\(j<\ell\), we also have \(i<\ell\).  Apply \noderef{NineN} to \(P\)'s
+replacement ETT, replacement base, hierarchy \(H\), good-hierarchy
+witness, the elementarity just obtained, and the
+\(\mathit{largeMissingSet}\) field of
+\(P.\mathit{minimumContext}\), at the index \(i\).  By (3), the set
+called \(T(y_i)\) in that lemma is exactly \(B\).  In the notation of the
+present statement, its old tail-color set is \(U_i\), and its available
+set is
+\[
+ X=(\overline\mu(B)\setminus M_0)\setminus U_i.              \tag{4}
+\]
+Consequently Lemma 9n gives
+\[
+ |X|\ge
+ 2\,P.\mathit{corresponding.replacementETT.rounds}+11,        \tag{5}
+\]
+and, if
+\[
+                      |X\setminus(\Gamma\cup D)|\le4,         \tag{6}
+\]
+it gives an injectively indexed family
+\((\eta_h)_{h\in\operatorname{Fin}7}\) such that, with
+\(Q_h=\Gamma^q_{\eta_h}\cup\{\eta_h\}\),
+\[
+ \eta_h\in D\cap\overline\mu(B)\quad\hbox{and}\quad
+                         Q_h\cap U_i=\varnothing              \tag{7}
+\]
+for every \(h\).
+
+Only two new exact edge positions occur between \(U_i\) and \(U_j\).  To
+record this without identifying parallel edges, set
+\[
+                              R=U_j\setminus U_i.
+\]
+Take \(c\in R\), and choose the index \(r\) in the definition of \(U_j\).
+If \(r<m+i\), the very same index and the very same exact edge
+\(T.\mathit{edge}(r)\) put \(c\) in \(U_i\), a contradiction.  Hence
+\(m+i\le r<m+j=m+i+2\), so
+\[
+                         r=m+i\quad\hbox{or}\quad r=m+i+1.     \tag{8}
+\]
+The inequality \(j<\ell\), (2), and the fact that \(A\) is an ordered
+initial segment of \(T\) from \noderef{TashkinovHierarchy} ensure that
+both numbers in (8) are legitimate positions whenever they occur.
+Thus \(R\) is contained in the set of colors assigned by \(\mu\) to these
+two individual edge identities, and therefore
+\[
+                              |R|\le2,\qquad U_j\subseteq U_i\cup R. \tag{9}
+\]
+
+We split according to (6).  First suppose
+\(|X\setminus(\Gamma\cup D)|>4\).  The set
+\(R\cup\{\alpha\}\) has cardinality at most three by (9), whereas
+\(X\setminus(\Gamma\cup D)\) has at least five members.  Choose
+\[
+ \beta\in (X\setminus(\Gamma\cup D))\setminus(R\cup\{\alpha\}). \tag{10}
+\]
+Then \(\beta\ne\alpha\), and (4) gives
+\(\beta\in\overline\mu(B)\), \(\beta\notin M_0\), and
+\(\beta\notin U_i\).  Equation (10) also gives
+\(\beta\notin\Gamma\), \(\beta\notin D\), and \(\beta\notin R\).
+The containment in (9) now yields \(\beta\notin U_j\), while the two
+nonmembership conclusions give \(\beta\notin M_0\cup D\).  This is the
+first required alternative.
+
+It remains to assume (6), and take the seven colors and blocks in (7).
+We first check explicitly that these seven blocks are pairwise disjoint.
+By \noderef{HierarchyStoredColorsAt}, a stored color in \(D\) is not
+missing on \(A\).  On the other hand, the \(\mathit{avoidance}\) field of
+\noderef{GoodHierarchy}, interpreted using
+\noderef{HierarchyStageMissingColors}, puts every member of every
+\(\Gamma^q_\eta\), for \(\eta\in D\), among the colors missing on the
+last relevant hierarchy stage.  If \(q>0\), that stage is \(A\) by
+\noderef{HierarchyStarredStage}; if \(q=0\), it is \(T_n\), which is an
+ordered initial segment of \(A\) by \noderef{HierarchyBase} and
+\noderef{TashkinovHierarchy}.  In either case
+\noderef{TreeMissingColors} shows that every Gamma color is missing on
+\(A\).  Hence no member of \(D\) belongs to any Gamma pair.             \tag{11}
+
+For distinct \(h,h'\), injectivity gives
+\(\eta_h\ne\eta_{h'}\).  The \(\mathit{disjointPairs}\) field of
+\noderef{GoodHierarchy} makes their two Gamma pairs disjoint; (11) removes
+both possible stored-color/Gamma cross-intersections, and the two stored
+colors themselves are distinct.  Therefore
+\[
+                              Q_h\cap Q_{h'}=\varnothing.       \tag{12}
+\]
+
+Let \(I_R\) be the indices \(h\) for which \(Q_h\cap R\ne\varnothing\).
+For each \(h\in I_R\), choose one color in this intersection.  By (12),
+the chosen colors for two distinct indices are distinct.  This gives an
+injection \(I_R\hookrightarrow R\), so (9) implies \(|I_R|\le2\).
+Likewise, (12) shows that at most one index \(h\) has
+\(\alpha\in Q_h\).  Thus at most three of the seven indices are forbidden
+by meeting \(R\) or containing \(\alpha\).  Choose an index \(h_0\) which
+is not forbidden, and set
+\[
+                              \beta=\eta_{h_0}.                 \tag{13}
+\]
+By (7), \(\beta\in D\cap\overline\mu(B)\) and
+\(Q_{h_0}\cap U_i=\varnothing\).  The choice of \(h_0\) gives
+\(\alpha\notin Q_{h_0}\), hence \(\beta\ne\alpha\), and also
+\(Q_{h_0}\cap R=\varnothing\).  Combining this with (9) and (7) gives
+\[
+       (\Gamma^q_\beta\cup\{\beta\})\cap U_j=\varnothing.      \tag{14}
+\]
+In particular \(\beta\notin U_j\).  Finally, (11) and \(\beta\in D\)
+give \(\beta\notin\Gamma\).  Equations (13)--(14) are exactly the stored
+second alternative and all the common conclusions.  The two cases prove
+the lemma.
+\end{proof}
