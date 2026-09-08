@@ -91,12 +91,29 @@ index, unfolding \noderef{HierarchyStoredColorsAt} and
 \[
  D=D_n\setminus\noderef{TreeMissingColors}(\mu,A).            \tag{5}
 \]
-The avoidance field of \noderef{GoodHierarchy}, read through
-\noderef{HierarchyStageMissingColors}, puts every member of every last
-Gamma pair in the corresponding stage-missing set; that stage is
-contained in \(A\).  Also, the core and stage clauses of
-\noderef{HierarchyBase} and \noderef{TashkinovHierarchy} put every
-vertex of the base core outside \(T_n\) in \(A\).  Therefore
+The same definitions give a universal separation that will be used in
+both color-choice branches.  Fix arbitrary \(\eta\in D\) and
+\(\xi\in D\cap g.\mathit{gamma}(q,\eta)\).  Equation (5) says that
+\(\xi\) is not missing on \(A\).  On the other hand, the avoidance field
+of \noderef{GoodHierarchy}, read through
+\noderef{HierarchyStageMissingColors}, puts \(\xi\) in the last
+stage-missing set.  If \(q>0\), this is the missing set on the last
+starred stage \(A\).  If \(q=0\), it is the missing set on \(T_n\); in
+the PE case the parallel clause of \noderef{HierarchyBase} and its
+\noderef{OrderedTreeUnion} make \(T_n\) an ordered initial segment of
+\(A\), while in the non-PE case the nonparallel clause gives \(A=T_n\).
+Thus in every case \(\xi\) is missing on \(A\), a contradiction.  Since
+\(\eta\) and \(\xi\) were arbitrary,
+\[
+ D\cap g.\mathit{gamma}(q,\eta)=\varnothing
+                         \quad\hbox{for every }\eta\in D.     \tag{5a}
+\]
+
+The same stage containment, together with the fact that \(\alpha\) is
+not missing on \(A\), excludes \(\alpha\) from every last Gamma pair.
+Also, the core and stage clauses of \noderef{HierarchyBase} and
+\noderef{TashkinovHierarchy} put every vertex of the base core outside
+\(T_n\) in \(A\).  Therefore
 \[
                     \alpha\notin\Gamma^q\cup M_0.            \tag{6}
 \]
@@ -137,25 +154,12 @@ Suppose instead that \(|R|\leq4\).  The second conclusion of
        \quad\hbox{is disjoint from }\mu\langle B-A\rangle.   \tag{9b}
 \]
 We verify, rather than assume, that the seven sets \(S_h\) are pairwise
-disjoint.  If \(\xi\in D\), equation (5) says that \(\xi\) is not
-missing on \(A\).  For \(q=0\),
-\noderef{HierarchyStageMissingColors} is the missing set on \(T_n\),
-which is contained in \(A\) by the parallel
-\noderef{OrderedTreeUnion} or equals \(A\) in the non-PE case.  For
-\(q>0\), the last stage-missing set is the missing set on the last
-starred stage \(A\).  Thus no member of \(D\) belongs to the last
-stage-missing set.  On the other hand, the avoidance clause of
-\noderef{GoodHierarchy} places every color of
-\(g.\mathit{gamma}(q,\eta_h)\) in that stage-missing set.
-Consequently
-\[
-       D\cap g.\mathit{gamma}(q,\eta_h)
-                      =\varnothing\quad\hbox{for every }h.   \tag{10}
-\]
-For \(h\ne h'\), injectivity gives \(\eta_h\ne\eta_{h'}\), and the
-disjoint-pairs field of \noderef{GoodHierarchy} makes their Gamma pairs
-disjoint.  Equation (10) gives both cross-disjointness relations and
-also keeps the two distinct singleton stored colors apart.  Hence
+disjoint.  For \(h\ne h'\), injectivity gives
+\(\eta_h\ne\eta_{h'}\), and the disjoint-pairs field of
+\noderef{GoodHierarchy} makes their Gamma pairs disjoint.  The universal
+separation (5a), applied once to each owner, gives both cross-disjointness
+relations and keeps each stored singleton out of both Gamma pairs; the
+two singleton stored colors are distinct by injectivity.  Hence
 \(S_h\cap S_{h'}=\varnothing\).
 
 The one new edge of \(B^+-B\) has only one color, so its color lies in at
@@ -165,7 +169,8 @@ interval \(B^+-A\).  The two-colors field of
 \noderef{GoodHierarchy} says that
 \(g.\mathit{gamma}(q,\eta_m)\) has cardinality two;
 choose a color \(\beta\) in this pair.  Avoidance makes \(\beta\)
-stage-missing and hence missing on \(B\), while (10) gives
+stage-missing and hence missing on \(B\), while the universal separation
+(5a) gives
 \(\beta\notin D\).  We have
 \[
  \eta_m\in D\cap\noderef{TreeMissingColors}(\mu,B),\quad
@@ -432,9 +437,8 @@ read via \noderef{HierarchySegmentColors}, and the fact that the first
 \[
  \gamma_1,\gamma_2\notin\mu\langle B^+-A\rangle.             \tag{16}
 \]
-Equation (5) says that a stored color is not missing on \(A\), while
-avoidance makes each \(\gamma_s\) stage-missing; thus
-\(\gamma_1,\gamma_2\notin D\) and neither can equal \(\eta_t\).
+Equation (5a) gives \(\gamma_1,\gamma_2\notin D\), and in particular
+neither can equal \(\eta_t\).
 The theorem \noderef{HierarchyTailMissingColorExclusion} excludes
 \(\eta_t\) from the same interval, with one possible exception: at
 divider zero in SE/RE, the first displayed edge may be the individual
@@ -476,8 +480,8 @@ same least member there; no vertex after the prefix can change that least
 member.  Thus the first position is again unchanged.  This treats every
 stored color, including the totalized fallback in the unaffected case.
 
-For \(hgammaCutoff\), a stored color such as \(\eta_t\) belongs to no
-Gamma pair by the stored-versus-stage-missing disjointness (10).  If
+For \(hgammaCutoff\), the universal separation (5a) says that the stored
+color \(\eta_t\) belongs to no Gamma pair.  If
 \(\gamma_1\in\Gamma^q_\eta\), then its simultaneous membership in
 \(\Gamma^q_{\eta_t}\) and pairwise disjointness force
 \(\eta=\eta_t\).  Its first missing position is \(y_{j-1}\), so
@@ -506,15 +510,67 @@ through \(B^+\), preserves all missing sets there pointwise, and its
 same-good data retain \(D\) and all Gamma pairs.  Consequently (9a), or
 (9c) together with (11), remains valid under \(\mu_1\).
 
-Apply \noderef{ChangeLemma} in the \(P_1\) presentation to
-\((\gamma_1,\beta)\).  The component through the retained stage witness
-of \(\gamma_1\) equals the component through the first \(\beta\)-missing
-witness in \(B\).  It is disjoint from the component \(Q_2\) through
-\(y_\ell\) by the same three-endpoint proof.  The two colors are distinct:
-in (9a), \(\beta\notin\Gamma^q\), while in (9c) the stored indices
-\(\eta_m\) and \(\eta_t=\alpha\) are distinct by elementarity at their
-distinct missing witnesses, so the two Gamma pairs are disjoint.  Switch
-\(Q_2\), obtaining \(\mu_2\), and apply
+First note that \(\gamma_1\ne\beta\).  In (9a),
+\(\beta\notin\Gamma^q\), whereas
+\(\gamma_1\in\Gamma^q_{\eta_t}\).  In (9c), the stored colors
+\(\eta_m\) and \(\eta_t=\alpha\) have distinct missing witnesses in
+\(B\) and at \(y_{j-1}\), respectively; elementarity gives
+\(\eta_m\ne\eta_t\), and the disjoint-pairs field of
+\noderef{GoodHierarchy} separates their Gamma pairs.
+
+In the \(P_1\) presentation, name the two first missing witnesses
+\[
+ w_\gamma=T.\mathit{vertex}
+       (\operatorname{First}_{\mu_1}(\gamma_1)),\qquad
+ w_\beta=T.\mathit{vertex}
+       (\operatorname{First}_{\mu_1}(\beta)).
+\]
+The color \(\gamma_1\) retains a missing witness in \(A\), so the
+least-candidate definition \noderef{HierarchyFirstMissingPosition} and
+the exact initial-segment relation put \(w_\gamma\) in \(A\).  Likewise,
+(9a) or (9c) supplies a \(\beta\)-missing witness in \(B\), so
+\(w_\beta\) lies in \(B\).  Hence both lie in \(B\).  Apply
+\noderef{ChangeLemma} to \((\gamma_1,\beta)\).  It identifies the
+components through \(w_\gamma\) and \(w_\beta\); call their common
+component \(Q_B\).  We prove that \(Q_B\) is disjoint from the component
+\(Q_2\) through \(y_\ell\), splitting on equality of the two named
+witnesses.
+
+If \(w_\gamma=w_\beta=w\), then both \(\gamma_1\) and \(\beta\) are
+missing at \(w\).  Unfolding \noderef{MissingColors}, no edge incident
+with \(w\) has either affected color, by the incidence-witness definition
+\noderef{PresentColors}.  By
+\noderef{TwoColorIncidenceGraph}, the vertex-node \(\operatorname{inl}w\)
+therefore has no adjacent edge-node, and the bipartite definition gives
+no other possible neighbor.  Thus it is isolated.  Unfolding
+\noderef{TwoColorComponent}, every walk from this node has length zero,
+so
+\[
+                         Q_B=\{\operatorname{inl}w\}.
+\]
+The exact-prefix definition puts \(w\) in the strict prefix \(B\), while
+the terminal vertex \(y_\ell\) is outside \(B\); vertex injectivity in
+\noderef{TreeSequence} gives \(w\ne y_\ell\).  Hence \(Q_B\ne Q_2\),
+because \(\operatorname{inl}y_\ell\in Q_2\), and
+\noderef{TwoColorComponentsDisjoint} makes them disjoint.
+
+If \(w_\gamma\ne w_\beta\), then
+\(w_\gamma,w_\beta,y_\ell\) are three distinct vertices: the first two
+lie in \(B\), whereas the terminal vertex is outside \(B\).  If
+\(Q_B=Q_2\), all three vertex-nodes lie in that component.  Each is
+missing one of the two affected colors, so
+\noderef{MissingColorIncidenceEndpoint} gives incidence degree at most
+one at all three.  But \noderef{TwoColorComponentSpanningPath} supplies
+a simple path spanning the component, and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} is the ambient two-color
+degree bound.  Every internal node of the spanning path has its two
+distinct path neighbors, so a node of degree at most one must be one of
+the path's two endpoints.  Three distinct such nodes are impossible.
+Thus \(Q_B\ne Q_2\), and
+\noderef{TwoColorComponentsDisjoint} again makes the two components
+disjoint.
+
+Only now switch \(Q_2\), obtaining \(\mu_2\), and apply
 \noderef{StableChangeCasesOneTwo} with \(\gamma_1\) first.  It is still
 stage-missing at its separated witness, so the case premise holds at
 positive divider count and at divider zero.
@@ -533,8 +589,9 @@ Both affected colors remain missing on \(X\) at their separated prefix
 witnesses.
 
 Every member of the current stored set \(D\) differs from
-\(\gamma_1\) and \(\beta\): the first is stage-missing, and (9a) or (10)
-excludes the second.  Hence the component swap fixes its missing
+\(\gamma_1\) and \(\beta\): the universal separation (5a) excludes
+\(\gamma_1\), and it also excludes \(\beta\) in (9c), while (9a)
+excludes \(\beta\) directly.  Hence the component swap fixes its missing
 predicate globally.  Unfolding
 \noderef{HierarchyFirstMissingPosition} gives identical candidate sets
 and least elements, or the identical last-position fallback.  This proves
