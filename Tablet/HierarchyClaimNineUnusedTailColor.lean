@@ -2,6 +2,7 @@ import Tablet.HierarchyEligibleCommonMissingIndices
 import Tablet.ChangeLemma
 import Tablet.ColoredVertexSetElementary
 import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.CorrespondingExtendedTashkinovTreeTrans
 import Tablet.HierarchyClaimNinePENormalization
 import Tablet.HierarchyCounterexample
 import Tablet.HierarchyCounterexamplePenultimateElementary

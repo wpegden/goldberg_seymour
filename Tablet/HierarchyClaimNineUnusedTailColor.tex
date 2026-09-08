@@ -310,10 +310,21 @@ All hypotheses of \noderef{StableChangeCasesOneTwoFullTail} are now
 available: (1) and the two prefix witnesses, the path certificate for
 \(Q\), (8), the normalized Cases 1/2 alternative, the defining swap (9),
 the exact tail equality (14), the vertexwise prefix equality (15), and the
-stored first-position equality (16).  Its final conclusion supplies an
-actual corresponding ETT on the same exact full tree \(T\) under
-\(\sigma_n\), maximum property, a replacement base, a good hierarchy, and
-same-good-hierarchy data relative to \(P.\mathit{counterexample}\).
+stored first-position equality (16).  Apply it with input
+\(P.\mathit{corresponding}.\mathit{replacementInput}\) and source ETT
+\[
+ \mathcal E_m=P.\mathit{corresponding}.\mathit{replacementETT}.
+\]
+Its final conclusion supplies a certificate
+\[
+ \mathcal C_1:
+ \noderef{CorrespondingExtendedTashkinovTree}
+   (\mathcal E_m,\sigma_n,T),                                  \tag{17}
+\]
+together with maximum property, a replacement base, a hierarchy and
+good-hierarchy witness, and same-good-hierarchy data relative to
+\(P.\mathit{counterexample}\).  In particular, (17) is relative to the
+intermediate ETT \(\mathcal E_m\), not yet to the original fixed ETT.
 
 The swap makes \(\beta\) missing at \(y\): originally \(\alpha\) is
 missing there and \(\beta\) is present there, and properness makes the
@@ -321,12 +332,35 @@ incident \(\beta\)-edge unique; its edge-node is adjacent to the root of
 \(Q\), so (9) changes it to \(\alpha\) and leaves no incident
 \(\beta\)-edge.  Equation (15) preserves the missingness of \(\beta\) at
 \(y^-\).  The two vertices are distinct by (2), so the new full tree is
-not elementary.  Together with positivity, maximum property, and the new
-good hierarchy, this constructs a genuine
-\noderef{HierarchyCounterexample} \(C_\sigma\).
+not elementary.  Together with positivity, the returned maximum property,
+and the returned good hierarchy, this constructs a genuine
+\noderef{HierarchyCounterexample} \(C_\sigma^1\), initially indexed by
+the replacement ETT and base returned with \(\mathcal C_1\).
+
+Put \(\mathcal C_0=P.\mathit{corresponding}\).  Apply
+\noderef{CorrespondingExtendedTashkinovTreeTrans} to
+\(\mathcal C_0\) and \(\mathcal C_1\).  It gives a certificate
+\[
+ \mathcal C_{10}:
+ \noderef{CorrespondingExtendedTashkinovTree}
+    (\mathit{ett},\sigma_n,T),                                 \tag{18}
+\]
+relative to the original fixed ETT, together with equality of its
+replacement input with that of \(\mathcal C_1\), heterogeneous equality
+of their dependent replacement series, and heterogeneous equality of
+their replacement ETTs.  Eliminate the input equality first and then the
+two dependent equalities.  Transport along them the FullTail output's
+maximum witness, replacement base, hierarchy, good-hierarchy witness,
+same-good witness, and the just-constructed counterexample
+\(C_\sigma^1\).  Denote the transported base and counterexample by
+\(\mathcal B_\sigma\) and \(C_\sigma\).  They are now indexed by exactly
+\(\mathcal C_{10}.\mathit{replacementInput}\) and
+\(\mathcal C_{10}.\mathit{replacementETT}\), rather than merely by
+heterogeneously equal copies.
 
 We spell out the transported minimum context.  Rung agreement in the new
-\noderef{CorrespondingExtendedTashkinovTree} rewrites the strict
+\noderef{CorrespondingExtendedTashkinovTree} \(\mathcal C_{10}\) rewrites
+the strict
 lower-rung bounds, so the lower-rung field of
 \(P.\mathit{minimumContext}\) applies verbatim.  Transitivity of the
 equalities in \noderef{SameGoodHierarchy} and
@@ -336,18 +370,28 @@ divider positions; hence the fewer-divider field transports and the two
 equal-divider counterexample were smaller than \(C_\sigma\), it would
 therefore be smaller than \(P.\mathit{counterexample}\), contradicting
 the old lexicographic-minimality field.  The corresponding certificate's
-properness and exact-one-uncolored fields give the first context field.
-Its exact terminal ladder-tree agreement and terminal
-\noderef{StableColoring} identify the two ladder-tree missing-color sets,
-so the old \(2n+11\) inequality gives the new large-set field.  These are
-exactly the five fields of
-\noderef{HierarchyMinimumCounterexampleContext}.
+properness and exact-one-uncolored fields give the first two context
+fields.
+At the terminal positive index, the
+\noderef{StableColoring} field of \(\mathcal C_1\) identifies the
+missing-color set of \(P.\mathit{coloring}\) on
+\(\mathcal E_m\)'s terminal ladder tree with that of \(\sigma_n\) on
+\(\mathcal C_1\)'s terminal ladder tree.  Its exact ladder-tree equality,
+followed by the replacement-series and replacement-ETT equalities in
+(18), therefore transports the old \(2n+11\) inequality to the new
+large-set field.  These are exactly the six fields of
+\noderef{HierarchyMinimumCounterexampleContext}; call the resulting
+transported context \(\mathit{ctx}_\sigma\).  The input, series, and ETT
+equalities returned with (18) ensure that this context is indexed by
+\(\mathcal C_{10}\), \(\mathcal B_\sigma\), and \(C_\sigma\).
 
-Compose the new same-good data with \(P.\mathit{sameGood}\), field by
+Compose the transported new same-good data with
+\(P.\mathit{sameGood}\), field by
 field in \noderef{SameGoodHierarchy}; equality transitivity gives
-same-good data relative to the original \(C\).  The new corresponding
-ETT, maximum property, base, \(C_\sigma\), composed same-good witness, and
-transported minimum context are precisely a new
+same-good data relative to the original \(C\).  The original-relative
+certificate \(\mathcal C_{10}\), transported maximum property,
+\(\mathcal B_\sigma\), \(C_\sigma\), composed same-good witness, and
+\(\mathit{ctx}_\sigma\) are precisely a new
 \noderef{HierarchyReplacementPresentation} \(P'\).
 
 Take \(i=\ell-1\), \(P'\), and \(\beta\) in the classical filter defining
