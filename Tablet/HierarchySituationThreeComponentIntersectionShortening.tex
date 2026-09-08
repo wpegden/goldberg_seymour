@@ -18,17 +18,53 @@ original counterexample, let \(P\) be a
  B=\noderef{HierarchyFullTailPrefix}(C,j-2),\qquad
  X=\noderef{HierarchyFullTailPrefix}(C,j-1).
 \]
-Assume \(2\le j<\ell\).  Suppose that \(\alpha\) has the full Claim
-\(j-1\) data used in
-\noderef{HierarchySituationThreeColorChoice}, and let \(\beta\) satisfy
-the complete conclusion of that lemma: in particular
+Let \(T_n\) be the last ladder tree of \(P\)'s replacement ETT, and put
 \[
- \alpha\ne\beta,\qquad
- \alpha,\beta\in\overline\mu(B),
+ D=D_{n,q}=\noderef{HierarchyStoredColorsAt}(H,q),\qquad
+ \Gamma=\bigcup_{\eta\in D}g.\Gamma^q_\eta,
 \]
-\(\beta\) is outside the last Gamma union and is unused on every exact
-tail edge through \(T(y_j)\), and the stated outside-stored or
-stored-block alternative holds.  Let
+\[
+ M_0=\bigcup_{v\in
+   V(P.\mathit{replacementBase.core})\setminus V(T_n)}
+        \overline\mu(v).
+\]
+Define the finite set of colors on the exact displayed tail through
+index \(j\) by
+\[
+ U_j=\{c:\text{ for some }r<|T|,\ |A|\le r<|A|+j
+                 \text{ and }\mu(T.\mathit{edge}(r))=c\}.
+\]
+Thus each quantified position \(r\) selects the individual edge identity
+\(T.\mathit{edge}(r)\), including when parallel edges have the same
+endpoints.
+
+Assume \(2\le j<\ell\).  Let \(\alpha\) and \(\beta\) be colors such that
+\[
+ \alpha\in\overline\mu\bigl(T.\mathit{vertex}(\operatorname{last})\bigr),
+ \qquad \alpha\in\overline\mu(B),
+\]
+and such that
+\[
+ \alpha\notin\Gamma\cup M_0,
+ \quad\hbox{or}\quad
+ \alpha\in g.\Gamma^q_\eta\text{ for some }\eta\in D
+ \text{ whose first \(\mu\)-missing position in \(T\) is at most }|B|.
+\]
+Suppose also that
+\[
+ \beta\ne\alpha,\qquad
+ \beta\in\overline\mu(B),\qquad
+ \beta\notin\Gamma,\qquad
+ \beta\notin U_j,
+\]
+and that
+\[
+ \beta\notin M_0\cup D,
+ \quad\hbox{or}\quad
+ \beta\in D\ \text{ and }
+   (g.\Gamma^q_\beta\cup\{\beta\})\cap U_j=\varnothing.
+\]
+Let
 \[
  Q=\noderef{TwoColorComponent}(G,\mu,\alpha,\beta,y_\ell).
 \]
