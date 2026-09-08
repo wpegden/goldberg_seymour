@@ -230,6 +230,8 @@ theorem StableChangeCasesOneTwo {V E : Type*}
               ∃ K : TashkinovHierarchy ettA baseA,
                 ∃ goodA : GoodHierarchy K,
                   MaximumProperty ettA ∧
+                    ettA.series.data.kind (Fin.last ettA.rounds) =
+                        ett.series.data.kind (Fin.last ett.rounds) ∧
                     ∃ hcount : K.dividerCount + 1 = H.dividerCount,
                       baseA.core = base.core ∧
                       baseA.closure = base.closure ∧

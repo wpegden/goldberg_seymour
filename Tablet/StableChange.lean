@@ -255,14 +255,24 @@ theorem StableChange {V E : Type*}
   dsimp only at hcase ⊢
   constructor
   · rcases hcase with h1 | h2 | h3
-    · exact StableChangeCasesOneTwo G k e0 input T phi ett base C hproper
-        hone hlower hfewer hminimal hprefixElementary hlarge alpha beta hne
-        hmissingPrefix z h1.2.2.1 sigma hsigma
-        (Or.inl ⟨h1.1, h1.2.1⟩) h1.2.2.2
-    · exact StableChangeCasesOneTwo G k e0 input T phi ett base C hproper
-        hone hlower hfewer hminimal hprefixElementary hlarge alpha beta hne
-        hmissingPrefix z h2.2.2.1 sigma hsigma
-        (Or.inr ⟨h2.1, h2.2.1⟩) h2.2.2.2
+    · have hresult := StableChangeCasesOneTwo G k e0 input T phi ett base C
+          hproper hone hlower hfewer hminimal hprefixElementary hlarge alpha
+          beta hne hmissingPrefix z h1.2.2.1 sigma hsigma
+          (Or.inl ⟨h1.1, h1.2.1⟩) h1.2.2.2
+      refine ⟨hresult.1, hresult.2.1, hresult.2.2.1, ?_⟩
+      intro hq
+      rcases hresult.2.2.2 hq with
+        ⟨inputA, ettA, baseA, K, goodA, hmax, _hkind, ⟨hcount, hrest⟩⟩
+      exact ⟨inputA, ettA, baseA, K, goodA, hmax, hcount, hrest⟩
+    · have hresult := StableChangeCasesOneTwo G k e0 input T phi ett base C
+          hproper hone hlower hfewer hminimal hprefixElementary hlarge alpha
+          beta hne hmissingPrefix z h2.2.2.1 sigma hsigma
+          (Or.inr ⟨h2.1, h2.2.1⟩) h2.2.2.2
+      refine ⟨hresult.1, hresult.2.1, hresult.2.2.1, ?_⟩
+      intro hq
+      rcases hresult.2.2.2 hq with
+        ⟨inputA, ettA, baseA, K, goodA, hmax, _hkind, ⟨hcount, hrest⟩⟩
+      exact ⟨inputA, ettA, baseA, K, goodA, hmax, hcount, hrest⟩
     · have hresult := StableChangeCaseThree G k e0 input T phi ett base C
           hproper hone hlower hfewer hminimal hprefixElementary hlarge
           alpha beta hne hmissingPrefix z sigma hsigma h3.1 h3.2.1

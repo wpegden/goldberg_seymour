@@ -81,8 +81,10 @@ ETT presentation under $\sigma_n$.
  T_n=T_{n,0}\subset\cdots\subset T_{n,q}=A
 \]
 form a good hierarchy of an actual maximum ETT on $A$ under
-$\sigma_n$.  Its divider count is $q-1$; at every retained index the
-sets $D_{n,j}$ agree exactly, and
+$\sigma_n$.  The terminal extension kind of this prefix ETT is exactly
+the terminal extension kind of the original ETT on $T$.  Its divider
+count is $q-1$; at every retained index the sets $D_{n,j}$ agree exactly,
+and
 $\Gamma^j_\eta$ agrees exactly for every $\eta\in D_{n,j}$.  In addition,
 \[
  T_{n,q}\text{ is }
@@ -527,6 +529,18 @@ the statement-level fields of
 \noderef{CorrespondingExtendedTashkinovTree}; every hierarchy field then
 has exactly its old ordered-tree proof.  Denote the resulting hierarchy
 under $\sigma_n$ by $K$.                                                \tag{23}
+
+We also record the terminal extension kind of the ETT underlying $K$.
+In the PE branch, the correspondence returned by
+\noderef{HierarchySplitter} identifies its replacement kind with the
+terminal kind of the old-color prefix ETT.  The latter prefix ETT has,
+by \noderef{GoodHierarchyPrefixRepackage}, the same entire certified
+series as the original ETT, so equality transport identifies its terminal
+kind with the original terminal kind.  Transitivity gives the asserted
+equality.  In the SE/RE branch, the correspondence obtained directly from
+(21) identifies the replacement kind with the original kind at every
+stored index, in particular at the terminal index.  Thus the same equality
+holds in both branches.                                                 \tag{23a}
 
 Copy every Gamma pair from (22).  Equations (11) give equality of all
 stage and starred-stage missing sets.  Correspondence gives equality of
