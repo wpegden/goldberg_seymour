@@ -1,0 +1,37 @@
+\begin{lemma}[Initial reserved pairs in the non-PE cases]
+Let $\mathcal E$ be a positive-rung ETT with rung number $n$, terminal
+ladder tree $T_n$, generating coloring $\varphi_n$, and terminal extension
+kind different from PE.  Fix a \noderef{HierarchyBase} $B$ and a
+\noderef{TashkinovHierarchy} $H$ over $B$, and put
+\[
+ M=\noderef{TreeMissingColors}(\varphi_n,T_n),\qquad
+ D=D^H_{n,0}=\noderef{HierarchyStoredColorsAt}(H,0).
+\]
+If $|M|\geq2n+11$, then there is a total family of finite color sets
+$\Gamma_\eta$, constrained at every $\eta\in D$, such that
+\[
+ |\Gamma_\eta|=2,\qquad \Gamma_\eta\subseteq M,
+ \qquad
+ \Gamma_\eta\cap\Gamma_\theta=\varnothing
+ \quad(\eta\ne\theta\text{ in }D).
+\]
+The family is total only to match the Lean representation; the conclusions
+impose conditions exactly at the paper indices $\eta\in D$.
+\end{lemma}
+\begin{proof}
+The stagewise estimate \noderef{HierarchyStoredColorsCardinality} gives
+$|D|\leq n$.  Put $d=|D|$.  The assumed large-branch bound gives
+\[
+                         |M|\geq2n+11\geq2d.                  \tag{1}
+\]
+Choose any $2d$-element subset $R$ of $M$; it exists by (1).  Enumerate
+the $d$ elements of $D$ and the $2d$ elements of $R$.  For the $i$-th
+member $\eta$ of $D$, let $\Gamma_\eta$ be the two colors in positions
+$2i$ and $2i+1$ of the enumeration of $R$, and put
+$\Gamma_\eta=\varnothing$ when $\eta\notin D$.
+
+Every indexed pair has exactly two elements.  Distinct indices receive
+disjoint two-position blocks, so their pairs are disjoint.  Every assigned
+color belongs to $R\subseteq M$.  These are precisely the three asserted
+properties.
+\end{proof}

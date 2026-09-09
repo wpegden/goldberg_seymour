@@ -1,0 +1,218 @@
+\begin{theorem}[Algorithm 5.5 base stage]
+Let $\mathcal E$ be a positive-rung ETT with rung number $n$, terminal
+ladder tree $T_n$, final series output $T_{n+1}$, generating coloring
+$\varphi_n$, and maximum property.  Assume also that $\varphi_n$ is a
+\noderef{ModColoring} of $\mathcal E$.  Fix a
+\noderef{HierarchyBase} $B$.
+
+In the PE case assume
+\[
+ |T_n|<|B.\mathit{core}|,
+ \qquad
+ \noderef{TashkinovClosure}
+   (\varphi_n,B.\mathit{core},T_{n+1}),                         \tag{1}
+\]
+and the following three facts from (5.3)--(5.4): some color missing on
+$B.\mathit{core}$ is not closed there; every color in
+\[
+ C=\overline\varphi_n(T_n)\cap
+   \overline\varphi_n(B.\mathit{closure})
+\]
+is closed on $B.\mathit{core}$; and $|C|\geq4$.  Finally assume the
+large-branch estimate
+\[
+                    |\overline\varphi_n(T_n)|\geq2n+11.       \tag{2}
+\]
+
+Then there are an exact Algorithm 5.5 seed $J$, a terminal ordered tree
+$U$, and a \noderef{CorrespondingExtendedTashkinovTree} $\mathcal E_U$
+for $(\varphi_n,T_n)$ on $U$ with the following properties.
+\begin{enumerate}
+\item In PE, $J=B.\mathit{core}=T_n\vee R_n$.  In SE or RE, there is an
+  individual edge identity $f_n$ for which $F_n=\{f_n\}$ and
+  \noderef{TreeSequenceAdjoinEdge}$(T_n,f_n,J)$ holds.
+\item There is a $\varphi_n$-\noderef{TashkinovAugmentationSequence}
+  from $J$ to $U$, and $J$ is an exact ordered initial segment of $U$.
+  In PE, $|B.\mathit{core}|<|U|$; in the non-PE cases, $|T_n|<|U|$.
+\item The corresponding ETT $\mathcal E_U$ has maximum property and a
+  hierarchy base $B_U$ whose core, closure, and numerical support position
+  equal those of $B$.  It carries a zero-divider hierarchy $K_U$ whose
+  exact stages are $T_n$ and $U$.
+\item There is a good-hierarchy witness $\mathcal G_U$ on $K_U$.  At its
+  sole indexed stage, every stored color $\eta$ has a two-color set
+  $\Gamma^0_\eta$ contained in
+  \[
+   \overline\varphi_n(T_n)-
+     \noderef{HierarchySegmentColors}(K_U,0,\eta),             \tag{3}
+  \]
+  and the pairs belonging to distinct stored colors are disjoint.  In PE,
+  $B.\mathit{core}$ is not $(\Gamma^0)^-$-closed and
+  $|C-\Gamma^0|\geq4$, where
+  $\Gamma^0=\bigcup_{\eta\in D^{K_U}_{n,0}}\Gamma^0_\eta$.
+\item With the terminal set kept separate from the sole indexed set,
+  $U$ is
+  \[
+   \left(\bigcup_{\eta\in
+      \noderef{HierarchyTerminalStoredColors}(K_U)}
+      \Gamma^0_\eta\right)^-
+  \text{-closed under }\varphi_n.                              \tag{4}
+  \]
+\end{enumerate}
+Every stage equality and initial-segment relation above concerns the full
+ordered edge-valued tree-sequence.  In particular, item 1 retains the exact
+identity of $f_n$ in the SE and RE cases.
+\end{theorem}
+\begin{proof}
+Apply \noderef{AlgorithmFiveFiveSeed} with the maximum property, the base,
+and the two conditional assumptions in (1).  It returns an exact seed
+$J$, an identity corresponding presentation $\mathcal E_J$, maximum
+property for $\mathcal E_J$, a copied base $B_J$, and a zero-divider
+hierarchy $K_J$.  Its statement gives
+\[
+ B_J.\mathit{core}=B.\mathit{core},\quad
+ B_J.\mathit{closure}=B.\mathit{closure},quad
+ K_J(0)=T_n,quad K_J(1)=J,                                   \tag{5}
+\]
+as exact data.  It also gives exactly the two alternatives in item 1.  In
+the non-PE alternative it retains an individual $f_n$ with
+$F_n=\{f_n\}$ and $T_n+f_n=J$; no endpoint equality is used in place of
+this edge identity.
+
+Put $D=D^{K_J}_{n,0}=\noderef{HierarchyStoredColorsAt}(K_J,0)$ and
+$M=\overline\varphi_n(T_n)$.  We next choose the initial Gamma pairs.  If
+the terminal kind is PE, transport the three PE assumptions across the
+first two equalities in (5), and transport (2) across the ladder equality
+in the corresponding certificate.  The hypotheses of
+\noderef{GoodHierarchyInitialPairsPE} are now exact.  It returns a family
+$\Gamma_\eta$ such that
+\[
+ |\Gamma_\eta|=2,quad \Gamma_\eta\subseteq M,quad
+ \Gamma_\eta\cap\Gamma_\theta=\varnothing
+       \quad(\eta\ne\theta\text{ in }D),                       \tag{6}
+\]
+the PE core is not $(\bigcup_{\eta\in D}\Gamma_\eta)^-$-closed,
+and at least four colors of $C$ remain outside this union.
+
+If the terminal kind is not PE, the positive terminal certificate in
+\noderef{TashkinovSeries} and \noderef{TashkinovSeriesStep} must instead
+be SE or RE.  Apply
+\noderef{GoodHierarchyInitialPairsNonPE}, again using the corresponding
+ladder equality to rewrite (2).  It gives exactly the three assertions in
+(6).  Thus a family satisfying (6) is fixed in every case.
+
+We record one fact needed for the non-PE avoidance check.  In an SE
+terminal certificate, the exact edge $f_n$ is the edge of its
+\noderef{MaximumDefectiveChoice}; its selected coloring gives
+$\varphi_n(f_n)=\delta_n$, and it is a boundary edge of $T_n$.  The
+pre-step coloring is \noderef{ColoredVertexSetClosed} on $T_n$, while the
+selected coloring is stable on $T_n$.  Both are proper and leave exactly the distinguished edge
+uncolored.  Symmetry of stability from \noderef{sc2} transports a
+hypothetical selected-color boundary edge whose color is selected-missing
+back to a pre-step boundary edge with the same color and the same missing
+witness.  This contradicts pre-step closedness.  Hence $T_n$ is closed
+under $\varphi_n$, and the displayed boundary edge gives
+\[
+                         \delta_n\notin M.                    \tag{7}
+\]
+In an RE terminal certificate, the current coloring equals the preceding
+closed coloring.  The statement of
+\noderef{RevisitingExtensionCertificate} says that its exact edge $f_n$
+is a boundary edge and lies on the recorded \noderef{TwoColorCycle}, so it has one of the two cycle colors under
+$\varphi_n$.  Closedness again shows directly that this exact edge color
+is not in $M$.  Consequently, in either non-PE case,
+\[
+                  \varphi_n(f_n)=c_n\quad\text{for some }c_n\notin M.
+                                                                    \tag{8}
+\]
+
+Define a total Gamma family on $K_J$ by the selected sets
+$\Gamma_\eta$.  We verify the five fields of
+\noderef{GoodHierarchy}.  Pair size and pairwise disjointness are (6).
+At index zero \noderef{HierarchyStageMissingColors} is $M$.  In PE, (5)
+and \noderef{HierarchyStarredStage} say that the starred stage and
+terminal seed are both $B.\mathit{core}$, so the
+half-open edge interval in
+\noderef{HierarchySegmentColors} is empty.  Thus
+$\Gamma_\eta\subseteq M$ proves avoidance.  In SE or RE, the starred
+stage is $T_n$, the terminal seed is the exact one-edge tree $T_n+f_n$,
+and the only possible segment color is the color $c_n$ of that exact new
+edge.  Equations (6) and (8) show that no Gamma pair contains $c_n$, so
+avoidance holds here as well.
+
+There is no positive divider index, so `uniqueRefresh' and the internal
+`minusClosed' field have empty domains.  In PE the two parts of
+`parallelBase' are precisely the non-minus-closed and four-color
+conclusions returned by \noderef{GoodHierarchyInitialPairsPE}, after the
+equalities in (5).  Outside PE its antecedent is false.  We have therefore
+constructed a complete good witness $\mathcal G_J$ on $K_J$.
+
+Now apply \noderef{GoodHierarchyRestrictedAugmentation} to
+$\mathcal E$, its mod-coloring and maximum property, and the corresponding
+seed data $(J,\mathcal E_J,B_J,K_J,\mathcal G_J)$.  It supplies a finite
+chain
+\[
+                         J=U_0\prec U_1\prec\cdots\prec U_m=U, \tag{9}
+\]
+where every nonempty step is an exact
+$\varphi_n$-Tashkinov augmentation, together with its composite
+augmentation sequence and exact initial-segment relations.  It also
+supplies a corresponding ETT $\mathcal E_U$ with maximum property, a base
+$B_U$, a hierarchy $K_U$, and a good witness $\mathcal G_U$.
+
+The reconstruction clauses of that lemma identify the core, closure, and
+numerical support position of $B_U$ with those of $B_J$, and hence with
+those of $B$.  They identify the divider count of $K_U$ with the zero
+divider count of $K_J$, identify its sole nonterminal stage with $T_n$,
+and identify every indexed stored set and Gamma pair with the corresponding
+one in $K_J$.  The terminal-stage field of
+\noderef{TashkinovHierarchy} identifies its other stage with the exact
+tree $U$.  Thus item 3, (3), pair cardinality, pairwise disjointness, and
+the two PE clauses all transport literally from (5)--(6) and
+$\mathcal G_J$ to $K_U$ and $\mathcal G_U$.
+
+We prove the strict assertions in item 2.  In SE or RE,
+\noderef{TreeSequenceAdjoinEdge} gives $|J|=|T_n|+1$, and (9) gives
+$J\preccurlyeq U$, so $|T_n|<|U|$.
+
+Suppose the terminal kind is PE.  Let
+$R=\bigcup_{\eta\in D}\Gamma_\eta$.  The PE selection says that the seed
+$J=B.\mathit{core}$ is not $R^-$-closed.  Expanding
+\noderef{TreeColorSetMinusClosed}, choose a color
+$c\in\overline\varphi_n(J)-R$ and an exact $c$-colored boundary edge $f$
+of $J$.  By \noderef{BoundaryColorEdges} and \noderef{BoundaryEdges}, it
+has an inside endpoint and an outside endpoint with the asserted unordered
+endpoint pair.  These endpoints construct the ordered one-edge tree
+$W=J+f$: in \noderef{TreeSequence}, copy every old vertex and edge entry,
+append the outside endpoint and the individual identity $f$, and use the
+boundary endpoint equation for the final attachment.  Freshness of the
+outside endpoint proves vertex injectivity and also prevents $f$ from
+being an old displayed edge, proving edge injectivity.  The last edge has color $c$
+missing on $J$, so this is a
+\noderef{TashkinovAugmentation} from $J$ to $W$.
+
+This step satisfies every fixed Gamma-avoidance condition used by the
+restricted loop.  All old eligible segment colors were already disjoint
+from $\Gamma_\eta$ by the avoidance field of $\mathcal G_J$; the only new
+possible segment color is $c$, and $c\notin R$ excludes it from every
+$\Gamma_\eta$.  Hence $W$ is an admissible successor of $J$.
+
+If the terminal tree in (9) were $U=J$, the maximality clause returned by
+\noderef{GoodHierarchyRestrictedAugmentation} would forbid exactly this
+successor $W$, a contradiction.  Thus $U\ne J$.  The length formula in
+that lemma says $|U|=|J|+m$, so $m>0$ and $|J|<|U|$.  Since $J$ is the PE
+core, this is the required strict PE growth.
+
+Finally, the terminal conclusion of
+\noderef{GoodHierarchyRestrictedAugmentation} says directly that
+\[
+ \noderef{TreeColorSetMinusClosed}\left(
+   G,\varphi_n,U,
+   \bigcup_{\eta\in D^{K_U}_{n,1}}
+     \mathcal G_U.\Gamma^0_\eta\right)                         \tag{10}
+\]
+holds, where its displayed terminal set is exactly
+\noderef{HierarchyTerminalStoredColors}$(K_U)$.  Equation (10) is item 5
+and (4).  All requested seed, growth, correspondence, maximum, hierarchy,
+avoidance, disjointness, PE, and terminal closedness assertions have now
+been established.
+\end{proof}

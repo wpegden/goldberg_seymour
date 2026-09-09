@@ -1,5 +1,6 @@
 import Tablet.CriticalCoreExists
 import Tablet.ElementaryTransfer
+import Tablet.AlgorithmFiveFiveBaseStage
 import Tablet.GoodHierarchyElementaryLarge
 import Tablet.HierarchySituationThreeImpossible
 import Tablet.HierarchySituationThreeComponentIntersectionShortening

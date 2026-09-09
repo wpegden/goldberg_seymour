@@ -1,0 +1,97 @@
+\begin{lemma}[The exact seed for Algorithm 5.5]
+Let $\mathcal E$ be a positive-rung ETT with rung number $n$, terminal
+ladder tree $T_n$, final series output $T_{n+1}$, generating coloring
+$\varphi_n$, and maximum property.  Fix a \noderef{HierarchyBase} $B$.
+Assume that, when the terminal kind is PE,
+\[
+ |T_n|<|B.\mathit{core}|,
+ \qquad
+ \noderef{TashkinovClosure}
+   (\varphi_n,B.\mathit{core},T_{n+1})                         \tag{1}
+\]
+holds.  Thus (1) is the paper's special choice that $T_{n+1}$ is a
+closure of $T_n\vee R_n$.
+
+There is an exact seed $J$ carrying a
+\noderef{CorrespondingExtendedTashkinovTree} $\mathcal E_J$ for
+$(\varphi_n,T_n)$ with maximum property, such that $J$ is an exact ordered
+initial segment of $T_{n+1}$.  Moreover, $\mathcal E_J$ has a hierarchy
+base $B_J$ with the same core, closure, and numerical support position as
+$B$, and it has a zero-divider hierarchy $K_J$ whose two stages are exactly
+$T_n$ and $J$.  The seed is determined by the terminal kind as follows.
+\begin{enumerate}
+\item In PE, $J=B.\mathit{core}=T_n\vee R_n$.
+\item In SE or RE, there is an individual edge identity $f_n$ such that
+  the terminal connecting-edge set is exactly $\{f_n\}$,
+  \noderef{TreeSequenceAdjoinEdge}$(T_n,f_n,J)$ holds, and there is a
+  $\varphi_n$-\noderef{TashkinovAugmentationSequence} from $J$ to
+  $T_{n+1}$.
+\end{enumerate}
+No endpoint pair is substituted for the individual identity $f_n$.
+\end{lemma}
+\begin{proof}
+Put $Z=T_{n+1}$.  Inspect the certificate at the positive terminal index
+of the \noderef{TashkinovSeries} carried by $\mathcal E$.  Positivity of
+\noderef{ExtendedTashkinovTree} rules out the initial constructor there,
+so \noderef{TashkinovSeriesStep} gives exactly the PE, SE, or RE cases.
+
+Suppose first that the constructor is PE.  Set $J=B.\mathit{core}$.
+The PE clause of \noderef{HierarchyBase} supplies an
+\noderef{OrderedTreeUnion} presentation of this core whose left tree is
+$T_n$; its left-segment field therefore gives the exact ordered inclusion
+$T_n\preccurlyeq J$ in the sense of
+\noderef{TreeSequenceInitialSegment}.  The first hypothesis in (1) makes this inclusion
+strict.  The augmentation-sequence part of the closure in (1) makes
+$J\preccurlyeq Z$: every \noderef{TashkinovAugmentation} contains an
+exact ordered initial-segment field, and these fields compose along the
+reflexive-transitive sequence.
+
+In the SE case, the constructor supplies an individual edge $f_n$, an
+ordered tree $J$, the exact equality $F_n=\{f_n\}$, the relation
+$\noderef{TreeSequenceAdjoinEdge}(T_n,f_n,J)$, and a closure from $J$ to
+$Z$ under the current coloring.  The generating-color equation of
+$\mathcal E$ identifies that current coloring with $\varphi_n$.  The
+adjoin relation gives $T_n\preccurlyeq J$ and
+$|J|=|T_n|+1$, while the closure gives both the asserted augmentation
+sequence $J\leadsto Z$ and $J\preccurlyeq Z$.  The RE constructor supplies
+the same four pieces of exact seed data, so the identical argument applies.
+This proves the seed alternatives, including their strictness above
+$T_n$.
+
+For any of the three choices of $J$, define a new ETT on $J$ by retaining
+the original rung number and the entire original certified series.  Use
+the just-proved exact strict inclusion $T_n\prec J$, the exact inclusion
+$J\preccurlyeq Z$, and the original generating-color equation as its
+three terminal fields.  This is an actual
+\noderef{ExtendedTashkinovTree}, denoted $\mathcal E_J$.
+
+It is corresponding to the original ETT by taking its replacement input
+and replacement series to be the original input and series.  Rung,
+ladder-tree, raw stored-set, connecting-edge-set, and extension-kind
+agreement are then literal equalities.  The required properness and
+exact-one-uncolored assertions follow at index zero from the certified
+\noderef{KTriple} in the initial constructor.  At every positive index
+they come from the SE, PE, or RE constructor at that index, using the
+selected-coloring fields of \noderef{MaximumDefectiveChoice} in SE.  The positive-stage
+\noderef{StableColoring} fields are reflexive: every controlled edge value
+and every missing-color set is equal to itself.  These are all fields of
+\noderef{CorrespondingExtendedTashkinovTree}.  Since
+$\mathcal E_J$ has exactly the original series, both clauses of
+\noderef{MaximumProperty} are unchanged, so its maximum property is the
+given one.
+
+Define $B_J$ by copying the core, closure, support position, and every
+proof field of $B$.  The replacement series is literally the original
+series, so the copied fields have the required dependent types.  In
+particular the three advertised data equalities are literal.
+
+Finally define $K_J$ with divider count zero, stage zero $T_n$, and stage
+one $J$.  Its base-stage and terminal-stage fields are the displayed
+equalities.  The only nestedness and strictness fields are precisely
+$T_n\preccurlyeq J$ and $|T_n|<|J|$, already proved.  There are no divider
+positions.  For the core-inside-first field, in PE use $J=B_J.\mathit{core}$;
+in SE or RE use the nonparallel clause of \noderef{HierarchyBase}, which
+identifies $B_J.\mathit{core}$ with $T_n$, followed by the exact adjoin
+inclusion.  Thus $K_J$ is the asserted zero-divider
+\noderef{TashkinovHierarchy}, completing the proof.
+\end{proof}

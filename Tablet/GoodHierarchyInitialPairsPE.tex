@@ -1,0 +1,81 @@
+\begin{lemma}[Initial reserved pairs in the PE case]
+Let $\mathcal E$ be a positive-rung ETT with rung number $n$, terminal
+ladder tree $T_n$, generating coloring $\varphi_n$, and terminal extension
+kind PE.  Fix a \noderef{HierarchyBase} $B$ and a
+\noderef{TashkinovHierarchy} $H$ over $B$, and put
+\[
+ M=\noderef{TreeMissingColors}(\varphi_n,T_n),\qquad
+ D=D^H_{n,0}=\noderef{HierarchyStoredColorsAt}(H,0),
+ \qquad C=M\cap\overline\varphi_n(B.\mathit{closure}).
+\]
+Assume $|M|\geq2n+11$.  Suppose that some
+$\alpha\in\overline\varphi_n(B.\mathit{core})$ is not closed on
+$B.\mathit{core}$, that every color in $C$ is closed on
+$B.\mathit{core}$, and that $|C|\geq4$.
+
+Then there is a total family of finite color sets $\Gamma_\eta$, constrained
+at every $\eta\in D$, such that
+\begin{enumerate}
+\item $|\Gamma_\eta|=2$ and $\Gamma_\eta\subseteq M$ for every
+  $\eta\in D$;
+\item $\Gamma_\eta\cap\Gamma_\theta=\varnothing$ for distinct
+  $\eta,\theta\in D$;
+\item $B.\mathit{core}$ is not
+  $\bigl(\bigcup_{\eta\in D}\Gamma_\eta\bigr)^-$-closed under
+  $\varphi_n$; and
+\item at least four common missing colors remain unreserved:
+  \[
+  \left|C-\bigcup_{\eta\in D}\Gamma_\eta\right|\geq4.
+  \]
+\end{enumerate}
+The family is total only to match the Lean representation; the conclusions
+impose conditions exactly at the paper indices $\eta\in D$.
+\end{lemma}
+\begin{proof}
+Choose $\alpha$ as in the hypotheses.  Since every color of $C$ is closed
+on the core while $\alpha$ is not, we have
+\[
+                              \alpha\notin C.                 \tag{1}
+\]
+The stagewise bound \noderef{HierarchyStoredColorsCardinality} gives
+$|D|\leq n$.  Write $d=|D|$ and $A=M-\{\alpha\}$.  Deleting one element
+reduces cardinality by at most one, so
+\[
+                  |A|\geq |M|-1\geq2n+10\geq2d+10.           \tag{2}
+\]
+
+We choose a set $R\subseteq A$ of exactly $2d$ colors, giving priority to
+colors outside $C$.  More explicitly, if $|A-C|\geq2d$, take any
+$2d$-subset of $A-C$.  Otherwise take every color of $A-C$ and add any
+$2d-|A-C|$ colors from $A\cap C$.  The latter choice is possible because
+the disjoint union
+$A=(A-C)\mathbin{\dot\cup}(A\cap C)$ and (2) give
+\[
+ |A\cap C|=|A|-|A-C|\geq2d-|A-C|.
+\]
+Thus in both cases $R\subseteq A$ and $|R|=2d$.
+
+The same choice leaves at least four colors of $C$ outside $R$.  In the
+first case $R\cap C=\varnothing$, so this follows from $|C|\geq4$.  In the
+second case, (1) gives $C\subseteq A$, and hence
+\[
+ |C-R|=|A|-2d\geq10                                             \tag{3}
+\]
+by (2).  In particular $|C-R|\geq4$ in either case.
+
+Enumerate the $d$ elements of the finite set $D$ and the $2d$ elements of
+$R$.  Assign to the $i$-th member of $D$ the two colors in positions
+$2i$ and $2i+1$ of the enumeration of $R$.  This defines
+$\Gamma_\eta$ for $\eta\in D$; put $\Gamma_\eta=\varnothing$ outside
+$D$.  Every indexed set has cardinality two, two different indexed sets
+are disjoint, and their union is exactly $R$.  Since $R\subseteq A\subseteq
+M$, items 1 and 2 follow, while (3) is item 4.
+
+Finally, $\alpha\notin R$ because $R\subseteq A$.  The chosen color
+$\alpha$ is missing on the core and has a nonempty exact
+$\alpha$-colored boundary there.  Hence it belongs to
+$\overline\varphi_n(B.\mathit{core})-R$ but is not closed.  Expanding
+\noderef{TreeColorSetMinusClosed} shows that the core is not
+$R^-$-closed.  Since $R=\bigcup_{\eta\in D}\Gamma_\eta$, this is item 3
+and completes the proof.
+\end{proof}
