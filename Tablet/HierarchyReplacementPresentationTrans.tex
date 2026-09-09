@@ -1,0 +1,192 @@
+\begin{lemma}[Composition of replacement presentations]
+Fix a finite loopless multigraph \(G\), a palette of \(k\) colors, a
+distinguished edge \(e_0\), an input coloring, an exact ordered terminal
+tree \(T\), a generating coloring \(\varphi\), an extended Tashkinov tree
+\(\mathcal E\), a hierarchy base, a
+\noderef{HierarchyCounterexample} \(C\), and its
+\noderef{HierarchyMinimumCounterexampleContext}.  Let
+\(P\) be a \noderef{HierarchyReplacementPresentation} relative to these
+fixed original data.  Write \(\mu=P.\mathit{coloring}\) and
+\(\mathcal E_\mu=P.\mathit{corresponding}.\mathit{replacementETT}\).
+
+Let \(\tau\) be another coloring.  Suppose there is a
+\noderef{CorrespondingExtendedTashkinovTree} from \(\mathcal E_\mu\) to
+\(\tau\) on the same exact \(T\), a hierarchy base on its replacement ETT,
+a hierarchy counterexample \(C_\tau\) on that base, and
+\[
+ \noderef{SameGoodHierarchy}
+   (P.\mathit{counterexample}.\mathit{good},C_\tau.\mathit{good}).
+\]
+Then there is a replacement presentation \(P_\tau\), relative to the
+original \(\mathcal E,C\), and the original minimum context, whose coloring
+is exactly \(\tau\).
+\end{lemma}
+\begin{proof}
+Put
+\[
+ \mathcal C_0=P.\mathit{corresponding},\qquad
+ \mathcal C_1=\mathit{second},\qquad
+ C_\mu=P.\mathit{counterexample}.
+\]
+Thus \(\mathcal C_0\) corresponds from the original ETT \(\mathcal E\) to
+the intermediate ETT \(\mathcal E_\mu\), whereas \(\mathcal C_1\)
+corresponds from \(\mathcal E_\mu\) to its replacement ETT
+\(\mathcal E_\tau\).  Apply
+\noderef{CorrespondingExtendedTashkinovTreeTrans} to
+\(\mathcal C_0,\mathcal C_1\).  It supplies a composite certificate
+\[
+ \mathcal C_{10}:
+ \noderef{CorrespondingExtendedTashkinovTree}(\mathcal E,\tau,T)       \tag{1}
+\]
+and three comparison witnesses: equality of its replacement input with
+that of \(\mathcal C_1\), heterogeneous equality of the two dependent
+replacement series, and heterogeneous equality of the two replacement
+ETTs.
+
+Use equality elimination on the replacement-input equality first.  Then
+use dependent heterogeneous-equality elimination on the replacement-series
+equality and on the replacement-ETT equality, in that order.  Transport
+along these eliminations the supplied second base, \(C_\tau\), its
+hierarchy and good-hierarchy witness, and the stated same-good witness.
+After these transports, all these objects are indexed by the literal
+replacement input and replacement ETT of (1).  In particular, no object
+whose type merely mentions a heterogeneously equal ETT is reused without
+transport.  We retain the notation \(\mathcal B_\tau,C_\tau\) for the
+transported base and counterexample.
+
+We next compose the two same-good witnesses.  Unfold
+\noderef{SameGoodHierarchy} for \(P.\mathit{sameGood}\) and for the
+transported second witness.  Their first clauses are two successive
+\noderef{SameHierarchyStages} relations.  Transitivity of equality gives
+equality of the first and third base cores and divider counts;
+transitivity of heterogeneous equality gives equality of their dependent
+stage families and divider-position families.  Compose the two
+equivalences asserting that the terminal extension kind is PE.  If this
+common assertion holds, apply the first closure equality and then the
+second closure equality.  These are exactly all clauses of
+\noderef{SameHierarchyStages} between \(C.\mathit{hierarchy}\) and
+\(C_\tau.\mathit{hierarchy}\).
+
+Let \(h_0:q=q_\mu\) and \(h_1:q_\mu=q_\tau\) be the two divider-count
+equalities, and use \(h_0h_1:q=q_\tau\) for the composite.  Given
+\(j<q+1\), cast it first along \(h_0\), then along \(h_1\).  Functoriality
+of dependent casts identifies this iterated cast with the direct cast
+along \(h_0h_1\).  The first same-good witness identifies the two
+\noderef{HierarchyStoredColorsAt} sets at the first two indices, and the
+second identifies the sets at the last two; equality transitivity gives
+the required first-to-third stored-set equality.  If
+\(\eta\) belongs to the first stored set, transport that membership across
+the first equality, apply the second Gamma-pair equality to \(\eta\), and
+compose it with the first Gamma-pair equality.  After the same cast
+identification this proves equality of the first and third Gamma pairs.
+Consequently we have constructed
+\[
+ s_{10}:\noderef{SameGoodHierarchy}
+       (C.\mathit{good},C_\tau.\mathit{good}).                 \tag{2}
+\]
+
+It remains to build the minimum context on the data in (1).  We verify its
+six fields separately, always starting with
+\(P.\mathit{minimumContext}\).
+
+First let \(n_\mu=\mathcal E_\mu.\mathit{rounds}\).  The terminal
+properness field of \(\mathcal C_1\), at
+\(\operatorname{Fin.last}(n_\mu)\), says that the terminal replacement
+series coloring is proper.  Its final-generating-coloring equality
+identifies that coloring with \(\tau\), so \(\tau\) is proper.  The
+terminal exact-one-uncolored field and the same equality show that exactly
+\(e_0\) is uncolored under \(\tau\).  These give
+\(\mathit{proper}\) and \(\mathit{oneEdgeUncolored}\).
+
+For \(\mathit{lowerRung}\), take any positive maximum ETT \(\mathcal L\)
+whose rung number is strictly below that of \(\mathcal E_\tau\).  The
+rung-agreement field of \(\mathcal C_1\), retained by the transports
+above, is
+\[
+ \mathcal E_\tau.\mathit{rounds}
+   =\mathcal E_\mu.\mathit{rounds}.                            \tag{3}
+\]
+Rewrite the strict inequality by (3) and apply the complete lower-rung
+field of \(P.\mathit{minimumContext}\).  This transports the entire
+six-assertion package, with its arbitrary input, tree, and generating
+coloring, not just its elementarity clause.
+
+For \(\mathit{fewerDividers}\), let \(\mathcal L\) be a maximum ETT with
+the same rung as \(\mathcal E_\tau\), and let \(K\) be a good hierarchy
+on it with fewer dividers than
+\(C_\tau.\mathit{hierarchy}\).  Rewrite the rung equality by (3).  The
+second supplied same-good witness gives
+\[
+ C_\mu.\mathit{hierarchy}.\mathit{dividerCount}
+ =C_\tau.\mathit{hierarchy}.\mathit{dividerCount}.             \tag{4}
+\]
+Rewrite the strict divider inequality by (4).  The
+\(\mathit{fewerDividers}\) field of \(P.\mathit{minimumContext}\) now
+applies and proves the required elementarity.
+
+For lexicographic minimality, we first prove the literal equality
+\[
+ \noderef{HierarchyCounterexampleMeasure}(C_\mu)
+   =\noderef{HierarchyCounterexampleMeasure}(C_\tau).          \tag{5}
+\]
+The \noderef{SameHierarchyStages} part of the second same-good witness
+gives (4), equality of the base cores, and transported equality of every
+ordinary hierarchy stage.  Hence the last
+\noderef{HierarchyStarredStage} is the same exact ordered tree on both
+sides: at divider count zero it is the equal base core, and at positive
+divider count it is the corresponding equal ordinary stage.  Both
+hierarchies have the same exact terminal tree \(T\).  Expanding
+\noderef{HierarchyPathNumber}, their tail lengths, finite candidate sets,
+and candidate predicates are therefore identical, including the
+empty-candidate fallback.  This proves equality of the first coordinates
+in (5).  For the second coordinates, (4) and equality of the ordinary
+stage families identify the stages at index equal to the divider count;
+subtracting their equal lengths from the common number
+\(T.\mathit{length}\) gives equality.  Equality of both coordinates
+proves (5).
+
+Now take any hierarchy counterexample \(C'\) with the same rung as
+\(\mathcal E_\tau\) and the same divider count as \(C_\tau\).  Equations
+(3) and (4) turn these into the corresponding equalities with
+\(\mathcal E_\mu,C_\mu\).  If
+\(\noderef{HierarchyCounterexampleLess}\) made the measure of \(C'\)
+strictly smaller than the measure of \(C_\tau\), rewriting by (5) would
+make it strictly smaller than the measure of \(C_\mu\), contradicting
+the \(\mathit{lexicographicMinimality}\) field of
+\(P.\mathit{minimumContext}\).  This proves the new minimality field.
+
+Finally consider \(\mathit{largeMissingSet}\).  Positivity of \(C_\tau\),
+transported through the rung equality in (1), permits the terminal
+positive index \(i<n\) whose successor is
+\(\operatorname{Fin.last}(n)\), where
+\(n=\mathcal E.\mathit{rounds}\).  Apply at \(i\) the
+replacement-stability field of \(\mathcal C_0\) and the composite
+replacement-stability field of \(\mathcal C_{10}\).  By
+\noderef{StableColoring}, their vertexwise clauses identify, respectively,
+the \(\mu\)-missing and the \(\tau\)-missing color sets at every vertex of
+the original terminal ladder tree with its \(\varphi\)-missing color set.
+The ladder-tree equalities in \(\mathcal C_0\) and \(\mathcal C_{10}\),
+together with the replacement-series and replacement-ETT transports
+already eliminated above, identify that original ladder tree with the
+terminal ladder trees of \(\mathcal E_\mu\) and \(\mathcal E_\tau\).
+Taking the union over their common displayed vertex set, as in
+\noderef{TreeMissingColors}, gives equality of the two tree-missing-color
+sets and hence equality of their cardinalities.  The rung equalities make
+the two integers \(2n+11\) identical.  Therefore the old
+\(\mathit{largeMissingSet}\) inequality in
+\(P.\mathit{minimumContext}\) is exactly the required inequality under
+\(\tau\).
+
+The six fields just constructed form a
+\noderef{HierarchyMinimumCounterexampleContext} \(\mathit{ctx}_\tau\)
+on the literal data in (1).  Use \(C_\tau.\mathit{maximum}\) for the
+maximum field; retain its positive-rung, hierarchy, good-hierarchy, and
+non-elementarity fields; and use (2) for the original-relative same-good
+field.  Then
+\[
+ P_\tau=(\tau,\mathcal C_{10},C_\tau.\mathit{maximum},
+          \mathcal B_\tau,C_\tau,s_{10},\mathit{ctx}_\tau)
+\]
+fills every field of \noderef{HierarchyReplacementPresentation}.  Its
+coloring field is definitionally \(\tau\), which proves the conclusion.
+\end{proof}
