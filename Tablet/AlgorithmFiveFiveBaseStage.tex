@@ -65,13 +65,13 @@ identity of $f_n$ in the SE and RE cases.
 \begin{proof}
 Apply \noderef{AlgorithmFiveFiveSeed} with the maximum property, the base,
 and the two conditional assumptions in (1).  It returns an exact seed
-$J$, an identity corresponding presentation $\mathcal E_J$, maximum
+$J$, a corresponding presentation $\mathcal E_J$, maximum
 property for $\mathcal E_J$, a copied base $B_J$, and a zero-divider
 hierarchy $K_J$.  Its statement gives
 \[
  B_J.\mathit{core}=B.\mathit{core},\quad
- B_J.\mathit{closure}=B.\mathit{closure},quad
- K_J(0)=T_n,quad K_J(1)=J,                                   \tag{5}
+ B_J.\mathit{closure}=B.\mathit{closure},\quad
+ K_J(0)=T_n,\quad K_J(1)=J,                                  \tag{5}
 \]
 as exact data.  It also gives exactly the two alternatives in item 1.  In
 the non-PE alternative it retains an individual $f_n$ with
@@ -79,14 +79,18 @@ $F_n=\{f_n\}$ and $T_n+f_n=J$; no endpoint equality is used in place of
 this edge identity.
 
 Put $D=D^{K_J}_{n,0}=\noderef{HierarchyStoredColorsAt}(K_J,0)$ and
-$M=\overline\varphi_n(T_n)$.  We next choose the initial Gamma pairs.  If
-the terminal kind is PE, transport the three PE assumptions across the
-first two equalities in (5), and transport (2) across the ladder equality
-in the corresponding certificate.  The hypotheses of
+$M=\noderef{TreeMissingColors}(\varphi_n,T_n)$.  By the ladder-tree and
+extension-kind agreement clauses of
+\noderef{CorrespondingExtendedTashkinovTree}, the terminal ladder tree of
+$\mathcal E_J$ is exactly $T_n$ and its terminal kind equals that of
+$\mathcal E$.  We next choose the initial Gamma pairs.  If the common
+terminal kind is PE, transport the three PE assumptions across the first
+two equalities in (5), and transport (2) across the ladder equality in the
+corresponding certificate.  The hypotheses of
 \noderef{GoodHierarchyInitialPairsPE} are now exact.  It returns a family
 $\Gamma_\eta$ such that
 \[
- |\Gamma_\eta|=2,quad \Gamma_\eta\subseteq M,quad
+ |\Gamma_\eta|=2,\quad \Gamma_\eta\subseteq M,\quad
  \Gamma_\eta\cap\Gamma_\theta=\varnothing
        \quad(\eta\ne\theta\text{ in }D),                       \tag{6}
 \]
@@ -105,12 +109,21 @@ terminal certificate, the exact edge $f_n$ is the edge of its
 \noderef{MaximumDefectiveChoice}; its selected coloring gives
 $\varphi_n(f_n)=\delta_n$, and it is a boundary edge of $T_n$.  The
 pre-step coloring is \noderef{ColoredVertexSetClosed} on $T_n$, while the
-selected coloring is stable on $T_n$.  Both are proper and leave exactly the distinguished edge
-uncolored.  Symmetry of stability from \noderef{sc2} transports a
-hypothetical selected-color boundary edge whose color is selected-missing
-back to a pre-step boundary edge with the same color and the same missing
-witness.  This contradicts pre-step closedness.  Hence $T_n$ is closed
-under $\varphi_n$, and the displayed boundary edge gives
+selected coloring is stable on $T_n$.  Both are proper and leave exactly
+the distinguished edge uncolored.  Suppose that $g$ were a boundary edge
+of $T_n$ under the selected coloring, with selected color $c\in M$.
+By \noderef{TreeMissingColors}, there is a vertex of $T_n$ at which $c$ is
+missing under the selected coloring.  Symmetry of stability from
+\noderef{sc2} makes the pre-step coloring stable relative to the selected
+coloring on the same tree and stored set.  The missing-set clause of
+\noderef{StableColoring} says that the chosen vertex also misses $c$ under
+the pre-step coloring.  Since $g$ is incident with $T_n$ and its selected
+color $c$ is tree-missing, the controlled incident-edge-color clause of
+\noderef{StableColoring} says that $g$ also has color $c$ under the pre-step
+coloring.  This contradicts pre-step closedness.  Hence $T_n$ is closed
+under $\varphi_n$.  Membership in $M$ is, by
+\noderef{TreeMissingColors}, exactly the existence of such a missing-color
+witness on $T_n$; the displayed boundary edge therefore gives
 \[
                          \delta_n\notin M.                    \tag{7}
 \]
@@ -155,9 +168,10 @@ chain
 \]
 where every nonempty step is an exact
 $\varphi_n$-Tashkinov augmentation, together with its composite
-augmentation sequence and exact initial-segment relations.  It also
-supplies a corresponding ETT $\mathcal E_U$ with maximum property, a base
-$B_U$, a hierarchy $K_U$, and a good witness $\mathcal G_U$.
+augmentation sequence, exact initial-segment relations, and the explicit
+length formula $|U_r|=|J|+r$.  It also supplies a corresponding ETT
+$\mathcal E_U$ with maximum property, a base $B_U$, a hierarchy $K_U$, and
+a good witness $\mathcal G_U$.
 
 The reconstruction clauses of that lemma identify the core, closure, and
 numerical support position of $B_U$ with those of $B_J$, and hence with
@@ -166,13 +180,19 @@ divider count of $K_J$, identify its sole nonterminal stage with $T_n$,
 and identify every indexed stored set and Gamma pair with the corresponding
 one in $K_J$.  The terminal-stage field of
 \noderef{TashkinovHierarchy} identifies its other stage with the exact
-tree $U$.  Thus item 3, (3), pair cardinality, pairwise disjointness, and
-the two PE clauses all transport literally from (5)--(6) and
-$\mathcal G_J$ to $K_U$ and $\mathcal G_U$.
+tree $U$.  The ladder-tree and terminal-kind agreement clauses of
+\noderef{CorrespondingExtendedTashkinovTree}, applied to both
+$\mathcal E_J$ and $\mathcal E_U$, identify their terminal ladder trees
+with $T_n$ and their terminal kinds with that of $\mathcal E$.  Thus item
+3, (3), pair cardinality, pairwise disjointness, and the two PE clauses all
+transport literally from (5)--(6) and $\mathcal G_J$ to $K_U$ and
+$\mathcal G_U$.
 
 We prove the strict assertions in item 2.  In SE or RE,
-\noderef{TreeSequenceAdjoinEdge} gives $|J|=|T_n|+1$, and (9) gives
-$J\preccurlyeq U$, so $|T_n|<|U|$.
+\noderef{TreeSequenceAdjoinEdge} gives $|J|=|T_n|+1$.  The endpoint instance
+of the length formula returned by
+\noderef{GoodHierarchyRestrictedAugmentation} gives $|U|=|J|+m$.
+Consequently $|U|=|T_n|+1+m$, and hence $|T_n|<|U|$.
 
 Suppose the terminal kind is PE.  Let
 $R=\bigcup_{\eta\in D}\Gamma_\eta$.  The PE selection says that the seed
@@ -198,9 +218,10 @@ $\Gamma_\eta$.  Hence $W$ is an admissible successor of $J$.
 
 If the terminal tree in (9) were $U=J$, the maximality clause returned by
 \noderef{GoodHierarchyRestrictedAugmentation} would forbid exactly this
-successor $W$, a contradiction.  Thus $U\ne J$.  The length formula in
-that lemma says $|U|=|J|+m$, so $m>0$ and $|J|<|U|$.  Since $J$ is the PE
-core, this is the required strict PE growth.
+successor $W$, a contradiction.  Thus $U\ne J$.  Since $U_0=J$ and
+$U_m=U$, this forces $m>0$; the length formula in that lemma then says
+$|U|=|J|+m>|J|$.  Since $J$ is the PE core, this is the required strict PE
+growth.
 
 Finally, the terminal conclusion of
 \noderef{GoodHierarchyRestrictedAugmentation} says directly that
