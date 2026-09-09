@@ -2,6 +2,7 @@ import Tablet.CriticalCoreExists
 import Tablet.ElementaryTransfer
 import Tablet.HierarchySituationThreeComponentIntersectionShortening
 import Tablet.HierarchySituationThreeDisjointPreparation
+import Tablet.HierarchySituationThreeDisjointThetaUnstoredOutsideImpossible
 import Tablet.HierarchySituationTwoImpossible
 import Tablet.MaximumDegreeRestrict
 import Tablet.ThmGS2
