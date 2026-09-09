@@ -1,0 +1,61 @@
+\begin{lemma}[Suffix of a Tashkinov augmentation sequence]
+Let (S,B,C) be tree-sequences for the same finite loopless multigraph
+with its individual edge type and the same distinguished first edge, and
+let \(\varphi\) be one fixed partial edge coloring.  Suppose that \(C\) is
+obtained from \(S\) by a
+\(\varphi\)-\noderef{TashkinovAugmentationSequence}, that \(S\) is an exact
+ordered \noderef{TreeSequenceInitialSegment} of \(B\), and that \(B\) is an
+exact ordered \noderef{TreeSequenceInitialSegment} of \(C\).  Then \(C\) is
+obtained from \(B\) by a
+\(\varphi\)-\noderef{TashkinovAugmentationSequence}.
+\end{lemma}
+\begin{proof}
+We first prove two elementary consequences of exact ordered initial
+segments.  If \(X\preccurlyeq Y\) and \(|X|=|Y|\), then \(X=Y\): the
+vertex and edge equalities in
+\noderef{TreeSequenceInitialSegment} identify the entries at every index,
+while proof irrelevance identifies the attachment and injectivity proofs
+in the two tree-sequence structures.  Also, if
+\(X\preccurlyeq Z\), \(Y\preccurlyeq Z\), and \(|X|\leq |Y|\), then
+\(X\preccurlyeq Y\).  Indeed, for each vertex or edge index of \(X\), the
+corresponding entries of \(X\) and \(Y\) are both equal to the entry of
+\(Z\) at that index; the assumed length inequality supplies the required
+index casts.  This verifies all three clauses of
+\noderef{TreeSequenceInitialSegment}.
+
+Unfold \noderef{TashkinovAugmentationSequence}.  The given passage from
+\(S\) to \(C\) is a finite reflexive-transitive chain of one-step
+\(\varphi\)-\noderef{TashkinovAugmentation}s.  We induct on that chain,
+allowing \(B\) to vary subject to \(S\preccurlyeq B\preccurlyeq C\), and
+prove that its suffix from \(B\) to \(C\) is again such a chain.
+
+If the chain is empty, then \(C=S\).  The two initial-segment length
+inequalities give
+\[
+                  |B|\leq |C|=|S|\leq |B|.
+\]
+Thus \(|B|=|S|\).  Since \(B\preccurlyeq C=S\), the first elementary
+consequence gives \(B=S=C\), and the empty reflexive chain from \(B\) to
+\(C\) proves the conclusion.
+
+For the induction step, write the final one-step augmentation as
+\(A\longrightarrow C\), preceded by a chain from \(S\) to \(A\).  By
+\noderef{TashkinovAugmentation},
+\[
+                       A\preccurlyeq C,
+             \qquad |C|=|A|+1.                                \tag{1}
+\]
+Suppose first that \(|B|\leq |A|\).  Both \(B\) and \(A\) are exact
+ordered initial segments of \(C\), so the second elementary consequence
+gives \(B\preccurlyeq A\).  The original relation
+\(S\preccurlyeq B\) is unchanged.  The induction hypothesis therefore
+gives a \(\varphi\)-augmentation sequence from \(B\) to \(A\).  Appending
+the actual last augmentation \(A\to C\), including its same exact new
+edge identity, gives the required sequence from \(B\) to \(C\).
+
+It remains that \(|B|>|A|\).  Since \(B\preccurlyeq C\), equation (1)
+also gives \(|B|\leq |C|=|A|+1\), so necessarily \(|B|=|C|\).  The first
+elementary consequence applied to \(B\preccurlyeq C\) yields \(B=C\).
+The empty reflexive chain from \(B=C\) to \(C\) proves the desired suffix.
+These two cases complete the induction.
+\end{proof}

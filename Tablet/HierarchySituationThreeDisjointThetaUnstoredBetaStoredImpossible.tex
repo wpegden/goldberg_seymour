@@ -258,10 +258,12 @@ one-uncoloredness above, the six context fields, (2), the path component
 $Q_\ell$, and (14).  Retain its
 \noderef{HierarchyWeaklyStable} and \noderef{ModColoring} conclusions.
 
-For completeness we now verify every additional split-tail premise.
-Restrict the exact old suffix $X\to T$ first at $Y$ using
-\noderef{TashkinovAugmentationSequenceRestrict}; this gives the exact
-$\sigma$-suffix $Y\to T$.  Equations (16)--(17) put both affected
+For completeness we now verify every additional split-tail premise.  Apply
+\noderef{TashkinovAugmentationSequenceSuffix} to the exact
+$\sigma$-route $d.\mathit{transportedSuffix}$ from $X$ to $T$ and the
+already proved exact prefix relations $X\preccurlyeq Y\preccurlyeq T$ in
+(3).  Denote its conclusion, the exact $\sigma$-suffix from $Y$ to $T$,
+by $\mathcal A_{Y,T}^{\sigma}$.  Equations (16)--(17) put both affected
 colors in \noderef{TreeMissingColors}$(\mu_2,Y)$.
 
 For the source-to-$Y$ route, inspect the actual terminal positive
@@ -439,12 +441,12 @@ nor theta colors any exact displayed edge from $A$ through $Y$, so
 the actual connecting seed, whose identity and singleton connecting-edge
 equation were retained in (19).
 
-The old $\mu_2$ suffix needed at this second step is also explicit.
-Restrict $d.\mathit{transportedSuffix}$ to $Y$, and apply
-\noderef{TashkinovAugmentationSequenceComponentSwap} to the first switch
-(15).  Both beta and gamma are missing on $Y$ under $\mu_2$ by
-(16)--(17), so the cited theorem transports the exact $\sigma$ suffix,
-with all individual new-edge identities, to a $\mu_2$ suffix $Y\to T$.
+The old $\mu_2$ suffix needed at this second step is also explicit.  Apply
+\noderef{TashkinovAugmentationSequenceComponentSwap} directly to the named
+$\sigma$-suffix $\mathcal A_{Y,T}^{\sigma}$ and the first switch (15).
+Both beta and gamma are missing on $Y$ under $\mu_2$ by (16)--(17), so the
+cited theorem transports that exact suffix, with all individual new-edge
+identities, to a $\mu_2$ suffix $Y\to T$.
 Equation (31) and (30) put gamma and theta in
 \noderef{TreeMissingColors}$(\mu_3,Y)$.
 

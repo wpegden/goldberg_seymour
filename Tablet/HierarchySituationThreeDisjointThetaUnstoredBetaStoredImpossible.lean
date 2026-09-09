@@ -39,6 +39,7 @@ import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceColoringTransport
 import Tablet.TashkinovAugmentationSequenceComponentSwap
 import Tablet.TashkinovAugmentationSequenceRestrict
+import Tablet.TashkinovAugmentationSequenceSuffix
 import Tablet.TashkinovClosure
 import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeries
