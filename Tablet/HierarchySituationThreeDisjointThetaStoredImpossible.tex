@@ -65,10 +65,23 @@ $2n+11$ estimate.  This gives
  \noderef{ColoredVertexSetElementary}
     (G,\sigma,\noderef{TreeSequenceVertexSet}(Z)).              \tag{2}
 \]
-The \noderef{SameGoodHierarchy} field of $R$ identifies the exact
-terminal tree and all hierarchy stages with those of $C$.  Expanding
+We first derive the required order from the actual hierarchy $H$.  The
+\(\mathit{coreInsideFirst}\) field of \noderef{TashkinovHierarchy} is an
+entrywise exact inclusion of the base core in the first ordinary stage.
+Each \(\mathit{nested}\) field is an entrywise exact inclusion of
+successive ordinary stages, its matching \(\mathit{strict}\) field makes
+that inclusion proper, and \(\mathit{terminalStage}\) identifies the last
+stage with $T$.  If $q=0$, the zero branch of
+\noderef{HierarchyStarredStage} identifies $A$ with the base core, so
+\(\mathit{coreInsideFirst}\), followed by the ordinary-stage chain and
+\(\mathit{terminalStage}\), places $A$ below $T$.  If $q>0$, the positive
+branch identifies $A$ with the last ordinary preterminal stage, whose last
+\(\mathit{nested}\) and \(\mathit{strict}\) clauses place it properly below
+the terminal stage.  The \noderef{SameGoodHierarchy} field of $R$ is used
+only to identify these exact replacement stages, including $A$ and $T$,
+with the stages underlying the full-tail prefixes of $C$.  Expanding
 \noderef{HierarchyFullTailLength} and
-\noderef{HierarchyFullTailPrefix}, and using $2\le j<\ell$, yields
+\noderef{HierarchyFullTailPrefix}, and using $2\le j<\ell$, now yields
 \[
              A\preccurlyeq B\prec X\prec Y\preccurlyeq Z\prec T. \tag{3}
 \]
@@ -289,13 +302,27 @@ $S_\sigma=T_n^\sigma+f_n$, and the route from that seed to $C_\sigma$.
 The below-final field of \noderef{ExtendedTashkinovTree} and (3) give
 $Y\preccurlyeq T\preccurlyeq C_\sigma$.
 
-The source is also an exact prefix of $Y$.  In PE at positive divider
-count, hierarchy nesting gives
-$T_n^\sigma\preccurlyeq A\preccurlyeq Y$; at divider zero, the
-\noderef{OrderedTreeUnion} in the parallel clause of
-\noderef{HierarchyBase} gives the same inclusion.  In SE/RE at positive
-divider count, the seed and first ordinary stage are exact prefixes of
-$C_\sigma$; their lengths and entrywise comparison give
+The source is also an exact prefix of $Y$.  Here $H$ is the actual
+\noderef{TashkinovHierarchy} on $\mathcal E_\sigma$.  In PE at positive
+divider count, its \(\mathit{baseStage}\) identity makes stage zero the
+actual $T_n^\sigma$, and its iterated \(\mathit{nested}\) fields put that
+tree below the last starred stage $A$; the same chain, ending with
+\(\mathit{terminalStage}\), together with the exact stage identification
+used in (3), gives
+$T_n^\sigma\preccurlyeq A\preccurlyeq Y$.  In PE at divider zero, the
+\(\mathit{parallel}\) field of \noderef{HierarchyBase} supplies the
+\noderef{OrderedTreeUnion} defining $A$, whose
+\(\mathit{leftSegment}\) field gives $T_n^\sigma\preccurlyeq A$; now
+$H.\mathit{coreInsideFirst}$ followed by its ordinary
+\(\mathit{nested}\) chain and \(\mathit{terminalStage}\), with the same
+stage identification from (3), gives $A\preccurlyeq Y$.  In SE/RE at
+positive divider count, $H.\mathit{baseStage}$ and the first
+\(\mathit{strict}\) field say that the first ordinary stage has length at
+least $|T_n^\sigma|+1$, the length of the exact seed.  The certified route
+puts the seed below $C_\sigma$, while the \(\mathit{nested}\) chain and
+\(\mathit{terminalStage}\), followed by $T\preccurlyeq C_\sigma$, put the
+first ordinary stage below the same output.  Their entrywise comparison
+therefore gives
 $T_n^\sigma+f_n\preccurlyeq H.\mathit{stage}(1)
  \preccurlyeq A\preccurlyeq Y$.  In SE/RE at divider zero, the
 nonparallel base clause gives $A=T_n^\sigma$, and the seed and $Y$ are
@@ -519,17 +546,42 @@ certificate of $\mathcal E_1$ in
 \noderef{TashkinovSeries}.  Let its output be $C_1^{\rm out}$ and its
 source be $S_1=T_n^1$ in PE or the exact seed
 $S_1=T_n^1+f_n^1$ in SE/RE, with the actual edge and singleton equation
-from \noderef{TashkinovSeriesStep}.  The same-good data identify the last
-starred stage $A_1$ with $A$.  As in (17), hierarchy nesting, the
-parallel \noderef{OrderedTreeUnion}, or comparison with the first
-ordinary nonparallel stage gives
+from \noderef{TashkinovSeriesStep}.  Put
+$H_1=R_1.\mathit{counterexample.hierarchy}$ and let $A_1$ be its last
+starred stage.  The current \noderef{SameGoodHierarchy} certificate first
+identifies the divider count and the exact tree $A_1$ with $q$ and $A$;
+hence (3) gives
+$A_1=A\preccurlyeq Y$.  We then use the fields of the actual
+\noderef{TashkinovHierarchy} $H_1$, not those of the original hierarchy.
+In PE at positive divider count, $H_1.\mathit{baseStage}$ identifies stage
+zero with $T_n^1$, and its iterated \(\mathit{nested}\) fields put
+$T_n^1\preccurlyeq A_1$.  In PE at divider zero, the current
+\noderef{HierarchyBase} parallel clause supplies the
+\noderef{OrderedTreeUnion} defining $A_1$, whose
+\(\mathit{leftSegment}\) field gives $T_n^1\preccurlyeq A_1$; the
+\(\mathit{coreInsideFirst}\), ordinary \(\mathit{nested}\), and
+\(\mathit{terminalStage}\) fields of $H_1$ locate that same $A_1$ in the
+current chain ending at $T$.  In SE/RE at positive divider count,
+$H_1.\mathit{baseStage}$ and its first \(\mathit{strict}\) field make
+$H_1.\mathit{stage}(1)$ at least $|T_n^1|+1=|S_1|$ entries long.  The
+certified route puts the exact seed below $C_1^{\rm out}$, and the current
+\(\mathit{nested}\) chain and \(\mathit{terminalStage}\), followed by the
+below-final relation, put $H_1.\mathit{stage}(1)$ below that same output.
+Entrywise comparison therefore puts $S_1$ below that first stage; iterating
+the current \(\mathit{nested}\) fields through
+$A_1=A\preccurlyeq Y$ gives $S_1\preccurlyeq Y$.  In SE/RE at divider
+zero, the current nonparallel
+base clause gives $A_1=T_n^1$; the seed and $Y$ are prefixes of the common
+output, and the unchanged bound $2\le j<\ell$ gives
+$|A_1|+1\le |Y|$, so the same entrywise length comparison gives
+$S_1\preccurlyeq Y$.  Finally $Y\preccurlyeq T$ by (3), while
+$H_1.\mathit{terminalStage}$ identifies the current last hierarchy stage
+with $T$ and the below-final field puts $T\preccurlyeq C_1^{\rm out}$.
+Thus
 \[
                      S_1\preccurlyeq Y\preccurlyeq C_1^{\rm out}. \tag{32}
 \]
-At divider zero in SE/RE, the length comparison again uses
-$2\le j<\ell$ and the fact that both exact trees are prefixes of the
-same certified output.  Apply
-\noderef{TashkinovAugmentationSequenceRestrict} to this actual
+Apply \noderef{TashkinovAugmentationSequenceRestrict} to this actual
 $\mu _4$-route.  It gives the current route
 $S_1\longrightarrow Y$; it does not produce, and is not used in place
 of, the suffix (31).
