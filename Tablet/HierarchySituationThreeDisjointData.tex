@@ -1,0 +1,72 @@
+\begin{definition}
+Fix the graph, palette, distinguished edge, exact terminal tree \(T\),
+generating coloring, positive-rung ETT, hierarchy base, minimum hierarchy
+counterexample \(C\), and its
+\noderef{HierarchyMinimumCounterexampleContext}.  Fix also a source
+\noderef{HierarchyReplacementPresentation} \(P\) and colors
+\(\alpha,\beta\).  Put
+\[
+ j=\noderef{HierarchyPathNumber}(C.\mathit{hierarchy}),\qquad
+ B=\noderef{HierarchyFullTailPrefix}(C,j-2),\qquad
+ X=\noderef{HierarchyFullTailPrefix}(C,j-1),
+\]
+and let \(y_\ell\) be the last displayed vertex of \(T\).  A
+\emph{Situation 7.3 disjoint datum} consists first of an actual
+original-relative replacement presentation \(P_\sigma\) satisfying
+\[
+ P_\sigma.\mathit{coloring}
+ =\noderef{TwoColorComponentSwap}
+   (G,P.\mathit{coloring},\alpha,\beta,y_\ell).
+\]
+The switched coloring is
+\noderef{IsProperEdgeColoring},
+\noderef{IsOneEdgeUncolored} at exactly the distinguished edge, and
+\noderef{TreeColoringInvariant} on \(X\) relative to the source coloring.
+Both \(\alpha\) and \(\beta\) belong to
+\(\noderef{TreeMissingColors}(P_\sigma.\mathit{coloring},X)\), and the
+same exact ordered suffix is a
+\noderef{TashkinovAugmentationSequence} from \(X\) to \(T\) under the
+switched coloring.  Moreover, \(\beta\) is missing at \(y_\ell\) and on
+\(B\).
+
+Write \(H_\sigma=P_\sigma.\mathit{counterexample.hierarchy}\), let \(q\)
+be its last stored index, and set
+\[
+ A_\sigma=\noderef{HierarchyStarredStage}(H_\sigma,q),\qquad
+ D_\sigma=\noderef{HierarchyStoredColorsAt}(H_\sigma,q),\qquad
+ \Gamma_\sigma=\bigcup_{\eta\in D_\sigma}
+ P_\sigma.\mathit{counterexample.good}.\Gamma^q_\eta.
+\]
+Let \(T_n^\sigma\) be the terminal ladder tree of the replacement ETT and
+put, with \(V(-)=\noderef{TreeSequenceVertexSet}(-)\),
+\[
+ M_0^\sigma=
+ \bigcup_{v\in
+ V(P_\sigma.\mathit{replacementBase.core})\setminus V(T_n^\sigma)}
+ \noderef{MissingColors}(G,P_\sigma.\mathit{coloring},v).
+\]
+Define the exact tail-color set
+\[
+ U_j^\sigma=\{c:\ \exists r\in\operatorname{Fin}|T|,
+ |A_\sigma|\le r<|A_\sigma|+j,
+ P_\sigma.\mathit{coloring}(T.\mathit{edge}(r))=c\}.
+\]
+Thus every witness \(r\) selects the individual edge identity
+\(T.\mathit{edge}(r)\), including among parallel edges.  The datum records
+\(\beta\notin\Gamma_\sigma\) and the full paper condition (9): either
+\[
+ \beta\notin M_0^\sigma,\quad \beta\notin U_j^\sigma,
+ \quad\beta\notin\Gamma_\sigma,\quad\beta\notin D_\sigma,
+\]
+or
+\[
+ \beta\in D_\sigma\cap
+ \noderef{TreeMissingColors}(P_\sigma.\mathit{coloring},B),\qquad
+ (P_\sigma.\mathit{counterexample.good}.\Gamma^q_\beta\cup\{\beta\})
+       \cap U_j^\sigma=\varnothing.
+\]
+Finally the datum contains a color \(\theta\) missing, under the switched
+coloring, at the last vertex \(y_j\) of
+\(\noderef{HierarchyFullTailPrefix}(C,j)\), and satisfying
+\(\theta\notin\Gamma_\sigma\).
+\end{definition}
