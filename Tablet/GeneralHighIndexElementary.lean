@@ -1,5 +1,6 @@
 import Tablet.CriticalCoreExists
 import Tablet.ElementaryTransfer
+import Tablet.HierarchySituationThreeImpossible
 import Tablet.HierarchySituationThreeComponentIntersectionShortening
 import Tablet.HierarchySituationThreeDisjointPreparation
 import Tablet.HierarchySituationThreeDisjointThetaStoredImpossible

@@ -1,0 +1,90 @@
+\begin{lemma}[Situation 7.3 is impossible]
+Fix a finite loopless multigraph with its individual edge identities, a
+palette of \(k\) colors, a distinguished edge \(e_0\), an input coloring,
+an exact terminal tree-sequence \(T\), a generating coloring, a
+positive-rung extended Tashkinov tree, a hierarchy base, a hierarchy
+counterexample \(C\), and a
+\noderef{HierarchyMinimumCounterexampleContext} for these data.  Assume
+that every vertex has a missing color under every proper coloring leaving
+exactly \(e_0\) uncolored.  If
+\[
+ 2\le j:=\noderef{HierarchyPathNumber}(C.\mathit{hierarchy})
+   <\ell:=\noderef{HierarchyFullTailLength}(C),
+\]
+then these data are impossible.
+\end{lemma}
+\begin{proof}
+Let
+\[
+ I=\noderef{HierarchyEligibleCommonMissingIndices}
+\]
+for the supplied minimum counterexample.  We first split according as
+\(I\) is nonempty or empty.  In the nonempty branch,
+\noderef{HierarchySituationThreeClaimJMinusOneNonempty} supplies a
+replacement presentation \(P\), a color \(\alpha\), and the full Claim
+\(j-1\) package: \(\alpha\) is missing at the terminal vertex and on
+\(B=T(y_{j-2})\), and it satisfies the stated outside-or-Gamma
+alternative.  In the empty branch,
+\noderef{HierarchySituationThreeClaimJMinusOneEmpty} supplies a
+replacement presentation \(P\), a color \(\alpha\), and exactly the same
+package.  Thus in either branch fix such \(P,\alpha\).
+
+Apply \noderef{HierarchySituationThreeColorChoice} to this full alpha
+package.  It supplies a color \(\beta\ne\alpha\), missing on \(B\),
+outside the last Gamma union and the exact used-tail color set, and
+satisfying precisely the two-alternative color-choice condition needed
+below.  Put
+\[
+ X=T(y_{j-1})=\noderef{HierarchyFullTailPrefix}(C,j-1)
+\]
+and let
+\[
+ Q=\noderef{TwoColorComponent}
+   (G,P.\mathit{coloring},\alpha,\beta,y_\ell)
+\]
+be the alpha-beta component rooted at the terminal vertex \(y_\ell\) of
+\(T\).
+
+If \(Q\) contains a vertex of \(X\), all hypotheses of
+\noderef{HierarchySituationThreeComponentIntersectionShortening} are the
+two packages just obtained together with \(2\le j<\ell\) and this
+intersection witness.  That lemma gives a contradiction directly.
+
+It remains to consider the case in which \(Q\) contains no vertex of
+\(X\).  Negating the existential intersection assertion says explicitly
+that
+\[
+  \operatorname{inl}(v)\notin Q
+       \qquad\text{for every }
+       v\in\noderef{TreeSequenceVertexSet}(X).
+\]
+Together with the alpha and beta packages, the path bounds, and the
+universal missing-color hypothesis, this is exactly the input to
+\noderef{HierarchySituationThreeDisjointPreparation}.  Choose the
+resulting datum
+\[
+ d:\noderef{HierarchySituationThreeDisjointData}(P,\alpha,\beta).
+\]
+Write \(H=d.\mathit{switched.counterexample.hierarchy}\), let \(q\) be
+its last stored index, and put
+\[
+ D=\noderef{HierarchyStoredColorsAt}(H,q).
+\]
+
+If \(d.\theta\in D\), then
+\noderef{HierarchySituationThreeDisjointThetaStoredImpossible}, applied
+to \(d\) and this membership, gives a contradiction.  Suppose instead
+that \(d.\theta\notin D\).  By the definition of
+\noderef{HierarchySituationThreeDisjointData}, the field
+\(d.\mathit{conditionNine}\) is exactly a disjunction: either the outside
+alternative of condition (9) holds, or its stored-beta alternative
+holds.  In the first branch,
+\noderef{HierarchySituationThreeDisjointThetaUnstoredOutsideImpossible}
+applied to \(d\), the theta nonmembership, and the outside package gives
+a contradiction.  In the second branch,
+\noderef{HierarchySituationThreeDisjointThetaUnstoredBetaStoredImpossible}
+applied to \(d\), the same theta nonmembership, and the stored-beta
+package gives a contradiction.  These cases exhaust \(I\), the
+component intersection decision, theta storedness, and condition (9), so
+Situation 7.3 is impossible.
+\end{proof}
