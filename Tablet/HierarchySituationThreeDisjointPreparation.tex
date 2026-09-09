@@ -118,13 +118,18 @@ The definitions of \noderef{HierarchyFullTailLength} and
 \noderef{HierarchyFullTailPrefix}, together with the exact nested stages
 in \noderef{TashkinovHierarchy} and \(2\le j<\ell\), give
 \[
- A\prec B\prec X\prec Y\preccurlyeq B_{\rm pen}\prec T.          \tag{2}
+ A\preccurlyeq B\prec X\prec Y\preccurlyeq B_{\rm pen}\prec T. \tag{2}
 \]
-Here each relation is \noderef{TreeSequenceInitialSegment}; in
-particular it includes equality of every carried vertex and individual
-edge entry.  Natural subtraction causes no endpoint ambiguity because
-\(j\ge2\), and \(j<\ell\) puts every displayed length strictly below
-\(|T|\).
+Here \(\preccurlyeq\) is \noderef{TreeSequenceInitialSegment} and
+\(\prec\) is its strict form; both include equality of every carried
+vertex and individual edge entry on the shorter sequence.  Natural
+subtraction causes no endpoint ambiguity because \(j\ge2\).  At the
+allowed boundary \(j=2\), the zero-addition prefix is exactly \(B=A\),
+so the first relation need not be strict.  For every \(2\le j<\ell\),
+however, the next exact addition gives \(B\prec X\); composing this with
+\(A\preccurlyeq B\) gives the strict relation \(A\prec X\).  The bound
+\(j<\ell\) also puts \(X\) and \(Y\) in the displayed relations to
+\(B_{\rm pen}\) and strictly below \(T\).
 
 Let \(z=\operatorname{inl}(y_\ell)\), set
 \[
@@ -176,8 +181,8 @@ definition of \noderef{TreeColoringInvariant},
                X\text{ is }(\mu,\sigma)\text{-invariant}.       \tag{6}
 \]
 The witnesses for \(\alpha,\beta\in
-\noderef{TreeMissingColors}(\mu,B)\), transported through (2) and (6),
-give
+\noderef{TreeMissingColors}(\mu,B)\), transported through the consequence
+\(B\preccurlyeq X\) of (2) and then through (6), give
 \[
  \alpha,\beta\in\noderef{TreeMissingColors}(\sigma,X).          \tag{7}
 \]
@@ -214,7 +219,9 @@ the literal singleton identity \(F_n=\{f_n\}\), an exact
 sequence from that seed.  The \(\mathit{belowFinal}\) field of
 \noderef{ExtendedTashkinovTree} places \(T\), hence \(X\), in the same
 final closure.  The hierarchy and base fields place the relevant PE
-source, or exact SE/RE seed, no later than \(A\prec X\).
+source, or exact SE/RE seed, no later than \(A\).  Composing
+\(A\preccurlyeq B\) with \(B\prec X\) in (2) gives the strict prefix
+\(A\prec X\), so each such source is strictly before \(X\).
 
 Every augmentation raises length by one and retains the preceding exact
 display by \noderef{TashkinovAugmentation}.  Induction on the finite
@@ -285,8 +292,10 @@ nor the formula in \noderef{TwoColorComponentSwap}; these equalities are
 obtained by commuting the two displayed disjuncts and the two exchange
 branches in those definitions.
 
-Take the split tree to be \(X\).  Equations (2), (6), (7), (8), (9),
-(11), and (12) are respectively the strict \(A\)-to-\(X\) prefix, exact
+Take the split tree to be \(X\).  In (2), compose
+\(A\preccurlyeq B\) with \(B\prec X\) to obtain the required strict
+\(A\)-to-\(X\) prefix.  This consequence of (2), followed by (6), (7),
+(8), (9), (11), and (12), gives respectively the strict prefix, exact
 edge fixation, split missingness, penultimate vertex equality, old
 suffix, stored-position equality, and affected-Gamma cutoff required by
 \noderef{StableChangeCasesOneTwoSplitTail}.  It remains only to give its
@@ -302,8 +311,9 @@ old route through \(X\).  At divider zero in PE,
 transport on both pieces; (6) transports the remainder through \(X\).
 At divider zero in SE/RE the nonparallel base is \(A=T_n\); retain the
 individual certified seed \(f_n\), its singleton connecting set, and its
-\noderef{TreeSequenceAdjoinEdge} certificate.  Its old endpoint lies in
-\(A\subseteq X\), so component disjointness fixes that exact edge, and
+\noderef{TreeSequenceAdjoinEdge} certificate.  Again
+\(A\preccurlyeq B\prec X\) from (2) gives \(A\prec X\), so its old endpoint
+lies in \(X\); component disjointness fixes that exact edge, and
 (6), (8), and
 \noderef{TashkinovAugmentationSequenceColoringTransport} transport the
 remaining route.  These are exactly the PE and SE/RE alternatives of the
@@ -323,13 +333,15 @@ together with maximum property, a base \(\mathcal B_1\), a hierarchy
 For completeness, suppose neither ordered pair satisfies the literal
 Cases 1/2 proposition.  We do not add that proposition as an extra
 hypothesis, since it is not part of the manuscript Case 2 statement.
-Instead use the fact that \(Q\) is wholly outside \(X\).  Apply
-\noderef{GoodHierarchyTerminalPrefixRepackage} to (2), obtaining on the
-exact tree \(X\) an ETT \(\mathcal E_X\) with the same rung and complete
-certified series as \(\mathcal E_m\), maximum property, the same base
-core and closure, the retained hierarchy \(H_X\), and a good hierarchy
-with the same stored sets and Gamma pairs.  The shared series and the
-entrywise equalities construct directly a
+Instead use the fact that \(Q\) is wholly outside \(X\).  The composition
+\(A\preccurlyeq B\prec X\) in (2) gives both \(A\preccurlyeq X\) and the
+strict length inequality \(|A|<|X|\).  Apply
+\noderef{GoodHierarchyTerminalPrefixRepackage} with these facts, obtaining
+on the exact tree \(X\) an ETT \(\mathcal E_X\) with the same rung and
+complete certified series as \(\mathcal E_m\), maximum property, the same
+base core and closure, the retained hierarchy \(H_X\), and a good
+hierarchy with the same stored sets and Gamma pairs.  The shared series
+and the entrywise equalities construct directly a
 \noderef{CorrespondingExtendedTashkinovTree} from
 \(\mathcal E_m\) to \(\mathcal E_X\) under \(\mu\).
 
@@ -376,8 +388,10 @@ input, series, and ETT indices.
 
 Build \(g_1\) on the just-selected branch-coherent base and hierarchy as
 follows.  Copy all nonterminal hierarchy stages and divider positions and
-take \(T\) as the terminal stage.  The exact nesting follows from (2), and
-all nonterminal goodness fields are those returned on \(X\).  For the last
+take \(T\) as the terminal stage.  For the last retained stage, (2) gives
+\(A\preccurlyeq B\prec X\), hence \(A\prec X\), and (2) also gives
+\(X\prec T\); these facts supply the exact nesting.  All nonterminal
+goodness fields are those returned on \(X\).  For the last
 avoidance field, unfold \noderef{HierarchySegmentColors}.  Equation
 (11) fixes every stored cutoff.  A new segment color can differ from the
 old one only by exchanging \(\alpha\) and \(\beta\) on \(Q\).  The color
@@ -448,7 +462,8 @@ exactly an original-relative
 It remains to transport the color-choice information.  The same-good
 and correspondence fields in (15) identify \(A,D,\Gamma\), \(T_n\), and
 the base core with their \(P_\sigma\) counterparts.  The base core is an
-exact prefix of \(A\preccurlyeq X\), so (6) and
+exact prefix of \(A\), while (2) gives \(A\preccurlyeq B\prec X\) and
+therefore \(A\prec X\).  Thus the base core is a prefix of \(X\), so (6) and
 \noderef{TreeSequenceVertexSet} identify all missing sets used in
 \(M_0\); hence \(M_0^\sigma=M_0\).  Every exact displayed edge counted by
 \(U_j\) before the last one lies in \(X\) and is fixed by (6).  The last
@@ -484,8 +499,9 @@ now to all six fields of \(\mathit{ctx}_1\).  It makes
 \noderef{GoodHierarchy}, interpreted by
 \noderef{HierarchyStageMissingColors}, supplies a
 \(\theta\)-missing vertex on the corresponding retained hierarchy stage,
-which lies in \(A\subset X\).  By (2), \(y_j\) is a new vertex after
-\(X\) and both vertices lie in \(B_{\rm pen}\).  This contradicts
+which lies in \(A\).  Composing \(A\preccurlyeq B\) with \(B\prec X\)
+in (2) gives \(A\prec X\), while \(X\prec Y\) says that \(y_j\) is a new
+vertex after \(X\); both vertices lie in \(B_{\rm pen}\).  This contradicts
 elementarity and (17).  Therefore
 \[
                          \theta\notin\Gamma_\sigma.            \tag{18}
