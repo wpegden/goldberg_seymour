@@ -1,0 +1,41 @@
+\begin{lemma}[A strict augmentation route starts with a colored boundary]
+Let \(A\) and \(B\) be tree-sequences for the same finite loopless
+multigraph and distinguished first edge, and let \(\varphi\) be a fixed
+partial edge coloring.  Suppose that \(B\) is obtained from \(A\) by a
+\(\varphi\)-\noderef{TashkinovAugmentationSequence} and that
+\(|A|<|B|\).  Then there is a color
+\(c\in\noderef{TreeMissingColors}(\varphi,A)\) for which the exact colored
+boundary set
+\(\noderef{BoundaryColorEdges}(G,\varphi,V(A),c)\) is nonempty.
+\end{lemma}
+\begin{proof}
+By \noderef{TashkinovAugmentationSequence}, the given route is a finite
+reflexive-transitive chain of one-step
+\(\varphi\)-\noderef{TashkinovAugmentation}s.  The strict length inequality
+rules out the empty chain.  Isolate its first step, say \(A\to C\).
+
+By \noderef{TashkinovAugmentation}, \(C\) has length \(|A|+1\), \(A\) is
+its exact ordered initial segment, and its new last edge \(f\) has a color
+\(c\) belonging to \noderef{TreeMissingColors}\((\varphi,A)\).  It remains
+only to verify that this exact edge identity \(f\) is a boundary edge of
+\(V(A)\).
+
+Write \(j=|A|\) for the index of \(f\) in \(C\).  The attachment clause in
+\noderef{TreeSequence} supplies an index \(a\leq j\) such that the ends of
+\(f\) are the new vertex \(C.y_{j+1}\) and the earlier vertex \(C.y_a\).
+Because \(A\) is an exact ordered
+\noderef{TreeSequenceInitialSegment} of \(C\), one has
+\(C.y_a=A.y_a\), so this earlier endpoint belongs to
+\(\noderef{TreeSequenceVertexSet}(A)\).
+
+The new endpoint \(C.y_{j+1}\) does not belong to \(V(A)\).  Otherwise it
+would equal \(A.y_b=C.y_b\) for some \(b\leq |A|=j\), contradicting the
+injectivity of the vertex map of \(C\), since \(b<j+1\).  Thus \(f\) has
+one endpoint in \(V(A)\) and its other endpoint outside \(V(A)\), so
+\(f\in\noderef{BoundaryEdges}(G,V(A))\).  The first-step augmentation also
+gives \(\varphi(f)=c\).  By the definition of
+\noderef{BoundaryColorEdges}, it follows that
+\(f\in\partial_{\varphi,c}(V(A))\).  Hence that exact colored boundary
+set is nonempty, witnessed by \(f\), and the chosen \(c\) has all the
+required properties.
+\end{proof}

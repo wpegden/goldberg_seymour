@@ -1,0 +1,31 @@
+\begin{lemma}[Augmentation sequences are exact initial extensions]
+Let (A) and (B) be tree-sequences for the same finite loopless
+multigraph and distinguished first edge, and let (arphi) be a fixed
+partial edge coloring.  If (B) is obtained from (A) by a
+(arphi)-\noderef{TashkinovAugmentationSequence}, then (A) is an exact
+ordered \noderef{TreeSequenceInitialSegment} of (B).
+\end{lemma}
+\begin{proof}
+By \noderef{TashkinovAugmentationSequence}, the passage from (A) to (B)
+is a finite reflexive-transitive chain of one-step
+(arphi)-\noderef{TashkinovAugmentation}s.  We induct on this chain.
+
+For the empty chain, the two endpoint tree-sequences are equal.  Their
+lengths are therefore equal and every vertex and edge entry agrees with
+itself.  These are exactly the three clauses of
+\noderef{TreeSequenceInitialSegment}.
+
+For the induction step, suppose first that (A) is an exact ordered
+initial segment of (C), and that the final augmentation passes from
+(C) to (D).  The definition of
+\noderef{TashkinovAugmentation} includes the fact that (C) is an exact
+ordered initial segment of (D).  Let (a=|A|), (c=|C|), and
+(d=|D|).  The two initial-segment relations give (a\leq c\leq d).
+For a vertex index (i\leq a), the (i)-th vertex of (D) equals the
+(i)-th vertex of (C), which in turn equals the (i)-th vertex of
+(A).  For an edge index (j<a), the same two equalities identify the
+(j)-th edge of (D), (C), and (A).  Composing the length
+inequalities and these entrywise equalities proves all clauses of
+\noderef{TreeSequenceInitialSegment} for (A) and (D).  This completes
+the induction.
+\end{proof}

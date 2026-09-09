@@ -101,6 +101,8 @@ import Tablet.Tchange
 import Tablet.interchange
 import Tablet.step1
 import Tablet.TashkinovAugmentationSequencePreservesTashkinovTree
+import Tablet.OrderedTreeUnionAugmentationSequence
+import Tablet.TashkinovAugmentationSequenceStrictBoundaryWitness
 import Tablet.TashkinovClosure
 import Tablet.TashkinovClosureExists
 import Tablet.TashkinovClosureVertexSetUnique
@@ -108,6 +110,7 @@ import Tablet.TashkinovOrder
 import Tablet.TashkinovStoredColorsCardinality
 import Tablet.Td
 import Tablet.TreeVertexOrder
+import Tablet.TreeSequenceInitialSegmentVertexSetEq
 import Tablet.TreeSequencePrefix
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwapProper
