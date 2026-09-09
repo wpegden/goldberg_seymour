@@ -1,0 +1,214 @@
+\begin{theorem}[Large-order good-hierarchy elementarity]
+Fix a finite loopless multigraph \(G\) with its individual edge identities,
+a palette of \(k\) colors, and a distinguished edge \(e_0\).  Let
+\(\mathcal E\) be a positive-rung
+\noderef{ExtendedTashkinovTree} on an exact terminal tree-sequence \(T\),
+constructed from an arbitrary certified input coloring and having generating
+coloring \(\varphi_n\).  Suppose that \(\mathcal E\) has
+\noderef{MaximumProperty}.  Fix a \noderef{HierarchyBase} \(\mathcal B\),
+an actual \noderef{TashkinovHierarchy} \(H\) over \(\mathcal B\), and a
+\noderef{GoodHierarchy} certificate for \(H\).
+
+Assume the following full form of (5.1).  For every positive-rung maximum
+ETT \(\mathcal L\) on the same \(G,k,e_0\), with arbitrary certified input
+and generating colorings and with rung number \(m<n\), all six assertions
+below hold.
+\begin{enumerate}
+\item Its exact terminal vertex set is elementary under its generating
+coloring.
+\item If \(L_{m+1}\) is its final ladder output, then under every proper
+coloring \(\sigma\) leaving exactly \(e_0\) uncolored and stable on
+\(L_{m+1}\) relative to the raw stored colors at slot \(m\) and the slot
+\(m\) coloring, every pair \(\alpha,\beta\) for which at least one color is
+missing on \(L_{m+1}\) is interchangeable on \(L_{m+1}\).
+\item At every index \(a<m\) for which slot \(a+1\) is PE with support
+\(v\), whenever \(v\) belongs to the exact terminal tree and has
+first-appearance index \(j+1\), every proper exactly-one-uncolored coloring
+stable on the ladder tree at index \(a+1\), relative to the stored set and
+coloring at slot \(a+1\), is stable before \(v\) in the terminal tree
+relative to the stored set and coloring at slot \(j\); if \(j>0\), it is
+additionally stable on the predecessor ladder tree at slot \(j\).
+Moreover, for distinct indices \(a,b<m\) with distinct PE supports
+\(v_a,v_b\) at slots \(a+1,b+1\), if both supports belong to the terminal
+tree and have the same first-appearance index, then the two raw stored sets
+at \(a+1\) and \(b+1\) are disjoint.
+\item At a terminal PE slot whose recorded support, Gamma color, and
+defective color are \(v,\gamma,\delta\), the
+\(\gamma\)-\(\delta\) component through \(v\), under every proper
+exactly-one-uncolored coloring stable on the terminal ladder tree relative
+to the terminal stored set and coloring, meets that ladder tree precisely
+at \(v\).
+\item Under every such stable terminal-ladder coloring, if \(\delta\) is
+defective and \(v\) is a \(\delta\)-boundary vertex having an earlier
+\(\delta\)-boundary vertex, then for every occurrence of \(v\) in the
+terminal ETT and every index \(a<m\) whose slot \(a+1\) records \(v_a\) as
+a PE support or an SE extension vertex, first appearance of \(v\) no later
+than \(a+1\) implies \(v=v_a\) or \(v\) precedes \(v_a\) in the exact
+terminal tree order.
+\item Every proper exactly-one-uncolored coloring stable on the terminal
+ladder tree relative to its terminal stored set and coloring is a
+\noderef{ModColoring} of \(\mathcal L\).
+\end{enumerate}
+
+Assume also assertions (iii)--(vi), with exactly the four scopes in items
+3--6, uniformly for every maximum ETT on the same \(G,k,e_0\), with
+arbitrary certified input and generating colorings, whose rung number is
+exactly \(n\).  In particular, the predecessor-ladder stability conclusion
+in assertion (iii) remains conditional on the first-appearance index being
+positive; none of the arbitrary-input quantifiers is restricted to the
+input of \(\mathcal E\).
+
+Finally assume the large branch
+\[
+                         11\leq \noderef{TashkinovOrder}(G),
+\]
+and assume the following candidate-uniform estimate.  For every same-rung
+maximum ETT \(\mathcal L\) admitted above, every hierarchy base on it, and
+every good hierarchy \(K\) over that base, if \(L_n\) is its terminal
+ladder tree and \(\psi_n\) its generating coloring, then
+\[
+             2n+11\leq
+             |\noderef{TreeMissingColors}(\psi_n,L_n)|.       \tag{1}
+\]
+Then
+\[
+       \noderef{ColoredVertexSetElementary}
+          (G,\varphi_n,\noderef{TreeSequenceVertexSet}(T))
+\]
+holds.
+\end{theorem}
+\begin{proof}
+We prove the strengthened assertion simultaneously for every choice of
+certified input coloring, generating coloring, same-rung maximum ETT,
+hierarchy base, and good hierarchy on the fixed \(G,k,e_0\), by strong
+induction on the divider count \(q\).  Thus, at the step \(q\), the induction
+hypothesis says that every such candidate with fewer than \(q\) dividers has
+an elementary terminal vertex set.  This is exactly the rung-local induction
+(6.1); neither the rung \(n\) nor the graph, palette, or distinguished exact
+edge changes.
+
+Fix a candidate at divider count \(q\), and suppose for a contradiction that
+its terminal vertex set is not elementary.  Positivity is part of
+\noderef{ExtendedTashkinovTree}, while the hierarchy, goodness, and maximum
+certificates are among the fixed data.  Hence these data form a
+\noderef{HierarchyCounterexample} at divider count \(q\).
+
+Among all hierarchy counterexamples with this same rung number and divider
+count \(q\), allowing the certified input coloring, generating coloring,
+ETT, base, and hierarchy to vary, choose one \(C\) with least first
+coordinate of \noderef{HierarchyCounterexampleMeasure}; among those choose
+one with least second coordinate.  These choices exist by the well-ordering
+of the natural numbers, because the counterexample just exhibited makes the
+class nonempty.  By the definitions of
+\noderef{HierarchyCounterexampleMeasure} and
+\noderef{HierarchyCounterexampleLess}, the choice says precisely that no
+same-rung, equal-divider counterexample \(C'\) satisfies
+\[
+ \noderef{HierarchyCounterexampleLess}
+  (\noderef{HierarchyCounterexampleMeasure}(C'),
+   \noderef{HierarchyCounterexampleMeasure}(C)).              \tag{2}
+\]
+The strong induction hypothesis rules out every counterexample with fewer
+than \(q\) dividers, so \(q\) is also the least divider count relevant at
+this induction step.
+
+We next construct, field by field, the
+\noderef{HierarchyMinimumCounterexampleContext} for \(C\).  First, its
+generating coloring is proper and leaves exactly \(e_0\) uncolored.  Indeed,
+let \(\mathcal S\) be its certified \noderef{TashkinovSeries}.  Since the
+rung number is positive, its last certificate in
+\noderef{TashkinovSeriesStep} is a positive SE, PE, or RE constructor.  In
+the SE case, the current-coloring equation identifies the generating
+coloring with the selected coloring in the recorded
+\noderef{MaximumDefectiveChoice}, which is proper and
+exactly-one-uncolored.  In the PE case, these two properties are explicit
+current-coloring fields of the constructor.  In the RE case, the current
+coloring equals the preceding coloring, for which the same two properties
+are constructor fields.  In all three cases the generating-coloring field
+of \noderef{ExtendedTashkinovTree} makes the resulting coloring exactly the
+displayed generating coloring of \(C\).
+
+The complete lower-rung six-pack is the first uniform hypothesis, applied
+to arbitrary input and generating data.  The fewer-divider field is exactly
+the strong induction hypothesis.  Equation (2) is exactly the
+equal-divider lexicographic-minimality field.  Finally apply the uniform
+estimate (1) to the chosen ETT, its maximum certificate, its chosen base,
+its actual hierarchy, and its good-hierarchy certificate.  This gives
+\[
+             2n+11\leq|\overline{\varphi_n}(T_n)|             \tag{3}
+\]
+for the terminal ladder tree of \(C\), rather than reusing an estimate from
+the initially displayed ETT.  These are all fields of the minimum context.
+The assumed current-rung assertions (iii)--(vi) also apply to \(C\), since
+their quantifiers allow precisely its arbitrary input and generating
+colorings and its rung number is \(n\).
+
+For later use we derive the palette-surplus assertion required in Situations
+7.1 and 7.3.  Inspect the initial certificate of \(\mathcal S\).  At index
+zero, \noderef{TashkinovSeriesStep} can only be its initial constructor, so
+it supplies a genuine \noderef{KTriple} on \(G,k,e_0\).  Consequently
+\[
+                       \noderef{MaximumDegree}(G)+1\leq k.    \tag{4}
+\]
+Let \(\mu\) be any proper \(k\)-edge-coloring leaving exactly \(e_0\)
+uncolored, and let \(v\) be any vertex.  By
+\noderef{IsProperEdgeColoring}, distinct colored edges incident with \(v\)
+have distinct colors.  Hence the number of \noderef{PresentColors} at \(v\)
+is at most \noderef{Degree}\((G,v)\), which is at most
+\(\operatorname{MaximumDegree}(G)\).  If
+\(\noderef{MissingColors}(G,\mu,v)\) were empty, every one of the \(k\)
+colors would be present at \(v\), giving
+\[
+ k\leq\deg_G(v)\leq\operatorname{MaximumDegree}(G),
+\]
+contrary to (4).  Therefore
+\[
+ \noderef{MissingColors}(G,\mu,v)\ne\varnothing              \tag{5}
+\]
+for every such \(\mu\) and every \(v\).  Notice that (5) is derived from
+the certified \(k\)-triple and properness; it is not an extra field of the
+minimum context.
+
+Write \(H_C=C.\mathit{hierarchy}\), let \(A\) be its last starred stage, and
+put
+\[
+ \ell=\noderef{HierarchyFullTailLength}(C)=|T_C|-|A|,
+ \qquad r=\noderef{HierarchyPathNumber}(H_C).
+\]
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} with the
+properness, exact one-uncoloredness, lower six-pack, strong-induction
+fewer-divider field, (2), and (3).  It gives the exact penultimate full-tail
+prefix assertion
+\[
+ V(T_C(y_{\ell-1}))\text{ is elementary under }\varphi_n,     \tag{6}
+\]
+which is fact (6.6), derived after the minimum context rather than inserted
+into it.
+
+Applying \noderef{HierarchyCounterexampleTailAtLeastTwo} to those same six
+context fields gives
+\[
+                              2\leq\ell.                      \tag{7}
+\]
+Applying \noderef{HierarchyCounterexamplePathNumberBounds} gives
+\[
+                              1\leq r\leq\ell.                \tag{8}
+\]
+Here \(\ell\) is the number of exact full-tail additions, whereas \(r\) is
+the least path-start index; (7)--(8) do not identify them.
+
+It remains only the exhaustive trichotomy checked by (7)--(8).  If \(r=1\),
+apply \noderef{HierarchySituationOneImpossible} to \(C\), its complete
+minimum context, this equality, and the universal missing-color assertion
+(5).  This is a contradiction.  If \(r=\ell\), apply
+\noderef{HierarchySituationTwoImpossible} to the same \(C\), context, and
+equality, again obtaining a contradiction.  In the remaining case,
+(8), \(r\ne1\), and \(r\ne\ell\) give
+\[
+                              2\leq r<\ell.
+\]
+Now \noderef{HierarchySituationThreeImpossible}, with the minimum context,
+these two inequalities, and (5), gives the final contradiction.  Thus no
+divider-\(q\) counterexample exists.  Strong induction proves elementarity
+for the originally supplied good hierarchy, as required.
+\end{proof}
