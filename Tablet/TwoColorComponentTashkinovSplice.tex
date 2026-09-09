@@ -57,34 +57,41 @@ the symbols \(e_i\) are pairwise distinct individual elements of \(E\).
 
 For each \(i\), adjacency of the three consecutive incidence nodes
 \(v_{i-1},e_i,v_i\), where \(v_0=u\), unfolds by
-\noderef{TwoColorIncidenceGraph} to
+\noderef{TwoColorIncidenceGraph}, and incidence unfolds by
+\noderef{Incident}, to
 \[
  v_{i-1},v_i\in\operatorname{ends}(e_i),qquad
               \mu(e_i)\in\{\alpha,\beta\}.                  \tag{4}
 \]
 The two vertices in (4) are distinct, by simplicity and because the graph
-is loopless.  An edge of a loopless multigraph has exactly its two
-endpoints, so
+is loopless.  By the two-endpoint and loopless semantics of
+\noderef{LooplessMultigraph}, two distinct vertices incident with this edge
+determine its exact unordered endpoint pair, so
 \[
                     \operatorname{ends}(e_i)=\{v_{i-1},v_i\}.\tag{5}
 \]
 No \(e_i\) is an old displayed edge of \(S\).  To see this with edge
 identities intact, suppose \(e_i=S.\operatorname{edge}(r)\).  The
 attachment field of the \noderef{TreeSequence} \(S\) says that both
-endpoints of this exact edge identity are vertices of \(S\).  Equation
-(5) would then put \(v_i\) in \(V(S)\), contrary to (3).  Thus the old
-edges and the exact edges in (2) are disjoint.
+endpoints of this exact edge identity occur in its displayed vertex map;
+by the image definition \noderef{TreeSequenceVertexSet}, both therefore
+belong to \(V(S)\).  Equation (5) would then put \(v_i\) in \(V(S)\),
+contrary to (3).  Thus the old edges and the exact edges in (2) are
+disjoint.
 
 Starting with \(S\), append successively the edge--vertex pairs
 \[
                          (e_1,v_1),\ldots,(e_m,v_m).          \tag{6}
 \]
-The old vertex and edge maps are retained literally.  Equations (3) and
-the simple-path injectivity prove injectivity of the enlarged vertex map;
-the preceding paragraph and simple-path injectivity prove injectivity of
-the enlarged edge map.  The first-edge field is unchanged.  For the first
-new edge use the old attachment vertex \(u\); for every later edge use the
-preceding new vertex.  Equation (5) proves each attachment equation.
+The old vertex and edge maps are retained literally.  By
+\noderef{TreeSequenceVertexSet}, the old vertex set is exactly the image of
+the old displayed vertex map.  Hence (3) makes every new \(v_i\) disjoint
+from that image, while simple-path injectivity makes the new vertices
+pairwise distinct; together these prove injectivity of the enlarged vertex
+map.  The preceding paragraph and simple-path injectivity prove injectivity
+of the enlarged edge map.  The first-edge field is unchanged.  For the
+first new edge use the old attachment vertex \(u\); for every later edge
+use the preceding new vertex.  Equation (5) proves each attachment equation.
 Consequently (6) defines a \noderef{TreeSequence} \(S'\), makes \(S\) an
 exact \noderef{TreeSequenceInitialSegment} of \(S'\), and gives precisely
 the two endpoint equations in (1).  It also gives
@@ -93,11 +100,14 @@ the two endpoint equations in (1).  It also gives
 It remains to verify that every step in (6) is a Tashkinov augmentation.
 The missing-color witnesses for both \(\alpha\) and \(\beta\) already lie
 in \(V(S)\), by the definition \noderef{TreeMissingColors}.  Every partial
-tree in (6) retains \(S\) as an initial segment, so those same vertices and
-the same missing-color facts remain present at every step.  By (4), the
-new edge at each step has one of these two colors.  The one-entry length
-increase, exact initial-segment equality, edge-color equality, and retained
-missing witness are exactly the four clauses of
+tree in (6) retains the old displayed vertex map of \(S\) literally as an
+initial segment; the image definition \noderef{TreeSequenceVertexSet}
+therefore puts those same witness vertices in every partial tree's vertex
+set, while their missing-color facts are properties of \(G\) and \(\mu\)
+at the unchanged vertices.  Thus both colors remain tree-missing at every
+step.  By (4), the new edge at each step has one of these two colors.  The
+one-entry length increase, exact initial-segment equality, edge-color
+equality, and retained missing witness are exactly the four clauses of
 \noderef{TashkinovAugmentation}.  Concatenating the \(m\) steps in its
 reflexive-transitive closure gives the required
 \noderef{TashkinovAugmentationSequence}.  Equations (2)--(6) also give all

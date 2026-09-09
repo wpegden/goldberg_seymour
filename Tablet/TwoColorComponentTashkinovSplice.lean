@@ -1,4 +1,6 @@
+import Tablet.Incident
 import Tablet.IsProperEdgeColoring
+import Tablet.LooplessMultigraph
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TreeMissingColors
