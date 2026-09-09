@@ -2,6 +2,7 @@ import Tablet.ChangeLemma
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.HierarchyBase
 import Tablet.HierarchyCounterexample
@@ -24,11 +25,14 @@ import Tablet.HierarchyStoredColorsAt
 import Tablet.MaximumPropertyTransport
 import Tablet.MaximumDefectiveChoice
 import Tablet.MissingColorIncidenceEndpoint
+import Tablet.MissingColors
 import Tablet.ModColoring
 import Tablet.OrderedTreeUnion
+import Tablet.PresentColors
 import Tablet.SameGoodHierarchy
 import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
+import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceRestrict
 import Tablet.TashkinovClosure
 import Tablet.TashkinovHierarchy

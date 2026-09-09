@@ -72,7 +72,14 @@ If \(Q\) contains a vertex of \(X=T(y_{j-1})\), then a contradiction
 follows from the lexicographic minimality of the current presentation.
 \end{lemma}
 \begin{proof}
-The two inequalities imply that \(B\) and \(X\) are the exact prefixes of
+Unfolding the data package
+\noderef{HierarchyReplacementPresentation}, all the replacement objects
+used below---the coloring \(\mu\), corresponding ETT, maximum-property
+witness, base, counterexample, same-hierarchy certificate, and minimum
+context---belong to one presentation on the same exact terminal tree \(T\).
+By \noderef{HierarchyStarredStage}, \(A\) is the last starred stage of that
+replacement hierarchy.  The two inequalities imply that \(B\) and \(X\)
+are the exact prefixes of
 \(T\) with respective lengths \(|A|+j-2\) and \(|A|+j-1\).  This follows
 directly from \noderef{HierarchyFullTailLength},
 \noderef{HierarchyFullTailPrefix}, and \(j<\ell=|T|-|A|\); in particular
@@ -87,9 +94,11 @@ with their counterparts in the replacement hierarchy.
 
 Set \(y=y_\ell=T.\mathit{vertex}(\operatorname{last})\).  Because
 \(j-1<\ell\), vertex injectivity in \noderef{TreeSequence} gives
-\(y\notin V(X)\).  Both \(\alpha\) and \(\beta\) are missing on \(B\),
-and therefore on \(X\), since their old missing witnesses remain vertices
-of the larger prefix.  The coloring \(\mu\) is proper by the
+\(y\notin V(X)\).  By \noderef{TreeMissingColors}, membership of
+\(\alpha\) and \(\beta\) in \(\overline\mu(B)\) supplies vertices of
+\(B\) at which they are respectively missing.  The exact prefix inclusion
+\(B\preccurlyeq X\) retains those vertices, so the same definition shows
+that both colors are missing on \(X\).  The coloring \(\mu\) is proper by the
 \noderef{HierarchyMinimumCounterexampleContext} carried by \(P\).
 Apply \noderef{TwoColorComponentTashkinovSplice} to \(X\), the root
 \(y\), and the assumed intersection.  It chooses the first vertex \(u\)
@@ -100,7 +109,8 @@ If \(u=y_{j-1}\), append that segment to \(X\).  Otherwise, (1) and the
 fact that no later vertex of the segment lies in \(X\) show that
 \(u\in V(B)\).  Apply the splice lemma again with base \(B\), and append
 its reversed first-intersection segment there.  Denote the resulting
-tree-sequence in either case by \(T'\).  Thus
+tree-sequence in either case by \(T'\), and write \(S=X\) in the first case
+and \(S=B\) in the second.  Thus
 \[
  \begin{cases}
  X\preccurlyeq T'&\text{and the first new edge attaches at }y_{j-1},
@@ -118,7 +128,11 @@ We next verify the only exceptional seed issue before invoking the
 mod-coloring theorem.  Let \(\mathcal E=P.\mathit{corresponding}.
 \mathit{replacementETT}\), and let \(T_n\) be its terminal ladder tree.
 Suppose simultaneously that \(q=0\), \(j=2\), and the last extension kind
-is SE or RE.  Then \(A=B=T_n\), while the eligible seed in
+is SE or RE.  At divider zero \noderef{HierarchyStarredStage} identifies
+\(A\) with the core of \(P.\mathit{replacementBase}\), and the non-PE
+clause of \noderef{HierarchyBase} identifies that core with \(T_n\).
+The exact-prefix formula for \(B\) at \(j=2\) then gives \(A=B=T_n\),
+while the eligible seed in
 \noderef{ModColoring} is the exact one-edge sequence \(T_n+f_n=X\).
 We claim that \(Q\) cannot meet \(T_n\).
 
@@ -145,23 +159,60 @@ force that exact edge to have color \(\alpha\) under \(\rho\), contrary
 to preceding closedness.  Thus in either SE/RE case
 \noderef{ColoredVertexSetClosed} implies that \(T_n\) is
 \(\alpha\)-closed in the singleton sense of
-\noderef{TreeColorSetClosed}.  Apply the closed-starred-stage clause
-of \noderef{ChangeLemma} to \(P.\mathit{counterexample}\) and the six
-fields of \(P.\mathit{minimumContext}\).  It says that \(T_n\) is
+\noderef{TreeColorSetClosed}.  The ordered containment of \(T_n=A\) in
+the exact penultimate full-tail prefix retains the two missing witnesses,
+so \noderef{TreeMissingColors} gives the two missing-color premises of the
+change lemma there.  Its conditional order-and-unused premise has false
+antecedent because both colors are already missing on \(A\).  Apply the
+closed-starred-stage clause of \noderef{ChangeLemma} to
+\(P.\mathit{counterexample}\) and the six fields of
+\(P.\mathit{minimumContext}\).  It says that \(T_n\) is
 \((\alpha,\beta)\)-interchangeable and identifies the components through
 the first \(\alpha\)- and \(\beta\)-missing witnesses in \(T_n\).
 
-Call those witnesses \(a\) and \(b\).  If \(a=b\), then both colors are
-missing at that vertex.  It has no neighbor in the two-color incidence
-graph, so its component is isolated.  Interchangeability would identify
-it with \(Q\) if \(Q\) met \(T_n\), which is impossible because \(Q\)
-also contains the distinct vertex \(y\).  If \(a\ne b\), then
-\noderef{MissingColorIncidenceEndpoint} gives incidence degree at most one
-at each of \(a\) and \(b\), and gives the same bound at \(y\), since
-\(\alpha\) is missing there.  Were \(Q\) to meet \(T_n\),
-\noderef{TreeInterchangeable} would identify \(Q\) with the common
-component through \(a,b\).  The three distinct nodes \(a,b,y\) would then
-lie in one component and all have degree at most one.  But
+Call those first-missing witnesses \(a\) and \(b\), and denote their full
+two-color components by \(K_a\) and \(K_b\).  They are actual vertices of
+\(T_n\): the two colors are tree-missing there, and the least positions in
+\noderef{HierarchyFirstMissingPosition} occur no later than the supplied
+missing witnesses.  The root vertex \(y\) belongs to \(Q\).
+
+We verify the path-component premises before using interchangeability.
+The inequality \(\alpha\ne\beta\), the fact that \(a\in K_a\), and
+\noderef{MissingColorIncidenceEndpoint} at the \(\alpha\)-missing vertex
+\(a\) show that the neighbor set of \(a\) in the two-color incidence graph
+has at most one element.  Thus the definition
+\noderef{TwoColorPathComponent} makes \(K_a\) a path component.  Apply the
+same endpoint lemma with the colors in the opposite order at the
+\(\beta\)-missing vertex \(b\).  The adjacency formula in
+\noderef{TwoColorIncidenceGraph} is unchanged when \(\alpha,\beta\) are
+exchanged, so the resulting degree bound is a bound in the original graph;
+therefore \(K_b\) is also a \(\noderef{TwoColorPathComponent}\).  Finally,
+\(\alpha\) is missing at \(y\), so the endpoint lemma gives degree at most
+one at \(y\).  Since \(y\in Q\), the same path-component definition makes
+\(Q\) a two-color path component as well.
+
+If \(a=b\), both colors are missing at this common vertex.  Were a node
+adjacent to it, \noderef{TwoColorIncidenceGraph} would make that node an
+exact incident edge colored \(\alpha\) or \(\beta\); either alternative is
+in \noderef{PresentColors} at the common vertex and is therefore excluded
+by the complementary definition \noderef{MissingColors}.  Thus its neighbor
+set is empty, and \noderef{TwoColorComponent} makes \(K_a=K_b\) the isolated
+one-vertex component.  If \(Q\) met \(T_n\), its certified path-component
+status and that of \(K_a\), together with their respective intersections
+with \(T_n\), would let \noderef{TreeInterchangeable} identify \(Q=K_a\).
+This is impossible because \(Q\) contains the distinct vertex \(y\).
+
+If \(a\ne b\), the preceding applications of
+\noderef{MissingColorIncidenceEndpoint} give incidence degree at most one
+at each of \(a,b,y\).  Were \(Q\) to meet \(T_n\), its path-component
+status and that of \(K_a\) satisfy the two literal path premises of
+\noderef{TreeInterchangeable}; the assumed vertex of \(Q\cap V(T_n)\) and
+the vertex \(a\in K_a\cap V(T_n)\) give its two literal tree-intersection
+premises.  Hence interchangeability identifies \(Q=K_a\), while the
+component equality supplied by
+\noderef{ChangeLemma} gives \(K_a=K_b\).  The three distinct nodes
+\(a,b,y\) would then lie in one component and all have degree at most one.
+But
 \noderef{TwoColorComponentSpanningPath} spans that component by a simple
 path.  Injectivity of the path order leaves only its two end nodes with
 degree at most one: every internal node has its two distinct path
@@ -192,13 +243,29 @@ last closure.  In SE/RE it contains the singleton equality
 \(F_n=\{f_n\}\), the exact \noderef{TreeSequenceAdjoinEdge}
 \(T_n+f_n\), and the augmentation sequence from that seed.  The terminal
 tree \(T\), hence each prefix in (2), is an exact initial segment of the
-last closure by the below-final field of the ETT.  Apply
+last closure by the \(\mathit{belowFinal}\) field in the definition
+\noderef{ExtendedTashkinovTree}.  Apply
 \noderef{TashkinovAugmentationSequenceRestrict}, using (3), to restrict
 the certified route to the selected splice base.  Concatenate that route
-with the augmentation sequence supplied by the splice lemma.  The result
-is precisely the PE or exact SE/RE eligibility route required by (4).
-It is strict because \(|B|>|A|\ge|T_n|\) except at the retained one-edge
-seed boundary, where the splice adds at least one further vertex.
+with the augmentation sequence supplied by the splice lemma; this is
+transitivity of the reflexive-transitive closure in
+\noderef{TashkinovAugmentationSequence}.  The result is precisely the PE
+or exact SE/RE eligibility route required by (4).
+
+For its separate strict-extension premise, hierarchy nesting and the
+PE/non-PE clauses of \noderef{HierarchyBase} give
+\(T_n\preccurlyeq A\), while \(j\ge2\), the exact prefix formulas, and the
+definition of \(S\) give \(A\preccurlyeq B\preccurlyeq S\).  Hence
+\[
+                         |T_n|\le |S|.
+\]
+The splice is strict over its selected base, so \(|S|<|T'|\).  Therefore
+\[
+                         |T_n|\le |S|<|T'|,
+\]
+and in particular \(|T_n|<|T'|\), exactly the strictness required by
+\noderef{ModColoring}.  This argument also covers \(j=2\); the exceptional
+SE/RE discussion above is needed only to retain the exact seed edge.
 
 The universal clause of (4) therefore supplies an actual
 \noderef{CorrespondingExtendedTashkinovTree} \(\mathcal E'\) with
@@ -214,7 +281,10 @@ Notice that no replacement presentation, and no minimum context for
 We construct the base and hierarchy needed to compare \(T'\) with the
 current minimum.  Correspondence identifies the rung number, each ladder
 tree through \(T_n\), every raw stored set, every exact connecting-edge
-set, and every extension kind.  In the non-PE cases copy
+set, and every extension kind.  By the definition
+\noderef{HierarchyStoredColorsAt}, equality of those raw stored sets, the
+ladder tree, and the vertexwise missing colors also identifies every stored
+set \(D_{n,r}\) used by the copied hierarchy.  In the non-PE cases copy
 \(P.\mathit{replacementBase}\) across these equalities; its core is
 \(T_n\), and its nonparallel clause is unchanged.  In PE, the
 corresponding certificate need not literally copy the internal chosen
@@ -237,7 +307,8 @@ The nesting, strictness, prefix, and core-containment fields of
 \noderef{TashkinovHierarchy} follow, with individual edge identities
 unchanged.  Call the resulting hierarchy \(H'\).
 
-Use exactly the same Gamma pairs as \(g\).  The pair-size,
+Use exactly the same Gamma pairs as \(g\), indexed by the common stored
+sets just computed from \noderef{HierarchyStoredColorsAt}.  The pair-size,
 pair-disjointness, unique-refresh, PE-base, and internal minus-closed
 fields of \noderef{GoodHierarchy} mention only the copied ladder tree,
 base, nonterminal stages, stored sets, and Gamma pairs, so they transfer
