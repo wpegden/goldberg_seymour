@@ -18,9 +18,14 @@ below hold.
 coloring.
 \item If \(L_{m+1}\) is its final ladder output, then under every proper
 coloring \(\sigma\) leaving exactly \(e_0\) uncolored and stable on
-\(L_{m+1}\) relative to the raw stored colors at slot \(m\) and the slot
-\(m\) coloring, every pair \(\alpha,\beta\) for which at least one color is
-missing on \(L_{m+1}\) is interchangeable on \(L_{m+1}\).
+\(L_{m+1}\) relative to the computed set
+\(D_m=\noderef{TashkinovStoredColors}(\mathcal L.\mathit{series.data},m)\)
+and the slot \(m\) coloring, every pair \(\alpha,\beta\) for which at least
+one color is missing on \(L_{m+1}\) is interchangeable on \(L_{m+1}\).
+Here \(D_0=\varnothing\); at a positive index \(m\), \(D_m\) is the
+cumulative union of the raw \(S_h\) entries for \(0\leq h\leq m\), with
+the colors missing on the slot-\(m\) ladder tree under the slot-\(m\)
+coloring removed.
 \item At every index \(a<m\) for which slot \(a+1\) is PE with support
 \(v\), whenever \(v\) belongs to the exact terminal tree and has
 first-appearance index \(j+1\), every proper exactly-one-uncolored coloring
