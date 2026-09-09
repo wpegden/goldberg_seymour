@@ -1,30 +1,32 @@
 \begin{lemma}[An exact segment with the full vertex set is the full tree]
-Let (A) and (B) be tree-sequences for the same finite loopless
-multigraph and distinguished first edge.  Suppose that (A) is an exact
-ordered \noderef{TreeSequenceInitialSegment} of (B) and that
-(\noderef{TreeSequenceVertexSet}(A)=
-\noderef{TreeSequenceVertexSet}(B)).  Then (A=B) as full ordered
-edge-valued tree-sequences.
+Let $A$ and $B$ be tree-sequences for the same finite loopless
+multigraph and distinguished first edge.  Suppose that $A$ is an exact
+ordered \noderef{TreeSequenceInitialSegment} of $B$ and that
+\[
+ \noderef{TreeSequenceVertexSet}(A)=
+ \noderef{TreeSequenceVertexSet}(B).
+\]
+Then $A=B$ as full ordered edge-valued tree-sequences.
 \end{lemma}
 \begin{proof}
-Write (|S|) for the number of edge entries in a tree-sequence (S).
+Write $|S|$ for the number of edge entries in a tree-sequence $S$.
 By the data in \noderef{TreeSequence}, its vertex map has domain
-({0,\ldots,|S|}) and is injective.  Consequently the definition of
+$\{0,\ldots,|S|\}$ and is injective.  Consequently the definition of
 \noderef{TreeSequenceVertexSet} gives
-[
+\[
              |V(S)|=|S|+1.                                      \tag{1}
-]
-Apply (1) to (A) and (B).  The assumed equality (V(A)=V(B)) gives
-(|A|+1=|B|+1), and hence (|A|=|B|).
+\]
+Apply (1) to $A$ and $B$.  The assumed equality $V(A)=V(B)$ gives
+$|A|+1=|B|+1$, and hence $|A|=|B|$.
 
 Now expand \noderef{TreeSequenceInitialSegment}.  Since the two lengths
-are equal, every vertex index of (B) lies in the range on which the
-initial-segment vertex equality applies, and every edge index of (B)
+are equal, every vertex index of $B$ lies in the range on which the
+initial-segment vertex equality applies, and every edge index of $B$
 lies in the range on which the edge equality applies.  Thus the ordered
-vertex maps of (A) and (B) agree at every index, and so do their
+vertex maps of $A$ and $B$ agree at every index, and so do their
 ordered edge maps.  The remaining fields in \noderef{TreeSequence}
 assert positivity, injectivity, the distinguished first edge, and
 attachment; all are propositions, so proof irrelevance identifies these
 fields once the lengths and the two maps have been identified.  Therefore
-the complete tree-sequence structures (A) and (B) are equal.
+the complete tree-sequence structures $A$ and $B$ are equal.
 \end{proof}

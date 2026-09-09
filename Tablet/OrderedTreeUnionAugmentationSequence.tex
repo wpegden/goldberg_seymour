@@ -1,91 +1,91 @@
 \begin{lemma}[Replaying an augmentation sequence through an ordered union]
-Let (P,L,R,U) be tree-sequences for the same finite loopless multigraph
-and distinguished first edge, and let (arphi) be a fixed partial edge
-coloring.  Suppose that (R) is obtained from (P) by a
-(arphi)-\noderef{TashkinovAugmentationSequence}, that (P) is an exact
-ordered \noderef{TreeSequenceInitialSegment} of (L), and that (U) is
-an \noderef{OrderedTreeUnion} of (L) and (R).  Then (U) is obtained
-from (L) by a (arphi)-Tashkinov augmentation sequence.
+Let $P,L,R,U$ be tree-sequences for the same finite loopless multigraph
+and distinguished first edge, and let $\varphi$ be a fixed partial edge
+coloring.  Suppose that $R$ is obtained from $P$ by a
+$\varphi$-\noderef{TashkinovAugmentationSequence}, that $P$ is an exact
+ordered \noderef{TreeSequenceInitialSegment} of $L$, and that $U$ is
+an \noderef{OrderedTreeUnion} of $L$ and $R$.  Then $U$ is obtained
+from $L$ by a $\varphi$-Tashkinov augmentation sequence.
 \end{lemma}
 \begin{proof}
-Put (ell=|L|).  For every (m) with
-(ell\leq m\leq |U|), let (U_m) be the exact ordered prefix of (U)
-having (m) edge entries, as in \noderef{TreeSequencePrefix}.  We prove
-inductively that (U_m) is obtained from (L) by a
-(arphi)-\noderef{TashkinovAugmentationSequence}.
+Put $\ell=|L|$.  For every $m$ with
+$\ell\leq m\leq |U|$, let $U_m$ be the exact ordered prefix of $U$
+having $m$ edge entries, as in \noderef{TreeSequencePrefix}.  We prove
+inductively that $U_m$ is obtained from $L$ by a
+$\varphi$-\noderef{TashkinovAugmentationSequence}.
 
 The left-segment clause of \noderef{OrderedTreeUnion} says that the first
-(ell) edge entries and first (ell+1) vertex entries of (U) are
-exactly those of (L).  Hence (U_ell=L) as ordered edge-valued
+$\ell$ edge entries and first $\ell+1$ vertex entries of $U$ are
+exactly those of $L$.  Hence $U_\ell=L$ as ordered edge-valued
 tree-sequences, and the empty augmentation sequence proves the base case.
 
-Fix (ell\leq m<|U|) and assume the assertion for (U_m).  Let (j=m)
-be the index of the next edge entry of (U).  The
+Fix $\ell\leq m<|U|$ and assume the assertion for $U_m$.  Let $j=m$
+be the index of the next edge entry of $U$.  The
 ``new entry from the right'' clause of \noderef{OrderedTreeUnion} supplies
-an index (i<|R|) such that
-[
+an index $i<|R|$ such that
+\[
  U.e_j=R.e_i,
  \qquad U.y_{j+1}=R.y_{i+1}.                                  \tag{1}
-]
-The right vertex in (1) is not in (V(L)).  Indeed, if it were the
-(a)-th vertex of (L), the left-segment equality would make it the
-(a)-th vertex of (U).  Equation (1) would then identify the distinct
-vertex indices (j+1>ell\geq a), contrary to the vertex injectivity in
+\]
+The right vertex in (1) is not in $V(L)$.  Indeed, if it were the
+$a$-th vertex of $L$, the left-segment equality would make it the
+$a$-th vertex of $U$.  Equation (1) would then identify the distinct
+vertex indices $j+1>\ell\geq a$, contrary to the vertex injectivity in
 \noderef{TreeSequence}.
 
-By \noderef{TashkinovAugmentationSequenceInitialSegment}, (P) is an exact
-ordered initial segment of (R).  Since it is also an exact ordered
-initial segment of (L), the preceding exclusion implies
-(i\geq |P|): if (i<|P|), then (R.y_{i+1}=P.y_{i+1}) would already
-belong to (L).
+By \noderef{TashkinovAugmentationSequenceInitialSegment}, $P$ is an exact
+ordered initial segment of $R$.  Since it is also an exact ordered
+initial segment of $L$, the preceding exclusion implies
+$i\geq |P|$: if $i<|P|$, then $R.y_{i+1}=P.y_{i+1}$ would already
+belong to $L$.
 
-Let (R_i) be the prefix of (R) having (i) edge entries.  The
-inequality just proved makes (P) an exact prefix of (R_i), while
-(R_i) is an exact prefix of (R).  Apply
+Let $R_i$ be the prefix of $R$ having $i$ edge entries.  The
+inequality just proved makes $P$ an exact prefix of $R_i$, while
+$R_i$ is an exact prefix of $R$.  Apply
 \noderef{TashkinovAugmentationSequenceSuffix} to the actual suffix
-(R_i\preccurlyeq R).  It gives a (arphi)-augmentation sequence from
-(R_i) to (R).  This suffix is nonempty because (i<|R|), so isolate
-its first one-step augmentation (R_i\to C).  By
-\noderef{TashkinovAugmentation}, (C) has length (i+1), its new edge
-has some color (c), and
-[
+$R_i\preccurlyeq R$.  It gives a $\varphi$-augmentation sequence from
+$R_i$ to $R$.  This suffix is nonempty because $i<|R|$, so isolate
+its first one-step augmentation $R_i\to C$.  By
+\noderef{TashkinovAugmentation}, $C$ has length $i+1$, its new edge
+has some color $c$, and
+\[
                     c\in\overline\varphi(R_i).                 \tag{2}
-]
-The remaining suffix from (C) to (R), together with
-\noderef{TashkinovAugmentationSequenceInitialSegment}, makes (C) an
-exact prefix of (R).  Therefore the exact new edge in this first step
-is (R.e_i).  In particular,
-[
+\]
+The remaining suffix from $C$ to $R$, together with
+\noderef{TashkinovAugmentationSequenceInitialSegment}, makes $C$ an
+exact prefix of $R$.  Therefore the exact new edge in this first step
+is $R.e_i$.  In particular,
+\[
                          \varphi(R.e_i)=c.                      \tag{3}
-]
+\]
 
-We next prove that (c) is missing on (U_m).  By (2) and
-\noderef{TreeMissingColors}, choose a vertex (vin V(R_i)) at which
-(c) is missing.  If (vin V(L)), the left-segment equality places
-(v) among the first (ell+1\leq m+1) vertices of (U), hence in
-(V(U_m)).
+We next prove that $c$ is missing on $U_m$.  By (2) and
+\noderef{TreeMissingColors}, choose a vertex $v\in V(R_i)$ at which
+$c$ is missing.  If $v\in V(L)$, the left-segment equality places
+$v$ among the first $\ell+1\leq m+1$ vertices of $U$, hence in
+$V(U_m)$.
 
-Suppose instead that (v\notin V(L)).  The initial vertex of (R_i) is
-the initial vertex of (P), hence is in (L); thus
-(v=R.y_{r+1}) for some (r<i).  The ``every new right entry'' clause of
-\noderef{OrderedTreeUnion} supplies an index (qgeqell) at which the
-exact right entry ((R.e_r,R.y_{r+1})) occurs in (U).  Both
-(R.y_{r+1}) and (R.y_{i+1}) are outside (L), and (r<i), so the
-``right order'' clause gives (q<j=m).  Hence (v=U.y_{q+1}) belongs to
-(U_m).  In either case the same vertex (v) witnesses
-[
+Suppose instead that $v\notin V(L)$.  The initial vertex of $R_i$ is
+the initial vertex of $P$, hence is in $L$; thus
+$v=R.y_{r+1}$ for some $r<i$.  The ``every new right entry'' clause of
+\noderef{OrderedTreeUnion} supplies an index $q\geq\ell$ at which the
+exact right entry $(R.e_r,R.y_{r+1})$ occurs in $U$.  Both
+$R.y_{r+1}$ and $R.y_{i+1}$ are outside $L$, and $r<i$, so the
+``right order'' clause gives $q<j=m$.  Hence $v=U.y_{q+1}$ belongs to
+$U_m$.  In either case the same vertex $v$ witnesses
+\[
                          c\in\overline\varphi(U_m).             \tag{4}
-]
+\]
 
-The prefix (U_m) is an exact ordered initial segment of (U_{m+1}),
+The prefix $U_m$ is an exact ordered initial segment of $U_{m+1}$,
 and their lengths differ by one.  Equations (1) and (3) identify the new
-edge of (U_{m+1}) as the same exact edge identity (R.e_i) of color
-(c); equation (4) says that (c) is missing on (U_m).  Thus all
+edge of $U_{m+1}$ as the same exact edge identity $R.e_i$ of color
+$c$; equation (4) says that $c$ is missing on $U_m$.  Thus all
 clauses of \noderef{TashkinovAugmentation} hold for
-(U_m\to U_{m+1}).  Appending this step to the induction hypothesis
-proves the assertion for (m+1).
+$U_m\to U_{m+1}$.  Appending this step to the induction hypothesis
+proves the assertion for $m+1$.
 
-Taking (m=|U|), the prefix (U_m) is the full ordered tree-sequence
-(U).  The resulting chain is the required
-(arphi)-Tashkinov augmentation sequence from (L) to (U).
+Taking $m=|U|$, the prefix $U_m$ is the full ordered tree-sequence
+$U$.  The resulting chain is the required
+$\varphi$-Tashkinov augmentation sequence from $L$ to $U$.
 \end{proof}
