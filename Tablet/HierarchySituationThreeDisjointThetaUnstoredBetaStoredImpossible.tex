@@ -268,15 +268,49 @@ colors in \noderef{TreeMissingColors}$(\mu_2,Y)$.
 
 For the source-to-$Y$ route, inspect the actual terminal positive
 certificate of $\mathcal E_\sigma$ using \noderef{TashkinovSeries} and
-\noderef{TashkinovSeriesStep}.  In PE its
-\noderef{TashkinovClosure} starts at $T_n^\sigma$.  In SE or RE it
-supplies an individual edge $f_n$, the exact singleton equation
-$F_n=\{f_n\}$, the \noderef{TreeSequenceAdjoinEdge} seed
-$T_n^\sigma+f_n$, and the route from that seed.  The base and hierarchy
-fields from \noderef{HierarchyBase} and \noderef{TashkinovHierarchy},
-together with the below-final field of
-\noderef{ExtendedTashkinovTree}, put $Y$ on this actual route.  In
-positive divider count, \noderef{HierarchyWeaklyStable} contains a
+\noderef{TashkinovSeriesStep}.  Denote its final output tree by
+$C_\sigma$.  In PE its \noderef{TashkinovClosure} contains a
+$\sigma$-\noderef{TashkinovAugmentationSequence} from
+$S_\sigma=T_n^\sigma$ to $C_\sigma$.  In SE or RE it supplies an
+individual edge $f_n$, the exact singleton equation $F_n=\{f_n\}$, the
+\noderef{TreeSequenceAdjoinEdge} seed
+$S_\sigma=T_n^\sigma+f_n$, and the $\sigma$-augmentation route from that
+exact seed to $C_\sigma$.
+
+We verify both exact-prefix hypotheses needed to restrict this certified
+route.  First, (3) gives $Y\preccurlyeq T$, while the below-final field of
+\noderef{ExtendedTashkinovTree} gives $T\preccurlyeq C_\sigma$; hence
+$Y\preccurlyeq C_\sigma$.  For $S_\sigma\preccurlyeq Y$, there are four
+cases.  In PE with $q>0$, the base-stage and nested fields of
+\noderef{TashkinovHierarchy} give
+$T_n^\sigma\preccurlyeq A\preccurlyeq Y$.  In PE with $q=0$, the
+parallel clause of \noderef{HierarchyBase} supplies the
+\noderef{OrderedTreeUnion} defining $A$, whose left-segment field gives
+the same relation.  In SE/RE with $q>0$, both the exact seed and the first
+ordinary hierarchy stage are prefixes of $C_\sigma$; the seed has length
+$|T_n^\sigma|+1$, while strictness of the first stage makes its length at
+least $|T_n^\sigma|+1$.  Entrywise comparison of these two prefixes via
+\noderef{TreeSequenceInitialSegment} gives
+$T_n^\sigma+f_n\preccurlyeq H.\mathit{stage}(1)
+ \preccurlyeq A\preccurlyeq Y$.  Finally, in SE/RE with $q=0$, the
+nonparallel base clause gives $A=T_n^\sigma$; the exact adjoined seed has
+length $|A|+1$, and $2\le j$ together with the definition of $Y$ and
+$j<\ell$ gives $|A|+1\le |Y|$.  Since the seed and $Y$ are both exact
+prefixes of $C_\sigma$, entrywise comparison again gives
+$T_n^\sigma+f_n\preccurlyeq Y$.  Thus in every case
+
+\[
+ S_\sigma\preccurlyeq Y\preccurlyeq C_\sigma.                 \tag{18a}
+\]
+
+Apply \noderef{TashkinovAugmentationSequenceRestrict} to the certified
+$\sigma$-route $S_\sigma\longrightarrow C_\sigma$ with intermediate
+tree $Y$ and the two relations (18a).  Its conclusion is the required
+$\sigma$-augmentation route $S_\sigma\longrightarrow Y$; exact-prefix
+inclusion alone is not being substituted for this route.
+
+We now transport that restricted route.  In positive divider count,
+\noderef{HierarchyWeaklyStable} contains a
 \noderef{TreeColoringInvariant} on $A$, so every exact source-to-$A$
 entry is fixed.  At divider zero in PE, weak stability is a
 \noderef{CombinedStableColoring}; applying
@@ -287,11 +321,10 @@ their exact entries in $A$.  At divider zero in SE/RE, the source is the
 exact adjoined seed, and (11) fixes its extra edge at position $|A|$;
 the \noderef{StableColoring} constituent of weak stability supplies the
 required vertexwise control on $T_n^\sigma$.  Combining this source
-control with the exact
-edge fixation from $A$ through $Y$, and combining (17) on $X$ with
-$X\prec Y$ and $|Y|=|X|+1$, all hypotheses of
-\noderef{TashkinovAugmentationSequenceColoringTransport} hold.  It gives
-the exact $\mu_2$ route
+control with the exact edge fixation from $A$ through $Y$, and combining
+(17) on $X$ with $X\prec Y$ and $|Y|=|X|+1$, all hypotheses of
+\noderef{TashkinovAugmentationSequenceColoringTransport} hold for the
+restricted route.  It gives the exact $\mu_2$ route
 \[
  \begin{cases}
  T_n^\sigma\longrightarrow Y,&\text{PE},\\
@@ -455,12 +488,61 @@ $R_1$ and the ordered pair $(\gamma_1,d.\theta)$.  The literal
 discriminator is again gamma's retained stage missingness.  Use the path
 $K_\ell$, separation (28), properness and one-uncoloredness, the six
 minimum-context fields of $R_1$, and its penultimate elementarity from
-\noderef{HierarchyCounterexamplePenultimateElementary}.  The returned
-weak stability, together with exact edge fixation through $Y$ and (31),
-feeds \noderef{TashkinovAugmentationSequenceColoringTransport} exactly
-as in (19).  It produces either the PE route from the current terminal
-ladder tree to $Y$, or the SE/RE route from the exact current seed to
-$Y$, retaining the actual edge and singleton equation.
+\noderef{HierarchyCounterexamplePenultimateElementary}.  Retain the
+returned weak stability.
+
+The old-color route used now must come from the actual current ETT, not
+from (19).  Put
+$\mathcal E_1=R_1.\mathit{corresponding.replacementETT}$, let $T_n^1$ be
+its terminal ladder tree, and inspect its terminal positive
+\noderef{TashkinovSeriesStep} inside its \noderef{TashkinovSeries}.
+Denote that certificate's final output tree by $C_1^{\rm out}$.  In PE
+it gives the $\mu_2$-augmentation route from $S_1=T_n^1$ to
+$C_1^{\rm out}$.  In SE/RE it gives an individual edge $f_n^1$, its
+literal singleton connecting-edge equation, the exact
+\noderef{TreeSequenceAdjoinEdge} seed $S_1=T_n^1+f_n^1$, and the
+$\mu_2$-augmentation route from that seed to $C_1^{\rm out}$.
+
+Let $H_1=R_1.\mathit{counterexample.hierarchy}$ and let $A_1$ be its last
+starred stage.  The same-good data in (22)--(23) identify $A_1=A$ and its
+divider count with $q$.  Also $Y\preccurlyeq T$ by (3), and the
+below-final field of $\mathcal E_1$ gives
+$T\preccurlyeq C_1^{\rm out}$, so $Y\preccurlyeq C_1^{\rm out}$.  The
+current replacement base and hierarchy give $S_1\preccurlyeq Y$ in the
+same four explicit cases.  In PE with positive divider count,
+$T_n^1\preccurlyeq A_1= A\preccurlyeq Y$ by hierarchy nesting.  In PE
+with divider zero, the \noderef{OrderedTreeUnion} in
+$R_1.\mathit{replacementBase}$ gives that inclusion.  In SE/RE with
+positive divider count, the exact seed and $H_1.\mathit{stage}(1)$ are
+prefixes of $C_1^{\rm out}$, and their lengths give
+$T_n^1+f_n^1\preccurlyeq H_1.\mathit{stage}(1)
+ \preccurlyeq A_1=A\preccurlyeq Y$.  In SE/RE with divider zero, the
+nonparallel base clause gives $A_1=T_n^1$; the exact one-edge seed and
+$Y$ are prefixes of $C_1^{\rm out}$, and $2\le j<\ell$ gives
+$|T_n^1|+1\le |Y|$, so entrywise comparison gives
+$T_n^1+f_n^1\preccurlyeq Y$.  Consequently
+
+\[
+                 S_1\preccurlyeq Y\preccurlyeq C_1^{\rm out}. \tag{31a}
+\]
+
+Apply \noderef{TashkinovAugmentationSequenceRestrict} to this actual
+$\mu_2$-route $S_1\longrightarrow C_1^{\rm out}$, with intermediate
+tree $Y$ and the two exact prefix relations (31a).  This gives the actual
+current route $S_1\longrightarrow Y$ under $\mu_2$.  Now apply
+\noderef{TashkinovAugmentationSequenceColoringTransport} to this
+restricted route, not to (19): the returned weak stability supplies the
+source-side control exactly as after (18a).  Namely, positive divider
+count gives invariance on $A_1$; divider-zero PE gives combined stability,
+the preserved PE closure, and its ordered union; and in divider-zero
+SE/RE there is no route below the exact seed.  The edge-fixation paragraph
+above supplies every remaining exact edge value through $Y$, while (31)
+on $X\preccurlyeq Z$, together with $X\prec Y$ and $|Y|=|X|+1$, supplies
+the required predecessor missing-set equality.  The conclusion is the
+$\mu_3$-augmentation route from $T_n^1$ to $Y$ in PE, or from the exact
+current seed $T_n^1+f_n^1$ to $Y$ in SE/RE.  In the latter case it
+retains the same individual edge, the same adjoined seed, and the literal
+singleton connecting-edge equation from the current certificate.
 
 For every $\eta\in D_1$, neither affected color equals $\eta$: gamma is
 missing on $A$ and hence is outside $D_1$, while theta is outside $D_1$
