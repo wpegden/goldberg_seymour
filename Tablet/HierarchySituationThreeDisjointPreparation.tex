@@ -218,10 +218,27 @@ the literal singleton identity \(F_n=\{f_n\}\), an exact
 \noderef{TreeSequenceAdjoinEdge} seed \(T_n+f_n\), and an augmentation
 sequence from that seed.  The \(\mathit{belowFinal}\) field of
 \noderef{ExtendedTashkinovTree} places \(T\), hence \(X\), in the same
-final closure.  The hierarchy and base fields place the relevant PE
-source, or exact SE/RE seed, no later than \(A\).  Composing
-\(A\preccurlyeq B\) with \(B\prec X\) in (2) gives the strict prefix
-\(A\prec X\), so each such source is strictly before \(X\).
+final closure.  The hierarchy and base fields place the PE source
+\(T_n\) no later than \(A\).  They also place the exact SE/RE seed no
+later than \(A\) when the divider count is positive.  There is one
+important boundary exception: at divider zero in SE/RE, \(A=T_n\), while
+the exact seed
+\[
+ S=T_n+f_n
+\]
+has length \(|S|=|A|+1\) by its
+\noderef{TreeSequenceAdjoinEdge} identity, so \(S\not\preccurlyeq A\).
+Instead, \(S\) and \(X\) are exact prefixes of the same final closure.
+Since \(j\ge2\), the full-tail definition gives
+\[
+ |S|=|A|+1\le |A|+(j-1)=|X|;
+\]
+the last equality is unsaturated because \(j<\ell\).  Comparing their
+entries in that common final closure therefore gives
+\(S\preccurlyeq X\), with equality possible when \(j=2\).  Thus in every
+terminal-kind and divider branch the actual augmentation source is an
+exact prefix of \(X\); only the PE source is needed strictly before
+\(X\).
 
 Every augmentation raises length by one and retains the preceding exact
 display by \noderef{TashkinovAugmentation}.  Induction on the finite
@@ -311,13 +328,16 @@ old route through \(X\).  At divider zero in PE,
 transport on both pieces; (6) transports the remainder through \(X\).
 At divider zero in SE/RE the nonparallel base is \(A=T_n\); retain the
 individual certified seed \(f_n\), its singleton connecting set, and its
-\noderef{TreeSequenceAdjoinEdge} certificate.  Again
-\(A\preccurlyeq B\prec X\) from (2) gives \(A\prec X\), so its old endpoint
-lies in \(X\); component disjointness fixes that exact edge, and
-(6), (8), and
-\noderef{TashkinovAugmentationSequenceColoringTransport} transport the
-remaining route.  These are exactly the PE and SE/RE alternatives of the
-split-tail theorem, with no identification of parallel edges.
+\noderef{TreeSequenceAdjoinEdge} certificate.  Use here the exact fact
+\(S=T_n+f_n\preccurlyeq X\) proved above, not a false comparison
+\(S\preccurlyeq A\).  It retains the individual edge \(f_n\) in \(X\)
+even at the equality boundary \(S=X\); its old endpoint lies in
+\(T_n=A\preccurlyeq X\), so component disjointness fixes that exact edge.
+The old route from \(S\) to \(X\), which is reflexive when \(S=X\), is
+then transported by (6), (8), and
+\noderef{TashkinovAugmentationSequenceColoringTransport}.  These are
+exactly the PE and SE/RE alternatives of the split-tail theorem, with no
+identification of parallel edges.
 
 Apply \noderef{StableChangeCasesOneTwoSplitTail}, with source ETT
 \(\mathcal E_m\), using those literal premises.  It returns
@@ -367,24 +387,46 @@ Concatenate it with (10) in the reflexive-transitive relation
 \noderef{TashkinovAugmentationSequence}.  This gives the exact PE route
 \(T_n\to T\), or the exact SE/RE route \(T_n+f_n\to T\), under \(\sigma\).
 
-If the terminal kind is PE, restrict the stability and invariance returned
-by \noderef{HierarchyLEMStable} to the common terminal ladder and PE
-closure; this is the required \noderef{CombinedStableColoring}.  Apply
-\noderef{HierarchySplitter} to \(\mathcal E_X\), its maximum witness,
-the lower-rung field, its base and hierarchy, this combined stability,
-and the PE route just constructed.  Use the corresponding ETT, maximum
-witness, base, and hierarchy returned together by that one application.
-If the terminal kind is SE or RE, use the mod-coloring universal clause at
-\(T\) with the retained exact seed and route, and apply
-\noderef{MaximumPropertyTransport}.  Correspondence identifies the
-terminal ladder and kind; the nonparallel field of
+If the terminal kind is PE, use \(\mathcal E_X\) and
+\noderef{HierarchyLEMStable} only for the outside-recoloring stability and
+invariance on \(X\) and for the good hierarchy on the retained stages.
+The terminal ladder and PE closure of its base lie in its hierarchy core,
+and that core is an exact prefix of \(X\).  Hence the already proved
+pointwise fixation of every edge incident with \(X\), and equality of all
+missing-color sets at vertices of \(X\), restrict respectively to the
+common terminal ladder and the common PE closure.  These restrictions are
+the two \noderef{StableColoring} clauses defining
+\noderef{CombinedStableColoring}.  Now rewrite along the retained-series,
+base-core, and base-closure equalities supplied by
+\noderef{GoodHierarchyTerminalPrefixRepackage}.  The result is precisely
+the combined-stability premise for the original full intermediate ETT
+\(\mathcal E_m\), its base, and its hierarchy \(H\), not merely for
+\(\mathcal E_X\).
+
+Apply \noderef{HierarchySplitter} to \(\mathcal E_m\), its original
+maximum witness and positive-rung field, the lower-rung field of
+\(\mathit{ctx}_m\), its base and hierarchy \(H\), the current PE identity,
+the properness and exact-one-uncoloredness fields of
+\(\mathit{ctx}_m\) for \(\mu\), the corresponding facts (5) for
+\(\sigma\), that combined stability, and the full PE route
+\(T_n\to T\) under \(\sigma\) constructed above.  Since the displayed
+terminal tree of this invocation is the full \(T\), the corresponding
+ETT, maximum witness, base, and hierarchy returned together by this one
+application give (13) directly relative to \(\mathcal E_m\).  No
+certificate through \(\mathcal E_X\) is composed in the PE branch.
+
+If the terminal kind is SE or RE, use the mod-coloring universal clause
+for \(\mathcal E_X\) at \(T\), with the retained exact seed and full route,
+and apply \noderef{MaximumPropertyTransport}.  Correspondence identifies
+the terminal ladder and kind; the nonparallel field of
 \noderef{HierarchyBase} identifies the base core with that ladder, so in
 this branch the base and hierarchy can be rebuilt without any PE support
-choice.  In either branch, compose the resulting certificate with the
-direct certificate \(\mathcal E_m\to\mathcal E_X\) by
-\noderef{CorrespondingExtendedTashkinovTreeTrans}.  This gives a
-certificate (13) relative to \(\mathcal E_m\), with the correct dependent
-input, series, and ETT indices.
+choice.  Only in this SE/RE branch, compose the resulting certificate
+\(\mathcal E_X\to T\) with the direct certificate
+\(\mathcal E_m\to\mathcal E_X\) by
+\noderef{CorrespondingExtendedTashkinovTreeTrans}.  This again gives (13)
+relative to \(\mathcal E_m\), with the correct dependent input, series,
+and ETT indices.
 
 Build \(g_1\) on the just-selected branch-coherent base and hierarchy as
 follows.  Copy all nonterminal hierarchy stages and divider positions and
@@ -405,17 +447,31 @@ stored sets, and Gamma pairs, so they copy.  This verifies every field of
 \noderef{SameGoodHierarchy} from \(g\) to \(g_1\).  Hence both branches
 produce the same tuple displayed after (13).
 
-The swap makes \(\beta\) missing at \(y_\ell\).  Indeed, elementarity
-(1) and the old \(\beta\)-missing witness in \(B\) show that \(\beta\) is
-present at the distinct vertex \(y_\ell\), whereas \(\alpha\) is absent
-there.  Properness makes the incident \(\beta\)-edge unique.  Its
-edge-node is adjacent to \(z\) and belongs to \(Q\), so (3) changes it to
-\(\alpha\); every possible incident affected edge is exchanged in the
-same component.  No incident \(\beta\)-edge remains.  Equation (8)
-retains a \(\beta\)-missing witness in \(B\).  Since \(B\prec T\), these
-are two distinct displayed vertices, and hence \(T\) is not elementary
-under \(\sigma\).  Positivity, the maximum witness following (13), and
-\(g_1\) now form an actual \noderef{HierarchyCounterexample} \(C_1\).
+The swap makes \(\beta\) missing at \(y_\ell\), including the possible
+isolated-component case.  Split according as \(\beta\) was already missing
+there under \(\mu\).  In that case \(\alpha\) is missing there as well, so
+the definition of \noderef{MissingColors} gives no incident
+\(\alpha\)-edge and no incident \(\beta\)-edge.  Thus \(z\) has no
+neighbor in \noderef{TwoColorIncidenceGraph}; its component \(Q\) is the
+isolated vertex \(\{z\}\).  Since the swap (3) changes only edge-nodes of
+\(Q\), it changes no edge incident with \(y_\ell\), and \(\beta\) remains
+missing there under \(\sigma\).
+
+Otherwise \(\beta\) is not missing at \(y_\ell\), hence is present there.
+Properness gives a unique incident \(\beta\)-edge.  Its edge-node is
+adjacent to \(z\), hence lies in \(Q\), and (3) changes its value to
+\(\alpha\).  The old absence of \(\alpha\) means that there is no incident
+\(\alpha\)-edge which could be changed to \(\beta\), while uniqueness
+excludes any second incident \(\beta\)-edge.  Consequently no incident
+edge has color \(\beta\) under \(\sigma\), so \(\beta\) is again missing
+at \(y_\ell\).
+
+In both cases equation (8) also retains the old \(\beta\)-missing witness
+in \(B\).  The vertex \(y_\ell\) is the terminal vertex omitted by
+\(B_{\rm pen}\), whereas \(B\preccurlyeq B_{\rm pen}\); hence these are
+two distinct displayed vertices.  Thus \(T\) is not elementary under
+\(\sigma\).  Positivity, the maximum witness following (13), and \(g_1\)
+now form an actual \noderef{HierarchyCounterexample} \(C_1\).
 
 The certificate (13) is still relative only to the intermediate ETT
 \(\mathcal E_m\).  Put \(\mathcal C_0=P.\mathit{corresponding}\) and
