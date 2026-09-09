@@ -46,15 +46,20 @@ ETTs.
 Use equality elimination on the replacement-input equality first.  Then
 use dependent heterogeneous-equality elimination on the replacement-series
 equality and on the replacement-ETT equality, in that order.  Transport
-along these eliminations the supplied second base, \(C_\tau\), its
-hierarchy and good-hierarchy witness, and the stated same-good witness.
+along these eliminations the supplied second base and \(C_\tau\).  By
+\noderef{HierarchyCounterexample}, the latter transport includes
+\(C_\tau\)'s positive-rung certificate, hierarchy, good-hierarchy witness,
+maximum-property certificate, and non-elementarity certificate; transport
+the stated same-good witness along with them.
 After these transports, all these objects are indexed by the literal
 replacement input and replacement ETT of (1).  In particular, no object
 whose type merely mentions a heterogeneously equal ETT is reused without
 transport.  We retain the notation \(\mathcal B_\tau,C_\tau\) for the
 transported base and counterexample.
 
-We next compose the two same-good witnesses.  Unfold
+We next compose the two same-good witnesses.  The hierarchy and
+good-hierarchy fields used here are precisely the fields packaged by
+\noderef{HierarchyCounterexample} in \(C_\mu\) and \(C_\tau\).  Unfold
 \noderef{SameGoodHierarchy} for \(P.\mathit{sameGood}\) and for the
 transported second witness.  Their first clauses are two successive
 \noderef{SameHierarchyStages} relations.  Transitivity of equality gives
@@ -155,34 +160,66 @@ make it strictly smaller than the measure of \(C_\mu\), contradicting
 the \(\mathit{lexicographicMinimality}\) field of
 \(P.\mathit{minimumContext}\).  This proves the new minimality field.
 
-Finally consider \(\mathit{largeMissingSet}\).  Positivity of \(C_\tau\),
-transported through the rung equality in (1), permits the terminal
-positive index \(i<n\) whose successor is
-\(\operatorname{Fin.last}(n)\), where
-\(n=\mathcal E.\mathit{rounds}\).  Apply at \(i\) the
-replacement-stability field of \(\mathcal C_0\) and the composite
-replacement-stability field of \(\mathcal C_{10}\).  By
-\noderef{StableColoring}, their vertexwise clauses identify, respectively,
-the \(\mu\)-missing and the \(\tau\)-missing color sets at every vertex of
-the original terminal ladder tree with its \(\varphi\)-missing color set.
-The ladder-tree equalities in \(\mathcal C_0\) and \(\mathcal C_{10}\),
-together with the replacement-series and replacement-ETT transports
-already eliminated above, identify that original ladder tree with the
-terminal ladder trees of \(\mathcal E_\mu\) and \(\mathcal E_\tau\).
-Taking the union over their common displayed vertex set, as in
-\noderef{TreeMissingColors}, gives equality of the two tree-missing-color
-sets and hence equality of their cardinalities.  The rung equalities make
-the two integers \(2n+11\) identical.  Therefore the old
-\(\mathit{largeMissingSet}\) inequality in
+Finally consider \(\mathit{largeMissingSet}\).  By
+\noderef{HierarchyCounterexample}, the positive-rung field of \(C_\tau\)
+says that \(\mathcal E_\tau\) has positive rung.  The rung-agreement field
+of \(\mathcal C_{10}\) therefore makes
+\(n=\mathcal E.\mathit{rounds}\) positive and permits the terminal positive
+index \(i<n\) whose successor is \(\operatorname{Fin.last}(n)\).  Put
+\[
+ L=\mathcal E.\mathit{series}.\mathit{data}.\mathit{tree}
+       (\operatorname{Fin.last}(n)).
+\]
+Apply at \(i\) the replacement-stability fields of \(\mathcal C_0\) and
+\(\mathcal C_{10}\).  We now make explicit the internal identifications
+needed to read these two stability relations at the terminal rung.  For
+each of the two certificates, the
+\(\mathit{finalGeneratingColoring}\) field of
+\noderef{CorrespondingExtendedTashkinovTree} identifies its replacement
+series terminal coloring with \(\mu\), respectively with \(\tau\).  Its
+\(\mathit{seriesPresentation}\) field identifies the replacement ETT's
+internal series with that displayed replacement series, and its
+\(\mathit{ladderTreesAgree}\) field at \(i\) identifies the actual terminal
+ladder tree of \(\mathcal E_\mu\), respectively of \(\mathcal E_\tau\),
+with the exact ordered tree \(L\).  Finally, the
+\(\mathit{generatingColoring}\) field of
+\noderef{ExtendedTashkinovTree} identifies the original series terminal
+coloring with \(\varphi\).
+
+Thus, after these four literal identifications, the vertexwise clause of
+\noderef{StableColoring} for \(\mathcal C_0\) gives
+\(\overline\mu(v)=\overline\varphi(v)\) at every vertex \(v\) of \(L\),
+and the corresponding clause for \(\mathcal C_{10}\) gives
+\(\overline\tau(v)=\overline\varphi(v)\) there.  Taking the unions over the
+same displayed vertex set, exactly as in \noderef{TreeMissingColors}, gives
+\[
+ \overline\mu(T_{n,\mu})=\overline\varphi(L)
+   =\overline\tau(T_{n,\tau}),
+\]
+where \(T_{n,\mu}\) and \(T_{n,\tau}\) are the actual terminal ladder
+trees in the internal series of \(\mathcal E_\mu\) and
+\(\mathcal E_\tau\).  Hence these sets have equal cardinalities.  The rung
+agreements of \(\mathcal C_0\) and \(\mathcal C_{10}\) also identify both
+rung numbers with \(n\), so the two bounds \(2n+11\) are identical.
+Therefore the old \(\mathit{largeMissingSet}\) inequality in
 \(P.\mathit{minimumContext}\) is exactly the required inequality under
-\(\tau\).
+\(\tau\).  Notice that the input, series, and ETT equalities returned by
+\noderef{CorrespondingExtendedTashkinovTreeTrans} were already used above
+to transport the dependent base, counterexample, and same-good data; those
+outer equalities do not replace the internal
+\(\mathit{finalGeneratingColoring}\), \(\mathit{seriesPresentation}\), and
+\(\mathit{ladderTreesAgree}\) equalities used in this paragraph.
 
 The six fields just constructed form a
 \noderef{HierarchyMinimumCounterexampleContext} \(\mathit{ctx}_\tau\)
-on the literal data in (1).  Use \(C_\tau.\mathit{maximum}\) for the
-maximum field; retain its positive-rung, hierarchy, good-hierarchy, and
-non-elementarity fields; and use (2) for the original-relative same-good
-field.  Then
+on the literal data in (1).  By
+\noderef{HierarchyCounterexample}, \(C_\tau\) supplies on the transported
+base exactly its positive-rung, hierarchy, good-hierarchy, maximum-property,
+and non-elementarity fields.  Use \(C_\tau.\mathit{maximum}\) for the
+separate maximum field of the replacement presentation; use \(C_\tau\)
+itself, including its positive-rung, hierarchy, good-hierarchy, and
+non-elementarity fields, for the counterexample field; and use (2) for the
+original-relative same-good field.  Then
 \[
  P_\tau=(\tau,\mathcal C_{10},C_\tau.\mathit{maximum},
           \mathcal B_\tau,C_\tau,s_{10},\mathit{ctx}_\tau)
