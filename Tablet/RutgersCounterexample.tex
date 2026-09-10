@@ -1,0 +1,28 @@
+\begin{definition}
+Let \(\mathcal P=(\sigma,U,\ldots)\) be a
+\noderef{RutgersClosedPresentation} relative to a fixed original ETT.
+A \emph{Rutgers counterexample on \(\mathcal P\)} consists of distinct
+colors \(\alpha,\beta\), with
+\(\alpha\in\overline\sigma(U)\) and
+\(\beta\notin\overline\sigma(U)\), and three exact incidence-graph walks
+\[
+       Q_i:a_i\longrightarrow b_i\qquad (i=1,2,3).
+\]
+Each \(Q_i\) is a
+\(\noderef{TreeExitPath}(U,\sigma,\alpha,\beta,a_i,b_i,Q_i)\).
+Their three incidence-graph supports are pairwise disjoint.  Their
+outside ends \(a_1,a_2,a_3\) are pairwise distinct, their inside ends
+\(b_1,b_2,b_3\) are pairwise distinct, and the latter have been labeled
+in the strict tree order
+\[
+                         b_1\prec_U b_2\prec_U b_3
+\]
+of \noderef{TreeVertexOrder}.
+
+Finally the data retain exact edge identities \(f_1,f_2,f_3\).  For each
+\(i\), the edge \(f_i\) belongs to the \(\beta\)-colored boundary-edge
+set of \(V(U)\), is incident with \(b_i\), and its edge node belongs to
+the support of the corresponding walk \(Q_i\).  Thus these fields record
+the individual \(\beta\)-colored boundary edges used by the three exits,
+not merely their endpoint pairs.
+\end{definition}

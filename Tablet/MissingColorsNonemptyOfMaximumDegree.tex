@@ -1,0 +1,31 @@
+\begin{lemma}[A vertex misses a color at the maximum-degree palette size]
+Let \(G\) be a finite loopless multigraph, let \(\varphi\) be an arbitrary
+partial edge coloring with colors in \([k]\), and let \(v\) be any vertex.
+If
+\[
+                     \Delta(G)+1\leq k,
+\]
+then \(\overline\varphi(v)\) is nonempty.  No properness assumption on
+\(\varphi\) is required.
+\end{lemma}
+\begin{proof}
+By \noderef{Degree}, the degree \(d_G(v)\) is the number of exact edge
+identities incident with \(v\), and by \noderef{MaximumDegree} we have
+\(d_G(v)\leq\Delta(G)\).  For each color in the set
+\noderef{PresentColors}\((G,\varphi,v)\), choose one incident edge having
+that color.  This choice is injective: if the chosen exact edge identity
+were the same for two colors, the value of the function \(\varphi\) on
+that edge would be both colors, so the colors would be equal.  Hence
+\[
+ |\operatorname{PresentColors}(G,\varphi,v)|
+       \leq d_G(v)\leq\Delta(G).                              \tag{1}
+\]
+If \noderef{MissingColors}\((G,\varphi,v)\) were empty, its definition as
+the complement of the present colors in \([k]\) would say that every one
+of the \(k\) colors is present at \(v\).  Equation (1) would then give
+\(k\leq\Delta(G)\), contrary to
+\(\Delta(G)+1\leq k\).  Thus at least one color is missing at \(v\).
+The argument used only the fact that a partial coloring assigns a unique
+optional color to each exact edge identity, and therefore did not use
+properness.
+\end{proof}

@@ -1,0 +1,25 @@
+\begin{definition}
+Fix an original positive-rung extended Tashkinov tree \(\mathcal E\).
+A \emph{Rutgers closed presentation relative to \(\mathcal E\)} consists
+of a replacement coloring \(\sigma\), a displayed tree \(U\), and an
+actual \noderef{CorrespondingExtendedTashkinovTree} certificate from
+\(\mathcal E\) directly to the replacement ETT displayed on \(U\).  The
+replacement ETT is required to satisfy \noderef{MaximumProperty}.
+
+Write \(n\) for its rung number and \(T_n^\sigma\) for its terminal
+ladder tree.  The presentation must additionally retain exactly one of
+the following kind-sensitive terminal routes under \(\sigma\):
+\begin{enumerate}
+\item its terminal kind is PE and
+  \(\noderef{TashkinovClosure}(\sigma,T_n^\sigma,U)\) holds;
+\item its terminal kind is SE or RE, and there are an exact edge identity
+  \(f\) and a seed \(A\) such that its terminal connecting-edge set is
+  exactly \(\{f\}\),
+  \(\noderef{TreeSequenceAdjoinEdge}(T_n^\sigma,f,A)\), and
+  \(\noderef{TashkinovClosure}(\sigma,A,U)\) hold.
+\end{enumerate}
+The alternatives are exclusive because the recorded terminal kind cannot
+simultaneously be PE and SE or RE.  In particular, the route records both
+the exact non-PE connecting edge and closedness of the displayed tree; a
+mere initial-segment or correspondence certificate is not a route.
+\end{definition}

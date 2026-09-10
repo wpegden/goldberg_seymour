@@ -1,0 +1,204 @@
+\begin{lemma}[Existence of a minimum Rutgers presentation]
+Fix a positive-rung extended Tashkinov tree \(\mathcal E\) satisfying
+maximum property, and write \(n\) for its rung number,
+\(T_n\) for its terminal ladder tree, \(T_{n+1}\) for the exact final
+tree of its certified series, \(D_n\) for its terminal stored-color set,
+and \(\varphi_n\) for its terminal series coloring.  Assume the following
+two current-rung assertions uniformly for every maximum ETT
+\(\mathcal F\) having \(n\) rungs, with arbitrary certified input:
+\begin{enumerate}
+\item the displayed vertex set of \(\mathcal F\) is elementary under its
+generating coloring;
+\item every proper coloring leaving exactly \(e_0\) uncolored and stable
+on the terminal ladder tree of \(\mathcal F\), relative to its terminal
+stored set and terminal series coloring, is a
+\noderef{ModColoring} of \(\mathcal F\).
+\end{enumerate}
+Let \(\sigma\) be a proper partial \(k\)-edge-coloring leaving exactly
+\(e_0\) uncolored which is
+\(\noderef{StableColoring}(T_{n+1},D_n,\varphi_n,\sigma)\).
+Let \(\alpha\ne\beta\), suppose
+\(\alpha\in\overline\sigma(T_{n+1})\), and suppose that \(\alpha,\beta\)
+are not \(T_{n+1}\)-interchangeable under \(\sigma\).
+
+Then there are a \noderef{RutgersClosedPresentation}
+\(\mathcal P\) relative to the fixed original \(\mathcal E\), and a
+\noderef{RutgersCounterexample} \(\mathcal C\) on \(\mathcal P\), such
+that for every Rutgers closed presentation \(\mathcal P'\) relative to
+the same fixed original \(\mathcal E\), and every Rutgers counterexample
+\(\mathcal C'\) on \(\mathcal P'\),
+\[
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C)
+ \leq
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C').
+\]
+Thus the minimum ranges simultaneously over all original-relative
+replacement presentations, their colorings and displayed closed trees,
+and all triples of exact exit walks on them.
+\end{lemma}
+\begin{proof}
+Put \(F=T_{n+1}\).  We first construct one closed presentation on \(F\)
+from the given stable coloring.  The positive terminal certificate in
+\noderef{TashkinovSeries} cannot be the initial constructor.  Inspecting
+the three positive constructors of \noderef{TashkinovSeriesStep} gives
+exactly one of the following routes under \(\varphi_n\):
+\[
+\begin{array}{ll}
+\Theta_n=\mathrm{PE}:&
+ \noderef{TashkinovClosure}(\varphi_n,T_n,F),\\
+\Theta_n\in\{\mathrm{SE},\mathrm{RE}\}:&
+ F_n=\{f_n\},\quad
+ \noderef{TreeSequenceAdjoinEdge}(T_n,f_n,A),\quad
+ \noderef{TashkinovClosure}(\varphi_n,A,F)
+\end{array}                                                    \tag{1}
+\]
+for an exact edge identity \(f_n\) and an exact seed \(A\) in the second
+case.  The same certificate says that \(\varphi_n\) is proper and leaves
+exactly \(e_0\) uncolored, that \(T_n\) is an ordered initial segment of
+\(F\), and that its length is strictly smaller.
+
+We next restrict the given final-tree stability to \(T_n\).  Its
+vertexwise missing-set equality restricts along the ordered
+initial-segment inclusion.  For the controlled-edge clause, let \(g\) be
+incident with \(T_n\) and suppose
+\(\varphi_n(g)=c\) with
+\(c\in\overline\varphi_n(T_n)\cup D_n\).  Apply the second inclusion of
+\noderef{HkuMissingStoredMonotone} at the last positive series step:
+\[
+ \overline\varphi_n(T_n)\cup D_n
+       \subseteq \overline\varphi_n(F)\cup D_n.                \tag{2}
+\]
+The edge \(g\) is also incident with \(F\), so final-tree stability,
+using (2), gives \(\sigma(g)=\varphi_n(g)\).  Hence
+\[
+             \noderef{StableColoring}(T_n,D_n,\varphi_n,\sigma).
+                                                                    \tag{3}
+\]
+The assumed current assertion (vi), applied to the original
+\(\mathcal E\), its maximum property, and (3), now says that \(\sigma\)
+is a \noderef{ModColoring} of \(\mathcal E\).                 \(\tag{4}\)
+
+The routes in (1) remain the same exact routes under \(\sigma\).  Indeed,
+consider one \noderef{TashkinovAugmentation} in the augmentation sequence
+inside the relevant closure.  Its new exact edge \(g\) has
+\(\varphi_n(g)=c\), where \(c\) is missing at a vertex \(v\) of the
+preceding tree.  Every intermediate tree is an ordered initial segment of
+\(F\), so \(v\in V(F)\); because missingness is a property of the fixed
+graph coloring rather than of the displayed tree, \(c\) is also a member
+of \(\overline\varphi_n(F)\).  Final-tree stability therefore fixes the
+exact identity \(g\) and makes \(c\) missing at the same \(v\) under
+\(\sigma\).  The length and ordered-prefix clauses of the augmentation
+do not mention a coloring.  Thus the identical ordered step is a
+Tashkinov augmentation under \(\sigma\).  Induction over
+\noderef{TashkinovAugmentationSequence} transports the entire sequence.
+
+It remains in this transport to check closedness at \(F\).  Since both
+\(\varphi_n\) and \(\sigma\) are proper and leave exactly \(e_0\)
+uncolored, symmetry in \noderef{sc2} reverses the given stable relation.
+If a boundary edge of \(F\) had \(\sigma\)-color \(c\) missing at a
+vertex of \(F\) under \(\sigma\), reverse stability would preserve both
+the missingness and that exact edge value under \(\varphi_n\), contrary
+to the closedness field of the closure in (1).  Consequently the
+transported augmentation sequence ends in a \(\sigma\)-closed \(F\), so
+(1) holds with \(\sigma\) in place of \(\varphi_n\).             \(\tag{5}\)
+
+Use (5), the exact initial-segment and strict-length fields just noted,
+in the universal clause of (4).  This produces an actual certificate
+\[
+ \mathcal R:
+ \noderef{CorrespondingExtendedTashkinovTree}
+       (\mathcal E,\sigma,F).                                  \tag{6}
+\]
+By \noderef{MaximumPropertyTransport}, the replacement ETT in
+\(\mathcal R\) has maximum property.  The certificate (6) identifies its
+terminal ladder tree, terminal kind, and exact connecting-edge set with
+those of the original, after transporting the equal rung indices.
+Therefore (5) rewrites to a route based at the replacement terminal
+ladder tree and retaining the same \(f_n\) and seed in the non-PE case.
+Together with (6) and the transported maximum property, these data are
+precisely a \noderef{RutgersClosedPresentation}; call it
+\(\mathcal P_0\).  This establishes in particular that the family of
+presentations being minimized over is nonempty.
+
+We now construct a counterexample on \(\mathcal P_0\).  The first
+current-rung assertion, applied to the replacement ETT in (6), gives
+that \(V(F)\) is elementary under \(\sigma\).  The terminal route in
+\(\mathcal P_0\) gives that \(V(F)\) is closed under \(\sigma\).
+Because \(\alpha\) is missing at some vertex of \(F\), closedness implies
+that the \(\alpha\)-colored boundary of \(F\) is empty; equivalently
+\(\noderef{TreeColorSetClosed}(G,\sigma,F,\{\alpha\})\) holds.
+
+We record why \(\beta\notin\overline\sigma(F)\), as this is needed for
+the third exit.  Suppose instead that \(\beta\) is missing on \(F\).
+Properness and \noderef{TwoColorIncidenceDegreeAtMostTwo} make every
+component of the spanning \((\alpha,\beta)\)-incidence graph a path
+(possibly an isolated vertex) or an even cycle.  Elementarity gives at
+most one vertex of \(F\) missing \(\alpha\) and at most one vertex of
+\(F\) missing \(\beta\).  Closedness gives no \(\alpha\)- or
+\(\beta\)-colored boundary edge, so every such component that meets
+\(F\) stays inside \(F\).  In a path component the two endpoints are
+exactly the vertices missing one of the two colors (with an isolated
+vertex accounting for both endpoints when it misses both).  Hence all
+path components meeting \(F\) have the same component: it is the unique
+one containing the one or two missing-color witnesses.  Cyclic
+components are excluded by the path-component predicate, including the
+possibly isolated case exactly as specified by
+\noderef{TwoColorPathComponent}.  Expanding
+\noderef{TreeInterchangeable}, any two path components meeting \(F\)
+would therefore be equal, contrary to the hypothesis.  Thus
+\[
+                         \beta\notin\overline\sigma(F).        \tag{7}
+\]
+
+Apply \noderef{ElementaryClosedNoninterchangeableExitPair} using
+properness, elementarity, \(\alpha\ne\beta\), the missingness of
+\(\alpha\), \(\alpha\)-closedness, and failed interchangeability.  It
+returns two exact exit walks \(Q_1,Q_2\), disjoint incidence-graph
+supports, distinct inside and outside ends, and individual exact
+\(\beta\)-colored boundary edges \(f_1,f_2\), each incident with its
+inside end and lying on its walk.  Apply
+\noderef{ElementaryClosedExitPairExtendsTriple} to those data and (7).
+It returns a third exact exit walk \(Q_3\), support-disjoint from both
+earlier walks, with new inside and outside ends and an exact
+\(\beta\)-colored boundary edge \(f_3\) having the same incidence and
+walk-membership properties.  Thus all three outside ends and all three
+inside ends are pairwise distinct.
+
+Each inside end lies in \(V(F)\) by the definition
+\noderef{TreeExitPath}.  The vertex entries of a tree-sequence are
+injective, so each inside end has a unique index in \(F\).  The three
+indices are distinct and the natural order on them is linear.  Sort the
+three complete packages
+\((a_i,b_i,Q_i,f_i)\) by these indices and relabel them.  This is one of
+the six permutations of the packages, so it preserves every exit
+condition, all pairwise support-disjointness statements, all distinctness
+statements, and every exact boundary-edge identity.  By the definition
+\noderef{TreeVertexOrder}, the relabeled ends satisfy
+\[
+                              b_1\prec_F b_2\prec_F b_3.
+\]
+Together with \(\mathcal P_0\), the relabeled data form a
+\noderef{RutgersCounterexample}; call it \(\mathcal C_0\).
+
+Finally define a predicate on natural numbers by
+\[
+ S(m)\quad\Longleftrightarrow\quad
+ \text{there are a Rutgers closed presentation \(\mathcal P\) relative
+ to \(\mathcal E\) and a counterexample \(\mathcal C\) on it with
+ Rutgers measure \(m\)}.
+\]
+The pair \((\mathcal P_0,\mathcal C_0)\) proves that \(S\) is inhabited.
+By well-ordering of the natural numbers, let \(m_0\) be its least
+inhabited value and choose witnesses
+\((\mathcal P,\mathcal C)\) with measure \(m_0\).  For every other
+presentation \(\mathcal P'\) relative to the same fixed original ETT and
+every counterexample \(\mathcal C'\) on it, its computed measure is a
+natural number satisfying \(S\); minimality of \(m_0\) gives
+\[
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C)
+ \leq
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C').
+\]
+This is the asserted global minimum over presentations and
+counterexamples.
+\end{proof}
