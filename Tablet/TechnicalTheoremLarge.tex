@@ -123,49 +123,69 @@ Every proper, exactly-\(e_0\)-uncolored coloring \(\sigma\) stable on
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-Apply \noderef{TechnicalInductionContextLarge} with bound \(n+1\).  Its
-numerical hypotheses are exactly the assumed degree and large-order
-inequalities, so it supplies a
-\noderef{TechnicalInductionContext} \(C\) for \(G,k,e_0\) up to that
-bound.
+We first construct, inside this proof, a
+\noderef{TechnicalInductionContext} \(C_b\) for every natural bound \(b\).
+We use strong induction on \(b\).  Fix \(b\), and suppose that \(C_s\) has
+already been constructed for every \(s<b\).  To form \(C_b\), begin by
+establishing all six assertions for an arbitrary positive-rung maximum ETT
+\(\mathcal A\) whose rung number is \(s<b\), allowing its certified input
+coloring to be arbitrary.
 
-The positive-rung field of
-\noderef{ExtendedTashkinovTree} gives \(0<n\), and arithmetic gives
-\(n<n+1\).  Hence \(\mathcal E\), together with its assumed maximum
-property, meets the common hypotheses of all six lower fields of \(C\).
+The strong-induction hypothesis gives \(C_s\).  Applying
+\noderef{TechnicalCurrentRungElementaryLarge} to \(\mathcal A\), its
+maximum property, \(C_s\), and the two numerical assumptions proves
+assertion (i) at rung \(s\).
 
-Apply \texttt{lowerOne} to obtain (i).  By the defining statement of
-\noderef{TechnicalInductionContext}, this field uses the displayed
-generating coloring \(\varphi\) and exact vertex set \(V(T)\), so its
-conclusion is precisely the first item above.
+For assertion (ii), apply
+\noderef{RutgersCurrentRungInterchangeability} to \(\mathcal A\).  Its
+four induction premises follow from \(C_s\) as follows.  For any
+arbitrary-input maximum ETT whose rung equals \(s\), transport \(C_s\)
+along that rung equality and apply
+\noderef{TechnicalCurrentRungElementaryLarge}; this gives current
+assertion (i) uniformly.  The fields \texttt{currentFour} and
+\texttt{currentSix} of \(C_s\) give current assertions (iv) and (vi) for
+the same arbitrary-input ETTs.  Finally, \texttt{lowerTwo} gives assertion
+(ii) for every positive maximum ETT of rung strictly below \(s\).  These
+are exactly the current-(i),(iv),(vi) and strict-lower-(ii) premises of the
+Rutgers lemma, so its conclusion is assertion (ii) for \(\mathcal A\),
+with the exact final series tree and terminal stability data.
 
-Apply \texttt{lowerTwo} to obtain (ii).  Its dependent terminal index is
-\(\operatorname{Fin.last}(n)=a\), while its final-tree index is
-\(\operatorname{Fin.last}(n+1)\); consequently its stable-coloring control
-is exactly \((D_a,\varphi_a)\) on \(F\), and its conclusion is exactly the
-stated universal \noderef{TreeInterchangeable} property.
+The remaining four assertions for \(\mathcal A\) are the fields
+\texttt{currentThree}, \texttt{currentFour}, \texttt{currentFive}, and
+\texttt{currentSix} of \(C_s\).  We have therefore proved assertions
+(i)--(vi) for every positive-rung maximum ETT of rung \(s<b\).  These six
+results define the fields \texttt{lowerOne} through \texttt{lowerSix} of
+\(C_b\), preserving all dependent indices, membership witnesses, exact
+trees, stored sets, and colorings appearing in the definition of the
+context.
 
-Apply \texttt{lowerThree} to obtain (iii).  Both conjuncts retain the exact
-indices \(q^+,r^+,j\), the dependent membership witnesses used by
-\noderef{ETTFirstAppearanceIndex}, the stability-before-vertex conclusion,
-the explicit \(j>0\) guard on predecessor stability, and the disjointness
-of the two raw stored sets.  Thus no transport or weakening of the third
-item is involved.
+It remains to define the four current-rung fields of \(C_b\).  Fix an
+arbitrary-input maximum ETT of rung exactly \(b\).  The complete
+strict-lower package just proved supplies all six assertions for each
+positive-rung maximum ETT below \(b\).  Apply
+\noderef{ExtensionRules} to obtain current assertion (iii), including
+both the stability conclusions and the disjointness of raw stored sets.
+Apply \noderef{ExtensionBase} to obtain current assertion (iv), with the
+exact terminal PE data.  Apply \noderef{Basic2} to obtain current
+assertion (v), retaining the defective boundary identities, chosen
+vertex, and first-appearance bound.  Apply \noderef{Td} to obtain current
+assertion (vi), universally over the eligible terminal-stable colorings.
+This constructs \(C_b\) and completes the strong induction.
 
-Apply \texttt{lowerFour} to obtain (iv).  Its terminal ladder tree is
-\(L_a\), and its four stored-data equalities identify exactly
-\(\Theta_a,u_a,\gamma_a,\delta_a\); the returned equivalence is therefore
-the asserted one-vertex intersection with the
-\noderef{TwoColorComponent}.
+Now take \(b=n+1\).  The positive-rung field of
+\noderef{ExtendedTashkinovTree} gives \(0<n\), while arithmetic gives
+\(n<n+1\).  Hence the given \(\mathcal E\), together with its maximum
+property, satisfies the common premises of all six lower fields of
+\(C_{n+1}\).  Field \texttt{lowerOne} is exactly (i), and
+\texttt{lowerTwo} is exactly (ii): its terminal index is
+\(a=\operatorname{Fin.last}(n)\), while its final-tree index is
+\(\operatorname{Fin.last}(n+1)\).
 
-Apply \texttt{lowerFive} to obtain (v).  That field has the same defective
-color, exact boundary-color-vertex predicate, earlier-vertex witness,
-membership proof \(h\), PE-or-SE alternative, chosen vertex, and
-first-appearance bound as the fifth item, and returns exactly its equality
-or \noderef{TreeVertexOrder} alternative.
-
-Finally, apply \texttt{lowerSix}.  Its terminal tree and stability data are
-again \(L_a,D_a,\varphi_a\), and its conclusion is precisely
-\noderef{ModColoring}\((\mathcal E,\sigma)\), which proves (vi).  The six
-field applications give the stated conjunction of assertions (i)--(vi).
+Likewise, \texttt{lowerThree} is exactly the two-part assertion (iii),
+including its dependent first-appearance witnesses and the \(j>0\) guard;
+\texttt{lowerFour} is (iv) with the exact data
+\(\Theta_a,u_a,\gamma_a,\delta_a\); \texttt{lowerFive} is (v) with the
+same boundary-color and order witnesses; and \texttt{lowerSix} is (vi)
+on \(L_a\) relative to \((D_a,\varphi_a)\).  Their conjunction proves all
+six assertions.
 \end{proof}
