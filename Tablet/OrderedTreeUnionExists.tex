@@ -1,0 +1,83 @@
+\begin{lemma}[Existence of the ordered union of two tree-sequences]
+Let $A$ and $B$ be finite ordered tree-sequences in the same loopless
+multigraph and with the same distinguished first edge identity $e_0$.
+There is a tree-sequence $U$ such that
+\[
+                         \noderef{OrderedTreeUnion}(A,B,U).
+\]
+Thus $U$ is obtained from $A$ by appending precisely the edge--new-vertex
+entries of $B$ whose new vertices lie outside $V(A)$, in their order in
+$B$.
+\end{lemma}
+\begin{proof}
+Write
+\[
+ A=(a_0,e_1,a_1,\ldots,e_p,a_p),\qquad
+ B=(b_0,f_1,b_1,\ldots,f_q,b_q).
+\]
+By \noderef{TreeSequence}, $e_1=f_1=e_0$, and the attachment condition at
+the first edge gives
+\[
+       \operatorname{ends}(e_0)=\{a_1,a_0\}=\{b_1,b_0\}.       \tag{1}
+\]
+Consequently $b_0,b_1\in V(A)$.  This observation also handles the
+possibility that the two sequences orient the ends of $e_0$ oppositely.
+
+Let
+\[
+ I=\{\,i\in\{1,\ldots,q\}:b_i\notin V(A)\,\},
+\]
+and list its members in their inherited order as
+$i_1<\cdots<i_m$.  Starting with the complete displayed sequence $A$,
+append, for $r=1,\ldots,m$, the exact entry $f_{i_r},b_{i_r}$ from $B$.
+Call the resulting displayed sequence $U$.  We first verify that this is
+a tree-sequence in the sense of \noderef{TreeSequence}.
+
+The old vertices are pairwise distinct because they are the vertices of
+$A$.  Each appended vertex lies outside $V(A)$ by the definition of $I$,
+and two appended vertices are distinct because the vertex map of $B$ is
+injective.  Hence all vertices displayed in $U$ are pairwise distinct.
+The old edge identities are likewise pairwise distinct.  The appended
+edge identities are pairwise distinct by edge injectivity in $B$.  No
+appended edge can equal an old edge: the attachment clause for $A$ shows
+that both ends of every old edge belong to $V(A)$, whereas the appended
+edge $f_{i_r}$ has the end $b_{i_r}\notin V(A)$.  Thus the edge entries of
+$U$ are also pairwise distinct.  Notice that this is an argument about
+exact edge identities; it does not identify parallel edges having the
+same unordered pair of ends.
+
+It remains to check attachment for an appended entry $f_{i_r},b_{i_r}$.
+The attachment clause for $B$ supplies an index $t<i_r$ such that
+\[
+                  \operatorname{ends}(f_{i_r})
+                    =\{b_{i_r},b_t\}.                           \tag{2}
+\]
+If $b_t\in V(A)$, then \noderef{TreeSequenceVertexSet} supplies an old
+position of $A$, hence of $U$, occupied by $b_t$, so (2) attaches the new
+entry there.
+If $b_t\notin V(A)$, then (1) implies $t\geq2$; hence $t$ is one of the
+indices in $I$.  Since $t<i_r$, it occurs among
+$i_1,\ldots,i_{r-1}$, so $b_t$ has already been appended to $U$ when the
+$r$-th entry is added.  Equation (2) again gives the required attachment.
+The first edge of $U$ is still the exact edge identity $e_0$, and its
+length is positive because the initial segment $A$ has positive length.
+This proves that $U$ is a tree-sequence.
+
+We now check every field of \noderef{OrderedTreeUnion}.  By construction,
+$A$ is an exact ordered initial segment of $U$: all of its vertex and edge
+entries are unchanged.  The vertices added after $A$ are exactly the
+$b_i$ outside $V(A)$, while every vertex of $B$ not outside $V(A)$ already
+belongs to $V(A)$.  Using \noderef{TreeSequenceVertexSet}, this proves
+\[
+                         V(U)=V(A)\cup V(B).                     \tag{3}
+\]
+Every entry after $A$ is, by construction, the exact pair
+$f_{i_r},b_{i_r}$ from $B$, which proves the new-entry clause.  Conversely,
+if a new vertex $b_i$ of an entry of $B$ lies outside $V(A)$, then
+$i\in I$, so that exact entry occurs in the appended part of $U$; this is
+the coverage clause.  Finally, if $i<j$ are two such indices, their ranks
+in the increasing list $i_1<\cdots<i_m$ have the same strict order.
+Their positions in $U$ therefore have that strict order, proving the
+right-order clause.  These facts together are precisely an instance of
+\noderef{OrderedTreeUnion}$(A,B,U)$.
+\end{proof}

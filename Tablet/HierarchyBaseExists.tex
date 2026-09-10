@@ -1,0 +1,84 @@
+\begin{lemma}[Existence of the canonical hierarchy base]
+Let $T$ be any positive-rung extended Tashkinov tree, let $n$ be its last
+rung, let $T_n$ be its terminal ladder tree, and let $\varphi_n$ be its
+generating coloring.  Then $T$ admits a
+\noderef{HierarchyBase} under $\varphi_n$.  No maximum-property, existing
+good hierarchy, or lower bound on $\lvert\overline{\varphi_n}(T_n)\rvert$
+is required.
+\end{lemma}
+\begin{proof}
+By \noderef{ExtendedTashkinovTree}, the certified series has at least one
+noninitial iteration and $\varphi_n$ is exactly the coloring recorded at
+its last rung.  The certification field of \noderef{TashkinovSeries}
+supplies a \noderef{TashkinovSeriesStep} certificate at every index; inspect
+the one at the final index.  Its initial constructor is impossible:
+that constructor certifies index $0$, whereas the final index is the
+positive rung $n$.  We treat the remaining three constructors.
+
+Suppose first that the final constructor is SE or RE.  By
+\noderef{TreeSequence}, $T_n$ has positive length, so position $1$ is a
+valid positive vertex position of $T_n$.  Take both the core and the
+otherwise unused closure field to be $T_n$, and take support position $1$.
+The terminal missing-color equality required by \noderef{HierarchyBase}
+is reflexive because the base coloring is $\varphi_n$.  The constructor's
+exact kind equation says respectively $\Theta_n=\mathrm{SE}$ or
+$\Theta_n=\mathrm{RE}$, so the parallel implication in the definition is
+vacuous.  If $\Theta_n\ne\mathrm{PE}$, the chosen core is exactly $T_n$,
+which proves the nonparallel clause.  These data therefore form the
+required base in both nonparallel cases.
+
+It remains to consider a final PE constructor.  Let
+$(\pi,v,f,u,\delta)$ be its recorded
+\noderef{MaximumDefectiveChoice} on $T_n$.  We first prove that the
+selected supporting vertex $v$ occurs at a positive position of $T_n$.
+By \noderef{DefectiveEdge}, the exact selected edge identity $f$ belongs
+to $\partial_{\pi,\alpha}(V(T_n))$ for some defective color $\alpha$.
+By \noderef{DefectiveColor} and \noderef{BoundaryColorEdges}, that finite
+set contains at least two distinct exact edge identities.  Choose
+\[
+              g\in\partial_{\pi,\alpha}(V(T_n)),\qquad g\ne f.  \tag{1}
+\]
+The definition of \noderef{BoundaryEdges} orients the ends of $g$ as
+\[
+       \operatorname{ends}(g)=\{w,z\},\qquad
+       w\in V(T_n),\quad z\notin V(T_n).                         \tag{2}
+\]
+Because $g$ has the same defective color $\alpha$, it is itself a
+defective edge, and (2) makes it incident with $w$.  Hence $w$ is a
+defective vertex by \noderef{DefectiveVertex}.
+
+Apply the maximality clause of \noderef{MaximumDefectiveChoice} to the
+same admissible coloring $\pi$ and the defective vertex $w$.  It gives
+either $w=v$ or $w\prec_{T_n}v$.  The first alternative is impossible.
+Indeed, (1) gives two distinct exact edges $f$ and $g$; both have color
+$\alpha$, and if $w=v$ then both are incident with $v$.  They are thus
+adjacent in the sense of \noderef{AdjacentEdges}, contradicting the
+properness of $\pi$ in \noderef{IsProperEdgeColoring}.  Consequently
+\[
+                              w\prec_{T_n}v.                     \tag{3}
+\]
+By \noderef{TreeVertexOrder}, (3) supplies vertex positions $r<s$ with
+$T_n(r)=w$ and $T_n(s)=v$.  In particular $s\geq1$.  Take $s$ as the
+support position.  The PE constructor's exact current-vertex equation
+identifies the recorded chosen vertex with $v=T_n(s)$, as required by the
+parallel clause of \noderef{HierarchyBase}.
+
+Form the exact ordered prefix $T_n(v)$ ending at position $s$ using
+\noderef{TreeSequencePrefix}; its definition applies because
+$1\leq s\leq\lvert T_n\rvert$.  By
+\noderef{TashkinovClosureExists}, choose a closure $R_n$ of this prefix
+under the generating coloring $\varphi_n$.  Apply
+\noderef{OrderedTreeUnionExists} to $T_n$ and $R_n$.  It yields a
+tree-sequence $U$ and an exact ordered-union certificate
+\[
+             \noderef{OrderedTreeUnion}(T_n,R_n,U).              \tag{4}
+\]
+Set the hierarchy-base closure to $R_n$ and its core to $U$.  The support
+position is positive by (3), the PE chosen-vertex equation was verified
+above, the required prefix closure is the chosen closure, and (4) is the
+required ordered union.  Again
+$\overline{\varphi_n}(T_n)=\overline{\varphi_n}(T_n)$ is reflexive.  The
+nonparallel implication is vacuous because the final constructor records
+$\Theta_n=\mathrm{PE}$.  Thus all fields of \noderef{HierarchyBase} are
+satisfied in the PE case as well, completing the construction.
+\end{proof}
