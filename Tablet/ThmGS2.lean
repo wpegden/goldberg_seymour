@@ -63,6 +63,7 @@ import Tablet.ScheideStructuralLemma
 import Tablet.SupportingPEColorChain
 import Tablet.SupportingPEMissingTransport
 import Tablet.SupportingPEStoredIntersection
+import Tablet.TechnicalInductionContext
 import Tablet.ExtensionBaseSupportClass
 import Tablet.ExtensionBaseSupportClassColors
 import Tablet.ExtensionBaseDeltaExclusion

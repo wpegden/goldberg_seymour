@@ -1,0 +1,208 @@
+\begin{definition}
+Fix a finite loopless multigraph \(G\), retaining its exact edge type, a
+palette of \(k\) colors, a distinguished edge \(e_0\), and a natural number
+\(n\).  A \emph{technical induction context up to rung \(n\)} is a record
+with the ten fields described below.
+
+Every field quantifies independently over an arbitrary input partial
+coloring \(\rho\), an arbitrary displayed ordered tree-sequence \(T\), an
+arbitrary generating coloring \(\varphi\), and an
+\[
+  \mathcal E:\noderef{ExtendedTashkinovTree}(G,k,e_0,\rho,T,\varphi).
+\]
+Write \(s\) for the rung number of \(\mathcal E\), write
+\(a_s=\operatorname{Fin.last}(s)\) for the last index in
+\(\operatorname{Fin}(s+1)\), and, for \(i\in\operatorname{Fin}(s+1)\), put
+\[
+ L_i=\mathcal E.\mathrm{series.data.tree}(i.\mathrm{castSucc}),\qquad
+ D_i=\noderef{TashkinovStoredColors}(\mathcal E.\mathrm{series.data},i),
+ \qquad \varphi_i=\mathcal E.\mathrm{series.data.coloring}(i).
+\]
+Thus \(L_{a_s}\) is the exact terminal ladder tree.  Separately, put
+\[
+ F_s=\mathcal E.\mathrm{series.data.tree}
+       (\operatorname{Fin.last}(s+1));
+\]
+this is the exact final series tree, whose index lies in
+\(\operatorname{Fin}(s+2)\).  Also write \(\Theta_i,u_i,\gamma_i,\delta_i\)
+for the extension kind, chosen vertex, gamma color, and delta color stored
+at data index \(i\), and write \(S_i^{\rm raw}\) for
+\(\mathcal E.\mathrm{series.data.stored}(i)\).  Membership in a displayed
+tree always means membership in its
+\(\noderef{TreeSequenceVertexSet}\).
+
+The six lower-rung fields are universally quantified as above and have the
+common hypotheses
+\[
+  0<s<n \quad\hbox{and}\quad \noderef{MaximumProperty}(\mathcal E).
+\]
+Their conclusions are the following.
+
+\begin{enumerate}
+\item[\texttt{lowerOne}.]
+The displayed set \(V(T)\) is
+\(\noderef{ColoredVertexSetElementary}\) with respect to the generating
+coloring \(\varphi\).
+
+\item[\texttt{lowerTwo}.]
+For every coloring \(\sigma\), if \(\sigma\) is
+\(\noderef{IsProperEdgeColoring}\), leaves exactly \(e_0\) uncolored in the
+sense of \(\noderef{IsOneEdgeUncolored}\), and is
+\(\noderef{StableColoring}\) on \(F_s\) relative to
+\((D_{a_s},\varphi_{a_s})\), then for all colors \(\alpha,\beta\),
+\[
+ \alpha\in\noderef{TreeMissingColors}(\sigma,F_s)
+ \quad\hbox{or}\quad
+ \beta\in\noderef{TreeMissingColors}(\sigma,F_s)
+ \quad\Longrightarrow\quad
+ \noderef{TreeInterchangeable}(G,F_s,\sigma,\alpha,\beta).
+\]
+This is the direct universal interchangeability assertion on the exact
+tree \(F_s\); in particular, the cited definition counts isolated
+two-color path components.
+
+\item[\texttt{lowerThree}.]
+This field is a conjunction of two assertions.  First, for every
+\(q\in\operatorname{Fin}(s)\), vertex \(v\), membership witness
+\(h:v\in V(T)\), and \(j\in\operatorname{Fin}(s+1)\), if
+\[
+ \Theta_{q^+}=\mathrm{PE},\qquad u_{q^+}=v,\qquad
+ \noderef{ETTFirstAppearanceIndex}(\mathcal E,v,h)=j+1,
+\]
+then every proper coloring \(\sigma\) leaving exactly \(e_0\) uncolored
+which is stable on \(L_{q^+}\) relative to
+\((D_{q^+},\varphi_{q^+})\) is
+\(\noderef{StableColoringBeforeVertex}\) before \(v\) in the displayed
+tree \(T\), using the same witness \(h\), relative to
+\((D_j,\varphi_j)\).  In addition, under the explicit condition \(0<j\),
+the same \(\sigma\) is stable on the predecessor ladder tree \(L_j\)
+relative to \((D_j,\varphi_j)\).
+
+Second, for all distinct \(q,r\in\operatorname{Fin}(s)\), all distinct
+vertices \(v_q,v_r\), and membership witnesses
+\(h_q:v_q\in V(T)\), \(h_r:v_r\in V(T)\), if
+\[
+ \Theta_{q^+}=\Theta_{r^+}=\mathrm{PE},\qquad
+ u_{q^+}=v_q,\quad u_{r^+}=v_r,
+\]
+and the two dependent first-appearance indices computed with \(h_q,h_r\)
+are equal, then
+\[
+  S_{q^+}^{\rm raw}\cap S_{r^+}^{\rm raw}=\varnothing.
+\]
+
+\item[\texttt{lowerFour}.]
+For all \(v\in V(G)\) and colors \(\gamma,\delta\), if
+\[
+ \Theta_{a_s}=\mathrm{PE},\qquad u_{a_s}=v,\qquad
+ \gamma_{a_s}=\gamma,\qquad\delta_{a_s}=\delta,
+\]
+then under every proper exactly-\(e_0\)-uncolored coloring \(\sigma\)
+stable on \(L_{a_s}\) relative to
+\((D_{a_s},\varphi_{a_s})\), every \(w\in V(L_{a_s})\) satisfies
+\[
+ \operatorname{inl}(w)\in
+   \noderef{TwoColorComponent}(G,\sigma,\gamma,\delta,
+      \operatorname{inl}(v))
+ \quad\Longleftrightarrow\quad w=v.
+\]
+
+\item[\texttt{lowerFive}.]
+Let \(\sigma\) be any proper exactly-\(e_0\)-uncolored coloring stable on
+\(L_{a_s}\) relative to \((D_{a_s},\varphi_{a_s})\).  Let \(\delta\) be a
+\(\noderef{DefectiveColor}\) of \(V(L_{a_s})\) under \(\sigma\), and let
+\(v\) satisfy
+\(\noderef{BoundaryColorVertex}(G,\sigma,V(L_{a_s}),\delta,v)\).
+Assume there exists \(w\) satisfying the same exact boundary-color-vertex
+predicate and
+\(\noderef{TreeVertexOrder}(L_{a_s},w,v)\).  Then, for every certified
+membership witness \(h:v\in V(T)\), every
+\(q\in\operatorname{Fin}(s)\), and every vertex \(v_i\), if
+\[
+ \Theta_{q^+}=\mathrm{PE}\ \hbox{or}\
+ \Theta_{q^+}=\mathrm{SE},\qquad
+ u_{q^+}=v_i,\qquad
+ \noderef{ETTFirstAppearanceIndex}(\mathcal E,v,h)\leq q+1,
+\]
+then
+\[
+ v=v_i\quad\hbox{or}\quad\noderef{TreeVertexOrder}(T,v,v_i).
+\]
+
+\item[\texttt{lowerSix}.]
+Every proper exactly-\(e_0\)-uncolored coloring \(\sigma\) stable on
+\(L_{a_s}\) relative to \((D_{a_s},\varphi_{a_s})\) satisfies
+\(\noderef{ModColoring}(\mathcal E,\sigma)\).
+\end{enumerate}
+
+The four current-rung fields again quantify independently over arbitrary
+\(\rho,T,\varphi,\mathcal E\), but their common hypotheses are now
+\[
+  s=n \quad\hbox{and}\quad \noderef{MaximumProperty}(\mathcal E).
+\]
+They are the following four certificates, stated at this exact rung.
+
+\begin{enumerate}
+\item[\texttt{currentThree}.]
+This field is a conjunction.  For every
+\(q\in\operatorname{Fin}(s)\), vertex \(v\), witness \(h:v\in V(T)\), and
+\(j\in\operatorname{Fin}(s+1)\), the hypotheses
+\[
+ \Theta_{q^+}=\mathrm{PE},\qquad u_{q^+}=v,\qquad
+ \noderef{ETTFirstAppearanceIndex}(\mathcal E,v,h)=j+1
+\]
+imply that every proper exactly-\(e_0\)-uncolored coloring \(\sigma\)
+stable on \(L_{q^+}\) relative to
+\((D_{q^+},\varphi_{q^+})\) is stable before \(v\) in \(T\), with witness
+\(h\), relative to \((D_j,\varphi_j)\); and, only when \(0<j\), it is also
+stable on \(L_j\) relative to \((D_j,\varphi_j)\).
+Moreover, for distinct \(q,r\in\operatorname{Fin}(s)\), distinct vertices
+\(v_q,v_r\), and witnesses \(h_q:v_q\in V(T)\),
+\(h_r:v_r\in V(T)\), if both slots are PE, have respective chosen vertices
+\(v_q,v_r\), and their dependent first-appearance indices are equal, then
+\(S_{q^+}^{\rm raw}\cap S_{r^+}^{\rm raw}=\varnothing\).
+
+\item[\texttt{currentFour}.]
+For all \(v\in V(G)\) and colors \(\gamma,\delta\), if
+\[
+ \Theta_{a_s}=\mathrm{PE},\qquad u_{a_s}=v,\qquad
+ \gamma_{a_s}=\gamma,\qquad\delta_{a_s}=\delta,
+\]
+then under every proper exactly-\(e_0\)-uncolored coloring \(\sigma\)
+stable on \(L_{a_s}\) relative to
+\((D_{a_s},\varphi_{a_s})\), every \(w\in V(L_{a_s})\) satisfies
+\[
+ \operatorname{inl}(w)\in
+   \noderef{TwoColorComponent}(G,\sigma,\gamma,\delta,
+      \operatorname{inl}(v))
+ \quad\Longleftrightarrow\quad w=v.
+\]
+
+\item[\texttt{currentFive}.]
+Let \(\sigma\) be any proper exactly-\(e_0\)-uncolored coloring stable on
+\(L_{a_s}\) relative to \((D_{a_s},\varphi_{a_s})\).  Let \(\delta\) be a
+\(\noderef{DefectiveColor}\) of \(V(L_{a_s})\), let \(v\) be a
+\(\delta\)-boundary-color vertex of \(V(L_{a_s})\), and assume that there
+exists another such boundary-color vertex \(w\) with
+\(\noderef{TreeVertexOrder}(L_{a_s},w,v)\).  Then, for every certified
+membership witness \(h:v\in V(T)\), every
+\(q\in\operatorname{Fin}(s)\), and every vertex \(v_i\), if
+\[
+ \Theta_{q^+}=\mathrm{PE}\ \hbox{or}\
+ \Theta_{q^+}=\mathrm{SE},\qquad
+ u_{q^+}=v_i,\qquad
+ \noderef{ETTFirstAppearanceIndex}(\mathcal E,v,h)\leq q+1,
+\]
+then \(v=v_i\) or \(\noderef{TreeVertexOrder}(T,v,v_i)\).
+
+\item[\texttt{currentSix}.]
+Every proper exactly-\(e_0\)-uncolored coloring \(\sigma\) stable on
+\(L_{a_s}\) relative to \((D_{a_s},\varphi_{a_s})\) satisfies
+\(\noderef{ModColoring}(\mathcal E,\sigma)\).
+\end{enumerate}
+
+Thus the lower fields package assertions (i)--(vi) strictly below the
+bound, while the current fields package only assertions (iii)--(vi) at the
+bound; assertions (i) and (ii) at rung \(n\) are deliberately not fields of
+this context.
+\end{definition}
