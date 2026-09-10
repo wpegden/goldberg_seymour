@@ -1,0 +1,114 @@
+\begin{theorem}[Large-order current-rung elementarity]
+Let \(G=(V,E)\) be a finite loopless multigraph with its individual edge
+identities, let \(e_0\in E\), and let the palette have \(k\) colors.  Let
+
+\[
+ \mathcal E:\noderef{ExtendedTashkinovTree}(G,k,e_0,\rho,T,\varphi)
+\]
+
+be an arbitrary-input positive-rung ETT with displayed tree \(T\), generating
+coloring \(\varphi\), and rung number \(n\).  Assume
+\noderef{MaximumProperty} for \(\mathcal E\), a
+\noderef{TechnicalInductionContext} through rung \(n\), and
+\[
+ \noderef{MaximumDegree}(G)+1\leq k,
+ \qquad 11\leq \noderef{TashkinovOrder}(G).
+\]
+Then
+\[
+ \noderef{ColoredVertexSetElementary}
+   \bigl(G,\varphi,\noderef{TreeSequenceVertexSet}(T)\bigr).
+\]
+In particular, no hierarchy base, good hierarchy, mod-coloring, terminal
+closure, or missing-color estimate is assumed.
+\end{theorem}
+\begin{proof}
+Apply \noderef{CurrentElementaryOrGoodHierarchyConstructionLarge} to
+\(\mathcal E\), its maximum property, the given technical context, and the
+two displayed numerical hypotheses.  If its first alternative holds, it is
+exactly the required elementarity of \(V(T)\), so suppose that its second
+alternative holds.  Choose the objects supplied there: a tree-sequence
+\(U\), a \noderef{CorrespondingExtendedTashkinovTree} certificate \(C_U\)
+relative to the fixed original ETT \(\mathcal E\), maximum property for the
+replacement ETT
+\[
+                   \mathcal E_U=C_U.\mathit{replacementETT},
+\]
+a generating-color \noderef{HierarchyBase} \(B_U\), a
+\noderef{TashkinovHierarchy} \(H\) over that base, and a
+\noderef{GoodHierarchy} witness.  We also retain the asserted equality
+\[
+ V(U)=V(F),\qquad
+ F=\mathcal E.\mathit{series.data.tree}
+       (\operatorname{Fin.last}(n+1)).                         \tag{1}
+\]
+The supplied terminal closedness will not be needed in this consumer.
+
+We verify the strict-lower package required by
+\noderef{GoodHierarchyElementaryLarge}.  Let \(\mathcal L\) be any
+positive-rung maximum ETT, with arbitrary certified input and generating
+colorings, whose rung number \(m\) satisfies
+\(m<\mathcal E_U.\mathit{rounds}\).  The rung-agreement field in the
+corresponding certificate gives
+\[
+             \mathcal E_U.\mathit{rounds}=n,
+\]
+so \(0<m<n\).  Apply, respectively, the six fields
+\texttt{lowerOne}, \texttt{lowerTwo}, \texttt{lowerThree},
+\texttt{lowerFour}, \texttt{lowerFive}, and \texttt{lowerSix} of the
+given \noderef{TechnicalInductionContext} to \(\mathcal L\), its positivity,
+the transported strict inequality \(m<n\), and its maximum property.  By
+the statement of that context, these are exactly assertions (i)--(vi) for
+\(\mathcal L\), with all the dependent terminal trees, stored sets,
+colorings, membership witnesses, and first-appearance indices belonging to
+\(\mathcal L\).  Their conjunction is therefore the full strict-lower
+package demanded by the good-hierarchy theorem.
+
+Next let \(\mathcal L\) be any maximum ETT whose rung equals that of
+\(\mathcal E_U\).  Composing this equality with the same rung-agreement
+field gives
+\(\mathcal L.\mathit{rounds}=n\).  The fields
+\texttt{currentThree}, \texttt{currentFour}, \texttt{currentFive}, and
+\texttt{currentSix} of the technical context, applied to this equality and
+the maximum property of \(\mathcal L\), give exactly assertions
+(iii)--(vi) at the current rung.  This supplies the second package required
+by \noderef{GoodHierarchyElementaryLarge}, uniformly over the arbitrary
+input and generating colorings of \(\mathcal L\).
+
+It remains to supply that theorem's candidate-uniform missing-color bound.
+Take any such same-rung maximum ETT \(\mathcal L\), together with any
+hierarchy base, hierarchy, and good witness offered by the premise of the
+good-hierarchy theorem.  Discard those three hierarchy objects.  The rung
+equality just proved transports the original technical context from rung
+\(n\) to the rung of \(\mathcal L\).  Apply
+\noderef{TechnicalCurrentLadderMissingBoundLarge} directly to
+\(\mathcal L\), its maximum property, that transported context, and the
+unchanged degree and large-order hypotheses.  If \(L_m\) is its exact
+terminal ladder tree and \(\psi\) its generating coloring, the conclusion is
+\[
+  2\mathcal L.\mathit{rounds}+11
+       \leq |\noderef{TreeMissingColors}(\psi,L_m)|,             \tag{2}
+\]
+which is precisely the required candidate-uniform estimate.  Thus (2) was
+derived without using the supplied base, hierarchy, or good witness.
+
+All hypotheses of \noderef{GoodHierarchyElementaryLarge} now hold for
+\(\mathcal E_U,B_U,H\): its maximum property and good hierarchy came from
+the construction alternative, the two induction packages were assembled
+above, the large-order hypothesis is the original one, and (2) is uniform
+over every same-rung candidate.  Hence
+\[
+ \noderef{ColoredVertexSetElementary}(G,\varphi,V(U)).           \tag{3}
+\]
+
+Finally, the \texttt{belowFinal} field of
+\noderef{ExtendedTashkinovTree} says that \(T\) is an exact
+\noderef{TreeSequenceInitialSegment} of \(F\).  By
+\noderef{TreeSequenceInitialSegmentVertexSetSubset},
+\(V(T)\subseteq V(F)\); rewriting with (1) gives
+\(V(T)\subseteq V(U)\).  For any distinct \(x,y\in V(T)\), this inclusion
+places both vertices in \(V(U)\), and (3) says that their missing-color sets
+under \(\varphi\) are disjoint.  The defining pairwise-disjoint condition in
+\noderef{ColoredVertexSetElementary} therefore holds on \(V(T)\), as
+claimed.
+\end{proof}

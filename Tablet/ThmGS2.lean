@@ -128,6 +128,7 @@ import Tablet.TreeMissingColorsCardLowerBound
 import Tablet.ElementaryClosedMissingColorOdd
 import Tablet.TechnicalCurrentLadderMissingBoundLarge
 import Tablet.CurrentElementaryOrGoodHierarchyConstructionLarge
+import Tablet.TechnicalCurrentRungElementaryLarge
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwapProper
 import Tablet.TwoColorComponentsDisjoint
