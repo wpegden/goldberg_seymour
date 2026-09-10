@@ -1,0 +1,297 @@
+\begin{lemma}[The middle Rutgers exit lies beyond the terminal ladder]
+Fix an original positive-rung extended Tashkinov tree \(\mathcal E\).
+Assume \(\Delta(G)+1\leq k\).  Assume current assertion (iv) uniformly
+for every maximum ETT having the same rung number as \(\mathcal E\): at a
+terminal PE, under every proper terminal-ladder-stable coloring leaving
+exactly \(e_0\) uncolored, the terminal \(\gamma_n,\delta_n\)-component
+through the certified support meets the terminal ladder only at that
+support.  Assume also assertion (ii) for every maximum positive-rung ETT
+whose rung number is strictly smaller than that of \(\mathcal E\), with
+arbitrary certified input.
+
+Let \(\mathcal P=(\sigma,U,\ldots)\) be a
+\noderef{RutgersClosedPresentation} relative to \(\mathcal E\), let
+\(\mathcal C\) be a \noderef{RutgersCounterexample} on \(\mathcal P\),
+and suppose that \(V(U)\) is elementary under \(\sigma\).  Write
+\(\mathcal R=\mathcal P.\mathit{corresponding}.\mathit{replacementETT}\),
+write \(n\) for its positive rung number, and write \(T_n\) for its
+actual terminal ladder tree.  Then the middle ordered tree end of
+\(\mathcal C\) satisfies
+\[
+                         b_2\notin V(T_n).
+\]
+No minimum property of \(\mathcal C\) is assumed.
+\end{lemma}
+\begin{proof}
+Put \(D_n=\noderef{TashkinovStoredColors}(\mathcal R,n)\), with \(n\)
+denoting the terminal data index as well as the rung number when no
+confusion can result.  The final-generating-coloring and dependent-series
+fields of \noderef{CorrespondingExtendedTashkinovTree} identify
+\(\sigma\) with the terminal coloring in the actual certified series of
+\(\mathcal R\).  Eliminating its positive terminal certificate in
+\noderef{TashkinovSeries} and \noderef{TashkinovSeriesStep} shows that
+this coloring is proper and leaves exactly \(e_0\) uncolored: these are
+explicit fields in SE and PE, and in RE they follow from the preceding
+proper coloring and the current-coloring equality.  We use these facts
+below without changing from the replacement presentation to the original
+ETT.
+
+Suppose, for a contradiction, that \(b_2\in V(T_n)\).  We first record
+the exact prefix relation
+\[
+                              T_n\subseteq U.                 \tag{1}
+\]
+In the PE alternative of the terminal route stored in
+\noderef{RutgersClosedPresentation},
+\(\noderef{TashkinovClosure}(\sigma,T_n,U)\) contains a
+\noderef{TashkinovAugmentationSequence} from \(T_n\) to \(U\), so
+\noderef{TashkinovAugmentationSequenceInitialSegment} gives (1).  In the
+SE/RE alternative, the route contains an exact seed \(A\), an exact edge
+identity \(f\), and
+\(\noderef{TreeSequenceAdjoinEdge}(T_n,f,A)\), followed by a closure
+from \(A\) to \(U\).  The adjoin-edge definition makes \(T_n\) an exact
+\noderef{TreeSequenceInitialSegment} of \(A\), and the same augmentation
+lemma makes \(A\) an exact initial segment of \(U\).  Composing their
+length inequalities and their entrywise vertex and edge equalities gives
+(1).  In either alternative, the closure field also says that \(V(U)\)
+is closed under \(\sigma\).
+
+Expand \(b_1\prec_U b_2\) from the field
+\(\mathcal C.\mathit{insideOrder12}\) using
+\noderef{TreeVertexOrder}.  It supplies positions \(i<j\) of \(b_1,b_2\)
+in \(U\).  Membership of \(b_2\) in \(T_n\), (1), and injectivity of
+the vertex array in the underlying tree-sequence identify \(j\) with the
+image of its position in \(T_n\).  Hence \(j\leq |T_n|\), and then
+\(i<j\) says that position \(i\) also lies in the exact prefix.  The
+entrywise equality in \noderef{TreeSequenceInitialSegment} yields
+\[
+                         b_1,b_2\in V(T_n).                   \tag{2}
+\]
+The vertex-set form of (1), equivalently
+\noderef{TreeSequenceInitialSegmentVertexSetSubset}, restricts the
+assumed \noderef{ColoredVertexSetElementary} relation on \(V(U)\) to
+\(V(T_n)\).
+
+The exact-one-uncolored property gives \(\sigma(e_0)=\mathsf{none}\).
+Apply \noderef{TreeMissingColorsCardLowerBound} to the elementary set
+\(V(T_n)\), this equality, and \(\Delta(G)+1\leq k\).  It gives
+\[
+             |V(T_n)|+2\leq |\overline\sigma(T_n)|.          \tag{3}
+\]
+In particular \(\overline\sigma(T_n)\) is nonempty.  In an SE or RE
+terminal step choose any
+\(c\in\overline\sigma(T_n)\).  In a PE step first expose from the actual
+positive constructor its certified support \(v_n\), colors
+\(\gamma_n,\delta_n\), and exact connecting edge \(f_n\).  A
+tree-sequence contains the two distinct ends of its first, loopless edge,
+so \(|V(T_n)|\geq2\); consequently (3) gives at least four missing
+colors.  Choose
+\[
+ c\in\overline\sigma(T_n)-\{\gamma_n,\delta_n\}.             \tag{4}
+\]
+This slightly more selective choice removes any ambiguity when the PE
+switch is later undone.
+
+By (1), the chosen color \(c\) is also missing on \(U\), while
+\(\alpha=\mathcal C.\alpha\) is missing on \(U\) by the counterexample
+field.  Define \(\mu_1=\sigma\) if \(c=\alpha\).  Otherwise put
+\[
+ \mu_1=\noderef{OutsideTreeColorSwap}(U,\sigma,\alpha,c).
+\]
+In the second case the two colors are distinct, \(U\) is closed, and
+both are missing on \(U\), so
+\noderef{OutsideTreeColorSwapStable}, with control set \(D_n\), proves
+that \(\mu_1\) is proper, leaves exactly \(e_0\) uncolored, is
+\((U,D_n,\sigma)\)-stable, and fixes every exact edge identity incident
+with \(U\).  In the first case the same conclusions are the reflexive
+case of \noderef{StableColoring}, also supplied by the reflexivity clause
+of \noderef{sc2}.  Restricting the vertex equality and incident-edge
+clauses along (1) gives
+\[
+            \mu_1\text{ is }(T_n,D_n,\sigma)\text{-stable}.  \tag{5}
+\]
+
+We next verify from the stored walks, rather than assume, what happens to
+the first two exit legs.  The field
+\(\mathcal C.\mathit{betaPresent}\) says that \(\beta\) is missing at no
+vertex of \(U\); since \(c\) is missing at a vertex of \(T_n\subseteq U\),
+we have \(c\ne\beta\).  In the nonidentity recoloring, every edge-node of
+\(Q_i\) not incident with \(U\) changes from color \(\alpha\) to color
+\(c\), or retains color \(\beta\).  An edge-node of \(Q_i\) incident
+with \(U\) is fixed.  Such an edge cannot have old color \(\alpha\): its
+path incidence and the first-contact condition in
+\noderef{TreeExitPath} make it a boundary identity of \(U\), while
+closedness and \(\alpha\in\overline\sigma(U)\) exclude an
+\(\alpha\)-colored boundary.  It therefore has color \(\beta\).  Thus
+each unchanged node sequence \(Q_i\), for \(i=1,2\), is a walk in
+\noderef{TwoColorIncidenceGraph}\((G,\mu_1;c,\beta)\).
+
+The path and length clauses are unchanged.  The outside endpoint remains
+outside \(T_n\), and (2) puts the inside endpoint in \(T_n\).  The only
+vertex-node of \(Q_i\) in \(U\) was \(b_i\), so it is also the only one
+in \(T_n\).  At the outside endpoint, exchanging \(\alpha,c\) exchanges
+their present and missing status and fixes that of \(\beta\); hence the
+old assertion that \(\alpha\) or \(\beta\) is missing becomes the
+assertion that \(c\) or \(\beta\) is missing.  These are all clauses of
+\noderef{TreeExitPath}, and therefore
+\[
+ Q_1,Q_2\text{ are support-disjoint }
+       (T_n,\mu_1,\{c,\beta\})\text{-exit paths}.             \tag{6}
+\]
+The supports themselves have not changed.  The exact identities
+\(f_1,f_2\) remain on their respective walks and remain incident with
+\(b_1,b_2\).  Their old membership in the \(\beta\)-colored boundary of
+\(U\), together with (2), says that the same identities belong to the
+\(\beta\)-colored boundary of \(T_n\) under \(\sigma\), and hence under
+\(\mu_1\).  Finally \(f_1\ne f_2\): equality would put the same edge-node
+in both walk supports, contrary to the recorded support-disjointness.
+
+We isolate a consequence of (6) which will be used after either terminal
+transport:
+\[
+ \begin{gathered}
+ \text{if a proper coloring \(\rho\) leaves the two walks in (6)
+ unchanged and }c\in\overline\rho(T_n),\\
+ \text{then \(c,\beta\) are not \(T_n\)-interchangeable under \(\rho\).}
+                                                               \tag{7}
+ \end{gathered}
+\]
+Choose \(x\in V(T_n)\) missing \(c\).  Since \(\beta\) is missing at no
+vertex of \(U\), the exact-witness definition
+\noderef{PresentColors} supplies a \(\beta\)-colored edge incident with
+\(x\).  No \(c\)-edge is incident there, and properness permits at most
+one incident \(\beta\)-edge; hence the vertex-node \(x\) has degree one
+in the \(c,\beta\) incidence graph.  For each \(i=1,2\), the exit path
+has positive incidence length and says that one of \(c,\beta\) is missing
+at \(a_i\).  Its first edge gives one neighbor of \(a_i\), missingness
+rules out one color, and properness permits at most one edge of the other
+color.  Thus \(a_1,a_2\) also have degree one.  The three vertex-nodes
+\(x,a_1,a_2\) are distinct, because \(x\in V(T_n)\), the two \(a_i\) are
+outside, and \(a_1\ne a_2\) is a counterexample field.
+
+Each root belongs to its own \noderef{TwoColorComponent}; its degree-one
+neighbor set and \(c\ne\beta\) prove the corresponding
+\noderef{TwoColorPathComponent} condition.  All three components meet
+\(T_n\): the component through \(x\) does so at \(x\), and the walks
+\(Q_i\) connect \(a_i\) to \(b_i\in V(T_n)\).  If \(c,\beta\) were
+\(T_n\)-interchangeable, \noderef{TreeInterchangeable} would identify
+all three full components.  Apply
+\noderef{TwoColorComponentSpanningPath} to that common component.  It is
+a finite simple spanning path.  An internal node has two distinct path
+neighbors, consistently with the global degree bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, so each of the three
+degree-one nodes must be one of the two endpoints.  Three distinct nodes
+cannot lie in that two-element endpoint set.  This proves (7).  Notice
+that \noderef{TwoColorPathComponent} still counts isolated components;
+the three components used here are proved nontrivial from their displayed
+incident edges, so no isolated case has been discarded.  Nor did we use
+the invalid inference that disjoint exit subwalks must themselves have
+distinct full components.
+
+We now transport to the preceding rung, splitting the actual terminal
+constructor.
+
+If it is SE, its \noderef{MaximumDefectiveChoice} field gives a selected
+coloring which is \((T_n,D_{n-1},\varphi_{n-1})\)-stable, and the current
+coloring equation identifies that selected coloring with \(\sigma\).
+The first inclusion of \noderef{HkuMissingStoredMonotone} says
+\[
+ \overline{\varphi}_{n-1}(T_n)\cup D_{n-1}
+ \subseteq \overline\sigma(T_n)\cup D_n.                    \tag{8}
+\]
+Using (8) in the incident-edge clause of (5), while restricting its
+vertex clause, makes \(\mu_1\)
+\((T_n,D_{n-1},\sigma)\)-stable.  Transitivity in
+\noderef{sc2} with the selected-stable certificate gives
+\[
+ \mu_1\text{ is }(T_n,D_{n-1},\varphi_{n-1})\text{-stable}.  \tag{9}
+\]
+In RE, the constructor equation is \(\sigma=\varphi_{n-1}\); the same
+use of (8) gives (9) directly.  Properness and exact-one-uncoloredness of
+every coloring used in this application are fields of the actual
+constructor or were proved above.
+
+Suppose instead that the terminal kind is PE.  Use its actual constructor
+witnesses \(v_n,\gamma_n,\delta_n,f_n\).  The
+\noderef{ParallelExtensionColor} field says that \(\gamma_n\) is missing
+at \(v_n\) before the terminal switch.  The exact selected edge from
+\noderef{MaximumDefectiveChoice} is incident with \(v_n\) and has color
+\(\delta_n\); the intermediate stable relation preserves that value.
+Thus \(\gamma_n\ne\delta_n\).  Expanding
+\noderef{TwoColorComponentSwap}, properness makes that edge the unique
+\(\delta_n\)-edge at \(v_n\), so the terminal switch makes
+\(\delta_n\) missing at \(v_n\) under \(\sigma\).  Since
+\(v_n\in V(T_n)\subseteq V(U)\), the global nonmissingness of \(\beta\)
+on \(U\) gives
+\[
+                             \beta\ne\delta_n.                \tag{10}
+\]
+
+The unconditional first conclusion of
+\noderef{HkuParallelBoundaryStructure}, applied to these exact terminal
+option slots and connecting identity, is
+\[
+           \partial_{\sigma,\gamma_n}(T_n)=\{f_n\}.          \tag{11}
+\]
+If \(\beta=\gamma_n\), then the two distinct exact identities
+\(f_1,f_2\) exhibited after (6) both lie in the singleton (11), a
+contradiction.  Hence \(\beta\ne\gamma_n\).  Together with the PE choice
+(4), we have
+\[
+                    \{c,\beta\}\cap
+                    \{\gamma_n,\delta_n\}=\varnothing.       \tag{12}
+\]
+
+Apply the assumed current assertion (iv) to the replacement ETT
+\(\mathcal R\), using its rung agreement with \(\mathcal E\), the
+maximum property \(\mathcal P.\mathit{maximum}\), the actual terminal
+kind and option-slot equations, and (5).  It says that the
+\(\gamma_n,\delta_n\)-component of \(v_n\) under \(\mu_1\) meets
+\(T_n\) exactly at \(v_n\).  These are precisely the hypotheses of
+\noderef{ParallelExtensionUndoStable}.  Put
+\[
+ \mu_2=\noderef{TwoColorComponentSwap}
+          (G,\mu_1,\gamma_n,\delta_n,\operatorname{inl}v_n).
+\]
+The cited undo theorem gives
+\[
+ \mu_2\text{ is }(T_n,D_{n-1},\varphi_{n-1})\text{-stable}.  \tag{13}
+\]
+Because \(\gamma_n\ne\delta_n\),
+\noderef{TwoColorComponentSwapProper} gives properness of \(\mu_2\).
+The definition of the switch fixes \(\mathsf{none}\) and only transposes
+two colored values, so the exact-one-uncolored condition for \(\mu_1\)
+gives the same condition for \(\mu_2\).  By (12), an exact edge has color
+\(c\) or \(\beta\) under \(\mu_2\) exactly when it has that same color
+under \(\mu_1\).  Consequently the two incidence graphs on these colors,
+their missingness at every vertex, and the walks \(Q_1,Q_2\) are
+unchanged.  In particular \(c\in\overline{\mu_2}(T_n)\), and (7) applies
+to \(\rho=\mu_2\).  Thus in the PE case we use (13) below and in the
+SE/RE cases we use (9), always with the coloring denoted by \(\rho\).
+
+It remains to invoke assertion (ii) at the correct rung.  First suppose
+\(1<n\).  Apply \noderef{CertifiedETTPredecessor} to \(\mathcal R\) and
+\(\mathcal P.\mathit{maximum}\).  It supplies an actual positive-rung
+ETT \(\mathcal R^-\) with rung number \(n-1\), maximum property,
+displayed terminal tree exactly \(T_n\), generating coloring exactly
+\(\varphi_{n-1}\), and terminal computed stored set exactly
+\(D_{n-1}\).  Its rung is strictly smaller than the rung of
+\(\mathcal E\), because
+\(\mathcal P.\mathit{corresponding}.\mathit{rungAgreement}\) identifies
+\(n\) with the original rung number.  Hence the assumed lower assertion
+(ii), applied to \(\mathcal R^-\), the transported coloring \(\rho\),
+(9) or (13), and \(c\in\overline\rho(T_n)\), says that \(c,\beta\) are
+\(T_n\)-interchangeable.  This contradicts (7).
+
+Finally suppose \(n=1\).  There is no zero-rung
+\noderef{ExtendedTashkinovTree}, and none is introduced.  Under the
+index equality \(n=1\), the actual tree \(T_n\), preceding coloring
+\(\varphi_{n-1}\), and preceding stored set \(D_{n-1}\) are exactly the
+tree, coloring, and stored set at index zero of the replacement certified
+series.  The interchangeability half of
+\noderef{TechnicalTheoremBase}, applied directly to that series, to
+\(\rho\), to (9) or (13), and to the missing color \(c\), therefore also
+says that \(c,\beta\) are \(T_n\)-interchangeable.  Again (7) is a
+contradiction.  Both possible positive rung numbers have led to a
+contradiction, proving \(b_2\notin V(T_n)\).
+\end{proof}

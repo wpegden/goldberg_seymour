@@ -131,6 +131,7 @@ import Tablet.CurrentElementaryOrGoodHierarchyConstructionLarge
 import Tablet.TechnicalCurrentRungElementaryLarge
 import Tablet.MissingColorsNonemptyOfMaximumDegree
 import Tablet.RutgersCounterexampleMinimumExists
+import Tablet.RutgersMiddleExitOutsideTerminalLadder
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwapProper
 import Tablet.TwoColorComponentsDisjoint
