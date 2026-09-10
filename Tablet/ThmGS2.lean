@@ -132,6 +132,8 @@ import Tablet.TechnicalCurrentRungElementaryLarge
 import Tablet.MissingColorsNonemptyOfMaximumDegree
 import Tablet.RutgersCounterexampleMinimumExists
 import Tablet.RutgersMiddleExitOutsideTerminalLadder
+import Tablet.RutgersStrictShortening
+import Tablet.RutgersCurrentRungInterchangeability
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwapProper
 import Tablet.TwoColorComponentsDisjoint

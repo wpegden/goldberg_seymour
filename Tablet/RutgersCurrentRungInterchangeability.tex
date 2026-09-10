@@ -1,0 +1,146 @@
+\begin{lemma}[Rutgers current-rung interchangeability]
+Fix a positive-rung extended Tashkinov tree \(\mathcal E\) satisfying
+maximum property, and assume \(\Delta(G)+1\leq k\).  Assume current
+assertions (i), (iv), and (vi) uniformly for every maximum ETT with the
+same rung number as \(\mathcal E\), with arbitrary certified input:
+\begin{enumerate}
+\item its displayed vertex set is elementary under its generating
+  coloring;
+\item at a terminal PE, under every proper terminal-ladder-stable
+  coloring leaving exactly \(e_0\) uncolored, the terminal
+  \(\gamma_n,\delta_n\)-component through the certified support meets
+  the terminal ladder only at that support;
+\item every such terminal-ladder-stable coloring is a
+  \(\noderef{ModColoring}\) of the ETT.
+\end{enumerate}
+Assume also assertion (ii) for every maximum positive-rung ETT whose
+rung number is strictly smaller than that of \(\mathcal E\), with
+arbitrary certified input.
+
+Write \(T_{n+1}\) for the exact final tree in the certified series of
+\(\mathcal E\), \(T_n\) for its terminal ladder tree, \(D_n\) for its
+terminal stored set, and \(\varphi_n\) for its terminal series coloring.
+For every proper partial coloring \(\sigma\) leaving exactly \(e_0\)
+uncolored which is
+\((T_{n+1},D_n,\varphi_n)\)-\(\noderef{StableColoring}\), and every two
+colors \(\alpha,\beta\), if
+\[
+ \alpha\in\overline\sigma(T_{n+1})
+ \quad\hbox{or}\quad
+ \beta\in\overline\sigma(T_{n+1}),
+\]
+then \(\alpha,\beta\) are
+\(\noderef{TreeInterchangeable}\) on \(T_{n+1}\) under \(\sigma\).
+\end{lemma}
+\begin{proof}
+Put \(F=T_{n+1}\).  We first record the symmetry and equal-color cases,
+because the missing-color disjunction in the statement does not privilege
+its first color.  By \(\noderef{TwoColorIncidenceGraph}\), exchanging
+the names \(\alpha,\beta\) exchanges the two disjuncts in every adjacency
+condition and hence gives the same simple incidence graph.  Therefore the
+connected supports in \(\noderef{TwoColorComponent}\), the leaf
+condition in \(\noderef{TwoColorPathComponent}\), and the quantification
+in \(\noderef{TreeInterchangeable}\) are unchanged.  Thus
+\[
+ \noderef{TreeInterchangeable}(G,F,\sigma,\alpha,\beta)
+ \quad\Longleftrightarrow\quad
+ \noderef{TreeInterchangeable}(G,F,\sigma,\beta,\alpha).      \tag{1}
+\]
+This is a direct expansion of the three definitions, not an assumption
+that the first named color is missing.
+
+If \(\alpha=\beta\), the distinct-color clause in
+\(\noderef{TwoColorPathComponent}\) is false for every root.  Hence the
+universal implication in \(\noderef{TreeInterchangeable}\) is vacuous,
+and the conclusion holds.  We may therefore assume
+\(\alpha\ne\beta\).  Suppose for a contradiction that the desired
+interchangeability fails.  Normalize the ordered pair \((a,b)\) as
+follows:
+\[
+ (a,b)=
+ \begin{cases}
+  (\alpha,\beta),&
+    \alpha\in\overline\sigma(F),\\
+  (\beta,\alpha),&
+    \beta\in\overline\sigma(F).
+ \end{cases}                                                   \tag{2}
+\]
+In the first line use the first side of the given disjunction; use the
+second line only when the first side is unavailable.  Then
+\(a\ne b\), \(a\in\overline\sigma(F)\), and \(a,b\) are not
+interchangeable: in the second line this last assertion is exactly the
+contrapositive direction of the symmetry (1).
+
+Apply \(\noderef{RutgersCounterexampleMinimumExists}\) to the fixed
+original \(\mathcal E\), its assumed
+\(\noderef{MaximumProperty}\), the uniform current assertions (i) and
+(vi), the given properness and exact-one-uncolored hypotheses, the given
+stability on \(F\), and the normalized colors in (2).  It supplies a
+\(\noderef{RutgersClosedPresentation}\) \(\mathcal P\) relative to
+the same fixed original and a \(\noderef{RutgersCounterexample}\)
+\(\mathcal C\) on it such that
+\[
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C)
+ \leq
+ \noderef{RutgersCounterexampleMeasure}(\mathcal D)           \tag{3}
+\]
+for every Rutgers presentation \(\mathcal Q\) relative to
+\(\mathcal E\) and every Rutgers counterexample \(\mathcal D\) on
+\(\mathcal Q\).  Notice that the minimum theorem itself constructs the
+presentation and all three exact exit walks; no presentation has been
+smuggled into the hypotheses of the present lemma.
+
+Let
+\(\mathcal R=\mathcal P.\mathit{corresponding}.\mathit{replacementETT}\).
+The rung-agreement field of
+\(\noderef{CorrespondingExtendedTashkinovTree}\) says that
+\(\mathcal R\) has the same rung number as \(\mathcal E\), and
+\(\mathcal P.\mathit{maximum}\) says that it has maximum property.
+Apply uniform current assertion (i) to \(\mathcal R\).  Since its
+displayed generating coloring is exactly
+\(\mathcal P.\mathit{sigma}\), this gives
+\[
+ \noderef{ColoredVertexSetElementary}
+       (G,\mathcal P.\mathit{sigma},V(\mathcal P.\mathit U)). \tag{4}
+\]
+
+All hypotheses of
+\(\noderef{RutgersMiddleExitOutsideTerminalLadder}\) now hold: use the
+degree bound, uniform current assertion (iv), the arbitrary-input
+strict-lower assertion (ii), the presentation \(\mathcal P\), the
+counterexample \(\mathcal C\), and (4).  If \(T_n^{\mathcal R}\) is
+the actual terminal ladder tree in the dependent certified series of
+\(\mathcal R\), that theorem yields
+\[
+                   \mathcal C.b_2\notin V(T_n^{\mathcal R}). \tag{5}
+\]
+The theorem handles the PE undo, the positive predecessor case, and the
+rung-one base boundary internally; in particular, (5) does not appeal to
+a nonexistent zero-rung ETT.
+
+Apply \(\noderef{RutgersStrictShortening}\) to \(\mathcal E\), the
+degree bound, the same uniform current assertions (i) and (vi), and the
+data \(\mathcal P,\mathcal C,(5)\).  We obtain a new Rutgers closed
+presentation \(\mathcal P'\) relative to the same original and a
+counterexample \(\mathcal C'\) on it satisfying
+\[
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C')
+ <
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C).          \tag{6}
+\]
+Instantiate the minimum inequality (3) with exactly
+\(\mathcal P',\mathcal C'\).  It gives the reverse weak inequality,
+\[
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C)
+ \leq
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C'),
+\]
+contradicting (6) in the natural-number order.
+
+Thus the assumed failure of interchangeability is impossible for the
+normalized pair.  In the first branch of (2) this is the desired ordered
+pair \((\alpha,\beta)\); in the second branch, symmetry (1) returns the
+same conclusion for \((\alpha,\beta)\).  Together with the equal-color
+case, this proves the asserted current-rung interchangeability for every
+side of the missing-color disjunction.
+\end{proof}

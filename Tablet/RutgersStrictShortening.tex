@@ -1,0 +1,447 @@
+\begin{lemma}[Strict shortening of a Rutgers counterexample]
+Fix an original positive-rung extended Tashkinov tree \(\mathcal E\),
+and assume \(\Delta(G)+1\leq k\).  Assume the following two assertions
+uniformly for every maximum ETT \(\mathcal F\) having the same rung
+number as \(\mathcal E\), with arbitrary certified input:
+\begin{enumerate}
+\item the displayed vertex set of \(\mathcal F\) is elementary under
+  its generating coloring;
+\item every proper coloring leaving exactly \(e_0\) uncolored and stable
+  on the terminal ladder tree of \(\mathcal F\), relative to its
+  terminal stored set and terminal series coloring, is a
+  \(\noderef{ModColoring}\) of \(\mathcal F\).
+\end{enumerate}
+Let \(\mathcal P=(\sigma,U,\ldots)\) be a
+\(\noderef{RutgersClosedPresentation}\) relative to \(\mathcal E\),
+and let \(\mathcal C\) be a \(\noderef{RutgersCounterexample}\) on
+\(\mathcal P\).  Write \(\mathcal R\) for the replacement ETT in
+\(\mathcal P\), and \(T_n\) for its actual terminal ladder tree.  If
+the middle ordered tree end of \(\mathcal C\) satisfies
+\[
+                              b_2\notin V(T_n),
+\]
+then there are another Rutgers closed presentation \(\mathcal P'\)
+relative to the same fixed original \(\mathcal E\), and a Rutgers
+counterexample \(\mathcal C'\) on \(\mathcal P'\), such that
+\[
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C')
+ <
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C).
+\]
+No minimality hypothesis on \(\mathcal C\) is assumed.
+\end{lemma}
+\begin{proof}
+Put \(n=\mathcal R.\mathit{rounds}\), let \(T_n\) be its terminal
+ladder tree, and let
+\(D_n=\noderef{TashkinovStoredColors}(\mathcal R,n)\).  The dependent
+series and final-coloring fields of
+\(\noderef{CorrespondingExtendedTashkinovTree}\) identify \(\sigma\)
+with the terminal series coloring of \(\mathcal R\).  Its
+replacement-proper and replacement-one-uncolored fields therefore say
+that \(\sigma\) is proper in the sense of
+\(\noderef{IsProperEdgeColoring}\) and leaves exactly \(e_0\)
+uncolored in the sense of \(\noderef{IsOneEdgeUncolored}\).
+
+The terminal route in \(\mathcal P\) supplies both
+\[
+             T_n\preccurlyeq U
+   \quad\hbox{and}\quad
+             \noderef{ColoredVertexSetClosed}(G,\sigma,V(U)). \tag{1}
+\]
+Indeed, in the PE alternative the
+\(\noderef{TashkinovClosure}\) starts at \(T_n\); in the SE/RE
+alternative it starts at an exact one-edge extension of \(T_n\) supplied
+by \(\noderef{TreeSequenceAdjoinEdge}\).  The augmentation sequence
+inside either closure makes its source an exact initial segment of \(U\)
+by \(\noderef{TashkinovAugmentationSequenceInitialSegment}\), and the
+entrywise relations in \(\noderef{TreeSequenceInitialSegment}\) compose.
+Applying \(\noderef{TreeSequenceInitialSegmentVertexSetSubset}\) gives
+the corresponding vertex-set inclusions.  In particular all three
+inside ends \(b_i\), which belong to \(V(U)\) by
+\(\noderef{TreeExitPath}\), are genuine displayed vertices of \(U\).
+
+By \(\noderef{MissingColorsNonemptyOfMaximumDegree}\), choose
+\[
+                    \gamma\in
+                    \noderef{MissingColors}(G,\sigma,b_3).   \tag{2}
+\]
+Thus \(\gamma\in\noderef{TreeMissingColors}(\sigma,U)\).
+The retained identity \(f_3\) has \(\sigma(f_3)=\beta\) by
+\(\noderef{BoundaryColorEdges}\), and is incident with \(b_3\) by the
+counterexample fields.  The witness definition
+\(\noderef{PresentColors}\), together with (2), gives
+\[
+                              \gamma\ne\beta.                 \tag{3}
+\]
+
+Define
+\[
+ \mu_3=\noderef{OutsideTreeColorSwap}(U,\sigma,\alpha,\gamma).
+                                                                    \tag{4}
+\]
+If \(\alpha=\gamma\), this is just \(\sigma\).  If
+\(\alpha\ne\gamma\), both colors are tree-missing on \(U\): this is a
+field of \(\mathcal C\) for \(\alpha\), and follows from (2) for
+\(\gamma\).  Apply \(\noderef{OutsideTreeColorSwapStable}\) using the
+closedness in (1).  In either equality branch, \(\mu_3\) is proper,
+leaves exactly \(e_0\) uncolored, is
+\((U,D_n,\sigma)\)-stable in the sense of
+\(\noderef{StableColoring}\), and fixes every exact identity incident
+with \(U\) in the sense of \(\noderef{TreeIncidentEdge}\).             \(\tag{5}\)
+
+We next verify, rather than merely assert, that every old walk \(Q_i\)
+is an exact \((U,\mu_3,\{\gamma,\beta\})\)-exit path.  Consider an
+edge-node \(f\) on \(Q_i\).  If \(f\) is not incident with \(U\), the
+definition in (4) changes an old \(\alpha\)-value to \(\gamma\), fixes
+an old \(\beta\)-value by (3) and the counterexample equality
+\(\alpha\ne\beta\), and preserves the relevant incidence adjacency in
+\(\noderef{TwoColorIncidenceGraph}\).  Suppose instead that \(f\) is
+incident with \(U\).  Since the endpoints of \(Q_i\) are vertex-nodes,
+the edge-node \(f\) is internal to the incidence walk and its predecessor
+and successor are its two endpoint vertices.  They are distinct by
+\(\noderef{LooplessMultigraph}\) and the endpoint-incidence definition
+\(\noderef{Incident}\).  The unique-contact clause of
+\(\noderef{TreeExitPath}\) says that the only one of these vertices that
+can lie in \(V(U)\) is \(b_i\).  Hence exactly one endpoint lies in
+\(V(U)\), so
+\[
+                       f\in\noderef{BoundaryEdges}(G,V(U)).   \tag{6}
+\]
+Closedness, together with the tree-missingness of \(\alpha\) and
+\(\gamma\), excludes both of those old colors on (6).  Since \(f\) is
+an old \(\alpha,\beta\)-walk edge, it is therefore \(\beta\)-colored,
+and (5) fixes it.
+
+The outside-end missing-color clause also transports field by field.
+If \(a_i\) was \(\beta\)-missing, no edge acquires or loses color
+\(\beta\), so it remains so.  Suppose it was \(\alpha\)-missing and,
+for a contradiction, that an edge \(g\) incident with \(a_i\) has new
+color \(\gamma\).  If \(g\) is not incident with \(U\), (4) says that
+it had old color \(\alpha\), contradicting the old missingness.  If it
+is incident with \(U\), it is fixed.  Since \(a_i\notin V(U)\), its
+other incident witness lies in \(V(U)\); the loopless endpoint law makes
+\(g\) a genuine boundary identity.  Its fixed old \(\gamma\)-color then
+contradicts closedness and the \(\gamma\)-missing witness \(b_3\).
+Thus \(a_i\) is \(\gamma\)-missing under \(\mu_3\).  Simplicity,
+length, endpoints, support, and unique contact never changed.  We have
+proved
+\[
+ Q_i:\noderef{TreeExitPath}(U,\mu_3,\gamma,\beta,a_i,b_i,Q_i)
+                    \qquad(i=1,2,3),                         \tag{7}
+\]
+with the same pairwise-disjoint supports.  The exact identities
+\(f_i\) remain \(\beta\)-colored boundary edges of \(U\), because they
+are incident with \(U\) and hence fixed by (5).
+
+We now obtain the first actual replacement ETT.  Restricting (5) along
+the exact prefix in (1) gives
+\[
+                 \mu_3\text{ is }(T_n,D_n,\sigma)\text{-stable}. \tag{8}
+\]
+For the edge clause, an edge incident with \(T_n\) is incident with
+\(U\); for the vertex clause, use the vertex-set inclusion from (1).
+The assumed current assertion (vi), applied to \(\mathcal R\), its
+maximum property \(\mathcal P.\mathit{maximum}\), and (8), gives
+\[
+                        M_3:\noderef{ModColoring}(\mathcal R,\mu_3).
+                                                                    \tag{9}
+\]
+
+The exact terminal route of \(\mathcal P\) also transports from
+\(\sigma\) to \(\mu_3\).  At each step of the
+\(\sigma\)-\(\noderef{TashkinovAugmentationSequence}\), the added edge
+is an edge of \(U\) incident with a preceding displayed vertex and is
+therefore fixed by (5).  The missing-color witness belongs to that
+preceding tree, hence to \(V(U)\), where (5) preserves the entire missing
+set.  Induction over the reflexive-transitive augmentation chain reuses
+the identical ordered steps under \(\mu_3\).  The same vertexwise and
+edgewise equalities show that the terminal closedness in (1) is preserved.
+Thus the PE closure from \(T_n\), or the SE/RE closure from its retained
+exact one-edge seed, is an identical route under \(\mu_3\).
+
+This route is a strict extension of \(T_n\): the vertex \(b_2\) belongs
+to \(V(U)\) by (7) but not to \(V(T_n)\) by hypothesis, whereas (1) is
+an exact prefix.  The universal clause of (9) therefore yields
+\[
+ \mathcal A_3:
+ \noderef{CorrespondingExtendedTashkinovTree}
+       (\mathcal R,\mu_3,U).                                  \tag{10}
+\]
+By \(\noderef{MaximumPropertyTransport}\), applied to the same
+mod-coloring (9), the ETT
+\(\mathcal R_3=\mathcal A_3.\mathit{replacementETT}\) has maximum
+property.  Apply
+\(\noderef{CorrespondingExtendedTashkinovTreeTransTrees}\) to
+\(\mathcal P.\mathit{corresponding}\) and \(\mathcal A_3\).  This
+gives an actual corresponding certificate from the fixed original
+\(\mathcal E\) directly to the \(\mu_3\)-presentation on \(U\).  The
+cited theorem composes, in particular, every positive-stage stable
+coloring relation through the intermediate replacement; no provenance is
+being inferred from equality of the displayed trees.                         \(\tag{11}\)
+
+We identify the exact component to be switched.  Put
+\[
+ K_3=\noderef{TwoColorComponent}(G,\mu_3,\gamma,\beta,
+                                      \operatorname{inl}b_3).
+\]
+The missingness in (2) is preserved at \(b_3\) by (5), while \(f_3\)
+is an incident \(\beta\)-edge.  Properness allows no second incident
+\(\beta\)-edge, so \(b_3\) has degree exactly one in the
+\(\gamma,\beta\)-incidence graph.  At \(a_3\), (7) gives a missing
+color and the nontrivial path gives an incident edge of the other color;
+properness again makes its incidence degree exactly one.  Every internal
+node of the simple walk \(Q_3\) has its two distinct walk neighbors, and
+\(\noderef{TwoColorIncidenceDegreeAtMostTwo}\) excludes a third.
+The spanning path in
+\(\noderef{TwoColorComponentSpanningPath}\), oriented from the
+degree-one node \(a_3\), is therefore forced one node at a time to agree
+with \(Q_3\); neither endpoint has room for a continuation.  Hence
+\[
+                              K_3=Q_3.\mathit{support}.        \tag{12}
+\]
+Equivalently, a shortest route from a hypothetical node of
+\(K_3\setminus Q_3.\mathit{support}\) to the displayed support would
+give a third neighbor at an internal node or a second neighbor at one of
+the two degree-one endpoints.  This also makes clear that (12) is proved
+after the recoloring; it is not imported from the old coloring.
+
+Let \(s\) be the unique displayed index of \(b_3\) in \(U\), whose
+existence and uniqueness follow from
+\(\noderef{TreeSequenceVertexSet}\) and the vertex-injectivity field of
+\(\noderef{TreeSequence}\).  Expanding
+\(\noderef{TreeVertexOrder}\), let \(t_2<s\) be the index of \(b_2\).
+If \(\ell=|T_n|\), exact prefixhood in (1) and
+\(b_2\notin V(T_n)\) imply \(\ell<t_2<s\).  In particular \(s\ge2\).
+Define
+\[
+ B^-=\noderef{TreeSequencePrefix}(U,s-1),\qquad
+ C=\noderef{TreeSequencePrefix}(U,s).                         \tag{13}
+\]
+Then
+\[
+              T_n\preccurlyeq B^-\prec C\preccurlyeq U,      \tag{14}
+\]
+the last vertex of \(C\) is \(b_3\), and \(|C|=|B^-|+1\).
+Moreover, in the SE/RE route the retained one-edge seed has length
+\(\ell+1\le s-1=|B^-|\), so that seed too is an exact prefix of \(B^-\).
+
+By (7), \(b_3\) is the only vertex-node of \(Q_3\) in \(V(U)\).
+Equations (12)--(14) therefore show that \(K_3\) contains no vertex-node
+of \(B^-\).  If an edge-node of \(K_3\) were incident with \(B^-\),
+the incidence adjacency would put its endpoint vertex-node in the same
+component, a contradiction.  Thus no edge identity in \(K_3\) is
+incident with \(B^-\).  Define
+\[
+ \mu_4=\noderef{TwoColorComponentSwap}
+          (G,\mu_3,\gamma,\beta,\operatorname{inl}b_3).       \tag{15}
+\]
+By (3) and \(\noderef{TwoColorComponentSwapProper}\), \(\mu_4\) is
+proper.  The swap transposes only the two displayed nonempty values, so
+the two clauses of \(\noderef{IsOneEdgeUncolored}\) show that precisely
+\(e_0\) remains uncolored.  Every edge incident with \(B^-\) is fixed;
+using \(\noderef{PresentColors}\) and \(\noderef{MissingColors}\),
+every missing set at a vertex of \(B^-\) is fixed as well.  In particular
+\[
+                  \mu_4\text{ is }(T_n,D_n,\mu_3)\text{-stable}. \tag{16}
+\]
+The correspondence fields in (10) identify its terminal tree with
+\(T_n\), its terminal series coloring with \(\mu_3\), and every raw
+stored set with the corresponding raw set of \(\mathcal R\).  We also
+check the computed terminal stored set.  By
+\(\noderef{TashkinovStoredColors}\), it is the union of the raw stored
+sets through the terminal index, with the colors missing on the terminal
+ladder deleted.  The raw unions agree by the stored-set fields of (10).
+The ladder trees agree, and the vertex clause of the positive-stage
+stability field in (10) identifies the two
+\(\noderef{MissingColors}\) sets at every vertex of that ladder; taking
+their union as in \(\noderef{TreeMissingColors}\) identifies the deleted
+sets.  Hence the computed set for \(\mathcal R_3\) is exactly \(D_n\).
+Since \(\mathcal R_3\) has the same rung as \(\mathcal E\) and maximum
+property, current assertion (vi) applied to (16) gives
+\[
+                        M_4:\noderef{ModColoring}(\mathcal R_3,\mu_4).
+                                                                    \tag{17}
+\]
+
+We reconstruct the exact route through \(b_3\).  The transported
+\(\mu_3\)-route used in (10), restricted at the exact prefix \(C\), is
+a route from \(T_n\) in PE, or from the retained exact one-edge seed in
+SE/RE, to \(C\); the restriction is precisely
+\(\noderef{TashkinovAugmentationSequenceRestrict}\), using (14).
+The component swap fixes every displayed edge of \(C\): an earlier edge
+is incident with \(B^-\), and the final displayed edge attaching \(b_3\)
+also has its old endpoint in \(B^-\).  It also fixes every missing set on
+\(B^-\).  Apply
+\(\noderef{TashkinovAugmentationSequenceColoringTransport}\) with target
+\(C\) and penultimate prefix \(B^-\).  Its two pointwise premises are
+exactly these fixed-edge and fixed-missing-set facts, and it yields the
+identical route under \(\mu_4\).                                  \(\tag{18}\)
+
+Choose a finite closure
+\[
+                    \noderef{TashkinovClosure}(\mu_4,C,T')    \tag{19}
+\]
+by \(\noderef{TashkinovClosureExists}\).  Concatenating its augmentation
+sequence with (18) gives the exact PE or SE/RE terminal route to \(T'\).
+It is strict over the terminal ladder because \(C\) already contains the
+vertex \(b_2\notin V(T_n)\).  The universal clause of (17) therefore
+supplies
+\[
+ \mathcal A_4:
+ \noderef{CorrespondingExtendedTashkinovTree}
+       (\mathcal R_3,\mu_4,T').                               \tag{20}
+\]
+Apply \(\noderef{MaximumPropertyTransport}\) to \(M_4\), (20), and the
+maximum property of \(\mathcal R_3\); its replacement ETT has maximum
+property under \(\mu_4\).                                    \(\tag{21}\)
+
+There are two required provenance compositions.  First apply
+\(\noderef{CorrespondingExtendedTashkinovTreeTransTrees}\) to (10) and
+(20), producing a certificate from \(\mathcal R\) to \(\mu_4,T'\).
+Then apply it again to \(\mathcal P.\mathit{corresponding}\) and that
+certificate.  The result is an actual certificate
+\[
+ \mathcal A_{40}:
+ \noderef{CorrespondingExtendedTashkinovTree}
+       (\mathcal E,\mu_4,T')                                  \tag{22}
+\]
+relative to the fixed original ETT.  At each application the theorem
+returns heterogeneous equality with the final nested ETT and series;
+transporting (21) along that equality gives maximum property for the
+replacement ETT in (22).  Likewise, its ladder-tree, kind, and exact
+connecting-edge equalities transport the concatenated route preceding
+(20) to the terminal data of (22).  Thus (19), (21), and (22), with the
+same PE route or the same retained SE/RE edge identity and seed, form a
+\(\noderef{RutgersClosedPresentation}\) \(\mathcal P'\) relative to
+\(\mathcal E\).  This use of maximum property comes from the applicable
+mod-coloring (17); neither maximum property nor correspondence provenance
+is inferred merely from equality of displayed trees.
+
+We now build the shorter counterexample on \(\mathcal P'\).  The swap in
+(15) preserves the entire underlying \(\gamma,\beta\)-incidence graph:
+inside \(K_3\) it interchanges the two allowed colors, and outside
+\(K_3\) it fixes every edge.  Therefore the same three node lists are
+walks in that graph.  For \(Q_3\), the missing statuses at its two
+degree-one endpoints are interchanged.  The other two walk supports lie
+outside \(K_3\): if their components met \(K_3\), connected components
+would coincide, contrary to (12) and the retained support-disjointness;
+this is the disjointness principle in
+\(\noderef{TwoColorComponentsDisjoint}\).  Their edges and endpoint
+missing statuses are fixed.  Hence all three statements in (7) remain
+exact \(\gamma,\beta\)-exit statements under \(\mu_4\).  At \(b_3\),
+the unique incident edge of \(K_3\), namely \(f_3\), changes from
+\(\beta\) to \(\gamma\), while no old incident \(\gamma\)-edge exists by
+(2) and (5).  Consequently
+\[
+                 \beta\in\noderef{MissingColors}(G,\mu_4,b_3).
+                                                                    \tag{23}
+\]
+
+The prefix \(C\), hence the closure \(T'\), contains all three \(b_i\).
+The identities \(f_1,f_2\) are fixed by (15), because their edge-nodes
+lie in the supports of \(Q_1,Q_2\), and remain \(\beta\)-colored.  We
+claim that both endpoints of each belong to \(V(T')\).  One endpoint
+\(b_i\) already belongs to \(V(C)\).  If its other endpoint were outside
+\(V(T')\), the loopless endpoint law and
+\(\noderef{BoundaryEdges}\) would make \(f_i\) a \(\beta\)-colored
+boundary identity of \(T'\).  But (23) makes \(\beta\) tree-missing on
+\(T'\), and the closedness clause of (19) forbids such an identity.
+This proves the claim, in particular for both ends of the retained exact
+identity \(f_1\).                                               \(\tag{24}\)
+
+Apply the assumed current assertion (i) to the replacement ETT in (22),
+using its rung agreement and transported maximum property.  It gives
+\[
+       \noderef{ColoredVertexSetElementary}(G,\mu_4,V(T')).   \tag{25}
+\]
+No outside end \(a_i\) lies in \(V(T')\).  Suppose one did.  It is
+distinct from \(b_3\), since it was outside \(U\) while \(b_3\in V(U)\).
+One of \(\gamma,\beta\) is missing there by the transported exit
+certificate, whereas \(\beta\) is missing at \(b_3\) by (23).
+Elementariness (25) therefore forces \(\gamma\) to be missing at that
+\(a_i\).  Both \(\gamma\) and \(\beta\) are now tree-missing on the
+closed set \(V(T')\).  Traverse each \(Q_j\) from
+\(b_j\in V(C)\subseteq V(T')\) toward \(a_j\).  If it ever first left
+\(V(T')\), the crossing edge would be a \(\gamma\)- or
+\(\beta\)-colored boundary identity, forbidden by closedness.  Thus all
+three distinct \(a_j\) lie in \(V(T')\).  At none of them can \(\beta\)
+be missing, by (23), (25), and their distinctness from \(b_3\); hence
+\(\gamma\) is missing at all three.  This contradicts (25) already at
+\(a_1,a_2\).  Therefore
+\[
+                              a_i\notin V(T')\quad(i=1,2,3).   \tag{26}
+\]
+
+For each \(i\), traverse the finite simple path \(Q_i\) from \(a_i\)
+and stop at its first vertex-node \(c_i\) in \(V(T')\).  Such a node
+exists because \(b_i\in V(T')\); (26) says it is not the initial node.
+Let \(L_i\) be this initial subwalk and let \(g_i\) be its final exact
+edge identity.  The predecessor vertex of \(g_i\) lies outside
+\(V(T')\), while \(c_i\) lies inside.  The two are its distinct endpoints
+by \(\noderef{Incident}\) and \(\noderef{LooplessMultigraph}\), so
+\[
+                         g_i\in\noderef{BoundaryEdges}(G,V(T')). \tag{27}
+\]
+Its incidence adjacency says that its color is \(\gamma\) or \(\beta\).
+The second alternative is forbidden by closedness and (23); hence
+\[
+                         \mu_4(g_i)=\gamma.                   \tag{28}
+\]
+
+Equations (26)--(28) verify every field of
+\(\noderef{TreeExitPath}(T',\mu_4,\beta,\gamma,a_i,c_i,L_i)\):
+the color order is immaterial to the incidence graph; the subwalk is
+simple and nontrivial, starts outside, ends at its unique first tree
+vertex, and retains its endpoint missing-color alternative.  Its support
+is contained in that of \(Q_i\), so the three supports remain pairwise
+disjoint and their outside ends remain pairwise distinct.  The new tree
+ends \(c_i\) are pairwise distinct.  If \(c_i=c_j\), then support
+disjointness gives \(g_i\ne g_j\); both identities are incident with the
+common vertex and hence adjacent by \(\noderef{AdjacentEdges}\), while
+(28) gives them the same nonempty color, contradicting properness.
+
+Equation (23) proves
+\(\beta\in\noderef{TreeMissingColors}(\mu_4,T')\).  On the other hand
+\(\gamma\notin\noderef{TreeMissingColors}(\mu_4,T')\): if \(\gamma\)
+were missing somewhere on \(T'\), closedness would forbid the exact
+\(\gamma\)-colored boundary identity \(g_1\) from (27)--(28).
+Thus the formal normalization required by
+\(\noderef{RutgersCounterexample}\) is
+\[
+                \alpha'=\beta\quad\hbox{(missing)},\qquad
+                \beta'=\gamma\quad\hbox{(not tree-missing)}. \tag{29}
+\]
+This is the same unordered two-color pair used in the paper, oriented so
+that the structure's first color is its missing color.  Distinctness is
+(3), and (27)--(28) give the required exact \(\beta'\)-colored boundary
+identities \(g_i\), incident with \(c_i\) and lying on \(L_i\).
+
+Use \(\noderef{TreeSequenceVertexSet}\) and vertex injectivity in
+\(\noderef{TreeSequence}\) to obtain the three unique displayed indices
+of the distinct \(c_i\).  Sort the complete packages
+\((a_i,c_i,L_i,g_i)\) by those indices.  The strict linear index order is
+exactly \(\noderef{TreeVertexOrder}\), so after relabeling the tree ends
+satisfy \(c_1\prec_{T'}c_2\prec_{T'}c_3\).  Permuting whole packages
+preserves all support, distinctness, exit, incidence, and boundary fields.
+Together with (22), (25), and (29), these data define a Rutgers
+counterexample \(\mathcal C'\) on \(\mathcal P'\).
+
+Finally, each \(L_i\) is an initial subpath of \(Q_i\), so
+\(|L_i|\le |Q_i|\).  The inequality is strict for the package containing
+the old \(Q_1\).  Indeed, (24) places both endpoint vertices of its
+retained edge-node \(f_1\) in \(V(T')\), while \(f_1\) belongs to
+\(Q_1.\mathit{support}\).  A path traversed from \(a_1\notin V(T')\)
+must therefore meet an endpoint vertex in \(V(T')\) before it could
+include the intervening edge-node \(f_1\).  The first-contact subpath
+stops at that vertex and omits \(f_1\); hence \(|L_1|<|Q_1|\).
+Sorting does not change the sum, so the definition
+\(\noderef{RutgersCounterexampleMeasure}\) gives
+\[
+ \noderef{RutgersCounterexampleMeasure}(\mathcal C')
+   =|L_1|+|L_2|+|L_3|
+   <|Q_1|+|Q_2|+|Q_3|
+   =\noderef{RutgersCounterexampleMeasure}(\mathcal C).
+\]
+This proves the asserted strict shortening without any appeal to
+minimality.
+\end{proof}
