@@ -1,0 +1,25 @@
+\begin{lemma}[Strict growth in a finite vertex set reaches a terminal state]
+Let $V$ be finite, and let $\mathcal S$ and $\mathcal T$ be arbitrary
+predicates on subsets of $V$.  Suppose that $\mathcal S(X_0)$ for some
+$X_0\subseteq V$, and that for every $X\subseteq V$ satisfying
+$\mathcal S(X)$ but not $\mathcal T(X)$ there is a set $Y\subseteq V$
+such that $\mathcal S(Y)$ and $X\subsetneq Y$.  Then there is a set
+$X\subseteq V$ satisfying both $\mathcal S(X)$ and $\mathcal T(X)$.
+\end{lemma}
+\begin{proof}
+For a subset $X\subseteq V$, define its deficit by
+$d(X)=|V|-|X|$.  We prove by well-founded induction on the natural number
+$d(X)$ that every $X$ satisfying $\mathcal S(X)$ has a terminal successor
+$Z$ satisfying both $\mathcal S(Z)$ and $\mathcal T(Z)$.
+
+Fix $X$ with $\mathcal S(X)$.  If $\mathcal T(X)$ holds, take $Z=X$.
+Otherwise the growth hypothesis supplies $Y$ with $\mathcal S(Y)$ and
+$X\subsetneq Y$.  Strict inclusion of finite sets gives $|X|<|Y|$, while
+$Y\subseteq V$ gives $|Y|\leq |V|$.  Therefore
+\[
+              d(Y)=|V|-|Y|<|V|-|X|=d(X).
+\]
+The induction hypothesis applied to $Y$ supplies the required terminal
+successor $Z$.  Finally apply the resulting assertion to the given initial
+state $X_0$.
+\end{proof}

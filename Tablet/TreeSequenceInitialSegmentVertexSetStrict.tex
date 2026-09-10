@@ -1,0 +1,26 @@
+\begin{lemma}[A longer initial-segment extension strictly grows the vertex set]
+Let $A$ and $B$ be tree-sequences for the same finite loopless multigraph
+and the same distinguished first edge.  Suppose that $A$ is an exact
+ordered \noderef{TreeSequenceInitialSegment} of $B$ and that
+$|A|<|B|$, where $|T|$ denotes the number of edge entries of $T$.
+Then
+\[
+  \noderef{TreeSequenceVertexSet}(A)
+  \subsetneq \noderef{TreeSequenceVertexSet}(B).
+\]
+\end{lemma}
+\begin{proof}
+The inclusion $V(A)\subseteq V(B)$ follows from
+\noderef{TreeSequenceInitialSegmentVertexSetSubset}.
+
+It remains to prove that equality is impossible.  By
+\noderef{TreeSequence}, the vertex map of a tree-sequence $T$ has domain
+$\{0,\ldots,|T|\}$ and is injective.  Hence the definition of
+\noderef{TreeSequenceVertexSet} gives
+\[
+                         |V(T)|=|T|+1.                         \tag{1}
+\]
+If $V(A)=V(B)$, then taking finite cardinalities and applying (1) to both
+trees gives $|A|+1=|B|+1$, hence $|A|=|B|$.  This contradicts the assumed
+strict inequality $|A|<|B|$.  Thus the inclusion is strict.
+\end{proof}

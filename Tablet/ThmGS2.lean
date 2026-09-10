@@ -117,6 +117,11 @@ import Tablet.TashkinovStoredColorsCardinality
 import Tablet.Td
 import Tablet.TreeVertexOrder
 import Tablet.TreeSequenceInitialSegmentVertexSetEq
+import Tablet.TreeSequenceInitialSegmentVertexSetSubset
+import Tablet.TreeSequenceInitialSegmentVertexSetStrict
+import Tablet.FiniteStrictGrowthReachesTerminal
+import Tablet.TashkinovClosureOfRouteAndAllMissingClosed
+import Tablet.TreeSequenceAdjoinEdgeUnique
 import Tablet.TreeSequencePrefix
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwapProper

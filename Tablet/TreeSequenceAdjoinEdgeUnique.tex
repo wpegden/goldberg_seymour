@@ -1,0 +1,50 @@
+\begin{lemma}[Adjoining a fixed exact edge is unique]
+Let $T$ be an ordered tree-sequence in a loopless multigraph, and let $f$
+be one fixed edge identity.  If both $U$ and $W$ satisfy
+\noderef{TreeSequenceAdjoinEdge}$(T,f,-)$, then $U=W$ as full ordered
+edge-valued tree-sequences.
+\end{lemma}
+\begin{proof}
+Write $n=|T|$.  Unpacking \noderef{TreeSequenceAdjoinEdge} for $U$ and
+$W$ gives
+\[
+ |U|=|W|=n+1,
+ \qquad T\preccurlyeq U,
+ \qquad T\preccurlyeq W,
+\]
+where both initial-segment relations are the exact ordered relation of
+\noderef{TreeSequenceInitialSegment}, and the final edge entry of both
+$U$ and $W$ is the same edge identity $f$.
+
+For every vertex index $i\leq n$, the two initial-segment vertex clauses
+give $U(i)=T(i)=W(i)$.  Likewise, for every edge index belonging to $T$,
+the edge clauses give $U(i)=T(i)=W(i)$.  The remaining final edge entries
+also agree because each is exactly $f$.  It remains only to identify the
+two new final vertices.
+
+By the attachment clause of \noderef{TreeSequence}, there are indices
+$q_U,q_W\leq n$ such that
+\[
+  \operatorname{ends}(f)=
+    \{U(n+1),T(q_U)\}
+  \quad\hbox{and}\quad
+  \operatorname{ends}(f)=
+    \{W(n+1),T(q_W)\}.                                      \tag{1}
+\]
+Equality of the two unordered endpoint pairs in (1) has two possible
+orientations.  In the direct orientation it immediately gives
+$U(n+1)=W(n+1)$.  In the swapped orientation it gives
+$U(n+1)=T(q_W)$.  But the initial-segment vertex equality also gives
+$T(q_W)=U(q_W)$, so this would identify the new vertex entry $U(n+1)$
+with an earlier vertex entry of $U$.  This contradicts the vertex
+injectivity clause of \noderef{TreeSequence}.  Hence only the direct
+orientation is possible, and the final vertices agree.
+
+Thus $U$ and $W$ have the same length, the same vertex entry at every
+index, and the same exact edge identity at every index.  All remaining
+fields of \noderef{TreeSequence} are propositions asserting positivity,
+injectivity, the first-edge condition, and attachment.  Proof irrelevance
+identifies those fields, so the complete structures satisfy $U=W$.
+The argument compares the identity $f$ itself, not merely its endpoint
+pair, and therefore remains valid when parallel edges are present.
+\end{proof}

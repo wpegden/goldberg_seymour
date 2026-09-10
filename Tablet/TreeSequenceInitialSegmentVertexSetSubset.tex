@@ -1,0 +1,18 @@
+\begin{lemma}[Initial segments have nested vertex sets]
+Let $A$ and $B$ be tree-sequences for the same finite loopless multigraph
+and the same distinguished first edge.  If $A$ is an exact ordered
+\noderef{TreeSequenceInitialSegment} of $B$, then
+\[
+  \noderef{TreeSequenceVertexSet}(A)
+  \subseteq \noderef{TreeSequenceVertexSet}(B).
+\]
+\end{lemma}
+\begin{proof}
+Let $v\in V(A)$.  By \noderef{TreeSequenceVertexSet}, there is a vertex
+index $i\in\{0,\ldots,|A|\}$ such that $v=A(i)$.  Expanding
+\noderef{TreeSequenceInitialSegment}, its length clause gives
+$|A|\leq |B|$, so the same integer $i$ is a valid vertex index of $B$.
+The vertex-entry clause of that definition gives $B(i)=A(i)=v$.
+Applying \noderef{TreeSequenceVertexSet} once more shows that $v\in V(B)$.
+Since $v$ was arbitrary, $V(A)\subseteq V(B)$.
+\end{proof}

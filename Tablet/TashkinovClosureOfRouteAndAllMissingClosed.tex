@@ -1,0 +1,27 @@
+\begin{lemma}[A route closed in every missing color is a closure]
+Let $S$ and $T$ be tree-sequences for the same finite loopless multigraph
+and distinguished first edge, and let $\varphi$ be a partial edge coloring.
+Suppose that there is a
+\noderef{TashkinovAugmentationSequence} from $S$ to $T$ under $\varphi$.
+If $T$ is \noderef{TreeColorSetClosed} under $\varphi$ for the entire set
+\noderef{TreeMissingColors}$(\varphi,T)$, then $T$ is a
+\noderef{TashkinovClosure} of $S$ under $\varphi$.
+\end{lemma}
+\begin{proof}
+By the definition of \noderef{TashkinovClosure}, the given augmentation
+sequence is its route clause.  It remains to verify that the finite vertex
+set $V(T)=\noderef{TreeSequenceVertexSet}(T)$ is
+\noderef{ColoredVertexSetClosed} under $\varphi$.
+
+Suppose, toward that clause, that an exact edge identity $f$ belongs to the
+boundary of $V(T)$, that $v\in V(T)$, that $\varphi(f)=c$, and that $c$ is
+missing at $v$.  The definition of \noderef{TreeMissingColors} then places
+$c$ in the union of the missing-color sets over $V(T)$, because $v$ is a
+witness.  The assumed \noderef{TreeColorSetClosed} property therefore says
+that the set of $c$-colored boundary-edge identities is empty.  On the other
+hand, the boundary membership of $f$ together with $\varphi(f)=c$ places
+$f$ in exactly that set by \noderef{BoundaryColorEdges}, a contradiction.
+Thus no boundary edge can carry a color missing at a vertex of $V(T)$, so
+$V(T)$ is closed.  Combining this with the given route proves the two
+clauses of \noderef{TashkinovClosure}.
+\end{proof}
