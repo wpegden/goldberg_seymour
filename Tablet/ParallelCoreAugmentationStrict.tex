@@ -1,0 +1,157 @@
+\begin{lemma}[The PE hierarchy base strictly extends the terminal ladder tree]
+Let $G$ be a finite loopless multigraph with distinguished edge $e_0$.
+Let $\mathcal T$ be an extended Tashkinov tree whose generating coloring is
+$\varphi$, let $n$ be its terminal rung, and put
+\[
+                         T_n=\mathcal T.\mathrm{tree}(n).
+\]
+Let $(T_{n,0}^{*},R_n,v_n)$ be a
+\noderef{HierarchyBase} for $\mathcal T$ under the same coloring
+$\varphi$.  If the terminal extension kind is PE, then
+\[
+ T_n\longrightarrow T_{n,0}^{*}
+ \quad\text{is a $\varphi$-\noderef{TashkinovAugmentationSequence},}
+ \qquad |T_n|<|T_{n,0}^{*}|.
+\]
+The lengths here count edge entries of the ordered tree-sequences.
+\end{lemma}
+\begin{proof}
+Let $P=T_n(v_n)$ denote the exact prefix ending at the positive support
+position stored in the hierarchy base.  The PE clause of
+\noderef{HierarchyBase} gives a $\varphi$-Tashkinov closure from $P$ to
+$R_n$ and an exact \noderef{OrderedTreeUnion}
+\[
+                         T_{n,0}^{*}=T_n\vee R_n.                \tag{1}
+\]
+By \noderef{TashkinovClosure}, this closure consists of an augmentation
+sequence to $R_n$ together with closedness of $V(R_n)$.
+The prefix $P$ is an exact ordered initial segment of $T_n$.  Apply
+\noderef{OrderedTreeUnionAugmentationSequence} to the closure's
+augmentation sequence $P\longrightarrow R_n$, this initial-segment
+relation, and (1).  It gives
+\[
+                         T_n\longrightarrow T_{n,0}^{*}          \tag{2}
+\]
+as a $\varphi$-Tashkinov augmentation sequence.  It remains to prove
+that (2) is nonempty.
+
+The ETT has positive rung, so its terminal rung has a predecessor $q$.
+Unpack the terminal certificate supplied by \noderef{TashkinovSeries}.
+The displayed PE-kind hypothesis rules out the initial, SE, and RE
+constructors of \noderef{TashkinovSeriesStep}.  We therefore use its PE
+constructor.  Write
+\(
+ \pi
+\)
+for the selected maximum-defective coloring, $f_n$ for the selected exact
+boundary-edge identity, $\delta_n$ for its color, $\gamma_n$ for the PE
+extension color, $\rho$ for the second stable coloring, and
+\[
+ K=K_{\rho}(v_n;\gamma_n,\delta_n)
+\]
+for the \noderef{TwoColorComponent} switched by that constructor.  Thus the
+terminal coloring is $\rho/K$.  Since the ETT's generating coloring is
+$\varphi$, the generating-coloring equality in
+\noderef{ExtendedTashkinovTree} identifies
+\[
+                            \varphi=\rho/K.                       \tag{3}
+\]
+
+We next construct a surviving $\delta_n$-boundary identity; its existence
+is not an assumption.  The certificate \noderef{MaximumDefectiveChoice}
+says that $f_n$ is a defective boundary identity under $\pi$ and that
+\(\pi(f_n)=\delta_n\).  By \noderef{DefectiveEdge}, there is a defective
+color $c$ for which $f_n$ lies in the exact $c$-boundary.  Membership in
+that boundary, by \noderef{BoundaryColorEdges}, also says
+\(\pi(f_n)=c\).  Hence $c=\delta_n$.  The definition
+\noderef{DefectiveColor} now gives
+\[
+                    |\partial_{\pi,\delta_n}(T_n)|\geq2.         \tag{4}
+\]
+Choose an exact identity
+\[
+ g\in\partial_{\pi,\delta_n}(T_n),\qquad g\ne f_n.              \tag{5}
+\]
+
+Every boundary identity is incident with a tree vertex by
+\noderef{BoundaryEdges} and hence is a
+\noderef{TreeIncidentEdge}.  The second stable relation in the PE
+constructor is a \noderef{StableColoring} whose control set contains
+$\delta_n$.  Its edge clause therefore applies separately to the exact
+identities $f_n$ and $g$, and (5) gives
+\[
+                         \rho(f_n)=\rho(g)=\delta_n.              \tag{6}
+\]
+The PE rule \noderef{ParallelExtensionColor}, together with the vertex
+clause of the same stable relation, says that $\gamma_n$ is missing at
+$v_n$ under $\rho$.  Since $f_n$ is incident with $v_n$ and has color
+$\delta_n$ by (6), \noderef{MissingColors} and
+\noderef{PresentColors} give $\gamma_n\ne\delta_n$.
+
+The incidence rule in \noderef{TwoColorIncidenceGraph} and (6) put the
+edge-node of $f_n$ in $K$.  Expanding
+\noderef{TwoColorComponentSwap}, the switch changes this exact identity
+from $\delta_n$ to $\gamma_n$:
+\[
+                         (\rho/K)(f_n)=\gamma_n.                  \tag{7}
+\]
+We claim that the edge-node of $g$ is not in $K$.  If it were, (6) and
+the same switch formula would give $(\rho/K)(g)=\gamma_n$.  Boundary
+membership is independent of coloring, so both $g$ and $f_n$ would then
+belong to the terminal $\gamma_n$-boundary.  But
+\noderef{HkuParallelBoundaryStructure} says that this exact boundary is
+the singleton $\{f_n\}$.  This would force $g=f_n$, contrary to (5).
+Thus $g$ is outside $K$, and the switch fixes it.  Using (3),
+\[
+                   g\in\partial_{\varphi,\delta_n}(T_n).         \tag{8}
+\]
+
+For completeness, $\delta_n$ is missing at $v_n$ after the switch.  If
+an edge identity incident with $v_n$ had terminal color $\delta_n$, then
+an identity inside $K$ would have had color $\gamma_n$ under $\rho$,
+contradicting that $\gamma_n$ is missing at $v_n$.  An identity outside
+$K$ would have had color $\delta_n$ under $\rho$, but its incidence with
+$v_n$ would itself put its edge-node in $K$ by
+\noderef{TwoColorIncidenceGraph}.  Both alternatives are impossible, so
+\[
+                       \delta_n\in\overline\varphi(v_n).         \tag{9}
+\]
+
+Apply the $\delta_n$-location clause of
+\noderef{HkuParallelBoundaryStructure} to the now-established identity
+(8).  There is a vertex $w\prec_{T_n}v_n$ incident with $g$.  By the
+definition of the positive prefix in \noderef{TreeSequencePrefix}, both
+$w$ and $v_n$ lie in $V(P)$.  The closure augmentation sequence from
+$P$ to $R_n$ is an exact initial extension by
+\noderef{TashkinovAugmentationSequenceInitialSegment}.  Consequently
+\[
+                              w,v_n\in V(R_n).                   \tag{10}
+\]
+
+Since $g$ is a boundary identity of $T_n$, write its two ends as
+$w'$ and $z$, where $w'\in V(T_n)$ and $z\notin V(T_n)$.  The vertex
+$w$ is incident with $g$ and belongs to $V(T_n)$, so $w=w'$; the other
+possibility would put the outside end $z$ in $T_n$.  Suppose for a
+contradiction that $z\notin V(R_n)$.  Then (10) makes $g$ a boundary
+identity of $R_n$.  Equations (8) and (3) give $\varphi(g)=\delta_n$,
+while (9) and (10) give a vertex $v_n\in V(R_n)$ missing
+$\delta_n$.  This contradicts the closedness clause of the Tashkinov
+closure in \noderef{HierarchyBase}, namely
+\noderef{ColoredVertexSetClosed}.  Hence
+\[
+                        z\in V(R_n)-V(T_n).                      \tag{11}
+\]
+
+The vertex-set clause of the exact ordered union (1) is
+\[
+ V(T_{n,0}^{*})=V(T_n)\cup V(R_n).
+\]
+Thus (11) gives a vertex of $T_{n,0}^{*}$ which is not a vertex of
+$T_n$.  On the other hand, (2) and
+\noderef{TashkinovAugmentationSequenceInitialSegment} make $T_n$ an exact
+ordered initial segment of $T_{n,0}^{*}$.  If their lengths were equal,
+entrywise equality in \noderef{TreeSequenceInitialSegment}, together
+with vertex injectivity from \noderef{TreeSequence}, would make their
+vertex sets equal, contradicting (11).  Therefore
+$|T_n|<|T_{n,0}^{*}|$, as required.
+\end{proof}

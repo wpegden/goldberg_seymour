@@ -1,0 +1,83 @@
+\begin{lemma}[Four common missing colors at an uncolored edge]
+Let $G=(V,E)$ be a finite loopless multigraph, let $e_0\in E$, and let
+$\varphi$ be a partial $k$-edge-coloring which is proper and leaves exactly
+$e_0$ uncolored.  Suppose
+\[
+                    \Delta(G)+1\leq k.
+\]
+Let $A$ and $B$ be tree-sequences with distinguished first edge $e_0$.
+Write $\partial e_0=\{x,y\}$, and suppose that both $x$ and $y$ belong to
+both $V(A)$ and $V(B)$.  If $V(A)\cup V(B)$ is elementary under
+$\varphi$, then
+\[
+ \bigl|\overline\varphi(A)\cap\overline\varphi(B)\bigr|\geq 4.
+\]
+Here tree-missing colors are understood in the sense of
+\noderef{TreeMissingColors}, so the intersection is an intersection of
+finite sets of exact color identities.
+\end{lemma}
+\begin{proof}
+Because the loopless law in \noderef{LooplessMultigraph} excludes an edge
+with two equal ends, and the two ends of $e_0$ are $x$ and $y$, one has
+$x\ne y$.  We first prove that at least two colors are missing at each end
+of $e_0$.
+
+Fix an end $v\in\{x,y\}$, and put $d=d_G(v)$.  Consider the finite set
+$I_v$ of exact edge identities incident with $v$ which are colored by
+$\varphi$.  By the hypothesis that exactly $e_0$ is uncolored, as defined
+in \noderef{IsOneEdgeUncolored},
+\[
+                    I_v=\{e:e\text{ is incident with }v,\ e\ne e_0\}.
+\]
+The endpoint equation and \noderef{Incident} say that $e_0$ is incident
+with $v$, so the definition of degree in \noderef{Degree} gives
+\[
+                         |I_v|=d-1.                              \tag{1}
+\]
+
+Sending an edge of $I_v$ to its assigned color is injective.  Indeed, if
+two distinct identities in $I_v$ received the same color, they would be
+adjacent because they share the vertex $v$, by
+\noderef{AdjacentEdges}; this would contradict properness as defined in
+\noderef{IsProperEdgeColoring}.  Conversely, the witness clause in the
+definition of \noderef{PresentColors} says that every color present at
+$v$ is the color of some identity in $I_v$.  Thus the injection is a
+bijection from $I_v$ onto the set of colors present at $v$, and (1) yields
+\[
+             |\varphi(v)|=d-1,
+             \qquad |\overline\varphi(v)|=k-(d-1).              \tag{2}
+\]
+The second equality is precisely the complement definition in
+\noderef{MissingColors}.
+The definition of \noderef{MaximumDegree} gives $d\leq\Delta(G)$.
+Together with $\Delta(G)+1\leq k$, equation (2) implies
+\[
+                         |\overline\varphi(v)|\geq 2.            \tag{3}
+\]
+Applying (3) to $x$ and to $y$ gives two missing-color sets, each of
+cardinality at least two.
+
+Both $x$ and $y$ lie in $V(A)\cup V(B)$, and they are distinct.  The
+elementarity hypothesis, in the precise sense of
+\noderef{ColoredVertexSetElementary}, therefore gives
+\[
+             \overline\varphi(x)\cap\overline\varphi(y)
+             =\varnothing.                                     \tag{4}
+\]
+Since each of $x,y$ belongs to $V(A)$, the union definition in
+\noderef{TreeMissingColors} gives
+\(
+ \overline\varphi(x)\cup\overline\varphi(y)
+ \subseteq\overline\varphi(A)
+\).
+The same argument using membership in $V(B)$ gives containment in
+$\overline\varphi(B)$.  Hence
+\[
+ \overline\varphi(x)\cup\overline\varphi(y)
+ \subseteq
+ \overline\varphi(A)\cap\overline\varphi(B).                   \tag{5}
+\]
+By (3) and the disjointness (4), the set on the left of (5) has at least
+$2+2=4$ elements.  Taking finite-set cardinalities in (5) proves the
+claim.
+\end{proof}

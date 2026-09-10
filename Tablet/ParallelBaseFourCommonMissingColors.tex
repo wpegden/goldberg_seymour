@@ -1,0 +1,73 @@
+\begin{lemma}[Four common missing colors for a PE hierarchy base]
+Let $G$ be a finite loopless multigraph with distinguished edge $e_0$,
+and let $\mathcal T$ be an extended Tashkinov tree whose generating
+coloring is $\varphi$.  Put
+\[
+                    T_n=\mathcal T.\mathrm{tree}(n)
+\]
+at its terminal rung, and let $(T_{n,0}^{*},R_n,v_n)$ be a
+\noderef{HierarchyBase} under $\varphi$.  Assume that the terminal
+extension kind is PE, that $\varphi$ is proper and leaves exactly $e_0$
+uncolored, that
+\[
+                         \Delta(G)+1\leq k,
+\]
+and that $V(T_{n,0}^{*})$ is elementary under $\varphi$.  Then
+\[
+             \bigl|\overline\varphi(T_n)
+                 \cap\overline\varphi(R_n)\bigr|\geq4.
+\]
+\end{lemma}
+\begin{proof}
+Let $P=T_n(v_n)$ be the exact support prefix recorded by the hierarchy
+base.  The PE clause of \noderef{HierarchyBase} says that the support
+position is positive, that $R_n$ is a $\varphi$-Tashkinov closure of
+$P$, and that $T_{n,0}^{*}$ is an
+\noderef{OrderedTreeUnion} of $T_n$ and $R_n$.  In particular,
+\[
+                    V(T_{n,0}^{*})=V(T_n)\cup V(R_n).            \tag{1}
+\]
+
+We verify the endpoint hypotheses needed for the generic counting
+lemma, rather than assuming them.  Let $j=0$ be the first edge index of
+$T_n$.  The first-edge field of \noderef{TreeSequence} gives
+$T_n.e_j=e_0$.  Its attachment field gives an earlier vertex index
+$i\leq j$ such that the ends of this exact edge identity are the new
+vertex $T_n.y_{j+1}$ and $T_n.y_i$.  Since $j=0$, necessarily $i=0$.
+Thus, for
+\[
+                   x=T_n.y_1,\qquad y=T_n.y_0,
+\]
+one has
+\[
+                   \partial e_0=\{x,y\},qquad x,y\in V(T_n).   \tag{2}
+\]
+
+The support position is at least one.  Therefore both vertex indices
+$0$ and $1$ occur in the exact prefix $P$, as defined by
+\noderef{TreeSequencePrefix}; hence $x,y\in V(P)$.  The closure in the
+base contains a
+$\varphi$-\noderef{TashkinovAugmentationSequence} from $P$ to $R_n$, by
+the definition of \noderef{TashkinovClosure}.
+By \noderef{TashkinovAugmentationSequenceInitialSegment}, $P$ is an
+exact ordered initial segment of $R_n$, so its vertex entries are retained.
+Consequently
+\[
+                              x,y\in V(R_n).                     \tag{3}
+\]
+
+By (1), the assumed elementarity of $V(T_{n,0}^{*})$ is exactly the
+elementarity of $V(T_n)\cup V(R_n)$.  Equations (2) and (3) show that
+the two ends of the uniquely uncolored exact identity $e_0$ belong to
+both constituent vertex sets.  All hypotheses of
+\noderef{CommonMissingColorsAtUncoloredEndpoints} now hold: properness,
+exactly-one-uncoloredness, and the degree bound are assumptions here,
+while endpoint containment and union elementarity were just derived.
+That lemma yields
+\[
+             4\leq
+             \bigl|\overline\varphi(T_n)
+                 \cap\overline\varphi(R_n)\bigr|,
+\]
+which is the desired assertion.
+\end{proof}

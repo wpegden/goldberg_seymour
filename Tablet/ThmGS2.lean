@@ -42,6 +42,8 @@ import Tablet.rutcor
 import Tablet.ParallelExtensionUndoStable
 import Tablet.ParallelClosureUnionElementary
 import Tablet.ParallelCommonMissingClosed
+import Tablet.ParallelCoreAugmentationStrict
+import Tablet.ParallelBaseFourCommonMissingColors
 import Tablet.SameColorSeriesPreserved
 import Tablet.ScheideGlobalMaximumBoundaryFacts
 import Tablet.ScheideGlobalMaximumFourFree
