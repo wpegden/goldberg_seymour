@@ -39,9 +39,11 @@ and all triples of exact exit walks on them.
 \begin{proof}
 Put \(F=T_{n+1}\).  We first construct one closed presentation on \(F\)
 from the given stable coloring.  The positive terminal certificate in
-\noderef{TashkinovSeries} cannot be the initial constructor.  Inspecting
-the three positive constructors of \noderef{TashkinovSeriesStep} gives
-exactly one of the following routes under \(\varphi_n\):
+\noderef{TashkinovSeries} cannot be the initial constructor: the
+positive-rung field of \noderef{ExtendedTashkinovTree} says \(n\geq1\),
+so the terminal certificate has positive index.  Inspecting the three
+positive constructors of \noderef{TashkinovSeriesStep} gives exactly one
+of the following routes under \(\varphi_n\):
 \[
 \begin{array}{ll}
 \Theta_n=\mathrm{PE}:&
@@ -53,13 +55,21 @@ exactly one of the following routes under \(\varphi_n\):
 \end{array}                                                    \tag{1}
 \]
 for an exact edge identity \(f_n\) and an exact seed \(A\) in the second
-case.  The same certificate says that \(\varphi_n\) is proper and leaves
-exactly \(e_0\) uncolored, that \(T_n\) is an ordered initial segment of
-\(F\), and that its length is strictly smaller.
+case.  In the SE case, the current coloring is the selected coloring in
+\noderef{MaximumDefectiveChoice}, whose fields say directly that it is
+proper and leaves exactly \(e_0\) uncolored.  The PE constructor has the
+same two properties as explicit current-coloring fields, and the RE
+constructor inherits them from its preceding coloring.  Thus in every
+case \(\varphi_n\) is proper and leaves exactly \(e_0\) uncolored.  The
+same positive constructor records
+\(\noderef{TreeSequenceInitialSegment}(T_n,F)\) and
+\(|T_n|<|F|\).
 
 We next restrict the given final-tree stability to \(T_n\).  Its
-vertexwise missing-set equality restricts along the ordered
-initial-segment inclusion.  For the controlled-edge clause, let \(g\) be
+vertexwise missing-set equality restricts because the entrywise agreement
+in \noderef{TreeSequenceInitialSegment}, together with the image
+definition \noderef{TreeSequenceVertexSet}, gives
+\(V(T_n)\subseteq V(F)\).  For the controlled-edge clause, let \(g\) be
 incident with \(T_n\) and suppose
 \(\varphi_n(g)=c\) with
 \(c\in\overline\varphi_n(T_n)\cup D_n\).  Apply the second inclusion of
@@ -68,8 +78,11 @@ incident with \(T_n\) and suppose
  \overline\varphi_n(T_n)\cup D_n
        \subseteq \overline\varphi_n(F)\cup D_n.                \tag{2}
 \]
-The edge \(g\) is also incident with \(F\), so final-tree stability,
-using (2), gives \(\sigma(g)=\varphi_n(g)\).  Hence
+By \noderef{TreeIncidentEdge}, incidence of \(g\) with \(T_n\) supplies
+a witness in \(V(T_n)\); the preceding vertex-set inclusion makes the
+same witness a member of \(V(F)\), so \(g\) is incident with \(F\) as
+well.  Final-tree stability, using (2), therefore gives
+\(\sigma(g)=\varphi_n(g)\).  Hence
 \[
              \noderef{StableColoring}(T_n,D_n,\varphi_n,\sigma).
                                                                     \tag{3}
@@ -82,23 +95,32 @@ The routes in (1) remain the same exact routes under \(\sigma\).  Indeed,
 consider one \noderef{TashkinovAugmentation} in the augmentation sequence
 inside the relevant closure.  Its new exact edge \(g\) has
 \(\varphi_n(g)=c\), where \(c\) is missing at a vertex \(v\) of the
-preceding tree.  Every intermediate tree is an ordered initial segment of
-\(F\), so \(v\in V(F)\); because missingness is a property of the fixed
-graph coloring rather than of the displayed tree, \(c\) is also a member
-of \(\overline\varphi_n(F)\).  Final-tree stability therefore fixes the
-exact identity \(g\) and makes \(c\) missing at the same \(v\) under
-\(\sigma\).  The length and ordered-prefix clauses of the augmentation
-do not mention a coloring.  Thus the identical ordered step is a
-Tashkinov augmentation under \(\sigma\).  Induction over
+preceding tree.  Successive applications of
+\noderef{TreeSequenceInitialSegment} place every intermediate tree as an
+ordered initial segment of \(F\), and \noderef{TreeSequenceVertexSet}
+therefore gives \(v\in V(F)\).  By the union definition
+\noderef{TreeMissingColors}, the same missing witness \(v\), under the
+fixed coloring \(\varphi_n\), proves
+\(c\in\overline\varphi_n(F)\).  The augmentation makes \(g\) incident
+with its preceding tree; \noderef{TreeIncidentEdge} and the same
+vertex-set inclusion make it incident with \(F\).  Final-tree stability
+therefore gives \(\sigma(g)=\varphi_n(g)=c\), while its vertexwise clause
+at \(v\) makes \(c\) missing at \(v\) under \(\sigma\).  The length and
+ordered-prefix clauses of the augmentation do not mention a coloring.
+Thus the identical ordered step is a Tashkinov augmentation under
+\(\sigma\).  Induction over
 \noderef{TashkinovAugmentationSequence} transports the entire sequence.
 
 It remains in this transport to check closedness at \(F\).  Since both
 \(\varphi_n\) and \(\sigma\) are proper and leave exactly \(e_0\)
 uncolored, symmetry in \noderef{sc2} reverses the given stable relation.
 If a boundary edge of \(F\) had \(\sigma\)-color \(c\) missing at a
-vertex of \(F\) under \(\sigma\), reverse stability would preserve both
-the missingness and that exact edge value under \(\varphi_n\), contrary
-to the closedness field of the closure in (1).  Consequently the
+vertex of \(F\) under \(\sigma\), then it would be incident with \(F\)
+by \noderef{TreeIncidentEdge}, and \(c\) would belong to
+\(\noderef{TreeMissingColors}(\sigma,F)\).  Reverse stability would
+preserve that exact edge value and, at the displayed missing witness,
+the missingness of \(c\) under \(\varphi_n\).  This contradicts the
+closedness field of \noderef{TashkinovClosure} in (1).  Consequently the
 transported augmentation sequence ends in a \(\sigma\)-closed \(F\), so
 (1) holds with \(\sigma\) in place of \(\varphi_n\).             \(\tag{5}\)
 
@@ -112,13 +134,17 @@ in the universal clause of (4).  This produces an actual certificate
 By \noderef{MaximumPropertyTransport}, the replacement ETT in
 \(\mathcal R\) has maximum property.  The certificate (6) identifies its
 terminal ladder tree, terminal kind, and exact connecting-edge set with
-those of the original, after transporting the equal rung indices.
-Therefore (5) rewrites to a route based at the replacement terminal
-ladder tree and retaining the same \(f_n\) and seed in the non-PE case.
-Together with (6) and the transported maximum property, these data are
-precisely a \noderef{RutgersClosedPresentation}; call it
-\(\mathcal P_0\).  This establishes in particular that the family of
-presentations being minimized over is nonempty.
+those of the original, after transporting the equal rung indices.  Its
+replacement object is an actual \noderef{ExtendedTashkinovTree} on the
+displayed tree \(F\), and the ladder, kind, and connecting-set agreement
+fields in \noderef{CorrespondingExtendedTashkinovTree} refer to that same
+dependent replacement series.  Therefore (5) rewrites to a route based
+at the replacement terminal ladder tree and retaining the same \(f_n\)
+and seed in the non-PE case.  Together with (6) and the transported
+maximum property, these data are precisely a
+\noderef{RutgersClosedPresentation}; call it \(\mathcal P_0\).  This
+establishes in particular that the family of presentations being
+minimized over is nonempty.
 
 We now construct a counterexample on \(\mathcal P_0\).  The first
 current-rung assertion, applied to the replacement ETT in (6), gives
@@ -130,22 +156,22 @@ that the \(\alpha\)-colored boundary of \(F\) is empty; equivalently
 
 We record why \(\beta\notin\overline\sigma(F)\), as this is needed for
 the third exit.  Suppose instead that \(\beta\) is missing on \(F\).
-Properness and \noderef{TwoColorIncidenceDegreeAtMostTwo} make every
-component of the spanning \((\alpha,\beta)\)-incidence graph a path
-(possibly an isolated vertex) or an even cycle.  Elementarity gives at
-most one vertex of \(F\) missing \(\alpha\) and at most one vertex of
-\(F\) missing \(\beta\).  Closedness gives no \(\alpha\)- or
-\(\beta\)-colored boundary edge, so every such component that meets
-\(F\) stays inside \(F\).  In a path component the two endpoints are
-exactly the vertices missing one of the two colors (with an isolated
-vertex accounting for both endpoints when it misses both).  Hence all
-path components meeting \(F\) have the same component: it is the unique
-one containing the one or two missing-color witnesses.  Cyclic
-components are excluded by the path-component predicate, including the
-possibly isolated case exactly as specified by
-\noderef{TwoColorPathComponent}.  Expanding
-\noderef{TreeInterchangeable}, any two path components meeting \(F\)
-would therefore be equal, contrary to the hypothesis.  Thus
+The closedness field of the terminal \noderef{TashkinovClosure} in
+\(\mathcal P_0\) says that every color missing on \(F\) has empty exact
+colored boundary there.  In the singleton notation of
+\noderef{TreeColorSetClosed}, both \(\{\alpha\}\) and \(\{\beta\}\)
+are therefore closed.  In particular,
+\[
+ \partial_{\sigma,\alpha}(V(F))=\varnothing,
+ \qquad
+ \partial_{\sigma,\beta}(V(F))=\varnothing,
+\]
+and the second boundary set has cardinality \(0\leq1\).  Apply
+\noderef{ElementarySingleBoundaryInterchangeable} to the proper coloring
+\(\sigma\), the already proved elementarity of \(V(F)\), and these two
+boundary facts.  It gives that \(\alpha\) and \(\beta\) are
+\(F\)-interchangeable under \(\sigma\), including the possibly isolated
+two-color path-component case.  This contradicts the hypothesis.  Thus
 \[
                          \beta\notin\overline\sigma(F).        \tag{7}
 \]
@@ -165,10 +191,12 @@ walk-membership properties.  Thus all three outside ends and all three
 inside ends are pairwise distinct.
 
 Each inside end lies in \(V(F)\) by the definition
-\noderef{TreeExitPath}.  The vertex entries of a tree-sequence are
-injective, so each inside end has a unique index in \(F\).  The three
-indices are distinct and the natural order on them is linear.  Sort the
-three complete packages
+\noderef{TreeExitPath}.  By \noderef{TreeSequenceVertexSet}, membership
+in \(V(F)\) supplies an index displaying that end, and the vertex-map
+injectivity field of \noderef{TreeSequence} makes this index unique.
+The three indices are distinct because the three inside ends are
+distinct, and the natural order on them is linear.  Sort the three
+complete packages
 \((a_i,b_i,Q_i,f_i)\) by these indices and relabel them.  This is one of
 the six permutations of the packages, so it preserves every exit
 condition, all pairwise support-disjointness statements, all distinctness

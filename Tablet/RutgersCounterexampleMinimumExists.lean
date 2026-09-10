@@ -1,7 +1,10 @@
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.ElementaryClosedExitPairExtendsTriple
 import Tablet.ElementaryClosedNoninterchangeableExitPair
+import Tablet.ElementarySingleBoundaryInterchangeable
+import Tablet.ExtendedTashkinovTree
 import Tablet.HkuMissingStoredMonotone
+import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumPropertyTransport
 import Tablet.ModColoring
 import Tablet.RutgersClosedPresentation
@@ -16,11 +19,14 @@ import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TreeColorSetClosed
 import Tablet.TreeExitPath
+import Tablet.TreeIncidentEdge
 import Tablet.TreeInterchangeable
+import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceVertexSet
 import Tablet.TreeVertexOrder
-import Tablet.TwoColorIncidenceDegreeAtMostTwo
-import Tablet.TwoColorPathComponent
 
 -- [TABLET NODE: RutgersCounterexampleMinimumExists]
 theorem RutgersCounterexampleMinimumExists
