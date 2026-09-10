@@ -1,0 +1,435 @@
+\begin{theorem}[One fixed-root Algorithm 5.6 refresh]
+Fix a finite loopless multigraph $G$ with individual edge type $E$, a
+palette $[k]$, and a distinguished edge $e_0$.  Let $\mathcal E$ be a
+positive-rung ETT of rung $n$, generating coloring $\varphi$, maximum
+property, terminal ladder tree $T_n$, and hierarchy base $B$.  Assume
+$\Delta(G)+1\leq k$, $11\leq t(G)$, and a
+\noderef{TechnicalInductionContext} at bound $n$.  Assume also that, for
+every arbitrary-input maximum ETT $\mathcal L$ of rung $n$ carrying a
+base and a good hierarchy, its terminal ladder tree $L_n$ satisfies
+\[
+                 2n+11\leq |\overline\psi(L_n)|,
+\]
+where $\psi$ is the generating coloring of $\mathcal L$.
+
+Let $U$ carry a corresponding ETT certificate $C_U$ relative to the
+fixed original $\mathcal E$ and the same coloring $\varphi$, maximum
+property for $C_U.\mathit{replacementETT}$, and a base $B_U$ whose core,
+closure, and numerical support position equal those of $B$.  Let $H$ be
+a hierarchy on $U$ over $B_U$, with $d$ dividers and good witness
+$\mathcal G$.  Put
+\[
+ q=\operatorname{last}(d),\qquad
+ A=H.\mathit{starred}(q),\qquad
+ D^+=\noderef{HierarchyTerminalStoredColors}(H),\qquad
+ \Gamma^- =\bigcup_{\theta\in D^+}\mathcal G.\Gamma^q_\theta.
+\]
+Assume that $U$ is $(\Gamma^-)^-$-closed but is not fully closed under
+$\varphi$.
+
+Finally retain an exact anchor tree $J$ and an augmentation sequence
+$J\longrightarrow U$.  The anchor data are one of the following two
+alternatives.
+\begin{enumerate}
+\item The terminal kind of $\mathcal E$ is PE, $J=B.\mathit{core}$,
+and there is an exact $\varphi$-augmentation sequence
+$T_n\longrightarrow J$; in this alternative
+$|B.\mathit{core}|<|U|$.
+\item The terminal kind is SE or RE, and there is an individual edge
+$f_n$ such that the original connecting-edge set is exactly $\{f_n\}$
+and $J=T_n+f_n$ as an exact one-edge tree-sequence; in these alternatives
+$|T_n|<|U|$.
+\end{enumerate}
+
+Then there exist colors
+$\alpha,\beta,\eta,\gamma_1,\gamma_2\in[k]$, an exact edge $f$, and a
+tree-sequence $W$ with all of the following properties.
+\begin{enumerate}
+\item Both $V(A)$ and $V(U)$ are elementary under $\varphi$,
+$|A|<|U|$, and both vertex sets have odd cardinality.  Moreover
+$\alpha\in\overline\varphi(U)-\Gamma^-$ and $U$ is
+$\alpha$-closed.
+\item The color $\beta$ is missing on $U$, belongs to $\Gamma^-$, and
+has a nonempty exact colored boundary.  The color $\eta$ belongs to
+$D^+$, $\beta\in\mathcal G.\Gamma^q_\eta$, and $\eta$ is the unique
+member of $D^+$ whose old pair contains $\beta$.  The chosen edge $f$
+belongs to that exact $\beta$-boundary and satisfies
+$\varphi(f)=\beta$.
+\item The tree $W$ is the exact one-edge extension $U+f$, and
+$U\longrightarrow W$ is a Tashkinov augmentation under $\varphi$.
+The colors $\gamma_1\ne\gamma_2$ are each missing at a vertex of
+$V(U)-V(A)$, the pair $\{\gamma_1,\gamma_2\}$ is disjoint from
+$\Gamma^-$, and in particular it does not contain $\beta$.
+\item The tree $W$ carries a corresponding certificate $C_W$ relative
+to the fixed original $\mathcal E$, maximum property, and a base $B_W$
+whose core, closure, and numerical support position equal those of $B$.
+There is a hierarchy $H_W$ on $W$ with $d+1$ dividers and a good witness
+$\mathcal G_W$.  Under the canonical inclusions of finite indices,
+all stages $0,\ldots,d+1$, all old divider positions, all indexed stored
+sets $0,\ldots,d$, and every old Gamma pair agree exactly with those of
+$H$ and $\mathcal G$.  The new preceding stage and starred stage are
+$U$, the new terminal stage is $W$, and the new divider position is
+$|U|$.  At the new last indexed level the stored set is exactly $D^+$,
+\[
+ \mathcal G_W.\Gamma^{d+1}_\eta=\{\gamma_1,\gamma_2\},\qquad
+ \mathcal G_W.\Gamma^{d+1}_\theta=
+     \mathcal G.\Gamma^q_\theta
+       \quad(\theta\in D^+,\ \theta\ne\eta).
+\]
+There is an exact augmentation sequence $J\longrightarrow W$.
+\item There are a terminal tree $V$, a corresponding certificate $C_V$
+relative to the same fixed original $\mathcal E$, maximum property, and
+a base $B_V$ whose core, closure, and numerical support position equal
+those of $B$, such that $|U|<|V|$ and $J\longrightarrow V$ is an exact
+augmentation sequence.  The tree $V$ carries a hierarchy $K$ with
+$d+1$ dividers and a good witness $\mathcal G_V$.  Its old stages,
+divider positions, indexed stored sets, and Gamma pairs agree with those
+of $H$ exactly as for $H_W$; its new preceding and starred stage are
+$U$, its terminal stage is $V$, its new divider position is $|U|$, its
+new indexed stored set is $D^+$, and its last Gamma family has exactly
+the displayed replacement at $\eta$.  Finally
+\[
+ V\text{ is }
+ \left(\bigcup_{\theta\in
+   \noderef{HierarchyTerminalStoredColors}(K)}
+   \mathcal G_V.\Gamma^{d+1}_\theta\right)^-\text{-closed under }\varphi.
+\]
+\end{enumerate}
+Every equality of stages above is equality of complete ordered
+edge-valued tree-sequences.  In particular, $D^+$ is the old terminal
+stored set, not the old last indexed stored set.
+\end{theorem}
+\begin{proof}
+We first recover the fixed-original mod-coloring.  The lower six fields of
+the assumed \noderef{TechnicalInductionContext}, conjoined in their
+listed order, have exactly the arbitrary-input scope and the strict
+lower-rung bounds required below.  Its four current fields similarly give
+assertions (iii)--(vi) for every arbitrary-input maximum ETT of rung $n$.
+Because $n>0$, the terminal certificate of the original
+\noderef{TashkinovSeries} is one of the positive SE, PE, or RE constructors
+of \noderef{TashkinovSeriesStep}.  In each case its current coloring is
+proper and leaves exactly $e_0$ uncolored.  The generating-color equation
+in \noderef{ExtendedTashkinovTree} identifies that coloring with
+$\varphi$.  Reflexivity in \noderef{sc2} makes $\varphi$ stable relative
+to itself on $T_n$ with the terminal stored set.  Applying the
+`currentSix' field to the original ETT, its maximum certificate, and these
+three facts gives
+\[
+                         \varphi\text{ is a }
+             \noderef{ModColoring}\text{ of }\mathcal E.       \tag{1}
+\]
+No mod-coloring is being assumed independently.
+
+We next prove elementarity of the current terminal tree.  Apply
+\noderef{GoodHierarchyElementaryLarge} to
+$C_U.\mathit{replacementETT}$, its maximum certificate, $B_U,H$, and
+$\mathcal G$.  The rung agreement in
+\noderef{CorrespondingExtendedTashkinovTree} identifies its rung with
+$n$.  Thus a strict lower-rung inequality for this replacement is a
+strict inequality below $n$, so the six lower projections of the context
+assemble the required lower conjunction.  The same rung agreement lets
+the four current projections assemble the current conjunction.  The
+candidate-uniform missing-color hypothesis applies to this very
+replacement ETT and this actual good hierarchy, rather than importing a
+bound from the original presentation.  Together with $11\leq t(G)$ these
+are all hypotheses of the cited theorem, and hence
+\[
+                         V(U)\text{ is elementary}.             \tag{2}
+\]
+
+We prove separately that the preceding starred stage $A$ is elementary.
+First suppose $d=0$.  By the definition of
+\noderef{HierarchyStarredStage}, $A=B_U.\mathit{core}$.
+
+If the terminal kind is PE, use the six lower context projections in
+\noderef{ParallelClosureUnionElementary}, with the original ETT,
+original maximum property, terminal PE equation, coloring $\varphi$, and
+base $B$.  Properness and unique uncoloredness are the terminal facts
+used above, and the required stability is again reflexivity from
+\noderef{sc2}.  The conclusion makes $B.\mathit{core}$ elementary.
+The assumed equality of the two cores therefore gives elementarity of
+$A$.
+
+Suppose instead that the terminal kind is SE or RE.  Correspondence
+preserves the terminal kind and the exact terminal ladder tree.  The
+nonparallel clause of \noderef{HierarchyBase} consequently identifies
+$B_U.\mathit{core}$, and hence $A$, with that exact $T_n$.
+If $n=1$, the first conclusion of \noderef{TechnicalTheoremBase} makes
+$T_n$ elementary under the slot-zero coloring.  If $n>1$, apply
+\noderef{CertifiedETTPredecessor} to the original ETT.  It returns an
+actual positive-rung maximum ETT of rung $n-1$, with terminal displayed
+tree exactly $T_n$ and generating coloring the slot-$(n-1)$ coloring;
+the `lowerOne' field of the context makes this $T_n$ elementary.  In the
+SE constructor the selected terminal coloring is stable on $T_n$
+relative to the preceding coloring, and in the RE constructor the two
+colorings are equal.  In the $n=1$ and $n>1$ cases alike, the vertex
+clause of \noderef{StableColoring} identifies every missing-color set on
+$T_n$ before and after the terminal step.  Elementarity therefore
+transports to $\varphi$, proving it for $A$ without ever introducing a
+zero-rung ETT.
+
+It remains to handle $d>0$.  Take the positive last indexed level of
+$H$.  The theorem \noderef{GoodHierarchyPrefixRepackage} returns a
+same-rung maximum ETT whose terminal displayed tree is exactly $A$, with
+a transported base, a truncated hierarchy, and a good witness.  Apply
+\noderef{GoodHierarchyElementaryLarge} to that package.  As in the proof
+of (2), rung equality reconstructs its lower and current conjunctions
+from the context, and the universal missing bound applies to this actual
+prefix presentation and good hierarchy.  Hence $V(A)$ is elementary in
+the positive-divider case as well.  We have proved
+\[
+                         V(A)\text{ is elementary}              \tag{3}
+\]
+in all three required cases.
+
+We also record that $A$ is a proper ordered segment of $U$.  When $d>0$,
+this is the last strict nesting assertion in
+\noderef{TashkinovHierarchy}.  When $d=0$ and the kind is PE, it is the
+assumed strict inequality $|B.\mathit{core}|<|U|$ transported through
+$B_U.\mathit{core}=B.\mathit{core}$.  When $d=0$ and the kind is SE or
+RE, $A=T_n$ as above and the second retained strict inequality applies.
+In either zero-divider case, `coreInsideFirst' from
+\noderef{TashkinovHierarchy}, followed by its terminal-stage equation,
+supplies the exact ordered initial-segment relation; in the
+positive-divider case that relation is the last `nested' field.
+Thus
+\[
+                    A\preccurlyeq U,\qquad |A|<|U|.             \tag{4}
+\]
+
+We now obtain the closed missing colors needed for parity.  By
+\noderef{TashkinovStoredColorsCardinality}, the raw terminal stored set
+has at most $n$ members; $D^+$ is a subset of it by the definition of
+\noderef{HierarchyTerminalStoredColors}.  The terminal set $D^+$ is also
+a subset of the old last indexed set: (4) makes every color missing on
+$A$ missing on $U$, so subtracting the larger missing set can only remove
+more raw stored colors.  For every such owner, the `twoColors' field of
+\noderef{GoodHierarchy} says that its old Gamma set has cardinality two.
+The elementary finite-union estimate therefore gives
+\[
+                            |\Gamma^-|\leq2n.                  \tag{5}
+\]
+The candidate-uniform bound applied to $C_U,H,\mathcal G$ gives at least
+$2n+11$ colors missing on its terminal ladder tree.  That ladder tree is
+an exact initial segment of $U$ by
+\noderef{ExtendedTashkinovTree}, and the union definition
+\noderef{TreeMissingColors} carries each missing witness into $U$.
+Together with (5), this leaves a color
+\[
+                         \alpha\in\overline\varphi(U)-\Gamma^-.
+                                                                    \tag{6}
+\]
+The assumed $(\Gamma^-)^-$-closedness is exactly
+\noderef{TreeColorSetMinusClosed}; applying it to (6) says that $U$ is
+$\alpha$-closed.
+
+For $A$ we make the analogous choice in the case appropriate to its
+construction.  If $d>0$, use the last internal `minusClosed' field of
+\noderef{GoodHierarchy}.  The same stored-set bound, the same two-color
+union estimate, and the terminal-ladder missing colors contained in $A$
+leave a missing color outside that preceding Gamma union; the
+`minusClosed' field makes it closed on $A$.  If $d=0$ and the kind is PE,
+the `parallelBase' field gives at least four colors in
+\[
+ (\overline\varphi(T_n)\cap
+   \overline\varphi(B_U.\mathit{closure}))-
+   \bigcup_{\theta\in D_{n,0}}\mathcal G.\Gamma^0_\theta.
+\]
+To see that these colors are closed on $A$, first obtain elementarity of
+the pre-step $T_n$ from \noderef{TechnicalTheoremBase} when $n=1$ and
+from the actual \noderef{CertifiedETTPredecessor} plus `lowerOne' when
+$n>1$.  Then \noderef{ParallelCommonMissingClosed}, with the exact PE
+base and the transported core and closure equalities, makes the entire
+displayed common-missing set closed on $A$.  Choose any one of the four
+colors.  Finally, if $d=0$ and the kind is SE or RE, the positive
+constructor of \noderef{TashkinovSeriesStep} says, in the sense of
+\noderef{ColoredVertexSetClosed}, that $T_n$ was closed under the
+preceding coloring.  The terminal stable relation in the SE
+case, or coloring equality in the RE case, preserves every missing set
+on $T_n$ and, by the symmetric incident-edge criterion in
+\noderef{sc2}, preserves the absence of a boundary in a missing color.
+The degree argument below supplies at least one missing color.  Hence in
+every case there is a color missing on and closed at $A$.               \tag{7}
+
+For completeness, we spell out the parity consequence rather than assume
+it.  Let $X$ be either $V(A)$ with the color from (7), or $V(U)$ with
+$\alpha$.  By (2) or (3), the chosen color is missing at exactly one
+vertex of $X$: existence is its selection, and two distinct missing
+vertices would contradict \noderef{ColoredVertexSetElementary}.  At
+every other vertex it is present by the complementary definitions
+\noderef{MissingColors} and \noderef{PresentColors}.
+\noderef{IsProperEdgeColoring} gives exactly one incident edge of that
+color, while
+\noderef{TreeColorSetClosed} forces the other endpoint of each such edge
+to remain in $X$.  Looplessness and properness therefore partition all
+vertices except the unique missing vertex into two-element endpoint
+pairs.  Thus
+\[
+                |V(A)|\text{ and }|V(U)|\text{ are odd}.       \tag{8}
+\]
+
+The injective vertex array in \noderef{TreeSequence} and the definition
+of \noderef{TreeSequenceVertexSet} give
+$|V(S)|=|S|+1$ for every tree-sequence $S$.  By (4) and (8), the positive
+difference $|V(U)|-|V(A)|$ is even, hence is at least two.  Choose two
+distinct vertices $x,y\in V(U)-V(A)$.  The definitions \noderef{Degree}
+and \noderef{MaximumDegree}, the inequality $\Delta(G)+1\leq k$, and
+\noderef{IsProperEdgeColoring} show that every vertex misses a color:
+otherwise all $k$ colors would be represented by distinct incident edges,
+giving $k\leq\deg_G(v)\leq\Delta(G)<k$.  Choose
+$\gamma_1\in\overline\varphi(x)$ and
+$\gamma_2\in\overline\varphi(y)$.  Elementarity of $U$ makes these
+colors distinct.
+
+Every old Gamma color belonging to an owner in $D^+$ is missing at a
+vertex of $A$ by \noderef{GoodHierarchyReservedDisjoint}.  Neither
+$\gamma_1$ nor $\gamma_2$ can equal such a color, since it is missing at
+$x$ or $y$ outside $A$ and (2) forbids a repeated missing color in $U$.
+Consequently
+\[
+               \{\gamma_1,\gamma_2\}\cap\Gamma^-=\varnothing.
+                                                                    \tag{9}
+\]
+
+We next choose the exact Step 1 edge.  Expanding the failure of
+\noderef{TreeColorSetClosed} gives a color $\beta$ which is missing on
+$U$ and has a nonempty $\beta$-boundary.  If
+$\beta\notin\Gamma^-$, the assumed
+\noderef{TreeColorSetMinusClosed} assertion would make that boundary
+empty.  Therefore $\beta\in\Gamma^-$.  Expand the finite biunion to
+choose $\eta\in D^+$ with
+$\beta\in\mathcal G.\Gamma^q_\eta$.  Since $D^+$ is contained in the
+last indexed stored set, `disjointPairs' in
+\noderef{GoodHierarchy} shows that no distinct owner in $D^+$ has a pair
+containing $\beta$.  This proves the asserted uniqueness.  Choose an
+individual identity $f$ in the nonempty boundary.  By
+\noderef{BoundaryColorEdges}, it is an edge in
+\noderef{BoundaryEdges}$(G,V(U))$ and
+\[
+                              \varphi(f)=\beta.                \tag{10}
+\]
+Equation (9), together with $\beta\in\Gamma^-$, also proves that the new
+pair excludes $\beta$.
+
+We construct $W=U+f$ as an exact ordered tree, not merely as a vertex-set
+extension.  The boundary definition supplies endpoints $u\in V(U)$ and
+$w\notin V(U)$ with ends $\{u,w\}$.  Give $W$ length $|U|+1$, copy all
+old vertex and edge entries, and use $w$ and $f$ as the new last entries.
+Vertex injectivity follows from $w\notin V(U)$.  Edge injectivity follows
+because every old displayed edge has both endpoints in $V(U)$ by the
+attachment field of \noderef{TreeSequence}, whereas $f$ has endpoint
+$w$ outside.  The old attachment equations copy, and the new one uses
+the old position of $u$.  These checks construct a genuine tree-sequence
+and give \noderef{TreeSequenceAdjoinEdge}$(U,f,W)$.  Equations (10) and
+$\beta\in\overline\varphi(U)$ are then precisely the color and missing
+witness required by \noderef{TashkinovAugmentation}; hence
+\[
+                              U\longrightarrow W.              \tag{11}
+\]
+
+We certify $W$ relative to the fixed original before constructing its
+dependent hierarchy.  Using the reflexive-transitive-chain definition
+\noderef{TashkinovAugmentationSequence}, concatenate the retained
+$J\longrightarrow U$ sequence with (11).  In the PE anchor case,
+concatenate first the retained
+$T_n\longrightarrow J$ sequence; in the SE/RE case retain the exact
+original connecting-edge identity and the exact equation $J=T_n+f_n$.
+The strict inequalities assumed for the two anchor alternatives, followed
+by $|U|<|W|$, give $|T_n|<|W|$.  By
+\noderef{TashkinovAugmentationSequenceInitialSegment}, $T_n$ is an exact
+initial segment of $W$.  These are precisely the PE or SE/RE eligibility
+clauses in (1).  Apply that fixed-original
+\noderef{ModColoring} directly to obtain
+\[
+ C_W:\noderef{CorrespondingExtendedTashkinovTree}
+        (\mathcal E,\varphi,W).                                \tag{12}
+\]
+Thus (12) is relative to $\mathcal E$, not to $C_U$'s replacement ETT.
+The theorem \noderef{MaximumPropertyTransport} transfers the original
+maximum property to $C_W.\mathit{replacementETT}$, and
+\noderef{HierarchyBaseCorrespondingTransport} transports the original
+base $B$ itself, giving $B_W$ with the three stated equalities.
+
+We now build the one-divider hierarchy $H_W$.  Set its divider count to
+$d+1$.  Copy the $d+2$ old stages of $H$ in order and append $W$ as the
+new terminal stage.  Copy the $d$ old divider positions and use $|U|$ as
+the new one.  All old nesting, strictness, divider-stage, and base-core
+fields copy from \noderef{TashkinovHierarchy}; the final nesting and
+strictness come from (11), and exact prefix equality in
+\noderef{TreeSequenceAdjoinEdge} identifies the prefix of $W$ of length
+$|U|$ with the complete ordered tree $U$.  This proves all hierarchy
+fields and the claimed equalities of stages and positions.
+
+For its indexed stored sets, the old starred stages are unchanged, so
+the definition \noderef{HierarchyStoredColorsAt} gives the old
+equalities.  The new starred stage is $U$.  Both $C_U$ and the certificate
+to be constructed on $W$ preserve the fixed original raw stored sets;
+therefore at the new indexed level the definition is
+\[
+ D_n-\overline\varphi(U)=
+       \noderef{HierarchyTerminalStoredColors}(H)=D^+.         \tag{13}
+\]
+
+Define the new total Gamma family by copying every old indexed family;
+at the new level put $\{\gamma_1,\gamma_2\}$ at $\eta$ and copy the old
+last pair for every other color.  We verify every field of
+\noderef{GoodHierarchy}.  Old pair cardinalities and disjointness copy.
+At the new level, cardinality two follows from
+$\gamma_1\ne\gamma_2$; disjointness between the new pair and every copied
+pair is (9), and disjointness among copied pairs is the old field.
+
+For avoidance, the two new colors are missing on $U$.  The only edge of
+$W-U$ is $f$, whose color is $\beta$, and (9) excludes $\beta$ from the
+new pair.  Thus the new pair avoids the exact segment before the first
+$\eta$-missing position.  If $\theta\ne\eta$ belongs to $D^+$, its copied
+pair is missing on $A$ by
+\noderef{GoodHierarchyReservedDisjoint}, hence also missing on $U$; old
+pair disjointness says it does not contain $\beta$, so it too avoids the
+only new segment edge.  At every old level, the stage and starred stage
+are unchanged.  If the relevant stored color was already missing on $U$,
+its first missing position is unchanged on passing to $W$; otherwise its
+old fallback position and its new first-or-fallback position both lie
+after that old stage.  The cutoff in
+\noderef{HierarchySegmentColors} is therefore unchanged, so all old
+avoidance fields copy exactly.
+
+Every old unique-refresh clause also copies.  At the new divider,
+$\eta$ has its new pair missing on $V(U)-V(A)$, and every other member of
+$D^+$ retains its old last pair.  The owner is unique: a copied old pair
+is missing on $A$, while every color of the new pair is missing at one of
+$x,y\notin V(A)$; elementarity of $U$ and nonemptiness of every old
+two-color pair prevent a copied pair from being contained in the new
+difference-missing set.  The PE base clause is unchanged.  Finally, the
+new internal minus-closed clause is exactly the assumed
+$(\Gamma^-)^-$-closedness of $U$, using (13), while all earlier clauses
+copy.  This completes the good witness $\mathcal G_W$ with exactly the
+stated unique replacement.  Equation (13) follows from the raw stored-set
+agreement in (12).
+
+We may now run Step 2 without losing the fixed root.  Apply
+\noderef{GoodHierarchyRestrictedAugmentation} with the
+original ETT $\mathcal E$, the fixed-original mod-coloring (1), original
+maximum property, $W,C_W,B_W,H_W$, and $\mathcal G_W$.  It returns a
+finite exact augmentation chain $W\longrightarrow V$, a certificate
+$C_V$ already relative to $\mathcal E$, maximum property, a transported
+base, a hierarchy $K$ with the same $d+1$ dividers, and a good witness
+whose stages, starred stages, indexed stored sets, divider positions, and
+Gamma pairs agree with those of $H_W$.  It also gives
+\[
+ V\text{ is }
+ \left(\bigcup_{\theta\in
+   \noderef{HierarchyTerminalStoredColors}(K)}
+   \mathcal G_V.\Gamma^{d+1}_\theta\right)^-\text{-closed}.    \tag{14}
+\]
+Compose its exact equalities with those just proved between $H_W$ and
+$H$; this gives every displayed old-stage, position, stored-set, and
+Gamma equality in the conclusion, as well as the new indexed equality
+(13) and the unique pair replacement.  Concatenating the three
+augmentation sequences gives $J\longrightarrow V$.  Since (11) gives
+$|U|<|W|$ and the returned chain has $W$ as an exact initial segment of
+$V$, we have $|U|<|V|$.  Equation (14) is the requested terminal
+minus-closedness.  Both (12) and $C_V$ were obtained directly from the
+same fixed-original mod-coloring, so no replacement-on-replacement
+certificate or uncomposed positive-stage stability relation remains.
+This proves every assertion.
+\end{proof}
