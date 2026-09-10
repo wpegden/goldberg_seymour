@@ -22,6 +22,7 @@ import Tablet.RutgersClosedPresentation
 import Tablet.RutgersCounterexample
 import Tablet.RutgersCounterexampleMeasure
 import Tablet.StableColoring
+import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceColoringTransport
 import Tablet.TashkinovAugmentationSequenceInitialSegment

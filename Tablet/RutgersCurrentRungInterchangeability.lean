@@ -104,4 +104,116 @@ theorem RutgersCurrentRungInterchangeability
           beta ∈ TreeMissingColors sigma Tnext) ->
         TreeInterchangeable G Tnext sigma alpha beta := by
 -- BODY
-  sorry
+  dsimp
+  intro sigma hproper hone hstable alpha beta hmissing
+  have graphSwap :
+      TwoColorIncidenceGraph G sigma alpha beta =
+        TwoColorIncidenceGraph G sigma beta alpha := by
+    ext x y
+    cases x <;> cases y <;> simp [TwoColorIncidenceGraph, or_comm]
+  have componentSwap (z : Sum V E) :
+      TwoColorComponent G sigma alpha beta z =
+        TwoColorComponent G sigma beta alpha z := by
+    unfold TwoColorComponent
+    rw [graphSwap]
+  have pathSwap (z : Sum V E) :
+      TwoColorPathComponent G sigma alpha beta z ↔
+        TwoColorPathComponent G sigma beta alpha z := by
+    simp [TwoColorPathComponent, componentSwap, graphSwap, ne_comm]
+  have interchangeSwap :
+      TreeInterchangeable G
+          (original.series.data.tree (Fin.last (original.rounds + 1)))
+          sigma alpha beta ↔
+        TreeInterchangeable G
+          (original.series.data.tree (Fin.last (original.rounds + 1)))
+          sigma beta alpha := by
+    constructor
+    · intro h z w hz hw hzT hwT
+      have hz' : TwoColorPathComponent G sigma alpha beta z :=
+        pathSwap z |>.mpr hz
+      have hw' : TwoColorPathComponent G sigma alpha beta w :=
+        pathSwap w |>.mpr hw
+      have hzT' : ∃ v ∈ TreeSequenceVertexSet
+          (original.series.data.tree (Fin.last (original.rounds + 1))),
+          Sum.inl v ∈ TwoColorComponent G sigma alpha beta z := by
+        obtain ⟨v, hv, hvz⟩ := hzT
+        exact ⟨v, hv, by rw [componentSwap z]; exact hvz⟩
+      have hwT' : ∃ v ∈ TreeSequenceVertexSet
+          (original.series.data.tree (Fin.last (original.rounds + 1))),
+          Sum.inl v ∈ TwoColorComponent G sigma alpha beta w := by
+        obtain ⟨v, hv, hvw⟩ := hwT
+        exact ⟨v, hv, by rw [componentSwap w]; exact hvw⟩
+      have result := h z w hz' hw' hzT' hwT'
+      exact (componentSwap z).symm.trans
+        (result.trans (componentSwap w))
+    · intro h z w hz hw hzT hwT
+      have hz' : TwoColorPathComponent G sigma beta alpha z :=
+        pathSwap z |>.mp hz
+      have hw' : TwoColorPathComponent G sigma beta alpha w :=
+        pathSwap w |>.mp hw
+      have hzT' : ∃ v ∈ TreeSequenceVertexSet
+          (original.series.data.tree (Fin.last (original.rounds + 1))),
+          Sum.inl v ∈ TwoColorComponent G sigma beta alpha z := by
+        obtain ⟨v, hv, hvz⟩ := hzT
+        exact ⟨v, hv, by rw [componentSwap z] at hvz; exact hvz⟩
+      have hwT' : ∃ v ∈ TreeSequenceVertexSet
+          (original.series.data.tree (Fin.last (original.rounds + 1))),
+          Sum.inl v ∈ TwoColorComponent G sigma beta alpha w := by
+        obtain ⟨v, hv, hvw⟩ := hwT
+        exact ⟨v, hv, by rw [componentSwap w] at hvw; exact hvw⟩
+      have result := h z w hz' hw' hzT' hwT'
+      exact (componentSwap z).trans
+        (result.trans (componentSwap w).symm)
+  by_cases heq : alpha = beta
+  · subst alpha
+    simp [TreeInterchangeable, TwoColorPathComponent]
+  by_cases halpha : alpha ∈ TreeMissingColors sigma
+      (original.series.data.tree (Fin.last (original.rounds + 1)))
+  · by_contra hnot
+    obtain ⟨presentation, counterexample, hminimum⟩ :=
+      RutgersCounterexampleMinimumExists G k e0
+        (input := _) (T := _) (generating := _) original hMP
+        hcurrentOne hcurrentSix sigma hproper hone hstable alpha beta heq
+        halpha hnot
+    have helementary :
+        ColoredVertexSetElementary G presentation.sigma
+          (TreeSequenceVertexSet presentation.U) := by
+      apply hcurrentOne presentation.corresponding.replacementETT
+      · exact presentation.corresponding.rungAgreement
+      · exact presentation.maximum
+    have houtside := RutgersMiddleExitOutsideTerminalLadder G k e0 original
+      hdegree hcurrentFour hlowerTwo presentation counterexample helementary
+    obtain ⟨newPresentation, newCounterexample, hshort⟩ :=
+      RutgersStrictShortening G k e0 original hdegree hcurrentOne hcurrentSix
+        presentation counterexample houtside
+    have hweak := hminimum newPresentation newCounterexample
+    exact (Nat.not_lt_of_ge hweak) hshort
+  · have hbeta : beta ∈ TreeMissingColors sigma
+        (original.series.data.tree (Fin.last (original.rounds + 1))) := by
+      exact hmissing.resolve_left halpha
+    by_contra hnot
+    have hnotSwap : ¬ TreeInterchangeable G
+        (original.series.data.tree (Fin.last (original.rounds + 1)))
+        sigma beta alpha := by
+      intro hs
+      exact hnot (interchangeSwap.mpr hs)
+    obtain ⟨presentation, counterexample, hminimum⟩ :=
+      RutgersCounterexampleMinimumExists G k e0
+        (input := _) (T := _) (generating := _) original hMP
+        hcurrentOne hcurrentSix sigma hproper hone hstable beta alpha
+        (by intro h; exact heq h.symm)
+        hbeta hnotSwap
+    have helementary :
+        ColoredVertexSetElementary G presentation.sigma
+          (TreeSequenceVertexSet presentation.U) := by
+      apply hcurrentOne presentation.corresponding.replacementETT
+      · exact presentation.corresponding.rungAgreement
+      · exact presentation.maximum
+    have houtside := RutgersMiddleExitOutsideTerminalLadder G k e0 original
+      hdegree hcurrentFour hlowerTwo presentation counterexample helementary
+    obtain ⟨newPresentation, newCounterexample, hshort⟩ :=
+      RutgersStrictShortening G k e0 original hdegree hcurrentOne hcurrentSix
+        presentation counterexample houtside
+    have hweak := hminimum newPresentation newCounterexample
+    exfalso
+    exact (Nat.not_lt_of_ge hweak) hshort
