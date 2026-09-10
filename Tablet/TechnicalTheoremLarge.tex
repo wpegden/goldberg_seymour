@@ -1,0 +1,171 @@
+\begin{theorem}[The positive-rung Technical Theorem in large order]
+Let \(G=(V,E)\) be a finite loopless multigraph with its individual edge
+identities, let \(e_0\in E\), and let the palette have \(k\) colors.  Let
+
+\[
+ \mathcal E:\noderef{ExtendedTashkinovTree}(G,k,e_0,\rho,T,\varphi)
+\]
+
+be a positive-rung ETT with displayed tree \(T\), generating coloring
+\(\varphi\), rung number \(n\), and certified series data.  Assume
+\noderef{MaximumProperty} for \(\mathcal E\) and
+
+\[
+ \noderef{MaximumDegree}(G)+1\leq k,
+ \qquad 11\leq\noderef{TashkinovOrder}(G).
+\]
+
+For \(i\in\operatorname{Fin}(n+1)\), put
+\[
+ L_i=\mathcal E.\mathrm{series.data.tree}(i.\mathrm{castSucc}),\quad
+ D_i=\noderef{TashkinovStoredColors}
+        (\mathcal E.\mathrm{series.data},i),\quad
+ \varphi_i=\mathcal E.\mathrm{series.data.coloring}(i).
+\]
+Write \(a=\operatorname{Fin.last}(n)\), and put
+\[
+ F=\mathcal E.\mathrm{series.data.tree}
+       (\operatorname{Fin.last}(n+1)).
+\]
+Thus \(L_a\) is the exact terminal ladder tree and \(F\) is the exact final
+series tree.  Write \(\Theta_i,u_i,\gamma_i,\delta_i\) for the kind, chosen
+vertex, gamma color, and delta color stored at index \(i\), and write
+\(S_i^{\mathrm{raw}}\) for the raw stored set at \(i\).  Then all of the
+following assertions hold.
+
+\begin{enumerate}
+\item[(i)]
+\(\noderef{ColoredVertexSetElementary}
+  (G,\varphi,\noderef{TreeSequenceVertexSet}(T))\).
+
+\item[(ii)]
+For every partial coloring \(\sigma\), if \(\sigma\) is
+\noderef{IsProperEdgeColoring}, leaves exactly \(e_0\) uncolored in the
+sense of \noderef{IsOneEdgeUncolored}, and is
+\noderef{StableColoring} on \(F\) relative to \((D_a,\varphi_a)\), then,
+for all colors \(\alpha,\beta\),
+\[
+ \alpha\in\noderef{TreeMissingColors}(\sigma,F)
+ \quad\hbox{or}\quad
+ \beta\in\noderef{TreeMissingColors}(\sigma,F)
+ \quad\Longrightarrow\quad
+ \noderef{TreeInterchangeable}(G,F,\sigma,\alpha,\beta).
+\]
+
+\item[(iii)]
+For every \(q\in\operatorname{Fin}(n)\), vertex \(v\), certified witness
+\(h:v\in\noderef{TreeSequenceVertexSet}(T)\), and
+\(j\in\operatorname{Fin}(n+1)\), suppose
+\[
+ \Theta_{q^+}=\mathrm{PE},\qquad u_{q^+}=v,\qquad
+ \noderef{ETTFirstAppearanceIndex}(\mathcal E,v,h)=j+1.
+\]
+Every proper coloring \(\sigma\) leaving exactly \(e_0\) uncolored which is
+stable on \(L_{q^+}\) relative to \((D_{q^+},\varphi_{q^+})\) is
+\noderef{StableColoringBeforeVertex} before \(v\) in \(T\), using the same
+witness \(h\), relative to \((D_j,\varphi_j)\).  Moreover, if \(j>0\),
+then \(\sigma\) is stable on \(L_j\) relative to
+\((D_j,\varphi_j)\).
+
+In addition, let \(q,r\in\operatorname{Fin}(n)\) be distinct, and let
+\(v_q,v_r\) be distinct vertices with certified membership witnesses in
+\(T\).  If
+\[
+ \Theta_{q^+}=\Theta_{r^+}=\mathrm{PE},\qquad
+ u_{q^+}=v_q,\qquad u_{r^+}=v_r,
+\]
+and their two dependent
+\noderef{ETTFirstAppearanceIndex} values are equal, then
+\[
+          S_{q^+}^{\mathrm{raw}}\cap S_{r^+}^{\mathrm{raw}}
+          =\varnothing.
+\]
+
+\item[(iv)]
+For all \(v\in V\) and colors \(\gamma,\delta\), suppose
+\[
+ \Theta_a=\mathrm{PE},\qquad u_a=v,\qquad
+ \gamma_a=\gamma,\qquad\delta_a=\delta.
+\]
+Under every proper, exactly-\(e_0\)-uncolored coloring \(\sigma\) stable on
+\(L_a\) relative to \((D_a,\varphi_a)\), every \(w\in V(L_a)\) satisfies
+\[
+ \operatorname{inl}(w)\in
+   \noderef{TwoColorComponent}
+     (G,\sigma,\gamma,\delta,\operatorname{inl}(v))
+ \quad\Longleftrightarrow\quad w=v.
+\]
+
+\item[(v)]
+Let \(\sigma\) be any proper, exactly-\(e_0\)-uncolored coloring stable on
+\(L_a\) relative to \((D_a,\varphi_a)\), and let \(d\) be a
+\noderef{DefectiveColor} of \(V(L_a)\) under \(\sigma\).  Let \(v\) satisfy
+\noderef{BoundaryColorVertex}\((G,\sigma,V(L_a),d,v)\), and suppose there
+is another such boundary-color vertex \(w\) with
+\noderef{TreeVertexOrder}\((L_a,w,v)\).  For every certified witness
+\(h:v\in V(T)\), every \(q\in\operatorname{Fin}(n)\), and every vertex
+\(v_i\), if
+\[
+ \Theta_{q^+}=\mathrm{PE}\ \hbox{or}\ \Theta_{q^+}=\mathrm{SE},
+ \qquad u_{q^+}=v_i,\qquad
+ \noderef{ETTFirstAppearanceIndex}(\mathcal E,v,h)\leq q+1,
+\]
+then
+\[
+                v=v_i\quad\hbox{or}\quad
+                \noderef{TreeVertexOrder}(T,v,v_i).
+\]
+
+\item[(vi)]
+Every proper, exactly-\(e_0\)-uncolored coloring \(\sigma\) stable on
+\(L_a\) relative to \((D_a,\varphi_a)\) satisfies
+\(\noderef{ModColoring}(\mathcal E,\sigma)\).
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+Apply \noderef{TechnicalInductionContextLarge} with bound \(n+1\).  Its
+numerical hypotheses are exactly the assumed degree and large-order
+inequalities, so it supplies a
+\noderef{TechnicalInductionContext} \(C\) for \(G,k,e_0\) up to that
+bound.
+
+The positive-rung field of
+\noderef{ExtendedTashkinovTree} gives \(0<n\), and arithmetic gives
+\(n<n+1\).  Hence \(\mathcal E\), together with its assumed maximum
+property, meets the common hypotheses of all six lower fields of \(C\).
+
+Apply \texttt{lowerOne} to obtain (i).  By the defining statement of
+\noderef{TechnicalInductionContext}, this field uses the displayed
+generating coloring \(\varphi\) and exact vertex set \(V(T)\), so its
+conclusion is precisely the first item above.
+
+Apply \texttt{lowerTwo} to obtain (ii).  Its dependent terminal index is
+\(\operatorname{Fin.last}(n)=a\), while its final-tree index is
+\(\operatorname{Fin.last}(n+1)\); consequently its stable-coloring control
+is exactly \((D_a,\varphi_a)\) on \(F\), and its conclusion is exactly the
+stated universal \noderef{TreeInterchangeable} property.
+
+Apply \texttt{lowerThree} to obtain (iii).  Both conjuncts retain the exact
+indices \(q^+,r^+,j\), the dependent membership witnesses used by
+\noderef{ETTFirstAppearanceIndex}, the stability-before-vertex conclusion,
+the explicit \(j>0\) guard on predecessor stability, and the disjointness
+of the two raw stored sets.  Thus no transport or weakening of the third
+item is involved.
+
+Apply \texttt{lowerFour} to obtain (iv).  Its terminal ladder tree is
+\(L_a\), and its four stored-data equalities identify exactly
+\(\Theta_a,u_a,\gamma_a,\delta_a\); the returned equivalence is therefore
+the asserted one-vertex intersection with the
+\noderef{TwoColorComponent}.
+
+Apply \texttt{lowerFive} to obtain (v).  That field has the same defective
+color, exact boundary-color-vertex predicate, earlier-vertex witness,
+membership proof \(h\), PE-or-SE alternative, chosen vertex, and
+first-appearance bound as the fifth item, and returns exactly its equality
+or \noderef{TreeVertexOrder} alternative.
+
+Finally, apply \texttt{lowerSix}.  Its terminal tree and stability data are
+again \(L_a,D_a,\varphi_a\), and its conclusion is precisely
+\noderef{ModColoring}\((\mathcal E,\sigma)\), which proves (vi).  The six
+field applications give the stated conjunction of assertions (i)--(vi).
+\end{proof}

@@ -67,6 +67,7 @@ import Tablet.SupportingPEColorChain
 import Tablet.SupportingPEMissingTransport
 import Tablet.SupportingPEStoredIntersection
 import Tablet.TechnicalInductionContext
+import Tablet.TechnicalTheoremLarge
 import Tablet.ExtensionBaseSupportClass
 import Tablet.ExtensionBaseSupportClassColors
 import Tablet.ExtensionBaseDeltaExclusion
