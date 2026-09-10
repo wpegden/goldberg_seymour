@@ -30,11 +30,15 @@ fields of \noderef{CorrespondingExtendedTashkinovTree} identify
 \(\sigma\) with the terminal coloring in the actual certified series of
 \(\mathcal R\).  Eliminating its positive terminal certificate in
 \noderef{TashkinovSeries} and \noderef{TashkinovSeriesStep} shows that
-this coloring is proper and leaves exactly \(e_0\) uncolored: these are
-explicit fields in SE and PE, and in RE they follow from the preceding
-proper coloring and the current-coloring equality.  We use these facts
-below without changing from the replacement presentation to the original
-ETT.
+this coloring is proper in the sense of
+\noderef{IsProperEdgeColoring} and leaves exactly \(e_0\) uncolored in
+the sense of \noderef{IsOneEdgeUncolored}: these are explicit fields in
+SE and PE, and in RE they follow from the preceding proper coloring and
+the current-coloring equality.  We use these facts below without changing
+from the replacement presentation to the original ETT.  All references
+below to the fields of \(\mathcal C\), including its colors, walks,
+endpoints, support-disjointness, and retained boundary identities, are to
+the definition \noderef{RutgersCounterexample}.
 
 Suppose, for a contradiction, that \(b_2\in V(T_n)\).  We first record
 the exact prefix relation
@@ -53,8 +57,10 @@ from \(A\) to \(U\).  The adjoin-edge definition makes \(T_n\) an exact
 \noderef{TreeSequenceInitialSegment} of \(A\), and the same augmentation
 lemma makes \(A\) an exact initial segment of \(U\).  Composing their
 length inequalities and their entrywise vertex and edge equalities gives
-(1).  In either alternative, the closure field also says that \(V(U)\)
-is closed under \(\sigma\).
+(1).  The vertex sets here and below are those of
+\noderef{TreeSequenceVertexSet}.  In either alternative, the closure
+field also says that \(V(U)\) is closed under \(\sigma\), in the precise
+sense of \noderef{ColoredVertexSetClosed}.
 
 Expand \(b_1\prec_U b_2\) from the field
 \(\mathcal C.\mathit{insideOrder12}\) using
@@ -72,7 +78,8 @@ The vertex-set form of (1), equivalently
 assumed \noderef{ColoredVertexSetElementary} relation on \(V(U)\) to
 \(V(T_n)\).
 
-The exact-one-uncolored property gives \(\sigma(e_0)=\mathsf{none}\).
+The first clause of \noderef{IsOneEdgeUncolored} gives
+\(\sigma(e_0)=\mathsf{none}\).
 Apply \noderef{TreeMissingColorsCardLowerBound} to the elementary set
 \(V(T_n)\), this equality, and \(\Delta(G)+1\leq k\).  It gives
 \[
@@ -83,9 +90,10 @@ terminal step choose any
 \(c\in\overline\sigma(T_n)\).  In a PE step first expose from the actual
 positive constructor its certified support \(v_n\), colors
 \(\gamma_n,\delta_n\), and exact connecting edge \(f_n\).  A
-tree-sequence contains the two distinct ends of its first, loopless edge,
-so \(|V(T_n)|\geq2\); consequently (3) gives at least four missing
-colors.  Choose
+tree-sequence in the sense of \noderef{TreeSequence} contains the two
+distinct ends of its first edge; their distinctness is the loopless law
+of \noderef{LooplessMultigraph}.  Thus \(|V(T_n)|\geq2\), and (3) gives
+at least four missing colors.  Choose
 \[
  c\in\overline\sigma(T_n)-\{\gamma_n,\delta_n\}.             \tag{4}
 \]
@@ -94,7 +102,10 @@ switch is later undone.
 
 By (1), the chosen color \(c\) is also missing on \(U\), while
 \(\alpha=\mathcal C.\alpha\) is missing on \(U\) by the counterexample
-field.  Define \(\mu_1=\sigma\) if \(c=\alpha\).  Otherwise put
+field.  Here and below tree-missingness is the union in
+\noderef{TreeMissingColors} of the vertex missing-color sets from
+\noderef{MissingColors}.  Define \(\mu_1=\sigma\) if \(c=\alpha\).
+Otherwise put
 \[
  \mu_1=\noderef{OutsideTreeColorSwap}(U,\sigma,\alpha,c).
 \]
@@ -110,83 +121,142 @@ clauses along (1) gives
 \[
             \mu_1\text{ is }(T_n,D_n,\sigma)\text{-stable}.  \tag{5}
 \]
+The vertexwise missing-set equality in \noderef{StableColoring}, followed
+by the union definition of \noderef{TreeMissingColors}, also gives
+\[
+                         c\in\overline{\mu}_1(T_n).            \tag{5a}
+\]
 
 We next verify from the stored walks, rather than assume, what happens to
 the first two exit legs.  The field
 \(\mathcal C.\mathit{betaPresent}\) says that \(\beta\) is missing at no
 vertex of \(U\); since \(c\) is missing at a vertex of \(T_n\subseteq U\),
-we have \(c\ne\beta\).  In the nonidentity recoloring, every edge-node of
-\(Q_i\) not incident with \(U\) changes from color \(\alpha\) to color
-\(c\), or retains color \(\beta\).  An edge-node of \(Q_i\) incident
-with \(U\) is fixed.  Such an edge cannot have old color \(\alpha\): its
-path incidence and the first-contact condition in
-\noderef{TreeExitPath} make it a boundary identity of \(U\), while
-closedness and \(\alpha\in\overline\sigma(U)\) exclude an
-\(\alpha\)-colored boundary.  It therefore has color \(\beta\).  Thus
-each unchanged node sequence \(Q_i\), for \(i=1,2\), is a walk in
+we have \(c\ne\beta\).  Fix \(i\in\{1,2\}\).  If \(c=\alpha\), the
+original \(U\)-exit certificate restricts immediately to \(T_n\) by
+(1)--(2).  Assume henceforth in this paragraph that \(c\ne\alpha\).
+
+First we rebuild the incidence-walk clause.  Let \(e\) be an edge-node
+of \(Q_i\).  If \(e\) is not incident with \(U\) in the sense of
+\noderef{TreeIncidentEdge}, then
+\noderef{OutsideTreeColorSwap} changes its old color \(\alpha\) to
+\(c\) and leaves its old color \(\beta\) unchanged.  Suppose instead
+that \(e\) is incident with \(U\).  Since both endpoints of \(Q_i\) are
+vertex-nodes, the edge-node \(e\) is internal on this simple path.  Its
+predecessor and successor are distinct vertex-nodes, by path simplicity,
+and adjacency in \noderef{TwoColorIncidenceGraph} says that both are
+ends of \(e\).  The endpoint-pair description and loopless law in
+\noderef{LooplessMultigraph} say that these are precisely the two
+distinct ends of \(e\).  At least one is in \(V(U)\) by
+\noderef{TreeIncidentEdge}; the unique-contact clause of the original
+\noderef{TreeExitPath} forces that end to be \(b_i\) and forces the other
+end outside \(V(U)\).  Thus \(e\) is an exact boundary identity in
+\noderef{BoundaryEdges}\((G,V(U))\).
+
+Both \(\alpha\) and \(c\) are missing on \(U\).  Choosing their
+respective missing vertices by \noderef{TreeMissingColors} and applying
+the closedness predicate \noderef{ColoredVertexSetClosed} to this exact
+boundary identity shows that \(\sigma(e)\) is neither \(\alpha\) nor
+\(c\).  But the old walk adjacency says that \(\sigma(e)\) is
+\(\alpha\) or \(\beta\), so it is \(\beta\).  The outside swap fixes
+this tree-incident identity.  We have now checked every edge-node, and
+the unchanged node sequence \(Q_i\) is therefore a walk in
 \noderef{TwoColorIncidenceGraph}\((G,\mu_1;c,\beta)\).
 
-The path and length clauses are unchanged.  The outside endpoint remains
-outside \(T_n\), and (2) puts the inside endpoint in \(T_n\).  The only
-vertex-node of \(Q_i\) in \(U\) was \(b_i\), so it is also the only one
-in \(T_n\).  At the outside endpoint, exchanging \(\alpha,c\) exchanges
-their present and missing status and fixes that of \(\beta\); hence the
-old assertion that \(\alpha\) or \(\beta\) is missing becomes the
-assertion that \(c\) or \(\beta\) is missing.  These are all clauses of
-\noderef{TreeExitPath}, and therefore
+Its path and length clauses are unchanged.  Its outside endpoint \(a_i\)
+is outside \(U\), hence outside \(T_n\); (2) puts \(b_i\) in \(T_n\).
+If a vertex-node of \(Q_i\) belongs to \(V(T_n)\), then (1) puts it in
+\(V(U)\), so the original unique-contact clause identifies it with
+\(b_i\).  It remains only to verify the missing-color alternative at
+\(a_i\).  If \(\beta\) was missing there under \(\sigma\), it remains
+missing: \(\beta\ne\alpha,c\), and the outside swap never creates or
+removes a \(\beta\)-colored edge.  Suppose instead that \(\alpha\) was
+missing there.  If some edge \(g\) incident with \(a_i\) had color
+\(c\) under \(\mu_1\), split according to
+\noderef{TreeIncidentEdge}\((U,g)\).  If \(g\) is not tree-incident,
+the definition of the swap and \(c\ne\alpha\) give
+\(\sigma(g)=\alpha\), contrary to \(\alpha\)-missingness.  If \(g\)
+is tree-incident, it is fixed and has old color \(c\).  Since
+\(a_i\notin V(U)\), its incidence with \(a_i\) and with a vertex of
+\(U\), together with the loopless endpoint description, put \(g\) in
+\noderef{BoundaryEdges}\((G,V(U))\).  This contradicts closedness of
+\(U\), because \(c\) is missing on \(U\).  Thus no such \(g\) exists.
+By the edge-witness definition \noderef{PresentColors} and its complement
+\noderef{MissingColors}, \(c\) is missing at \(a_i\) under \(\mu_1\).
+
+These verifications give every clause of \noderef{TreeExitPath} for
+both \(i=1,2\).  Their supports are still disjoint because the stored
+node sequences have not changed.  Consequently
 \[
  Q_1,Q_2\text{ are support-disjoint }
        (T_n,\mu_1,\{c,\beta\})\text{-exit paths}.             \tag{6}
 \]
-The supports themselves have not changed.  The exact identities
-\(f_1,f_2\) remain on their respective walks and remain incident with
-\(b_1,b_2\).  Their old membership in the \(\beta\)-colored boundary of
-\(U\), together with (2), says that the same identities belong to the
-\(\beta\)-colored boundary of \(T_n\) under \(\sigma\), and hence under
-\(\mu_1\).  Finally \(f_1\ne f_2\): equality would put the same edge-node
-in both walk supports, contrary to the recorded support-disjointness.
+The exact identities \(f_1,f_2\) remain on their respective walks and
+remain incident with \(b_1,b_2\).  Expanding their old membership in
+\noderef{BoundaryColorEdges}\((G,\sigma,V(U),\beta)\) says that each is
+an exact \noderef{BoundaryEdges}-identity of \(U\) colored \(\beta\).
+Since its inside endpoint \(b_i\) lies in \(T_n\) by (2), while its
+other endpoint lies outside \(U\) and hence outside \(T_n\), the same
+identity lies in the \(\beta\)-colored boundary of \(T_n\) under
+\(\sigma\).  It is incident with \(U\), so the outside swap fixes it and
+it remains in that boundary under \(\mu_1\).  Finally \(f_1\ne f_2\):
+equality would put the same edge-node in both walk supports, contrary to
+the recorded support-disjointness.
 
 We isolate a consequence of (6) which will be used after either terminal
 transport:
 \[
  \begin{gathered}
- \text{if a proper coloring \(\rho\) leaves the two walks in (6)
- unchanged and }c\in\overline\rho(T_n),\\
- \text{then \(c,\beta\) are not \(T_n\)-interchangeable under \(\rho\).}
+ \rho\text{ is proper},\quad c\ne\beta,\quad
+ c\in\overline\rho(T_n),\quad a_1\ne a_2,\\
+ \noderef{TreeExitPath}(T_n,\rho,c,\beta,a_i,b_i,Q_i)
+ \text{ holds exactly for }i=1,2\\
+ \Longrightarrow\quad
+ \neg\noderef{TreeInterchangeable}(G,T_n,\rho,c,\beta).
                                                                \tag{7}
  \end{gathered}
 \]
-Choose \(x\in V(T_n)\) missing \(c\).  Since \(\beta\) is missing at no
-vertex of \(U\), the exact-witness definition
-\noderef{PresentColors} supplies a \(\beta\)-colored edge incident with
-\(x\).  No \(c\)-edge is incident there, and properness permits at most
-one incident \(\beta\)-edge; hence the vertex-node \(x\) has degree one
-in the \(c,\beta\) incidence graph.  For each \(i=1,2\), the exit path
-has positive incidence length and says that one of \(c,\beta\) is missing
-at \(a_i\).  Its first edge gives one neighbor of \(a_i\), missingness
-rules out one color, and properness permits at most one edge of the other
-color.  Thus \(a_1,a_2\) also have degree one.  The three vertex-nodes
-\(x,a_1,a_2\) are distinct, because \(x\in V(T_n)\), the two \(a_i\) are
-outside, and \(a_1\ne a_2\) is a counterexample field.
+We prove (7), including the possibility of isolated components.  First
+observe that whenever a vertex \(w\) misses at least one of \(c,\beta\)
+under \(\rho\), its vertex-node has incidence degree at most one.  Indeed,
+by \noderef{TwoColorIncidenceGraph} every neighbor is an exact edge
+identity incident with \(w\) and colored \(c\) or \(\beta\).  If \(c\)
+is missing, the complement relation between \noderef{MissingColors} and
+\noderef{PresentColors} rules out the first color, and properness in
+\noderef{IsProperEdgeColoring} allows at most one incident edge of color
+\(\beta\).  If \(\beta\) is missing, the symmetric argument allows at
+most one edge of color \(c\).  This proves the claimed bound even when
+the neighbor set is empty.
 
-Each root belongs to its own \noderef{TwoColorComponent}; its degree-one
-neighbor set and \(c\ne\beta\) prove the corresponding
-\noderef{TwoColorPathComponent} condition.  All three components meet
-\(T_n\): the component through \(x\) does so at \(x\), and the walks
-\(Q_i\) connect \(a_i\) to \(b_i\in V(T_n)\).  If \(c,\beta\) were
-\(T_n\)-interchangeable, \noderef{TreeInterchangeable} would identify
-all three full components.  Apply
-\noderef{TwoColorComponentSpanningPath} to that common component.  It is
-a finite simple spanning path.  An internal node has two distinct path
-neighbors, consistently with the global degree bound
-\noderef{TwoColorIncidenceDegreeAtMostTwo}, so each of the three
-degree-one nodes must be one of the two endpoints.  Three distinct nodes
-cannot lie in that two-element endpoint set.  This proves (7).  Notice
-that \noderef{TwoColorPathComponent} still counts isolated components;
-the three components used here are proved nontrivial from their displayed
-incident edges, so no isolated case has been discarded.  Nor did we use
-the invalid inference that disjoint exit subwalks must themselves have
-distinct full components.
+Choose \(x\in V(T_n)\) missing \(c\), using the union definition
+\noderef{TreeMissingColors}.  The preceding degree bound applies to
+\(x\), and the missing-color clause in each exact exit certificate in
+(7) applies it to \(a_1,a_2\).  Because \(c\ne\beta\), the root itself
+belongs to its full connected component and has a subsingleton neighbor
+set.  These are exactly the clauses of
+\noderef{TwoColorPathComponent} for the components rooted at
+\(x,a_1,a_2\); no positive-degree assumption has been made.  The first
+component meets \(T_n\) at \(x\).  For \(i=1,2\), the walk \(Q_i\)
+connects \(a_i\) to \(b_i\in V(T_n)\), so equality of connected
+components in \noderef{TwoColorComponent} shows that the component rooted
+at \(a_i\) meets \(T_n\) at \(b_i\).
+
+If \(c,\beta\) were \(T_n\)-interchangeable, the defining implication in
+\noderef{TreeInterchangeable}, first for the roots \(x,a_1\) and then for
+\(a_1,a_2\), would identify all three full components.  Apply
+\noderef{TwoColorComponentSpanningPath} to this common component; its
+hypothesis is precisely the assumed properness of \(\rho\).  The result
+is a finite simple path whose support is the whole component.  Each of the
+three vertex-nodes lies on this path and has ambient incidence degree at
+most one.  Such a node must be a path endpoint: if it occurred at an
+internal index, its predecessor and successor would be distinct by path
+simplicity and would give two distinct incidence-graph neighbors.  But
+\(x,a_1,a_2\) are pairwise distinct, since \(x\in V(T_n)\), each
+\(a_i\notin V(T_n)\), and \(a_1\ne a_2\).  A path has only its first
+and last node as endpoints, so three distinct nodes cannot all be
+endpoints.  This contradiction proves (7).  In particular, the argument
+uses the at-most-one bound rather than a degree-one assertion and thus
+includes the isolated-component convention built into
+\noderef{TwoColorPathComponent}.
 
 We now transport to the preceding rung, splitting the actual terminal
 constructor.
@@ -218,7 +288,8 @@ at \(v_n\) before the terminal switch.  The exact selected edge from
 \noderef{MaximumDefectiveChoice} is incident with \(v_n\) and has color
 \(\delta_n\); the intermediate stable relation preserves that value.
 Thus \(\gamma_n\ne\delta_n\).  Expanding
-\noderef{TwoColorComponentSwap}, properness makes that edge the unique
+\noderef{TwoColorComponentSwap}, properness as defined in
+\noderef{IsProperEdgeColoring} makes that edge the unique
 \(\delta_n\)-edge at \(v_n\), so the terminal switch makes
 \(\delta_n\) missing at \(v_n\) under \(\sigma\).  Since
 \(v_n\in V(T_n)\subseteq V(U)\), the global nonmissingness of \(\beta\)
@@ -261,13 +332,34 @@ Because \(\gamma_n\ne\delta_n\),
 \noderef{TwoColorComponentSwapProper} gives properness of \(\mu_2\).
 The definition of the switch fixes \(\mathsf{none}\) and only transposes
 two colored values, so the exact-one-uncolored condition for \(\mu_1\)
-gives the same condition for \(\mu_2\).  By (12), an exact edge has color
-\(c\) or \(\beta\) under \(\mu_2\) exactly when it has that same color
-under \(\mu_1\).  Consequently the two incidence graphs on these colors,
-their missingness at every vertex, and the walks \(Q_1,Q_2\) are
-unchanged.  In particular \(c\in\overline{\mu_2}(T_n)\), and (7) applies
-to \(\rho=\mu_2\).  Thus in the PE case we use (13) below and in the
-SE/RE cases we use (9), always with the coloring denoted by \(\rho\).
+gives the same condition for \(\mu_2\), by the two clauses of
+\noderef{IsOneEdgeUncolored}.  By (12) and the edgewise definition of
+\noderef{TwoColorComponentSwap}, an exact edge has color \(c\) under
+\(\mu_2\) exactly when it has color \(c\) under \(\mu_1\), and the same
+equivalence holds for \(\beta\).  The adjacency definition in
+\noderef{TwoColorIncidenceGraph} therefore gives identical
+\(c,\beta\)-incidence graphs.  The edge-witness and complement definitions
+\noderef{PresentColors} and \noderef{MissingColors} give identical
+missingness for these two colors at every vertex.  Hence each exact
+certificate in (6) transports field by field: the same node sequence is
+a walk in the identical incidence graph; its path property, length,
+support, endpoints, and contacts with \(T_n\) are unchanged; and its
+outside-end missing-color alternative is preserved.  Thus \(Q_1,Q_2\)
+are exact \(T_n\)-exit paths under \(\mu_2\), and the union definition
+\noderef{TreeMissingColors} transports (5a) to
+\(c\in\overline{\mu}_2(T_n)\).  Applying (7) gives noninterchangeability
+under \(\mu_2\).
+
+In the SE/RE cases, apply (7) directly to the exact certificates (6),
+(5a), properness of \(\mu_1\), \(c\ne\beta\), and the retained
+counterexample field \(a_1\ne a_2\).  In the PE case use the just
+transported certificates and missingness together with properness of
+\(\mu_2\).  Therefore, if \(\rho\) denotes \(\mu_1\) in the SE/RE cases
+and \(\mu_2\) in the PE case, then (9) or (13), respectively, holds and
+\[
+             \neg\noderef{TreeInterchangeable}
+                    (G,T_n,\rho,c,\beta).                    \tag{14}
+\]
 
 It remains to invoke assertion (ii) at the correct rung.  First suppose
 \(1<n\).  Apply \noderef{CertifiedETTPredecessor} to \(\mathcal R\) and
@@ -281,7 +373,7 @@ displayed terminal tree exactly \(T_n\), generating coloring exactly
 \(n\) with the original rung number.  Hence the assumed lower assertion
 (ii), applied to \(\mathcal R^-\), the transported coloring \(\rho\),
 (9) or (13), and \(c\in\overline\rho(T_n)\), says that \(c,\beta\) are
-\(T_n\)-interchangeable.  This contradicts (7).
+\(T_n\)-interchangeable.  This contradicts (14).
 
 Finally suppose \(n=1\).  There is no zero-rung
 \noderef{ExtendedTashkinovTree}, and none is introduced.  Under the
@@ -291,7 +383,7 @@ tree, coloring, and stored set at index zero of the replacement certified
 series.  The interchangeability half of
 \noderef{TechnicalTheoremBase}, applied directly to that series, to
 \(\rho\), to (9) or (13), and to the missing color \(c\), therefore also
-says that \(c,\beta\) are \(T_n\)-interchangeable.  Again (7) is a
+says that \(c,\beta\) are \(T_n\)-interchangeable.  Again (14) is a
 contradiction.  Both possible positive rung numbers have led to a
 contradiction, proving \(b_2\notin V(T_n)\).
 \end{proof}
