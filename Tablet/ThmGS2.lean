@@ -124,6 +124,9 @@ import Tablet.FiniteStrictGrowthReachesTerminal
 import Tablet.TashkinovClosureOfRouteAndAllMissingClosed
 import Tablet.TreeSequenceAdjoinEdgeUnique
 import Tablet.TreeSequencePrefix
+import Tablet.TreeMissingColorsCardLowerBound
+import Tablet.ElementaryClosedMissingColorOdd
+import Tablet.TechnicalCurrentLadderMissingBoundLarge
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwapProper
 import Tablet.TwoColorComponentsDisjoint

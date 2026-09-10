@@ -1,0 +1,156 @@
+\begin{theorem}[Unconditional large-order missing-color bound on the current ladder]
+Let $G=(V,E)$ be a finite loopless multigraph, let $e_0\in E$, and let
+$k$ satisfy $\Delta(G)+1\leq k$.  Let $T$ be an arbitrary-input
+positive-rung ETT with rung number $n$, generating coloring $\varphi_n$,
+and certified Tashkinov series, and suppose that $T$ has maximum property.
+Assume a technical induction context through rung $n$ and assume
+$11\leq t(G)$, where $t(G)$ is the Tashkinov order.  If $T_n$ denotes
+the exact terminal ladder tree
+\[
+ T_n=T.\mathrm{series.data.tree}
+       ((\operatorname{Fin.last}n).\mathrm{castSucc}),
+\]
+then
+\[
+ 2n+11\leq |\overline{\varphi_n}(T_n)|.
+\]
+The assertion is uniform in the certified input coloring and assumes no
+hierarchy base, good hierarchy, or prior missing-color estimate.
+\end{theorem}
+\begin{proof}
+For $1\leq i\leq n$, write
+\[
+ T_i=T.\mathrm{series.data.tree}(i),\qquad
+ \varphi_{i-1}=T.\mathrm{series.data.coloring}(i-1),
+\]
+using the canonical finite indices.  The positivity clause of
+\noderef{ExtendedTashkinovTree} ensures $n\geq1$.
+
+We first prove that, for every $1\leq i\leq n$,
+\[
+ V(T_i)\text{ is elementary under }\varphi_{i-1}.             \tag{1}
+\]
+For $i=1$, this is exactly the first conclusion of
+\noderef{TechnicalTheoremBase} applied to the certified series.  Now let
+$2\leq i\leq n$ and set $r=i-1$.  Then $0<r<n$.  Apply
+\noderef{CertifiedETTRestriction} to the given maximum ETT with target
+rung $r$.  Its statement supplies an actual positive-rung ETT with the
+same arbitrary input coloring, rung exactly $r$, displayed tree exactly
+the original $T_{r+1}=T_i$, generating coloring exactly the original
+$\varphi_r=\varphi_{i-1}$, and inherited maximum property.  The
+\texttt{lowerOne} field of \noderef{TechnicalInductionContext}, applied
+to this certified lower ETT and $0<r<n$, gives (1).
+
+Next inspect the exact certificate at every positive data slot
+$i\in\{1,\ldots,n\}$ in \noderef{TashkinovSeries}.  The initial
+constructor of \noderef{TashkinovSeriesStep} cannot occur at a positive
+slot.  Each of the SE, PE, and RE constructors has the following common
+fields: $\varphi_{i-1}$ is proper and leaves exactly $e_0$ uncolored,
+$V(T_i)$ is closed under $\varphi_{i-1}$, $T_i$ is an exact ordered
+initial segment of $T_{i+1}$, and $T_i$ has strictly smaller sequence
+length than $T_{i+1}$.  The unique-uncolored field in particular gives
+$\varphi_{i-1}(e_0)$ uncolored.
+
+Apply \noderef{TreeMissingColorsCardLowerBound} to $T_i$, using (1),
+$\varphi_{i-1}(e_0)$ uncolored, and $\Delta(G)+1\leq k$.  It gives
+\[
+ |V(T_i)|+2\leq|\overline{\varphi_{i-1}}(T_i)|,               \tag{2}
+\]
+so choose
+$\alpha_i\in\overline{\varphi_{i-1}}(T_i)$.  We claim that $T_i$ is
+$\{\alpha_i\}$-closed.  Indeed, choose a vertex $v\in V(T_i)$ missing
+$\alpha_i$.  If a boundary edge identity $f$ had color $\alpha_i$, the
+\noderef{ColoredVertexSetClosed} field just extracted, applied to $f$ and
+$v$, would say that $\alpha_i$ is not missing at $v$, a contradiction.
+Thus the $\alpha_i$-colored boundary set is empty, which is precisely
+\noderef{TreeColorSetClosed} for the singleton $\{\alpha_i\}$.  Now
+\noderef{ElementaryClosedMissingColorOdd}, using properness, (1), the
+choice of $\alpha_i$, and this singleton closedness, yields
+\[
+                         |V(T_i)|\text{ is odd}.               \tag{3}
+\]
+
+For $1\leq i<n$, the ordered-extension and strict-length fields of the
+same slot-$i$ certificate, followed by
+\noderef{TreeSequenceInitialSegmentVertexSetStrict}, give
+$V(T_i)\subsetneq V(T_{i+1})$.  Hence
+$|V(T_i)|<|V(T_{i+1})|$.  Both cardinalities are odd by (3).  Writing
+them as $2a+1$ and $2b+1$, strict inequality gives $a<b$, and therefore
+\[
+                         |V(T_i)|+2\leq|V(T_{i+1})|.            \tag{4}
+\]
+The first clause of \noderef{MaximumProperty} says
+$|V(T_1)|=t(G)$, so the large-order hypothesis gives $11\leq|V(T_1)|$.
+Induction on $i$, with this base and recurrence (4), proves
+\[
+                         2i+9\leq|V(T_i)|
+       \quad(1\leq i\leq n).                                  \tag{5}
+\]
+In particular, $2n+9\leq|V(T_n)|$.
+
+It remains to use the generating coloring $\varphi_n$, rather than the
+preceding coloring $\varphi_{n-1}$ used in (1)--(5).  Let $a$ be the last
+positive data index and inspect the exact certificate at $a$.  Again it
+cannot be initial.  The generating-color equality in
+\noderef{ExtendedTashkinovTree} identifies $\varphi_n$ with the current
+coloring stored at $a$.  We prove
+\[
+ V(T_n)\text{ is elementary under }\varphi_n,                 \tag{6}
+\]
+and simultaneously record that $\varphi_n$ is proper and leaves $e_0$
+uncolored, by considering its three possible constructors.
+
+If the last constructor is SE, its
+\noderef{MaximumDefectiveChoice} has a selected coloring which is proper,
+leaves exactly $e_0$ uncolored, and is stable on $T_n$ relative to
+$\varphi_{n-1}$.  The SE current-coloring equation identifies this
+selected coloring with $\varphi_n$.  The vertex clause of
+\noderef{StableColoring} identifies, at every vertex of $T_n$, its
+missing-color set with the one under $\varphi_{n-1}$.  Thus (1) for
+$i=n$ transfers directly to (6), and the selected-coloring fields supply
+properness and the root condition.
+
+If the last constructor is RE, its current-coloring equation is
+$\varphi_n=\varphi_{n-1}$.  Thus (6), properness, and the root condition
+are exactly (1) and the common preceding-coloring fields already
+extracted from that RE constructor.
+
+Suppose finally that the last constructor is PE.  Its current fields say
+directly that $\varphi_n$ is proper and leaves exactly $e_0$ uncolored.
+By \noderef{HierarchyBaseExists}, choose a hierarchy base for this ETT
+under the generating coloring $\varphi_n$.  Assemble the six lower-rung
+premises of \noderef{ParallelClosureUnionElementary} point by point from
+the fields \texttt{lowerOne}, \texttt{lowerTwo}, \texttt{lowerThree},
+\texttt{lowerFour}, \texttt{lowerFive}, and \texttt{lowerSix} of the
+given \noderef{TechnicalInductionContext}; their quantifiers all permit
+arbitrary certified input colorings and their common hypotheses are
+exactly positive rung, rung below $n$, and maximum property.  Apply
+\noderef{ParallelClosureUnionElementary} with $\sigma=\varphi_n$.  The
+required stability is reflexive by \noderef{sc2}; the PE-kind equation,
+properness, root condition, and positive rung have just been supplied.
+It follows that the ordered-union core of the chosen base is elementary
+under $\varphi_n$.
+
+The PE clause of \noderef{HierarchyBase} says that this core is the exact
+ordered union of $T_n$ with the support-prefix closure.  In particular,
+$T_n$ is an ordered initial segment of the core, so
+\noderef{TreeSequenceInitialSegmentVertexSetSubset} gives
+$V(T_n)\subseteq V(\text{core})$.  Restricting the pairwise-disjoint
+missing-color condition in \noderef{ColoredVertexSetElementary} from the
+core to this subset proves (6).
+
+All three cases therefore give (6), properness, and in particular
+$\varphi_n(e_0)$ uncolored.  Apply
+\noderef{TreeMissingColorsCardLowerBound} once more, now to $T_n$ under
+$\varphi_n$.  We obtain
+\[
+ |V(T_n)|+2\leq|\overline{\varphi_n}(T_n)|.                   \tag{7}
+\]
+Combining (5) at $i=n$ with (7) gives
+\[
+ 2n+11=(2n+9)+2
+   \leq |V(T_n)|+2
+   \leq |\overline{\varphi_n}(T_n)|,
+\]
+which is the desired bound.
+\end{proof}

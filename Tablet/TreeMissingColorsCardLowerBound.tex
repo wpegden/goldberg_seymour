@@ -1,0 +1,63 @@
+\begin{lemma}[Sharp missing-color count for an elementary tree-sequence]
+Let $G=(V,E)$ be a finite loopless multigraph with maximum degree
+$\Delta(G)$, let $e_0\in E$, and let $\varphi$ be a partial coloring with
+colors in $[k]$.  Let $T$ be a tree-sequence rooted at the exact edge
+identity $e_0$.  If
+\[
+ \varphi(e_0)\text{ is uncolored},\qquad \Delta(G)+1\leq k,
+\]
+and $V(T)$ is elementary with respect to $\varphi$, then
+\[
+ |V(T)|+2\leq |\overline\varphi(T)|.
+\]
+No properness assumption and no assertion about colors on edges other than
+$e_0$ is required.
+\end{lemma}
+\begin{proof}
+Put $X=V(T)$ and let $D$ be the set of endpoints of the exact root edge
+$e_0$.  By looplessness in \noderef{LooplessMultigraph}, $D$ has exactly
+two vertices.  The first-edge and attachment clauses of
+\noderef{TreeSequence}, together with the definition
+\noderef{TreeSequenceVertexSet}, put both endpoints in $X$.
+
+For a vertex $v$, map each color in
+\noderef{PresentColors}$(G,\varphi,v)$ to one incident exact edge identity
+having that color.  This map is injective: if the chosen edge identities
+are equal, the single value of the function $\varphi$ on that identity,
+as specified by \noderef{PartialEdgeColoring},
+forces the two colors to be equal.  Hence the number of present colors at
+$v$ is at most $d_G(v)$ as defined in \noderef{Degree}, and therefore is
+at most $\Delta(G)$ by \noderef{MaximumDegree}.  Since
+\noderef{MissingColors} is the complement of the present colors in
+$[k]$ and $k\geq\Delta(G)+1$, every vertex misses at least one color.
+
+If $v\in D$, the same injection lands among the incident edge identities
+other than $e_0$, because $\varphi(e_0)$ is uncolored.  There are exactly
+$d_G(v)-1$ such identities: $e_0$ is incident with $v$, and degree counts
+exact edge identities.  Thus the number of present colors at $v$ is at
+most $d_G(v)-1$.  The inequalities
+\[
+ |\overline\varphi(v)|
+   =k-|\varphi(v)|
+   \geq k-(d_G(v)-1)
+   \geq 2
+\]
+show that each of the two root endpoints misses at least two colors.
+
+Choose one missing color $a_v$ at every $v\in X$.  At each $v\in D$,
+choose a second missing color $b_v\ne a_v$.  The elementarity hypothesis,
+in the exact sense of \noderef{ColoredVertexSetElementary}, says that
+missing-color sets at distinct vertices of $X$ are disjoint.  Consequently
+all colors in the family $(a_v)_{v\in X}$ are distinct, each $b_v$ differs
+from the $a_v$ chosen at the same vertex, and every $b_v$ differs from all
+colors chosen at every other vertex.  Thus
+\[
+ X\mathbin{\dot\cup}D\longrightarrow
+ \overline\varphi(T),\qquad
+ v\mapsto a_v\ (v\in X),\quad v\mapsto b_v\ (v\in D),
+\]
+is injective.  By \noderef{TreeMissingColors}, its codomain is precisely
+the union of all vertex missing-color sets on $T$.  Taking cardinalities
+and using $|D|=2$ gives
+$|V(T)|+2\leq|\overline\varphi(T)|$, as required.
+\end{proof}

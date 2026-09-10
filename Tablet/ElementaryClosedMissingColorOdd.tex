@@ -1,0 +1,37 @@
+\begin{lemma}[Odd order from an elementary closed missing color]
+Let $G=(V,E)$ be a finite loopless multigraph, let $e_0\in E$, let
+$\varphi$ be a proper partial coloring with colors in $[k]$, and let $T$
+be a tree-sequence rooted at $e_0$.  Suppose that $V(T)$ is elementary
+with respect to $\varphi$.  If
+$\alpha\in\overline\varphi(T)$ and $T$ is
+$\{\alpha\}$-closed under $\varphi$, then $|V(T)|$ is odd.
+\end{lemma}
+\begin{proof}
+Write $X=V(T)$.  By \noderef{TreeMissingColors}, choose
+$x\in X$ at which $\alpha$ is missing.  Elementarity in the sense of
+\noderef{ColoredVertexSetElementary} implies that $\alpha$ is not missing
+at any other vertex of $X$: otherwise the two missing-color sets would
+intersect in $\alpha$.  Hence, by \noderef{PresentColors} and
+\noderef{MissingColors}, every vertex of $X-\{x\}$ is incident with an
+exact edge identity colored $\alpha$, whereas $x$ is incident with none.
+
+For every $v\in X-\{x\}$, that incident $\alpha$-edge is unique.  Indeed,
+two distinct such identities would be adjacent at $v$ and would receive
+the same color, contrary to properness as defined in
+\noderef{IsProperEdgeColoring}.  Moreover, every $\alpha$-edge incident
+with a vertex of $X$ has its other endpoint in $X$.  Otherwise it would
+be an exact member of the $\alpha$-colored boundary set from
+\noderef{BoundaryColorEdges}, contradicting the assumed
+$\{\alpha\}$-closedness in \noderef{TreeColorSetClosed}.
+
+Let $M$ be the set of exact $\alpha$-colored edge identities whose two
+endpoints lie in $X$.  The preceding paragraph shows that the endpoint
+sets of the edges in $M$ cover exactly $X-\{x\}$.  These endpoint sets are
+pairwise disjoint, because two distinct members of $M$ sharing an endpoint
+would again violate properness.  Each member has exactly two distinct
+endpoints by looplessness in \noderef{LooplessMultigraph}.  Therefore
+\[
+ |X|-1=|X-\{x\}|=2|M|,
+\]
+so $|X|-1$ is even and $|X|=|V(T)|$ is odd.
+\end{proof}
