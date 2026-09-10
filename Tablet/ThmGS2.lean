@@ -44,6 +44,7 @@ import Tablet.ParallelClosureUnionElementary
 import Tablet.ParallelCommonMissingClosed
 import Tablet.ParallelCoreAugmentationStrict
 import Tablet.ParallelBaseFourCommonMissingColors
+import Tablet.ParallelSpecialClosurePreparation
 import Tablet.SameColorSeriesPreserved
 import Tablet.ScheideGlobalMaximumBoundaryFacts
 import Tablet.ScheideGlobalMaximumFourFree

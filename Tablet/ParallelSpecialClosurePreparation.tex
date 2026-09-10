@@ -1,0 +1,345 @@
+\begin{theorem}[Preparation of the PE special closure]
+Let \(G\) be a finite loopless multigraph with its exact edge type, let
+\(e_0\) be the distinguished edge, and let the palette have \(k\) colors.
+Let
+\[
+ \mathcal E:\noderef{ExtendedTashkinovTree}(G,k,e_0,\rho,T,\varphi)
+\]
+be a maximum ETT, put \(n=\mathcal E.\mathit{rounds}>0\), and put
+\[
+ a_n=\operatorname{Fin.last}(n),\qquad
+ T_n=\mathcal E.\mathit{series.data.tree}(a_n.\mathit{castSucc}).
+\]
+Assume that the extension kind at \(a_n\) is PE.  Let
+\(B\) be a generating-color \(\noderef{HierarchyBase}\) for
+\((\mathcal E,\varphi)\), and assume
+\[
+ \noderef{MaximumDegree}(G)+1\leq k,
+ \qquad
+ 2n+11\leq |\noderef{TreeMissingColors}(\varphi,T_n)|.          \tag{1}
+\]
+Suppose also that a
+\(\noderef{TechnicalInductionContext}(G,k,e_0,n)\) is given.
+
+Then
+\[
+ \noderef{TashkinovAugmentationSequence}
+       (\varphi,T_n,B.\mathit{core}),
+ \qquad |T_n|<|B.\mathit{core}|.                                \tag{2}
+\]
+Moreover, one of the following two alternatives holds.
+
+First, \(V(T)\) is
+\(\noderef{ColoredVertexSetElementary}\) under \(\varphi\).
+
+Second, there are an ordered tree-sequence \(U\) and a certificate
+\[
+ C_U:\noderef{CorrespondingExtendedTashkinovTree}
+       (\mathcal E,\varphi,U)                                   \tag{3}
+\]
+relative to the fixed original ETT \(\mathcal E\), such that the replacement
+ETT \(\mathcal E_U=C_U.\mathit{replacementETT}\) has maximum property and
+\[
+ \noderef{TashkinovAugmentationSequence}
+       (\varphi,B.\mathit{core},U),\qquad
+ B.\mathit{core}\preccurlyeq U,
+ \qquad |B.\mathit{core}|<|U|.                                  \tag{4}
+\]
+Here \(\preccurlyeq\) is the exact ordered
+\(\noderef{TreeSequenceInitialSegment}\) relation.
+
+There are a hierarchy base \(B_U\) for \((\mathcal E_U,\varphi)\), a
+\(\noderef{TashkinovHierarchy}\) \(K_U\) based on \(B_U\), and a
+\(\noderef{GoodHierarchy}\) witness \(\mathcal G_U\) such that
+\[
+ \begin{split}
+ B_U.\mathit{core}&=B.\mathit{core},\\
+ B_U.\mathit{closure}&=B.\mathit{closure},\\
+ B_U.\mathit{supportPosition.val}&=B.\mathit{supportPosition.val},
+ \end{split}                                                     \tag{5}
+\]
+and
+\[
+ K_U.\mathit{dividerCount}=0,\qquad K_U(0)=T_n,
+ \qquad K_U(\operatorname{last}(K_U.\mathit{dividerCount}+1))=U. \tag{6}
+\]
+Write \(D_0=\noderef{HierarchyStoredColorsAt}(K_U,0)\), write
+\(\Gamma^0_\eta=\mathcal G_U.\mathit{gamma}(0,\eta)\), and put
+\(\Gamma^0=\bigcup_{\eta\in D_0}\Gamma^0_\eta\).  For every
+\(\eta\in D_0\),
+\[
+ |\Gamma^0_\eta|=2,
+ \qquad
+ \Gamma^0_\eta\subseteq
+ \overline\varphi(T_n)-
+   \noderef{HierarchySegmentColors}(K_U,0,\eta),                 \tag{7}
+\]
+and the sets \(\Gamma^0_\eta\) for distinct members of \(D_0\) are
+pairwise disjoint.  In addition,
+\[
+ \begin{split}
+ &B.\mathit{core}\text{ is not }(\Gamma^0)^-\text{-closed},     \tag{8}\\
+ &\left|\bigl(\overline\varphi(T_n)\cap
+       \overline\varphi(B.\mathit{closure})\bigr)-\Gamma^0\right|
+       \geq4.                                                    \tag{9}
+ \end{split}
+\]
+Finally, with the terminal stored-color set kept distinct from \(D_0\),
+\[
+ U\text{ is }
+ \left(\bigcup_{\eta\in
+      \noderef{HierarchyTerminalStoredColors}(K_U)}
+      \Gamma^0_\eta\right)^-\text{-closed under }\varphi.      \tag{10}
+\]
+All tree equalities and initial-segment relations above concern the full
+ordered edge-valued tree-sequences.
+\end{theorem}
+\begin{proof}
+We keep the original ETT fixed throughout the construction.  In particular,
+every occurrence of ``corresponding'' in the conclusion is relative to
+\(\mathcal E\), rather than merely to an ETT obtained at an intermediate
+replacement step.
+
+First assemble the lower-rung hypothesis expected by the existing technical
+results.  Given an arbitrary positive-rung maximum ETT \(\mathcal L\) with
+\(\mathcal L.\mathit{rounds}<n\), apply, in order, the six fields
+\(\mathit{lowerOne},\ldots,\mathit{lowerSix}\) of the assumed
+\noderef{TechnicalInductionContext}.  Their conclusions have exactly the
+same independently quantified input coloring, displayed tree, generating
+coloring, and ETT.  Conjoin them without changing those parameters.  Denote
+the resulting six-assertion conjunction by \(H_{<n}(\mathcal L)\).  Thus its
+first component is lower-rung elementarity, its second is interchangeability
+on the exact final series tree (including isolated path components), its
+third contains both stable-before-first-appearance and raw stored-set
+disjointness, its fourth is the PE two-color-component assertion, its fifth
+is the defective-vertex order assertion, and its sixth is the lower-rung
+mod-coloring assertion.  The positivity condition in the predecessor
+stability clause is retained verbatim; no zero-rung ETT is introduced.
+
+We next record the terminal coloring facts.  The positivity field of
+\noderef{ExtendedTashkinovTree} makes \(a_n\) a positive series index.  The
+certificate at that index supplied by \noderef{TashkinovSeries}, together
+with the assumed PE kind, selects the PE constructor of
+\noderef{TashkinovSeriesStep}.  Its current-coloring, current-properness, and
+current-one-uncolored clauses, combined with the generating-coloring equality
+in the ETT, show that \(\varphi\) is proper and leaves exactly \(e_0\)
+uncolored.  The same constructor also says that the original final series
+tree
+\[
+ F=\mathcal E.\mathit{series.data.tree}
+       (\operatorname{Fin.last}(n+1))                            \tag{11}
+\]
+is a \(\varphi\)-\noderef{TashkinovClosure} of \(T_n\).  Since stability of
+a coloring with itself is the reflexive clause of \noderef{sc2}, \(\varphi\)
+is stable on \(T_n\), relative to the computed terminal
+\noderef{TashkinovStoredColors}, with respect to itself.
+
+Apply \noderef{Td} to \(\mathcal E\), its maximum property, its positive rung,
+the locally assembled conjunction \(H_{<n}\), and this proper,
+exactly-one-uncolored, reflexively stable generating coloring.  We obtain
+\[
+                         M_0:\noderef{ModColoring}(\mathcal E,\varphi).
+                                                                    \tag{12}
+\]
+Independently, \noderef{ParallelCoreAugmentationStrict}, applied to the PE
+kind and the base \(B\), gives exactly (2).  Call its augmentation sequence
+\(P:T_n\longrightarrow B.\mathit{core}\).
+
+We now establish the three PE facts that will later be supplied to Algorithm
+5.5.  Apply \noderef{ParallelClosureUnionElementary} with
+\(H_{<n}\), the maximum property, the PE kind, the coloring
+\(\sigma=\varphi\), reflexive stability, and the given base.  It yields
+\[
+ V(B.\mathit{core})\text{ is elementary under }\varphi.          \tag{13}
+\]
+The input required for common-missing-color closedness is the elementarity of
+the exact predecessor ladder tree under the pre-step coloring.  We derive it
+without postulating a zero-rung ETT.
+
+If \(n=1\), the first conclusion of \noderef{TechnicalTheoremBase}, applied
+to the original certified series, states that its exact tree at data index
+one is elementary under the coloring at index zero.  After substituting
+\(n=1\), those are precisely \(T_n\) and its predecessor coloring.  If
+\(1<n\), apply \noderef{CertifiedETTPredecessor} to \(\mathcal E\).  It
+produces an actual positive-rung maximum predecessor \(\mathcal L\), with
+displayed tree exactly \(T_n\), generating coloring exactly the predecessor
+coloring, and rung number \(n-1<n\).  The field
+\(\mathit{lowerOne}\) of the context, applied to this certified
+\(\mathcal L\), proves the same elementarity assertion.  These two cases
+therefore supply the precise premise of \noderef{ParallelCommonMissingClosed},
+which gives
+\[
+ \noderef{TreeColorSetClosed}\left(
+   G,\varphi,B.\mathit{core},
+   \overline\varphi(T_n)\cap
+     \overline\varphi(B.\mathit{closure})\right).                \tag{14}
+\]
+Finally, apply \noderef{ParallelBaseFourCommonMissingColors} to the proper
+exactly-one-uncolored coloring, the degree bound, and (13).  We obtain
+\[
+ 4\leq\left|\overline\varphi(T_n)\cap
+              \overline\varphi(B.\mathit{closure})\right|.       \tag{15}
+\]
+
+Choose, using \noderef{TashkinovClosureExists}, a
+\(\varphi\)-Tashkinov closure \(Z\) of \(B.\mathit{core}\).  Its closure
+certificate contains an augmentation sequence
+\(Q:B.\mathit{core}\longrightarrow Z\).  By the reflexive-transitive-chain
+definition in \noderef{TashkinovAugmentationSequence}, concatenate \(P\) and
+\(Q\) to obtain a sequence \(T_n\longrightarrow Z\).  Because (2) is strict,
+\(|T_n|<|Z|\); and
+\noderef{TashkinovAugmentationSequenceInitialSegment} makes \(T_n\) an exact
+ordered initial segment of \(Z\).  The universal PE clause of the
+mod-coloring (12) therefore gives a certificate
+\[
+ C_0:\noderef{CorrespondingExtendedTashkinovTree}
+        (\mathcal E,\varphi,Z).                                  \tag{16}
+\]
+Let \(\mathcal E_0=C_0.\mathit{replacementETT}\).  The theorem
+\noderef{MaximumPropertyTransport}, applied to (12), (16), and the original
+maximum property, gives maximum property for \(\mathcal E_0\).
+The theorem \noderef{HierarchyBaseCorrespondingTransport} gives a base
+\(B_0\) for \((\mathcal E_0,\varphi)\) satisfying
+\[
+ B_0.\mathit{core}=B.\mathit{core},\quad
+ B_0.\mathit{closure}=B.\mathit{closure},\quad
+ B_0.\mathit{supportPosition.val}=B.\mathit{supportPosition.val}. \tag{17}
+\]
+
+It is essential here to identify the complete tree \(Z\), not merely its
+vertex set.  Let
+\[
+ F_0=\mathcal E_0.\mathit{series.data.tree}
+       (\operatorname{Fin.last}(\mathcal E_0.\mathit{rounds}+1))  \tag{18}
+\]
+be the exact final series output of the replacement ETT.  The rung,
+ladder-tree, and extension-kind agreement fields in (16) identify the
+replacement terminal ladder tree with \(T_n\) and its terminal kind with PE.
+Consequently its terminal certified \noderef{TashkinovSeriesStep} is the PE
+constructor, and that constructor makes \(F_0\) a
+\(\varphi\)-Tashkinov closure of the same exact tree \(T_n\).
+
+On the other hand, the concatenated route \(T_n\longrightarrow Z\), together
+with the closedness part of the chosen closure of
+\(B.\mathit{core}\), makes \(Z\) itself a
+\(\varphi\)-Tashkinov closure of \(T_n\).  The `belowFinal' field of
+\(\mathcal E_0\) says that its displayed tree \(Z\) is an exact ordered
+initial segment of \(F_0\).  Apply
+\noderef{TashkinovClosureVertexSetUnique} to the two closures from the exact
+same source \(T_n\); it gives
+\(V(Z)=V(F_0)\).  Then
+\noderef{TreeSequenceInitialSegmentVertexSetEq} upgrades this equality and
+\(Z\preccurlyeq F_0\) to the equality of complete ordered edge-valued trees
+\[
+                              Z=F_0.                              \tag{19}
+\]
+Thus, and only now, rewriting the original closure
+\(B.\mathit{core}\longrightarrow Z\) by (17) and (19) supplies the closure
+\[
+              B_0.\mathit{core}\longrightarrow F_0              \tag{20}
+\]
+required for the replacement presentation.
+
+We must derive a second mod-coloring rather than reuse (12).  For every
+positive-rung maximum ETT \(\mathcal L\) with
+\(\mathcal L.\mathit{rounds}<\mathcal E_0.\mathit{rounds}\), the rung
+agreement in (16) changes this inequality into
+\(\mathcal L.\mathit{rounds}<n\).  Apply the six lower fields of the same
+\noderef{TechnicalInductionContext} and conjoin them exactly as before;
+call the result \(H^0_{<n}(\mathcal L)\).  The type of (16) says that the
+generating coloring of \(\mathcal E_0\) is again \(\varphi\).  Its terminal
+properness and exactly-one-uncoloredness follow from the replacement
+properness fields of (16), while reflexive stability again follows from
+\noderef{sc2}.  Apply \noderef{Td} to \(\mathcal E_0\), its transported
+maximum property, its positive rung transported through the rung agreement,
+and \(H^0_{<n}\).  This gives
+\[
+                         M_1:\noderef{ModColoring}(\mathcal E_0,\varphi).
+                                                                    \tag{21}
+\]
+
+We now split according as the chosen core closure grew.  Suppose first that
+\(Z=B.\mathit{core}\).  Then the closedness of \(Z\) and the route \(P\)
+make \(B.\mathit{core}\) a closure of \(T_n\).  The original terminal PE
+certificate made \(F\) in (11) another closure of \(T_n\).  By
+\noderef{TashkinovClosureVertexSetUnique},
+\[
+                        V(B.\mathit{core})=V(F).                  \tag{22}
+\]
+The `belowFinal' field of the original
+\noderef{ExtendedTashkinovTree} gives \(T\preccurlyeq F\); expanding
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet} gives \(V(T)\subseteq V(F)\).  After (22),
+this is \(V(T)\subseteq V(B.\mathit{core})\).  Elementarity in (13) is
+hereditary under restriction: two distinct vertices of \(V(T)\) are two
+distinct vertices of the elementary superset, so their missing-color sets
+are disjoint by the definition of \noderef{ColoredVertexSetElementary}.
+Hence \(V(T)\) is elementary, which is the first alternative.
+
+It remains to treat \(Z\ne B.\mathit{core}\).  The initial-segment relation
+implicit in \(Q\), supplied explicitly by
+\noderef{TashkinovAugmentationSequenceInitialSegment}, first gives
+\(|B.\mathit{core}|\leq|Z|\).  Equality of these lengths would make its
+vertex and edge equalities cover every index of both trees; extensionality of
+the data fields in \noderef{TreeSequence}, followed by proof irrelevance for
+the structural fields, would then give \(Z=B.\mathit{core}\).  This contradicts
+the present case.  Hence
+\(|B.\mathit{core}|<|Z|\).  Apply
+\noderef{TashkinovAugmentationSequenceStrictBoundaryWitness} to \(Q\).
+It supplies a color \(\alpha\) missing on \(B.\mathit{core}\) and a concrete
+\(\alpha\)-colored boundary edge identity.  By the meanings of
+\noderef{BoundaryColorEdges} and \noderef{TreeColorSetClosed}, this says
+\[
+ \alpha\in\overline\varphi(B.\mathit{core}),\qquad
+ \neg\,\noderef{TreeColorSetClosed}
+       (G,\varphi,B.\mathit{core},\{\alpha\}).                    \tag{23}
+\]
+
+We verify the inputs of \noderef{AlgorithmFiveFiveBaseStage} for
+\(\mathcal E_0,B_0\).  The replacement terminal kind is PE by (16).  Its
+terminal ladder tree is exactly \(T_n\); (17) transports the strict
+inequality in (2) to \(|T_n|<|B_0.\mathit{core}|\).  Equation (20) is its
+required core-to-final closure.  Estimate (1) transports across the exact
+ladder-tree equality in (16).  Assertion (23), assertion (14), and assertion
+(15), rewritten using (17) and the same ladder-tree equality, are exactly the
+three PE facts required by that theorem.  Finally use the maximum property of
+\(\mathcal E_0\) and its independently derived mod-coloring (21).
+
+The output of \noderef{AlgorithmFiveFiveBaseStage} consists of a seed \(J\),
+a terminal tree \(U\), and a certificate
+\[
+ C_1:\noderef{CorrespondingExtendedTashkinovTree}
+       (\mathcal E_0,\varphi,U).                                 \tag{24}
+\]
+Because the terminal kind is PE, its exact seed alternative says
+\(J=B_0.\mathit{core}=B.\mathit{core}\).  Hence its augmentation route,
+initial-segment clause, and strict PE growth give exactly (4).  It also gives
+maximum property for \(C_1.\mathit{replacementETT}\), a base \(B_1\), a
+zero-divider hierarchy \(K_1\), and a good witness \(\mathcal G_1\).  Its
+displayed conclusions, after (17) and the ladder equality from (16), are
+precisely (5)--(10), except that (24) is at this moment relative to the
+intermediate ETT \(\mathcal E_0\).
+
+Apply \noderef{CorrespondingExtendedTashkinovTreeTransTrees} immediately to
+(16) and (24).  It gives a composite certificate \(C_U\) as in (3), relative
+to the fixed original \(\mathcal E\), equality of the replacement inputs,
+and heterogeneous equalities between the composite replacement series and
+ETT and those supplied by \(C_1\).  Transport maximum property along the ETT
+equality.  Transport \(B_1\) along the same equality to obtain \(B_U\), then
+transport \(K_1\) along the transported base equality to obtain \(K_U\), and
+finally transport \(\mathcal G_1\) along the hierarchy equality to obtain
+\(\mathcal G_U\).  These are dependent transports, not an appeal to equality
+of vertex sets.
+
+The transported core, closure, and numerical support-position equations are
+still (5).  The zero-divider equation, the two full stage equalities, every
+stored set, every Gamma pair, and every hierarchy segment color set are
+preserved by these dependent equalities.  In the first stage equality, the
+ladder agreement in (16) rewrites the intermediate terminal ladder tree to
+the original exact \(T_n\), giving (6).  Consequently the pair-size and
+avoidance assertions become (7), pairwise disjointness is unchanged, the two
+PE conclusions become (8)--(9), and the transported terminal
+minus-closedness assertion is exactly (10).  The certificate (3) now has the
+required fixed-original provenance, completing the strict branch and the
+proof.
+\end{proof}
