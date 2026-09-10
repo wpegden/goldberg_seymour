@@ -1,0 +1,273 @@
+\begin{theorem}[Construct a good hierarchy or finish in the elementary branch]
+Let \(G\) be a finite loopless multigraph with its individual edge type,
+let \(e_0\) be the distinguished edge, and let the palette have \(k\)
+colors.  Let
+\[
+ \mathcal E:\noderef{ExtendedTashkinovTree}(G,k,e_0,\rho,T,\varphi)
+\]
+be a positive-rung ETT with \noderef{MaximumProperty}, rung number \(n\), generating
+coloring \(\varphi\), displayed tree \(T\), terminal ladder tree
+\[
+ T_n=\mathcal E.\mathit{series.data.tree}
+       (\operatorname{Fin.last}(n).\mathit{castSucc}),
+\]
+and final series output
+\[
+ F=\mathcal E.\mathit{series.data.tree}
+       (\operatorname{Fin.last}(n+1)).
+\]
+Assume a \noderef{TechnicalInductionContext} at rung \(n\),
+\[
+             \noderef{MaximumDegree}(G)+1\leq k,
+             \qquad 11\leq \noderef{TashkinovOrder}(G).        \tag{1}
+\]
+Then one of the following alternatives holds.
+
+First, \(V(T)\) is
+\noderef{ColoredVertexSetElementary} under \(\varphi\).
+
+Second, there are an ordered tree-sequence \(U\), a certificate
+\[
+ C_U:\noderef{CorrespondingExtendedTashkinovTree}
+       (G,k,e_0,\mathcal E,\varphi,U)                            \tag{2}
+\]
+relative to the fixed original ETT \(\mathcal E\),
+\noderef{MaximumProperty} for
+\(C_U.\mathit{replacementETT}\), a generating-color
+\noderef{HierarchyBase} \(B_U\) for that replacement ETT, a
+\noderef{TashkinovHierarchy} \(H\) based on \(B_U\), and a
+\noderef{GoodHierarchy} witness on \(H\), such that
+\[
+ \noderef{TreeColorSetClosed}
+   \bigl(G,\varphi,U,\noderef{TreeMissingColors}(\varphi,U)\bigr) \tag{3}
+\]
+and
+\[
+                       V(U)=V(F).                               \tag{4}
+\]
+Equality (4) is only an equality of vertex sets.  No equality of the two
+ordered tree-sequences, and no containment of an intermediate tree in
+\(F\), is asserted.
+\end{theorem}
+\begin{proof}
+Write \(a=\operatorname{Fin.last}(n)\), so that the exact terminal ladder
+tree is \(T_n=\mathcal E.\mathit{series.data.tree}(a.\mathit{castSucc})\).
+The terminal certificate supplied by \noderef{TashkinovSeries} is a
+positive-index constructor of \noderef{TashkinovSeriesStep}.  In each of
+its PE, SE, and RE cases, its current-coloring clauses, together with the
+generating-color equality in \noderef{ExtendedTashkinovTree}, say that
+\(\varphi\) is an \noderef{IsProperEdgeColoring} and is
+\noderef{IsOneEdgeUncolored} at \(e_0\).  Reflexivity in \noderef{sc2}
+makes \(\varphi\) a \noderef{StableColoring} of itself on \(T_n\), relative
+to the terminal \(\noderef{TashkinovStoredColors}\).  The
+\texttt{currentSix} field of the assumed
+\noderef{TechnicalInductionContext}, instantiated with the original
+arbitrary input \(\rho\), the equality \(\mathcal E.\mathit{rounds}=n\),
+the maximum property, and these three coloring facts, therefore gives
+\[
+                       \noderef{ModColoring}(\mathcal E,\varphi). \tag{5}
+\]
+No mod-coloring is assumed.
+
+Apply \noderef{HierarchyBaseExists} to \(\mathcal E\) and choose a
+generating-color base \(B\).  Independently, apply
+\noderef{TechnicalCurrentLadderMissingBoundLarge} to the maximum property,
+the same technical context, and (1).  It gives the unconditional estimate
+\[
+                       2n+11\leq
+       |\noderef{TreeMissingColors}(\varphi,T_n)|.               \tag{6}
+\]
+This invocation uses no hierarchy, hierarchy base, or prior missing-color
+estimate.
+
+We construct an initial state for a finite iteration, splitting only on the
+actual terminal constructor.
+
+Suppose first that its kind is PE.  Apply
+\noderef{ParallelSpecialClosurePreparation} to \(\mathcal E\), the chosen
+base \(B\), the maximum property, the technical context, (1), and (6).  Its
+statement first supplies an exact \(\varphi\)-
+\noderef{TashkinovAugmentationSequence}
+\[
+                         T_n\longrightarrow B.\mathit{core}      \tag{7}
+\]
+and the strict inequality
+\(|T_n|<|B.\mathit{core}|\).  If that theorem returns elementarity of
+\(V(T)\), we take the first alternative of the present theorem and stop.
+This is exactly the early branch allowed before the paper imposes the
+nonclosed-core hypothesis.
+
+In the other PE alternative, the same theorem supplies a tree \(U_0\), a
+certificate \(C_0\) already relative to the fixed original
+\(\mathcal E\), \noderef{MaximumProperty} for its replacement ETT, a route
+\[
+                         B.\mathit{core}\longrightarrow U_0,     \tag{8}
+\]
+an exact initial-segment relation, and
+\(|B.\mathit{core}|<|U_0|\).  It also supplies a base \(B_0\), a
+zero-divider hierarchy \(H_0\), and a good witness
+\(\mathcal G_0\).  The core, closure, and numerical support position of
+\(B_0\) are explicitly equal to those of \(B\), and the exact two stages of
+\(H_0\) are \(T_n\) and \(U_0\).  Finally it states that
+\[
+ U_0\text{ is }
+ \left(\bigcup_{\eta\in
+   \noderef{HierarchyTerminalStoredColors}(H_0)}
+   \mathcal G_0.\Gamma^0_\eta\right)^-
+ \text{-closed under }\varphi.                                 \tag{9}
+\]
+For this branch fix the anchor
+\(J=B.\mathit{core}\).  Equations (7)--(9), including the strict inequality,
+are the complete initial iteration state.  In particular, only the
+zero-divider package in the second alternative is iterated.
+
+Now suppose the terminal kind is not PE.  Positivity excludes the initial
+constructor, so the terminal certificate in
+\noderef{TashkinovSeriesStep} is SE or RE.  Apply
+\noderef{AlgorithmFiveFiveBaseStage} with the maximum property, (5), the
+base \(B\), and (6).  Each hypothesis whose antecedent says that the kind
+is PE is discharged by the present non-PE assumption; no PE fact is used.
+The theorem returns a seed \(J\), a tree \(U_0\), and a corresponding
+certificate \(C_0\) relative to the fixed original \(\mathcal E\).  It
+also returns \noderef{MaximumProperty}, a base \(B_0\) with the same core, closure,
+and numerical support position as \(B\), a zero-divider hierarchy \(H_0\),
+a good witness \(\mathcal G_0\), its terminal minus-closedness assertion,
+and an exact route
+\[
+                              J\longrightarrow U_0.              \tag{10}
+\]
+Crucially, its non-PE seed clause retains one individual edge identity
+\(f_n\) for which
+\[
+ \mathcal E.\mathit{series.data.connectingEdges}(a)=\{f_n\},
+ \qquad \noderef{TreeSequenceAdjoinEdge}(T_n,f_n,J),             \tag{11}
+\]
+and it gives \(|T_n|<|U_0|\).  We keep this exact \(J\), rather than merely
+its vertex set, fixed throughout the iteration.
+
+We now describe the common finite iteration in either branch.  For a vertex
+finset \(X\subseteq V(G)\), call \(X\) a state if there are
+\[
+ (U,C_U,B_U,H_U,\mathcal G_U)                                   \tag{12}
+\]
+such that \(V(U)=X\), \(C_U\) is corresponding relative to the fixed
+original \(\mathcal E\), its replacement ETT has
+\noderef{MaximumProperty}, the
+three base data of \(B_U\) agree with those of \(B\), and \(H_U\) has good
+witness \(\mathcal G_U\).  Require also the fixed route
+\(J\longrightarrow U\), the terminal
+\noderef{TreeColorSetMinusClosed} assertion
+\[
+ U\text{ is }
+ \left(\bigcup_{\eta\in
+   \noderef{HierarchyTerminalStoredColors}(H_U)}
+   \mathcal G_U.\Gamma^{q_U}_\eta\right)^-
+ \text{-closed},                                                \tag{13}
+\]
+where \(q_U=\operatorname{Fin.last}(H_U.\mathit{dividerCount})\),
+and the fixed anchor alternative and strict inequality: in PE, (7),
+\(J=B.\mathit{core}\), and
+\(|B.\mathit{core}|<|U|\); in SE or RE, (11) and
+\(|T_n|<|U|\).  The PE and non-PE constructions above show directly that
+\(V(U_0)\) is a state.
+
+Call \(X\) terminal when the full closedness condition (3) holds for any,
+equivalently every, tree-sequence whose displayed vertex set is \(X\).
+This is well defined: by the definitions of
+\noderef{TreeSequenceVertexSet}, \noderef{TreeMissingColors}, and
+\noderef{TreeColorSetClosed}, both the set of tree-missing colors and every
+relevant colored boundary depend only on the displayed vertex finset.
+
+Let \(X=V(U)\) be a nonterminal state, witnessed by (12).  The preceding
+extensional observation says exactly that
+\[
+ \neg\noderef{TreeColorSetClosed}
+       (G,\varphi,U,\noderef{TreeMissingColors}(\varphi,U)).      \tag{14}
+\]
+We verify the candidate-uniform bound required by
+\noderef{AlgorithmFiveSixFixedRootRefresh}.  Given any arbitrary-input
+maximum corresponding replacement ETT \(\mathcal L\) of rung \(n\), with
+any base and good hierarchy, discard those last two objects and apply
+\noderef{TechnicalCurrentLadderMissingBoundLarge} directly to
+\(\mathcal L\).  The rung equality transports the fixed technical context
+to the required type; the degree and large-order assumptions remain (1).
+Thus the result is precisely
+\[
+            2n+11\leq
+            |\noderef{TreeMissingColors}(\psi,L_n)|,             \tag{15}
+\]
+for the generating coloring \(\psi\) and exact terminal ladder tree
+\(L_n\).  This proves the uniform premise without assuming a hierarchy in
+the missing-color theorem.
+
+Apply \noderef{AlgorithmFiveSixFixedRootRefresh} to the state witness,
+(13)--(15), the fixed base \(B\), anchor \(J\), anchor alternative, strict
+anchor inequality, and fixed route.  Its terminal output provides a tree
+\(U^+\), a certificate \(C_{U^+}\) relative to the same fixed original
+\(\mathcal E\), \noderef{MaximumProperty}, a transported base with the same three
+base data, a hierarchy \(H_{U^+}\), a good witness, the corresponding
+minus-closedness assertion, and a route
+\(J\longrightarrow U^+\).  It also gives
+\[
+                              |U|<|U^+|.                         \tag{16}
+\]
+The nesting fields in the returned
+\noderef{TashkinovHierarchy} say that \(U\) is an exact
+\noderef{TreeSequenceInitialSegment} of \(U^+\).  Applying
+\noderef{TreeSequenceInitialSegmentVertexSetStrict} to that nesting and
+(16) gives
+\[
+                              V(U)\subsetneq V(U^+).              \tag{17}
+\]
+All other output fields are exactly the state conditions, with the same
+fixed \(J\).  Hence every nonterminal state finset has a strictly larger
+state finset.
+
+Apply \noderef{FiniteStrictGrowthReachesTerminal} to this state predicate,
+terminal predicate, strict-growth rule (17), and the initial state
+\(V(U_0)\).  Since \(V(G)\) is finite, it returns a terminal state.  Choose
+its complete witness (12) and call its tree \(U\).  We have obtained the
+certificate (2), \noderef{MaximumProperty}, the base, hierarchy, good witness, and
+full closedness (3).  It remains only to prove (4).
+
+By \noderef{TashkinovClosureOfRouteAndAllMissingClosed}, the fixed route
+\(J\longrightarrow U\) and (3) make \(U\) a
+\(\varphi\)-\noderef{TashkinovClosure} of \(J\).  We compare it with the
+original final output only now, after iteration has terminated.
+
+In PE, concatenate the exact route (7), from \(T_n\) to the fixed anchor
+\(J=B.\mathit{core}\), with the fixed-anchor route from \(J\) to \(U\).
+The reflexive-transitive-chain definition of
+\noderef{TashkinovAugmentationSequence} gives a route
+\(T_n\longrightarrow U\), and (3) therefore makes \(U\) a closure of the
+exact \(T_n\).  The PE constructor of the original terminal
+\noderef{TashkinovSeriesStep} states that \(F\) is another
+\(\varphi\)-closure of this same exact \(T_n\).  Apply
+\noderef{TashkinovClosureVertexSetUnique} to these two closures to obtain
+\(V(U)=V(F)\).
+
+In SE or RE, the corresponding constructor of the original terminal
+\noderef{TashkinovSeriesStep} supplies an exact edge \(g_n\), its own
+one-edge seed \(J_0\), the equations
+\[
+ \mathcal E.\mathit{series.data.connectingEdges}(a)=\{g_n\},
+ \qquad \noderef{TreeSequenceAdjoinEdge}(T_n,g_n,J_0),
+\]
+and a \(\varphi\)-closure of \(J_0\) equal to \(F\).  Comparison with
+(11) gives equality of the singleton sets \(\{g_n\}=\{f_n\}\), hence
+equality of the individual exact edges \(g_n=f_n\).  Rewrite the
+constructor's adjoining certificate by this edge equality.  The theorem
+\noderef{TreeSequenceAdjoinEdgeUnique} therefore gives \(J=J_0\) as full
+ordered edge-valued tree-sequences.  Rewriting the original closure by this
+equality makes \(F\) a closure of the fixed anchor \(J\).  The endpoint
+tree \(U\) is also a closure of \(J\), so
+\noderef{TashkinovClosureVertexSetUnique} again gives \(V(U)=V(F)\).
+
+Thus (4) holds in every terminal-kind case.  Every exposed corresponding
+certificate was returned relative to the fixed original \(\mathcal E\) by
+\noderef{ParallelSpecialClosurePreparation},
+\noderef{AlgorithmFiveFiveBaseStage}, or
+\noderef{AlgorithmFiveSixFixedRootRefresh}; no nested replacement provider
+is used in this proof.  Consequently no uncomposed intermediate provenance
+remains, and all objects in the second alternative have the claimed types.
+\end{proof}
