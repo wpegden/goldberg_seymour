@@ -1,0 +1,63 @@
+\begin{lemma}[Certified Tashkinov series have boundedly many iterations]
+Let \(V\) and \(E\) be finite types with decidable equality, let
+\(G=(V,E)\) be a loopless multigraph, let \(k,r\in\mathbb N\), let
+\(e_0\in E\), and let \(\varphi\) be a partial \(k\)-edge-coloring.  If
+\(\mathcal S\) is a certified Tashkinov series constructed from
+\((G,e_0,\varphi)\) with \(r\) noninitial iterations, then
+\[
+                         r+2\leq |V|.
+\]
+\end{lemma}
+\begin{proof}
+By \noderef{TashkinovSeriesData}, the tree entries of \(\mathcal S\) are
+indexed as
+\[
+                         T_0,T_1,\ldots,T_{r+1}.
+\]
+By \noderef{TashkinovSeries}, the series has a
+\noderef{TashkinovSeriesStep} certificate at every index from \(0\) through
+\(r\).
+
+We first prove that
+\[
+                         |T_{i+1}|<|T_{i+2}|                 \tag{1}
+\]
+for every integer \(i\) with \(0\leq i<r\).  Inspect the certificate at
+index \(i+1\).  The initial constructor of
+\noderef{TashkinovSeriesStep} certifies only index \(0\), so it cannot be
+this certificate because \(i+1>0\).  The only remaining constructors are
+SE, PE, and RE.  Each of those three constructors includes the strict
+extension field
+\(\lvert T_{i+1}\rvert<\lvert T_{i+2}\rvert\), proving (1).
+
+We next show by induction on \(j\), for \(0\leq j\leq r\), that
+\[
+                         |T_1|+j\leq |T_{j+1}|.              \tag{2}
+\]
+For \(j=0\), both sides of (2) are \(|T_1|\), so the claim is equality.
+Suppose \(j<r\) and (2) holds at \(j\).  Formula (1) gives
+\(|T_{j+1}|<|T_{j+2}|\), hence
+\(|T_{j+1}|+1\leq |T_{j+2}|\).  Adding one to the induction hypothesis
+and composing the two inequalities yields
+\[
+                 |T_1|+(j+1)\leq |T_{j+1}|+1\leq |T_{j+2}|,
+\]
+which is (2) at \(j+1\).  Taking \(j=r\) in (2) gives
+\[
+                         |T_1|+r\leq |T_{r+1}|.              \tag{3}
+\]
+
+Every \noderef{TreeSequence} has positive length, so \(|T_1|\geq1\).
+The same definition gives an injective vertex map from the
+\(|T_{r+1}|+1\) displayed vertex positions of \(T_{r+1}\) into the finite
+type \(V\).  The finite-set cardinality bound for an injection therefore
+gives
+\[
+                         |T_{r+1}|+1\leq |V|.                \tag{4}
+\]
+Combining positivity, (3), and (4), we obtain
+\[
+ r+2\leq |T_1|+r+1\leq |T_{r+1}|+1\leq |V|,
+\]
+as required.
+\end{proof}
