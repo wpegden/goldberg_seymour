@@ -1,0 +1,60 @@
+\begin{lemma}[A boundary edge can be adjoined exactly]
+Let $G=(V,E)$ be a finite loopless multigraph, let $e_0\in E$, and let
+$T$ be a tree-sequence with respect to $G$ and $e_0$.  If the exact edge
+identity $f$ belongs to $\partial_G(V(T))$, then there is a tree-sequence
+$U$ with respect to $G$ and $e_0$ such that
+\[
+  \operatorname{TreeSequenceAdjoinEdge}(T,f,U).
+\]
+In particular, $U$ has one more edge than $T$, contains $T$ as its ordered
+initial segment, and has $f$ as its new final edge identity.
+\end{lemma}
+\begin{proof}
+By the definition of the boundary in \noderef{BoundaryEdges}, choose ends
+$x$ and $y$ of the exact edge identity $f$ such that
+$x\in V(T)$, $y\notin V(T)$, and the unordered endpoint pair of $f$ is
+$\{x,y\}$.  By \noderef{TreeSequenceVertexSet}, every displayed vertex
+of $T$ belongs to $V(T)$.
+
+First, $f$ is distinct from every displayed edge identity of $T$.  Indeed,
+fix such an old edge $T.edge(i)$.  Its attachment clause in
+\noderef{TreeSequence} says that its two ends are the newly displayed old
+vertex at that step and an earlier displayed old vertex.  Both ends
+therefore belong to $V(T)$.  If the exact identities $f$ and $T.edge(i)$
+were equal, then $y$, being an end of $f$, would be one of those two ends
+of $T.edge(i)$ and hence would belong to $V(T)$.  This contradicts the
+choice of $y$.  This argument compares exact edge identities and does not
+identify parallel edges merely because they have the same ends.
+
+Write $p$ for the length of $T$.  Define an ordered sequence $U$ of length
+$p+1$ by retaining, at their original indices, every vertex and edge of
+$T$, and by putting $y$ at the new final vertex index and $f$ at the new
+final edge index.  We verify that this data form a tree-sequence in the
+sense of \noderef{TreeSequence}.  Two retained vertices are distinct by
+vertex injectivity for $T$, while the new vertex $y$ is distinct from every
+retained vertex because $y\notin V(T)$.  Thus the vertices of $U$ are
+pairwise distinct.  Two retained edge identities are distinct by edge
+injectivity for $T$, and the preceding paragraph shows that the new exact
+edge identity $f$ is distinct from every retained edge.  Thus the edges of
+$U$ are pairwise distinct.
+
+The first edge of $U$ is the retained first edge of $T$, hence is $e_0$.
+For every retained edge, retain its attachment witness from $T$ and regard
+the same new-at-that-step and earlier vertices at their canonical old
+indices in $U$; the endpoint equation is unchanged.  For the new final
+edge, use $x\in V(T)$ and \noderef{TreeSequenceVertexSet} to choose an old
+vertex index $q$ with $T.vertex(q)=x$.  The new final vertex is $y$, the
+vertex at the retained index $q$ is $x$, and the endpoint pair of $f$ is
+$\{x,y\}=\{y,x\}$.  Hence $f$ attaches the new final vertex to an earlier
+displayed vertex.  Since $p\geq 1$ for the original tree-sequence, the new
+length is positive.  All fields required of $U$ are now established.
+
+It remains to check the claimed adjoining relation.  By construction,
+$U$ has length $p+1$.  At every old vertex index and every old edge index,
+the corresponding entry of $U$ is exactly the entry of $T$; hence $T$ is
+an ordered initial segment of $U$ by
+\noderef{TreeSequenceInitialSegment}.  At the unique new final edge index,
+the edge of $U$ is exactly the identity $f$.  These are precisely the three
+clauses of \noderef{TreeSequenceAdjoinEdge}, so
+$\operatorname{TreeSequenceAdjoinEdge}(T,f,U)$ holds.
+\end{proof}

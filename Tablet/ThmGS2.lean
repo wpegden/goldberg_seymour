@@ -2,6 +2,7 @@ import Tablet.Critical
 import Tablet.AlgorithmThreeOneChoiceDataExists
 import Tablet.TashkinovSeriesAppend
 import Tablet.TreeExitComponentMeetsTreeOnlyAtExit
+import Tablet.TreeSequenceBoundaryEdgeAppendExists
 import Tablet.ChangeLemma
 import Tablet.HierarchyCounterexamplePathNumberBounds
 import Tablet.HierarchyCounterexampleTailAtLeastTwo
