@@ -1,0 +1,38 @@
+\begin{lemma}[A Tashkinov tree is generated from its one-edge prefix]
+Let \(G\) be a finite loopless multigraph with a finite edge-identity set,
+let \(e_0\) be an edge identity, let \(\varphi\) be a partial \(k\)-edge-coloring,
+and let \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\) be a Tashkinov tree with
+respect to \(e_0\) and \(\varphi\).  Then there is a Tashkinov augmentation
+sequence under \(\varphi\) from the exact length-one prefix
+\(T|y_1=(y_0,e_1,y_1)\) to \(T\).
+\end{lemma}
+\begin{proof}
+For every \(q\) with \(1\leq q\leq n\), let \(P_q=T|y_q\), using the
+exact prefix from \noderef{TreeSequencePrefix}.  Thus \(P_q\) has length
+\(q\), its displayed vertices are exactly \(y_0,\ldots,y_q\) in that
+order, and its displayed edge identities are exactly
+\(e_1,\ldots,e_q\) in that order.
+
+Fix \(q\) with \(1\leq q<n\).  Apply the defining property in
+\noderef{TashkinovTree} to the next displayed edge \(e_{q+1}\).  It gives
+a color \(c\) such that \(\varphi(e_{q+1})=c\) and an index
+\(i<q+1\) such that \(c\) is missing at \(y_i\).  Since
+\(i\leq q\), the vertex \(y_i\) belongs to \(P_q\), so \(c\) belongs to
+the union of the colors missing at vertices of \(P_q\), namely the tree
+missing-color set from \noderef{TreeMissingColors}.
+
+The prefix \(P_{q+1}\) has length \(q+1\), contains \(P_q\) as its exact
+ordered initial segment, and its newly added last edge is the same edge
+identity \(e_{q+1}\), not merely an edge with the same endpoints.  That
+edge has color \(c\), which is missing on \(P_q\).  These are precisely
+the clauses of \noderef{TashkinovAugmentation}; hence \(P_{q+1}\) is one
+Tashkinov augmentation of \(P_q\) under \(\varphi\).
+
+Starting with \(P_1\), induction on \(q\) and concatenation of the preceding
+one-step augmentations gives a Tashkinov augmentation sequence from \(P_1\)
+to every \(P_q\).  The base case is the empty augmentation sequence, allowed
+by the reflexive clause in \noderef{TashkinovAugmentationSequence}.  At
+\(q=n\), the exact full-length prefix has all the vertex and edge data of
+\(T\), hence is \(T\) itself.  The resulting sequence from \(P_1\) to \(T\)
+is the required one.
+\end{proof}

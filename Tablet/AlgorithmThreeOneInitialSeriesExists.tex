@@ -1,0 +1,70 @@
+\begin{theorem}[Algorithm 3.1 has a globally maximum initial series]
+Let \(G\) be a finite loopless multigraph satisfying the tablet's
+edge-criticality condition.  Suppose that
+\(\chi'(G)=k+1\) and \(\Delta(G)+1\leq k\).  Then there exist an edge
+identity \(e_0\), a partial \(k\)-edge-coloring \(\varphi\), a tree-sequence
+\(T\), and a certified Tashkinov series \(\mathcal T\) with zero
+noninitial rounds, such that \((T,e_0,\varphi)\) is globally maximum and:
+\[
+ \mathcal T.T_0=T|y_1,\qquad
+ \mathcal T.T_1=T,\qquad
+ \mathcal T.\varphi_0=\varphi;
+\]
+\[
+ \mathcal T.S_0=\mathcal T.F_0=\varnothing,
+ \quad \mathcal T.\Theta_0=\mathrm{none},
+ \quad \mathcal T.v_0=\mathcal T.u_0=
+ \mathcal T.\delta_0=\mathcal T.\gamma_0=\mathrm{none}.
+\]
+Here \(T|y_1\) is the exact length-one prefix of \(T\).  Moreover, the
+terminal slot satisfies
+\[
+ |V(\mathcal T.T_1)|=t(G),\qquad |V(\mathcal T.T_1)|\geq3,
+ \qquad |V(\mathcal T.T_1)|\text{ is odd},
+\]
+and \(V(\mathcal T.T_1)\) is both elementary and closed with respect to
+\(\varphi\).
+\end{theorem}
+\begin{proof}
+By \noderef{GlobalMaximumTripleExists}, choose an edge identity \(e_0\),
+a partial \(k\)-edge-coloring \(\varphi\), and a tree-sequence \(T\) such
+that \((T,e_0,\varphi)\) is globally maximum.  In particular, by the
+definition in \noderef{GlobalMaximumTriple}, \((G,e_0,\varphi)\) is a
+\(k\)-triple and \(T\) is a Tashkinov tree for this triple.
+
+Let \(P=T|y_1\) be the exact length-one prefix supplied by
+\noderef{TreeSequencePrefix}.  The theorem
+\noderef{TashkinovTreeFromLengthOnePrefix} gives a Tashkinov augmentation
+sequence under \(\varphi\) from \(P\) to \(T\).  On the other hand,
+\noderef{ScheideGlobalMaximumOrder} gives
+\[
+ t(G)=|V(T)|,\quad |V(T)|\geq3,\quad |V(T)|\text{ odd},
+\]
+and says that \(V(T)\) is elementary and closed with respect to
+\(\varphi\).  The augmentation sequence together with this last closedness
+clause is exactly a Tashkinov closure of \(P\) under \(\varphi\), by
+\noderef{TashkinovClosure}.
+
+Define zero-round series data as follows.  In the two tree slots put \(P\)
+at index \(0\) and \(T\) at index \(1\).  In the unique coloring slot put
+\(\varphi\).  In the unique stored-color and connecting-edge slots put the
+empty sets, and put the value none in each of the unique extension-kind,
+chosen-vertex, outside-vertex, delta-color, and gamma-color slots.  These
+are all the fields required by \noderef{TashkinovSeriesData}, and the
+displayed slot equations hold directly by construction.
+
+It remains to certify the data.  There is only one certificate index,
+namely index \(0\).  The initial constructor of
+\noderef{TashkinovSeriesStep} applies there: its triple premise is supplied
+by the globally maximum triple; the seed \(P\) has length one by its exact
+prefix construction; the coloring, empty-set, and absent-witness premises
+are the defining equations above; and its closure premise is the closure
+of \(P\) by \(T\) just proved.  Thus the data and this sole certificate form
+a zero-round Tashkinov series by \noderef{TashkinovSeries}.
+
+Its terminal tree slot is definitionally \(T\).  Substitution into the
+five conclusions of \noderef{ScheideGlobalMaximumOrder} yields respectively
+the asserted global-order equality, lower bound, oddness, elementarity, and
+closedness of the terminal slot.  This proves every claimed property of
+\(\mathcal T\).
+\end{proof}
