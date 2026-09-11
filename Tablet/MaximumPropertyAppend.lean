@@ -28,12 +28,14 @@ theorem MaximumPropertyAppend
     exists newETT : ExtendedTashkinovTree G k e0 input
         (extended.data.tree (Fin.last ((ett.rounds + 1) + 1)))
         (extended.data.coloring (Fin.last (ett.rounds + 1))),
+      newETT.rounds = ett.rounds + 1 /\
+      HEq newETT.series extended /\
       MaximumProperty newETT := by
 -- BODY
   classical
   obtain ⟨newETT, hrounds, hseries⟩ :=
     TashkinovSeriesFinalETTExists G k (ett.rounds + 1) e0 input extended (by omega)
-  refine ⟨newETT, ?_⟩
+  refine ⟨newETT, hrounds, hseries, ?_⟩
   cases newETT with
   | mk newRounds newRoundsPositive newSeries above strict below generatingEq =>
     dsimp at hrounds

@@ -12,9 +12,10 @@ extension kind, chosen and outside vertices, and two colors, as defined by
 
 Then there exists an extended Tashkinov tree displayed on exactly the final
 tree of \(\mathcal T^+\), with generating coloring exactly the terminal
-coloring of \(\mathcal T^+\), and this ETT has the maximum property.  In
-particular, its displayed tree and generating coloring are the entries at
-indices \(n+2\) and \(n+1\), respectively.
+coloring of \(\mathcal T^+\), whose rung number is exactly \(n+1\), whose
+dependent certified series is exactly \(\mathcal T^+\), and which has the
+maximum property.  In particular, its displayed tree and generating coloring
+are the entries at indices \(n+2\) and \(n+1\), respectively.
 \end{lemma}
 \begin{proof}
 Because \(n+1>0\), apply
@@ -82,5 +83,10 @@ newly supplied last tree \(T_{n+2}^+\).  Since the old final tree at index
 Every index \(1\leq i<n+1\) has now been covered.  Hence the global
 first-tree equation and all stagewise bounds in
 \noderef{MaximumProperty} hold for the exact-final ETT \(T^+\), as
-claimed.
+claimed.  The construction by
+\noderef{TashkinovSeriesFinalETTExists} also gave, as exact parts of the
+same witness, the equality of its rung with \(n+1\) and the dependent
+equality of its certified series with \(\mathcal T^+\).  Retaining those
+two equalities together with the proved maximum property gives every part
+of the conclusion.
 \end{proof}

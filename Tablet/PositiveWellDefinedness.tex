@@ -1,0 +1,124 @@
+\begin{corollary}[Positive-rung well-definedness]
+Let \(G=(V,E)\) be a finite loopless multigraph with individual edge
+identities, let \(e_0\in E\), and let the palette have \(k\) colors.  Let
+\(\mathcal E\) be a positive-rung extended Tashkinov tree with rung number
+\(n\), input coloring \(\varphi\), certified series \(\mathcal T\), and
+displayed tree exactly the final tree \(T_{n+1}\) of \(\mathcal T\).  Suppose
+that \(\mathcal E\) has \noderef{MaximumProperty},
+\(\noderef{MaximumDegree}(G)+1\leq k\), and
+\(11\leq\noderef{TashkinovOrder}(G)\).
+
+Then one of the following two alternatives holds.
+\begin{enumerate}
+\item There are an input coloring \(\varphi^*\), a certified series
+      \(\mathcal T^*\) with exactly \(n\) noninitial iterations, and an ETT
+      \(\mathcal E^*\) displayed on exactly the final tree of
+      \(\mathcal T^*\), with generating coloring exactly its terminal
+      coloring, such that the rung of \(\mathcal E^*\) is exactly \(n\),
+      its dependent series is exactly \(\mathcal T^*\), its terminal
+      coloring is proper and leaves exactly \(e_0\) uncolored, its final
+      vertex set is both closed and strongly closed, and
+      \(\mathcal E^*\) has both \noderef{MaximumProperty} and
+      \noderef{TerminalClosureMaximum}.
+\item There are an input coloring \(\varphi^*\), a certified series
+      \(\mathcal T^+\) with exactly \(n+1\) noninitial iterations, and an
+      ETT \(\mathcal E^+\) displayed on exactly the final tree of
+      \(\mathcal T^+\), with generating coloring exactly its terminal
+      coloring, such that the rung of \(\mathcal E^+\) is exactly \(n+1\),
+      its dependent series is exactly \(\mathcal T^+\), its terminal
+      coloring is proper and leaves exactly \(e_0\) uncolored, its final
+      vertex set is closed, and \(\mathcal E^+\) has
+      \noderef{MaximumProperty}.
+\end{enumerate}
+No correspondence assertion between the original ETT and the ETT in the
+second alternative is made.
+\end{corollary}
+\begin{proof}
+Apply \noderef{NormalizePositiveTerminalMaximum} to \(\mathcal E\).  Its
+hypotheses are exactly the assumed final-tree equality, maximum property,
+degree bound, and large-order bound.  It supplies a proper coloring
+\(\sigma_n\) leaving exactly \(e_0\) uncolored, a seed \(S\), a maximum
+closure \(T^*\), and a
+\noderef{CorrespondingExtendedTashkinovTree} certificate \(C\).  It also
+supplies the following statement-level conclusions: \(T^*\) is the exact
+final tree of \(C\)'s replacement series; the replacement ETT has
+\noderef{MaximumProperty} and \noderef{TerminalClosureMaximum}; and
+\(T^*\) is a \noderef{TashkinovClosure} under \(\sigma_n\), hence its
+vertex set is closed.
+
+Unpack the data in \(C\).  By the definition
+\noderef{CorrespondingExtendedTashkinovTree}, there are an actual
+replacement input coloring \(\varphi^*\), an actual certified replacement
+series \(\mathcal T^*\) of the same rung \(n\), and an actual replacement
+ETT whose dependent series is \(\mathcal T^*\) and whose final generating
+coloring is \(\sigma_n\).  Eliminate the rung equality first and then the
+dependent equality of certified series.  Next eliminate the equality of
+the generating coloring with \(\sigma_n\), and finally the equality of
+the replacement series' exact final tree with \(T^*\).  After these four
+dependent transports, the replacement ETT may be presented as an ETT
+\(\mathcal E^*\) whose displayed tree is literally
+\(\mathcal T^*.\operatorname{tree}(\operatorname{last}(n+1))\), whose
+generating coloring is literally
+\(\mathcal T^*.\operatorname{coloring}(\operatorname{last}(n))\), whose
+rung is \(n\), and whose dependent series is \(\mathcal T^*\).  The maximum
+property and terminal maximum property returned by
+\noderef{NormalizePositiveTerminalMaximum} transport along these same
+equalities to \(\mathcal E^*\).  The properness and exactly-one-uncolored
+conclusions for \(\sigma_n\) become those properties for the exact terminal
+coloring of \(\mathcal T^*\), while the closure conclusion for \(T^*\)
+becomes closedness of the exact final vertex set.
+
+Test whether that exact final vertex set is strongly closed under the exact
+terminal coloring.  If it is, retain this fact together with the rung and
+dependent-series equalities, properness, exactly-one-uncoloredness,
+closedness, maximum property, and terminal maximum property just obtained.
+These witnesses give the first alternative.
+
+Suppose instead that the exact final vertex set is not strongly closed.
+Apply \noderef{AlgorithmThreeOneStepExists} to the certified replacement
+series \(\mathcal T^*\).  The required degree bound is assumed; the required
+terminal properness, exactly-one-uncoloredness, and closedness were obtained
+above; and the last hypothesis is the present failure of strong closedness.
+The theorem returns a certified series \(\mathcal T^+\) with \(n+1\)
+noninitial iterations whose complete data are exactly the data of
+\(\mathcal T^*\) followed by the supplied Algorithm~3.1 step.  In
+particular, this is the exact append equation required by
+\noderef{MaximumPropertyAppend}.  Applying that lemma to
+\(\mathcal E^*\), its maximum property, its terminal maximum property, and
+this exact append produces an exact-final ETT \(\mathcal E^+\).  The same
+lemma states, rather than merely choosing definitionally convenient data,
+that \(\mathcal E^+\) has rung \(n+1\), has dependent series exactly
+\(\mathcal T^+\), and has \noderef{MaximumProperty}.
+
+It remains only to verify the three terminal coloring facts demanded in the
+second alternative.  Put \(r=n+1>0\) and \(q=r-1\).  Then the successor of
+\(q\) is the final coloring index and its second successor is the final tree
+index.  By \noderef{TashkinovSeries}, the exact last index of
+\(\mathcal T^+\) has a certificate classified by
+\noderef{TashkinovSeriesStep}.  The initial constructor is impossible,
+because it certifies index zero whereas this final index has positive value
+\(r\).  There are three remaining cases.
+
+In the SE case, the constructor identifies the terminal coloring with the
+selected maximum-defective coloring.  The fields of
+\noderef{MaximumDefectiveChoice} state that this coloring is proper and
+leaves exactly \(e_0\) uncolored, and the closed-extension field states that
+the final tree is a closure under that coloring.  Thus its final vertex set
+is closed.  In the PE case, the constructor directly records terminal
+properness and exactly-one-uncoloredness, and its closed-extension field
+again records closedness of the exact final tree.  In the RE case, the
+constructor identifies the terminal coloring with the preceding proper
+coloring that leaves exactly \(e_0\) uncolored, and its closed-extension
+field supplies closedness.  Rewriting the successor indices \(q+1\) and
+\(q+2\) as the exact final coloring and tree indices gives, in all three
+cases, properness, exactly-one-uncoloredness, and closedness for the terminal
+data of \(\mathcal T^+\).
+
+Combine these three terminal facts with the exact rung equality, dependent
+series equality, and maximum property supplied by
+\noderef{MaximumPropertyAppend}.  This gives the second alternative.  The
+only correspondence certificate used was the same-rung certificate needed
+to normalize \(\mathcal T^*\); after the Algorithm~3.1 append we assert only
+the exact new series and ETT data furnished by the append lemma, so no
+same-rung correspondence is claimed across the append.
+\end{proof}

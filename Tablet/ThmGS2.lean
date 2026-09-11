@@ -5,6 +5,7 @@ import Tablet.MaximumStableClosureExists
 import Tablet.CorrespondingTerminalClosureEq
 import Tablet.NormalizePositiveTerminalMaximum
 import Tablet.MaximumPropertyAppend
+import Tablet.PositiveWellDefinedness
 import Tablet.AlgorithmThreeOneChoiceDataExists
 import Tablet.AlgorithmThreeOneStepExists
 import Tablet.TashkinovSeriesAppend
