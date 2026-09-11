@@ -1,0 +1,148 @@
+\begin{lemma}[Normalization to a maximum terminal closure]
+Let \(G\) be a finite loopless multigraph with individual edge identities,
+let \(e_0\) be a distinguished edge, and let the palette have \(k\) colors.
+Let \(\mathcal E\) be a positive-rung
+\noderef{ExtendedTashkinovTree} with rung number \(n\), displayed tree
+\(T\), generating coloring \(\varphi_n\), and certified series
+\(\mathcal T\).  Write \(T_n\) for its exact terminal ladder tree,
+\(D_n\) for its computed terminal \noderef{TashkinovStoredColors}, and
+\(T_{n+1}\) for its exact final series tree.  Suppose
+\[
+ T=T_{n+1},\qquad \noderef{MaximumProperty}(\mathcal E),\qquad
+ \noderef{MaximumDegree}(G)+1\leq k,\qquad
+ 11\leq\noderef{TashkinovOrder}(G).
+\]
+Then there exist a partial coloring \(\sigma_n\), tree-sequences
+\(T^*\) and \(S\), and a
+\noderef{CorrespondingExtendedTashkinovTree} certificate \(\mathcal C\)
+from \(\mathcal E\) to the displayed tree \(T^*\) under \(\sigma_n\)
+such that all of the following hold:
+\begin{enumerate}
+\item \(\sigma_n\) is proper, leaves exactly \(e_0\) uncolored, and is
+      \((T_n,D_n,\varphi_n)\)-\noderef{StableColoring};
+\item exactly one of the following route alternatives is exhibited: the
+      terminal kind is PE and \(S=T_n\); or the terminal kind is SE or RE
+      and there is an exact edge identity \(f_n\) for which the terminal
+      connecting-edge set is \(\{f_n\}\) and
+      \noderef{TreeSequenceAdjoinEdge}\((T_n,f_n,S)\) holds;
+\item \(T^*\) is a \noderef{TashkinovClosure} of \(S\) under \(\sigma_n\);
+\item the exact final tree of the replacement series in \(\mathcal C\)
+      is \(T^*\); and
+\item the replacement ETT satisfies both \noderef{MaximumProperty} and
+      \noderef{TerminalClosureMaximum}.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+Put \(a=\operatorname{Fin.last}(n)\), so the terminal ladder tree,
+coloring, and stored set are
+\[
+ T_n=\mathcal T.\mathrm{tree}(a.\mathrm{castSucc}),\qquad
+ \varphi_n=\mathcal T.\mathrm{coloring}(a),\qquad
+ D_n=\noderef{TashkinovStoredColors}(\mathcal T,a).
+\]
+The positivity field of \noderef{ExtendedTashkinovTree} gives \(n\geq1\),
+so \(a\) is the successor of the index \(n-1\).  Inspect the certificate
+at \(a\), supplied by \noderef{TashkinovSeries} and classified by
+\noderef{TashkinovSeriesStep}.  The initial constructor would force
+\(n=0\), hence is impossible.  In the SE constructor, its selected
+coloring is proper and exactly \(e_0\)-uncolored, its connecting set is
+the singleton containing the selected edge, it supplies the exact
+one-edge extension \(S=T_n+f_n\), and its closed-extension field says
+that \(T_{n+1}\) is a closure of \(S\).  The RE constructor gives the
+same four facts with its available revisiting edge.  In the PE constructor,
+the recorded current coloring is proper and exactly \(e_0\)-uncolored,
+the kind is PE, the seed is exactly \(S=T_n\), and the closed-extension
+field says that \(T_{n+1}\) is a closure of this seed.  Thus in every
+possible case we have an exact terminal seed \(S\), a proper,
+exactly-one-uncolored coloring \(\varphi_n\), the asserted PE or SE/RE
+seed route, and
+\[
+                 \noderef{TashkinovClosure}(\varphi_n,S,T_{n+1}). \tag{1}
+\]
+
+By the reflexive clause of \noderef{sc2}, \(\varphi_n\) is
+\((T_n,D_n,\varphi_n)\)-stable.  Consequently (1) is a nonempty eligible
+family for \noderef{MaximumStableClosureExists}.  Apply that lemma to
+choose a proper, exactly-\(e_0\)-uncolored coloring \(\sigma_n\), stable
+relative to \((T_n,D_n,\varphi_n)\), and a closure \(T^*\) of the same
+exact seed \(S\), such that
+\[
+ |V(U)|\leq |V(T^*)|                                           \tag{2}
+\]
+for every eligible coloring \(\rho\) and every closure \(U\) of \(S\)
+under \(\rho\).  Applying (2) to \((\varphi_n,T_{n+1})\) from (1) gives
+\(|V(T_{n+1})|\leq |V(T^*)|\).  The vertices displayed by a
+\noderef{TreeSequence} are injectively indexed, so vertex-set cardinality
+is its length plus one; hence
+\(|T_{n+1}|\leq |T^*|\).  The strict penultimate containment in
+\noderef{ExtendedTashkinovTree}, together with the hypothesis
+\(T=T_{n+1}\), gives \(|T_n|<|T_{n+1}|\), and therefore
+\[
+                             |T_n|<|T^*|.                       \tag{3}
+\]
+
+The augmentation part of the selected closure and
+\noderef{TashkinovAugmentationSequenceInitialSegment} show that \(S\) is
+an exact ordered initial segment of \(T^*\).  In the PE case \(S=T_n\).
+In the SE/RE case, the exact one-edge relation makes \(T_n\) an initial
+segment of \(S\); composing the two entrywise initial-segment relations
+shows that \(T_n\) is an initial segment of \(T^*\).  The same closure
+data give precisely the kind-dependent eligibility premise in
+\noderef{ModColoring}: direct augmentation from \(T_n\) in PE, or exact
+adjoining of the singleton connecting edge followed by augmentation in
+SE/RE.  Assertion (vi) of \noderef{TechnicalTheoremLarge}, applied using
+the assumed maximum property and numerical bounds, says that
+\(\sigma_n\) is a mod coloring.  Its universal clause, applied to the
+initial-segment relation, strictness (3), and this exact eligibility route,
+therefore supplies a corresponding certificate \(\mathcal C\) on
+\(T^*\).
+
+The chosen seed route and selected closure satisfy the hypotheses of
+\noderef{CorrespondingTerminalClosureEq}.  That lemma identifies the
+exact final output tree of \(\mathcal C\)'s replacement series with
+\(T^*\).  Moreover, \noderef{MaximumPropertyTransport}, applied to the
+mod-coloring fact, \(\mathcal C\), and the original maximum property,
+gives \noderef{MaximumProperty} for the replacement ETT.  It remains to
+prove its terminal maximum property.
+
+Write \(\mathcal T^*\) for the replacement series.  The fields of
+\noderef{CorrespondingExtendedTashkinovTree} identify its rung with
+\(n\), its terminal ladder tree with \(T_n\), its raw stored sets and
+terminal extension kind with those of \(\mathcal T\), and its terminal
+connecting-edge set with the same exact set of edge identities.  They
+also say that its terminal coloring \(\sigma_n^*\) is proper, leaves
+exactly \(e_0\) uncolored, and is
+\((T_n,D_n,\varphi_n)\)-stable.  The last stability statement identifies
+the missing-color set at every vertex of \(T_n\).  Taking the union over
+these common vertices identifies the two terminal tree-missing-color
+sets.  Since \noderef{TashkinovStoredColors} subtracts exactly that set
+from the union of the raw stored sets through the terminal index, the raw
+set agreements imply
+\[
+ D_n^*=D_n.                                                     \tag{4}
+\]
+
+Now take an arbitrary competitor \(\rho\) in the definition of
+\noderef{TerminalClosureMaximum} for the replacement ETT, with prescribed
+seed \(S'\) and closure \(U\).  Using terminal ladder equality and (4),
+its assumed \((T_n^*,D_n^*,\sigma_n^*)\)-stability is stability relative
+to \((T_n,D_n,\sigma_n^*)\).  Compose it, in this order, after the
+certificate's \((T_n,D_n,\varphi_n)\)-stability.  The transitivity clause
+of \noderef{sc2} yields that \(\rho\) is
+\((T_n,D_n,\varphi_n)\)-stable.                                \tag{5}
+
+We next identify \(S'\) with the selected seed \(S\).  Kind agreement
+rules out every mismatch between PE and SE/RE.  In the matching PE case,
+both seeds are literally the common terminal ladder tree.  In the matching
+SE/RE case, equality of the two singleton connecting-edge sets identifies
+their exact edge identities.  Both \(S'\) and \(S\) are therefore obtained
+by adjoining the same edge identity to the same ordered tree, so
+\noderef{TreeSequenceAdjoinEdgeUnique} gives \(S'=S\).  Thus the competitor
+closure is a closure of \(S\), and (2), using (5) together with its
+properness and exact-one-uncoloredness, gives
+\(|V(U)|\leq |V(T^*)|\).  Finally,
+\noderef{CorrespondingTerminalClosureEq} already identified \(T^*\) with
+the replacement series' exact final tree.  Rewriting the right side by
+that equality proves the required universal bound in
+\noderef{TerminalClosureMaximum}.  All five asserted conclusions now hold.
+\end{proof}
