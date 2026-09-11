@@ -1,0 +1,51 @@
+\begin{lemma}[Existence of a maximum stable closure]
+Let \(G\) be a finite loopless multigraph, let \(e_0\) be a distinguished
+edge identity, and let \(T\) and \(S\) be tree-sequences based at \(e_0\).
+Fix a set of colors \(C\subseteq [k]\) and a partial \(k\)-edge-coloring
+\(\varphi\).  Suppose that there are a partial \(k\)-edge-coloring \(\pi\)
+and a tree-sequence \(U\), based at \(e_0\), such that \(\pi\) is proper,
+leaves exactly \(e_0\) uncolored, is \((T,C,\varphi)\)-stable, and \(U\) is
+a closure of the exact prescribed seed \(S\) under \(\pi\).
+
+Then there are such a coloring \(\pi_*\) and such a closure \(U_*\) of
+\(S\) for which the following maximum property holds: for every proper
+partial \(k\)-edge-coloring \(\rho\) that leaves exactly \(e_0\) uncolored
+and is \((T,C,\varphi)\)-stable, and every closure \(W\) of the same exact
+seed \(S\) under \(\rho\),
+\[
+                         |V(W)|\leq |V(U_*)|.
+\]
+\end{lemma}
+\begin{proof}
+Call a pair \((\sigma,X)\) eligible when \(\sigma\) is proper in the sense
+of \noderef{IsProperEdgeColoring}, leaves exactly \(e_0\) uncolored in the
+sense of \noderef{IsOneEdgeUncolored}, is
+\((T,C,\varphi)\)-stable in the sense of \noderef{StableColoring}, and
+\(X\) is a \noderef{TashkinovClosure} of the prescribed seed \(S\) under
+\(\sigma\).  Thus the assumed pair \((\pi,U)\) is eligible.
+
+Put \(N=|V(G)|\).  For every tree-sequence \(X\), its vertex set
+\(V(X)\), as defined in \noderef{TreeSequenceVertexSet}, is a finite subset
+of the \(N\)-element vertex set of \(G\).  Consequently
+\(|V(X)|\leq N\).
+
+Let
+\[
+  \mathcal A=\{\,n\in\{0,1,\ldots,N\}:
+       \text{there is an eligible pair }(\sigma,X)
+       \text{ with }|V(X)|=n\,\}.
+\]
+This is a finite set.  It is nonempty because the assumed eligible pair
+\((\pi,U)\) contributes the integer \(|V(U)|\), which lies in the displayed
+range by the preceding cardinality bound.  Hence \(\mathcal A\) has a
+largest member \(m\).  Membership of \(m\) in \(\mathcal A\) supplies an
+eligible pair \((\pi_*,U_*)\) with \(|V(U_*)|=m\); in particular \(U_*\) is
+a closure of the exact seed \(S\), with no change to that seed.
+
+Now let \(\rho\) and \(W\) satisfy all the conditions in the conclusion.
+Then \((\rho,W)\) is eligible.  The universal cardinality bound gives
+\(|V(W)|\leq N\), so \(|V(W)|\) lies in the range
+\(\{0,1,\ldots,N\}\); its eligibility therefore gives
+\(|V(W)|\in\mathcal A\).  By maximality of \(m\),
+\(|V(W)|\leq m=|V(U_*)|\), which is the required inequality.
+\end{proof}
