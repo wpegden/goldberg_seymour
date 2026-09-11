@@ -1,0 +1,272 @@
+\begin{theorem}[Realization of one terminal Algorithm 3.1 step]
+Let \(G=(V,E)\) be a finite loopless multigraph, let \(e_0\in E\),
+and let \(\mathcal S\) be a certified Tashkinov series with \(r\)
+noninitial iterations, palette size \(k\), input coloring \(\varphi\),
+and data \(\mathcal D\).  Put
+\[
+ i=\operatorname{last}(r)\in\operatorname{Fin}(r+1),\qquad
+ T=\mathcal D.\operatorname{tree}(\operatorname{last}(r+1)).
+\]
+Suppose that \(\Delta(G)+1\leq k\), that
+\(\mathcal D.\operatorname{coloring}(i)\) is proper and leaves exactly
+\(e_0\) uncolored, and that \(V(T)\) is closed but not strongly closed
+under this coloring.
+
+Then there exist a tree-sequence \(U\), a partial coloring \(\psi\),
+finite sets \(S\subseteq\operatorname{Fin}(k)\) and \(F\subseteq E\),
+an optional extension kind \(\Theta\), optional vertices \(v,u\),
+optional colors \(\delta,\gamma\), and a certified Tashkinov series
+\(\mathcal S^+\) with \(r+1\) noninitial iterations such that
+\[
+ \mathcal S^+.\operatorname{data}
+   =\operatorname{TashkinovSeriesDataAppend}
+      (\mathcal D,U,\psi,S,F,\Theta,v,u,\delta,\gamma)
+ \quad\text{and}\quad
+ \operatorname{length}(T)<\operatorname{length}(U).
+\]
+Thus every old tree, coloring, stored set, connecting-edge set, kind,
+vertex, and color slot of \(\mathcal D\) occurs in \(\mathcal S^+\) at
+its canonical old index, while the displayed values are the exact new
+terminal slots.
+\end{theorem}
+\begin{proof}
+The successor of \(i=\operatorname{last}(r)\) is the last tree index of
+the old data, so the tree used at coloring index \(i\) is exactly \(T\).
+Apply the choice trichotomy \noderef{AlgorithmThreeOneChoiceDataExists}
+at this index.  Its hypotheses are precisely the degree bound,
+properness, unique-uncolored-edge condition, closure, and failure of
+strong closure assumed here.  We realize its three alternatives in turn.
+
+First suppose that it returns a revisiting certificate \(R\).  The fields
+of \noderef{RevisitingExtensionCertificate} give an exact edge identity
+\(f=R.\operatorname{edge}\) in \(\partial_G(V(T))\), its inside and
+outside endpoints, and the two colors \(R.\delta,R.\gamma\).  By
+\noderef{TreeSequenceBoundaryEdgeAppendExists}, there is a tree-sequence
+\(A\) such that
+\[
+             \operatorname{TreeSequenceAdjoinEdge}(T,f,A).       \tag{1}
+\]
+In particular, by \noderef{TreeSequenceAdjoinEdge}, \(A\) has length
+\(\operatorname{length}(T)+1\), contains \(T\) as the exact ordered
+initial segment, and has the same exact edge identity \(f\) as its new
+last edge.  Apply \noderef{TashkinovClosureExists} to obtain a closure
+\(U\) of \(A\) under the old terminal coloring.  By
+\noderef{TashkinovClosure}, there is a Tashkinov augmentation sequence
+from \(A\) to \(U\); hence
+\noderef{TashkinovAugmentationSequenceInitialSegment} says that \(A\)
+is an exact ordered initial segment of \(U\).
+
+We spell out the resulting composition because the final step constructor
+records it.  The length inequalities for \(T\leq A\) and \(A\leq U\)
+compose.  At every old vertex index the entry of \(U\) equals that of
+\(A\), which equals that of \(T\); the same is true at every old edge
+index.  These are exactly the clauses of
+\noderef{TreeSequenceInitialSegment}, so \(T\leq U\).  Moreover,
+\[
+ \operatorname{length}(T)+1=\operatorname{length}(A)
+       \leq\operatorname{length}(U),
+\]
+and therefore \(\operatorname{length}(T)<\operatorname{length}(U)\).
+
+For this branch choose
+\[
+ \psi=\mathcal D.\operatorname{coloring}(i),\quad
+ S=\{R.\delta,R.\gamma\},\quad F=\{f\},\quad
+ \Theta=\mathrm{RE},
+\]
+and choose the optional vertices and colors to be respectively
+\(R\)'s inside endpoint, outside endpoint, delta, and gamma.  Let
+\(\mathcal D^+\) be the exact append supplied by
+\noderef{TashkinovSeriesDataAppend}.  The old index \(i\) embeds as the
+predecessor of the new last index.  The backward-history data used there
+are unchanged: \noderef{TashkinovStoredColorsAppend} identifies its
+computed stored-color set with the old one, and
+\noderef{RevisitingExtensionCertificateAppend} transports \(R\) to a
+certificate over \(\mathcal D^+\), retaining the exact colors, edge, and
+endpoints.  The preceding hypotheses, (1), the closure of \(A\) to
+\(U\), the composed initial-segment relation, and the strict inequality
+therefore fill, field for field, the RE constructor of
+\noderef{TashkinovSeriesStep} at the new last index.  Applying
+\noderef{TashkinovSeriesAppend} gives a certified series
+\(\mathcal S^+\) whose data are literally \(\mathcal D^+\).  This proves
+the conclusion in the RE case.
+
+Suppose next that the trichotomy returns the SE alternative.  Write its
+maximum-defective choice as
+\[
+                Q=(\pi,v,f,u,\delta).
+\]
+By the fields of \noderef{MaximumDefectiveChoice} and the definition
+\noderef{DefectiveEdge}, the exact selected edge \(f\) belongs to a
+boundary-color set and hence to \(\partial_G(V(T))\).  Apply
+\noderef{TreeSequenceBoundaryEdgeAppendExists} to obtain an exact
+one-edge append \(A=T+f\), and apply
+\noderef{TashkinovClosureExists} to obtain a closure \(U\) of \(A\)
+under \(\pi\).  Exactly the composition argument in the RE case, using
+\noderef{TashkinovAugmentationSequenceInitialSegment}, proves
+\(T\leq U\) and
+\[
+                     \operatorname{length}(T)<\operatorname{length}(U).
+                                                                    \tag{2}
+\]
+
+Choose
+\[
+ \psi=\pi,\quad S=\{\delta\},\quad F=\{f\},\quad
+ \Theta=\mathrm{SE},\quad
+ (v,u,\delta,\gamma)=(v,u,\delta,\mathrm{none}),
+\]
+where the last tuple denotes the four optional entries.  Form the exact
+append \(\mathcal D^+\).  The equality in
+\noderef{TashkinovStoredColorsAppend} transports the maximum choice,
+including its selected stability and maximality clauses, to the embedded
+old slots of \(\mathcal D^+\).  It also transports the universal SE
+disjointness alternative returned by the trichotomy.  If an RE
+certificate existed at that embedded index, the reverse direction of
+\noderef{RevisitingExtensionCertificateAppend} would give one for the
+old data, contradicting the SE alternative's no-RE clause.  Thus the
+old properness, unique-uncoloredness, closure and non-strong-closure
+hypotheses, the transported choice and SE predicate, the exact append
+\(A=T+f\), its closure \(U\), the order relation, and (2) give all fields
+of the SE constructor of \noderef{TashkinovSeriesStep}.  A final
+application of \noderef{TashkinovSeriesAppend} gives the required exact
+data equality and strict growth.
+
+It remains to realize the PE alternative.  Retain its no-RE proof, its
+witnessed failure of the SE predicate, the same choice
+\(Q=(\pi,v,f,u,\delta)\), the color \(\gamma\) satisfying
+\noderef{ParallelExtensionColor}, and the proper coloring \(\sigma\)
+which leaves exactly \(e_0\) uncolored, is stable for the enlarged
+controlled set, and satisfies
+\[
+                    \operatorname{TreeExit}(T,\sigma,\gamma,\delta,v).
+                                                                    \tag{3}
+\]
+
+We first extract a second exact defective edge.  The selected-edge field
+of \(Q\), expanded through \noderef{DefectiveEdge}, supplies some color
+whose \noderef{BoundaryColorEdges} set contains \(f\) and is defective.
+Since \(\pi(f)=\delta\), equality of the two colored values on this same
+exact edge identity identifies that color with \(\delta\).  Hence
+\(\delta\) is a \noderef{DefectiveColor} and its exact boundary-color
+set has at least two elements.  Choose
+\[
+ g\in\partial_{\pi,\delta}(V(T)),\qquad g\ne f.              \tag{4}
+\]
+This is a choice of a distinct edge identity; no endpoint-pair
+identification is made.
+
+Every boundary edge is incident with a vertex of \(T\) by
+\noderef{BoundaryEdges}.  Since \(\delta\) belongs to the inserted part
+of the controlled color set, the edge clause of
+\noderef{StableColoring} fixes both \(f\) and \(g\) between \(\pi\) and
+\(\sigma\).  Consequently
+\[
+                       \sigma(f)=\sigma(g)=\delta.             \tag{5}
+\]
+The missing-color clause of \noderef{ParallelExtensionColor} says that
+\(\gamma\) is missing at \(v\) under \(\pi\), and vertexwise stability
+makes it missing there under \(\sigma\).  If \(\gamma=\delta\), then
+(5) and the incidence of \(f\) with \(v\) would put \(\gamma\) in the
+\noderef{PresentColors} at \(v\), contradicting its membership in the
+complementary set \noderef{MissingColors}.  Thus
+\[
+                              \gamma\ne\delta.                 \tag{6}
+\]
+
+Let
+\[
+ K=\operatorname{TwoColorComponent}(G,\sigma,\gamma,\delta,v).
+\]
+We claim that the edge-node of \(g\) does not belong to \(K\).  If it
+did, use (4) and \noderef{BoundaryEdges} to orient the endpoint pair of
+\(g\) with an inside endpoint \(w\in V(T)\).  By (5), the incidence
+edge between the vertex-node \(w\) and edge-node \(g\) belongs to the
+\((\gamma,\delta)\)-incidence graph of
+\noderef{TwoColorIncidenceGraph}.  Hence \(w\) also belongs to the same
+component \(K\).  Apply
+\noderef{TreeExitComponentMeetsTreeOnlyAtExit} to (3), the properness of
+\(\sigma\), and the fact that \(\gamma\) is missing at \(v\).  It gives
+\(w=v\).  Now the distinct exact edges \(g\) and \(f\) are adjacent at
+\(v\) and both have color \(\delta\) by (5), contradicting
+\noderef{IsProperEdgeColoring}.  This proves
+\[
+                              g\notin K.                        \tag{7}
+\]
+
+Define the new coloring by the component swap
+\[
+             \psi=\operatorname{TwoColorComponentSwap}
+                    (G,\sigma,\gamma,\delta,v).
+\]
+By (6), \noderef{TwoColorComponentSwapProper} makes \(\psi\) proper.
+The definition \noderef{TwoColorComponentSwap} also preserves the
+exact-one-uncolored property directly.  Indeed, the old uncolored edge
+\(e_0\) still has value \(\mathrm{none}\), whether or not its edge-node
+is tested against \(K\).  For any \(a\ne e_0\), choose its old colored
+value \(c\) using \noderef{IsOneEdgeUncolored}.  Outside \(K\) its new
+value is still \(c\); inside \(K\) it is \(\delta\) when
+\(c=\gamma\), is \(\gamma\) when \(c=\delta\), and is still \(c\)
+otherwise.  In every case it remains colored.  Moreover, (7) and (5)
+give
+\[
+                              \psi(g)=\delta.                   \tag{8}
+\]
+
+We next prove that \(\delta\) is missing at \(v\) under \(\psi\).
+Suppose instead that an edge identity \(a\) incident with \(v\) has
+\(\psi(a)=\delta\).  If its edge-node is outside \(K\), then the swap
+fixes it, so \(\sigma(a)=\delta\).  Its incidence with the root
+vertex-node \(v\) then puts it in \(K\), a contradiction.  If its
+edge-node is in \(K\), inspection of the swap and (6) shows that the only
+old value which can become \(\delta\) is \(\gamma\).  Thus
+\(\sigma(a)=\gamma\), contradicting that \(\gamma\) is missing at
+\(v\).  No such \(a\) exists, and the complementary definitions
+\noderef{PresentColors} and \noderef{MissingColors} give
+\[
+                    \delta\in\overline\psi(v).                 \tag{9}
+\]
+
+The vertex \(v\) belongs to \(V(T)\) by the defective-vertex field of
+\noderef{MaximumDefectiveChoice}.  Equations (4), (8), and (9) therefore
+contradict the defining condition \noderef{ColoredVertexSetClosed} for
+\(V(T)\) under \(\psi\).  Hence \(T\) is not closed under \(\psi\).
+Apply \noderef{TashkinovClosureExists} directly to \(T\), obtaining a
+closure \(U\) under \(\psi\).  Its augmentation sequence makes
+\(T\leq U\) by
+\noderef{TashkinovAugmentationSequenceInitialSegment}.  This sequence
+cannot be empty, because then \(U=T\) would be closed, contrary to the
+preceding paragraph.  A nonempty augmentation sequence has a last
+\noderef{TashkinovAugmentation}, which increases length by one after an
+initial segment of length at least that of \(T\).  Consequently
+\[
+                       \operatorname{length}(T)<\operatorname{length}(U).
+                                                                    \tag{10}
+\]
+
+For PE choose
+\[
+ S=\{\delta,\gamma\},\quad F=\{f\},\quad
+ \Theta=\mathrm{PE},\quad
+ (v,u,\delta,\gamma)=(v,u,\delta,\gamma)
+\]
+as the optional terminal entries, and form the exact append
+\(\mathcal D^+\) with new coloring \(\psi\) and new tree \(U\).
+As in SE, \noderef{TashkinovStoredColorsAppend} transports the maximum
+choice, its witnessed failure of the universal SE predicate, and the
+stability relation to the embedded old slots.  The no-RE clause transports
+backward by \noderef{RevisitingExtensionCertificateAppend}.  The
+history-sensitive choice of \(\gamma\) transports exactly by
+\noderef{ParallelExtensionColorAppend}.  Thus (3), properness and
+unique-uncoloredness of \(\sigma\), the definition and the two proved
+properties of \(\psi\), the closure of \(T\) to \(U\), its ordered
+initial-segment certificate, and (10) supply every field of the PE
+constructor of \noderef{TashkinovSeriesStep}.  Applying
+\noderef{TashkinovSeriesAppend} produces the required certified series
+with data exactly \(\mathcal D^+\).
+
+In this last construction \(f\) is recorded exactly in the new singleton
+connecting-edge set, but the closure was taken directly from \(T\); no
+claim that \(f\) belongs to \(U\) has been made.  The three trichotomy
+alternatives are exhaustive, so the theorem follows.
+\end{proof}
