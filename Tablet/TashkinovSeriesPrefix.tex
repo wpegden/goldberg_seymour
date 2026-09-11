@@ -1,0 +1,18 @@
+\begin{lemma}[Every initial data segment is a certified series]
+Let \(\mathcal S\) be a certified \noderef{TashkinovSeries} with \(n\) rounds
+and let \(m\leq n\).  There exists a certified series \(\mathcal S^{\leq m}\)
+with \(m\) rounds whose data are exactly
+\(\noderef{TashkinovSeriesDataPrefix}(m,\mathcal S.\mathit{data})\).
+At every \(a\in\operatorname{Fin}(m+1)\), its certificate is heterogeneously
+equal to the original certificate at the canonical included index.
+\end{lemma}
+\begin{proof}
+Use the prefix data as the data field.  For each retained index \(a\), the
+original series supplies its certificate at the included index, and
+\noderef{TashkinovSeriesStepPrefix} supplies a corresponding certificate for
+the prefix data together with the required heterogeneous equality.  Choose
+one such prefix certificate at every index.  These choices form the
+certification field of a \noderef{TashkinovSeries}.  The data equality is
+reflexive by construction, and the chosen certificate's heterogeneous
+equality is exactly the one supplied at that index.
+\end{proof}

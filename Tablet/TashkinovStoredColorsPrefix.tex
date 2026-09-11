@@ -1,0 +1,31 @@
+\begin{lemma}[Computed stored colors depend only on bounded history]
+Let \(\mathcal D\) be \noderef{TashkinovSeriesData} with \(n\) rounds, let
+\(m\leq n\), and put
+\(\mathcal D^{\leq m}=\noderef{TashkinovSeriesDataPrefix}(m,\mathcal D)\).
+For every \(a\in\operatorname{Fin}(m+1)\), if \(\iota_D(a)\) is the
+canonical same-value inclusion in \(\operatorname{Fin}(n+1)\), then
+\[
+ \noderef{TashkinovStoredColors}(\mathcal D^{\leq m},a)
+   =\noderef{TashkinovStoredColors}(\mathcal D,\iota_D(a)).
+\]
+\end{lemma}
+\begin{proof}
+If \(a=0\), both computed sets are empty by the defining zero-index branch of
+\noderef{TashkinovStoredColors}.
+
+Suppose \(a>0\).  Before subtracting missing colors, the left-hand union runs
+over precisely those \(h\in\operatorname{Fin}(m+1)\) with \(h\leq a\).
+Sending such an \(h\) through the canonical inclusion gives an old index of
+the same numerical value, still at most \(\iota_D(a)\).  Conversely, if an old
+index \(j\in\operatorname{Fin}(n+1)\) satisfies \(j\leq\iota_D(a)\), then
+\(j\leq a<m+1\) numerically, so the same numerical value defines a unique
+\(h\in\operatorname{Fin}(m+1)\).  These maps are inverse and the raw stored
+sets agree at paired indices by the definition of
+\noderef{TashkinovSeriesDataPrefix}.  Hence the two bounded unions are equal.
+
+At the current index, the prefix coloring and tree are respectively the old
+coloring at \(\iota_D(a)\) and the old tree at the same-value tree inclusion.
+The latter is exactly the cast-successor of \(\iota_D(a)\).  Therefore the two
+tree-missing-color sets subtracted from the unions are equal.  Equal unions
+minus equal missing-color sets give the asserted equality.
+\end{proof}

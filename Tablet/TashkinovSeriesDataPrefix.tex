@@ -1,0 +1,16 @@
+\begin{definition}[Initial-segment data of a Tashkinov series]
+Let \(\mathcal D\) be \noderef{TashkinovSeriesData} with \(n\) rounds, and
+let \(m\leq n\).  The data
+\(\operatorname{TashkinovSeriesDataPrefix}(m,\mathcal D)\) have \(m\)
+rounds and are obtained through the canonical order-preserving inclusions
+\[
+ \iota_T:\operatorname{Fin}(m+2)\longrightarrow\operatorname{Fin}(n+2),
+ \qquad
+ \iota_D:\operatorname{Fin}(m+1)\longrightarrow\operatorname{Fin}(n+1).
+\]
+Their tree entry at \(a\) is \(\mathcal D.\mathit{tree}(\iota_T(a))\).
+Each of their coloring, raw stored-color, exact connecting-edge, extension-kind,
+chosen-vertex, outside-vertex, delta, and gamma entries at \(a\) is the
+corresponding entry of \(\mathcal D\) at \(\iota_D(a)\).  In particular, the
+construction retains individual edge identities, not only their endpoints.
+\end{definition}

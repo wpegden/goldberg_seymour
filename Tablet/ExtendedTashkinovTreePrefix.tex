@@ -1,0 +1,41 @@
+\begin{lemma}[A positive certified series prefix is an ETT]
+Let \(\mathcal E\) be an \noderef{ExtendedTashkinovTree} with \(n\) rounds and
+certified series \(\mathcal S\).  Fix \(m\) with \(1\leq m<n\), a tree index
+\(t\in\operatorname{Fin}(n+2)\) of numerical value \(m+1\), and a coloring
+index \(c\in\operatorname{Fin}(n+1)\) of numerical value \(m\).  There is an
+ETT \(\mathcal E^{\leq m}\), displayed on exactly
+\(\mathcal S.\mathit{data}.\mathit{tree}(t)\) with generating coloring exactly
+\(\mathcal S.\mathit{data}.\mathit{coloring}(c)\), whose rung is \(m\).
+
+Its tree array is the original tree array restricted through the canonical
+same-value inclusion.  Its coloring, raw stored-color, exact connecting-edge,
+extension-kind, chosen-vertex, outside-vertex, delta, and gamma arrays are the
+corresponding restricted original arrays.  At every retained data index its
+computed \noderef{TashkinovStoredColors} set equals the old computed set, and
+its step certificate is heterogeneously equal to the old included certificate.
+\end{lemma}
+\begin{proof}
+Apply \noderef{TashkinovSeriesPrefix} at \(m\), obtaining a certified series
+\(\mathcal S^-\) whose data are exactly the literal prefix and whose
+certificates have the stated heterogeneous equalities.  Since \(m\geq1\),
+\noderef{TashkinovSeriesFinalETTExists} turns \(\mathcal S^-\) into an ETT of
+rung \(m\), displayed on its final tree slot and final coloring slot, with
+dependent series exactly \(\mathcal S^-\).
+
+The final tree index of an \(m\)-round series has numerical value \(m+1\).
+After inclusion into the old tree-index type it therefore equals \(t\), by
+extensionality of finite indices and the hypothesis on \(t\).  Likewise, the
+last coloring index has value \(m\) and its inclusion equals \(c\).  The
+literal prefix definition consequently identifies the two displayed objects
+with the exact objects asserted in the statement; transport the ETT along
+these equalities.
+
+The cited final-series result gives rung equality and equality of the dependent
+series.  Substitute those equalities.  Every tree and raw data-array conclusion
+then follows directly from \noderef{TashkinovSeriesDataPrefix}.  The computed
+stored-color conclusion is \noderef{TashkinovStoredColorsPrefix}, and the
+certificate conclusion is the corresponding conclusion of
+\noderef{TashkinovSeriesPrefix}.  Since the connecting-edge array itself is
+copied, these are equalities of exact edges, including distinct parallel
+edges, rather than endpoint-only comparisons.
+\end{proof}

@@ -1,0 +1,34 @@
+\begin{lemma}[Maximum property is inherited by an agreeing earlier prefix]
+Let \(\mathcal E\) be an \noderef{ExtendedTashkinovTree} of rung \(n\) with
+\noderef{MaximumProperty}.  Let \(1\leq m<n\), and let \(\mathcal R\) be any
+ETT of rung \(m\).  Suppose every tree slot of \(\mathcal R\) equals the old
+tree slot at the canonical included index.  Suppose also that, at every data
+index of \(\mathcal R\), its coloring, exact connecting-edge set, extension
+kind, and computed \noderef{TashkinovStoredColors} set equal the corresponding
+old entries.  Then \(\mathcal R\) has maximum property.
+\end{lemma}
+\begin{proof}
+Unfold \noderef{MaximumProperty}.  Its first clause concerns tree slot one.
+That slot is present because \(m\geq1\), and the tree-array agreement identifies
+it with tree slot one of \(\mathcal E\).  The original first clause therefore
+gives the required equality with the Tashkinov order.
+
+For the second clause, fix \(i\) with \(1\leq i<m\), a proper coloring with
+exactly the distinguished edge uncolored, a seed, and a candidate closure
+satisfying the maximum-property premises for \(\mathcal R\).  Since \(m<n\),
+we also have \(i<n\), so the old maximum bound is available at index \(i\).
+The same-value inclusions identify the restricted current tree with the old
+current tree and the restricted next tree with the old next tree.  By the four
+data agreements, the stability premise has the same reference coloring and
+computed control set.  The PE seed alternative has the same kind and current
+tree.  The SE/RE alternative has the same kind, the same individual
+connecting-edge singleton, and the same current tree; hence its exact
+tree-adjoining assertion is unchanged.  Thus every premise of the old maximum
+bound holds for the same coloring, seed, and candidate.
+
+Apply the old bound.  It bounds the candidate's vertex cardinality by that of
+the old tree at slot \(i+1\).  The tree-array agreement at \(i+1\) identifies
+this with the restricted next tree, giving precisely the required bound for
+\(\mathcal R\).  This holds at every \(1\leq i<m\), so both clauses of maximum
+property are proved.
+\end{proof}

@@ -1,0 +1,64 @@
+\begin{lemma}[A certified series step restricts to every containing prefix]
+Let \(\mathcal D\) be \noderef{TashkinovSeriesData} with \(n\) rounds, let
+\(m\leq n\), and let \(a\in\operatorname{Fin}(m+1)\).  If the original data
+have a \noderef{TashkinovSeriesStep} certificate at the canonical included
+index \(\iota_D(a)\), then
+\(\noderef{TashkinovSeriesDataPrefix}(m,\mathcal D)\) has a step certificate
+at \(a\).  The new certificate is heterogeneously equal to the original
+certificate, after dependent transport to the prefix data.
+\end{lemma}
+\begin{proof}
+Write \(\mathcal D^-\) for the prefix data.  Inspect the constructor of the
+given \noderef{TashkinovSeriesStep} certificate.
+
+For the initial constructor, its certified index is zero, so equality of
+finite indices forces \(a=0\).  All of its data concern tree slots zero and
+one and data slot zero.  These slots are retained literally by
+\noderef{TashkinovSeriesDataPrefix}; reuse the same triple, seed-length and
+input-coloring equalities, empty initial fields, and exact closure.
+
+For any positive constructor, write \(a=b+1\).  Since \(a<m+1\), one has
+\(b<m\).  Thus data slots \(b\) and \(b+1\), and tree slots \(b+1\) and
+\(b+2\), all occur in the prefix.  Moreover, by
+\noderef{TashkinovStoredColorsPrefix}, every computed stored-color set at a
+retained index is exactly the old computed set at the included index.
+
+In the SE case, retain the same previous properness, one-uncoloredness,
+closedness and failure of strong closedness, the same
+\noderef{MaximumDefectiveChoice}, the universal series alternative, all eight
+current data equalities, the exact adjoined tree, closure, ordered extension,
+and strict extension.  It remains only to justify the negative revisiting
+condition.  Any revisiting certificate for the prefix at slot \(b\) names an
+earlier index at most \(b\) and quantifies over intervening indices at most
+\(b\).  Every named index is retained; composing it with the canonical
+inclusion and using the literal kind, gamma, delta, coloring, and tree
+equalities produces a \noderef{RevisitingExtensionCertificate} for the old
+data.  This contradicts the old negative condition.
+
+In the PE case, the same argument transports the negative revisiting
+condition.  Retain the maximum-defective choice and the witness that the
+universal alternative fails.  The predicate
+\noderef{ParallelExtensionColor} only quantifies over positive PE indices at
+most \(b\): its existing-index alternative and its universal latest-index
+clause therefore transport in both directions through the same-value
+inclusion.  Reuse the old gamma and its rule, the second stable coloring and
+its two coloring certificates, the stability relation, exit witness, component
+swap equation, resulting properness and one-uncoloredness, all current data
+equalities, closure, ordered extension, and strict extension.
+
+In the RE case, rebuild the
+\noderef{RevisitingExtensionCertificate} from the original earlier PE index.
+That index is at most \(b\), and every intervening index is bounded by \(b\),
+so they are all retained.  The prefix definition identifies the earlier kind,
+gamma and delta, the current coloring, all tree vertex sets, the exact cycle
+edge and its endpoints, and the return path.  Reuse these witnesses, followed
+by the old current-coloring equation, two-color raw stored set, singleton
+connecting-edge identity, kind and optional fields, exact adjoining, closure,
+ordered extension, and strict extension.
+
+The four constructors exhaust the certificate.  In each case we have produced
+a proof of the prefix step proposition.  Both that proof and the original
+certificate prove propositions; heterogeneous proof irrelevance identifies
+them even though their proposition types mention differently sized dependent
+data.  This gives the required heterogeneous equality.
+\end{proof}
