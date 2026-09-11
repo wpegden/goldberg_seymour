@@ -1,6 +1,6 @@
 import Tablet.ParallelExtensionColorAppend
 import Tablet.RevisitingExtensionCertificateAppend
-import Tablet.TashkinovSeriesDataAppendEquations
+import Tablet.TashkinovSeriesDataAppend
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColorsAppend
 set_option maxHeartbeats 1200000
@@ -27,10 +27,21 @@ theorem TashkinovSeriesStepAppend {V E : Type*} [Fintype V] [Fintype E]
   let appended := TashkinovSeriesDataAppend data newTree newColoring
     newStored newConnectingEdges newKind newChosenVertex newOutsideVertex
     newDelta newGamma
-  rcases TashkinovSeriesDataAppendEquations data newTree newColoring newStored newConnectingEdges
-      newKind newChosenVertex newOutsideVertex newDelta newGamma with
-    ⟨treeOld, treeLast, slotsOld, coloringLast, storedLast, edgesLast,
-      kindLast, chosenLast, outsideLast, deltaLast, gammaLast⟩
+  have treeOld : ∀ i : Fin (rounds + 2),
+      appended.tree i.castSucc = data.tree i := by
+    intro i
+    simp [appended, TashkinovSeriesDataAppend]
+  have slotsOld : ∀ i : Fin (rounds + 1),
+      appended.coloring i.castSucc = data.coloring i ∧
+      appended.stored i.castSucc = data.stored i ∧
+      appended.connectingEdges i.castSucc = data.connectingEdges i ∧
+      appended.kind i.castSucc = data.kind i ∧
+      appended.chosenVertex i.castSucc = data.chosenVertex i ∧
+      appended.outsideVertex i.castSucc = data.outsideVertex i ∧
+      appended.delta i.castSucc = data.delta i ∧
+      appended.gamma i.castSucc = data.gamma i := by
+    intro i
+    simp [appended, TashkinovSeriesDataAppend]
   have treeZeroIndex : (0 : Fin ((rounds + 1) + 2)) =
       (0 : Fin (rounds + 2)).castSucc := by ext; rfl
   have treeOneIndex : (1 : Fin ((rounds + 1) + 2)) =
@@ -560,4 +571,3 @@ theorem TashkinovSeriesStepAppend {V E : Type*} [Fintype V] [Fintype E]
           exact strictExtension
       rw [← slotIndexEq]
       exact lifted
-

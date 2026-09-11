@@ -1,6 +1,5 @@
 import Tablet.RevisitingExtensionCertificate
 import Tablet.TashkinovSeriesDataAppend
-import Tablet.TashkinovSeriesDataAppendEquations
 set_option maxHeartbeats 800000
 
 -- [TABLET NODE: RevisitingExtensionCertificateAppend]
@@ -74,9 +73,8 @@ theorem RevisitingExtensionCertificateAppend {V E : Type*} [Fintype V] [Fintype 
         appended.tree i.castSucc.succ = appended.tree i.succ.castSucc :=
           congrArg appended.tree currentIndexEq
         _ = data.tree i.succ := by
-          exact (TashkinovSeriesDataAppendEquations data newTree newColoring newStored
-            newConnectingEdges newKind newChosenVertex newOutsideVertex
-            newDelta newGamma).1 i.succ
+          simp only [appended, TashkinovSeriesDataAppend,
+            Fin.lastCases_castSucc]
     have oldPackage : Package (data.coloring i)
         (data.tree oldEarlier.castSucc) (data.tree i.succ) := by
       rw [← colorEq, ← earlierTreeEq, ← currentTreeEq]
@@ -159,9 +157,8 @@ theorem RevisitingExtensionCertificateAppend {V E : Type*} [Fintype V] [Fintype 
         appended.tree i.castSucc.succ = appended.tree i.succ.castSucc :=
           congrArg appended.tree currentIndexEq
         _ = data.tree i.succ := by
-          exact (TashkinovSeriesDataAppendEquations data newTree newColoring newStored
-            newConnectingEdges newKind newChosenVertex newOutsideVertex
-            newDelta newGamma).1 i.succ
+          simp only [appended, TashkinovSeriesDataAppend,
+            Fin.lastCases_castSucc]
     have newPackage : Package (appended.coloring i.castSucc)
         (appended.tree cert.earlier.castSucc.castSucc)
         (appended.tree i.castSucc.succ) := by

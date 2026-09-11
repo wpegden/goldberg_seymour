@@ -12,11 +12,13 @@ induced.
 Consider first a certificate \(C^+\) for the appended data.  Its earlier index
 \(h\) satisfies \(h\leq i^+\), hence
 \(h.val\leq i.val<r+1\).  Define the old index
-\(h_0=\langle h.val,h.val<r+1\rangle\); then \(h=h_0^+\).  The old-slot
-equations in \(\noderef{TashkinovSeriesDataAppendEquations}\) identify the PE
-kind and ordered gamma and delta at these two indices.  For every old
+\(h_0=\langle h.val,h.val<r+1\rangle\); then \(h=h_0^+\).  Unfolding the
+last-index case splits in \(\noderef{TashkinovSeriesDataAppend}\) at this
+cast-successor index identifies the PE kind and ordered gamma and delta at
+these two indices.  For every old
 \(j\) strictly between \(h_0\) and \(i\), apply the intervening-RE clause of
-\(C^+\) to \(j^+\); its kind is the old kind by the same equations.
+\(C^+\) to \(j^+\); its kind is the old kind by the same definitional
+computation rule.
 
 The current coloring, the earlier tree, and the current tree in \(C^+\) are
 respectively equal to the old current coloring, old earlier tree, and old
@@ -38,9 +40,10 @@ For the reverse direction, map the earlier old index \(h\) to \(h^+\).
 An enlarged index \(j\) occurring in the intervening-RE clause is bounded by
 \(i^+\), so the numerical argument above converts it to a unique old
 \(j_0\) with \(j=j_0^+\); the old intervening clause supplies the required
-RE kind.  Use the old-slot equations again to identify the current coloring,
-earlier tree, and current tree, and transport the complete cycle-and-return-
-path package together in the opposite direction.  This yields a certificate
-for \((A^+,i^+)\), again installing the original gamma, delta, exact edge,
-and two endpoints verbatim.  Hence both witness-preserving maps exist.
+RE kind.  Unfold the same append definition again at the relevant
+cast-successor indices to identify the current coloring, earlier tree, and
+current tree, and transport the complete cycle-and-return-path package
+together in the opposite direction.  This yields a certificate for
+\((A^+,i^+)\), again installing the original gamma, delta, exact edge, and two
+endpoints verbatim.  Hence both witness-preserving maps exist.
 \end{proof}

@@ -8,9 +8,10 @@ iterations.  Append arbitrary supplied final values to obtain \(A^+\) as in
 3.1 step certificate for \((G,k,r+1,e_0,\varphi,A^+)\).
 \end{lemma}
 \begin{proof}
-Use the exact old-slot equalities from
-\(\noderef{TashkinovSeriesDataAppendEquations}\).  Besides their stated
-cast-successor form, the elementary index equalities
+Unfold \(\noderef{TashkinovSeriesDataAppend}\).  Each of its nine arrays is a
+last-index case split, whose cast-successor computation rule identifies every
+old tree or non-tree slot of \(A^+\) with the corresponding slot of \(A\).
+Besides these cast-successor rules, the elementary index equalities
 \((i^+).succ=(i.succ)^+\) and their tree-index analogues identify every tree
 and non-tree expression occurring in an old constructor with the expression
 at the lifted constructor.  We inspect the four constructors of
