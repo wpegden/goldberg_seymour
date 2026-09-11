@@ -1,0 +1,137 @@
+\begin{theorem}[Large-order terminal witness]
+Let (V) and (E) be finite types with decidable equality, let
+(G=(V,E)) be a loopless multigraph, and let (k\in\mathbb N).  Suppose
+that (G) is \noderef{Critical},
+[
+ \noderef{ChromaticIndex}(G)=k+1,
+ \qquad \noderef{MaximumDegree}(G)+1\leq k,
+ \qquad 11\leq \noderef{TashkinovOrder}(G).
+]
+Then there exist an exact edge identity (e_0\in E), a partial
+(k)-edge-coloring (\varphi), and a finite set (X\subseteq V) such
+that (\varphi) is \noderef{IsProperEdgeColoring}, it leaves exactly
+(e_0) uncolored in the sense of \noderef{IsOneEdgeUncolored}, every
+endpoint of (e_0) belongs to (X), and (X) is both
+\noderef{ColoredVertexSetElementary} and
+\noderef{ColoredVertexSetStronglyClosed} with respect to (\varphi).
+\end{theorem}
+\begin{proof}
+We first record an endpoint fact that will apply to every tree returned
+below.  If (R) is a \noderef{TreeSequence} based at the exact edge
+(e_0), write its first displayed edge as (e_1).  The definition gives
+(e_1=e_0), and the attachment condition at the first positive edge index
+says that the two ends of (e_1) are its new vertex (y_1) and a vertex
+(y_i) with (i<1).  Necessarily (i=0).  Thus both exact endpoints of
+(e_0) occur among the displayed vertices of (R), and hence, by
+\noderef{TreeSequenceVertexSet},
+[
+                 v\in G.\operatorname{ends}(e_0)
+                 \quad\Longrightarrow\quad v\in V(R).       \tag{1}
+]
+
+Apply \noderef{AlgorithmThreeOneInitialSeriesExists} to criticality, the
+chromatic-index equality, and the degree bound.  It supplies an exact edge
+(e_0), a partial coloring
+(\varphi), and a certified zero-round series
+(\mathcal S^0), together with a \noderef{GlobalMaximumTriple} based on
+these data.  By that definition the underlying data form a
+\noderef{KTriple}; hence (\varphi) is proper and leaves exactly (e_0)
+uncolored.  The initial-series theorem also says that the unique coloring slot is
+(\varphi), and that the terminal tree (T^0_1) has
+[
+       |V(T^0_1)|=\noderef{TashkinovOrder}(G).                 \tag{2}
+]
+It also says that (V(T^0_1)) is elementary and closed under
+(\varphi).
+
+If (V(T^0_1)) is strongly closed under (\varphi), take
+(X=V(T^0_1)).  Properness, the exact-one-uncolored property,
+elementarity, and strong closedness are the facts just obtained, while
+(1), applied to (T^0_1), puts both ends of (e_0) in (X).  This is
+the desired conclusion in this case.
+
+Assume henceforth that (V(T^0_1)) is not strongly closed.  The exact
+last coloring and tree indices of the zero-round series are respectively
+its slots (0) and (1), so its terminal properness, unique-uncoloredness,
+closedness, and failure of strong closedness meet all hypotheses of
+\noderef{AlgorithmThreeOneStepExists}.  Apply that theorem at round zero.
+It gives a certified one-round series (\mathcal S^1) whose data are the
+exact \noderef{TashkinovSeriesDataAppend} of the zero-round data.  By
+\noderef{TashkinovSeriesFinalETTExists}, the exact final tree (T^1_2),
+the exact terminal coloring (\varphi^1_1), and this same dependent
+series determine a positive ETT (\mathcal E^1) of rung exactly (1).
+
+We verify \noderef{MaximumProperty} for (\mathcal E^1).  In the append,
+the old terminal tree (T^0_1) is retained literally in the new tree slot
+(T^1_1).  Therefore (2) gives
+[
+                         |V(T^1_1)|=t(G),                     \tag{3}
+]
+which is the first clause of the maximum property.  Its stagewise clause
+ranges over indices (i) with (1\leq i<1), of which there are none.
+Thus (\mathcal E^1) has the maximum property.
+
+For (n\in\mathbb N), call (n) attainable if there exist an input
+partial coloring (\rho), a tree-sequence (T), a generating coloring
+(\sigma), and a positive ETT
+[
+                    \mathcal E:(G,k,e_0,\rho,T,\sigma)
+]
+such that the rung of (\mathcal E) is (n), the displayed tree (T)
+is exactly the final tree of the dependent certified series of
+(\mathcal E), and (\mathcal E) has the maximum property.  The ETT
+(\mathcal E^1) proves that (1) is attainable.  Applying
+\noderef{CertifiedSeriesRoundsBound} to its dependent one-round series
+gives (1+2\leq |V|), and in particular (1<|V|).
+
+Define the finite set
+[
+        A=\{m\in\mathbb N:m<|V|\text{ and }m\text{ is attainable}\}.
+]
+The preceding paragraph shows (1\in A), so (A) is nonempty.  Let
+(n=\max A), and choose witnesses
+((\rho_n,T_n,\sigma_n,\mathcal E_n)) for the attainability of (n).
+In particular, (T_n) is the exact final tree of the certified series of
+(\mathcal E_n), and (\mathcal E_n) has the maximum property.
+
+Apply \noderef{PositiveWellDefinedness} to (\mathcal E_n), using this
+exact-final equality, its maximum property, and the assumed degree and
+large-order bounds.  Consider its two alternatives.
+
+In the first alternative, there are a replacement input coloring
+(\rho^*), a certified same-rung series (\mathcal S^*), and an ETT
+(\mathcal E^*) displayed on exactly the final tree of (\mathcal S^*),
+with generating coloring exactly its terminal coloring (\varphi^*).
+The same alternative states that (\varphi^*) is proper and leaves exactly
+(e_0) uncolored, that the final vertex set
+[
+ X=V\bigl(\mathcal S^*.T_{n+1}\bigr)
+]
+is strongly closed, and that (\mathcal E^*) has the maximum property.
+Apply assertion (i) of \noderef{TechnicalTheoremLarge} to this exact ETT.
+Its hypotheses are precisely that maximum property and the same degree and
+large-order inequalities, and its conclusion is that (X) is elementary
+under (\varphi^*).  Finally (1), applied to the exact final tree of
+(\mathcal S^*), puts both endpoints of (e_0) in (X).  Hence
+((e_0,\varphi^*,X)) has all five required properties.
+
+It remains to rule out the second alternative.  That alternative supplies
+a certified series (\mathcal S^+) with (n+1) noninitial iterations and
+an exact-final ETT (\mathcal E^+).  More precisely, it states both that
+the rung of (\mathcal E^+) is exactly (n+1) and that its dependent
+series is exactly (\mathcal S^+); it also states that
+(\mathcal E^+) has the maximum property.  Eliminating those two exact
+dependent equalities identifies its displayed tree with the final tree of
+(\mathcal S^+).  Consequently these data prove that (n+1) is
+attainable.
+
+Moreover, \noderef{CertifiedSeriesRoundsBound} applied to
+(\mathcal S^+) gives
+[
+                         (n+1)+2\leq |V|,
+]
+so (n+1<|V|).  Thus (n+1\in A).  Since (n=\max A), this implies
+(n+1\leq n), an arithmetic contradiction.  The extension alternative is
+therefore impossible, and the witness obtained in the first alternative
+completes the proof.
+\end{proof}
