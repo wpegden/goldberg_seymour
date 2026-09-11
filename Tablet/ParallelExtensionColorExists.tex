@@ -1,0 +1,99 @@
+\begin{lemma}[Existence of the prescribed parallel-extension color]
+Let \(\mathcal T\) be a certified Tashkinov series with finite data
+\(\mathcal D\), let \(i\) be one of its coloring indices, and let
+\[
+ Q=(\pi,v,f,u,\delta)
+\]
+be an admissible maximum-defective choice for
+\[
+ \bigl(T_{i+1},D_i,\varphi_i\bigr).
+\]
+If \(\Delta(G)+1\leq k\), then there is a color \(\gamma\) satisfying
+the history-sensitive predicate
+\[
+                 \operatorname{ParallelExtensionColor}
+                    (\mathcal D,i,\pi,v,\gamma).
+\]
+Thus, if a positive PE slot at most \(i\) has support \(v\), \(\gamma\)
+is the delta color of the latest such slot; if no such slot exists,
+\(\gamma\) is an arbitrary color missing at \(v\) under \(\pi\).
+\end{lemma}
+\begin{proof}
+First suppose that no positive slot \(h\leq i\) is a PE supported at
+\(v\).  The palette inequality and
+\noderef{MissingColorsNonemptyOfMaximumDegree}, applied to the arbitrary
+partial coloring \(\pi\) at \(v\), give
+\(\gamma\in\overline\pi(v)\).  Together with the assumed absence of a
+prior supporting PE, these are exactly the second alternative of
+\noderef{ParallelExtensionColor}.
+
+Now suppose at least one such PE exists.  Then \(i>0\); write \(q=i-1\).
+Form the nonempty finite set
+\[
+ B=\{b\leq q:\ \Theta_{b+1}=\mathrm{PE}
+                 \text{ and the support at slot }b+1\text{ is }v\}.
+\]
+List it in increasing order as
+\(b_0<\cdots<b_p\).  Finiteness comes from the finite index type.
+The exact-range property of this list says both that every listed slot
+is a PE at \(v\), and that every PE at \(v\) through \(i\) occurs in the
+list.
+
+For each listed index, eliminate the certificate supplied by
+\noderef{TashkinovSeries}.  Its kind equality excludes the initial, SE,
+and RE constructors of \noderef{TashkinovSeriesStep}.  The remaining PE
+constructor supplies exact colors \(\gamma_{b_a+1}\) and
+\(\delta_{b_a+1}\), says that \(v\) lies in the tree processed at that
+slot, and says that the resulting tree is an ordered extension.  Repeated
+use of \noderef{TreeSequenceInitialSegment} therefore places \(v\) in
+\(V(T_i)\), as required for the history-transport results.
+
+Successive entries in the list obey
+\[
+             \gamma_{b_{a+1}+1}=\delta_{b_a+1}
+\]
+by \noderef{SupportingPEColorChain}.  More precisely, apply
+\noderef{SupportingPEMissingTransport} to the entire exact enumeration,
+with the first gamma \(\gamma_{b_0+1}\) and the last delta
+\(\delta_{b_p+1}\).  Its second asserted equality is
+\[
+ \overline{\varphi}_{b_p+1}(v)
+  =\bigl(\overline{\varphi}_{b_0}(v)
+        \setminus\{\gamma_{b_0+1}\}\bigr)
+       \cup\{\delta_{b_p+1}\}.                                 \tag{1}
+\]
+In particular, the last delta color is missing at \(v\) immediately
+after the latest supporting PE.
+
+Put \(h=b_p+1\).  By construction \(h\) is positive, \(h\leq i\),
+\(\Theta_h=\mathrm{PE}\), its chosen support is \(v\), and
+\(\delta_h=\delta_{b_p+1}\).  Every positive PE slot \(j\leq i\)
+supported at \(v\) corresponds to an element of \(B\), hence its
+zero-based position is at most the last element \(b_p\).  Thus \(j\leq h\);
+this is exactly the required latest-slot clause.
+
+It remains to show that \(\delta_h\) is missing under the selected
+coloring \(\pi\), rather than only just after slot \(h\).  If \(h=i\),
+equation (1) already gives missingness under \(\varphi_i\).  If \(h<i\),
+the ordered-extension field at \(h\) places \(v\) in \(T_{h+1}\), and
+maximality of \(h\) says that no PE in the interval
+\(h+1,\ldots,i\) is supported at \(v\).  Apply
+\noderef{HkuUnsupportedVertexColors} to this exact interval.  It yields
+\[
+          \overline{\varphi}_{h}(v)
+             =\overline{\varphi}_{i}(v),                       \tag{2}
+\]
+so (1) again puts \(\delta_h\) in the right-hand set.  Finally the
+selected-stability field of \noderef{MaximumDefectiveChoice}, using the
+vertex clause of \noderef{StableColoring} at
+\(v\in V(T_{i+1})\), gives
+\[
+                 \overline\pi(v)=\overline{\varphi}_i(v).       \tag{3}
+\]
+Equations (1)--(3) show
+\(\delta_h\in\overline\pi(v)\).  Choose
+\(\gamma=\delta_h\).  The positivity, index bound, kind, support, exact
+delta equality, and latest-slot property proved above give the first
+history alternative in \noderef{ParallelExtensionColor}; (3) gives its
+missingness clause.  This completes both exhaustive cases.
+\end{proof}

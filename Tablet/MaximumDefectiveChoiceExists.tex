@@ -1,0 +1,85 @@
+\begin{lemma}[Existence of a maximum-defective choice]
+Let \(G\) be a finite loopless multigraph, let \(e_0\) be an edge, let
+\(T\) be a tree-sequence with first edge \(e_0\), let
+\(C\subseteq [k]\), and let \(\varphi\) be a proper partial
+\(k\)-edge-coloring leaving exactly \(e_0\) uncolored.  If \(V(T)\) is
+closed but not strongly closed under \(\varphi\), then there exists an
+admissible maximum-defective choice for
+\((G,e_0,T,C,\varphi)\) in the sense of
+\noderef{MaximumDefectiveChoice}.  In particular, the choice retains an
+exact defective boundary edge identity, its displayed incident endpoint,
+its other endpoint outside \(V(T)\), the symmetric endpoint equation, and
+its exact color.
+\end{lemma}
+\begin{proof}
+Put \(X=V(T)\).  Since \(X\) is closed but is not strongly closed,
+the second clause of \noderef{ColoredVertexSetStronglyClosed} fails.
+Consequently there are distinct exact boundary edge identities \(f,g\)
+and a color \(c\) such that
+\[
+ f,g\in\partial_G(X),\qquad \varphi(f)=c=\varphi(g).             \tag{1}
+\]
+Both edges therefore belong to
+\(\partial_{\varphi,c}(X)\), as defined by
+\noderef{BoundaryColorEdges}.  The two-element set \(\{f,g\}\) is a
+subset of that boundary-color set, so its cardinality is at least two.
+Thus \(c\) is a defective color by \noderef{DefectiveColor}, and each of
+\(f,g\) is a defective edge by \noderef{DefectiveEdge}.
+
+Unpack the membership \(f\in\partial_G(X)\) using
+\noderef{BoundaryEdges}.  It supplies vertices \(v\in X\) and
+\(u\notin X\) with
+\[
+                         \operatorname{ends}_G(f)=\{v,u\}.       \tag{2}
+\]
+In particular \(f\) is incident with \(v\) in the sense of
+\noderef{Incident}.  Hence \(v\) is a defective vertex under
+\(\varphi\) by \noderef{DefectiveVertex}.
+
+We next perform the finite maximum in the manuscript footnote.  Let
+\(I\) be the set of displayed positions \(a\) of \(T\) for which there
+exist a partial coloring \(\pi\) satisfying all four conditions
+\[
+ \pi\text{ is proper},\quad \pi\text{ leaves exactly }e_0
+ \text{ uncolored},\quad
+ \pi\text{ is }(T,C,\varphi)\text{-stable},\quad
+ T(a)\text{ is defective under }\pi.                            \tag{3}
+\]
+The displayed position set is finite by \noderef{TreeSequence}.  It is
+nonempty: the vertex \(v\) obtained above has a unique displayed position
+because \(v\in X=\noderef{TreeSequenceVertexSet}(T)\), and the identity
+coloring \(\pi=\varphi\) satisfies (3).  Its stability is immediate from
+both clauses of \noderef{StableColoring}.
+
+Choose the greatest position \(a_*\in I\), and choose a coloring
+\(\pi_*\) witnessing its membership in \(I\).  Set
+\(v_*=T(a_*)\).  If \(\rho\) is any other proper coloring leaving
+\(e_0\) uncolored, stable for \((T,C,\varphi)\), and \(w\) is a
+defective vertex under \(\rho\), then
+\(w=T(b)\) for a unique displayed position \(b\).  The four defining
+conditions put \(b\) in \(I\), so \(b\leq a_*\).  If equality holds,
+injectivity of the displayed vertex map gives \(w=v_*\); otherwise
+\(b<a_*\), which is precisely
+\(w\prec_T v_*\) by \noderef{TreeVertexOrder}.  This proves the required
+global maximality over both colorings and their defective vertices.
+
+Finally unpack \noderef{DefectiveVertex} for \(v_*\) under \(\pi_*\).
+Choose the resulting exact defective edge \(e\) incident with \(v_*\).
+Unpacking \noderef{DefectiveEdge} gives its exact color
+\(\delta\) and \(e\in\partial_{\pi_*,\delta}(X)\), hence
+\(e\in\partial_G(X)\) and \(\pi_*(e)=\delta\).  Unpacking the latter
+boundary membership gives an inside endpoint \(x\in X\), an outside
+endpoint \(y\notin X\), and
+\(\operatorname{ends}_G(e)=\{x,y\}\).  Since \(e\) is incident with
+\(v_*\in X\), equation of the unordered endpoint pair says that
+\(v_*=x\) or \(v_*=y\); the second alternative contradicts
+\(y\notin X\).  Thus \(v_*=x\), and
+\[
+ \operatorname{ends}_G(e)=\{v_*,y\},\qquad
+ y\notin X,\qquad \pi_*(e)=\delta .
+\]
+Together with the properties in (3) and the proved maximality, these are
+exactly all fields of \noderef{MaximumDefectiveChoice}.  They also retain
+the identity of \(e\); no edge is replaced merely because another edge
+has the same endpoints.
+\end{proof}

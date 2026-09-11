@@ -1,0 +1,134 @@
+\begin{theorem}[The Algorithm 3.1 choice trichotomy]
+Let \(\mathcal T\) be a certified Tashkinov series with finite data
+\(\mathcal D\), let \(i\) be a coloring index, and suppose
+\(\Delta(G)+1\leq k\).  Suppose \(\varphi_i\) is proper, leaves exactly
+\(e_0\) uncolored, and \(T_{i+1}\) is closed but not strongly closed
+under \(\varphi_i\).  Then exactly the data needed to select the next
+Algorithm 3.1 branch are inhabited in one of the following three forms.
+
+First, \(\operatorname{RevisitingExtensionCertificate}(\mathcal D,i)\)
+is inhabited.  Or it is not inhabited, and there is an admissible
+maximum-defective choice \(Q=(\pi,v,f,u,\delta)\) such that every proper
+coloring \(\rho\), leaving exactly \(e_0\) uncolored and stable for
+\[
+             (T_{i+1},D_i\cup\{\delta\},\pi),
+\]
+has
+\[
+ \overline\rho(u)\cap\overline\rho(T_{i+1})=\varnothing.        \tag{SE}
+\]
+Or no revisiting certificate is inhabited, and there is such a maximum
+choice \(Q\), together with a witnessed failure of (SE), a color
+\(\gamma\) satisfying
+\(\operatorname{ParallelExtensionColor}(\mathcal D,i,\pi,v,\gamma)\),
+and a proper coloring \(\sigma\) leaving exactly \(e_0\) uncolored,
+stable for
+\((T_{i+1},D_i\cup\{\delta\},\pi)\), for which \(v\) is a
+\((T_{i+1},\sigma,\{\gamma,\delta\})\)-exit.
+
+Here “witnessed failure” means explicitly that there is a proper
+\(\rho\), leaving exactly \(e_0\) uncolored and having the displayed
+stability, for which the two displayed missing-color sets are not
+disjoint.  The conclusion is this inline disjunction over the existing
+RE, maximum-choice, PE-color, stability, and exit predicates.
+\end{theorem}
+\begin{proof}
+Decide first whether
+\(\operatorname{RevisitingExtensionCertificate}(\mathcal D,i)\), as
+defined by \noderef{RevisitingExtensionCertificate}, is inhabited.  If
+it is, return that certificate in the first disjunct.  This gives RE the
+priority required by Algorithm 3.1.
+
+Suppose henceforth that no RE certificate is inhabited.  Apply
+\noderef{MaximumDefectiveChoiceExists} to the proper coloring
+\(\varphi_i\), its unique uncolored edge \(e_0\), and the hypothesis that
+\(T_{i+1}\) is closed but not strongly closed.  This gives an admissible
+maximum-defective choice
+\[
+                     Q=(\pi,v,f,u,\delta)
+\]
+for \((T_{i+1},D_i,\varphi_i)\), including every field of
+\noderef{MaximumDefectiveChoice}.
+
+Now decide the exact universal predicate (SE) in the statement.  If it
+holds, return \(Q\), the already established nonexistence of RE, and
+that universal predicate in the second disjunct.  Notice that the
+quantifiers, properness and one-uncolored hypotheses, enlarged stable set
+\(D_i\cup\{\delta\}\), and disjointness conclusion are exactly those in
+the SE constructor of \noderef{TashkinovSeriesStep}.
+
+It remains to treat failure of (SE).  Negating its nested universal
+implications gives a particular partial coloring \(\rho\) such that
+\[
+ \rho\text{ is proper},\quad
+ \rho\text{ leaves exactly }e_0\text{ uncolored},\quad
+ \rho\text{ is }(T_{i+1},D_i\cup\{\delta\},\pi)\text{-stable},
+                                                                    \tag{1}
+\]
+and
+\[
+  \neg\operatorname{Disjoint}
+       \bigl(\overline\rho(u),\overline\rho(T_{i+1})\bigr).     \tag{2}
+\]
+Retain \(\rho\) and (1)--(2), since they constitute the witnessed
+negation required in the third disjunct.
+
+By \noderef{ParallelExtensionColorExists}, using
+\(\Delta(G)+1\leq k\), choose a color \(\gamma\) satisfying
+\noderef{ParallelExtensionColor} for \((\mathcal D,i,\pi,v)\).
+In particular,
+\[
+                         \gamma\in\overline\pi(v).              \tag{3}
+\]
+
+We verify the hypotheses of the exit-coloring lemma.  First,
+\(T_{i+1}\) is closed under \(\pi\).  Let \(a\) be a boundary edge
+whose \(\pi\)-color \(c\) is missing at some \(x\in V(T_{i+1})\).
+The vertex clause of \noderef{StableColoring} for the selected coloring
+says that \(c\) is also missing at \(x\) under \(\varphi_i\), hence
+belongs to \(\overline{\varphi_i}(T_{i+1})\).  A boundary edge is
+incident with the tree by \noderef{BoundaryEdges}.  Apply the alternate
+stability criterion \noderef{sc1} on its \(\pi(a)\) side; properness and
+the unique-uncolored hypotheses hold for both colorings by the maximum
+choice.  It follows that
+\(\varphi_i(a)=\pi(a)=c\), contradicting the assumed closure of
+\(T_{i+1}\) under \(\varphi_i\), namely
+\noderef{ColoredVertexSetClosed}.  This proves closure under \(\pi\).
+
+Next, the selected edge \(f\) remains the same exact edge identity.
+The fields of \noderef{MaximumDefectiveChoice} say that it is a defective
+edge, and \noderef{DefectiveEdge} places it in the exact boundary-color
+set; hence \(f\in\partial_G(V(T_{i+1}))\).  They also say
+\[
+ \operatorname{ends}_G(f)=\{v,u\},\quad
+ v\in V(T_{i+1}),\quad u\notin V(T_{i+1}),\quad \pi(f)=\delta.   \tag{4}
+\]
+Use only symmetry of the unordered pair in (4) to rewrite it as
+\(\operatorname{ends}_G(f)=\{u,v\}\), in the outside/inside order
+expected below.  No endpoint equality is used to substitute a different
+parallel edge.
+
+Finally, (2) is equivalent, for the two finite missing-color sets, to
+the existence of a color \(\beta\) in their intersection.  Thus
+\[
+       \beta\in\overline\rho(u)
+       \quad\text{and}\quad
+       \beta\in\overline\rho(T_{i+1}).                          \tag{5}
+\]
+The coloring \(\rho\) and (1), together with (4)--(5), provide the
+existential premise of \noderef{LEM_extable}; the maximum choice supplies
+properness and unique uncoloredness of \(\pi\), and the preceding
+paragraph supplies closure.  Apply that lemma with the color \(\gamma\)
+from (3).  It returns a partial coloring \(\sigma\) which is proper,
+leaves exactly \(e_0\) uncolored, is
+\((T_{i+1},D_i\cup\{\delta\},\pi)\)-stable, and satisfies
+\[
+                  \operatorname{TreeExit}
+                    (T_{i+1},\sigma,\gamma,\delta,v)
+\]
+in the sense of \noderef{TreeExit}.  Return \(Q\), the retained witness
+\(\rho\) of failure of (SE), \(\gamma\) with its prescribed history rule,
+and this \(\sigma\) with its exit certificate in the third disjunct.
+All three branches preserve the prior decision that RE is unavailable
+where required, completing the inline trichotomy.
+\end{proof}
