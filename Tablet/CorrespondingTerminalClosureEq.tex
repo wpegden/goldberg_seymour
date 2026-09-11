@@ -1,0 +1,79 @@
+\begin{lemma}[The corresponding terminal series tree is the selected closure]
+Let \(T\) be an extended Tashkinov tree of positive rung number \(n\),
+presented by a certified series \(\mathcal T\), and let \(T_n\) denote its
+terminal ladder tree.  Fix a coloring \(\sigma_n\), tree-sequences \(S\) and
+\(T^*\), and a \noderef{CorrespondingExtendedTashkinovTree} certificate
+\(\mathcal C\) exhibiting \(T^*\) as corresponding to \(T\) under
+\(\sigma_n\), with replacement series \(\mathcal T^*\).  Suppose that one
+of the following exact seed conditions holds:
+\begin{itemize}
+\item the terminal kind in \(\mathcal T\) is PE and \(S=T_n\); or
+\item the terminal kind is SE or RE, and there is an edge identity \(f\)
+such that the terminal connecting-edge set is exactly \(\{f\}\) and
+\noderef{TreeSequenceAdjoinEdge}\((T_n,f,S)\) holds.
+\end{itemize}
+If \(T^*\) is a \noderef{TashkinovClosure} of \(S\) under \(\sigma_n\),
+then the final output tree \(T^*_{n+1}\) of \(\mathcal T^*\) is exactly
+\(T^*\) as an ordered edge-valued tree-sequence.
+\end{lemma}
+\begin{proof}
+Write \(\mathcal E^*\) for the replacement ETT carried by \(\mathcal C\).
+By the rung-agreement and dependent-series-presentation fields in
+\noderef{CorrespondingExtendedTashkinovTree}, we may identify the rung number
+of \(\mathcal E^*\) with \(n\) and its certified series with
+\(\mathcal T^*\).  Since \(n\geq 1\) by
+\noderef{ExtendedTashkinovTree}, the terminal stored index is the successor
+of the index \(n-1\), and its output-tree index is the following successor,
+namely the final tree index \(n+1\).  The ladder-tree, connecting-edge, and
+extension-kind agreement fields of \(\mathcal C\), evaluated at the terminal
+stored index, give
+\[
+ T_n^*=T_n,\qquad F_n^*=F_n,\qquad \Theta_n^*=\Theta_n.       \tag{1}
+\]
+Also, the final-generating-coloring field gives
+\(\varphi_n^*=\sigma_n\).                                      \tag{2}
+
+By \noderef{TashkinovSeries}, the terminal stored index of
+\(\mathcal T^*\) has a step certificate.  Its four possible forms are
+listed in \noderef{TashkinovSeriesStep}.  The
+initial form has no extension kind, whereas the hypotheses and (1) give
+PE, SE, or RE, so that form is impossible.  Likewise, in each of the three
+noninitial forms, (1) rules out the two forms whose recorded kind differs
+from \(\Theta_n\).  It remains to handle the matching PE, SE, and RE forms.
+
+Suppose first that \(\Theta_n=\mathrm{PE}\).  The PE terminal-step
+certificate says that \(T^*_{n+1}\) is a closure, under
+\(\varphi_n^*\), of its terminal ladder tree \(T_n^*\).  By (1), (2), and
+the PE seed hypothesis, this says precisely that \(T^*_{n+1}\) is a
+closure of \(S\) under \(\sigma_n\):
+\[
+              \operatorname{TashkinovClosure}
+                (\sigma_n,S,T^*_{n+1}).                          \tag{3}
+\]
+
+Now suppose that \(\Theta_n\) is SE or RE.  Let \(f\) be the edge in the
+seed hypothesis.  In either matching terminal-step certificate, there is
+an exact edge identity \(f^*\), the stored connecting-edge set is the
+singleton \(\{f^*\}\), an intermediate tree \(A^*\) satisfies
+\noderef{TreeSequenceAdjoinEdge}\((T_n^*,f^*,A^*)\), and
+\(T^*_{n+1}\) is a closure of \(A^*\) under \(\varphi_n^*\).  Equality
+\(F_n^*=F_n\) in (1), together with the two singleton descriptions, yields
+\(f^*=f\) as exact edge identities.  Equality \(T_n^*=T_n\) then shows
+that both \(A^*\) and \(S\) are obtained by adjoining the same exact edge
+\(f\) to the same ordered tree-sequence \(T_n\).  Therefore
+\noderef{TreeSequenceAdjoinEdgeUnique} gives \(A^*=S\).  Substituting this
+equality and (2) into the terminal-step closure clause again proves (3).
+
+The assumed closure of \(S\) is \(T^*\), while (3) shows that another
+closure of the same seed under the same coloring is \(T^*_{n+1}\).
+Hence \noderef{TashkinovClosureVertexSetUnique} gives
+\[
+                         V(T^*)=V(T^*_{n+1}).                    \tag{4}
+\]
+Finally, the below-final field of the replacement
+\noderef{ExtendedTashkinovTree} presentation says that \(T^*\) is an exact
+ordered initial segment of \(T^*_{n+1}\).  Apply
+\noderef{TreeSequenceInitialSegmentVertexSetEq} to that initial-segment
+relation and (4).  It identifies the full ordered vertex and exact-edge
+data, and therefore yields \(T^*=T^*_{n+1}\), as required.
+\end{proof}
