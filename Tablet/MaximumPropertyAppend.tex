@@ -1,0 +1,86 @@
+\begin{lemma}[Appending a terminal maximum preserves the maximum property]
+Let \(T\) be an extended Tashkinov tree with positive rung number \(n\),
+certified series \(\mathcal T\), maximum property in the sense of
+\noderef{MaximumProperty}, and a terminal maximum closure in the sense of
+\noderef{TerminalClosureMaximum}.  Append one further certified
+Algorithm~3.1 step to \(\mathcal T\): more precisely, let
+\(\mathcal T^+\) be a certified Tashkinov series with \(n+1\) noninitial
+iterations whose complete indexed data is exactly the old data followed by
+one supplied last tree, coloring, stored set, exact connecting-edge set,
+extension kind, chosen and outside vertices, and two colors, as defined by
+\noderef{TashkinovSeriesDataAppend}.
+
+Then there exists an extended Tashkinov tree displayed on exactly the final
+tree of \(\mathcal T^+\), with generating coloring exactly the terminal
+coloring of \(\mathcal T^+\), and this ETT has the maximum property.  In
+particular, its displayed tree and generating coloring are the entries at
+indices \(n+2\) and \(n+1\), respectively.
+\end{lemma}
+\begin{proof}
+Because \(n+1>0\), apply
+\noderef{TashkinovSeriesFinalETTExists} to the certified appended series
+\(\mathcal T^+\).  It gives an ETT \(T^+\) displayed on exactly the last
+tree of \(\mathcal T^+\), with exactly its terminal coloring, rung number
+\(n+1\), and dependent certified series exactly \(\mathcal T^+\).  It
+therefore remains to verify the two clauses of
+\noderef{MaximumProperty} for this ETT.
+
+For the global first-tree clause, the index \(1\) is an old tree index.
+The exact append equations in \noderef{TashkinovSeriesDataAppend} give
+\(T_1^+=T_1\) as ordered tree-sequences.  The maximum property of the old
+ETT says \(|V(T_1)|\) equals the Tashkinov order of \(G\).  Rewriting along
+this equality proves the first clause for \(T^+\).
+
+For the stagewise clause, fix an integer \(i\) with
+\(1\leq i<n+1\).  Let \(\pi\) be any proper partial coloring leaving
+exactly \(e_0\) uncolored and stable for the stage-\(i\) tree, computed
+stored set, and reference coloring in \(\mathcal T^+\).  Let \(U\) be a
+seed satisfying its PE or SE/RE route, and let \(U'\) be a closure of \(U\)
+under \(\pi\).  We must prove
+\[
+                         |V(U')|\leq |V(T_{i+1}^+)|.       \tag{1}
+\]
+
+First suppose \(i<n\).  Both \(i\) and \(i+1\) are old indices.  By the
+array equations in \noderef{TashkinovSeriesDataAppend}, the tree \(T_i^+\),
+reference coloring \(\varphi_i^+\), kind \(\Theta_i^+\), exact
+connecting-edge set \(F_i^+\), and comparison tree \(T_{i+1}^+\) equal
+their old counterparts.  The stored set also agrees exactly:
+\noderef{TashkinovStoredColorsAppend} gives \(D_i^+=D_i\).  Consequently
+the assumed stability of \(\pi\) is exactly
+\((T_i,D_i,\varphi_i)\)-stability.
+
+The prescribed seed route transports without loss of edge identity.  In
+the PE case, \(\Theta_i^+=PE\) and \(U=T_i^+\) rewrite to
+\(\Theta_i=PE\) and \(U=T_i\).  In the SE/RE case, the same equalities
+rewrite the alternative for the kind, the exact singleton equation
+\(F_i^+=\{f\}\), and the assertion that \(U=T_i^++f\) to the corresponding
+old assertions \(F_i=\{f\}\) and \(U=T_i+f\).  Thus every hypothesis of
+the old stage-\(i\) clause of \noderef{MaximumProperty} holds for the same
+\(\pi,U,U'\).  That clause yields
+\(|V(U')|\leq|V(T_{i+1})|\), and the append equality
+\(T_{i+1}^+=T_{i+1}\) turns this into (1).
+
+It remains to consider \(i\not<n\).  Together with \(i<n+1\), ordinary
+integer order gives \(i=n\).  The tree \(T_n^+\), reference coloring
+\(\varphi_n^+\), kind \(\Theta_n^+\), and exact connecting-edge set
+\(F_n^+\) are again old entries by
+\noderef{TashkinovSeriesDataAppend}, and
+\noderef{TashkinovStoredColorsAppend} gives \(D_n^+=D_n\).  Exactly the
+same rewriting as in the preceding paragraph turns the stability and seed
+route assumptions into the terminal assumptions for the old series.
+The terminal maximum-closure hypothesis
+\noderef{TerminalClosureMaximum} therefore gives
+\[
+                         |V(U')|\leq |V(T_{n+1})|.         \tag{2}
+\]
+The comparison tree required here is \(T_{i+1}^+=T_{n+1}^+\), not the
+newly supplied last tree \(T_{n+2}^+\).  Since the old final tree at index
+\(n+1\) is retained by the append operation, the exact append equation is
+\(T_{n+1}^+=T_{n+1}\).  Rewriting (2) proves (1) in the remaining case.
+
+Every index \(1\leq i<n+1\) has now been covered.  Hence the global
+first-tree equation and all stagewise bounds in
+\noderef{MaximumProperty} hold for the exact-final ETT \(T^+\), as
+claimed.
+\end{proof}

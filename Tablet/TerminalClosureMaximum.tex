@@ -1,0 +1,26 @@
+\begin{definition}
+Let \(T\) be an extended Tashkinov tree with positive rung number \(n\) and
+certified series
+\[
+ \mathcal T=\{(T_i,\varphi_{i-1},S_{i-1},F_{i-1},\Theta_{i-1})
+ :1\leq i\leq n+1\}.
+\]
+Using the computed terminal stored set \(D_n\) of
+\noderef{TashkinovStoredColors}, say that this series has a
+\emph{terminal maximum closure} when the following holds.  For every proper
+partial \(k\)-edge-coloring \(\pi\) which leaves exactly the distinguished
+edge \(e_0\) uncolored and is
+\((T_n,D_n,\varphi_n)\)-stable, every candidate closure \(U'\) obtained by
+one of the prescribed terminal routes satisfies
+\[
+                         |V(U')|\leq |V(T_{n+1})|.
+\]
+The prescribed route is exact: if \(\Theta_n=PE\), its seed \(U\) is
+exactly \(T_n\); if \(\Theta_n=SE\) or \(\Theta_n=RE\), there must be an
+edge identity \(f_n\) such that \(F_n=\{f_n\}\), and \(U\) is exactly the
+one-edge extension \(T_n+f_n\) in the sense of
+\noderef{TreeSequenceAdjoinEdge}.  In either case \(U'\) must be a closure
+of \(U\) under \(\pi\) in the sense of \noderef{TashkinovClosure}.
+Here \(T_{n+1}\) is the exact final tree stored by the certified series,
+whether or not the ETT's separately displayed tree is all of \(T_{n+1}\).
+\end{definition}
