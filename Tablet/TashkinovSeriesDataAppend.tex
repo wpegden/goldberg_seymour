@@ -1,0 +1,19 @@
+\begin{definition}
+Let \(A\) be Tashkinov-series data with \(r\) noninitial iterations.  Given
+one further terminal tree \(T_{r+2}\), a coloring \(\varphi_{r+1}\), finite
+sets \(S_{r+1}\) and \(F_{r+1}\), an optional extension kind
+\(\Theta_{r+1}\), optional vertices \(v_{r+1},u_{r+1}\), and optional colors
+\(\delta_{r+1},\gamma_{r+1}\), define the appended data
+\(\operatorname{append}(A)\) with \(r+1\) noninitial iterations as follows.
+
+On tree indices, use the canonical inclusion
+\(\operatorname{Fin}(r+2)\hookrightarrow\operatorname{Fin}(r+3)\) to retain
+every old tree and put the supplied tree at the last index.  On each of the
+other eight arrays, use the canonical inclusion
+\(\operatorname{Fin}(r+1)\hookrightarrow\operatorname{Fin}(r+2)\) to retain
+every old value and put its supplied value at the last index.  Equivalently,
+each array is defined by last-index case analysis: the last case is the new
+value and a cast-successor case is the corresponding old value.  In
+particular, all exact edge sets still contain edge identities rather than
+endpoint pairs.
+\end{definition}

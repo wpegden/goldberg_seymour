@@ -1,0 +1,19 @@
+\begin{theorem}[Appending one certified Tashkinov-series tuple]
+Let \(\mathcal S\) be a certified Tashkinov series with \(r\) noninitial
+iterations.  Supply one new terminal tree and all eight final non-tree values,
+and let \(A^+\) be the exact data append of \(\mathcal S\)'s data.  If the
+last index of \(A^+\) has an Algorithm 3.1 step certificate, then there exists
+a certified Tashkinov series \(\mathcal S^+\) with \(r+1\) noninitial
+iterations whose data are exactly \(A^+\).
+\end{theorem}
+\begin{proof}
+Define \(\mathcal S^+\)'s data to be the supplied exact append.  It remains to
+certify every index of \(\operatorname{Fin}(r+2)\).  Perform last-index case
+analysis.  In the last case, use the supplied final certificate.  In a
+cast-successor case \(j^+\), the old series supplies its certificate at
+\(j\), and \(\noderef{TashkinovSeriesStepAppend}\) transports that certificate
+to \(j^+\).  These two cases exhaust the enlarged finite index type, so they
+define the certification field required by \(\noderef{TashkinovSeries}\).
+The data field was defined to be the exact append, making the concluding data
+equality reflexive.
+\end{proof}

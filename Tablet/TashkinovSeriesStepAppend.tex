@@ -1,0 +1,66 @@
+\begin{lemma}[Old Algorithm 3.1 steps survive a data append]
+Fix finite graph data, a color bound \(k\), distinguished edge \(e_0\), input
+coloring \(\varphi\), and Tashkinov-series data \(A\) with \(r\) noninitial
+iterations.  Append arbitrary supplied final values to obtain \(A^+\) as in
+\(\noderef{TashkinovSeriesDataAppend}\).  If an old index
+\(j\in\operatorname{Fin}(r+1)\) has an Algorithm 3.1 step certificate for
+\((G,k,r,e_0,\varphi,A)\), then its canonical image \(j^+\) has an Algorithm
+3.1 step certificate for \((G,k,r+1,e_0,\varphi,A^+)\).
+\end{lemma}
+\begin{proof}
+Use the exact old-slot equalities from
+\(\noderef{TashkinovSeriesDataAppendEquations}\).  Besides their stated
+cast-successor form, the elementary index equalities
+\((i^+).succ=(i.succ)^+\) and their tree-index analogues identify every tree
+and non-tree expression occurring in an old constructor with the expression
+at the lifted constructor.  We inspect the four constructors of
+\(\noderef{TashkinovSeriesStep}\).
+
+For the initial constructor, the new indices zero and one are the canonical
+images of the old indices zero and one.  The old-slot equations therefore
+preserve the seed length, input coloring, empty stored and connecting-edge
+sets, all absent optional values, and the initial closure.  These fields give
+the initial constructor for \(A^+\).
+
+Consider an old SE constructor at positive slot \(i.succ\).  The preceding
+coloring, preceding tree, current coloring, current data fields, and output
+tree are all the corresponding fields of \(A^+\) by the old-slot equations.
+The controlled stored-color set at the preceding slot is unchanged by
+\(\noderef{TashkinovStoredColorsAppend}\).  Transport, as one dependent
+package across these equalities, the maximum-defective choice, the universal
+SE alternative, all current-field equations, the exact adjoined tree, its
+one-edge-adjoin certificate, its closure, ordered extension, and strict length
+increase.  This produces witnesses of exactly the types required by the
+lifted SE constructor.  If an RE certificate existed in the appended history,
+the appended-to-old map of
+\(\noderef{RevisitingExtensionCertificateAppend}\) would give an old RE
+certificate, contradicting the old no-RE premise.  Thus the lifted SE
+constructor has every required field.
+
+For a PE constructor, use the same equalities and stored-color invariance.
+Pointwise in a selected coloring, vertex, and color,
+\(\noderef{ParallelExtensionColorAppend}\) identifies the enlarged PE color
+rule with the old one; functional and propositional extensionality therefore
+identify the two three-argument rule predicates.  Transport in one dependent
+package the maximum-defective choice, failure witness for the SE alternative,
+the prescribed gamma and its rule, the second stable coloring, its properness
+and one-uncoloredness, its stability, the exact exit witness, the component
+switch equation, properness and one-uncoloredness after switching, all eight
+current fields, the closure, ordered extension, and strict growth.  Because
+the rule predicate is transported together with the choice, its occurrences
+of the selected coloring and supporting vertex remain coherent.  The same
+appended-to-old certificate map proves the lifted no-RE premise.  The
+transported package is therefore precisely a PE constructor for \(A^+\).
+
+Finally, suppose the old constructor is RE.  Apply the old-to-appended map in
+\(\noderef{RevisitingExtensionCertificateAppend}\) to its available
+certificate.  That map preserves gamma, delta, the exact connecting edge,
+and both endpoints.  Consequently the old equations for the current coloring,
+stored pair, singleton edge set, kind, vertices, and connecting colors rewrite
+directly to the equations required for the new certificate.  The old-slot
+tree and coloring equations likewise preserve the exact adjoin operation,
+closure, ordered extension, and strict growth.  These data form the lifted RE
+constructor.  In all four cases its result index is
+\((i^+).succ=(i.succ)^+\), or zero in the initial case, which proves the
+claim for the original \(j\).
+\end{proof}

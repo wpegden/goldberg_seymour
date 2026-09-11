@@ -1,0 +1,31 @@
+\begin{lemma}[Stored colors are invariant on old slots]
+Let \(A^+\) be obtained by appending arbitrary final values to Tashkinov-series
+data \(A\) as in \(\noderef{TashkinovSeriesDataAppend}\).  For every old
+non-tree index \(i\),
+\[
+  D_{A^+}(i^+)=D_A(i),
+\]
+where \(i^+\) is the canonical cast-successor embedding and both sides use
+the stored-color definition of \(\noderef{TashkinovStoredColors}\).
+\end{lemma}
+\begin{proof}
+The cast-successor index \(i^+\) has the same numerical value as \(i\).  If
+that value is zero, both sides are empty by the explicit zero clause in
+\(\noderef{TashkinovStoredColors}\).
+
+Suppose it is positive.  The two set differences remove the same tree-missing
+colors: by \(\noderef{TashkinovSeriesDataAppend}\), the coloring at \(i^+\)
+is the old coloring at \(i\), and the tree at the cast-successor of \(i^+\)
+is the old tree at the cast-successor of \(i\).
+
+It remains to compare the bounded unions of stored sets.  If an enlarged
+index \(h\in\operatorname{Fin}(r+2)\) satisfies \(h\leq i^+\), then
+\(h.val\leq i.val<i.val+1\leq r+1\).  Hence
+\(h_0=\langle h.val,h.val<r+1\rangle\) is an old index and
+\(h=h_0^+\).  The append definition identifies its stored set with the old
+stored set at \(h_0\).  This converts every member of the enlarged bounded
+union into a member of the old bounded union.  Conversely, an old index
+\(h\leq i\) maps to \(h^+\leq i^+\), and its stored set is unchanged, giving
+the reverse inclusion.  Thus the bounded unions, the removed missing-color
+sets, and finally the two differences are equal.
+\end{proof}
