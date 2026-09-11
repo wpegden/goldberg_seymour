@@ -1,5 +1,6 @@
 import Tablet.Critical
 import Tablet.AlgorithmThreeOneInitialSeriesExists
+import Tablet.TashkinovSeriesFinalETTExists
 import Tablet.AlgorithmThreeOneChoiceDataExists
 import Tablet.AlgorithmThreeOneStepExists
 import Tablet.TashkinovSeriesAppend

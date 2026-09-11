@@ -1,0 +1,41 @@
+\begin{lemma}[The final output of a positive series is an ETT]
+Let \(G\) be a finite loopless multigraph, let \(e_0\) be an edge, let
+\(\varphi\) be a partial \(k\)-edge-coloring, and let \(\mathcal S\) be a
+certified Tashkinov series from \((G,e_0,\varphi)\) with \(r>0\)
+noninitial iterations.  Write \(T_{r+1}\) for the final tree stored by
+\(\mathcal S\) and \(\varphi_r\) for its terminal coloring.  Then there is
+an extended Tashkinov tree displayed on exactly \(T_{r+1}\), with generating
+coloring exactly \(\varphi_r\), whose rung is exactly \(r\) and whose
+dependent certified series is the given series \(\mathcal S\).
+\end{lemma}
+\begin{proof}
+By the definition of a certified series in \noderef{TashkinovSeries}, the
+series has a \noderef{TashkinovSeriesStep} certificate at every index from
+zero through \(r\).  Fix \(i<r\) and inspect the certificate at the positive
+index \(i+1\).  It cannot be the initial constructor: that constructor
+certifies index zero, whereas \(i+1\) is positive.  The remaining three
+constructors are SE, PE, and RE.  In each of them, the two final fields state
+respectively that \(T_{i+1}\) is an ordered initial segment of
+\(T_{i+2}\) and that
+\[
+                         |T_{i+1}|<|T_{i+2}|.
+\]
+Thus both assertions hold for every \(i<r\).
+
+Since \(r>0\), take \(i=r-1\).  The preceding conclusion then gives the
+ordered initial-segment relation
+\(T_r\subseteq T_{r+1}\) together with the strict length inequality
+\(|T_r|<|T_{r+1}|\).  Hence this containment is strict.  Moreover,
+\(T_{r+1}\) is an ordered initial segment of itself: in the definition
+\noderef{TreeSequenceInitialSegment}, choose the reflexive length inequality,
+and all required vertex and edge equalities are reflexive.
+
+Now apply the definition \noderef{ExtendedTashkinovTree} with displayed tree
+\(T_{r+1}\), rung \(r\), and the original series \(\mathcal S\).  The strict
+lower containment is the relation and inequality just obtained, the upper
+containment is the reflexive certificate just constructed, and the displayed
+generating coloring is \(\varphi_r\) by reflexivity.  This constructs the
+required ETT.  Because its rung and its dependent series were assigned
+directly to \(r\) and \(\mathcal S\), the asserted rung equality and dependent
+series agreement are both reflexive.
+\end{proof}
