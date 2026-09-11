@@ -1,163 +1,46 @@
-import Tablet.Critical
-import Tablet.AlgorithmThreeOneInitialSeriesExists
-import Tablet.TashkinovSeriesFinalETTExists
-import Tablet.MaximumStableClosureExists
-import Tablet.CorrespondingTerminalClosureEq
-import Tablet.NormalizePositiveTerminalMaximum
-import Tablet.MaximumPropertyAppend
-import Tablet.PositiveWellDefinedness
-import Tablet.CertifiedSeriesRoundsBound
-import Tablet.LargeOrderTerminalWitness
-import Tablet.AlgorithmThreeOneChoiceDataExists
-import Tablet.AlgorithmThreeOneStepExists
-import Tablet.TashkinovSeriesAppend
-import Tablet.TreeExitComponentMeetsTreeOnlyAtExit
-import Tablet.TreeSequenceBoundaryEdgeAppendExists
-import Tablet.ChangeLemma
-import Tablet.HierarchyCounterexamplePathNumberBounds
-import Tablet.HierarchyCounterexampleTailAtLeastTwo
-import Tablet.HierarchyCounterexampleTerminalCommonMissing
-import Tablet.HierarchyTailMissingColorExclusion
-import Tablet.HierarchyBaseCorrespondingTransport
-import Tablet.HierarchyBaseExists
-import Tablet.HierarchySituationOneImpossible
-import Tablet.StableChange
-import Tablet.StableChangeCasesOneTwoFullTail
 import Tablet.IncidentCoreReduction
-import Tablet.Basic2
-import Tablet.DefectiveVertex
-import Tablet.Elementary
-import Tablet.ETTFirstAppearanceIndex
-import Tablet.ETTInterchangeabilityProperty
-import Tablet.ExtendedTashkinovTree
-import Tablet.ExtensionRules
-import Tablet.HkuIncidentColorPreserved
-import Tablet.HkuMissingStoredMonotone
-import Tablet.HkuParallelBoundaryStructure
-import Tablet.HkuTreeColorsControlled
-import Tablet.HkuUnsupportedVertexColors
-import Tablet.GoodHierarchyNewMissingClosed
-import Tablet.GoodHierarchyNextEdgeColor
-import Tablet.GoodHierarchyParallelCoreStrict
-import Tablet.GoodHierarchyReservedDisjoint
-import Tablet.HierarchyCounterexampleCoreProper
-import Tablet.HierarchyCounterexampleLess
-import Tablet.HierarchyLEMStable
-import Tablet.HierarchyNonparallelFirstEdge
-import Tablet.HierarchyStoredColorsCardinality
-import Tablet.HierarchyWeaklyStable
-import Tablet.LEM_extable
-import Tablet.MaximumProperty
-import Tablet.MaximumPropertyTransport
-import Tablet.MaximumDegree
-import Tablet.MissingColorIncidenceEndpoint
-import Tablet.ModColoring
-import Tablet.NineN
-import Tablet.rutcor
-import Tablet.ParallelExtensionUndoStable
-import Tablet.ParallelClosureUnionElementary
-import Tablet.ParallelCommonMissingClosed
-import Tablet.ParallelCoreAugmentationStrict
-import Tablet.ParallelBaseFourCommonMissingColors
-import Tablet.ParallelSpecialClosurePreparation
-import Tablet.AlgorithmFiveSixFixedRootRefresh
-import Tablet.SameColorSeriesPreserved
-import Tablet.ScheideGlobalMaximumBoundaryFacts
-import Tablet.ScheideGlobalMaximumFourFree
-import Tablet.ScheideGlobalMaximumMissingCounts
-import Tablet.ScheideGlobalMaximumUnused
-import Tablet.ScheideHeightFiveGammaEdges
-import Tablet.ScheideHeightFiveOutsideLinks
-import Tablet.ScheideLargeHeightElementary
-import Tablet.ScheideSmallHeightElementary
-import Tablet.ScheideMaximalExtendsEveryTree
-import Tablet.ScheideMaximalOddCycle
-import Tablet.ScheideAbsorbingElementary
-import Tablet.ScheideDefectiveChainFirstOutsideElementary
-import Tablet.ScheideExitNoFree
-import Tablet.ScheideTrunkRotationPreserves
-import Tablet.ScheideStructuralLemma
-import Tablet.SupportingPEColorChain
-import Tablet.SupportingPEMissingTransport
-import Tablet.SupportingPEStoredIntersection
-import Tablet.TechnicalInductionContext
-import Tablet.TechnicalTheoremLarge
-import Tablet.ExtensionBaseSupportClass
-import Tablet.ExtensionBaseSupportClassColors
-import Tablet.ExtensionBaseDeltaExclusion
-import Tablet.ExtensionBaseClaimMissingColors
-import Tablet.ExtensionBaseClaimStrongInterchangeable
-import Tablet.ExtensionBaseClaimTreeEdgeColors
-import Tablet.ExtensionBaseSupportOrder
-import Tablet.ExtensionBaseStoredPairOverlap
-import Tablet.ExtensionBaseRestorationIndices
-import Tablet.ExtensionBaseRestorationTrace
-import Tablet.ExtensionBaseRestorationInvariant
-import Tablet.ExtensionBaseAlgorithmA
-import Tablet.ExtensionBaseClaim43Stability
-import Tablet.ExtensionBaseClaim43MissingColors
-import Tablet.ExtensionBaseClaim43TreeEdges
-import Tablet.ExtensionBaseClaim43EdgeEffects
-import Tablet.ExtensionBaseClaim43
-import Tablet.ExtensionBaseCaseOneIndices
-import Tablet.ExtensionBaseClosure
-import Tablet.ExtensionBaseCaseOneSelection
-import Tablet.ExtensionBaseAlgorithmBTrace
-import Tablet.ExtensionBaseAlgorithmBInvariant
-import Tablet.ExtensionBaseAlgorithmB
-import Tablet.ExtensionBaseClaim44
-import Tablet.OutsideTreeColorSwapStable
-import Tablet.ExtensionBaseCaseTwoObservation19
-import Tablet.ExtensionBaseClaim46
-import Tablet.ExtensionBaseAlgorithmCTrace
-import Tablet.ExtensionBaseAlgorithmCInvariant
-import Tablet.ExtensionBaseAlgorithmC
-import Tablet.ExtensionBaseClaim45
-import Tablet.ExtensionBaseCaseTwoContradiction
-import Tablet.ExtensionBase
-import Tablet.StrongInterchangeableImpliesInterchangeable
-import Tablet.StrongInterchangeabilityKempePreserved
+import Tablet.LargeOrderTerminalWitness
 import Tablet.ThmScheide
-import Tablet.TashTree
-import Tablet.Tchange
-import Tablet.interchange
-import Tablet.step1
-import Tablet.TashkinovAugmentationSequencePreservesTashkinovTree
-import Tablet.OrderedTreeUnionAugmentationSequence
-import Tablet.TashkinovAugmentationSequenceStrictBoundaryWitness
-import Tablet.TashkinovClosure
-import Tablet.TashkinovClosureExists
-import Tablet.TashkinovClosureVertexSetUnique
-import Tablet.TashkinovOrder
-import Tablet.TashkinovStoredColorsCardinality
-import Tablet.Td
-import Tablet.TreeVertexOrder
-import Tablet.TreeSequenceInitialSegmentVertexSetEq
-import Tablet.TreeSequenceInitialSegmentVertexSetSubset
-import Tablet.TreeSequenceInitialSegmentVertexSetStrict
-import Tablet.FiniteStrictGrowthReachesTerminal
-import Tablet.TashkinovClosureOfRouteAndAllMissingClosed
-import Tablet.TreeSequenceAdjoinEdgeUnique
-import Tablet.TreeSequencePrefix
-import Tablet.TreeMissingColorsCardLowerBound
-import Tablet.ElementaryClosedMissingColorOdd
-import Tablet.TechnicalCurrentLadderMissingBoundLarge
-import Tablet.CurrentElementaryOrGoodHierarchyConstructionLarge
-import Tablet.TechnicalCurrentRungElementaryLarge
-import Tablet.MissingColorsNonemptyOfMaximumDegree
-import Tablet.RutgersCounterexampleMinimumExists
-import Tablet.RutgersMiddleExitOutsideTerminalLadder
-import Tablet.RutgersStrictShortening
-import Tablet.RutgersCurrentRungInterchangeability
-import Tablet.TwoColorComponentSpanningPath
-import Tablet.TwoColorComponentSwapProper
-import Tablet.TwoColorComponentsDisjoint
 import Tablet.egraph2
-import Tablet.zang1
 
 -- [TABLET NODE: ThmGS2]
 theorem ThmGS2 {V E : Type*} [Fintype V] [Fintype E] [DecidableEq E]
     (G : LooplessMultigraph V E) (hG : MaximumDegree G + 2 ≤ ChromaticIndex G)
     (hcrit : Critical G) : Elementary G := by
 -- BODY
-  sorry
+  classical
+  let H := IncidentCore G
+  have reduction := IncidentCoreReduction G
+  change
+    (forall e : E,
+      Sym2.map (fun x : IncidentVertex G => x.1) (H.ends e) = G.ends e) /\
+    (forall x : IncidentVertex G, exists e : E, Incident H x e) /\
+    (Critical H <-> Critical G) /\
+    ChromaticIndex H = ChromaticIndex G /\
+    MaximumDegree H = MaximumDegree G /\
+    TashkinovOrder H = TashkinovOrder G /\
+    (Elementary H -> Elementary G) at reduction
+  rcases reduction with
+    ⟨hendpoints, hnoisolated, hcriticalEq, hindexEq, hdegreeEq,
+      horderEq, helementaryTransfer⟩
+  have hcriticalH : Critical H := hcriticalEq.mpr hcrit
+  have hhighH : MaximumDegree H + 2 <= ChromaticIndex H := by
+    omega
+  by_cases hsmall : TashkinovOrder H < 11
+  · exact helementaryTransfer
+      (ThmScheide H hcriticalH hnoisolated hhighH hsmall)
+  · let k := ChromaticIndex H - 1
+    have hindexH : ChromaticIndex H = k + 1 := by
+      dsimp [k]
+      omega
+    have hdegreeH : MaximumDegree H + 1 <= k := by
+      dsimp [k]
+      omega
+    have hlargeH : 11 <= TashkinovOrder H := by omega
+    obtain ⟨e0, phi, X, hproper, hone, hends, helementary, hstrong⟩ :=
+      LargeOrderTerminalWitness H k hcriticalH hindexH hdegreeH
+        hlargeH
+    have character := egraph2 H k hcriticalH hindexH hdegreeH hnoisolated
+    apply helementaryTransfer
+    exact character.1.mpr (character.2.1.mpr (character.2.2.mpr
+      ⟨e0, phi, X, hproper, hone, hends, helementary, hstrong⟩))

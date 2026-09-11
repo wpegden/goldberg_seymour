@@ -3,23 +3,51 @@ Every critical multigraph $G$ with
 $\chi'(G)\ge\Delta(G)+2$ is elementary.
 \end{theorem}
 \begin{proof}
-Put $k=\chi'(G)-1$.  Criticality supplies, for each edge $e$, a proper
-$k$-edge-coloring of $G-e$.  Starting from such a colored edge deletion, the
-paper constructs a maximal Tashkinov series and its terminal extended
-Tashkinov tree.  The construction separates according to the order of the
-initial Tashkinov tree.  If that order is at most $10$, Scheide's theorem
-makes $G$ elementary.  Otherwise the six assertions of the paper's technical
-theorem apply successively along the rungs: the extension rules, extension
-base, interchangeability, and connecting-color control are established
-under the complete lower-rung package; good hierarchies then make the current
-tree elementary; and the final interchange argument closes the package.
-Strong induction therefore gives all six assertions at every rung.
+Let $H=G^{\circ}$ be the incident core of $G$.  By
+\noderef{IncidentCoreReduction}, every vertex of $H$ is incident with an
+edge, and
+\[
+ \operatorname{Critical}(H)\Longleftrightarrow
+ \operatorname{Critical}(G),\qquad
+ \chi'(H)=\chi'(G),\qquad
+ \Delta(H)=\Delta(G),\qquad
+ t(H)=t(G).                                             \tag{1}
+\]
+The same reduction says that elementariness of $H$ implies elementariness
+of $G$.  Thus $H$ is critical, and the numerical equalities in (1) transfer
+the assumed bound to
+\[
+                         \Delta(H)+2\leq\chi'(H).        \tag{2}
+\]
 
-Apply that package to a lexicographically maximal finite Tashkinov series.
-Its terminal extended Tashkinov tree is elementary.  If a defective boundary
-color remained, the well-defined extension rule would produce a strictly
-larger admissible series, contrary to maximality; hence the terminal tree is
-strongly closed.  The elementary/strongly-closed characterization for a
-critical graph with $\chi'(G)=k+1$ and $k\ge\Delta(G)+1$ now yields
-$\chi'(G)=\lceil\Gamma(G)\rceil$.  Thus $G$ is elementary.
+First suppose that $t(H)<11$.  Criticality of $H$, the no-isolated-vertex
+conclusion above, (2), and this order bound are exactly the hypotheses of
+\noderef{ThmScheide}.  That theorem makes $H$ elementary, so the final
+clause of \noderef{IncidentCoreReduction} makes $G$ elementary.
+
+It remains to consider the complementary case, so $11\leq t(H)$.  Put
+$k=\chi'(H)-1$.  Inequality (2) implies $\chi'(H)\geq2$; hence natural-number
+subtraction is exact and
+\[
+                 \chi'(H)=k+1,\qquad \Delta(H)+1\leq k. \tag{3}
+\]
+Apply \noderef{LargeOrderTerminalWitness} to $H$, using its criticality,
+(3), and $11\leq t(H)$.  It supplies an exact edge identity $e_0$, a proper
+partial $k$-edge-coloring $\varphi$ leaving exactly $e_0$ uncolored, and a
+finite set $X\subseteq V(H)$ which contains both endpoints of $e_0$ and is
+both elementary and strongly closed under $\varphi$.  This theorem is the
+packaged bounded-attainable-rung endpoint of the Tashkinov-series argument:
+its conclusion already supplies the exact terminal witness needed here, so
+no additional series hypotheses or correspondence certificate are being
+introduced at this step.
+
+Now apply \noderef{egraph2} to $H$ and $k$.  Its hypotheses are precisely
+criticality of $H$, the two equalities and inequalities in (3), and the fact
+that every vertex of $H$ is incident with an edge.  The data
+$(e_0,\varphi,X)$ satisfy its condition~(iv).  The equivalence
+(iii)$\leftrightarrow$(iv) first gives condition~(iii), then
+(ii)$\leftrightarrow$(iii) gives condition~(ii), and finally
+(i)$\leftrightarrow$(ii) gives condition~(i).  Consequently $H$ is
+elementary.  The elementary-transfer clause of
+\noderef{IncidentCoreReduction} therefore proves that $G$ is elementary.
 \end{proof}
