@@ -1,0 +1,69 @@
+\begin{lemma}[An exit path exhausts its two-color component]
+Let $G$ be a finite loopless multigraph, let $T$ be a tree-sequence of
+$G$, and let $\varphi$ be a proper partial edge-coloring.  Suppose that
+$\alpha$ is missing at $v$ and that $v$ is a
+$(T,\varphi,\{\alpha,\beta\})$-exit.  Then, for every $w\in V(T)$,
+\[
+ (w\text{ belongs to }P_v(\alpha,\beta,\varphi))
+ \quad\Longleftrightarrow\quad w=v.
+\]
+Here membership in the two-color chain is represented in the two-color
+incidence graph, so the assertion concerns the vertex-node corresponding
+to $w$.
+\end{lemma}
+\begin{proof}
+By the definition of an exit in \noderef{TreeExit}, choose an outside
+vertex $u$ and its exit path $P$ from the vertex-node $u$ to the
+vertex-node $v$.  The clauses of \noderef{TreeExitPath} say that $P$ is
+simple, its incidence-graph length is at least two, its only vertex-node
+from the displayed vertex set $V(T)$ of
+\noderef{TreeSequenceVertexSet} is $v$, and at least one of
+$\alpha,\beta$ is missing at $u$.
+
+We first record an endpoint degree observation.  If either $\alpha$ or
+$\beta$ is missing at a vertex $x$, then the vertex-node $x$ has degree at
+most one in $I_G(\varphi;\alpha,\beta)$.  Indeed, by
+\noderef{TwoColorIncidenceGraph}, every neighbor of $x$ is the identity of
+an edge incident with $x$ and colored $\alpha$ or $\beta$.  If, for
+example, $\alpha$ is missing, the complementary definitions
+\noderef{MissingColors} and \noderef{PresentColors} exclude every
+$\alpha$-colored incident edge.  Thus all neighbors are edge identities
+colored $\beta$.  Two distinct such neighbors would be two distinct
+adjacent edges with the same color, contrary to properness in
+\noderef{IsProperEdgeColoring}.  The case in which $\beta$ is missing is
+symmetric.  Hence the missing-color alternative at $u$ makes the degree
+of $u$ at most one, and the hypothesis that $\alpha$ is missing at $v$
+makes the degree of $v$ at most one.  Notice that the latter use is
+essential: the definition of an exit does not itself require either exit
+color to be missing at its tree endpoint.
+
+Let $S$ be the support of $P$.  We claim that $S$ is closed under
+adjacency in the two-color incidence graph.  Let $x\in S$ and suppose
+$x$ is adjacent to a node $y$.  If $x=u$, then $P$ has a first neighbor
+of $u$ because its length is at least two.  Since $u$ has degree at most
+one, $y$ must be that first neighbor, and hence $y\in S$.  If $x=v$, the
+same argument uses the last neighbor of $v$ on $P$ and the degree-at-most-
+one bound at $v$.
+
+It remains to consider an internal node $x$ of $P$.  It has a predecessor
+and a successor on $P$, and these are distinct because $P$ is simple.  If
+$y\notin S$, then $y$ differs from both of those path neighbors.  The node
+$x$ would consequently have three distinct neighbors: its predecessor,
+its successor, and $y$.  This contradicts the degree-at-most-two theorem
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  Therefore $y\in S$ in this
+case as well, proving adjacency-closure of $S$.
+
+The last node of $P$ is $v$, so $v\in S$.  Any node in the connected
+component of $v$ is joined to $v$ by a finite incidence-graph walk.
+Starting at $v$ and applying the adjacency-closure just proved at each
+successive edge of that walk shows that every node of the walk, and in
+particular its endpoint, lies in $S$.  Conversely every node of $P$ is
+connected to $v$ along the corresponding subpath.  Thus $S$ is exactly
+the component through $v$ defined in \noderef{TwoColorComponent}.
+
+Now let $w\in V(T)$.  If its vertex-node belongs to the component through
+$v$, then it belongs to $S$, and the exact tree-intersection clause of
+\noderef{TreeExitPath} gives $w=v$.  Conversely, if $w=v$, then its
+vertex-node belongs to its own component by the length-zero walk.  This
+proves the equivalence.
+\end{proof}
