@@ -1,0 +1,78 @@
+\begin{helper}[Extension rules below the terminal slot]
+Fix a finite loopless multigraph \(G\) with exact edge type, a palette of
+\(k\) colors, a distinguished edge \(e_0\), an input coloring, and a
+positive-rung ETT \(\mathcal E\) with displayed tree \(T\), certified series
+\(\mathcal T\), generating coloring, and the maximum property.  Put
+\(n=\mathcal E.\mathrm{rounds}\), and write \(D_a\), \(\varphi_a\),
+\(\Theta_a\), \(u_a\), and \(S_a\) for the computed stored set, coloring,
+kind, chosen vertex, and raw stored pair at data slot \(a\).
+
+Assume assertion (iii) for every positive-rung maximum ETT on the same input
+whose rung number is strictly less than \(n\): a PE support \(u_a\) with
+first-appearance index \(b\) has the before-support stability conclusion,
+and, when \(b>0\), the predecessor-stage stability conclusion, under every
+proper exactly-\(e_0\)-uncolored stable coloring; moreover distinct PE
+supports of equal first-appearance index have disjoint raw stored pairs.
+
+Then both conclusions already hold below the terminal data slot.  More
+precisely, if \(a=q^+\ne\operatorname{Fin.last}(n)\) is PE with support
+\(v\), \(h:v\in V(T)\), and
+\(\noderef{ETTFirstAppearanceIndex}(\mathcal E,v,h)=b+1\), then every proper
+exactly-\(e_0\)-uncolored coloring stable on the ladder tree at slot \(a\)
+relative to \((D_a,\varphi_a)\) is
+\(\noderef{StableColoringBeforeVertex}\) before \(v\) in \(T\), relative to
+\((D_b,\varphi_b)\), and, if \(b>0\), is
+\(\noderef{StableColoring}\) on the ladder tree at slot \(b\) relative to
+the same pair.  Also, if \(a=q^+\) and \(c=r^+\) are two distinct
+nonterminal PE slots with distinct supports \(v_q,v_r\), and their dependent
+first-appearance indices (using the supplied membership witnesses in
+\(V(T)\)) are equal, then \(S_a\cap S_c=\varnothing\).
+\end{helper}
+\begin{proof}
+Consider first one nonterminal slot \(a=q^+\), and put \(s=q+1\) for its
+ordinary natural-number index.  Since \(a\) is not the last element of
+\(\operatorname{Fin}(n+1)\), \(1\le s<n\).  Apply
+\noderef{CertifiedETTRestriction} to \(\mathcal E\) with target rung \(s\).
+It returns an actual positive-rung ETT \(\mathcal E_s\) on the same input,
+with rung number exactly \(s\), displayed tree exactly the original series
+tree at index \(s+1\), generating coloring exactly \(\varphi_s\), and an
+inherited maximum-property certificate.
+
+The restriction theorem gives pointwise equality of every retained tree,
+coloring, raw stored set, extension kind, and chosen vertex, equality of all
+computed sets \(D_t\), and heterogeneous equality of every retained
+certificate.  In particular the certificate supplied by
+\noderef{TashkinovSeries} at \(a\), after eliminating the PE constructor of
+\noderef{TashkinovSeriesStep}, puts its support \(v\) in the ladder tree at
+that slot.  The ordered-prefix clause and
+\noderef{TreeSequenceInitialSegment} carry \(v\) to the displayed tree of
+\(\mathcal E_s\).  Thus the membership witness required by lower assertion
+(iii) exists independently of the original final-tree witness \(h\).
+
+By the least-stage definition of \noderef{ETTFirstAppearanceIndex}, the
+dependent value does not depend on which final displayed tree is used once
+all complete stages through \(s\) agree and already contain \(v\): the
+finite set of eligible indices and its least member are literally the same
+under the restriction equalities.  Hence its value for \(\mathcal E_s\) is
+the original value \(b\).  The stable coloring hypothesis also transports
+literally, because the relevant ladder tree, \(D_a\), and \(\varphi_a\) are
+among the retained equal data.  Applying the assumed lower assertion (iii)
+to \(\mathcal E_s\) now gives the before-support conclusion and its
+conditional predecessor-stage conclusion.  Expanding the same pointwise
+equalities transports both conclusions back to \(\mathcal E\), including
+the original witness \(h\): the set of vertices before \(v\) is determined
+by the common ordered prefix, so its edge-incidence and vertexwise
+missing-set clauses are unchanged.
+
+For the pair conclusion, let \(s\) be the larger of the two natural indices
+\(q+1\) and \(r+1\).  Both slots are nonterminal, so again \(1\le s<n\).
+Restrict to rung \(s\).  Both PE certificates are retained; their support
+clauses put both vertices in the restricted displayed tree, while all trees
+through their common first-appearance stage agree pointwise with the
+original series.  The same least-index argument therefore preserves the
+equality of the two first-appearance indices.  Their raw stored sets are
+also exactly the original sets.  The pair clause of lower assertion (iii)
+on this restricted maximum ETT gives disjointness, and the retained-set
+equalities identify its conclusion with \(S_{q^+}\cap S_{r^+}=\varnothing\).
+This proves both nonterminal assertions.
+\end{proof}

@@ -1,0 +1,104 @@
+\begin{helper}[Terminal PE whose support first appears at the terminal stage]
+Let \(\mathcal E\) be a positive-rung maximum ETT on a finite loopless
+multigraph, with displayed tree \(T\), certified series \(\mathcal T\), and
+rung number \(n\).  Let \(a=\operatorname{Fin.last}(n)\).  Suppose the data
+at \(a\) certify a PE with chosen support \(v\), let \(h:v\in V(T)\), and let
+\(b\in\operatorname{Fin}(n+1)\) satisfy
+\[
+ \noderef{ETTFirstAppearanceIndex}(\mathcal E,v,h)=b+1,
+ \qquad b+1=n.
+\]
+If \(\sigma\) is proper, leaves exactly \(e_0\) uncolored, and is
+\(\noderef{StableColoring}\) on the terminal ladder tree relative to
+\((D_a,\varphi_a)\), then \(\sigma\) is
+\(\noderef{StableColoringBeforeVertex}\) before \(v\) in \(T\), relative to
+\((D_b,\varphi_b)\).  Moreover, if \(b>0\), it is stable on the ladder tree
+at slot \(b\) relative to that same pair.
+\end{helper}
+\begin{proof}
+First prove stability before \(v\).  Put \(T^*=T(v)-v\), whose vertices are precisely those specified by
+\noderef{TreeVerticesBefore}.  The terminal PE certificate supplied by
+\noderef{TashkinovSeries}, its support and ordered-prefix clauses in
+\noderef{TashkinovSeriesStep}, and
+\noderef{TreeSequenceInitialSegment} show that \(v\) and every vertex of
+\(T^*\) belong to the terminal ladder tree \(T_n\).
+
+Repeated use of \noderef{HkuMissingStoredMonotone} gives
+\[
+ \overline\varphi_{n-1}(T_n)\cup D_{n-1}
+ \subseteq \overline\varphi_n(T_n)\cup D_n.                    \tag{1}
+\]
+If a color is missing on \(T^*\), \noderef{TreeMissingColors} gives a
+vertex witness, and the preceding containment of vertex sets makes it
+missing on \(T_n\).  Likewise, the endpoint witness in
+\noderef{TreeIncidentEdge} makes every edge incident with \(T^*\) incident
+with \(T_n\).  Thus the given stability relation restricts to a relation
+from \(\sigma\) to \(\varphi_n\) on \(T^*\), with control \(D_{n-1}\), by
+(1).  By the composition principle \noderef{sc2}, it suffices to prove that
+\(\varphi_n\) is stable from \(\varphi_{n-1}\) on \(T^*\) with the same
+control.
+
+Eliminate the terminal certificate through the PE constructor of
+\noderef{TashkinovSeriesStep}.  It supplies the selected coloring
+\(\pi_{n-1}\), the second coloring \(\pi'_{n-1}\), the colors
+\(\gamma_n,\delta_n\), stability of \(\pi_{n-1}\) from
+\(\varphi_{n-1}\) with control \(D_{n-1}\), stability of
+\(\pi'_{n-1}\) from \(\pi_{n-1}\) with control
+\(D_{n-1}\cup\{\delta_n\}\), and
+\[
+ \varphi_n=\pi'_{n-1}/K,
+\]
+where \(K\) is the \((\gamma_n,\delta_n)\)-component through \(v\).  Its
+\noderef{TreeExit} witness supplies a path \(R\), and
+\noderef{TreeExitPath} says that \(R\) runs from outside \(T_n\) to \(v\)
+and has no other vertex of \(T_n\).
+
+We check that \(R\) exhausts \(K\).  The rule
+\noderef{ParallelExtensionColor} makes \(\gamma_n\) missing at \(v\) under
+\(\pi_{n-1}\), and the vertex clause of stability preserves this under
+\(\pi'_{n-1}\).  The certificate \noderef{MaximumDefectiveChoice} gives an
+edge \(f_n\) incident with \(v\) and colored \(\delta_n\) under
+\(\pi_{n-1}\); the enlarged-control edge clause fixes this value under
+\(\pi'_{n-1}\).  Properness makes \(f_n\) the unique two-color incidence at
+\(v\).  At the outside endpoint of \(R\), one switch color is missing and
+the path edge supplies the other, so properness again gives total degree
+one.  Every internal path node already has its two path neighbors in
+\noderef{TwoColorIncidenceGraph}.  If the connected support
+\noderef{TwoColorComponent} contained an extra node, a shortest route to
+\(R\) would give either a third neighbor to an internal node, contrary to
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, or a second neighbor to an
+endpoint of total degree one.  Therefore \(R=K\), and \(K\) meets \(T_n\)
+only at \(v\).
+
+No edge incident with \(T^*\) has its edge-node in \(K\): otherwise its
+endpoint in \(T^*\) would be adjacent to that edge-node in
+\noderef{TwoColorIncidenceGraph} and would belong to the same
+\noderef{TwoColorComponent}, contradicting the preceding intersection
+statement.  Consequently \noderef{TwoColorComponentSwap} fixes every edge
+incident with \(T^*\), and hence fixes every missing-color set there.
+Restrict the two certified stability relations to \(T^*\), discard the
+unused extra control color \(\delta_n\), and compose their edge equalities
+and vertexwise missing-set equalities.  This proves stability of
+\(\varphi_n\) from \(\varphi_{n-1}\) on \(T^*\).  A final application of
+\noderef{sc2} with the restricted given relation proves the required
+before-support stability.
+
+For the additional ladder-tree conclusion, assume \(b>0\).  The equality
+\(b+1=n\) and minimality in \noderef{ETTFirstAppearanceIndex} say that
+\(v\) is absent from the ladder tree at slot \(b\) but belongs to the next
+complete stage.  The certified step there and
+\noderef{TreeSequenceInitialSegment} identify the predecessor tree entry by
+entry with an initial segment of that next stage.  Consequently every
+vertex of the predecessor tree occurs strictly before \(v\) in the final
+display: an occurrence at or after \(v\)'s position would, by the
+vertex-injectivity field of \noderef{TreeSequence}, either put \(v\) in the
+predecessor or violate the initial-segment order.  Hence the predecessor
+vertex set is contained in \(V(T^*)\).  By
+\noderef{TreeIncidentEdge}, every edge incident with the predecessor is
+therefore incident with \(T^*\); a missing color transports by the same
+vertex witness through \noderef{TreeMissingColors}.  Restricting the edge
+clause and vertexwise missing-set clause of the before-support stability
+just proved gives stability on the ladder tree at slot \(b\), relative to
+\((D_b,\varphi_b)\).  When \(b=0\) the implication has no premise, so no
+stability assertion about the auxiliary seed is made.
+\end{proof}

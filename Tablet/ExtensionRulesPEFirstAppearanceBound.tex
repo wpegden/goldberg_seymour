@@ -1,0 +1,27 @@
+\begin{helper}[A PE support appears by its supporting slot]
+Let \(\mathcal T\) be a certified Tashkinov series and let \(\mathcal E\)
+be an ETT carrying that series, with displayed tree \(T\).  If the positive
+data slot \(q^+\) is PE with chosen supporting vertex \(v\), and
+\(h:v\in V(T)\), then
+\[
+ \noderef{ETTFirstAppearanceIndex}(\mathcal E,v,h)\le q+1.
+\]
+Thus a supporting vertex cannot first occur only after the slot at which it
+is used.
+\end{helper}
+\begin{proof}
+The certificate at \(q^+\), supplied by \noderef{TashkinovSeries}, cannot
+be initial because the index is a successor.  Its displayed PE-kind
+equation rules out the SE and RE constructors of
+\noderef{TashkinovSeriesStep}.  In the remaining PE constructor, equality
+of the chosen-vertex fields identifies its
+\noderef{MaximumDefectiveChoice} vertex with \(v\).  That vertex is
+defective on the ladder tree at \(q^+\), so in particular belongs to that
+tree's vertex set.
+
+By \noderef{ExtendedTashkinovLadderStage}, the ladder stage with zero-based
+index \(q\) is exactly this tree.  It is therefore a member of the finite
+candidate set minimized in the definition
+\noderef{ETTFirstAppearanceIndex}.  The minimum candidate is at most \(q\);
+adding one gives the asserted bound.
+\end{proof}

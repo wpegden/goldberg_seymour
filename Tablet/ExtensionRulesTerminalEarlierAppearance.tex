@@ -1,0 +1,117 @@
+\begin{helper}[Terminal PE whose support appears earlier]
+Let \(\mathcal E\) be a positive-rung maximum ETT on a finite loopless
+multigraph, with displayed tree \(T\), certified series \(\mathcal T\), and
+rung number \(n\).  Assume lower-rung assertion (v) for every positive-rung
+maximum ETT on the same input with fewer than \(n\) rungs: under a proper
+exactly-\(e_0\)-uncolored stable coloring of its terminal ladder tree, a
+nonminimum boundary vertex of a defective color precedes every later PE
+support or SE extension vertex, from its first-appearance slot onward.
+
+Let \(a=\operatorname{Fin.last}(n)\), suppose the data at \(a\) certify a PE
+with chosen support \(v\), let \(h:v\in V(T)\), and suppose
+\[
+ \noderef{ETTFirstAppearanceIndex}(\mathcal E,v,h)=b+1,
+ \qquad b+1<n.
+\]
+If \(\sigma\) is proper, leaves exactly \(e_0\) uncolored, and is stable on
+the terminal ladder tree relative to \((D_a,\varphi_a)\), then \(\sigma\)
+is \(\noderef{StableColoringBeforeVertex}\) before \(v\) in \(T\), relative
+to \((D_b,\varphi_b)\).  If \(b>0\), it is also
+\(\noderef{StableColoring}\) on the ladder tree at slot \(b\) relative to
+that pair.
+\end{helper}
+\begin{proof}
+Put \(T^*=T(v)-v\).  The terminal PE certificate supplied by
+\noderef{TashkinovSeries}, its ordered-prefix clause in
+\noderef{TashkinovSeriesStep}, and
+\noderef{TreeSequenceInitialSegment} put every vertex of \(T^*\) in the
+terminal ladder tree \(T_n\).  Repeatedly applying
+\noderef{HkuMissingStoredMonotone} from slot \(b\) through slot \(n\) gives
+\[
+ \overline\varphi_b(T_{b+1})\cup D_b
+ \subseteq \overline\varphi_n(T_n)\cup D_n.                    \tag{1}
+\]
+Using a vertex witness from \noderef{TreeMissingColors} and an endpoint
+witness from \noderef{TreeIncidentEdge}, the two clauses of the given
+stability relation restrict to \(T^*\) with control \(D_b\).  Hence
+\(\sigma\) is stable from \(\varphi_n\) there.  By \noderef{sc2}, it remains
+to prove that \(\varphi_n\) is stable from \(\varphi_b\) on \(T^*\) with
+control \(D_b\).
+
+Eliminate the terminal PE certificate.  Its
+\noderef{MaximumDefectiveChoice} supplies a proper exactly-\(e_0\)-uncolored
+selected coloring \(\pi_{n-1}\), stable from \(\varphi_{n-1}\) on \(T_n\),
+a defective supporting vertex \(v\), a selected boundary-edge identity
+\(f_n\) incident with \(v\), an outside endpoint, and
+\(\pi_{n-1}(f_n)=\delta_n\).  Since \(b<n\), the complete stage where \(v\)
+first appears is contained in \(T_{n-1}\), so \(v\in V(T_{n-1})\).
+
+We verify the lower-(v) hypotheses using exact edge identities.  By
+\noderef{DefectiveEdge}, \noderef{BoundaryColorEdges}, and
+\noderef{DefectiveColor}, there is a second identity \(g\ne f_n\) in the
+\(\delta_n\)-colored boundary of \(T_n\).  Expand
+\noderef{BoundaryEdges} to write its endpoints as an inside vertex \(w\)
+and an outside vertex.  We have \(w\ne v\): otherwise the distinct edges
+\(f_n,g\) are adjacent at \(v\) and carry the same color, contrary to
+\noderef{IsProperEdgeColoring}.  The predicates
+\noderef{DefectiveEdge} and \noderef{DefectiveVertex} make \(w\) another
+defective vertex for the same admissible coloring.  Maximality in
+\noderef{MaximumDefectiveChoice} gives \(w=v\) or \(w\prec v\), so
+\(w\prec v\).
+
+The first-appearance equality and \(b<n\), expanded through
+\noderef{ETTFirstAppearanceIndex}, put \(v\) in \(T_{b+1}\subseteq
+T_{n-1}\).  Because \(w\prec v\), the ordered-prefix equalities put \(w\)
+there as well.  Both outside endpoints remain outside the smaller tree.
+Thus \(f_n\) and \(g\) are two distinct \(\delta_n\)-colored boundary
+identities of \(T_{n-1}\).  Therefore \(\delta_n\) is defective there, and
+\noderef{BoundaryColorVertex} puts both \(v\) and \(w\) in its boundary
+incidence set, with \(w\prec v\).  Apply
+\noderef{CertifiedETTRestriction} at rung \(n-1\); its inherited maximum
+property and the assumed lower assertion
+(v) consequently imply
+\[
+ v\preceq v_t
+ \quad\hbox{for every PE supporting vertex }v_t
+ \hbox{ with }b+1\le t\le n-1.                                \tag{2}
+\]
+All trees, colorings, computed stored sets, kinds, vertices, and relevant
+certificates used here are the retained data of that restriction.
+
+Every \(x\in V(T^*)\) satisfies \(x\prec v\).  Equation (2) says that no PE
+in the interval from \(b+1\) through \(n\) uses \(x\) as its support.
+Applying \noderef{HkuUnsupportedVertexColors} interval by interval yields
+\[
+ \overline\varphi_b(x)=\overline\varphi_n(x)
+ \qquad(x\in V(T^*)).                                         \tag{3}
+\]
+For the edge clause, take an edge \(f\) incident with \(T^*\), with
+\(\varphi_b(f)=c\) and
+\(c\in\overline\varphi_b(T^*)\cup D_b\).
+\noderef{SameColorSeriesPreserved} says that either
+\(\varphi_n(f)=\varphi_b(f)\), or \(f\) is the exact connecting edge of a
+PE in this interval.  In the exceptional case the unique tree endpoint is
+that PE support.  Since \(f\) is incident with \(T^*\), this support would
+strictly precede \(v\), contradicting (2); it cannot equal \(v\) because
+\(T^*\) excludes \(v\).  Hence
+\[
+ \varphi_n(f)=\varphi_b(f).                                    \tag{4}
+\]
+Equations (3) and (4) are exactly the vertex and edge clauses of stability
+from \(\varphi_b\) to \(\varphi_n\) on \(T^*\).  Compose it with the
+restricted given stability using \noderef{sc2}; this proves the
+before-support conclusion.
+
+Finally assume \(b>0\).  Minimality in
+\noderef{ETTFirstAppearanceIndex} says that \(v\) is absent from the ladder
+tree at slot \(b\) but present at the next complete stage.  The certified
+step at that index and \noderef{TreeSequenceInitialSegment} show, entry by
+entry, that every vertex of the predecessor ladder tree occurs before
+\(v\) in the final display; injectivity in \noderef{TreeSequence} rules out
+an alternative display position.  Thus its vertex set is contained in
+\(V(T^*)\).  The witness definition \noderef{TreeIncidentEdge} transports
+edge incidence to \(T^*\), and a vertex witness transports missing colors.
+Restricting the already proved two stability clauses to this subset gives
+stability on the predecessor ladder tree.  No such claim is made when
+\(b=0\), exactly as required.
+\end{proof}

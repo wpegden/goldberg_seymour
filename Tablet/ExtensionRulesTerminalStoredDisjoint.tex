@@ -1,0 +1,127 @@
+\begin{helper}[The terminal PE stored pair is disjoint from an earlier equal-level pair]
+Let \(\mathcal E\) be a positive-rung maximum ETT on a finite loopless
+multigraph, with displayed tree \(T\), certified series \(\mathcal T\), and
+rung number \(n\).  Assume lower-rung assertions (i) and (ii) for every positive-rung
+maximum ETT on the same input with fewer than \(n\) rungs: every proper
+exactly-\(e_0\)-uncolored stable coloring of its final series tree makes any
+two colors, one of which is missing on that tree, interchangeable there;
+and its displayed vertex set is elementary under its generating coloring.
+
+Let \(a=\operatorname{Fin.last}(n)\), and let \(c=r^+\ne a\) be an earlier
+slot.  Suppose \(a\) and \(c\) are PE slots with distinct chosen supports
+\(v_n,v_r\), both belonging to \(V(T)\), and suppose their dependent
+\noderef{ETTFirstAppearanceIndex} values, computed using the supplied
+membership witnesses, are equal.  Then their exact raw stored pairs are
+disjoint:
+\[
+ \mathcal T.\mathrm{stored}(a)\cap
+ \mathcal T.\mathrm{stored}(c)=\varnothing.
+\]
+\end{helper}
+\begin{proof}
+Write the earlier slot as \(h=c\).  Eliminating the PE certificates supplied
+by \noderef{TashkinovSeries} and \noderef{TashkinovSeriesStep} identifies
+the two raw stored sets as
+\[
+ S_h=\{\delta_h,\gamma_h\},\qquad
+ S_n=\{\delta_n,\gamma_n\}.                                   \tag{1}
+\]
+We prove that both colors of \(S_h\) occur on internal edge identities at
+\(v_n\) under \(\varphi_n\), and then exclude both terminal colors there.
+
+In the second stable coloring \(\pi'_{h-1}\) used by the earlier PE, let
+\(P\) and \(Q\) be the supports of \noderef{TwoColorComponent} through
+\(v_h\) and \(v_n\), respectively, for the colors
+\(\gamma_h,\delta_h\) in \noderef{TwoColorIncidenceGraph}.  The earlier PE
+certificate puts \(v_h\) in \(T_h\), so
+\noderef{ETTFirstAppearanceIndex} gives \(m(v_h)\le h\).  Equality of first
+appearances and the ordered prefixes in \noderef{TashkinovSeriesStep} and
+\noderef{TreeSequenceInitialSegment} therefore put \(v_n\) in \(T_h\).
+
+The earlier \noderef{TreeExit} path, by \noderef{TreeExitPath}, runs from an
+outside vertex to \(v_h\) and meets \(T_h\) only there.
+\noderef{ParallelExtensionColor} makes \(\gamma_h\) missing at \(v_h\),
+while \noderef{MaximumDefectiveChoice} supplies the incident
+\(\delta_h\)-colored connecting edge and stability preserves it in
+\(\pi'_{h-1}\).  Thus \(v_h\) has degree one in the two-color incidence
+graph.  The outside endpoint likewise has degree one, because it misses one
+of the colors and the path supplies the other.  Every internal path node
+already has two neighbors, and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} forbids a third.  The shortest
+attachment argument therefore shows that this exit path exhausts \(P\).
+It meets \(T_h\) only at \(v_h\).  Since \(v_n\ne v_h\), \(P\ne Q\), and
+\noderef{TwoColorComponentsDisjoint} makes them vertex-disjoint.
+\noderef{TwoColorComponentSwap} changes only \(P\), so \(Q\) remains the
+component through \(v_n\) under \(\varphi_h\).
+
+The switch makes \(\delta_h\) missing at \(v_h\), hence by
+\noderef{TreeMissingColors} it is missing on the final tree \(T_{h+1}\) of
+the rung-\(h\) restriction.  That restriction is a
+positive-rung maximum ETT because \(h\) is a positive PE slot, and
+\noderef{CertifiedETTRestriction} says that all of its retained data agree
+with the original series.  The assumed lower
+assertion (ii), together with the definition
+\noderef{TreeInterchangeable}, says that \(P\) is the unique
+\((\gamma_h,\delta_h)\)-path component meeting \(T_{h+1}\).
+
+We now show that \(Q\) is a cycle.  The earlier certificate says \(T_h\) is
+\noderef{ColoredVertexSetClosed} under \(\varphi_{h-1}\), and that the
+selected and second colorings are proper, exactly-\(e_0\)-uncolored, and
+linked by the two displayed stability relations.  Applying
+\noderef{sc1} in both directions transports any hypothetical boundary color
+missing on \(T_h\) successively back to \(\varphi_{h-1}\), contradicting
+closure.  Thus \(\pi'_{h-1}\) is closed on \(T_h\).
+
+If \(h>1\), apply \noderef{CertifiedETTRestriction} at rung \(h-1\) and
+then lower assertion (i); if \(h=1\), apply
+\noderef{TechnicalTheoremBase} to the initial tuple.  In either case
+\(T_h\) is \noderef{ColoredVertexSetElementary} under
+\(\varphi_{h-1}\).  The two vertex clauses of
+\noderef{StableColoring} preserve the individual missing sets, so \(T_h\)
+is elementary under \(\pi'_{h-1}\).  Since \(\gamma_h\) is missing at
+\(v_h\ne v_n\), it is not missing at \(v_n\).  By
+\noderef{MissingColors} and \noderef{PresentColors}, an incident
+\(\gamma_h\)-colored edge exists at \(v_n\).  Closedness and the exact
+\(\delta_h\)-colored boundary connecting edge similarly show that
+\(\delta_h\) is not missing at \(v_n\), so another incident edge has that
+color.  The adjacency rule in \noderef{TwoColorIncidenceGraph} puts both
+edge-nodes in \(Q\), and the disjoint switch component \(P\) does not alter
+them.  Therefore \(Q\) is nonisolated and has both colored incidences at
+\(v_n\).  The incidence-degree bound says it is a path or a cycle.  If it
+were a path, it and \(P\) would be two distinct path components meeting
+\(T_{h+1}\), contrary to interchangeability.  Hence \(Q\) is a cycle.
+
+Let \(t>h\) be the first later slot that is not RE; it exists because the
+terminal slot is PE.  The priority fields of
+\noderef{RevisitingExtensionCertificate} in the certificate at \(t\) say that every
+eligible two-color cycle from the preceding RE run is contained in the
+ladder tree \(T_t\); hence \(Q\subseteq G[T_t]\).  Repeated
+\noderef{HkuMissingStoredMonotone} gives
+\[
+ \overline\varphi_h(T_{h+1})\cup D_h
+ \subseteq \overline\varphi_{t-1}(T_t)\cup D_{t-1}.             \tag{2}
+\]
+Both \(\gamma_h,\delta_h\) lie in the left side: the PE certificate puts
+the raw stored pair inside its controlled union, and the switch makes
+\(\delta_h\) missing on \(T_{h+1}\).  Now apply
+\noderef{SameColorSeriesPreserved} to every exact edge of the internal cycle
+\(Q\).  The internal-edge alternative excludes every connecting-edge
+exception by \noderef{InternalEdges}, so all its edge colors are unchanged from \(\varphi_h\) through
+\(\varphi_n\).  Consequently \(Q\) remains a
+\((\gamma_h,\delta_h)\)-cycle through \(v_n\) under \(\varphi_n\).  At
+\(v_n\) it supplies two distinct internal incident edges, one of each color.
+
+Finally the terminal certificate and
+\noderef{HkuParallelBoundaryStructure} identify the connecting edge at
+\(v_n\) as the unique \(\gamma_n\)-colored boundary edge after the terminal
+switch.  Directly from \noderef{ParallelExtensionColor},
+\noderef{MaximumDefectiveChoice}, and
+\noderef{TwoColorComponentSwap}, the switch replaces the unique incident
+\(\delta_n\)-edge by a \(\gamma_n\)-edge and leaves no incident
+\(\delta_n\)-edge; thus \(\delta_n\) is missing at \(v_n\).  Properness
+prevents either internal cycle edge at \(v_n\) from having color
+\(\gamma_n\), while missingness prevents either from having color
+\(\delta_n\).  Hence
+\(\{\gamma_h,\delta_h\}\cap\{\gamma_n,\delta_n\}=\varnothing\), which is
+exactly the claimed disjointness by (1).
+\end{proof}
