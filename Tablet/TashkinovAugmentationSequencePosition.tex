@@ -1,0 +1,34 @@
+\begin{helper}[Exact position in a Tashkinov augmentation sequence]
+Let $A$ and $B$ be tree-sequences such that $B$ is obtained from $A$ by
+a finite sequence of Tashkinov augmentations under a coloring $\varphi$.
+For an edge position $t$ of $B$ with $|A|\leq t$, let $B_t$ and
+$B_{t+1}$ be the exact ordered prefixes of $B$ of lengths $t$ and
+$t+1$, respectively.  Then $B_{t+1}$ is a single
+$\varphi$-Tashkinov augmentation of $B_t$, and its new last edge is the
+individual edge $B.\mathit{edge}(t)$.
+\end{helper}
+\begin{proof}
+By \noderef{TashkinovAugmentationSequenceInitialSegment}, $A$ is an exact
+ordered initial segment of $B$.  Hence it is also an exact initial
+segment of $B_t$, while $B_t$ is an exact initial segment of $B_{t+1}$
+and $B_{t+1}$ is an exact initial segment of $B$; these statements
+follow entry by entry from the definition of \noderef{TreeSequencePrefix}.
+Apply \noderef{TashkinovAugmentationSequenceRestrict} to the original
+augmentation sequence at $B_{t+1}$, and then apply
+\noderef{TashkinovAugmentationSequenceSuffix} at $B_t$.  This gives a
+finite augmentation sequence from $B_t$ to $B_{t+1}$.
+
+Every augmentation increases the tree length by exactly one, by
+\noderef{TashkinovAugmentation}.  The two endpoints of the last sequence
+have lengths $t$ and $t+1$.  If the sequence is written as its preceding
+subsequence followed by its last augmentation, the initial-segment
+conclusion of \noderef{TashkinovAugmentationSequenceInitialSegment}
+shows that the predecessor has length at least $t$, while the last
+augmentation and the endpoint length show that it has length exactly
+$t$.  Two exact initial segments of the same tree having the same length
+agree entry by entry, so this predecessor is $B_t$.  Thus the sequence
+consists of one augmentation from $B_t$ to $B_{t+1}$.  Finally,
+\noderef{TreeSequencePrefix} identifies the new last edge of
+$B_{t+1}$, at the exact index $t$, with the individual edge
+$B.\mathit{edge}(t)$.
+\end{proof}

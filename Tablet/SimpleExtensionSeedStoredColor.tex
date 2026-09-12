@@ -1,0 +1,38 @@
+\begin{lemma}[The seed color of a simple extension is stored]
+Let a certified step of a Tashkinov series be an SE step at a positive
+index $j$.  If its connecting-edge set is the singleton containing the
+individual edge $f$ and the current coloring gives $f$ the color
+$\beta$, then $\beta$ belongs to the computed stored-color set $D_j$.
+\end{lemma}
+\begin{proof}
+Inspect the SE constructor of \noderef{TashkinovSeriesStep}.  Its
+\noderef{MaximumDefectiveChoice} identifies $f$ with the selected
+defective edge, identifies the current coloring with the selected stable
+coloring, and gives $f$ the selected color $\delta$.  The singleton
+connecting-edge and color equations therefore give $\beta=\delta$.
+The constructor also puts $\delta$ in the raw stored set at index $j$.
+
+It remains to show that $\delta$ is not removed when
+\noderef{TashkinovStoredColors} subtracts the current tree-missing
+colors.  Suppose instead that $δ$ is missing at a vertex $w$ of the
+preceding ladder tree.  The vertexwise clause of
+\noderef{StableColoring} says that it is also missing at $w$ under the
+preceding coloring.  At the selected inside vertex $v$, however, the
+edge $f$ has current color $\delta$, so $\delta$ is present there; the
+same vertexwise clause says that $\delta$ is not missing at $v$ under
+the preceding coloring.  Hence some individual edge $g$ incident with
+$v$ has preceding color $\delta$.
+
+Since $\delta$ is tree-missing under the preceding coloring, the
+protected-edge clause of \noderef{StableColoring} fixes $g$, so $g$ also
+has current color $\delta$.  The current coloring is proper by
+\noderef{MaximumDefectiveChoice}; the edges $g$ and $f$ are adjacent at
+$v$ and both currently have color $\delta$, so they are the same
+individual edge.  Thus $f$ had preceding color $\delta$.  But $f$ is a
+boundary edge of the preceding ladder tree and that tree is closed under
+the preceding coloring, contradicting that $\delta$ is missing at $w$.
+Therefore $\delta$ is not current-tree-missing.  It survives the
+subtraction in \noderef{TashkinovStoredColors}, proving
+$\beta=\delta\in D_j$.
+\end{proof}
+

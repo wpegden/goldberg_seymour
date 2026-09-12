@@ -1,0 +1,30 @@
+\begin{lemma}[The seed color of a revisiting extension is stored]
+Let a certified step of a Tashkinov series be an RE step at a positive
+index $j$.  If its connecting-edge set is the singleton containing the
+individual edge $f$ and the current coloring gives $f$ the color
+$\beta$, then $\beta$ belongs to the computed stored-color set $D_j$.
+\end{lemma}
+\begin{proof}
+Inspect the RE constructor of \noderef{TashkinovSeriesStep}, and write
+$\gamma,δ$ for the two colors in its
+\noderef{RevisitingExtensionCertificate}.  The singleton equation for
+connecting edges identifies $f$ with the certified revisiting edge.
+The certificate supplies a walk in
+\noderef{TwoColorIncidenceGraph} from the edge-node $f$ to a vertex-node.
+These endpoints have different sum tags, so the walk is nonempty.  Its
+first adjacency joins the edge-node $f$ to a vertex-node; by the
+definition of the incidence graph, the preceding coloring of $f$ is
+therefore either $\gamma$ or $\delta$.  The RE constructor identifies
+the current and preceding colorings, so the assumed current color
+$\beta$ is one of $\gamma,δ$.  Both colors belong to the raw stored set
+at index $j$.
+
+The same constructor says that the preceding ladder tree is closed, and
+the revisiting certificate says that $f$ is one of its boundary edges.
+Because current and preceding colorings agree, a vertex of that tree
+cannot miss the color $\beta$ carried by $f$; otherwise
+\noderef{ColoredVertexSetClosed} would give an immediate contradiction.
+Thus $\beta$ is not in the current tree-missing set and is not removed
+from the raw stored set by \noderef{TashkinovStoredColors}.  Hence
+$\beta\in D_j$.
+\end{proof}
