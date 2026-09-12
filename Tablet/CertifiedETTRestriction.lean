@@ -45,4 +45,25 @@ theorem CertifiedETTRestriction {V E : Type*}
           HEq (restricted.series.certified i)
             (ett.series.certified (Fin.castLE (by omega) i))) := by
 -- BODY
-  sorry
+  have hprefix := ExtendedTashkinovTreePrefix G k e0 input T generating ett
+    r hrPositive hrBefore
+    ⟨r + 1, by omega⟩ rfl
+    ⟨r, by omega⟩ rfl
+  obtain ⟨restricted, hr, tree_eq, full_data_eq⟩ := hprefix
+  have data_eq : ∀ i : Fin (restricted.rounds + 1),
+      restricted.series.data.coloring i =
+          ett.series.data.coloring (Fin.castLE (by omega) i) ∧
+      restricted.series.data.connectingEdges i =
+          ett.series.data.connectingEdges (Fin.castLE (by omega) i) ∧
+      restricted.series.data.kind i =
+          ett.series.data.kind (Fin.castLE (by omega) i) ∧
+      TashkinovStoredColors restricted.series.data i =
+          TashkinovStoredColors ett.series.data
+            (Fin.castLE (by omega) i) := by
+    intro i
+    rcases full_data_eq i with ⟨hc, _, he, hk, _, _, _, _, hs, _⟩
+    exact ⟨hc, he, hk, hs⟩
+  have hmax : MaximumProperty restricted :=
+    MaximumPropertyPrefix G k e0 input T generating ett hMP
+      r hrPositive hrBefore restricted hr tree_eq data_eq
+  exact ⟨restricted, hr, hmax, tree_eq, full_data_eq⟩
