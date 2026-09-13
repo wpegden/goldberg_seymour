@@ -1,7 +1,9 @@
+import Tablet.BoundaryEdges
 import Tablet.InternalEdges
 import Tablet.RevisitingExtensionCertificate
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
+import Tablet.TreeSequenceInitialSegmentVertexSetSubset
 import Tablet.TwoColorCycle
 import Tablet.TwoColorIncidenceGraph
 

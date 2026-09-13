@@ -24,14 +24,16 @@ Here (C) is the simple closed incidence walk supplied by
 
 Assume, for a contradiction, that an exact cycle edge is not internal to the
 tree (T_p) preceding (p^+).  The ladder trees are nested by the
-`orderedExtension` fields of \noderef{TashkinovSeriesStep}, so the supplied
-vertex of (C) in the tree preceding (r^+) also lies in (T_p).  Traverse
+`orderedExtension` fields of \noderef{TashkinovSeriesStep}; applying
+\noderef{TreeSequenceInitialSegmentVertexSetSubset}, the supplied vertex of
+(C) in the tree preceding (r^+) also lies in (T_p).  Traverse
 the transported cycle from that vertex and choose its first crossing of
 (T_p).  Its edge-node is an exact edge (f) of the cycle.  The incidence
 graph definition \noderef{TwoColorIncidenceGraph} identifies the adjacent
 vertex-nodes with the two endpoints of (f); hence one endpoint (x) lies in
 (T_p), the other endpoint (y)
-lies outside (T_p), and (f\in\partial(T_p)).
+lies outside (T_p), and \noderef{BoundaryEdges} gives
+(f\in\partial(T_p)).
 
 Follow the cycle backwards from the edge-node (f) to the last visit, before
 this crossing, to the earlier ladder tree.  Call that return vertex (u).
