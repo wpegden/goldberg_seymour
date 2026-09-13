@@ -1,0 +1,44 @@
+\begin{helper}[A distinct tree-meeting two-color component is a cycle]
+Let (T) be a tree-sequence in a finite loopless multigraph and let
+\(\varphi\) be a proper partial edge coloring.  Fix two colors
+\(\alpha,\beta\) and two nodes (z,w) of their two-color incidence graph.
+Suppose the component through (z) is a path component, the two colors are
+interchangeable on (T), both components meet (V(T)), and the two
+components are distinct.  Then the component through (w) is a two-color
+cycle: there is a simple closed walk whose support is exactly that component.
+\end{helper}
+\begin{proof}
+By \noderef{TwoColorPathComponent}, the path-component hypothesis includes
+(\alpha\ne\beta).  If the component through (w) were also a path component,
+the definition of
+\noderef{TreeInterchangeable}, applied to the two supplied tree-intersection
+witnesses, would identify it with the component through (z), contrary to
+the distinctness hypothesis.  Hence the component through (w) has no node
+whose neighbor set is a subsingleton.
+
+By \noderef{TwoColorComponentSpanningPath}, properness gives a simple path
+(R) whose support is the whole component through (w).  This path is not
+trivial: otherwise its sole node would have an empty neighbor set inside its
+connected component and hence, since the support is the whole component, in
+the incidence graph as well.  That neighbor set would be a subsingleton,
+contrary to the preceding paragraph.
+
+Let (a,b) be the two endpoints of (R), and let (a_1) be the path neighbor of
+(a).  The neighbor set of (a) is not a subsingleton, so it has a neighbor
+(a') distinct from (a_1).  Every neighbor remains in the same connected
+component and hence occurs on (R).  The node (a') cannot be internal to
+(R): an internal node already has its two distinct path neighbors, and its
+additional neighbor (a) would give it at least three neighbors, contrary to
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  Nor can (a') equal (a), since
+the incidence graph is loopless.  The only remaining possibility is the
+other endpoint (b).  In particular (b\ne a_1), so the path has more than one
+edge, and (a) and (b) are adjacent by an incidence edge not already used by
+(R).
+
+Close (R) with this last adjacency.  Simplicity of (R), together with the
+fact that its endpoints are distinct and the closing incidence edge is not a
+path edge, makes the resulting closed walk a simple cycle.  Closing the path
+does not add a node, so its support is still the support of (R), namely the
+entire component through (w).  This is exactly
+\noderef{TwoColorComponentCycle}.
+\end{proof}

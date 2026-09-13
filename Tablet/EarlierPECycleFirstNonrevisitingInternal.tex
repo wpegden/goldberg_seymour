@@ -1,0 +1,55 @@
+\begin{helper}[An earlier PE cycle is internal at the first later non-RE slot]
+Let a certified Tashkinov series have an earlier nonterminal PE slot (r^+),
+with recorded pair (\{\gamma,\delta\}), and let (C) be a
+\((\gamma,\delta)\)-cycle under the coloring at that slot.  Suppose (C)
+meets the ladder tree preceding the earlier PE and the terminal slot is PE.
+Then there is a later slot (p^+), of kind SE or PE, such that all slots
+strictly between (r^+) and (p^+) are RE, the coloring preceding (p^+)
+equals the coloring at (r^+), and every exact edge identity on (C) is
+internal to the ladder tree preceding (p^+).
+\end{helper}
+\begin{proof}
+Because the earlier slot is not terminal and the terminal slot is PE, the
+finite set of later slots whose kind is not RE is nonempty.  Choose its least
+member (p^+).  It cannot be the initial slot, and certification by
+\noderef{TashkinovSeries} and \noderef{TashkinovSeriesStep} leaves only SE,
+PE, and RE at a positive slot.
+Its choice excludes RE, so it is SE or PE.  Minimality says that every slot
+strictly between (r^+) and (p^+) is RE.  At an RE step the
+`currentColoring` field is equality with the preceding coloring.  Composing
+these equalities along the finite interval identifies the coloring preceding
+(p^+) with the coloring at (r^+).  Transport (C) across this equality.
+Here (C) is the simple closed incidence walk supplied by
+\noderef{TwoColorCycle}.
+
+Assume, for a contradiction, that an exact cycle edge is not internal to the
+tree (T_p) preceding (p^+).  The ladder trees are nested by the
+`orderedExtension` fields of \noderef{TashkinovSeriesStep}, so the supplied
+vertex of (C) in the tree preceding (r^+) also lies in (T_p).  Traverse
+the transported cycle from that vertex and choose its first crossing of
+(T_p).  Its edge-node is an exact edge (f) of the cycle.  The incidence
+graph definition \noderef{TwoColorIncidenceGraph} identifies the adjacent
+vertex-nodes with the two endpoints of (f); hence one endpoint (x) lies in
+(T_p), the other endpoint (y)
+lies outside (T_p), and (f\in\partial(T_p)).
+
+Follow the cycle backwards from the edge-node (f) to the last visit, before
+this crossing, to the earlier ladder tree.  Call that return vertex (u).
+The chosen segment is a path because it is a proper segment of the simple
+cycle.  Its support is contained in the cycle support.  All its vertex-nodes
+lie in (T_p): otherwise the traversal would have crossed the boundary of
+(T_p) before the chosen first crossing.  Moreover (u) lies in the earlier
+tree by construction.
+
+These data fill every field of
+\noderef{RevisitingExtensionCertificate} for the stage preceding (p^+):
+take earlier slot (r^+), its positive index and PE kind, the recorded colors
+(\gamma,\delta), the transported cycle, the given earlier-tree meeting,
+the outside vertex (y), boundary edge (f), endpoints (x,y), return
+vertex (u), and the internal return path just constructed.  The interval of
+RE slots verifies `interveningRevisiting`.  But an SE or PE certificate at
+(p^+) contains `noRevisiting`, which denies the existence of precisely this
+certificate.  The contradiction shows that every edge of (C) is internal
+to (T_p), in the precise sense of \noderef{InternalEdges}.  Together with
+the composed RE coloring equality, this proves all asserted conclusions.
+\end{proof}
