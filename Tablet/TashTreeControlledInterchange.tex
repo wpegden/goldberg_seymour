@@ -1,0 +1,90 @@
+\begin{lemma}[Controlled interchange for a minimum bad pair]
+Let \((\varphi,T)\) be a minimum bad pair, with
+\(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\).  Suppose \(i<j<n\), the distinct
+colors \(\alpha,\beta\) are missing at \(y_i,y_j\), respectively, and
+neither color is used on \(e_2,\ldots,e_j\).  Let \(Q\) be the
+\((\alpha,\beta)\)-component containing \(y_j\), and obtain
+\(\varphi'\) by interchanging the two colors on \(Q\).  Then:
+\begin{enumerate}
+\item \(Q\) is a path component containing \(y_i\), with \(y_i,y_j\) as
+its two vertex ends;
+\item \(\beta\) is missing at \(y_i\) and \(\alpha\) at \(y_j\) under
+\(\varphi'\);
+\item every edge \(e_2,\ldots,e_j\) keeps its exact color, and every old
+Tashkinov witness for every later edge gives a (possibly exchanged)
+earlier witness for that edge after the interchange; and
+\item \((\varphi',T)\) is again a minimum bad pair.
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+The properness clause of \noderef{TashTreeMinimumBadPair} and
+\noderef{MissingColorIncidenceEndpoint} show that the vertex-node \(y_j\)
+has degree at most one in the two-color incidence graph, because it misses
+\(\beta\).  Hence its component \noderef{TwoColorComponent} is a
+\noderef{TwoColorPathComponent}; concretely,
+\noderef{TwoColorComponentSpanningPath} gives a spanning path for it.
+The same endpoint lemma says that \(y_i\), if it belongs to this component,
+is also an end because it misses \(\alpha\).
+
+Suppose \(y_i\) is not the other end.  It then does not belong to \(Q\):
+if it did, it would be a second end of the spanning path, whose first end is
+\(y_j\).  Apply the exact component swap
+\noderef{TwoColorComponentSwap}.  It is proper by
+\noderef{TwoColorComponentSwapProper}.  At \(y_j\), swapping the unique
+possible incident \(\alpha\)-edge to \(\beta\) makes \(\alpha\) missing;
+if the component is isolated, both colors were already missing and the
+same conclusion holds.  Since \(y_i\notin Q\), \(\alpha\) remains missing
+there.
+
+Let \(T_j\) be the prefix through \(y_j\).  The unused hypotheses
+\noderef{TreeColorUnusedThrough}, together with the fact that \(e_1=e\) is
+uncolored, imply that no exact edge identity of \(T_j\) belongs to \(Q\).
+Thus all its displayed edge colors stay fixed.  At a vertex of the prefix
+strictly inside \(Q\), both colors are present before and after the swap;
+at a vertex outside \(Q\), its missing colors do not change.  The only new
+endpoint missingness in the prefix is the missing \(\alpha\) at \(y_j\).
+It follows that every old Tashkinov witness in the prefix persists, while
+\(\alpha\) is now missing at both \(y_i\) and \(y_j\).  The prefix is a
+non-elementary Tashkinov tree, contradicting
+\noderef{TashTreeProperPrefixElementary}.  Therefore \(Q\) joins
+\(y_j\) to \(y_i\), proving the first assertion.
+
+Now perform the swap on this path.  At its end \(y_i\), the possible
+incident \(\beta\)-edge becomes \(\alpha\), so \(\beta\) is missing; at
+the other end \(y_j\), the possible \(\alpha\)-edge becomes \(\beta\),
+so \(\alpha\) is missing.  This also covers a degree-zero end directly.
+The absence of both colors from \(e_2,\ldots,e_j\) proves the asserted
+edge-by-edge fixity through the prefix.
+
+We verify every later witness explicitly.  Fix a later displayed edge
+\(e_h\) and an old witness \(y_r\), \(r<h\), for its old color.  A color
+outside \(\{\alpha,\beta\}\) is untouched on both the edge and at the
+witness.  If the old color is \(\alpha\) or \(\beta\) and \(y_r\) is not
+one of \(y_i,y_j\), then a missing affected color makes \(y_r\) a path
+end by \noderef{MissingColorIncidenceEndpoint}; since the two ends of
+\(Q\) are already \(y_i,y_j\), either \(y_r\notin Q\) and its missingness
+is unchanged, or it equals one of those two vertices.  If the witness
+\(y_i\) for \(\alpha\) is lost, use \(y_j\), which is earlier than
+\(e_h\) and now misses \(\alpha\).  If the witness \(y_j\) for \(\beta\)
+is lost, use the earlier \(y_i\), which now misses \(\beta\).  Finally, if
+\(e_h\) itself belongs to \(Q\), then an old \(\alpha\)-edge becomes
+\(\beta\) and has the new earlier witness \(y_i\), while an old
+\(\beta\)-edge becomes \(\alpha\) and has the new earlier witness
+\(y_j\).  These are exactly the pointwise witness alternatives asserted
+in the statement.  They prove that \(T\) remains a Tashkinov tree.
+
+The exact uncolored edge \(e\) is not a node of the two-color incidence
+graph, so the swap fixes it and fixes the property that it is the unique
+uncolored edge.  All graph and numerical clauses of the \(k\)-triple are
+unchanged, and properness was proved above.  At internal vertices of \(Q\)
+both affected colors remain present; outside \(Q\) nothing changes; and at
+the two ends the missing statuses of \(\alpha,\beta\) are exchanged.
+Therefore the number of tree vertices missing each of the two colors is
+unchanged, as is every other missing-color multiplicity.  Since \(T\) was
+non-elementary, it remains non-elementary.  Thus
+\((\varphi',T)\) is bad.  Its displayed sequence, path index, and rank are
+unchanged.  Moreover the minimality clause of
+\noderef{TashTreeMinimumBadPair} already excludes smaller bad pairs for
+every generating coloring, so it applies unchanged to \(\varphi'\).
+This proves the final assertion.
+\end{proof}

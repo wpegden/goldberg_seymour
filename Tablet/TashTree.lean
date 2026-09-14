@@ -1,6 +1,8 @@
 import Tablet.ColoredVertexSetElementary
 import Tablet.KTriple
 import Tablet.MissingColors
+import Tablet.TashTreeMinimumBadPairExists
+import Tablet.TashTreeNoMinimumBadPair
 import Tablet.TashkinovTree
 import Tablet.TreeSequenceVertexSet
 
@@ -11,4 +13,7 @@ theorem TashTree {V E : Type*} [Fintype V] [Fintype E] [DecidableEq E]
     (htriple : KTriple G k e0 phi) (hT : TashkinovTree G e0 phi T) :
     ColoredVertexSetElementary G phi (TreeSequenceVertexSet T) := by
 -- BODY
-  sorry
+  by_contra hbad
+  obtain ⟨psi, S, hmin⟩ :=
+    TashTreeMinimumBadPairExists G k e0 phi T htriple hT hbad
+  exact TashTreeNoMinimumBadPair G k e0 psi S hmin

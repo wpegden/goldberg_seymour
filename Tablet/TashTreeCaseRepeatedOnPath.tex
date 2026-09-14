@@ -1,0 +1,47 @@
+\begin{lemma}[Minimum bad pair: repeated color on the path suffix]
+Let \((\varphi,T)\) be a minimum bad pair with \(\rho(T)>2\) and
+\(\rho(T)<|E(T)|\).  It is impossible for a color missing at the final
+vertex \(y_n\) also to be missing at some \(y_i\) with
+\(\rho(T)\le i<n\).
+\end{lemma}
+\begin{proof}
+Put \(q=\rho(T)\), and let \(\beta\) be missing at both \(y_i\) and
+\(y_n\), with \(q\le i<n\).  If \(i<n-1\), choose a color \(\gamma\)
+missing at \(y_{i+1}\); it exists because the \(k\)-triple inequality in
+\noderef{KTriple} is \(k\ge\Delta(G)+1\).  The suffix beginning at \(y_q\)
+is a path by \noderef{TashTreeSuffixPath}, so the exact edge \(e_{i+1}\)
+joins \(y_i\) to \(y_{i+1}\).
+
+Both \(\beta\) and \(\gamma\) are unused through \(y_{i+1}\).  Indeed,
+an earlier tree edge with color \(\gamma\) would have an even earlier
+missing-\(\gamma\) witness by the Tashkinov condition, contrary to
+elementariness of the proper prefix supplied by
+\noderef{TashTreeProperPrefixElementary}.  For \(\beta\), prefix
+elementariness makes \(y_i\) the only possible earlier missing witness.
+The only remaining candidate edge is \(e_{i+1}\), and it cannot be colored
+\(\beta\) because it is incident with the \(\beta\)-missing vertex
+\(y_i\).
+
+Apply \noderef{TashTreeControlledInterchange} to these two colors and the
+vertices \(y_i,y_{i+1}\).  It moves the earlier missing occurrence of
+\(\beta\) to \(y_{i+1}\), keeps the whole displayed tree a minimum bad
+Tashkinov tree, and leaves \(\beta\) missing at \(y_n\).  For the last
+claim, the controlled component already has the two ends
+\(y_i,y_{i+1}\), so the distinct vertex \(y_n\), also missing one of its
+colors, cannot lie on that component by
+\noderef{MissingColorIncidenceEndpoint}.  Repeating this finite step makes
+\(\beta\) missing at both \(y_{n-1}\) and \(y_n\).
+
+Now recolor the last path edge \(e_n=y_{n-1}y_n\) with \(\beta\), and let
+\(\delta\) be its old color.  Since both ends miss \(\beta\), this change
+preserves properness; it also preserves the unique uncolored edge, because
+\(n>q>2\) makes \(e_n\ne e_1=e\).  A Tashkinov witness for the old
+\(\delta\)-color of \(e_n\) is an earlier vertex \(y_j\).  It cannot be
+\(y_{n-1}\), which was incident with the \(\delta\)-colored edge, so
+\(j\le n-2\).  After the recoloring, \(\delta\) is also missing at
+\(y_{n-1}\).  No edge or witness of \(T_{n-1}\) was changed.  Thus
+\(T_{n-1}\) is a bad Tashkinov tree under the new coloring, and it has
+smaller rank than \(T\), contradicting
+\noderef{TashTreeMinimumBadPair}.  The asserted repeated-color
+configuration is therefore impossible.
+\end{proof}

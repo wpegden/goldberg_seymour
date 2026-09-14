@@ -1,0 +1,30 @@
+\begin{lemma}[Proper prefixes of a minimum bad tree]
+Let \((\varphi,T)\) be a minimum bad pair.  If \(S\) is a proper initial
+segment of \(T\), then \(V(S)\) is \(\varphi\)-elementary.
+\end{lemma}
+\begin{proof}
+Write \(q=\rho(T)\), using \noderef{TashTreePathIndex}.  The initial
+segment relation in \noderef{TreeSequenceInitialSegment} identifies every
+displayed vertex and exact edge of \(S\) with the corresponding initial
+vertex and edge of \(T\).  Therefore every Tashkinov witness required for
+an edge of \(S\) is inherited from the witness for the same edge of \(T\):
+the witness occurs earlier than that edge and hence is still in the initial
+segment.  Consequently \(S\) is a Tashkinov tree for the same \(k\)-triple.
+
+We compare ranks.  If \(|E(S)|<q\), the general bound
+\(\rho(S)\le |E(S)|\), which follows from
+\noderef{TashTreeSuffixPath} by taking the last displayed vertex, gives
+\(\rho(S)<q\).  If \(q\le |E(S)|\), the path suffix of \(T\) beginning at
+\(y_q\) restricts to a path suffix of \(S\), so minimality in the
+definition of \(\rho(S)\) gives \(\rho(S)\le q\).  A strict inequality
+again makes the first rank coordinate smaller.  In the remaining case
+\(\rho(S)=q\), while the proper-prefix hypothesis gives
+\(|E(S)|<|E(T)|\).  Thus in every case
+\(S\) has smaller rank than \(T\) according to
+\noderef{TashTreeRankLess}.
+
+If \(V(S)\) were not elementary, the preceding inheritance would make
+\((\varphi,S)\) a bad pair of smaller rank.  This contradicts the defining
+minimality clause of \noderef{TashTreeMinimumBadPair}.  Hence the proper
+prefix is elementary.
+\end{proof}

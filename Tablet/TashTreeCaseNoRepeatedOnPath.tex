@@ -1,0 +1,75 @@
+\begin{lemma}[Minimum bad pair: no repeated color on the path suffix]
+Let \((\varphi,T)\) be a minimum bad pair with \(\rho(T)>2\) and
+\(\rho(T)<|E(T)|\).  It is also impossible that no color missing at the
+final vertex \(y_n\) is missing at any \(y_i\) with
+\(\rho(T)\le i<n\).
+\end{lemma}
+\begin{proof}
+Write \(q=\rho(T)<n\).  Since the last proper prefix is elementary by
+\noderef{TashTreeProperPrefixElementary} but \(T\) is bad, a color
+\(\beta\) is missing at \(y_n\) and at some earlier \(y_i\).  The case
+hypothesis forces \(i<q\).  We first arrange \(i\le q-2\).  If
+\(i=q-1\), apply \noderef{TashTreeFourUnusedColors} to \(T_{q-2}\).
+After allowing for the one extra edge \(e_{q-1}\), at least three colors
+missing on that prefix remain unused through \(y_{q-1}\).  Choose one
+\(\alpha\ne\beta\), missing at some \(y_m\) with \(m\le q-2\).
+Elementariness of \(T_{q-1}\) also shows that \(\beta\) is unused there:
+any occurrence would require an earlier missing-\(\beta\) witness, whose
+coexistence with \(y_{q-1}\) would violate elementariness.  The controlled
+\((\alpha,\beta)\)-interchange from
+\noderef{TashTreeControlledInterchange} moves the earlier missing
+occurrence of \(\beta\) from \(y_{q-1}\) to \(y_m\), while the third-end
+argument leaves it missing at \(y_n\).  We may henceforth take
+\(i\le q-2\).
+
+Choose a color \(\gamma\) missing at \(y_q\).  Such a color exists from
+the \(k\)-triple degree inequality.  It is unused through \(T_q\): if a
+colored tree edge in that prefix used \(\gamma\), its earlier Tashkinov
+witness together with \(y_q\) would contradict prefix elementariness.
+The case hypothesis gives \(\gamma\ne\beta\), since \(q\ge q\),
+\(q<n\), and \(\beta\) is missing at \(y_n\).
+
+Apply \noderef{TashTreeFourUnusedColors} to \(T_{q-2}\).  The two
+additional exact edges \(e_{q-1},e_q\) exclude at most two of its four
+free colors.  Choose a remaining color \(\varepsilon\ne\gamma\), missing
+at some \(y_{m'}\), \(m'\le q-2\), and unused through \(T_q\).  If
+\(\varepsilon\) is missing at \(y_n\), the controlled
+\((\varepsilon,\gamma)\)-interchange between \(y_{m'}\) and \(y_q\)
+makes \(\varepsilon\) missing at \(y_q,y_n\).  This is precisely the
+configuration ruled out by \noderef{TashTreeCaseRepeatedOnPath}.  We may
+therefore assume \(\varepsilon\) is present at \(y_n\); in particular
+\(\varepsilon\ne\beta\).
+
+Follow the maximal \((\varepsilon,\beta)\)-chain \(Q\) starting at
+\(y_n\).  Suppose first that it meets \(T_{q-1}\).  Traverse from \(y_n\)
+and let \(y_h\) be the first vertex met in that prefix.  If \(h\le q-2\),
+retain \(T_{q-2}\); if \(h=q-1\), retain \(T_{q-1}\).  Append to the
+retained prefix the alternating segment of \(Q\) from \(y_h\) to
+\(y_n\).  All its internal vertices are outside the retained tree, and
+each exact appended edge has color \(\varepsilon\) or \(\beta\), with an
+earlier missing witness at \(y_{m'}\) or \(y_i\), respectively.  Hence the
+new display is a Tashkinov tree.  It is bad because \(\beta\) remains
+missing at the retained \(y_i\) and at \(y_n\).  Its appended suffix begins
+no later than \(q-1\), so its path index is at most \(q-1<q\), contradicting
+minimum badness.
+
+Thus \(Q\) avoids \(T_{q-1}\).  Swap \(\varepsilon,\beta\) on \(Q\),
+which preserves properness by \noderef{TwoColorComponentSwapProper}.  No
+edge of \(T_q\) changes, because every one of its edge identities has an
+endpoint in \(T_{q-1}\).  Witnesses through \(T_q\) are therefore fixed.
+For a later affected tree edge, an old \(\beta\)-witness can be replaced
+by the earlier missing-\(\varepsilon\) vertex \(y_{m'}\), and an old
+\(\varepsilon\)-witness by the earlier missing-\(\beta\) vertex \(y_i\),
+according to its new color.  Hence \(T\) remains Tashkinov.  The swap only
+exchanges endpoint missing statuses on its component, so badness and rank
+are preserved exactly as in \noderef{TashTreeControlledInterchange}.
+After the swap, \(\varepsilon\) is missing at both \(y_{m'}\) and \(y_n\).
+
+The colors \(\varepsilon,\gamma\) are still unused through \(T_q\), with
+\(\varepsilon\) missing at \(y_{m'}\) and \(\gamma\) at \(y_q\).  A
+controlled \((\varepsilon,\gamma)\)-interchange therefore moves the
+earlier missing occurrence of \(\varepsilon\) to \(y_q\), while it remains
+missing at \(y_n\).  Again this produces the configuration forbidden by
+\noderef{TashTreeCaseRepeatedOnPath}.  The contradiction proves that the
+present complementary case is impossible.
+\end{proof}

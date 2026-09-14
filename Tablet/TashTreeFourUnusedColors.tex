@@ -1,0 +1,40 @@
+\begin{lemma}[Four unused missing colors]
+Let \((\varphi,T)\) be a minimum bad pair and let \(T_q\) be the prefix
+through \(y_q\), where \(1\le q<|E(T)|\).  Then at least four colors are
+missing on \(V(T_q)\) and unused on the colored tree-edge identities
+\(e_2,\ldots,e_q\); equivalently,
+\[
+  |\mathcal F(T_q,e,\varphi)|\ge4.
+\]
+\end{lemma}
+\begin{proof}
+The prefix is the tree-sequence \noderef{TreeSequencePrefix}, and it is
+elementary by \noderef{TashTreeProperPrefixElementary}.  We count its
+missing-color incidences.
+
+By \noderef{KTriple}, \(k\ge\Delta(G)+1\), the coloring is proper, and the
+exact edge \(e=e_1\) is its unique uncolored edge.  The attachment and
+first-edge fields of \noderef{TreeSequence} say that \(e\) has endpoints
+\(y_0,y_1\).  These vertices are distinct, and at either one at most
+\(d_G(y_i)-1\le\Delta(G)-1\) colored edges are incident: the incident edge
+identity \(e\) is uncolored.  Properness makes all colors present at a
+vertex occur on distinct incident edges.  Hence each of \(y_0,y_1\) misses
+at least
+\(k-(\Delta(G)-1)\ge2\) colors.  Every other vertex has at most
+\(d_G(v)\le\Delta(G)\) present colors and therefore misses at least one.
+
+There are \(q+1\) vertices in the prefix, with distinctness supplied by
+\noderef{TreeSequence}.  The total number of missing-color incidences is
+therefore at least
+\[
+  2+2+(q-1)=q+3.
+\]
+Elementariness, in the precise pairwise-disjoint sense of
+\noderef{ColoredVertexSetElementary}, makes the colors in all these
+incidences distinct.  Thus \noderef{TreeMissingColors} contains at least
+\(q+3\) colors.  The exact colored tree edges of this prefix are only
+\(e_2,\ldots,e_q\), a list of \(q-1\) identities, so
+\noderef{TreeUsedColors} contains at most \(q-1\) colors.  Removing those
+used colors leaves at least
+\((q+3)-(q-1)=4\) colors in \noderef{TreeFreeColors}, as required.
+\end{proof}

@@ -1,0 +1,18 @@
+\begin{lemma}[No minimum bad pair]
+For a fixed finite loopless multigraph \(G\), integer \(k\), and exact
+uncolored edge \(e\), no minimum bad pair \((\varphi,T)\) exists.
+\end{lemma}
+\begin{proof}
+Assume that \((\varphi,T)\) is a minimum bad pair.  By
+\noderef{TashTreeMinimumBadPathIndex}, its path index \(q=\rho(T)\) is
+greater than two.  The definition \noderef{TashTreePathIndex} always gives
+\(q\le |E(T)|\).
+
+If \(q=|E(T)|\), \noderef{TashTreeCasePathIndexLast} gives a
+contradiction.  Otherwise \(q<|E(T)|\).  In that situation, either some
+color missing at the final vertex is also missing at a vertex \(y_i\) with
+\(q\le i<|E(T)|\), or there is no such color and vertex.  The first
+alternative contradicts \noderef{TashTreeCaseRepeatedOnPath}; its logical
+negation contradicts \noderef{TashTreeCaseNoRepeatedOnPath}.  These are
+exhaustive alternatives, so the assumed minimum bad pair cannot exist.
+\end{proof}

@@ -1,0 +1,91 @@
+\begin{lemma}[Minimum bad pair: last path-index case]
+Let \((\varphi,T)\) be a minimum bad pair with \(\rho(T)>2\).  The case
+\(\rho(T)=|E(T)|\) is impossible.
+\end{lemma}
+\begin{proof}
+Write \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\) and \(q=\rho(T)=n\).  The last
+edge \(e_n\) does not join \(y_{n-1}\) to \(y_n\), since otherwise the
+suffix path would begin at \(n-1\), contrary to the minimality of the path
+index in \noderef{TashTreePathIndex}.  We successively establish three
+normal forms.  Every recoloring used below preserves a minimum bad pair by
+\noderef{TashTreeControlledInterchange}, so the proper-prefix
+elementarity and unused-color count remain applicable.
+
+First we arrange that a color \(\beta\) is missing at \(y_n\) and at some
+\(y_j\), \(j\le n-2\), and is unused on every displayed colored tree
+edge.  Since the last proper prefix is elementary but \(T\) is bad, begin
+with a color \(\beta\) missing at \(y_n\) and some \(y_j\), \(j<n\).
+By \noderef{TashTreeFourUnusedColors}, the prefix \(T_{n-2}\) has at least
+four missing colors unused on its colored edges.  The two further exact
+edges \(e_{n-1},e_n\) use at most two colors.  Hence at least two of those
+four colors are unused on all of \(T\); choose one, \(\alpha\ne\beta\),
+missing at a vertex \(y_m\), \(m\le n-2\).
+
+If \(j=n-1\), then \(\beta\) is unused on \(T_{n-1}\): any use there
+would have an earlier missing-\(\beta\) witness by the Tashkinov condition,
+contradicting elementariness of that prefix.  It is not used on \(e_n\),
+which is incident with the \(\beta\)-missing vertex \(y_n\).  Thus the
+controlled \((\alpha,\beta)\)-interchange between \(y_m\) and \(y_{n-1}\)
+moves the earlier missing occurrence of \(\beta\) to \(y_m\), while the
+third-endpoint argument in \noderef{TashTreeControlledInterchange} leaves
+it missing at \(y_n\).  This gives the claimed normal form.
+
+Suppose instead that \(j\le n-2\).  If \(\beta\) is already unused on the
+whole tree, the first normal form holds.  Otherwise follow the maximal
+\((\alpha,\beta)\)-chain \(Q\) starting at \(y_n\).  If \(Q\) meets
+\(V(T_{n-2})\), traverse it from \(y_n\), let \(y_h\) be its first vertex
+in that prefix, and append the intervening alternating segment to
+\(T_{n-2}\).  Its internal vertices are outside the retained prefix.  Each
+appended edge has color \(\alpha\) or \(\beta\), and these colors have the
+earlier missing witnesses \(y_m,y_j\) in the retained prefix.  Thus the
+result is a Tashkinov tree.  It is bad because \(\beta\) is still missing
+at \(y_j,y_n\), while its appended suffix is a path and its path index is
+at most \(n-1<q\).  This contradicts the minimality clause of
+\noderef{TashTreeMinimumBadPair}.
+
+Consequently \(Q\) avoids \(T_{n-2}\).  Every displayed tree edge has an
+endpoint in this prefix: this is immediate for \(e_1,\ldots,e_{n-1}\),
+and for \(e_n\) it follows from the already-proved fact that its earlier
+endpoint is not \(y_{n-1}\).  Hence \(Q\) contains no tree-edge identity.
+Swap \(\alpha,\beta\) on \(Q\), using
+\noderef{TwoColorComponentSwapProper}, and then globally transpose the
+names \(\alpha,\beta\).  The local swap fixes every tree edge and every
+needed earlier witness; the global transposition preserves properness and
+all witness relations.  In the resulting coloring the color now called
+\(\beta\) is missing at \(y_m,y_n\), and any tree edge colored \(\beta\)
+would previously have been colored \(\alpha\), contrary to the choice of
+\(\alpha\).  The first normal form follows.
+
+Second, put \(\gamma=\varphi(e_n)\) and arrange that \(\gamma\) is present
+at \(y_{n-1}\).  If it is missing there, elementariness of \(T_{n-1}\)
+and the Tashkinov witness for \(e_n\) show that \(y_{n-1}\) is the unique
+vertex in that prefix missing \(\gamma\).  It follows, as above, that
+\(\gamma\) is unused through \(T_{n-1}\).  The color \(\beta\) from the
+first normal form is unused everywhere, so apply a controlled
+\((\beta,\gamma)\)-interchange between its earlier missing vertex and
+\(y_{n-1}\).  Its component cannot contain \(y_n\): the vertices at its
+two controlled ends have degree at most one, while \(y_n\), which misses
+\(\beta\) and is incident with the \(\gamma\)-colored \(e_n\), would be
+a third end.  Thus \(e_n\) keeps color \(\gamma\), while \(\gamma\)
+becomes present at \(y_{n-1}\).
+
+Third, arrange that some color is missing at \(y_n\) and at a vertex of
+\(T_{n-2}\).  Choose a repeated missing color \(\beta'\) at
+\(y_{j'},y_n\).  This is immediate if \(j'\le n-2\).  If \(j'=n-1\),
+then prefix elementariness and incidence with \(y_n\) make \(\beta'\)
+unused on all of \(T\).  The first normal-form count supplies a distinct
+color \(\alpha'\), missing on \(T_{n-2}\) and unused on all of \(T\).
+A controlled interchange moves the earlier missing \(\beta'\) into
+\(T_{n-2}\) and leaves it missing at \(y_n\).  Neither affected color is
+\(\gamma\): that color is used on \(e_n\) and, by the second normal form,
+is present at \(y_{n-1}\).  Hence the second normal form survives.
+
+Delete the exact pair \(e_{n-1},y_{n-1}\) from the display and retain
+\(e_n,y_n\) as the last pair.  Because \(q=n\), the earlier endpoint of
+\(e_n\) lies in \(T_{n-2}\), so the resulting display is a tree-sequence.
+The second normal form says that the missing-\(\gamma\) witness for
+\(e_n\) is not \(y_{n-1}\), and therefore remains in \(T_{n-2}\); all
+other witnesses are inherited.  The third normal form makes the shortened
+tree bad.  It has only \(n-1\) edges and path index at most \(n-1<n=q\),
+contradicting minimum badness.  Thus this case is impossible.
+\end{proof}

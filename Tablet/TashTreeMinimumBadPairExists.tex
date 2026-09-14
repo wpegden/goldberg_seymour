@@ -1,0 +1,27 @@
+\begin{lemma}[Existence of a minimum bad pair]
+Let \((G,e,\varphi)\) be a \(k\)-triple and let \(T\) be a Tashkinov
+tree for it.  If \(V(T)\) is not \(\varphi\)-elementary, then there are a
+partial coloring \(\psi\) and a Tashkinov tree \(S\) for which
+\((\psi,S)\) is a minimum bad pair.
+\end{lemma}
+\begin{proof}
+The hypotheses say exactly that \((\varphi,T)\) is a bad pair in the sense
+of \noderef{TashTreeBadPair}, so the class of bad pairs is nonempty.  Map
+each bad pair \((\theta,R)\) to the pair of natural numbers
+\[
+  (\rho(R),|E(R)|),
+\]
+using \noderef{TashTreePathIndex}.  The lexicographic order on
+\(\mathbb N\times\mathbb N\) is well founded: first choose the least first
+coordinate occurring among bad pairs, and among the bad pairs with that
+first coordinate choose the least second coordinate.  Both choices exist
+by well ordering of \(\mathbb N\).
+
+Choose a bad pair \((\psi,S)\) attaining the resulting two coordinates.
+If a bad pair \((\psi',S')\) had smaller rank according to
+\noderef{TashTreeRankLess}, then either its first coordinate would be below
+the first chosen minimum, or its first coordinate would agree and its
+second coordinate would be below the second chosen minimum.  Both are
+impossible by construction.  Thus \((\psi,S)\) satisfies precisely the
+minimality clause of \noderef{TashTreeMinimumBadPair}.
+\end{proof}

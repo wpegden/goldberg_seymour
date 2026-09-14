@@ -1,0 +1,51 @@
+\begin{lemma}[A minimum bad tree is not a path]
+If \((\varphi,T)\) is a minimum bad pair, then
+\(\rho(T)>2\).
+\end{lemma}
+\begin{proof}
+Write \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\).  First, \(n\ne1\).  Otherwise
+non-elementariness says that some color is missing at both \(y_0,y_1\),
+the two endpoints of the uncolored edge \(e_1=e\).  Assigning that color
+to \(e\) creates a proper full \(k\)-edge-coloring of \(G\).  This
+contradicts the clause \(\chi'(G)=k+1\) in \noderef{KTriple}.  Hence
+\(n\ge2\).
+
+Suppose \(\rho(T)\le2\).  By \noderef{TashTreeSuffixPath}, if the index is
+one the entire display is a path.  If it is two, the tree-sequence
+attachment for \(e_2\) joins \(y_2\) to one of \(y_0,y_1\); exchange the
+names of the first two vertices if necessary.  The remaining suffix is a
+path by definition of the index.  Thus in either case the entire displayed
+tree is a path in order.
+
+The prefix \(T_{n-1}\) is elementary by
+\noderef{TashTreeProperPrefixElementary}, while \(T\) is not.  Hence some
+color \(\beta\) is missing at \(y_n\) and at an earlier vertex \(y_i\).
+If \(i<n-1\), choose a color \(\gamma\) missing at \(y_{i+1}\); such a
+color exists because \(k\ge\Delta(G)+1\).  Both colors are unused through
+\(y_{i+1}\).  For \(\gamma\), an occurrence on an earlier colored tree
+edge would have an even earlier missing-color witness by the Tashkinov
+condition, contradicting elementariness of \(T_{i+1}\).  For \(\beta\),
+elementariness makes \(y_i\) the only possible earlier witness.  The only
+remaining candidate is \(e_{i+1}\), but that path edge is incident with
+the \(\beta\)-missing vertex \(y_i\), so it cannot be colored \(\beta\).
+
+Apply \noderef{TashTreeControlledInterchange} to \(\beta,\gamma\).  It
+moves the earlier missing occurrence of \(\beta\) from \(y_i\) to
+\(y_{i+1}\), preserves all later Tashkinov witnesses, and keeps a minimum
+bad pair.  It also leaves \(\beta\) missing at \(y_n\): otherwise the
+controlled two-color path would contain the three distinct degree-at-most-
+one vertices \(y_i,y_{i+1},y_n\), impossible for a path.  Iterating this
+finite operation, we obtain a minimum bad pair in which \(\beta\) is
+missing at both \(y_{n-1}\) and \(y_n\).
+
+Recolor the last exact edge \(e_n=y_{n-1}y_n\) with \(\beta\), and let
+\(\delta\) be its former color.  Properness is preserved because both
+ends miss \(\beta\).  The old Tashkinov witness for the \(\delta\)-colored
+edge \(e_n\) is some \(y_j\) with \(j<n\); it cannot be \(y_{n-1}\),
+which was incident with that \(\delta\)-edge, so \(j\le n-2\).  Removing
+\(\delta\) from \(e_n\) also makes \(\delta\) missing at \(y_{n-1}\).
+No displayed edge or witness of \(T_{n-1}\) changed.  Consequently
+\(T_{n-1}\) is a bad Tashkinov path under the new coloring, with strictly
+smaller rank than \(T\).  This contradicts
+\noderef{TashTreeMinimumBadPair}.  Therefore \(\rho(T)>2\).
+\end{proof}
