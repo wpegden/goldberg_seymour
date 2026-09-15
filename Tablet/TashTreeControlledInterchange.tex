@@ -17,74 +17,131 @@ earlier witness for that edge after the interchange; and
 \end{enumerate}
 \end{lemma}
 \begin{proof}
-The properness clause of \noderef{TashTreeMinimumBadPair} and
-\noderef{MissingColorIncidenceEndpoint} show that the vertex-node \(y_j\)
-has degree at most one in the two-color incidence graph, because it misses
-\(\beta\).  Hence its component \noderef{TwoColorComponent} is a
-\noderef{TwoColorPathComponent}; concretely,
-\noderef{TwoColorComponentSpanningPath} gives a spanning path for it.
-The same endpoint lemma says that \(y_i\), if it belongs to this component,
-is also an end because it misses \(\alpha\).
+Unfold \noderef{TashTreeMinimumBadPair}.  Its first conjunct, unfolded
+with \noderef{TashTreeBadPair}, gives a \(k\)-triple, the Tashkinov
+condition for \(T\), and non-elementariness of \(V(T)\); its second
+conjunct excludes every smaller bad pair for every coloring of the fixed
+exact edge \(e_0\).  In particular, \noderef{KTriple} supplies properness
+of \(\varphi\) and the fact that \(e_0=e_1\) is uniquely uncolored.
 
-Suppose \(y_i\) is not the other end.  It then does not belong to \(Q\):
-if it did, it would be a second end of the spanning path, whose first end is
-\(y_j\).  Apply the exact component swap
+Let \(Q\) be the component in \noderef{TwoColorComponent}.  Since
+\(y_j\) misses \(\beta\), \noderef{MissingColorIncidenceEndpoint} says
+that its vertex-node has at most one neighbor in the incidence graph
+\noderef{TwoColorIncidenceGraph}.  It belongs to \(Q\) by definition.
+Together with \(\alpha\ne\beta\), this is exactly the leaf condition in
+\noderef{TwoColorPathComponent}, so \(Q\) is a path component (including
+the possible isolated case).  More explicitly,
+\noderef{TwoColorComponentSpanningPath} supplies a simple path whose
+support is all of \(Q\), and \(y_j\) is one of its ends.  Likewise, since
+\(y_i\) misses \(\alpha\), \noderef{MissingColorIncidenceEndpoint} says
+that if \(y_i\) belongs to \(Q\), then it is an end.  The vertices \(y_i\)
+and \(y_j\) are distinct by the vertex-injectivity field of
+\noderef{TreeSequence}.  Hence, if \(y_i\in Q\), it is the other end of
+the spanning path.
+
+We prove that \(y_i\in Q\) by contradiction.  Suppose it is not the other
+end.  The preceding paragraph then shows \(y_i\notin Q\).  Let
+\(\psi\) be the exact component swap defined in
 \noderef{TwoColorComponentSwap}.  It is proper by
-\noderef{TwoColorComponentSwapProper}.  At \(y_j\), swapping the unique
-possible incident \(\alpha\)-edge to \(\beta\) makes \(\alpha\) missing;
-if the component is isolated, both colors were already missing and the
-same conclusion holds.  Since \(y_i\notin Q\), \(\alpha\) remains missing
-there.
+\noderef{TwoColorComponentSwapProper}.  At \(y_j\), there is at most one
+incident \(\alpha\)- or \(\beta\)-edge.  If there is one, it is colored
+\(\alpha\), because \(\beta\) is missing, and the swap changes it to
+\(\beta\); if there is none, both colors remain missing.  Thus \(\alpha\)
+is missing at \(y_j\) under \(\psi\).  Since \(y_i\notin Q\), no
+\(\alpha\)- or \(\beta\)-edge incident with \(y_i\) belongs to \(Q\), so
+\(\alpha\) remains missing there.
 
-Let \(T_j\) be the prefix through \(y_j\).  The unused hypotheses
-\noderef{TreeColorUnusedThrough}, together with the fact that \(e_1=e\) is
-uncolored, imply that no exact edge identity of \(T_j\) belongs to \(Q\).
-Thus all its displayed edge colors stay fixed.  At a vertex of the prefix
-strictly inside \(Q\), both colors are present before and after the swap;
-at a vertex outside \(Q\), its missing colors do not change.  The only new
-endpoint missingness in the prefix is the missing \(\alpha\) at \(y_j\).
-It follows that every old Tashkinov witness in the prefix persists, while
-\(\alpha\) is now missing at both \(y_i\) and \(y_j\).  The prefix is a
-non-elementary Tashkinov tree, contradicting
-\noderef{TashTreeProperPrefixElementary}.  Therefore \(Q\) joins
-\(y_j\) to \(y_i\), proving the first assertion.
+Let \(P\) be the prefix through \(y_j\), the object supplied by
+\noderef{TreeSequencePrefix}; it is a proper prefix because \(j<n\).
+We check directly that \((\psi,P)\) is bad.  For its \(k\)-triple, the
+graph, \(k\), criticality, chromatic-index equation, and degree inequality
+are unchanged.  The swap preserves properness as just noted.  By
+\noderef{TwoColorComponentSwap}, it maps colored values to colored values
+and fixes every uncolored value.  Hence the exact clause
+\noderef{IsOneEdgeUncolored} remains true with the same \(e_0\).
 
-Now perform the swap on this path.  At its end \(y_i\), the possible
-incident \(\beta\)-edge becomes \(\alpha\), so \(\beta\) is missing; at
-the other end \(y_j\), the possible \(\alpha\)-edge becomes \(\beta\),
-so \(\alpha\) is missing.  This also covers a degree-zero end directly.
-The absence of both colors from \(e_2,\ldots,e_j\) proves the asserted
-edge-by-edge fixity through the prefix.
+The prefix is also a Tashkinov tree.  Indeed, \(e_1=e_0\) is uncolored.
+For every one of \(e_2,\ldots,e_j\), the two hypotheses
+\noderef{TreeColorUnusedThrough} say that its old color is neither
+\(\alpha\) nor \(\beta\).  Its exact color is therefore fixed by the
+swap.  Its old witness, supplied by \noderef{TashkinovTree}, misses that
+same color at an earlier prefix vertex; colors outside
+\(\{\alpha,\beta\}\) and their missing statuses are untouched by the
+swap.  Thus every displayed colored edge of \(P\) retains its old
+Tashkinov witness.  Finally, the two distinct vertices \(y_i,y_j\) of
+\(P\) both miss \(\alpha\) under \(\psi\), so
+\noderef{ColoredVertexSetElementary} fails for
+\noderef{TreeSequenceVertexSet} of \(P\).  These facts are precisely the
+three clauses of \noderef{TashTreeBadPair}; hence \((\psi,P)\) is bad.
 
-We verify every later witness explicitly.  Fix a later displayed edge
-\(e_h\) and an old witness \(y_r\), \(r<h\), for its old color.  A color
-outside \(\{\alpha,\beta\}\) is untouched on both the edge and at the
-witness.  If the old color is \(\alpha\) or \(\beta\) and \(y_r\) is not
-one of \(y_i,y_j\), then a missing affected color makes \(y_r\) a path
-end by \noderef{MissingColorIncidenceEndpoint}; since the two ends of
-\(Q\) are already \(y_i,y_j\), either \(y_r\notin Q\) and its missingness
-is unchanged, or it equals one of those two vertices.  If the witness
-\(y_i\) for \(\alpha\) is lost, use \(y_j\), which is earlier than
-\(e_h\) and now misses \(\alpha\).  If the witness \(y_j\) for \(\beta\)
-is lost, use the earlier \(y_i\), which now misses \(\beta\).  Finally, if
-\(e_h\) itself belongs to \(Q\), then an old \(\alpha\)-edge becomes
-\(\beta\) and has the new earlier witness \(y_i\), while an old
-\(\beta\)-edge becomes \(\alpha\) and has the new earlier witness
-\(y_j\).  These are exactly the pointwise witness alternatives asserted
-in the statement.  They prove that \(T\) remains a Tashkinov tree.
+For completeness, it is smaller than \(T\) for the actual registered
+rank.  Put \(m=|E(P)|=j\) and \(q=\rho(T)\).  By
+\noderef{TashTreePathIndex}, \(\rho(P)\le m\).  If \(m<q\), the first
+rank coordinate decreases.  If \(q\le m\), the suffix-path equations for
+\(T\), as expressed by \noderef{TashTreeSuffixPath}, restrict entry by
+entry to \(P\), so \(\rho(P)\le q\).  A strict inequality decreases the
+first coordinate, while equality together with \(m<n\) decreases the
+second.  Thus \noderef{TashTreeRankLess} holds for \(P,T\).  This smaller
+bad pair contradicts the universal clause of
+\noderef{TashTreeMinimumBadPair}.  The counterfactual is impossible, and
+\(Q\) therefore contains \(y_i\), with \(y_i,y_j\) its two ends.  The
+two applications of \noderef{MissingColorIncidenceEndpoint} also give
+the two asserted subsingleton neighbor sets.
 
-The exact uncolored edge \(e\) is not a node of the two-color incidence
-graph, so the swap fixes it and fixes the property that it is the unique
-uncolored edge.  All graph and numerical clauses of the \(k\)-triple are
-unchanged, and properness was proved above.  At internal vertices of \(Q\)
-both affected colors remain present; outside \(Q\) nothing changes; and at
-the two ends the missing statuses of \(\alpha,\beta\) are exchanged.
-Therefore the number of tree vertices missing each of the two colors is
-unchanged, as is every other missing-color multiplicity.  Since \(T\) was
-non-elementary, it remains non-elementary.  Thus
-\((\varphi',T)\) is bad.  Its displayed sequence, path index, and rank are
-unchanged.  Moreover the minimality clause of
-\noderef{TashTreeMinimumBadPair} already excludes smaller bad pairs for
-every generating coloring, so it applies unchanged to \(\varphi'\).
-This proves the final assertion.
+Now set \(\varphi'=\varphi/Q\).  Because \(Q\) is a nontrivial path from
+\(y_i\) to \(y_j\), its unique incident two-color edge at \(y_i\) is
+colored \(\beta\) and becomes \(\alpha\); hence \(\beta\) is missing at
+\(y_i\).  Its unique such edge at \(y_j\) is colored \(\alpha\) and
+becomes \(\beta\); hence \(\alpha\) is missing at \(y_j\).  The unused
+hypotheses also show directly, exact identity by exact identity, that
+every \(e_2,\ldots,e_j\) lies outside \(Q\) and retains its value.
+
+We next verify the pointwise later-witness assertion.  Fix a displayed
+edge \(e_h\) after this prefix and an old witness \(y_r\), with \(r<h\),
+for its old color \(c\).
+\begin{itemize}
+\item If \(c\notin\{\alpha,\beta\}\), neither the edge value nor the
+missing status of \(c\) changes, so the same witness works.
+\item Suppose the edge is outside \(Q\) and \(c=\alpha\).  If its old
+witness is outside \(Q\), that witness remains valid.  If it lies in
+\(Q\), then its missing \(\alpha\) makes it an end by
+\noderef{MissingColorIncidenceEndpoint}; the spanning-path description
+forces it to be \(y_i\) or \(y_j\).  The only endpoint which loses missing
+\(\alpha\) is \(y_i\), and in that event \(y_j\), which also precedes
+\(e_h\), is the new missing-\(\alpha\) witness.  The case \(c=\beta\)
+is symmetric: a lost witness at \(y_j\) is replaced by the earlier
+\(y_i\).
+\item If the edge-node itself lies in \(Q\), an old \(\alpha\)-edge
+becomes a \(\beta\)-edge and uses the new missing-\(\beta\) witness
+\(y_i\); an old \(\beta\)-edge becomes an \(\alpha\)-edge and uses the
+new missing-\(\alpha\) witness \(y_j\).
+\end{itemize}
+Since \(i<j\) and \(h>j\), every replacement vertex is earlier than the
+edge.  These alternatives are exactly the quantified witness alternatives
+in the statement, and they prove via \noderef{TashkinovTree} that \(T\)
+remains Tashkinov under \(\varphi'\).
+
+It remains to package minimum badness.  Properness follows from
+\noderef{TwoColorComponentSwapProper}, while
+\noderef{TwoColorComponentSwap} and
+\noderef{IsOneEdgeUncolored} show that the same exact \(e_0\) remains
+uniquely uncolored; every other \(k\)-triple clause is unchanged.  Outside
+\(Q\), missing sets do not change.  At an internal vertex-node of the
+spanning path, properness gives one incident edge of each affected color
+both before and after the swap, so neither is missing.  At the two ends,
+the missing statuses of \(\alpha,\beta\) are exchanged between
+\(y_i,y_j\), as proved above.  Consequently, for each of the two affected
+colors, the number of vertices of \(T\) missing it is unchanged; all other
+missing-color incidences are fixed.  Since \(V(T)\) was non-elementary,
+it remains so.  Thus \noderef{TashTreeBadPair} holds for
+\((\varphi',T)\).
+
+The displayed sequence is literally the same \(T\), so its path index and
+both coordinates of its rank are unchanged.  The universal minimality
+clause for \(T\) in the original
+\noderef{TashTreeMinimumBadPair} quantifies over every coloring, and hence
+still excludes every smaller bad pair.  Combining that clause with the
+badness just proved gives
+\( \operatorname{TashTreeMinimumBadPair}(G,k,e_0,\varphi',T)\), completing
+all four assertions.
 \end{proof}

@@ -1,8 +1,29 @@
+import Tablet.AdjacentEdges
+import Tablet.ChromaticIndex
+import Tablet.ColoredVertexSetElementary
+import Tablet.Degree
+import Tablet.HasKEdgeColoring
+import Tablet.Incident
+import Tablet.IsFullEdgeColoring
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
 import Tablet.KTriple
+import Tablet.MaximumDegree
+import Tablet.MissingColorIncidenceEndpoint
+import Tablet.MissingColors
+import Tablet.PresentColors
+import Tablet.TashTreeBadPair
 import Tablet.TashTreeControlledInterchange
 import Tablet.TashTreeMinimumBadPair
+import Tablet.TashTreePathIndex
 import Tablet.TashTreeProperPrefixElementary
+import Tablet.TashTreeRankLess
 import Tablet.TashTreeSuffixPath
+import Tablet.TashkinovTree
+import Tablet.TreeSequence
+import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorComponentSpanningPath
 
 -- [TABLET NODE: TashTreeMinimumBadPathIndex]
 theorem TashTreeMinimumBadPathIndex {V E : Type*}

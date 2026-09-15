@@ -1,7 +1,9 @@
+import Tablet.TashTreeBadPair
 import Tablet.TashTreeMinimumBadPair
 import Tablet.TashTreePathIndex
 import Tablet.TashTreeRankLess
 import Tablet.TashTreeSuffixPath
+import Tablet.TashkinovTree
 import Tablet.TreeSequenceInitialSegment
 
 -- [TABLET NODE: TashTreeProperPrefixElementary]

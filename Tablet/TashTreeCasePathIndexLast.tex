@@ -3,89 +3,233 @@ Let \((\varphi,T)\) be a minimum bad pair with \(\rho(T)>2\).  The case
 \(\rho(T)=|E(T)|\) is impossible.
 \end{lemma}
 \begin{proof}
-Write \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\) and \(q=\rho(T)=n\).  The last
-edge \(e_n\) does not join \(y_{n-1}\) to \(y_n\), since otherwise the
-suffix path would begin at \(n-1\), contrary to the minimality of the path
-index in \noderef{TashTreePathIndex}.  We successively establish three
-normal forms.  Every recoloring used below preserves a minimum bad pair by
-\noderef{TashTreeControlledInterchange}, so the proper-prefix
-elementarity and unused-color count remain applicable.
+Write \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\) and
+\(q=\rho(T)=n\).  Unfolding \noderef{TashTreeMinimumBadPair} and
+\noderef{TashTreeBadPair} gives the fixed \(k\)-triple, the Tashkinov
+condition, non-elementariness, and the universal exclusion of every
+smaller bad pair.  Since \(q>2\), all prefixes used below have positive
+length.
 
-First we arrange that a color \(\beta\) is missing at \(y_n\) and at some
-\(y_j\), \(j\le n-2\), and is unused on every displayed colored tree
-edge.  Since the last proper prefix is elementary but \(T\) is bad, begin
-with a color \(\beta\) missing at \(y_n\) and some \(y_j\), \(j<n\).
-By \noderef{TashTreeFourUnusedColors}, the prefix \(T_{n-2}\) has at least
-four missing colors unused on its colored edges.  The two further exact
-edges \(e_{n-1},e_n\) use at most two colors.  Hence at least two of those
-four colors are unused on all of \(T\); choose one, \(\alpha\ne\beta\),
-missing at a vertex \(y_m\), \(m\le n-2\).
+The last edge \(e_n\) does not join \(y_{n-1}\) to \(y_n\).  Otherwise
+\(n-1\) would satisfy \noderef{TashTreeSuffixPath}, whereas
+\noderef{TashTreePathIndex} defines \(q=n\) to be the least suffix-path
+start.  By the attachment field of \noderef{TreeSequence}, \(e_n\) joins
+\(y_n\) to some earlier displayed vertex; the preceding observation shows
+that this earlier endpoint belongs to \(V(T_{n-2})\).
 
-If \(j=n-1\), then \(\beta\) is unused on \(T_{n-1}\): any use there
-would have an earlier missing-\(\beta\) witness by the Tashkinov condition,
-contradicting elementariness of that prefix.  It is not used on \(e_n\),
-which is incident with the \(\beta\)-missing vertex \(y_n\).  Thus the
-controlled \((\alpha,\beta)\)-interchange between \(y_m\) and \(y_{n-1}\)
-moves the earlier missing occurrence of \(\beta\) to \(y_m\), while the
-third-endpoint argument in \noderef{TashTreeControlledInterchange} leaves
-it missing at \(y_n\).  This gives the claimed normal form.
+We establish three successive normal forms.  At each stage we retain the
+same symbols for the current coloring and its minimum bad pair, but we
+justify minimum badness before invoking any prefix result for the new
+coloring.
 
-Suppose instead that \(j\le n-2\).  If \(\beta\) is already unused on the
-whole tree, the first normal form holds.  Otherwise follow the maximal
-\((\alpha,\beta)\)-chain \(Q\) starting at \(y_n\).  If \(Q\) meets
-\(V(T_{n-2})\), traverse it from \(y_n\), let \(y_h\) be its first vertex
-in that prefix, and append the intervening alternating segment to
-\(T_{n-2}\).  Its internal vertices are outside the retained prefix.  Each
-appended edge has color \(\alpha\) or \(\beta\), and these colors have the
-earlier missing witnesses \(y_m,y_j\) in the retained prefix.  Thus the
-result is a Tashkinov tree.  It is bad because \(\beta\) is still missing
-at \(y_j,y_n\), while its appended suffix is a path and its path index is
-at most \(n-1<q\).  This contradicts the minimality clause of
-\noderef{TashTreeMinimumBadPair}.
+\emph{First normal form.}
+The proper prefix \(T_{n-1}\), constructed by
+\noderef{TreeSequencePrefix}, is elementary by
+\noderef{TashTreeProperPrefixElementary}, while \(T\) is not.  Expanding
+\noderef{ColoredVertexSetElementary}, some color \(\beta\) is missing at
+\(y_n\) and at a vertex \(y_j\), \(j<n\); otherwise every repeated
+missing color of \(T\) would already occur twice in the elementary
+prefix.
 
-Consequently \(Q\) avoids \(T_{n-2}\).  Every displayed tree edge has an
-endpoint in this prefix: this is immediate for \(e_1,\ldots,e_{n-1}\),
-and for \(e_n\) it follows from the already-proved fact that its earlier
-endpoint is not \(y_{n-1}\).  Hence \(Q\) contains no tree-edge identity.
-Swap \(\alpha,\beta\) on \(Q\), using
-\noderef{TwoColorComponentSwapProper}, and then globally transpose the
-names \(\alpha,\beta\).  The local swap fixes every tree edge and every
-needed earlier witness; the global transposition preserves properness and
-all witness relations.  In the resulting coloring the color now called
-\(\beta\) is missing at \(y_m,y_n\), and any tree edge colored \(\beta\)
-would previously have been colored \(\alpha\), contrary to the choice of
-\(\alpha\).  The first normal form follows.
+By \noderef{TashTreeFourUnusedColors}, the proper prefix \(T_{n-2}\) has
+four colors in \noderef{TreeFreeColors}.  By
+\noderef{TreeMissingColors} each is missing at a displayed vertex
+\(y_m\), \(m\le n-2\), and by \noderef{TreeUsedColors} none colors
+\(e_2,\ldots,e_{n-2}\).  The two further exact identities
+\(e_{n-1},e_n\) exclude at most two colors.  Hence at least two of the
+four are unused on every colored tree edge; choose one called
+\(\alpha\) which is distinct from \(\beta\), and let \(y_m\), \(m\le
+n-2\), miss it.
 
-Second, put \(\gamma=\varphi(e_n)\) and arrange that \(\gamma\) is present
-at \(y_{n-1}\).  If it is missing there, elementariness of \(T_{n-1}\)
-and the Tashkinov witness for \(e_n\) show that \(y_{n-1}\) is the unique
-vertex in that prefix missing \(\gamma\).  It follows, as above, that
-\(\gamma\) is unused through \(T_{n-1}\).  The color \(\beta\) from the
-first normal form is unused everywhere, so apply a controlled
-\((\beta,\gamma)\)-interchange between its earlier missing vertex and
-\(y_{n-1}\).  Its component cannot contain \(y_n\): the vertices at its
-two controlled ends have degree at most one, while \(y_n\), which misses
-\(\beta\) and is incident with the \(\gamma\)-colored \(e_n\), would be
-a third end.  Thus \(e_n\) keeps color \(\gamma\), while \(\gamma\)
-becomes present at \(y_{n-1}\).
+Suppose first that \(j=n-1\).  The color \(\beta\) is unused on
+\(e_2,\ldots,e_{n-1}\).  Indeed, if one of these edges had color
+\(\beta\), \noderef{TashkinovTree} would give an earlier
+missing-\(\beta\) witness, distinct from \(y_{n-1}\), contradicting
+the elementariness of \(T_{n-1}\) just obtained from
+\noderef{TashTreeProperPrefixElementary}.  It also does not color
+\(e_n\), since that edge is incident with the \(\beta\)-missing vertex
+\(y_n\).  Thus both \(\alpha,\beta\) are unused through \(y_{n-1}\), and
+\noderef{TashTreeControlledInterchange} applies at \(y_m,y_{n-1}\).
 
-Third, arrange that some color is missing at \(y_n\) and at a vertex of
-\(T_{n-2}\).  Choose a repeated missing color \(\beta'\) at
-\(y_{j'},y_n\).  This is immediate if \(j'\le n-2\).  If \(j'=n-1\),
-then prefix elementariness and incidence with \(y_n\) make \(\beta'\)
-unused on all of \(T\).  The first normal-form count supplies a distinct
-color \(\alpha'\), missing on \(T_{n-2}\) and unused on all of \(T\).
-A controlled interchange moves the earlier missing \(\beta'\) into
-\(T_{n-2}\) and leaves it missing at \(y_n\).  Neither affected color is
-\(\gamma\): that color is used on \(e_n\) and, by the second normal form,
-is present at \(y_{n-1}\).  Hence the second normal form survives.
+That component does not contain \(y_n\).  It is a path with the two
+distinct controlled ends \(y_m,y_{n-1}\).  The vertex \(y_n\) also
+misses \(\beta\), so \noderef{MissingColorIncidenceEndpoint} gives it
+degree at most one in the same two-color incidence graph.  If \(y_n\)
+lay in the component, the spanning path supplied by
+\noderef{TwoColorComponentSpanningPath} would have three distinct
+degree-at-most-one vertex-nodes, impossible for a path.  Therefore the
+swap fixes every edge incident with \(y_n\), and \(\beta\) remains
+missing there.  The conclusion of
+\noderef{TashTreeControlledInterchange} makes the new pair minimum bad
+and moves the other missing occurrence of \(\beta\) to \(y_m\).  We have
+the first normal form in this subcase.
 
-Delete the exact pair \(e_{n-1},y_{n-1}\) from the display and retain
-\(e_n,y_n\) as the last pair.  Because \(q=n\), the earlier endpoint of
-\(e_n\) lies in \(T_{n-2}\), so the resulting display is a tree-sequence.
-The second normal form says that the missing-\(\gamma\) witness for
-\(e_n\) is not \(y_{n-1}\), and therefore remains in \(T_{n-2}\); all
-other witnesses are inherited.  The third normal form makes the shortened
-tree bad.  It has only \(n-1\) edges and path index at most \(n-1<n=q\),
-contradicting minimum badness.  Thus this case is impossible.
+Now suppose \(j\le n-2\).  If \(\beta\) is unused on the whole displayed
+tree, the desired form already holds.  Otherwise let \(Q\) be the
+component \noderef{TwoColorComponent} through \(y_n\) for
+\(\alpha,\beta\).  Since \(y_n\) misses \(\beta\),
+\noderef{MissingColorIncidenceEndpoint} makes it an end, and
+\noderef{TwoColorComponentSpanningPath} gives a simple spanning path for
+\(Q\), which we orient from \(y_n\).
+
+Suppose \(Q\) meets \(V(T_{n-2})\).  Along that spanning path, let \(y_h\)
+be the first vertex-node in this prefix and retain the segment from
+\(y_h\) to \(y_n\).  Its internal vertex-nodes lie outside the retained
+prefix by the choice of \(y_h\); simplicity gives distinct new vertices
+and exact edge identities.  Append the segment, in reverse traversal from
+\(y_h\) toward \(y_n\), to the tree-sequence \(T_{n-2}\).  The first
+appended edge attaches its new vertex to the earlier \(y_h\), and every
+later appended edge attaches the next new vertex to the preceding one, so
+\noderef{TreeSequence} holds.  Every appended edge is colored
+\(\alpha\) or \(\beta\), and the retained prefix contains the respective
+missing witnesses \(y_m,y_j\).  Thus
+\noderef{TashkinovTree} holds for the appended sequence.  Its unchanged
+\(k\)-triple and the two missing-\(\beta\) vertices \(y_j,y_n\) make it
+bad by \noderef{TashTreeBadPair}.  Its first appended edge may attach
+away from the last retained vertex, but all subsequent appended edges are
+in path order; therefore \(n-1\) is a suffix-path start and its path
+index is at most \(n-1<q\).  By \noderef{TashTreeRankLess}, this is a
+smaller bad pair, contrary to \noderef{TashTreeMinimumBadPair}.
+
+It follows that \(Q\) avoids \(V(T_{n-2})\).  Every displayed tree edge
+has an endpoint in that prefix.  For \(e_1,\ldots,e_{n-2}\) this follows
+from both endpoints being prefix vertices; for \(e_{n-1}\), its earlier
+endpoint is in the prefix; and for \(e_n\), it is the earlier-end fact
+proved in the first paragraph.  If the edge-node of any displayed tree
+edge belonged to \(Q\), its incidence edge in
+\noderef{TwoColorIncidenceGraph} would put that prefix endpoint in \(Q\).
+Thus no displayed exact tree-edge identity belongs to \(Q\).
+
+Let \(\varphi_1\) be the component swap
+\noderef{TwoColorComponentSwap} on \(Q\), and let \(\varphi_2\) be obtained
+from \(\varphi_1\) by globally transposing the two color names
+\(\alpha,\beta\), fixing all other colors and the uncolored value.  We
+now verify, without invoking the controlled-interchange lemma, that
+\((\varphi_2,T)\) is a minimum bad pair.
+
+The local swap is proper by \noderef{TwoColorComponentSwapProper}; the
+global transposition is an injective permutation of colored values, so
+\noderef{IsProperEdgeColoring} remains true.  Both operations fix
+\(\operatorname{none}\) and send colored values to colored values, hence
+the same exact \(e_0\) remains uniquely uncolored by
+\noderef{IsOneEdgeUncolored}.  All other clauses of \noderef{KTriple}
+depend only on \(G,k,e_0\) and are unchanged.
+
+For the Tashkinov condition under the local swap, first consider an edge
+through \(T_{n-2}\).  Its exact identity and its old witness vertex both
+avoid \(Q\), so its color and missing witness are fixed.  The only
+remaining displayed edges are \(e_{n-1},e_n\), whose identities also
+avoid \(Q\).  A witness for a color outside
+\(\{\alpha,\beta\}\) is unchanged.  If either edge has color \(\alpha\)
+or \(\beta\) and its old witness changes, use instead the fixed earlier
+missing vertex \(y_m\) for \(\alpha\) or \(y_j\) for \(\beta\);
+both lie in \(T_{n-2}\) and outside \(Q\).  Hence every edge retains an
+earlier witness under \(\varphi_1\).  The global transposition then
+changes an edge color and its missing-color relation by the same
+permutation at every vertex, so the same witness position works under
+\(\varphi_2\).  This proves \noderef{TashkinovTree}.
+
+Under \(\varphi_1\), \(\alpha\) is missing at \(y_n\): if \(Q\) is
+nontrivial, the unique incident \(\alpha\)-edge at the
+\(\beta\)-missing end becomes \(\beta\); if \(Q\) is isolated, both
+colors were already missing.  The vertex \(y_m\) lies outside \(Q\) and
+continues to miss \(\alpha\).  After the global transposition,
+\(\beta\) is missing at the two distinct vertices \(y_m,y_n\).
+Thus \(V(T)\) is non-elementary and \noderef{TashTreeBadPair} holds for
+\((\varphi_2,T)\).  Its sequence and rank are unchanged.  Finally, the
+universal minimality conjunct of the original
+\noderef{TashTreeMinimumBadPair} quantifies over every coloring and
+therefore combines with this badness to make \((\varphi_2,T)\) minimum.
+
+No tree-edge identity was changed by the local swap.  Consequently, if a
+tree edge has color \(\beta\) under \(\varphi_2\), it had color
+\(\alpha\) under the original coloring, contrary to the choice of
+\(\alpha\).  We have therefore reached the first normal form:
+\[
+ \beta\in\overline\varphi(y_j)\cap\overline\varphi(y_n)
+ \quad\text{for some }j\le n-2,\qquad
+ \beta\notin\varphi\langle T\rangle .
+\]
+
+\emph{Second normal form.}
+Put \(\gamma=\varphi(e_n)\).  Suppose it is missing at \(y_{n-1}\).
+The Tashkinov condition for \(e_n\) supplies a missing-\(\gamma\)
+witness in \(T_{n-1}\).  Since that prefix is elementary by
+\noderef{TashTreeProperPrefixElementary} for the current minimum bad
+pair, the witness must be \(y_{n-1}\) itself.  Moreover \(\gamma\) is
+unused on \(e_2,\ldots,e_{n-1}\): any occurrence there would have an
+earlier missing-\(\gamma\) witness by \noderef{TashkinovTree}, distinct
+from \(y_{n-1}\), and would contradict the same prefix elementariness.
+
+The first-normal-form color \(\beta\) is unused on all tree edges.
+Apply \noderef{TashTreeControlledInterchange} to \(\beta,\gamma\) at
+the missing vertices \(y_j,y_{n-1}\).  Its controlled component cannot
+contain \(y_n\).  Indeed, \(y_n\) misses \(\beta\) and is incident with
+the \(\gamma\)-colored exact edge \(e_n\); by
+\noderef{MissingColorIncidenceEndpoint} it has degree at most one, and
+the displayed incidence makes that degree one.  The spanning path from
+\noderef{TwoColorComponentSpanningPath} already has the two distinct
+ends \(y_j,y_{n-1}\), so \(y_n\) cannot be a third end.  Thus \(y_n\)
+and \(e_n\) are outside the component, and \(e_n\) retains color
+\(\gamma\).  At the other controlled end \(y_{n-1}\), the nontrivial
+path has an incident \(\beta\)-edge, which becomes \(\gamma\).  Hence
+\(\gamma\) is present at \(y_{n-1}\).  The controlled lemma also supplies
+minimum badness of the new pair.  This proves the second normal form.
+
+\emph{Third normal form.}
+Using non-elementariness of the current \(T\) and elementariness of its
+proper prefix from \noderef{TashTreeProperPrefixElementary}, choose a
+color \(\beta'\) missing at \(y_n\) and at \(y_{j'}\), \(j'<n\).
+If \(j'\le n-2\), the third form already holds.  If \(j'=n-1\), the same
+prefix-elementarity argument is as follows.  If some
+\(e_h\), \(2\le h\le n-1\), had color \(\beta'\), then
+\noderef{TashkinovTree} would supply a missing-\(\beta'\) witness
+\(y_r\) with \(r<h\le n-1\).  This vertex is distinct from
+\(y_{n-1}\), contradicting the elementariness of \(T_{n-1}\) supplied by
+\noderef{TashTreeProperPrefixElementary}.  Thus \(\beta'\) is unused on
+\(e_2,\ldots,e_{n-1}\), and incidence with its missing vertex \(y_n\)
+shows that it is not the color of \(e_n\).
+
+Apply \noderef{TashTreeFourUnusedColors} to \(T_{n-2}\) for the current
+minimum bad pair.  After excluding the at most two colors on
+\(e_{n-1},e_n\), at least two free colors remain unused on the whole
+tree.  Choose one \(\alpha'\ne\beta'\), missing at a vertex of
+\(T_{n-2}\).  A controlled \((\alpha',\beta')\)-interchange at that
+vertex and \(y_{n-1}\) moves missing \(\beta'\) into \(T_{n-2}\).
+Exactly as in the first controlled swap, \(y_n\), which misses
+\(\beta'\), is a third degree-at-most-one vertex and hence lies outside
+the component by \noderef{MissingColorIncidenceEndpoint} and
+\noderef{TwoColorComponentSpanningPath}; thus it continues to miss
+\(\beta'\).
+
+Neither affected color is \(\gamma\).  The color \(\alpha'\) is unused
+on \(e_n\), which has color \(\gamma\); and \(\beta'\) is missing at
+\(y_n\), where the incident \(e_n\) makes \(\gamma\) present.  Therefore
+the interchange neither changes \(e_n\)'s color nor the presence of
+\(\gamma\) at \(y_{n-1}\).  The second normal form survives, and the
+conclusion of \noderef{TashTreeControlledInterchange} again supplies a
+minimum bad pair.  The third normal form is established.
+
+Finally delete the exact pair \(e_{n-1},y_{n-1}\), retaining
+\[
+ T'=(y_0,e_1,y_1,\ldots,e_{n-2},y_{n-2},e_n,y_n).
+\]
+This is a tree-sequence: deleting entries preserves vertex and edge
+injectivity and the first edge, all earlier attachment equations are
+unchanged, and the earlier endpoint of \(e_n\) lies in \(T_{n-2}\).
+All Tashkinov witnesses before the final edge are inherited.  The final
+edge still has color \(\gamma\).  Its old missing-\(\gamma\) witness
+cannot be \(y_{n-1}\), because the second normal form says \(\gamma\) is
+present there, and \noderef{PresentColors} and \noderef{MissingColors}
+are complementary.  Hence a witness for \(e_n\) remains in
+\(T_{n-2}\), proving \noderef{TashkinovTree} for \(T'\).
+
+The \(k\)-triple is unchanged, and the third normal form supplies a color
+missing both at \(y_n\) and at a retained vertex of \(T_{n-2}\).  Thus
+\noderef{TashTreeBadPair} holds for the shortened pair.  It has \(n-1\)
+edges, so \noderef{TashTreePathIndex} gives
+\(\rho(T')\le n-1<n=q\).  By \noderef{TashTreeRankLess}, it is smaller
+than the current minimum bad pair, contradicting
+\noderef{TashTreeMinimumBadPair}.  Therefore the case \(q=n\) is
+impossible.
 \end{proof}

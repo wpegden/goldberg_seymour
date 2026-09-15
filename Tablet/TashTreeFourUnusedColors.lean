@@ -1,9 +1,21 @@
+import Tablet.AdjacentEdges
+import Tablet.ColoredVertexSetElementary
+import Tablet.Degree
+import Tablet.Incident
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
 import Tablet.KTriple
+import Tablet.MaximumDegree
+import Tablet.MissingColors
+import Tablet.PresentColors
+import Tablet.TashTreeBadPair
+import Tablet.TashTreeMinimumBadPair
 import Tablet.TashTreeProperPrefixElementary
 import Tablet.TreeFreeColors
 import Tablet.TreeMissingColors
 import Tablet.TreeSequence
 import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
 import Tablet.TreeUsedColors
 
 -- [TABLET NODE: TashTreeFourUnusedColors]

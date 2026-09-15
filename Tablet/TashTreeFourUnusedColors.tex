@@ -8,33 +8,80 @@ missing on \(V(T_q)\) and unused on the colored tree-edge identities
 \]
 \end{lemma}
 \begin{proof}
-The prefix is the tree-sequence \noderef{TreeSequencePrefix}, and it is
-elementary by \noderef{TashTreeProperPrefixElementary}.  We count its
-missing-color incidences.
+Let \(P=T_q\) be the actual prefix object supplied by
+\noderef{TreeSequencePrefix}.  Since \(q<|E(T)|\), it is a proper initial
+segment, so \noderef{TashTreeProperPrefixElementary} says that \(V(P)\)
+is \(\varphi\)-elementary.  We now count incidences directly from the
+local data carried by the minimum bad pair.
 
-By \noderef{KTriple}, \(k\ge\Delta(G)+1\), the coloring is proper, and the
-exact edge \(e=e_1\) is its unique uncolored edge.  The attachment and
-first-edge fields of \noderef{TreeSequence} say that \(e\) has endpoints
-\(y_0,y_1\).  These vertices are distinct, and at either one at most
-\(d_G(y_i)-1\le\Delta(G)-1\) colored edges are incident: the incident edge
-identity \(e\) is uncolored.  Properness makes all colors present at a
-vertex occur on distinct incident edges.  Hence each of \(y_0,y_1\) misses
-at least
-\(k-(\Delta(G)-1)\ge2\) colors.  Every other vertex has at most
-\(d_G(v)\le\Delta(G)\) present colors and therefore misses at least one.
+Unfold \noderef{TashTreeMinimumBadPair} and take its bad-pair conjunct.
+By \noderef{TashTreeBadPair}, this conjunct contains a \(k\)-triple; by
+\noderef{KTriple}, that triple gives
+\[
+ k\ge \Delta(G)+1,\qquad
+ \text{\(\varphi\) proper},\qquad
+ \text{\(e_0\) the unique uncolored exact edge.}
+\]
+The first-edge and first-attachment fields of \noderef{TreeSequence}
+identify \(e_1\) with \(e_0\) and its endpoints with the distinct vertices
+\(y_0,y_1\).  In the terminology of \noderef{Incident}, \(e_0\) is
+therefore incident with each of them.  The definition
+\noderef{IsOneEdgeUncolored} says both that \(e_0\) has value
+\(\operatorname{none}\) and that every other exact edge identity has a
+colored value.
 
-There are \(q+1\) vertices in the prefix, with distinctness supplied by
-\noderef{TreeSequence}.  The total number of missing-color incidences is
+Fix a vertex \(v\), and consider its colored incident exact edge
+identities.  Sending such an identity to its color is injective: two
+distinct identities in this set share \(v\), hence are adjacent by
+\noderef{AdjacentEdges}, and equality of their colors would contradict
+\noderef{IsProperEdgeColoring}.  Its image is exactly
+\noderef{PresentColors}: membership in that set is, by definition,
+witnessed by an incident edge with the stated color, and every colored
+incident edge supplies such a witness.  Thus the number of present colors
+equals the number of colored incident identities and is at most the number
+of all incident identities counted by \noderef{Degree}.  Consequently
+\[
+  |\varphi(v)|\le d_G(v)\le\Delta(G),
+\]
+where the last inequality is the defining maximum property in
+\noderef{MaximumDegree}.
+
+At \(v=y_0\) or \(y_1\), the colored incident identities are exactly all
+incident identities except \(e_0\): that edge is uncolored, and
+\noderef{IsOneEdgeUncolored} colors every other identity.  Removing this
+one known incident identity from the \(d_G(v)\) identities therefore
+sharpens the bound to
+\[
+ |\varphi(v)|\le d_G(v)-1\le\Delta(G)-1.
+\]
+Here \(d_G(v)\ge1\) because \(e_0\) is incident with \(v\), so the
+subtraction is legitimate.  Since \noderef{MissingColors} is the
+complement of the present-color set in the \(k\) colors, each of
+\(y_0,y_1\) misses at least
+\[
+ k-(\Delta(G)-1)\ge2
+\]
+colors.  At every other displayed vertex the unsharpened bound gives at
+least \(k-\Delta(G)\ge1\) missing color.
+
+The prefix has exactly the \(q+1\) pairwise distinct vertices
+\(y_0,\ldots,y_q\), by the injectivity field of
+\noderef{TreeSequence}; equivalently these are the elements of
+\noderef{TreeSequenceVertexSet}.  Its number of missing-color incidences is
 therefore at least
 \[
   2+2+(q-1)=q+3.
 \]
-Elementariness, in the precise pairwise-disjoint sense of
-\noderef{ColoredVertexSetElementary}, makes the colors in all these
-incidences distinct.  Thus \noderef{TreeMissingColors} contains at least
-\(q+3\) colors.  The exact colored tree edges of this prefix are only
-\(e_2,\ldots,e_q\), a list of \(q-1\) identities, so
-\noderef{TreeUsedColors} contains at most \(q-1\) colors.  Removing those
-used colors leaves at least
-\((q+3)-(q-1)=4\) colors in \noderef{TreeFreeColors}, as required.
+By \noderef{ColoredVertexSetElementary}, no color occurs in the missing
+sets of two distinct prefix vertices.  Hence these incidences have distinct
+color coordinates, and the union \noderef{TreeMissingColors} has at least
+\(q+3\) elements.
+
+Finally, \noderef{TreeUsedColors} is the set of colors on the exact
+identities \(e_2,\ldots,e_q\).  There are \(q-1\) such identities, so this
+set has cardinality at most \(q-1\), even if some displayed edges share a
+color.  Deleting from a set of at least \(q+3\) colors a set of at most
+\(q-1\) colors leaves at least four.  By the set-difference definition in
+\noderef{TreeFreeColors}, the resulting set is precisely
+\(\mathcal F(P,e_0,\varphi)\), which proves the claim.
 \end{proof}

@@ -1,8 +1,30 @@
+import Tablet.ColoredVertexSetElementary
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.MissingColorIncidenceEndpoint
+import Tablet.MissingColors
+import Tablet.PresentColors
+import Tablet.TashTreeBadPair
 import Tablet.TashTreeControlledInterchange
 import Tablet.TashTreeFourUnusedColors
 import Tablet.TashTreeMinimumBadPair
 import Tablet.TashTreeMinimumBadPathIndex
 import Tablet.TashTreePathIndex
+import Tablet.TashTreeProperPrefixElementary
+import Tablet.TashTreeRankLess
+import Tablet.TashTreeSuffixPath
+import Tablet.TashkinovTree
+import Tablet.TreeFreeColors
+import Tablet.TreeMissingColors
+import Tablet.TreeSequence
+import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
+import Tablet.TreeUsedColors
+import Tablet.TwoColorComponent
+import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorComponentSwapProper
 
 -- [TABLET NODE: TashTreeCasePathIndexLast]

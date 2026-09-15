@@ -3,28 +3,48 @@ Let \((\varphi,T)\) be a minimum bad pair.  If \(S\) is a proper initial
 segment of \(T\), then \(V(S)\) is \(\varphi\)-elementary.
 \end{lemma}
 \begin{proof}
-Write \(q=\rho(T)\), using \noderef{TashTreePathIndex}.  The initial
-segment relation in \noderef{TreeSequenceInitialSegment} identifies every
-displayed vertex and exact edge of \(S\) with the corresponding initial
-vertex and edge of \(T\).  Therefore every Tashkinov witness required for
-an edge of \(S\) is inherited from the witness for the same edge of \(T\):
-the witness occurs earlier than that edge and hence is still in the initial
-segment.  Consequently \(S\) is a Tashkinov tree for the same \(k\)-triple.
+Put \(m=|E(S)|\), \(n=|E(T)|\), and \(q=\rho(T)\).  By
+\noderef{TashTreeMinimumBadPair}, the hypothesis on \((\varphi,T)\)
+has two parts: \((\varphi,T)\) is bad, and no bad pair for any coloring
+of the same exact uncolored edge has rank below that of \(T\).  Unfolding
+badness with \noderef{TashTreeBadPair}, the first part supplies the fixed
+\(k\)-triple, the assertion that \(T\) is a Tashkinov tree, and the
+non-elementariness of \(V(T)\).
 
-We compare ranks.  If \(|E(S)|<q\), the general bound
-\(\rho(S)\le |E(S)|\), which follows from
-\noderef{TashTreeSuffixPath} by taking the last displayed vertex, gives
-\(\rho(S)<q\).  If \(q\le |E(S)|\), the path suffix of \(T\) beginning at
-\(y_q\) restricts to a path suffix of \(S\), so minimality in the
-definition of \(\rho(S)\) gives \(\rho(S)\le q\).  A strict inequality
-again makes the first rank coordinate smaller.  In the remaining case
-\(\rho(S)=q\), while the proper-prefix hypothesis gives
-\(|E(S)|<|E(T)|\).  Thus in every case
-\(S\) has smaller rank than \(T\) according to
-\noderef{TashTreeRankLess}.
+We first check the Tashkinov condition for \(S\), rather than merely
+regarding it as inherited notation.  The relation
+\noderef{TreeSequenceInitialSegment} gives \(m\le n\) and identifies the
+vertex in every position \(0,\ldots,m\) and the exact edge identity in
+every position \(1,\ldots,m\) with the corresponding entry of \(T\).
+Fix \(2\le h\le m\).  Since \(T\) is a Tashkinov tree,
+\noderef{TashkinovTree} supplies a color \(c=\varphi(e_h)\) and an index
+\(r<h\) for which \(c\) is missing at \(y_r\).  Because \(h\le m\), both
+the edge in position \(h\) and the vertex in position \(r\) occur in
+\(S\), and the entrywise equalities above identify them with those same
+objects.  Thus the identical \(y_r,c\) witnesses the condition for the
+edge in position \(h\) of \(S\).  This proves the condition for every
+colored edge of \(S\), so \(S\) is a Tashkinov tree for the unchanged
+\(k\)-triple.
 
-If \(V(S)\) were not elementary, the preceding inheritance would make
-\((\varphi,S)\) a bad pair of smaller rank.  This contradicts the defining
-minimality clause of \noderef{TashTreeMinimumBadPair}.  Hence the proper
-prefix is elementary.
+It remains to compare ranks carefully.  By
+\noderef{TashTreePathIndex}, every tree-sequence \(R\) satisfies
+\(1\le\rho(R)\le |E(R)|\), and \(\rho(R)\) is the least number satisfying
+\noderef{TashTreeSuffixPath}.  If \(m<q\), then
+\(\rho(S)\le m<q=\rho(T)\).  Suppose instead that \(q\le m\).  The fact
+that \(q=\rho(T)\) says that for every \(q\le h<n\), the exact edge in
+position \(h+1\) joins the vertices in positions \(h,h+1\).  Restricting
+this assertion to \(q\le h<m\), and using the entrywise initial-segment
+equalities, proves that \(q\) is a suffix-path start for \(S\).  Hence
+\(\rho(S)\le q\).  If this inequality is strict, the first rank coordinate
+decreases.  If it is equality, then \(m<n\) by properness of the initial
+segment, so the second coordinate decreases.  In all cases
+\noderef{TashTreeRankLess} gives that \(S\) has smaller rank than \(T\).
+
+Now assume for contradiction that \(V(S)\) is not
+\(\varphi\)-elementary.  The unchanged \(k\)-triple, the Tashkinov
+condition just proved, and this failure of elementariness are exactly the
+three clauses of \noderef{TashTreeBadPair}.  Thus \((\varphi,S)\) is a bad
+pair, and the preceding paragraph makes it a smaller one.  This contradicts
+the universal minimality clause of \noderef{TashTreeMinimumBadPair}.
+Therefore \(V(S)\) is elementary.
 \end{proof}

@@ -3,49 +3,153 @@ If \((\varphi,T)\) is a minimum bad pair, then
 \(\rho(T)>2\).
 \end{lemma}
 \begin{proof}
-Write \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\).  First, \(n\ne1\).  Otherwise
-non-elementariness says that some color is missing at both \(y_0,y_1\),
-the two endpoints of the uncolored edge \(e_1=e\).  Assigning that color
-to \(e\) creates a proper full \(k\)-edge-coloring of \(G\).  This
-contradicts the clause \(\chi'(G)=k+1\) in \noderef{KTriple}.  Hence
-\(n\ge2\).
+Write \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\) and \(q=\rho(T)\).  Unfolding
+\noderef{TashTreeMinimumBadPair} and then \noderef{TashTreeBadPair}
+shows that \(T\) is a non-elementary Tashkinov tree for the \(k\)-triple
+\((G,e_0,\varphi)\), and that no bad pair under any coloring has rank
+below \(T\).
 
-Suppose \(\rho(T)\le2\).  By \noderef{TashTreeSuffixPath}, if the index is
-one the entire display is a path.  If it is two, the tree-sequence
-attachment for \(e_2\) joins \(y_2\) to one of \(y_0,y_1\); exchange the
-names of the first two vertices if necessary.  The remaining suffix is a
-path by definition of the index.  Thus in either case the entire displayed
-tree is a path in order.
+First \(n\ne1\).  If \(n=1\), then
+\noderef{TreeSequenceVertexSet} is exactly \(\{y_0,y_1\}\).  Its failure
+of \noderef{ColoredVertexSetElementary} supplies a color \(\eta\) missing
+at both distinct vertices.  Define a new coloring \(\psi\) by giving
+\(e_1=e_0\) color \(\eta\) and leaving every other exact edge unchanged.
+The endpoints of \(e_0\) are \(y_0,y_1\) by
+\noderef{TreeSequence}.  Because \(\eta\) is missing at both, no edge
+adjacent to \(e_0\) has color \(\eta\); hence the definition
+\noderef{IsProperEdgeColoring} shows that \(\psi\) is proper.  The clause
+\noderef{IsOneEdgeUncolored} for the original \(k\)-triple says that
+every other edge was already colored, so \(\psi\) is full in the sense of
+\noderef{IsFullEdgeColoring}.  Thus \(\psi\) witnesses
+\noderef{HasKEdgeColoring} with \(k\) colors.  By the leastness in
+\noderef{ChromaticIndex}, \(\chi'(G)\le k\), contradicting the equation
+\(\chi'(G)=k+1\) in \noderef{KTriple}.  Since
+\noderef{TreeSequence} also gives \(n\ge1\), we have \(n\ge2\).
 
-The prefix \(T_{n-1}\) is elementary by
-\noderef{TashTreeProperPrefixElementary}, while \(T\) is not.  Hence some
-color \(\beta\) is missing at \(y_n\) and at an earlier vertex \(y_i\).
-If \(i<n-1\), choose a color \(\gamma\) missing at \(y_{i+1}\); such a
-color exists because \(k\ge\Delta(G)+1\).  Both colors are unused through
-\(y_{i+1}\).  For \(\gamma\), an occurrence on an earlier colored tree
-edge would have an even earlier missing-color witness by the Tashkinov
-condition, contradicting elementariness of \(T_{i+1}\).  For \(\beta\),
-elementariness makes \(y_i\) the only possible earlier witness.  The only
-remaining candidate is \(e_{i+1}\), but that path edge is incident with
-the \(\beta\)-missing vertex \(y_i\), so it cannot be colored \(\beta\).
+Suppose for contradiction that \(q\le2\).  The bounds in
+\noderef{TashTreePathIndex} give \(1\le q\).  We first dispose explicitly
+of \(q=2\).  By \noderef{TashTreeSuffixPath}, every exact edge
+\(e_h\), \(3\le h\le n\), joins \(y_{h-1}\) to \(y_h\).  The attachment
+field of \noderef{TreeSequence} says that \(e_2\) joins \(y_2\) to
+exactly one of \(y_0,y_1\).
 
-Apply \noderef{TashTreeControlledInterchange} to \(\beta,\gamma\).  It
-moves the earlier missing occurrence of \(\beta\) from \(y_i\) to
-\(y_{i+1}\), preserves all later Tashkinov witnesses, and keeps a minimum
-bad pair.  It also leaves \(\beta\) missing at \(y_n\): otherwise the
-controlled two-color path would contain the three distinct degree-at-most-
-one vertices \(y_i,y_{i+1},y_n\), impossible for a path.  Iterating this
-finite operation, we obtain a minimum bad pair in which \(\beta\) is
-missing at both \(y_{n-1}\) and \(y_n\).
+If that earlier endpoint is \(y_1\), the original display is already a
+path in order.  Then \(1\) is a suffix-path start, so leastness in
+\noderef{TashTreePathIndex} gives \(\rho(T)=1\), immediately
+contradicting \(q=2\).
 
-Recolor the last exact edge \(e_n=y_{n-1}y_n\) with \(\beta\), and let
-\(\delta\) be its former color.  Properness is preserved because both
-ends miss \(\beta\).  The old Tashkinov witness for the \(\delta\)-colored
-edge \(e_n\) is some \(y_j\) with \(j<n\); it cannot be \(y_{n-1}\),
-which was incident with that \(\delta\)-edge, so \(j\le n-2\).  Removing
-\(\delta\) from \(e_n\) also makes \(\delta\) missing at \(y_{n-1}\).
-No displayed edge or witness of \(T_{n-1}\) changed.  Consequently
-\(T_{n-1}\) is a bad Tashkinov path under the new coloring, with strictly
-smaller rank than \(T\).  This contradicts
-\noderef{TashTreeMinimumBadPair}.  Therefore \(\rho(T)>2\).
+It remains that the earlier endpoint is \(y_0\).  Define a new displayed
+sequence
+\[
+ S=(y_1,e_1,y_0,e_2,y_2,e_3,y_3,\ldots,e_n,y_n);
+\]
+that is, exchange only the first two vertex entries and retain every exact
+edge identity and every later vertex entry.  We verify that this is a
+tree-sequence, rather than treating the exchange as notation.
+Vertex and edge injectivity are inherited because only two distinct
+vertices were permuted.  The first edge remains the exact edge \(e_0\);
+its endpoint pair is unchanged because an unordered pair is symmetric.
+The chosen orientation makes \(e_2\) join the new second vertex \(y_0\)
+to the new vertex \(y_2\), and the suffix equations above give the
+successive attachments for every \(e_h\), \(h\ge3\).  Hence all fields of
+\noderef{TreeSequence} hold, and \(S\) is a path in displayed order.
+
+The reordered \(S\) remains a Tashkinov tree.  For \(e_2\), its old
+witness under \noderef{TashkinovTree} was one of \(y_0,y_1\), and both
+still precede \(e_2\).  For \(e_h\), \(h\ge3\), an old witness among the
+first two vertices is merely exchanged and still precedes \(e_h\), while
+every other witness retains its position.  Its vertex set is exactly that
+of \(T\), and the coloring and \(k\)-triple are unchanged, so its
+non-elementariness is unchanged.  Thus \noderef{TashTreeBadPair} holds
+for \((\varphi,S)\).  The in-order path gives \(\rho(S)=1\), whereas
+\(\rho(T)=2\), so \noderef{TashTreeRankLess} makes \(S\) smaller than
+\(T\), contradicting the universal clause of
+\noderef{TashTreeMinimumBadPair}.  Therefore \(q\ne2\).  Under our
+assumption \(q\le2\), it follows that \(q=1\), and
+\noderef{TashTreeSuffixPath} now says that the original display \(T\) is
+itself a path in order.
+
+Let \(P=T_{n-1}\) be the prefix from \noderef{TreeSequencePrefix}.
+It is elementary by \noderef{TashTreeProperPrefixElementary}, whereas
+\(T\) is not.  Expanding \noderef{ColoredVertexSetElementary}, a color
+\(\beta\) is therefore missing at the new vertex \(y_n\) and at some
+\(y_i\) with \(i<n\): if a repeated missing color had both witnesses in
+\(P\), it would already violate elementariness there.
+
+Assume \(i<n-1\).  There is a color \(\gamma\) missing at \(y_{i+1}\).
+Indeed, the properness and degree inequality in \noderef{KTriple}, together
+with \noderef{PresentColors}, give one incident edge for every present
+color in the sense of \noderef{Incident}.  Two edges chosen for the same
+color would be adjacent by \noderef{AdjacentEdges} and would contradict
+\noderef{IsProperEdgeColoring}.  Thus \noderef{Degree} and
+\noderef{MaximumDegree} give
+\[
+ |\varphi(y_{i+1})|\le d_G(y_{i+1})\le\Delta(G)<k.
+\]
+The complement definition \noderef{MissingColors} then supplies
+\(\gamma\).
+
+Both \(\beta\) and \(\gamma\) are unused on
+\(e_2,\ldots,e_{i+1}\).  For \(\gamma\), if such an edge used it, the
+Tashkinov condition \noderef{TashkinovTree} would give an earlier
+missing-\(\gamma\) vertex, distinct from \(y_{i+1}\), contradicting
+elementariness of the proper prefix \(T_{i+1}\) supplied by
+\noderef{TashTreeProperPrefixElementary}.  For \(\beta\), an occurrence
+on one of \(e_2,\ldots,e_i\) similarly supplies an earlier witness
+distinct from \(y_i\).  The only remaining edge \(e_{i+1}\) joins
+\(y_i\) to \(y_{i+1}\), because \(T\) is an in-order path; it cannot have
+color \(\beta\), since \(\beta\) is missing at its incident vertex
+\(y_i\).  Thus the hypotheses of
+\noderef{TashTreeControlledInterchange} hold for the colors
+\(\beta,\gamma\) at \(y_i,y_{i+1}\).
+
+After that interchange, \(\beta\) is missing at \(y_{i+1}\) and the pair
+is again minimum bad.  It is still missing at \(y_n\).  To justify this
+last assertion, the controlled component has the two distinct vertex ends
+\(y_i,y_{i+1}\).  Since \(y_n\) also misses \(\beta\),
+\noderef{MissingColorIncidenceEndpoint} makes it a vertex of degree at
+most one in the same two-color incidence graph.  If it belonged to that
+component, the spanning path from
+\noderef{TwoColorComponentSpanningPath} would have three distinct
+degree-at-most-one vertex-nodes, impossible for a path.  Thus \(y_n\) is
+outside the swapped component, and all its incident edge colors, including
+its missing-\(\beta\) status, are fixed.
+
+The sequence itself has not changed.  We may repeat this argument with
+\(i+1\) in place of \(i\); each application returns a minimum bad pair,
+so \noderef{TashTreeProperPrefixElementary} remains applicable at the next
+stage.  The integer \(n-1-i\) decreases by one, so after finitely many
+steps we have a minimum bad pair, which we again denote
+\((\varphi,T)\), in which \(\beta\) is missing at both
+\(y_{n-1}\) and \(y_n\).
+
+Because \(q=1\), the last exact edge \(e_n\) joins these two vertices.
+It has a colored value \(\delta\): \(n\ge2\), edge injectivity in
+\noderef{TreeSequence} gives \(e_n\ne e_1=e_0\), and
+\noderef{IsOneEdgeUncolored} colors every edge other than \(e_0\).
+Recolor only \(e_n\) with \(\beta\), obtaining \(\varphi^*\).  This is
+proper because both endpoints previously missed \(\beta\); all pairs of
+edges not involving \(e_n\) are unchanged, and no edge adjacent to
+\(e_n\) can have color \(\beta\).  The uniquely uncolored edge remains
+\(e_0\), since a colored edge was replaced by another colored value.
+Thus all clauses of the \(k\)-triple remain true.
+
+The old Tashkinov witness for the \(\delta\)-colored \(e_n\) is a vertex
+\(y_j\) with \(j<n\).  It cannot be \(y_{n-1}\), because \(e_n\) was an
+incident \(\delta\)-edge there, whereas a missing color is absent from all
+incident edges by \noderef{PresentColors} and \noderef{MissingColors}.
+Hence \(j\le n-2\).  Properness also implies that \(e_n\) was the only
+incident \(\delta\)-edge at \(y_{n-1}\); after removing its old color,
+\(\delta\) is missing there.  No exact edge or missing-color witness in
+the prefix \(T_{n-1}\) was otherwise changed.  Therefore that prefix is a
+Tashkinov tree under \(\varphi^*\), and it is non-elementary because the
+distinct vertices \(y_j,y_{n-1}\) both miss \(\delta\).
+By \noderef{TashTreeBadPair}, \((\varphi^*,T_{n-1})\) is bad.
+
+Both \(T\) and \(T_{n-1}\) are in-order paths, so both path indices are
+one, while the latter has one fewer exact edge.  Thus
+\noderef{TashTreeRankLess} makes this new bad pair strictly smaller than
+the current minimum bad pair.  This contradicts
+\noderef{TashTreeMinimumBadPair}.  The assumption \(q\le2\) is false, and
+therefore \(\rho(T)>2\).
 \end{proof}

@@ -1,8 +1,33 @@
+import Tablet.AdjacentEdges
+import Tablet.ColoredVertexSetElementary
+import Tablet.Degree
+import Tablet.Incident
+import Tablet.IsOneEdgeUncolored
+import Tablet.IsProperEdgeColoring
+import Tablet.KTriple
+import Tablet.MaximumDegree
+import Tablet.MissingColorIncidenceEndpoint
+import Tablet.MissingColors
+import Tablet.PresentColors
+import Tablet.TashTreeBadPair
 import Tablet.TashTreeCaseRepeatedOnPath
 import Tablet.TashTreeControlledInterchange
 import Tablet.TashTreeFourUnusedColors
+import Tablet.TashTreeMinimumBadPair
 import Tablet.TashTreeProperPrefixElementary
+import Tablet.TashTreeRankLess
+import Tablet.TashkinovTree
+import Tablet.TreeFreeColors
+import Tablet.TreeMissingColors
+import Tablet.TreeSequence
+import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
+import Tablet.TreeUsedColors
+import Tablet.TwoColorComponent
+import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: TashTreeCaseNoRepeatedOnPath]
 theorem TashTreeCaseNoRepeatedOnPath {V E : Type*}
