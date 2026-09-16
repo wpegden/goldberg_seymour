@@ -17,37 +17,58 @@ under \(\varphi\), then it misses \(\alpha\) under \(\varphi'\).
 \begin{proof}
 Write \(H\) for the incidence graph
 \noderef{TwoColorIncidenceGraph} and use the component
-\noderef{TwoColorComponent}.  If an edge-node \(e\) is in \(C\) and
-is incident with a vertex \(v\), then its old color is \(\alpha\) or
-\(\beta\), so \(e\) is adjacent to the vertex-node \(v\) in \(H\).
-Thus \(v\in C\).  Conversely, if \(v\in C\) and an incident edge has
-old color \(\alpha\) or \(\beta\), its edge-node is adjacent to \(v\)
-and hence is in \(C\).
+\noderef{TwoColorComponent}.  Fix a vertex \(v\) and an incident edge
+\(e\).  If the edge-node \(e\) belongs to \(C\) and its old value is
+\(\alpha\) or \(\beta\), then the adjacency rule in
+\noderef{TwoColorIncidenceGraph} joins \(e\) to the vertex-node \(v\),
+so \(v\in C\).  If instead the edge-node belongs to \(C\) but its old
+value is neither affected color (including the possibility that it is
+uncolored), both nested color tests in
+\noderef{TwoColorComponentSwap} fail and the value of \(e\) is fixed.
+This second alternative includes the isolated edge-root case, in which
+an off-color or uncolored edge-node can by itself be the selected
+component.  Finally, if the edge-node is outside \(C\), the outer
+component test in \noderef{TwoColorComponentSwap} fixes its value.
+
+Conversely, if \(v\in C\) and an incident edge has old color
+\(\alpha\) or \(\beta\), the same adjacency rule joins its edge-node to
+\(v\), and hence that edge-node lies in \(C\).
 
 Suppose first that \(v\notin C\).  The first observation shows that no
-edge-node in \(C\) is incident with \(v\).  The definition
-\noderef{TwoColorComponentSwap} therefore fixes every edge incident with
-\(v\).  By the definitions of present and missing colors
+incident edge whose edge-node lies in \(C\) can have old value
+\(\alpha\) or \(\beta\), since that would force \(v\in C\).  Every such
+edge is therefore fixed by the nested tests, and every incident edge
+outside \(C\) is fixed by the outer test.  Thus every exact value on an
+edge incident with \(v\) is fixed.  By the definitions of present and
+missing colors
 \noderef{PresentColors} and \noderef{MissingColors}, the whole
 missing-color set at \(v\) is unchanged.
 
 Now suppose \(v\in C\) and \(v\) misses \(\alpha\) under \(\varphi\).
 If an incident edge had color \(\beta\) after the interchange, then
-either it was outside \(C\), in which case it already had color
-\(\beta\), or it was inside \(C\), in which case it previously had
-color \(\alpha\).  The first case is impossible because an incident
-old \(\beta\)-edge at a vertex of \(C\) belongs to \(C\); the second is
-impossible because \(v\) misses \(\alpha\).  Hence \(v\) misses
-\(\beta\) afterward.  Interchanging the roles of \(\alpha\) and
-\(\beta\) proves the symmetric assertion.  Properness
-\noderef{IsProperEdgeColoring} ensures that the two-color incidence
-description is the usual one, although the preceding exclusion also
-checks the required edge identities directly.
+either its edge-node was outside \(C\), in which case
+\noderef{TwoColorComponentSwap} says that it already had color
+\(\beta\), or its edge-node was inside \(C\).  The first case is
+impossible: that old \(\beta\)-edge is adjacent to \(v\) in
+\noderef{TwoColorIncidenceGraph}, so the edge-node belongs to the same
+component as \(v\).  In the second case, the three nested branches in
+\noderef{TwoColorComponentSwap}, together with
+\(\alpha\ne\beta\), show that a new \(\beta\)-value can only have come
+from an old \(\alpha\)-value.  That contradicts \(v\)'s old
+missing-\(\alpha\) status by \noderef{MissingColors}.  Hence no
+incident edge has color \(\beta\) afterward, so \(v\) misses
+\(\beta\).  Interchanging the roles of \(\alpha\) and \(\beta\) proves
+the symmetric assertion.  The assumed properness is the condition under
+which these components are the usual two-color chains, as expressed by
+\noderef{IsProperEdgeColoring}; the pointwise exclusions above prove the
+claimed missing-color implications.
 
 Finally, \noderef{TwoColorComponentSwap} changes only values equal to
-\(\alpha\) or \(\beta\).  An incident edge therefore has any fixed
-color \(c\notin\{\alpha,\beta\}\) before the interchange if and only if
-it has color \(c\) afterward.  Applying
-\noderef{PresentColors} and then taking complements via
-\noderef{MissingColors} proves the last assertion.
+\(\alpha\) or \(\beta\).  More explicitly, an old value
+\(c\notin\{\alpha,\beta\}\) fails both nested color tests and is fixed;
+conversely, neither affected-color branch can produce \(c\), so a new
+\(c\)-value must be the fixed old \(c\)-value.  Thus an incident edge
+has color \(c\) before the interchange if and only if it has color
+\(c\) afterward.  Applying \noderef{PresentColors} and then taking
+complements via \noderef{MissingColors} proves the last assertion.
 \end{proof}

@@ -1,10 +1,12 @@
 import Tablet.ColoredVertexSetElementary
 import Tablet.IsProperEdgeColoring
 import Tablet.MissingColorIncidenceEndpoint
+import Tablet.MissingColors
 import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapMissingBehavior
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: TwoColorComponentSwapNonElementary]
 theorem TwoColorComponentSwapNonElementary {V E : Type*}

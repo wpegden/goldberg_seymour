@@ -15,21 +15,47 @@ the component \noderef{TwoColorComponent} \(C\).  Since \(u\) misses
 have degree at most one.  An internal support vertex of a simple path
 has its two distinct path-neighbors, so neither \(u\) nor \(v\) is
 internal.  They are distinct and belong to the support, and hence they
-are exactly the two ends of this nontrivial spanning path.  Every other
-vertex-node of \(C\) is
-internal and consequently is incident with one edge of each affected
-color; it misses neither \(\alpha\) nor \(\beta\).  The interchange
-reverses these two colors along the path, so the same remains true at
-all internal vertices.  By
-\noderef{TwoColorComponentSwapMissingBehavior}, the affected missing
-statuses at the ends are exchanged: afterward \(u\) misses \(\beta\)
-and \(v\) misses \(\alpha\).  Vertices outside \(C\) keep their whole
-missing sets, and all colors outside \(\{\alpha,\beta\}\) keep their
-missing status everywhere.
+are exactly the two ends of this nontrivial spanning path.
+
+We first classify the two affected missing colors at every vertex-node
+of \(C\).  The unique path-neighbor of the end \(u\) is an edge-node
+adjacent to \(u\),
+so \noderef{TwoColorIncidenceGraph} says that it is an incident edge of
+old color \(\alpha\) or \(\beta\).  Since \(u\) misses \(\alpha\), the
+definition \noderef{MissingColors} excludes the first possibility.
+Thus this edge has old color \(\beta\), and consequently \(u\) does not
+also miss \(\beta\).  Symmetrically, the unique path-neighbor of \(v\)
+is an edge-node of old color \(\alpha\), because \(v\) misses
+\(\beta\); consequently \(v\) does not also miss \(\alpha\).
+
+Every other vertex-node of \(C\) is internal on the spanning path and
+has two distinct path-neighbors.  By
+\noderef{TwoColorIncidenceGraph}, those neighbors are the identities of
+two distinct incident edges, each colored \(\alpha\) or \(\beta\).
+They cannot have the same color, because they share this vertex and
+properness \noderef{IsProperEdgeColoring} forbids equal colors on
+distinct adjacent edges.  Hence one has color \(\alpha\) and the other
+has color \(\beta\), so an internal vertex misses neither affected
+color.  We have proved that, among vertex-nodes of \(C\), only \(u\)
+can miss \(\alpha\), and only \(v\) can miss \(\beta\), before the
+swap.
+
+Every edge-node on the spanning path belongs to \(C\), so
+\noderef{TwoColorComponentSwap} reverses its affected color.  In
+particular, the old \(\beta\)-edge at \(u\) becomes an \(\alpha\)-edge,
+and the old \(\alpha\)-edge at \(v\) becomes a \(\beta\)-edge.  Together
+with \noderef{TwoColorComponentSwapMissingBehavior}, this shows that
+afterward \(u\) misses \(\beta\) but not \(\alpha\), while \(v\) misses
+\(\alpha\) but not \(\beta\).  At each internal vertex, its two path
+edges are merely exchanged, so it still misses neither affected color.
+Vertices outside \(C\) keep their whole missing sets by
+\noderef{TwoColorComponentSwapMissingBehavior}, and the same node says
+that all colors outside \(\{\alpha,\beta\}\) keep their missing status
+everywhere.
 
 Because \(X\) is not elementary, unfolding
 \noderef{ColoredVertexSetElementary} gives distinct \(x,y\in X\) and a
-color \(c\) missing at both.  If
+color \(c\) belonging to both sets from \noderef{MissingColors}.  If
 \(c\notin\{\alpha,\beta\}\), the same witnesses work afterward.  Let
 \(c=\alpha\).  Among vertices of \(C\), only the end \(u\) can miss
 \(\alpha\) before the swap.  Thus either both witnesses lie outside

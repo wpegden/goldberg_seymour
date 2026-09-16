@@ -12,22 +12,35 @@ witness after the swap, and the full displayed sequence \(T\) is a
 Tashkinov tree under \(\varphi'\).
 \end{helper}
 \begin{proof}
-Let \(h\) satisfy \(2\le h\le j\).  By the two
-\noderef{TreeColorUnusedThrough} assumptions, the exact value
-\(\varphi(e_h)\) is neither \(\alpha\) nor \(\beta\).  Whether or not
-the edge-node belongs to \(C\), the definition
-\noderef{TwoColorComponentSwap} therefore fixes that value.  This gives
-the first assertion.
+Fix an index \(r\) with \(1\le r<j\); in the displayed indexing this is
+exactly one of the edges \(e_2,\ldots,e_j\).  The two
+\noderef{TreeColorUnusedThrough} hypotheses say separately that
+\(\varphi(e_{r+1})\ne\alpha\) and
+\(\varphi(e_{r+1})\ne\beta\).  If this edge is uncolored, the nested
+tests in \noderef{TwoColorComponentSwap} fix its value.  If it has a
+color, that color is different from both affected colors, so the same
+nested tests again fix its exact value, whether or not its edge-node
+belongs to \(C\).  This proves the asserted fixation at every index
+with \(1\le r<j\).  No color or witness claim is being made for the
+initial edge \(e_1\), whose index has \(r=0\).
 
-Let \(S\) be an initial segment through \(y_j\).  For any colored
-displayed edge of \(S\), choose its earlier witness from
-\noderef{TashkinovTree}.  The edge color is outside
-\(\{\alpha,\beta\}\) by the preceding paragraph.  Its exact edge value
-is fixed, and its missing status at the old witness is fixed by the last
-clause of \noderef{TwoColorComponentSwapMissingBehavior}.  The vertex
-and edge identities in \(S\) agree with those of \(T\) by
-\noderef{TreeSequenceInitialSegment}.  Hence the same earlier vertex is
-a valid witness in \(S\), proving that \(S\) is Tashkinov for
+Let \(S\) be an initial segment of length \(j\).  By the definition
+\noderef{TashkinovTree}, the Tashkinov obligations for \(S\) are indexed
+only by \(r\) with \(1\le r<j\), again the edges
+\(e_2,\ldots,e_j\); there is no Tashkinov obligation for \(e_1\).
+Fix such an \(r\).  Apply the Tashkinov property of \(T\) at this same
+index to obtain a color \(c\) of \(e_{r+1}\) and an earlier vertex
+\(y_s\), \(s<r+1\), at which \(c\) is missing.  Both unused-through
+hypotheses apply because \(1\le r<j\), and hence
+\(c\notin\{\alpha,\beta\}\).  The preceding paragraph fixes the exact
+edge value.  The last clause of
+\noderef{TwoColorComponentSwapMissingBehavior} fixes missingness of
+\(c\) at \(y_s\); here missingness means membership in the complement
+set defined by \noderef{MissingColors}.  Finally,
+\noderef{TreeSequenceInitialSegment} identifies the edge and all
+vertices through this index in \(S\) with those in \(T\).  Thus the
+same \(y_s\) is an earlier witness for this edge in \(S\).  Since \(r\)
+was an arbitrary index with \(1\le r<j\), \(S\) is Tashkinov for
 \(\varphi'\).
 
 Assume now that \(y_i\in C\).  The root \(y_j\) is also in \(C\).
@@ -38,6 +51,7 @@ We construct the claimed new witness by exhaustive cases.
 
 If \(c\notin\{\alpha,\beta\}\), the edge still has color \(c\), and
 the same vertex still misses \(c\), by
+\noderef{TwoColorComponentSwap} and
 \noderef{TwoColorComponentSwapMissingBehavior}.  If the edge-node lies
 in \(C\) and its old color is \(\alpha\), its new color is \(\beta\)
 and \(y_i\) is a new missing-\(\beta\) witness.  If its old color is
@@ -57,12 +71,18 @@ has support equal to all of \(C\).  A support vertex internal to that
 path has two distinct path-neighbors, so each of the three
 degree-at-most-one vertices must be an end.  Since the nontrivial path
 has exactly two ends and \(y_i,y_j\) already occupy them, the old
-witness must be one of \(y_i,y_j\).  Thus a lost missing-\(\alpha\)
-witness can only be
+witness must be one of \(y_i,y_j\).  Moreover, the path is nontrivial,
+and the unique path-neighbor of \(y_i\) is an edge-node of old color
+\(\beta\): adjacency
+in \noderef{TwoColorIncidenceGraph} makes its color \(\alpha\) or
+\(\beta\), while membership of \(\alpha\) in
+\noderef{MissingColors} at \(y_i\) excludes \(\alpha\).  Hence \(y_i\)
+does not miss \(\beta\).  Symmetrically, the unique path-neighbor of
+\(y_j\) is an edge-node of old color \(\alpha\), so \(y_j\) does not
+miss \(\alpha\).  Thus a lost missing-\(\alpha\) witness can only be
 \(y_i\), and it is replaced by the new missing-\(\alpha\) witness
-\(y_j\).  Symmetrically, a lost missing-\(\beta\) witness at \(y_j\)
-is replaced by \(y_i\).  Again both replacements occur before
-\(e_h\).
+\(y_j\).  A lost missing-\(\beta\) witness can only be \(y_j\), and it
+is replaced by \(y_i\).  Again both replacements occur before \(e_h\).
 
 This proves the quantified witness-transport assertion.  Applying it to
 the witness supplied by \noderef{TashkinovTree} for each later edge, and

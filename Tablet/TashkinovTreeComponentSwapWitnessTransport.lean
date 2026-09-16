@@ -1,5 +1,6 @@
 import Tablet.IsProperEdgeColoring
 import Tablet.MissingColorIncidenceEndpoint
+import Tablet.MissingColors
 import Tablet.TashkinovTree
 import Tablet.TreeColorUnusedThrough
 import Tablet.TreeSequence
@@ -8,6 +9,7 @@ import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapMissingBehavior
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: TashkinovTreeComponentSwapWitnessTransport]
 theorem TashkinovTreeComponentSwapWitnessTransport {V E : Type*}
