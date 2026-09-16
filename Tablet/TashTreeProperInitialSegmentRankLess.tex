@@ -1,0 +1,25 @@
+\begin{helper}[A proper initial segment has smaller Tashkinov-tree rank]
+If \(S\) is a proper initial segment of a tree-sequence \(T\), then
+\(S\) has smaller lexicographic rank \((\rho,\text{length})\) than
+\(T\).
+\end{helper}
+\begin{proof}
+Let \(q=\rho(T)\), where \(\rho\) is
+\noderef{TashTreePathIndex}.  By
+\noderef{TashTreeSuffixPath}, \(1\le q\le |E(T)|\), and every displayed
+edge at or after position \(q\) joins its two consecutive displayed
+vertices.  The same definition gives \(\rho(S)\le |E(S)|\).
+
+If \(|E(S)|<q\), then
+\(\rho(S)\le |E(S)|<q=\rho(T)\), so the first rank coordinate strictly
+decreases.  Otherwise \(q\le |E(S)|\).  Since
+\noderef{TreeSequenceInitialSegment} identifies every retained vertex
+and exact edge of \(S\) with the corresponding entry of \(T\), all the
+suffix-path equations of \(T\) from position \(q\) restrict to \(S\).
+Consequently \(q\) is an admissible suffix start for \(S\), and the
+minimality in \noderef{TashTreePathIndex} gives \(\rho(S)\le q\).  If
+this inequality is strict, the first coordinate again decreases.  If
+it is an equality, the first coordinates agree while the properness
+hypothesis gives \(|E(S)|<|E(T)|\).  In every case the lexicographic
+condition \noderef{TashTreeRankLess} holds.
+\end{proof}

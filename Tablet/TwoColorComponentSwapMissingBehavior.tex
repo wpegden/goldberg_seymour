@@ -1,0 +1,53 @@
+\begin{helper}[Missing colors under a two-color component interchange]
+Let \(\varphi\) be a proper partial edge-coloring, let
+\(\alpha\ne\beta\), let \(C\) be one
+\((\alpha,\beta)\)-component of the two-color incidence graph, and let
+\(\varphi'\) be obtained by interchanging \(\alpha\) and \(\beta\) on
+\(C\).  Then the following hold.
+\begin{enumerate}
+\item If a vertex \(v\) is outside \(C\), then its entire missing-color
+set is unchanged.
+\item If \(v\in C\) misses \(\alpha\) under \(\varphi\), then it misses
+\(\beta\) under \(\varphi'\); symmetrically, if it misses \(\beta\)
+under \(\varphi\), then it misses \(\alpha\) under \(\varphi'\).
+\item At every vertex, missingness of every color outside
+\(\{\alpha,\beta\}\) is unchanged.
+\end{enumerate}
+\end{helper}
+\begin{proof}
+Write \(H\) for the incidence graph
+\noderef{TwoColorIncidenceGraph} and use the component
+\noderef{TwoColorComponent}.  If an edge-node \(e\) is in \(C\) and
+is incident with a vertex \(v\), then its old color is \(\alpha\) or
+\(\beta\), so \(e\) is adjacent to the vertex-node \(v\) in \(H\).
+Thus \(v\in C\).  Conversely, if \(v\in C\) and an incident edge has
+old color \(\alpha\) or \(\beta\), its edge-node is adjacent to \(v\)
+and hence is in \(C\).
+
+Suppose first that \(v\notin C\).  The first observation shows that no
+edge-node in \(C\) is incident with \(v\).  The definition
+\noderef{TwoColorComponentSwap} therefore fixes every edge incident with
+\(v\).  By the definitions of present and missing colors
+\noderef{PresentColors} and \noderef{MissingColors}, the whole
+missing-color set at \(v\) is unchanged.
+
+Now suppose \(v\in C\) and \(v\) misses \(\alpha\) under \(\varphi\).
+If an incident edge had color \(\beta\) after the interchange, then
+either it was outside \(C\), in which case it already had color
+\(\beta\), or it was inside \(C\), in which case it previously had
+color \(\alpha\).  The first case is impossible because an incident
+old \(\beta\)-edge at a vertex of \(C\) belongs to \(C\); the second is
+impossible because \(v\) misses \(\alpha\).  Hence \(v\) misses
+\(\beta\) afterward.  Interchanging the roles of \(\alpha\) and
+\(\beta\) proves the symmetric assertion.  Properness
+\noderef{IsProperEdgeColoring} ensures that the two-color incidence
+description is the usual one, although the preceding exclusion also
+checks the required edge identities directly.
+
+Finally, \noderef{TwoColorComponentSwap} changes only values equal to
+\(\alpha\) or \(\beta\).  An incident edge therefore has any fixed
+color \(c\notin\{\alpha,\beta\}\) before the interchange if and only if
+it has color \(c\) afterward.  Applying
+\noderef{PresentColors} and then taking complements via
+\noderef{MissingColors} proves the last assertion.
+\end{proof}

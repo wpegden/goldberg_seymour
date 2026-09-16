@@ -1,0 +1,44 @@
+\begin{helper}[A component swap between two missing-color ends preserves non-elementarity]
+Let \(X\) be a vertex set in a properly partially edge-colored graph.
+Let \(u\ne v\) belong both to \(X\) and to one
+\((\alpha,\beta)\)-component \(C\), where \(\alpha\ne\beta\), with
+\(u\) missing \(\alpha\) and \(v\) missing \(\beta\).  If \(X\) is
+not elementary before interchanging \(\alpha,\beta\) on \(C\), then it
+is not elementary afterward.
+\end{helper}
+\begin{proof}
+By \noderef{TwoColorComponentSpanningPath}, properness
+\noderef{IsProperEdgeColoring} supplies a simple path whose support is
+the component \noderef{TwoColorComponent} \(C\).  Since \(u\) misses
+\(\alpha\) and \(v\) misses \(\beta\),
+\noderef{MissingColorIncidenceEndpoint} makes each of their vertex-nodes
+have degree at most one.  An internal support vertex of a simple path
+has its two distinct path-neighbors, so neither \(u\) nor \(v\) is
+internal.  They are distinct and belong to the support, and hence they
+are exactly the two ends of this nontrivial spanning path.  Every other
+vertex-node of \(C\) is
+internal and consequently is incident with one edge of each affected
+color; it misses neither \(\alpha\) nor \(\beta\).  The interchange
+reverses these two colors along the path, so the same remains true at
+all internal vertices.  By
+\noderef{TwoColorComponentSwapMissingBehavior}, the affected missing
+statuses at the ends are exchanged: afterward \(u\) misses \(\beta\)
+and \(v\) misses \(\alpha\).  Vertices outside \(C\) keep their whole
+missing sets, and all colors outside \(\{\alpha,\beta\}\) keep their
+missing status everywhere.
+
+Because \(X\) is not elementary, unfolding
+\noderef{ColoredVertexSetElementary} gives distinct \(x,y\in X\) and a
+color \(c\) missing at both.  If
+\(c\notin\{\alpha,\beta\}\), the same witnesses work afterward.  Let
+\(c=\alpha\).  Among vertices of \(C\), only the end \(u\) can miss
+\(\alpha\) before the swap.  Thus either both witnesses lie outside
+\(C\), in which case they remain witnesses, or exactly one is \(u\)
+and the other, say \(x\), is outside \(C\).  In the latter case \(x\)
+still misses \(\alpha\), while the other end \(v\in X\) now misses
+\(\alpha\); also \(x\ne v\), since \(v\in C\).  Hence \(x,v\) witness
+non-elementarity afterward.  The case \(c=\beta\) is symmetric, using
+the new missing-\(\beta\) end \(u\).  In all cases two distinct members
+of \(X\) share a missing color after the component swap, so \(X\) is
+not elementary.
+\end{proof}

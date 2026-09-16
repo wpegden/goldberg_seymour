@@ -1,0 +1,71 @@
+\begin{helper}[Transport of Tashkinov witnesses through a controlled component swap]
+Let \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\) be a Tashkinov tree for a
+proper partial coloring \(\varphi\).  Let \(i<j\), let
+\(\alpha\ne\beta\) be missing at \(y_i,y_j\), respectively, and assume
+that neither color occurs on \(e_2,\ldots,e_j\).  Swap the two colors on
+the \((\alpha,\beta)\)-component \(C\) containing \(y_j\), obtaining
+\(\varphi'\).  Then every edge \(e_2,\ldots,e_j\) keeps its exact color,
+and every initial segment through \(y_j\) is a Tashkinov tree under
+\(\varphi'\).  Moreover, if \(y_i\in C\), then every old witness for
+every edge at or after position \(j\) gives a possibly exchanged earlier
+witness after the swap, and the full displayed sequence \(T\) is a
+Tashkinov tree under \(\varphi'\).
+\end{helper}
+\begin{proof}
+Let \(h\) satisfy \(2\le h\le j\).  By the two
+\noderef{TreeColorUnusedThrough} assumptions, the exact value
+\(\varphi(e_h)\) is neither \(\alpha\) nor \(\beta\).  Whether or not
+the edge-node belongs to \(C\), the definition
+\noderef{TwoColorComponentSwap} therefore fixes that value.  This gives
+the first assertion.
+
+Let \(S\) be an initial segment through \(y_j\).  For any colored
+displayed edge of \(S\), choose its earlier witness from
+\noderef{TashkinovTree}.  The edge color is outside
+\(\{\alpha,\beta\}\) by the preceding paragraph.  Its exact edge value
+is fixed, and its missing status at the old witness is fixed by the last
+clause of \noderef{TwoColorComponentSwapMissingBehavior}.  The vertex
+and edge identities in \(S\) agree with those of \(T\) by
+\noderef{TreeSequenceInitialSegment}.  Hence the same earlier vertex is
+a valid witness in \(S\), proving that \(S\) is Tashkinov for
+\(\varphi'\).
+
+Assume now that \(y_i\in C\).  The root \(y_j\) is also in \(C\).
+By \noderef{TwoColorComponentSwapMissingBehavior}, \(y_i\) misses
+\(\beta\) and \(y_j\) misses \(\alpha\) after the swap.  Fix a later
+edge \(e_h\), an old color \(c\), and an old earlier witness \(y_r\).
+We construct the claimed new witness by exhaustive cases.
+
+If \(c\notin\{\alpha,\beta\}\), the edge still has color \(c\), and
+the same vertex still misses \(c\), by
+\noderef{TwoColorComponentSwapMissingBehavior}.  If the edge-node lies
+in \(C\) and its old color is \(\alpha\), its new color is \(\beta\)
+and \(y_i\) is a new missing-\(\beta\) witness.  If its old color is
+\(\beta\), the symmetric witness is \(y_j\).  Both vertices precede
+\(e_h\), since \(i<j\le h\).
+
+It remains that the edge-node is outside \(C\) and
+\(c\in\{\alpha,\beta\}\), so its exact color is fixed.  If the old
+witness is outside \(C\), its entire missing set is unchanged by
+\noderef{TwoColorComponentSwapMissingBehavior}.  If it is in \(C\),
+then it has degree at most one in the two-color incidence graph by
+properness and \noderef{MissingColorIncidenceEndpoint}.  The same is
+true of \(y_i\) and \(y_j\).  These two vertices are distinct because
+\(i<j\) and \noderef{TreeSequence} makes the displayed vertices
+injective.  By \noderef{TwoColorComponentSpanningPath}, a simple path
+has support equal to all of \(C\).  A support vertex internal to that
+path has two distinct path-neighbors, so each of the three
+degree-at-most-one vertices must be an end.  Since the nontrivial path
+has exactly two ends and \(y_i,y_j\) already occupy them, the old
+witness must be one of \(y_i,y_j\).  Thus a lost missing-\(\alpha\)
+witness can only be
+\(y_i\), and it is replaced by the new missing-\(\alpha\) witness
+\(y_j\).  Symmetrically, a lost missing-\(\beta\) witness at \(y_j\)
+is replaced by \(y_i\).  Again both replacements occur before
+\(e_h\).
+
+This proves the quantified witness-transport assertion.  Applying it to
+the witness supplied by \noderef{TashkinovTree} for each later edge, and
+using the already proved initial-segment assertion for earlier edges,
+shows that the full sequence \(T\) remains a Tashkinov tree.
+\end{proof}
