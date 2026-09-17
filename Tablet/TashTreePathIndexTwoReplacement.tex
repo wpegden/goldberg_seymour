@@ -1,0 +1,69 @@
+\begin{helper}[The path-index-two first-vertex replacement]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\), \(n\geq2\), and \(\rho(T)=2\).
+Then there is a tree-sequence \(S\) of the same length whose exact edge
+in every position is the corresponding edge of \(T\), whose first two
+vertices are \(y_1,y_0\) in that order, and whose later vertices are the
+corresponding vertices of \(T\), such that \((\varphi,S)\) is a bad pair
+and \(S\) has smaller Tashkinov rank than \(T\).
+\end{helper}
+\begin{proof}
+Write \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\).  The assertion
+\(\rho(T)=2\), together with \noderef{TashTreePathIndex} and
+\noderef{TashTreeSuffixPath}, says that every \(e_h\) with
+\(3\leq h\leq n\) joins \(y_{h-1}\) to \(y_h\).  The attachment field of
+\noderef{TreeSequence} says that \(e_2\) joins \(y_2\) to one of the two
+earlier vertices \(y_0,y_1\).
+
+It cannot join \(y_2\) to \(y_1\).  If it did, the first edge
+\(e_1=e_0\) joins \(y_0\) to \(y_1\), again by the attachment field (the
+only earlier index at the first position is zero), \(e_2\) would join
+\(y_1\) to \(y_2\), and all later consecutive equations were just
+obtained from the suffix condition.  Thus \(1\) would satisfy
+\noderef{TashTreeSuffixPath}.  Leastness in
+\noderef{TashTreePathIndex}, together with its lower bound \(1\), would
+give \(\rho(T)=1\), contrary to \(\rho(T)=2\).  Hence \(e_2\) joins
+\(y_0\) to \(y_2\).
+
+Define
+\[
+ S=(y_1,e_1,y_0,e_2,y_2,e_3,y_3,\ldots,e_n,y_n).
+\]
+This is a \noderef{TreeSequence}, as follows field by field.  Its length
+is \(n\), and its exact edge in every position is the same edge identity
+as in \(T\).  Edge injectivity is therefore inherited.  Its vertex list
+is obtained by transposing the distinct entries \(y_0,y_1\), so vertex
+injectivity is inherited as well.  Its first edge is still the exact
+edge \(e_1=e_0\).  The endpoint pair of that edge is unchanged, because
+the pair is unordered.  The preceding paragraph shows that \(e_2\)
+joins the new vertex in position two, namely \(y_2\), to the earlier
+new vertex \(y_0\) in position one.  Every \(e_h\), \(h\geq3\), joins
+the unchanged consecutive vertices \(y_{h-1},y_h\).  These are all the
+attachment obligations.  They also establish the entrywise equalities
+for \(S\) asserted in the statement.
+
+We verify the Tashkinov condition rather than infer it from notation.
+Unfolding \noderef{TashTreeMinimumBadPair} and
+\noderef{TashTreeBadPair} supplies \noderef{TashkinovTree} for \(T\).
+For \(e_2\), its old missing-color witness is one of \(y_0,y_1\); both
+vertices still occur before \(e_2\) in \(S\).  For an edge \(e_h\) with
+\(h\geq3\), an old witness at \(y_0\) or \(y_1\) remains earlier after
+their transposition, while any other old witness retains its position.
+The exact edge and its color are unchanged.  Hence every old Tashkinov
+witness yields an earlier witness in \(S\), proving
+\noderef{TashkinovTree} for \(S\).
+
+The entrywise vertex description makes
+\noderef{TreeSequenceVertexSet} for \(S\) equal to that for \(T\).
+Therefore the failure of \noderef{ColoredVertexSetElementary} supplied
+by badness of \(T\) also holds for \(S\).  The \(k\)-triple is literally
+unchanged.  These three facts give \noderef{TashTreeBadPair} for
+\((\varphi,S)\).
+
+Finally the attachment checks above show that the entire displayed
+sequence \(S\) is a path in order, so \(1\) satisfies
+\noderef{TashTreeSuffixPath}; its required lower bound forces
+\(\rho(S)=1\).  Since \(\rho(T)=2\), the first coordinate in
+\noderef{TashTreeRankLess} strictly decreases.  Thus \(S\) is the
+asserted smaller bad replacement.
+\end{proof}

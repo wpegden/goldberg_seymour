@@ -1,0 +1,31 @@
+\begin{helper}[A repeated color on a path-shaped minimum bad tree]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\), \(n\geq2\), and \(\rho(T)=1\).
+Then there are a color \(\beta\) and an index \(i<n\) such that
+\(\beta\) is missing at both \(y_i\) and \(y_n\).
+\end{helper}
+\begin{proof}
+Let \(P=T_{n-1}\) be the object \noderef{TreeSequencePrefix} obtained by
+retaining exactly the vertices \(y_0,\ldots,y_{n-1}\) and edges
+\(e_1,\ldots,e_{n-1}\).  Since \(n\geq2\), this is a positive proper
+initial segment of \(T\).  Therefore
+\noderef{TashTreeProperPrefixElementary}, applied to the supplied
+\noderef{TashTreeMinimumBadPair}, says that
+\noderef{TreeSequenceVertexSet} of \(P\) is elementary under
+\(\varphi\).
+
+On the other hand, unfolding the badness conjunct with
+\noderef{TashTreeBadPair} says that
+\noderef{TreeSequenceVertexSet} of \(T\) is not elementary.  By the
+definition \noderef{ColoredVertexSetElementary}, there are distinct
+vertices \(u,v\) of \(T\) and a color \(\beta\) which lies in both of
+their \noderef{MissingColors} sets.  If both vertices belonged to \(P\),
+the same pair and color would contradict the elementariness of \(P\).
+Thus one of \(u,v\) is the only displayed vertex outside \(P\), namely
+\(y_n\).  The other is a displayed vertex \(y_i\) with \(i<n\), because
+\noderef{TreeSequenceVertexSet} is precisely the image of the displayed
+vertex positions.  Relabeling the two witnesses if necessary gives the
+asserted \(\beta,i\).  (The path-index hypothesis records the branch in
+which this witness will be used; the extraction itself needs only the
+minimum bad pair and its proper-prefix elementariness.)
+\end{proof}

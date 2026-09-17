@@ -1,0 +1,43 @@
+\begin{helper}[A minimum bad tree has at least two edges]
+If \((\varphi,T)\) is a minimum bad pair, then the displayed
+tree-sequence \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\) has \(n\geq2\).
+\end{helper}
+\begin{proof}
+By the positivity field of \noderef{TreeSequence}, \(n\geq1\).  Suppose
+that \(n=1\).  Unfolding \noderef{TashTreeMinimumBadPair} and then
+\noderef{TashTreeBadPair}, the set \noderef{TreeSequenceVertexSet} of
+\(T\) is not elementary under \(\varphi\).  For a length-one sequence this
+set consists exactly of the two distinct vertices \(y_0,y_1\), where
+distinctness follows from vertex injectivity in \noderef{TreeSequence}.
+Thus \noderef{ColoredVertexSetElementary} supplies a color \(\eta\) which
+is missing at both \(y_0\) and \(y_1\).
+
+The attachment clause of \noderef{TreeSequence}, at its unique edge
+position, says that the endpoint pair of \(e_1=e_0\) is precisely
+\(\{y_0,y_1\}\).  Define a partial \(k\)-coloring \(\psi\) by
+\[
+ \psi(e)=\begin{cases}\eta,&e=e_0,\\ \varphi(e),&e\ne e_0.\end{cases}
+\]
+It is full.  Indeed, \(e_0\) now has the value \(\eta\), while the second
+clause of \noderef{IsOneEdgeUncolored}, supplied by the
+\noderef{KTriple} in badness, gives a colored value to every other exact
+edge.  This is exactly \noderef{IsFullEdgeColoring}.
+
+It is also proper.  Consider distinct adjacent exact edges.  If neither
+is \(e_0\), their values are unchanged and properness follows from
+\noderef{IsProperEdgeColoring} for \(\varphi\).  If one is \(e_0\), the
+definition \noderef{AdjacentEdges} gives a common vertex satisfying
+\noderef{Incident} for both edges.  Since the endpoints of \(e_0\) are
+\(y_0,y_1\), this
+common vertex is one of them.  The color \(\eta\) is missing there, so
+the definitions \noderef{PresentColors} and \noderef{MissingColors}
+exclude value \(\eta\) on the other incident edge.  Hence the new
+\(\eta\)-colored \(e_0\) creates no equal-colored adjacent pair.
+
+Consequently \(\psi\) is a proper full \(k\)-edge-coloring and witnesses
+\noderef{HasKEdgeColoring}.  By the leastness in
+\noderef{ChromaticIndex}, this gives \(\chi'(G)\leq k\).  But the
+\noderef{KTriple} clause of the bad pair says
+\(\chi'(G)=k+1\), a contradiction.  Therefore \(n\ne1\), and together
+with \(n\geq1\) this proves \(n\geq2\).
+\end{proof}

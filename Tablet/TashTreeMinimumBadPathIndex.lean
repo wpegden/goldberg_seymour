@@ -1,29 +1,12 @@
-import Tablet.AdjacentEdges
-import Tablet.ChromaticIndex
-import Tablet.ColoredVertexSetElementary
-import Tablet.Degree
-import Tablet.HasKEdgeColoring
-import Tablet.Incident
-import Tablet.IsFullEdgeColoring
-import Tablet.IsOneEdgeUncolored
-import Tablet.IsProperEdgeColoring
-import Tablet.KTriple
-import Tablet.MaximumDegree
-import Tablet.MissingColorIncidenceEndpoint
-import Tablet.MissingColors
-import Tablet.PresentColors
-import Tablet.TashTreeBadPair
 import Tablet.TashTreeControlledInterchange
 import Tablet.TashTreeMinimumBadPair
+import Tablet.TashTreeMinimumBadLengthAtLeastTwo
 import Tablet.TashTreePathIndex
-import Tablet.TashTreeProperPrefixElementary
-import Tablet.TashTreeRankLess
+import Tablet.TashTreePathIndexTwoReplacement
+import Tablet.TashTreeRhoOneIterate
+import Tablet.TashTreeRhoOneRepeatedColor
+import Tablet.TashTreeRhoOneTerminalReplacement
 import Tablet.TashTreeSuffixPath
-import Tablet.TashkinovTree
-import Tablet.TreeSequence
-import Tablet.TreeSequencePrefix
-import Tablet.TreeSequenceVertexSet
-import Tablet.TwoColorComponentSpanningPath
 
 -- [TABLET NODE: TashTreeMinimumBadPathIndex]
 theorem TashTreeMinimumBadPathIndex {V E : Type*}
@@ -33,4 +16,28 @@ theorem TashTreeMinimumBadPathIndex {V E : Type*}
     (hmin : TashTreeMinimumBadPair G k e0 phi T) :
     2 < TashTreePathIndex G T := by
 -- BODY
-  sorry
+  classical
+  have hlen : 2 ≤ T.length :=
+    TashTreeMinimumBadLengthAtLeastTwo G k e0 phi T hmin
+  have hpath : TashTreeSuffixPath G T (TashTreePathIndex G T) := by
+    unfold TashTreePathIndex
+    exact Nat.find_spec _
+  have hpos : 1 ≤ TashTreePathIndex G T := hpath.1
+  by_contra hnot
+  have hle : TashTreePathIndex G T ≤ 2 := by omega
+  have hcases : TashTreePathIndex G T = 1 ∨
+      TashTreePathIndex G T = 2 := by
+    omega
+  rcases hcases with hq | hq
+  · obtain ⟨beta, i, hi, hlast⟩ :=
+      TashTreeRhoOneRepeatedColor G k e0 phi T hmin hlen hq
+    obtain ⟨psi, p, hp, hminPsi, hprev, hlastPsi⟩ :=
+      TashTreeRhoOneIterate G k e0 phi T hmin hq beta i hi hlast
+    obtain ⟨hpos, hprefix, delta, j, phiStar, hdelta, hj,
+        hjMissing, hphiStar, hbad, hrank⟩ :=
+      TashTreeRhoOneTerminalReplacement G k e0 psi T hminPsi hlen hq
+        beta p hp hprev hlastPsi
+    exact (hminPsi.2 hbad) hrank
+  · obtain ⟨S, hdisplay, hbad, hrank⟩ :=
+      TashTreePathIndexTwoReplacement G k e0 phi T hmin hlen hq
+    exact (hmin.2 hbad) hrank

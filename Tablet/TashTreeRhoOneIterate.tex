@@ -1,0 +1,25 @@
+\begin{helper}[Advance a repeated color to the penultimate vertex]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\) and \(\rho(T)=1\).  If a color
+\(\beta\) is missing at both \(y_i\), for some \(i<n\), and \(y_n\),
+then there are a coloring \(\psi\) and an index \(p<n\) with
+\(p+1=n\) such that \((\psi,T)\) is a minimum bad pair and \(\beta\)
+is missing at both \(y_p\) and \(y_n\) under \(\psi\).
+\end{helper}
+\begin{proof}
+We induct on the natural number \(n-1-i\).  If \(i+1=n\), take
+\(\psi=\varphi\) and \(p=i\); all conclusions are exactly the supplied
+hypotheses.
+
+Otherwise \(i+1<n\): the alternative \(n<i+1\) is excluded by \(i<n\).
+Apply \noderef{TashTreeRhoOneAdvance}.  It returns a coloring
+\(\varphi_1\) for which \((\varphi_1,T)\) is again a minimum bad pair
+and \(\beta\) is missing at \(y_{i+1}\) and \(y_n\).  The displayed
+sequence and its \noderef{TashTreePathIndex} have not changed.  Moreover
+\(n-1-(i+1)<n-1-i\).  The induction hypothesis applied to
+\((\varphi_1,T)\) and the index \(i+1\) therefore produces a coloring
+\(\psi\) and \(p<n\) with \(p+1=n\), minimum badness of
+\((\psi,T)\), and the two required missing-color assertions.  Since the
+measure decreases by one at every nonterminal step, this is a finite
+iteration and proves the claim.
+\end{proof}

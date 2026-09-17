@@ -1,0 +1,95 @@
+\begin{helper}[Terminal recoloring gives a shorter bad path]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\), \(n\geq2\), and \(\rho(T)=1\).
+Let \(p<n\) satisfy \(p+1=n\), and suppose the color \(\beta\) is
+missing at both \(y_p=y_{n-1}\) and \(y_n\).  Then \(p\geq1\), and
+there are a color \(\delta\), an index \(j<p\), and a coloring
+\(\varphi^*\) with the following properties:
+\begin{enumerate}
+\item the old value of \(e_n\) is \(\delta\), and \(\delta\) is missing
+at \(y_j\) under \(\varphi\);
+\item \(\varphi^*\) is obtained by changing exactly \(e_n\) from
+\(\delta\) to \(\beta\); and
+\item the exact prefix \(T_{n-1}\) is a bad pair under \(\varphi^*\)
+and has smaller Tashkinov rank than \(T\).
+\end{enumerate}
+\end{helper}
+\begin{proof}
+The equations \(p+1=n\) and \(n\geq2\) give \(p\geq1\).  Since
+\(\rho(T)=1\), the defining equations in
+\noderef{TashTreeSuffixPath} say that the last exact edge, which is the
+edge in position \(p\) in zero-based Lean indexing, has endpoint pair
+\(\{y_p,y_n\}\).
+
+This last edge is distinct from \(e_1=e_0\).  Indeed, its position \(p\)
+is positive, while the edge-position map of \noderef{TreeSequence} is
+injective.  The \noderef{KTriple} inside
+\noderef{TashTreeBadPair}, obtained from the first conjunct of
+\noderef{TashTreeMinimumBadPair}, supplies
+\noderef{IsOneEdgeUncolored}.  Its second clause therefore supplies a
+color \(\delta\) with \(\varphi(e_n)=\delta\).
+
+Because the last edge has positive displayed index, the
+\noderef{TashkinovTree} clause of badness supplies an earlier displayed
+vertex \(y_j\), \(j\leq p\), at which \(\delta\) is missing.  In fact
+\(j<p\).  If \(j=p\), then \(e_n\) itself would be an incident edge of
+color \(\delta\) at \(y_p\), putting \(\delta\) in
+\noderef{PresentColors} there and excluding it from
+\noderef{MissingColors}.  This contradicts the witness assertion.
+Thus \(j<p\), establishing the old color and the strictly earlier
+witness required in the statement.
+
+Define the promised coloring by the exact-edge formula
+\[
+ \varphi^*(e)=
+ \begin{cases}
+   \beta,&e=e_n,\\
+   \varphi(e),&e\ne e_n.
+ \end{cases}
+\]
+It is proper.  A pair of distinct adjacent edges not containing \(e_n\)
+is unchanged and is handled by \noderef{IsProperEdgeColoring} for
+\(\varphi\).  If the pair contains \(e_n\), its other edge shares one of
+the endpoints \(y_p,y_n\), by \noderef{AdjacentEdges} and the endpoint
+equation above.  Since \(\beta\) is missing at both endpoints, the
+definitions \noderef{PresentColors} and \noderef{MissingColors} show
+that the other edge does not have value \(\beta\).  Thus recoloring
+\(e_n\) with \(\beta\) creates no conflict.  The uniquely uncolored edge
+is still \(e_0\): \(e_n\ne e_0\) and one colored value was replaced by
+another.  Therefore \noderef{IsOneEdgeUncolored} is preserved.  All
+other clauses of \noderef{KTriple} concern only the graph, \(k\), and
+the fixed chromatic and degree data, so \((G,e_0,\varphi^*)\) is again a
+\(k\)-triple.
+
+Let \(P\) be the exact \noderef{TreeSequencePrefix} of length \(p\).
+It is an initial segment in the sense of
+\noderef{TreeSequenceInitialSegment}, and \(p<n\).  Every exact edge of
+\(P\) differs from \(e_n\) by edge-position injectivity, so its value is
+unchanged by the definition of \(\varphi^*\).  Fix such a displayed edge
+from the second position onward.  Its old witness from
+\noderef{TashkinovTree} occurs strictly before that edge, hence before
+position \(p\).  The only endpoints whose incident color sets can change
+are \(y_p,y_n\), so this old witness is neither endpoint and retains the
+same missing color.  Thus each old witness remains valid and \(P\) is a
+Tashkinov tree under \(\varphi^*\).
+
+The vertices \(y_j,y_p\) show that \(P\) is not elementary under
+\(\varphi^*\).  At \(y_j\), the missingness of \(\delta\) is unchanged,
+because \(j<p\) makes \(y_j\) distinct from both endpoints of \(e_n\).
+At \(y_p\), properness of the old coloring implies that \(e_n\) was the
+only incident edge with value \(\delta\): a second one would be a
+distinct adjacent edge with the same color, contrary to
+\noderef{IsProperEdgeColoring}.  Replacing the value of \(e_n\) therefore
+removes the last incident \(\delta\)-edge, so \(\delta\) is missing at
+\(y_p\) under \(\varphi^*\).  The two vertices are distinct because
+\(j<p\) and the vertex map of \noderef{TreeSequence} is injective.  By
+\noderef{ColoredVertexSetElementary} and
+\noderef{TreeSequenceVertexSet}, the prefix is non-elementary.
+
+The new \(k\)-triple, the verified Tashkinov condition, and this
+non-elementariness are precisely \noderef{TashTreeBadPair} for
+\((\varphi^*,P)\).  Finally \(P\) is a proper exact initial segment of
+\(T\), so \noderef{TashTreeProperInitialSegmentRankLess} gives
+\noderef{TashTreeRankLess} of \(P\) below \(T\).  This proves every
+asserted part of the terminal replacement.
+\end{proof}
