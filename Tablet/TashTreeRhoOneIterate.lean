@@ -22,4 +22,36 @@ theorem TashTreeRhoOneIterate {V E : Type*}
       beta ∈ MissingColors G psi
         (T.vertex (Fin.last T.length)) := by
 -- BODY
-  sorry
+  have iterate : ∀ (d : ℕ) (coloring : _)
+      (j : Fin T.length),
+      T.length - (j.val + 1) = d →
+      TashTreeMinimumBadPair G k e0 coloring T →
+      beta ∈ MissingColors G coloring (T.vertex j.castSucc) →
+      beta ∈ MissingColors G coloring (T.vertex (Fin.last T.length)) →
+      ∃ (nextColoring : _) (p : Fin T.length),
+        p.val + 1 = T.length ∧
+        TashTreeMinimumBadPair G k e0 nextColoring T ∧
+        beta ∈ MissingColors G nextColoring (T.vertex p.castSucc) ∧
+        beta ∈ MissingColors G nextColoring
+          (T.vertex (Fin.last T.length)) := by
+    intro d
+    induction d using Nat.strong_induction_on with
+    | h d smaller =>
+        intro coloring j hd hbad hj hlast'
+        by_cases hnext : j.val + 1 < T.length
+        · let nextIndex : Fin T.length := ⟨j.val + 1, hnext⟩
+          obtain ⟨coloring', hbad', hj', hlast''⟩ :=
+            TashTreeRhoOneAdvance G k e0 coloring T hbad hq beta j hnext hj hlast'
+          have hnextval : nextIndex.val = j.val + 1 := by
+            rfl
+          have hsmaller : T.length - (nextIndex.val + 1) < d := by
+            omega
+          have htransport : beta ∈ MissingColors G coloring'
+              (T.vertex nextIndex.castSucc) := by
+            simpa [nextIndex, Fin.succ] using hj'
+          exact smaller (T.length - (nextIndex.val + 1)) hsmaller coloring' nextIndex
+            rfl hbad' htransport hlast''
+        · have hterminal : j.val + 1 = T.length := by
+            omega
+          refine ⟨coloring, j, hterminal, hbad, hj, hlast'⟩
+  exact iterate (T.length - (i.val + 1)) phi i rfl hmin hi hlast
