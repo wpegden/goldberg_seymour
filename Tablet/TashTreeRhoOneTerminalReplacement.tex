@@ -16,10 +16,12 @@ and has smaller Tashkinov rank than \(T\).
 \end{helper}
 \begin{proof}
 The equations \(p+1=n\) and \(n\geq2\) give \(p\geq1\).  Since
-\(\rho(T)=1\), the defining equations in
-\noderef{TashTreeSuffixPath} say that the last exact edge, which is the
-edge in position \(p\) in zero-based Lean indexing, has endpoint pair
-\(\{y_p,y_n\}\).
+\(\rho(T)=1\), the least-index specification in
+\noderef{TashTreePathIndex} says that \(1\) is a suffix-path start for
+\(T\).  Because \(p\geq1\), the equation in
+\noderef{TashTreeSuffixPath} at the zero-based edge index \(p\) says
+that the last exact edge \(e_n=e_{p+1}\) has endpoint pair
+\(\{y_p,y_{p+1}\}=\{y_p,y_n\}\).
 
 This last edge is distinct from \(e_1=e_0\).  Indeed, its position \(p\)
 is positive, while the edge-position map of \noderef{TreeSequence} is

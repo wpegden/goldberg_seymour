@@ -1,11 +1,8 @@
-import Tablet.AdjacentEdges
-import Tablet.Degree
-import Tablet.Incident
-import Tablet.IsProperEdgeColoring
+import Tablet.ColoredVertexSetElementary
 import Tablet.KTriple
-import Tablet.MaximumDegree
 import Tablet.MissingColorIncidenceEndpoint
 import Tablet.MissingColors
+import Tablet.MissingColorsNonemptyOfMaximumDegree
 import Tablet.PresentColors
 import Tablet.TashTreeBadPair
 import Tablet.TashTreeControlledInterchange

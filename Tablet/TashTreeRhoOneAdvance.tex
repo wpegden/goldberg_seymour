@@ -11,41 +11,48 @@ Unfolding \noderef{TashTreeMinimumBadPair} and
 \noderef{TashTreeBadPair}, and then \noderef{KTriple}, supplies
 properness of \(\varphi\), the bound
 \(\Delta(G)+1\leq k\), and the Tashkinov condition for \(T\).
-There is a color \(\gamma\) missing at \(y_{i+1}\).  Indeed, for each
-color in \noderef{PresentColors} at that vertex choose an exact edge
-satisfying \noderef{Incident} there.  Two different present colors
-necessarily have different chosen
-edges, while two distinct incident edges with the same chosen color are
-adjacent by \noderef{AdjacentEdges} and are forbidden by
-\noderef{IsProperEdgeColoring}.  Hence the number of present colors is
-at most \noderef{Degree} at \(y_{i+1}\), which is at most
-\noderef{MaximumDegree} and therefore strictly below \(k\).  The
-complement definition \noderef{MissingColors} supplies \(\gamma\).
+By \noderef{MissingColorsNonemptyOfMaximumDegree}, applied with that
+degree bound at \(y_{i+1}\), choose a color \(\gamma\) missing there.
 
 The colors \(\beta,\gamma\) are distinct.  Otherwise both \(y_i\) and
 \(y_{i+1}\) would miss \(\beta\).  These are distinct vertices by
 injectivity in \noderef{TreeSequence}, and both lie in the proper prefix
 through \(y_{i+1}\) because \(i+1<n\).  The elementariness supplied for
-that prefix by \noderef{TashTreeProperPrefixElementary} would be
-contradicted.
+that prefix by \noderef{TashTreeProperPrefixElementary}, together with
+the defining disjointness of missing-color sets in
+\noderef{ColoredVertexSetElementary}, would be contradicted.
 
 We next prove the two \noderef{TreeColorUnusedThrough} hypotheses
-through \(y_{i+1}\).  Construct the prefixes used here with
-\noderef{TreeSequencePrefix}.  If \(\gamma\) occurred on one of the displayed
+through \(y_{i+1}\), constructing the relevant exact prefixes with
+\noderef{TreeSequencePrefix}.  First suppose \(i=0\).  The formal range
+in either unused-through assertion consists of edge indices \(r\) with
+\(1\leq r<i+1=1\), so it is empty.  Thus both assertions hold
+vacuously in this boundary case; in particular, no endpoint equation is
+needed for the initial edge \(e_1\).
+
+Now suppose \(i>0\).  If \(\gamma\) occurred on one of the displayed
 colored edges \(e_2,\ldots,e_{i+1}\), the
 \noderef{TashkinovTree} condition would provide an earlier displayed
 vertex missing \(\gamma\).  That vertex is distinct from \(y_{i+1}\),
-so the same elementary proper prefix would contain two vertices missing
-\(\gamma\), impossible.  If \(\beta\) occurred on one of
+so the elementary proper prefix through \(y_{i+1}\) would contain two
+vertices missing \(\gamma\), contrary to the disjointness in
+\noderef{ColoredVertexSetElementary}.  If \(\beta\) occurred on one of
 \(e_2,\ldots,e_i\), its earlier Tashkinov witness would similarly be a
-vertex distinct from \(y_i\) in the proper prefix through \(y_i\),
-contradicting \noderef{TashTreeProperPrefixElementary}.  The remaining
-edge \(e_{i+1}\) joins \(y_i\) to \(y_{i+1}\), since
-\(\rho(T)=1\) means that \noderef{TashTreeSuffixPath} holds from the
-first position.  This edge cannot have color \(\beta\), because it is
+vertex distinct from \(y_i\) in the proper prefix through \(y_i\).
+The elementariness supplied by
+\noderef{TashTreeProperPrefixElementary} and again the disjointness in
+\noderef{ColoredVertexSetElementary} contradict the fact that \(y_i\)
+also misses \(\beta\).
+
+It remains only to exclude \(\beta\) from \(e_{i+1}\).  By the
+least-index specification in \noderef{TashTreePathIndex}, the equation
+\(\rho(T)=1\) implies that \(1\) is a suffix-path start.  Since \(i>0\),
+the equation in \noderef{TashTreeSuffixPath} at the zero-based edge
+index \(i\) says that the displayed edge \(e_{i+1}\) joins \(y_i\) to
+\(y_{i+1}\).  This edge cannot have color \(\beta\), because it is
 incident with \(y_i\), where \(\beta\) is missing by the definitions
-\noderef{PresentColors} and \noderef{MissingColors}.  Thus neither
-color is used through \(y_{i+1}\).
+\noderef{PresentColors} and \noderef{MissingColors}.  Hence neither
+color is used through \(y_{i+1}\) also when \(i>0\).
 
 Apply \noderef{TashTreeControlledInterchange} to the distinct colors
 \(\beta,\gamma\), the vertices \(y_i,y_{i+1}\), and these unused-color
@@ -54,17 +61,18 @@ that \((\varphi',T)\) is a minimum bad pair, and says that the original
 color \(\beta\) is now missing at \(y_{i+1}\).  It remains to check its
 missingness at \(y_n\).
 
-The same controlled-interchange conclusion places \(y_i,y_{i+1}\) in
-one two-color component and gives them subsingleton incidence neighbor
-sets.  They are distinct.  Since \(y_n\) also misses \(\beta\),
+The same controlled-interchange conclusion says that the swapped
+component is a path component having \(y_i,y_{i+1}\) as its two vertex
+ends.  The vertex \(y_n\) is distinct from both of them by the index
+inequality \(i+1<n\) and vertex injectivity in \noderef{TreeSequence}.
+Since \(y_n\) also misses \(\beta\),
 \noderef{MissingColorIncidenceEndpoint} gives its vertex-node degree at
-most one in the same two-color incidence graph.  If \(y_n\) lay in that
-component, \noderef{TwoColorComponentSpanningPath} would give a simple
-path spanning it with three distinct vertex-nodes of degree at most one:
-\(y_i,y_{i+1},y_n\).  The component is nontrivial because it contains
-the first two distinct vertices, so a simple path has exactly its two
-ends as degree-at-most-one nodes.  This is impossible.  Hence \(y_n\)
-is outside the swapped component.  The outside-vertex clause of
+most one in the same two-color incidence graph.  If \(y_n\) lay in the
+swapped component, the simple path supplied by
+\noderef{TwoColorComponentSpanningPath} would therefore have the three
+distinct ends \(y_i,y_{i+1},y_n\), whereas a nontrivial simple path has
+exactly two ends.  This is impossible.  Hence \(y_n\) is outside the
+swapped component.  The outside-vertex clause of
 \noderef{TwoColorComponentSwapMissingBehavior} fixes its entire missing
 set, so \(\beta\) remains missing there under \(\varphi'\).  This proves
 all three asserted properties of the replacement coloring.
