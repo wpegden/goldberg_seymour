@@ -1,0 +1,68 @@
+\begin{helper}[Disjoint two-color component normalization]
+Let \((\varphi,T)\) be a minimum bad pair, write
+\(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\), and fix indices
+\(a,b\le p<n\).  Suppose distinct colors \(\alpha,\beta\) are missing
+at \(y_a,y_b\), respectively, and \(\beta\) is also missing at \(y_n\).
+Assume neither color is used on \(e_2,\ldots,e_p\).  Let \(Q\) be the
+\((\alpha,\beta)\)-component rooted at \(y_n\).  If every vertex
+\(y_0,\ldots,y_p\) and every exact edge-node among the protected early
+edges \(e_1,\ldots,e_p\) avoids \(Q\), then the component swap
+\(\varphi'=\varphi/Q\) has the following properties:
+\((\varphi',T)\) is a minimum bad pair, every protected edge keeps its
+exact value, and \(\alpha\) is missing at both \(y_a\) and \(y_n\).
+\end{helper}
+\begin{proof}
+Put \(C=Q\) and let \(\varphi'\) be the exact swap from
+\noderef{TwoColorComponentSwap}.  Unfold
+\noderef{TashTreeMinimumBadPair} and \noderef{TashTreeBadPair} for the
+original pair.  In particular, \noderef{KTriple} supplies properness of
+\(\varphi\), unique uncoloredness of \(e_0=e_1\), and all the fixed
+graph-and-color-count clauses.  The new coloring is proper by
+\noderef{TwoColorComponentSwapProper}.  The defining cases of
+\noderef{TwoColorComponentSwap} fix an uncolored value and replace a
+colored value only by another colored value.  Hence the same exact edge
+is uniquely uncolored, as expressed by \noderef{IsOneEdgeUncolored}, and
+all remaining \(k\)-triple clauses are unchanged.
+
+We check the Tashkinov condition edge by edge.  Fix a formal edge index
+\(r\) with \(1\le r<n\), so that \noderef{TashkinovTree} supplies an old
+color \(c\) of the exact edge and an old missing-\(c\) witness \(y_w\),
+where \(w\le r\).  If \(r<p\), the edge-node avoids \(C\) by hypothesis,
+so its value is fixed.  Also \(w\le r<p\), and hence the vertex-node
+\(y_w\) avoids \(C\).  The outside-component clause of
+\noderef{TwoColorComponentSwapMissingBehavior} says that its entire
+missing set is fixed.  Thus the same witness proves the new Tashkinov
+obligation.
+
+It remains to treat \(p\le r\).  If \(c\notin\{\alpha,\beta\}\), the
+unaffected-color clause of
+\noderef{TwoColorComponentSwapMissingBehavior} preserves missingness of
+\(c\) at the old witness, and the defining cases of
+\noderef{TwoColorComponentSwap} preserve the edge value, so the old
+witness works.  Suppose \(c=\alpha\).  If the edge-node lies in \(C\),
+its new color is \(\beta\), and the fixed vertex \(y_b\), which is outside
+\(C\), still misses \(\beta\).  If the edge-node lies outside \(C\), its
+color remains \(\alpha\), and \(y_a\) still misses \(\alpha\).  Both
+replacement indices are at most \(p\le r\), so they are legal earlier
+vertices for this edge.  The case \(c=\beta\) is symmetric: use \(y_a\)
+when the edge is swapped to \(\alpha\), and \(y_b\) when it stays
+\(\beta\).  This proves \noderef{TashkinovTree} for \(T\) under
+\(\varphi'\).
+
+The vertex \(y_a\) avoids \(C\), so the first clause of
+\noderef{TwoColorComponentSwapMissingBehavior} preserves its missing
+\(\alpha\).  The root vertex-node \(y_n\) belongs to its own component;
+the affected-color clause of the same result changes its missing
+\(\beta\) into missing \(\alpha\).  The two vertices are distinct because
+\(a\le p<n\) and the vertex map in \noderef{TreeSequence} is injective.
+Consequently \(V(T)\) is not elementary under \(\varphi'\).  Together
+with the new \(k\)-triple and Tashkinov condition, this is
+\noderef{TashTreeBadPair}.
+
+The sequence \(T\), hence its rank, has not changed.  The universal
+minimality clause of the original \noderef{TashTreeMinimumBadPair}
+quantifies over every coloring, so it combines with the new badness to
+make \((\varphi',T)\) minimum bad.  Finally, every protected edge-node
+is outside \(C\), and its exact value is therefore fixed directly by
+\noderef{TwoColorComponentSwap}.  This proves all asserted conclusions.
+\end{proof}

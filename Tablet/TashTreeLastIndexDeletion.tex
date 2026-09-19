@@ -1,0 +1,57 @@
+\begin{helper}[Delete the penultimate pair in the last-index case]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(2<\rho(T)=|E(T)|=n\).  Suppose the exact last edge has color
+\(\gamma\), this color is present at \(y_{n-1}\), and a color \(\beta\)
+is missing at \(y_n\) and at some \(y_j\) with \(j\le n-2\).  Then there
+are exact tree-sequences \(P,S\), with \(P\) the initial segment of \(T\)
+of length \(n-2\) and \(S\) obtained from \(P\) by appending the original
+last edge and last vertex, such that \((\varphi,S)\) is bad and
+\(S\) has strictly smaller Tashkinov rank than \(T\).
+\end{helper}
+\begin{proof}
+Let \(P=(y_0,e_1,\ldots,e_{n-2},y_{n-2})\), using the exact entries of
+the initial segment.  Since \(\rho(T)=n\), the suffix condition cannot
+start at \(n-1\).  Thus the last edge does not join \(y_{n-1}\) to
+\(y_n\).  Its attachment witness from \noderef{TreeSequence} is an
+earlier displayed vertex, and hence lies in \(P\).
+
+Define
+\[
+ S=(y_0,e_1,y_1,\ldots,e_{n-2},y_{n-2},e_n,y_n).
+\]
+The vertex and exact-edge maps on the retained initial segment are those
+of \(T\); the new final edge and vertex are the exact last edge and
+vertex of \(T\).  Injectivity follows by restriction from
+\noderef{TreeSequence}, since the deleted identities \(e_{n-1}\) and
+\(y_{n-1}\) were distinct from all retained entries.  The first-edge
+identity is unchanged.  Every old attachment equation in \(P\) is
+unchanged, and the preceding paragraph supplies the earlier endpoint in
+\(P\) for the appended \(e_n\).  This verifies every field of
+\noderef{TreeSequence}, gives both stated
+\noderef{TreeSequenceInitialSegment} relations, and proves the exact
+length, final-edge, and final-vertex equations asserted in the
+conclusion.
+
+We prove \noderef{TashkinovTree} for \(S\).  Every obligation belonging
+to \(P\) is inherited entry by entry from the Tashkinov condition in the
+minimum bad pair.  For the new final edge, that old condition supplies a
+missing-\(\gamma\) witness among \(y_0,\ldots,y_{n-1}\).  It cannot be
+\(y_{n-1}\), because \(\gamma\in
+\noderef{PresentColors}(\varphi,y_{n-1})\), while
+\noderef{MissingColors} is the complement of the present-color set.
+Therefore the witness lies in \(P\) and remains a legal earlier witness
+for the exact final edge of \(S\).
+
+The \(k\)-triple from \noderef{TashTreeMinimumBadPair} is unchanged.
+The distinct retained vertices \(y_j,y_n\) both miss \(\beta\), so
+\noderef{ColoredVertexSetElementary} fails on
+\noderef{TreeSequenceVertexSet} of \(S\).  Together with the Tashkinov
+condition, this proves \noderef{TashTreeBadPair} for \((\varphi,S)\).
+
+Finally \(S\) has \(n-1\) edges.  The general bound in
+\noderef{TashTreePathIndex}, obtained by taking the full length as a
+vacuous \noderef{TashTreeSuffixPath} start, gives
+\(\rho(S)\le n-1<n=\rho(T)\).  Hence the first coordinate in
+\noderef{TashTreeRankLess} strictly decreases.  This proves the promised
+bad pair of smaller rank, together with the exact deletion data.
+\end{proof}

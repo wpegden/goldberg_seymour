@@ -1,0 +1,56 @@
+\begin{helper}[Last-index component-intersection shortening]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(\rho(T)=|E(T)|\).  Let \(S\) be an exact initial segment of \(T\) with
+\(|E(S)|+2=|E(T)|\).  Suppose distinct colors \(\alpha,\beta\) are
+missing on \(S\), \(\beta\) is also missing at the last vertex \(y_n\)
+of \(T\), and \(y_n\notin V(S)\).  Then the
+\((\alpha,\beta)\)-component rooted at \(y_n\) cannot meet \(V(S)\).
+\end{helper}
+\begin{proof}
+Assume that the component meets \(V(S)\).  Unfolding
+\noderef{TashTreeMinimumBadPair} and \noderef{TashTreeBadPair}, obtain
+the proper \(k\)-triple for \(\varphi\), the Tashkinov condition on
+\(T\), and the universal exclusion of a smaller bad pair.  Restrict the
+Tashkinov condition to \(S\): for every formal edge index of \(S\) at
+least one, \noderef{TreeSequenceInitialSegment} identifies its exact
+edge and every earlier vertex with the corresponding entries of \(T\),
+so the witness furnished by \noderef{TashkinovTree} for \(T\) is also a
+witness in \(S\).
+
+Apply \noderef{TwoColorComponentTashkinovSplice} to \(S\), the two
+tree-missing colors, the outside vertex \(y_n\), and the assumed
+intersection.  It returns a vertex \(u\in V(S)\) and a tree-sequence
+\(S'\) which properly extends \(S\), ends at \(y_n\), and is connected
+to \(S\) by a \noderef{TashkinovAugmentationSequence}.  The splice
+statement records every appended exact edge-node and vertex-node in the
+chosen component, and says that the first appended edge joins \(u\) to
+its new vertex while every later appended edge joins consecutive new
+vertices.  Since \(S\) is Tashkinov, applying
+\noderef{TashkinovAugmentationSequencePreservesTashkinovTree} shows that
+\(S'\) is Tashkinov under the unchanged coloring.
+
+The hypothesis \(\beta\in\noderef{TreeMissingColors}(\varphi,S)\)
+gives a vertex \(v\in V(S)\) missing \(\beta\).  The initial-segment
+clause of the splice puts \(v\) in \(V(S')\), while its last-vertex
+clause puts \(y_n\) in \(V(S')\).  These vertices are distinct because
+\(y_n\notin V(S)\), and \(y_n\) also misses \(\beta\).  Thus
+\noderef{ColoredVertexSetElementary} fails on
+\noderef{TreeSequenceVertexSet} of \(S'\).  The original \(k\)-triple,
+the Tashkinov condition just proved, and this repeated missing color give
+\noderef{TashTreeBadPair} for \(\varphi,S'\).
+
+Set \(q=|E(S)|+1\).  It is positive, and the splice grows \(S\) by at
+least one edge, so \(q\le |E(S')|\).  For every formal edge index
+\(r\ge q\), one has \(r>|E(S)|\); hence it is not the first appended
+edge, and the final endpoint equation in the splice statement identifies
+its ends with the consecutive displayed vertices of \(S'\).  These are
+exactly the clauses of \noderef{TashTreeSuffixPath} at \(q\).  By the
+leastness in \noderef{TashTreePathIndex},
+\[
+ \rho(S')\le |E(S)|+1=|E(T)|-1<|E(T)|=\rho(T).
+\]
+Thus the first coordinate of \noderef{TashTreeRankLess} strictly
+decreases.  The smaller bad pair contradicts the universal clause of
+\noderef{TashTreeMinimumBadPair}, proving that the component cannot meet
+\(V(S)\).
+\end{proof}

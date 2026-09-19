@@ -1,0 +1,51 @@
+\begin{helper}[Second normal form in the last-index case]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(2<\rho(T)=|E(T)|=n\).  Suppose a color \(\beta\), unused on the
+displayed colored tree edges, is missing at \(y_n\) and at some
+\(y_j\) with \(j\le n-2\).  Then there are an explicit replacement
+coloring \(\varphi_2\), the exact last-edge and penultimate-vertex
+indices \(r,p\) (so \(r+1=p+1=n\)), and a color \(\gamma\) such that
+\((\varphi_2,T)\) is minimum bad, \(\varphi_2(e_r)=\gamma\), and
+\(\gamma\) is present at \(y_p\).
+\end{helper}
+\begin{proof}
+Unfold \noderef{TashTreeMinimumBadPair} through
+\noderef{TashTreeBadPair} and \noderef{KTriple}.  The clause
+\noderef{IsOneEdgeUncolored} says that the exact first edge \(e_1=e_0\)
+is the unique uncolored edge.  Since \(n>2\), exact-edge injectivity in
+\noderef{TreeSequence} makes the last edge distinct from \(e_1\), so it
+is colored; call its color \(\gamma\), and take \(r=n-1\) and
+\(p=n-1\) in the formal zero-based indexing.
+
+If \(\gamma\) is present at \(y_p=y_{n-1}\), take
+\(\varphi_2=\varphi\).  Suppose instead that it is missing there.  The
+Tashkinov condition for the last edge gives an earlier
+missing-\(\gamma\) witness in the prefix through \(y_{n-1}\).  That
+prefix is elementary by \noderef{TashTreeProperPrefixElementary}, so
+the witness must be \(y_{n-1}\) itself.  The same argument shows that
+\(\gamma\) is unused on all its earlier colored tree edges: any
+occurrence would have a still earlier missing-\(\gamma\) witness and
+would violate prefix elementariness.
+
+The given \(\beta\) is unused on every colored tree edge, in particular
+through \(y_{n-1}\).  The last vertex \(y_n\) misses \(\beta\) and is
+incident with the \(\gamma\)-colored last edge, so \(\beta\ne\gamma\).
+Apply \noderef{TashTreeControlledInterchange} to
+\(\beta,\gamma\) at \(y_j,y_{n-1}\).  The theorem returns an explicit
+component-swap coloring and a new minimum-bad certificate.  Its
+component is a path whose two controlled ends are \(y_j,y_{n-1}\).
+Moreover, the same missingness and incidence show that
+\noderef{MissingColorIncidenceEndpoint} makes it a degree-one vertex in
+the two-color incidence graph.  The spanning path supplied by
+\noderef{TwoColorComponentSpanningPath} cannot have this third distinct
+end.  Hence \(y_n\), and consequently the exact last edge incident with
+it, lies outside the swapped component.
+
+The last edge therefore keeps color \(\gamma\).  At the controlled end
+\(y_{n-1}\), the nontrivial path has an incident \(\beta\)-edge, which
+the swap changes to \(\gamma\); thus \(\gamma\) belongs to
+\noderef{PresentColors} there.  The replacement coloring and its
+minimum-bad certificate supplied by
+\noderef{TashTreeControlledInterchange}, together with the chosen exact
+indices, give every asserted conjunct.
+\end{proof}

@@ -1,0 +1,80 @@
+\begin{helper}[First normal form in the last-index case]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(2<\rho(T)=|E(T)|=n\).  There are a coloring \(\varphi_1\), a color
+\(\beta\), and an index \(j\le n-2\) such that
+\((\varphi_1,T)\) is a minimum bad pair, \(\beta\) is missing at both
+\(y_j,y_n\), and \(\beta\) is not used on any colored displayed tree
+edge.
+\end{helper}
+\begin{proof}
+The inequality gives \(n\ge3\), so the prefixes through \(y_{n-1}\) and
+\(y_{n-2}\) are defined by \noderef{TreeSequencePrefix}.  The first is
+elementary by \noderef{TashTreeProperPrefixElementary}, whereas the full
+vertex set is not elementary by \noderef{TashTreeMinimumBadPair} and
+\noderef{TashTreeBadPair}.  Expanding
+\noderef{ColoredVertexSetElementary}, choose a color \(\beta\) missing
+at \(y_n\) and at \(y_j\) for some \(j<n\).
+
+By \noderef{TashTreeFourUnusedColors}, the prefix through \(y_{n-2}\)
+has four colors in \noderef{TreeFreeColors}.  The definitions
+\noderef{TreeMissingColors} and \noderef{TreeUsedColors} say that each
+has a missing witness in that prefix and is unused on its displayed
+colored edges.  The two remaining exact identities \(e_{n-1},e_n\) use
+at most two colors.  Hence at least two of the four colors are unused on
+all displayed colored edges of \(T\).  Choose one, \(\alpha\ne\beta\),
+and a missing witness \(y_m\) with \(m\le n-2\).
+
+First suppose \(j=n-1\).  The color \(\beta\) is unused through
+\(y_{n-1}\).  Indeed, an occurrence on any relevant earlier tree edge
+would have, by the Tashkinov condition contained in
+\noderef{TashTreeBadPair}, an earlier missing-\(\beta\) witness distinct
+from \(y_{n-1}\), contradicting elementariness of the prefix.  It cannot
+color \(e_n\), because that edge is incident with the
+missing-\(\beta\) vertex \(y_n\).  Apply
+\noderef{TashTreeControlledInterchange} to \(\alpha,\beta\) at
+\(y_m,y_{n-1}\).  Its component is a path with those two controlled
+ends.  The vertex \(y_n\), which also misses \(\beta\), cannot lie on
+that path as a third end: \noderef{MissingColorIncidenceEndpoint} gives
+its vertex-node degree at most one, while
+\noderef{TwoColorComponentSpanningPath} says that the component support
+is a simple path already having the two distinct controlled ends.
+Thus \(y_n\) is outside the component, and the outside-vertex clause of
+\noderef{TwoColorComponentSwapMissingBehavior} shows that the swap
+leaves the missing-\(\beta\) status at \(y_n\), moves the other occurrence to
+\(y_m\), fixes the tree-edge values in question, and returns a minimum
+bad pair.  Taking \(j=m\) gives the conclusion.
+
+Now suppose \(j\le n-2\).  If \(\beta\notin
+\noderef{TreeUsedColors}(\varphi,T)\), take \(\varphi_1=\varphi\).
+Otherwise let \(Q\) be the \((\alpha,\beta)\)-component rooted at
+\(y_n\).  If \(Q\) meets the prefix through \(y_{n-2}\), then
+\noderef{TashTreeLastIndexIntersectionShortening} applies: both colors
+are missing on that prefix, \(y_n\) is outside it by vertex injectivity,
+and its length is exactly \(n-2\).  This gives a contradiction.
+
+Thus \(Q\) avoids every vertex of the prefix.  We claim that it also
+avoids every displayed exact tree-edge node.  The edges through
+\(e_{n-2}\) have both ends in the prefix, and \(e_{n-1}\) has its earlier
+end there.  Finally, \(\rho(T)=n\) says that the final edge is not the
+consecutive edge \(y_{n-1}y_n\); its attachment witness from
+\noderef{TreeSequence} is therefore in the prefix through \(y_{n-2}\).
+If any of these edge-nodes belonged to \(Q\), its affected color and
+incidence with the displayed prefix endpoint would put that endpoint in
+the same component, a contradiction.  Here an off-pair or uncolored
+edge-node has no incidence-graph adjacency at all; since \(Q\) is rooted
+at a vertex-node, such an isolated edge-node cannot belong to \(Q\).
+
+The colors \(\alpha,\beta\) are unused through the retained prefix:
+this is clear for \(\alpha\), and for \(\beta\) an occurrence would give
+an earlier missing witness and contradict prefix elementariness exactly
+as above.  Apply \noderef{TashTreeDisjointComponentNormalization} with
+that prefix cutoff and the fixed missing witnesses \(y_m,y_j\).  It
+returns the explicit local component-swap coloring, proves it is again a
+minimum bad pair, and makes \(\alpha\) missing at both \(y_m,y_n\).
+Every displayed exact edge-node avoids \(Q\), so
+\noderef{TwoColorComponentSwap} fixes every tree-edge value.  Since
+\(\alpha\) was unused on the original tree, it remains outside
+\noderef{TreeUsedColors} after the swap.  Rename this newly repeated
+color \(\alpha\) as the output \(\beta\), and take \(j=m\).  This uses
+only the local swap; no global transposition of color names is needed.
+\end{proof}

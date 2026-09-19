@@ -1,0 +1,45 @@
+\begin{helper}[Third normal form in the last-index case]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(2<\rho(T)=|E(T)|=n\).  Let the exact last edge have color
+\(\gamma\), and suppose \(\gamma\) is present at the penultimate vertex.
+There are an explicit replacement coloring \(\varphi_3\), a color
+\(\beta\), and \(j\le n-2\) such that \((\varphi_3,T)\) is minimum bad,
+the last edge still has color \(\gamma\), \(\gamma\) is still present at
+the penultimate vertex, and \(\beta\) is missing at both \(y_j,y_n\).
+\end{helper}
+\begin{proof}
+As in the first normalization, the proper prefix through \(y_{n-1}\) is
+elementary by \noderef{TashTreeProperPrefixElementary}, whereas the full
+minimum bad pair is not.  Therefore some color \(\beta\) is missing at
+\(y_n\) and at \(y_{j'}\) for an index \(j'<n\).
+
+If \(j'\le n-2\), use the original coloring.  Otherwise \(j'=n-1\).
+Then \(\beta\) is unused on the colored edges of the prefix: if such an
+edge had color \(\beta\), the Tashkinov condition would provide an
+earlier missing-\(\beta\) witness distinct from \(y_{n-1}\), contrary to
+elementariness.  It also cannot color the last edge, which is incident
+with the missing-\(\beta\) vertex \(y_n\).
+
+Apply \noderef{TashTreeFourUnusedColors} to the prefix through
+\(y_{n-2}\).  By the meanings of \noderef{TreeFreeColors} and
+\noderef{TreeUsedColors}, after excluding the at most two colors on the
+two remaining exact edges there are at least two colors missing in the
+prefix and unused on all displayed colored tree edges.  Choose one
+\(\alpha\ne\beta\), with missing witness \(y_m\), \(m\le n-2\).
+The two colors are unused through \(y_{n-1}\), so
+\noderef{TashTreeControlledInterchange} applies at \(y_m,y_{n-1}\).
+It returns an explicit component-swap coloring, makes \(\beta\) missing
+at \(y_m\), and returns a minimum-bad certificate.
+
+The last vertex \(y_n\), which misses \(\beta\), is a third
+degree-at-most-one vertex by \noderef{MissingColorIncidenceEndpoint}; it
+cannot lie on the controlled path whose two ends are \(y_m,y_{n-1}\),
+as seen from \noderef{TwoColorComponentSpanningPath}.  Thus it continues
+to miss \(\beta\).  Neither affected color equals \(\gamma\):
+\(\alpha\) is unused on the \(\gamma\)-colored last edge, while
+\(\beta\) is missing at its endpoint \(y_n\).  Hence the defining swap
+does not change the last edge's \(\gamma\) value or any incident
+\(\gamma\)-edge witnessing membership in
+\noderef{PresentColors} at \(y_{n-1}\).  Taking \(j=m\) gives the
+replacement coloring and all required preserved invariants.
+\end{proof}
