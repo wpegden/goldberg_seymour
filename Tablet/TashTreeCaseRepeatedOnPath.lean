@@ -1,10 +1,5 @@
-import Tablet.KTriple
-import Tablet.MissingColorIncidenceEndpoint
-import Tablet.TashTreeControlledInterchange
-import Tablet.TashTreeMinimumBadPair
-import Tablet.TashTreeMinimumBadPathIndex
-import Tablet.TashTreeProperPrefixElementary
-import Tablet.TashTreeSuffixPath
+import Tablet.TashTreeSuffixIterate
+import Tablet.TashTreeSuffixTerminalReplacement
 
 -- [TABLET NODE: TashTreeCaseRepeatedOnPath]
 theorem TashTreeCaseRepeatedOnPath {V E : Type*}
@@ -19,4 +14,22 @@ theorem TashTreeCaseRepeatedOnPath {V E : Type*}
       alpha ∈ MissingColors G phi (T.vertex i) ∧
       alpha ∈ MissingColors G phi (T.vertex (Fin.last T.length))) : False := by
 -- BODY
-  sorry
+  rcases hrepeat with ⟨beta, i, hiSuffix, hiLength, hi, hlast⟩
+  let i' : Fin T.length := Fin.castLT i hiLength
+  have hiCast : i'.castSucc = i := by
+    apply Fin.ext
+    rfl
+  have hi' : beta ∈ MissingColors G phi (T.vertex i'.castSucc) := by
+    rw [hiCast]
+    exact hi
+  have hiSuffix' : TashTreePathIndex G T ≤ i'.val := by
+    simpa [i'] using hiSuffix
+  obtain ⟨psi, p, hp, hpSuffix, hminPsi, hprev, hlastPsi⟩ :=
+    TashTreeSuffixIterate G k e0 phi T hmin beta i' hiSuffix' hi' hlast
+  have hlen : 2 ≤ T.length := by
+    omega
+  obtain ⟨_hpos, _hle, _delta, _j, _psiStar, _hdelta, _hjlt,
+      _hmissing, _hformula, hbad, hrank⟩ :=
+    TashTreeSuffixTerminalReplacement G k e0 psi T hminPsi hlen beta p
+      hpSuffix hp hprev hlastPsi
+  exact (hminPsi.2 hbad) hrank

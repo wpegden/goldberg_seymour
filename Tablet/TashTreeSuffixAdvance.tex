@@ -1,0 +1,74 @@
+\begin{helper}[Advance a repeated missing color along the path suffix]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\).  Suppose \(i+1<n\), the color
+\(\beta\) is missing at both \(y_i\) and \(y_n\), and either \(i=0\)
+or \(\rho(T)\leq i\).  Then there is a coloring \(\varphi'\) such that
+\((\varphi',T)\) is again a minimum bad pair and \(\beta\) is missing
+at both \(y_{i+1}\) and \(y_n\) under \(\varphi'\).
+\end{helper}
+\begin{proof}
+Unfolding \noderef{TashTreeMinimumBadPair} and
+\noderef{TashTreeBadPair}, and then \noderef{KTriple}, supplies
+properness of \(\varphi\), the bound
+\(\Delta(G)+1\leq k\), and the Tashkinov condition for \(T\).
+By \noderef{MissingColorsNonemptyOfMaximumDegree}, applied with that
+degree bound at \(y_{i+1}\), choose a color \(\gamma\) missing there.
+
+The colors \(\beta,\gamma\) are distinct.  Otherwise both \(y_i\) and
+\(y_{i+1}\) would miss \(\beta\).  These are distinct vertices by
+injectivity in \noderef{TreeSequence}, and both lie in the proper prefix
+through \(y_{i+1}\) because \(i+1<n\).  The elementariness supplied for
+that prefix by \noderef{TashTreeProperPrefixElementary}, together with
+the defining disjointness of missing-color sets in
+\noderef{ColoredVertexSetElementary}, would be contradicted.
+
+We next prove the two \noderef{TreeColorUnusedThrough} hypotheses
+through \(y_{i+1}\), constructing the relevant exact prefix with
+\noderef{TreeSequencePrefix}.  If \(i=0\), the formal range in either
+unused-through assertion consists of edge indices \(r\) with
+\(1\leq r<i+1=1\), so it is empty.  Both assertions are therefore
+vacuous in this boundary case, and no endpoint equation for the initial
+edge \(e_1\) is used.
+
+Suppose now that \(i>0\).  If \(\gamma\) occurred on one of the
+displayed colored edges \(e_2,\ldots,e_{i+1}\), the
+\noderef{TashkinovTree} condition would provide an earlier displayed
+vertex missing \(\gamma\).  That vertex is distinct from \(y_{i+1}\),
+so the elementary proper prefix through \(y_{i+1}\) would contain two
+vertices missing \(\gamma\), contrary to
+\noderef{ColoredVertexSetElementary}.  If \(\beta\) occurred on one of
+\(e_2,\ldots,e_i\), its earlier Tashkinov witness would similarly be a
+vertex distinct from \(y_i\) in the same proper prefix.  Elementariness
+then contradicts the fact that \(y_i\) also misses \(\beta\).
+
+It remains to exclude \(\beta\) from \(e_{i+1}\).  By the
+least-index specification in \noderef{TashTreePathIndex}, the suffix
+starting at \(\rho(T)\) is a path.  Our hypothesis \(\rho(T)\leq i\)
+therefore lets us apply \noderef{TashTreeSuffixPath} at the zero-based
+edge index \(i\): the exact edge \(e_{i+1}\) joins \(y_i\) to
+\(y_{i+1}\).  This edge cannot have color \(\beta\), since it is
+incident with \(y_i\), where \(\beta\) is missing by
+\noderef{PresentColors} and \noderef{MissingColors}.  Thus both colors
+are unused through \(y_{i+1}\).
+
+Apply \noderef{TashTreeControlledInterchange} to the distinct colors
+\(\beta,\gamma\), the vertices \(y_i,y_{i+1}\), and these unused-color
+facts.  It returns the exact component-swap coloring \(\varphi'\), says
+that \((\varphi',T)\) is a minimum bad pair, and makes \(\beta\) missing
+at \(y_{i+1}\).  It remains to verify that \(\beta\) is still missing
+at \(y_n\).
+
+The controlled interchange says that the swapped component is a path
+component having \(y_i,y_{i+1}\) as its two vertex ends.  The vertex
+\(y_n\) is distinct from both by \(i+1<n\) and vertex injectivity in
+\noderef{TreeSequence}.  Since \(y_n\) misses \(\beta\),
+\noderef{MissingColorIncidenceEndpoint} gives its vertex-node degree at
+most one in the same two-color incidence graph.  If \(y_n\) lay in the
+swapped component, the simple path supplied by
+\noderef{TwoColorComponentSpanningPath} would consequently have the
+three distinct ends \(y_i,y_{i+1},y_n\), which is impossible.  Hence
+\(y_n\) is outside the swapped component.  The outside-vertex clause of
+\noderef{TwoColorComponentSwapMissingBehavior} fixes its missing-color
+set, so \(\beta\) remains missing there under \(\varphi'\).  This proves
+the claim.
+\end{proof}

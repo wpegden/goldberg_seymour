@@ -1,0 +1,30 @@
+\begin{helper}[Advance a repeated color to the penultimate suffix vertex]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\).  Suppose \(\rho(T)\leq i<n\)
+and a color \(\beta\) is missing at both \(y_i\) and \(y_n\).  Then
+there are a coloring \(\psi\) and an index \(p<n\) such that
+\(p+1=n\), \(\rho(T)\leq p\), \((\psi,T)\) is a minimum bad pair,
+and \(\beta\) is missing at both \(y_p\) and \(y_n\) under \(\psi\).
+\end{helper}
+\begin{proof}
+Induct on the natural number \(n-1-i\).  If \(i+1=n\), take
+\(\psi=\varphi\) and \(p=i\).  The equation \(p+1=n\), the bound
+\(\rho(T)\leq p\), minimum badness, and both missing-color assertions
+are exactly the supplied hypotheses.
+
+Otherwise \(i+1<n\), since the inequality \(i<n\) excludes
+\(n<i+1\).  Apply \noderef{TashTreeSuffixAdvance} with the second
+alternative \(\rho(T)\leq i\).  It returns a coloring \(\varphi_1\)
+for which \((\varphi_1,T)\) is again a minimum bad pair and \(\beta\)
+is missing at \(y_{i+1}\) and \(y_n\).  The displayed sequence has not
+changed, so its path index has not changed, and
+\(\rho(T)\leq i<i+1\).  Thus the path-index lower bound required at
+the next step is preserved.  Moreover
+\(n-1-(i+1)<n-1-i\).
+
+Apply the induction hypothesis to \((\varphi_1,T)\) and the index
+\(i+1\).  It produces \(\psi\) and \(p<n\) with \(p+1=n\),
+\(\rho(T)\leq p\), minimum badness of \((\psi,T)\), and the two
+required missing-color assertions.  The natural-number measure strictly
+decreases at every nonterminal step, so the iteration is finite.
+\end{proof}
