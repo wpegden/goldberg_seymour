@@ -3,8 +3,7 @@ Let \((\varphi,T)\) be a minimum bad pair, write
 \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\), and fix indices
 \(a,b\le p<n\).  Suppose distinct colors \(\alpha,\beta\) are missing
 at \(y_a,y_b\), respectively, and \(\beta\) is also missing at \(y_n\).
-Assume neither color is used on \(e_2,\ldots,e_p\).  Let \(Q\) be the
-\((\alpha,\beta)\)-component rooted at \(y_n\).  If every vertex
+Let \(Q\) be the \((\alpha,\beta)\)-component rooted at \(y_n\).  If every vertex
 \(y_0,\ldots,y_p\) and every exact edge-node among the protected early
 edges \(e_1,\ldots,e_p\) avoids \(Q\), then the component swap
 \(\varphi'=\varphi/Q\) has the following properties:
@@ -34,7 +33,9 @@ so its value is fixed.  Also \(w\le r<p\), and hence the vertex-node
 missing set is fixed.  Thus the same witness proves the new Tashkinov
 obligation.
 
-It remains to treat \(p\le r\).  If \(c\notin\{\alpha,\beta\}\), the
+It remains to treat \(p\le r\).  The cutoff inequalities give
+\(a,b\le p\le r\), so both fixed witnesses are legal earlier witnesses
+for the edge at index \(r\).  If \(c\notin\{\alpha,\beta\}\), the
 unaffected-color clause of
 \noderef{TwoColorComponentSwapMissingBehavior} preserves missingness of
 \(c\) at the old witness, and the defining cases of

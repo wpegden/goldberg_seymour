@@ -41,8 +41,14 @@ is a simple path already having the two distinct controlled ends.
 Thus \(y_n\) is outside the component, and the outside-vertex clause of
 \noderef{TwoColorComponentSwapMissingBehavior} shows that the swap
 leaves the missing-\(\beta\) status at \(y_n\), moves the other occurrence to
-\(y_m\), fixes the tree-edge values in question, and returns a minimum
-bad pair.  Taking \(j=m\) gives the conclusion.
+\(y_m\), and returns a minimum bad pair.  The controlled interchange
+fixes \(e_2,\ldots,e_{n-1}\).  The last edge-node is outside the
+component as well: if it were in the component, its incidence with
+\(y_n\) would put \(y_n\) in the component.  Hence
+\noderef{TwoColorComponentSwap} also fixes \(e_n\), while \(e_1\) stays
+uncolored.  Thus every displayed edge value is fixed and \(\beta\),
+which was unused under \(\varphi\), is still unused after the swap.
+Taking \(j=m\) gives the conclusion.
 
 Now suppose \(j\le n-2\).  If \(\beta\notin
 \noderef{TreeUsedColors}(\varphi,T)\), take \(\varphi_1=\varphi\).
@@ -64,11 +70,10 @@ the same component, a contradiction.  Here an off-pair or uncolored
 edge-node has no incidence-graph adjacency at all; since \(Q\) is rooted
 at a vertex-node, such an isolated edge-node cannot belong to \(Q\).
 
-The colors \(\alpha,\beta\) are unused through the retained prefix:
-this is clear for \(\alpha\), and for \(\beta\) an occurrence would give
-an earlier missing witness and contradict prefix elementariness exactly
-as above.  Apply \noderef{TashTreeDisjointComponentNormalization} with
-that prefix cutoff and the fixed missing witnesses \(y_m,y_j\).  It
+The color \(\alpha\) is unused on the whole displayed tree by its
+choice above.  Apply \noderef{TashTreeDisjointComponentNormalization}
+with the retained-prefix cutoff, the fixed missing witnesses
+\(y_m,y_j\), and the vertex- and edge-node avoidance just proved.  It
 returns the explicit local component-swap coloring, proves it is again a
 minimum bad pair, and makes \(\alpha\) missing at both \(y_m,y_n\).
 Every displayed exact edge-node avoids \(Q\), so
