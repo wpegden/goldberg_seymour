@@ -19,32 +19,63 @@ is colored; call its color \(\gamma\), and take \(r=n-1\) and
 
 If \(\gamma\) is present at \(y_p=y_{n-1}\), take
 \(\varphi_2=\varphi\).  Suppose instead that it is missing there.  The
-Tashkinov condition for the last edge gives an earlier
+condition \noderef{TashkinovTree} for the last edge gives a
 missing-\(\gamma\) witness in the prefix through \(y_{n-1}\).  That
-prefix is elementary by \noderef{TashTreeProperPrefixElementary}, so
-the witness must be \(y_{n-1}\) itself.  The same argument shows that
-\(\gamma\) is unused on all its earlier colored tree edges: any
-occurrence would have a still earlier missing-\(\gamma\) witness and
-would violate prefix elementariness.
+prefix is the proper initial segment from
+\noderef{TreeSequencePrefix}, and it is elementary by
+\noderef{TashTreeProperPrefixElementary}.  Both
+the witness and \(y_{n-1}\) miss \(\gamma\) in the sense of
+\noderef{MissingColors}; hence \noderef{ColoredVertexSetElementary} and
+vertex injectivity from \noderef{TreeSequence} force the witness to be
+\(y_{n-1}\) itself.  The same facts show that \(\gamma\) is unused on all
+earlier colored tree edges.  Indeed, an earlier tree edge colored
+\(\gamma\) would, by \noderef{TashkinovTree}, have a
+missing-\(\gamma\) witness at a vertex preceding that edge.  This vertex
+is strictly earlier than \(y_{n-1}\), so \noderef{MissingColors} and
+\noderef{ColoredVertexSetElementary} would contradict elementariness of
+the prefix.
 
 The given \(\beta\) is unused on every colored tree edge, in particular
 through \(y_{n-1}\).  The last vertex \(y_n\) misses \(\beta\) and is
-incident with the \(\gamma\)-colored last edge, so \(\beta\ne\gamma\).
+incident with the \(\gamma\)-colored last edge by
+\noderef{TreeSequence}.  Thus \noderef{MissingColors} gives
+\(\beta\ne\gamma\).  Properness, which is needed below, follows by
+unfolding \noderef{TashTreeMinimumBadPair} through
+\noderef{TashTreeBadPair} and then using \noderef{KTriple}.
 Apply \noderef{TashTreeControlledInterchange} to
 \(\beta,\gamma\) at \(y_j,y_{n-1}\).  The theorem returns an explicit
 component-swap coloring and a new minimum-bad certificate.  Its
-component is a path whose two controlled ends are \(y_j,y_{n-1}\).
-Moreover, the same missingness and incidence show that
-\noderef{MissingColorIncidenceEndpoint} makes it a degree-one vertex in
-the two-color incidence graph.  The spanning path supplied by
-\noderef{TwoColorComponentSpanningPath} cannot have this third distinct
-end.  Hence \(y_n\), and consequently the exact last edge incident with
-it, lies outside the swapped component.
+component \(Q\), understood as the connected support in
+\noderef{TwoColorComponent}, is a path whose two controlled ends are
+\(y_j,y_{n-1}\).  At \(y_n\), all premises of
+\noderef{MissingColorIncidenceEndpoint} hold: the affected colors are
+distinct, \(\varphi\) is proper by \noderef{KTriple}, and \(\beta\) is
+missing there.  Hence the vertex-node \(y_n\) has degree at most one in
+the \((\beta,\gamma)\)-incidence graph.  On the other hand, the last edge
+is incident with \(y_n\) and colored \(\gamma\), so
+\noderef{TwoColorIncidenceGraph} joins its edge-node to \(y_n\); the
+degree is therefore exactly one.  If \(y_n\) belonged to \(Q\), the
+spanning path from \noderef{TwoColorComponentSpanningPath} would make it
+an end.  This would be a third end distinct from \(y_j,y_{n-1}\), with
+distinctness following from \(j\le n-2\) and
+\noderef{TreeSequence}.  Thus \(y_n\notin Q\).  If the last edge-node
+belonged to \(Q\), its adjacency to \(y_n\) in
+\noderef{TwoColorIncidenceGraph} and connected-component closure in
+\noderef{TwoColorComponent} would put \(y_n\) in \(Q\).  Therefore the
+last edge-node is outside \(Q\) as well.
 
-The last edge therefore keeps color \(\gamma\).  At the controlled end
-\(y_{n-1}\), the nontrivial path has an incident \(\beta\)-edge, which
-the swap changes to \(\gamma\); thus \(\gamma\) belongs to
-\noderef{PresentColors} there.  The replacement coloring and its
+Since its node is outside \(Q\), the defining outside case of
+\noderef{TwoColorComponentSwap} fixes the last edge's color
+\(\gamma\).  At the controlled end \(y_{n-1}\), the nontrivial path from
+the distinct vertex \(y_j\) has an incident edge-node which, by
+\noderef{TwoColorIncidenceGraph}, has color \(\beta\) or \(\gamma\).  This edge
+cannot have color \(\gamma\), because \(\gamma\) is missing at
+\(y_{n-1}\) by \noderef{MissingColors}; its old color is therefore
+\(\beta\).  Its edge-node lies in \(Q\), so the inside case of
+\noderef{TwoColorComponentSwap} changes its exact value from \(\beta\)
+to \(\gamma\).  The same edge remains incident with \(y_{n-1}\), and
+therefore witnesses \(\gamma\in\noderef{PresentColors}(\varphi_2,y_{n-1})\).
+The replacement coloring and its
 minimum-bad certificate supplied by
 \noderef{TashTreeControlledInterchange}, together with the chosen exact
 indices, give every asserted conjunct.

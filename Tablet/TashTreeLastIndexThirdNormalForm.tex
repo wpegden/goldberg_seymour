@@ -8,17 +8,30 @@ the last edge still has color \(\gamma\), \(\gamma\) is still present at
 the penultimate vertex, and \(\beta\) is missing at both \(y_j,y_n\).
 \end{helper}
 \begin{proof}
-As in the first normalization, the proper prefix through \(y_{n-1}\) is
-elementary by \noderef{TashTreeProperPrefixElementary}, whereas the full
-minimum bad pair is not.  Therefore some color \(\beta\) is missing at
-\(y_n\) and at \(y_{j'}\) for an index \(j'<n\).
+Unfolding \noderef{TashTreeMinimumBadPair} and
+\noderef{TashTreeBadPair}, the full vertex set is not elementary and the
+pair contains a \(k\)-triple; \noderef{KTriple} in particular supplies
+properness of \(\varphi\).  The proper prefix through \(y_{n-1}\) is
+elementary by \noderef{TashTreeProperPrefixElementary}.  By
+\noderef{ColoredVertexSetElementary}, failure of elementariness on the
+full set supplies two distinct vertices with a common missing color
+\(\beta\).  The two cannot both lie in the elementary prefix, while
+\noderef{TreeSequence} and \noderef{TreeSequencePrefix} show that the
+only displayed vertex outside that prefix is \(y_n\).  Hence, in the
+sense of \noderef{MissingColors}, \(\beta\) is missing at \(y_n\) and at
+\(y_{j'}\) for some \(j'<n\).
 
 If \(j'\le n-2\), use the original coloring.  Otherwise \(j'=n-1\).
 Then \(\beta\) is unused on the colored edges of the prefix: if such an
-edge had color \(\beta\), the Tashkinov condition would provide an
-earlier missing-\(\beta\) witness distinct from \(y_{n-1}\), contrary to
-elementariness.  It also cannot color the last edge, which is incident
-with the missing-\(\beta\) vertex \(y_n\).
+edge had color \(\beta\), \noderef{TashkinovTree} would provide an
+earlier missing-\(\beta\) witness.  That witness precedes the edge and is
+therefore distinct from \(y_{n-1}\) by \noderef{TreeSequence}; together
+with the missing-\(\beta\) status of \(y_{n-1}\), this contradicts
+\noderef{ColoredVertexSetElementary} by the meaning of
+\noderef{MissingColors}.  The last edge has endpoint \(y_n\) by
+\noderef{TreeSequence}, so \noderef{MissingColors} says that it also
+cannot have color \(\beta\).  Thus \(\beta\) is unused on the whole
+displayed tree.
 
 Apply \noderef{TashTreeFourUnusedColors} to the prefix through
 \(y_{n-2}\).  By the meanings of \noderef{TreeFreeColors} and
@@ -32,14 +45,36 @@ It returns an explicit component-swap coloring, makes \(\beta\) missing
 at \(y_m\), and returns a minimum-bad certificate.
 
 The last vertex \(y_n\), which misses \(\beta\), is a third
-degree-at-most-one vertex by \noderef{MissingColorIncidenceEndpoint}; it
-cannot lie on the controlled path whose two ends are \(y_m,y_{n-1}\),
-as seen from \noderef{TwoColorComponentSpanningPath}.  Thus it continues
-to miss \(\beta\).  Neither affected color equals \(\gamma\):
-\(\alpha\) is unused on the \(\gamma\)-colored last edge, while
-\(\beta\) is missing at its endpoint \(y_n\).  Hence the defining swap
-does not change the last edge's \(\gamma\) value or any incident
-\(\gamma\)-edge witnessing membership in
-\noderef{PresentColors} at \(y_{n-1}\).  Taking \(j=m\) gives the
-replacement coloring and all required preserved invariants.
+degree-at-most-one vertex by \noderef{MissingColorIncidenceEndpoint}:
+the affected colors are distinct by choice, the coloring is proper by
+\noderef{KTriple}, and \(\beta\) is missing at \(y_n\); apply the lemma
+with \(\beta\) as its missing color.  If \(y_n\) lay on the controlled
+component, \noderef{TwoColorComponentSpanningPath} would make it a third
+end besides \(y_m,y_{n-1}\).  These three vertices are distinct by the
+vertex-injectivity clause of \noderef{TreeSequence}, so this is
+impossible.  The outside-component clause of
+\noderef{TwoColorComponentSwapMissingBehavior} now preserves the whole
+missing-color set at \(y_n\), in particular its missing-\(\beta\)
+status.  The controlled-end conclusion of
+\noderef{TashTreeControlledInterchange} makes \(\beta\) missing at
+\(y_m\), and that theorem also supplies the asserted new minimum-bad
+certificate.
+
+Neither affected color equals \(\gamma\).  The color \(\alpha\) is
+outside \noderef{TreeUsedColors} for the whole tree, while the displayed
+last edge has color \(\gamma\), so \(\alpha\ne\gamma\).  Also, that last
+edge is incident with \(y_n\) by \noderef{TreeSequence}; since it has
+color \(\gamma\) while \(y_n\) misses \(\beta\),
+\noderef{MissingColors} gives \(\beta\ne\gamma\).  The component swap
+\noderef{TwoColorComponentSwap} changes only values equal to
+\(\alpha\) or \(\beta\), and consequently fixes the exact last edge's
+\(\gamma\)-value.  Finally,
+\(\gamma\in\noderef{PresentColors}(\varphi,y_{n-1})\) supplies an exact
+edge incident with \(y_{n-1}\) whose old value is \(\gamma\).  Whether
+or not its edge-node lies in the swapped component, the cases of
+\noderef{TwoColorComponentSwap} fix this value because
+\(\gamma\notin\{\alpha,\beta\}\).  The same incident edge therefore
+witnesses that \(\gamma\) remains present at \(y_{n-1}\).  Taking
+\(j=m\) gives the replacement coloring and all required preserved
+invariants.
 \end{proof}

@@ -8,46 +8,71 @@ edge.
 \end{helper}
 \begin{proof}
 The inequality gives \(n\ge3\), so the prefixes through \(y_{n-1}\) and
-\(y_{n-2}\) are defined by \noderef{TreeSequencePrefix}.  The first is
-elementary by \noderef{TashTreeProperPrefixElementary}, whereas the full
-vertex set is not elementary by \noderef{TashTreeMinimumBadPair} and
-\noderef{TashTreeBadPair}.  Expanding
-\noderef{ColoredVertexSetElementary}, choose a color \(\beta\) missing
-at \(y_n\) and at \(y_j\) for some \(j<n\).
+\(y_{n-2}\) are defined by \noderef{TreeSequencePrefix}.  Unfolding
+\noderef{TashTreeMinimumBadPair} and then \noderef{TashTreeBadPair}, the
+original pair supplies a \(k\)-triple, the \noderef{TashkinovTree}
+condition on \(T\), and non-elementariness of the full vertex set.  In
+particular, \noderef{KTriple} supplies properness of \(\varphi\).  The
+prefix through \(y_{n-1}\) is elementary by
+\noderef{TashTreeProperPrefixElementary}.  By
+\noderef{ColoredVertexSetElementary}, non-elementariness of the full set
+gives two distinct displayed vertices with a common missing color
+\(\beta\), where missingness has the meaning in
+\noderef{MissingColors}.  Both vertices cannot lie in the elementary
+prefix, and \noderef{TreeSequencePrefix} leaves only \(y_n\) outside it.
+Thus \(\beta\) is missing at \(y_n\) and at \(y_j\) for some \(j<n\).
 
 By \noderef{TashTreeFourUnusedColors}, the prefix through \(y_{n-2}\)
 has four colors in \noderef{TreeFreeColors}.  The definitions
-\noderef{TreeMissingColors} and \noderef{TreeUsedColors} say that each
-has a missing witness in that prefix and is unused on its displayed
-colored edges.  The two remaining exact identities \(e_{n-1},e_n\) use
-at most two colors.  Hence at least two of the four colors are unused on
-all displayed colored edges of \(T\).  Choose one, \(\alpha\ne\beta\),
-and a missing witness \(y_m\) with \(m\le n-2\).
+\noderef{TreeMissingColors}, \noderef{MissingColors}, and
+\noderef{TreeUsedColors} say that each has a missing witness in that
+prefix and is unused on its displayed colored edges.  The two remaining
+exact identities \(e_{n-1},e_n\) use at most two colors.  Hence at least
+two of the four colors are unused on all displayed colored edges of
+\(T\).  Choose one, \(\alpha\ne\beta\), and a missing witness \(y_m\)
+with \(m\le n-2\).
 
 First suppose \(j=n-1\).  The color \(\beta\) is unused through
-\(y_{n-1}\).  Indeed, an occurrence on any relevant earlier tree edge
-would have, by the Tashkinov condition contained in
-\noderef{TashTreeBadPair}, an earlier missing-\(\beta\) witness distinct
-from \(y_{n-1}\), contradicting elementariness of the prefix.  It cannot
-color \(e_n\), because that edge is incident with the
-missing-\(\beta\) vertex \(y_n\).  Apply
+\(y_{n-1}\).  Indeed, if one of the relevant colored edges before
+\(y_{n-1}\) had color \(\beta\), then \noderef{TashkinovTree} would
+supply a missing-\(\beta\) witness at a still earlier vertex.  That
+witness is distinct from \(y_{n-1}\) by vertex injectivity in
+\noderef{TreeSequence}; by \noderef{MissingColors}, it and
+\(y_{n-1}\) would be two distinct prefix vertices missing \(\beta\),
+contrary to \noderef{ColoredVertexSetElementary}.  The edge \(e_n\)
+has endpoint \(y_n\) by \noderef{TreeSequence}, so
+\noderef{MissingColors} says it cannot have color \(\beta\).  Thus
+\(\beta\) is unused on the whole tree.  Apply
 \noderef{TashTreeControlledInterchange} to \(\alpha,\beta\) at
 \(y_m,y_{n-1}\).  Its component is a path with those two controlled
-ends.  The vertex \(y_n\), which also misses \(\beta\), cannot lie on
-that path as a third end: \noderef{MissingColorIncidenceEndpoint} gives
-its vertex-node degree at most one, while
-\noderef{TwoColorComponentSpanningPath} says that the component support
-is a simple path already having the two distinct controlled ends.
-Thus \(y_n\) is outside the component, and the outside-vertex clause of
+ends and the returned coloring is again a minimum bad pair.  To apply
+\noderef{MissingColorIncidenceEndpoint} at \(y_n\), its three premises
+are explicit: \(\alpha\ne\beta\) by choice, \(\varphi\) is proper by
+\noderef{KTriple}, and \(\beta\) is missing at \(y_n\).  Applying the
+lemma with the two colors in the reversed order gives degree at most one
+for the vertex-node \(y_n\).  If \(y_n\) lay in the controlled
+component, the spanning path in
+\noderef{TwoColorComponentSpanningPath} would therefore make it an end.
+But its two ends are already \(y_m,y_{n-1}\), and all three vertices are
+distinct by \noderef{TreeSequence}.  Hence \(y_n\) is outside the
+component, and the outside-vertex clause of
 \noderef{TwoColorComponentSwapMissingBehavior} shows that the swap
-leaves the missing-\(\beta\) status at \(y_n\), moves the other occurrence to
-\(y_m\), and returns a minimum bad pair.  The controlled interchange
-fixes \(e_2,\ldots,e_{n-1}\).  The last edge-node is outside the
-component as well: if it were in the component, its incidence with
-\(y_n\) would put \(y_n\) in the component.  Hence
-\noderef{TwoColorComponentSwap} also fixes \(e_n\), while \(e_1\) stays
-uncolored.  Thus every displayed edge value is fixed and \(\beta\),
-which was unused under \(\varphi\), is still unused after the swap.
+leaves the missing-\(\beta\) status at \(y_n\); the controlled-end
+conclusion of \noderef{TashTreeControlledInterchange} makes \(\beta\)
+missing at \(y_m\).  The controlled interchange also fixes
+\(e_2,\ldots,e_{n-1}\).  The last edge-node is outside the component as
+well.  If its color is \(\alpha\) or \(\beta\), its incidence with
+\(y_n\) from \noderef{TreeSequence} is an adjacency in
+\noderef{TwoColorIncidenceGraph}; membership of the edge-node would then
+put \(y_n\) in the same connected support by
+\noderef{TwoColorComponent}.  If its color is outside the pair or it is
+uncolored, \noderef{TwoColorIncidenceGraph} gives it no adjacency at all,
+so its isolated edge-node cannot lie in the component rooted at the
+distinct vertex-node \(y_{n-1}\).  In either case the edge-node is
+outside, and \noderef{TwoColorComponentSwap} fixes \(e_n\).  The same
+definition fixes the uncolored \(e_1\).  Thus every displayed edge value
+is fixed and \(\beta\), which was unused under \(\varphi\), is still
+unused after the swap.
 Taking \(j=m\) gives the conclusion.
 
 Now suppose \(j\le n-2\).  If \(\beta\notin
@@ -61,18 +86,32 @@ and its length is exactly \(n-2\).  This gives a contradiction.
 Thus \(Q\) avoids every vertex of the prefix.  We claim that it also
 avoids every displayed exact tree-edge node.  The edges through
 \(e_{n-2}\) have both ends in the prefix, and \(e_{n-1}\) has its earlier
-end there.  Finally, \(\rho(T)=n\) says that the final edge is not the
-consecutive edge \(y_{n-1}y_n\); its attachment witness from
-\noderef{TreeSequence} is therefore in the prefix through \(y_{n-2}\).
-If any of these edge-nodes belonged to \(Q\), its affected color and
-incidence with the displayed prefix endpoint would put that endpoint in
-the same component, a contradiction.  Here an off-pair or uncolored
-edge-node has no incidence-graph adjacency at all; since \(Q\) is rooted
-at a vertex-node, such an isolated edge-node cannot belong to \(Q\).
+end there, by \noderef{TreeSequence}.  For the final edge, if its earlier
+attachment were \(y_{n-1}\), then its ends would be
+\(y_{n-1},y_n\).  Since \(n\ge3\), the defining condition in
+\noderef{TashTreeSuffixPath} would then hold at \(n-1\), and the
+leastness clause of \noderef{TashTreePathIndex} would give
+\(\rho(T)\le n-1\), contrary to \(\rho(T)=n\).  Thus the earlier
+attachment supplied by \noderef{TreeSequence} lies in the prefix through
+\(y_{n-2}\).  Consequently every displayed edge has an endpoint in that
+prefix.
+
+Fix any displayed exact edge-node.  If its color is \(\alpha\) or
+\(\beta\), then \noderef{TwoColorIncidenceGraph} joins it to the
+prefix endpoint just identified.  If the edge-node belonged to \(Q\),
+that adjacency and the connected-component meaning of
+\noderef{TwoColorComponent} would put the endpoint in \(Q\), contrary to
+vertex avoidance.  If the edge is uncolored or has a color outside
+\(\{\alpha,\beta\}\), \noderef{TwoColorIncidenceGraph} gives its
+edge-node no neighbors.  It is therefore an isolated component and,
+since \(Q\) is the component rooted at the distinct vertex-node \(y_n\),
+\noderef{TwoColorComponent} again excludes it from \(Q\).  This proves
+avoidance of every displayed exact edge-node, including the isolated
+off-pair case.
 
 The color \(\alpha\) is unused on the whole displayed tree by its
 choice above.  Apply \noderef{TashTreeDisjointComponentNormalization}
-with the retained-prefix cutoff, the fixed missing witnesses
+with retained-prefix cutoff \(p=n-2\), the fixed missing witnesses
 \(y_m,y_j\), and the vertex- and edge-node avoidance just proved.  It
 returns the explicit local component-swap coloring, proves it is again a
 minimum bad pair, and makes \(\alpha\) missing at both \(y_m,y_n\).

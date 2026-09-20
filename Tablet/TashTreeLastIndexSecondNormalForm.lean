@@ -1,3 +1,4 @@
+import Tablet.ColoredVertexSetElementary
 import Tablet.IsOneEdgeUncolored
 import Tablet.KTriple
 import Tablet.MissingColorIncidenceEndpoint
@@ -8,9 +9,14 @@ import Tablet.TashTreeBadPair
 import Tablet.TashTreeMinimumBadPair
 import Tablet.TashTreePathIndex
 import Tablet.TashTreeProperPrefixElementary
+import Tablet.TashkinovTree
 import Tablet.TreeSequence
+import Tablet.TreeSequencePrefix
 import Tablet.TreeUsedColors
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: TashTreeLastIndexSecondNormalForm]
 theorem TashTreeLastIndexSecondNormalForm {V E : Type*}
