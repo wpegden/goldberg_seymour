@@ -41,6 +41,10 @@ theorem TashkinovAlternatingSegmentAppend
     ∃ S' : TreeSequence G e0,
       TreeSequenceInitialSegment S S' ∧
         S'.length = S.length + m ∧
+        (∀ i : Fin m, ∃ r : Fin S'.length,
+          r.val = S.length + i.val ∧
+            S'.edge r = pathEdge i ∧
+            S'.vertex r.succ = pathVertex i.succ) ∧
         S.length < S'.length ∧
         TashkinovAugmentationSequence phi S S' ∧
         S'.vertex (Fin.last S'.length) = pathVertex (Fin.last m) ∧

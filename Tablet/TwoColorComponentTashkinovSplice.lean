@@ -44,7 +44,8 @@ theorem TwoColorComponentTashkinovSplice
       hedgeInjective, hstart, hlast, houtside, hvertexComponent,
       hedgeComponent, hcolors, hends, hedgeFresh⟩ :=
     TwoColorComponentNearestSegment G phi S alpha beta y hproper hne hy hmeets
-  obtain ⟨S', hSS', _hlengthEq, hlength, haugment, hlastVertex, hnew⟩ :=
+  obtain ⟨S', hSS', _hlengthEq, _hsegmentEntries, hlength, haugment,
+      hlastVertex, hnew⟩ :=
     TashkinovAlternatingSegmentAppend G phi S alpha beta y m hm
       pathVertex pathEdge hvertexInjective hedgeInjective hstart houtside
       hvertexComponent hedgeComponent hcolors hends hedgeFresh halpha hbeta
