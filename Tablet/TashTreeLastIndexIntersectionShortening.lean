@@ -57,7 +57,8 @@ theorem TashTreeLastIndexIntersectionShortening {V E : Type*}
       rw [← hSTvertices, hindex]
       exact hmissing
   have hproper : IsProperEdgeColoring G phi := hmin.1.1.2.2.2.1
-  obtain ⟨u, S', hu, hSS', hlength, haugment, hlastVertex, hsplice⟩ :=
+  obtain ⟨u, S', hu, _huComponent, hSS', hlength, haugment,
+      hlastVertex, hsplice⟩ :=
     TwoColorComponentTashkinovSplice G phi S alpha beta
       (T.vertex (Fin.last T.length)) hproper hne halpha hbeta
       hlastOutside hmeets

@@ -1,15 +1,6 @@
-import Tablet.Incident
 import Tablet.IsProperEdgeColoring
-import Tablet.LooplessMultigraph
-import Tablet.TashkinovAugmentation
-import Tablet.TashkinovAugmentationSequence
-import Tablet.TreeMissingColors
-import Tablet.TreeSequence
-import Tablet.TreeSequenceInitialSegment
-import Tablet.TreeSequenceVertexSet
-import Tablet.TwoColorComponent
-import Tablet.TwoColorComponentSpanningPath
-import Tablet.TwoColorIncidenceGraph
+import Tablet.TashkinovAlternatingSegmentAppend
+import Tablet.TwoColorComponentNearestSegment
 
 open scoped Sym2
 
@@ -29,6 +20,8 @@ theorem TwoColorComponentTashkinovSplice
       Sum.inl u ∈ TwoColorComponent G phi alpha beta (Sum.inl y)) :
     ∃ (u : V) (S' : TreeSequence G e0),
       u ∈ TreeSequenceVertexSet S /\
+        Sum.inl u ∈
+          TwoColorComponent G phi alpha beta (Sum.inl y) /\
         TreeSequenceInitialSegment S S' /\
         S.length < S'.length /\
         TashkinovAugmentationSequence phi S S' /\
@@ -47,4 +40,14 @@ theorem TwoColorComponentTashkinovSplice
               else
                 s(S'.vertex r.castSucc, S'.vertex r.succ) := by
 -- BODY
-  sorry
+  obtain ⟨m, hm, pathVertex, pathEdge, hvertexInjective,
+      hedgeInjective, hstart, hlast, houtside, hvertexComponent,
+      hedgeComponent, hcolors, hends, hedgeFresh⟩ :=
+    TwoColorComponentNearestSegment G phi S alpha beta y hproper hne hy hmeets
+  obtain ⟨S', hSS', _hlengthEq, hlength, haugment, hlastVertex, hnew⟩ :=
+    TashkinovAlternatingSegmentAppend G phi S alpha beta y m hm
+      pathVertex pathEdge hvertexInjective hedgeInjective hstart houtside
+      hvertexComponent hedgeComponent hcolors hends hedgeFresh halpha hbeta
+  refine ⟨pathVertex 0, S', hstart, hvertexComponent 0, hSS', hlength,
+    haugment, ?_, hnew⟩
+  rw [hlastVertex, hlast]

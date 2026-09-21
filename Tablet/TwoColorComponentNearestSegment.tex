@@ -1,0 +1,69 @@
+\begin{helper}[Nearest old-tree segment of a two-color component]
+Let \(G\) be a finite loopless multigraph with exact edge type \(E\), let
+\(S\) be an ordered tree-sequence rooted at \(e_0\), and let \(\mu\) be a
+proper partial \(k\)-edge-coloring.  Fix distinct colors
+\(\alpha,\beta\), a vertex \(y\notin V(S)\), and suppose that the
+\((\alpha,\beta)\)-component \(K\) through the vertex-node \(y\) contains
+a vertex-node from \(V(S)\).
+
+Then there are \(m\geq 1\), vertices
+\(v_0,\ldots,v_m\), and exact edges \(f_0,\ldots,f_{m-1}\) such that:
+\begin{enumerate}
+\item the vertex map \(i\mapsto v_i\) and exact-edge map
+      \(i\mapsto f_i\) are injective;
+\item \(v_0\in V(S)\), \(v_m=y\), and
+      \(v_i\notin V(S)\) for \(1\leq i\leq m\);
+\item every vertex-node \(v_i\) and edge-node \(f_i\) belongs to \(K\);
+\item \(\mu(f_i)\in\{\alpha,\beta\}\) and
+      \(\operatorname{ends}(f_i)=\{v_i,v_{i+1}\}\) for every \(i<m\);
+\item no exact edge \(f_i\) is an edge displayed by \(S\).
+\end{enumerate}
+Thus the segment retains the identities of parallel edges, not merely their
+endpoint pairs.
+\end{helper}
+\begin{proof}
+Put
+\(K=\noderef{TwoColorComponent}(G,\mu,\alpha,\beta,y)\).  By
+\noderef{TwoColorComponentSpanningPath}, properness supplies a simple path
+\(P\) in the two-color incidence graph whose support is exactly \(K\).
+The root vertex-node \(y\) lies in \(K\), and the meeting hypothesis gives
+at least one vertex-node of \(P\) which belongs to \(V(S)\).
+
+Choose, among the occurrences on \(P\) of vertex-nodes from \(V(S)\), one
+whose path distance from the occurrence of \(y\) is least.  Reverse \(P\)
+if necessary, and take the subpath from that chosen occurrence to \(y\).
+Because \(\noderef{TwoColorIncidenceGraph}\) is bipartite with parts \(V\)
+and \(E\), this subpath has the unique alternating form
+\[
+ v_0,f_0,v_1,f_1,\ldots,f_{m-1},v_m=y.                 \tag{1}
+\]
+Here \(v_0\in V(S)\).  Since \(y\notin V(S)\), the subpath is nonconstant,
+so \(m\geq1\).  If some \(v_i\) with \(1\leq i\leq m\) belonged to
+\(V(S)\), it would be a tree vertex strictly closer to \(y\) along \(P\)
+than \(v_0\), contrary to the choice of \(v_0\).  This proves the
+outside-tree assertion.
+
+The subpath of a simple path is simple.  Hence all its nodes are distinct;
+in particular, both displayed maps in (1) are injective.  Since the support
+of \(P\) is \(K\), every vertex-node and every exact edge-node in (1)
+belongs to \(K\).
+
+For each \(i<m\), both adjacencies
+\(v_i\mathbin{-}f_i\) and \(f_i\mathbin{-}v_{i+1}\) occur in the incidence
+path.  Unfolding \noderef{TwoColorIncidenceGraph} and
+\noderef{Incident}, these adjacencies say that both vertices are incident
+with the exact edge \(f_i\), and that
+\(\mu(f_i)=\alpha\) or \(\mu(f_i)=\beta\).  Simplicity makes
+\(v_i\ne v_{i+1}\).  The endpoint multiset has size two, and the graph is
+loopless by \noderef{LooplessMultigraph}; consequently the two distinct
+incident vertices exhaust it, giving
+\(\operatorname{ends}(f_i)=\{v_i,v_{i+1}\}\).
+
+Finally suppose that \(f_i\) were the displayed edge \(S.\operatorname{edge}(j)\).
+The attachment clause in \noderef{TreeSequence} gives both endpoints of this
+exact edge among the displayed vertices of \(S\), hence in \(V(S)\) by
+\noderef{TreeSequenceVertexSet}.  The endpoint identity just proved would
+then put \(v_{i+1}\) in \(V(S)\), contradicting the outside-tree assertion.
+Therefore every \(f_i\) is distinct from every old displayed exact edge,
+which proves all five claims.
+\end{proof}

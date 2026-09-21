@@ -6,14 +6,14 @@ proper partial \(k\)-edge-coloring.  Let \(\alpha\ne\beta\) both belong to
 \((\alpha,\beta)\)-component through the vertex-node \(y\) contains a
 vertex-node belonging to \(V(S)\).
 
-Then there are a vertex \(u\in V(S)\) and a strict ordered extension
+Then there are a vertex \(u\in V(S)\), whose vertex-node belongs to that
+same \((\alpha,\beta)\)-component, and a strict ordered extension
 \(S'\) of \(S\) such that \(S'\) is obtained from \(S\) by a
 \noderef{TashkinovAugmentationSequence}, its last displayed vertex is
 \(y\), and every new exact edge and new vertex-node belongs to the
 \noderef{TwoColorComponent} through \(y\).  Every new edge has color
 \(\alpha\) or \(\beta\), and every new vertex lies outside \(V(S)\).
-Moreover, if the new entries have indices
-\(|S|\le r<|S'|\), then
+Moreover, if the new entries have indices \(|S|\le r<|S'|\), then
 \[
  \operatorname{ends}(S'.\operatorname{edge}(r))=
  \begin{cases}
@@ -27,89 +27,20 @@ intersection with \(S\) to \(y\), and (1) retains the identity of every
 parallel edge rather than retaining only its endpoint pair.
 \end{lemma}
 \begin{proof}
-Put \(K=\noderef{TwoColorComponent}(G,\mu,\alpha,\beta,y)\).  By
-\noderef{TwoColorComponentSpanningPath}, properness gives a simple path
-\(P\) in the two-color incidence graph whose support is exactly \(K\).
-The node \(y\) lies on \(P\), because every connected component contains
-its root.  By hypothesis, at least one vertex-node \(x\) of \(P\) has
-\(x\in V(S)\).
+Apply \noderef{TwoColorComponentNearestSegment}.  It gives a positive
+integer \(m\), an injective vertex list
+\(v_0,\ldots,v_m\), and an injective exact-edge list
+\(f_0,\ldots,f_{m-1}\).  Its conclusions say that \(v_0\in V(S)\), that
+the vertex-node \(v_0\) belongs to the component through \(y\), that
+\(v_m=y\), that every later vertex is outside \(V(S)\), and that all the
+vertex, edge, color, endpoint, and old-edge-disjointness conditions of
+\noderef{TashkinovAlternatingSegmentAppend} hold.
 
-Orient \(P\) temporarily and let \(t\) be the index of the node \(y\).
-Among the finitely many indices of vertex-nodes of \(P\) which belong to
-\(V(S)\), choose one, say \(a\), minimizing the ordinary distance to
-\(t\).  If it lies after \(t\), reverse \(P\).  Write the subpath from
-that chosen node to \(y\) as
-\[
- u,e_1,v_1,e_2,v_2,\ldots,e_m,v_m=y.                         \tag{2}
-\]
-Here \(u\in V(S)\).  The two-color incidence graph
-\noderef{TwoColorIncidenceGraph} is bipartite between vertex-nodes and
-edge-nodes, so the nodes in (2) alternate in exactly the displayed way.
-Since \(y\notin V(S)\), the two ends are different and \(m\ge1\).
-Minimality of \(a\) says
-\[
-                         v_i\notin V(S)\quad(1\le i\le m).    \tag{3}
-\]
-Indeed, any such \(v_i\in V(S)\) would occur strictly closer to \(y\)
-than \(u\).  The simple-path condition says that all nodes in (2) are
-distinct.  In particular the vertices \(v_i\) are pairwise distinct and
-the symbols \(e_i\) are pairwise distinct individual elements of \(E\).
-
-For each \(i\), adjacency of the three consecutive incidence nodes
-\(v_{i-1},e_i,v_i\), where \(v_0=u\), unfolds by
-\noderef{TwoColorIncidenceGraph}, and incidence unfolds by
-\noderef{Incident}, to
-\[
- v_{i-1},v_i\in\operatorname{ends}(e_i),qquad
-              \mu(e_i)\in\{\alpha,\beta\}.                  \tag{4}
-\]
-The two vertices in (4) are distinct, by simplicity and because the graph
-is loopless.  By the two-endpoint and loopless semantics of
-\noderef{LooplessMultigraph}, two distinct vertices incident with this edge
-determine its exact unordered endpoint pair, so
-\[
-                    \operatorname{ends}(e_i)=\{v_{i-1},v_i\}.\tag{5}
-\]
-No \(e_i\) is an old displayed edge of \(S\).  To see this with edge
-identities intact, suppose \(e_i=S.\operatorname{edge}(r)\).  The
-attachment field of the \noderef{TreeSequence} \(S\) says that both
-endpoints of this exact edge identity occur in its displayed vertex map;
-by the image definition \noderef{TreeSequenceVertexSet}, both therefore
-belong to \(V(S)\).  Equation (5) would then put \(v_i\) in \(V(S)\),
-contrary to (3).  Thus the old edges and the exact edges in (2) are
-disjoint.
-
-Starting with \(S\), append successively the edge--vertex pairs
-\[
-                         (e_1,v_1),\ldots,(e_m,v_m).          \tag{6}
-\]
-The old vertex and edge maps are retained literally.  By
-\noderef{TreeSequenceVertexSet}, the old vertex set is exactly the image of
-the old displayed vertex map.  Hence (3) makes every new \(v_i\) disjoint
-from that image, while simple-path injectivity makes the new vertices
-pairwise distinct; together these prove injectivity of the enlarged vertex
-map.  The preceding paragraph and simple-path injectivity prove injectivity
-of the enlarged edge map.  The first-edge field is unchanged.  For the
-first new edge use the old attachment vertex \(u\); for every later edge
-use the preceding new vertex.  Equation (5) proves each attachment equation.
-Consequently (6) defines a \noderef{TreeSequence} \(S'\), makes \(S\) an
-exact \noderef{TreeSequenceInitialSegment} of \(S'\), and gives precisely
-the two endpoint equations in (1).  It also gives
-\(|S'|=|S|+m>|S|\), and its last vertex is \(v_m=y\).
-
-It remains to verify that every step in (6) is a Tashkinov augmentation.
-The missing-color witnesses for both \(\alpha\) and \(\beta\) already lie
-in \(V(S)\), by the definition \noderef{TreeMissingColors}.  Every partial
-tree in (6) retains the old displayed vertex map of \(S\) literally as an
-initial segment; the image definition \noderef{TreeSequenceVertexSet}
-therefore puts those same witness vertices in every partial tree's vertex
-set, while their missing-color facts are properties of \(G\) and \(\mu\)
-at the unchanged vertices.  Thus both colors remain tree-missing at every
-step.  By (4), the new edge at each step has one of these two colors.  The
-one-entry length increase, exact initial-segment equality, edge-color
-equality, and retained missing witness are exactly the four clauses of
-\noderef{TashkinovAugmentation}.  Concatenating the \(m\) steps in its
-reflexive-transitive closure gives the required
-\noderef{TashkinovAugmentationSequence}.  Equations (2)--(6) also give all
-the stated component-membership and outside-vertex conclusions.
+Apply that append lemma using the two assumed tree-missing colors
+\(\alpha\) and \(\beta\).  It returns a strict exact extension \(S'\),
+the finite Tashkinov augmentation sequence from \(S\) to \(S'\), the last
+vertex identity \(S'.\operatorname{vertex}(|S'|)=v_m=y\), and all the
+component, outside-tree, color, and endpoint conclusions in (1).  Taking
+\(u=v_0\) supplies both \(u\in V(S)\) and the newly stated membership of
+its vertex-node in the component, so every conclusion follows.
 \end{proof}

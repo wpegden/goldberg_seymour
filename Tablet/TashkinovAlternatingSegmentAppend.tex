@@ -1,0 +1,89 @@
+\begin{helper}[Appending a certified alternating segment]
+Let \(G\) be a finite loopless multigraph, let \(S\) be an ordered
+tree-sequence rooted at \(e_0\), and let \(\mu\) be a partial
+\(k\)-edge-coloring.  Suppose \(\alpha,\beta\in\overline\mu(S)\).
+Let \(m\geq1\), and suppose we are given injective maps
+\[
+ v:\{0,\ldots,m\}\longrightarrow V,
+ \qquad f:\{0,\ldots,m-1\}\longrightarrow E
+\]
+with the following properties.  The vertex \(v_0\) belongs to \(V(S)\),
+every \(v_{i+1}\) lies outside \(V(S)\), every exact edge \(f_i\) is
+distinct from every displayed edge of \(S\), and
+\[
+ \operatorname{ends}(f_i)=\{v_i,v_{i+1}\},\qquad
+ \mu(f_i)\in\{\alpha,\beta\}.                              \tag{1}
+\]
+Fix a vertex \(y\), and also suppose that every vertex-node \(v_i\) and
+edge-node \(f_i\) lies in the \((\alpha,\beta)\)-component through \(y\).
+
+Then appending
+\((f_0,v_1),\ldots,(f_{m-1},v_m)\) produces a tree-sequence \(S'\) such
+that \(S\) is its exact initial segment,
+\(|S'|=|S|+m>|S|\), and \(S'\) is reached from \(S\) by a
+\noderef{TashkinovAugmentationSequence}.  Its last vertex is \(v_m\).
+Every appended edge and vertex has the stated component membership and
+color, every appended vertex lies outside \(V(S)\), and for
+\(|S|\leq r<|S'|\),
+\[
+ \operatorname{ends}(S'.\operatorname{edge}(r))=
+ \begin{cases}
+  \{v_0,S'.\operatorname{vertex}(r+1)\},&r=|S|,\\
+  \{S'.\operatorname{vertex}(r),S'.\operatorname{vertex}(r+1)\},&r>|S|.
+ \end{cases}                                                \tag{2}
+\]
+\end{helper}
+\begin{proof}
+Define the enlarged vertex map on the ordinal sum of the old
+\(|S|+1\) positions and the \(m\) new positions by retaining every old
+entry and sending the new position numbered \(i\) to \(v_{i+1}\).
+Define the enlarged edge map similarly, retaining the old \(|S|\) entries
+and sending the new position numbered \(i\) to \(f_i\).  These maps have
+domains of sizes \(|S|+m+1\) and \(|S|+m\), respectively.
+
+The old part of the vertex map is injective by the
+\noderef{TreeSequence} axioms for \(S\); the new part is injective because
+\(v\) is injective; and the two images are disjoint because every
+\(v_{i+1}\) is outside \(V(S)\), whose image description is
+\noderef{TreeSequenceVertexSet}.  Hence the enlarged vertex map is
+injective.  The same three-part argument applies to edges: the old map is
+injective by \noderef{TreeSequence}, the new map is injective by hypothesis,
+and old and new exact edge identities are disjoint by the freshness
+hypothesis.  Thus the enlarged edge map is injective.
+
+The first displayed edge remains the old first edge \(e_0\), because
+\(|S|\geq1\).  Every old attachment equation is inherited literally from
+\(S\).  For the first new edge, (1) attaches \(f_0\) to the earlier old
+vertex \(v_0\in V(S)\); by \noderef{TreeSequenceVertexSet}, choose its
+displayed index in \(S\).  For \(i>0\), equation (1) attaches \(f_i\) to
+the immediately preceding new vertex \(v_i\).  All these attachment
+indices precede the corresponding new vertex.  These facts construct all
+fields of a \noderef{TreeSequence} \(S'\).  Its definitions give
+\(|S'|=|S|+m\), make \(S\) an exact
+\noderef{TreeSequenceInitialSegment}, identify its last vertex with
+\(v_m\), and translate (1) entry by entry into (2).  Since \(m\geq1\),
+the length inequality is strict.  The outside-tree, component-membership,
+and color conclusions are immediate from the definitions of the appended
+maps and the corresponding hypotheses.
+
+It remains to construct the augmentation sequence.  For
+\(0\leq t\leq m\), let \(S_t\) be the same construction using only the
+first \(t\) new pairs.  Thus \(S_0=S\), \(S_m=S'\), and
+\(|S_{t+1}|=|S_t|+1\).  The map definitions give an exact
+\noderef{TreeSequenceInitialSegment} from \(S_t\) to \(S_{t+1}\).
+
+Unfolding \noderef{TreeMissingColors}, choose a vertex of \(S\) missing
+\(\alpha\) and a vertex of \(S\) missing \(\beta\).  Every \(S_t\)
+retains all old displayed vertices literally, so the same two vertices,
+with their unchanged missing-color facts under the fixed coloring \(\mu\),
+show that both \(\alpha\) and \(\beta\) belong to
+\(\overline\mu(S_t)\).  By (1), the new last edge in the step
+\(S_t\to S_{t+1}\) has one of those two colors.  The one-edge length
+increase, exact initial-segment equality, its stated color, and the retained
+missing-color witness are precisely the clauses of
+\noderef{TashkinovAugmentation}.  Hence every adjacent pair
+\((S_t,S_{t+1})\) is one augmentation.  Finite induction on \(t\), using
+the reflexive-transitive-closure definition in
+\noderef{TashkinovAugmentationSequence}, concatenates these \(m\) steps
+from \(S\) to \(S'\).  This proves the remaining assertion.
+\end{proof}
