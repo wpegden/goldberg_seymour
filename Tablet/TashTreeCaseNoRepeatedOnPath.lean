@@ -1,33 +1,8 @@
-import Tablet.AdjacentEdges
-import Tablet.ColoredVertexSetElementary
-import Tablet.Degree
-import Tablet.Incident
-import Tablet.IsOneEdgeUncolored
-import Tablet.IsProperEdgeColoring
-import Tablet.KTriple
-import Tablet.MaximumDegree
-import Tablet.MissingColorIncidenceEndpoint
-import Tablet.MissingColors
-import Tablet.PresentColors
-import Tablet.TashTreeBadPair
-import Tablet.TashTreeCaseRepeatedOnPath
-import Tablet.TashTreeControlledInterchange
-import Tablet.TashTreeFourUnusedColors
-import Tablet.TashTreeMinimumBadPair
-import Tablet.TashTreeProperPrefixElementary
-import Tablet.TashTreeRankLess
-import Tablet.TashkinovTree
-import Tablet.TreeFreeColors
-import Tablet.TreeMissingColors
-import Tablet.TreeSequence
-import Tablet.TreeSequencePrefix
-import Tablet.TreeSequenceVertexSet
-import Tablet.TreeUsedColors
-import Tablet.TwoColorComponent
-import Tablet.TwoColorComponentSpanningPath
-import Tablet.TwoColorComponentSwap
-import Tablet.TwoColorComponentSwapProper
-import Tablet.TwoColorIncidenceGraph
+import Tablet.TashTreeControlledRepeatedSuffixContradiction
+import Tablet.TashTreeEarlyBetaNormalization
+import Tablet.TashTreeGammaEpsilonSetup
+import Tablet.TashTreeNoRepeatedDisjointReduction
+import Tablet.TashTreeNoRepeatedIntersectionShortening
 
 -- [TABLET NODE: TashTreeCaseNoRepeatedOnPath]
 theorem TashTreeCaseNoRepeatedOnPath {V E : Type*}
@@ -42,4 +17,48 @@ theorem TashTreeCaseNoRepeatedOnPath {V E : Type*}
       alpha ∈ MissingColors G phi (T.vertex i) ∧
       alpha ∈ MissingColors G phi (T.vertex (Fin.last T.length))) : False := by
 -- BODY
-  sorry
+  rcases TashTreeEarlyBetaNormalization G k e0 phi T hmin hq hbefore hnone with
+    ⟨phi', beta, i, hmin', hi, hbeta, hbetaLast, hnone'⟩
+  let q : Fin (T.length + 1) :=
+    ⟨TashTreePathIndex G T, Nat.lt_succ_of_lt hbefore⟩
+  have hsetup :
+      ∃ (gamma epsilon : Fin k) (m : Fin (T.length + 1)),
+        gamma ≠ beta ∧ epsilon ≠ gamma ∧
+        gamma ∈ MissingColors G phi' (T.vertex q) ∧
+        epsilon ∈ MissingColors G phi' (T.vertex m) ∧
+        TreeColorUnusedThrough phi' T gamma q ∧
+        TreeColorUnusedThrough phi' T epsilon q ∧
+        m.val + 2 ≤ TashTreePathIndex G T := by
+    simpa [q] using
+      (TashTreeGammaEpsilonSetup G k e0 phi' T hmin' hq hbefore
+        hnone' beta hbetaLast)
+  rcases hsetup with
+    ⟨gamma, epsilon, m, hgb, heg, hgamma, hepsilon,
+      hgammaUnused, hepsilonUnused, hm⟩
+  by_cases hepsilonLast : epsilon ∈
+      MissingColors G phi' (T.vertex (Fin.last T.length))
+  · exact TashTreeControlledRepeatedSuffixContradiction
+      G k e0 phi' T hmin' hq hbefore m q
+      (by change m.val < TashTreePathIndex G T; omega)
+      (by change TashTreePathIndex G T < T.length; exact hbefore)
+      (by change TashTreePathIndex G T ≤ TashTreePathIndex G T; exact le_rfl)
+      epsilon gamma heg hepsilon hgamma
+      hepsilonUnused hgammaUnused hepsilonLast
+  · have heb : epsilon ≠ beta := by
+      intro h
+      apply hepsilonLast
+      simpa [h] using hbetaLast
+    by_cases hmeets : ∃ s : Fin (T.length + 1),
+        s.val + 1 ≤ TashTreePathIndex G T ∧
+        Sum.inl (T.vertex s) ∈
+          TwoColorComponent G phi' epsilon beta
+            (Sum.inl (T.vertex (Fin.last T.length)))
+    · exact TashTreeNoRepeatedIntersectionShortening
+        G k e0 phi' T hmin' hq hbefore beta epsilon heb i m hi hm
+        hbeta hbetaLast hepsilon hmeets
+    · exact TashTreeNoRepeatedDisjointReduction
+        G k e0 phi' T hmin' hq hbefore beta gamma epsilon hgb heg heb
+        i m hi hm hbeta hbetaLast hepsilon hgamma hgammaUnused
+        hepsilonUnused (by
+          intro s hs hmem
+          exact hmeets ⟨s, hs, hmem⟩)

@@ -1,0 +1,38 @@
+\begin{helper}[Controlled interchange gives a repeated suffix color]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(2<\rho(T)<|E(T)|\).  Let \(i<j<|E(T)|\), with
+\(\rho(T)\le j\), and let distinct colors \(\alpha,\beta\) be missing
+at \(y_i,y_j\), respectively.  If both colors are unused through
+\(y_j\) and \(\alpha\) is also missing at the final vertex \(y_n\),
+then this configuration is impossible.
+\end{helper}
+\begin{proof}
+Apply \noderef{TashTreeControlledInterchange} to \(\alpha,\beta\) at
+\(y_i,y_j\).  Write \(Q\) for the returned
+\((\alpha,\beta)\)-component and \(\varphi'\) for its component swap.
+That result says that \(Q\) is a path component containing both
+\(y_i\) and \(y_j\), that these two distinct vertices have at most one
+neighbor in the two-color incidence graph, that \(\alpha\) is missing
+at \(y_j\) under \(\varphi'\), and that \((\varphi',T)\) is again a
+minimum bad pair.
+
+We claim that \(y_n\notin Q\).  The inequalities
+\(i<j<n\), together with the displayed-vertex injectivity in
+\noderef{TreeSequence}, make \(y_i,y_j,y_n\) pairwise distinct.  Since
+\(\alpha\) is missing at \(y_n\),
+\noderef{MissingColorIncidenceEndpoint} says that \(y_n\) also has at
+most one neighbor in the two-color incidence graph.  On the other hand,
+\noderef{TwoColorComponentSpanningPath} realizes all of \(Q\) as the
+support of one simple path.  A nontrivial simple path has exactly two
+vertices of degree at most one in its support: here they are the two
+distinct vertices \(y_i\) and \(y_j\).  Thus a third such vertex
+\(y_n\) cannot belong to \(Q\), proving the claim.
+
+The outside-component clause of
+\noderef{TwoColorComponentSwapMissingBehavior} now preserves the whole
+missing-color set at \(y_n\).  Hence \(\alpha\) is missing under
+\(\varphi'\) both at \(y_j\) and at \(y_n\).  The unchanged tree has
+\(\rho(T)\le j<n\), so these witnesses meet exactly the repeated suffix
+hypothesis of \noderef{TashTreeCaseRepeatedOnPath} for the returned
+minimum bad pair.  That result gives a contradiction.
+\end{proof}

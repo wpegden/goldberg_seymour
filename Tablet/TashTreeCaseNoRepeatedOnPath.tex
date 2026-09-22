@@ -5,196 +5,34 @@ final vertex \(y_n\) is missing at any \(y_i\) with
 \(\rho(T)\le i<n\).
 \end{lemma}
 \begin{proof}
-Write \(T=(y_0,e_1,y_1,\ldots,e_n,y_n)\) and
-\(q=\rho(T)<n\).  Unfolding \noderef{TashTreeMinimumBadPair} and
-\noderef{TashTreeBadPair} gives the fixed \(k\)-triple, the Tashkinov
-condition, non-elementariness of \(V(T)\), and the universal exclusion of
-all smaller bad pairs.  Since \(q>2\), all prefixes below have positive
-length.
+Put \(q=\rho(T)\).  By
+\noderef{TashTreeEarlyBetaNormalization}, replace \(\varphi\), if
+necessary, by a coloring \(\varphi'\) for which \((\varphi',T)\) is
+still a minimum bad pair satisfying the no-repetition hypothesis, and
+choose \(\beta\) and \(i\le q-2\) such that \(\beta\) is missing at
+both \(y_i\) and \(y_n\).
 
-The proper prefix \(T_{n-1}\), as defined by
-\noderef{TreeSequencePrefix}, is elementary by
-\noderef{TashTreeProperPrefixElementary}, whereas \(T\) is not.
-By \noderef{ColoredVertexSetElementary}, there is therefore a color
-\(\beta\) missing at \(y_n\) and at some earlier vertex \(y_i\): a pair
-of repeated missing-color witnesses cannot both lie in the elementary
-prefix.  The hypothesis of the present case forces \(i<q\).
+Apply \noderef{TashTreeGammaEpsilonSetup} to this normalized pair.  It
+gives colors \(\gamma,\varepsilon\) and an index \(m\le q-2\) such
+that \(\gamma\ne\beta\), \(\varepsilon\ne\gamma\), \(\gamma\) is
+missing at \(y_q\), \(\varepsilon\) is missing at \(y_m\), and both
+colors are unused through \(y_q\).
 
-We first arrange \(i\le q-2\).  Suppose \(i=q-1\).  Apply
-\noderef{TashTreeFourUnusedColors} to \(T_{q-2}\).  Its four colors in
-\noderef{TreeFreeColors} are missing at vertices of that prefix by
-\noderef{TreeMissingColors} and unused on its colored edge identities by
-\noderef{TreeUsedColors}.  The one additional edge \(e_{q-1}\) excludes
-at most one of them, so at least three remain unused through
-\(y_{q-1}\).  Choose one \(\alpha\ne\beta\), missing at \(y_m\) with
-\(m\le q-2\).
+If \(\varepsilon\) is missing at \(y_n\), invoke
+\noderef{TashTreeControlledRepeatedSuffixContradiction} with
+\(\alpha=\varepsilon\), \(\beta=\gamma\), \(i=m\), and \(j=q\).
+All its hypotheses are exactly the facts just obtained, and it gives a
+contradiction.  Hence \(\varepsilon\) is not missing at \(y_n\).
+Since \(\beta\) is missing there, the two colors are distinct.
 
-The color \(\beta\) is also unused through \(y_{q-1}\).  If an edge
-\(e_h\), \(2\le h\le q-1\), had color \(\beta\), its earlier witness from
-\noderef{TashkinovTree} would be distinct from the
-\(\beta\)-missing \(y_{q-1}\), contradicting elementariness of the proper
-prefix \(T_{q-1}\) supplied by
-\noderef{TashTreeProperPrefixElementary}.  Thus
-\noderef{TashTreeControlledInterchange} applies to
-\(\alpha,\beta\) at \(y_m,y_{q-1}\), producing another minimum bad pair
-in which \(\beta\) is missing at \(y_m\).
-
-The vertex \(y_n\) lies outside this controlled component.  The component
-is a path with the two distinct ends \(y_m,y_{q-1}\), while
-\noderef{MissingColorIncidenceEndpoint} makes the
-\(\beta\)-missing \(y_n\) a third vertex of degree at most one.
-\noderef{TwoColorComponentSpanningPath} therefore rules out its membership.
-Consequently \(\beta\) remains missing at \(y_n\).
-
-This normalization also preserves the present case hypothesis.  Its two
-path ends have indices below \(q\).  Every vertex \(y_s\) with
-\(q\le s\le n\) is either outside the component, when all its incident
-colors are fixed, or internal to the two-color path, when one edge of each
-affected color remains present after the transposition.  We just proved
-the endpoint \(y_n\) is outside.  Thus every missing-color set on the
-suffix \(y_q,\ldots,y_n\) is unchanged, and no color missing at \(y_n\)
-becomes missing at \(y_q,\ldots,y_{n-1}\).  We may henceforth use the
-normalized minimum bad pair, still satisfying the case hypothesis, with
-\(\beta\) missing at \(y_i,y_n\) for some \(i\le q-2\).
-
-Choose a color \(\gamma\) missing at \(y_q\).  We derive its existence
-from the local \(k\)-triple, as follows.  By \noderef{KTriple},
-\(\varphi\) is proper and \(k\ge\Delta(G)+1\).  Choosing one edge for
-each color in \noderef{PresentColors} gives exact identities incident
-with \(y_q\) in the sense of \noderef{Incident}.  Two such identities of
-one color would be adjacent by \noderef{AdjacentEdges} and would violate
-\noderef{IsProperEdgeColoring}.  Hence the choices are injective and, by
-\noderef{Degree} and
-\noderef{MaximumDegree},
-\[
- |\varphi(y_q)|\le d_G(y_q)\le\Delta(G)<k.
-\]
-The complement definition \noderef{MissingColors} now supplies
-\(\gamma\).
-
-The color \(\gamma\) is unused on \(e_2,\ldots,e_q\).  Otherwise an edge
-of this proper prefix with color \(\gamma\) would have an earlier
-missing-\(\gamma\) witness by \noderef{TashkinovTree}, distinct from
-\(y_q\), contradicting \noderef{TashTreeProperPrefixElementary} for
-\(T_q\).  Also \(\gamma\ne\beta\): the current case hypothesis forbids a
-color missing at \(y_n\), as \(\beta\) is, from also being missing at the
-suffix vertex \(y_q\).
-
-Apply \noderef{TashTreeFourUnusedColors} to \(T_{q-2}\) once more.
-After excluding the at most two colors on the additional exact edges
-\(e_{q-1},e_q\), at least two free colors remain unused through \(y_q\).
-Choose one \(\varepsilon\ne\gamma\), missing at a vertex \(y_{m'}\) with
-\(m'\le q-2\).
-
-If \(\varepsilon\) is missing at \(y_n\), apply
-\noderef{TashTreeControlledInterchange} to
-\(\varepsilon,\gamma\) at \(y_{m'},y_q\).  The vertex \(y_n\) remains
-outside the controlled component: it is a third distinct
-degree-at-most-one vertex by
-\noderef{MissingColorIncidenceEndpoint}, and this is impossible on the
-spanning path in \noderef{TwoColorComponentSpanningPath}.  Hence
-\(\varepsilon\) remains missing at \(y_n\), while the controlled
-interchange makes it missing at \(y_q\) and returns a minimum bad pair.
-This satisfies the repeated-color hypothesis of
-\noderef{TashTreeCaseRepeatedOnPath} with index \(q<n\), a contradiction.
-We may therefore assume that \(\varepsilon\) is present at \(y_n\).
-Since \noderef{PresentColors} and \noderef{MissingColors} are
-complements and \(\beta\) is missing there, \(\varepsilon\ne\beta\).
-
-Let \(Q\) be the \((\varepsilon,\beta)\)-component
-\noderef{TwoColorComponent} through \(y_n\).  The vertex \(y_n\) misses
-\(\beta\) but has an incident \(\varepsilon\)-edge, so
-\noderef{MissingColorIncidenceEndpoint} and the incidence definition
-\noderef{TwoColorIncidenceGraph} make it an end of a nontrivial component.
-Orient the spanning path from
-\noderef{TwoColorComponentSpanningPath} from this end.
-
-Suppose first that \(Q\) meets \(V(T_{q-1})\), and let \(y_h\) be the
-first prefix vertex-node on the oriented path.  If \(h\le q-2\), retain
-\(T_{q-2}\); if \(h=q-1\), retain \(T_{q-1}\).  In either case the
-retained prefix contains the missing-\(\varepsilon\) witness \(y_{m'}\)
-and the missing-\(\beta\) witness \(y_i\).  Append the simple alternating
-segment from \(y_h\) to \(y_n\), traversed away from the prefix.  Its
-internal vertex-nodes are outside the retained prefix, its vertices and
-exact edge identities are distinct, its first edge attaches at the
-earlier \(y_h\), and each later edge attaches to the preceding new vertex.
-Thus it is a tree-sequence by \noderef{TreeSequence}.  Every appended
-edge has color \(\varepsilon\) or \(\beta\) and therefore has one of the
-two retained earlier missing witnesses, so it is a Tashkinov tree by
-\noderef{TashkinovTree}.  It is bad by
-\noderef{TashTreeBadPair}, since \(\beta\) remains missing at the
-retained \(y_i\) and at \(y_n\).
-
-If the retained prefix is \(T_{q-1}\), the entire appended part is in
-path order starting at position \(q-1\).  If it is \(T_{q-2}\), the first
-appended edge may attach away from the last retained vertex, but all
-subsequent appended edges are in path order, again making \(q-1\) a
-suffix-path start.  In both cases the new path index is at most
-\(q-1<q\), so \noderef{TashTreeRankLess} and the universal clause of
-\noderef{TashTreeMinimumBadPair} give a contradiction.
-
-It remains that \(Q\) avoids \(V(T_{q-1})\).  Every exact edge identity
-of \(T_q\) has an earlier endpoint in that vertex set by the attachment
-field of \noderef{TreeSequence}.  Hence no such edge-node belongs to
-\(Q\), since its incidence edge would put that endpoint in the same
-component.  Let
-\[
- \varphi_1=
- \operatorname{TwoColorComponentSwap}
-   (G,\varphi,\varepsilon,\beta,y_n)
-\]
-be the swap from \noderef{TwoColorComponentSwap}.  We verify directly
-that \((\varphi_1,T)\) is a minimum bad pair.
-
-It is proper by \noderef{TwoColorComponentSwapProper}.  The swap fixes
-uncolored values and sends colored values to colored values, so
-\noderef{IsOneEdgeUncolored} remains true for the same \(e_0\), while
-all other graph and numerical clauses of \noderef{KTriple} are unchanged.
-For each displayed edge through \(T_q\), both the edge-node and every
-earlier witness vertex lie outside \(Q\), so the old color and missing
-witness are fixed.  For a later edge, colors outside
-\(\{\varepsilon,\beta\}\) and their witnesses are unchanged.  If an
-affected edge or witness changes, use the fixed vertex \(y_{m'}\), which
-misses \(\varepsilon\), or \(y_i\), which misses \(\beta\), according
-to the edge's new color.  Both indices are below \(q\), hence earlier than
-every such edge.  These cases prove the full condition
-\noderef{TashkinovTree} under \(\varphi_1\).
-
-At the end \(y_n\), the unique incident \(\varepsilon\)-edge becomes
-\(\beta\), so \(\varepsilon\) becomes missing.  The vertex \(y_{m'}\)
-lies in \(T_{q-1}\), outside \(Q\), and remains missing
-\(\varepsilon\).  Thus \(V(T)\) remains non-elementary, and
-\noderef{TashTreeBadPair} holds for \((\varphi_1,T)\).  Its sequence and
-rank are unchanged.  The original universal minimality clause quantifies
-over all colorings, so it combines with this badness to give
-\noderef{TashTreeMinimumBadPair} for \((\varphi_1,T)\).
-
-We also check that this second normalization preserves the no-repetition
-case hypothesis.  The proper prefix \(T_{n-1}\) is elementary for the
-pre-swap minimum bad pair by
-\noderef{TashTreeProperPrefixElementary}.  Since \(\varepsilon\) is
-missing at \(y_{m'}\) and \(\beta\) at \(y_i\), no other prefix vertex,
-in particular no \(y_s\) with \(q\le s<n\), misses either affected
-color before the swap.  A suffix vertex outside \(Q\) is fixed; one
-internal to its spanning path has both affected colors present before and
-after; and it cannot be the other end, since an end would miss one of
-those two colors.  At \(y_n\), the swap replaces missing \(\beta\) by
-missing \(\varepsilon\).  Therefore after the swap neither affected color
-is missing both at \(y_n\) and at a vertex \(y_s\), \(q\le s<n\), and
-all other colors are unchanged.  The case hypothesis is preserved.
-
-No edge of \(T_q\) changed, so \(\varepsilon,\gamma\) are still unused
-through \(y_q\).  The vertex \(y_{m'}\) still misses \(\varepsilon\),
-and \(y_q\) still misses \(\gamma\), since
-\(\gamma\notin\{\varepsilon,\beta\}\).  Apply
-\noderef{TashTreeControlledInterchange} to these colors and vertices.
-The final vertex \(y_n\), now missing \(\varepsilon\), is outside this
-controlled component: the component already has the distinct ends
-\(y_{m'},y_q\), while
-\noderef{MissingColorIncidenceEndpoint} and
-\noderef{TwoColorComponentSpanningPath} forbid \(y_n\) as a third end.
-Thus \(\varepsilon\) remains missing at \(y_n\), and the controlled swap
-makes it missing at \(y_q\).  The returned pair is minimum bad and falls
-under \noderef{TashTreeCaseRepeatedOnPath}, again a contradiction.  This
-exhausts the no-repeated-color case and proves it impossible.
+Let \(Q\) be the \((\varepsilon,\beta)\)-component rooted at \(y_n\).
+If \(Q\) meets a displayed vertex of \(T_{q-1}\), then
+\noderef{TashTreeNoRepeatedIntersectionShortening}, using the early
+missing witnesses \(y_i,y_m\), produces a smaller bad pair and hence a
+contradiction.  Otherwise \(Q\) avoids every displayed vertex of that
+prefix.  The hypotheses assembled above then match
+\noderef{TashTreeNoRepeatedDisjointReduction}, which swaps this disjoint
+component and reduces to the controlled repeated-suffix contradiction.
+This is again impossible.  The two alternatives exhaust the component,
+so the no-repetition case cannot occur.
 \end{proof}

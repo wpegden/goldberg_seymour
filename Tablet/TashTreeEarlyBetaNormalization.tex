@@ -1,0 +1,73 @@
+\begin{helper}[Early repeated-color normalization]
+Let \((\varphi,T)\) be a minimum bad pair with
+\(2<q:=\rho(T)<n:=|E(T)|\), and suppose that no color missing at
+\(y_n\) is missing at any \(y_s\) with \(q\le s<n\).  Then there are a
+coloring \(\varphi'\), a color \(\beta\), and an index \(i\) with
+\(i+2\le q\) such that \((\varphi',T)\) is a minimum bad pair,
+\(\beta\) is missing at both \(y_i\) and \(y_n\) under \(\varphi'\),
+and the same no-repetition condition holds under \(\varphi'\).
+\end{helper}
+\begin{proof}
+Unfolding \noderef{TashTreeMinimumBadPair} and
+\noderef{TashTreeBadPair}, the full vertex set of \(T\) is not
+elementary.  The exact penultimate prefix supplied by
+\noderef{TreeSequencePrefix} is elementary by
+\noderef{TashTreeProperPrefixElementary}.  Therefore the definition
+\noderef{ColoredVertexSetElementary}, together with the exact vertex set
+\noderef{TreeSequenceVertexSet}, gives a color \(\beta\) missing at
+\(y_n\) and at some earlier \(y_i\).  The assumed no-repetition condition
+forces \(i<q\).  If \(i+2\le q\), take \(\varphi'=\varphi\); all the
+asserted conclusions are immediate.
+
+It remains to treat \(i+2>q\).  Since \(i<q\), this means
+\(i=q-1\).  As \(q>2\), the prefix \(T_{q-2}\) has positive length and
+is proper.  By \noderef{TashTreeFourUnusedColors}, it has at least four
+colors in \noderef{TreeFreeColors}.  Each such color is missing at a
+displayed vertex of \(T_{q-2}\), by
+\noderef{TreeMissingColors}, and occurs on no colored exact edge of that
+prefix, by \noderef{TreeUsedColors}.  Passing from \(T_{q-2}\) to
+\(T_{q-1}\) adds only the exact edge \(e_{q-1}\), so at most one of the
+four colors ceases to be unused.  Excluding also \(\beta\), choose a
+remaining color \(\alpha\ne\beta\), missing at some \(y_m\) with
+\(m\le q-2\), which is unused through \(y_{q-1}\).
+
+The color \(\beta\) is unused through \(y_{q-1}\) as well.  Indeed, if
+a formal edge index \(r\) satisfied \(1\le r<q-1\) and that exact edge
+had color \(\beta\), then \noderef{TashkinovTree} would give an earlier
+missing-\(\beta\) witness \(y_w\), with \(w\le r<q-1\).  This witness
+and the distinct vertex \(y_{q-1}\) would both lie in the proper prefix
+\(T_{q-1}\) and both miss \(\beta\), contrary to
+\noderef{TashTreeProperPrefixElementary}.  This proves precisely the
+predicate \noderef{TreeColorUnusedThrough} for \(\beta\).
+
+Apply \noderef{TashTreeControlledInterchange} to \(\alpha,\beta\) at
+\(y_m,y_{q-1}\), and let \(\varphi'\) be the returned exact component
+swap from \noderef{TwoColorComponentSwap}.  It makes \(\beta\) missing
+at \(y_m\) and makes \((\varphi',T)\) a minimum bad pair.  Moreover,
+\(y_n\) is outside the controlled component.  The returned component
+is a path with the two distinct degree-at-most-one vertices
+\(y_m,y_{q-1}\).  The old missingness of \(\beta\) at \(y_n\), together
+with \noderef{MissingColorIncidenceEndpoint}, would make \(y_n\) a third
+such vertex if it belonged to the component, contradicting the spanning
+simple path supplied by \noderef{TwoColorComponentSpanningPath}.  The
+outside clause of \noderef{TwoColorComponentSwapMissingBehavior}
+therefore preserves missingness of \(\beta\) at \(y_n\).  Since
+\(m\le q-2\), this gives the required early index.
+
+It remains to verify the no-repetition condition under \(\varphi'\).
+Both ends \(y_m,y_{q-1}\) of the controlled path occur before \(q\).
+For every suffix vertex \(y_s\), \(q\le s<n\), a vertex outside the
+component keeps its complete missing set by
+\noderef{TwoColorComponentSwapMissingBehavior}.  A suffix vertex inside
+the component cannot be either end, so it is internal on the spanning
+path from \noderef{TwoColorComponentSpanningPath}; properness gives it
+one incident edge of each affected color before the swap, and the exact
+transposition gives it one of each afterward.  Thus its missing set is
+also unchanged.  We already proved that the final vertex lies outside,
+so its missing set is unchanged.  Colors other than
+\(\alpha,\beta\) have unchanged missingness everywhere by the final
+clause of \noderef{TwoColorComponentSwapMissingBehavior}.  Consequently
+a color repeated between \(y_n\) and a suffix vertex after the swap
+would already have been repeated there before the swap, contrary to the
+hypothesis.  Hence \(\varphi',\beta,m\) have every asserted property.
+\end{proof}
