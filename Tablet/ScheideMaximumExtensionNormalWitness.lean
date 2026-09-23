@@ -25,7 +25,9 @@ theorem ScheideMaximumExtensionNormalWitness {V E : Type*}
     (C : ScheideReversedPathCertificate G k e0 phi T alpha beta p) :
     ∃ (T' : TreeSequence G e0)
       (N : NormalGlobalMaximumTriple G k e0 phi T'),
-      N.height = p.length / 2 + 1 := by
+      TreeSequenceVertexSet T' = TreeSequenceVertexSet T ∧
+        N.alpha = alpha ∧ N.beta = beta ∧
+        N.height = p.length / 2 + 1 := by
 -- BODY
   classical
   obtain ⟨T', hTashkinov, hvertexSet, hinitial⟩ :=
@@ -182,6 +184,6 @@ theorem ScheideMaximumExtensionNormalWitness {V E : Type*}
         exact hvertex j'.succ
       rw [hedgeEq, hvertexEq, hsuccEq]
       exact C.trunk_edge_ends j' hjpos
-  }, ?_⟩
+  }, hvertexSet, rfl, rfl, ?_⟩
   change C.tree.length + 1 = p.length / 2 + 1
   rw [C.length_eq]

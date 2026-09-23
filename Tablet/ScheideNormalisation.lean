@@ -92,12 +92,8 @@ theorem ScheideNormalisation {V E : Type*}
       i0 i1 (by simp [i0, i1]) alpha beta halpha hbeta
   obtain ⟨C⟩ := ScheideReversedKempePathTree G k e0 phi T hglobal.1
     alpha beta halpha hbeta p hp hdiv
-  obtain ⟨T', N, hheight⟩ :=
+  obtain ⟨T', N, hvertexSet, hNalpha, hNbeta, hheight⟩ :=
     ScheideMaximumExtensionNormalWitness G k e0 phi T hglobal hmax
       alpha beta halpha hbeta p hp C
-  have hidentities :
-      TreeSequenceVertexSet T' = TreeSequenceVertexSet T ∧
-        N.alpha = alpha ∧ N.beta = beta := by
-    sorry
   exact ⟨alpha, beta, p, T', N, halpha, hbeta, hp, hsupport,
-    hidentities.1, hidentities.2.1, hidentities.2.2, hheight⟩
+    hvertexSet, hNalpha, hNbeta, hheight⟩

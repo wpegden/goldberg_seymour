@@ -53,7 +53,7 @@ theorem ScheideKempePathHeightBound {V E : Type*}
       alpha beta halpha hbeta
   obtain ⟨C⟩ := ScheideReversedKempePathTree G k e0 phi T hglobal.1
     alpha beta halpha hbeta p hp hdiv
-  obtain ⟨T', N, hN⟩ :=
+  obtain ⟨T', N, _, _, _, hN⟩ :=
     ScheideMaximumExtensionNormalWitness G k e0 phi T hglobal hmax
       alpha beta halpha hbeta p hp C
   have hheight : p.length / 2 + 1 ≤ ScheideGraphHeight G := by
