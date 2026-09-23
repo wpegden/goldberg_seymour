@@ -18,14 +18,17 @@ this prefix.  For every retained edge position covered by
 index and hence is also retained.  Thus $Q$ is Tashkinov for
 $(e_0,\varphi)$.
 
-We check that $Q$ is a balanced candidate.  It begins with the exact trunk
-because a tree-sequence is an initial segment of itself in
+We check $Q$ against every clause of
+\noderef{ScheideBalancedCandidate}.  Its Tashkinov clause was established
+above.  Its exact-trunk clause holds because a tree-sequence is an initial
+segment of itself in
 \noderef{TreeSequenceInitialSegment}: use equality of lengths and the
 identity casts in the vertex and edge clauses.  By
 \noderef{TreeSequence}, the vertex map of $Q$ is injective, so
 \noderef{TreeSequenceVertexSet} has cardinality
-$Q.\operatorname{length}+1=p$, which is odd.  Every used edge of $Q$ is
-the identically indexed edge of $T$, and therefore
+$Q.\operatorname{length}+1=p$, which proves the odd-order clause.  Every
+used edge of $Q$ is the identically indexed edge of $T$, and therefore the
+used-color clause holds:
 $\noderef{TreeUsedColors}(\varphi,Q)\subseteq
 \noderef{TreeUsedColors}(\varphi,T)$.  Finally, $Q$ has order $p$, so there
 is no integer $j$ with

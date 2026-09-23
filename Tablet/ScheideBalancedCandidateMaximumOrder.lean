@@ -8,12 +8,14 @@ import Tablet.KTriple
 import Tablet.LooplessMultigraph
 import Tablet.MissingColors
 import Tablet.NormalGlobalMaximumTriple
+import Tablet.NormalTripleTrunk
 import Tablet.PresentColors
 import Tablet.ScheideBalancedCandidate
 import Tablet.TashTree
 import Tablet.TashkinovOrder
 import Tablet.TashkinovTree
 import Tablet.TreeSequence
+import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceVertexSet
 import Tablet.TreeUsedColors
 

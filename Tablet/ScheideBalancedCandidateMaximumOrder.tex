@@ -7,12 +7,16 @@ among all such candidates.  Then
 \]
 \end{helper}
 \begin{proof}
-Write $i=|V(S)|$ and $t=\noderef{TashkinovOrder}(G)$.  The global field of
-$N$, exposed by \noderef{NormalGlobalMaximumTriple} and interpreted by
+Write $p=N.\operatorname{height}$, $i=|V(S)|$, and
+$t=\noderef{TashkinovOrder}(G)$.  By
+\noderef{ScheideBalancedCandidate}, the hypothesis on $S$ supplies its
+Tashkinov property, odd order, exact-trunk initial segment, used-color
+restriction, and post-trunk equal-color pairing.  The global field of $N$,
+exposed by \noderef{NormalGlobalMaximumTriple} and interpreted by
 \noderef{GlobalMaximumTriple}, supplies both the fixed
 \noderef{KTriple} $(G,e_0,\varphi)$ and $|V(T)|=t$.  In particular
-$\chi'(G)=k+1$, so $k=\chi'(G)-1$.  Since the candidate property supplies
-\noderef{TashkinovTree} for $S$, its cardinality occurs in the finite
+$\chi'(G)=k+1$, so $k=\chi'(G)-1$.  Since its candidate Tashkinov field is
+a \noderef{TashkinovTree} for $S$, its cardinality occurs in the finite
 maximum defining $t$; hence $i\le t$.  We prove that strict inequality is
 impossible.
 
@@ -26,8 +30,10 @@ $\gamma$ and an index $a<r$ such that the exact original edge identity
 $e_r$ has color $\gamma$ and $y_a$ misses $\gamma$.  The attachment
 equation supplies $b<r$ such that the ends of $e_r$ are $y_r$ and $y_b$.
 
-Construct a tree-sequence $S^+$, rather than suppressing the append.  If
-$S$ has length $i-1$, give $S^+$ length $i$, retain the old vertex and edge
+Construct a tree-sequence $S^+$, rather than suppressing the append.  By
+the injective vertex map in \noderef{TreeSequence} and the definition
+\noderef{TreeSequenceVertexSet}, $i=S.\operatorname{length}+1$, so $S$ has
+length $i-1$.  Give $S^+$ length $i$, retain the old vertex and edge
 functions on their old index ranges, set its last vertex equal to $y_r$,
 and set its last edge identity equal to $e_r$.  The new vertex is fresh by
 the choice of $r$.  Every old edge of $S$ has both endpoints in $V(S)$ by
@@ -37,7 +43,8 @@ old vertex, which proves the last attachment equation; all earlier
 attachment equations and both injectivity clauses are inherited.  The old
 Tashkinov witnesses remain valid, and $y_a$ is the required earlier
 missing-color witness for the new edge.  Hence $S^+$ is a Tashkinov tree.
-It has the even order $i+1$.  Also
+Its constructed vertex map is injective, so
+\noderef{TreeSequenceVertexSet} gives it the even order $i+1$.  Also
 $\gamma\in\noderef{TreeUsedColors}(\varphi,T)$ because $e_r$ is an
 original edge at one-based position $r\ge2$.
 
@@ -79,17 +86,25 @@ unchanged, and the unique vertex of $U$ missing $\gamma$ is an earlier
 witness for the new $\gamma$-colored edge $f$.  Thus $S^{++}$ is again a
 Tashkinov tree-sequence.
 
-It remains to check every candidate field.  Appending entries preserves the
-exact initial trunk.  All old used colors obey the restriction for $S$,
-and both new edges have the same color
+It remains to check every field of
+\noderef{ScheideBalancedCandidate}.  The constructed $S^{++}$ is Tashkinov
+by the preceding paragraph.  By the exact-entry definitions in
+\noderef{NormalTripleTrunk} and \noderef{TreeSequenceInitialSegment},
+appending entries preserves the exact initial trunk.  All old used colors
+obey the restriction for $S$, and both new edges have the same color
 $\gamma\in\noderef{TreeUsedColors}(\varphi,T)$.  The exact-trunk condition
-gives $p\le i$, and the candidate condition says that $i$ is odd.  Thus the
-two new edge positions are precisely the next one-based pair
+from \noderef{NormalTripleTrunk} and
+\noderef{TreeSequenceInitialSegment} gives $p\le i$: the trunk has length
+$p-1$, while $S$ has length $i-1$.  The odd-order candidate field says that
+$i$ is odd.  Thus the two new edge positions are precisely the next one-based pair
 $(e_i,e_{i+1})$: equivalently their zero-based positions are $i-1$ and
 $i$, corresponding to the unique new even number $2j=i+1$ in the pairing
 range $p<2j<i+2$.  Therefore the old equal-color pairs plus
-$\varphi(e_r)=\varphi(f)=\gamma$ prove the entire pair condition.
-Finally $|V(S^{++})|=i+2$ is odd.  Hence $S^{++}$ is a balanced candidate
-of order $i+2$, contradicting the maximality of $S$.  We conclude
+$\varphi(e_r)=\varphi(f)=\gamma$ prove the entire pair condition.  Finally,
+the constructed vertex map is injective, so
+\noderef{TreeSequenceVertexSet} gives $|V(S^{++})|=i+2$, which is odd.
+Thus all five clauses of \noderef{ScheideBalancedCandidate} hold for
+$S^{++}$.  It is a balanced candidate of order $i+2$, contradicting the
+maximality of $S$.  We conclude
 $i\not<t$, and together with $i\le t$ this gives $i=t$.
 \end{proof}
