@@ -25,7 +25,23 @@ from \noderef{ScheideTrunkRotationCycle}.  Let $B$ be the old color of
 $f_j$ and let $A$ be the other one: explicitly, if $j$ is odd take
 $(A,B)=(N.beta,N.alpha)$, and if $j$ is even take
 $(A,B)=(N.alpha,N.beta)$.  The cited alternation proves that this is the
-old color of $f_j$, and its proof also gives $N.alpha\ne N.beta$; hence
+old color of $f_j$.
+
+We derive the required distinctness, rather than using anything from the
+proof of the cited cycle lemma.  By \noderef{NormalGlobalMaximumTriple},
+$N.beta$ is missing at $y_1$ and the global field of $N$ is a globally
+maximum triple.  Unpacking \noderef{GlobalMaximumTriple}, its first field is
+a $k$-triple; by \noderef{KTriple}, the old coloring $\varphi$ is proper and
+leaves exactly $e_0$ uncolored.  Thus, by
+\noderef{IsProperEdgeColoring}, any two distinct adjacent old colored edges
+have different colors, and by \noderef{IsOneEdgeUncolored}, $\varphi(e_0)$
+is uncolored while every other exact identity is colored.  The endpoint
+formula and the $i=1$ color formula in
+\noderef{ScheideTrunkRotationCycle} say that $f_1$ is incident with $y_1$
+and $\varphi(f_1)=N.alpha$.  On the other hand, expanding
+\noderef{MissingColors} and \noderef{PresentColors}, $N.beta$ missing at
+$y_1$ says that no identity incident with $y_1$ is colored $N.beta$.
+Consequently $N.alpha\ne N.beta$, and the displayed parity choices give
 $A\ne B$.
 
 Define $\psi$ on exact edge identities by
@@ -38,10 +54,13 @@ Define $\psi$ on exact edge identities by
 Injectivity of $i\mapsto f_i$ makes the cases disjoint and hence defines a
 function.  Each $f_i$ with $i<j$ receives a colored value by the
 alternation theorem.  If $g\ne f_j$ is not among the earlier shifted
-identities, then either it is one of the colored cycle identities or it is
-unchanged and differs from $f_0=e_0$.  The old unique-uncolored clause
-\noderef{IsOneEdgeUncolored} then supplies a color.  Thus exactly $f_j$
-is uncolored.
+identities, then (1) leaves $g$ unchanged.  Moreover, the definition
+\noderef{NormalCycleEdge} gives $f_0=e_0$, so injectivity of the $f_i$ and
+$g\ne f_0$ show that $g\ne e_0$.  The old unique-uncolored clause obtained
+above from \noderef{NormalGlobalMaximumTriple},
+\noderef{GlobalMaximumTriple}, \noderef{KTriple}, and
+\noderef{IsOneEdgeUncolored} therefore supplies a color for $g$.  Thus
+exactly $f_j$ is uncolored.
 
 We verify properness locally.  For $0\leq i<j$, let $c_i$ be the old
 color of $f_{i+1}$, hence the new color of $f_i$.  At $y_{i+1}$, old
@@ -83,8 +102,9 @@ that successor vertex.  This proves the two exact missing-color clauses.
 
 The fourth and fifth conclusions are the corresponding clauses of (1).
 For the sixth, final tail clause, let $r\geq p-1$.  Each $f_i$ with
-$0\leq i\leq p-2$ is the old tree edge at position $i$, so old edge
-injectivity separates it from $T.edge(r)$.  If the closing identity
+$0\leq i\leq p-2$ is the old tree edge at position $i$ by
+\noderef{NormalCycleEdge}, so old edge injectivity in
+\noderef{TreeSequence} separates it from $T.edge(r)$.  If the closing identity
 $f_{p-1}$ equaled $T.edge(r)$, the attachment field of
 \noderef{TreeSequence} would make it incident with the fresh vertex
 $y_{r+1}$, while its endpoint formula makes both ends $y_{p-1},y_0$.

@@ -115,11 +115,25 @@ outside the shifted cycle, by the identity-disjointness argument above, so
 its $\psi$-color is still $c$.  If $c=A$ or $c=B$, use respectively the
 new position zero or one, which are no later than $r$ because $p\geq3$.
 Otherwise $c$ is outside the two old trunk colors, since $\{A,B\}$ is
-exactly that pair.  Only the two trunk colors change under the displayed
-shift; hence every incidence of $c$ is unchanged and $c$ remains missing
-at $T.vertex(a)$.  Move this vertex to its new position by the inverse
-index used in the attachment argument.  That position is still at most
-$r$, and supplies the required witness.  Thus $T'$ is a Tashkinov tree.
+exactly that pair.  We now verify preservation of this missing witness from
+the definitions, edge by edge.  Expanding \noderef{MissingColors} and
+\noderef{PresentColors}, old missingness at $T.vertex(a)$ says that there is
+no exact identity $g$ incident with this vertex for which
+$\varphi(g)=c$.  Suppose, for a contradiction, that $c$ were present there
+under $\psi$.  By \noderef{PresentColors}, some incident exact identity $g$
+would satisfy $\psi(g)=c$.  If $g$ lies outside
+$\{f_0,\ldots,f_j\}$, the fixed hypothesis gives
+$\varphi(g)=\psi(g)=c$, contradicting old missingness.  If $g=f_j$, the
+exactly-one-uncolored hypothesis \noderef{IsOneEdgeUncolored} gives
+$\psi(g)$ uncolored, again a contradiction.  Finally, if $g=f_i$ for some
+$i<j$, the shift hypothesis gives
+$\psi(g)=\varphi(f_{i+1})$; the alternating-color clause of
+\noderef{ScheideTrunkRotationCycle} puts this value in $\{A,B\}$, contrary
+to $c\notin\{A,B\}$.  These cases exhaust all identities, so $c$ is not
+present under $\psi$ and hence, by \noderef{MissingColors}, remains missing
+at $T.vertex(a)$.  Move this vertex to its new position by the inverse index
+used in the attachment argument.  That position is still at most $r$, and
+supplies the required witness.  Thus $T'$ is a Tashkinov tree.
 
 It remains to show global maximality.  The graph-only first three clauses
 of the old \noderef{KTriple} are unchanged.  The hypotheses say that
