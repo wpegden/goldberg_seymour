@@ -11,7 +11,6 @@ import Tablet.ScheideGlobalMaximumFixedPairMaximal
 import Tablet.ScheideMaximumExtensionNormalWitness
 import Tablet.ScheideMaximalExtendsEveryTree
 import Tablet.ScheideMaximalKempePath
-import Tablet.ScheideNormalHeightLeGraphHeight
 import Tablet.ScheideReversedKempePathTree
 import Tablet.TashkinovOrder
 import Tablet.TashkinovTree
@@ -59,5 +58,19 @@ theorem ScheideKempePathHeightBound {V E : Type*}
       alpha beta p hp C
   have hheight : p.length / 2 + 1 ≤ ScheideGraphHeight G := by
     rw [← hN]
-    exact ScheideNormalHeightLeGraphHeight G k e0 phi T' N
+    have hcard : T'.length + 1 ≤ Fintype.card V := by
+      simpa using Fintype.card_le_of_injective T'.vertex T'.vertex_injective
+    have hNcard : N.height < Fintype.card V + 1 :=
+      lt_of_le_of_lt N.height_upper (by omega)
+    let heights := (Finset.range (Fintype.card V + 1)).filter fun q =>
+      ∃ (m : ℕ) (f : E) (c : PartialEdgeColoring E m)
+        (S : TreeSequence G f),
+        ∃ M : NormalGlobalMaximumTriple G m f c S, M.height = q
+    have hmem : N.height ∈ heights := by
+      apply Finset.mem_filter.mpr
+      exact ⟨Finset.mem_range.mpr hNcard, k, e0, phi, T', N, rfl⟩
+    unfold ScheideGraphHeight
+    dsimp only
+    apply Finset.le_max'
+    exact Finset.mem_insert_of_mem hmem
   exact ⟨p, hp, hsupport, hdiv, hvertices, hheight⟩
