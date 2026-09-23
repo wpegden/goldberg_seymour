@@ -1,0 +1,79 @@
+\begin{lemma}[The reversed Kempe path is a Tashkinov initial tree]
+Let $(G,e_0,\varphi)$ be a $k$-triple and let $T$ be a tree-sequence with
+first two vertices $y_0,y_1$.  Suppose
+$\alpha\in\overline\varphi(y_0)$ and
+$\beta\in\overline\varphi(y_1)$.  If $P$ is a simple incidence path from
+$y_0$ to $y_1$ in the $(\alpha,\beta)$-incidence graph and
+$4\mid\operatorname{length}(P)$, then $P$ admits a reversed Kempe-path
+certificate in the sense of \noderef{ScheideReversedPathCertificate}.
+\end{lemma}
+\begin{proof}
+By \noderef{TwoColorIncidenceGraph}, every adjacency joins a vertex-node
+to an incident edge-node colored $\alpha$ or $\beta$.  Hence, starting at
+the vertex-node $y_0$ and ending at the vertex-node $y_1$, write
+\[
+ P=(\mathrm{inl}(a_0),\mathrm{inr}(f_1),\mathrm{inl}(a_1),
+       \ldots,\mathrm{inr}(f_m),\mathrm{inl}(a_m)),
+\]
+where $a_0=y_0$, $a_m=y_1$, and
+$2m=\operatorname{length}(P)$.  Simplicity says that the $a_r$ are
+pairwise distinct and that the individual identities $f_r$ are pairwise
+distinct.  This does not identify parallel edges.
+
+For $1\leq r\leq m$, the two walk adjacencies at $f_r$ give, by
+\noderef{TwoColorIncidenceGraph}, incidence of $f_r$ with both
+$a_{r-1}$ and $a_r$, as well as
+$\varphi(f_r)\in\{\alpha,\beta\}$.  The consecutive vertex-nodes are
+distinct by simplicity.  Expanding incidence with \noderef{Incident} and
+using looplessness from \noderef{LooplessMultigraph}, the two distinct
+incident vertices are the two endpoints, so
+\[
+             G.\operatorname{ends}(f_r)=\{a_{r-1},a_r\}.       \tag{1}
+\]
+The endpoints $y_0,y_1$ are distinct by vertex injectivity in
+\noderef{TreeSequence}; therefore $P$ has positive length.  Since its
+length is divisible by four, $m\geq2$.  Moreover no $f_r$ equals $e_0$:
+each $f_r$ is colored, whereas \noderef{KTriple} and
+\noderef{IsOneEdgeUncolored} say that $e_0$ is uncolored.
+
+Define a length-$m$ sequence $U$ by the exact zero-based entries
+\[
+ \begin{array}{c|c@{\qquad}c|c}
+ j&U.vertex(j)&j&U.edge(j)\\ \hline
+ 0&a_0&0&e_0\\
+ 1&a_m&1\leq j\leq m-1&f_{m+1-j}\\
+ 2\leq j\leq m&a_{m+1-j}&&
+ \end{array}                                                     \tag{2}
+\]
+and put $q=f_1$.  The displayed vertex map and edge map are injective by
+the preceding pairwise-distinctness statements and $f_r\ne e_0$.
+The first edge is $e_0$.  The attachment clause of the original
+tree-sequence at index zero says that $e_0$ joins $y_1$ and $y_0$, hence
+it attaches the second vertex of $U$ to the first.  If
+$1\leq j\leq m-1$, put $r=m+1-j$.  Equation (1) and (2) give
+\[
+ G.\operatorname{ends}(U.edge(j))
+ =G.\operatorname{ends}(f_r)
+ =\{a_{r-1},a_r\}
+ =\{U.vertex(j),U.vertex(j+1)\}.
+\]
+Thus every remaining edge attaches its new vertex to the immediately
+preceding vertex.  This verifies all fields of \noderef{TreeSequence}.
+
+To verify \noderef{TashkinovTree}, consider an index $j\geq1$.
+The edge $U.edge(j)=f_{m+1-j}$ is colored $\alpha$ or $\beta$.  In the
+first case its earlier missing-color witness is $U.vertex(0)=y_0$, by the
+hypothesis on $\alpha$; in the second it is
+$U.vertex(1)=y_1$, by the hypothesis on $\beta$.  Both witnesses precede
+the new vertex at index $j+1$.  There is no Tashkinov condition at edge
+index zero.
+
+Finally, (2) is a permutation of the vertex-nodes
+$a_0,\ldots,a_m$.  Consequently those nodes are exactly the vertex support
+of $P$.  Its edge support is exactly $f_1=q$ together with
+$f_m,f_{m-1},\ldots,f_2$, the edges of $U$ at indices $1,\ldots,m-1$.
+Equation (1) gives the closing endpoint identity for $q$ and every stated
+trunk endpoint identity.  Together with $m=\operatorname{length}(P)/2$
+and $m\geq2$, these are precisely all fields of the reversed Kempe-path
+certificate.
+\end{proof}

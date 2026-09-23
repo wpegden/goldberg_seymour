@@ -1,0 +1,22 @@
+\begin{definition}[Reversed Kempe-path certificate]
+Fix a loopless multigraph $G$, an edge $e_0$, a partial $k$-edge-coloring
+$\varphi$, a tree-sequence $T$ with first
+vertices $y_0,y_1$, colors $\alpha,\beta$, and an incidence walk $P$ from
+$y_0$ to $y_1$.  A reversed Kempe-path certificate consists of a
+tree-sequence $U$ and an individual edge identity $q$ such that, writing
+$m=\operatorname{length}(U)$:
+\begin{enumerate}
+\item $2\leq m=\operatorname{length}(P)/2$ and $U$ is a Tashkinov tree;
+\item the first two vertices of $U$ are $y_0,y_1$;
+\item $q$ joins the last vertex of $U$ to its first vertex;
+\item the vertex-nodes in the support of $P$ are exactly the vertex entries
+of $U$;
+\item the edge-nodes in the support of $P$ are exactly $q$ together with
+the individual edge entries of $U$ having zero-based index at least one;
+and
+\item every edge of $U$ having zero-based index at least one joins the
+vertex at that index to the next vertex.
+\end{enumerate}
+All references to edges in this certificate are to edge identities, so
+parallel edges with equal endpoint pairs remain distinct.
+\end{definition}

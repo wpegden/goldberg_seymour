@@ -7,8 +7,12 @@ import Tablet.LooplessMultigraph
 import Tablet.MissingColors
 import Tablet.NormalGlobalMaximumTriple
 import Tablet.ScheideGraphHeight
+import Tablet.ScheideGlobalMaximumFixedPairMaximal
+import Tablet.ScheideMaximumExtensionNormalWitness
 import Tablet.ScheideMaximalExtendsEveryTree
 import Tablet.ScheideMaximalKempePath
+import Tablet.ScheideNormalHeightLeGraphHeight
+import Tablet.ScheideReversedKempePathTree
 import Tablet.TashkinovOrder
 import Tablet.TashkinovTree
 import Tablet.TreeSequence
@@ -40,4 +44,20 @@ theorem ScheideKempePathHeightBound {V E : Type*}
           v ∈ TreeSequenceVertexSet T) ∧
         p.length / 2 + 1 ≤ ScheideGraphHeight G := by
 -- BODY
-  sorry
+  classical
+  have hmax : FixedPairMaximalTashkinovTree G e0 phi T :=
+    ScheideGlobalMaximumFixedPairMaximal G k e0 phi T hglobal
+  obtain ⟨_, p, hp, hsupport, hdiv, hvertices, _⟩ :=
+    ScheideMaximalKempePath G k e0 phi T T hglobal.1 hmax hglobal.2.1
+      ⟨0, Nat.zero_lt_succ T.length⟩
+      ⟨1, Nat.succ_lt_succ T.positive⟩ (by norm_num)
+      alpha beta halpha hbeta
+  obtain ⟨C⟩ := ScheideReversedKempePathTree G k e0 phi T hglobal.1
+    alpha beta halpha hbeta p hp hdiv
+  obtain ⟨T', N, hN⟩ :=
+    ScheideMaximumExtensionNormalWitness G k e0 phi T hglobal hmax
+      alpha beta p hp C
+  have hheight : p.length / 2 + 1 ≤ ScheideGraphHeight G := by
+    rw [← hN]
+    exact ScheideNormalHeightLeGraphHeight G k e0 phi T' N
+  exact ⟨p, hp, hsupport, hdiv, hvertices, hheight⟩

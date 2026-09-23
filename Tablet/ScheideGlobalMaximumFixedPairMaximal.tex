@@ -1,0 +1,22 @@
+\begin{lemma}[A globally maximum tree is fixed-pair maximal]
+Let $(T,e_0,\varphi)$ be a globally maximum $k$-triple.  Then $T$ is
+maximal among the Tashkinov trees for the fixed edge $e_0$ and fixed
+coloring $\varphi$: if such a tree $S$ contains $V(T)$, then
+$V(S)=V(T)$ (and in particular $V(S)\subseteq V(T)$).
+\end{lemma}
+\begin{proof}
+By \noderef{GlobalMaximumTriple}, $T$ is a Tashkinov tree and
+$|V(T)|=t(G)$.  The same node also supplies the $k$-triple condition, so
+\noderef{KTriple} gives $\chi'(G)=k+1$ and hence
+$k=\chi'(G)-1$.
+
+Let $S$ be a Tashkinov tree for the same $e_0$ and $\varphi$, and suppose
+$V(T)\subseteq V(S)$.  With $k=\chi'(G)-1$, the data
+$(e_0,\varphi,S)$ satisfy exactly the predicate defining the candidate
+orders in \noderef{TashkinovOrder}.  Thus $|V(S)|\leq t(G)=|V(T)|$.
+On the other hand, the assumed inclusion gives $|V(T)|\leq |V(S)|$.
+The two finite sets therefore have equal cardinality, and the inclusion
+is an equality.  Hence $V(S)\subseteq V(T)$.  Together with the
+Tashkinov-tree clause for $T$, this is precisely every clause of
+\noderef{FixedPairMaximalTashkinovTree}.
+\end{proof}

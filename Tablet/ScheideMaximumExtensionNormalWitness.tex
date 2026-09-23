@@ -1,0 +1,67 @@
+\begin{lemma}[A reversed path extends to a normal maximum tree]
+Let $(T,e_0,\varphi)$ be a globally maximum $k$-triple, assume that $T$
+is fixed-pair maximal, and let $P$ be a simple $(\alpha,\beta)$-incidence
+path from the first vertex of $T$ to its second vertex.  From any reversed
+Kempe-path certificate $C$ for $P$, one obtains a globally maximum
+Tashkinov tree $T'$ and a normal witness on $T'$ whose height is
+$\operatorname{length}(P)/2+1$.
+\end{lemma}
+\begin{proof}
+Let $U$ and $q$ be the tree and closing edge supplied by
+\noderef{ScheideReversedPathCertificate}.  Its fields say that $U$ is a
+Tashkinov tree and has length
+$m=\operatorname{length}(P)/2\geq2$.  Apply
+\noderef{ScheideMaximalExtendsEveryTree} to the $k$-triple contained in
+\noderef{GlobalMaximumTriple}, the assumed fixed-pair maximal tree $T$,
+and $U$.  We obtain a Tashkinov tree $T'$ such that
+\[
+ V(T')=V(T),\qquad U\text{ is an ordered initial segment of }T'. \tag{1}
+\]
+By \noderef{TreeSequenceInitialSegment}, (1) gives
+$m\leq T'.length$ and exact equality of every vertex entry through index
+$m$ and every edge entry below $m$.  The cardinality equality in
+\noderef{GlobalMaximumTriple}, together with $V(T')=V(T)$, shows that
+$(T',e_0,\varphi)$ is again globally maximum.
+
+We construct the normal witness field by field.  Set its height to
+$m+1$ and its last index to the index $m$ of $T'$.  The certificate gives
+$m\geq2$, while (1) gives $m\leq T'.length$, so the required height bounds
+hold.  The first two exact vertex equalities in the certificate and (1)
+transport the two prescribed missing colors from the first two vertices
+of $T$ to the first two vertices of $T'$.  Choose $q$ as the closing edge.
+The certificate's closing-end equation, transported entrywise through
+(1), is
+\[
+ G.\operatorname{ends}(q)
+   =\{T'.vertex(m),T'.vertex(0)\}.                              \tag{2}
+\]
+
+Use the reversed walk $P^{\rm rev}$ as the closing walk.  It starts at
+the second vertex and ends at the first, because $P$ has the opposite
+endpoints and the first two entries of $U,T'$ agree.  Reversal preserves
+simplicity, support, and length.  Since $m=\operatorname{length}(P)/2$
+and an incidence path between vertex-nodes has even length, this length is
+exactly $2m=2((m+1)-1)$.
+
+The certificate's vertex-support equivalence says that the vertex-nodes
+of $P$, hence also of $P^{\rm rev}$, are exactly the $m+1$ vertex entries
+of $U$.  Entrywise equality in (1) identifies these with precisely the
+first $m+1$ entries of $T'$, giving `closingPath_vertices'.  Likewise,
+the certificate's edge-support equivalence says that its edge-nodes are
+exactly $q$ together with the entries $U.edge(j)$ for
+$1\leq j\leq m-1$.  Under (1), these are exactly $q$ together with the
+entries $T'.edge(j)$ satisfying
+$1\leq j$ and $j+2\leq m+1$; this proves both directions of
+`closingPath_edges', including its index bounds.
+
+Finally, for every such $j$, the certificate gives
+\[
+ G.\operatorname{ends}(U.edge(j))
+   =\{U.vertex(j),U.vertex(j+1)\}.
+\]
+Transporting the three exact entries through (1) gives the corresponding
+`trunk_edge_ends' equation for $T'$.  Thus (2), the reversed-walk facts,
+the two exact support equivalences, and the trunk equations establish
+every field of \noderef{NormalGlobalMaximumTriple}.  Its height is
+$m+1=\operatorname{length}(P)/2+1$, as claimed.
+\end{proof}
