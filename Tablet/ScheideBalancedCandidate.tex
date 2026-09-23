@@ -1,0 +1,19 @@
+\begin{definition}
+Fix normal globally maximum data $N$ for $(T,e_0,\varphi)$, and let its
+height be $p$.  A \emph{balanced candidate} for $N$ is a Tashkinov
+tree-sequence $S$ for the same pair $(e_0,\varphi)$ such that:
+\begin{enumerate}
+\item $|V(S)|$ is odd;
+\item the exact tree-sequence \noderef{NormalTripleTrunk}$(N)$ is an
+entry-by-entry initial segment of $S$ in the sense of
+\noderef{TreeSequenceInitialSegment};
+\item every color in $\noderef{TreeUsedColors}(\varphi,S)$ belongs to
+$\noderef{TreeUsedColors}(\varphi,T)$; and
+\item whenever $p<2j<S.\operatorname{length}+1$, the two exact edge
+identities of $S$ in zero-based positions $2j-2$ and $2j-1$ have the same
+$\varphi$-color.
+\end{enumerate}
+The Tashkinov condition in the first sentence has its exact meaning from
+\noderef{TashkinovTree}; in particular it is part of the candidate data,
+not a consequence merely of having the same vertex set as $T$.
+\end{definition}

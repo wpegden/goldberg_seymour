@@ -1,0 +1,47 @@
+\begin{helper}[A maximum odd balanced candidate exists]
+Let $N$ be normal globally maximum data for $(T,e_0,\varphi)$ and suppose
+that its height is $h(G)$.  There is a
+\noderef{ScheideBalancedCandidate} $S$ for $N$ whose vertex-set cardinality
+is at least that of every balanced candidate for $N$.
+\end{helper}
+\begin{proof}
+Put $p=N.\operatorname{height}=h(G)$ and
+$Q=\noderef{NormalTripleTrunk}(N)$.  By
+\noderef{NormalGlobalMaximumTriple}, the global field of $N$ is a
+\noderef{GlobalMaximumTriple}; apply \noderef{ScheideGraphHeightOdd} to
+that field and use the assumed height equality to see that $p$ is odd.
+The definition of $Q$ is the
+exact prefix of $T$ through its first $p$ vertices and first $p-1$ edge
+identities.  Restrict the Tashkinov property in the global field of $N$ to
+this prefix.  For every retained edge position covered by
+\noderef{TashkinovTree}, its old missing-color witness has a smaller vertex
+index and hence is also retained.  Thus $Q$ is Tashkinov for
+$(e_0,\varphi)$.
+
+We check that $Q$ is a balanced candidate.  It begins with the exact trunk
+because a tree-sequence is an initial segment of itself in
+\noderef{TreeSequenceInitialSegment}: use equality of lengths and the
+identity casts in the vertex and edge clauses.  By
+\noderef{TreeSequence}, the vertex map of $Q$ is injective, so
+\noderef{TreeSequenceVertexSet} has cardinality
+$Q.\operatorname{length}+1=p$, which is odd.  Every used edge of $Q$ is
+the identically indexed edge of $T$, and therefore
+$\noderef{TreeUsedColors}(\varphi,Q)\subseteq
+\noderef{TreeUsedColors}(\varphi,T)$.  Finally, $Q$ has order $p$, so there
+is no integer $j$ with
+$p<2j<Q.\operatorname{length}+1=p$; its post-trunk pairing condition is
+vacuous.  Hence the candidate family is nonempty.
+
+For any tree-sequence $R$, injectivity of its vertex map in
+\noderef{TreeSequence} identifies $|V(R)|$ with
+$R.\operatorname{length}+1$ and bounds it by the finite number $|V(G)|$.
+Consequently the set
+\[
+ \{\,|V(R)|:R\text{ is a balanced candidate for }N\,\}
+\]
+is a nonempty subset of the finite set
+$\{0,1,\ldots,|V(G)|\}$.  It has a largest member $m$.  By the definition
+of this set there is an actual balanced candidate $S$ with $|V(S)|=m$.
+For every other candidate $R$, membership of $|V(R)|$ in the same set and
+maximality of $m$ give $|V(R)|\le |V(S)|$, as required.
+\end{proof}

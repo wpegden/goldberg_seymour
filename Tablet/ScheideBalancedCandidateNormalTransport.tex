@@ -1,0 +1,76 @@
+\begin{helper}[Transport normal data along an exact-trunk candidate]
+Let $N$ be normal globally maximum data for $(T,e_0,\varphi)$, and let
+$S$ be a \noderef{ScheideBalancedCandidate} for $N$.  If
+$\noderef{TreeSequenceVertexSet}(S)=
+\noderef{TreeSequenceVertexSet}(T)$, then there are normal globally maximum
+data $N'$ for $(S,e_0,\varphi)$ with
+$N'.\operatorname{height}=N.\operatorname{height}$.
+\end{helper}
+\begin{proof}
+Put $p=N.\operatorname{height}$.  We first establish equality of the
+displayed lengths, which is needed to transport all bounded indices.
+For any \noderef{TreeSequence} $R$, its vertex map is injective and
+\noderef{TreeSequenceVertexSet} is exactly the image of that map on
+$\operatorname{Fin}(R.\operatorname{length}+1)$.  Therefore
+$|V(R)|=R.\operatorname{length}+1$.  The assumed equality of vertex sets
+gives
+\[
+ S.\operatorname{length}+1=|V(S)|=|V(T)|
+ =T.\operatorname{length}+1,
+\]
+and cancellation yields $S.\operatorname{length}=T.\operatorname{length}$.
+
+Next unpack the exact-trunk field of
+\noderef{ScheideBalancedCandidate}.  By
+\noderef{NormalTripleTrunk}, the trunk is the prefix of $T$ of length
+$p-1$; hence its vertices in positions $0,\ldots,p-1$ and edges in
+positions $0,\ldots,p-2$ are literally those of $T$.  The
+\noderef{TreeSequenceInitialSegment} field says, entry by entry and with
+the corresponding finite-index casts, that this same trunk is the initial
+segment of $S$.  Consequently
+\[
+ S.\operatorname{vertex}(a)=T.\operatorname{vertex}(a)
+ \quad(0\le a<p),
+ \qquad
+ S.\operatorname{edge}(b)=T.\operatorname{edge}(b)
+ \quad(0\le b<p-1).
+\]
+These are ordered equalities of exact vertex and edge identities, not merely
+consequences of equality of the two vertex sets.
+
+We now construct every field of $N'$ from the fields of
+\noderef{NormalGlobalMaximumTriple}.  Its global field, in the sense of
+\noderef{GlobalMaximumTriple}, uses the original $k$-triple, the
+candidate's Tashkinov field, and
+\[
+ |V(S)|=|V(T)|=\noderef{TashkinovOrder}(G),
+\]
+where the last equality is the global field of $N$.  Set the new height to
+$p$ and retain $N$'s lower bound.  Its upper bound transports along the
+proved equality of lengths.  Retain the same colors $\alpha,\beta$.
+Their missingness at the first two vertices transports along the exact
+prefix equalities just proved.
+
+Retain the same closing edge identity.  Transport $N$'s last index across
+$S.\operatorname{length}=T.\operatorname{length}$; its value remains
+$p-1$.  The transported vertex at that index and the vertex at index zero
+agree with their counterparts in $T$, so the closing-edge endpoint equation
+is unchanged.  Retain the same closing incidence path: its ambient
+two-color incidence graph depends only on $G,\varphi,\alpha,\beta$, none of
+which changed.  Its simplicity and length are therefore unchanged.
+
+For the path-support fields, the vertex-node equivalence in $N$ says that
+the supported vertices are exactly the first $p$ displayed vertices of
+$T$.  The exact-prefix equalities replace each of these, at the same
+bounded index, by the corresponding vertex of $S$, proving the new
+vertex-support equivalence in both directions.  The edge-node equivalence
+uses the same closing identity together with the exact trunk edges
+$e_2,\ldots,e_{p-1}$, equivalently the zero-based positions $b$ satisfying
+$1\le b$ and $b+2\le p$.  Each such edge of $S$ equals the identically
+indexed edge of $T$, so both directions of the new edge-support equivalence
+follow.  Finally, for every trunk index in that same range, replace the two
+endpoint vertices and the exact edge by their proved prefix equalities in
+$N$'s trunk-edge endpoint equation.  This proves the full trunk-endpoint
+field.  All fields of normal globally maximum data have now been supplied,
+and by construction the new height is $p$.
+\end{proof}

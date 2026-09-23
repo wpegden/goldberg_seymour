@@ -14,6 +14,10 @@ import Tablet.NormalTripleTrunk
 import Tablet.PresentColors
 import Tablet.ScheideGlobalMaximumOrder
 import Tablet.ScheideGraphHeightOdd
+import Tablet.ScheideBalancedCandidateMaximumExists
+import Tablet.ScheideBalancedCandidateMaximumOrder
+import Tablet.ScheideBalancedCandidateNormalTransport
+import Tablet.ScheideGlobalMaximumFixedPairMaximal
 import Tablet.ScheideMaximalContainsEveryTree
 import Tablet.TashTree
 import Tablet.TashkinovOrder
@@ -35,4 +39,25 @@ theorem ScheideBalancedFromMaxNormal {V E : Type*}
         TreeSequenceVertexSet T' = TreeSequenceVertexSet T ∧
         TreeUsedColors phi T' ⊆ TreeUsedColors phi T := by
 -- BODY
-  sorry
+  classical
+  obtain ⟨S, hS, hmax⟩ :=
+    ScheideBalancedCandidateMaximumExists G k e0 phi T N hheight
+  have horder : (TreeSequenceVertexSet S).card = TashkinovOrder G :=
+    ScheideBalancedCandidateMaximumOrder G k e0 phi T S N hS hmax
+  have hfixed : FixedPairMaximalTashkinovTree G e0 phi T :=
+    ScheideGlobalMaximumFixedPairMaximal G k e0 phi T N.global
+  have hsubset : TreeSequenceVertexSet S ⊆ TreeSequenceVertexSet T :=
+    ScheideMaximalContainsEveryTree G k e0 phi T S N.global.1 hfixed
+      hS.tashkinov
+  have hcard : (TreeSequenceVertexSet T).card ≤
+      (TreeSequenceVertexSet S).card := by
+    rw [N.global.2.2, horder]
+  have hvertices : TreeSequenceVertexSet S = TreeSequenceVertexSet T :=
+    Finset.eq_of_subset_of_card_le hsubset hcard
+  obtain ⟨N', hN'⟩ :=
+    ScheideBalancedCandidateNormalTransport G k e0 phi T S N hS hvertices
+  refine ⟨S, N', ?_, hvertices, hS.usedColors⟩
+  constructor
+  · exact hN'.trans hheight
+  · intro j hlow hupp
+    exact hS.paired j (by simpa [hN'] using hlow) hupp

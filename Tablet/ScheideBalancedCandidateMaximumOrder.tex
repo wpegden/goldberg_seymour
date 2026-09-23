@@ -1,0 +1,95 @@
+\begin{helper}[A maximum balanced candidate has Tashkinov order]
+Let $N$ be normal globally maximum data for $(T,e_0,\varphi)$, and let
+$S$ be a \noderef{ScheideBalancedCandidate} for $N$ whose order is maximum
+among all such candidates.  Then
+\[
+ |V(S)|=\noderef{TashkinovOrder}(G).
+\]
+\end{helper}
+\begin{proof}
+Write $i=|V(S)|$ and $t=\noderef{TashkinovOrder}(G)$.  The global field of
+$N$, exposed by \noderef{NormalGlobalMaximumTriple} and interpreted by
+\noderef{GlobalMaximumTriple}, supplies both the fixed
+\noderef{KTriple} $(G,e_0,\varphi)$ and $|V(T)|=t$.  In particular
+$\chi'(G)=k+1$, so $k=\chi'(G)-1$.  Since the candidate property supplies
+\noderef{TashkinovTree} for $S$, its cardinality occurs in the finite
+maximum defining $t$; hence $i\le t$.  We prove that strict inequality is
+impossible.
+
+Assume $i<t=|V(T)|$.  Choose the first displayed vertex $y_r$ of $T$ not
+in $V(S)$.  The first edge identity of both sequences is $e_0$, and the
+attachment equation in \noderef{TreeSequence}, together with looplessness,
+says that their first two displayed vertices are the two distinct ends of
+$e_0$.  Thus both belong to $V(S)$, so $r\ge2$, and every $y_a$ with
+$a<r$ lies in $V(S)$.  The Tashkinov property of $T$ supplies a color
+$\gamma$ and an index $a<r$ such that the exact original edge identity
+$e_r$ has color $\gamma$ and $y_a$ misses $\gamma$.  The attachment
+equation supplies $b<r$ such that the ends of $e_r$ are $y_r$ and $y_b$.
+
+Construct a tree-sequence $S^+$, rather than suppressing the append.  If
+$S$ has length $i-1$, give $S^+$ length $i$, retain the old vertex and edge
+functions on their old index ranges, set its last vertex equal to $y_r$,
+and set its last edge identity equal to $e_r$.  The new vertex is fresh by
+the choice of $r$.  Every old edge of $S$ has both endpoints in $V(S)$ by
+\noderef{TreeSequence}, whereas $e_r$ has the endpoint $y_r$ outside
+$V(S)$, so $e_r$ is a fresh edge identity.  Its other endpoint $y_b$ is an
+old vertex, which proves the last attachment equation; all earlier
+attachment equations and both injectivity clauses are inherited.  The old
+Tashkinov witnesses remain valid, and $y_a$ is the required earlier
+missing-color witness for the new edge.  Hence $S^+$ is a Tashkinov tree.
+It has the even order $i+1$.  Also
+$\gamma\in\noderef{TreeUsedColors}(\varphi,T)$ because $e_r$ is an
+original edge at one-based position $r\ge2$.
+
+Apply \noderef{TashTree} to the unchanged $k$-triple and $S^+$.  Its
+vertex set $U$ is elementary in the sense of
+\noderef{ColoredVertexSetElementary}.  The vertex $y_a$ misses $\gamma$,
+and elementariness says that no second vertex of $U$ does.  Thus exactly
+one vertex of $U$ misses $\gamma$.  By \noderef{MissingColors} and
+\noderef{PresentColors}, every other vertex of $U$ is incident with at
+least one $\gamma$-colored edge identity.  It is incident with at most one:
+two distinct such identities would be adjacent by
+\noderef{AdjacentEdges}, contradicting the proper-coloring clause of the
+$k$-triple and \noderef{IsProperEdgeColoring}.  The number of incidence
+pairs
+\[
+ (v,f),\qquad v\in U,\quad \noderef{Incident}(G,v,f),\quad
+ \varphi(f)=\gamma,
+\]
+is therefore $|U|-1=i$, an odd number.
+
+This count retains individual multigraph edge identities.  Partition the
+$\gamma$-colored identities meeting $U$ into those with both endpoints in
+$U$ and those with exactly one endpoint in $U$.  Say that the two classes
+have $a_0$ and $b_0$ identities.  An internal identity contributes its two
+distinct endpoints, by the loopless law in
+\noderef{LooplessMultigraph}; a second-class identity contributes its
+unique endpoint in $U$; all other identities contribute zero.  Hence
+$i=2a_0+b_0$.  The second class is exactly the set of $\gamma$-colored
+identities in \noderef{BoundaryEdges}$(G,U)$.  Since $i$ is odd, $b_0$ is
+odd and therefore nonzero.  Choose one exact identity $f$ from this class,
+with endpoints $u\in U$ and $w\notin U$.
+
+Now explicitly construct $S^{++}$ by giving it length $i+1$, retaining all
+entries of $S^+$, and placing $f$ and $w$ in its final edge and vertex
+positions.  The vertex $w$ is fresh.  Every old edge identity has both ends
+in $U$, whereas $f$ is a boundary identity, so $f$ is fresh.  Its endpoint
+$u$ proves the new attachment equation.  All old Tashkinov witnesses are
+unchanged, and the unique vertex of $U$ missing $\gamma$ is an earlier
+witness for the new $\gamma$-colored edge $f$.  Thus $S^{++}$ is again a
+Tashkinov tree-sequence.
+
+It remains to check every candidate field.  Appending entries preserves the
+exact initial trunk.  All old used colors obey the restriction for $S$,
+and both new edges have the same color
+$\gamma\in\noderef{TreeUsedColors}(\varphi,T)$.  The exact-trunk condition
+gives $p\le i$, and the candidate condition says that $i$ is odd.  Thus the
+two new edge positions are precisely the next one-based pair
+$(e_i,e_{i+1})$: equivalently their zero-based positions are $i-1$ and
+$i$, corresponding to the unique new even number $2j=i+1$ in the pairing
+range $p<2j<i+2$.  Therefore the old equal-color pairs plus
+$\varphi(e_r)=\varphi(f)=\gamma$ prove the entire pair condition.
+Finally $|V(S^{++})|=i+2$ is odd.  Hence $S^{++}$ is a balanced candidate
+of order $i+2$, contradicting the maximality of $S$.  We conclude
+$i\not<t$, and together with $i\le t$ this gives $i=t$.
+\end{proof}
