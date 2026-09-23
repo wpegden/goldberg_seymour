@@ -1,0 +1,137 @@
+\begin{helper}[Rotated tree sequence]
+Let $N$ be balanced normal globally maximum data for
+$(G,k,e_0,\varphi,T)$, put $p=N.height$, and fix
+$j\in\operatorname{Fin}(p)$ with $1\leq j$.  Put
+$f_i=\noderef{NormalCycleEdge}(N,i)$.  Suppose that $A\ne B$ satisfy
+\[
+ A=\begin{cases}N.beta,&j\text{ odd},\\N.alpha,&j\text{ even},\end{cases}
+ \qquad
+ B=\begin{cases}N.alpha,&j\text{ odd},\\N.beta,&j\text{ even},\end{cases}
+\]
+and that a partial coloring $\psi$ is proper, leaves exactly $f_j$
+uncolored, makes $A$ missing at $y_j$ and $B$ missing at
+$y_{(j+1)\bmod p}$, satisfies
+$\psi(f_i)=\varphi(f_{i+1})$ for $0\leq i<j$, and fixes every identity
+outside $\{f_0,\ldots,f_j\}$.
+
+Then there is a tree sequence $T'$ based at $f_j$ which is globally
+maximum for $\psi$, has $T'.length=T.length$ and
+\[
+ \noderef{TreeSequenceVertexSet}(T')=
+ \noderef{TreeSequenceVertexSet}(T),
+\]
+and has the following exact entries.  For every vertex position $r<p$,
+there is $i\in\operatorname{Fin}(p)$ with
+\[
+ i=(j+r)\bmod p,
+ \qquad T'.vertex(r)=T.vertex(i),
+\]
+where the latter index is cast using $p\leq T.length+1$.  Every vertex
+position $r\geq p$ is unchanged.  For every edge position with $r+1<p$,
+there is $i\in\operatorname{Fin}(p)$ with
+\[
+ i=(j+r)\bmod p,
+ \qquad T'.edge(r)=f_i,
+\]
+and for every edge position $r\geq p-1$ there is an old edge position of
+the same numeric value at which $T'.edge(r)=T.edge(r)$.
+\end{helper}
+\begin{proof}
+The closing-cycle facts in \noderef{ScheideTrunkRotationCycle} give
+$p\geq3$, injectivity of the exact identities $f_i$, and their cyclic
+endpoint equations.  Define
+\[
+ \rho(r)=(j+r)\bmod p
+\]
+for $0\leq r<p$, and define the entries of $T'$ by
+\[
+ T'.vertex(r)=
+ \begin{cases}
+  T.vertex(\rho(r)),&r<p,\\
+  T.vertex(r),&p\leq r\leq T.length,
+ \end{cases}                                                    \tag{1}
+\]
+and
+\[
+ T'.edge(r)=
+ \begin{cases}
+  f_{\rho(r)},&r+1<p,\\
+  T.edge(r),&p-1\leq r<T.length.
+ \end{cases}                                                    \tag{2}
+\]
+The ranges in (1)--(2) cover all positions and agree at no overlapping
+case.
+
+We check \noderef{TreeSequence}.  Addition by $j$ modulo $p$ permutes
+$\operatorname{Fin}(p)$, so the first vertex block in (1) is injective and
+uses exactly the old vertices with indices below $p$.  The remaining
+vertices retain their old indices.  Old vertex injectivity therefore makes
+the complete new vertex map injective.
+
+The first $p-1$ new edge identities are the cycle identities except
+$f_{(j+p-1)\bmod p}$, and are pairwise distinct by the cited cycle
+injectivity.  The fixed tail identities are pairwise distinct by old edge
+injectivity.  They are disjoint from the cycle identities: for
+$0\leq i\leq p-2$, the definition \noderef{NormalCycleEdge} identifies
+$f_i$ with the old tree edge at position $i$, so old injectivity separates
+it from any tail position $r\geq p-1$.  If the closing identity
+$f_{p-1}$ equaled such a tail edge, its closing endpoint pair would be
+$\{y_{p-1},y_0\}$, whereas the old attachment field makes the same tail
+identity incident with the fresh vertex $y_{r+1}$; old vertex injectivity
+contradicts $r+1\geq p$.  Thus the new edge map is injective.  Formula (2)
+at $r=0$ gives $T'.edge(0)=f_j$, the required first identity.
+
+For $r+1<p$, the cyclic endpoint equation gives
+\[
+ G.ends(T'.edge(r))=
+ \{T'.vertex(r),T'.vertex(r+1)\},                               \tag{3}
+\]
+so this edge attaches the next new vertex to the immediately preceding
+one.  For $r\geq p-1$, old attachment gives an old index $a\leq r$ such
+that
+\[
+ G.ends(T.edge(r))=\{T.vertex(r+1),T.vertex(a)\}.
+\]
+If $a<p$, take $s=(a+p-j)\bmod p$; then $s<p\leq r+1$ and (1) gives
+$T'.vertex(s)=T.vertex(a)$.  If $a\geq p$, take $s=a$.  In both cases
+$s\leq r$, the other endpoint is $T'.vertex(r+1)$, and (2) supplies the
+required attachment.  This proves every tree-sequence field.
+
+We next verify \noderef{TashkinovTree}.  Delete $f_j$ from the cycle and
+traverse the remaining $p-1$ identities beginning at
+$y_{(j+1)\bmod p}$.  The alternating old colors from
+\noderef{ScheideTrunkRotationCycle}, the parity definitions of $A,B$, and
+the shift and fixed equations for $\psi$ show that every new trunk edge is
+colored $A$ or $B$.  For an edge position $1\leq r<p-1$, use the new
+position zero, where $A$ is missing, as the earlier witness for color $A$;
+use position one, where $B$ is missing, as the witness for color $B$.
+Both positions are at most $r$.
+
+Let $r\geq p-1$.  The old Tashkinov clause, obtained from the global field
+of \noderef{NormalGlobalMaximumTriple} via
+\noderef{GlobalMaximumTriple}, supplies a color $c$ on $T.edge(r)$ and an
+old witness position $a\leq r$ where $c$ is missing.  The tail identity is
+outside the shifted cycle, by the identity-disjointness argument above, so
+its $\psi$-color is still $c$.  If $c=A$ or $c=B$, use respectively the
+new position zero or one, which are no later than $r$ because $p\geq3$.
+Otherwise $c$ is outside the two old trunk colors, since $\{A,B\}$ is
+exactly that pair.  Only the two trunk colors change under the displayed
+shift; hence every incidence of $c$ is unchanged and $c$ remains missing
+at $T.vertex(a)$.  Move this vertex to its new position by the inverse
+index used in the attachment argument.  That position is still at most
+$r$, and supplies the required witness.  Thus $T'$ is a Tashkinov tree.
+
+It remains to show global maximality.  The graph-only first three clauses
+of the old \noderef{KTriple} are unchanged.  The hypotheses say that
+$\psi$ is proper and leaves exactly $f_j$ uncolored, so they supply the
+last two clauses of a new $k$-triple.  Together with the Tashkinov property
+just proved, this gives the first two clauses of
+\noderef{GlobalMaximumTriple}.  Formula (1) permutes exactly the first
+$p$ old vertices and fixes every later one.  By
+\noderef{TreeSequenceVertexSet}, the old and new displayed vertex sets are
+equal, so their cardinalities agree; the old global maximum clause gives
+the required cardinality.  This proves global maximality.  Formulas
+(1)--(2), read with their finite-index bounds, are exactly the four entry
+formulas and the length and vertex-set equalities asserted in the
+statement.
+\end{proof}

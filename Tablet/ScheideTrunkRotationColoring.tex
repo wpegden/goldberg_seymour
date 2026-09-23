@@ -1,0 +1,94 @@
+\begin{helper}[Shifted closing-cycle coloring]
+Let $N$ be balanced normal globally maximum data for
+$(G,k,e_0,\varphi,T)$, and fix
+$j\in\operatorname{Fin}(N.height)$ with $1\leq j$.  There are a partial
+coloring $\psi$ and distinct colors $A,B$ such that:
+\begin{enumerate}
+\item if $j$ is odd, $(A,B)=(N.beta,N.alpha)$, while if $j$ is even,
+      $(A,B)=(N.alpha,N.beta)$;
+\item $\psi$ is proper and leaves exactly
+      $f_j=\noderef{NormalCycleEdge}(N,j)$ uncolored;
+\item $A$ is missing at $y_j$, and $B$ is missing at
+      $y_{(j+1)\bmod N.height}$;
+\item for every $0\leq i<j$, $\psi(f_i)=\varphi(f_{i+1})$;
+\item every exact edge identity outside $\{f_0,\ldots,f_j\}$ retains its
+      old value; and
+\item for every old tree-edge position $r\geq N.height-1$,
+      $\psi(T.edge(r))=\varphi(T.edge(r))$.
+\end{enumerate}
+All bounds are the corresponding finite-index bounds in the Lean
+statement.
+\end{helper}
+\begin{proof}
+Write $p=N.height$ and use the exact identities and alternating colors
+from \noderef{ScheideTrunkRotationCycle}.  Let $B$ be the old color of
+$f_j$ and let $A$ be the other one: explicitly, if $j$ is odd take
+$(A,B)=(N.beta,N.alpha)$, and if $j$ is even take
+$(A,B)=(N.alpha,N.beta)$.  The cited alternation proves that this is the
+old color of $f_j$, and its proof also gives $N.alpha\ne N.beta$; hence
+$A\ne B$.
+
+Define $\psi$ on exact edge identities by
+\[
+ \psi(f_j)=\operatorname{none},\qquad
+ \psi(f_i)=\varphi(f_{i+1})\ (0\leq i<j),\qquad
+ \psi(g)=\varphi(g)\quad
+   (g\notin\{f_0,\ldots,f_j\}).                         \tag{1}
+\]
+Injectivity of $i\mapsto f_i$ makes the cases disjoint and hence defines a
+function.  Each $f_i$ with $i<j$ receives a colored value by the
+alternation theorem.  If $g\ne f_j$ is not among the earlier shifted
+identities, then either it is one of the colored cycle identities or it is
+unchanged and differs from $f_0=e_0$.  The old unique-uncolored clause
+\noderef{IsOneEdgeUncolored} then supplies a color.  Thus exactly $f_j$
+is uncolored.
+
+We verify properness locally.  For $0\leq i<j$, let $c_i$ be the old
+color of $f_{i+1}$, hence the new color of $f_i$.  At $y_{i+1}$, old
+properness makes $f_{i+1}$ the unique incident carrier of $c_i$: any
+distinct second carrier would be adjacent by \noderef{AdjacentEdges} and
+contradict \noderef{IsProperEdgeColoring}.  Under (1), that unique old
+carrier is recolored if $i+1<j$ and becomes uncolored if $i+1=j$.  Hence
+no unchanged edge at this endpoint conflicts with the new color on
+$f_i$.
+
+At the other endpoint $y_i$, there are three cases.  For $i=0$,
+$c_i=N.alpha$, which is missing at $y_0$.  For $i=1$,
+$c_i=N.beta$, which is missing at $y_1$.  In either case
+\noderef{MissingColors} and \noderef{PresentColors} exclude an unchanged
+carrier.  For $2\leq i<j$, alternation gives
+$\varphi(f_{i-1})=c_i$.  Old properness makes $f_{i-1}$ the unique old
+carrier at $y_i$, and (1) recolors it simultaneously with the other trunk
+color.  Again no unchanged identity conflicts.
+
+Two cycle identities share an endpoint only when their indices are
+consecutive modulo $p$, by the exact endpoint formula, vertex injectivity
+in \noderef{TreeSequence}, and $p\geq3$.  Consecutive shifted identities
+receive consecutive old colors and are different.  At $y_0$, the
+additional comparison is between $f_0$, which receives $N.alpha$, and
+$f_{p-1}$, which remains $N.beta$ unless it is the new uncolored identity.
+At the other end $f_j$ is uncolored.  All pairs not involving a shifted
+identity retain their proper old values, and the preceding endpoint
+analysis covers every mixed pair.  This proves properness of $\psi$.
+
+At $y_j$, if $j=1$, $A=N.beta$ was already missing and the only incoming
+new color is $B=N.alpha$.  If $j>1$, alternation makes $f_{j-1}$ the
+unique old $A$-carrier there; it is recolored to $B$, while $f_j$ becomes
+uncolored.  No edge changes to $A$, so $A$ is missing at $y_j$.  At
+$y_{(j+1)\bmod p}$, old properness makes $f_j$ the unique old $B$-carrier,
+and it becomes uncolored.  The other incident cycle identity has new color
+$A$: it is the unchanged $f_{j+1}$ if $j<p-1$, and is the newly colored
+$f_0$ if $j=p-1$.  No noncycle identity changes.  Thus $B$ is missing at
+that successor vertex.  This proves the two exact missing-color clauses.
+
+The fourth and fifth conclusions are the corresponding clauses of (1).
+For the sixth, final tail clause, let $r\geq p-1$.  Each $f_i$ with
+$0\leq i\leq p-2$ is the old tree edge at position $i$, so old edge
+injectivity separates it from $T.edge(r)$.  If the closing identity
+$f_{p-1}$ equaled $T.edge(r)$, the attachment field of
+\noderef{TreeSequence} would make it incident with the fresh vertex
+$y_{r+1}$, while its endpoint formula makes both ends $y_{p-1},y_0$.
+Vertex injectivity and $r+1\geq p$ contradict this.  Therefore the tail
+identity is outside every shifted $f_i$, and the fixed clause in (1) gives
+the asserted equality of its values.
+\end{proof}

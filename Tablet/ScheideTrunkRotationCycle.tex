@@ -1,0 +1,92 @@
+\begin{helper}[Closing-cycle identities and colors]
+Let $N$ be normal globally maximum data for $(G,k,e_0,\varphi,T)$,
+assume that $N$ is balanced, put $p=N.height$, and define
+$f_i=\noderef{NormalCycleEdge}(N,i)$ for $i\in\operatorname{Fin}(p)$.
+Then $p\geq3$ is odd, the map $i\mapsto f_i$ is injective, and, writing
+$y_i=T.vertex(i)$ with the canonical cast into
+$\operatorname{Fin}(T.length+1)$,
+\[
+ G.ends(f_i)=\{y_i,y_{(i+1)\bmod p}\}\qquad(0\leq i<p).
+\]
+Moreover, for $1\leq i<p$,
+\[
+ \varphi(f_i)=
+ \begin{cases}
+  \operatorname{some}(N.alpha),&i\text{ odd},\\
+  \operatorname{some}(N.beta),&i\text{ even}.
+ \end{cases}
+\]
+All assertions concern the exact edge identities $f_i$, including parallel
+edges with the same endpoints.
+\end{helper}
+\begin{proof}
+Balance in the sense of \noderef{BalancedGlobalMaximumTriple} gives
+$p=\noderef{ScheideGraphHeight}(G)$.  The global field of
+\noderef{NormalGlobalMaximumTriple} is a globally maximum triple, so
+\noderef{ScheideGraphHeightOdd} applies and gives $p\geq3$ and oddness of
+$p$.
+
+We first identify the endpoints.  Expanding
+\noderef{NormalCycleEdge}, $f_0=e_0$, $f_{p-1}=N.closingEdge$, and
+$f_i=T.edge(i)$ for $1\leq i\leq p-2$.  At $i=0$, the first-edge and
+attachment fields of \noderef{TreeSequence} say that $e_0$ joins $y_1$
+to the only earlier vertex $y_0$.  For $1\leq i\leq p-2$, the
+`trunk-edge-ends' field of \noderef{NormalGlobalMaximumTriple} says
+directly that $T.edge(i)$ has endpoint pair $\{y_i,y_{i+1}\}$.  Finally,
+the `closing-ends' and `last-index-height' fields say that
+$N.closingEdge$ has endpoint pair $\{y_{p-1},y_0\}$.  These three cases
+are exactly the displayed modular endpoint formula.  The casts are legal
+because $p\leq T.length+1$, and the modular successor is below $p$ because
+$p>0$.
+
+It remains to recover identity distinctness and the colors.  The stored
+closing walk has length $2(p-1)$ and is a simple path.  Its vertex-node
+support is exactly
+\[
+ \{\operatorname{inl}(y_i):0\leq i<p\},
+\]
+and its edge-node support is exactly
+\[
+ \{\operatorname{inr}(f_i):1\leq i<p\},                 \tag{1}
+\]
+by the two support equivalences in
+\noderef{NormalGlobalMaximumTriple}.  The $p$ displayed vertex nodes are
+distinct by vertex injectivity in \noderef{TreeSequence}.  A simple path
+of length $2(p-1)$ has $2p-1$ distinct support nodes.  Vertex and edge
+nodes have different sum tags, so (1) must consist of precisely $p-1$
+distinct edge nodes.  Hence $f_1,\ldots,f_{p-1}$ are pairwise distinct.
+
+Every edge node in (1) is adjacent along the stored path to a vertex node.
+By \noderef{TwoColorIncidenceGraph}, its exact identity is incident with
+that vertex and its color is $N.alpha$ or $N.beta$.  On the other hand,
+the $k$-triple clause of \noderef{GlobalMaximumTriple}, expanded using
+\noderef{KTriple} and \noderef{IsOneEdgeUncolored}, says that
+$f_0=e_0$ is uncolored.  Thus $f_0$ differs from every $f_i$ in (1), and
+$i\mapsto f_i$ is injective on all of $\operatorname{Fin}(p)$.
+
+The endpoint formula and this injectivity force the order of the stored
+path.  Its initial node is $y_1$.  Among the unused identities (1), the
+first identity incident with $y_1$ is $f_1$; after traversing $f_i$ from
+$y_i$ to $y_{i+1}$, the next unused identity incident with the latter
+vertex is $f_{i+1}$.  Induction therefore gives the exact order
+\[
+ y_1,f_1,y_2,f_2,\ldots,y_{p-1},f_{p-1},y_0.            \tag{2}
+\]
+Here incidence has its endpoint meaning from \noderef{Incident}; vertex
+injectivity prevents a nonconsecutive endpoint coincidence, and edge
+injectivity just proved prevents reusing an identity.
+
+The color $N.beta$ is missing at $y_1$.  By
+\noderef{MissingColors} and \noderef{PresentColors}, no incident edge has
+that color.  Since $f_1$ is incident with $y_1$ and has one of the two
+trunk colors, it has color $N.alpha$.  In particular the two colors are
+distinct: $N.alpha$ is present at $y_1$ while $N.beta$ is missing there.
+The old coloring is proper by \noderef{KTriple} and
+\noderef{IsProperEdgeColoring}.  Consecutive identities in (2) are
+distinct and share the intervening vertex, hence are adjacent by
+\noderef{AdjacentEdges}; properness forces their two colors to differ.
+Starting with $N.alpha$, induction on $i$ now gives $N.alpha$ at odd
+indices and $N.beta$ at even indices.  Since $p$ is odd, $p-1$ is even,
+so this also gives $N.beta$ on the closing identity, consistently with
+$N.alpha$ being missing at $y_0$.
+\end{proof}

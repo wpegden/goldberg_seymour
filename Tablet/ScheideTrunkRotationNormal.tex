@@ -1,0 +1,118 @@
+\begin{helper}[Normal witness for the rotated trunk]
+Let $N$ be balanced normal globally maximum data for
+$(G,k,e_0,\varphi,T)$, put $p=N.height$, fix $1\leq j<p$, and put
+$f_i=\noderef{NormalCycleEdge}(N,i)$.  Let distinct $A,B$ be the parity
+choices
+\[
+ A=\begin{cases}N.beta,&j\text{ odd},\\N.alpha,&j\text{ even},\end{cases}
+ \qquad
+ B=\begin{cases}N.alpha,&j\text{ odd},\\N.beta,&j\text{ even}.
+ \end{cases}
+\]
+Suppose that $\psi(f_i)=\varphi(f_{i+1})$ for $0\leq i<j$ and that
+$\psi$ fixes every identity outside $\{f_0,\ldots,f_j\}$.
+
+Let $T'$ be a tree sequence based at $f_j$ which is globally maximum for
+$\psi$ and has $T'.length=T.length$.  Suppose $A$ is missing at $y_j$,
+$B$ is missing at $y_{(j+1)\bmod p}$, and the following exact trunk
+formulas hold:
+\[
+ \begin{aligned}
+ T'.vertex(r)&=T.vertex((j+r)\bmod p) &&(r<p),\\
+ T'.edge(r)&=f_{(j+r)\bmod p} &&(r+1<p),
+ \end{aligned}                                                   \tag{1}
+\]
+where each right-hand index is represented by the finite witness required
+in the Lean statement.
+
+Then there are normal globally maximum data $N'$ for
+$(G,k,f_j,\psi,T')$ such that
+\[
+ N'.height=p,qquad N'.alpha=A,qquad N'.beta=B,
+\]
+and, for
+$pred=(j+p-1)\bmod p\in\operatorname{Fin}(p)$,
+\[
+ N'.closingEdge=f_{pred}.
+\]
+\end{helper}
+\begin{proof}
+The cycle theorem \noderef{ScheideTrunkRotationCycle} gives $p\geq3$,
+the exact cyclic endpoint pairs, pairwise identity distinctness, and the
+old alternating colors.  Define $N'$ to have the supplied global field,
+height $p$, colors $A,B$, and closing identity
+\[
+ q'=f_{(j+p-1)\bmod p}.                                      \tag{2}
+\]
+The lower height bound follows from $p\geq3$.  The old height upper bound
+$p\leq T.length+1$ and the supplied equality
+$T'.length=T.length$ give the new upper bound.
+
+Formula (1) at $r=0$ identifies $T'.vertex(0)$ with $y_j$, because
+$j<p$ makes $(j+0)\bmod p=j$.  At $r=1$, it identifies
+$T'.vertex(1)$ with $y_{(j+1)\bmod p}$.  The two assumed missing-color
+facts are therefore exactly the alpha- and beta-missing fields required
+of $N'$.  The closing-cycle endpoint equation and (1) give
+\[
+ G.ends(q')=\{T'.vertex(p-1),T'.vertex(0)\};                   \tag{3}
+\]
+indeed the cyclic edge immediately preceding $f_j$ joins the last vertex
+of the rotated block to its first.  Take the new last index to be $p-1$;
+it lies below $T'.length+1$, has successor $p$, and (3) proves the
+closing-end field.  This includes the wraparound $j=p-1$, where (2) is
+$f_{p-2}$.
+
+We now construct the stored closing walk explicitly.  In the two-color
+incidence graph for $\psi,A,B$, take
+\[
+ \begin{split}
+ R={}&(\operatorname{inl}(T'.vertex(1)),
+       \operatorname{inr}(T'.edge(1)),
+       \operatorname{inl}(T'.vertex(2)),\ldots,\\
+    &\operatorname{inr}(T'.edge(p-2)),
+       \operatorname{inl}(T'.vertex(p-1)),
+       \operatorname{inr}(q'),
+       \operatorname{inl}(T'.vertex(0))).                     \tag{4}
+ \end{split}
+\]
+For $p=3$, the middle range $1\leq r\leq p-2$ has exactly one edge; the
+notation in (4) therefore displays that edge once, not twice.
+
+By the shift and fixed equations, the old alternation from
+\noderef{ScheideTrunkRotationCycle}, and the parity definitions of $A,B$,
+every identity displayed in (4) is colored $A$ or $B$ under $\psi$.
+Formula (1), equation (3), and the cyclic endpoint equations show that
+each is incident with its two neighboring displayed vertices.  Thus every
+successive pair is adjacent by \noderef{TwoColorIncidenceGraph}, so (4)
+is a walk from $T'.vertex(1)$ to $T'.vertex(0)$.
+
+The $p$ displayed vertex nodes are pairwise distinct because (1) is a
+cyclic permutation of the first $p$ old vertices and
+\noderef{TreeSequence} has an injective vertex map.  The $p-1$ displayed
+edge nodes are precisely all cycle identities except $f_j$, and are
+pairwise distinct by the cycle theorem.  Sum tags separate vertex nodes
+from edge nodes.  Hence $R$ is a simple path and has $2(p-1)$ incidence
+steps.
+
+The same enumeration proves both support equivalences required by
+\noderef{NormalGlobalMaximumTriple}.  Its vertex-node support is exactly
+\[
+ \{\operatorname{inl}(T'.vertex(i)):0\leq i<p\}.
+\]
+Its edge-node support is exactly the closing identity $q'$ together with
+\[
+ \{\operatorname{inr}(T'.edge(r)):1\leq r,\ r+2\leq p\}.
+\]
+The forward directions follow by inspecting (4).  Conversely, every
+index in the displayed bounds occurs in (4), and pairwise distinctness
+prevents an omitted exact parallel identity from being identified merely
+through equal endpoints.  Finally, the cyclic endpoint equation and (1)
+give, for each $1\leq r\leq p-2$,
+\[
+ G.ends(T'.edge(r))=
+ \{T'.vertex(r),T'.vertex(r+1)\},
+\]
+which is the normal trunk-edge endpoint field.  We have now constructed
+every field of $N'$.  Its height and colors were chosen as asserted, and
+(2) is exactly the finite predecessor witness in the conclusion.
+\end{proof}
