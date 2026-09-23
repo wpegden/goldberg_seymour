@@ -9,8 +9,10 @@ at \(y_q\), \(\varepsilon\) is missing at \(y_m\),
 through \(y_q\).
 \end{helper}
 \begin{proof}
-The \(k\)-triple clause of \noderef{TashTreeBadPair} gives
-\(k\ge\Delta(G)+1\).  Therefore
+Unfold \noderef{TashTreeMinimumBadPair} and take its bad-pair conjunct.
+By \noderef{TashTreeBadPair}, that conjunct contains a \(k\)-triple,
+and it also says that \(T\) satisfies \noderef{TashkinovTree}.
+The definition \noderef{KTriple} gives \(k\ge\Delta(G)+1\).  Therefore
 \noderef{MissingColorsNonemptyOfMaximumDegree} supplies a color
 \(\gamma\) missing at \(y_q\).
 
@@ -18,9 +20,14 @@ This color is unused through \(y_q\).  If a formal edge index \(r\)
 satisfied \(1\le r<q\) and the corresponding exact edge had color
 \(\gamma\), then \noderef{TashkinovTree} would supply a witness
 \(y_w\) with \(w\le r<q\) at which \(\gamma\) is missing.  Both
-\(y_w\) and the distinct vertex \(y_q\) belong to the proper prefix
-\(T_q\), contradicting its elementariness from
-\noderef{TashTreeProperPrefixElementary}.  This is exactly
+\(y_w\) and \(y_q\) occur in the prefix \(T_q\) by the entry identities
+of \noderef{TreeSequencePrefix}; they belong to its vertex set by
+\noderef{TreeSequenceVertexSet}.  They are distinct because \(w<q\)
+and the vertex map is injective by \noderef{TreeSequence}.  The
+elementariness supplied by \noderef{TashTreeProperPrefixElementary},
+expanded using \noderef{ColoredVertexSetElementary}, forbids these two
+distinct prefix vertices from sharing the missing color \(\gamma\), a
+contradiction.  This is exactly
 \noderef{TreeColorUnusedThrough}; in particular, as required by its
 formal definition, no condition has been imposed on the first displayed
 edge at formal index zero.  Also \(\gamma\ne\beta\): otherwise the
@@ -32,12 +39,15 @@ Apply \noderef{TashTreeFourUnusedColors} to the positive proper prefix
 \noderef{TreeFreeColors} are missing at vertices of that prefix by
 \noderef{TreeMissingColors} and absent from its exact colored edges by
 \noderef{TreeUsedColors}.  Extending through \(y_q\) introduces only
-the two exact edges \(e_{q-1}\) and \(e_q\).  Each excludes at most its
+the two exact edges \(e_{q-1}\) and \(e_q\): this is the entrywise
+description in \noderef{TreeSequencePrefix}.  Each excludes at most its
 single assigned color from being unused, so at least two of the four
 colors remain unused through \(y_q\).  Choose among them a color
 \(\varepsilon\ne\gamma\).  Its membership in
-\noderef{TreeMissingColors} yields a witness \(y_m\) in
-\(T_{q-2}\), hence \(m+2\le q\); its avoidance of the old prefix and
+\noderef{TreeMissingColors} yields a vertex in the set
+\noderef{TreeSequenceVertexSet} of \(T_{q-2}\).  The prefix identities
+from \noderef{TreeSequencePrefix} identify that vertex as some \(y_m\)
+with \(m\le q-2\), equivalently \(m+2\le q\).  Its avoidance of the old prefix and
 of the two additional exact edges is precisely
 \noderef{TreeColorUnusedThrough} through \(y_q\).  These choices give
 all the claimed properties.

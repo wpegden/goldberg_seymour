@@ -10,6 +10,11 @@ rooted at \(y_n\) avoids every displayed vertex of \(T_{q-1}\), then
 this configuration is impossible.
 \end{helper}
 \begin{proof}
+Unfold \noderef{TashTreeMinimumBadPair} and take its bad-pair
+conjunct.  By \noderef{TashTreeBadPair} it contains a \(k\)-triple, and
+\noderef{KTriple} says that \(\varphi\) is proper.  This is the
+properness used below for the swap-missing theorem.
+
 Write \(Q\) for the component and
 \(\varphi_1\) for the exact swap from
 \noderef{TwoColorComponentSwap}.  We first verify the edge-node
@@ -20,7 +25,9 @@ hypotheses needed to apply
 Fix a formal edge index \(r<q-1\).  By the attachment field of
 \noderef{TreeSequence}, the exact edge node for \(T.edge(r)\) has a
 displayed endpoint whose index is at most \(r+1\le q-1\), and that
-vertex-node avoids \(Q\) by hypothesis.  If the edge has color
+vertex is an entry of the prefix \(T_{q-1}\) by
+\noderef{TreeSequencePrefix}, so its vertex-node avoids \(Q\) by
+hypothesis.  If the edge has color
 \(\varepsilon\) or \(\beta\), then
 \noderef{TwoColorIncidenceGraph} joins its edge-node to this endpoint;
 membership of the edge-node in \(Q\) would therefore force membership
@@ -33,7 +40,8 @@ avoids \(Q\).  Notice that this argument explicitly covers off-pair
 edge nodes rather than assuming they carry an affected color.
 
 The early witnesses satisfy \(m,i\le q-2<p+1\), and all displayed
-vertices through \(p=q-1\) avoid \(Q\).  We may therefore apply
+vertices through \(p=q-1\), which are exactly the entries of that
+prefix by \noderef{TreeSequencePrefix}, avoid \(Q\).  We may therefore apply
 \noderef{TashTreeDisjointComponentNormalization} with
 \(\alpha=\varepsilon\), \(\beta=\beta\), \(a=m\), \(b=i\), and the
 cutoff \(p=q-1\).  It returns a minimum bad pair
@@ -44,19 +52,26 @@ cutoff \(p=q-1\).  It returns a minimum bad pair
 The remaining exact edge needed for the unused-through predicates is
 the edge at formal index \(q-1\), namely displayed edge \(e_q\).  Its
 attachment data again gives it an earlier endpoint in
-\(V(T_{q-1})\), which avoids \(Q\).  The same affected-color adjacency
+\(V(T_{q-1})\); the entry description in
+\noderef{TreeSequencePrefix} identifies this as one of the protected
+displayed vertices, which avoids \(Q\).  The same affected-color adjacency
 argument, and the same isolated off-pair edge-node argument, prove that
 this exact edge-node also avoids \(Q\).  Consequently its value is fixed
 by the defining cases of \noderef{TwoColorComponentSwap}.  Combined
-with the early-edge equalities returned by the normalization, this shows
-that \(\varepsilon\) remains unused through \(y_q\).  Since the swap
+with the early-edge equalities returned by the normalization, every
+formal edge index \(r\) with \(1\le r<q\), namely the exact range
+\(e_2,\ldots,e_q\) in \noderef{TreeColorUnusedThrough}, retains a
+non-\(\varepsilon\) value.  Thus \(\varepsilon\) remains unused through
+\(y_q\).  Since the swap
 only exchanges \(\varepsilon\) and \(\beta\), every exact edge having
-color \(\gamma\) is fixed, so \(\gamma\) also remains unused through
-\(y_q\).
+color \(\gamma\) is fixed.  Applying the same formal-index range from
+\noderef{TreeColorUnusedThrough} shows that \(\gamma\) also remains
+unused through \(y_q\).
 
 Finally, \(\gamma\) is distinct from both swapped colors.  The
 unaffected-color clause of
-\noderef{TwoColorComponentSwapMissingBehavior} therefore preserves its
+\noderef{TwoColorComponentSwapMissingBehavior}, applied with the
+properness obtained from \noderef{KTriple}, therefore preserves its
 missingness at \(y_q\), whether or not that vertex lies in \(Q\).  Under
 the new minimum bad pair we now have \(\varepsilon\) missing at the
 early vertex \(y_m\) and at \(y_n\), \(\gamma\) missing at \(y_q\),

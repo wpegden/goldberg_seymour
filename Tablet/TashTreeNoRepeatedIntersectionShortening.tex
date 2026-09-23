@@ -7,52 +7,102 @@ Let \((\varphi,T)\) be a minimum bad pair with
 vertex of \(T_{q-1}\), then a smaller bad pair exists, a contradiction.
 \end{helper}
 \begin{proof}
-Let \(Q\) be the stated component.  First suppose that \(Q\) meets the
-smaller exact prefix \(T_{q-2}\).  Both colors belong to
-\noderef{TreeMissingColors} of that prefix, witnessed by \(y_m\) and
-\(y_i\).  The final vertex is outside the prefix by injectivity of the
-displayed vertices.  Thus \noderef{TwoColorComponentTashkinovSplice},
-applied with \(S=T_{q-2}\) from
-\noderef{TreeSequencePrefix}, returns a longer tree sequence \(S'\)
-which has \(S\) as an exact initial segment, ends at \(y_n\), and whose
-appended exact edges and vertices follow the oriented alternating
-component segment.  It also returns a
-\noderef{TashkinovAugmentationSequence}; hence
-\noderef{TashkinovAugmentationSequencePreservesTashkinovTree}, together
-with the Tashkinov clause of \noderef{TashTreeBadPair}, proves that
-\(S'\) is a Tashkinov tree under \(\varphi\).
+Let \(Q\) be the stated component.  Unfold
+\noderef{TashTreeMinimumBadPair} and take its bad-pair conjunct.  By
+\noderef{TashTreeBadPair}, this supplies a \(k\)-triple and the
+Tashkinov-tree condition for the full sequence \(T\).  By
+\noderef{KTriple}, the coloring \(\varphi\) is proper, as required by
+each application of \noderef{TwoColorComponentTashkinovSplice}.
 
-The retained vertices \(y_i,y_m\) are present in \(S\), and the splice
-ends at \(y_n\).  In particular, \(\beta\) is missing at the two
-distinct vertices \(y_i,y_n\) of \(S'\).  The unchanged \(k\)-triple
-and this failure of elementariness show, by
-\noderef{TashTreeBadPair}, that \((\varphi,S')\) is bad.  The generic
-splice assertion makes consecutive endpoint equations automatic only
-after its first appended edge.  Since \(S\) has length \(q-2\), those
-equations make \(q-1=(q-2)+1\) a suffix-path start for \(S'\).  Hence
-its path index is at most \(q-1<q=\rho(T)\), which is the strict rank
-comparison \noderef{TashTreeRankLess}.  This contradicts the universal
+We first record that each prefix used below is itself a Tashkinov tree.
+Let \(p\) be either \(q-2\) or \(q-1\), and put
+\(S=T_p\) using \noderef{TreeSequencePrefix}.  Fix a formal edge index
+\(r\) of \(S\) with \(1\le r\).  The full-tree condition from
+\noderef{TashkinovTree} gives a color of the exact edge in position
+\(r\) and a missing-color witness at a vertex in a position
+\(w\le r\).  The edge and vertex identities in
+\noderef{TreeSequencePrefix} identify these entries of \(S\) with the
+same entries of \(T\).  Thus the same color and the same earlier vertex
+witness the Tashkinov condition for this edge of \(S\).  Since this
+holds for every \(r\), \(S\) is a Tashkinov tree.  This argument applies
+separately to both \(T_{q-2}\) and \(T_{q-1}\).
+
+First suppose that \(Q\) meets the smaller exact prefix \(T_{q-2}\),
+and set \(S=T_{q-2}\).  The inequalities \(m,i\le q-2\), together with
+the entry identities in \noderef{TreeSequencePrefix}, put \(y_m,y_i\)
+in the vertex set \noderef{TreeSequenceVertexSet} of \(S\).  Hence
+\(\varepsilon,\beta\), respectively, belong to
+\noderef{TreeMissingColors} of \(S\).  Every vertex of \(S\) has an
+original displayed index at most \(q-2<n\); injectivity of the vertex
+map in \noderef{TreeSequence} therefore shows that the final vertex
+\(y_n\) is outside \(V(S)\).
+
+All premises of \noderef{TwoColorComponentTashkinovSplice} now hold:
+properness was obtained above, the colors are distinct and tree-missing,
+\(y_n\) is outside, and this subcase supplies the component
+intersection.  The result is a strict extension \(S'\) which has \(S\)
+as an exact initial segment in the sense of
+\noderef{TreeSequenceInitialSegment}, ends at \(y_n\), and comes with a
+\noderef{TashkinovAugmentationSequence}.  Since \(S\) was proved
+Tashkinov, \noderef{TashkinovAugmentationSequencePreservesTashkinovTree}
+makes \(S'\) Tashkinov.
+
+The initial-segment vertex identities retain \(y_i\) in \(S'\), while
+the last-vertex identity makes \(y_n\) the final vertex of \(S'\).
+These vertices are distinct by \noderef{TreeSequence}, and both belong
+to \noderef{TreeSequenceVertexSet} of \(S'\).  Both miss \(\beta\), so
+the disjointness condition in \noderef{ColoredVertexSetElementary}
+fails.  The unchanged \(k\)-triple, the Tashkinov property just proved,
+and this non-elementariness are exactly
+\noderef{TashTreeBadPair}; hence \((\varphi,S')\) is bad.
+
+It remains to compare ranks.  Here \(|E(S)|=q-2\).  For every formal
+edge position \(r\ge q-1=(q-2)+1\), one has
+\(r>|E(S)|\), so the later-edge equation returned by the splice says
+that the exact edge in position \(r\) of \(S'\) joins its vertices in
+positions \(r,r+1\).  Moreover \(q>2\) gives \(1\le q-1\), and strict
+extension gives \(q-1\le |E(S')|\).  These endpoint equations and bounds
+are precisely \noderef{TashTreeSuffixPath} at start \(q-1\).  By the
+least-start definition \noderef{TashTreePathIndex},
+\(\rho(S')\le q-1<q=\rho(T)\).  Thus
+\noderef{TashTreeRankLess} holds, contradicting the universal
 minimality clause of \noderef{TashTreeMinimumBadPair}.
 
 It remains to suppose that \(Q\) avoids every displayed vertex of
-\(T_{q-2}\) but meets \(T_{q-1}\).  Apply
-\noderef{TwoColorComponentTashkinovSplice} with
-\(S=T_{q-1}\).  The attachment vertex returned by that theorem lies in
-\(Q\cap V(T_{q-1})\).  Exact-prefix vertex identities from
-\noderef{TreeSequencePrefix} say that the only vertex of
-\(T_{q-1}\) not already in \(T_{q-2}\) is \(y_{q-1}\); therefore the
-returned attachment is exactly \(y_{q-1}\).  The special first-edge
-equation in the splice statement now says that the first appended edge
-joins the last retained vertex \(y_{q-1}\) to the first new vertex.
-Together with the later consecutive equations, the entire appended
-segment is in path order beginning at position \(q-1\), rather than
-only at the generic position \(q\).
+\(T_{q-2}\) but meets \(T_{q-1}\), and now set \(S=T_{q-1}\).  The
+same prefix, vertex-set, and injectivity arguments put the two early
+missing-color witnesses in \(S\) and put \(y_n\) outside it.  Hence the
+properness established above permits another application of
+\noderef{TwoColorComponentTashkinovSplice}.  Its attachment vertex
+\(u\) lies in \(Q\cap V(T_{q-1})\).  By
+\noderef{TreeSequencePrefix} and \noderef{TreeSequenceVertexSet}, the
+vertices of \(T_{q-1}\) are exactly
+\(y_0,\ldots,y_{q-1}\), whereas those of \(T_{q-2}\) are exactly
+\(y_0,\ldots,y_{q-2}\).  Because \(Q\) avoids the latter set and the
+displayed vertices are distinct by \noderef{TreeSequence}, necessarily
+\(u=y_{q-1}\).
 
-As in the first subcase, the retained prefix contains both early
-missing-color witnesses, the splice ends at \(y_n\), its augmentation
-sequence preserves the Tashkinov property, and the two
-missing-\(\beta\) vertices make it bad.  Its path index is at most
-\(q-1<q\), so \noderef{TashTreeRankLess} again contradicts the
-minimality clause of \noderef{TashTreeMinimumBadPair}.  The two prefix
-subcases exhaust the asserted meeting with \(T_{q-1}\).
+The prefix \(S\) is Tashkinov by the restriction argument above, so the
+returned augmentation sequence and
+\noderef{TashkinovAugmentationSequencePreservesTashkinovTree} make the
+extension \(S'\) Tashkinov.  Now \(|E(S)|=q-1\).  At the first new
+formal edge position \(r=q-1\), the special first-edge equation from
+the splice joins \(u=y_{q-1}\) to the first new vertex; the
+initial-segment equality in \noderef{TreeSequenceInitialSegment}
+identifies \(y_{q-1}\) with the vertex of \(S'\) in position \(r\).
+At every later position the splice gives the ordinary consecutive
+endpoint equation.  Since \(q>2\) gives \(1\le q-1\), and strict
+extension gives \(q-1\le |E(S')|\), these equations again establish
+\noderef{TashTreeSuffixPath} with start \(q-1\).  Thus
+\noderef{TashTreePathIndex} gives \(\rho(S')\le q-1<q\).
+
+Finally, the initial-segment and last-vertex identities retain the two
+distinct missing-\(\beta\) vertices \(y_i,y_n\).  By
+\noderef{TreeSequenceVertexSet} and
+\noderef{ColoredVertexSetElementary}, \(V(S')\) is not elementary.
+Together with the unchanged \(k\)-triple and the Tashkinov property,
+this makes \((\varphi,S')\) bad by \noderef{TashTreeBadPair}.  The path
+index inequality gives \noderef{TashTreeRankLess}, again contradicting
+\noderef{TashTreeMinimumBadPair}.  The two prefix subcases exhaust the
+asserted meeting with \(T_{q-1}\).
 \end{proof}

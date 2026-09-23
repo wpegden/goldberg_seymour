@@ -7,8 +7,18 @@ at \(y_i,y_j\), respectively.  If both colors are unused through
 then this configuration is impossible.
 \end{helper}
 \begin{proof}
+Unfold \noderef{TashTreeMinimumBadPair} and take its bad-pair
+conjunct.  By \noderef{TashTreeBadPair} this conjunct contains a
+\(k\)-triple, and \noderef{KTriple} says in particular that
+\(\varphi\) is proper.  We use this properness below for every
+incidence-graph endpoint, spanning-path, and swap-missing assertion.
+Also, by \noderef{TreeColorUnusedThrough}, the two unused-through
+hypotheses say exactly that every displayed edge \(e_r\),
+\(2\le r\le j\), has color different from \(\alpha\) and from
+\(\beta\).
+
 Apply \noderef{TashTreeControlledInterchange} to \(\alpha,\beta\) at
-\(y_i,y_j\).  Write \(Q\) for the returned
+\(y_i,y_j\), using those edgewise nonuse assertions.  Write \(Q\) for the returned
 \((\alpha,\beta)\)-component and \(\varphi'\) for its component swap.
 That result says that \(Q\) is a path component containing both
 \(y_i\) and \(y_j\), that these two distinct vertices have at most one
@@ -19,10 +29,11 @@ minimum bad pair.
 We claim that \(y_n\notin Q\).  The inequalities
 \(i<j<n\), together with the displayed-vertex injectivity in
 \noderef{TreeSequence}, make \(y_i,y_j,y_n\) pairwise distinct.  Since
-\(\alpha\) is missing at \(y_n\),
+\(\alpha\) is missing at \(y_n\), the properness extracted above and
 \noderef{MissingColorIncidenceEndpoint} says that \(y_n\) also has at
 most one neighbor in the two-color incidence graph.  On the other hand,
-\noderef{TwoColorComponentSpanningPath} realizes all of \(Q\) as the
+using the same properness, \noderef{TwoColorComponentSpanningPath}
+realizes all of \(Q\) as the
 support of one simple path.  A nontrivial simple path has exactly two
 vertices of degree at most one in its support: here they are the two
 distinct vertices \(y_i\) and \(y_j\).  Thus a third such vertex
@@ -30,7 +41,8 @@ distinct vertices \(y_i\) and \(y_j\).  Thus a third such vertex
 
 The outside-component clause of
 \noderef{TwoColorComponentSwapMissingBehavior} now preserves the whole
-missing-color set at \(y_n\).  Hence \(\alpha\) is missing under
+missing-color set at \(y_n\); its properness premise is precisely the
+properness derived from \noderef{KTriple}.  Hence \(\alpha\) is missing under
 \(\varphi'\) both at \(y_j\) and at \(y_n\).  The unchanged tree has
 \(\rho(T)\le j<n\), so these witnesses meet exactly the repeated suffix
 hypothesis of \noderef{TashTreeCaseRepeatedOnPath} for the returned

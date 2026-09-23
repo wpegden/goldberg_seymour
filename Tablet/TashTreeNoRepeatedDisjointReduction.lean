@@ -1,7 +1,11 @@
+import Tablet.KTriple
+import Tablet.TashTreeBadPair
 import Tablet.TashTreeControlledRepeatedSuffixContradiction
 import Tablet.TashTreeDisjointComponentNormalization
+import Tablet.TashTreeMinimumBadPair
 import Tablet.TreeColorUnusedThrough
 import Tablet.TreeSequence
+import Tablet.TreeSequencePrefix
 import Tablet.TwoColorComponent
 import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorComponentSwap

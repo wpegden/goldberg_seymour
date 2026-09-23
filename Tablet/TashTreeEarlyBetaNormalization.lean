@@ -1,4 +1,5 @@
 import Tablet.ColoredVertexSetElementary
+import Tablet.KTriple
 import Tablet.MissingColorIncidenceEndpoint
 import Tablet.MissingColors
 import Tablet.TashTreeBadPair
@@ -17,6 +18,7 @@ import Tablet.TreeUsedColors
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwapMissingBehavior
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: TashTreeEarlyBetaNormalization]
 theorem TashTreeEarlyBetaNormalization {V E : Type*}

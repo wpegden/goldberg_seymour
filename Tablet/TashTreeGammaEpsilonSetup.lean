@@ -1,3 +1,5 @@
+import Tablet.ColoredVertexSetElementary
+import Tablet.KTriple
 import Tablet.MissingColorsNonemptyOfMaximumDegree
 import Tablet.TashTreeBadPair
 import Tablet.TashTreeFourUnusedColors
@@ -7,7 +9,9 @@ import Tablet.TashkinovTree
 import Tablet.TreeColorUnusedThrough
 import Tablet.TreeFreeColors
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
 import Tablet.TreeUsedColors
 
 -- [TABLET NODE: TashTreeGammaEpsilonSetup]

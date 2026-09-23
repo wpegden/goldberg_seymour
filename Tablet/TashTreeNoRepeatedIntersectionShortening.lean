@@ -1,10 +1,15 @@
+import Tablet.ColoredVertexSetElementary
+import Tablet.KTriple
 import Tablet.TashTreeMinimumBadPair
 import Tablet.TashTreeBadPair
+import Tablet.TashTreePathIndex
 import Tablet.TashTreeRankLess
+import Tablet.TashTreeSuffixPath
 import Tablet.TashkinovTree
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequencePreservesTashkinovTree
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix
 import Tablet.TreeSequenceVertexSet

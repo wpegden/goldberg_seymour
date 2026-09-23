@@ -1,6 +1,9 @@
 import Tablet.MissingColorIncidenceEndpoint
+import Tablet.KTriple
+import Tablet.TashTreeBadPair
 import Tablet.TashTreeCaseRepeatedOnPath
 import Tablet.TashTreeControlledInterchange
+import Tablet.TashTreeMinimumBadPair
 import Tablet.TreeColorUnusedThrough
 import Tablet.TreeSequence
 import Tablet.TwoColorComponentSpanningPath

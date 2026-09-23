@@ -10,14 +10,21 @@ and the same no-repetition condition holds under \(\varphi'\).
 \begin{proof}
 Unfolding \noderef{TashTreeMinimumBadPair} and
 \noderef{TashTreeBadPair}, the full vertex set of \(T\) is not
-elementary.  The exact penultimate prefix supplied by
-\noderef{TreeSequencePrefix} is elementary by
-\noderef{TashTreeProperPrefixElementary}.  Therefore the definition
-\noderef{ColoredVertexSetElementary}, together with the exact vertex set
-\noderef{TreeSequenceVertexSet}, gives a color \(\beta\) missing at
-\(y_n\) and at some earlier \(y_i\).  The assumed no-repetition condition
-forces \(i<q\).  If \(i+2\le q\), take \(\varphi'=\varphi\); all the
-asserted conclusions are immediate.
+elementary, and the bad-pair conjunct contains a \(k\)-triple.
+By \noderef{KTriple}, \(\varphi\) is proper; this is the properness used
+in every incidence-component argument below.  The exact penultimate
+prefix supplied by \noderef{TreeSequencePrefix} is elementary by
+\noderef{TashTreeProperPrefixElementary}.  Non-elementariness of the
+full set, expanded with \noderef{ColoredVertexSetElementary}, gives two
+distinct displayed vertices sharing a missing color.  By
+\noderef{TreeSequenceVertexSet} every displayed vertex except \(y_n\)
+belongs to the penultimate prefix, and \noderef{TreeSequence} makes
+vertices at distinct displayed indices distinct.  Hence the two
+witnesses cannot both be in that elementary prefix: one is \(y_n\) and
+the other is some \(y_i\), \(i<n\).  Denote their common missing color
+by \(\beta\).  The assumed no-repetition condition forces \(i<q\).
+If \(i+2\le q\), take \(\varphi'=\varphi\); all the asserted
+conclusions are immediate.
 
 It remains to treat \(i+2>q\).  Since \(i<q\), this means
 \(i=q-1\).  As \(q>2\), the prefix \(T_{q-2}\) has positive length and
@@ -35,9 +42,13 @@ The color \(\beta\) is unused through \(y_{q-1}\) as well.  Indeed, if
 a formal edge index \(r\) satisfied \(1\le r<q-1\) and that exact edge
 had color \(\beta\), then \noderef{TashkinovTree} would give an earlier
 missing-\(\beta\) witness \(y_w\), with \(w\le r<q-1\).  This witness
-and the distinct vertex \(y_{q-1}\) would both lie in the proper prefix
-\(T_{q-1}\) and both miss \(\beta\), contrary to
-\noderef{TashTreeProperPrefixElementary}.  This proves precisely the
+and \(y_{q-1}\) are distinct by the displayed-vertex injectivity in
+\noderef{TreeSequence}; the entry identities in
+\noderef{TreeSequencePrefix} put both in the vertex set
+\noderef{TreeSequenceVertexSet} of the proper prefix \(T_{q-1}\).
+They both miss \(\beta\), contrary to the elementariness supplied by
+\noderef{TashTreeProperPrefixElementary} and defined in
+\noderef{ColoredVertexSetElementary}.  This proves precisely the
 predicate \noderef{TreeColorUnusedThrough} for \(\beta\).
 
 Apply \noderef{TashTreeControlledInterchange} to \(\alpha,\beta\) at
@@ -46,12 +57,16 @@ swap from \noderef{TwoColorComponentSwap}.  It makes \(\beta\) missing
 at \(y_m\) and makes \((\varphi',T)\) a minimum bad pair.  Moreover,
 \(y_n\) is outside the controlled component.  The returned component
 is a path with the two distinct degree-at-most-one vertices
-\(y_m,y_{q-1}\).  The old missingness of \(\beta\) at \(y_n\), together
-with \noderef{MissingColorIncidenceEndpoint}, would make \(y_n\) a third
-such vertex if it belonged to the component, contradicting the spanning
-simple path supplied by \noderef{TwoColorComponentSpanningPath}.  The
+\(y_m,y_{q-1}\); they and \(y_n\) are pairwise distinct because their
+indices are distinct and \noderef{TreeSequence} has an injective vertex
+map.  The old missingness of \(\beta\) at \(y_n\), the properness from
+\noderef{KTriple}, and \noderef{MissingColorIncidenceEndpoint} would
+make \(y_n\) a third such vertex if it belonged to the component,
+contradicting the spanning simple path supplied, with the same
+properness premise, by \noderef{TwoColorComponentSpanningPath}.  The
 outside clause of \noderef{TwoColorComponentSwapMissingBehavior}
-therefore preserves missingness of \(\beta\) at \(y_n\).  Since
+therefore preserves missingness of \(\beta\) at \(y_n\), again using
+the properness already extracted.  Since
 \(m\le q-2\), this gives the required early index.
 
 It remains to verify the no-repetition condition under \(\varphi'\).
@@ -60,10 +75,15 @@ For every suffix vertex \(y_s\), \(q\le s<n\), a vertex outside the
 component keeps its complete missing set by
 \noderef{TwoColorComponentSwapMissingBehavior}.  A suffix vertex inside
 the component cannot be either end, so it is internal on the spanning
-path from \noderef{TwoColorComponentSpanningPath}; properness gives it
-one incident edge of each affected color before the swap, and the exact
-transposition gives it one of each afterward.  Thus its missing set is
-also unchanged.  We already proved that the final vertex lies outside,
+path from \noderef{TwoColorComponentSpanningPath}.  Such an internal
+vertex has two distinct path neighbors.  By the bipartite adjacency
+definition \noderef{TwoColorIncidenceGraph}, those neighbors are exact
+incident edge-nodes colored \(\alpha\) or \(\beta\).  Properness from
+\noderef{KTriple} prevents the two distinct incident edges from having
+the same color, so there is one edge of each affected color.  The exact
+transposition in \noderef{TwoColorComponentSwap} again leaves one of
+each, and the other colors are unchanged.  Thus its complete missing set
+is unchanged.  We already proved that the final vertex lies outside,
 so its missing set is unchanged.  Colors other than
 \(\alpha,\beta\) have unchanged missingness everywhere by the final
 clause of \noderef{TwoColorComponentSwapMissingBehavior}.  Consequently
