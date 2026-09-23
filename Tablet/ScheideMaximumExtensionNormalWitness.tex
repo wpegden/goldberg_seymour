@@ -1,9 +1,11 @@
 \begin{lemma}[A reversed path extends to a normal maximum tree]
 Let $(T,e_0,\varphi)$ be a globally maximum $k$-triple, assume that $T$
-is fixed-pair maximal, and let $P$ be a simple $(\alpha,\beta)$-incidence
-path from the first vertex of $T$ to its second vertex.  From any reversed
-Kempe-path certificate $C$ for $P$, one obtains a globally maximum
-Tashkinov tree $T'$ and a normal witness on $T'$ whose height is
+is fixed-pair maximal, and write its first two vertices as $y_0,y_1$.
+Suppose that $\alpha\in\overline\varphi(y_0)$ and
+$\beta\in\overline\varphi(y_1)$, and let $P$ be a simple
+$(\alpha,\beta)$-incidence path from $y_0$ to $y_1$.  From any reversed
+Kempe-path certificate $C$ for $P$, one obtains a globally maximum Tashkinov
+tree $T'$ and a normal witness on $T'$ whose height is
 $\operatorname{length}(P)/2+1$.
 \end{lemma}
 \begin{proof}
@@ -26,11 +28,27 @@ $(T',e_0,\varphi)$ is again globally maximum.
 We construct the normal witness field by field.  Set its height to
 $m+1$ and its last index to the index $m$ of $T'$.  The certificate gives
 $m\geq2$, while (1) gives $m\leq T'.length$, so the required height bounds
-hold.  The first two exact vertex equalities in the certificate and (1)
-transport the two prescribed missing colors from the first two vertices
-of $T$ to the first two vertices of $T'$.  Choose $q$ as the closing edge.
-The certificate's closing-end equation, transported entrywise through
-(1), is
+hold.  We next verify the two missing-color fields explicitly.  The
+certificate equalities are
+\[
+ U.vertex(0)=T.vertex(0)=y_0,
+ \qquad U.vertex(1)=T.vertex(1)=y_1.
+\]
+The vertex-entry clause of (1), first at index $0$ and then at index $1$,
+gives
+\[
+ T'.vertex(0)=U.vertex(0),
+ \qquad T'.vertex(1)=U.vertex(1).
+\]
+Combining these equalities yields $T'.vertex(0)=y_0$ and
+$T'.vertex(1)=y_1$.  Substitution in the two explicit hypotheses
+$\alpha\in\overline\varphi(y_0)$ and
+$\beta\in\overline\varphi(y_1)$ therefore gives, respectively,
+$\alpha\in\overline\varphi(T'.vertex(0))$ and
+$\beta\in\overline\varphi(T'.vertex(1))$.  These are exactly the
+`alpha_missing' and `beta_missing' fields of the normal witness.  Choose
+$q$ as the closing edge.  The certificate's closing-end equation,
+transported entrywise through (1), is
 \[
  G.\operatorname{ends}(q)
    =\{T'.vertex(m),T'.vertex(0)\}.                              \tag{2}

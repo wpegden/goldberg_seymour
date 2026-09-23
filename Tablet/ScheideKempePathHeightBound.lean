@@ -55,7 +55,7 @@ theorem ScheideKempePathHeightBound {V E : Type*}
     alpha beta halpha hbeta p hp hdiv
   obtain ⟨T', N, hN⟩ :=
     ScheideMaximumExtensionNormalWitness G k e0 phi T hglobal hmax
-      alpha beta p hp C
+      alpha beta halpha hbeta p hp C
   have hheight : p.length / 2 + 1 ≤ ScheideGraphHeight G := by
     rw [← hN]
     have hcard : T'.length + 1 ≤ Fintype.card V := by
