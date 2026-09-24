@@ -1,0 +1,73 @@
+\begin{helper}[Replacement excursion and final-departure order]
+Let $\beta,v,z,P_\delta$ be any replacement-coloring data with $v\in Z$,
+with $\beta$ missing at $v$ under both colorings, free for $T_\delta$,
+distinct from $\delta$ and $\gamma$, and with $P_\delta$ a full simple
+$(\gamma,\beta)$ path from $v$ to $z$ outside $X_\delta$.  There is a
+$\beta$-colored edge $h$ under $\varphi_\delta$ with exact ends
+$u^1_\gamma,u^2_\gamma$.  In one of its two orientations,
+$P_\delta$ contains the five consecutive nodes
+\[
+ f^1_\gamma,u^1_\gamma,h,u^2_\gamma,f^2_\gamma.
+\]
+This excursion occurs strictly before the last $X_\delta$-vertex; that
+last vertex is $v^0_\delta$, the immediately following edge is
+$f^0_\delta$, and all later vertex-nodes lie outside $X_\delta$.
+Moreover neither $u^1_\delta$ nor $u^2_\delta$ is a Scheide exit of the
+replacement tree.  The assertion retains exact finite indices for the
+five consecutive nodes and the final vertex-edge pair.
+\end{helper}
+\begin{proof}
+Because $\beta$ is missing under the original coloring at a vertex of
+$Z$ and differs from $\gamma$,
+\noderef{ScheideStructuralInternalPair} gives an original
+$\beta$-edge $h$ internal to $U_\gamma$.  It is incident with $V(T)$,
+is not $f^0_\delta$ because their original colors differ, and is therefore
+fixed by \noderef{ScheideDefectiveSwitchEffect}.  Thus it still has color
+$\beta$ under $\varphi_\delta$.  The exact configuration in
+\noderef{ScheideSymmetricReplacementBoundaryConfiguration} makes both
+deleted block edges $\gamma$-colored boundary identities, and
+\noderef{ScheideDefectiveChainBoundaryEdges} puts both on the full path.
+Properness of the replacement
+coloring, looplessness, and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} now force the displayed five
+nodes to be consecutive, in one orientation or the other, exactly as in
+the original excursion argument.
+
+We next exclude the two vertices of $U_\delta$ from the replacement exit
+set.  By \noderef{ScheideGlobalMaximumMissingCounts}, each of them misses
+at least one color.  Every color used on $T_\delta$ has a missing witness
+in $Z$: retained base and block colors have their base witnesses from
+\noderef{ScheideStructuralConfiguration}; those witnesses survive the
+switch by \noderef{ScheideDefectiveSwitchEffect}, since distinct block
+colors are injective, nonfirst base colors avoid all block colors, and
+the defective color $\delta$ is unused by
+\noderef{ScheideGlobalMaximumUnused}; finally, the appended color
+$\delta$ is missing at $v^0_\delta\in Z$ by the switch-effect missing-set
+formula.  The edge classification in \noderef{ScheideReplacementData}
+shows that these retained edges and the appended pair exhaust the
+displayed edges of $T_\delta$.  Elementariness from
+\noderef{ScheideGlobalMaximumOrder} therefore says that no used color can
+be missing at either vertex of $U_\delta$.  Any color missing there is
+unused and hence free.  But \noderef{ScheideExitNoFree} says that an exit
+of a globally maximum triple misses no free color.  Thus neither vertex
+of $U_\delta$ is an exit.
+
+The finite path starts in $X_\delta$ and ends outside it, so choose its
+last vertex-node $w$ in $X_\delta$.  By the definition
+\noderef{ScheideExitVertex}, $w$ is a replacement exit.  The preceding
+paragraph and the exact equality $X_\delta=Z\cup U_\delta$ put $w$ in
+$Z$.  Its next edge is a boundary edge.  Closedness excludes color
+$\beta$, which is missing on $X_\delta$, so this edge has color $\gamma$.
+The exact departure classification in
+\noderef{ScheideSymmetricReplacementBoundaryConfiguration} makes it one
+of $f^0_\delta,f^1_\gamma,f^2_\gamma$.
+
+It cannot be either block edge, because the forced consecutive segment
+then returns through the other block edge to a later vertex of $Z$.  It
+is therefore $f^0_\delta$, whose exact tree endpoint is
+$v^0_\delta$ by \noderef{ScheideDefectiveSetup}.  The returning block
+excursion necessarily precedes this last departure.  Reading these
+occurrences in the finite path order supplies the asserted consecutive
+index equalities, strict order, final adjacent pair, and the condition on
+all later vertex-nodes.
+\end{proof}

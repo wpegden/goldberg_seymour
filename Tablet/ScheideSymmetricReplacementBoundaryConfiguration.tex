@@ -1,0 +1,58 @@
+\begin{helper}[Replacement gamma-boundary configuration]
+Fix a defective color $\delta$, put
+$\gamma=\gamma(\delta)$,
+$\varphi_\delta=\operatorname{swap}_{\gamma,\delta}
+ (\varphi;v^0_\delta)$, let
+$X_\delta=V(T_\delta)$, and put
+$Z=V(T)\setminus U_\gamma$.  The color $\gamma$ is defective for
+$X_\delta$ under $\varphi_\delta$.  The three pairwise distinct edge
+identities
+\[
+ f^0_\delta,qquad f^1_\gamma,qquad f^2_\gamma
+\]
+all have color $\gamma$ under $\varphi_\delta$, and they are exactly the
+$\gamma$-colored edges with one end in $Z$ and the other outside
+$X_\delta$.
+\end{helper}
+\begin{proof}
+By \noderef{ScheideDefectiveSwitchEffect}, the switched coloring gives
+$f^0_\delta$ color $\gamma$ and fixes every other identity incident with
+$V(T)$.  The other end of $f^0_\delta$ is outside $V(T)$ by
+\noderef{ScheideDefectiveSetup}, whereas each displayed edge of the
+deleted $\gamma$-block has both ends in $V(T)$ by
+\noderef{ScheideStructuralConfiguration}; hence both block identities
+differ from $f^0_\delta$ and retain their structural color $\gamma$.
+The two block identities are distinct by exact-edge injectivity in
+\noderef{TreeSequence}.  Their base ends lie in the
+base $Y\subseteq Z$ and their block ends lie in
+$U_\gamma=V(T)\setminus X_\delta$, using the exact vertex-set equality in
+\noderef{ScheideReplacementData}.
+
+The edge $f^0_\delta$ also leaves $X_\delta$.  Its tree end
+$v^0_\delta$ is an exit by \noderef{ScheideDefectiveSetup}, hence belongs
+to $Y\subseteq Z$ by \noderef{ScheideStructuralExitsInBase}.  Its other
+end cannot equal $u^1_\delta$ or $u^2_\delta$: otherwise
+$f^0_\delta$ and the corresponding distinct edge $f^i_\delta$ would be
+two incident edges of original color $\delta$, contrary to the properness
+in the globally maximum triple.  The replacement vertex-set equality now
+puts that other end outside $X_\delta$.
+
+Thus the three identities are pairwise distinct boundary edges of
+$X_\delta$ and already show, by \noderef{DefectiveColors}, that
+$\gamma$ is defective.
+
+It remains to prove exactness.  Let $a$ be a $\gamma$-colored edge under
+$\varphi_\delta$ with one end in $Z$ and the other outside $X_\delta$.
+If $a=f^0_\delta$ there is nothing to prove.  Otherwise the pointwise
+fixation clause of \noderef{ScheideDefectiveSwitchEffect} gives
+$\varphi(a)=\gamma$.  Original closedness from
+\noderef{ScheideGlobalMaximumOrder}, together with the fact that
+$\gamma$ is missing at $v^0_\delta$, excludes an original
+$\gamma$-edge from $Z$ to the exterior of $V(T)$.  Its other endpoint
+therefore lies in $V(T)\setminus X_\delta=U_\gamma$.  At either vertex
+of this pair, the corresponding displayed block edge is already incident
+and has color $\gamma$; original properness makes it the unique such
+identity.  Hence $a=f^1_\gamma$ or $a=f^2_\gamma$.  Conversely the
+endpoint and color calculations above show directly that each of the
+three named identities has the stated departure property.
+\end{proof}

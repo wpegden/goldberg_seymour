@@ -1,0 +1,49 @@
+\begin{helper}[Original deleted-block avoidance]
+Let $v\in Z$, let $\beta$ be missing at $v$, free for
+$(T,e_0,\varphi)$, and distinct from $\gamma(\delta)$, and let $P$ be a
+full simple $(\delta,\beta)$ path from $v$ to an outside endpoint.
+Neither vertex of the deleted block $U_{\gamma(\delta)}$ occurs in the
+support of $P$.
+Consequently no $\delta$-colored boundary edge of $V(T)$ is incident
+with either vertex of that block.  Both conclusions retain exact vertex
+and parallel-edge identities.
+\end{helper}
+\begin{proof}
+Apply \noderef{ScheideSymmetricOriginalPathOrder}.  It gives the forced
+returning excursion through $U_\delta$ and identifies
+$f^0_\delta$ as the edge immediately after the last tree vertex of $P$.
+On the other hand, since $\beta$ is missing in $Z$ and differs from
+$\gamma(\delta)$, \noderef{ScheideStructuralInternalPair} gives a
+$\beta$-edge internal to $U_{\gamma(\delta)}$.  Properness makes this the
+unique incident $\beta$-edge at each of those two vertices, so no
+$\beta$-edge joins the deleted block to $Z$.  Independently,
+\noderef{ScheideDefectiveNoCross} says that no $\delta$-edge joins that
+block to $Z$.
+
+Suppose $P$ first reached a vertex of the deleted block.  It starts in
+$Z$, and neither path color crosses directly from $Z$ to the block.
+Therefore before that first occurrence it must leave $V(T)$ from a
+vertex of $Z$.  Choose the last such departure before the occurrence.
+Closedness supplied by \noderef{ScheideGlobalMaximumOrder} excludes
+color $\beta$, because $\beta$ is missing on the tree, so the departure
+has color $\delta$.  Its in-end lies in
+$Z$, and the exact-three clause of \noderef{ScheideReplacementData}
+makes it one of $f^0_\delta,f^1_\delta,f^2_\delta$.
+
+If it is $f^1_\delta$ or $f^2_\delta$, the consecutive excursion supplied
+by \noderef{ScheideSymmetricOriginalPathOrder} forces a return to $Z$
+through the other named edge before the path can proceed elsewhere.  This
+contradicts the choice of the departure.  If it is $f^0_\delta$, the same
+order theorem places it immediately after the last tree vertex, so the
+path cannot subsequently reach the deleted block, which is contained in
+$V(T)$.  These alternatives are exhaustive.  Hence neither deleted-block
+vertex lies in the support of $P$.
+
+Finally, \noderef{ScheideDefectiveChainBoundaryEdges} says that every
+$\delta$-colored boundary identity of $V(T)$ is an edge-node in the full
+path support.  If such an identity were incident with a deleted-block
+vertex, the adjacency definition in \noderef{TwoColorIncidenceGraph}
+would put that vertex-node in the same full component, hence in the
+support of $P$ by \noderef{ScheideDefectiveChainPath}.  This contradicts
+the first conclusion and proves the asserted boundary avoidance.
+\end{proof}

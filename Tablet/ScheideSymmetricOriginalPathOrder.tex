@@ -1,0 +1,65 @@
+\begin{helper}[Original excursion and final-departure order]
+In the notation of the preceding construction, let $\beta,v,z,P$ be any
+data with $v\in Z$, with $\beta$ missing at $v$, free, and distinct from
+$\gamma(r)$, and with $P$ a full simple $(\delta,\beta)$ path from $v$ to
+$z$ outside $V(T)$.  There is a $\beta$-colored edge $h$ with exact ends
+$u^1_\delta,u^2_\delta$.  In one of its two orientations, $P$ contains
+the five consecutive incidence nodes
+\[
+ f^1_\delta,u^1_\delta,h,u^2_\delta,f^2_\delta.
+\]
+This excursion occurs strictly before the last tree vertex on $P$; that
+last vertex is $v^0_\delta$, its immediately following node is
+$f^0_\delta$, and every later vertex-node is outside $V(T)$.  The claim
+includes exact finite indices for all five consecutive nodes and for the
+last vertex and following edge.
+\end{helper}
+\begin{proof}
+Because $\beta$ is missing at $v\in Z$ and differs from $\gamma(r)$,
+\noderef{ScheideReplacementInternalMissing} supplies an individual
+$\beta$-edge $h$ with exact ends $u^1_\delta,u^2_\delta$.
+The edges $f^1_\delta,f^2_\delta$ have exact colors $\delta$ and exact
+ends $v^i_\delta\in Z$, $u^i_\delta\notin V(T)$ by
+\noderef{ScheideReplacementData}.  Hence they are $\delta$-colored
+boundary identities of $V(T)$.  By
+\noderef{ScheideDefectiveChainBoundaryEdges}, both edge-nodes occur on
+$P$.
+
+At $u^i_\delta$, the named $f^i_\delta$ and $h$ are respectively the
+incident $\delta$- and $\beta$-edges.  Properness, from the globally
+maximum field of \noderef{ScheideReducedConfiguration}, makes each the
+unique incident edge of its color.
+Every edge-node has only its two endpoint incidences, the ends of $h$ are
+distinct by looplessness, and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} excludes branching anywhere
+in the two-color incidence graph.  Since $P$ is simple and its support is
+the whole component by \noderef{ScheideDefectiveChainPath}, the five
+nodes must therefore be consecutive, in the displayed orientation or its
+reverse.  This gives the asserted consecutive finite indices.
+
+The path starts at a vertex of $V(T)$ and ends outside it, so its finite
+order has a last vertex-node $w$ belonging to $V(T)$.  The full-path data
+and this last occurrence are exactly the witnesses in
+\noderef{ScheideExitVertex}; thus $w$ lies in
+\noderef{ScheideExitVertices}.  By
+\noderef{ScheideStructuralExitsInBase}, $w$ is a base vertex and hence
+belongs to $Z$.  Let $q$ be the immediately following edge-node.  Its
+two adjacent vertex-nodes lie respectively inside and outside $V(T)$, so
+\noderef{BoundaryEdges} makes $q$ a boundary identity.  It cannot have
+color $\beta$: $\beta$ is missing on the closed set $V(T)$ by
+\noderef{ScheideGlobalMaximumOrder}, and
+\noderef{ColoredVertexSetClosed} forbids such a boundary color.  Hence
+$q$ has color $\delta$.
+
+Its tree end is in $Z$ and its other end is outside $V(T)$, so the
+exact-three clause of \noderef{ScheideReplacementData} says that
+$q$ is one of $f^0_\delta,f^1_\delta,f^2_\delta$.  If it were either of
+the latter two, the forced five-node segment would pass through the other
+one and return to a later vertex of $Z$, contradicting the choice of $w$.
+Thus $q=f^0_\delta$.  Its exact endpoint record in
+\noderef{ScheideDefectiveSetup} gives $w=v^0_\delta$.  Since the
+$f^1_\delta$--$f^2_\delta$ excursion returns to $Z$, it occurs before
+this final departure.  Reading the occurrences in the finite path order
+gives all index equalities, the strict order, and the final assertion that
+every later vertex-node is outside $V(T)$.
+\end{proof}

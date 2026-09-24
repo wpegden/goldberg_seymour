@@ -1,0 +1,36 @@
+import Tablet.ScheideDefectiveChainBoundaryEdges
+import Tablet.ScheideDefectiveChainPath
+import Tablet.ScheideDefectiveNoCross
+import Tablet.ScheideGlobalMaximumOrder
+import Tablet.ScheideReplacementData
+import Tablet.ScheideStructuralInternalPair
+import Tablet.ScheideSymmetricOriginalPathOrder
+import Tablet.TwoColorIncidenceGraph
+
+-- [TABLET NODE: ScheideSymmetricOriginalBoundaryAvoidance]
+theorem ScheideSymmetricOriginalBoundaryAvoidance {V E : Type*}
+    [Fintype V] [Fintype E] [DecidableEq V] [DecidableEq E]
+    (G : LooplessMultigraph V E) (k : ℕ) (e0 : E)
+    (phi : PartialEdgeColoring E k) (T : TreeSequence G e0)
+    (C : ScheideReducedConfiguration G k e0 phi T)
+    (D : ScheideDefectiveSetup G k e0 phi T C)
+    (d : {delta // delta ∈ DefectiveColors G phi (TreeSequenceVertexSet T)})
+    (R : ScheideReplacementData G k e0 phi T C D d) :
+    ∀ (beta : Fin k) (v z : V)
+      (p : (TwoColorIncidenceGraph G phi d.1 beta).Walk
+        (Sum.inl v) (Sum.inl z)),
+      v ∈ TreeSequenceVertexSet T \
+          {C.blockVertex (D.gammaIndex d) 0,
+            C.blockVertex (D.gammaIndex d) 1} →
+      beta ∈ MissingColors G phi v →
+      beta ∈ TreeFreeColors phi T →
+      beta ≠ C.gamma (D.gammaIndex d) →
+      ScheideDefectiveChainPath T phi d.1 beta v z p →
+      (∀ j : Fin 2,
+        Sum.inl (C.blockVertex (D.gammaIndex d) j) ∉ p.support) ∧
+      ∀ f : E,
+        f ∈ BoundaryColorEdges G phi (TreeSequenceVertexSet T) d.1 →
+          ∀ j : Fin 2,
+            ¬ Incident G (C.blockVertex (D.gammaIndex d) j) f := by
+-- BODY
+  sorry

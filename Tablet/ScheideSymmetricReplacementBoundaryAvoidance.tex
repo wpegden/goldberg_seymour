@@ -1,0 +1,52 @@
+\begin{helper}[Replacement-pair avoidance]
+Let $\beta,v,z,P_\delta$ satisfy the explicitly stated replacement-path
+hypotheses: $v\in Z$, $\beta$ is missing there under both colorings, is
+free for $T_\delta$, differs from $\delta$ and $\gamma$, and
+$P_\delta$ is the full simple $(\gamma,\beta)$ path from $v$ to an
+outside endpoint.  Neither $u^1_\delta$ nor $u^2_\delta$ occurs in the
+support of $P_\delta$.  Consequently no $\gamma$-colored boundary edge
+of $X_\delta$ under $\varphi_\delta$ is incident with either vertex.
+Furthermore, every $\gamma$-colored edge under $\varphi_\delta$ incident
+with $U_\delta$ has no incident vertex in $Z$.
+\end{helper}
+\begin{proof}
+First prove the last assertion directly.  If a
+$\varphi_\delta$-$\gamma$ edge joined $U_\delta$ to $Z$, then
+\noderef{ScheideReplacementPairFixed} would give the same individual edge
+color $\gamma$ under $\varphi$.  Its $Z$-end lies in $V(T)$ and its
+$U_\delta$-end lies outside $V(T)$, so it would be an original
+$\gamma$-colored boundary edge.  This contradicts original closedness
+from \noderef{ScheideGlobalMaximumOrder}, because $\gamma$ is missing at
+$v^0_\delta$ by \noderef{ScheideDefectiveSetup}.
+
+By \noderef{ScheideReplacementInternalMissing}, the original missing
+occurrence of $\beta$ in $Z$ gives a $\beta$-edge internal to
+$U_\delta$.  The fixation theorem
+\noderef{ScheideReplacementPairFixed} preserves its color under
+$\varphi_\delta$.  Replacement properness makes it the unique incident
+$\beta$-edge at each endpoint, so no $\beta$-edge joins $U_\delta$ to
+$Z$.  Together with the preceding paragraph, neither path color crosses
+directly between these two sets.
+
+Suppose $P_\delta$ first reached $U_\delta$.  Starting in $Z$, it must
+first leave $X_\delta$ and later enter the pair.  Take the last departure
+from $Z$ before that first entry.  Closedness of $X_\delta$ excludes the
+missing color $\beta$, so its color is $\gamma$.  The exact classification
+in \noderef{ScheideSymmetricReplacementBoundaryConfiguration} makes this
+edge one of $f^0_\delta,f^1_\gamma,f^2_\gamma$.  If it is a deleted
+block edge, the forced excursion in
+\noderef{ScheideSymmetricReplacementPathOrder} returns through the other
+one to $Z$ before proceeding, contrary to the departure choice.  If it
+is $f^0_\delta$, that same order theorem places it after the last
+$X_\delta$-vertex, so the path cannot subsequently enter
+$U_\delta\subseteq X_\delta$.  This contradiction proves that both pair
+vertices are absent from the path support.
+
+Finally, \noderef{ScheideDefectiveChainBoundaryEdges} says that every
+$\gamma$-colored boundary identity of $X_\delta$ occurs as an edge-node
+on the full path.  If one were incident with $u^1_\delta$ or
+$u^2_\delta$, the corresponding vertex-node would be in the same
+two-color component and hence, by the support equality in
+\noderef{ScheideDefectiveChainPath}, in the support of $P_\delta$.  This
+contradicts the avoidance just proved and establishes the boundary claim.
+\end{proof}
