@@ -17,57 +17,251 @@ replacement tree.  The assertion retains exact finite indices for the
 five consecutive nodes and the final vertex-edge pair.
 \end{helper}
 \begin{proof}
-Because $\beta$ is missing under the original coloring at a vertex of
-$Z$ and differs from $\gamma$,
-\noderef{ScheideStructuralInternalPair} gives an original
-$\beta$-edge $h$ internal to $U_\gamma$.  It is incident with $V(T)$,
-is not $f^0_\delta$ because their original colors differ, and is therefore
-fixed by \noderef{ScheideDefectiveSwitchEffect}.  Thus it still has color
-$\beta$ under $\varphi_\delta$.  The exact configuration in
-\noderef{ScheideSymmetricReplacementBoundaryConfiguration} makes both
-deleted block edges $\gamma$-colored boundary identities, and
-\noderef{ScheideDefectiveChainBoundaryEdges} puts both on the full path.
-Properness of the replacement
-coloring, looplessness, and
-\noderef{TwoColorIncidenceDegreeAtMostTwo} now force the displayed five
-nodes to be consecutive, in one orientation or the other, exactly as in
-the original excursion argument.
+Put $r=\gammaIndex(\delta)$, $\gamma=\gamma(r)$,
+$X_\delta=V(T_\delta)$, and
+$Z=V(T)\setminus\{u^1_\gamma,u^2_\gamma\}$.  We first fix the
+replacement maximum certificate which is used throughout the proof.
+The statement of \noderef{ScheideReplacementMaximum} gives all three
+facts
+\[
+ \varphi_\delta\text{ is proper},\qquad
+ \varphi_\delta^{-1}(\varnothing)=\{e_0\},\qquad
+ (T_\delta,e_0,\varphi_\delta)\text{ is globally maximum}.       \tag{1}
+\]
+In particular, every later invocation of
+\noderef{ScheideDefectiveChainBoundaryEdges},
+\noderef{ScheideGlobalMaximumMissingCounts},
+\noderef{ScheideGlobalMaximumOrder}, or
+\noderef{ScheideExitNoFree} below is made for this same triple and the
+same proper coloring $\varphi_\delta$.  From
+\noderef{ScheideReplacementData} we also have the exact set identity
+\[
+                 X_\delta=Z\cup\{u^1_\delta,u^2_\delta\}.        \tag{2}
+\]
+Thus the assumed $v\in Z$ belongs to $X_\delta$.
 
-We next exclude the two vertices of $U_\delta$ from the replacement exit
-set.  By \noderef{ScheideGlobalMaximumMissingCounts}, each of them misses
-at least one color.  Every color used on $T_\delta$ has a missing witness
-in $Z$: retained base and block colors have their base witnesses from
-\noderef{ScheideStructuralConfiguration}; those witnesses survive the
-switch by \noderef{ScheideDefectiveSwitchEffect}, since distinct block
-colors are injective, nonfirst base colors avoid all block colors, and
-the defective color $\delta$ is unused by
-\noderef{ScheideGlobalMaximumUnused}; finally, the appended color
-$\delta$ is missing at $v^0_\delta\in Z$ by the switch-effect missing-set
-formula.  The edge classification in \noderef{ScheideReplacementData}
-shows that these retained edges and the appended pair exhaust the
-displayed edges of $T_\delta$.  Elementariness from
-\noderef{ScheideGlobalMaximumOrder} therefore says that no used color can
-be missing at either vertex of $U_\delta$.  Any color missing there is
-unused and hence free.  But \noderef{ScheideExitNoFree} says that an exit
-of a globally maximum triple misses no free color.  Thus neither vertex
-of $U_\delta$ is an exit.
+We next construct and order the deleted-block excursion.  The color
+$\beta$ is missing under the original coloring at $v\in Z$ and is
+different from $\gamma$.  Hence
+\noderef{ScheideStructuralInternalPair} supplies an individual edge
+identity $h$ such that
+\[
+ \varphi(h)=\beta,
+ \qquad G.\operatorname{ends}(h)=
+        \{u^1_\gamma,u^2_\gamma\}.                              \tag{3}
+\]
+This edge is incident with $V(T)$.  It is not $f^0_\delta$, because the
+latter has original color $\delta$ by
+\noderef{ScheideDefectiveSetup}, whereas $\beta\ne\delta$ by hypothesis.
+The edge-fixing clause of \noderef{ScheideDefectiveSwitchEffect}
+therefore gives
+\[
+                         \varphi_\delta(h)=\beta.                \tag{4}
+\]
 
-The finite path starts in $X_\delta$ and ends outside it, so choose its
-last vertex-node $w$ in $X_\delta$.  By the definition
-\noderef{ScheideExitVertex}, $w$ is a replacement exit.  The preceding
-paragraph and the exact equality $X_\delta=Z\cup U_\delta$ put $w$ in
-$Z$.  Its next edge is a boundary edge.  Closedness excludes color
-$\beta$, which is missing on $X_\delta$, so this edge has color $\gamma$.
-The exact departure classification in
-\noderef{ScheideSymmetricReplacementBoundaryConfiguration} makes it one
-of $f^0_\delta,f^1_\gamma,f^2_\gamma$.
+The statement of
+\noderef{ScheideSymmetricReplacementBoundaryConfiguration} says that
+$\gamma$ is defective for $X_\delta$ under $\varphi_\delta$ and that
+$f^1_\gamma,f^2_\gamma$ are $\gamma$-colored edges from $Z$ to the
+complement of $X_\delta$.  By the definitions
+\noderef{BoundaryEdges} and \noderef{BoundaryColorEdges}, both belong to
+$\partial_{\varphi_\delta,\gamma}(X_\delta)$.  Apply
+\noderef{ScheideDefectiveChainBoundaryEdges} with the globally maximum
+triple in (1), defective color $\gamma$, free color $\beta$, starting
+vertex $v$, and the supplied full path $P_\delta$.  It follows that the
+two individual edge-nodes $f^1_\gamma,f^2_\gamma$ occur on $P_\delta$.
+The endpoint equations in \noderef{ScheideStructuralConfiguration},
+together with (3), give the four incidence adjacencies
+\[
+ f^1_\gamma-u^1_\gamma-h-u^2_\gamma-f^2_\gamma.                \tag{5}
+\]
+Every node in (5) lies in the same two-color component as
+$f^1_\gamma$.  Since \noderef{ScheideDefectiveChainPath} says that the
+support of $P_\delta$ is that entire component, all five nodes occur on
+the path.
 
-It cannot be either block edge, because the forced consecutive segment
-then returns through the other block edge to a later vertex of $Z$.  It
-is therefore $f^0_\delta$, whose exact tree endpoint is
-$v^0_\delta$ by \noderef{ScheideDefectiveSetup}.  The returning block
-excursion necessarily precedes this last departure.  Reading these
-occurrences in the finite path order supplies the asserted consecutive
-index equalities, strict order, final adjacent pair, and the condition on
-all later vertex-nodes.
+We now prove that adjacent named nodes in (5) occur consecutively; mere
+component membership is not enough.  By the definition
+\noderef{MissingColors}, no $\beta$-colored edge is incident with the
+starting vertex $v$.  The path is nontrivial because its first vertex is
+in $X_\delta$ and its last vertex is outside $X_\delta$, as recorded by
+\noderef{ScheideDefectiveChainPath}.  Consequently the first step of the
+path gives an incident $\gamma$-edge at $v$.  Properness in (1), unpacked
+using \noderef{IsProperEdgeColoring}, makes this edge identity the unique
+$\gamma$-edge incident with $v$.  Hence the vertex-node $v$ has exactly
+one neighbor in its full $(\gamma,\beta)$ component, namely the node at
+path index one.
+
+Let two component nodes occurring at indices $i<j$ on $P_\delta$ be
+adjacent in the incidence graph.  If $i=0$, the preceding uniqueness at
+$v$ forces $j=1$.  If $i>0$ and $j>i+1$, then the predecessor and
+successor of the node at index $i$, together with the node at index $j$,
+are three neighbors of the index-$i$ node.  They are distinct because
+the path is simple, again by
+\noderef{ScheideDefectiveChainPath}.  This contradicts
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, applied using the properness
+in (1).  Therefore every adjacent pair of component nodes that occurs on
+the full path occurs at consecutive indices, in one direction or the
+other.
+
+Apply this conclusion to the four adjacencies in (5).  The edge-nodes
+$f^1_\gamma$ and $h$ are distinct, as are $h$ and $f^2_\gamma$, because
+their $\varphi_\delta$-colors are respectively $\gamma$ and $\beta$.
+Also $u^1_\gamma\ne u^2_\gamma$, since otherwise (3) would make $h$ a
+loop, contrary to \noderef{LooplessMultigraph}.  If the directions of
+the four consecutive steps changed at an intermediate node, the simple
+path would repeat respectively $f^1_\gamma$, one of the two block
+vertices, or $h$.  Thus the directions are uniform.  We obtain indices
+$i_0,\ldots,i_4$ satisfying the four asserted successor equalities and
+having the five displayed values in (5), or having all five values in
+the reverse order.
+
+We next prove, in detail, that neither appended vertex
+$u^1_\delta,u^2_\delta$ is a replacement exit.  First we establish the
+following claim.
+
+\emph{Claim.}  If a color $c$ is used on $T_\delta$, then some vertex of
+$Z$ misses $c$ under $\varphi_\delta$.
+
+Indeed, by \noderef{TreeUsedColors}, $c$ colors a nonfirst displayed
+edge of $T_\delta$.  Write $n$ for the common length of $T$ and
+$T_\delta$, and write $b=p-1+2r$ for the first edge position of the
+deleted block.  The exact positional clauses of
+\noderef{ScheideReplacementData} give three exhaustive cases.
+
+If the displayed position $j$ satisfies $1\le j<p-1$, use the
+\noderef{TashkinovTree} clause contained in the globally maximum
+certificate (1).  It gives an earlier replacement vertex, at an index at
+most $j$, which misses $c$.  The retained-vertex clause of
+\noderef{ScheideReplacementData} identifies that position with the same
+old position.  Since it is below $p$, it is a base vertex $y_a$ by
+\noderef{ScheideStructuralConfiguration}.  Such a base vertex lies in
+$Z$: its position $a<p$ differs from the deleted block-vertex positions
+$p+2r$ and $p+2r+1$, and vertex-position injectivity is part of
+\noderef{TreeSequence}.  This is the required witness.
+
+Suppose next that $p-1\le j<b$.  Division of $j-(p-1)$ by two writes the
+corresponding retained old edge as one of the two edges in a unique block
+$q<r$.  If instead $b\le j$ and $j+2<n$, division of
+$j+2-(p-1)$ by two writes it as an edge in a unique block $q>r$.
+In either subcase, \noderef{ScheideStructuralConfiguration} says that
+the old edge color is $\gamma(q)$ and supplies a base vertex $y_a$
+missing $\gamma(q)$ under $\varphi$.  The block colors are injectively
+indexed, so $\gamma(q)\ne\gamma(r)$.  The edge is incident with
+$V(T)$ and is not $f^0_\delta$: alternatively, the latter conclusion
+also follows because \noderef{ScheideGlobalMaximumUnused} makes the
+defective color $\delta$ unused on $T$, whereas
+$\varphi(f^0_\delta)=\delta$.  Thus
+\noderef{ScheideDefectiveSwitchEffect} fixes its color.  That same lemma
+fixes the missing set at $y_a$ unless $y_a=v^0_\delta$; in the exceptional
+case its exact erase-and-insert formula still preserves
+$\gamma(q)$ because $\gamma(q)\ne\gamma(r)$.  Hence $c=\gamma(q)$ is
+missing under $\varphi_\delta$ at the base vertex $y_a\in Z$.
+
+The only remaining positions are $n-2,n-1$.  By
+\noderef{ScheideReplacementData} their edge identities are
+$f^1_\delta,f^2_\delta$.  Each is incident with the corresponding
+vertex of $U_\delta$, so
+\noderef{ScheideReplacementPairFixed} preserves its original color
+$\delta$.  The exact missing-set formula in
+\noderef{ScheideDefectiveSwitchEffect} says that $\delta$ is missing at
+$v^0_\delta$ under $\varphi_\delta$.  Moreover the full path, last-tree-
+vertex, defective-color, and missing-color fields of
+\noderef{ScheideDefectiveSetup}, when substituted into the definition
+\noderef{ScheideExitVertex}, make $v^0_\delta$ an exit of the original
+reduced configuration.  Hence
+\noderef{ScheideStructuralExitsInBase} therefore writes it as a base
+vertex.  The preceding position argument puts that base vertex in $Z$.
+This proves the claim in every case.
+
+Now fix $u\in\{u^1_\delta,u^2_\delta\}$.  Equation (2) puts $u$ in
+$X_\delta$, while \noderef{ScheideReplacementData} puts it outside
+$V(T)$ and hence outside $Z$.  Apply
+\noderef{ScheideGlobalMaximumMissingCounts} to the globally maximum
+replacement triple (1): whether or not $u$ is incident with $e_0$, the
+stated lower bound shows that $u$ misses at least one color $c$.  If $c$
+were used on $T_\delta$, the claim would give $y\in Z$ missing $c$.
+The distinct vertices $y,u$ both lie in $X_\delta$, contradicting the
+elementariness supplied by \noderef{ScheideGlobalMaximumOrder} for the
+same triple (1), interpreted through
+\noderef{ColoredVertexSetElementary}.  Therefore $c$ is unused.  By
+\noderef{TreeFreeColors}, it is free for $T_\delta$.  Finally
+\noderef{ScheideExitNoFree}, again applied to the replacement triple in
+(1), says that an exit misses no free color.  Hence
+\[
+ u^1_\delta,u^2_\delta\notin
+ \noderef{ScheideExitVertices}(T_\delta,\varphi_\delta).        \tag{6}
+\]
+
+It remains to identify the final departure.  Among the finitely many
+positions of $P_\delta$, choose the largest index $q_v$ whose node is a
+vertex-node $w\in X_\delta$.  The set is nonempty because its index zero
+node is $v$, and $q_v$ is not the terminal index because the terminal
+vertex $z$ is outside $X_\delta$.  By the bipartite adjacency definition
+in \noderef{TwoColorIncidenceGraph}, the node at
+$q_f=q_v+1$ is an edge-node, say $f$, and the following node is a
+vertex-node $x$.  Maximality of $q_v$ gives $x\notin X_\delta$.
+The two walk adjacencies make $f$ incident with both $w$ and $x$.
+Simplicity gives $w\ne x$, and the unordered endpoint map in
+\noderef{LooplessMultigraph} therefore gives
+$G.\operatorname{ends}(f)=\{w,x\}$.  Thus $f$ is a boundary identity of
+$X_\delta$ in the sense of \noderef{BoundaryEdges}.
+
+The incidence-graph definition says that $f$ has color $\gamma$ or
+$\beta$.  The second alternative is impossible: $\beta$ is missing at
+$v\in X_\delta$, while the closedness supplied by
+\noderef{ScheideGlobalMaximumOrder} for (1), interpreted through
+\noderef{ColoredVertexSetClosed}, forbids a $\beta$-colored boundary
+edge.  Therefore
+\[
+                         \varphi_\delta(f)=\gamma.              \tag{7}
+\]
+The data $v,\beta,\gamma,z,P_\delta,q_v$ now satisfy each clause of
+\noderef{ScheideExitVertex}: $v\in X_\delta$, $\beta$ is missing there,
+$\gamma$ is defective by the replacement boundary configuration, the
+path is the supplied full path, and the maximal definition of $q_v$
+says that all later vertex-nodes lie outside $X_\delta$.  Thus $w$ is a
+replacement exit.  By (2) and (6), it cannot be either vertex of
+$U_\delta$; hence $w\in Z$.
+
+Now (7), the exact endpoints $\{w,x\}$, $w\in Z$, and
+$x\notin X_\delta$ meet the precise hypothesis of
+\noderef{ScheideSymmetricReplacementBoundaryConfiguration}.  Its
+exact classification gives
+\[
+                    f\in\{f^0_\delta,f^1_\gamma,f^2_\gamma\}.  \tag{8}
+\]
+The five-node segment (5) returns to $Z$ after its final displayed block
+edge.  More explicitly, in the forward orientation the node after
+$f^2_\gamma$ must be the base endpoint of that edge: by
+\noderef{ScheideStructuralConfiguration} its other endpoint is
+$u^2_\gamma$, which is the immediately preceding node, and simplicity
+forbids returning to it.  That base endpoint lies in $Z$ by the position
+argument above.  In the reverse orientation the identical argument
+after $f^1_\gamma$ gives its base endpoint in $Z$.  Therefore a vertex of
+$X_\delta$ occurs at index $i_4+1$, so maximality of $q_v$ yields
+$i_4<q_v$.  Since $q_f=q_v+1$, simplicity of $P_\delta$ now forbids its
+edge-node $f$ from repeating either already displayed block-edge
+identity.  Equation (8) forces
+\[
+                              f=f^0_\delta.                     \tag{9}
+\]
+
+Finally, \noderef{ScheideDefectiveSetup} gives
+$G.\operatorname{ends}(f^0_\delta)=
+\{v^0_\delta,u^0_\delta\}$ with $v^0_\delta\in V(T)$ and
+$u^0_\delta\notin V(T)$.  The exact classification in
+\noderef{ScheideSymmetricReplacementBoundaryConfiguration}, applied to
+$f^0_\delta$ itself, also presents this same edge with one endpoint in
+$Z$ and the other outside $X_\delta$.  Comparing the two exact unordered
+endpoint pairs identifies the endpoint in $Z$ as $v^0_\delta$ and the
+outside endpoint as $u^0_\delta$.  Since $w\in X_\delta$ is the inside
+endpoint of (9), $w=v^0_\delta$.
+
+The constructed indices therefore satisfy all four successor
+equalities, $i_4<q_v$, and $q_f=q_v+1$; their path values are the five
+nodes in (5), in one of its two orientations, followed at the last
+departure by $v^0_\delta,f^0_\delta$.  By the maximal definition of
+$q_v$, every later vertex-node lies outside $X_\delta$.  Equation (6)
+supplies the two final non-exit clauses, completing every assertion.
 \end{proof}
