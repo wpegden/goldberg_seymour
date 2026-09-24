@@ -9,23 +9,55 @@ $\gamma_i$.  Then every Scheide exit vertex of $T$ misses one of
 $\gamma_0,\gamma_1$.
 \end{helper}
 \begin{proof}
-Write $y_r=T.\mathsf{vertex}(r)$.  The normal height-five path in
-\noderef{NormalGlobalMaximumTriple} has first normal color $\alpha$
-missing at $y_0$ and second normal color $\beta$ missing at $y_1$.
-Its exact support and endpoint fields, together with properness, show
-that the colored base identities in positions $1,2,3$ alternate between
-$\alpha$ and $\beta$.  The base-avoidance hypothesis therefore makes
-both $\alpha$ and $\beta$ distinct from both block colors; injectivity of
-the block-color map makes $\gamma_0\ne\gamma_1$.
+Put $X=\noderef{TreeSequenceVertexSet}(T)$ and write
+$y_r=T.\mathsf{vertex}(r)$.  We first make all coloring data of the
+current normal triple explicit.  Its globally maximum field, expanded by
+\noderef{GlobalMaximumTriple}, supplies a
+$\noderef{KTriple}(G,k,e_0,\varphi)$.  Expanding that predicate with
+\noderef{KTriple} supplies
+\[
+ \Delta(G)+1\leq k,\qquad
+ \noderef{IsProperEdgeColoring}(G,\varphi),\qquad
+ \noderef{IsOneEdgeUncolored}(\varphi,e_0).
+\tag{1}
+\]
+Thus properness means that distinct identities incident with a common
+vertex cannot have the same assigned color, while the last clause says
+that $\varphi(e_0)$ is uncolored and every identity other than $e_0$ is
+colored.  These are precisely the clauses in
+\noderef{IsProperEdgeColoring} and \noderef{IsOneEdgeUncolored}; no
+coloring property of a pre-replacement triple is being used.
 
-The first identity is $e_0$ by \noderef{TreeSequence} and is the unique
-uncolored identity by the $k$-triple inside the globally maximum field.
-The preceding base-color calculation and the two block-color hypotheses
-therefore give the exact equality
+Let $\alpha,\beta$ be the two normal colors.  By
+\noderef{NormalGlobalMaximumTriple}, $\alpha$ is missing at $y_0$,
+$\beta$ is missing at $y_1$, and the normal height-five incidence path
+has as its displayed tree-edge nodes exactly the identities in positions
+$1,2,3$.  By the adjacency definition in
+\noderef{TwoColorIncidenceGraph}, every one of those three identities has
+color $\alpha$ or $\beta$.  The endpoint field of the same normal data
+puts the position-$1$ identity on $y_1y_2$.  It cannot have color
+$\beta$: such an incidence would put $\beta$ in
+$\noderef{PresentColors}(G,\varphi,y_1)$, contrary to its membership in
+$\noderef{MissingColors}(G,\varphi,y_1)$.  Hence position $1$ has color
+$\alpha$.  The position-$2$ identity meets it at $y_2$, and position $3$
+meets position $2$ at $y_3$.  The identities are distinct by
+\noderef{TreeSequence}; their common incidences are instances of
+\noderef{Incident}, hence make the successive pairs adjacent in the
+sense of \noderef{AdjacentEdges}.  Properness from (1) therefore forces
+the colors in positions $1,2,3$ to be $\alpha,\beta,\alpha$.
+
+The base-avoidance hypothesis applied to positions $1$ and $2$ now says
+that both $\alpha$ and $\beta$ differ from both block colors, and
+injectivity of the block-color map says
+$\gamma_0\ne\gamma_1$.  The four block identities in positions
+$4,5,6,7$ have colors $\gamma_0,\gamma_0,\gamma_1,\gamma_1$ by
+hypothesis.  Finally, \noderef{TreeUsedColors} ranges exactly over the
+colored displayed positions after the first one; that first identity is
+$e_0$ by \noderef{TreeSequence} and is uncolored by (1).  Consequently
 \[
  \noderef{TreeUsedColors}(\varphi,T)
    =\{\alpha,\beta,\gamma_0,\gamma_1\}.
-\tag{1}
+\tag{2}
 \]
 Choose $z_i$ among $y_0,\ldots,y_4$ with $\gamma_i$ missing at $z_i$,
 as supplied by the hypotheses.  The elementary clause of
@@ -35,31 +67,52 @@ distinct displayed vertices are disjoint.  Consequently $y_0$ is the
 only displayed vertex that can miss $\alpha$, $y_1$ the only one that can
 miss $\beta$, and $z_i$ the only one that can miss $\gamma_i$.
 
-We next count missing colors.  The degree bound in the $k$-triple and
-\noderef{MaximumDegree} give
-$d_G(v)\leq\Delta(G)\leq k-1$ for every vertex $v$, with degree interpreted
-by \noderef{Degree}.  Properness makes the colors of the colored
+We next perform the missing-color count directly from the same current
+$k$-triple.  By \noderef{Degree}, $d_G(v)$ is the number of individual
+edge identities incident with $v$, and by \noderef{MaximumDegree},
+$d_G(v)\leq\Delta(G)$.  Thus (1) gives
+$d_G(v)+1\leq k$.  Properness in (1) makes the colors on the colored
 identities incident with $v$ pairwise distinct.  If $v$ is not an end of
-$e_0$, every incident identity is colored, so $v$ misses at least
-$k-d_G(v)\geq1$ color.  If $v$ is an end of $e_0$, exactly that incident
-identity is uncolored and every other incident identity is colored, so
-$v$ misses at least $k-d_G(v)+1\geq2$ colors.  The attachment equation at
-edge index zero and the first-edge equation in
-\noderef{TreeSequence} identify the two ends of $e_0$ as $y_0,y_1$.
+$e_0$, exact-one-uncoloredness says that all $d_G(v)$ incident identities
+are colored, so exactly $d_G(v)$ colors are present.  Since
+\noderef{MissingColors} is the complement of
+\noderef{PresentColors} in the $k$ colors,
+\[
+ |\overline\varphi(v)|=k-d_G(v)\geq1.              \tag{3}
+\]
+If $v$ is an end of $e_0$, the identity $e_0$ is uncolored and every
+other incident identity is colored.  Hence exactly $d_G(v)-1$ distinct
+colors are present and
+\[
+ |\overline\varphi(v)|=k-(d_G(v)-1)
+   =k-d_G(v)+1\geq2.                               \tag{4}
+\]
+The first-edge equation and the index-zero attachment equation in
+\noderef{TreeSequence} give
+$\operatorname{ends}_G(e_0)=\{y_1,y_0\}$, so these are exactly the two
+displayed vertices to which (4), rather than (3), applies.
 
 Let $v$ be a displayed vertex different from both $z_0,z_1$.  If $v$ is
 not an end of $e_0$, then it is also different from $y_0,y_1$.  Its
-guaranteed missing color is therefore none of the four colors in (1), by
-elementarity and the four displayed witnesses.  If $v$ is an end of
-$e_0$, it is $y_0$ or $y_1$.  At most its corresponding one of
-$\alpha,\beta$ can be missing among the four colors in (1), because $v$
-is different from both $z_i$; the lower bound of two missing colors again
-supplies a missing color outside (1).  In either case $v$ misses a color
-not used on any colored tree identity, hence a color in
+missing color furnished by (3) is therefore none of the four colors in
+(2), by elementarity and the four displayed witnesses.  If $v$ is an end
+of $e_0$, then it is $y_0$ or $y_1$.  Among the four colors in (2),
+elementarity permits it to miss at most its corresponding one of
+$\alpha,\beta$: it differs from both $z_i$, and it differs from the other
+normal-color witness.  The two missing colors furnished by (4) therefore
+include a color outside (2).  In either case $v$ misses a color unused on
+all colored tree identities, hence a color in
 \noderef{TreeFreeColors}.
 
-By \noderef{ScheideExitNoFree}, a Scheide exit vertex has its missing
-colors disjoint from the tree-free colors.  Therefore every exit is one
-of $z_0,z_1$.  At $z_i$ the color $\gamma_i$ is missing by its defining
-choice, which proves the claimed exit coverage.
+Now take an arbitrary $v\in\noderef{ScheideExitVertices}(T,\varphi)$.
+Unfolding that finite set gives
+$\noderef{ScheideExitVertex}(T,\varphi,v)$.  In particular, the specified
+last tree occurrence in the exit certificate explicitly includes
+$v\in X$; thus the displayed-vertex conclusion of the preceding
+paragraph applies to this arbitrary exit.  By
+\noderef{ScheideExitNoFree}, its missing-color set is disjoint from
+$\noderef{TreeFreeColors}(\varphi,T)$.  It cannot therefore be different
+from both $z_0,z_1$.  Hence $v=z_i$ for some $i\in\{0,1\}$, and the
+defining choice of $z_i$ gives
+$\gamma_i\in\noderef{MissingColors}(G,\varphi,v)$, as required.
 \end{proof}
