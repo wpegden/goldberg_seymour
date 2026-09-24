@@ -17,6 +17,8 @@ import Tablet.PartialEdgeColoring
 import Tablet.PresentColors
 import Tablet.ScheideDefectiveChainPath
 import Tablet.ScheideDefectiveNoCross
+import Tablet.ScheideDefectiveLastReturnExists
+import Tablet.ScheideDefectiveReturnContradiction
 import Tablet.ScheideDefectiveSetup
 import Tablet.ScheideGlobalMaximumMissingCounts
 import Tablet.ScheideGlobalMaximumOrder
@@ -52,4 +54,8 @@ theorem ScheideDefectiveTailExternal {V E : Type*}
           (Sum.inl (D.v0 d)) →
         w = D.v0 d := by
 -- BODY
-  sorry
+  intro d w hw hcomponent
+  by_contra hne
+  obtain ⟨R⟩ := ScheideDefectiveLastReturnExists
+    G k e0 phi T C D d w hw hcomponent hne
+  exact ScheideDefectiveReturnContradiction G k e0 phi T C D d R

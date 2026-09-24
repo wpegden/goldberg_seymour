@@ -1,0 +1,26 @@
+\begin{definition}[Last-return data for a defective replacement chain]
+Fix a defective color $\delta$, put
+$X=\noderef{TreeSequenceVertexSet}(T)$,
+$i=\gammaIndex(\delta)$, and let $P'$ be the replacement path recorded by
+\noderef{ScheideDefectiveSetup}.  A
+\emph{Scheide defective return datum} consists of three positions
+$r,r+1,r+2$ on $P'$, vertices $v_1,u_1$, an exact edge identity $f_1$,
+and a block index $j$, with the following properties.
+
+The nodes of $P'$ at those positions are respectively
+$v_1,f_1,u_1$; $v_1\in X$, $v_1\ne v^0_\delta$, and every vertex-node
+strictly after position $r$ lies outside $X$.  In particular
+$u_1\notin X$.  The vertex $v_1$ is in
+\noderef{ScheideExitVertices}$(T,\varphi)$ and in the base image $Y$.
+Moreover,
+\[
+ \varphi(f_1)=\delta,\qquad
+ \operatorname{ends}(f_1)=\{v_1,u_1\},\qquad
+ \gamma_j\in\overline\varphi(v_1),\qquad j\ne i.
+\]
+Finally the four colors
+$\alpha _0,\gamma_i,\gamma_j,\delta$ are pairwise distinct.  Here all
+positions, vertices, edge identities, and color inequalities are stored as
+part of the datum, as are the exact position equalities and the assertion
+that every later vertex-node is outside $X$.
+\end{definition}

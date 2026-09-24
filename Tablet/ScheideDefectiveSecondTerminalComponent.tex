@@ -1,0 +1,95 @@
+\begin{helper}[The second recoloring has the full replacement suffix]
+Fix a defective color $\delta$ and a
+\noderef{ScheideDefectiveReturnData} $R$.  Write
+$\gamma=\gamma_{\gammaIndex(\delta)}$, $\eta=\gamma_{R.j}$, and set
+\[
+ \psi_1=\noderef{OutsideTreeColorSwap}(T,\varphi,\gamma,\eta),
+ \qquad
+ K=\noderef{TwoColorComponent}
+      (G,\psi_1,\eta,\delta,\operatorname{inl}R.v_1),
+\]
+\[
+ \psi_2=\noderef{TwoColorComponentSwap}
+      (G,\psi_1,\eta,\delta,\operatorname{inl}R.v_1).
+\]
+Then $\psi_1$ is proper, leaves exactly $e_0$ uncolored, is
+$(T,\varnothing,\varphi)$-stable, and fixes every edge identity incident
+with $T$.  The set $K$ is
+exactly the set of nodes of the recorded replacement path at or after
+the stored position of $R.v_1$; it contains $R.f_1$, meets $V(T)$ only
+at $R.v_1$, and contains no displayed edge identity of $T$.  Moreover
+$\psi_1(R.f_1)=\delta$.
+
+The coloring $\psi_2$ is proper and leaves exactly $e_0$ uncolored;
+$\delta$ is missing at $R.v_1$, every other vertex of $V(T)$ has its
+original missing-color set, and
+$\psi_2(f^0_\delta)=\delta$.
+\end{helper}
+\begin{proof}
+Put $X=\noderef{TreeSequenceVertexSet}(T)$.  The return datum says that
+$\gamma$ and $\eta$ are distinct and missing on $X$, at
+$v^0_\delta$ and $R.v_1$ respectively.  Expanding the globally maximum
+triple from \noderef{ScheideReducedConfiguration}, its
+\noderef{KTriple} makes $\varphi$ proper and leaves exactly $e_0$
+uncolored, while \noderef{ScheideGlobalMaximumOrder} makes $X$ closed.
+Therefore \noderef{OutsideTreeColorSwapStable}, with empty protected
+color set, proves all four asserted properties of $\psi_1$.  In
+particular $R.f_1$, being incident with $R.v_1\in X$, is fixed and
+retains color $\delta$.
+
+Let $Q$ be the suffix of the recorded replacement path beginning at the
+stored occurrence of $R.v_1$.  The last-return field says
+$V(Q)\cap X=\{R.v_1\}$ and identifies its first later edge and vertex as
+$R.f_1,R.u_1$.  Every later edge of $Q$ has both endpoints outside
+$X$.  Its old color is $\gamma$ or $\delta$ by
+\noderef{TwoColorIncidenceGraph}; along the simple proper path these
+colors alternate.  Hence the outside swap changes precisely the later
+$\gamma$-edges to $\eta$ and fixes the $\delta$-edges.  Thus $Q$ is an
+$(\eta,\delta)$ walk under $\psi_1$.
+
+We check that no incidence adjacency leaves this walk.  At $R.v_1$ the
+color $\eta$ is missing and $R.f_1$ is the unique incident
+$\delta$-edge.  The predecessor edge on the old path has color
+$\gamma$; it is incident with $X$, remains $\gamma$, and so is absent
+from the new two-color graph.  At every internal vertex of $Q$, its two
+path edges have distinct colors $\eta,\delta$, and properness excludes a
+third such edge.  An internal edge-node has only its two endpoint
+adjacencies by \noderef{TwoColorIncidenceGraph}.
+
+For the terminal endpoint, the old full replacement path from
+$v^0_\delta$ is the component support by
+\noderef{ScheideDefectiveChainPath}.  Its initial vertex misses
+$\gamma$.  Since $\delta$ belongs to \noderef{DefectiveColors}, there is
+a $\delta$-colored boundary identity of $X$.  Closedness therefore makes
+$\delta$ present at every vertex of $X$ by \noderef{MissingColors} and
+\noderef{PresentColors}; properness makes its incident identity unique.
+Thus the initial vertex has degree one in the old two-color graph.  The degree bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, simplicity, connectedness,
+and finiteness therefore make the other endpoint degree one as well.
+On edges wholly outside $X$, the new $\eta,\delta$ status is exactly the
+old $\gamma,\delta$ status.  On a boundary edge, closedness excludes
+both $\gamma$ and $\eta$, so the outside swap fixes the relevant status.
+The terminal endpoint consequently remains degree one.  Both endpoints
+and all internal nodes have now been checked, proving that the support
+of $Q$ is exactly $K$.  This also proves the asserted intersection with
+$X$ and the absence of displayed tree-edge nodes.
+
+The colors $\eta$ and $\delta$ are distinct, so
+\noderef{TwoColorComponentSwapProper} makes $\psi_2$ proper.  Directly
+from \noderef{TwoColorComponentSwap}, uncolored values remain uncolored
+and colored values remain colored, so the exact-one-uncolored property
+is preserved.  At $R.v_1$ the component switch changes the unique
+incident identity $R.f_1$ from $\delta$ to $\eta$ and fixes all other
+incident identities.  Thus $\delta$ becomes missing there.  For every
+other vertex of $X$, neither its vertex-node nor an incident edge-node
+is in $K$; \noderef{TwoColorComponentSwapMissingBehavior} and the
+stability of the first swap give its original missing set.
+
+Finally $f^0_\delta$ is incident with $v^0_\delta\in X$, so the outside
+swap fixes it.  If its edge-node belonged to $K$, its incidence with
+$v^0_\delta$ would put that vertex-node in $K$, contrary to
+$K\cap X=\{R.v_1\}$ and $R.v_1\ne v^0_\delta$.  The component switch
+therefore fixes this exact identity too, and
+\noderef{ScheideDefectiveSetup} gives
+$\psi_2(f^0_\delta)=\delta$.
+\end{proof}

@@ -1,0 +1,141 @@
+\begin{helper}[Last-return data contradict global maximality]
+For every defective color $\delta$, no
+\noderef{ScheideDefectiveReturnData} for $\delta$ exists.
+\end{helper}
+\begin{proof}
+Suppose that a return datum $R$ exists.  Put
+$X=\noderef{TreeSequenceVertexSet}(T)$,
+$i=\gammaIndex(\delta)$, $j=R.j$,
+$\gamma=\gamma_i$, and $\eta=\gamma_j$.  Let
+$\varphi_2$ be the first final coloring, obtained from the
+$\alpha _0,\gamma$ outside swap followed by the component switch through
+$v^0_\delta$, and let $\psi_2$ be the second final coloring from
+\noderef{ScheideDefectiveSecondTerminalComponent}.
+
+Choose the partial Tashkinov trees $S_\gamma,S_\eta$ from
+\noderef{ScheideDefectiveDeletedTreePair}, and choose
+$f_2=z_2u_2$ from \noderef{ScheideDefectiveThirdBoundaryEdge}.  Thus
+\[
+ V(S_\gamma)=(X\setminus U_\gamma)\cup\{R.u_1\},qquad
+ V(S_\eta)=(X\setminus U_\eta)\cup\{u^0_\delta\},             \tag{1}
+\]
+$u_2\notin X$, $u_2\ne R.u_1,u^0_\delta$, and $f_2$ has color
+$\delta$ in both final colorings.
+
+Append $(f_2,u_2)$ to both sequences.  In the first sequence, $z_2$ is
+an earlier vertex because it belongs to
+$X\setminus U_\gamma$; in the second it belongs to
+$X\setminus U_\eta$.  The endpoint $u_2$ is new in both by (1) and the
+exclusions just listed.  The identity $f_2$ is new: it is distinct from
+the already appended $R.f_1,f^0_\delta$, and the unused-defective-color
+conclusion used in \noderef{ScheideDefectiveDeletedTreePair} excludes it
+from every retained displayed edge.  Therefore
+\noderef{TreeSequenceBoundaryEdgeAppendExists} produces exact
+tree-sequences
+\[
+ \widehat T_\gamma,\qquad \widehat T_\eta
+\]
+with vertex sets
+\[
+ V(\widehat T_\gamma)
+   =(X\setminus U_\gamma)\cup\{R.u_1,u_2\},qquad
+ V(\widehat T_\eta)
+   =(X\setminus U_\eta)\cup\{u^0_\delta,u_2\}.                \tag{2}
+\]
+These equalities are the vertex-set clause of
+\noderef{TreeSequenceAdjoinEdge} applied to (1).
+
+We check the new Tashkinov clauses rather than infer them from
+cardinality.  For the first recoloring,
+\noderef{ScheideDefectiveTerminalComponent} identifies the exact switched
+component.  Together with \noderef{TwoColorComponentSwapMissingBehavior}
+it says that $\delta$ is missing at the retained base vertex
+$v^0_\delta$.  For the second recoloring,
+\noderef{ScheideDefectiveSecondTerminalComponent} says that $\delta$ is
+missing at the retained base vertex $R.v_1$.  In both cases $f_2$ has
+color $\delta$, so the corresponding retained vertex is an earlier
+missing witness.  Every old Tashkinov clause comes from the two partial
+trees.  Hence
+\[
+ \noderef{TashkinovTree}(G,e_0,\varphi_2,\widehat T_\gamma),
+ \qquad
+ \noderef{TashkinovTree}(G,e_0,\psi_2,\widehat T_\eta).       \tag{3}
+\]
+
+Both trees in (2) have exactly $|X|$ vertices: each deletes the two
+vertices of one block and appends two distinct vertices outside $X$.
+We now rebuild their global maximality.  For $\varphi_2$, the first
+outside swap is proper and leaves exactly $e_0$ uncolored by
+\noderef{ScheideDefectiveTerminalComponent}; its two component colors
+are distinct by the return datum, so
+\noderef{TwoColorComponentSwapProper} gives properness after the switch,
+and \noderef{TwoColorComponentSwap} preserves the exact colored versus
+uncolored status of every identity.  The corresponding facts for
+$\psi_2$ are stated directly in
+\noderef{ScheideDefectiveSecondTerminalComponent}.  In each case combine
+these coloring-dependent facts with the unchanged criticality,
+chromatic-index, and maximum-degree fields of the original
+\noderef{KTriple}.  This gives a $K$-triple for the new coloring.
+Equations (2)--(3) and the original equality
+$|X|=\noderef{TashkinovOrder}(G)$ then satisfy every clause of
+\noderef{GlobalMaximumTriple}.  Thus both new triples are globally
+maximum.  Applying \noderef{ScheideGlobalMaximumOrder} to them makes
+the two sets in (2) elementary and closed in their respective colorings.
+
+It remains to contradict the simultaneous global maximality.  The exact
+position equations in \noderef{ScheideReducedConfiguration} and the
+attachment law in \noderef{TreeSequence} identify the endpoints of the
+first edge $e_0$ as the distinct first two base vertices $y_0,y_1$.
+Apply \noderef{ScheideGlobalMaximumMissingCounts} to the original global
+maximum triple at each endpoint.  Each missing-color set has at least
+two members.  The original set $X$ is elementary by
+\noderef{ScheideGlobalMaximumOrder}, so the two sets are disjoint and
+their union has at least four colors.  Choose a color $\beta$ in this
+union outside $\{\alpha _0,\gamma,\eta\}$, and let
+$y_\beta\in\{y_0,y_1\}$ miss it.  The defective color $\delta$ is
+represented by a member of \noderef{DefectiveColors}, so it has a
+boundary identity of $X$; because $X$ is closed, \noderef{MissingColors}
+and \noderef{PresentColors} make $\delta$ present at every vertex of
+$X$.  Thus
+\[
+ \beta\notin\{\alpha _0,\gamma,\eta,\delta\}.                \tag{4}
+\]
+
+Every operation producing either final coloring transposes two colors
+from the set on the right of (4).  Hence it fixes every exact
+$\beta$-edge and creates no new one; $\beta$ remains missing at the
+retained base vertex $y_\beta$ in both new maximum trees.
+Elementariness of the first new tree and the distinct vertices
+$y_\beta,u_2$ imply that $\beta$ is present at $u_2$.  By
+\noderef{PresentColors}, choose its exact incident $\beta$-edge $b$.
+Closedness of the first new tree, using the missing witness $y_\beta$,
+forces the other endpoint of $b$ to lie in its vertex set.  That endpoint
+cannot lie in $X$: since $u_2\notin X$, this would make $b$ a
+$\beta$-colored boundary identity of the original closed set $X$, where
+$\beta$ is missing.  From the first equality in (2), and
+\noderef{LooplessMultigraph},
+the other endpoint is therefore exactly $R.u_1$:
+\[
+ \operatorname{ends}(b)=\{u_2,R.u_1\}.                       \tag{5}
+\]
+
+Equation (4) shows that the same identity $b$ has color $\beta$ under
+$\psi_2$.  The vertex $R.u_1$ is absent from the second set in (2): it
+lies outside $X$, it differs from $u_2$ by the third-edge helper, and it
+differs from $u^0_\delta$ because the distinct proper
+$\delta$-edges $R.f_1,f^0_\delta$ could not share their outside endpoint.
+They are distinct because equality of their endpoint pairs from
+\noderef{ScheideDefectiveReturnData} and
+\noderef{ScheideDefectiveSetup} would identify the distinct tree
+vertices $R.v_1,v^0_\delta$ (or a tree vertex with an outside vertex).
+Thus (5) makes $b$ a boundary edge of the second new maximum tree, with
+the new endpoint $R.u_1$.  Append $(b,R.u_1)$.  The earlier endpoint is
+$u_2$, the exact identity is new because its color differs from the two
+appended $\delta$-edges and its two endpoints lie outside $X$, and the
+retained vertex $y_\beta$ is an earlier missing witness.  Hence the
+result is a Tashkinov tree for the same $K$-triple.
+
+This last tree has $|X|+1$ vertices by the second equality in (2),
+contradicting $|X|=\noderef{TashkinovOrder}(G)$.  Therefore the assumed
+return datum cannot exist.
+\end{proof}

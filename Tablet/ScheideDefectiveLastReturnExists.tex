@@ -1,0 +1,61 @@
+\begin{helper}[A second tree vertex determines last-return data]
+Fix a defective color $\delta$.  If $w\in V(T)$, $w\ne v^0_\delta$, and
+the vertex-node $w$ belongs to the full
+$(\gamma(\delta),\delta)$ component through $v^0_\delta$, then there
+exists a \noderef{ScheideDefectiveReturnData} for $\delta$.
+\end{helper}
+\begin{proof}
+Write $X=\noderef{TreeSequenceVertexSet}(T)$,
+$i=\gammaIndex(\delta)$, $\gamma=\gamma_i$, and let $P'$ be the
+replacement path supplied by \noderef{ScheideDefectiveSetup}.  By
+\noderef{ScheideDefectiveChainPath}, $P'$ is simple and its support is
+exactly the full $(\gamma,\delta)$ component through $v^0_\delta$.
+Thus the assumed vertex-node $w$ occurs on $P'$.  Among all occurrences
+after the initial $v^0_\delta$ whose vertex lies in $X$, choose the last
+one and call its vertex $v_1$.  It is distinct from $v^0_\delta$ by
+simplicity.  The terminal vertex of $P'$ lies outside $X$, so the next
+two nodes after $v_1$ exist; bipartiteness of
+\noderef{TwoColorIncidenceGraph} makes them an edge-node $f_1$ and a
+vertex-node $u_1$.  Lastness gives $u_1\notin X$ and gives the required
+universal assertion about every later vertex-node.  Adjacency in the
+incidence graph and \noderef{Incident} give
+$\operatorname{ends}(f_1)=\{v_1,u_1\}$.
+
+The suffix of $P'$ beginning at $v_1$ is a two-color path whose last tree
+vertex is $v_1$.  The incidence graph does not depend on the order of its
+two named colors, $\delta$ is defective, and $\gamma$ is missing at the
+initial tree vertex $v^0_\delta$.  Hence this suffix satisfies the
+definition \noderef{ScheideExitVertex}, so
+$v_1\in\noderef{ScheideExitVertices}(T,\varphi)$.  The inclusion
+\noderef{ScheideStructuralExitsInBase} places $v_1$ in the base image
+$Y$.
+
+The edge $f_1$ has color $\gamma$ or $\delta$ by
+\noderef{TwoColorIncidenceGraph}.  Its endpoints show that it is a
+boundary identity of $X$ in the sense of \noderef{BoundaryEdges}.
+Expanding the \noderef{GlobalMaximumTriple} in
+\noderef{ScheideReducedConfiguration},
+\noderef{ScheideGlobalMaximumOrder} says that $X$ is closed and
+elementary.  Since $\gamma$ is missing at $v^0_\delta\in X$, closedness
+excludes a $\gamma$-colored boundary identity.  Therefore
+$\varphi(f_1)=\delta$.
+
+The exact-one exit clause of \noderef{ScheideReducedConfiguration}
+gives a unique block index $j$ for which $\gamma_j$ is missing at
+$v_1$.  The colors $\gamma_i$ and $\gamma_j$ cannot be equal: they are
+missing at the two distinct vertices $v^0_\delta,v_1\in X$, contrary to
+elementariness.  Injectivity of the block-color map consequently gives
+$j\ne i$.
+
+It remains only to record the color inequalities required by
+\noderef{ScheideDefectiveReturnData}.  The setup already gives
+$\alpha _0\ne\gamma_i$ and $\alpha _0\ne\gamma_j$.  Membership of
+$\delta$ in \noderef{DefectiveColors} supplies a
+$\delta$-colored boundary identity of $X$.  Closedness says that its
+color is missing at no vertex of $X$; by \noderef{MissingColors} and
+\noderef{PresentColors}, $\delta$ is present at every vertex of $X$.
+It is therefore distinct from $\alpha _0,\gamma_i,\gamma_j$, which are
+missing respectively at $y_0,v^0_\delta,v_1$.  These data, with the
+chosen three exact path positions, fill every field of the required
+return datum.
+\end{proof}

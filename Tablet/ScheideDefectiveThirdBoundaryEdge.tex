@@ -1,0 +1,117 @@
+\begin{helper}[The odd residual set has an external third defective edge]
+Fix a defective color $\delta$ and a
+\noderef{ScheideDefectiveReturnData} $R$.  Write
+$i=\gammaIndex(\delta)$, $j=R.j$, and
+\[
+ Z=V(T)\setminus(U_{\gamma_i}\cup U_{\gamma_j}).
+\]
+There are an exact edge identity $f_2$ and vertices $z_2,u_2$ such that
+\[
+ \varphi(f_2)=\delta,quad
+ \operatorname{ends}(f_2)=\{z_2,u_2\},quad
+ z_2\in Z,quad u_2\notin V(T),quad
+ f_2\notin\{f^0_\delta,R.f_1\}.
+\]
+The vertex $z_2$ is distinct from $v^0_\delta$ and $R.v_1$; the edge
+$f_2$ retains color $\delta$ in each of the two recolorings used in
+\noderef{ScheideDefectiveDeletedTreePair}; and
+$u_2\ne u^0_\delta,R.u_1$.
+\end{helper}
+\begin{proof}
+Put $X=\noderef{TreeSequenceVertexSet}(T)$.  The return datum gives
+$i\ne j$.  The exact block positions in
+\noderef{ScheideReducedConfiguration}, together with vertex injectivity
+in \noderef{TreeSequence}, show that the two blocks contain four distinct
+vertices of $X$.  By \noderef{ScheideGlobalMaximumOrder}, $|X|$ is odd;
+hence $|Z|=|X|-4$ is odd.
+
+Because $\delta$ is defective, it occurs on a boundary identity of $X$.
+The same maximum-order theorem makes $X$ closed.  Therefore $\delta$ is
+missing at no vertex of $X$, so \noderef{PresentColors} supplies at
+least one incident $\delta$-edge identity at every $z\in Z$.  It is
+unique: two distinct such identities would be adjacent at $z$ by
+\noderef{AdjacentEdges} and \noderef{Incident}, contradicting the
+\noderef{IsProperEdgeColoring} field of the
+\noderef{KTriple} in the original \noderef{GlobalMaximumTriple}.
+
+Count the finite set of pairs $(z,f)$ with $z\in Z$, $f$ incident with
+$z$, and $\varphi(f)=\delta$.  The preceding uniqueness makes its
+cardinality $|Z|$.  An identity in \noderef{InternalEdges}$(G,Z)$ has
+two distinct endpoints in $Z$ by \noderef{LooplessMultigraph} and contributes two
+pairs.  An identity in \noderef{BoundaryEdges}$(G,Z)$ has exactly one
+endpoint in $Z$ and contributes one.  Grouping by exact edge identity
+therefore gives
+\[
+ |Z|=2|E^{\rm int}_\delta(Z)|+
+   |\noderef{BoundaryColorEdges}(G,\varphi,Z,\delta)|.
+ \tag{1}
+\]
+Thus an odd number of $\delta$-colored edge identities leave $Z$.
+
+Both $f^0_\delta$ and $R.f_1$ are in this boundary-color set.  Indeed,
+\noderef{ScheideStructuralExitsInBase} puts $v^0_\delta$ in the base,
+and the return datum puts $R.v_1$ there; a base vertex belongs to $Z$
+because base and block positions are distinct.  Their other endpoints
+lie outside $X$.  The identities are distinct: equality, together with
+their exact endpoint pairs and $R.v_1\ne v^0_\delta$, would identify
+the tree vertex $R.v_1$ with the outside vertex $u^0_\delta$.  An odd
+finite set containing these two distinct identities has a third member.
+Choose it as $f_2$ and orient its endpoint pair as
+$\{z_2,u_2\}$ with $z_2\in Z$ and $u_2\notin Z$.
+
+Properness and the distinct identities show
+$z_2\ne v^0_\delta,R.v_1$: otherwise $f_2$ and respectively
+$f^0_\delta$ or $R.f_1$ would be adjacent edges of the same color.  Both
+outside swaps fix $f_2$, since it is incident with $z_2\in X$.  In the
+first recoloring, \noderef{ScheideDefectiveTerminalComponent} says that
+membership of its edge-node in the switched component would force the
+tree endpoint $z_2$ to be $v^0_\delta$; in the second recoloring,
+\noderef{ScheideDefectiveSecondTerminalComponent} would force it to be
+$R.v_1$.  Both alternatives were excluded.  Hence both component swaps
+also fix $f_2$, and it retains color $\delta$ in both final colorings.
+
+We now exclude all possible locations of $u_2$ in $X$.  It cannot lie in
+$U_{\gamma_i}$: then the exact identity $f_2$ would join that block to
+$X\setminus U_{\gamma_i}$, precisely the configuration forbidden by
+\noderef{ScheideDefectiveNoCross}.
+
+Suppose that $u_2\in U_{\gamma_j}$.  Take the second partial tree
+$S_{\gamma_j}$ from \noderef{ScheideDefectiveDeletedTreePair}.  Its
+vertex set is $(X\setminus U_{\gamma_j})\cup\{u^0_\delta\}$.
+The edge $f_2$ has its earlier endpoint $z_2$ in this set, its new
+endpoint $u_2$ in the deleted block, and its retained color $\delta$;
+$\delta$ is missing at the earlier retained vertex $R.v_1$ by
+\noderef{ScheideDefectiveSecondTerminalComponent}.  Its identity is new
+because the defective color is unused on displayed tree edges and it is
+distinct from $f^0_\delta$.  Thus
+\noderef{TreeSequenceBoundaryEdgeAppendExists} appends $(f_2,u_2)$ and
+preserves the Tashkinov conditions.
+
+The base vertex $y_0$ remains and still misses $\alpha _0$, since the
+second recoloring changes only the pairwise distinct colors
+$\gamma_i,\gamma_j,\delta$.  Because
+$\alpha _0\ne\gamma_j$,
+\noderef{ScheideStructuralInternalPair} supplies an exact
+$\alpha _0$-edge joining the two vertices of $U_{\gamma_j}$.  Append
+this identity and the other deleted block vertex after $u_2$.  The two
+new block vertices are distinct by their exact positions, the internal
+edge is new by its color and endpoints, and $y_0$ is an earlier missing
+witness.  Thus the resulting sequence is again Tashkinov.
+
+The coloring-independent fields of the original
+\noderef{KTriple}, together with the proper and exact-one-uncolored
+conclusions of \noderef{ScheideDefectiveSecondTerminalComponent}, give
+a $K$-triple for the second final coloring.  The new Tashkinov tree has
+deleted two vertices and appended $u^0_\delta$ and both deleted block
+vertices, so it has $|X|+1$ vertices.  This contradicts the equality
+$|X|=\noderef{TashkinovOrder}(G)$ from
+\noderef{ScheideGlobalMaximumOrder}.  Therefore
+$u_2\notin U_{\gamma_j}$.
+
+The disjoint decomposition of $X$ into $Z$ and the two block pairs,
+together with $u_2\notin Z$, now gives $u_2\notin X$.  Finally
+$u_2\ne u^0_\delta$ and $u_2\ne R.u_1$: either equality would make the
+distinct $\delta$-identities $f_2$ and respectively
+$f^0_\delta$ or $R.f_1$ adjacent at their common outside endpoint,
+again contradicting properness.  All asserted properties follow.
+\end{proof}
