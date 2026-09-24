@@ -11,41 +11,90 @@ All vertices and edges here are the exact identities of the supplied
 reduced configuration and replacement data.
 \end{helper}
 \begin{proof}
-The globally maximum field of \noderef{ScheideReducedConfiguration},
-together with \noderef{ScheideGlobalMaximumOrder}, says that $X$ is
-elementary and closed.  The ordered layout in
-\noderef{ScheideStructuralConfiguration} has $|X|=p+2s$ and hence
-$|Z|=p+2s-2$.  It also places both ends of $e_0$ among the base vertices,
-which all lie in $Z$: the two deleted vertices occur later in one of the
-two-vertex blocks, and vertex injectivity is part of
-\noderef{TreeSequence}.
+By \noderef{ScheideReducedConfiguration}, the supplied reduced
+configuration includes all of the data and laws of
+\noderef{ScheideStructuralConfiguration}.  In particular, its ordered
+layout has $p$ base vertices followed by $s$ two-vertex blocks, with
+\[
+             T.length+1=p+2s.                                      \tag{1}
+\]
+The vertex map of a tree-sequence is injective by
+\noderef{TreeSequence}, and \noderef{TreeSequenceVertexSet} defines
+$X=V(T)$ to be the image of that map.  Thus (1) gives $|X|=p+2s$.
+The two vertices in the $r$-th block occupy the distinct positions
+$p+2r$ and $p+2r+1$, so they are distinct members of $X$.  Deleting
+them therefore gives
+\[
+                     |Z|=p+2s-2.                                  \tag{2}
+\]
 
-Apply \noderef{ScheideGlobalMaximumMissingCounts} at every vertex of
-$Z$.  Every such vertex misses at least one color, while each of the two
-ends of $e_0$ misses at least two.  Elementariness makes missing-color
-sets at different vertices disjoint.  Consequently at least
-$(p+2s-2)+2=p+2s$ distinct colors are missing on $Z$.
+The first edge of \noderef{TreeSequence} is $e_0$, and its attachment
+law at the first edge says that the two ends of $e_0$ are the vertices
+in positions $0$ and $1$.  The inequality $p\ge2$ and injectivity of
+the vertex map separate those positions from the deleted positions
+$p+2r,p+2r+1$.  Hence both distinct ends of the loopless edge $e_0$
+belong to $Z$.
 
-There are at most $p-2+s$ colors in
-$\noderef{TreeUsedColors}(\varphi,T)$.  Indeed, after the uncolored first
-edge, the base contributes at most $p-2$ colors, and the two displayed
-edges of each of the $s$ blocks have the single common block color given
-by \noderef{ScheideStructuralConfiguration}.  Every used color has a
-missing witness in the base: for a nonfirst base edge this is the earlier
-vertex in the defining condition of \noderef{TashkinovTree}, and for a
-block color it is the explicit base witness in the structural
-configuration.  Thus all used colors occur among the colors just counted
-on $Z$.
+The structural configuration supplies a globally maximum triple.
+Unpacking \noderef{GlobalMaximumTriple}, this says in particular both
+that $T$ is a Tashkinov tree and that the hypotheses needed below hold.
+By \noderef{ScheideGlobalMaximumOrder}, $X$ is elementary.  Unpacking
+the definition \noderef{ColoredVertexSetElementary}, whenever
+$x,y\in Z\subseteq X$ and $x\ne y$, the sets of colors missing at $x$
+and at $y$ are disjoint.
 
-The index $r$ exists, so $s\ge1$, and therefore
-$p-2+s<p+2s$.  Choose a color $\beta$ missing at a vertex $v\in Z$ but
-not used on the displayed colored edges.  By the definition
-\noderef{TreeFreeColors}, $\beta$ is free.  It differs from $\gamma(r)$,
-because the latter colors the two displayed edges of the $r$-th block and
-is therefore used.  Finally apply
-\noderef{ScheideDefectiveChainPathExists} to the globally maximum triple,
-the defective color $\delta$, this free color $\beta$, and its missing
-vertex $v$.  It supplies an outside endpoint $z$ and the required walk;
-its conclusion is exactly the full simple-path predicate
-\noderef{ScheideDefectiveChainPath} asserted here.
+Now apply \noderef{ScheideGlobalMaximumMissingCounts} to each vertex of
+$Z$.  Every vertex contributes at least one missing color, while each of
+the two ends of $e_0$ contributes at least two.  Choose one missing
+color at every vertex of $Z$ and, at each end of $e_0$, choose a second
+one different from the first.  The preceding pairwise-disjointness
+shows that all $|Z|+2$ chosen colors are distinct.  Using (2), the set
+of colors missing somewhere on $Z$ consequently has cardinality at
+least
+\[
+                  |Z|+2=(p+2s-2)+2=p+2s.                           \tag{3}
+\]
+
+We next count the set defined by \noderef{TreeUsedColors}.  Its members
+are precisely the colors on displayed edges after the distinguished
+first edge.  Among the base edges there are only the positions
+$2,\ldots,p-1$, so these contribute at most $p-2$ colors.  Every
+remaining displayed edge belongs to one of the $s$ blocks, and the two
+edges in block $i$ both have the single color $\gamma(i)$ by
+\noderef{ScheideStructuralConfiguration}.  The block edges therefore
+contribute at most $s$ further colors.  Hence
+\[
+             |\varphi\langle T\rangle|\le p-2+s.                   \tag{4}
+\]
+For completeness, each color counted in (4) is also missing at a base
+vertex.  For a nonfirst base edge this follows by applying the
+Tashkinov-tree condition \noderef{TashkinovTree} obtained from
+\noderef{GlobalMaximumTriple}: its color is missing at an earlier base
+vertex.  For a block color, the required base witness is an explicit
+field of \noderef{ScheideStructuralConfiguration}.  Every base vertex
+lies in $Z$, since its position is below $p$ whereas the two deleted
+positions are at least $p$.
+
+Finally, \noderef{ScheideDefectiveSetup} makes
+$r=\gammaIndex(\delta)$ an element of the $s$-element index type.
+Consequently $s\ge1$, and $p\ge2$ gives
+\[
+                         p-2+s<p+2s.                               \tag{5}
+\]
+By (3)--(5), some color $\beta$ is missing at a vertex $v\in Z$ but is
+not used on the displayed colored edges.  Since $Z\subseteq X$, this
+color is missing on $T$; together with non-use, the definition
+\noderef{TreeFreeColors} says exactly that $\beta$ is free.  Moreover
+$\gamma(r)$ colors the first displayed edge of the $r$-th block and is
+therefore used, so $\beta\ne\gamma(r)$.
+
+Apply \noderef{ScheideDefectiveChainPathExists} with the globally
+maximum triple, the supplied membership of $\delta$ in the defective
+colors, the free color $\beta$, and the facts $v\in Z\subseteq X$ and
+$\beta\in\overline\varphi(v)$.  It supplies a vertex $z$ and a walk
+$P$ from $v$ to $z$ satisfying
+\noderef{ScheideDefectiveChainPath}.  Unpacking that predicate, $P$ is
+simple, $z\notin X$, and the support of $P$ is exactly the full
+$(\delta,\beta)$ incidence component through $v$, which is precisely
+the claimed conclusion.
 \end{proof}
