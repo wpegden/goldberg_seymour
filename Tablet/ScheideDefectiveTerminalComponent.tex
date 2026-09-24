@@ -16,67 +16,135 @@ no displayed edge identity of $T$ belongs to $K$, and every edge-node in
 $K$ has color $\gamma$ or $d$ under $\varphi_1$.
 \end{helper}
 \begin{proof}
-Both $\alpha_0$ and $\gamma$ are tree-missing colors in the sense of
-\noderef{TreeMissingColors}: the former is
-missing at $y_0$ and the latter at $v^0_d$, by
-\noderef{ScheideDefectiveSetup}.  The globally maximum vertex set is
-closed by \noderef{ScheideGlobalMaximumOrder}, and the two colors are distinct.  Therefore
-\noderef{OutsideTreeColorSwapStable} applies.  It proves in one step that
-$\varphi_1$ is proper, has exactly the original uncolored edge, is stable
-on $T$, and fixes every identity satisfying
-\noderef{TreeIncidentEdge}.
+We first expose the hypotheses hidden in the configuration records.  By
+\noderef{ScheideReducedConfiguration}, $C$ contains an inherited
+Scheide structural configuration.  The latter definition,
+\noderef{ScheideStructuralConfiguration}, supplies a globally maximum
+triple.  Unpacking \noderef{GlobalMaximumTriple} supplies in turn a
+$k$-triple, and \noderef{KTriple} says in particular that $\varphi$ is
+proper in the sense of \noderef{IsProperEdgeColoring} and leaves exactly
+$e_0$ uncolored in the sense of \noderef{IsOneEdgeUncolored}.  Applying
+\noderef{ScheideGlobalMaximumOrder} to that globally maximum triple shows
+that $V(T)$ is closed under $\varphi$.
 
-Let $P$ be the recorded $(\alpha_0,d)$ path.  Its full-path clause in
-\noderef{ScheideDefectiveSetup}, through
-\noderef{ScheideDefectiveChainPath}, says that $P$ is simple and that its
-support is the complete old two-color component.  Let $R$ be the nodes
-of $P$ from the recorded index of $v^0_d$ onward.  The successive-index
-clauses identify the next two nodes as $f^0_d,u^0_d$, and the last-tree-
-vertex clause says that every later vertex-node lies outside $V(T)$.
-Thus the vertex-nodes of $R$ meet $V(T)$ exactly at $v^0_d$.
+Put $y_0=C.y(0)$ and $v_0=v^0_d$.  The data in
+\noderef{ScheideDefectiveSetup} say that $\alpha_0$ is missing at $y_0$,
+that $\gamma$ is missing at $v_0$, that both vertices lie in $V(T)$, and
+that $\alpha_0\ne\gamma$.  Hence both colors belong to the union
+\noderef{TreeMissingColors}.  We have now checked every hypothesis of
+\noderef{OutsideTreeColorSwapStable}: properness and the unique uncolored
+identity come from the displayed chain through \noderef{KTriple},
+closedness comes from \noderef{ScheideGlobalMaximumOrder}, and missingness
+and distinctness come from \noderef{ScheideDefectiveSetup}.  That lemma
+therefore proves that $\varphi_1$ is proper, leaves exactly $e_0$
+uncolored, is $(T,\varnothing,\varphi)$-stable, and fixes every identity
+which is incident with $T$ in the sense of \noderef{TreeIncidentEdge}.
 
-The first edge $f^0_d$ is incident with $V(T)$ and retains color $d$.
-Every later edge of $R$ has both endpoints outside $V(T)$.  Its old color
-is $\alpha_0$ or $d$ by \noderef{TwoColorIncidenceGraph}; properness and
-simplicity make these colors alternate.  The outside swap changes each
-such $\alpha_0$ value to $\gamma$ and fixes every $d$ value.  Hence $R$
-is a $(\gamma,d)$ walk under $\varphi_1$.
+We next justify a fact about the defective color which will be used in the
+path argument.  Membership of $d$ in \noderef{DefectiveColors}, together
+with \noderef{DefectiveColor}, gives at least two, and hence at least one,
+identity $b$ in the $d$-colored boundary set.  By
+\noderef{BoundaryColorEdges}, $b$ is a boundary identity of $V(T)$ and
+$\varphi(b)=d$.  If $d$ were missing at any $x\in V(T)$, applying
+closedness as defined in \noderef{ColoredVertexSetClosed} to $b$ and $x$
+would be a contradiction.  Thus $d$ is not missing at any tree vertex.
+Equivalently, by \noderef{MissingColors} and \noderef{PresentColors}, at
+every $x\in V(T)$ there is an identity incident with $x$ which has color
+$d$.  In particular $d$ is present at $y_0$ and at $v_0$.  Since
+$\alpha_0$ is missing at $y_0$ and $\gamma$ is missing at $v_0$, we have
+$\alpha_0\ne d$ and $\gamma\ne d$.
 
-We check that no new two-color adjacency leaves $R$.  At $v^0_d$, the
-color $\gamma$ is missing and all incident identities are fixed.  The
-edge $f^0_d$ is the unique incident $d$-identity by properness.  If
-$v^0_d$ has a predecessor on $P$, that predecessor has old color
-$\alpha_0$; it is incident with $V(T)$, remains $\alpha_0$, and so is not
-an edge of the new $(\gamma,d)$ graph.  Thus the new two-color degree at
-$v^0_d$ is one.  At every internal vertex of $R$, its two path identities
-have the two distinct colors; properness excludes any third incident
-identity of either color.  Every internal edge-node already uses both of
-its possible incidence adjacencies.
+Let $P$ be the recorded $(\alpha_0,d)$ path, let $z$ be its terminal
+vertex, and let $R$ be the set of its nodes at indices at least the
+recorded index of $v_0$.  The full-path field of
+\noderef{ScheideDefectiveSetup}, interpreted using
+\noderef{ScheideDefectiveChainPath}, says that $P$ is simple, that its
+support is the entire old $(\alpha_0,d)$-component of $y_0$, and that $z$
+is outside $V(T)$.  The recorded successive indices identify the first
+three nodes of $R$ as $v_0,f^0_d,u^0_d$.  Its last-tree-vertex field says
+that every later vertex-node is outside $V(T)$.  Consequently the
+vertex-nodes of $R$ meet $V(T)$ in exactly $v_0$.
 
-For the last vertex of $P$, first consider the old two-color graph.
-The initial vertex $y_0$ has degree one because $\alpha_0$ is missing
-there and $d$ is present there.  By
-\noderef{TwoColorIncidenceDegreeAtMostTwo}, all nodes have degree at most
-two.  A simple path whose support is the whole finite connected component
-and which begins at a degree-one node must end at another degree-one node:
-otherwise following an unused adjacency would either enlarge the support
-or create a cycle attached to the path, and the attachment node would
-have degree at least three.  At the terminal outside vertex, every new
-$\gamma$- or $d$-identity corresponds to an old $\alpha_0$- or
-$d$-identity.  Boundary identities are fixed, but closedness excludes
-$\alpha_0$ and $\gamma$ on the boundary, so the same conclusion holds
-there.  The terminal degree is therefore also one after the swap.
+Every edge-node of $P$ has old color $\alpha_0$ or $d$ by the adjacency
+definition \noderef{TwoColorIncidenceGraph}.  At any vertex there is at
+most one incident identity of either fixed color: two distinct such
+identities would be adjacent by \noderef{AdjacentEdges} and would
+contradict \noderef{IsProperEdgeColoring}.  Since
+$\alpha_0\ne d$, the two path identities at each internal vertex of $P$
+therefore have opposite colors.  At $y_0$, the color $\alpha_0$ is
+missing, whereas $d$ is present by the preceding paragraph.  Thus the
+first identity of $P$ is the unique incident $d$-identity, the old
+two-color degree of $y_0$ is one, and the colors on $P$ alternate between
+$d$ and $\alpha_0$.
 
-It follows that $R$ is connected and closed under all adjacencies of the
-new two-color incidence graph.  By \noderef{TwoColorComponent}, its
-support is exactly $K$.  This proves both the displayed exact-support
-description and the unique intersection with the tree vertices, and it
-puts $f^0_d$ in $K$.  A displayed tree edge has both endpoint vertices in
-$V(T)$; it cannot occur in $R$, whose only tree vertex is its first vertex
-and whose first edge is the boundary identity $f^0_d$.  The endpoint
-description of displayed edges is part of \noderef{TreeSequence}.  Finally the
-component contains the nonisolated root $v^0_d$ and $f^0_d$.  Any
-edge-node connected to it is adjacent in
-\noderef{TwoColorIncidenceGraph}, and hence has color $\gamma$ or $d$.
-This proves the remaining two assertions.
+The first edge of $R$ is $f^0_d$, which has color $d$ by
+\noderef{ScheideDefectiveSetup}; it is incident with $v_0\in V(T)$ and
+is fixed.  Every subsequent edge-node of $R$ lies between two later
+vertex-nodes of $P$, both outside $V(T)$, and hence is not incident with
+$T$.  The exact edgewise definition \noderef{OutsideTreeColorSwap} then
+changes its old value $\alpha_0$ to $\gamma$ and leaves its old value $d$
+unchanged, since $d$ is distinct from both swapped colors.  It follows
+that $R$ is a $(\gamma,d)$ walk for $\varphi_1$.
+
+We show that this walk has no new two-color adjacency at its vertices.
+At $v_0$, every incident identity is fixed and $\gamma$ is missing.
+Properness makes $f^0_d$ the unique incident $d$-identity.  If $v_0$ has
+a predecessor edge on $P$, alternation makes its old color $\alpha_0$;
+that edge is incident with $v_0\in V(T)$, so it remains $\alpha_0$ and is
+not a $(\gamma,d)$-edge.  Hence $v_0$ has new two-color degree one.  At
+each internal vertex of $R$, the two path identities have the two
+distinct colors $\gamma,d$.  The already established properness of
+$\varphi_1$, together with \noderef{AdjacentEdges}, excludes every third
+incident identity of either color.
+
+It remains to check the terminal vertex $z$.  Apply
+\noderef{TwoColorIncidenceDegreeAtMostTwo} to the old proper coloring:
+every node of the old two-color graph has degree at most two.  The finite
+connected component is the support of the simple path $P$, and its
+initial node $y_0$ has degree one.  Its terminal node $z$ must also have
+degree one.  Indeed, an additional adjacency at $z$ cannot lead outside
+the support because the support is the whole component.  Its other endpoint
+would therefore be an edge-node already on $P$.  Every edge-node on this
+vertex-to-vertex path is internal and already has its two distinct path
+neighbors.  Unless it is the final path edge (which gives the adjacency
+already counted at $z$), the extra adjacency would give that edge-node
+degree at least three, contrary to the degree bound.  Thus no additional
+adjacency exists.
+
+We now compare incident identities at $z$ before and after the swap.
+Because $z\notin V(T)$, any identity incident with both $z$ and $T$ is a
+boundary identity by \noderef{BoundaryEdges} and
+\noderef{TreeIncidentEdge}.  Closedness
+\noderef{ColoredVertexSetClosed}, using the tree witnesses at which
+$\alpha_0$ and $\gamma$ are missing, forbids either of those colors on
+such a boundary identity.  Therefore every old $\alpha_0$-identity at
+$z$ is not incident with $T$ and is changed to $\gamma$ by the exact
+formula in \noderef{OutsideTreeColorSwap}; every old $d$-identity is
+fixed because $d\ne\alpha_0,\gamma$.  Conversely, a new $\gamma$-identity
+at $z$ cannot be tree-incident (a tree-incident identity is fixed, and an
+old boundary $\gamma$-identity is impossible), so the same formula says
+that it was formerly an $\alpha_0$-identity.  A new $d$-identity was
+formerly a $d$-identity.  Thus the new $\gamma/d$ incidences at $z$ are
+exactly the old $\alpha_0/d$ incidences, identity by identity.  The new
+two-color degree of $z$ is consequently one as well.
+
+Finally, every edge-node of $R$ is internal to this vertex-to-vertex
+path.  Its two path neighbors are its two endpoint vertices, and the
+loopless endpoint pair in \noderef{LooplessMultigraph} admits no further
+incidence neighbor.  The vertex analysis above therefore shows that the
+support of $R$ is connected and closed under every adjacency in the new
+$(\gamma,d)$ incidence graph.
+Since it contains $v_0$, the definition \noderef{TwoColorComponent}
+gives that its support is exactly $K$.  This is precisely the asserted
+suffix-set equality; it also puts $f^0_d$ in $K$ and proves that the only
+tree vertex-node in $K$ is $v_0$.
+
+If a displayed edge of $T$ belonged to $R$, then its two path-neighbor
+vertices would be its two distinct endpoints.  Both endpoints of a
+displayed edge lie in $V(T)$ by \noderef{TreeSequence} and
+\noderef{TreeSequenceVertexSet}, contradicting the fact that $R$ has only
+one tree vertex.  Hence no displayed edge identity belongs to $K$.
+Lastly, any edge-node in this nonisolated component occurs next to a
+vertex-node along a component path; by \noderef{TwoColorIncidenceGraph}
+its $\varphi_1$-color is $\gamma$ or $d$.  All claimed assertions follow.
 \end{proof}
