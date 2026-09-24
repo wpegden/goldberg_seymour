@@ -1,0 +1,65 @@
+\begin{helper}[Exit localization for the two order-nine blocks]
+Let $(T,e_0,\varphi,N)$ be a balanced normal globally maximum triple with
+$T.\mathsf{length}=8$ and $N.\mathsf{height}=5$.  Let
+$\gamma_0,\gamma_1$ be distinct colors such that the identities in
+positions $4,5$ have color $\gamma_0$, the identities in positions $6,7$
+have color $\gamma_1$, each $\gamma_i$ is missing at one of the first five
+vertices, and the colored base identities in positions $1,2,3$ avoid both
+$\gamma_i$.  Then every Scheide exit vertex of $T$ misses one of
+$\gamma_0,\gamma_1$.
+\end{helper}
+\begin{proof}
+Write $y_r=T.\mathsf{vertex}(r)$.  The normal height-five path in
+\noderef{NormalGlobalMaximumTriple} has first normal color $\alpha$
+missing at $y_0$ and second normal color $\beta$ missing at $y_1$.
+Its exact support and endpoint fields, together with properness, show
+that the colored base identities in positions $1,2,3$ alternate between
+$\alpha$ and $\beta$.  The base-avoidance hypothesis therefore makes
+both $\alpha$ and $\beta$ distinct from both block colors; injectivity of
+the block-color map makes $\gamma_0\ne\gamma_1$.
+
+The first identity is $e_0$ by \noderef{TreeSequence} and is the unique
+uncolored identity by the $k$-triple inside the globally maximum field.
+The preceding base-color calculation and the two block-color hypotheses
+therefore give the exact equality
+\[
+ \noderef{TreeUsedColors}(\varphi,T)
+   =\{\alpha,\beta,\gamma_0,\gamma_1\}.
+\tag{1}
+\]
+Choose $z_i$ among $y_0,\ldots,y_4$ with $\gamma_i$ missing at $z_i$,
+as supplied by the hypotheses.  The elementary clause of
+\noderef{ScheideGlobalMaximumOrder}, expanded through
+\noderef{ColoredVertexSetElementary}, says that missing-color sets at
+distinct displayed vertices are disjoint.  Consequently $y_0$ is the
+only displayed vertex that can miss $\alpha$, $y_1$ the only one that can
+miss $\beta$, and $z_i$ the only one that can miss $\gamma_i$.
+
+We next count missing colors.  The degree bound in the $k$-triple and
+\noderef{MaximumDegree} give
+$d_G(v)\leq\Delta(G)\leq k-1$ for every vertex $v$, with degree interpreted
+by \noderef{Degree}.  Properness makes the colors of the colored
+identities incident with $v$ pairwise distinct.  If $v$ is not an end of
+$e_0$, every incident identity is colored, so $v$ misses at least
+$k-d_G(v)\geq1$ color.  If $v$ is an end of $e_0$, exactly that incident
+identity is uncolored and every other incident identity is colored, so
+$v$ misses at least $k-d_G(v)+1\geq2$ colors.  The attachment equation at
+edge index zero and the first-edge equation in
+\noderef{TreeSequence} identify the two ends of $e_0$ as $y_0,y_1$.
+
+Let $v$ be a displayed vertex different from both $z_0,z_1$.  If $v$ is
+not an end of $e_0$, then it is also different from $y_0,y_1$.  Its
+guaranteed missing color is therefore none of the four colors in (1), by
+elementarity and the four displayed witnesses.  If $v$ is an end of
+$e_0$, it is $y_0$ or $y_1$.  At most its corresponding one of
+$\alpha,\beta$ can be missing among the four colors in (1), because $v$
+is different from both $z_i$; the lower bound of two missing colors again
+supplies a missing color outside (1).  In either case $v$ misses a color
+not used on any colored tree identity, hence a color in
+\noderef{TreeFreeColors}.
+
+By \noderef{ScheideExitNoFree}, a Scheide exit vertex has its missing
+colors disjoint from the tree-free colors.  Therefore every exit is one
+of $z_0,z_1$.  At $z_i$ the color $\gamma_i$ is missing by its defining
+choice, which proves the claimed exit coverage.
+\end{proof}

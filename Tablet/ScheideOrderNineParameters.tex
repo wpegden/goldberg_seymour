@@ -1,0 +1,33 @@
+\begin{lemma}[The order-nine and height-five parameters]
+Let $G$ be a finite loopless multigraph, let $k$ be a natural number, and
+suppose that $G$ is critical, $\chi'(G)=k+1$, $\Delta(G)+1\leq k$, and
+every vertex is incident with an edge.  Suppose also that $G$ is not
+elementary and $t(G)<11$.  If $(T,e_0,\varphi,N)$ is a balanced normal
+globally maximum triple, then
+\[
+ t(G)=9,\qquad h(G)=5,\qquad T.\mathsf{length}=8,
+ \qquad N.\mathsf{height}=5.
+\]
+\end{lemma}
+\begin{proof}
+If $h(G)<5$, \noderef{ScheideSmallHeightElementary} would make $G$
+elementary.  Hence $5\leq h(G)$.  Similarly, if
+$t(G)-4<h(G)$, \noderef{ScheideLargeHeightElementary} would make $G$
+elementary, so $h(G)\leq t(G)-4$.
+
+By \noderef{ScheideGraphHeightOdd}, $h(G)$ is odd.  The order assertion
+and oddness assertion of \noderef{ScheideGlobalMaximumOrder}, applied to
+the globally maximum field of $N$, say that
+\[
+ t(G)=|V(T)|\quad\hbox{and}\quad |V(T)|\text{ is odd}.
+\]
+The injectivity field of \noderef{TreeSequence}, together with the
+definition \noderef{TreeSequenceVertexSet}, gives
+$|V(T)|=T.\mathsf{length}+1$.  Thus $t(G)$ is odd.  The inequalities
+$5\leq h(G)\leq t(G)-4$ give $9\leq t(G)$, while $t(G)<11$ and oddness
+give $t(G)=9$.  The same inequalities give $5\leq h(G)\leq5$, hence
+$h(G)=5$.  The two cardinality equalities now give
+$T.\mathsf{length}=8$.  Finally, the defining height equality in
+\noderef{BalancedGlobalMaximumTriple} says
+$N.\mathsf{height}=h(G)=5$.
+\end{proof}

@@ -1,0 +1,179 @@
+\begin{helper}[The two balanced blocks at order nine]
+Let $(T,e,\varphi,N)$ be a balanced normal globally maximum triple in a
+finite loopless multigraph $G$, with $t(G)=9$ and $h(G)=5$.  Then there is
+a balanced normal globally maximum triple $(S,e',\psi,M)$ with
+$S.\mathsf{length}=8$ and $M.\mathsf{height}=5$, and there are two
+distinct colors $\gamma_0,\gamma_1$, such that, writing the positions of
+$S$ as
+\[
+ (y_0,a_0,y_1,a_1,y_2,a_2,y_3,a_3,y_4,
+   f_{0,0},u_{0,0},f_{0,1},u_{0,1},
+   f_{1,0},u_{1,0},f_{1,1},u_{1,1}),
+\]
+the following hold for $i,j\in\{0,1\}$:
+\begin{enumerate}
+\item $f_{i,j}$ has exact endpoint pair $\{y_q,u_{i,j}\}$ for some
+      $q\in\{0,1,2,3,4\}$;
+\item $\psi(f_{i,j})=\gamma_i$;
+\item $\gamma_i$ is missing at some $y_q$ with $0\leq q<5$;
+\item the colored base identities $a_1,a_2,a_3$ have colors different
+      from both $\gamma_0$ and $\gamma_1$.
+\end{enumerate}
+All displayed edges are individual edge identities; parallel identities
+are not identified.
+\end{helper}
+\begin{proof}
+Because the triple is balanced and has height five, its eight displayed
+edge positions split after the five-vertex normal trunk into two
+equal-colored pairs.  Call their colors initially $\gamma_0$ and
+$\gamma_1$.  The \noderef{TashkinovTree} field supplies a missing witness
+for $\gamma_0$ among the five earlier trunk vertices and a missing witness
+for $\gamma_1$ among the first seven vertices.  The equality
+$t(G)=9$, the global maximality field, and the injectivity in
+\noderef{TreeSequence} give exactly nine distinct displayed vertices.
+
+Choose the first trunk vertex missing $\gamma_0$.  If it is not the
+first displayed vertex, apply \noderef{ScheideTrunkRotationPreserves}.
+The exact formulas in \noderef{TrunkRotation} move that witness to the
+first position, preserve every post-trunk vertex and edge identity, and
+alter only the two normal trunk colors on the closing cycle.  To check
+that the missing color really survives, use the elementary clause of
+\noderef{ScheideGlobalMaximumOrder}: a color has at most one missing
+witness in the displayed vertex set.  If $\gamma_0$ is the first normal
+color, its witness was already the first vertex; if it is the second
+normal color, its witness is the second vertex and the rotation changes
+only the adjacent uncolored and first-normal-color identities; otherwise
+no identity whose color is $\gamma_0$ changes.  Thus after rotation
+$\gamma_0$ is missing at $y_0$, while both tail pairs and balancedness
+are preserved.
+
+The first identity of the first tail pair crosses from the trunk to its
+new vertex by the attachment clause of \noderef{TreeSequence}.  Apply
+\noderef{ScheideHeightFiveGammaEdges}.  It produces three distinct exact
+roles: a $\gamma_0$-identity from $y_1$ to an outside-trunk vertex $v_1$,
+a $\gamma_0$-identity from $y_4$ to an outside-trunk vertex $v_2$, and a
+$\gamma_0$-identity with endpoint pair $\{y_2,y_3\}$.  Both identities
+of the first balanced pair attach to the trunk.  Indeed, the second
+cannot attach to the first new vertex, since the two distinct identities
+would then be adjacent in the sense of \noderef{AdjacentEdges}, have the
+same color, and contradict \noderef{IsProperEdgeColoring}.  Neither can
+attach at $y_0$, where the color is missing, nor at $y_2$ or $y_3$, where
+the internal identity already gives the unique proper $\gamma_0$
+incidence.  Hence their attachment vertices are $y_1$ and $y_4$, one
+each.  Properness identifies them with the two crossing identities just
+obtained, preserving their individual edge identities.  Interchanging
+the two complete edge--new-vertex entries if necessary preserves every
+\noderef{TreeSequence} and \noderef{TashkinovTree} condition.  We may
+therefore label them
+\[
+ f_{0,0}=y_1v_1,qquad f_{0,1}=y_4v_2.
+\]
+
+Now apply \noderef{ScheideHeightFiveOutsideLinks}.  It gives two distinct
+parallel identities on the exact endpoint pair $\{v_1,v_2\}$, one of
+each normal trunk color.  Together with the alternating normal closing
+path and the three $\gamma_0$-identities above, these identities form
+three matchings on the first seven vertices.  Each matching leaves only
+its displayed missing vertex unmatched.  If $\gamma_1$ were either
+normal trunk color or $\gamma_0$, neither of its two distinct tree
+identities could attach to an earlier vertex: every nonmissing earlier
+vertex already has a unique incident identity of that color, while the
+missing vertex has none.  This contradicts the attachment field of
+\noderef{TreeSequence}.  Thus $\gamma_1$ differs from both trunk colors
+and from $\gamma_0$.
+
+The elementary and closed clauses of
+\noderef{ScheideGlobalMaximumOrder} next force an identity of each of the
+two trunk colors and $\gamma_0$ between the last two vertices.  For any
+one of these colors, elementarity makes it present at each last vertex.
+Choose its incident identity at the first last vertex by
+\noderef{PresentColors}.  Its other endpoint cannot lie outside the
+tree, because the color is missing at its unmatched earlier vertex and
+closedness forbids a boundary identity of a tree-missing color.  It
+cannot be any of the first seven vertices: at the unique missing vertex
+there is no such incidence, and at every other one properness already
+fixes the displayed matching identity.  Looplessness excludes the first
+last vertex itself.  The other endpoint is therefore the second last
+vertex.  Applying this argument to the three pairwise distinct colors
+gives three separately named parallel edge identities.
+
+The witness for $\gamma_1$ lies either on the trunk or among
+$v_1,v_2$.  In the latter case replace the displayed order by
+\[
+ (y_0,e,y_1,y_1v_1,v_1,v_1v_2,v_2,v_2y_4,y_4,
+   a_1,y_2,a_3,y_3,f_{1,0},u_{1,0},f_{1,1},u_{1,1}),
+\]
+where the middle identity $v_1v_2$ has the second trunk color.  The
+endpoint equalities show successively that every new vertex attaches to
+an earlier vertex.  The edge identities are distinct by the old edge
+injectivity, by their different endpoint pairs, or by their different
+colors.  The missing witnesses are, successively, the old
+$\gamma_0$-witness for the two crossing identities, the old second
+trunk-color witness for $v_1v_2$, the old first-trunk-color witness for
+$a_1,a_3$, and the assumed $\gamma_1$-witness for the last pair.
+Consequently this is again a Tashkinov tree.  It has the same nine
+vertices and the same proper coloring with the same unique uncolored
+identity, so it is globally maximum.  Its first five vertices lie on the
+simple alternating path through
+$y_1,v_1,v_2,y_4,y_0$, hence it is normal of height five; its two tail
+pairs have equal colors, hence it is balanced.  Relabeling colors and
+positions now puts the $\gamma_1$-witness on the trunk while retaining
+all conclusions above.  If the witness was already on the trunk, no
+replacement is needed.
+
+It remains to prove that the last balanced pair attaches to the trunk.
+First some $\gamma_1$-identity joins the trunk to the last two vertices.
+Otherwise properness and the attachment clauses force the two
+$\gamma_1$ tree identities to match $\{v_1,v_2\}$ with the last two
+vertices.  Together with the two parallel identities of the second
+trunk color on $\{v_1,v_2\}$ and on the last pair, they form a complete
+alternating cycle in \noderef{TwoColorIncidenceGraph}.  Exact endpoint
+equalities, properness, and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} show that no incidence-graph
+edge leaves this cycle, so it is the full
+\noderef{TwoColorComponent}.  Switch it using
+\noderef{TwoColorComponentSwap}.  By
+\noderef{TwoColorComponentSwapProper} the new coloring is proper; it
+fixes the trunk and the unique uncolored identity, and it changes both
+last tree identities to the second trunk color, which is missing on the
+trunk.  Thus the same ordered sequence is again a globally maximum
+Tashkinov tree.
+
+In that switched coloring, the $\gamma_0$--second-trunk-color component
+through the two normal missing vertices is forced, identity by identity,
+through seven multigraph vertices: the first crossing identity, one
+switched last-pair identity, the $\gamma_0$ identity between the last
+vertices, the other switched identity, the second crossing identity,
+and the normal closing identity.  At the two ends missingness gives
+incidence degree one; at each internal vertex properness gives exactly
+the two displayed incidences; and each edge-node has exactly its two
+loopless endpoints.  Hence this is the full component and every simple
+path between its ends has twelve incidence steps.  But
+\noderef{ScheideKempePathHeightBound} supplies such a path with
+$\mathsf{length}/2+1\leq h(G)=5$, whereas here that quantity is seven, a
+contradiction.
+
+Choose a trunk vertex missing $\gamma_1$ and temporarily rotate it to
+the first position with \noderef{ScheideTrunkRotationPreserves}.  Since
+$\gamma_1$ differs from both trunk colors, this changes neither its
+identities nor its missingness.  Apply
+\noderef{ScheideHeightFiveGammaEdges} and then
+\noderef{ScheideHeightFiveOutsideLinks}.  The first result gives exactly
+two $\gamma_1$ crossings from the trunk and one internal trunk identity;
+the second joins the outside ends by an identity of each temporary trunk
+color.  At least one outside end is a last vertex by the preceding
+paragraph.  An identity of the same trunk color already joins the two
+last vertices, so properness forces the other outside end to be the
+other last vertex.  Undoing the temporary rotation leaves these
+$\gamma_1$ identities fixed.  Properness then identifies them with the
+two identities of the last balanced pair.  Thus all four block
+identities attach to the five base vertices, both block colors have base
+missing witnesses, and the colors are distinct.
+
+Finally, the three colored nonfirst base identities lie on the normal
+closing path, so each has one of the two trunk colors.  The first block
+color differs from both trunk colors by its missing incidence and the
+proper crossing identities above, and the second does so by the matching
+argument.  Therefore every such base color avoids both block colors.
+These are exactly the four asserted properties.
+\end{proof}
