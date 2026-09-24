@@ -1,0 +1,171 @@
+\begin{helper}[No middle-trunk escape at height five]
+Let $N$ be normal globally maximum data for a $k$-triple
+$(T,e_0,\varphi)$, suppose that $N.\mathsf{height}=h(G)=5$, and write
+$y_i=T.\mathsf{vertex}(i)$ for $0\leq i\leq4$.  Let
+$\gamma\in\overline\varphi(y_0)$.  Suppose that an exact edge identity
+$g$ has color $\gamma$ and endpoints $\{y_i,v\}$ for some
+$i\in\{0,1,2,3,4\}$, where
+$v\in V(T)\setminus\{y_0,y_1,y_2,y_3,y_4\}$.
+If another exact edge identity $r$ has color $\gamma$ and endpoints
+$\{y_2,w\}$ or $\{y_3,w\}$, then
+\[
+ w\in\{y_0,y_1,y_2,y_3,y_4\}.
+\]
+All assertions concern the named multigraph edge identities, so no two
+parallel edges are identified merely because their unordered endpoint
+pairs agree.
+\end{helper}
+\begin{proof}
+Put
+\[
+ a_1=T.\mathsf{edge}(1),\qquad
+ a_2=T.\mathsf{edge}(2),\qquad
+ a_3=T.\mathsf{edge}(3),\qquad q=N.\mathsf{closingEdge}.
+\]
+Thus $a_1,a_2,a_3$ are the paper's identities $e_2,e_3,e_4$.
+The height upper bound, closing-index equation, endpoint fields, and
+support fields of \noderef{NormalGlobalMaximumTriple}, together with
+the first-edge, attachment, and injectivity fields of
+\noderef{TreeSequence} and the endpoint meaning of
+\noderef{Incident}, give
+\[
+ \operatorname{ends}(a_1)=\{y_1,y_2\},\quad
+ \operatorname{ends}(a_2)=\{y_2,y_3\},\quad
+ \operatorname{ends}(a_3)=\{y_3,y_4\},\quad
+ \operatorname{ends}(q)=\{y_4,y_0\}.                 \tag{1}
+\]
+The five $y_i$ are pairwise distinct, and the stored closing path is the
+simple incidence path
+\[
+ y_1,a_1,y_2,a_2,y_3,a_3,y_4,q,y_0.                 \tag{2}
+\]
+
+We next recover all four colors in (2), rather than treating alternation
+as implicit.  Every edge-node on (2) has color $N.\mathsf{alpha}$ or
+$N.\mathsf{beta}$ by \noderef{TwoColorIncidenceGraph}.  The color
+$N.\mathsf{beta}$ is missing at $y_1$ by
+\noderef{NormalGlobalMaximumTriple}; expanding
+\noderef{MissingColors} and \noderef{PresentColors}, the incident identity
+$a_1$ therefore cannot have that color.  Hence
+$\varphi(a_1)=N.\mathsf{alpha}$.  The global field of $N$, expanded by
+\noderef{GlobalMaximumTriple} and \noderef{KTriple}, makes $\varphi$
+proper in the sense of \noderef{IsProperEdgeColoring}.  Consecutive
+identities in (2) are distinct and adjacent in the sense of
+\noderef{AdjacentEdges}, so properness alternates their colors.
+Consequently
+\[
+ \varphi(a_1)=\varphi(a_3)=N.\mathsf{alpha},\qquad
+ \varphi(a_2)=\varphi(q)=N.\mathsf{beta}.            \tag{3}
+\]
+In particular, the incidence of $a_1$ at $y_1$ also proves
+$N.\mathsf{alpha}\ne N.\mathsf{beta}$.
+
+Apply \noderef{ScheideKempePathHeightBound} to $N.\mathsf{global}$,
+$\gamma$ missing at $y_0$, and $N.\mathsf{beta}$ missing at $y_1$.
+It supplies a simple incidence path $P_1$ from $y_0$ to $y_1$ whose
+support is the full $(\gamma,N.\mathsf{beta})$-component $C_1$ in the
+sense of \noderef{TwoColorComponent}, with
+\[
+ 4\mid\operatorname{length}(P_1),\qquad
+ \operatorname{length}(P_1)/2+1\leq h(G)=5.          \tag{4}
+\]
+By (1)--(3), the incidences $y_0,q,y_4$ lie in $C_1$.  Also
+\noderef{ScheideGlobalMaximumOrder}, read through
+\noderef{ColoredVertexSetElementary}, makes $V(T)$ elementary.  Since
+$\gamma$ is missing at $y_0$ and $y_0\ne y_1$, it is not missing at
+$y_1$.  The definitions \noderef{MissingColors} and
+\noderef{PresentColors} therefore give a $\gamma$-colored exact identity
+$b$ incident with $y_1$; its edge-node lies in $C_1$.
+
+We record the two required color separations.  First
+$\gamma\ne N.\mathsf{beta}$, since $b$ has color $\gamma$ at $y_1$ while
+$N.\mathsf{beta}$ is missing there.  Suppose instead that
+$\gamma=N.\mathsf{alpha}$.  Then (1)--(3) put all five trunk vertices,
+and the four exact edge-nodes $q,a_1,a_2,a_3$, in $C_1$.  The specified
+identity $g$ joins one of those vertices to $v$, so $v$ also lies in
+$C_1$.  These six vertex-nodes are distinct by the hypotheses on $v$;
+the four edge-nodes are distinct by edge injectivity and their exact
+endpoint pairs in (1).  Thus $P_1$ has at least ten distinct incidence
+nodes.  Simplicity of $P_1$ gives
+$\operatorname{length}(P_1)\geq9$; divisibility by four then gives length
+at least twelve, contradicting (4).  Hence
+\[
+ \gamma\ne N.\mathsf{alpha},\qquad
+ \gamma\ne N.\mathsf{beta}.                         \tag{5}
+\]
+This count retains the edge-nodes $q,a_1,a_2,a_3$ as identities and makes
+no simplicity assumption about the underlying multigraph.
+
+Assume for a contradiction that $w$ is distinct from every trunk vertex.
+We claim that none of $y_2,y_3,w$ belongs to $C_1$.  If any one belonged,
+the $N.\mathsf{beta}$-identity $a_2$ between $y_2,y_3$ and the
+$\gamma$-identity $r$ between $w$ and one of those two vertices would put
+all three in $C_1$.  Then $C_1$ would contain the six distinct vertex-nodes
+$y_0,y_1,y_2,y_3,y_4,w$ and the four edge-nodes $q,a_2,b,r$.
+These edge identities are distinct: $q\ne a_2$ by their endpoint pairs in
+(1), the cross-color pairs are distinct by (5), and $b\ne r$ because $b$
+is incident with $y_1$ whereas neither possible endpoint pair of $r$
+contains $y_1$.  As before, ten distinct incidence nodes force path length
+at least nine and then at least twelve, contrary to (4).  Therefore
+\[
+ y_2,y_3,w\notin C_1,\qquad \operatorname{inr}(r)\notin C_1.             \tag{6}
+\]
+For the final clause, if the edge-node of $r$ belonged to $C_1$, its
+incidence adjacency in \noderef{TwoColorIncidenceGraph} would put its
+middle-trunk endpoint in $C_1$, contrary to the first part of (6).
+
+We now use the permitted switch, checking its hypotheses explicitly.
+By \noderef{ScheideGlobalMaximumFixedPairMaximal}, the globally maximum
+triple has $T$ fixed-pair maximal.  Apply
+\noderef{ScheideMaximalKempePath} at tree indices zero and one with colors
+$\gamma,N.\mathsf{beta}$.  The premise
+\noderef{TreeColorUnusedThrough} is vacuous at index one, since it asks
+only about colored tree-edge indices $j$ satisfying $1\leq j<1$.
+Consequently the component interchange
+\[
+ \varphi'=\noderef{TwoColorComponentSwap}
+   (G,\varphi,\gamma,N.\mathsf{beta},y_0)
+\]
+is proper, still leaves exactly $e_0$ uncolored, and leaves the same
+ordered sequence $T$ Tashkinov.  These are precisely the color-dependent
+clauses of \noderef{KTriple}, \noderef{IsOneEdgeUncolored}, and
+\noderef{TashkinovTree}; the graph-theoretic clauses and the cardinality
+of $V(T)$ do not change.  Hence $(T,e_0,\varphi')$ again satisfies
+\noderef{GlobalMaximumTriple}.
+
+The missing-color conclusions after the switch follow clause by clause
+from \noderef{TwoColorComponentSwapMissingBehavior}.  The endpoint $y_1$
+belongs to $C_1$ and formerly missed $N.\mathsf{beta}$, so it misses
+$\gamma$ under $\varphi'$.  By (5), the unaffected color
+$N.\mathsf{alpha}$ remains missing at $y_0$.  The definition of the swap,
+together with (3) and (6), gives
+\[
+ \varphi'(q)=\gamma,\quad
+ \varphi'(a_1)=\varphi'(a_3)=N.\mathsf{alpha},\quad
+ \varphi'(r)=\gamma.                                \tag{7}
+\]
+Here $q$ belongs to $C_1$, the two alpha identities are fixed because of
+(5), and $r$ is fixed because its exact edge-node is outside $C_1$.
+
+Apply \noderef{ScheideKempePathHeightBound} a second time to the switched
+globally maximum triple, using $N.\mathsf{alpha}$ missing at $y_0$ and
+$\gamma$ missing at $y_1$.  Its full
+$(N.\mathsf{alpha},\gamma)$-component has a simple incidence path $P_2$
+with length divisible by four and
+\[
+ \operatorname{length}(P_2)/2+1\leq h(G)=5.          \tag{8}
+\]
+Equations (1) and (7) force the segments
+\[
+ y_0,q,y_4,a_3,y_3,qquad y_1,a_1,y_2
+\]
+into this component.  The exact identity $r$ then brings in $w$, whether
+its middle endpoint is $y_2$ or $y_3$.  Thus $P_2$ contains the six
+distinct vertex-nodes $y_0,y_1,y_2,y_3,y_4,w$ and the four exact
+edge-nodes $q,a_1,a_3,r$.  The four edge identities are distinct: (1) and
+tree edge injectivity separate $q,a_1,a_3$, (5) separates $r$ from the
+two alpha identities, and the old colors in (3) separate $r$ from $q$.
+The same ten-node support count forces length at least twelve, contradicting
+(8).  This contradiction discharges the assumption that $w$ lies outside
+the trunk, and proves the asserted five-way alternative.
+\end{proof}
