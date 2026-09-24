@@ -8,49 +8,135 @@ both $\delta$ and $\gamma$, and $P_\delta$ has precisely the support of
 the two-color component through $v$ and ends outside $X_\delta$.
 \end{helper}
 \begin{proof}
-The replacement theorem \noderef{ScheideReplacementMaximum} makes
-$(T_\delta,e_0,\varphi_\delta)$ globally maximum, and
+Put $r=\gammaIndex(\delta)$,
+$U_\gamma=\{u^1_{\gamma(r)},u^2_{\gamma(r)}\}$,
+$Z=V(T)\setminus U_\gamma$, and $X_\delta=V(T_\delta)$.
+The ordered layout in \noderef{ScheideStructuralConfiguration} places
+the base vertices $y_0,\ldots,y_{p-1}$ in positions strictly below $p$,
+whereas the two vertices of the deleted block occupy positions
+$p+2r$ and $p+2r+1$.  The vertex map is injective by
+\noderef{TreeSequence}, so no base vertex is either deleted vertex.
+Consequently
+\[
+                         Y\subseteq Z.                              \tag{1}
+\]
+Moreover, \noderef{ScheideDefectiveSetup} says that
+$v^0_\delta$ is an exit vertex, and
+\noderef{ScheideStructuralExitsInBase} localizes every exit vertex in
+$Y$.  Thus
+\[
+                         v^0_\delta\in Y\subseteq Z.                \tag{2}
+\]
+The exact vertex-set equality in \noderef{ScheideReplacementData} is
+$X_\delta=Z\cup\{u^1_\delta,u^2_\delta\}$, and hence $Z\subseteq
+X_\delta$.
+
+The same ordered layout and injectivity show that $V(T)$ has
+$p+2s$ vertices and that the two deleted vertices are distinct.  Hence
+\[
+                         |Z|=p+2s-2.                               \tag{3}
+\]
+The first-edge and attachment fields of \noderef{TreeSequence} put the
+two ends of $e_0$ in positions $0$ and $1$.  They are distinct because
+the graph is loopless, and $p\geq2$ puts both positions in $Y$, hence in
+$Z$ by (1).
+
+By \noderef{ScheideReplacementMaximum}, the switched coloring is proper,
+leaves exactly $e_0$ uncolored, and makes
+$(T_\delta,e_0,\varphi_\delta)$ globally maximum.  Unpacking
+\noderef{GlobalMaximumTriple}, its ordered tree is a
+\noderef{TashkinovTree}.  Also,
 \noderef{ScheideGlobalMaximumOrder} makes $X_\delta$ elementary and
-closed.  Its exact vertex set is $Z\cup U_\delta$ by
-\noderef{ScheideReplacementData}; in particular, the two ends of $e_0$
-remain in the base $Y\subseteq Z$.
+closed.  By the definition \noderef{ColoredVertexSetElementary}, missing
+sets at distinct vertices of $Z\subseteq X_\delta$ are disjoint.
 
-Apply \noderef{ScheideGlobalMaximumMissingCounts} to every vertex of
-$Z$.  As in the original count, each vertex contributes at least one
-missing color, the two ends of $e_0$ contribute one additional color
-each, and elementariness makes the contributions at distinct vertices
-disjoint.  Thus at least $p+2s$ distinct colors are missing on $Z$.
-At most $p-2+s$ colors are used on $T_\delta$: at most $p-2$ come from
-retained colored base edges, $s-1$ from retained blocks, and the two
-appended edges have the single common color $\delta$ by
-\noderef{ScheideReplacementPairFixed} and
-\noderef{ScheideReplacementData}.
+Apply \noderef{ScheideGlobalMaximumMissingCounts} to each vertex of
+$Z$.  Every vertex has at least one missing color, while each of the two
+ends of $e_0$ has at least two.  Choose one missing color at every vertex
+and a second, different missing color at each end of $e_0$.  The
+elementarity just noted makes all $|Z|+2$ choices distinct.  If $M$ is
+the set of colors missing somewhere on $Z$, (3) gives
+\[
+                         |M|\geq p+2s.                             \tag{4}
+\]
 
-Every used color has a missing witness in $Z$.  A retained base or block
-color has its old base witness from
-\noderef{ScheideStructuralConfiguration}.  No retained displayed edge
-has color $\delta$, because \noderef{ScheideGlobalMaximumUnused} says
-that the defective color is unused on the original tree.  The switch
-changes at an old
-tree vertex only the two colors $\gamma,\delta$ at $v^0_\delta$, by
-\noderef{ScheideDefectiveSwitchEffect}; retained base colors avoid all
-block colors, retained block colors differ from $\gamma$ by injectivity,
-and so those old witnesses survive.  The new used color $\delta$ is
-missing at $v^0_\delta\in Y\subseteq Z$ by the exact missing-set formula
-in the same switch-effect theorem.
+We next count the colors used on displayed colored edges of $T_\delta$.
+There are at most $p-2$ colors on the retained nonfirst base edges.  The
+selected $r$-th block is deleted, so the other blocks contribute at most
+$s-1$ colors.  Finally the appended pair has the single color $\delta$:
+its two original values are $\delta$ by
+\noderef{ScheideReplacementData}, and
+\noderef{ScheideReplacementPairFixed} says that the switch fixes every
+edge incident with either appended vertex.  Thus, in the terminology of
+\noderef{TreeUsedColors},
+\[
+       |\varphi_\delta\langle T_\delta\rangle|
+          \leq (p-2)+(s-1)+1=p-2+s.                               \tag{5}
+\]
+No retained displayed edge can secretly be $f^0_\delta$: such an edge
+would have original color $\delta$, whereas
+\noderef{ScheideGlobalMaximumUnused} says that the original defective
+color $\delta$ is unused on $T$.
 
-Since $p-2+s<p+2s$, choose a color $\beta$ missing in $Z$ but unused on
-$T_\delta$.  It is free by \noderef{TreeFreeColors}.  It differs from
-$\delta$, which is used on the appended pair.  It differs from $\gamma$
-as well: \noderef{ScheideSymmetricReplacementBoundaryConfiguration}
-makes $\gamma$ defective, and closedness then makes $\gamma$ present at
-every vertex of $X_\delta$.  The switch-effect formula, together with
-$\beta\ne\gamma,\delta$, shows that the same vertex $v\in Z$ also misses
-$\beta$ under the original coloring.
+For later use, every color counted in (5) has a missing witness in $Z$.
+First consider a color $c$ on a retained nonfirst base edge in formal
+position $j$, where $1\leq j<p-1$.  Apply the
+\noderef{TashkinovTree} certificate just extracted from the replacement
+globally maximum triple.  It gives an index $i<j+1$ such that $c$ is
+missing at the replacement vertex in position $i$.  Since $i\leq j<p-1$,
+this is a base position.  The exact retention clauses of
+\noderef{ScheideReplacementData} identify it with the original base
+vertex $y_i$, which belongs to $Z$ by (1).  Notice that this argument
+uses the replacement Tashkinov certificate; it does not assume an old
+witness survives the switch.
 
-Finally, the globally maximum replacement triple, the defective-color
-clause just proved, and this free missing color satisfy all hypotheses of
-\noderef{ScheideDefectiveChainPathExists}.  That theorem supplies the
-outside endpoint $z$ and the required full simple path, with the exact
-support assertion expressed by \noderef{ScheideDefectiveChainPath}.
+Next let $c=\gamma(q)$ be the color of a retained block, so $q\ne r$.
+The structural field in \noderef{ScheideStructuralConfiguration}
+supplies a base vertex $y_a$ missing $\gamma(q)$ under $\varphi$.  It is
+in $Z$ by (1).  If $y_a\ne v^0_\delta$, the pointwise missing-set clause
+of \noderef{ScheideDefectiveSwitchEffect} leaves its missing set
+unchanged.  If $y_a=v^0_\delta$, the exact formula in that same theorem is
+\[
+ \overline\varphi_\delta(v^0_\delta)
+   =\{\delta\}\cup
+     \bigl(\overline\varphi(v^0_\delta)\setminus\{\gamma(r)\}\bigr).
+\]
+Injectivity of the structural map $\gamma$ and $q\ne r$ give
+$\gamma(q)\ne\gamma(r)$, so the old witness survives in this case too.
+Finally, (2) and the displayed switch formula show that the appended
+color $\delta$ is missing at $v^0_\delta\in Z$.  This proves the claimed
+witness assertion for all three classes of used colors.
+
+Since $r$ exists, $s\geq1$; hence (4)--(5) imply
+$p-2+s<p+2s\leq|M|$.  Choose $\beta\in M$ which is not in
+$\varphi_\delta\langle T_\delta\rangle$, and choose
+$v\in Z$ missing $\beta$.  Since $v\in X_\delta$, the definitions
+\noderef{TreeFreeColors} and \noderef{TreeUsedColors} say exactly that
+$\beta$ is free for $T_\delta$.  The color $\delta$ is used on the
+appended pair, so $\beta\ne\delta$.
+
+The boundary theorem
+\noderef{ScheideSymmetricReplacementBoundaryConfiguration} says that
+$\gamma(r)$ is defective on $X_\delta$.  By
+\noderef{DefectiveColors}, there is a $\gamma(r)$-colored boundary edge.
+Closedness from \noderef{ScheideGlobalMaximumOrder}, interpreted through
+\noderef{ColoredVertexSetClosed}, therefore forbids $\gamma(r)$ from
+being missing at any vertex of $X_\delta$.  Since $v\in Z\subseteq
+X_\delta$ misses $\beta$, it follows that $\beta\ne\gamma(r)$.
+
+It remains to compare the two colorings at $v$.  If
+$v\ne v^0_\delta$, \noderef{ScheideDefectiveSwitchEffect} says their
+missing sets there are equal.  If $v=v^0_\delta$, its exact formula above,
+together with $\beta\ne\delta,\gamma(r)$, says that membership of $\beta$
+in the new missing set can only come from the old missing set with
+$\gamma(r)$ erased.  Thus in either case $\beta$ is also missing at $v$
+under $\varphi$.
+
+Finally apply \noderef{ScheideDefectiveChainPathExists} to the replacement
+globally maximum triple, the defective color $\gamma(r)$, the free color
+$\beta$, and the vertex $v\in X_\delta$ missing $\beta$.  It supplies a
+vertex $z$ and a walk $P_\delta$ from $v$ to $z$ satisfying
+\noderef{ScheideDefectiveChainPath}.  Unpacking that predicate, the walk
+is simple, its support is the full $(\gamma(r),\beta)$ component through
+$v$, and $z\notin X_\delta$, which is the required conclusion.
 \end{proof}
