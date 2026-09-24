@@ -15,51 +15,130 @@ includes exact finite indices for all five consecutive nodes and for the
 last vertex and following edge.
 \end{helper}
 \begin{proof}
-Because $\beta$ is missing at $v\in Z$ and differs from $\gamma(r)$,
-\noderef{ScheideReplacementInternalMissing} supplies an individual
-$\beta$-edge $h$ with exact ends $u^1_\delta,u^2_\delta$.
-The edges $f^1_\delta,f^2_\delta$ have exact colors $\delta$ and exact
-ends $v^i_\delta\in Z$, $u^i_\delta\notin V(T)$ by
-\noderef{ScheideReplacementData}.  Hence they are $\delta$-colored
-boundary identities of $V(T)$.  By
-\noderef{ScheideDefectiveChainBoundaryEdges}, both edge-nodes occur on
-$P$.
+Put $X=V(T)$, put $r=\gammaIndex(\delta)$, and put
+$Z=X\setminus\{u^1_{\gamma(r)},u^2_{\gamma(r)}\}$.  Since $\beta$ is
+missing at $v\in Z$ and $\beta\ne\gamma(r)$,
+\noderef{ScheideReplacementInternalMissing} supplies an edge identity
+$h$ such that
+\[
+ \varphi(h)=\beta,
+ \qquad \operatorname{ends}(h)=
+       \{u^1_\delta,u^2_\delta\}.                         \tag{1}
+\]
+By \noderef{ScheideReplacementData}, for $i=1,2$ the edge
+$f^i_\delta$ has color $\delta$, its tree end $v^i_\delta$ lies in
+$Z$, and its other end $u^i_\delta$ lies outside $X$.  Thus the
+definitions \noderef{BoundaryEdges} and \noderef{BoundaryColorEdges}
+put both identities in $\partial_{\varphi,\delta}(X)$.  Applying
+\noderef{ScheideDefectiveChainBoundaryEdges} to the supplied full path
+shows that the two edge-nodes $f^1_\delta,f^2_\delta$ occur on $P$.
+The adjacencies through (1) then put the nodes
+$u^1_\delta,h,u^2_\delta$ in the same component.  Since
+\noderef{ScheideDefectiveChainPath} identifies the support of $P$ with
+that entire component, all five named nodes occur on $P$.
 
-At $u^i_\delta$, the named $f^i_\delta$ and $h$ are respectively the
-incident $\delta$- and $\beta$-edges.  Properness, from the globally
-maximum field of \noderef{ScheideReducedConfiguration}, makes each the
-unique incident edge of its color.
-Every edge-node has only its two endpoint incidences, the ends of $h$ are
-distinct by looplessness, and
-\noderef{TwoColorIncidenceDegreeAtMostTwo} excludes branching anywhere
-in the two-color incidence graph.  Since $P$ is simple and its support is
-the whole component by \noderef{ScheideDefectiveChainPath}, the five
-nodes must therefore be consecutive, in the displayed orientation or its
-reverse.  This gives the asserted consecutive finite indices.
+We next justify their order, including the point that the component is
+not a cycle.  The globally maximum field of
+\noderef{ScheideReducedConfiguration} contains a proper partial coloring.
+Unpacking \noderef{IsProperEdgeColoring}, two distinct edges of color
+$\delta$ incident with one vertex would be adjacent in the sense of
+\noderef{AdjacentEdges} and hence are impossible.  Moreover, by the
+definitions \noderef{MissingColors} and \noderef{PresentColors}, no
+$\beta$-colored edge is incident with the starting vertex $v$.  The walk
+is nontrivial because $v\in X$ whereas its terminal vertex $z$ is outside
+$X$.  Its first step therefore gives one neighbor of $v$ in the incidence
+graph, and the preceding two observations show that this is its unique
+neighbor.  Here \noderef{TwoColorIncidenceGraph} is used literally: a
+neighbor of the vertex-node $v$ is an individual incident edge identity
+whose color is $\delta$ or $\beta$.
 
-The path starts at a vertex of $V(T)$ and ends outside it, so its finite
-order has a last vertex-node $w$ belonging to $V(T)$.  The full-path data
-and this last occurrence are exactly the witnesses in
-\noderef{ScheideExitVertex}; thus $w$ lies in
-\noderef{ScheideExitVertices}.  By
-\noderef{ScheideStructuralExitsInBase}, $w$ is a base vertex and hence
-belongs to $Z$.  Let $q$ be the immediately following edge-node.  Its
-two adjacent vertex-nodes lie respectively inside and outside $V(T)$, so
-\noderef{BoundaryEdges} makes $q$ a boundary identity.  It cannot have
-color $\beta$: $\beta$ is missing on the closed set $V(T)$ by
-\noderef{ScheideGlobalMaximumOrder}, and
-\noderef{ColoredVertexSetClosed} forbids such a boundary color.  Hence
-$q$ has color $\delta$.
+Every incidence node has degree at most two by
+\noderef{TwoColorIncidenceDegreeAtMostTwo}; that degree bound itself is
+the consequence of the endpoint-pair definition in
+\noderef{LooplessMultigraph} and of
+\noderef{AdjacentEdges} together with
+\noderef{IsProperEdgeColoring}.  We claim that whenever two nodes of the
+component are adjacent, their occurrences on $P$ are consecutive.  Let
+their indices be $i<j$.  If $i=0$, uniqueness of the neighbor of $v$
+forces $j=1$.  If $i>0$ and $j>i+1$, the predecessor of the node at $i$,
+its successor, and the node at $j$ are three distinct neighbors: they are
+neighbors because $P$ is a walk, and they are distinct because $P$ is
+simple.  This contradicts the degree-two bound.  Thus $j=i+1$, proving
+the claim for either orientation.
 
-Its tree end is in $Z$ and its other end is outside $V(T)$, so the
-exact-three clause of \noderef{ScheideReplacementData} says that
-$q$ is one of $f^0_\delta,f^1_\delta,f^2_\delta$.  If it were either of
-the latter two, the forced five-node segment would pass through the other
-one and return to a later vertex of $Z$, contradicting the choice of $w$.
-Thus $q=f^0_\delta$.  Its exact endpoint record in
-\noderef{ScheideDefectiveSetup} gives $w=v^0_\delta$.  Since the
-$f^1_\delta$--$f^2_\delta$ excursion returns to $Z$, it occurs before
-this final departure.  Reading the occurrences in the finite path order
-gives all index equalities, the strict order, and the final assertion that
-every later vertex-node is outside $V(T)$.
+The exact endpoint equations give the four incidence adjacencies
+\[
+ f^1_\delta-u^1_\delta-h-u^2_\delta-f^2_\delta.           \tag{2}
+\]
+The colors show $f^1_\delta\ne h\ne f^2_\delta$: indeed $\delta$ is not
+missing at $v$, since closedness of $X$ from
+\noderef{ScheideGlobalMaximumOrder} and the $\delta$-boundary edge
+$f^1_\delta$ exclude that, whereas $\beta$ is missing at $v$.
+Consequently $\delta\ne\beta$.  Also
+$u^1_\delta\ne u^2_\delta$, since otherwise (1) would be a loop,
+contrary to \noderef{LooplessMultigraph}.  Apply the preceding adjacency
+claim successively to (2).  A reversal at an intermediate step would
+repeat respectively $f^1_\delta$, one of the two outside vertices, or
+$h$, contradicting simplicity and these inequalities.  Hence all four
+steps point in the same direction.  This produces indices
+$i_0<i_1<i_2<i_3<i_4$, consecutive one by one, with the five values in
+the displayed order or in its reverse.
+
+It remains to identify the last departure.  Among the finitely many
+positions of $P$, choose the largest index $q_v$ whose node is a
+vertex-node $w$ in $X$.  This set of positions is nonempty because it
+contains the starting position.  Also $q_v<|P|$, since the terminal
+vertex $z$ is outside $X$.  By bipartiteness in
+\noderef{TwoColorIncidenceGraph}, the node at $q_f=q_v+1$ is an edge-node,
+say $f$, and the following node is a vertex-node $x$.  Maximality of
+$q_v$ gives $x\notin X$.  The two walk adjacencies say that $f$ is
+incident with $w$ and $x$; simplicity gives $w\ne x$, and the unordered
+endpoint pair in \noderef{LooplessMultigraph} is therefore exactly
+$\{w,x\}$.  Hence \noderef{BoundaryEdges} makes $f$ a boundary identity
+of $X$.  Its color is $\delta$ or $\beta$ by
+\noderef{TwoColorIncidenceGraph}.  The latter is impossible: $\beta$ is
+missing at $v\in X$, while closedness from
+\noderef{ScheideGlobalMaximumOrder}, interpreted by
+\noderef{ColoredVertexSetClosed}, forbids a $\beta$-colored boundary
+edge.  Thus $\varphi(f)=\delta$.
+
+The data $v,\beta,\delta,z,P,q_v$ and the defining maximality of $q_v$
+satisfy every clause of \noderef{ScheideExitVertex} for $w$; hence $w$
+belongs to \noderef{ScheideExitVertices}.  By
+\noderef{ScheideStructuralExitsInBase}, $w=C.y(a)$ for some $a<p$.
+We now verify the omitted implication ``base vertex, hence in $Z$''.
+The ordered layout in \noderef{ScheideReducedConfiguration}, through
+its inherited \noderef{ScheideStructuralConfiguration} data, places
+$C.y(a)$ at tree position $a<p$, while the two deleted block vertices
+occupy positions $p+2r$ and $p+2r+1$.  These positions are distinct, and
+the vertex map is injective by \noderef{TreeSequence}.  Therefore $w$
+is neither deleted block vertex, so $w\in Z$.
+
+We have now shown that $f$ is a $\delta$-colored boundary identity of
+$Z$, with the incident vertex $x$ outside the larger set $X$.  The
+exact-three clause of \noderef{ScheideReplacementData} gives
+\[
+                    f\in\{f^0_\delta,f^1_\delta,f^2_\delta\}.       \tag{3}
+\]
+The excursion (2) returns to $X$ after its last displayed edge.  More
+explicitly, in the first orientation the node following
+$f^2_\delta$ must be $v^2_\delta\in Z$: its other adjacent node is
+$u^2_\delta$, its exact ends are
+$\{v^2_\delta,u^2_\delta\}$, and simplicity forbids returning to the
+previous node.  In the reverse orientation the same argument after
+$f^1_\delta$ gives $v^1_\delta\in Z$.  Thus an $X$-vertex occurs at
+index $i_4+1$, and maximality of $q_v$ yields $i_4<q_v$.  Since
+$q_f=q_v+1$, simplicity of $P$ now shows that its edge-node $f$ cannot
+equal either already occurring identity $f^1_\delta$ or
+$f^2_\delta$.  Equation (3) therefore forces $f=f^0_\delta$.
+
+Finally, \noderef{ScheideDefectiveSetup} gives
+$\operatorname{ends}(f^0_\delta)=\{v^0_\delta,u^0_\delta\}$ with
+$u^0_\delta\notin X$.  Since its endpoint $w$ lies in $X$, necessarily
+$w=v^0_\delta$.  The chosen indices satisfy the four successor
+equalities, $i_4<q_v$, and $q_f=q_v+1$; their path values are exactly the
+five nodes of (2), followed at the last departure by
+$v^0_\delta,f^0_\delta$.  The maximal definition of $q_v$ says directly
+that every later vertex-node lies outside $X$, which is the remaining
+assertion.
 \end{proof}
