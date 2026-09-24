@@ -10,43 +10,172 @@ Furthermore, every $\gamma$-colored edge under $\varphi_\delta$ incident
 with $U_\delta$ has no incident vertex in $Z$.
 \end{helper}
 \begin{proof}
-First prove the last assertion directly.  If a
-$\varphi_\delta$-$\gamma$ edge joined $U_\delta$ to $Z$, then
-\noderef{ScheideReplacementPairFixed} would give the same individual edge
-color $\gamma$ under $\varphi$.  Its $Z$-end lies in $V(T)$ and its
-$U_\delta$-end lies outside $V(T)$, so it would be an original
-$\gamma$-colored boundary edge.  This contradicts original closedness
-from \noderef{ScheideGlobalMaximumOrder}, because $\gamma$ is missing at
-$v^0_\delta$ by \noderef{ScheideDefectiveSetup}.
+Put $r=\gammaIndex(\delta)$, $\gamma=\gamma(r)$,
+\[
+ \varphi_\delta=
+ \operatorname{swap}_{\gamma,\delta}(\varphi;v^0_\delta),
+ \qquad X_\delta=V(T_\delta),
+ \qquad Z=V(T)\setminus
+   \{u^1_\gamma,u^2_\gamma\}.
+\]
+We first fix all maximum and set data used below.  The supplied
+\noderef{ScheideReducedConfiguration} extends the structural configuration
+of \noderef{ScheideStructuralConfiguration}; in particular, it contains
+the explicitly named original globally maximum triple
+$(T,e_0,\varphi)$.  On the replacement side,
+\noderef{ScheideReplacementMaximum}, instantiated with the present
+$G,k,e_0,\varphi,T,C,D,\delta$ and replacement data, states simultaneously
+that $\varphi_\delta$ is proper, that exactly $e_0$ is uncolored, and that
+$(T_\delta,e_0,\varphi_\delta)$ is globally maximum.  We use this one
+replacement maximum certificate throughout the proof.  Finally, the exact
+vertex-set clause of \noderef{ScheideReplacementData} gives
+\[
+                     X_\delta=Z\cup U_\delta,
+ \qquad U_\delta=\{u^1_\delta,u^2_\delta\},                 \tag{1}
+\]
+and says separately that both vertices of $U_\delta$ lie outside $V(T)$.
+Thus $Z\cap U_\delta=\varnothing$, and the assumed $v\in Z$ also lies in
+$X_\delta$.
 
-By \noderef{ScheideReplacementInternalMissing}, the original missing
-occurrence of $\beta$ in $Z$ gives a $\beta$-edge internal to
-$U_\delta$.  The fixation theorem
-\noderef{ScheideReplacementPairFixed} preserves its color under
-$\varphi_\delta$.  Replacement properness makes it the unique incident
-$\beta$-edge at each endpoint, so no $\beta$-edge joins $U_\delta$ to
-$Z$.  Together with the preceding paragraph, neither path color crosses
-directly between these two sets.
+We next prove, retaining individual edge identities, that neither path
+color crosses directly between $Z$ and $U_\delta$.  Consider first an
+edge $a$ with $\varphi_\delta(a)=\gamma$ incident with a vertex of
+$U_\delta$.  By \noderef{ScheideReplacementPairFixed}, the same identity
+satisfies $\varphi(a)=\gamma$.  If $a$ were also incident with
+$w\in Z$, its other incident vertex in $U_\delta$ would be outside
+$V(T)$ by \noderef{ScheideReplacementData}, whereas $w\in V(T)$.
+The endpoint-pair convention in \noderef{LooplessMultigraph}, the
+incidence convention in \noderef{Incident}, and the definition
+\noderef{BoundaryEdges} therefore make $a$ an original boundary identity
+in $\partial_G(V(T))$.  Apply \noderef{ScheideGlobalMaximumOrder} to the
+original globally maximum triple inherited above.  Its last clause says
+that $V(T)$ is closed.  Unfolding that clause through
+\noderef{ColoredVertexSetClosed}, the boundary identity $a$ cannot have
+color $\gamma$, since \noderef{ScheideDefectiveSetup} states that
+$\gamma$ is missing at $v^0_\delta\in V(T)$.  This contradiction proves
+\[
+ \text{no $\varphi_\delta$-$\gamma$ edge joins $Z$ to $U_\delta$.} \tag{2}
+\]
+Notice that this proves verbatim the final assertion of the helper.
 
-Suppose $P_\delta$ first reached $U_\delta$.  Starting in $Z$, it must
-first leave $X_\delta$ and later enter the pair.  Take the last departure
-from $Z$ before that first entry.  Closedness of $X_\delta$ excludes the
-missing color $\beta$, so its color is $\gamma$.  The exact classification
-in \noderef{ScheideSymmetricReplacementBoundaryConfiguration} makes this
-edge one of $f^0_\delta,f^1_\gamma,f^2_\gamma$.  If it is a deleted
-block edge, the forced excursion in
-\noderef{ScheideSymmetricReplacementPathOrder} returns through the other
-one to $Z$ before proceeding, contrary to the departure choice.  If it
-is $f^0_\delta$, that same order theorem places it after the last
-$X_\delta$-vertex, so the path cannot subsequently enter
-$U_\delta\subseteq X_\delta$.  This contradiction proves that both pair
-vertices are absent from the path support.
+For the second color, the original missing occurrence of $\beta$ at
+$v\in Z$ and the hypothesis $\beta\ne\gamma$ meet the exact assumptions
+of \noderef{ScheideReplacementInternalMissing}.  Hence there is an edge
+identity $b$ such that
+\[
+       \varphi(b)=\beta,
+       \qquad G.\operatorname{ends}(b)
+                    =\{u^1_\delta,u^2_\delta\}.              \tag{3}
+\]
+Both ends make $b$ incident with $U_\delta$, so
+\noderef{ScheideReplacementPairFixed} gives
+$\varphi_\delta(b)=\beta$.  The properness supplied by the already fixed
+instance of \noderef{ScheideReplacementMaximum}, interpreted using
+\noderef{IsProperEdgeColoring}, makes $b$ the unique
+$\varphi_\delta$-$\beta$ edge incident with either of its two ends:
+a distinct such edge would be adjacent to $b$ at that end by
+\noderef{AdjacentEdges} and would have the same color.  Equation (3) has
+both ends in $U_\delta$, so this uniqueness proves
+\[
+ \text{no $\varphi_\delta$-$\beta$ edge joins $Z$ to $U_\delta$.} \tag{4}
+\]
 
-Finally, \noderef{ScheideDefectiveChainBoundaryEdges} says that every
-$\gamma$-colored boundary identity of $X_\delta$ occurs as an edge-node
-on the full path.  If one were incident with $u^1_\delta$ or
-$u^2_\delta$, the corresponding vertex-node would be in the same
-two-color component and hence, by the support equality in
-\noderef{ScheideDefectiveChainPath}, in the support of $P_\delta$.  This
-contradicts the avoidance just proved and establishes the boundary claim.
+Apply \noderef{ScheideSymmetricReplacementPathOrder} to the given
+$\beta,v,z,P_\delta$.  It supplies exact finite path indices
+$i_0,\ldots,i_4,q_v,q_f$.  At $i_0,\ldots,i_4$ the path contains, in one
+orientation or the other, the consecutive nodes
+\[
+ f^1_\gamma,u^1_\gamma,h,u^2_\gamma,f^2_\gamma,             \tag{5}
+\]
+where $h$ is a $\varphi_\delta$-$\beta$ edge with the displayed two
+block vertices as its exact ends.  The same result says that
+\[
+ i_4<q_v,\qquad q_f=q_v+1,\qquad
+ P_\delta(q_v)=v^0_\delta,\qquad P_\delta(q_f)=f^0_\delta,       \tag{6}
+\]
+and every vertex-node after $q_v$ lies outside $X_\delta$.
+
+Suppose for a contradiction that a vertex of $U_\delta$ occurs in the
+support of $P_\delta$, and choose its first occurrence $t$.  The starting
+node is $v\in Z$, so there is a $Z$-vertex occurrence before $t$; among
+the finitely many such indices choose the largest one, say $q$, and call
+its vertex $w\in Z$.  By the bipartite adjacency definition in
+\noderef{TwoColorIncidenceGraph}, the node at $q+1$ is an edge-node,
+say $a$, and the node at $q+2$ is a vertex-node, say $x$.  Both walk
+adjacencies make $a$ incident with $w$ and $x$, and its
+$\varphi_\delta$-color is either $\gamma$ or $\beta$.  Simplicity, which
+is part of \noderef{ScheideDefectiveChainPath}, makes $w\ne x$; hence
+\noderef{LooplessMultigraph} and \noderef{Incident} identify the exact
+ends of $a$ as
+$\{w,x\}$.
+
+We claim that $x\notin X_\delta$.  If $x\in Z$, then its occurrence is
+still before $t$ and is later than $q$, contrary to the maximal choice of
+$q$.  If $x\in U_\delta$, then $a$ directly joins $Z$ to $U_\delta$,
+contradicting (2) or (4) according to its color.  Equation (1) exhausts
+the vertices of $X_\delta$, proving the claim.  Thus $a$ is a boundary
+identity of $X_\delta$ in the exact sense of
+\noderef{BoundaryEdges}.  Applying \noderef{ScheideGlobalMaximumOrder}
+to the replacement globally maximum triple fixed above shows that
+$X_\delta$ is closed.  Since $\beta$ is missing at $v\in X_\delta$,
+\noderef{ColoredVertexSetClosed} rules out the color $\beta$ on this
+boundary identity.  Therefore
+\[
+                         \varphi_\delta(a)=\gamma.             \tag{7}
+\]
+
+The data $\varphi_\delta(a)=\gamma$, $w\in Z$, $x\notin X_\delta$,
+and $G.\operatorname{ends}(a)=\{w,x\}$ meet exactly the quantified
+classification in
+\noderef{ScheideSymmetricReplacementBoundaryConfiguration}.  Hence
+\[
+             a\in\{f^0_\delta,f^1_\gamma,f^2_\gamma\}.        \tag{8}
+\]
+Suppose $a$ is one of the two deleted-block identities.  Simplicity of
+the path gives that edge-node a unique index, so its occurrence at
+$q+1$ is one of its occurrences in (5).  It cannot be the second edge
+of (5): the immediately preceding node there is one of the deleted block
+vertices $u^1_\gamma,u^2_\gamma$, whereas the node at $q$ is the vertex
+$w\in Z$.  If it is the first edge, the four consecutive steps in (5)
+lead through the other deleted-block edge.  That last edge has, by the
+endpoint clause of \noderef{ScheideStructuralConfiguration}, one block
+end and one base end.  Simplicity forbids the next node from returning to
+the immediately preceding block end, so the next node is its base end.
+The explicit vertex positions in the same structural configuration put
+every base vertex in $Z$, while the vertex-set identity in
+\noderef{ScheideReplacementData} puts the two deleted block vertices
+outside $X_\delta$.  Consequently this return to $Z$ occurs after $q$
+and before $t$, contradicting the maximal choice of $q$.
+
+The only remaining case in (8) is $a=f^0_\delta$.  Again path simplicity
+identifies its unique occurrence $q+1$ with the index $q_f$ in (6).
+Since $q+1<t$, we have $q_v< t$.  But the node at $t$ is a vertex of
+$U_\delta\subseteq X_\delta$ by (1), contradicting the final clause of
+(6), which places every later vertex-node outside $X_\delta$.  All three
+cases in (8) are impossible.  We have proved
+\[
+       \operatorname{inl}(u^1_\delta),
+       \operatorname{inl}(u^2_\delta)\notin\operatorname{supp}(P_\delta).
+                                                                    \tag{9}
+\]
+
+It remains to derive the asserted boundary avoidance.  Instantiate
+\noderef{ScheideDefectiveChainBoundaryEdges} with the same replacement
+global-maximum certificate from \noderef{ScheideReplacementMaximum},
+with defective color $\gamma$ as stated by
+\noderef{ScheideSymmetricReplacementBoundaryConfiguration}, free color
+$\beta$, starting vertex $v\in X_\delta$, its assumed missingness, and
+the supplied full path.  It says that every identity in
+$\partial_{\varphi_\delta,\gamma}(X_\delta)$ occurs as an edge-node in
+the support of $P_\delta$; here the colored boundary is interpreted
+exactly by \noderef{BoundaryColorEdges} and \noderef{BoundaryEdges}.
+If such an identity $c$ were incident with $u^1_\delta$ or
+$u^2_\delta$, then its color $\gamma$ and the definition
+\noderef{TwoColorIncidenceGraph} would make the corresponding vertex-node
+adjacent to the edge-node of $c$.  Thus both nodes lie in the same
+$(\gamma,\beta)$ component.  The full-component equality in
+\noderef{ScheideDefectiveChainPath} identifies this entire component with
+the support of $P_\delta$, putting the pair vertex-node on the path and
+contradicting (9).  This proves the boundary assertion; (2) is the final
+noncrossing assertion, so all three conclusions follow.
 \end{proof}
