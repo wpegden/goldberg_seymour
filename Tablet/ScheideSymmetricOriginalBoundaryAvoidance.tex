@@ -9,41 +9,124 @@ with either vertex of that block.  Both conclusions retain exact vertex
 and parallel-edge identities.
 \end{helper}
 \begin{proof}
-Apply \noderef{ScheideSymmetricOriginalPathOrder}.  It gives the forced
-returning excursion through $U_\delta$ and identifies
-$f^0_\delta$ as the edge immediately after the last tree vertex of $P$.
-On the other hand, since $\beta$ is missing in $Z$ and differs from
-$\gamma(\delta)$, \noderef{ScheideStructuralInternalPair} gives a
-$\beta$-edge internal to $U_{\gamma(\delta)}$.  Properness makes this the
-unique incident $\beta$-edge at each of those two vertices, so no
-$\beta$-edge joins the deleted block to $Z$.  Independently,
-\noderef{ScheideDefectiveNoCross} says that no $\delta$-edge joins that
-block to $Z$.
+Put
+\[
+ X=\noderef{TreeSequenceVertexSet}(T),\qquad
+ U=\{u^1_{\gamma(\delta)},u^2_{\gamma(\delta)}\},\qquad
+ Z=X\setminus U.
+\]
+The hypothesis says that $v\in Z$, that $\beta$ is missing at $v$ and
+free for $T$, and that $\beta\ne\gamma(\delta)$.
 
-Suppose $P$ first reached a vertex of the deleted block.  It starts in
-$Z$, and neither path color crosses directly from $Z$ to the block.
-Therefore before that first occurrence it must leave $V(T)$ from a
-vertex of $Z$.  Choose the last such departure before the occurrence.
-Closedness supplied by \noderef{ScheideGlobalMaximumOrder} excludes
-color $\beta$, because $\beta$ is missing on the tree, so the departure
-has color $\delta$.  Its in-end lies in
-$Z$, and the exact-three clause of \noderef{ScheideReplacementData}
-makes it one of $f^0_\delta,f^1_\delta,f^2_\delta$.
+We first prove carefully that no $\beta$-edge joins $U$ to $Z$.  By
+\noderef{ScheideStructuralInternalPair}, there is an individual edge
+identity $b$ such that
+\[
+ \varphi(b)=\beta,
+ \qquad
+ G.\operatorname{ends}(b)
+   =\{u^1_{\gamma(\delta)},u^2_{\gamma(\delta)}\}.       \tag{1}
+\]
+Unpack the supplied \noderef{ScheideReducedConfiguration}.  As a reduced
+structural configuration it contains the underlying
+\noderef{ScheideStructuralConfiguration}, and in particular its explicitly
+named original globally maximum triple $(T,e_0,\varphi)$.  Unpacking
+\noderef{GlobalMaximumTriple} gives the original $k$-triple
+$(G,e_0,\varphi)$.  Unpacking \noderef{KTriple} in turn gives that
+$\varphi$ is proper in the sense of
+\noderef{IsProperEdgeColoring}.
 
-If it is $f^1_\delta$ or $f^2_\delta$, the consecutive excursion supplied
-by \noderef{ScheideSymmetricOriginalPathOrder} forces a return to $Z$
-through the other named edge before the path can proceed elsewhere.  This
-contradicts the choice of the departure.  If it is $f^0_\delta$, the same
-order theorem places it immediately after the last tree vertex, so the
-path cannot subsequently reach the deleted block, which is contained in
-$V(T)$.  These alternatives are exhaustive.  Hence neither deleted-block
-vertex lies in the support of $P$.
+Fix $u\in U$.  Equation (1) makes $b$ incident with $u$ in the sense of
+\noderef{Incident}.  If a distinct edge identity $a$ of color $\beta$
+were also incident with $u$, then $a$ and $b$ would be adjacent by
+\noderef{AdjacentEdges}.  This contradicts the just-extracted properness.
+Thus $b$ is the unique $\beta$-edge incident with either vertex of $U$.
+Since the two exact ends of $b$ are the two vertices of $U$, no
+$\beta$-edge can join $U$ to $Z$.  Independently,
+\noderef{ScheideDefectiveNoCross}, instantiated with the present defective
+color $\delta$, says that no $\delta$-edge has one incident vertex in
+$U$ and another in $Z$.  Hence neither of the two path colors crosses
+directly between $Z$ and $U$.                                      \tag{2}
 
-Finally, \noderef{ScheideDefectiveChainBoundaryEdges} says that every
-$\delta$-colored boundary identity of $V(T)$ is an edge-node in the full
-path support.  If such an identity were incident with a deleted-block
-vertex, the adjacency definition in \noderef{TwoColorIncidenceGraph}
-would put that vertex-node in the same full component, hence in the
-support of $P$ by \noderef{ScheideDefectiveChainPath}.  This contradicts
-the first conclusion and proves the asserted boundary avoidance.
+Apply \noderef{ScheideSymmetricOriginalPathOrder} to the present
+$\beta,v,z,P$.  It supplies exact path indices for the consecutive
+five-node excursion
+\[
+ f^1_\delta,u^1_\delta,h,u^2_\delta,f^2_\delta
+\]
+or its reverse, where $h$ is the internal $\beta$-edge of $U_\delta$.
+It also supplies exact indices $q_v,q_f$ such that $q_f=q_v+1$, the
+node at $q_v$ is $v^0_\delta$, the node at $q_f$ is $f^0_\delta$, the
+excursion ends before $q_v$, and every vertex-node strictly after $q_v$
+lies outside $X$.                                                   \tag{3}
+
+Suppose for a contradiction that a vertex of $U$ occurs on $P$.  Among
+its finitely many path indices choose the first such index $t$.  Since
+the initial vertex $v$ lies in $Z$, there is a path index before $t$
+whose node is a vertex of $Z$; choose the last such index $q$.  By the
+bipartite adjacency definition in
+\noderef{TwoColorIncidenceGraph}, the node at $q+1$ is an edge-node,
+say the identity $f$, and the node at $q+2$ is a vertex-node, say $x$.
+The two walk adjacencies say that $f$ is incident with both the $Z$-vertex
+at $q$ and $x$, and that its color is $\delta$ or $\beta$.  Simplicity
+of the supplied full path and the endpoint-pair convention in
+\noderef{LooplessMultigraph} identify these as the two exact ends of
+$f$.
+
+The vertex $x$ lies outside $X$.  Indeed, if $x\in Z$, then its index
+$q+2\le t$ is in fact strictly below $t$ and contradicts the maximal
+choice of $q$.  If instead $x\in U$, then $f$ crosses directly from $Z$
+to $U$, contradicting (2), whichever of its two possible colors it has.
+Since $X=Z\mathbin{\dot\cup}U$, these are all possibilities inside $X$.
+Thus the definition \noderef{BoundaryEdges} makes $f$ a boundary edge of
+both $X$ and $Z$.                                                   \tag{4}
+
+Instantiate \noderef{ScheideGlobalMaximumOrder} with the original
+globally maximum triple extracted above.  Its last clause says that $X$
+is closed.  By \noderef{ColoredVertexSetClosed}, because $\beta$ is
+missing at $v\in X$, this closedness forbids a $\beta$-colored boundary
+edge of $X$.  Consequently (4) and the two-color incidence definition
+force $\varphi(f)=\delta$.  The
+exact-three clause of \noderef{ScheideReplacementData}, applied to the
+$Z$-end and the other end outside $X$, now gives
+\[
+                 f\in\{f^0_\delta,f^1_\delta,f^2_\delta\}.          \tag{5}
+\]
+
+Suppose first that $f$ is $f^1_\delta$ or $f^2_\delta$.  Its occurrence
+at $q+1$ cannot be the second edge of the excursion in (3): the node
+immediately before that second edge is one of the outside vertices
+$u^1_\delta,u^2_\delta$, whereas the node at $q$ lies in $Z\subseteq X$.
+Thus it is the first excursion edge.  The exact consecutive indices in
+(3) carry the path through the two outside vertices and the internal
+$\beta$-edge to the other named $\delta$-edge.  That other edge has exact
+ends $\{v^i_\delta,u^i_\delta\}$ by
+\noderef{ScheideReplacementData}; simplicity prevents the next node from
+returning to the immediately preceding outside vertex, so the next node
+is $v^i_\delta\in Z$.  It occurs after $q$ and still before $t$, contrary
+to the maximal choice of $q$.
+
+The remaining alternative in (5) is $f=f^0_\delta$.  Simplicity gives
+this edge-node a unique path index, so (3) identifies $q+1$ with $q_f$.
+Therefore $t>q_f>q_v$.  But the node at $t$ is a vertex of $U\subseteq X$,
+whereas the last clause of (3) says that every vertex-node after $q_v$
+is outside $X$.  This is again a contradiction.  All alternatives in
+(5) are impossible, proving
+\[
+       u^1_{\gamma(\delta)},u^2_{\gamma(\delta)}\notin V(P).        \tag{6}
+\]
+
+Finally instantiate \noderef{ScheideDefectiveChainBoundaryEdges} with
+the same explicitly identified original globally maximum triple, the
+defective color $\delta$, the free color $\beta$, its missing witness
+$v$, and the supplied full path.  It says that every individual
+$\delta$-colored boundary identity of $X$ occurs as an edge-node in the
+support of $P$.  If such an identity $a$ were incident with a vertex
+$u\in U$, then \noderef{TwoColorIncidenceGraph} would make the
+vertex-node $u$ adjacent to the edge-node $a$.  Hence they lie in the
+same two-color component.  The support-equality clause in
+\noderef{ScheideDefectiveChainPath} identifies that entire component
+with the support of $P$, so the vertex-node $u$ would lie on $P$.
+This contradicts (6) and proves the required boundary avoidance, with
+the individual identity $a$ retained throughout.
 \end{proof}
