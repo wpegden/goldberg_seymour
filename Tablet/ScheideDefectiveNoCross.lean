@@ -201,8 +201,9 @@ theorem ScheideDefectiveNoCross {V E : Type*}
   have hphi2g3 : phi2 g3 = some d.1 := by
     simp [phi2, TwoColorComponentSwap, K, hg3notK, hphi1g3]
 
-  obtain ⟨S, hSvertices, hSlength, hbaseVertices, hbaseEdges, hblockEntries,
-    hedgeCases, hedgeOld, hnotIncident⟩ :=
+  obtain ⟨S, hSvertices, hSlength, hvertexReindex, hedgeReindex,
+    hbaseVertices, hbaseEdges, hblockEntries, hedgeCases, hedgeOld,
+    hnotIncident⟩ :=
     ScheideSelectedBlockDeletion G k e0 phi T C i
   have htreeOld : TashkinovTree G e0 phi T := C.globally_maximum.2.1
   have hunused := ScheideGlobalMaximumUnused G k e0 phi T C.globally_maximum

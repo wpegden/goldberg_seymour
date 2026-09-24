@@ -13,6 +13,18 @@ theorem ScheideSelectedBlockDeletion {V E : Type*}
       TreeSequenceVertexSet S = TreeSequenceVertexSet T \
         {C.blockVertex i 0, C.blockVertex i 1} ∧
       S.length + 2 = T.length ∧
+      (∃ rV : Fin (S.length + 1) → Fin (T.length + 1),
+        (∀ q : Fin (S.length + 1), S.vertex q = T.vertex (rV q)) ∧
+        (∀ q : Fin (S.length + 1), q.val < C.p + 2 * i.val →
+          (rV q).val = q.val) ∧
+        ∀ q : Fin (S.length + 1), C.p + 2 * i.val ≤ q.val →
+          (rV q).val = q.val + 2) ∧
+      (∃ rE : Fin S.length → Fin T.length,
+        (∀ q : Fin S.length, S.edge q = T.edge (rE q)) ∧
+        (∀ q : Fin S.length, q.val < C.p - 1 + 2 * i.val →
+          (rE q).val = q.val) ∧
+        ∀ q : Fin S.length, C.p - 1 + 2 * i.val ≤ q.val →
+          (rE q).val = q.val + 2) ∧
       (∀ a : Fin C.p, ∃ q : Fin (S.length + 1),
         q.val = a.val ∧ S.vertex q = C.y a) ∧
       (∀ a : Fin (C.p - 1), ∃ q : Fin S.length,
