@@ -1,0 +1,69 @@
+\begin{helper}[Deletion and reindexing of one Scheide block]
+Let a reduced Scheide configuration consist of its base followed by its
+ordered two-vertex blocks.  For any selected block index $i$, there is a
+tree-sequence $S$ obtained by deleting exactly the two displayed edges
+and two displayed vertices of block $i$.  It has length
+$\operatorname{len}(T)-2$ and vertex set
+\[
+ V(S)=V(T)\setminus
+ \{u^1_{\gamma_i},u^2_{\gamma_i}\}.
+\]
+Every base vertex and base edge retains its original index.  Every entry
+of every block $r\ne i$ is retained, with its edge immediately before its
+new vertex and after the base.  Conversely every edge of $S$ is either a
+base edge or an edge of a retained block and is an exact edge
+identity of $T$.  No retained edge is incident with either deleted block
+vertex.
+\end{helper}
+\begin{proof}
+Put $m=p+2i$, the old index of the first vertex of the selected block.
+Define the vertex reindexing map on the new indices by
+\[
+ r_V(q)=\begin{cases}q,&q<m,\\q+2,&q\ge m,
+ \end{cases}
+\]
+and define the edge reindexing map by
+\[
+ r_E(q)=\begin{cases}q,&q<m-1,\\q+2,&q\ge m-1.
+ \end{cases}
+\]
+The length equation and position equations in
+\noderef{ScheideReducedConfiguration} show that both maps land in the
+old index ranges and avoid precisely the two selected positions.  They
+are injective: indices on the same side of the gap are translated by the
+same amount, while an index below the gap cannot equal an index at least
+two positions above it.
+
+Set $S.vertex(q)=T.vertex(r_V(q))$ and
+$S.edge(q)=T.edge(r_E(q))$.  Vertex and edge injectivity follow from the
+two reindexing maps and the corresponding fields of
+\noderef{TreeSequence}.  Since $p\ge2$, the first edge lies before the
+deleted block, so the first-edge identity is unchanged.
+
+We verify attachment.  An edge before the gap keeps both its new-vertex
+position and its earlier attachment position.  An edge after the gap is
+an edge of a block $r>i$.  The block-attachment clause of
+\noderef{ScheideReducedConfiguration} says that its endpoints are its
+own block vertex and a base vertex.  Both are retained; the block vertex
+and its edge are shifted down by two positions, while the base attachment
+keeps its original earlier index.  Thus every reindexed edge satisfies
+the attachment equation required by \noderef{TreeSequence}.
+
+The structural position equations now give the claimed entry formulas.
+All base entries keep their indices.  A block $r<i$ keeps its old
+positions, and a block $r>i$ has both positions reduced by two; in either
+case its edge remains immediately before its displayed vertex and its
+edge index is at least $p-1$.  Euclidean division of an index after the
+base by two proves the converse classification: it supplies the unique
+retained block and its member $j\in\{0,1\}$.  This also shows directly
+that every new edge is one of the old exact edge identities.
+
+The image of $r_V$ consists of every old vertex index except $m,m+1$.
+Using the block-position equations and vertex injectivity therefore gives
+the asserted vertex-set equality.  Finally an old base edge has endpoints
+at base positions, and an old block edge has endpoints at its own block
+vertex and a base vertex.  For a retained block its block index differs
+from $i$, so vertex injectivity separates that endpoint from both deleted
+vertices.  Unfolding \noderef{Incident} proves that no retained edge is
+incident with either deleted vertex.
+\end{proof}

@@ -1,0 +1,79 @@
+\begin{helper}[Exact edges selected from a defective crossing]
+Let $d$ be a defective color in a reduced Scheide configuration, put
+$i=\gammaIndex(d)$, $X=V(T)$,
+$U=\{u^1_{\gamma_i},u^2_{\gamma_i}\}$, and $Z=X\setminus U$.
+Suppose that an exact edge identity $g_1$ has color $d$ and is incident
+with a vertex $x\in U$ and a vertex $z_1\in Z$.  Then the two vertices of
+$U$ can be named $u_1,u_2$, with $x=u_1$, and there are exact edge
+identities $g_2,g_3$ and vertices $z_3,w_3$ such that
+\[
+ \begin{gathered}
+ u_1\ne u_2,\quad u_1,u_2\in X,\quad
+ v^0_d,y_0\in Z,\\
+ \alpha_0\ne\gamma_i,\quad \alpha_0\ne d,\quad \gamma_i\ne d,\\
+ \operatorname{ends}(g_1)=\{u_1,z_1\},\qquad
+ \varphi(g_2)=\alpha_0,\quad
+ \operatorname{ends}(g_2)=\{u_1,u_2\},\\
+ g_3\in\partial_d(X),\quad g_3\ne f^0_d,\quad
+ z_3\in Z,\quad w_3\notin X,\quad
+ \operatorname{ends}(g_3)=\{z_3,w_3\}.
+ \end{gathered}
+\]
+Moreover $g_1,g_2,g_3$ are pairwise distinct.
+\end{helper}
+\begin{proof}
+Write the two members of $U$ as $u_1=x$ and $u_2$ for the other member.
+The two block positions in the ordered \noderef{TreeSequence} are
+distinct, so $u_1\ne u_2$; the structural position equations in
+\noderef{ScheideReducedConfiguration} put both
+vertices in $X$.  The two stated incidences of $g_1$, together with the
+endpoint membership in \noderef{Incident} and the loopless law in
+\noderef{LooplessMultigraph}, give
+$\operatorname{ends}(g_1)=\{u_1,z_1\}$.
+
+We locate the two distinguished base vertices.  By
+\noderef{ScheideGlobalMaximumOrder}, $X$ is elementary.  Membership of
+$v^0_d$ in the exit set, supplied by \noderef{ScheideDefectiveSetup},
+and the exit-covering clause give a block color missing at $v^0_d$.
+The same block color is missing at a base vertex by the block-missing
+clause.  Elementariness forces those two vertices to coincide.  Hence
+$v^0_d$ is a base vertex.  The first vertex $y_0$ is also a base vertex.
+Vertex injectivity and the structural position equations separate every
+base position from both positions of the $i$-block.  Thus
+$v^0_d,y_0\in Z$.
+
+The setup \noderef{ScheideDefectiveSetup} already states
+$\alpha_0\ne\gamma_i$.  Since $d$ is defective,
+\noderef{ScheideGlobalMaximumBoundaryFacts} gives at least three exact
+$d$-colored boundary identities.  Choose one.  Closedness from
+\noderef{ScheideGlobalMaximumOrder} says that the color of a boundary
+edge is missing at no vertex of $X$.  By \noderef{MissingColors},
+therefore, $d$ is present at every
+vertex of $X$.  It is distinct from $\alpha_0$, which is missing at
+$y_0$, and from $\gamma_i$, which is missing at $v^0_d$.
+
+Now $\alpha_0$ is missing at the vertex $y_0\in Z$ and is distinct from
+$\gamma_i$.  Applying \noderef{ScheideStructuralInternalPair} gives an
+exact identity $g_2$ of color $\alpha_0$ with endpoint pair
+$\{u_1,u_2\}$.
+
+The setup gives
+$\varphi(f^0_d)=d$, endpoints $\{v^0_d,u^0_d\}$, and
+$u^0_d\notin X$.  Hence $f^0_d\in\partial_d(X)$ and its endpoint in
+$X$ lies in $Z$.  Properness in the globally maximum field of
+\noderef{ScheideReducedConfiguration}, interpreted by
+\noderef{IsProperEdgeColoring}, permits only one $d$-identity incident
+with either $u_1$ or $u_2$.  The internal identity $g_1$ already uses the
+$d$-incidence at $u_1$.  Consequently at most one member of
+$\partial_d(X)$ has its endpoint in $U$.  Since this boundary-color set
+has at least three members and $f^0_d$ has its endpoint in $Z$, there is
+a member $g_3\ne f^0_d$ whose endpoint in $X$ lies in $Z$.  Unfolding
+\noderef{BoundaryColorEdges} and \noderef{BoundaryEdges} gives vertices
+$z_3\in Z$ and $w_3\notin X$ with the displayed endpoint equation.
+
+Finally, $g_1$ is internal to $X$ whereas $g_3$ is a boundary identity,
+so they differ.  The identity $g_2$ has color $\alpha_0$, while $g_1$
+and $g_3$ have color $d\ne\alpha_0$; hence it differs from both.  These
+arguments count exact edge identities and therefore remain valid in the
+presence of parallel edges.
+\end{proof}
