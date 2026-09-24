@@ -1,24 +1,32 @@
 import Tablet.OutsideTreeColorSwap
+import Tablet.BoundaryEdges
 import Tablet.GlobalMaximumTriple
+import Tablet.Incident
 import Tablet.IsOneEdgeUncolored
 import Tablet.KTriple
 import Tablet.MissingColors
+import Tablet.ScheideDefectiveSetup
 import Tablet.ScheideDefectiveReturnData
 import Tablet.ScheideDefectiveSecondTerminalComponent
 import Tablet.ScheideDefectiveTerminalComponent
 import Tablet.ScheideGlobalMaximumUnused
 import Tablet.ScheideReducedConfiguration
 import Tablet.ScheideSelectedBlockDeletion
+import Tablet.ScheideStructuralConfiguration
 import Tablet.ScheideStructuralExitsInBase
+import Tablet.StableColoring
 import Tablet.TashkinovTree
+import Tablet.TreeIncidentEdge
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceBoundaryEdgeAppendExists
 import Tablet.TreeSequence
 import Tablet.TreeSequenceVertexSet
 import Tablet.TreeUsedColors
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapMissingBehavior
 import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ScheideDefectiveDeletedTreePair]
 theorem ScheideDefectiveDeletedTreePair {V E : Type*}
@@ -48,4 +56,545 @@ theorem ScheideDefectiveDeletedTreePair {V E : Type*}
             C.blockVertex R.blockIndex 1}) ∪ {D.u0 d} ∧
       phi2 R.f1 = some d.1 ∧ psi2 (D.f0 d) = some d.1 := by
 -- BODY
-  sorry
+  classical
+  dsimp only
+  let X := TreeSequenceVertexSet T
+  let i := D.gammaIndex d
+  let j := R.blockIndex
+  let gamma := C.gamma i
+  let gammaJ := C.gamma j
+  let phi1 := OutsideTreeColorSwap T phi D.alpha0 gamma
+  let K := TwoColorComponent G phi1 gamma d.1 (Sum.inl (D.v0 d))
+  let phi2 := TwoColorComponentSwap G phi1 gamma d.1 (Sum.inl (D.v0 d))
+  let psi1 := OutsideTreeColorSwap T phi gamma gammaJ
+  let KJ := TwoColorComponent G psi1 gammaJ d.1 (Sum.inl R.v1)
+  let psi2 := TwoColorComponentSwap G psi1 gammaJ d.1 (Sum.inl R.v1)
+
+  have hterminal := ScheideDefectiveTerminalComponent G k e0 phi T C D d
+  dsimp only at hterminal
+  rcases hterminal with
+    ⟨hproper1, hone1, hstable1, hfixed1, htailK, hf0K, hKtree,
+      htreeEdgesOutside, hKcolors⟩
+  have hterminalJ :=
+    ScheideDefectiveSecondTerminalComponent G k e0 phi T C D d R
+  dsimp only at hterminalJ
+  rcases hterminalJ with
+    ⟨hproperJ1, honeJ1, hstableJ1, hfixedJ1, htailKJ, hf1KJ, hKJtree,
+      htreeEdgesOutsideJ, hf1colorJ1, hproperJ2, honeJ2, hdeltaMissingJ2,
+      hotherMissingJ2, hf0colorJ2⟩
+
+  have tree_edge_incident : ∀ q : Fin T.length, TreeIncidentEdge T (T.edge q) := by
+    intro q
+    obtain ⟨a, ha⟩ := T.attaches q
+    refine ⟨T.vertex q.succ, ?_, ?_⟩
+    · simp [TreeSequenceVertexSet]
+    · simp [Incident, ha]
+  have component_vertex_of_edge {v : V} {e : E}
+      (heK : Sum.inr e ∈ K) (hve : Incident G v e)
+      (hecolor : phi1 e = some gamma ∨ phi1 e = some d.1) :
+      Sum.inl v ∈ K := by
+    let H := TwoColorIncidenceGraph G phi1 gamma d.1
+    have hadj : H.Adj (Sum.inl v) (Sum.inr e) := by
+      simpa [H, TwoColorIncidenceGraph] using ⟨hve, hecolor⟩
+    change H.connectedComponentMk (Sum.inr e) =
+      H.connectedComponentMk (Sum.inl (D.v0 d)) at heK
+    change H.connectedComponentMk (Sum.inl v) =
+      H.connectedComponentMk (Sum.inl (D.v0 d))
+    exact (SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj hadj).trans heK
+
+  have hv0X : D.v0 d ∈ X := by
+    have hv0base := ScheideStructuralExitsInBase G k e0 phi T C (D.v0_is_exit d)
+    obtain ⟨a, _, ha⟩ := Finset.mem_image.mp hv0base
+    rw [← ha, ← C.base_vertex_position a]
+    simp [X, TreeSequenceVertexSet]
+  have hv1X : R.v1 ∈ X := by simpa [X] using R.v1_mem
+  have hgammaDelta : gamma ≠ d.1 := by simpa [gamma, i] using R.gamma_ne_delta
+  have hgammaJDelta : gammaJ ≠ d.1 := by
+    simpa [gammaJ, j] using R.gammaJ_ne_delta
+  have hbehavior := TwoColorComponentSwapMissingBehavior G phi1 gamma d.1
+    hgammaDelta hproper1 (Sum.inl (D.v0 d))
+  have hbehaviorJ := TwoColorComponentSwapMissingBehavior G psi1 gammaJ d.1
+    hgammaJDelta hproperJ1 (Sum.inl R.v1)
+  have hgammaMissing1 : gamma ∈ MissingColors G phi1 (D.v0 d) := by
+    rw [hstable1.2 (D.v0 d) (by simpa [X] using hv0X)]
+    simpa [gamma, i] using D.gamma_missing_at_v0 d
+  have hdeltaMissing2 : d.1 ∈ MissingColors G phi2 (D.v0 d) := by
+    simpa [phi2, K] using
+      hbehavior.2.1 (D.v0 d) (by rfl) hgammaMissing1
+
+  have hphi1f1 : phi1 R.f1 = some d.1 := by
+    apply (hfixed1 R.f1 ?_).trans R.f1_color
+    exact ⟨R.v1, by simpa [X] using hv1X,
+      by simp [Incident, R.f1_ends]⟩
+  have hf1NotK : Sum.inr R.f1 ∉ K := by
+    intro hf1K
+    have hv1f1 : Incident G R.v1 R.f1 := by
+      simp [Incident, R.f1_ends]
+    have hv1K := component_vertex_of_edge hf1K hv1f1 (Or.inr hphi1f1)
+    exact R.v1_ne_v0 ((hKtree R.v1 (by simpa [X] using hv1X)).mp hv1K)
+  have hf1color2 : phi2 R.f1 = some d.1 := by
+    simp [phi2, TwoColorComponentSwap, K, hf1NotK, hphi1f1]
+
+  obtain ⟨Tgamma, hTgammaVertices, hTgammaLength, hTgammaVertexReindex,
+      hTgammaEdgeReindex, hTgammaBaseVertices, hTgammaBaseEdges,
+      hTgammaBlockEntries, hTgammaEdgeCases, hTgammaEdgeOld,
+      hTgammaNotIncident⟩ :=
+    ScheideSelectedBlockDeletion G k e0 phi T C i
+  obtain ⟨TgammaJ, hTgammaJVertices, hTgammaJLength,
+      hTgammaJVertexReindex, hTgammaJEdgeReindex, hTgammaJBaseVertices,
+      hTgammaJBaseEdges, hTgammaJBlockEntries, hTgammaJEdgeCases,
+      hTgammaJEdgeOld, hTgammaJNotIncident⟩ :=
+    ScheideSelectedBlockDeletion G k e0 phi T C j
+
+  have htreeOld : TashkinovTree G e0 phi T := C.globally_maximum.2.1
+  have hunused := ScheideGlobalMaximumUnused G k e0 phi T C.globally_maximum
+  have edge_color_phi2 (q : Fin T.length) (c : Fin k)
+      (hc : phi (T.edge q) = some c) : phi2 (T.edge q) = some c := by
+    have hc1 : phi1 (T.edge q) = some c :=
+      (hfixed1 _ (tree_edge_incident q)).trans hc
+    have hout : Sum.inr (T.edge q) ∉ K := by
+      simpa [K] using htreeEdgesOutside q
+    simp [phi2, TwoColorComponentSwap, K, hout, hc1]
+  have edge_color_psi2 (q : Fin T.length) (c : Fin k)
+      (hc : phi (T.edge q) = some c) : psi2 (T.edge q) = some c := by
+    have hc1 : psi1 (T.edge q) = some c :=
+      (hfixedJ1 _ (tree_edge_incident q)).trans hc
+    have hout : Sum.inr (T.edge q) ∉ KJ := by
+      simpa [KJ] using htreeEdgesOutsideJ q
+    simp [psi2, TwoColorComponentSwap, KJ, hout, hc1]
+  have missing_unaffected (v : V) (hvX' : v ∈ X) (c : Fin k)
+      (hcg : c ≠ gamma) (hcd : c ≠ d.1) :
+      (c ∈ MissingColors G phi2 v ↔ c ∈ MissingColors G phi v) := by
+    have h1 : MissingColors G phi1 v = MissingColors G phi v :=
+      hstable1.2 v (by simpa [X] using hvX')
+    rw [← h1]
+    exact hbehavior.2.2.2 v c hcg hcd
+  have missing_unaffectedJ (v : V) (hvX' : v ∈ X) (c : Fin k)
+      (hcg : c ≠ gammaJ) (hcd : c ≠ d.1) :
+      (c ∈ MissingColors G psi2 v ↔ c ∈ MissingColors G phi v) := by
+    have h1 : MissingColors G psi1 v = MissingColors G phi v :=
+      hstableJ1.2 v (by simpa [X] using hvX')
+    rw [← h1]
+    exact hbehaviorJ.2.2.2 v c hcg hcd
+
+  have htreeGamma : TashkinovTree G e0 phi2 Tgamma := by
+    intro q hq
+    rcases hTgammaEdgeCases q with
+      ⟨a, hqa, hqe⟩ | ⟨r, b, hri, hqbase, hqe⟩
+    · have haPos : 1 ≤ a.val := by omega
+      let oldq : Fin T.length := ⟨a.val, by omega⟩
+      obtain ⟨w, c, hc, hm⟩ := htreeOld oldq haPos
+      have hwP : w.val < C.p := by
+        have hw := w.isLt
+        dsimp [oldq] at hw
+        omega
+      let wp : Fin C.p := ⟨w.val, hwP⟩
+      obtain ⟨ws, hwsval, hws⟩ := hTgammaBaseVertices wp
+      have hwq : w.val < q.val + 1 := by
+        have hw := w.isLt
+        dsimp [oldq] at hw
+        omega
+      let wn : Fin (q.val + 1) := ⟨w.val, hwq⟩
+      have hcast : Fin.castLT wn
+          (Nat.lt_trans wn.isLt (Nat.succ_lt_succ q.isLt)) = ws := by
+        apply Fin.ext
+        simpa [wn] using hwsval.symm
+      have holdedge : T.edge oldq = C.baseEdge a := by
+        simpa [oldq] using C.base_edge_position a
+      have hcbase : phi (C.baseEdge a) = some c := holdedge ▸ hc
+      have hcGamma : c ≠ gamma := by
+        simpa [gamma, i] using
+          C.initial_nonfirst_avoids_blocks a haPos c hcbase i
+      have hcUsed : c ∈ TreeUsedColors phi T := by
+        simp only [TreeUsedColors, Finset.mem_filter, Finset.mem_univ, true_and]
+        exact ⟨oldq, haPos, hc⟩
+      have hcDelta : c ≠ d.1 := by
+        intro heq
+        exact (Finset.disjoint_left.mp hunused.1) d.2 (heq ▸ hcUsed)
+      refine ⟨wn, c, ?_, ?_⟩
+      · rw [hqe, ← holdedge]
+        exact edge_color_phi2 oldq c hc
+      · rw [hcast, hws]
+        have hvwpX : C.y wp ∈ X := by
+          rw [← C.base_vertex_position wp]
+          simp [X, TreeSequenceVertexSet]
+        have holdvertex : T.vertex
+            (Fin.castLT w (Nat.lt_trans w.isLt (Nat.succ_lt_succ oldq.isLt))) =
+            C.y wp := by
+          have hidx : Fin.castLT w
+              (Nat.lt_trans w.isLt (Nat.succ_lt_succ oldq.isLt)) =
+              (⟨wp.val, by omega⟩ : Fin (T.length + 1)) := by
+            apply Fin.ext
+            rfl
+          rw [hidx]
+          exact C.base_vertex_position wp
+        have hmwp : c ∈ MissingColors G phi (C.y wp) := by
+          simpa only [holdvertex] using hm
+        exact (missing_unaffected (C.y wp) hvwpX c hcGamma hcDelta).mpr hmwp
+    · obtain ⟨w, hwmissing⟩ := C.block_color_missing_on_base r
+      obtain ⟨ws, hwsval, hws⟩ := hTgammaBaseVertices w
+      let wn : Fin (q.val + 1) := ⟨w.val, by omega⟩
+      have hcast : Fin.castLT wn
+          (Nat.lt_trans wn.isLt (Nat.succ_lt_succ q.isLt)) = ws := by
+        apply Fin.ext
+        simpa [wn] using hwsval.symm
+      have hrgamma : C.gamma r ≠ gamma := by
+        intro h
+        exact hri (C.gamma_injective (by simpa [gamma, i] using h))
+      let oldq : Fin T.length := ⟨C.p - 1 + 2 * r.val + b.val, by
+        have hr := r.isLt
+        have hb := b.isLt
+        have hlen := C.length_eq
+        omega⟩
+      have hrdelta : C.gamma r ≠ d.1 := by
+        intro h
+        have hused : d.1 ∈ TreeUsedColors phi T := by
+          simp only [TreeUsedColors, Finset.mem_filter, Finset.mem_univ, true_and]
+          refine ⟨oldq, by
+            have hp := C.p_ge_two
+            simp [oldq]
+            omega, ?_⟩
+          rw [show T.edge oldq = C.blockEdge r b by
+            simpa [oldq] using C.block_edge_position r b]
+          simpa [h] using C.block_color r b
+        exact (Finset.disjoint_left.mp hunused.1) d.2 hused
+      have holdedge : T.edge oldq = C.blockEdge r b := by
+        simpa only [oldq] using C.block_edge_position r b
+      have hcold : phi (T.edge oldq) = some (C.gamma r) := by
+        rw [holdedge]
+        exact C.block_color r b
+      refine ⟨wn, C.gamma r, ?_, ?_⟩
+      · rw [hqe, ← holdedge]
+        exact edge_color_phi2 oldq (C.gamma r) hcold
+      · rw [hcast, hws]
+        exact (missing_unaffected (C.y w) (by
+          rw [← C.base_vertex_position w]
+          simp [X, TreeSequenceVertexSet])
+          (C.gamma r) hrgamma hrdelta).mpr hwmissing
+
+  have htreeGammaJ : TashkinovTree G e0 psi2 TgammaJ := by
+    intro q hq
+    rcases hTgammaJEdgeCases q with
+      ⟨a, hqa, hqe⟩ | ⟨r, b, hrj, hqbase, hqe⟩
+    · have haPos : 1 ≤ a.val := by omega
+      let oldq : Fin T.length := ⟨a.val, by omega⟩
+      obtain ⟨w, c, hc, hm⟩ := htreeOld oldq haPos
+      have hwP : w.val < C.p := by
+        have hw := w.isLt
+        dsimp [oldq] at hw
+        omega
+      let wp : Fin C.p := ⟨w.val, hwP⟩
+      obtain ⟨ws, hwsval, hws⟩ := hTgammaJBaseVertices wp
+      have hwq : w.val < q.val + 1 := by
+        have hw := w.isLt
+        dsimp [oldq] at hw
+        omega
+      let wn : Fin (q.val + 1) := ⟨w.val, hwq⟩
+      have hcast : Fin.castLT wn
+          (Nat.lt_trans wn.isLt (Nat.succ_lt_succ q.isLt)) = ws := by
+        apply Fin.ext
+        simpa [wn] using hwsval.symm
+      have holdedge : T.edge oldq = C.baseEdge a := by
+        simpa [oldq] using C.base_edge_position a
+      have hcbase : phi (C.baseEdge a) = some c := holdedge ▸ hc
+      have hcGammaJ : c ≠ gammaJ := by
+        simpa [gammaJ, j] using
+          C.initial_nonfirst_avoids_blocks a haPos c hcbase j
+      have hcUsed : c ∈ TreeUsedColors phi T := by
+        simp only [TreeUsedColors, Finset.mem_filter, Finset.mem_univ, true_and]
+        exact ⟨oldq, haPos, hc⟩
+      have hcDelta : c ≠ d.1 := by
+        intro heq
+        exact (Finset.disjoint_left.mp hunused.1) d.2 (heq ▸ hcUsed)
+      refine ⟨wn, c, ?_, ?_⟩
+      · rw [hqe, ← holdedge]
+        exact edge_color_psi2 oldq c hc
+      · rw [hcast, hws]
+        have hvwpX : C.y wp ∈ X := by
+          rw [← C.base_vertex_position wp]
+          simp [X, TreeSequenceVertexSet]
+        have holdvertex : T.vertex
+            (Fin.castLT w (Nat.lt_trans w.isLt (Nat.succ_lt_succ oldq.isLt))) =
+            C.y wp := by
+          have hidx : Fin.castLT w
+              (Nat.lt_trans w.isLt (Nat.succ_lt_succ oldq.isLt)) =
+              (⟨wp.val, by omega⟩ : Fin (T.length + 1)) := by
+            apply Fin.ext
+            rfl
+          rw [hidx]
+          exact C.base_vertex_position wp
+        have hmwp : c ∈ MissingColors G phi (C.y wp) := by
+          simpa only [holdvertex] using hm
+        exact (missing_unaffectedJ (C.y wp) hvwpX c hcGammaJ hcDelta).mpr hmwp
+    · obtain ⟨w, hwmissing⟩ := C.block_color_missing_on_base r
+      obtain ⟨ws, hwsval, hws⟩ := hTgammaJBaseVertices w
+      let wn : Fin (q.val + 1) := ⟨w.val, by omega⟩
+      have hcast : Fin.castLT wn
+          (Nat.lt_trans wn.isLt (Nat.succ_lt_succ q.isLt)) = ws := by
+        apply Fin.ext
+        simpa [wn] using hwsval.symm
+      have hrgamma : C.gamma r ≠ gammaJ := by
+        intro h
+        exact hrj (C.gamma_injective (by simpa [gammaJ, j] using h))
+      let oldq : Fin T.length := ⟨C.p - 1 + 2 * r.val + b.val, by
+        have hr := r.isLt
+        have hb := b.isLt
+        have hlen := C.length_eq
+        omega⟩
+      have hrdelta : C.gamma r ≠ d.1 := by
+        intro h
+        have hused : d.1 ∈ TreeUsedColors phi T := by
+          simp only [TreeUsedColors, Finset.mem_filter, Finset.mem_univ, true_and]
+          refine ⟨oldq, by
+            have hp := C.p_ge_two
+            simp [oldq]
+            omega, ?_⟩
+          rw [show T.edge oldq = C.blockEdge r b by
+            simpa [oldq] using C.block_edge_position r b]
+          simpa [h] using C.block_color r b
+        exact (Finset.disjoint_left.mp hunused.1) d.2 hused
+      have holdedge : T.edge oldq = C.blockEdge r b := by
+        simpa only [oldq] using C.block_edge_position r b
+      have hcold : phi (T.edge oldq) = some (C.gamma r) := by
+        rw [holdedge]
+        exact C.block_color r b
+      refine ⟨wn, C.gamma r, ?_, ?_⟩
+      · rw [hqe, ← holdedge]
+        exact edge_color_psi2 oldq (C.gamma r) hcold
+      · rw [hcast, hws]
+        exact (missing_unaffectedJ (C.y w) (by
+          rw [← C.base_vertex_position w]
+          simp [X, TreeSequenceVertexSet])
+          (C.gamma r) hrgamma hrdelta).mpr hwmissing
+
+  have tashkinov_adjoin (S U : TreeSequence G e0) (f : E)
+      (hadjoin : TreeSequenceAdjoinEdge S f U)
+      (hS : TashkinovTree G e0 phi2 S) (c : Fin k)
+      (hf : phi2 f = some c) (v : V) (hv : v ∈ TreeSequenceVertexSet S)
+      (hmiss : c ∈ MissingColors G phi2 v) :
+      TashkinovTree G e0 phi2 U := by
+    rcases hadjoin with ⟨hlen, hinitial, hlast⟩
+    rcases hinitial with ⟨hle, hvert, hedge⟩
+    intro q hq
+    by_cases hold : q.val < S.length
+    · let qS : Fin S.length := ⟨q.val, hold⟩
+      obtain ⟨a, color, hcolor, hcolorMissing⟩ :=
+        hS qS (by simpa [qS] using hq)
+      let aU : Fin (q.val + 1) := ⟨a.val, by simpa [qS] using a.isLt⟩
+      refine ⟨aU, color, ?_, ?_⟩
+      · have hqeq : Fin.castLE hle qS = q := by
+          apply Fin.ext
+          rfl
+        have hUedge : U.edge q = S.edge qS := by
+          rw [← hqeq]
+          exact hedge qS
+        rw [hUedge]
+        exact hcolor
+      · let oldVertexIndex : Fin (S.length + 1) :=
+          Fin.castLT a (Nat.lt_trans a.isLt (Nat.succ_lt_succ qS.isLt))
+        let newVertexIndex : Fin (U.length + 1) :=
+          Fin.castLT aU (Nat.lt_trans aU.isLt (Nat.succ_lt_succ q.isLt))
+        have hindex : Fin.castLE (Nat.succ_le_succ hle) oldVertexIndex =
+            newVertexIndex := by
+          apply Fin.ext
+          rfl
+        have hvertex : U.vertex newVertexIndex = S.vertex oldVertexIndex := by
+          rw [← hindex]
+          exact hvert oldVertexIndex
+        simpa [oldVertexIndex, newVertexIndex] using hvertex.symm ▸ hcolorMissing
+    · have hqval : q.val = S.length := by
+        have hqbound : q.val < S.length + 1 := by simpa [hlen] using q.isLt
+        omega
+      obtain ⟨a, ha⟩ : ∃ a : Fin (S.length + 1), S.vertex a = v := by
+        simpa [TreeSequenceVertexSet] using hv
+      let aU : Fin (q.val + 1) := ⟨a.val, by simpa [hqval] using a.isLt⟩
+      refine ⟨aU, c, ?_, ?_⟩
+      · have hqlast : q = Fin.cast hlen.symm (Fin.last S.length) := by
+          apply Fin.ext
+          simpa using hqval
+        rw [hqlast, hlast]
+        exact hf
+      · let newVertexIndex : Fin (U.length + 1) :=
+          Fin.castLT aU (Nat.lt_trans aU.isLt (Nat.succ_lt_succ q.isLt))
+        have hindex : Fin.castLE (Nat.succ_le_succ hle) a =
+            newVertexIndex := by
+          apply Fin.ext
+          rfl
+        have hvertex : U.vertex newVertexIndex = v := by
+          rw [← hindex, hvert a, ha]
+        simpa [newVertexIndex, hvertex] using hmiss
+
+  have tashkinov_adjoinJ (S U : TreeSequence G e0) (f : E)
+      (hadjoin : TreeSequenceAdjoinEdge S f U)
+      (hS : TashkinovTree G e0 psi2 S) (c : Fin k)
+      (hf : psi2 f = some c) (v : V) (hv : v ∈ TreeSequenceVertexSet S)
+      (hmiss : c ∈ MissingColors G psi2 v) :
+      TashkinovTree G e0 psi2 U := by
+    rcases hadjoin with ⟨hlen, hinitial, hlast⟩
+    rcases hinitial with ⟨hle, hvert, hedge⟩
+    intro q hq
+    by_cases hold : q.val < S.length
+    · let qS : Fin S.length := ⟨q.val, hold⟩
+      obtain ⟨a, color, hcolor, hcolorMissing⟩ :=
+        hS qS (by simpa [qS] using hq)
+      let aU : Fin (q.val + 1) := ⟨a.val, by simpa [qS] using a.isLt⟩
+      refine ⟨aU, color, ?_, ?_⟩
+      · have hqeq : Fin.castLE hle qS = q := by
+          apply Fin.ext
+          rfl
+        have hUedge : U.edge q = S.edge qS := by
+          rw [← hqeq]
+          exact hedge qS
+        rw [hUedge]
+        exact hcolor
+      · let oldVertexIndex : Fin (S.length + 1) :=
+          Fin.castLT a (Nat.lt_trans a.isLt (Nat.succ_lt_succ qS.isLt))
+        let newVertexIndex : Fin (U.length + 1) :=
+          Fin.castLT aU (Nat.lt_trans aU.isLt (Nat.succ_lt_succ q.isLt))
+        have hindex : Fin.castLE (Nat.succ_le_succ hle) oldVertexIndex =
+            newVertexIndex := by
+          apply Fin.ext
+          rfl
+        have hvertex : U.vertex newVertexIndex = S.vertex oldVertexIndex := by
+          rw [← hindex]
+          exact hvert oldVertexIndex
+        simpa [oldVertexIndex, newVertexIndex] using hvertex.symm ▸ hcolorMissing
+    · have hqval : q.val = S.length := by
+        have hqbound : q.val < S.length + 1 := by simpa [hlen] using q.isLt
+        omega
+      obtain ⟨a, ha⟩ : ∃ a : Fin (S.length + 1), S.vertex a = v := by
+        simpa [TreeSequenceVertexSet] using hv
+      let aU : Fin (q.val + 1) := ⟨a.val, by simpa [hqval] using a.isLt⟩
+      refine ⟨aU, c, ?_, ?_⟩
+      · have hqlast : q = Fin.cast hlen.symm (Fin.last S.length) := by
+          apply Fin.ext
+          simpa using hqval
+        rw [hqlast, hlast]
+        exact hf
+      · let newVertexIndex : Fin (U.length + 1) :=
+          Fin.castLT aU (Nat.lt_trans aU.isLt (Nat.succ_lt_succ q.isLt))
+        have hindex : Fin.castLE (Nat.succ_le_succ hle) a =
+            newVertexIndex := by
+          apply Fin.ext
+          rfl
+        have hvertex : U.vertex newVertexIndex = v := by
+          rw [← hindex, hvert a, ha]
+        simpa [newVertexIndex, hvertex] using hmiss
+
+  have adjoin_vertex_set (A B : TreeSequence G e0) (f : E) (x y : V)
+      (hxy : G.ends f = s(x, y)) (hxA : x ∈ TreeSequenceVertexSet A)
+      (hyA : y ∉ TreeSequenceVertexSet A)
+      (hAB : TreeSequenceAdjoinEdge A f B) :
+      TreeSequenceVertexSet B = insert y (TreeSequenceVertexSet A) := by
+    rcases hAB with ⟨hlen, hinit, hlast⟩
+    rcases hinit with ⟨hle, hvertices, hedges⟩
+    have holdSubset : TreeSequenceVertexSet A ⊆ TreeSequenceVertexSet B := by
+      intro v hv
+      simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+        true_and] at hv ⊢
+      obtain ⟨q, hq⟩ := hv
+      refine ⟨Fin.castLE (Nat.succ_le_succ hle) q, ?_⟩
+      rw [hvertices]
+      exact hq
+    have hyB : y ∈ TreeSequenceVertexSet B := by
+      let q : Fin B.length := Fin.cast hlen.symm (Fin.last A.length)
+      obtain ⟨a, ha⟩ := B.attaches q
+      have hyEnds : y ∈ G.ends (B.edge q) := by
+        rw [hlast, hxy]
+        simp
+      rw [ha] at hyEnds
+      rcases (by simpa only [Sym2.mem_iff] using hyEnds) with hynew | hyold
+      · simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+          true_and]
+        exact ⟨q.succ, hynew.symm⟩
+      · simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+          true_and]
+        exact ⟨Fin.castLT a (Nat.lt_trans a.isLt (Nat.succ_lt_succ q.isLt)),
+          hyold.symm⟩
+    have hinsert : insert y (TreeSequenceVertexSet A) ⊆
+        TreeSequenceVertexSet B := by
+      intro v hv
+      simp only [Finset.mem_insert] at hv
+      rcases hv with rfl | hv
+      · exact hyB
+      · exact holdSubset hv
+    have hAcard : (TreeSequenceVertexSet A).card = A.length + 1 := by
+      simp [TreeSequenceVertexSet, Finset.card_image_of_injective,
+        A.vertex_injective]
+    have hBcard : (TreeSequenceVertexSet B).card = B.length + 1 := by
+      simp [TreeSequenceVertexSet, Finset.card_image_of_injective,
+        B.vertex_injective]
+    have hcard : (TreeSequenceVertexSet B).card ≤
+        (insert y (TreeSequenceVertexSet A)).card := by
+      rw [hBcard, Finset.card_insert_of_notMem hyA, hAcard, hlen]
+    exact (Finset.eq_of_subset_of_card_le hinsert hcard).symm
+
+  have hv0Gamma : D.v0 d ∈ TreeSequenceVertexSet Tgamma := by
+    obtain ⟨a, _, ha⟩ := Finset.mem_image.mp
+      (ScheideStructuralExitsInBase G k e0 phi T C (D.v0_is_exit d))
+    obtain ⟨q, hq, hvertex⟩ := hTgammaBaseVertices a
+    simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ, true_and]
+    exact ⟨q, hvertex.trans ha⟩
+  have hv1Gamma : R.v1 ∈ TreeSequenceVertexSet Tgamma := by
+    obtain ⟨a, _, ha⟩ := Finset.mem_image.mp R.v1_in_base
+    obtain ⟨q, hq, hvertex⟩ := hTgammaBaseVertices a
+    simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ, true_and]
+    exact ⟨q, hvertex.trans ha⟩
+  have hu1NotGamma : R.u1 ∉ TreeSequenceVertexSet Tgamma := by
+    rw [hTgammaVertices]
+    exact fun h => R.u1_outside (Finset.mem_sdiff.mp h).1
+  have hf1Boundary : R.f1 ∈ BoundaryEdges G (TreeSequenceVertexSet Tgamma) := by
+    simp only [BoundaryEdges, Finset.mem_filter, Finset.mem_univ, true_and]
+    exact ⟨R.v1, hv1Gamma, R.u1, hu1NotGamma, R.f1_ends⟩
+  obtain ⟨Sgamma, hAdjoinGamma⟩ :=
+    TreeSequenceBoundaryEdgeAppendExists Tgamma R.f1 hf1Boundary
+  have hSgammaTash : TashkinovTree G e0 phi2 Sgamma :=
+    tashkinov_adjoin Tgamma Sgamma R.f1 hAdjoinGamma htreeGamma d.1
+      hf1color2 (D.v0 d) hv0Gamma hdeltaMissing2
+  have hSgammaVertices0 : TreeSequenceVertexSet Sgamma =
+      insert R.u1 (TreeSequenceVertexSet Tgamma) :=
+    adjoin_vertex_set Tgamma Sgamma R.f1 R.v1 R.u1 R.f1_ends
+      hv1Gamma hu1NotGamma hAdjoinGamma
+  have hSgammaVertices : TreeSequenceVertexSet Sgamma =
+      (TreeSequenceVertexSet T \
+        {C.blockVertex (D.gammaIndex d) 0,
+          C.blockVertex (D.gammaIndex d) 1}) ∪ {R.u1} := by
+    rw [hSgammaVertices0, hTgammaVertices]
+    simp [i, Finset.union_singleton]
+
+  have hv0GammaJ : D.v0 d ∈ TreeSequenceVertexSet TgammaJ := by
+    obtain ⟨a, _, ha⟩ := Finset.mem_image.mp
+      (ScheideStructuralExitsInBase G k e0 phi T C (D.v0_is_exit d))
+    obtain ⟨q, hq, hvertex⟩ := hTgammaJBaseVertices a
+    simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ, true_and]
+    exact ⟨q, hvertex.trans ha⟩
+  have hv1GammaJ : R.v1 ∈ TreeSequenceVertexSet TgammaJ := by
+    obtain ⟨a, _, ha⟩ := Finset.mem_image.mp R.v1_in_base
+    obtain ⟨q, hq, hvertex⟩ := hTgammaJBaseVertices a
+    simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ, true_and]
+    exact ⟨q, hvertex.trans ha⟩
+  have hu0NotGammaJ : D.u0 d ∉ TreeSequenceVertexSet TgammaJ := by
+    rw [hTgammaJVertices]
+    exact fun h => D.u0_outside d (Finset.mem_sdiff.mp h).1
+  have hf0Boundary : D.f0 d ∈ BoundaryEdges G
+      (TreeSequenceVertexSet TgammaJ) := by
+    simp only [BoundaryEdges, Finset.mem_filter, Finset.mem_univ, true_and]
+    exact ⟨D.v0 d, hv0GammaJ, D.u0 d, hu0NotGammaJ, D.f0_ends d⟩
+  obtain ⟨SgammaJ, hAdjoinGammaJ⟩ :=
+    TreeSequenceBoundaryEdgeAppendExists TgammaJ (D.f0 d) hf0Boundary
+  have hSgammaJTash : TashkinovTree G e0 psi2 SgammaJ :=
+    tashkinov_adjoinJ TgammaJ SgammaJ (D.f0 d) hAdjoinGammaJ
+      htreeGammaJ d.1 hf0colorJ2 R.v1 hv1GammaJ hdeltaMissingJ2
+  have hSgammaJVertices0 : TreeSequenceVertexSet SgammaJ =
+      insert (D.u0 d) (TreeSequenceVertexSet TgammaJ) :=
+    adjoin_vertex_set TgammaJ SgammaJ (D.f0 d) (D.v0 d) (D.u0 d)
+      (D.f0_ends d) hv0GammaJ hu0NotGammaJ hAdjoinGammaJ
+  have hSgammaJVertices : TreeSequenceVertexSet SgammaJ =
+      (TreeSequenceVertexSet T \
+        {C.blockVertex R.blockIndex 0,
+          C.blockVertex R.blockIndex 1}) ∪ {D.u0 d} := by
+    rw [hSgammaJVertices0, hTgammaJVertices]
+    simp [j, Finset.union_singleton]
+
+  exact ⟨Sgamma, SgammaJ, hSgammaTash, hSgammaVertices,
+    hSgammaJTash, hSgammaJVertices, hf1color2, hf0colorJ2⟩

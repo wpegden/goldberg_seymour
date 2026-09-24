@@ -25,21 +25,25 @@ Write $X=\noderef{TreeSequenceVertexSet}(T)$.  Apply
 It gives exact tree-sequences $T^-_\gamma,T^-_\eta$, retaining the base
 and every other block in their old relative order, with
 \[
- V(T^-_\gamma)=X\setminus U_\gamma,qquad
+ V(T^-_\gamma)=X\setminus U_\gamma,\qquad
  V(T^-_\eta)=X\setminus U_\eta.
  \tag{1}
 \]
 Its edge classification says that every retained edge is either a base
-edge or belongs to a block whose index differs from the deleted one; it
-also says that no retained edge is incident with either deleted vertex.
-The setup puts $v^0_\delta$ in the exit set, so
+edge or belongs to a block whose index differs from the deleted one, and
+that every such edge is the same exact edge identity as an edge of $T$.
+The data in \noderef{ScheideDefectiveSetup} put $v^0_\delta$ in the exit
+set, so
 \noderef{ScheideStructuralExitsInBase} puts it in the base; the return
-datum already puts $R.v_1$ there.  Consequently both vertices survive
-both block deletions and occur before every retained block vertex.
+datum \noderef{ScheideDefectiveReturnData} puts $R.v_1$ in the base.
+Consequently the base-retention clause of
+\noderef{ScheideSelectedBlockDeletion} puts both vertices in each
+deleted sequence, before every retained block vertex.
 
 The old Tashkinov witnesses used below are available because the
 \noderef{GlobalMaximumTriple} stored in
-\noderef{ScheideReducedConfiguration} contains
+\noderef{ScheideReducedConfiguration}, through its inherited
+\noderef{ScheideStructuralConfiguration}, contains
 \noderef{TashkinovTree}$(G,e_0,\varphi,T)$.
 
 For the first recoloring, invoke
@@ -47,50 +51,102 @@ For the first recoloring, invoke
 every edge incident with $T$, and its switched component meets $X$ only
 at $v^0_\delta$ and contains no displayed tree-edge node.  Hence every
 edge retained in $T^-_\gamma$ has its original value under
-$\varphi_2$.  The component switch changes the missing status on $X$
-only at $v^0_\delta$, replacing $\gamma$ by $\delta$; this follows
-edge-by-edge from the exact component assertion and
-\noderef{TwoColorComponentSwapMissingBehavior}.
+$\varphi_2$.  At every vertex of $X$ other than $v^0_\delta$ the
+component switch preserves the whole missing-color set; at
+$v^0_\delta$ it turns the known missing color $\gamma$ into a missing
+color $\delta$.  These claims follow edge-by-edge from the exact
+component assertion and
+\noderef{TwoColorComponentSwapMissingBehavior}, using the
+$\gamma$-missing datum at $v^0_\delta$ from
+\noderef{ScheideDefectiveSetup}.
 
-We verify the Tashkinov witnesses.  A retained nonfirst base edge has an
-earlier base missing witness under $\varphi$, and the base-avoidance
-clause of \noderef{ScheideReducedConfiguration} says that its color is
-not $\gamma$.  A retained block edge has color $\gamma_r$ for
-$r\ne i$ and retains a base witness missing $\gamma_r$; injectivity of
-the block colors gives $\gamma_r\ne\gamma$.  Thus the sole changed
-missing status does not destroy any retained witness, and
-$T^-_\gamma$ remains Tashkinov under $\varphi_2$.
+We verify the Tashkinov witnesses edge by edge.  If a retained nonfirst
+edge is a base edge, its old Tashkinov certificate supplies a missing
+witness at an earlier base vertex.  The base-avoidance field of
+\noderef{ScheideStructuralConfiguration} says that its color is not
+$\gamma$.  If the retained edge belongs to a block $r\ne i$, the block
+color and base-witness fields of that same node say that its color is
+$\gamma_r$ and that $\gamma_r$ is missing at a base vertex; injectivity
+of the block colors gives $\gamma_r\ne\gamma$.  In either case the color
+is used by a nonfirst displayed edge of $T$, so
+\noderef{ScheideGlobalMaximumUnused}, interpreted through
+\noderef{TreeUsedColors}, says that it is not the defective color
+$\delta$.  The unaffected-color clause of
+\noderef{TwoColorComponentSwapMissingBehavior} therefore preserves the
+chosen missing witness.  The exact-edge clause of
+\noderef{ScheideSelectedBlockDeletion} and the no-displayed-edge clause
+of \noderef{ScheideDefectiveTerminalComponent} preserve the retained
+edge's color.  Hence every nonfirst edge of $T^-_\gamma$ satisfies the
+definition of \noderef{TashkinovTree} under $\varphi_2$.
 
 The exact edge $R.f_1$ is fixed by the outside swap because it is
-incident with $R.v_1\in X$.  It cannot belong to the switched component:
-otherwise its incidence with $R.v_1$ would put that vertex in the
-component, whose only tree vertex is $v^0_\delta$; these vertices are
-distinct in $R$.  Hence $\varphi_2(R.f_1)=\delta$.  Its endpoint in
-$X$ is the retained base vertex $R.v_1$, its other endpoint $R.u_1$ is
-outside $X$, and its identity is not retained: it is colored, hence is
-not $e_0$, while \noderef{ScheideGlobalMaximumUnused}, interpreted by
-\noderef{TreeUsedColors}, excludes the defective color $\delta$ from
-every colored displayed tree edge.  The new edge has the earlier missing
-witness $v^0_\delta$, where $\delta$ is missing after the component
-switch.  The boundary append supplied by
-\noderef{TreeSequenceBoundaryEdgeAppendExists} therefore gives a
-tree-sequence $S_\gamma$ satisfying the first Tashkinov assertion and,
-by (1), the first exact vertex-set equality.
+incident with $R.v_1\in X$; this membership, the endpoint equation
+$\operatorname{ends}(R.f_1)=\{R.v_1,R.u_1\}$, and the old color
+$\varphi(R.f_1)=\delta$ are all fields of
+\noderef{ScheideDefectiveReturnData}.  If its edge-node belonged to the
+switched component, adjacency at $R.v_1$ would put that vertex-node in
+the component.  The singleton tree-vertex conclusion of
+\noderef{ScheideDefectiveTerminalComponent} would then give
+$R.v_1=v^0_\delta$, contrary to the inequality in
+\noderef{ScheideDefectiveReturnData}.  Thus
+$\varphi_2(R.f_1)=\delta$.
+
+The same return datum \noderef{ScheideDefectiveReturnData} says that
+$R.u_1\notin X$.  Since $R.v_1$ is retained in $T^-_\gamma$, equation
+(1) and the exact endpoint equation put $R.f_1$ in
+\noderef{BoundaryEdges}$(G,V(T^-_\gamma))$.  The setup datum
+\noderef{ScheideDefectiveSetup} says that $\gamma$ was missing at the
+retained earlier vertex $v^0_\delta$; the component missing-color
+interchange just proved makes $\delta$ missing there.  Thus
+\noderef{TreeSequenceBoundaryEdgeAppendExists} appends
+$R.f_1,R.u_1$ to give $S_\gamma$.  Unfolding the resulting
+\noderef{TreeSequenceAdjoinEdge}, old edge obligations transport through
+the initial-segment maps, while the unique new last-edge obligation uses
+the displayed color $\delta$ and this earlier missing witness.  Therefore
+$S_\gamma$ is Tashkinov.
+
+For the vertex set, the same initial-segment maps include
+$V(T^-_\gamma)$ in $V(S_\gamma)$, and the attachment equation for the
+new edge puts $R.u_1$ in $V(S_\gamma)$.  By the injective vertex-map
+clause of \noderef{TreeSequence}, a tree-sequence of length $m$ has
+$m+1$ vertices; the adjoin has length one larger, and
+$R.u_1\notin V(T^-_\gamma)$.  The inclusion and equal cardinalities
+therefore give
+$V(S_\gamma)=V(T^-_\gamma)\cup\{R.u_1\}$, which with (1) is the first
+asserted equality.
 
 The second construction is symmetric but uses the independently proved
 component in \noderef{ScheideDefectiveSecondTerminalComponent}.  The
 outside swap fixes all tree-incident identities, and the switched
 component meets $X$ only at $R.v_1$ and contains no displayed tree edge.
 Thus all edges retained in $T^-_\eta$ keep their original values.  A
-retained base-edge color avoids $\eta$, and a retained block edge has
-color $\gamma_r\ne\eta$ with an unchanged base missing witness.  Hence
+retained nonfirst base-edge color avoids $\eta$ by the base-avoidance
+field of \noderef{ScheideStructuralConfiguration}.  A retained block
+edge has color $\gamma_r\ne\eta$ by the block-color and injectivity
+fields of that node, and its recorded base missing witness is retained.
+As above \noderef{ScheideGlobalMaximumUnused} makes either retained
+edge color distinct from $\delta$, so the unaffected-color clause of
+\noderef{TwoColorComponentSwapMissingBehavior} preserves the missing
+witness.  The exact-edge classification from
+\noderef{ScheideSelectedBlockDeletion} now proves, edge by edge, that
 $T^-_\eta$ is Tashkinov under $\psi_2$.
 
 The same helper gives $\psi_2(f^0_\delta)=\delta$ and makes $\delta$
-missing at the retained base vertex $R.v_1$.  The setup gives the exact
-attachment of $f^0_\delta$ at the retained base vertex $v^0_\delta$ and
-puts its other endpoint $u^0_\delta$ outside $X$.  The unused-defective-
-color argument again separates its identity from every retained edge.
-Appending it therefore produces $S_\eta$ with the second asserted
-Tashkinov certificate and the second exact vertex-set equality.
+missing at the retained base vertex $R.v_1$; the latter base membership
+is a field of \noderef{ScheideDefectiveReturnData}.  The exact attachment
+$\operatorname{ends}(f^0_\delta)=\{v^0_\delta,u^0_\delta\}$, its old
+color $\delta$, the exit membership of $v^0_\delta$, and
+$u^0_\delta\notin X$ are fields of
+\noderef{ScheideDefectiveSetup}.  The exit membership and
+\noderef{ScheideStructuralExitsInBase} retain $v^0_\delta$ in
+$T^-_\eta$.  Hence the endpoint equation puts $f^0_\delta$ directly in
+\noderef{BoundaryEdges}$(G,V(T^-_\eta))$.  Append it using
+\noderef{TreeSequenceBoundaryEdgeAppendExists}.  The identical
+\noderef{TreeSequenceAdjoinEdge} argument transports every old
+Tashkinov obligation and uses the $\delta$-missing witness at $R.v_1$
+for the new last edge.  It also gives
+$V(S_\eta)=V(T^-_\eta)\cup\{u^0_\delta\}$ by the same inclusion and
+cardinality calculation.  Together with (1), these are the second
+Tashkinov certificate and the second exact vertex-set equality, and the
+two displayed color equalities have already been established.
 \end{proof}
