@@ -7,7 +7,9 @@ of $Z$ which have an incident vertex outside $X$.  Then $|B|\le3$.
 \end{helper}
 \begin{proof}
 Fix $\delta$, put $X=V(T)$, $i=\gammaIndex(\delta)$,
-$\gamma=\gamma_i$, and use the sets $Z,B$ of the statement.  By
+$\gamma=\gamma_i$, and use the sets $Z,B$ of the statement.  The
+codomain clause for $\gammaIndex$ in \noderef{ScheideDefectiveSetup}
+gives $i<s$.  By
 \noderef{ScheideReplacementBoundaryParity}, $|B|$ is odd,
 $f^0_\delta\in B$, and $v^0_\delta\in Z$.  Suppose $|B|>3$.  Oddness
 gives $|B|\ge5$, so there are three pairwise distinct exact identities
@@ -35,19 +37,25 @@ Consequently every $g_j$ retains color $\delta$.
 
 Put $n=T.\operatorname{length}$ and
 $a=p-1+2i$, the zero-based position of the first selected block edge.
-The equations in \noderef{ScheideStructuralConfiguration} give
-$a\ge1$, identify positions $a,a+1$ with the two selected block edges,
-and identify vertex positions $a+1,a+2$ with the two selected block
-vertices.  Define an ordered sequence $T^+$ by retaining all entries
-strictly before these positions, shifting every later old block pair two
-positions to the left, and appending
+Using $i<s$ from \noderef{ScheideDefectiveSetup}, together with $p\ge2$
+and the length and position equations in
+\noderef{ScheideStructuralConfiguration}, gives $a\ge1$, proves that
+$a,a+1$ are valid edge positions and $a+1,a+2$ are valid vertex
+positions, identifies the former with the two selected block edges, and
+identifies the latter with the two selected block vertices.  Define an
+ordered sequence $T^+$ by retaining all entries strictly before these
+positions, shifting every later old block pair two positions to the
+left, and appending
 $(g_1,w_1),(g_2,w_2),(g_3,w_3)$.
 
 We verify \noderef{TreeSequence} exactly.  Its length is $n+1$ and its
 first edge is the old first edge because $a\ge1$.  Old retained vertices
-and edges remain injective.  The new vertices are outside $X$ and are
-pairwise distinct.  Every old displayed edge has both endpoints in $X$
-by the old attachment equation, so none of $g_1,g_2,g_3$ is an old edge;
+and edges remain injective.  By \noderef{TreeSequenceVertexSet}, $X$ is
+exactly the image of the old vertex map.  Hence $w_j\notin X$ makes each
+new vertex fresh from every old displayed vertex, and the new vertices
+are pairwise distinct.  The attachment equation in
+\noderef{TreeSequence} puts both endpoints of every old displayed edge
+in that vertex-map image $X$, so none of $g_1,g_2,g_3$ is an old edge;
 the chosen identities are also pairwise distinct.  Attachments before
 $a$ retain their old witnesses.  Every shifted old edge is a later block
 edge, and \noderef{ScheideStructuralConfiguration} attaches it directly
@@ -67,7 +75,11 @@ retained earlier vertex $v^0_\delta$.  This proves the
 The graph-only fields of the old \noderef{KTriple} are unchanged, while
 properness and exact-one-uncoloredness come from
 \noderef{ScheideDefectiveSwitchEffect}; hence the switched data form a
-new $k$-triple.  Vertex injectivity gives
+new $k$-triple.  By \noderef{TreeSequenceVertexSet}, both $V(T)$ and
+$V(T^+)$ are the images of their respective vertex maps.  The two
+selected block vertices are distinct old image elements, the three
+appended vertices are pairwise distinct and fresh from the old image,
+and all other old image elements are retained.  Therefore
 \[
  |V(T^+)|=|X|-2+3=|X|+1=\noderef{TashkinovOrder}(G)+1,
 \]

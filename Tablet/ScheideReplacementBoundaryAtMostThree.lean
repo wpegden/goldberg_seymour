@@ -5,6 +5,7 @@ import Tablet.Incident
 import Tablet.IsProperEdgeColoring
 import Tablet.KTriple
 import Tablet.LooplessMultigraph
+import Tablet.ScheideDefectiveSetup
 import Tablet.ScheideDefectiveSwitchEffect
 import Tablet.ScheideReplacementBoundaryParity
 import Tablet.ScheideReducedConfiguration
