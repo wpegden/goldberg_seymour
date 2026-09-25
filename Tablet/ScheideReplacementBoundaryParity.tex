@@ -1,0 +1,72 @@
+\begin{helper}[Parity of the retained defective boundary]
+Fix a defective color $\delta$.  Put
+\[
+ X=V(T),\qquad
+ Z=X\setminus\{x^0_{\gamma(\delta)},x^1_{\gamma(\delta)}\},
+\]
+and let $B$ be the finite set of exact $\delta$-colored boundary-edge
+identities of $Z$ which have an incident vertex outside $X$.  Then the
+recorded exit $v^0_\delta$ and the first base vertex $y_0$ belong to $Z$,
+every vertex of $Z$ is incident with a unique $\delta$-colored edge
+identity, $f^0_\delta\in B$, and $|B|$ is odd.
+\end{helper}
+\begin{proof}
+Write $i=\gammaIndex(\delta)$ and $\gamma=\gamma_i$.  By
+\noderef{ScheideDefectiveSetup}, $v^0_\delta$ is an exit vertex,
+$\gamma$ is missing there, $f^0_\delta$ has color $\delta$ and exact
+ends $v^0_\delta,u^0_\delta$, and $u^0_\delta\notin X$.
+
+We first locate the exit.  Expanding \noderef{ScheideExitVertices} and
+\noderef{ScheideExitVertex} puts $v^0_\delta$ in $X$.  The exit-covering
+field of \noderef{ScheideStructuralConfiguration}, inherited through
+\noderef{ScheideReducedConfiguration}, gives an $r$ for which $\gamma_r$
+is missing at $v^0_\delta$.  Its block-missing field gives a base vertex
+$y_q$ at which the same color is missing.  The base-position equation and
+\noderef{TreeSequenceVertexSet} put $y_q$ in $X$.  By
+\noderef{ScheideGlobalMaximumOrder}, $X$ is elementary; hence the two
+vertices with the common missing color are equal.  Thus $v^0_\delta$ is a
+base vertex.
+
+The position equations in \noderef{ScheideStructuralConfiguration} put
+$y_0$ in a position below $p$, while the selected block vertices occupy
+the distinct positions $p+2i$ and $p+2i+1$.  Since $p\ge2$, vertex
+injectivity in \noderef{TreeSequence} shows that neither $v^0_\delta$
+nor $y_0$ is a selected block vertex.  Both therefore belong to $Z$.
+
+By \noderef{ScheideGlobalMaximumBoundaryFacts}, the defective color
+$\delta$ has at least three boundary identities at $X$.  Choose one.
+Its color is $\delta$ by \noderef{BoundaryColorEdges}.  Since $X$ is
+closed by \noderef{ScheideGlobalMaximumOrder}, $\delta$ cannot be missing
+at any vertex of $X$: otherwise the chosen boundary identity contradicts
+\noderef{ColoredVertexSetClosed}.  The complementary definitions
+\noderef{MissingColors} and \noderef{PresentColors} therefore supply a
+$\delta$-colored incident identity at every vertex of $X$, in particular
+at every vertex of $Z$.  It is unique.  Indeed, two distinct such
+identities would be adjacent by \noderef{AdjacentEdges} and would
+contradict \noderef{IsProperEdgeColoring}.  That properness is the
+coloring field of the \noderef{KTriple} contained in the
+\noderef{GlobalMaximumTriple} field of the structural configuration.
+
+The exact end equation for $f^0_\delta$, the already proved membership
+$v^0_\delta\in Z$, and $u^0_\delta\notin X$ show, through
+\noderef{Incident}, \noderef{BoundaryEdges}, and
+\noderef{BoundaryColorEdges}, that $f^0_\delta\in B$.
+
+It remains to prove parity.  Let $I$ consist of the pairs $(z,f)$ with
+$z\in Z$, $f$ incident with $z$, and $f$ colored $\delta$.  The preceding
+existence and uniqueness gives a bijection $Z\to I$.  Let $A$ be the set
+of $\delta$-colored identities in \noderef{InternalEdges}$(G,Z)$.  Count
+$I$ by edge identity.  By \noderef{LooplessMultigraph}, every member of
+$A$ has two distinct ends in $Z$ and contributes two incidences.  Every
+member of $B$ contributes one incidence.  There are no other nonempty
+fibers: the other end of an identity incident with $Z$ lies in $Z$, in
+the deleted pair, or outside $X$, and the middle alternative for a
+$\delta$-identity is excluded by \noderef{ScheideDefectiveNoCross}.
+Consequently
+\[
+ |Z|=|I|=2|A|+|B|.
+\]
+The two deleted block vertices are distinct members of $X$, so
+$|Z|=|X|-2$.  The order of $X$ is odd by
+\noderef{ScheideGlobalMaximumOrder}; therefore $|B|$ is odd, as claimed.
+\end{proof}

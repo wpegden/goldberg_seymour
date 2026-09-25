@@ -1,0 +1,91 @@
+\begin{helper}[At least three retained departures]
+For a defective color $\delta$, put
+$X=V(T)$ and
+$Z=X\setminus\{x^0_{\gamma(\delta)},x^1_{\gamma(\delta)}\}$, and let
+$B$ be the finite set of exact $\delta$-colored boundary-edge identities
+of $Z$ which have an incident vertex outside $X$.  Then $3\le |B|$.
+\end{helper}
+\begin{proof}
+Fix $\delta$, put $X=V(T)$, let $U$ be its selected two-vertex block, and
+put $Z=X\setminus U$.  By \noderef{ScheideReplacementBoundaryParity},
+$B$ has odd cardinality and contains $f^0_\delta$.  If $|B|<3$, these two
+facts force $B=\{f^0_\delta\}$.
+
+Write $\alpha=\alpha_0$.  The same parity helper puts $y_0$ in $Z$, and
+\noderef{ScheideDefectiveSetup} says that $\alpha$ is missing at $y_0$
+and differs from the selected block color.  Apply
+\noderef{ScheideStructuralInternalPair}.  It supplies an exact identity
+$h_\alpha$ of color $\alpha$ joining the two vertices of $U$.
+\noderef{IsProperEdgeColoring} makes it the unique $\alpha$-colored
+identity incident with either of those vertices.
+
+The full initial $(\alpha,\delta)$ path recorded by
+\noderef{ScheideDefectiveSetup} avoids $U$.  Indeed, start at $y_0\in Z$
+and consider a first exit from $Z$ before its recorded departure
+$v^0_\delta,f^0_\delta,u^0_\delta$.  By
+\noderef{TwoColorIncidenceGraph} the traversed identity has color
+$\alpha$ or $\delta$.  An entry into $U$ contradicts either uniqueness of
+$h_\alpha$ or \noderef{ScheideDefectiveNoCross}.  An $\alpha$-edge from
+$Z$ to outside $X$ contradicts the closedness supplied by the global
+maximum and \noderef{ColoredVertexSetClosed}, since $\alpha$ is missing
+at $y_0$.  A $\delta$-edge from $Z$ to outside $X$ must be the unique
+member $f^0_\delta$ of $B$.  Simplicity and the exact successive indices
+in \noderef{ScheideDefectiveSetup} identify this with the recorded
+departure, after which its last-tree-vertex clause excludes all of $X$.
+Thus the path contains no vertex of $U$.
+
+Let $K$ be the $(\alpha,\delta)$ component through the first vertex of
+$U$.  The internal identity $h_\alpha$ puts both vertices of $U$ in $K$,
+and the preceding paragraph makes $K$ distinct from the full initial
+component.  We claim that $K$ avoids $Z$.  Otherwise take a shortest
+incidence walk from $U$ to $Z$ and inspect its last entering identity.
+A direct entry from $U$ is excluded by uniqueness of $h_\alpha$ and
+\noderef{ScheideDefectiveNoCross}.  An entry from outside $X$ cannot have
+color $\alpha$ by closedness.  If it has color $\delta$, uniqueness of
+$B$ makes it $f^0_\delta$; then the two components share its exact
+edge-node and hence are equal, a contradiction.  Therefore $K\cap Z$ is
+empty.
+
+No displayed tree-edge identity belongs to $K$.  The first edge $e_0$ is
+uncolored.  Every other displayed edge has both endpoints in $X$ by
+\noderef{TreeSequence}; if its edge-node were in $K$, both endpoints
+would lie in $U$.  The exact layout in
+\noderef{ScheideStructuralConfiguration} rules this out: base edges join
+base positions, while each block edge joins its block vertex to a base
+vertex.
+
+By \noderef{ScheideGlobalMaximumBoundaryFacts}, the original
+$\delta$-boundary of $X$ contains at least three distinct identities.
+Only $f^0_\delta$ has its inside endpoint in $Z$, so at least two have
+their inside endpoints in $U$.  Properness permits at most one at each of
+the two vertices of $U$; hence there are exactly two, say
+$\ell_0=x_0t_0$ and $\ell_1=x_1t_1$.  Both are in $K$ by the adjacency
+rule of \noderef{TwoColorIncidenceGraph}.
+
+Switch $\alpha$ and $\delta$ on $K$.  These colors are distinct because
+$\alpha$ is missing at $y_0$ whereas $\delta$ is present at every vertex
+of $Z$ by \noderef{ScheideReplacementBoundaryParity}.  Thus
+\noderef{TwoColorComponentSwapProper} gives properness.  The pointwise
+definition \noderef{TwoColorComponentSwap} preserves the unique
+uncolored edge recorded by \noderef{IsOneEdgeUncolored}, changes
+$h_\alpha$ to $\delta$, and changes both
+$\ell_j$ to $\alpha$.
+
+The old sequence remains Tashkinov.  Every displayed edge is outside
+$K$ and keeps its color.  By \noderef{ScheideGlobalMaximumUnused}, the
+defective color $\delta$ is absent from \noderef{TreeUsedColors}.  If an
+old displayed edge has color $\alpha$, use the unchanged missing witness
+$y_0\notin K$; for every other color retain the old witness from
+\noderef{TashkinovTree}, since a two-color swap cannot change incidence
+of a third color.
+
+Append $(\ell_0,t_0)$ to $T$.  The new vertex lies outside $X$, and the
+new edge is not an old displayed identity because it has an outside end.
+Its inside end $x_0$ is earlier, so all fields of \noderef{TreeSequence}
+hold.  The new edge has color $\alpha$, still missing at the earlier
+vertex $y_0$, so the enlarged sequence is Tashkinov.  Properness and
+exact-one-uncoloredness, together with the graph-only fields of the old
+\noderef{KTriple}, give a new $k$-triple.  Its order is
+$|X|+1=\noderef{TashkinovOrder}(G)+1$, contradicting the definition of
+\noderef{TashkinovOrder}.  Hence $|B|<3$ is impossible and $3\le|B|$.
+\end{proof}

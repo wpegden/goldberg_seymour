@@ -1,0 +1,63 @@
+\begin{helper}[Exact selected-block splice]
+Fix a defective color $\delta$ and write $i=\gammaIndex(\delta)$.  Suppose
+that $f_1,f_2$ are distinct edge identities with exact ends
+$\{v_1,u_1\}$ and $\{v_2,u_2\}$, respectively, where $v_1,v_2$ lie in
+$V(T)\setminus\{x_i^0,x_i^1\}$, the distinct vertices $u_1,u_2$ lie
+outside $V(T)$, and $x_i^0,x_i^1$ are the two vertices of the selected
+block.  Then deleting that block from the exact order of $T$ and appending
+$(f_1,u_1),(f_2,u_2)$ gives a tree-sequence of the same length.  It agrees
+with $T$ at every position before the block, agrees after the block with
+indices shifted by two, has the two supplied pairs in its final
+positions, has vertex set
+\[
+ (V(T)\setminus\{x_i^0,x_i^1\})\cup\{u_1,u_2\},
+\]
+and has edge-identity set obtained by successively erasing the two exact
+selected block identities and adjoining $f_1,f_2$.
+\end{helper}
+\begin{proof}
+Put $n=T.\operatorname{length}$ and $a=p-1+2i$.  From $p\ge2$, $i<s$,
+and the length equation in \noderef{ScheideStructuralConfiguration}, the
+positions $a,a+1$ are valid edge positions, $a+1,a+2$ are valid vertex
+positions, and $a\ge1$.  The same definition identifies these entries
+with the two selected block edges and vertices.
+
+Define the new sequence $R$ of length $n$ as follows.  For edge indices
+$q<a$, set $R.edge(q)=T.edge(q)$.  For $a\le q$ with $q+2<n$, set
+$R.edge(q)=T.edge(q+2)$.  Put $f_1,f_2$ in edge positions $n-2,n-1$.
+For vertex indices $q\le a$, retain $T.vertex(q)$; for $a<q$ with
+$q+2<n+1$, use $T.vertex(q+2)$; and put $u_1,u_2$ in positions $n-1,n$.
+These formulas directly give all four retained-position families and all
+four asserted final-position equations.
+
+We check the fields of \noderef{TreeSequence}.  Positivity is inherited
+from $T$, and the first edge remains $e_0$ because $a\ge1$.  The retained
+vertices are precisely the old positions other than $a+1,a+2$, so they
+are pairwise distinct by old vertex injectivity.  Both new vertices are
+outside $V(T)$ and are distinct by hypothesis; hence the new vertex map
+is injective.  Similarly, retained edges are precisely the old positions
+other than $a,a+1$.  Neither $f_j$ is an old displayed edge: the exact
+end equation gives it the outside endpoint $u_j$, whereas every displayed
+old edge has both endpoints among old vertices by the attachment field.
+Together with $f_1\ne f_2$, this proves edge injectivity.
+
+For attachment before $a$, retain the old later endpoint and earlier
+witness.  Every retained edge after $a$ is an edge of a later block; the
+block-attachment field of \noderef{ScheideStructuralConfiguration} joins
+it to a base vertex, and all base vertices remain earlier in the new
+order.  Finally the exact end equations for $f_j$ join the new vertex
+$u_j$ to $v_j$.  Since $v_j$ is in the retained vertex set, its unique old
+position is carried to an earlier retained position.  Thus both appended
+edges also satisfy the attachment field, completing the tree-sequence.
+
+The vertex-map formula partitions its domain into the retained old
+indices and the final two indices.  Applying the image definition
+\noderef{TreeSequenceVertexSet}, old vertex injectivity, and freshness of
+$u_1,u_2$ gives exactly
+$(V(T)\setminus\{x_i^0,x_i^1\})\cup\{u_1,u_2\}$.  The analogous
+partition of edge indices gives the image of the old edge map with the
+entries at $a,a+1$ removed, union $\{f_1,f_2\}$.  The position equations
+in \noderef{ScheideStructuralConfiguration} identify the removed
+identities with $blockEdge(i,0)$ and $blockEdge(i,1)$, yielding the stated
+successive-erase identity.  All claimed properties follow.
+\end{proof}

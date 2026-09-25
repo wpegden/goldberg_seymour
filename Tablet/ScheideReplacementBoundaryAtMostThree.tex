@@ -1,0 +1,78 @@
+\begin{helper}[At most three retained departures]
+For a defective color $\delta$, put
+$X=V(T)$ and
+$Z=X\setminus\{x^0_{\gamma(\delta)},x^1_{\gamma(\delta)}\}$, and let
+$B$ be the finite set of exact $\delta$-colored boundary-edge identities
+of $Z$ which have an incident vertex outside $X$.  Then $|B|\le3$.
+\end{helper}
+\begin{proof}
+Fix $\delta$, put $X=V(T)$, $i=\gammaIndex(\delta)$,
+$\gamma=\gamma_i$, and use the sets $Z,B$ of the statement.  By
+\noderef{ScheideReplacementBoundaryParity}, $|B|$ is odd,
+$f^0_\delta\in B$, and $v^0_\delta\in Z$.  Suppose $|B|>3$.  Oddness
+gives $|B|\ge5$, so there are three pairwise distinct exact identities
+$g_1,g_2,g_3$ in $B\setminus\{f^0_\delta\}$.
+
+Membership in $B$, expanded through \noderef{BoundaryEdges},
+\noderef{Incident}, and \noderef{LooplessMultigraph}, orients each edge
+as
+\[
+ \operatorname{ends}(g_j)=\{z_j,w_j\},\qquad
+ z_j\in Z,\quad w_j\notin X,\quad\varphi(g_j)=\delta.
+\]
+The vertices $w_1,w_2,w_3$ are pairwise distinct: equality of two would
+make the corresponding distinct $\delta$-identities adjacent, contrary
+to \noderef{AdjacentEdges} and \noderef{IsProperEdgeColoring}; this
+properness is supplied by the global field of
+\noderef{ScheideReducedConfiguration}.
+
+Let $\varphi_\delta$ be the $(\gamma,\delta)$ component switch rooted at
+$v^0_\delta$.  The exact clauses of
+\noderef{ScheideDefectiveSwitchEffect} say that it is proper, leaves
+exactly $e_0$ uncolored, fixes every identity incident with $X$ other
+than $f^0_\delta$, and makes $\delta$ missing at $v^0_\delta$.
+Consequently every $g_j$ retains color $\delta$.
+
+Put $n=T.\operatorname{length}$ and
+$a=p-1+2i$, the zero-based position of the first selected block edge.
+The equations in \noderef{ScheideStructuralConfiguration} give
+$a\ge1$, identify positions $a,a+1$ with the two selected block edges,
+and identify vertex positions $a+1,a+2$ with the two selected block
+vertices.  Define an ordered sequence $T^+$ by retaining all entries
+strictly before these positions, shifting every later old block pair two
+positions to the left, and appending
+$(g_1,w_1),(g_2,w_2),(g_3,w_3)$.
+
+We verify \noderef{TreeSequence} exactly.  Its length is $n+1$ and its
+first edge is the old first edge because $a\ge1$.  Old retained vertices
+and edges remain injective.  The new vertices are outside $X$ and are
+pairwise distinct.  Every old displayed edge has both endpoints in $X$
+by the old attachment equation, so none of $g_1,g_2,g_3$ is an old edge;
+the chosen identities are also pairwise distinct.  Attachments before
+$a$ retain their old witnesses.  Every shifted old edge is a later block
+edge, and \noderef{ScheideStructuralConfiguration} attaches it directly
+to a retained base vertex.  Finally $g_j$ attaches $w_j$ to the retained
+vertex $z_j$.  Thus all tree-sequence fields hold.
+
+This sequence is Tashkinov for $\varphi_\delta$.  For an old retained
+edge before $a$, its earlier witness is retained.  Its color is not
+$\gamma$: nonfirst base edges avoid every block color and an earlier
+block edge has the distinct color $\gamma_r$ with $r<i$.  A shifted
+later block edge has color $\gamma_r$ with $r>i$ and retains its base
+missing witness.  Hence the switch-effect equalities preserve all these
+old witnesses.  Each new edge has color $\delta$, now missing at the
+retained earlier vertex $v^0_\delta$.  This proves the
+\noderef{TashkinovTree} condition.
+
+The graph-only fields of the old \noderef{KTriple} are unchanged, while
+properness and exact-one-uncoloredness come from
+\noderef{ScheideDefectiveSwitchEffect}; hence the switched data form a
+new $k$-triple.  Vertex injectivity gives
+\[
+ |V(T^+)|=|X|-2+3=|X|+1=\noderef{TashkinovOrder}(G)+1,
+\]
+where the last equality follows from the global maximum field in
+\noderef{GlobalMaximumTriple}.  This contradicts the defining upper
+bound in \noderef{TashkinovOrder} for a Tashkinov tree of a $k$-triple.
+Therefore $|B|\le3$.
+\end{proof}
