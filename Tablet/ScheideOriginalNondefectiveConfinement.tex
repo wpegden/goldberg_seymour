@@ -15,24 +15,33 @@ The extension field of \noderef{ScheideReducedConfiguration} supplies the
 inherited \noderef{ScheideStructuralConfiguration}.  Its globally maximum
 field, followed by
 \noderef{ScheideGlobalMaximumOrder}, says that $X_0$ is closed under
-$\varphi$.  The setup \noderef{ScheideDefectiveSetup} says that
-$\alpha_0=D.\alpha_0$ is missing at $y_0\in X_0$.  Thus
+$\varphi$.  The exact first base position in
+\noderef{ScheideStructuralConfiguration}, together with the image
+definition \noderef{TreeSequenceVertexSet}, puts $y_0$ in $X_0$.  The setup
+\noderef{ScheideDefectiveSetup} says that $\alpha_0=D.\alpha_0$ is missing
+at this vertex.  Thus
 \noderef{ColoredVertexSetClosed} forbids every $\alpha_0$-colored
 boundary edge of $X_0$.
 
 Let $P,i,v,g$ be the path, last-inside index, last-inside vertex, and
 crossing edge recorded by $L$.  The certificate gives $v\in X_0$,
 $\varphi(g)=\alpha$, and says that the vertex after $g$ lies outside
-$X\supseteq X_0$.  Hence $g$ is an $\alpha$-colored boundary edge of
-$X_0$.
+$X$.  The union formula in \noderef{ScheideEnlargedVertexSet} gives
+$X_0\subseteq X$, so that latter vertex is outside $X_0$.  Since $g$ is
+incident with it and with $v\in X_0$, the definition
+\noderef{BoundaryEdges} says that $g$ is an $\alpha$-colored boundary edge
+of $X_0$.
 
 Suppose some vertex-node of the segment $y_0Pv$ were outside $X_0$.
 Choose the first such vertex-node.  The preceding edge-node $h$ is a
-boundary edge of $X_0$.  By \noderef{TwoColorIncidenceGraph}, its color
-is $\alpha_0$ or $\alpha$; the preceding closedness argument excludes
-$\alpha_0$, so $\varphi(h)=\alpha$.  The path later returns to
-$v\in X_0$, and $h\ne g$ because $g$ occurs strictly after $v$ and $P$
-is simple.  Thus $h$ and $g$ are two distinct members of
+boundary edge of $X_0$ by \noderef{BoundaryEdges}: its preceding endpoint
+vertex lies in $X_0$ by the choice of the first departure, while its
+following endpoint vertex does not.  By
+\noderef{TwoColorIncidenceGraph}, its color is $\alpha_0$ or $\alpha$; the
+preceding closedness argument excludes $\alpha_0$, so
+$\varphi(h)=\alpha$.  The path later returns to $v\in X_0$, and $h\ne g$
+because $g$ occurs strictly after $v$ and $P$ is simple.  Thus $h$ and $g$
+are two distinct members of
 \noderef{BoundaryColorEdges}$(G,\varphi,X_0,\alpha)$.  Expanding
 \noderef{DefectiveColors} and \noderef{DefectiveColor}, this says that
 $\alpha$ is defective for $X_0$, contrary to the hypothesis.  Therefore
@@ -43,10 +52,13 @@ two-color component.  The support equality in
 \noderef{ScheideLastExitPath} puts the edge-node $f$ on $P$.  Its two
 neighbors on the full component path are its two endpoint vertex-nodes,
 by \noderef{Incident}, \noderef{LooplessMultigraph}, and
-\noderef{TwoColorIncidenceGraph}.  All vertex-nodes of $P$ through $v$
-lie in $X_0\subseteq X$, while every vertex-node after $v$ lies outside
-$X$ by the last-index field of $L$.  Hence the only consecutive pair of
-endpoint vertex-nodes separated by the boundary of $X$ occurs across the
-edge-node immediately after $v$, namely $g$.  Simplicity of $P$ then
-gives $f=g$, proving the second assertion.
+\noderef{TwoColorIncidenceGraph}.  Moreover,
+\noderef{BoundaryEdges} says that precisely one of these endpoints is in
+$X$.  All vertex-nodes of $P$ through $v$ lie in $X_0\subseteq X$, where
+the inclusion again follows from \noderef{ScheideEnlargedVertexSet}, while
+every vertex-node after $v$ lies outside $X$ by the last-index field of
+$L$.  Hence the only consecutive pair of endpoint vertex-nodes separated
+by the boundary of $X$ occurs across the edge-node immediately after $v$,
+namely $g$.  Simplicity of $P$ then gives $f=g$, proving the second
+assertion.
 \end{proof}

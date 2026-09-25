@@ -15,57 +15,84 @@ $L$.
 \begin{proof}
 Let $i=D.\gammaIndex(d)$ and
 $U_\gamma=\{C.\mathit{blockVertex}(i,0),C.\mathit{blockVertex}(i,1)\}$.
+The extension field of \noderef{ScheideReducedConfiguration} supplies the
+inherited \noderef{ScheideStructuralConfiguration}.  Its exact block
+positions, together with the image definition
+\noderef{TreeSequenceVertexSet}, give $U_\gamma\subseteq X_0$.
 The first conclusion of \noderef{ScheideSymmetricDefectiveInternal}
 supplies an $\alpha$-colored edge internal to $U_\gamma$.  Its endpoints
 are the two distinct members of $U_\gamma$ by
-\noderef{LooplessMultigraph}.  The extension field of
-\noderef{ScheideReducedConfiguration} supplies the inherited
-\noderef{ScheideStructuralConfiguration}.  The original coloring is proper
-because that structural configuration contains a
+\noderef{LooplessMultigraph}.  The original coloring is proper because
+that structural configuration contains a
 \noderef{GlobalMaximumTriple}, hence a \noderef{KTriple} and an
 \noderef{IsProperEdgeColoring}.  Properness and
 \noderef{AdjacentEdges} therefore exclude every other $\alpha$-edge
-incident with either deleted vertex.
+incident with either deleted vertex: by \noderef{Incident}, any such edge
+and the internal edge would be distinct edges incident with a common
+vertex, hence adjacent.
 
 Consequently every $\alpha$-colored boundary edge of $X_0$ has its
-tree endpoint in $X_0\setminus U_\gamma$.  The exact-three field of
+tree endpoint in $X_0\setminus U_\gamma$.  Indeed,
+\noderef{BoundaryEdges} gives it exactly one endpoint in $X_0$, and the
+preceding uniqueness of $\alpha$-incidence excludes that endpoint from
+$U_\gamma$.  The exact-three field of
 \noderef{ScheideReplacementData} now identifies all such identities as
-$D.f0(d),(R d).f1,(R d).f2$.  The latter two join the retained set to
-the two vertices of $U_\alpha$, so they are internal to $X_\alpha$.
-They are distinct and their $U_\alpha$ endpoints are distinct: otherwise
-two distinct incident edges of the same color would contradict
-properness.  Thus every vertex of $U_\alpha$ is already incident with
-one of these two $\alpha$-edges, and no further $\alpha$-edge can leave
-$X_\alpha$ there.
+$D.f0(d),(R d).f1,(R d).f2$.  The latter two have, respectively, one
+endpoint in the retained set and the endpoints $(R d).u1,(R d).u2$ in
+$U_\alpha$; by \noderef{Incident}, they therefore join those vertex
+identities and are internal to $X_\alpha$.  They are distinct and their
+$U_\alpha$ endpoints are distinct: otherwise the endpoint records and
+\noderef{Incident} would make two distinct edges of the same color
+incident with a common vertex and hence adjacent, contradicting
+properness.  Thus every vertex of $U_\alpha$ is already incident with one
+of these two $\alpha$-edges.  Properness excludes any further
+$\alpha$-incidence there, so in particular
+\noderef{BoundaryEdges} excludes any further $\alpha$-edge leaving
+$X_\alpha$ through $U_\alpha$.
 
 The outside endpoint of $D.f0(d)$ is outside $X_0$ by
 \noderef{ScheideDefectiveSetup}.  It is not either member of
 $U_\alpha$, since equality would make $D.f0(d)$ adjacent to the
-corresponding distinct edge $(R d).f1$ or $(R d).f2$ of the same color.
-Thus $D.f0(d)$ leaves $X_\alpha$.  The preceding exhaustive list proves
-that it is the unique member of
+corresponding distinct edge $(R d).f1$ or $(R d).f2$ of the same color:
+the endpoint records and \noderef{Incident} give the common incidence.
+Its other endpoint is the tree vertex recorded in
+\noderef{ScheideDefectiveSetup}, hence lies in $X_0$, so
+\noderef{BoundaryEdges} says that $D.f0(d)$ leaves $X_\alpha$.  The
+preceding exhaustive list and boundary orientation prove that it is the
+unique member of
 \noderef{BoundaryColorEdges}$(G,\varphi,X_\alpha,\alpha)$.
 
 The set $X_\alpha$ is closed by
-\noderef{ScheideReplacementUnionClosed}.  It contains $y_0$, and
-\noderef{ScheideDefectiveSetup} says that $y_0$ misses $\alpha_0$.
-Hence \noderef{ColoredVertexSetClosed} forbids an
+\noderef{ScheideReplacementUnionClosed}.  The first base position in
+\noderef{ScheideStructuralConfiguration} and the definition
+\noderef{TreeSequenceVertexSet} put $y_0$ in $X_0\subseteq X_\alpha$, and
+\noderef{ScheideDefectiveSetup} says that $y_0$ misses $\alpha_0$.  Hence
+\noderef{ColoredVertexSetClosed} forbids an
 $\alpha_0$-colored boundary edge of $X_\alpha$.  The crossing $g$ of
-$L$ leaves the larger set $X$ from $v\in X_0\subseteq X_\alpha$ and has
+$L$ has one endpoint $v\in X_0\subseteq X_\alpha$ and its other endpoint
+outside $X$.  The union formula in
+\noderef{ScheideEnlargedVertexSet} gives $X_\alpha\subseteq X$, so this
+second endpoint is outside $X_\alpha$.  Thus
+\noderef{BoundaryEdges} makes $g$ a boundary edge of $X_\alpha$; it has
 color $\alpha$, so the uniqueness just proved gives $g=D.f0(d)$.
 
 If the path $P$ of $L$ left $X_\alpha$ before reaching $v$, choose its
-first departure.  Its edge has color $\alpha_0$ or $\alpha$ by
-\noderef{TwoColorIncidenceGraph}; closedness excludes the first color,
+first departure.  The adjacent vertex-nodes lie respectively inside and
+outside $X_\alpha$, so \noderef{BoundaryEdges} makes the intervening
+edge-node a boundary identity.  Its edge has color $\alpha_0$ or $\alpha$
+by \noderef{TwoColorIncidenceGraph}; closedness excludes the first color,
 and the second makes it the unique edge $D.f0(d)=g$.  But this earlier
-edge-node is distinct from the edge-node $g$ after $v$, contradicting
-the simplicity recorded in \noderef{ScheideLastExitPath}.  Thus all
+edge-node is distinct from the edge-node $g$ after $v$, contradicting the
+simplicity recorded in \noderef{ScheideLastExitPath}.  Thus all
 vertex-nodes through $v$ lie in $X_\alpha$.
 
 Finally let $f$ be any boundary edge of $X$ in the full component.  The
 support equality for $L$ puts $f$ on $P$.  Before and through $v$, every
 vertex-node is in $X_\alpha\subseteq X$; after $v$, every vertex-node is
-outside $X$.  As in the incidence description above, the only path
-edge-node with one endpoint vertex in $X$ and the other outside is the
-edge immediately after $v$, namely $g$.  Therefore $f=g$.
+outside $X$.  By \noderef{BoundaryEdges}, $f$ has exactly one endpoint in
+$X$; by \noderef{Incident} and \noderef{TwoColorIncidenceGraph}, its two
+endpoint vertex-nodes are its two neighbors on the component path.  Hence
+the only possible path edge-node with one endpoint vertex in $X$ and the
+other outside is the edge immediately after $v$, namely $g$.  Therefore
+$f=g$.
 \end{proof}
