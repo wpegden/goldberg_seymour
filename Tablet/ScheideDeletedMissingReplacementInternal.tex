@@ -22,7 +22,9 @@ $Y\subseteq Z$.  The original triple and, by
 \noderef{ScheideReplacementMaximum}, the replacement triple are globally
 maximum.  Hence \noderef{ScheideGlobalMaximumOrder} makes $X$ elementary
 and closed under $\varphi$, and makes $X_\delta$ elementary and closed under
-$\varphi_\delta$.
+$\varphi_\delta$.  Here and below these predicates are used in the exact
+senses of \noderef{ColoredVertexSetElementary} and
+\noderef{ColoredVertexSetClosed}.
 
 Let $\alpha$ be missing at $u^i_{\gamma(\delta)}$.  Its displayed block edge
 from \noderef{ScheideStructuralConfiguration} is incident there and has
@@ -33,7 +35,8 @@ two vertices of $U_\gamma$, so $\alpha\ne\delta$.  The vertex $y_0$ is
 distinct from the selected block vertex by the exact positions and vertex
 injectivity in \noderef{TreeSequence}; original elementariness, together
 with the missing $\alpha_0$ at $y_0$ recorded in
-\noderef{ScheideDefectiveSetup}, gives $\alpha\ne\alpha_0$.
+\noderef{ScheideDefectiveSetup}, gives $\alpha\ne\alpha_0$ by the
+disjoint-missing-set condition in \noderef{ColoredVertexSetElementary}.
 
 We also record the inequalities needed before comparing incidence graphs.
 The setup gives $\alpha_0\ne\gamma(\delta)$, and
@@ -41,8 +44,10 @@ $\gamma(\delta)\ne\delta$ because $\gamma(\delta)$ is missing at
 $v^0_\delta$ whereas the incident exact identity $f^0_\delta$ has color
 $\delta$.  Finally $\alpha_0\ne\delta$: defectivity in
 \noderef{DefectiveColors} gives a $\delta$-colored boundary edge of $X$,
-and closedness of $X$ makes $\delta$ present at $y_0$, where $\alpha_0$ is
-missing.  Since both $\alpha_0$ and $\alpha$ differ from the colors in the
+which is an identity in \noderef{BoundaryEdges}; closedness in
+\noderef{ColoredVertexSetClosed}, applied at $y_0$, makes $\delta$ present
+there, where $\alpha_0$ is missing.  Since both $\alpha_0$ and $\alpha$
+differ from the colors in the
 first switch, the pointwise definition
 \noderef{TwoColorComponentSwap} gives, for every exact edge identity $q$,
 \[
@@ -52,16 +57,21 @@ first switch, the pointwise definition
  \varphi(q)=\alpha\Longleftrightarrow
  \varphi_\delta(q)=\alpha.                                  \tag{1}
 \]
-Thus the two $(\alpha_0,\alpha)$ incidence graphs, including their isolated
-vertex and edge nodes, are identical.
+Thus, by the adjacency definition in \noderef{TwoColorIncidenceGraph}, the
+two $(\alpha_0,\alpha)$ incidence graphs, including their isolated vertex
+and edge nodes, are identical.
 
 Apply \noderef{ScheideReplacementInternalMissing} to $\alpha_0$, using
 $y_0\in Z$ and $\alpha_0\ne\gamma(\delta)$.  It gives an exact
 $\alpha_0$-colored identity joining $U_\delta$ under $\varphi$.
 \noderef{ScheideReplacementPairFixed} transfers the same color of that same
-identity to $\varphi_\delta$.  Consequently both replacement vertices lie
-in the $(\alpha_0,\alpha)$ component $K$ through $u^1_\delta$ under
-$\varphi_\delta$.
+identity to $\varphi_\delta$.  Let $K$ be the component through
+$u^1_\delta$ under $\varphi_\delta$, as defined in
+\noderef{TwoColorComponent}.  Its root belongs to it, and the internal
+$\alpha_0$ edge-node is adjacent to both endpoint vertex-nodes by
+\noderef{TwoColorIncidenceGraph}; propagation across that exact edge in
+\noderef{TwoColorComponent} consequently puts both replacement vertices in
+$K$.
 
 The component $K$ avoids every vertex of $X$ and every edge-node incident
 with $X$.  Indeed, $u^1_\delta\notin X$, while $\alpha_0$ is missing at
@@ -69,8 +79,11 @@ $y_0\in X$ and $\alpha$ is missing at the selected vertex of
 $U_\gamma\subseteq X$.  Apply
 \noderef{ClosedSetTwoColorComponentAvoidance} to the closed set $X$ under
 $\varphi$, and then use (1) to identify the component under
-$\varphi_\delta$.  This proves both the vertex-node and incident-edge-node
-avoidance, not merely avoidance of the displayed vertices.
+$\varphi_\delta$: equality of the graphs is supplied by
+\noderef{TwoColorIncidenceGraph}, and equality of their connected
+components by \noderef{TwoColorComponent}.  This proves both the vertex-node
+and incident-edge-node avoidance, not merely avoidance of the displayed
+vertices.
 
 Switch $\alpha_0$ and $\alpha$ on $K$ under $\varphi_\delta$, and call the
 new coloring $\theta$.  We reconstruct a globally maximum replacement
@@ -102,9 +115,16 @@ every displayed tree identity has both endpoints in $X$.  The exact before-
 and-after records of \noderef{ScheideReplacementData} keep every base witness
 at its original base position; an edge after the deleted block merely shifts
 two positions toward the front, so its base witness remains earlier.  The
-last two displayed edges have color $\delta$ and use $v^0_\delta\in Y$ as
-their earlier missing witness, again by the exact missing-set formula in
-\noderef{ScheideDefectiveSwitchEffect}.  All these
+last two displayed edges have color $\delta$.  The recorded-exit field of
+\noderef{ScheideDefectiveSetup} says that $v^0_\delta$ is a Scheide exit
+vertex.  Instantiating \noderef{ScheideStructuralExitsInBase} with this
+specific exit gives $v^0_\delta\in Y$.  The base-position and
+retained-vertex clauses of \noderef{ScheideStructuralConfiguration} and
+\noderef{ScheideReplacementData} place that same vertex before both final
+edges in $T_\delta$, while the exact missing-set formula in
+\noderef{ScheideDefectiveSwitchEffect} says that $\delta$ is missing there.
+Thus $v^0_\delta$ is an earlier missing-$\delta$ witness for each appended
+replacement edge, separately.  All these
 witnesses lie in $Y\subseteq X$ and hence, by the vertex and incident-edge
 avoidance above, retain their full missing sets under the second switch.
 These cases exhaust the exact replacement layout, so
@@ -120,21 +140,37 @@ closed under $\theta$.
 
 We exclude every $\alpha$-edge under $\varphi_\delta$ leaving $U_\delta$.
 Any such individual identity belongs to $K$, since both replacement vertices
-belong to $K$.  If its other endpoint lies in $Z$, then
+belong to $K$: \noderef{TwoColorIncidenceGraph} makes its edge-node adjacent
+to its endpoint vertex-node, and \noderef{TwoColorComponent} puts that
+edge-node in the same component.  If its other endpoint lies in $Z$, then
 \noderef{ScheideReplacementPairFixed} says the same identity has color
-$\alpha$ under $\varphi$; it is a boundary edge of the closed set $X$ and
-contradicts the missing $\alpha$ at the selected vertex of $U_\gamma$.  If
+$\alpha$ under $\varphi$; it is in \noderef{BoundaryEdges} for $X$, and
+closedness as defined by \noderef{ColoredVertexSetClosed} contradicts the
+missing $\alpha$ at the selected vertex of $U_\gamma$.  If
 its other endpoint lies outside $X_\delta$, the second switch gives it color
-$\alpha_0$; it is then a boundary edge of the newly proved closed set
-$X_\delta$ under $\theta$, contradicting the missing $\alpha_0$ at
+$\alpha_0$; it is then in \noderef{BoundaryEdges} for the newly proved
+closed set $X_\delta$ under $\theta$, and
+\noderef{ColoredVertexSetClosed} contradicts the missing $\alpha_0$ at
 $y_0$, whose incident identities were fixed by component avoidance.
-Because $X_\delta=Z\cup U_\delta$, the only remaining possible other
-endpoint lies in $U_\delta$.
 
-If no internal $\alpha$-edge existed, both distinct vertices of $U_\delta$
-would therefore miss $\alpha$ under $\varphi_\delta$, contrary to the
-elementariness of $X_\delta$.  Hence an exact identity $f$ joins them and has
-$\varphi_\delta(f)=\alpha$.  It is incident with the replacement pair, so
+Suppose now that no exact $\alpha$-colored identity under
+$\varphi_\delta$ is internal to $U_\delta$.  Fix either vertex
+$x\in U_\delta$, and take an arbitrary identity $q$ of color $\alpha$
+under $\varphi_\delta$ incident with $x$.  By \noderef{Incident}, write
+$G.\operatorname{ends}(q)=\{x,w\}$.  The loopless law in
+\noderef{LooplessMultigraph} implies $w\ne x$.  If $w\in Z$, the first
+exclusion above applies; if $w\notin X_\delta$, the second applies.  In the
+only remaining case, $w\in X_\delta\setminus Z=U_\delta$.  The replacement
+data give two distinct vertices in $U_\delta$, so $w\ne x$ identifies $w$
+with the other one, making $q$ the forbidden exact internal edge.  Hence no
+$\alpha$-colored identity is incident with $x$.  Since $x$ was arbitrary,
+\noderef{MissingColors} says that both vertices of $U_\delta$ miss
+$\alpha$ under $\varphi_\delta$.  Their distinctness and membership in
+$X_\delta$ come from \noderef{ScheideReplacementData}, so this contradicts
+the disjoint-missing-set condition in
+\noderef{ColoredVertexSetElementary}.  Therefore an exact identity $f$
+joins them and has $\varphi_\delta(f)=\alpha$.  It is incident with the
+replacement pair, so
 \noderef{ScheideReplacementPairFixed} transfers its color back to
 $\varphi(f)=\alpha$.  This proves the claim while retaining the identity of
 $f$, even in the presence of parallel edges.

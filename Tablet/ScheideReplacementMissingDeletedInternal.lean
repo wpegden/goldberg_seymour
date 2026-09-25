@@ -1,11 +1,17 @@
+import Tablet.BoundaryEdges
 import Tablet.ClosedSetTwoColorComponentAvoidance
+import Tablet.ColoredVertexSetClosed
+import Tablet.ColoredVertexSetElementary
+import Tablet.LooplessMultigraph
 import Tablet.ScheideDefectiveSwitchEffect
 import Tablet.ScheideGlobalMaximumOrder
 import Tablet.ScheideReplacementMaximum
 import Tablet.ScheideReplacementPairFixed
 import Tablet.ScheideStructuralInternalPair
 import Tablet.ScheideSymmetricDefectiveInternal
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorIncidenceGraph
 
 open scoped Sym2
 

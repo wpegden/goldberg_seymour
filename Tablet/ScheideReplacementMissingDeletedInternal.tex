@@ -26,6 +26,9 @@ triple $(T_\delta,e_0,\varphi_\delta)$ is globally maximum.  Thus
 \noderef{ScheideGlobalMaximumOrder} makes $X_\delta$ elementary and closed
 under $\varphi_\delta$; the same two conclusions hold for $X$ under
 $\varphi$ by applying that node to the original globally maximum triple.
+Here and below ``elementary'' and ``closed'' are used exactly in the senses
+of \noderef{ColoredVertexSetElementary} and
+\noderef{ColoredVertexSetClosed}.
 
 Let $\alpha$ be missing at $u^i_\delta$.  The corresponding one of the
 exact edges $f^1_\delta,f^2_\delta$ in
@@ -41,8 +44,10 @@ $v^0_\delta$ while the incident identity $f^0_\delta$ has color $\delta$.
 The setup also gives $\alpha_0\ne\gamma(\delta)$ and says that $\alpha_0$
 is missing at $y_0$.  Moreover $\alpha_0\ne\delta$.  Indeed, defectivity in
 \noderef{DefectiveColors} supplies a $\delta$-colored boundary edge of $X$;
-closedness of $X$ then makes $\delta$ present at every vertex of $X$, whereas
-$\alpha_0$ is missing at $y_0$.  Thus both $\alpha_0$ and $\alpha$ differ
+this is an identity in \noderef{BoundaryEdges}.  Closedness of $X$, applied
+at $y_0$ by \noderef{ColoredVertexSetClosed}, then says that $\delta$ is not
+missing there, whereas $\alpha_0$ is missing at $y_0$.  Thus both
+$\alpha_0$ and $\alpha$ differ
 from the two colors switched in forming $\varphi_\delta$.  The pointwise
 formula in \noderef{TwoColorComponentSwap} consequently gives, for every
 edge identity $q$,
@@ -53,28 +58,37 @@ edge identity $q$,
  \varphi(q)=\alpha\Longleftrightarrow
  \varphi_\delta(q)=\alpha.                                  \tag{1}
 \]
-In particular, the two $(\alpha_0,\alpha)$ incidence graphs are identical.
+By the adjacency definition in \noderef{TwoColorIncidenceGraph}, (1) says
+that the two $(\alpha_0,\alpha)$ incidence graphs are identical.
 
 The agreement assertion \noderef{ScheideReplacementPairFixed} applies to
 every identity incident with $u^i_\delta$, so $\alpha$ remains missing at
 that vertex under $\varphi_\delta$.  Equation (1) likewise shows that
 $\alpha_0$ remains missing at $y_0$.  These are distinct vertices of
 $X_\delta$, since the first lies outside $X$ and the second lies in $Z$.
-Elementariness of $X_\delta$ therefore gives $\alpha\ne\alpha_0$.
+The disjoint-missing-set condition in
+\noderef{ColoredVertexSetElementary} for $X_\delta$ therefore gives
+$\alpha\ne\alpha_0$.
 
 Apply \noderef{ScheideStructuralInternalPair} to $\alpha_0$, using its
 missing witness $y_0\in Z$ and
 $\alpha_0\ne\gamma(\delta)$.  It returns an exact $\alpha_0$-colored edge
-joining the two vertices of $U_\gamma$.  Hence both vertices of $U_\gamma$
-belong to the $(\alpha_0,\alpha)$ component $K$ through
-$u^1_{\gamma(\delta)}$.  Under $\varphi_\delta$, the component $K$ avoids
+joining the two vertices of $U_\gamma$.  Let $K$ be the component through
+$u^1_{\gamma(\delta)}$ as defined in \noderef{TwoColorComponent}.  The root
+belongs to its own component.  The internal edge-node is adjacent to each
+of the two endpoint vertex-nodes by
+\noderef{TwoColorIncidenceGraph}, so connectivity propagates from the root
+across that exact edge and puts both vertices of $U_\gamma$ in $K$.  Under
+$\varphi_\delta$, the component $K$ avoids
 every vertex of $X_\delta$ and every edge-node incident with $X_\delta$.
 Indeed, its starting vertex is outside $X_\delta$, while $\alpha_0$ and
 $\alpha$ have the missing witnesses $y_0$ and $u^i_\delta$ in the closed set
 $X_\delta$; this is exactly
 \noderef{ClosedSetTwoColorComponentAvoidance}.  Equation (1) identifies
 this component, including both its vertex nodes and its individual edge
-nodes, with the component defined under $\varphi$.
+nodes, with the component defined under $\varphi$: the graphs agree by
+\noderef{TwoColorIncidenceGraph}, and hence their connected components
+agree by \noderef{TwoColorComponent}.
 
 Switch $\alpha_0$ and $\alpha$ on $K$ and call the resulting coloring
 $\psi$.  We verify that $(T,e_0,\psi)$ is globally maximum.  First,
@@ -104,19 +118,36 @@ triple field by field.
 Apply \noderef{ScheideGlobalMaximumOrder} to the reconstructed triple.  It
 says that $X$ is closed under $\psi$.  We now exclude every
 $\alpha$-edge leaving $U_\gamma$.  Such an edge identity lies in $K$, since
-both vertices of $U_\gamma$ lie there.  If its other end is in $Z$, then by
-(1) it is an $\alpha$-colored boundary edge of the closed set $X_\delta$
-under $\varphi_\delta$, contradicting the missing $\alpha$ at
+both vertices of $U_\gamma$ lie there: an incident $\alpha$-colored
+edge-node is adjacent to its endpoint vertex-node by
+\noderef{TwoColorIncidenceGraph}, and therefore belongs to the same
+component by \noderef{TwoColorComponent}.  If its other end is in $Z$, then
+by (1) it is an $\alpha$-colored boundary edge of $X_\delta$ in the sense of
+\noderef{BoundaryEdges}; closedness under $\varphi_\delta$, used through
+\noderef{ColoredVertexSetClosed}, contradicts the missing $\alpha$ at
 $u^i_\delta$.  If its other end is outside $X$, the second switch changes
-its color to $\alpha_0$; it is then a boundary edge of $X$ under $\psi$,
-contradicting the missing $\alpha_0$ at $y_0$, whose incident identities
-were fixed by component avoidance.  The endpoint decomposition
-$X=Z\cup U_\gamma$ leaves only an edge internal to $U_\gamma$.
+its color to $\alpha_0$; it is then in \noderef{BoundaryEdges} for $X$
+under $\psi$, and \noderef{ColoredVertexSetClosed} contradicts the missing
+$\alpha_0$ at $y_0$, whose incident identities were fixed by component
+avoidance.
 
-If no internal $\alpha$-edge existed, the preceding exclusion would make
-$\alpha$ missing at both vertices of $U_\gamma$.  They are distinct members
-of $X$ by the vertex injectivity clause of \noderef{TreeSequence}, contrary
-to the original elementariness of $X$.  Hence an individual edge $f$ exists
+For completeness, assume that no exact $\alpha$-colored identity is
+internal to $U_\gamma$.  Fix either vertex $x\in U_\gamma$, and take an
+arbitrary identity $q$ of color $\alpha$ incident with $x$.  By
+\noderef{Incident}, write its exact endpoint pair as
+$G.\operatorname{ends}(q)=\{x,w\}$.  The loopless law in
+\noderef{LooplessMultigraph} gives $w\ne x$, since otherwise the endpoint
+pair would be $\{x,x\}$.  There are three exhaustive possibilities.  If
+$w\in Z$, the first exclusion above applies.  If $w\notin X$, the second
+exclusion applies.  Otherwise $w\in X\setminus Z=U_\gamma$; because
+$U_\gamma$ consists of the two distinct structural vertices and $w\ne x$,
+$w$ is the other vertex, so $q$ is an exact internal $\alpha$-edge,
+contrary to the assumption.  Thus no $\alpha$-colored identity is incident
+with $x$.  Since $x$ was arbitrary, \noderef{MissingColors} says that
+$\alpha$ is missing at both vertices of $U_\gamma$.  Those vertices are
+distinct members of $X$ by the vertex injectivity clause of
+\noderef{TreeSequence}, contradicting the disjoint-missing-set condition in
+\noderef{ColoredVertexSetElementary}.  Hence an individual edge $f$ exists
 with $\varphi(f)=\alpha$ and exact unordered endpoint pair $U_\gamma$, as
 claimed.  Distinct parallel identities have throughout remained distinct;
 only their exact endpoint pairs and colors were used.
