@@ -1,0 +1,123 @@
+\begin{helper}[A replacement-pair missing color is internal on the deleted pair]
+Fix a defective color $\delta$ and its replacement data.  If a color
+$\alpha$ is missing under $\varphi$ at either replacement vertex
+$u^1_\delta$ or $u^2_\delta$, then there is an individual edge $f$ with
+$\varphi(f)=\alpha$ and
+\[
+ G.\operatorname{ends}(f)=
+ \{u^1_{\gamma(\delta)},u^2_{\gamma(\delta)}\}.
+\]
+\end{helper}
+\begin{proof}
+Write $X=V(T)$,
+$U_\gamma=\{u^1_{\gamma(\delta)},u^2_{\gamma(\delta)}\}$,
+$Z=X\setminus U_\gamma$, and
+$U_\delta=\{u^1_\delta,u^2_\delta\}$.  Let
+\[
+ \varphi_\delta=\operatorname{swap}_{\gamma(\delta),\delta}
+   (\varphi;v^0_\delta),\qquad X_\delta=V(T_\delta).
+\]
+The exact replacement identity in \noderef{ScheideReplacementData} is
+$X_\delta=Z\cup U_\delta$; it also says that both vertices of
+$U_\delta$ lie outside $X$.  The ordered layout in
+\noderef{ScheideStructuralConfiguration} puts the base $Y$, in particular
+$y_0$, in $Z$.  By \noderef{ScheideReplacementMaximum}, the replacement
+triple $(T_\delta,e_0,\varphi_\delta)$ is globally maximum.  Thus
+\noderef{ScheideGlobalMaximumOrder} makes $X_\delta$ elementary and closed
+under $\varphi_\delta$; the same two conclusions hold for $X$ under
+$\varphi$ by applying that node to the original globally maximum triple.
+
+Let $\alpha$ be missing at $u^i_\delta$.  The corresponding one of the
+exact edges $f^1_\delta,f^2_\delta$ in
+\noderef{ScheideReplacementData} is incident there and has color $\delta$,
+so the definition \noderef{MissingColors} gives $\alpha\ne\delta$.
+The second edge supplied by \noderef{ScheideSymmetricDefectiveInternal} has
+color $\gamma(\delta)$ and exact ends $U_\delta$, so the same argument gives
+$\alpha\ne\gamma(\delta)$.  Also
+$\gamma(\delta)\ne\delta$: the setup
+\noderef{ScheideDefectiveSetup} makes $\gamma(\delta)$ missing at
+$v^0_\delta$ while the incident identity $f^0_\delta$ has color $\delta$.
+
+The setup also gives $\alpha_0\ne\gamma(\delta)$ and says that $\alpha_0$
+is missing at $y_0$.  Moreover $\alpha_0\ne\delta$.  Indeed, defectivity in
+\noderef{DefectiveColors} supplies a $\delta$-colored boundary edge of $X$;
+closedness of $X$ then makes $\delta$ present at every vertex of $X$, whereas
+$\alpha_0$ is missing at $y_0$.  Thus both $\alpha_0$ and $\alpha$ differ
+from the two colors switched in forming $\varphi_\delta$.  The pointwise
+formula in \noderef{TwoColorComponentSwap} consequently gives, for every
+edge identity $q$,
+\[
+ \varphi(q)=\alpha_0\Longleftrightarrow
+ \varphi_\delta(q)=\alpha_0,
+ \qquad
+ \varphi(q)=\alpha\Longleftrightarrow
+ \varphi_\delta(q)=\alpha.                                  \tag{1}
+\]
+In particular, the two $(\alpha_0,\alpha)$ incidence graphs are identical.
+
+The agreement assertion \noderef{ScheideReplacementPairFixed} applies to
+every identity incident with $u^i_\delta$, so $\alpha$ remains missing at
+that vertex under $\varphi_\delta$.  Equation (1) likewise shows that
+$\alpha_0$ remains missing at $y_0$.  These are distinct vertices of
+$X_\delta$, since the first lies outside $X$ and the second lies in $Z$.
+Elementariness of $X_\delta$ therefore gives $\alpha\ne\alpha_0$.
+
+Apply \noderef{ScheideStructuralInternalPair} to $\alpha_0$, using its
+missing witness $y_0\in Z$ and
+$\alpha_0\ne\gamma(\delta)$.  It returns an exact $\alpha_0$-colored edge
+joining the two vertices of $U_\gamma$.  Hence both vertices of $U_\gamma$
+belong to the $(\alpha_0,\alpha)$ component $K$ through
+$u^1_{\gamma(\delta)}$.  Under $\varphi_\delta$, the component $K$ avoids
+every vertex of $X_\delta$ and every edge-node incident with $X_\delta$.
+Indeed, its starting vertex is outside $X_\delta$, while $\alpha_0$ and
+$\alpha$ have the missing witnesses $y_0$ and $u^i_\delta$ in the closed set
+$X_\delta$; this is exactly
+\noderef{ClosedSetTwoColorComponentAvoidance}.  Equation (1) identifies
+this component, including both its vertex nodes and its individual edge
+nodes, with the component defined under $\varphi$.
+
+Switch $\alpha_0$ and $\alpha$ on $K$ and call the resulting coloring
+$\psi$.  We verify that $(T,e_0,\psi)$ is globally maximum.  First,
+\noderef{TwoColorComponentSwapProper} gives properness because
+$\alpha_0\ne\alpha$.  The switch interchanges two colored values and fixes
+the uncolored value, so the exact-one-uncolored clause of
+\noderef{KTriple} is preserved.  Every displayed edge of $T$ has an
+endpoint in $Z$: a base edge has its new base vertex there, and a block edge
+has a base endpoint there by the exact attachment clause of
+\noderef{ScheideStructuralConfiguration}.  The edge-node avoidance above
+therefore fixes every displayed edge identity.
+
+It remains to check every Tashkinov witness, rather than merely assert that
+the sequence is unchanged.  For a nonfirst base edge, its witness from
+\noderef{TashkinovTree} occurs at an earlier base position, hence in
+$Y\subseteq Z$.  For a block edge,
+\noderef{ScheideStructuralConfiguration} explicitly supplies a witness in
+$Y$ for its block color.  These cases exhaust the exact ordered layout.
+The vertex and incident-edge avoidance of $K$ fixes every edge incident with
+each such witness, hence fixes its full missing-color set.  Thus all clauses
+of \noderef{TashkinovTree} hold for $T$ under $\psi$.  The criticality,
+chromatic-index, and degree fields of \noderef{KTriple} are unchanged, and
+the displayed vertex set still has the cardinality in
+\noderef{GlobalMaximumTriple}.  This reconstructs that globally maximum
+triple field by field.
+
+Apply \noderef{ScheideGlobalMaximumOrder} to the reconstructed triple.  It
+says that $X$ is closed under $\psi$.  We now exclude every
+$\alpha$-edge leaving $U_\gamma$.  Such an edge identity lies in $K$, since
+both vertices of $U_\gamma$ lie there.  If its other end is in $Z$, then by
+(1) it is an $\alpha$-colored boundary edge of the closed set $X_\delta$
+under $\varphi_\delta$, contradicting the missing $\alpha$ at
+$u^i_\delta$.  If its other end is outside $X$, the second switch changes
+its color to $\alpha_0$; it is then a boundary edge of $X$ under $\psi$,
+contradicting the missing $\alpha_0$ at $y_0$, whose incident identities
+were fixed by component avoidance.  The endpoint decomposition
+$X=Z\cup U_\gamma$ leaves only an edge internal to $U_\gamma$.
+
+If no internal $\alpha$-edge existed, the preceding exclusion would make
+$\alpha$ missing at both vertices of $U_\gamma$.  They are distinct members
+of $X$ by the vertex injectivity clause of \noderef{TreeSequence}, contrary
+to the original elementariness of $X$.  Hence an individual edge $f$ exists
+with $\varphi(f)=\alpha$ and exact unordered endpoint pair $U_\gamma$, as
+claimed.  Distinct parallel identities have throughout remained distinct;
+only their exact endpoint pairs and colors were used.
+\end{proof}
