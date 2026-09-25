@@ -173,7 +173,8 @@ preceding paragraph, the three clauses of
 \noderef{GlobalMaximumTriple} are all satisfied for
 $(T_\delta,e_0,\psi)$.
 
-It remains to construct the forbidden augmentation explicitly.  Since
+It remains to contradict closedness of the reconstructed maximum tree.
+Since
 $f$ has color $\alpha$ and is incident with the root $u$, its edge-node is
 adjacent to $u$ in the two-color incidence graph, and hence belongs to the
 full component $K$ by \noderef{TwoColorComponent}.  The first switch fixes
@@ -189,37 +190,12 @@ whereas the two deleted block vertices have positions at least $p\geq2$;
 vertex injectivity in \noderef{TreeSequence} makes these vertices
 distinct.  On the other hand that same equation gives
 $V(T_\delta)\subseteq V(T)\cup U_\delta\subseteq X$, so
-$w\notin X$ implies $w\notin V(T_\delta)$.  The edge identity $f$ is
-also fresh for $T_\delta$, since $f\in K$ whereas every edge identity of
-$T_\delta$ was proved outside $K$.
-
-Let $n=T_\delta.\mathrm{length}$.  Form an ordered sequence $S$ of length
-$n+1$ by retaining, in their old positions, the vertices indexed
-$0,\ldots,n$ and the edges indexed $0,\ldots,n-1$, and by putting $f$ in
-edge position $n$ and $w$ in vertex position $n+1$.  This is explicit
-\noderef{TreeSequence} data.  Its old vertices remain injective and the
-new one is fresh; its old edges remain injective and $f$ is fresh.  Its
-first edge is the old first edge $e_0$.  Every old attachment equality is
-unchanged, while the last edge attaches because its ends are $u$ and $w$
-and $u$ occurs among the earlier vertices of $T_\delta$.  Hence $S$ is a
-tree-sequence with respect to $G,e_0$.
-
-For every old noninitial edge position, the Tashkinov witness already
-verified for $T_\delta$ under $\psi$ is still earlier and unchanged in
-$S$.  At the new last position, $f$ has color $\alpha_0$ and the earlier
-vertex $y_0$ misses $\alpha_0$.  These are exactly all clauses of
-\noderef{TashkinovTree}, so $S$ is a Tashkinov tree for the reconstructed
-$k$-triple $(G,e_0,\psi)$.
-
-Finally, \noderef{TreeSequenceVertexSet} is the image of all displayed
-vertex positions.  Vertex injectivity and freshness of $w$ give
-\[
- |V(S)|=|V(T_\delta)|+1=t(G)+1.
-\]
-The equality $\chi'(G)=k+1$ in the reconstructed
-\noderef{KTriple} gives $k=\chi'(G)-1$, so this very triple and tree occur
-among the candidates whose maximum defines \noderef{TashkinovOrder}.
-That definition would force $|V(S)|\leq t(G)$, contradicting the displayed
-equality.  The assumed boundary identity $f$ therefore cannot exist, and
-$X$ is closed.
+$w\notin X$ implies $w\notin V(T_\delta)$.  Thus the same exact identity
+$f$, with ends $u\in V(T_\delta)$ and $w\notin V(T_\delta)$, is a boundary
+identity of $V(T_\delta)$ under $\psi$.  But the reconstructed global
+maximality makes $V(T_\delta)$ closed under $\psi$ by
+\noderef{ScheideGlobalMaximumOrder}.  Its boundary identity $f$ has color
+$\alpha_0$, while $\alpha_0$ is missing at
+$y_0\in V(T_\delta)$, contradicting that closedness directly.  The assumed
+boundary identity $f$ therefore cannot exist, and $X$ is closed.
 \end{proof}

@@ -1,0 +1,34 @@
+\begin{helper}[A closed set separates outside two-color components]
+Let $X$ be closed under a partial edge-coloring $\varphi$.  Suppose
+$u\notin X$, $a,b\in X$, color $\alpha$ is missing at $a$, and color
+$\beta$ is missing at $b$.  Then the full $(\alpha,\beta)$ incidence
+component rooted at $u$ contains no vertex-node belonging to $X$ and no
+edge-node incident with a vertex of $X$.
+\end{helper}
+\begin{proof}
+Let $H$ be the two-color incidence graph from
+\noderef{TwoColorIncidenceGraph}, and call a node of $H$ outside if it is
+either a vertex-node $v$ with $v\notin X$, or an edge-node $e$ that is
+incident with no vertex of $X$.  The root $u$ is outside by hypothesis.
+
+We first check that every neighbor in $H$ of an outside node is outside.
+There are only two nonvacuous cases because $H$ is bipartite.  If an
+outside vertex-node $v$ is adjacent to an edge-node $e$, then $e$ is
+incident with $v$ in the sense of \noderef{Incident}, and its color is
+$\alpha$ or $\beta$.  If $e$ were also
+incident with some $x\in X$, then $x\ne v$.  The two distinct incidences
+identify the exact endpoint pair of $e$, so $e$ would belong to
+\noderef{BoundaryEdges}.  In the $\alpha$ case, closedness as defined in
+\noderef{ColoredVertexSetClosed}, applied at $a$, contradicts that
+$\alpha$ is missing there; in the $\beta$ case the same argument at $b$
+contradicts the missingness of $\beta$.  Thus $e$ is incident with no
+vertex of $X$.  Conversely, if an outside edge-node $e$ is adjacent to a
+vertex-node $v$, then $e$ is incident with $v$, so the defining property
+of the edge-node immediately gives $v\notin X$.
+
+Every node in the component of the root is joined to it by a finite walk,
+by the connected-component definition in \noderef{TwoColorComponent}.
+Induction along this walk, using the neighbor calculation above, shows
+that every node in the component is outside.  Specializing first to
+vertex-nodes and then to edge-nodes gives the two asserted conclusions.
+\end{proof}
