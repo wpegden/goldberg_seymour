@@ -1,0 +1,52 @@
+\begin{helper}[Nondefective original-tree confinement]
+Let $L$ be a \noderef{ScheideLastExitPath} certificate for $\alpha$.
+Suppose that its last inside vertex $v$ belongs to
+$X_0=\noderef{TreeSequenceVertexSet}(T)$ and that
+$\alpha\notin\noderef{DefectiveColors}(G,\varphi,X_0)$.  Then every
+vertex-node of $L$'s path from $y_0$ through $v$ belongs to $X_0$.
+Moreover, every edge identity which belongs both to
+$\noderef{BoundaryEdges}(G,X)$, where
+$X=\noderef{ScheideEnlargedVertexSet}(R)$, and to the full
+$(D.\alpha_0,\alpha)$ component through $y_0$ is the crossing edge of
+$L$.
+\end{helper}
+\begin{proof}
+The extension field of \noderef{ScheideReducedConfiguration} supplies the
+inherited \noderef{ScheideStructuralConfiguration}.  Its globally maximum
+field, followed by
+\noderef{ScheideGlobalMaximumOrder}, says that $X_0$ is closed under
+$\varphi$.  The setup \noderef{ScheideDefectiveSetup} says that
+$\alpha_0=D.\alpha_0$ is missing at $y_0\in X_0$.  Thus
+\noderef{ColoredVertexSetClosed} forbids every $\alpha_0$-colored
+boundary edge of $X_0$.
+
+Let $P,i,v,g$ be the path, last-inside index, last-inside vertex, and
+crossing edge recorded by $L$.  The certificate gives $v\in X_0$,
+$\varphi(g)=\alpha$, and says that the vertex after $g$ lies outside
+$X\supseteq X_0$.  Hence $g$ is an $\alpha$-colored boundary edge of
+$X_0$.
+
+Suppose some vertex-node of the segment $y_0Pv$ were outside $X_0$.
+Choose the first such vertex-node.  The preceding edge-node $h$ is a
+boundary edge of $X_0$.  By \noderef{TwoColorIncidenceGraph}, its color
+is $\alpha_0$ or $\alpha$; the preceding closedness argument excludes
+$\alpha_0$, so $\varphi(h)=\alpha$.  The path later returns to
+$v\in X_0$, and $h\ne g$ because $g$ occurs strictly after $v$ and $P$
+is simple.  Thus $h$ and $g$ are two distinct members of
+\noderef{BoundaryColorEdges}$(G,\varphi,X_0,\alpha)$.  Expanding
+\noderef{DefectiveColors} and \noderef{DefectiveColor}, this says that
+$\alpha$ is defective for $X_0$, contrary to the hypothesis.  Therefore
+every vertex-node through $v$ lies in $X_0$.
+
+Now let $f$ be any edge identity in both the boundary of $X$ and the full
+two-color component.  The support equality in
+\noderef{ScheideLastExitPath} puts the edge-node $f$ on $P$.  Its two
+neighbors on the full component path are its two endpoint vertex-nodes,
+by \noderef{Incident}, \noderef{LooplessMultigraph}, and
+\noderef{TwoColorIncidenceGraph}.  All vertex-nodes of $P$ through $v$
+lie in $X_0\subseteq X$, while every vertex-node after $v$ lies outside
+$X$ by the last-index field of $L$.  Hence the only consecutive pair of
+endpoint vertex-nodes separated by the boundary of $X$ occurs across the
+edge-node immediately after $v$, namely $g$.  Simplicity of $P$ then
+gives $f=g$, proving the second assertion.
+\end{proof}

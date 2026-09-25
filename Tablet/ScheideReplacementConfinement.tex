@@ -1,0 +1,167 @@
+\begin{helper}[Replacement-tree confinement]
+Let $L$ be a \noderef{ScheideLastExitPath} certificate for $\alpha$, and
+suppose its last inside vertex $v$ does not belong to
+$X_0=\noderef{TreeSequenceVertexSet}(T)$.  Then there is a defective
+color $\delta$ such that $v\in U_\delta=\{(R\delta).u1,(R\delta).u2\}$.
+Write $r=D.\gammaIndex(\delta)$,
+$\gamma=C.\gamma(r)$,
+$Z=X_0\setminus\{C.\mathit{blockVertex}(r,0),
+C.\mathit{blockVertex}(r,1)\}$,
+$T_\delta=(R\delta).\mathit{replacementTree}$, and
+\[
+ \varphi_\delta=\noderef{TwoColorComponentSwap}
+   (G,\varphi,\gamma,\delta,\operatorname{inl}D.v0(\delta)).
+\]
+The labeled $(D.\alpha_0,\alpha)$ incidence graph is the same under
+$\varphi_\delta$ and $\varphi$.  Every color used on $T_\delta$ under
+$\varphi_\delta$ is missing under $\varphi_\delta$ at a vertex of $Z$.
+The vertex $v$ misses a member of
+$\noderef{TreeFreeColors}(\varphi_\delta,T_\delta)$, and $\alpha$ is not
+in \noderef{DefectiveColors}$(G,\varphi_\delta,V(T_\delta))$.
+Every vertex-node of $L$'s path from $y_0$ through $v$ belongs to
+$V(T_\delta)$.  Finally, every edge identity belonging both to
+$\noderef{BoundaryEdges}(G,X)$ and to the full
+$(D.\alpha_0,\alpha)$ component through $y_0$ is the crossing edge of
+$L$.
+\end{helper}
+\begin{proof}
+Since $v\in X\setminus X_0$, the indexed-union definition
+\noderef{ScheideEnlargedVertexSet} supplies a defective index $\delta$
+with $v\in U_\delta$.  The appropriate one of $(R\delta).f1$ and
+$(R\delta).f2$ is a $\delta$-colored edge incident with $v$ and with its
+other endpoint in $Z$, by \noderef{ScheideReplacementData}.  The second
+conclusion of \noderef{ScheideSymmetricDefectiveInternal} supplies a
+$\gamma$-colored edge internal to $U_\delta$, also incident with $v$.
+Both are distinct from the crossing $g$ of $L$, because their endpoints
+belong to $X$ whereas $g$ leaves $X$.  The extension field of
+\noderef{ScheideReducedConfiguration} supplies the structural
+configuration.  Properness, obtained by expanding
+the \noderef{GlobalMaximumTriple} and \noderef{KTriple} inside
+\noderef{ScheideStructuralConfiguration} to its
+\noderef{IsProperEdgeColoring} field, and
+\noderef{AdjacentEdges} therefore give
+\[
+ \alpha\ne\delta,\qquad \alpha\ne\gamma.                 \tag{1}
+\]
+The setup \noderef{ScheideDefectiveSetup} gives
+$\alpha_0\ne\gamma$.  Defectiveness, expanded through
+\noderef{DefectiveColors} and \noderef{DefectiveColor}, supplies a
+$\delta$-colored boundary edge of $X_0$, while
+\noderef{ScheideGlobalMaximumOrder} makes
+$X_0$ closed and $y_0\in X_0$ misses $\alpha_0$.  Thus
+\noderef{ColoredVertexSetClosed} implies
+\[
+ \alpha_0\ne\delta,\qquad \alpha_0\ne\gamma.             \tag{2}
+\]
+
+The formula in \noderef{TwoColorComponentSwap} changes only the values
+$\gamma$ and $\delta$.  Equations (1)--(2), applied in both directions,
+give for every edge identity $q$
+\[
+ \varphi_\delta(q)=\alpha_0\iff\varphi(q)=\alpha_0,
+ \qquad
+ \varphi_\delta(q)=\alpha\iff\varphi(q)=\alpha.           \tag{3}
+\]
+Expanding \noderef{TwoColorIncidenceGraph}, (3) proves equality of the
+two labeled incidence graphs, and hence preserves the full component and
+the path $P$ recorded by $L$.
+
+The theorem \noderef{ScheideReplacementMaximum} says that
+$(T_\delta,e_0,\varphi_\delta)$ is globally maximum.  Applying
+\noderef{ScheideGlobalMaximumOrder} makes $V(T_\delta)$ elementary and
+closed under $\varphi_\delta$.  The exact vertex-set field of
+\noderef{ScheideReplacementData} is
+\[
+ V(T_\delta)=Z\cup U_\delta.                              \tag{4}
+\]
+The exact base and block positions in
+\noderef{ScheideStructuralConfiguration}, together with vertex
+injectivity in \noderef{TreeSequence}, place $y_0$ in $Z$.  The exit
+witness fields of \noderef{ScheideDefectiveSetup}, unfolded through
+\noderef{ScheideExitVertex}, place $D.v0(\delta)$ in
+\noderef{ScheideExitVertices}; then
+\noderef{ScheideStructuralExitsInBase} places it in the base and hence
+in $Z$.  In particular $y_0,D.v0(\delta),v$ all lie in $V(T_\delta)$.
+
+The missing-set formula in \noderef{ScheideDefectiveSwitchEffect}
+shows that $\alpha_0$ remains missing at $y_0$.  Away from
+$D.v0(\delta)$ the missing set is fixed.  At that vertex it becomes
+$(\overline\varphi(D.v0(\delta))\setminus\{\gamma\})
+\cup\{\delta\}$, which retains $\alpha_0$ by (2).
+
+We prove the used-color assertion explicitly.  Let $c$ be in
+\noderef{TreeUsedColors}$(\varphi_\delta,T_\delta)$.  The exact edge-set
+and position fields of \noderef{ScheideReplacementData} say that its
+witnessing edge is either a retained old tree edge or one of the appended
+edges $(R\delta).f1,(R\delta).f2$.  The deleted block starts at position
+$p-1\geq1$, so the old first edge remains the first replacement edge and
+cannot witness membership in \noderef{TreeUsedColors}.  The base-position
+and block-position fields of \noderef{ScheideStructuralConfiguration},
+together with vertex injectivity in \noderef{TreeSequence}, also show
+that every base vertex is in $Z$.
+
+For a retained noninitial base edge, the
+\noderef{TashkinovTree} field of the original globally maximum triple
+supplies an earlier missing witness in the base.  Its color is not
+$\gamma$ by the base-avoidance field of
+\noderef{ScheideStructuralConfiguration}.  For a retained block edge,
+the structural block-color and base-missing-witness fields give a base
+witness, and injectivity of the block colors shows again that its color
+is not the deleted color $\gamma$.  Such an edge is not $D.f0(\delta)$,
+because every displayed old tree edge has both endpoints in $X_0$ by
+\noderef{TreeSequence}, whereas $D.f0(\delta)$ has an endpoint outside
+$X_0$.  The fixed-edge and missing-set clauses of
+\noderef{ScheideDefectiveSwitchEffect} therefore preserve the edge color
+and its witness; even if the witness equals $D.v0(\delta)$, the
+erase-insert formula preserves every color other than $\gamma$.  Hence a
+retained used color is missing under $\varphi_\delta$ at a vertex of $Z$.
+
+For an appended edge, \noderef{ScheideReplacementData} gives old color
+$\delta$, an endpoint in $Z$, and inequality from $D.f0(\delta)$.
+The fixed-edge clause of \noderef{ScheideDefectiveSwitchEffect} leaves
+its color equal to $\delta$, while that node's missing-set formula
+inserts $\delta$ at $D.v0(\delta)\in Z$.  Thus in all cases
+\[
+ c\in\noderef{TreeUsedColors}(\varphi_\delta,T_\delta)
+ \Longrightarrow
+ \exists z\in Z,
+ c\in\noderef{MissingColors}(G,\varphi_\delta,z).           \tag{5}
+\]
+
+Apply \noderef{ScheideGlobalMaximumMissingCounts} to the replacement
+triple and $v\in V(T_\delta)$.  Its two alternatives both give a color
+$\beta\in\noderef{MissingColors}(G,\varphi_\delta,v)$.  If $\beta$ were
+used on $T_\delta$, (5) would give $z\in Z$ also missing $\beta$.
+Because $z\in X_0$ and $v\notin X_0$, these are distinct vertices of
+$V(T_\delta)$, contradicting its
+\noderef{ColoredVertexSetElementary} property.  Thus $\beta$ is unused;
+the definitions \noderef{TreeMissingColors} and
+\noderef{TreeFreeColors} show that $\beta$ is a free color missing at
+$v$.
+
+If $\alpha$ were defective for $T_\delta$, the preserved full path $P$
+from $y_0$, the missing color $\alpha_0$ there, and the fact that $v$ is
+the last replacement-tree vertex of $P$ would satisfy
+\noderef{ScheideExitVertex}.  Hence
+$v\in\noderef{ScheideExitVertices}(T_\delta,\varphi_\delta)$.  But
+\noderef{ScheideExitNoFree}, applied to the replacement globally maximum
+triple, says that such a vertex misses no free color, contradicting the
+chosen $\beta$.  Therefore $\alpha$ is not defective for
+$T_\delta$.
+
+Closedness of $V(T_\delta)$ and the missing color $\alpha_0$ at $y_0$
+forbid every $\alpha_0$-colored boundary edge of that tree.  The edge
+$g$ leaves $X$ from $v$, so by (4) it is an $\alpha$-colored boundary
+edge of $V(T_\delta)$.  If $P$ left $V(T_\delta)$ before reaching $v$,
+its first departure would also have color $\alpha$ and would be distinct
+from $g$, contradicting the nondefectiveness just proved.  Hence every
+vertex-node of $P$ through $v$ lies in $V(T_\delta)$.
+
+Finally, the prefix just proved lies in $V(T_\delta)\subseteq X$, while
+the last-index field of \noderef{ScheideLastExitPath} puts every later
+vertex-node outside $X$.  Its support equality says that every edge-node
+of the full component lies on $P$.  Therefore the only edge-node of that
+component with one endpoint in $X$ and the other outside is the edge
+immediately following $v$, namely $g$.  This proves the asserted final
+uniqueness.
+\end{proof}

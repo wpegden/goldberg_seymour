@@ -1,0 +1,71 @@
+\begin{helper}[Defective original-tree confinement]
+Let $L$ be a \noderef{ScheideLastExitPath} certificate for $\alpha$.
+Suppose that its last inside vertex $v$ belongs to
+$X_0=\noderef{TreeSequenceVertexSet}(T)$ and that
+$\alpha\in\noderef{DefectiveColors}(G,\varphi,X_0)$.  Regard $\alpha$
+as the corresponding defective index $d$, put
+$U_\alpha=\{(R d).u1,(R d).u2\}$, and put
+$X_\alpha=X_0\cup U_\alpha$.  Then $D.f0(d)$ is the unique
+$\alpha$-colored boundary identity of $X_\alpha$, every vertex-node of
+$L$'s path from $y_0$ through $v$ lies in $X_\alpha$, and every edge
+identity belonging both to $\noderef{BoundaryEdges}(G,X)$ and to the full
+$(D.\alpha_0,\alpha)$ component through $y_0$ is the crossing edge of
+$L$.
+\end{helper}
+\begin{proof}
+Let $i=D.\gammaIndex(d)$ and
+$U_\gamma=\{C.\mathit{blockVertex}(i,0),C.\mathit{blockVertex}(i,1)\}$.
+The first conclusion of \noderef{ScheideSymmetricDefectiveInternal}
+supplies an $\alpha$-colored edge internal to $U_\gamma$.  Its endpoints
+are the two distinct members of $U_\gamma$ by
+\noderef{LooplessMultigraph}.  The extension field of
+\noderef{ScheideReducedConfiguration} supplies the inherited
+\noderef{ScheideStructuralConfiguration}.  The original coloring is proper
+because that structural configuration contains a
+\noderef{GlobalMaximumTriple}, hence a \noderef{KTriple} and an
+\noderef{IsProperEdgeColoring}.  Properness and
+\noderef{AdjacentEdges} therefore exclude every other $\alpha$-edge
+incident with either deleted vertex.
+
+Consequently every $\alpha$-colored boundary edge of $X_0$ has its
+tree endpoint in $X_0\setminus U_\gamma$.  The exact-three field of
+\noderef{ScheideReplacementData} now identifies all such identities as
+$D.f0(d),(R d).f1,(R d).f2$.  The latter two join the retained set to
+the two vertices of $U_\alpha$, so they are internal to $X_\alpha$.
+They are distinct and their $U_\alpha$ endpoints are distinct: otherwise
+two distinct incident edges of the same color would contradict
+properness.  Thus every vertex of $U_\alpha$ is already incident with
+one of these two $\alpha$-edges, and no further $\alpha$-edge can leave
+$X_\alpha$ there.
+
+The outside endpoint of $D.f0(d)$ is outside $X_0$ by
+\noderef{ScheideDefectiveSetup}.  It is not either member of
+$U_\alpha$, since equality would make $D.f0(d)$ adjacent to the
+corresponding distinct edge $(R d).f1$ or $(R d).f2$ of the same color.
+Thus $D.f0(d)$ leaves $X_\alpha$.  The preceding exhaustive list proves
+that it is the unique member of
+\noderef{BoundaryColorEdges}$(G,\varphi,X_\alpha,\alpha)$.
+
+The set $X_\alpha$ is closed by
+\noderef{ScheideReplacementUnionClosed}.  It contains $y_0$, and
+\noderef{ScheideDefectiveSetup} says that $y_0$ misses $\alpha_0$.
+Hence \noderef{ColoredVertexSetClosed} forbids an
+$\alpha_0$-colored boundary edge of $X_\alpha$.  The crossing $g$ of
+$L$ leaves the larger set $X$ from $v\in X_0\subseteq X_\alpha$ and has
+color $\alpha$, so the uniqueness just proved gives $g=D.f0(d)$.
+
+If the path $P$ of $L$ left $X_\alpha$ before reaching $v$, choose its
+first departure.  Its edge has color $\alpha_0$ or $\alpha$ by
+\noderef{TwoColorIncidenceGraph}; closedness excludes the first color,
+and the second makes it the unique edge $D.f0(d)=g$.  But this earlier
+edge-node is distinct from the edge-node $g$ after $v$, contradicting
+the simplicity recorded in \noderef{ScheideLastExitPath}.  Thus all
+vertex-nodes through $v$ lie in $X_\alpha$.
+
+Finally let $f$ be any boundary edge of $X$ in the full component.  The
+support equality for $L$ puts $f$ on $P$.  Before and through $v$, every
+vertex-node is in $X_\alpha\subseteq X$; after $v$, every vertex-node is
+outside $X$.  As in the incidence description above, the only path
+edge-node with one endpoint vertex in $X$ and the other outside is the
+edge immediately after $v$, namely $g$.  Therefore $f=g$.
+\end{proof}

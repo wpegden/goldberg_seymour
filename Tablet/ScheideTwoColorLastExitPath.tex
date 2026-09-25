@@ -1,0 +1,61 @@
+\begin{helper}[The full two-color component has a certified last exit]
+In the data $G,k,e_0,\varphi,T,C,D,R$, let $\alpha$ be present at every
+vertex of $X=\noderef{ScheideEnlargedVertexSet}(R)$.  Then there exists a
+\noderef{ScheideLastExitPath} certificate for $\alpha$.
+\end{helper}
+\begin{proof}
+Write $y_0=C.y(0)$ and $\alpha_0=D.\alpha_0$.  The extension field of
+\noderef{ScheideReducedConfiguration} supplies a
+\noderef{ScheideStructuralConfiguration}; its base-position field and the image
+definition \noderef{TreeSequenceVertexSet} put $y_0$ in $V(T)$, hence in
+$X$.  The setup \noderef{ScheideDefectiveSetup} gives
+$\alpha_0\in\noderef{MissingColors}(G,\varphi,y_0)$.  Since $\alpha$ is
+present at $y_0$, the complementary definitions of
+\noderef{PresentColors} and \noderef{MissingColors} give
+$\alpha\ne\alpha_0$.
+
+The globally maximum field of that
+\noderef{ScheideStructuralConfiguration}, expanded through
+\noderef{GlobalMaximumTriple} and \noderef{KTriple}, says that $\varphi$
+is proper.  At $y_0$ there is no incident $\alpha_0$-edge and there is
+at least one incident $\alpha$-edge.  Properness permits at most one such
+$\alpha$-edge: two distinct identities incident with $y_0$ would be
+\noderef{AdjacentEdges} of the same color.  Consequently the vertex-node
+$y_0$ has degree one in the two-color incidence graph.
+
+Apply \noderef{TwoColorComponentSpanningPath}.  It supplies a simple path
+whose support is the full component through $y_0$.  By
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, no internal node of this path
+can have another component incidence.  Since $y_0$ has degree one, it is
+one of the two path ends; reverse the path if necessary so that it starts
+at $y_0$.  Its other end is a vertex-node.  Indeed, an edge-node in the
+component has the two distinct endpoint vertex-neighbors specified by
+\noderef{Incident} and the loopless law in
+\noderef{LooplessMultigraph}, and hence cannot be a degree-one end.
+Denote the other endpoint vertex by $t$.
+
+The set $X$ is elementary by \noderef{ScheideEnlargedElementary}.  If
+$t\in X$, then $\alpha$ is present at $t$.  Since $t$ is a degree-one
+end of the alternating path, its unique incident path edge has color
+$\alpha$ and $\alpha_0$ is missing there.  Thus the distinct vertices
+$y_0,t\in X$ both miss $\alpha_0$, contrary to
+\noderef{ColoredVertexSetElementary}.  (They are distinct because the
+component path has a degree-one end $y_0$ and contains its incident
+$\alpha$-edge.)  Hence $t\notin X$.
+
+The finite path begins at a vertex of $X$ and ends at a vertex outside
+$X$.  Choose the greatest path index $i$ whose node is a vertex-node in
+$X$, and call that vertex $v$.  The bipartite definition
+\noderef{TwoColorIncidenceGraph} makes the next two nodes an edge-node
+$g$ and a vertex-node $u$.  Maximality of $i$ gives $u\notin X$ and says
+that every later vertex-node is outside $X$.  The two adjacencies give
+that $g$ is incident with $v$ and $u$, so
+$g\in\noderef{BoundaryEdges}(G,X)$.  Its color is $\alpha_0$ or
+$\alpha$.  But $X$ is closed by \noderef{ScheideEnlargedClosed}; since
+$y_0\in X$ misses $\alpha_0$, the definition
+\noderef{ColoredVertexSetClosed} forbids an $\alpha_0$-colored boundary
+edge.  Therefore $\varphi(g)=\alpha$.  Finally $g$ is a node of the path,
+whose support is the component, so its edge-node belongs to that
+component.  These choices and facts are exactly all fields of the
+claimed \noderef{ScheideLastExitPath} certificate.
+\end{proof}

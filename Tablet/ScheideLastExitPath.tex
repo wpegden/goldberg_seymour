@@ -1,0 +1,17 @@
+\begin{definition}[Scheide last-exit path certificate]
+Fix the data $G,k,e_0,\varphi,T,C,D,R$ occurring in the Scheide reduced
+configuration and a color $\alpha$.  A \emph{Scheide last-exit path
+certificate} consists of vertices $t,v,u$, an edge identity $g$, a walk
+$P$ in the \noderef{TwoColorIncidenceGraph} for the colors
+$D.\alpha_0,\alpha$ from the vertex-node $y_0=C.y(0)$ to the vertex-node
+$t$, and an index $i$ of $P$, with all of the following properties.
+The walk $P$ is a simple path and its support is exactly the
+\noderef{TwoColorComponent} through $y_0$.  The terminal vertex $t$ is
+outside $X=\noderef{ScheideEnlargedVertexSet}(R)$.  At positions
+$i,i+1,i+2$ the path has respectively the nodes $v,g,u$, where
+$v\in X$, $u\notin X$, and $i+2\leq |P|$.  Every vertex-node strictly
+after position $i$ is outside $X$.  Finally,
+$g\in\noderef{BoundaryEdges}(G,X)$, $\varphi(g)=\alpha$, and the
+edge-node $g$ belongs to the full $(D.\alpha_0,\alpha)$ component through
+$y_0$.
+\end{definition}
