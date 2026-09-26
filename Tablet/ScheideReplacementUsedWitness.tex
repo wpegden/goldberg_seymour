@@ -1,0 +1,64 @@
+\begin{helper}[Missing witnesses for replacement-tree colors]
+Fix a defective color $\delta$, put $r=D.\gammaIndex(\delta)$,
+\[
+ Z=V(T)\setminus\{C.\mathit{blockVertex}(r,0),
+                   C.\mathit{blockVertex}(r,1)\},
+ \qquad T_\delta=(R\delta).\mathit{replacementTree},
+\]
+and let $\varphi_\delta$ be the
+\noderef{TwoColorComponentSwap} of $C.\gamma(r)$ and $\delta$ rooted at
+$D.v0(\delta)$.  Every color in
+\noderef{TreeUsedColors}$(\varphi_\delta,T_\delta)$ is missing under
+$\varphi_\delta$ at some vertex of $Z$.
+\end{helper}
+\begin{proof}
+Write $\gamma=C.\gamma(r)$.  Let $c$ be used on $T_\delta$, and choose a
+noninitial displayed edge $h$ of $T_\delta$ colored $c$.  The exact
+edge-set, retained-position, and last-edge fields of
+\noderef{ScheideReplacementData} split $h$ into three possibilities: a
+retained noninitial base edge of $T$, a retained block edge of $T$, or
+one of the appended edges $(R\delta).f1,(R\delta).f2$.  The deleted block
+starts at position $p-1\ge1$.  Consequently the original first edge is
+still the first replacement edge, and injectivity of the edge sequence in
+\noderef{TreeSequence} prevents it from occurring again; hence it cannot
+be the witness $h$.
+
+Suppose first that $h$ is a retained noninitial base edge.  The
+\noderef{TashkinovTree} field of the original
+\noderef{GlobalMaximumTriple} supplies an earlier vertex where its color
+$c$ is missing.  The base-position fields of
+\noderef{ScheideStructuralConfiguration} put that earlier vertex in the
+base.  The deleted vertices are block vertices at positions at least
+$p$, so vertex injectivity in \noderef{TreeSequence} puts the witness in
+$Z$.  Moreover the base-avoidance field of
+\noderef{ScheideStructuralConfiguration} gives $c\ne\gamma$.
+
+Suppose next that $h$ is a retained block edge.  Its block-color and
+base-missing-witness fields in
+\noderef{ScheideStructuralConfiguration} give a base vertex $z$ at which
+$c$ is missing.  Again $z\in Z$.  Since this is a retained block rather
+than the deleted block, injectivity of the block-color map gives
+$c\ne\gamma$.  Every displayed old tree edge has both endpoints in
+$V(T)$ by \noderef{TreeSequence}, whereas $D.f0(\delta)$ has an endpoint
+outside $V(T)$ by \noderef{ScheideDefectiveSetup}; hence the retained
+edge is not $D.f0(\delta)$.
+
+In both retained cases the fixed-edge clause of
+\noderef{ScheideDefectiveSwitchEffect} preserves the edge color.  Its
+missing-set clauses preserve the missing witness unless that witness is
+$D.v0(\delta)$.  In the exceptional case, the erase-insert formula there
+removes only $\gamma$, and $c\ne\gamma$, so it preserves $c$ as well.
+Thus the retained-edge color $c$ is missing under $\varphi_\delta$ at the
+chosen vertex of $Z$.
+
+Finally suppose that $h$ is appended.  The endpoint and color fields of
+\noderef{ScheideReplacementData} say that $h$ has old color $\delta$, has
+an endpoint in $Z$, and is different from $D.f0(\delta)$.  The fixed-edge
+clause of \noderef{ScheideDefectiveSwitchEffect} therefore leaves its
+color equal to $\delta$.  The same theorem says that the new missing set
+at $D.v0(\delta)$ is obtained by inserting $\delta$.  The exit field of
+\noderef{ScheideDefectiveSetup}, followed by
+\noderef{ScheideStructuralExitsInBase}, places $D.v0(\delta)$ in the
+base, hence in $Z$.  Thus $D.v0(\delta)$ is the required missing witness
+for the appended color.  These three exhaustive cases prove the claim.
+\end{proof}

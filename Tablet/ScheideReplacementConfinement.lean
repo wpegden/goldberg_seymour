@@ -18,7 +18,12 @@ import Tablet.ScheideGlobalMaximumMissingCounts
 import Tablet.ScheideGlobalMaximumOrder
 import Tablet.ScheideLastExitPath
 import Tablet.ScheideReplacementData
+import Tablet.ScheideReplacementBoundaryUnique
+import Tablet.ScheideReplacementExitNotDefective
 import Tablet.ScheideReplacementMaximum
+import Tablet.ScheideReplacementPathPrefix
+import Tablet.ScheideReplacementSelectionSwitch
+import Tablet.ScheideReplacementUsedWitness
 import Tablet.ScheideReducedConfiguration
 import Tablet.ScheideStructuralConfiguration
 import Tablet.ScheideStructuralExitsInBase
@@ -80,4 +85,14 @@ theorem ScheideReplacementConfinement {V E : Type*}
           (Sum.inl (C.y ⟨0, lt_of_lt_of_le Nat.zero_lt_two C.p_ge_two⟩)) →
         f = L.crossing := by
 -- BODY
-  sorry
+  obtain ⟨d, hpair, hgraph⟩ :=
+    ScheideReplacementSelectionSwitch G k e0 phi T C D R alpha L hlast
+  have hused := ScheideReplacementUsedWitness G k e0 phi T C D R d
+  obtain ⟨hfree, hnondef⟩ :=
+    ScheideReplacementExitNotDefective G k e0 phi T C D R alpha L hlast
+      d hpair hgraph
+  have hprefix := ScheideReplacementPathPrefix G k e0 phi T C D R alpha L
+    d hpair hgraph hnondef
+  have hboundary := ScheideReplacementBoundaryUnique G k e0 phi T C D R
+    alpha L d hprefix
+  exact ⟨d, hpair, hgraph, hused, hfree, hnondef, hprefix, hboundary⟩

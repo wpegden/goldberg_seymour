@@ -1,0 +1,40 @@
+\begin{helper}[Uniqueness of the enlarged-set crossing]
+In the setting of \noderef{ScheideLastExitPath}, fix a defective index
+$\delta$ and suppose every vertex-node of $L.path$ through
+$L.\mathit{lastInside}$ belongs to the replacement-tree vertex set
+$V((R\delta).\mathit{replacementTree})$.  Then every edge identity that
+belongs both to
+\noderef{BoundaryEdges}$(G,\noderef{ScheideEnlargedVertexSet}(R))$ and to
+the full $(D.\alpha_0,\alpha)$ component through $y_0$ equals
+$L.\mathit{crossing}$.
+\end{helper}
+\begin{proof}
+Put $X=\noderef{ScheideEnlargedVertexSet}(R)$ and
+$v=L.\mathit{lastInside}$.  The exact replacement vertex-set field in
+\noderef{ScheideReplacementData} gives
+$V((R\delta).\mathit{replacementTree})\subseteq X$.  The assumed prefix
+confinement therefore puts every vertex-node of $L.path$ through $v$ in
+$X$.  Conversely, the $afterLastOutside$ field of
+\noderef{ScheideLastExitPath} puts every later vertex-node of the path
+outside $X$.
+
+Let $f$ be both a boundary edge of $X$ and an edge-node of the indicated
+two-color component.  The support equality $L.pathSpans$ from
+\noderef{ScheideLastExitPath}, expanded through
+\noderef{TwoColorComponent}, places $\operatorname{inr}(f)$ on $L.path$.
+The walk alternates vertex-nodes and edge-nodes because adjacency in
+\noderef{TwoColorIncidenceGraph} only joins the two summands.  Thus the
+two path neighbors of this occurrence of $f$ are precisely its two
+endpoints in $G$.  Since $f\in\noderef{BoundaryEdges}(G,X)$, exactly one
+of these endpoint vertices lies in $X$.
+
+If the occurrence of $f$ were before the edge immediately following
+$v$, both neighboring vertex-nodes would occur no later than $v$ and
+hence both would lie in $X$.  If it were after that edge, both would
+occur after $v$ and hence both would lie outside $X$.  Both alternatives
+contradict that $f$ is a boundary edge.  The only remaining occurrence is
+the edge-node immediately following $v$.  The path-simplicity field of
+\noderef{ScheideLastExitPath} makes this occurrence unique, and its
+$crossingAt$ field identifies it as $L.\mathit{crossing}$.  Therefore
+$f=L.\mathit{crossing}$.
+\end{proof}

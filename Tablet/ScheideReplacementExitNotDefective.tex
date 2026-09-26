@@ -1,0 +1,76 @@
+\begin{helper}[The replacement exit has a free color and is nondefective]
+Let $C$ be a \noderef{ScheideReducedConfiguration} for
+$(G,k,e_0,\varphi,T)$, let $D$ be its
+\noderef{ScheideDefectiveSetup}, let $R$ assign
+\noderef{ScheideReplacementData} to each defective color, and let $L$ be
+a \noderef{ScheideLastExitPath} certificate for $\alpha$.  Fix a
+defective color $\delta$.  Assume explicitly that
+$v=L.\mathit{lastInside}$ belongs to
+$U_\delta=\{(R\delta).u1,(R\delta).u2\}$ and that the labeled
+$(D.\alpha_0,\alpha)$ \noderef{TwoColorIncidenceGraph}s for $\varphi$ and
+$\varphi_\delta$ are equal.  If $v\notin V(T)$, then $v$ misses a color
+$\beta\in\noderef{TreeFreeColors}(\varphi_\delta,T_\delta)$, where
+$T_\delta=(R\delta).\mathit{replacementTree}$, and
+\[
+ \alpha\notin\noderef{DefectiveColors}
+       (G,\varphi_\delta,V(T_\delta)).
+\]
+\end{helper}
+\begin{proof}
+Put $r=D.\gammaIndex(\delta)$,
+$Z=V(T)\setminus\{C.\mathit{blockVertex}(r,0),
+C.\mathit{blockVertex}(r,1)\}$, and
+$\gamma=C.\gamma(r)$.  By \noderef{ScheideReplacementMaximum},
+$(T_\delta,e_0,\varphi_\delta)$ is globally maximum.  Applying
+\noderef{ScheideGlobalMaximumOrder} shows that $V(T_\delta)$ is
+\noderef{ColoredVertexSetElementary} and closed.  The exact vertex-set
+field of \noderef{ScheideReplacementData} is
+\[
+ V(T_\delta)=Z\cup U_\delta.                              \tag{1}
+\]
+Thus the assumed membership puts $v$ in $V(T_\delta)$.
+
+The base and block positions in
+\noderef{ScheideStructuralConfiguration}, together with vertex
+injectivity in \noderef{TreeSequence}, place $y_0$ in $Z$.  The exit
+field of \noderef{ScheideDefectiveSetup}, expanded through
+\noderef{ScheideExitVertex}, places $D.v0(\delta)$ in
+\noderef{ScheideExitVertices}; \noderef{ScheideStructuralExitsInBase}
+then places it in the base and hence in $Z$.  The missing-set formula in
+\noderef{ScheideDefectiveSwitchEffect} preserves $D.\alpha_0$ at $y_0$:
+away from $D.v0(\delta)$ it fixes the missing set, while at that vertex
+it deletes only $\gamma$, and
+$D.\alpha_0\ne\gamma$ is a field of
+\noderef{ScheideDefectiveSetup}.
+
+Apply \noderef{ScheideGlobalMaximumMissingCounts} to the replacement
+triple and $v\in V(T_\delta)$.  Whether or not $v$ is incident with the
+uncolored edge, the corresponding alternative gives a color
+$\beta\in\noderef{MissingColors}(G,\varphi_\delta,v)$.  Suppose $\beta$
+were used on $T_\delta$.  The theorem
+\noderef{ScheideReplacementUsedWitness} would give $z\in Z$ also missing
+$\beta$.  Here $z\in V(T)$ while $v\notin V(T)$, so $z\ne v$; both lie in
+$V(T_\delta)$ by (1).  This contradicts the elementariness of that set.
+Consequently $\beta$ is unused.  Since it is missing at a tree vertex,
+the definitions of \noderef{TreeMissingColors} and
+\noderef{TreeFreeColors} show that it is free on $T_\delta$.
+
+It remains to exclude defectiveness of $\alpha$.  Suppose instead that
+$\alpha\in\noderef{DefectiveColors}(G,\varphi_\delta,V(T_\delta))$.
+The assumed equality of incidence graphs transports the walk $L.path$,
+its simplicity, and its full-component support from $\varphi$ to
+$\varphi_\delta$.  Its initial vertex $y_0$ lies in $V(T_\delta)$ and
+misses $D.\alpha_0$, while its terminal vertex lies outside the enlarged
+set and therefore outside $V(T_\delta)$.  The certificate
+\noderef{ScheideLastExitPath} says that every vertex-node after $v$ lies
+outside the enlarged set.  Together with $v\in V(T_\delta)$, this proves
+that $v$ is the last replacement-tree vertex on the full
+$(D.\alpha_0,\alpha)$ path.  Expanding
+\noderef{ScheideDefectiveChainPath} and \noderef{ScheideExitVertex}, these
+facts say exactly that
+$v\in\noderef{ScheideExitVertices}(T_\delta,\varphi_\delta)$.
+But \noderef{ScheideExitNoFree}, applied to the replacement globally
+maximum triple, makes the missing colors at such an exit vertex disjoint
+from the free colors.  This contradicts the color $\beta$ found above.
+Hence $\alpha$ is not defective for $T_\delta$.
+\end{proof}

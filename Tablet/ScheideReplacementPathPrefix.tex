@@ -1,0 +1,48 @@
+\begin{helper}[Confinement of the replacement-path prefix]
+Let $C$ be a \noderef{ScheideReducedConfiguration} for
+$(G,k,e_0,\varphi,T)$, let $D$ be its
+\noderef{ScheideDefectiveSetup}, let $R$ assign
+\noderef{ScheideReplacementData} to each defective color, and let $L$ be
+a \noderef{ScheideLastExitPath} certificate for $\alpha$.  Fix a
+defective color $\delta$, put
+$T_\delta=(R\delta).\mathit{replacementTree}$, and assume that the
+labeled $(D.\alpha_0,\alpha)$ \noderef{TwoColorIncidenceGraph}s for $\varphi$ and
+$\varphi_\delta$ agree.  If $L.\mathit{lastInside}\in U_\delta$ and
+$\alpha$ is not defective for $T_\delta$ under $\varphi_\delta$, then
+every vertex-node of $L.path$ from $y_0$ through
+$L.\mathit{lastInside}$ belongs to $V(T_\delta)$.
+\end{helper}
+\begin{proof}
+Write $v=L.\mathit{lastInside}$, $g=L.\mathit{crossing}$, and
+$X=\noderef{ScheideEnlargedVertexSet}(R)$.  The exact vertex-set field of
+\noderef{ScheideReplacementData} and the assumed membership give
+$v\in V(T_\delta)$, and also give $V(T_\delta)\subseteq X$.  By
+\noderef{ScheideReplacementMaximum} and
+\noderef{ScheideGlobalMaximumOrder}, $V(T_\delta)$ is
+\noderef{ColoredVertexSetClosed} under $\varphi_\delta$.
+
+The base-position fields of
+\noderef{ScheideStructuralConfiguration} put $y_0$ in
+$V(T_\delta)$.  The formula in
+\noderef{ScheideDefectiveSwitchEffect}, together with the fact that
+$D.\alpha_0$ differs from the switched block color, shows that
+$D.\alpha_0$ remains missing at $y_0$.  The certificate
+\noderef{ScheideLastExitPath} records $v,g$, and the next vertex
+consecutively on $L.path$, with the next vertex outside $X$.  Hence $g$
+leaves $V(T_\delta)$.  By the assumed graph equality it has one of the
+two colors $D.\alpha_0,\alpha$ under $\varphi_\delta$.  Closedness and the
+missing color $D.\alpha_0$ exclude the first possibility, so $g$ is an
+$\alpha$-colored boundary edge of $V(T_\delta)$.
+
+Suppose the path left $V(T_\delta)$ before reaching $v$, and take its
+first such departure.  The departure edge again has one of the two path
+colors, and closedness again excludes $D.\alpha_0$, so it has color
+$\alpha$.  It is distinct from $g$: the first departure occurs before
+the occurrence at $v$, and $L.pathSimple$ from
+\noderef{ScheideLastExitPath} forbids repetition of its edge-node.  Thus
+there are at least two distinct $\alpha$-colored boundary edges of
+$V(T_\delta)$.  Expanding \noderef{DefectiveColor} and
+\noderef{DefectiveColors}, this says that $\alpha$ is defective, contrary
+to the hypothesis.  Therefore no such earlier departure occurs, and all
+vertex-nodes through $v$ lie in $V(T_\delta)$.
+\end{proof}
