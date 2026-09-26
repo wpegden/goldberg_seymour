@@ -1,0 +1,48 @@
+\begin{helper}[Finite exit-color selection and block partition]
+Every Scheide structural configuration has a
+\noderef{ScheideStructuralSelectionData}: one old block color is selected
+for each exit, the selected old indices are injectively enumerated, their
+complement is enumerated, and these two enumerations give the stated
+unique partition of all old block indices.
+\end{helper}
+\begin{proof}
+Put $X=\operatorname{TreeSequenceVertexSet}(T)$ and
+$F=\operatorname{ScheideExitVertices}(T,\varphi)$.  The globally maximum
+field of \noderef{ScheideStructuralConfiguration}, together with
+\noderef{ScheideGlobalMaximumOrder}, says that $X$ is elementary in the
+sense of \noderef{ColoredVertexSetElementary}.
+
+Fix an old block index $i$.  The missing-on-base field of
+\noderef{ScheideStructuralConfiguration} gives a base index $q$ such that
+$C.\gamma(i)$ belongs to
+\noderef{MissingColors} at $C.y(q)$.  The exact base-position field and
+\noderef{TreeSequenceVertexSet} put $C.y(q)$ in $X$.  If the same color
+were missing at two distinct members of $X$, those two missing-color sets
+would intersect, contrary to elementariness.  Hence every old block color
+is missing at exactly one vertex of $X$.
+
+By the definition \noderef{ScheideExitVertices}, every member of $F$ is a
+vertex of $X$.  For each $v\in F$, the exit-coverage field of
+\noderef{ScheideStructuralConfiguration} supplies an old index $i(v)$
+whose color is missing at $v$.  Make these finitely many choices.  If
+$i(v)=i(w)$, then the same old block color is missing at both $v$ and $w$;
+the uniqueness just proved gives $v=w$.  Thus $v\mapsto i(v)$ is
+injective.  Moreover, if the selected color belonging to $w$ is missing
+at $v$, its unique missing vertex is both $v$ and $w$, so $v=w$.  This is
+the selected-color uniqueness clause.
+
+Let $r=|F|$ and choose a bijection
+$b:\operatorname{Fin}(r)\to\{v:v\in F\}$.  Define
+$\rho(t)=i(b(t))$; the preceding paragraph proves that $\rho$ is injective
+and has the required missing-color and uniqueness properties.  Let $U$ be
+the complement of the range of $\rho$ in the finite type
+$\operatorname{Fin}(C.s)$, put $a=|U|$, and choose a bijection
+$\upsilon:\operatorname{Fin}(a)\to U$.  The range of an injection from
+$\operatorname{Fin}(r)$ has $r$ elements.  It and $U$ are disjoint and
+partition $\operatorname{Fin}(C.s)$, so cardinality addition gives
+$C.s=a+r$.  Bijectivity of $b$ gives $r=|F|$.  Finally, membership or
+nonmembership in the range of $\rho$, followed by injectivity of $\rho$
+or $\upsilon$, gives the two disjoint unique alternatives for every old
+index.  These data are exactly a
+\noderef{ScheideStructuralSelectionData}.
+\end{proof}

@@ -1,0 +1,74 @@
+\begin{helper}[Reduced configuration assembly]
+Let $C$ be a Scheide structural configuration, let $D$ be a
+\noderef{ScheideStructuralSelectionData}, and let $T'$ carry the associated
+\noderef{ScheideStructuralReorderingData}.  Then $T'$ admits a reduced
+Scheide structural configuration $R$ with $V(T')=V(T)$: every old base
+vertex is in the new base, and every old block is either retained with its
+color, both vertex identities, and both edge identities unchanged, or has
+both vertices absorbed into the new base.
+\end{helper}
+\begin{proof}
+Write $a=D.a$, $r=D.r$, $\upsilon=D.\upsilon$, and $\rho=D.\rho$.  Define
+$p'=C.p+2a$ and $s'=r$.  The new base consists of the old base followed by
+the two vertices of every $\upsilon$-block.  Its base edges are the
+corresponding old base edges followed by the two exact edge identities of
+every such block.  For $t\in\operatorname{Fin}(r)$, define the $t$-th new
+block by
+\[
+ \gamma'(t)=C.\gamma(\rho(t)),\quad
+ u'_j(t)=C.\operatorname{blockVertex}(\rho(t),j),\quad
+ f'_j(t)=C.\operatorname{blockEdge}(\rho(t),j).
+\]
+The exact position clauses in
+\noderef{ScheideStructuralReorderingData} give the four required base and
+block position equations.  Its length clause, the equality $C.s=a+r$ in
+\noderef{ScheideStructuralSelectionData}, and the old length equation give
+$T'.\operatorname{length}+1=p'+2s'$.
+
+The new block-color map is injective because both $C.\gamma$ and $\rho$
+are injective.  Block attachment, block color, and a base missing witness
+are inherited from the corresponding old $\rho(t)$-block; every old
+missing witness lies in the unchanged first $C.p$ base positions.  For the
+new base-color exclusion, an old nonfirst base edge is covered by the old
+exclusion field of \noderef{ScheideStructuralConfiguration}.  A newly
+absorbed base edge has color $C.\gamma(\upsilon(h))$.  Equality with a
+retained color would, by injectivity of $C.\gamma$, identify
+$\upsilon(h)$ with $\rho(t)$, contradicting the defining complement of
+$\upsilon$.  Thus the exclusion holds on the enlarged base.
+
+For exit coverage, take a new exit $v$.  Exit-set equality in
+\noderef{ScheideStructuralReorderingData} makes it an old exit.  The
+bijection $D.b$ gives a unique $t$ with underlying vertex $v$, and the
+selected-missing field says that $\gamma'(t)$ is missing there.  The
+no-isolated-vertex field is copied from $C$.
+
+To reconstruct global maximality, unfold the old
+\noderef{GlobalMaximumTriple}.  Its \noderef{KTriple} is unchanged, the
+reordering datum supplies the new Tashkinov-tree assertion, and its
+vertex-set equality transfers the cardinality equality with the Tashkinov
+order.  Hence the preceding data form a new
+\noderef{ScheideStructuralConfiguration} on $T'$.
+
+We verify the three extra fields of
+\noderef{ScheideReducedConfiguration}.  Exit-set equality and
+$r=|\operatorname{ScheideExitVertices}(T,\varphi)|$ give the required
+cardinality.  For a new exit $v$, use the inverse of $D.b$ to obtain $t$;
+the selected-missing field supplies existence.  If another indexed new
+color is missing at $v$, the selected-uniqueness field of
+\noderef{ScheideStructuralSelectionData} makes its index equal to $t$.
+Conversely, for every $t$, the exit underlying $D.b(t)$ is in the new exit
+set and misses $\gamma'(t)$.  These are respectively exact uniqueness and
+surjectivity onto the new block colors.
+
+Call the resulting reduced configuration $R$.  The required vertex-set
+equality is already a field of the reordering datum.  Each old base vertex
+is the new base vertex at the same initial position.  Finally fix an old
+block index $i$ and apply the unique partition in
+\noderef{ScheideStructuralSelectionData}.  If $i=\rho(t)$, the definitions
+of the retained block give equality of its color, its two vertex
+identities, and its two exact edge identities with block $t$ of $R$.  If
+$i=\upsilon(h)$, the two old vertices occur at the new base positions
+$C.p+2h+j$.  Hence both lie in the image of $R.y$.  This proves precisely
+the retained-block versus absorbed-block alternative without identifying
+parallel edge identities.
+\end{proof}

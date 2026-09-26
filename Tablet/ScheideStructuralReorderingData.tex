@@ -1,0 +1,25 @@
+\begin{definition}
+Given a \noderef{ScheideStructuralConfiguration} $C$ and a
+\noderef{ScheideStructuralSelectionData} $D$, a \emph{Scheide structural
+reordering datum} is a tree-sequence $T'$ of the same length as $T$ whose
+vertices, in zero-based order, are
+\[
+ C.y(q),\quad
+ C.\operatorname{blockVertex}(D.\upsilon(h),j),\quad
+ C.\operatorname{blockVertex}(D.\rho(t),j),
+\]
+over respectively $q<C.p$, $h<D.a,j<2$, and $t<D.r,j<2$, and whose exact
+edge identities, in zero-based order, are
+\[
+ C.\operatorname{baseEdge}(q),\quad
+ C.\operatorname{blockEdge}(D.\upsilon(h),j),\quad
+ C.\operatorname{blockEdge}(D.\rho(t),j),
+\]
+over respectively $q<C.p-1$, $h<D.a,j<2$, and $t<D.r,j<2$.  The second
+vertex interval starts at $C.p$, the third at $C.p+2D.a$; the analogous
+edge intervals start at $C.p-1$ and $C.p-1+2D.a$.  The datum additionally
+certifies that $T'$ is a \noderef{TashkinovTree}, that
+$V(T')=V(T)$ as defined by \noderef{TreeSequenceVertexSet}, and that its
+exact \noderef{ScheideExitVertices} set under $\varphi$ equals
+that of $T$.
+\end{definition}

@@ -1,0 +1,64 @@
+\begin{helper}[Exact tree-sequence reordering]
+For every Scheide structural configuration and every
+\noderef{ScheideStructuralSelectionData}, there is a reordered
+tree-sequence $T'$ carrying a
+\noderef{ScheideStructuralReorderingData}.
+\end{helper}
+\begin{proof}
+Write $a=D.a$, $r=D.r$, $\upsilon=D.\upsilon$, and $\rho=D.\rho$.
+Define the alternating list $T'$ exactly as in
+\noderef{ScheideStructuralReorderingData}: first the old base, then the
+$a$ complementary blocks in $\upsilon$-order, and finally the $r$ retained
+blocks in $\rho$-order.  The retained/complement partition and
+$C.s=a+r$ from \noderef{ScheideStructuralSelectionData} show that these
+three intervals are disjoint and exhaustive.  Together with the exact
+length field of \noderef{ScheideStructuralConfiguration}, they show that
+$T'$ has $T.\operatorname{length}+1$ vertices and
+$T.\operatorname{length}$ edges and establish every displayed position
+identity in the reordering datum.
+
+We verify the fields of \noderef{TreeSequence}.  Positivity follows from
+$C.p\ge2$.  The first exact edge identity is the unchanged old
+$C.\operatorname{baseEdge}(0)=e_0$.  The vertex-position map is a
+permutation of the old vertex-position map: every old base entry is in the
+first interval and every old block index is in exactly one of the two
+later intervals.  The identical argument for edge positions is an
+identity-preserving permutation of the old edge-position map.  Hence the
+old vertex and edge injectivity fields prove the new ones; in particular,
+distinct parallel edge identities remain distinct.
+
+For attachment, an old-base edge retains its old earlier endpoint.  An
+absorbed edge has the form
+$C.\operatorname{blockEdge}(\upsilon(h),j)$, and the block-attachment
+field of \noderef{ScheideStructuralConfiguration} identifies its ends
+with its displayed new vertex and some $C.y(q)$ in the initial base.
+That base vertex occurs strictly earlier.  The same argument with
+$\rho(t)$ proves attachment for each retained edge.  This completes the
+tree-sequence construction.
+
+The new sequence satisfies \noderef{TashkinovTree}.  The globally maximum
+field of \noderef{ScheideStructuralConfiguration}, unfolded through
+\noderef{GlobalMaximumTriple}, supplies this property for the old tree.
+Every nonfirst old-base edge therefore retains an earlier missing-color
+witness in the unchanged base prefix.  For an absorbed or retained block
+edge, the block-color and missing-on-base fields give respectively its
+color and a missing witness among the first $C.p$ vertices, strictly
+before the block edge.  Thus every nonfirst new edge has the required
+earlier witness.
+
+The same exhaustive permutation of vertex positions and
+\noderef{TreeSequenceVertexSet} give $V(T')=V(T)$.  It remains to compare
+exits.  Unfold \noderef{ScheideExitVertices} and
+\noderef{ScheideExitVertex}.  Given witnesses
+$u,\gamma,\delta,z,P$ and a selected position for one tree, use the same
+vertices, colors, exact incidence walk, and position for the other.
+The equality $V(T')=V(T)$ transports start membership, the defective-color
+membership after unfolding \noderef{DefectiveColors},
+\noderef{DefectiveColor}, \noderef{BoundaryColorEdges}, and
+\noderef{BoundaryEdges}, membership of the selected exit, and every
+later-vertex exclusion.  In \noderef{ScheideDefectiveChainPath} it transports the start
+and terminal inside/outside conditions; the path and full-component
+conditions do not mention the ordered tree beyond its vertex set.  This
+proves each implication and hence equality of the exact exit sets.  All
+fields of \noderef{ScheideStructuralReorderingData} now hold.
+\end{proof}

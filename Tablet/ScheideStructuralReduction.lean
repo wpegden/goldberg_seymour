@@ -9,7 +9,10 @@ import Tablet.ScheideExitVertex
 import Tablet.ScheideExitVertices
 import Tablet.ScheideReducedConfiguration
 import Tablet.ScheideGlobalMaximumOrder
+import Tablet.ScheideStructuralReducedAssembly
+import Tablet.ScheideStructuralReordering
 import Tablet.ScheideStructuralConfiguration
+import Tablet.ScheideStructuralSelection
 import Tablet.TashkinovTree
 import Tablet.TreeSequence
 import Tablet.TreeSequenceVertexSet
@@ -30,4 +33,7 @@ theorem ScheideStructuralReduction {V E : Type*}
             C.blockEdge i j = R.blockEdge r j) ∨
         ∀ j : Fin 2, C.blockVertex i j ∈ Finset.univ.image R.y) := by
 -- BODY
-  sorry
+  classical
+  obtain ⟨D⟩ := ScheideStructuralSelection G k e0 phi T C
+  obtain ⟨T', ⟨Q⟩⟩ := ScheideStructuralReordering G k e0 phi T C D
+  exact ⟨T', ScheideStructuralReducedAssembly G k e0 phi T C D T' Q⟩

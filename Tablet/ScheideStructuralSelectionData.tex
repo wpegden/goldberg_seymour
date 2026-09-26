@@ -1,0 +1,22 @@
+\begin{definition}
+For a \noderef{ScheideStructuralConfiguration} $C$, a \emph{Scheide structural
+selection datum} consists of natural numbers $a,r$, a bijection
+\[
+ b:\operatorname{Fin}(r)\longrightarrow
+   \{v:v\in\operatorname{ScheideExitVertices}(T,\varphi)\},
+\]
+and an injective retained-index map
+$\rho:\operatorname{Fin}(r)\to\operatorname{Fin}(C.s)$.  The selected
+color $C.\gamma(\rho(t))$ is missing at the exit underlying $b(t)$, and
+among all selected colors it is the unique one missing there.  The datum
+also contains a bijection
+\[
+ \upsilon:\operatorname{Fin}(a)\longrightarrow
+ \{i\in\operatorname{Fin}(C.s):i\notin\operatorname{range}(\rho)\}.
+\]
+It records the equalities
+$C.s=a+r$ and
+$r=|\operatorname{ScheideExitVertices}(T,\varphi)|$, and records that each
+old index belongs, uniquely and disjointly, either to the image of
+$\upsilon$ or to the image of $\rho$.
+\end{definition}
