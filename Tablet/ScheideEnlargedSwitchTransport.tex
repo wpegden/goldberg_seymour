@@ -1,0 +1,144 @@
+\begin{helper}[Transport through the two switches]
+Let $X=\noderef{ScheideEnlargedVertexSet}(R)$ and suppose that $X$ is not
+strongly closed.  Then there are a color $\alpha$, a defective index
+$d=(\delta,h_\delta)$, an edge $f$, and vertices $w,u$ with the following
+properties.  Put
+\[
+ \varphi_d=\noderef{TwoColorComponentSwap}
+ (G,\varphi,\gamma(d),\delta,\operatorname{inl}v^0_d),
+\]
+\[
+ Q=\noderef{TwoColorComponent}
+ (G,\varphi_d,\alpha_0,\alpha,\operatorname{inl}u),\qquad
+ \psi=\noderef{TwoColorComponentSwap}
+ (G,\varphi_d,\alpha_0,\alpha,\operatorname{inl}u).
+\]
+Then $\alpha\ne\alpha_0$, $G.\mathop{\rm ends}(f)=s(w,u)$,
+$\varphi_d(f)=\alpha$, $\operatorname{inr}f\in Q$, and $Q$ contains no
+vertex-node from $V(T)$.  Furthermore
+\[
+ (T_d,e_0,\psi),\qquad T_d=(R d).\mathit{replacementTree},
+\]
+is a globally maximum triple; $\alpha_0$ is missing at $y_0=C.y(0)$
+under $\varphi_d$; $y_0,w\in V(T_d)$; $u\notin V(T_d)$; and $f$ is not
+an edge identity of $T_d$.
+\end{helper}
+\begin{proof}
+Apply \noderef{ScheideEnlargedBoundarySelection}.  It supplies
+$\alpha,d,f,w,u$ with $\alpha\ne\alpha_0$, the stated endpoint equation,
+$\varphi(f)=\alpha$, membership of $f$ in the original component through
+$u$, avoidance of $V(T)$ by that component, and
+$w=(R d).u_1$ or $w=(R d).u_2$.  Write $\delta=d.1$,
+$r=D.\gammaIndex(d)$, $\gamma=C.\gamma(r)$, and
+$T_d=(R d).\mathit{replacementTree}$.
+
+We first separate the four colors relevant to the first switch.  According
+to which of $(R d).u_1,(R d).u_2$ equals $w$, the corresponding one of
+$(R d).f_1,(R d).f_2$ is a $\delta$-edge incident with $w$ whose other
+end is in the retained part of $V(T)$.  The second clause of
+\noderef{ScheideSymmetricDefectiveInternal} supplies a $\gamma$-edge
+internal to the pair $\{(R d).u_1,(R d).u_2\}$ and hence incident with
+$w$.  These identities differ from $f$, because both of their ends lie
+in $X$, whereas $f$ leaves $X$.  Properness from the
+\noderef{GlobalMaximumTriple} inside
+\noderef{ScheideStructuralConfiguration}, together with
+\noderef{AdjacentEdges}, gives
+$\alpha\ne\delta$ and $\alpha\ne\gamma$.
+The setup gives $\alpha_0\ne\gamma$.  Since $\delta$ is defective on
+$V(T)$, a $\delta$-edge leaves $V(T)$; closedness and the missingness of
+$\alpha_0$ at $y_0$ exclude equality $\delta=\alpha_0$.  Thus neither
+$\alpha$ nor $\alpha_0$ is changed into the other by the
+$(\gamma,\delta)$ switch.
+
+Unfold \noderef{TwoColorComponentSwap}.  For every edge identity $q$,
+the preceding inequalities give both equivalences
+\[
+ \varphi_d(q)=\alpha_0\iff\varphi(q)=\alpha_0,
+ \qquad
+ \varphi_d(q)=\alpha\iff\varphi(q)=\alpha.                 \tag{1}
+\]
+Indeed the reverse implications are fixed branches of the switch, and a
+new value in either forward implication could only have arisen from
+$\gamma$ or $\delta$, which the inequalities exclude.  Hence the labeled
+$(\alpha_0,\alpha)$ graphs in \noderef{TwoColorIncidenceGraph} are equal.
+The component $Q$ under $\varphi_d$ is therefore the component furnished
+under $\varphi$ by \noderef{ScheideEnlargedBoundarySelection}.  It
+contains $\operatorname{inr}f$, avoids all vertex-nodes of $V(T)$, and
+(1) gives $\varphi_d(f)=\alpha$.
+
+No edge identity of $T_d$ belongs to $Q$.  By the exact edge equation in
+\noderef{ScheideReplacementData}, such an identity is either a retained
+edge of $T$ or one of $(R d).f_1,(R d).f_2$.  Every old tree edge is
+incident with a vertex of $V(T)$ by \noderef{TreeSequence}, and an edge
+of $Q$ incident with such a vertex would put that vertex-node in $Q$.
+The two new identities have old color $\delta$; equations (1) and
+$\delta\notin\{\alpha_0,\alpha\}$ exclude them from the labeled
+component.  In particular $f$ is not an edge identity of $T_d$.
+
+The theorem \noderef{ScheideReplacementMaximum} says that
+$(T_d,e_0,\varphi_d)$ is globally maximum.  We now verify that its second
+switch still has all Tashkinov witnesses.  For a retained noninitial base
+edge, the original \noderef{TashkinovTree} condition supplies an earlier
+missing witness in the base.  Its color differs from every block color by
+the base-edge avoidance clause of \noderef{ScheideStructuralConfiguration}.
+For a retained block edge, its color is the corresponding block color,
+and the structural configuration supplies a base vertex missing that
+color.  Injectivity of the block-color list shows that, outside the
+deleted block, this color differs from $\gamma$.  In either case the
+position equations of \noderef{ScheideReplacementData} retain the
+witness before the retained or shifted edge.
+
+The exact effect in \noderef{ScheideDefectiveSwitchEffect} fixes every
+retained tree edge (it is incident with $V(T)$ and is not $D.f_0(d)$).
+It fixes the missing set at every retained witness except possibly
+$v^0_d$; at $v^0_d$ it erases only $\gamma$ and inserts $\delta$, so it
+still retains every witness color just considered.  Every base vertex is
+in the retained set because the base and block positions are distinct by
+vertex injectivity of \noderef{TreeSequence}.
+
+For the final two edges of $T_d$, the replacement data give color
+$\delta$, and \noderef{ScheideDefectiveSwitchEffect} inserts $\delta$
+into the missing set at $v^0_d$.  To locate that witness in the retained
+base, unpack \noderef{ScheideDefectiveSetup}: its recorded full simple
+$(\alpha_0,\delta)$ path starts at $y_0$, ends outside $V(T)$, contains
+$v^0_d$, and has no later vertex-node in $V(T)$.  Reversing the displayed
+order of the two colors does not change \noderef{TwoColorIncidenceGraph},
+so these data give the predicate \noderef{ScheideExitVertex} for
+$v^0_d$.  Thus $v^0_d$ belongs to \noderef{ScheideExitVertices}, and
+\noderef{ScheideStructuralExitsInBase} writes $v^0_d=C.y(a)$ for some
+$a<C.p$.  The deleted vertices occur at positions $C.p+2r$ and
+$C.p+2r+1$, so vertex injectivity retains $v^0_d$.  The replacement
+position equations retain it at position $a$, and
+$a\le C.p-1<T.length-1$, before both final edges.  It is therefore the
+required missing-$\delta$ witness for each.
+
+All missing witnesses just constructed lie in $V(T)$.  The component
+$Q$ avoids every vertex-node there.  By the incidence definition, no
+edge of $Q$ is incident with a witness, so the second switch preserves
+each witness's missing set.  It also fixes every tree-edge identity and
+color because no edge identity of $T_d$ belongs to $Q$.  Consequently
+$T_d$ remains a Tashkinov tree under $\psi$.
+
+Since $\alpha\ne\alpha_0$, properness is preserved by
+\noderef{TwoColorComponentSwapProper}.  The switch fixes the value
+``uncolored'' and permutes only two colored values, so the exactly-one-
+uncolored clause in \noderef{ScheideReplacementMaximum} is preserved.
+The criticality, chromatic-index, and degree clauses of
+\noderef{KTriple} depend only on $G$ and $k$.  Hence $(G,e_0,\psi)$ is a
+$k$-triple.  The tree and its vertex set did not change, so the maximum
+cardinality equation in \noderef{ScheideReplacementMaximum}, together
+with the Tashkinov verification, proves that $(T_d,e_0,\psi)$ is globally
+maximum.
+
+Finally, $y_0$ is a retained base vertex of $T_d$.  Under the first
+switch, \noderef{ScheideDefectiveSwitchEffect} either fixes its missing
+set or, if $y_0=v^0_d$, erases $\gamma\ne\alpha_0$ and inserts $\delta$.
+Thus $\alpha_0$ is missing at $y_0$ under $\varphi_d$.  The replacement
+vertex equation places the selected $w=(R d).u_1$ or $(R d).u_2$ in
+$V(T_d)$ and gives
+\[
+ V(T_d)\subseteq V(T)\cup\{(R d).u_1,(R d).u_2\}\subseteq X.
+\]
+Since $u\notin X$, it is not in $V(T_d)$.  These are all the asserted
+transport properties.
+\end{proof}

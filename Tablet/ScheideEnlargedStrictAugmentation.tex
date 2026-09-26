@@ -1,0 +1,80 @@
+\begin{helper}[Strict augmentation beyond the global order]
+Fix the Scheide configuration and replacement family.  Suppose there
+exist $\alpha,d,f,w,u$ with the following package.  Put
+\[
+ \varphi_d=\noderef{TwoColorComponentSwap}
+ (G,\varphi,\gamma(d),d,\operatorname{inl}v^0_d),
+\]
+\[
+ Q=\noderef{TwoColorComponent}
+ (G,\varphi_d,\alpha_0,\alpha,\operatorname{inl}u),\qquad
+ \psi=\noderef{TwoColorComponentSwap}
+ (G,\varphi_d,\alpha_0,\alpha,\operatorname{inl}u),
+\]
+and $T_d=(R d).\mathit{replacementTree}$.  The package is:
+$\alpha\ne\alpha_0$; $G.\mathop{\rm ends}(f)=s(w,u)$;
+$\varphi_d(f)=\alpha$; $\operatorname{inr}f\in Q$; no vertex-node of
+$V(T)$ lies in $Q$; $(T_d,e_0,\psi)$ is globally maximum;
+$\alpha_0$ is missing at $y_0=C.y(0)$ under $\varphi_d$;
+$y_0,w\in V(T_d)$; $u\notin V(T_d)$; and $f$ is not an edge identity of
+$T_d$.  Then there are a partial $k$-edge-coloring $\psi'$ and a
+tree-sequence $S$ such that $(G,e_0,\psi')$ is a $k$-triple, $S$ is a
+Tashkinov tree for this triple, and
+\[
+ |V(S)|=\noderef{TashkinovOrder}(G)+1.
+\]
+\end{helper}
+\begin{proof}
+Choose the displayed package.  Since
+$\operatorname{inr}f\in Q$, $\varphi_d(f)=\alpha$, and
+$\alpha\ne\alpha_0$, unfolding
+\noderef{TwoColorComponentSwap} gives
+\[
+ \psi(f)=\alpha_0.                                        \tag{1}
+\]
+
+The base-position equation in \noderef{ScheideStructuralConfiguration}
+puts $y_0$ in $V(T)$.  Hence the avoidance assumption gives
+$\operatorname{inl}y_0\notin Q$.  No edge-node of $Q$ is incident with
+$y_0$: otherwise the adjacency clause in
+\noderef{TwoColorIncidenceGraph} would put $\operatorname{inl}y_0$ in
+the same connected component.  The second switch therefore fixes every
+edge incident with $y_0$, so it fixes the whole set
+\noderef{MissingColors}$(G,\varphi_d,y_0)$.  The packaged missingness
+thus gives
+\[
+ \alpha_0\in\noderef{MissingColors}(G,\psi,y_0).           \tag{2}
+\]
+
+The endpoint equation, $w\in V(T_d)$, and $u\notin V(T_d)$ put $f$ in
+\noderef{BoundaryEdges}$(G,V(T_d))$.  Apply
+\noderef{TreeSequenceBoundaryEdgeAppendExists} to obtain a tree-sequence
+$S$ with \noderef{TreeSequenceAdjoinEdge}$(T_d,f,S)$.  Unfolding the
+latter relation says that $S$ has length $T_d.length+1$, keeps every old
+vertex and edge position, and has $f$ as its final edge.  Its final new
+vertex is the outside end $u$ by the attachment equation and vertex
+injectivity; the explicit assumption that $f$ was not an old edge is
+consistent with, and also follows from, this boundary attachment.
+
+The globally maximum package gives
+\noderef{TashkinovTree}$(G,e_0,\psi,T_d)$.  Every old noninitial edge of
+$S$ has exactly the same earlier missing witness as in $T_d$, because
+the initial-segment equations preserve both positions.  For the new last
+edge, (1) gives its color $\alpha_0$, while (2) gives a missing witness at
+the earlier vertex $y_0\in V(T_d)$.  Thus every noninitial position of
+$S$ satisfies the Tashkinov condition, and $S$ is a Tashkinov tree for
+the same $k$-triple.
+
+By \noderef{TreeSequenceVertexSet} and injectivity of the vertex map, a
+tree-sequence of length $m$ has $m+1$ vertices.  The adjoin equation
+therefore gives
+\[
+ |V(S)|=|V(T_d)|+1.                                       \tag{3}
+\]
+The cardinality clause of \noderef{GlobalMaximumTriple} says
+$|V(T_d)|=\noderef{TashkinovOrder}(G)$.  Its
+\noderef{KTriple} clause supplies the same $k$-triple for the unchanged
+coloring $\psi$.  Taking $\psi'=\psi$, equation (3) is therefore
+$|V(S)|=\noderef{TashkinovOrder}(G)+1$, and the constructed $S$ has all
+the properties asserted in the conclusion.
+\end{proof}

@@ -1,0 +1,119 @@
+\begin{helper}[Boundary selection outside the base tree]
+Let $X_0=V(T)$ and $X=\noderef{ScheideEnlargedVertexSet}(R)$.  If $X$ is
+not strongly closed, then there are a color $\alpha$, a defective-color
+index $d=(\delta,h_\delta)$, an edge $f$, and vertices $w,u$ such that
+\[
+ \alpha\ne\alpha_0,\qquad \varphi(f)=\alpha,\qquad
+ G.\mathop{\rm ends}(f)=s(w,u),
+\]
+\[
+ w\in X\setminus X_0,\qquad u\notin X,\qquad
+ w=(R d).u_1\ \hbox{or}\ w=(R d).u_2.
+\]
+Moreover, for the full $(\alpha_0,\alpha)$ incidence component
+\[
+ Q=\noderef{TwoColorComponent}(G,\varphi,\alpha_0,\alpha,
+      \operatorname{inl}u),
+\]
+the edge-node $\operatorname{inr}f$ belongs to $Q$, and no vertex-node
+$\operatorname{inl}v$ with $v\in X_0$ belongs to $Q$.
+\end{helper}
+\begin{proof}
+Write $y_0=C.y(0)$.  The global maximum triple contained in
+\noderef{ScheideStructuralConfiguration}, via
+\noderef{GlobalMaximumTriple} and \noderef{KTriple}, says that $\varphi$
+is proper.  The base-position equation puts $y_0$ in
+$X_0=\noderef{TreeSequenceVertexSet}(T)$, and
+\noderef{ScheideDefectiveSetup} says that $\alpha_0$ is missing at
+$y_0$.  By \noderef{ScheideGlobalMaximumOrder}, $X_0$ is closed and has
+odd order, and by \noderef{ScheideEnlargedClosed}, $X$ is closed.
+
+Since $X$ is not strongly closed, the definition
+\noderef{ColoredVertexSetStronglyClosed} gives a color $\alpha$ on two
+distinct identities of \noderef{BoundaryEdges}$(G,X)$.  Closedness of
+$X$ implies that $\alpha$ is present at every vertex of $X$: otherwise a
+vertex missing $\alpha$ and either boundary identity contradict
+\noderef{ColoredVertexSetClosed}.  In particular, the missingness of
+$\alpha_0$ at $y_0\in X$ and the definition \noderef{PresentColors}
+give $\alpha\ne\alpha_0$.
+
+At each vertex of $X$ there is exactly one incident $\alpha$-edge.
+Existence is presentness.  Two distinct such identities would be
+\noderef{AdjacentEdges} and violate properness.  An $\alpha$-edge in
+\noderef{InternalEdges}$(G,X)$ contributes two incidences, an
+$\alpha$-edge in the boundary contributes one, and all other edges
+contribute none; this is immediate from \noderef{Incident} and the
+distinct-end law in \noderef{LooplessMultigraph}.  Hence
+\[
+ |X|=2|E_\alpha(X)|+|\partial_{\varphi,\alpha}(X)|.       \tag{1}
+\]
+
+For every defective $\delta$, the internal edge supplied by
+\noderef{ScheideSymmetricDefectiveInternal} has the two distinct vertices
+$(R\delta).u_1,(R\delta).u_2$ as its ends.  Both lie outside $X_0$ by
+\noderef{ScheideReplacementData}.  The equal-or-disjoint alternative in
+\noderef{ScheideReplacementPairsLaminar} therefore says that the indexed
+union in \noderef{ScheideEnlargedVertexSet} adds a disjoint union of
+two-vertex sets to $X_0$.  Thus $|X|$ is odd.  Equation (1) makes the
+number of $\alpha$-boundary identities odd; since it is at least two, it
+is at least three.
+
+At most one of these identities has its end in $X_0$.  If $\alpha$ is
+not in \noderef{DefectiveColors}$(G,\varphi,X_0)$, this is the definition
+of nondefectiveness.  Suppose instead that $\alpha$ is defective and use
+it as an index $a$.  The first clause of
+\noderef{ScheideSymmetricDefectiveInternal} gives an internal
+$\alpha$-edge on the deleted pair $U_{\gamma(\alpha)}$.  Properness
+excludes every other $\alpha$-edge at either deleted vertex, so each
+$\alpha$-boundary edge of $X_0$ leaves from the retained set
+$Z_{\gamma(\alpha)}$.  The exact-three clause of
+\noderef{ScheideReplacementData} identifies those identities as
+$f^0_\alpha,f^1_\alpha,f^2_\alpha$.  The latter two end in the two
+distinct vertices of $U_\alpha$, hence are internal to
+$X_\alpha=X_0\cup U_\alpha$.  Properness at these vertices also shows
+that the outside end of $f^0_\alpha$ is not in $U_\alpha$.  Consequently
+$f^0_\alpha$ is the sole $\alpha$-boundary identity of $X_\alpha$, so it
+is the only one among the three that can leave $X\supseteq X_\alpha$.
+Thus at least two $\alpha$-boundary identities of $X$ have their in-end
+in $X\setminus X_0$.
+
+Let $P$ be the full $(\alpha_0,\alpha)$ component through $y_0$.
+Because $\alpha$ is present throughout $X$,
+\noderef{ScheideSingleBoundaryCrossing} gives exactly one edge-node of
+$P$ in $\partial_G(X)$.  It has color $\alpha$: every edge-node in $P$
+has one of the two component colors by \noderef{TwoColorComponent} and
+\noderef{TwoColorIncidenceGraph}, while closedness of $X$ and the missing
+color $\alpha_0$ at $y_0$ forbid an $\alpha_0$ boundary edge.  Select,
+among the two boundary identities whose in-end is outside $X_0$, an edge
+$f$ different from this unique identity.  Orient its distinct ends as
+$G.\mathop{\rm ends}(f)=s(w,u)$ with
+$w\in X\setminus X_0$ and $u\notin X$; this orientation follows from
+\noderef{BoundaryEdges} and looplessness.  Expanding
+\noderef{ScheideEnlargedVertexSet} supplies a defective index $d$ for
+which $w=(R d).u_1$ or $w=(R d).u_2$.
+
+Let $Q$ be the full $(\alpha_0,\alpha)$ component through $u$.  Since
+$f$ has color $\alpha$ and is incident with $u$, the incidence edge
+definition puts $\operatorname{inr}f$ in $Q$.  The components $P$ and
+$Q$ are distinct, because otherwise $f$ would be the boundary edge-node
+of $P$; connected components are therefore disjoint.
+
+It remains to prove that $Q$ avoids $X_0$.  No $\alpha_0$-edge leaves
+$X_0$, by its closedness and the missingness of $\alpha_0$ at $y_0$.  If
+$\alpha$ is nondefective, its at most one boundary identity of $X_0$ lies
+on $P$: the component begins at $y_0\in X_0$ and reaches the unique
+boundary crossing of $X$, hence its first exit from $X_0$ must use that
+identity.  A first entry of the disjoint component $Q$ into $X_0$ would
+use either a forbidden $\alpha_0$ boundary identity or that same
+$\alpha$ identity, a contradiction.
+
+If $\alpha$ is defective, then
+\noderef{ScheideReplacementUnionClosed} says that $X_\alpha$ is closed.
+It contains $y_0$, so it has no $\alpha_0$ boundary identity, and the
+argument above showed that its unique $\alpha$ boundary identity is
+$f^0_\alpha$.  The component $P$ starts in $X_\alpha$ and reaches outside
+$X\supseteq X_\alpha$, so its first exit is $f^0_\alpha$.  Since $Q$
+starts outside $X$ and is disjoint from $P$, the same first-entry argument
+prevents $Q$ from entering $X_\alpha$.  In either case no vertex-node of
+$X_0$ belongs to $Q$, as required.
+\end{proof}

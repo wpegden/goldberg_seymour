@@ -16,6 +16,8 @@ import Tablet.ScheideDefectiveChainPath
 import Tablet.ScheideDefectiveSetup
 import Tablet.ScheideDefectiveSwitchEffect
 import Tablet.ScheideEnlargedClosed
+import Tablet.ScheideEnlargedStrictAugmentation
+import Tablet.ScheideEnlargedSwitchTransport
 import Tablet.ScheideEnlargedVertexSet
 import Tablet.ScheideExitVertex
 import Tablet.ScheideExitVertices
@@ -49,4 +51,29 @@ theorem ScheideEnlargedStronglyClosed {V E : Type*}
       (TreeSequenceVertexSet T)}, ScheideReplacementData G k e0 phi T C D d) :
     ColoredVertexSetStronglyClosed G phi (ScheideEnlargedVertexSet R) := by
 -- BODY
-  sorry
+  classical
+  by_contra hnot
+  have htransport := ScheideEnlargedSwitchTransport G k e0 phi T C D R hnot
+  obtain ⟨psi, S, htriple, htree, hcard⟩ :=
+    ScheideEnlargedStrictAugmentation G k e0 phi T C D R htransport
+  have hchi : ChromaticIndex G = k + 1 := htriple.2.1
+  have hk : ChromaticIndex G - 1 = k := by omega
+  have hmem : (TreeSequenceVertexSet S).card ∈
+      (Finset.range (Fintype.card V + 1)).filter (fun n =>
+        ∃ (e : E) (p : PartialEdgeColoring E (ChromaticIndex G - 1))
+          (U : TreeSequence G e),
+          KTriple G (ChromaticIndex G - 1) e p ∧
+            TashkinovTree G e p U ∧
+              (TreeSequenceVertexSet U).card = n) := by
+    rw [hk]
+    simp only [Finset.mem_filter, Finset.mem_range]
+    constructor
+    · have hle : (TreeSequenceVertexSet S).card ≤ Fintype.card V :=
+        Finset.card_le_card (Finset.subset_univ _)
+      omega
+    · exact ⟨e0, psi, S, htriple, htree, rfl⟩
+  have hle : (TreeSequenceVertexSet S).card ≤ TashkinovOrder G := by
+    unfold TashkinovOrder
+    dsimp
+    exact Finset.le_max' _ _ (Finset.mem_insert_of_mem hmem)
+  omega
