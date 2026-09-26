@@ -1,4 +1,5 @@
 import Tablet.AdjacentEdges
+import Tablet.BoundaryColorEdges
 import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetStronglyClosed

@@ -53,8 +53,10 @@ $S$ with \noderef{TreeSequenceAdjoinEdge}$(T_d,f,S)$.  Unfolding the
 latter relation says that $S$ has length $T_d.length+1$, keeps every old
 vertex and edge position, and has $f$ as its final edge.  Its final new
 vertex is the outside end $u$ by the attachment equation and vertex
-injectivity; the explicit assumption that $f$ was not an old edge is
-consistent with, and also follows from, this boundary attachment.
+injectivity.  More explicitly, $u\notin V(T_d)$ and the hypothesis that
+$f$ is not an old edge identity are exactly the freshness facts needed by
+the vertex- and edge-injectivity clauses of \noderef{TreeSequence}; the
+boundary-append lemma packages these facts into the asserted tree-sequence.
 
 The globally maximum package gives
 \noderef{TashkinovTree}$(G,e_0,\psi,T_d)$.  Every old noninitial edge of
@@ -65,9 +67,10 @@ the earlier vertex $y_0\in V(T_d)$.  Thus every noninitial position of
 $S$ satisfies the Tashkinov condition, and $S$ is a Tashkinov tree for
 the same $k$-triple.
 
-By \noderef{TreeSequenceVertexSet} and injectivity of the vertex map, a
-tree-sequence of length $m$ has $m+1$ vertices.  The adjoin equation
-therefore gives
+By \noderef{TreeSequenceVertexSet} and the vertex-injectivity clause of
+\noderef{TreeSequence}, the displayed vertex map of a tree-sequence of
+length $m$ is an injection from exactly $m+1$ indices onto its vertex set.
+The adjoin equation therefore gives
 \[
  |V(S)|=|V(T_d)|+1.                                       \tag{3}
 \]

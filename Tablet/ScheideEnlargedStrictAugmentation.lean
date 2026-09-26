@@ -8,6 +8,7 @@ import Tablet.ScheideReplacementData
 import Tablet.ScheideStructuralConfiguration
 import Tablet.TashkinovOrder
 import Tablet.TashkinovTree
+import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceBoundaryEdgeAppendExists
 import Tablet.TreeSequenceVertexSet
