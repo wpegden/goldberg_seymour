@@ -20,7 +20,9 @@ $T_\delta=(R\delta).\mathit{replacementTree}$, and
 Put $r=D.\gammaIndex(\delta)$,
 $Z=V(T)\setminus\{C.\mathit{blockVertex}(r,0),
 C.\mathit{blockVertex}(r,1)\}$, and
-$\gamma=C.\gamma(r)$.  By \noderef{ScheideReplacementMaximum},
+$\gamma=C.\gamma(r)$.  Also put
+$X=\noderef{ScheideEnlargedVertexSet}(R)$.  By
+\noderef{ScheideReplacementMaximum},
 $(T_\delta,e_0,\varphi_\delta)$ is globally maximum.  Applying
 \noderef{ScheideGlobalMaximumOrder} shows that $V(T_\delta)$ is
 \noderef{ColoredVertexSetElementary} and closed.  The exact vertex-set
@@ -28,7 +30,17 @@ field of \noderef{ScheideReplacementData} is
 \[
  V(T_\delta)=Z\cup U_\delta.                              \tag{1}
 \]
-Thus the assumed membership puts $v$ in $V(T_\delta)$.
+By the definition of $X$ in \noderef{ScheideEnlargedVertexSet}, its first
+summand is $V(T)$.  Hence
+$Z\subseteq V(T)\subseteq X$.  Its second summand is the union of all
+indexed replacement pairs, and $U_\delta$ is the summand indexed by the
+present defective color $\delta$; hence $U_\delta\subseteq X$.  Equation
+(1) therefore gives
+\[
+                 V(T_\delta)\subseteq X.                    \tag{2}
+\]
+In particular, the assumed membership $v\in U_\delta$, together with
+(1), puts $v$ in $V(T_\delta)$.
 
 The base and block positions in
 \noderef{ScheideStructuralConfiguration}, together with vertex
@@ -57,20 +69,62 @@ the definitions of \noderef{TreeMissingColors} and
 
 It remains to exclude defectiveness of $\alpha$.  Suppose instead that
 $\alpha\in\noderef{DefectiveColors}(G,\varphi_\delta,V(T_\delta))$.
-The assumed equality of incidence graphs transports the walk $L.path$,
-its simplicity, and its full-component support from $\varphi$ to
-$\varphi_\delta$.  Its initial vertex $y_0$ lies in $V(T_\delta)$ and
-misses $D.\alpha_0$, while its terminal vertex lies outside the enlarged
-set and therefore outside $V(T_\delta)$.  The certificate
-\noderef{ScheideLastExitPath} says that every vertex-node after $v$ lies
-outside the enlarged set.  Together with $v\in V(T_\delta)$, this proves
-that $v$ is the last replacement-tree vertex on the full
-$(D.\alpha_0,\alpha)$ path.  Expanding
-\noderef{ScheideDefectiveChainPath} and \noderef{ScheideExitVertex}, these
-facts say exactly that
+We first put the recorded path into the color order required by an exit
+witness.  By \noderef{TwoColorIncidenceGraph}, adjacency in
+$I_G(\psi;a,b)$ tests only whether an incident edge has color $a$ or
+color $b$.  Commuting this disjunction proves, for every coloring $\psi$,
+\[
+                 I_G(\psi;a,b)=I_G(\psi;b,a).
+\]
+Consequently the assumed graph equality gives
+\[
+ I_G(\varphi_\delta;\alpha,D.\alpha_0)
+ =I_G(\varphi_\delta;D.\alpha_0,\alpha)
+ =I_G(\varphi;D.\alpha_0,\alpha).                            \tag{3}
+\]
+Regard the same ordered walk $L.path$ through (3) as a walk
+$P_\delta$ in the left-hand graph.  Equality of the graph structures
+does not change the vertices, length, vertex at an index, or support of
+the walk.  Thus $L.pathSimple$ makes $P_\delta$ simple.  Moreover,
+$L.pathSpans$, together with (3) and the component definition
+\noderef{TwoColorComponent}, gives
+\[
+ \{x:x\in\mathit{support}(P_\delta)\}
+ =\operatorname{Comp}_{I_G(\varphi_\delta;\alpha,D.\alpha_0)}(y_0).
+                                                               \tag{4}
+\]
+
+We now verify every field of the required exit witness.  The base-position
+argument above gives $y_0\in Z$, so (1) gives
+$y_0\in V(T_\delta)$; the missing-set argument above gives
+$D.\alpha_0\in\overline{\varphi_\delta}(y_0)$.  The present
+contradiction assumption says that $\alpha$ is defective for
+$V(T_\delta)$.  The terminal-exclusion field $L.terminalOutside$ of
+\noderef{ScheideLastExitPath} says $L.terminal\notin X$, and (2) therefore
+gives $L.terminal\notin V(T_\delta)$.  Together with simplicity and (4),
+these facts verify all four clauses of
+\noderef{ScheideDefectiveChainPath} for
+\[
+ (T_\delta,\varphi_\delta,\alpha,D.\alpha_0,
+   y_0,L.terminal,P_\delta).
+\]
+
+Finally take $i=L.lastIndex$.  The field $L.lastInsideAt$ says that the
+vertex of $P_\delta$ at $i$ is $v$, and the assumed membership
+$v\in U_\delta$, together with (1), says $v\in V(T_\delta)$.  If a later
+position contains a vertex-node $w$,
+the field $L.afterLastOutside$ says $w\notin X$; by (2), this implies
+$w\notin V(T_\delta)$.  Hence all fields in
+\noderef{ScheideExitVertex} hold with
+\[
+ u=y_0,\qquad \gamma=D.\alpha_0,\qquad \delta=\alpha,
+ \qquad z=L.terminal,\qquad P=P_\delta,\qquad i=L.lastIndex.
+\]
+Thus the definition of \noderef{ScheideExitVertices} gives
 $v\in\noderef{ScheideExitVertices}(T_\delta,\varphi_\delta)$.
 But \noderef{ScheideExitNoFree}, applied to the replacement globally
 maximum triple, makes the missing colors at such an exit vertex disjoint
-from the free colors.  This contradicts the color $\beta$ found above.
+from the free colors.  This contradicts the color $\beta$ found above,
+which is both missing at $v$ and free on $T_\delta$.
 Hence $\alpha$ is not defective for $T_\delta$.
 \end{proof}
