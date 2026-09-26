@@ -8,7 +8,6 @@ import Tablet.ScheideGlobalMaximumMissingCounts
 import Tablet.ScheideGlobalMaximumOrder
 import Tablet.ScheideLastExitPath
 import Tablet.ScheideReplacementMaximum
-import Tablet.ScheideReplacementSelectionSwitch
 import Tablet.ScheideReplacementUsedWitness
 import Tablet.ScheideStructuralExitsInBase
 import Tablet.TreeFreeColors
