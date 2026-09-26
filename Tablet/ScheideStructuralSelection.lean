@@ -1,5 +1,6 @@
 import Tablet.ColoredVertexSetElementary
 import Tablet.MissingColors
+import Tablet.ScheideExitVertex
 import Tablet.ScheideExitVertices
 import Tablet.ScheideGlobalMaximumOrder
 import Tablet.ScheideStructuralConfiguration

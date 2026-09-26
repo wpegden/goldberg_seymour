@@ -21,8 +21,10 @@ were missing at two distinct members of $X$, those two missing-color sets
 would intersect, contrary to elementariness.  Hence every old block color
 is missing at exactly one vertex of $X$.
 
-By the definition \noderef{ScheideExitVertices}, every member of $F$ is a
-vertex of $X$.  For each $v\in F$, the exit-coverage field of
+By \noderef{ScheideExitVertices}, $F$ is the finite set obtained by filtering
+vertices with the predicate \noderef{ScheideExitVertex}.  Thus every $v\in F$
+satisfies that predicate, whose tree-membership clause gives $v\in X$.  For
+each $v\in F$, the exit-coverage field of
 \noderef{ScheideStructuralConfiguration} supplies an old index $i(v)$
 whose color is missing at $v$.  Make these finitely many choices.  If
 $i(v)=i(w)$, then the same old block color is missing at both $v$ and $w$;
