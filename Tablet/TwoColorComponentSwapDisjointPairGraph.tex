@@ -1,23 +1,27 @@
 \begin{helper}[A disjoint Kempe pair leaves the other incidence graph unchanged]
-Let (arphi) be a partial edge coloring and let
-({alpha,eta}cap{gamma,delta}=arnothing).  Swapping
-(gamma) and (delta) on any one
-((gamma,delta))-component leaves the entire
-((alpha,eta))-incidence graph unchanged.
+Let $\varphi$ be a partial edge coloring, and let
+$\alpha,\beta,\gamma,\delta$ be colors such that the two finite color pairs
+are disjoint:
+\[
+\{\alpha,\beta\}\cap\{\gamma,\delta\}=\varnothing.
+\]
+For any node $z$, swapping $\gamma$ and $\delta$ on the full
+$(\gamma,\delta)$-component through $z$ leaves the entire
+$(\alpha,\beta)$-incidence graph unchanged.
 \end{helper}
 \begin{proof}
-Write (arphi') for the coloring obtained from
+Write $\varphi'$ for the coloring obtained from
 \noderef{TwoColorComponentSwap}.  Consider an individual incidence between
-a vertex (v) and an exact edge identity (e).  By
+a vertex $v$ and an exact edge identity $e$.  By
 \noderef{TwoColorIncidenceGraph}, it is an edge of the
-((alpha,eta))-incidence graph precisely when (v) is incident with
-(e) and the color of (e) is (alpha) or (eta).
+$(\alpha,\beta)$-incidence graph precisely when $v$ is incident with
+$e$ and the color of $e$ is $\alpha$ or $\beta$.
 
-If the edge-node of (e) is outside the switched component, then
-(arphi'(e)=arphi(e)).  If it is inside, the swap either exchanges
-(gamma) and (delta) or fixes the value of (e).  Since neither
-(gamma) nor (delta) equals (alpha) or (eta), the predicate
-``the color is (alpha) or (eta)'' has the same truth value before and
+If the edge-node of $e$ is outside the switched component, then
+$\varphi'(e)=\varphi(e)$.  If it is inside, the swap either exchanges
+$\gamma$ and $\delta$ or fixes the value of $e$.  Since neither
+$\gamma$ nor $\delta$ equals $\alpha$ or $\beta$, the predicate
+``the color is $\alpha$ or $\beta$'' has the same truth value before and
 after the swap.  The incidence relation itself is unchanged.  Thus every
 vertex--edge adjacency is identical in the two incidence graphs.  Both
 graphs have no vertex--vertex or edge--edge adjacencies by definition, so
