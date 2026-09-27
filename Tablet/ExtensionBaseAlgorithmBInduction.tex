@@ -22,15 +22,21 @@ Write \(r_a=b-1-a\), \(t_a=\mathtt{indices}(r_a)\), and
 \(c_0=\gamma_0\) and \(c_{q+1}=\delta_q\).  The chain identity gives
 \(\gamma_q=c_q\), and injectivity of
 \(\operatorname{Fin.cons}(\gamma_0,\delta)\) makes all \(c_q\) distinct.
-Consequently the pair switched at position \(r\) is
+The exact trace-field clause of
+\noderef{ExtensionBaseAlgorithmBTrace}, together with the assumed trace
+gamma and delta equalities, identifies the colors recorded at position
+\(r\) with \(\gamma_r\) and \(\delta_r\).  Consequently the pair switched
+at position \(r\) is
 \(\{c_r,c_{r+1}\}\), and every lower gamma \(c_q\), \(q<r\), differs from
 both switched colors.  The stored-pair equalities put both colors of every
 processed slot in \(U\).
 
-We induct on the trace step.  Initially properness and the unique uncolored
-edge are hypotheses.  At the first position \(r=b-1\), the chain identity
-gives \(\delta_r=\gamma_b\), which is missing at \(u\); minimality says
-that every \(\gamma_q\), \(q<b\), is present there by
+We induct on the trace step.  By the initial-coloring clause of
+\noderef{ExtensionBaseAlgorithmBTrace}, the initial trace coloring is
+\(\varrho_1\); hence properness and the unique uncolored edge are the
+corresponding hypotheses.  At the first position \(r=b-1\), the chain
+identity gives \(\delta_r=\gamma_b\), which is missing at \(u\); minimality
+says that every \(\gamma_q\), \(q<b\), is present there by
 \noderef{MissingColors} and \noderef{PresentColors}.  Initial strong
 interchangeability is supplied at every position below \(b\).  Finally,
 the empty intersection at \(v_n\) says that no color of \(U\) is missing
@@ -43,44 +49,59 @@ current strong-interchangeability certificate, current missing delta and
 present gamma at \(u\), and presence of both colors at \(v_n\).  It supplies
 the rooted nontrivial path and its tree-intersection properties.  The two
 colors are distinct by the injectivity argument above, so
-\noderef{TwoColorComponentSwapProper} makes the new coloring proper.
+\noderef{TwoColorComponentSwapProper} makes the component-swapped coloring
+proper.  The transition clause of \noderef{ExtensionBaseAlgorithmBTrace}
+identifies this coloring with the successor coloring in the trace.
 Inspection of \noderef{TwoColorComponentSwap} shows pointwise that an edge
 is uncolored after the swap exactly when it was uncolored before: on the
 component the two nonempty color values are exchanged, and off it every
 value is fixed.  Thus \noderef{IsOneEdgeUncolored} is preserved.
 
-At \(u\), the missing delta means that there is no incident delta edge,
-while properness makes the incident gamma edge unique.  That gamma edge is
-in the rooted component, so the swap changes it to delta.  No incident edge
-can acquire gamma: this would have to come either from an old delta edge in
-the component or from an old gamma edge outside it, and both possibilities
-have just been excluded.  Hence gamma becomes missing and delta becomes
-present.  Since every lower \(\gamma_q\) differs from the two switched
-colors, its incident witness is fixed.  If a next position exists, its
-delta is the present step's gamma by the chain identity, proving the
-missing-color descent.
+At \(u\), the missing delta means that there is no incident delta edge.
+Properness makes the incident gamma edge unique: two distinct such edges
+would be adjacent through \(u\) and have the same color, contrary to
+\noderef{IsProperEdgeColoring}, using \noderef{AdjacentEdges} and
+\noderef{Incident}.  By \noderef{TwoColorIncidenceGraph}, that gamma
+edge-node is adjacent to the root vertex-node \(u\), so
+\noderef{TwoColorComponent} places it in the rooted component and the swap
+changes it to delta.  No incident edge can acquire gamma: this would have
+to come either from an old delta edge in the component or from an old gamma
+edge outside it, and both possibilities have just been excluded.  Hence
+gamma becomes missing and delta becomes present.  Since every lower
+\(\gamma_q\) differs from the two switched colors, its incident witness is
+fixed.  If a next position exists, its delta is the present step's gamma by
+the chain identity, proving the missing-color descent.
 
 At \(v_n\), if its vertex-node is outside the rooted component, every
-incident edge is fixed.  If it is inside, the one-step lemma gives distinct
-incident gamma and delta edges; the swap exchanges their colors, while
-every other color is fixed.  Thus every color of \(U\) remains present at
-\(v_n\).
+incident edge is fixed.  Indeed, \noderef{TwoColorIncidenceGraph} and
+\noderef{TwoColorComponent} say that an edge-node in the rooted component
+has a switched color and, if incident with \(v_n\), is adjacent to the
+vertex-node \(v_n\).  Such an incident edge-node would therefore put
+\(v_n\) in the component, a contradiction.  Thus no incident edge lies in
+the swapped component, and \noderef{TwoColorComponentSwap} fixes all of
+them.  If \(v_n\) is inside, the one-step lemma gives distinct incident
+gamma and delta edges; the swap exchanges their colors, while every other
+color is fixed.  Thus every color of \(U\) remains present at \(v_n\).
 
 It remains to propagate the unprocessed pairs.  Exact enumeration by the
-trace writes any unprocessed slot as \(t_c\).  Since it was not processed
-at or before step \(a\), one has \(c>a\), and strict descent of the trace
-gives \(t_c<t_a\).  The induction hypothesis supplies strong
+trace, as stated in \noderef{ExtensionBaseAlgorithmBTrace}, writes any
+unprocessed slot as \(t_c\).  Since it was not processed at or before step
+\(a\), one has \(c>a\), and the strict-descent clause of the same node gives
+\(t_c<t_a\).  The induction hypothesis supplies strong
 interchangeability for both its pair and the current pair.  Instantiate
 \noderef{StrongInterchangeabilityKempePreserved} with their common support
 \(v_n\), the strict slot inequality, the current rooted nontrivial path,
 and the proper/exactly-one-uncolored assertions.  Its same-support branch
 shows that the earlier unprocessed pair remains strongly interchangeable
-after the swap.  Exact gamma and delta field equalities identify any colors
-named in the conclusion with those at position \(r_c\).
+after the swap.  The exact-field clause of
+\noderef{ExtensionBaseAlgorithmBTrace} and the assumed gamma and delta
+trace equalities identify any colors named in the conclusion with those at
+position \(r_c\).
 
 This completes the induction and proves every asserted pre-step and
 post-step clause.  At the last coloring the same survivor argument applies.
-In fact the trace enumerates every member of \(L_1^*\), so a member absent
+In fact the exact-image clause of \noderef{ExtensionBaseAlgorithmBTrace}
+says that the trace enumerates every member of \(L_1^*\), so a member absent
 from all steps is impossible; the stated final implication is therefore
 vacuous, including when \(b=0\), where \(L_1^*=\varnothing\).
 \end{proof}
