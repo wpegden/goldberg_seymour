@@ -1,0 +1,42 @@
+\begin{helper}[A disjoint active component is exactly preserved by a component swap]
+Fix two color pairs ({alpha,eta}) and
+({gamma,delta}) in a partial edge coloring (arphi).  Let (C) be
+the full ((alpha,eta))-component through a node (x), and let (K) be
+the full ((gamma,delta))-component through a node (z).  Suppose every
+edge-node belonging to (K) has color (gamma) or (delta), and suppose
+(Ccap K=arnothing).  After swapping (gamma) and (delta) on (K),
+the full ((alpha,eta))-component through (x) is exactly (C).
+\end{helper}
+\begin{proof}
+Let (H) be the old ((alpha,eta))-incidence graph and (H') the
+corresponding graph after the swap from
+\noderef{TwoColorComponentSwap}.  We first compare adjacencies at nodes of
+(C).  If an old (H)-adjacency starts at a node of (C), its other end
+also belongs to (C), because connected components are closed under
+adjacency.  Its edge-node is therefore outside (K), by (Ccap K) being
+empty.  The swap fixes that exact edge identity, so the old adjacency is
+also an (H')-adjacency.
+
+Conversely, consider an (H')-adjacency starting at a node of (C).  If
+its edge-node belonged to (K), then the activity hypothesis says that the
+old color of that edge is (gamma) or (delta).  The incident vertex-node
+would consequently be adjacent to that edge-node in the old
+((gamma,delta))-incidence graph, and hence would belong to (K).  If the
+starting node is the edge-node, it already lies in both components; if the
+starting node is the vertex-node, the preceding observation puts it in both
+components.  Either case contradicts (Ccap K=arnothing).  Thus the
+edge-node is outside (K), its color is fixed, and the new adjacency is an
+old (H)-adjacency whose other endpoint belongs to (C).  This uses the
+adjacency and connected-component definitions in
+\noderef{TwoColorIncidenceGraph} and \noderef{TwoColorComponent}; no edge is
+identified merely by its endpoints.
+
+Now take any old incidence-graph walk beginning at (x).  Induction over
+its successive adjacencies, using the first comparison, turns it into an
+(H')-walk with the same ordered nodes.  Hence every node of (C) belongs
+to the new component through (x).  Conversely, induction over an
+(H')-walk beginning at (x), using the second comparison, keeps every
+node in (C) and turns the walk into an (H)-walk.  Thus every node of the
+new component belongs to (C).  The two inclusions prove exact equality of
+the full components.
+\end{proof}

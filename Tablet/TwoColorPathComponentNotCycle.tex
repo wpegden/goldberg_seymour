@@ -1,0 +1,18 @@
+\begin{helper}[A two-color path component is not a full cycle component]
+Let (z) be a node of a two-color incidence graph.  If the component through
+(z) is a path component, then it is not a two-color component cycle whose
+closed walk has the whole component as its support.
+\end{helper}
+\begin{proof}
+By \noderef{TwoColorPathComponent}, the component contains a node (x)
+whose neighbor set is a subsingleton.  Suppose for a contradiction that
+\noderef{TwoColorComponentCycle} supplies a simple closed walk (C) whose
+support is the entire component.  Then (x) lies on (C).  Rotate (C) so
+that its initial and terminal node is (x).  Rotation preserves simplicity
+and closedness.  The first node after (x) and the penultimate node before
+the final (x) are both neighbors of (x).  They are distinct: otherwise
+the rotated closed walk would repeat that node in its cyclic support, whereas
+a simple cycle has no such repetition (equivalently, its first and
+penultimate neighbors are distinct).  Thus the neighbor set of (x)
+contains two distinct nodes, contradicting that it is a subsingleton.
+\end{proof}
