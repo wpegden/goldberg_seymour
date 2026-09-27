@@ -1,13 +1,15 @@
 \begin{helper}[Restoration induction for Algorithm (A)]
 Let \(\mathcal R\) be a decreasing
 \noderef{ExtensionBaseRestorationTrace} starting at a proper coloring
-\(\sigma_n\) which leaves exactly \(e_0\) uncolored. Assume the order and
-initial-segment conclusions for every restoration slot: whenever \(t\) has
-exact support \(v_t\), the terminal support precedes \(v_t\) in the final
-tree order, and \(T_j\) is an ordered initial segment of \(T_t\). Assume
-initial strong
-interchangeability of every active nonterminal pair, and assume that the
-terminal slot \(q\) has exact chosen vertex \(v_n\). Assume also the
+\(\sigma_n\) which leaves exactly \(e_0\) uncolored. Fix a distinguished
+support vertex \(v_*\) in the final tree and a distinguished, exempt slot
+\(q\) whose exact chosen vertex satisfies
+\(\operatorname{chosenVertex}(q.\mathrm{succ})=v_*\). Assume the order
+and initial-segment conclusions for every restoration slot: whenever \(t\)
+has exact support \(v_t\), the distinguished support \(v_*\) precedes
+\(v_t\) in the final tree order, and \(T_j\) is an ordered initial segment
+of \(T_t\). Assume initial strong interchangeability of the exact
+gamma/delta pair at every active slot \(t\ne q\). Assume also the
 active-pair overlap law (O): for active \(s<t\), their exact stored pairs
 overlap if and only if their supports agree and no member of their full
 \noderef{ExtensionBaseSupportClass} lies strictly between them, and in that
@@ -45,9 +47,10 @@ constructor. The vertex-defective field, expanded through
 \[
                          v\in V(T_t).                \tag{1}
 \]
-Membership \(t\in L^*\) also gives \(t\ne q\): if \(t=q\), the terminal exact
-chosen-vertex field and the trace field would put \(t\) in the removed
-terminal support class. For the first step, initial strong
+Membership \(t\in L^*\) also gives \(t\ne q\): if \(t=q\), the
+distinguished-slot exact chosen-vertex hypothesis and the trace field would
+put \(t\) in the removed distinguished-support class. For the first step,
+initial strong
 interchangeability therefore supplies the pair at \(t\). For a later step,
 the preceding induction state supplies it, since strict decrease ensures
 that \(t\) did not occur at an earlier position. The assumed color state
@@ -56,12 +59,12 @@ Consequently \noderef{ExtensionBaseAlgorithmASingleStep} gives a nontrivial
 path component, proves that it meets \(V(T_t)\) exactly in \(v\), and proves
 properness and exact-one-uncoloredness after the switch. The trace transition
 identifies that switched coloring with the next trace coloring. The required
-terminal order and \(T_j\)-initial-segment clauses are the two standing
-assumptions. Together with (1), this proves every non-preservation clause of
-the invariant at step \(a\).
+distinguished-support order and \(T_j\)-initial-segment clauses are the two
+standing assumptions. Together with (1), this proves every non-preservation
+clause of the invariant at step \(a\).
 
-It remains to preserve all unprocessed active nonterminal pairs. Let \(s\)
-be such a slot, with exact support \(v_s\) and exact pair
+It remains to preserve all unprocessed active pairs at slots \(s\ne q\).
+Let \(s\) be such a slot, with exact support \(v_s\) and exact pair
 \(\{\gamma_s,\delta_s\}\). The induction hypothesis supplies its strong
 interchangeability before the current switch. If \(v_s\ne v\), then
 \(s\ne t\); orient the two distinct finite ordinals increasingly and apply
@@ -69,7 +72,7 @@ the overlap law (O). Its support-equality condition is false, so the two
 stored pairs are disjoint.
 
 Suppose instead that \(v_s=v\). Since \(t\in L^*\), its support differs from
-the terminal support. Thus active membership puts \(s\) in the same full
+the distinguished support. Thus active membership puts \(s\) in the same full
 support class and hence in \(L^*\). The trace enumerates \(L^*\), so \(s\)
 occurs somewhere. It has not occurred at or before \(a\), by the unprocessed
 hypothesis. Strict decrease of the trace then gives \(s<t\). We have
@@ -81,8 +84,8 @@ certificates, proves that the pair at \(s\) remains strongly interchangeable
 after the switch. This completes the induction step.
 
 The induction supplies properness and exact-one-uncoloredness at all
-positions, every step clause, and preservation of every active nonterminal
-slot absent through the current step. At the final position, the same
+positions, every step clause, and preservation of every active slot \(s\ne q\)
+absent through the current step. At the final position, the same
 induction statement gives the final absent-slot clause of
 \noderef{ExtensionBaseRestorationInvariant}. If the trace has no steps,
 there is no step clause to prove, its sole coloring is \(\sigma_n\), and the
