@@ -1,6 +1,10 @@
 \begin{helper}[Induction state for Algorithm (B)]
 Consider the decreasing \noderef{ExtensionBaseAlgorithmBTrace} on the
-positions below \(b\), with position \(b-1-a\) at step \(a\), and assume
+positions below \(b\), with position \(b-1-a\) at step \(a\).  Assume that
+\(\varrho_1\) is a proper partial edge coloring leaving exactly \(e_0\)
+uncolored and that, for every trace step \(a\),
+\(\mathtt{trace.gamma}(a)=\gamma(\mathtt{trace.position}(a))\) and
+\(\mathtt{trace.delta}(a)=\delta(\mathtt{trace.position}(a))\).  Also assume
 the Case 1 color chain, distinctness, initial missing-color, minimality,
 initial strong-interchangeability, exact stored-pair, and terminal
 stored-union hypotheses.  Then every coloring in the trace is proper and
