@@ -12,8 +12,16 @@ active-pair overlap law (O): for active \(s<t\), their exact stored pairs
 overlap if and only if their supports agree and no member of their full
 \noderef{ExtensionBaseSupportClass} lies strictly between them, and in that
 case their intersection is both \(\{\gamma_t\}\) and
-\(\{\delta_s\}\). Suppose finally that the color-state conclusion of
-\noderef{ExtensionBaseAlgorithmAColorState} holds before every trace step.
+\(\{\delta_s\}\). Suppose finally that, for every trace step \(a<r\),
+the trace's stored delta and gamma colors satisfy
+\[
+ \delta_{t_a}\in\overline{\sigma^a}(v_{t_a})
+ \quad\hbox{and}\quad
+ \gamma_{t_a}\in\sigma^a(v_{t_a}).
+\]
+Thus the stored delta color is missing at the trace support under the
+pre-step trace coloring, while the stored gamma color is present there
+under that same coloring.
 Then \(\mathcal R\) satisfies the
 \noderef{ExtensionBaseRestorationInvariant}.
 \end{helper}
