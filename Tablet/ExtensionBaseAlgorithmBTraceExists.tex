@@ -1,0 +1,43 @@
+\begin{helper}[Decreasing trace for Algorithm (B)]
+Let \(1_1<\cdots<1_{p+1}\) be the strictly increasing list of PE slots
+with the prescribed common support and prescribed gamma and delta fields, and
+fix \(b\in\operatorname{Fin}(p+1)\).  There is an
+\noderef{ExtensionBaseAlgorithmBTrace} with exactly \(b\) steps whose step
+\(a\) has position \(b-1-a\), slot \(1_{b-a}\), and the gamma and delta
+colors prescribed at that position.  In particular, in zero-based notation,
+the trace satisfies
+\[
+ \mathtt{position}(a)+a+1=b,
+ \qquad
+ \mathtt{gamma}(a)=\gamma_{\mathtt{position}(a)},
+ \qquad
+ \mathtt{delta}(a)=\delta_{\mathtt{position}(a)}.
+\]
+\end{helper}
+\begin{proof}
+Set the number of steps to \(b\), and for \(a\in\operatorname{Fin}(b)\)
+set \(r_a=b-1-a\).  Since \(a<b\), one has \(r_a<b<p+1\), so \(r_a\)
+is a well-defined member of \(\operatorname{Fin}(p+1)\).  Put
+\[
+ \mathtt{position}(a)=r_a,\quad
+ \mathtt{slot}(a)=\mathtt{indices}(r_a),\quad
+ \mathtt{gamma}(a)=\gamma_{r_a},\quad
+ \mathtt{delta}(a)=\delta_{r_a}.
+\]
+Starting with \(\varrho_1\), define coloring \(a+1\) from coloring \(a\)
+by the rooted component swap required in the transition field of
+\noderef{ExtensionBaseAlgorithmBTrace}.  Finite recursion supplies these
+\(b+1\) colorings, including the sole initial coloring when \(b=0\).
+
+The displayed definition gives \(r_a+a+1=b\).  Its values are precisely all
+positions \(r<b\): for such an \(r\), take \(a=b-1-r\).  Therefore the image
+of the slot map is exactly the image under \(\mathtt{indices}\) of the
+positions below \(b\), which is
+\noderef{ExtensionBaseCaseOneIndices}.  If \(a<c\), then
+\(r_c<r_a\); strict increase of the supplied index list gives
+\(\mathtt{slot}(c)<\mathtt{slot}(a)\).  Finally, the prescribed support,
+PE-kind, gamma-field, and delta-field equalities at \(r_a\), together with
+the recursive coloring equation, give all remaining fields of
+\noderef{ExtensionBaseAlgorithmBTrace}.  The three asserted identities are
+immediate from the definitions.
+\end{proof}

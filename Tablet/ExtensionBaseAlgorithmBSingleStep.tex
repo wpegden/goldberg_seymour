@@ -1,0 +1,50 @@
+\begin{helper}[One step of Algorithm (B)]
+Let \(t\) be a PE slot supported at \(v_n\), and suppose its colors
+\(\alpha,\beta\) are strongly interchangeable on \(T_t\) under a proper
+coloring \(\varphi\).  If \(\beta\) is missing and \(\alpha\) is present at
+\(u\), while both colors are present at \(v_n\), then the full
+\(\alpha\)-\(\beta\) component rooted at \(u\) is a nontrivial path
+component.  It meets \(T_t\) only possibly at \(v_n\).  Moreover, if it
+does contain \(v_n\), then \(v_n\) is not an end of that path, equivalently
+the neighbor set of its vertex-node in the two-color incidence graph is not
+subsingleton.
+\end{helper}
+\begin{proof}
+Because \(\beta\) is missing at \(u\), the definitions
+\noderef{MissingColors} and \noderef{PresentColors} show that no edge
+incident with \(u\) has color \(\beta\).  Since \(\alpha\) is present,
+there is an incident \(\alpha\)-colored edge \(e_\alpha\).  It is unique:
+two distinct such edges would be \noderef{AdjacentEdges} through \(u\),
+contrary to \noderef{IsProperEdgeColoring}.  By \noderef{Incident} and
+the definition of \noderef{TwoColorIncidenceGraph}, the edge-node
+\(\mathsf{inr}(e_\alpha)\) is adjacent to \(\mathsf{inl}(u)\) and hence is
+in the rooted \noderef{TwoColorComponent}.  It is the unique neighbor of
+\(\mathsf{inl}(u)\).
+
+Strong interchangeability, as defined in
+\noderef{ETTStrongInterchangeable}, includes \(\alpha\ne\beta\).
+Apply \noderef{TwoColorComponentSpanningPath} to the proper coloring.
+Its spanning path has support equal to the entire rooted component.  Since
+the component contains the edge-node \(\mathsf{inr}(e_\alpha)\), it is
+nontrivial.  Since \(u\) has exactly one neighbor, the spanning path can be
+oriented with \(u\) as an end.  This is the required
+\noderef{TwoColorNontrivialPathComponent}.
+
+Now suppose \(w\in V(T_t)\), \(w\ne v_n\), and
+\(\mathsf{inl}(w)\) lies in the rooted component.  Components based at two
+nodes in the same connected component are equal.  The strong
+interchangeability clause at \(w\) supplies a
+\noderef{TwoColorComponentCycle} whose underlying
+\noderef{TwoColorCycle} has support equal to that full component.  Hence
+the cycle contains \(u\).  A simple cycle has two distinct neighbors at
+each of its vertices, contradicting the uniqueness of the neighbor of
+\(u\) proved above.  Thus \(w=v_n\).
+
+Finally both colors are present at \(v_n\).  Choose incident edges
+\(e_\alpha^n,e_\beta^n\) of the respective colors.  They are distinct,
+because one coloring value cannot equal both \(\mathsf{some}(\alpha)\)
+and \(\mathsf{some}(\beta)\).  If the rooted component contains \(v_n\),
+the incidence-graph adjacencies place both edge-nodes in the component and
+make them two distinct neighbors of \(\mathsf{inl}(v_n)\).  Its neighbor
+set is therefore not subsingleton, as claimed.
+\end{proof}

@@ -1,8 +1,11 @@
 import Tablet.AdjacentEdges
 import Tablet.ETTStrongInterchangeable
 import Tablet.ExtendedTashkinovTree
+import Tablet.ExtensionBaseAlgorithmBInduction
+import Tablet.ExtensionBaseAlgorithmBSingleStep
 import Tablet.ExtensionBaseAlgorithmBInvariant
 import Tablet.ExtensionBaseAlgorithmBTrace
+import Tablet.ExtensionBaseAlgorithmBTraceExists
 import Tablet.ExtensionBaseCaseOneIndices
 import Tablet.ExtensionBaseSupportClassColors
 import Tablet.Incident
@@ -72,4 +75,25 @@ theorem ExtensionBaseAlgorithmB {V E : Type*}
       ExtensionBaseAlgorithmBInvariant ett terminalSupport jSlot rho1 u
         p indices b trace := by
 -- BODY
-  sorry
+  classical
+  obtain ⟨trace, hsteps, hposition, htraceGamma, htraceDelta⟩ :=
+    ExtensionBaseAlgorithmBTraceExists ett terminalSupport rho1 u p indices
+      gamma delta b hincreasing hsupport hkind hgamma hdelta
+  refine ⟨trace, ?_⟩
+  obtain ⟨hcoloring, hstate, hfinal⟩ :=
+    ExtensionBaseAlgorithmBInduction ett terminalSupport rho1 u p indices
+      gamma delta b trace hsteps hposition htraceGamma htraceDelta hproper
+      hone hchain hdistinct hselected hminimal hinitialSI hterminalNoMissing
+      hstored
+  unfold ExtensionBaseAlgorithmBInvariant
+  refine ⟨hcoloring, ?_, hfinal⟩
+  intro a
+  obtain ⟨hmissing, hpresent, hterminalGamma, hterminalDelta, hsi,
+      hsurvivors⟩ := hstate a
+  have hstep := ExtensionBaseAlgorithmBSingleStep ett (trace.slot a)
+    terminalSupport (trace.coloring a.castSucc) u (trace.gamma a)
+    (trace.delta a) (hcoloring a.castSucc).1 hsi hmissing hpresent
+    hterminalGamma hterminalDelta
+  refine ⟨?_, hmissing, hstep.1, hstep.2.1, hstep.2.2, hsurvivors⟩
+  rw [trace.slotIdentity a]
+  exact hTjInitial (trace.position a) (trace.positionBefore a)
