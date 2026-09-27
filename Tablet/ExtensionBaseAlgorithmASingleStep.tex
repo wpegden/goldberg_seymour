@@ -1,0 +1,44 @@
+\begin{helper}[One restoration switch in Algorithm (A)]
+Let \(t\) be a slot, let \(v_t\in V(T_t)\), and let
+\(\gamma_t,\delta_t\) be colors. Suppose a coloring \(\phi\) is proper,
+leaves exactly \(e_0\) uncolored, and the pair is
+\noderef{ETTStrongInterchangeable} at \(t\) with support \(v_t\). Suppose
+also that \(\delta_t\) is missing at \(v_t\) and \(\gamma_t\) is present
+there. Then the
+\((\gamma_t,\delta_t)\)-component rooted at \(v_t\) is a nontrivial path and
+\[
+ V(T_t)\cap V(K(v_t))=\{v_t\}.
+\]
+Switching this component preserves properness and the property that exactly
+\(e_0\) is uncolored.
+\end{helper}
+\begin{proof}
+Strong interchangeability gives \(\gamma_t\ne\delta_t\). Expand
+\noderef{MissingColors}: no \(\delta_t\)-colored edge is incident with
+\(v_t\). Expand \noderef{PresentColors}: some
+\(\gamma_t\)-colored edge is incident with \(v_t\). Properness, as defined
+by \noderef{IsProperEdgeColoring}, permits at most one incident edge of a
+fixed color. Hence the root has exactly one neighbor in
+\noderef{TwoColorIncidenceGraph}, and its component contains the displayed
+edge. The root belongs to its own \noderef{TwoColorComponent}; thus the
+distinct-color fact and the root as a node with subsingleton neighbor set
+give a \noderef{TwoColorPathComponent}. The displayed incident edge belongs
+to the same component, so the path component satisfies the additional
+\noderef{TwoColorNontrivialPathComponent} clause.
+
+The root belongs to \(V(T_t)\) by hypothesis. Let \(w\in V(T_t)\) be another
+vertex in the root component. Equality of connected-component classes says
+that the component rooted at \(w\) equals the component rooted at \(v_t\).
+The strong-interchangeability clause for \(w\ne v_t\), however, says that
+its component avoids \(v_t\). This contradicts the fact that the root
+component contains \(v_t\). Thus \(w=v_t\), and the converse follows from
+membership of a root in its own component. This proves the exact
+intersection formula.
+
+Because the two colors are distinct, \noderef{TwoColorComponentSwapProper}
+applied to the proper coloring proves properness after the switch. Finally,
+the formula in \noderef{TwoColorComponentSwap} only exchanges two
+\(\mathsf{some}\)-values and fixes every \(\mathsf{none}\)-value. The edge
+\(e_0\) therefore remains uncolored, and every other edge remains colored.
+This is exactly \noderef{IsOneEdgeUncolored} for the switched coloring.
+\end{proof}

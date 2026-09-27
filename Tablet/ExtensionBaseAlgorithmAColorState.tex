@@ -1,0 +1,79 @@
+\begin{helper}[Support-class color state in Algorithm (A)]
+Let \(\mathcal R\) be an
+\noderef{ExtensionBaseRestorationTrace}, let \(q\) have exact support
+\(v_n\), and suppose initially every active non-\(q\) pair is strongly
+interchangeable. Assume the support-class missing-color law (A4): for the
+greatest member \(t\) of every full support class \(L(w)\subseteq L^*\),
+\[
+ \overline\sigma_n(w)\cap\bigcup_{s\in L(w)}S_s=\{\delta_t\},
+\]
+and assume the active-pair overlap law (O): two exact stored pairs at active
+slots \(s<t\) overlap exactly when their supports agree and no member of that
+support class lies strictly between them; in the overlap case their
+intersection is both \(\{\gamma_t\}\) and \(\{\delta_s\}\). Then immediately
+before every step \(a\) of \(\mathcal R\),
+\[
+ \delta_{t_a}\in\overline{\sigma^a}(v_{t_a})
+ \quad\hbox{and}\quad
+ \gamma_{t_a}\in\sigma^a(v_{t_a}).
+\]
+\end{helper}
+\begin{proof}
+Fix a support \(w\) that occurs in the trace. Since the trace enumerates
+\(L^*=\noderef{ExtensionBaseRestorationIndices}\), its slot \(t\) is active
+and does not belong to the support class of \(v_n\). The exact chosen-vertex
+field of the trace therefore implies \(w\ne v_n\). Conversely, every active
+slot supported at \(w\) lies outside the support class of \(v_n\), so the
+full class \(L(w)=\noderef{ExtensionBaseSupportClass}\) is contained in
+\(L^*\). List this nonempty class increasingly as
+\[
+                         i_0<i_1<\cdots<i_p.
+\]
+Membership in \(L^*\), expanded through
+\noderef{ExtensionBaseActiveIndices}, says that each positive certified slot
+has PE kind. Inspect its certificate in \noderef{TashkinovSeries}. The
+initial, SE, and RE constructors of \noderef{TashkinovSeriesStep} are
+excluded by the positive index and exact PE-kind field. In the PE constructor
+the stored set is the exact pair
+\(S_{i_b}=\{\gamma_{i_b},\delta_{i_b}\}\). Also \(i_b\ne q\): otherwise the
+exact chosen-vertex fields would give \(w=v_n\). Initial strong
+interchangeability, expanded using \noderef{ETTStrongInterchangeable}, hence
+gives \(\gamma_{i_b}\ne\delta_{i_b}\).
+
+Apply (A4) to the greatest member \(i_p\). It makes
+\(\delta_{i_p}\) missing at \(w\), and it makes every other color of the
+union of the stored pairs present there, by the complementary definitions
+\noderef{MissingColors} and \noderef{PresentColors}. In particular every
+\(\gamma_{i_b}\) is present. For \(b=p\), this follows from
+\(\gamma_{i_p}\ne\delta_{i_p}\). For \(b<p\), law (O) either makes
+\(S_{i_b}\) disjoint from \(S_{i_p}\), or, if they are consecutive in the
+class, identifies their intersection with
+\(\{\delta_{i_b}\}=\{\gamma_{i_p}\}\); in either event
+\(\gamma_{i_b}\ne\delta_{i_p}\). Applying (O) to each consecutive pair also
+gives
+\[
+                 \gamma_{i_{b+1}}=\delta_{i_b}
+                 \qquad(0\le b<p).                 \tag{1}
+\]
+
+The trace processes the members of this class in decreasing order. Before
+processing \(i_p\), the preceding paragraph supplies the claimed missing and
+present colors. Every incident edge whose color is
+\(\gamma_{i_p}\) lies in the two-color component rooted at \(w\), while no
+incident edge has color \(\delta_{i_p}\). The transition formula in
+\noderef{ExtensionBaseRestorationTrace}, expanded by
+\noderef{TwoColorComponentSwap}, therefore changes every such
+\(\gamma_{i_p}\)-edge to \(\delta_{i_p}\) and creates no new
+\(\gamma_{i_p}\)-edge at \(w\). Consequently
+\(\gamma_{i_p}=\delta_{i_{p-1}}\) is missing after the switch. Law (O) says
+that the switched pair meets the next pair only in this delta color, so the
+incident edge witnessing that \(\gamma_{i_{p-1}}\) is present is fixed.
+Repeating the argument down (1) proves the two assertions before each step
+supported at \(w\).
+
+Finally, a switch belonging to a different support class has a color pair
+disjoint from every pair in \(L(w)\), by (O). Its transition therefore fixes
+all edges whose colors occur in the preceding argument. Thus intervening
+steps from other support classes do not alter either assertion. Since every
+trace slot has some support, the conclusion holds for every step \(a\).
+\end{proof}

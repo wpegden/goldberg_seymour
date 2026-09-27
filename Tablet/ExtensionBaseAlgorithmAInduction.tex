@@ -1,0 +1,83 @@
+\begin{helper}[Restoration induction for Algorithm (A)]
+Let \(\mathcal R\) be a decreasing
+\noderef{ExtensionBaseRestorationTrace} starting at a proper coloring
+\(\sigma_n\) which leaves exactly \(e_0\) uncolored. Assume the order and
+initial-segment conclusions for every restoration slot: whenever \(t\) has
+exact support \(v_t\), the terminal support precedes \(v_t\) in the final
+tree order, and \(T_j\) is an ordered initial segment of \(T_t\). Assume
+initial strong
+interchangeability of every active nonterminal pair, and assume that the
+terminal slot \(q\) has exact chosen vertex \(v_n\). Assume also the
+active-pair overlap law (O): for active \(s<t\), their exact stored pairs
+overlap if and only if their supports agree and no member of their full
+\noderef{ExtensionBaseSupportClass} lies strictly between them, and in that
+case their intersection is both \(\{\gamma_t\}\) and
+\(\{\delta_s\}\). Suppose finally that the color-state conclusion of
+\noderef{ExtensionBaseAlgorithmAColorState} holds before every trace step.
+Then \(\mathcal R\) satisfies the
+\noderef{ExtensionBaseRestorationInvariant}.
+\end{helper}
+\begin{proof}
+We induct on the trace position. At position zero, the trace's initial
+coloring is \(\sigma_n\), so properness and the exact-one-uncolored property
+are the two initial assumptions. At any later position they follow from the
+preceding switch, as explained below.
+
+Fix a step \(a\), write \(t=t_a\), \(v=v_t\),
+\(\gamma=\gamma_t\), and \(\delta=\delta_t\). The enumeration clause of
+\noderef{ExtensionBaseRestorationTrace} gives \(t\in L^*\), and hence, by
+\noderef{ExtensionBaseRestorationIndices} and
+\noderef{ExtensionBaseActiveIndices}, \(t\) is an active PE slot. Inspect the
+certificate at \(t+1\) in \noderef{TashkinovSeries}. Since this is a positive
+slot of exact PE kind, only the PE constructor of
+\noderef{TashkinovSeriesStep} is possible. The trace's exact chosen-vertex
+field identifies \(v\) with the maximum defective-choice vertex in that
+constructor. The vertex-defective field, expanded through
+\noderef{DefectiveVertex}, gives
+\[
+                         v\in V(T_t).                \tag{1}
+\]
+Membership \(t\in L^*\) also gives \(t\ne q\): if \(t=q\), the terminal exact
+chosen-vertex field and the trace field would put \(t\) in the removed
+terminal support class. For the first step, initial strong
+interchangeability therefore supplies the pair at \(t\). For a later step,
+the preceding induction state supplies it, since strict decrease ensures
+that \(t\) did not occur at an earlier position. The assumed color state
+supplies that \(\delta\) is missing and \(\gamma\) present at \(v\).
+Consequently \noderef{ExtensionBaseAlgorithmASingleStep} gives a nontrivial
+path component, proves that it meets \(V(T_t)\) exactly in \(v\), and proves
+properness and exact-one-uncoloredness after the switch. The trace transition
+identifies that switched coloring with the next trace coloring. The required
+terminal order and \(T_j\)-initial-segment clauses are the two standing
+assumptions. Together with (1), this proves every non-preservation clause of
+the invariant at step \(a\).
+
+It remains to preserve all unprocessed active nonterminal pairs. Let \(s\)
+be such a slot, with exact support \(v_s\) and exact pair
+\(\{\gamma_s,\delta_s\}\). The induction hypothesis supplies its strong
+interchangeability before the current switch. If \(v_s\ne v\), then
+\(s\ne t\); orient the two distinct finite ordinals increasingly and apply
+the overlap law (O). Its support-equality condition is false, so the two
+stored pairs are disjoint.
+
+Suppose instead that \(v_s=v\). Since \(t\in L^*\), its support differs from
+the terminal support. Thus active membership puts \(s\) in the same full
+support class and hence in \(L^*\). The trace enumerates \(L^*\), so \(s\)
+occurs somewhere. It has not occurred at or before \(a\), by the unprocessed
+hypothesis. Strict decrease of the trace then gives \(s<t\). We have
+therefore proved in the two cases exactly the alternative required by
+\noderef{StrongInterchangeabilityKempePreserved}: different supports with
+disjoint color pairs, or equal supports with \(s<t\). That node, applied
+with the current nontrivial path and the two strong-interchangeability
+certificates, proves that the pair at \(s\) remains strongly interchangeable
+after the switch. This completes the induction step.
+
+The induction supplies properness and exact-one-uncoloredness at all
+positions, every step clause, and preservation of every active nonterminal
+slot absent through the current step. At the final position, the same
+induction statement gives the final absent-slot clause of
+\noderef{ExtensionBaseRestorationInvariant}. If the trace has no steps,
+there is no step clause to prove, its sole coloring is \(\sigma_n\), and the
+final absent-slot clause is exactly the initial strong-interchangeability
+assumption. Hence the invariant also holds in the empty-index case.
+\end{proof}

@@ -1,6 +1,9 @@
 import Tablet.DefectiveVertex
 import Tablet.ETTStrongInterchangeable
 import Tablet.ExtensionBaseActiveIndices
+import Tablet.ExtensionBaseAlgorithmAColorState
+import Tablet.ExtensionBaseAlgorithmAInduction
+import Tablet.ExtensionBaseAlgorithmATraceExists
 import Tablet.ExtensionBaseClaimMissingColors
 import Tablet.ExtensionBaseClaimStrongInterchangeable
 import Tablet.ExtensionBaseRestorationInvariant
@@ -112,4 +115,12 @@ theorem ExtensionBaseAlgorithmA {V E : Type*}
       ExtensionBaseRestorationInvariant ett terminalSupport
         hterminalSupport jSlot q sigmaN trace := by
 -- BODY
-  sorry
+  obtain ⟨trace⟩ := ExtensionBaseAlgorithmATraceExists ett terminalSupport
+    hterminalSupport sigmaN hslotData
+  have hcolorState := ExtensionBaseAlgorithmAColorState ett terminalSupport
+    hterminalSupport q sigmaN hqVertex trace hinitialSI hclassMissing
+      hpairOverlap
+  refine ⟨trace, ?_⟩
+  exact ExtensionBaseAlgorithmAInduction ett terminalSupport hterminalSupport
+    jSlot q sigmaN hqVertex hsigmaProper hsigmaOne hterminalBefore hjInitial
+      hinitialSI hpairOverlap trace hcolorState

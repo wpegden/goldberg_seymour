@@ -1,0 +1,38 @@
+\begin{helper}[Decreasing restoration trace for Algorithm (A)]
+Let \(L^*=\noderef{ExtensionBaseRestorationIndices}\). Suppose that every
+slot \(t\in L^*\) has exact certified values
+\[
+  v_t,\gamma_t,\delta_t,\qquad
+  v(t+1)=v_t,\quad \gamma(t+1)=\gamma_t,\quad
+  \delta(t+1)=\delta_t.
+\]
+For any starting coloring \(\sigma_n\), there exists an
+\noderef{ExtensionBaseRestorationTrace} based at \(\sigma_n\).
+\end{helper}
+\begin{proof}
+The set \(L^*\) is a finite set of finite ordinals. Let \(r=|L^*|\), and
+list its members in the unique strictly decreasing order
+\[
+                         t_0>t_1>\cdots>t_{r-1}.
+\]
+This includes \(r=0\), when the list has no entries. For each \(a<r\),
+apply the displayed hypothesis to \(t_a\), and choose one triple
+\((v_{t_a},\gamma_{t_a},\delta_{t_a})\) satisfying all three exact field
+equalities. Define colorings recursively by
+\[
+ \sigma^0=\sigma_n,\qquad
+ \sigma^{a+1}=\noderef{TwoColorComponentSwap}
+   (\sigma^a,\gamma_{t_a},\delta_{t_a},v_{t_a}).
+\]
+Take the number of steps to be \(r\), the slot at position \(a\) to be
+\(t_a\), the support and two colors to be the chosen triple, and the coloring
+at position \(a\) to be \(\sigma^a\). The initial-coloring and transition
+clauses of \noderef{ExtensionBaseRestorationTrace} hold by these recursive
+definitions. The image of the slot map is exactly \(L^*\), because the
+ordered list contains every member exactly once. Its strict-decrease clause
+holds because the list was sorted in decreasing order. Finally, the three
+certified-field clauses are precisely the properties of the chosen triple.
+Thus all fields of the required trace are defined. When \(r=0\), the same
+construction consists only of \(\sigma^0=\sigma_n\), and all slot-indexed
+clauses are vacuous.
+\end{proof}
