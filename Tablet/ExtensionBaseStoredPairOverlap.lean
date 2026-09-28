@@ -2,7 +2,9 @@ import Tablet.DefectiveVertex
 import Tablet.ETTFirstAppearanceIndex
 import Tablet.ExtensionBaseActiveIndices
 import Tablet.ExtensionBaseDeltaExclusion
+import Tablet.ExtensionBaseSameSupportStoredPairOverlap
 import Tablet.ExtensionBaseSupportClass
+import Tablet.ExtensionBaseSupportClassEnumeration
 import Tablet.ExtensionBaseSupportClassColors
 import Tablet.ExtensionBaseSupportOrder
 import Tablet.ExtensionRules
@@ -198,4 +200,140 @@ theorem ExtensionBaseStoredPairOverlap {V E : Type*}
           ett.series.data.stored s.succ ∩
             ett.series.data.stored t.succ = {deltaS}) := by
 -- BODY
-  sorry
+  classical
+  have supportOrder := ExtensionBaseSupportOrder ett terminalSupport
+    hterminalSupport q hqTerminal hqKind hqVertex hLowerPartV
+  have deltaExclusion := (ExtensionBaseDeltaExclusion ett terminalSupport
+    hterminalSupport q hqTerminal hqKind hqVertex jSlot hjSlot
+    hLowerElementary hLowerPartV).1
+  have differentSupport := (ExtensionRules G k e0 input T generating ett
+    hMP hpositive hlower).2
+  intro s t vs vt hvsFinal hvtFinal gammaS deltaS gammaT deltaT
+    hsActive htActive hst hsVertex htVertex hsGamma hsDelta htGamma htDelta
+  have hsKind : ett.series.data.kind s.succ =
+      some TashkinovExtensionKind.PE := by
+    have hsData := hsActive
+    simp [ExtensionBaseActiveIndices] at hsData
+    exact hsData.2.1
+  have htKind : ett.series.data.kind t.succ =
+      some TashkinovExtensionKind.PE := by
+    have htData := htActive
+    simp [ExtensionBaseActiveIndices] at htData
+    exact htData.2.1
+  have sameSupport : vs = vt →
+      (((ett.series.data.stored s.succ ∩
+          ett.series.data.stored t.succ).Nonempty ↔
+        ¬ ∃ r : Fin ett.rounds,
+          r ∈ ExtensionBaseActiveIndices ett terminalSupport
+            hterminalSupport ∧
+          s.val < r.val ∧ r.val < t.val ∧
+          ett.series.data.chosenVertex r.succ = some vs) ∧
+      ((ett.series.data.stored s.succ ∩
+          ett.series.data.stored t.succ).Nonempty →
+        ett.series.data.stored s.succ ∩
+            ett.series.data.stored t.succ = {gammaT} ∧
+          ett.series.data.stored s.succ ∩
+            ett.series.data.stored t.succ = {deltaS})) := by
+    intro hvst
+    subst vt
+    have hsClass : s ∈ ExtensionBaseSupportClass ett terminalSupport
+        hterminalSupport vs := by
+      simp [ExtensionBaseSupportClass, hsActive, hsVertex]
+    have htClass : t ∈ ExtensionBaseSupportClass ett terminalSupport
+        hterminalSupport vs := by
+      simp [ExtensionBaseSupportClass, htActive, htVertex]
+    have hclassNonempty :
+        (ExtensionBaseSupportClass ett terminalSupport
+          hterminalSupport vs).Nonempty := ⟨s, hsClass⟩
+    have hcommon : ∀ (r : Fin ett.rounds) (v : V)
+        (hvFinal : v ∈ TreeSequenceVertexSet T),
+        r ∈ ExtensionBaseActiveIndices ett terminalSupport hterminalSupport →
+        ett.series.data.chosenVertex r.succ = some v →
+        ETTFirstAppearanceIndex ett v hvFinal =
+          ETTFirstAppearanceIndex ett terminalSupport hterminalSupport := by
+      intro r v hvFinal hrActive hrVertex
+      exact (supportOrder.2.1 r v hvFinal hrActive hrVertex).1
+    obtain ⟨p, indices, hwCurrent, hincreasing, hclass, henumerates⟩ :=
+      ExtensionBaseSupportClassEnumeration ett terminalSupport
+        hterminalSupport q hqTerminal vs hcommon hclassNonempty
+    have hdeltaIndexed : ∀ (a b : Fin (p + 1))
+        (gammaA deltaB : Fin k), a.val ≤ b.val →
+        ett.series.data.gamma (indices a).succ = some gammaA →
+        ett.series.data.delta (indices b).succ = some deltaB →
+        deltaB ≠ gammaA := by
+      intro a b gammaA deltaB hab haGamma hbDelta
+      have haClass := (hclass (indices a)).2 ⟨a, rfl⟩
+      have hbClass := (hclass (indices b)).2 ⟨b, rfl⟩
+      simp only [ExtensionBaseSupportClass, Finset.mem_filter] at haClass hbClass
+      have habIndices : (indices a).val ≤ (indices b).val := by
+        rcases lt_or_eq_of_le hab with hablt | habeq
+        · exact (hincreasing a b hablt).le
+        · have habFin : a = b := Fin.ext habeq
+          subst b
+          exact le_rfl
+      exact (deltaExclusion (indices a) (indices b) vs vs hvsFinal
+        hvsFinal deltaB gammaA haClass.1 hbClass.1 habIndices
+        haClass.2 hbClass.2 hbDelta haGamma).2
+    have hsame := ExtensionBaseSameSupportStoredPairOverlap ett
+      terminalSupport hterminalSupport q hqTerminal vs hwCurrent p indices
+      hincreasing hclass henumerates hdeltaIndexed s t hsClass htClass hst
+      gammaS deltaS gammaT deltaT hsGamma hsDelta htGamma htDelta
+    have hbetween :
+        (∃ r : Fin ett.rounds,
+          r ∈ ExtensionBaseSupportClass ett terminalSupport
+            hterminalSupport vs ∧
+          s.val < r.val ∧ r.val < t.val) ↔
+        ∃ r : Fin ett.rounds,
+          r ∈ ExtensionBaseActiveIndices ett terminalSupport
+            hterminalSupport ∧
+          s.val < r.val ∧ r.val < t.val ∧
+          ett.series.data.chosenVertex r.succ = some vs := by
+      constructor
+      · rintro ⟨r, hrClass, hsr, hrt⟩
+        simp only [ExtensionBaseSupportClass, Finset.mem_filter] at hrClass
+        exact ⟨r, hrClass.1, hsr, hrt, hrClass.2⟩
+      · rintro ⟨r, hrActive, hsr, hrt, hrVertex⟩
+        refine ⟨r, ?_, hsr, hrt⟩
+        simp [ExtensionBaseSupportClass, hrActive, hrVertex]
+    constructor
+    · constructor
+      · intro hoverlap hbetweenActive
+        exact (hsame.1.mp hoverlap) (hbetween.mpr hbetweenActive)
+      · intro hnoClass
+        apply hsame.1.mpr
+        intro hbetweenClass
+        exact hnoClass (hbetween.mp hbetweenClass)
+    · exact hsame.2
+  have hoverlapIff :
+      ((ett.series.data.stored s.succ ∩
+          ett.series.data.stored t.succ).Nonempty ↔
+        vs = vt ∧
+          ¬ ∃ r : Fin ett.rounds,
+            r ∈ ExtensionBaseActiveIndices ett terminalSupport
+              hterminalSupport ∧
+            s.val < r.val ∧ r.val < t.val ∧
+            ett.series.data.chosenVertex r.succ = some vs) := by
+    constructor
+    · intro hoverlap
+      by_cases hvst : vs = vt
+      · exact ⟨hvst, (sameSupport hvst).1.mp hoverlap⟩
+      · have hstNe : s ≠ t := by
+          intro heq
+          subst t
+          omega
+        have hsFirst :=
+          (supportOrder.2.1 s vs hvsFinal hsActive hsVertex).1
+        have htFirst :=
+          (supportOrder.2.1 t vt hvtFinal htActive htVertex).1
+        have hdisjoint := differentSupport s t vs vt hstNe hvst hsKind
+          htKind hsVertex htVertex hvsFinal hvtFinal
+          (hsFirst.trans htFirst.symm)
+        obtain ⟨c, hc⟩ := hoverlap
+        have hcPairs := Finset.mem_inter.mp hc
+        exact (Finset.disjoint_left.mp hdisjoint hcPairs.1 hcPairs.2).elim
+    · rintro ⟨hvst, hnoBetween⟩
+      exact (sameSupport hvst).1.mpr hnoBetween
+  refine ⟨hoverlapIff, ?_⟩
+  intro hoverlap
+  have hvst := (hoverlapIff.mp hoverlap).1
+  exact (sameSupport hvst).2 hoverlap

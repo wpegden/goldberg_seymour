@@ -1,0 +1,56 @@
+\begin{helper}[Stored-pair overlap inside one support class]
+Fix a nonempty active support class (L(w)), and let
+(i_0<\cdots<i_p) be an increasing enumeration which is also the exact
+enumeration of all terminal-bounded PE slots supported at (w).  Assume
+(w) belongs to the current terminal ladder tree and that whenever
+(a\leq b), the exact delta at (i_b) differs from the exact gamma at
+(i_a).  For two class members (s<t), with exact fields
+(\gamma_s,\delta_s,\gamma_t,\delta_t) and exact stored sets (S_s,S_t),
+[
+ S_s\cap S_t\ne\varnothing
+ \quad\Longleftrightarrow\quad
+ \text{there is no }r\in L(w)\text{ with }s<r<t.               \tag{1}
+]
+When these conditions hold,
+[
+                     S_s\cap S_t=\{\gamma_t\}=\{\delta_s\}.   \tag{2}
+]
+\end{helper}
+\begin{proof}
+For each enumerated PE slot (i_a), its certificate from
+\noderef{TashkinovSeries} is necessarily the PE constructor of
+\noderef{TashkinovSeriesStep}.  Hence there are unique exact colors
+(\gamma_a,\delta_a) in its gamma and delta fields, and the constructor's
+stored-set field gives
+[
+                         S_{i_a}=\{\delta_a,\gamma_a\}.         \tag{3}
+]
+Use these colors as the two color arrays in
+\noderef{ExtensionBaseSupportClassColors}.  The hypotheses of that result
+are exactly the increasing enumeration, its two stated range
+characterizations, current-tree membership of (w), and the assumed
+delta-versus-earlier-gamma exclusion.  It yields
+[
+ \gamma_{a+1}=\delta_a\quad(a<p)                               \tag{4}
+]
+and injectivity of the list
+[
+            \gamma_0,\delta_0,\delta_1,\ldots,\delta_p.        \tag{5}
+]
+
+Let (s=i_a) and (t=i_b); the exact-range property supplies unique
+(a<b).  If (b=a+1), equations (3)--(5) say that the two pairs have the
+single common color
+(\delta_a=\gamma_{a+1}).  Using the exact gamma and delta field equations
+at (s,t), this is precisely
+(S_s\cap S_t=\{\gamma_t\}=\{\delta_s\}).
+
+If (b>a+1), every possible equality between a member of
+(\{\delta_a,\gamma_a\}) and a member of
+(\{\delta_b,\gamma_b\}) contradicts (5), after using (4) to rewrite a
+noninitial gamma as the preceding delta.  Thus the pairs are disjoint.
+Finally, strict increase and exactness of the enumeration show that
+(b=a+1) is equivalent to there being no enumerated, hence no class,
+index strictly between (s) and (t).  These observations prove (1) and
+(2).
+\end{proof}

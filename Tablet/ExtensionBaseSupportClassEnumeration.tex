@@ -1,0 +1,52 @@
+\begin{helper}[Exact enumeration of one active support class]
+Let an ETT with (n>0) noninitial rounds be fixed, let (q\in
+\operatorname{Fin}(n)) satisfy (q+1=n), and fix the terminal support
+(v_n\in V(T)).  Let (w) be a vertex whose
+\noderef{ExtensionBaseSupportClass} (L(w)) is nonempty.  Assume that every
+active PE support has the same \noderef{ETTFirstAppearanceIndex} as (v_n).
+Then there are (p\geq0) and indices
+[
+                 i_0<i_1<\cdots<i_p
+]
+such that (w\in V(T_{q+1})), the range of this increasing sequence is
+exactly (L(w)), and it is also exactly the set of all indices (r\leq q)
+whose positive slot is a PE with exact chosen vertex (w).
+\end{helper}
+\begin{proof}
+Choose (r_0\in L(w)).  By the definitions of
+\noderef{ExtensionBaseSupportClass} and
+\noderef{ExtensionBaseActiveIndices}, (r_0) is active and its chosen-vertex
+field is both “some (w)” and “some (u)” for a vertex
+(u\in V(T)).  Injectivity of the option constructor gives (u=w), so
+(w\in V(T)), the slot (r_0+1) is a PE, and the common-index hypothesis
+gives
+[
+ m(w)=m(v_n).                                                    \tag{1}
+]
+
+Now let (r\leq q) be any PE slot with chosen vertex (w).  The certificate
+at (r+1), supplied by \noderef{TashkinovSeries}, must be the PE constructor
+of \noderef{TashkinovSeriesStep}: its exact kind rules out the initial, SE,
+and RE constructors.  In that PE constructor, the chosen vertex is the
+vertex of its \noderef{MaximumDefectiveChoice}.  The defining defective-
+vertex field puts (w) in the current ladder tree (T_{r+1}).  By the
+least-stage definition of \noderef{ETTFirstAppearanceIndex}, this implies
+(m(w)\leq r+1).  Together with (1), the PE kind, the exact chosen-vertex
+field, and (w\in V(T)), this is precisely membership of (r) in the active
+set and hence in (L(w)).
+
+Conversely, a member of (L(w)) is active and has chosen vertex (w) by
+the two filter definitions.  It is therefore a PE.  Every index in
+\(\operatorname{Fin}(n)\) is at most (q), because (q+1=n), so it satisfies
+the displayed terminal bound.  Thus (L(w)) is exactly the claimed set of
+terminal-bounded PE slots supported at (w).
+
+The nonempty finite linearly ordered set (L(w)) has a unique increasing
+enumeration by a type \(\operatorname{Fin}(p+1)\); take its cardinality minus
+one for (p).  This gives the two asserted range equivalences.  Finally the
+PE certificate at (r_0+1) puts (w) in (T_{r_0+1}).  At every later
+certified slot, each constructor of \noderef{TashkinovSeriesStep} contains an
+ordered initial-segment field.  Repeated application of
+\noderef{TreeSequenceInitialSegmentVertexSetSubset} carries (w) through the
+ladder trees up to (T_{q+1}), proving the remaining membership assertion.
+\end{proof}
