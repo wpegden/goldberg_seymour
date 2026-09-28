@@ -28,8 +28,10 @@ Now let (r\leq q) be any PE slot with chosen vertex (w).  The certificate
 at (r+1), supplied by \noderef{TashkinovSeries}, must be the PE constructor
 of \noderef{TashkinovSeriesStep}: its exact kind rules out the initial, SE,
 and RE constructors.  In that PE constructor, the chosen vertex is the
-vertex of its \noderef{MaximumDefectiveChoice}.  The defining defective-
-vertex field puts (w) in the current ladder tree (T_{r+1}).  By the
+vertex of its \noderef{MaximumDefectiveChoice}.  Its
+\(\mathsf{vertexDefective}\) field, unfolded using
+\noderef{DefectiveVertex}, is a conjunction whose membership clause puts
+(w) in the current ladder tree (T_{r+1}).  By the
 least-stage definition of \noderef{ETTFirstAppearanceIndex}, this implies
 (m(w)\leq r+1).  Together with (1), the PE kind, the exact chosen-vertex
 field, and (w\in V(T)), this is precisely membership of (r) in the active

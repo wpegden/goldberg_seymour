@@ -1,3 +1,4 @@
+import Tablet.DefectiveVertex
 import Tablet.ETTFirstAppearanceIndex
 import Tablet.ExtensionBaseActiveIndices
 import Tablet.ExtensionBaseSupportClass
