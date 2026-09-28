@@ -1,15 +1,15 @@
 \begin{lemma}[Outside-swap normalization of an exit triple]
-Every \(\noderef{TchangeCounterexample}\) \(C\) can be replaced, without
-changing its \(\noderef{TchangeCounterexampleMeasure}\), by a
-counterexample \(D\) whose three legs have
-been relabeled so that \(b_1\prec_D b_3\) and \(b_2\prec_D b_3\), and
-for which
+For every \(\noderef{TchangeCounterexample}\) \(C\), there exists a
+\(\noderef{TchangeCounterexample}\) \(D\) such that
+\(D.T=C.T\), \(D.b=C.b\),
+\(b_1\prec_D b_3\), \(b_2\prec_D b_3\), and
 \[
  D.\varphi=\noderef{OutsideTreeColorSwap}
    (C.T,C.\varphi,C.a,D.a).
 \]
-Here \(D.T=C.T\), \(D.b=C.b\), and the new first color \(D.a\) is missing
-at \(D.b_3\) under the new coloring \(D.\varphi\).
+Moreover, \(D.a\) is missing at \(D.b_3\) under \(D.\varphi\), and
+\(\noderef{TchangeCounterexampleMeasure}(D)
+=\noderef{TchangeCounterexampleMeasure}(C)\).
 \end{lemma}
 \begin{proof}
 The three tree ends of \(C\) are distinct.  Their displayed indices in
