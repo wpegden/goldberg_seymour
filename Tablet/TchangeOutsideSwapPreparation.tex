@@ -1,0 +1,56 @@
+\begin{lemma}[Outside-swap normalization of an exit triple]
+Every \(\noderef{TchangeCounterexample}\) \(C\) can be replaced, without
+changing its \(\noderef{TchangeCounterexampleMeasure}\), by a
+counterexample \(D\) whose three legs have
+been relabeled so that \(b_1\prec_D b_3\) and \(b_2\prec_D b_3\), and
+for which
+\[
+ D.\varphi=\noderef{OutsideTreeColorSwap}
+   (C.T,C.\varphi,C.a,D.a).
+\]
+Here \(D.T=C.T\), \(D.b=C.b\), and the new first color \(D.a\) is missing
+at \(D.b_3\) under the new coloring \(D.\varphi\).
+\end{lemma}
+\begin{proof}
+The three tree ends of \(C\) are distinct.  Their displayed indices in
+the tree-sequence are therefore distinct, so the linear order encoded by
+\(\noderef{TreeVertexOrder}\) has a unique largest one.  Relabel the three
+legs so that this largest end is called \(b_3\); call the other two
+\(b_1,b_2\).  This permutation preserves every counterexample condition
+and the sum of the three lengths.
+
+Choose a color \(\gamma\) missing at \(b_3\).  Such a color exists because
+the \(\noderef{KTriple}\) condition gives
+\(k\geq\Delta(G)+1\), and
+\(\noderef{MissingColorsNonemptyOfMaximumDegree}\) applied at \(b_3\)
+supplies such a \(\gamma\).  Since the old first color \(a\)
+is missing on the tree, the closedness condition
+\(\noderef{ColoredVertexSetClosed}\) forbids both \(a\) and \(\gamma\)
+on the boundary.  They are distinct from \(b\): \(b\) is not missing anywhere
+on the tree, whereas \(\gamma\) is missing at \(b_3\).  If
+\(\gamma=a\), the outside swap below is the identity and all subsequent
+claims remain valid; otherwise apply
+\(\noderef{OutsideTreeColorSwapStable}\) to \(a,\gamma\).
+
+Put
+\(\sigma=\varphi/(G-T,a,\gamma)\).  The cited stability lemma says that
+\(\sigma\) is proper, leaves exactly \(e_0\) uncolored, and fixes every
+edge incident with \(T\), as well as every missing-color set on \(T\).
+Thus the coloring-independent clauses of the \(k\)-triple, together with
+those two coloring clauses, make \((G,e_0,\sigma)\) a \(k\)-triple.
+The displayed edges and all earlier missing witnesses in
+\(\noderef{TashkinovTree}\) are unchanged, so \(T\) remains Tashkinov; the same
+pointwise equality on incident edges preserves closedness.
+
+Every boundary edge \(f_i\) remains colored \(b\).  By the exact
+first-contact clause of \(\noderef{TreeExitPath}\), before the first tree
+vertex of an exit leg no edge is incident with \(T\), so the outside
+swap replaces \(a\) by \(\gamma\) and fixes \(b\) all along that portion.
+The missing status at the remote end changes by the same transposition.
+Consequently the same three vertex-edge sequences, regarded in the
+\((\gamma,b)\)-incidence graph, are exit paths with the same supports and
+lengths.  Support-disjointness, endpoint distinctness, and the exact
+boundary witnesses \(f_i\) are unchanged.  These data define the asserted
+counterexample \(D\), with \(D.a=\gamma\), and give all the displayed
+equalities and order relations.
+\end{proof}

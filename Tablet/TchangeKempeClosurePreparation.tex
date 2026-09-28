@@ -1,0 +1,82 @@
+\begin{lemma}[Kempe switch and two-edge closure construction]
+Let \(C\) be a \(\noderef{TchangeCounterexample}\) such that its first
+color is missing at \(b_3\), and suppose
+\(b_1\prec_T b_3\) and \(b_2\prec_T b_3\).  Then there exists a
+\(\noderef{TchangeKempeClosureData}\) for \(C\).
+\end{lemma}
+\begin{proof}
+Let \(\sigma\) be obtained by interchanging the two colors \(a,b\) on
+the full component containing the third exit path.  The third remote end
+misses one of these colors by \(\noderef{TreeExitPath}\),
+\(a\) is missing at \(b_3\), and the exact
+boundary edge \(f_3\) is colored \(b\).  Hence the third path is the full
+component between its two ends: properness and missingness make both
+ends degree one, \(\noderef{TwoColorIncidenceDegreeAtMostTwo}\) bounds
+all degrees by two, and the spanning path from
+\(\noderef{TwoColorComponentSpanningPath}\) cannot have an additional
+branch.  The switch therefore makes \(b\) missing
+at \(b_3\), by the affected-color clause of
+\(\noderef{TwoColorComponentSwapMissingBehavior}\).  Properness follows from
+\(\noderef{TwoColorComponentSwapProper}\), and the swap only exchanges
+two colored values in the definition
+\(\noderef{TwoColorComponentSwap}\), so the unique uncolored edge remains
+\(e_0\).
+
+The other two full components are disjoint from the third by
+\(\noderef{TwoColorComponentsDisjoint}\): an
+intersection would identify the components and put their distinct tree
+ends into the component whose first contact with \(T\) is \(b_3\).
+Thus their path edges and endpoint missing statuses are fixed.  The third
+path remains an exit path with its two colors exchanged.  In all three
+cases one obtains walks in the new two-color incidence graph with exactly
+the old support and length.
+
+Let \(S=T|b_3\).  The two strict order hypotheses ensure that this prefix
+contains \(b_1,b_2\), and it ends at \(b_3\).  The component switch meets
+\(T\) only at \(b_3\); its only edge incident with that vertex is the
+boundary edge \(f_3\), not a displayed tree edge.  It consequently fixes
+every displayed edge and every missing-color witness needed before the
+last vertex of \(S\).  Directly from \(\noderef{TashkinovTree}\),
+\(S\) is Tashkinov under \(\sigma\).
+
+For \(i=1,2\), let \(x_i\) be the outside endpoint of \(f_i\).  Append
+first \((f_1,x_1)\) and then \((f_2,x_2)\).  The \(x_i\) are outside the
+old tree by the exact endpoint descriptions in
+\(\noderef{BoundaryEdges}\) and \(\noderef{Incident}\), together with
+the exit-path condition.  They are distinct: otherwise the
+two distinct \(b\)-colored edges would be adjacent by
+\(\noderef{AdjacentEdges}\), contradicting
+\(\noderef{IsProperEdgeColoring}\).  The edges \(f_1,f_2\) are not
+displayed in \(S\), attach at
+the earlier vertices \(b_1,b_2\), and have color \(b\), which is missing
+at \(b_3\) before and after the first addition.  Hence these are two
+successive \(\noderef{TashkinovAugmentation}\) steps.  They produce trees
+\(S_1,S_2\), and
+\(\noderef{TashkinovAugmentationSequencePreservesTashkinovTree}\) makes
+\(S_2\) Tashkinov.
+
+Choose a closure \(U\) of \(S_2\) by
+\(\noderef{TashkinovClosureExists}\).  The
+\(\noderef{TashkinovClosure}\) definition and another
+application of augmentation preservation make \(U\) a closed Tashkinov
+tree.  Properness and the one-uncolored-edge condition established above,
+together with the coloring-independent clauses of the original
+\(\noderef{KTriple}\), give a \(k\)-triple for \(\sigma\).  Therefore
+\(\noderef{TashTree}\) says that \(V(U)\) is elementary.  The entrywise
+preservation in \(\noderef{TreeSequenceInitialSegment}\) puts all three
+\(b_i\) in \(U\), and the first augmentation puts
+both ends of \(f_1\) in \(U\).
+
+It remains to prove that no remote end \(a_i\) lies in \(U\).  If one did,
+then it misses \(a\) or \(b\), while the distinct vertex \(b_3\) misses
+\(b\).  \(\noderef{ColoredVertexSetElementary}\) forces that remote end
+to miss \(a\).  Thus both colors are missing somewhere on \(U\).
+\(\noderef{ColoredVertexSetClosed}\) forbids either color
+on a boundary edge.  Starting at each \(b_j\) and following the
+alternating path toward \(a_j\), a first departure from \(U\) would use
+exactly such a boundary edge.  Hence all three paths, including all three
+distinct remote ends, lie in \(U\).  Elementariness then forces all three
+remote ends to miss \(a\), an immediate contradiction.  This proves the
+three outside assertions and completes every field of the required
+Kempe-closure datum.
+\end{proof}

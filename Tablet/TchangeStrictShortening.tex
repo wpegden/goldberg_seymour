@@ -1,0 +1,73 @@
+\begin{lemma}[Strict shortening after the two-edge closure]
+If \(C\) is a \(\noderef{TchangeCounterexample}\) and \(D\) is a
+\(\noderef{TchangeKempeClosureData}\) for \(C\), then there is another
+\(T\)-change counterexample \(C'\) whose
+\(\noderef{TchangeCounterexampleMeasure}\) is strictly smaller than that
+of \(C\).
+\end{lemma}
+\begin{proof}
+Write \(U\) for the closed elementary tree and \(\sigma\) for the coloring
+in \(D\).  For each \(i\), traverse the corresponding \((a,b)\)-walk from
+the remote end \(a_i\), and stop at its first vertex \(c_i\) in \(V(U)\).
+Such a vertex exists because \(b_i\in V(U)\), while \(a_i\notin V(U)\).
+Call the resulting first-entry subpath \(L_i\), and let \(g_i\) be its
+final exact edge.  Then \(L_i\) is nontrivial, simple, has only \(c_i\)
+in \(U\), and its remote end still misses one of the two colors.  Thus it
+satisfies every clause of \(\noderef{TreeExitPath}\) relative to \(U\).
+The three \(L_i\) remain pairwise support-disjoint and retain their
+distinct remote ends.
+
+The two vertices adjacent to the edge-node \(g_i\) are the last outside
+vertex and \(c_i\).  By \(\noderef{Incident}\) and the loopless endpoint
+law in \(\noderef{LooplessMultigraph}\), these are the two distinct ends
+of \(g_i\); hence
+\(g_i\in\noderef{BoundaryEdges}(G,V(U))\).  Its color is \(a\) or \(b\).
+But \(b\) is missing at \(b_3\in U\), and \(U\) is closed, so no boundary
+edge has color \(b\), by \(\noderef{ColoredVertexSetClosed}\).
+Therefore every \(g_i\) has color \(a\).
+The vertices \(c_i\) are distinct: equality \(c_i=c_j\), together with
+support-disjointness, would give two distinct \(a\)-colored exact edges
+incident with one vertex, contrary to \(\noderef{AdjacentEdges}\) and
+\(\noderef{IsProperEdgeColoring}\).
+
+We verify that each \(L_i\) is the required prefix of a full component,
+not merely an arbitrary exit walk.  At \(a_i\), one of \(a,b\) is missing.
+Here missingness and presence are the complementary sets
+\(\noderef{MissingColors}\) and \(\noderef{PresentColors}\).
+There is at most one incident edge of the other color, since two such
+exact identities would be adjacent and equally colored.  The nontrivial
+path supplies one, so the incidence-graph degree of \(a_i\) is exactly
+one.  The component contains an edge-node and a degree-one node, hence it
+is a \(\noderef{TwoColorNontrivialPathComponent}\).  Apply
+\(\noderef{TwoColorComponentSpanningPath}\) and orient the resulting
+spanning path from \(a_i\).  The degree bound
+\(\noderef{TwoColorIncidenceDegreeAtMostTwo}\) forces this full path and
+\(L_i\) to agree successively from their common degree-one end through
+\(c_i\).  Thus \(L_i\) is precisely the initial segment of its full
+component up to the first vertex of \(U\).
+
+The color \(b\) is missing on \(U\).  Since \(g_1\) is an \(a\)-colored
+boundary identity, closedness shows that \(a\) cannot be missing at
+any vertex of \(U\): otherwise that same boundary identity would violate
+\(\noderef{ColoredVertexSetClosed}\).  Thus, after reversing the order
+of the two colors, the new data have the convention that the first color
+is missing on the tree and the second is not missing anywhere on it.
+The \(k\)-triple, closed Tashkinov-tree,
+and elementariness data are supplied by \(D\), with properness read from
+\(\noderef{KTriple}\).  The three paths, their
+disjointness and distinct ends, and the exact boundary witnesses \(g_i\)
+in \(\noderef{BoundaryColorEdges}\) therefore form a new
+\(\noderef{TchangeCounterexample}\) \(C'\) for the
+color pair \((b,a)\).
+
+Finally, both endpoints of \(f_1\) lie in \(U\).  The first-entry path
+\(L_1\) stops before traversing \(f_1\), whereas the old first path contains
+the edge-node \(f_1\).  Each \(L_i\) is a prefix of the corresponding old
+path, so no length increases and the first length decreases strictly.
+Consequently
+\[
+ |L_1|+|L_2|+|L_3|<|P_1|+|P_2|+|P_3|,
+\]
+which is exactly the asserted strict inequality of counterexample
+measures.
+\end{proof}
