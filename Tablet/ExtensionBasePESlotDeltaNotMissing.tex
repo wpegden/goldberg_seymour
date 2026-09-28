@@ -1,0 +1,46 @@
+\begin{helper}[A PE delta color is present before its slot]
+Let \(G\) be a finite loopless multigraph with distinguished edge \(e_0\),
+let \(k\) be fixed, and let \(\mathcal S\) be a certified Tashkinov series.
+For a noninitial Lean index \(r\), suppose the positive slot
+\(r.\mathsf{succ}\) has kind PE and its exact delta field is the color
+\(\delta\).  Then
+\[
+ \delta\notin
+ \overline{\varphi_r}\bigl(T_{r+1}\bigr),
+\]
+where, in the Lean indexing of the series, \(\varphi_r\) is the coloring at
+\(r.\mathsf{castSucc}\) and \(T_{r+1}\) is the tree at
+\(r.\mathsf{succ}.\mathsf{castSucc}\).
+\end{helper}
+\begin{proof}
+Eliminate the certificate at \(r.\mathsf{succ}\) using
+\noderef{TashkinovSeries}.  The kind equality rules out the initial, SE, and
+RE constructors of \noderef{TashkinovSeriesStep}, so the certificate is PE.
+Write \(\pi\) for its maximum-defective selected coloring and \(f\) for its
+selected exact edge identity.  The PE fields and
+\noderef{MaximumDefectiveChoice} give the following facts: the preceding
+coloring \(\varphi_r\) and \(\pi\) are proper and leave exactly \(e_0\)
+uncolored; \(\pi\) is stable relative to \(\varphi_r\); the preceding tree
+is closed under \(\varphi_r\); the selected vertex belongs to that tree;
+\(f\) is incident with the selected vertex and is a defective boundary edge;
+and \(\pi(f)=\delta\).  The exact delta-field equality identifies the
+choice color with the displayed color \(\delta\).
+
+Suppose instead that \(\delta\) is tree-missing under \(\varphi_r\).
+By \noderef{TreeMissingColors}, choose a tree vertex \(v\) missing
+\(\delta\).  The vertex clause of \noderef{StableColoring} says that the
+missing-color sets under \(\pi\) and \(\varphi_r\) agree at \(v\), so
+\(\delta\) is also tree-missing under \(\pi\).  The symmetric edge criterion
+in \noderef{sc1}, applied to the two proper exactly-one-uncolored colorings,
+therefore fixes the incident edge \(f\): its \(\pi\)-color lies in the
+controlling tree-missing set, hence
+\(\varphi_r(f)=\pi(f)=\delta\).
+
+Expanding \noderef{DefectiveEdge} and
+\noderef{BoundaryColorEdges} shows that the same exact identity \(f\) lies
+in the uncolored boundary set \noderef{BoundaryEdges} of the preceding tree.
+Thus \(f\) is a boundary edge colored \(\delta\) under \(\varphi_r\), while
+the inside vertex \(v\) misses \(\delta\).  This contradicts the preceding
+closedness condition \noderef{ColoredVertexSetClosed}.  Hence \(\delta\) is
+not tree-missing before its PE slot.
+\end{proof}

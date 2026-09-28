@@ -1,0 +1,73 @@
+\begin{helper}[Transport from the least active slot]
+Let \(G,e_0,k,T\), a generating coloring, and an ETT be fixed.  Let \(q\)
+be the last noninitial Lean index, with \(q+1\) equal to the number of
+rounds, and assume slot \(q.\mathsf{succ}\) is a PE whose exact chosen vertex
+is a terminal support vertex \(v_n\in V(T)\).  Let \(jSlot\) satisfy
+\[
+ jSlot+1=m(v_n),
+\]
+where \(m\) is \noderef{ETTFirstAppearanceIndex}.  Put
+\(L=\noderef{ExtensionBaseActiveIndices}\).
+
+Assume that whenever \(s,t\in L\), \(s\le t\), their exact chosen vertices
+belong to \(V(T)\), and the exact delta field at \(t\) is \(\delta_t\), one
+has
+\[
+ \delta_t\notin\overline{\varphi_s}(T_{s+1}).               \tag{1}
+\]
+Then every \(t\in L\), with exact chosen vertex in \(V(T)\) and exact delta
+field \(\delta_t\), satisfies
+\[
+ \delta_t\notin
+ \overline{\varphi_{jSlot}}(T_{jSlot+1}).                   \tag{2}
+\]
+The quantified final-tree membership proofs in (1) and (2) are the same
+dependent witnesses appearing in the Lean statement.
+\end{helper}
+\begin{proof}
+By \noderef{ExtensionRulesPEFirstAppearanceBound}, the first-appearance
+index of the terminal support is at most \(q+1\).  Together with the exact
+terminal kind and chosen-vertex equations, this proves directly from
+\noderef{ExtensionBaseActiveIndices} that \(q\in L\).  Thus \(L\) is a
+nonempty finite set.  Let \(s_0\) be its least Lean index.  For a fixed
+\(t\in L\), leastness gives \(s_0\le t\), and hypothesis (1), instantiated
+with the exact chosen vertices and delta field, gives
+\[
+ \delta_t\notin\overline{\varphi_{s_0}}(T_{s_0+1}).         \tag{3}
+\]
+
+Membership of \(s_0\) in \(L\), together with
+\(jSlot+1=m(v_n)\), implies \(jSlot\le s_0\).  If equality holds, the
+coloring and tree indices in (2) and (3) are definitionally the same, and
+the result follows.
+
+Assume now that \(jSlot<s_0\), and let \(x\) be any vertex of the displayed
+tree at \(jSlot\).  Iterating the ordered-extension fields of
+\noderef{TashkinovSeriesStep}, followed by the terminal initial-segment field
+of \noderef{ExtendedTashkinovTree}, puts \(x\) in \(V(T)\).  Unfold the
+finite minimum in \noderef{ETTFirstAppearanceIndex}.  The ladder entry at
+\(jSlot\) is a candidate containing \(x\), so
+\[
+                         m(x)\le jSlot+1.                    \tag{4}
+\]
+
+There is no index \(r\) with \(jSlot\le r<s_0\) whose positive slot is PE
+and whose exact chosen vertex is \(x\).  Otherwise (4) and
+\(jSlot+1=m(v_n)\) verify the first-appearance clause in the definition of
+\(L\); the remaining clauses are the assumed PE kind and exact chosen-vertex
+equations.  Hence \(r\in L\), contradicting the leastness of \(s_0\).
+
+Let \(b=s_0-1\).  Apply \noderef{HkuUnsupportedVertexColors} to \(x\) on
+the full interval from \(jSlot\) through \(b\).  The preceding paragraph is
+exactly its unsupported-vertex premise, and it yields
+\[
+ \overline{\varphi_{jSlot}}(x)
+   =\overline{\varphi_{s_0}}(x).                             \tag{5}
+\]
+If \(\delta_t\) were tree-missing at the displayed tree for \(jSlot\),
+\noderef{TreeMissingColors} would supply such a vertex \(x\) missing it.
+Equation (5) preserves that missing color, while the iterated ordered
+initial segments put \(x\) in the displayed tree for \(s_0\).  Thus
+\(\delta_t\) would be tree-missing there, contradicting (3).  This proves
+(2).
+\end{proof}

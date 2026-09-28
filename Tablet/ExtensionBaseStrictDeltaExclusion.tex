@@ -1,0 +1,113 @@
+\begin{helper}[Strict active-slot delta exclusion]
+Let \(G,e_0,k,T\), the generating coloring, and the ETT be as in
+Extension-base Part I.  Fix the last noninitial Lean index \(q\), with
+\(q+1\) equal to the number of rounds, and assume its positive slot is a PE
+whose exact chosen vertex is a fixed terminal support vertex in \(V(T)\).
+Assume that every displayed tree at an index \(r<q\) is elementary under its
+preceding displayed coloring.  Also assume the following lower-rung
+maximum-defective order assertion: whenever \(a<r\), \(\sigma\) is a proper
+exactly-one-uncolored coloring stable at the displayed tree for \(r\),
+\(\delta\) is defective there, and \(v\) is a \(\delta\)-boundary vertex
+having an earlier \(\delta\)-boundary vertex, then, if \(v\in V(T)\), its
+first-appearance index is at most \(a+1\), and slot \(a.\mathsf{succ}\) is
+PE or SE with exact chosen vertex \(v_a\), one has
+\(v=v_a\) or \(v\prec v_a\) in that displayed tree.
+
+Let \(s<t\) be two members of
+\(L=\noderef{ExtensionBaseActiveIndices}\), with exact chosen vertices
+\(v_s,v_t\in V(T)\), and suppose the exact delta field at slot
+\(t.\mathsf{succ}\) is \(\delta_t\).  Then
+\[
+ \delta_t\notin
+ \overline{\varphi_s}\bigl(T_{s+1}\bigr).
+\]
+All edges in this statement and proof are individual edge identities, so
+parallel edges are never identified.
+\end{helper}
+\begin{proof}
+Suppose that \(\delta_t\) is missing at a vertex \(u\) of the displayed tree
+at \(s\), using \noderef{TreeMissingColors}.  Since \(s<t\le q\), the
+elementarity hypothesis and \noderef{ColoredVertexSetElementary} imply that
+every other vertex \(x\) of this tree has \(\delta_t\) present.  By
+\noderef{MissingColors} and \noderef{PresentColors}, choose an exact edge
+identity \(f_x\) incident with \(x\) and colored \(\delta_t\) by the
+coloring at \(s\).
+
+Membership of \(s\) in the active set forces its certificate to be PE.  Its
+preceding-closed field, together with the missing witness \(u\), says that
+\(f_x\) cannot be a boundary edge.  Since \(f_x\) is incident with the
+inside vertex \(x\), the endpoint definitions \noderef{Incident} and
+\noderef{BoundaryEdges} then put every endpoint of this same identity inside
+the tree; hence \(f_x\) is in \noderef{InternalEdges}.  Apply
+\noderef{SameColorSeriesPreserved} from \(s\) through the slot immediately
+before \(t\).  Its internal-edge clause preserves the exact equation
+\(\varphi_t(f_x)=\delta_t\).  Iterating both inclusions of
+\noderef{HkuMissingStoredMonotone} over the same interval puts
+\(\delta_t\) in the union of the missing and stored colors at the displayed
+tree for \(t\).
+
+Eliminate the PE certificate at \(t\).  Let \(\pi\) be its selected coloring
+and \(\rho\) its second stable coloring.  The certified ordered extensions,
+expressed by \noderef{TreeSequenceInitialSegment}, include the tree at
+\(s\) in the tree at \(t\).  The edge clause of
+\noderef{StableColoring}, first for \(\pi\) relative to \(\varphi_t\) and
+then for \(\rho\) relative to \(\pi\) with \(\delta_t\) inserted in the
+controlling set, gives
+\[
+             \pi(f_x)=\rho(f_x)=\delta_t.                 \tag{1}
+\]
+Consequently \(x\) is not a \(\delta_t\)-boundary vertex under \(\rho\).
+Indeed, otherwise \noderef{BoundaryColorVertex} supplies an exact boundary
+identity \(g\) incident with \(x\) and colored \(\delta_t\).  The internal
+identity \(f_x\) is not a boundary identity, so \(g\ne f_x\).  These two
+distinct identities are adjacent by \noderef{AdjacentEdges}, and (1)
+contradicts the properness condition \noderef{IsProperEdgeColoring} for
+\(\rho\).  Thus every vertex of the old tree other than \(u\) is excluded
+from the \(\delta_t\)-boundary vertices under \(\rho\).                 \(\tag{2}\)
+
+Restrict the enlarged stability of \(\rho\) to the old stored set.  Its
+vertex clause is unchanged and its edge clause only loses controlling
+colors.  Compose this restricted relation with the selected coloring's
+stability by the transitivity clause of \noderef{sc2}.  Hence \(\rho\) is
+proper, leaves exactly \(e_0\) uncolored, and is stable relative to the
+preceding displayed coloring at slot \(t\), exactly as required by
+\noderef{MaximumDefectiveChoice}.
+
+The exact \(\delta_t\)-boundary-edge set is the same under \(\pi\) and
+\(\rho\).  Membership in \noderef{BoundaryEdges} is coloring-independent.
+For a boundary identity colored \(\delta_t\) under \(\pi\), the enlarged
+edge-stability clause fixes it under \(\rho\).  Conversely, the symmetric
+criterion \noderef{sc1} fixes a boundary identity colored \(\delta_t\)
+under \(\rho\).  Thus \noderef{BoundaryColorEdges} gives equality of the
+two finite sets.  Expanding \noderef{DefectiveEdge} for the selected exact
+edge shows that its defective color is precisely the recorded
+\(\delta_t\), by comparison with the stored equation on that edge.
+Therefore \noderef{DefectiveColor} supplies a second, distinct exact
+\(\delta_t\)-boundary identity \(g\) under \(\rho\).
+
+Choose its inside endpoint \(y\).  Then \(y\) and the selected vertex
+\(v_t\) are \(\delta_t\)-boundary vertices.  They are distinct, since if
+they coincided, the distinct identities \(g\) and the selected edge would
+be adjacent and have the same color, again contradicting properness.  The
+vertex \(y\) is defective under \(\rho\).  Maximality in
+\noderef{MaximumDefectiveChoice}, applied with the admissibility just
+proved, yields
+\[
+                    y\prec_{T_{t+1}}v_t.                    \tag{3}
+\]
+
+Apply \noderef{ExtensionBaseSupportOrder} with the stated lower-rung order
+hypothesis.  It gives \(v_t=v_s\) or \(v_t\prec_Tv_s\).  Iterating the
+ordered-extension fields of \noderef{TashkinovSeriesStep} and the terminal
+segment field of \noderef{ExtendedTashkinovTree} shows that both displayed
+trees are ordered initial segments of \(T\).  The entrywise prefix equations
+preserve \noderef{TreeVertexOrder}; moreover, an earlier vertex of \(T\)
+than a vertex in an ordered prefix is itself in that prefix, by injectivity
+of the vertex sequence in \noderef{TreeSequence}.  From (3) it follows that
+both \(v_t\) and \(y\) lie in the displayed tree at \(s\).
+
+If \(u=v_t\), then the boundary vertex \(y\) belongs to the old tree and is
+different from \(u\), contradicting (2).  If \(u\ne v_t\), then the boundary
+vertex \(v_t\) itself contradicts (2).  The assumed missing witness cannot
+exist, proving the asserted strict-slot exclusion.
+\end{proof}
