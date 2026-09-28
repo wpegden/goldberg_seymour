@@ -19,61 +19,111 @@ before every step \(a\) of \(\mathcal R\),
 \]
 \end{helper}
 \begin{proof}
-Fix a support \(w\) that occurs in the trace. Since the trace enumerates
-\(L^*=\noderef{ExtensionBaseRestorationIndices}\), its slot \(t\) is active
-and does not belong to the support class of \(v_n\). The exact chosen-vertex
-field of the trace therefore implies \(w\ne v_n\). Conversely, every active
-slot supported at \(w\) lies outside the support class of \(v_n\), so the
-full class \(L(w)=\noderef{ExtensionBaseSupportClass}\) is contained in
-\(L^*\). List this nonempty class increasingly as
+Fix a support \(w\) which occurs in the trace.  A trace slot supported at
+\(w\) belongs to
+\(L^*=\noderef{ExtensionBaseRestorationIndices}\), hence is active but is not
+in the support class of \(v_n\).  By the exact chosen-vertex field in
+\noderef{ExtensionBaseRestorationTrace}, this implies \(w\ne v_n\).
+Conversely, every active slot supported at \(w\) is outside the support class
+of \(v_n\).  Thus the full class
+\(L(w)=\noderef{ExtensionBaseSupportClass}\) is a nonempty subset of \(L^*\).
+Write its members, in increasing order, as
 \[
-                         i_0<i_1<\cdots<i_p.
+                         i_0<i_1<\cdots<i_p,          \tag{1}
 \]
-Membership in \(L^*\), expanded through
-\noderef{ExtensionBaseActiveIndices}, says that each positive certified slot
-has PE kind. Inspect its certificate in \noderef{TashkinovSeries}. The
-initial, SE, and RE constructors of \noderef{TashkinovSeriesStep} are
-excluded by the positive index and exact PE-kind field. In the PE constructor
-the stored set is the exact pair
-\(S_{i_b}=\{\gamma_{i_b},\delta_{i_b}\}\). Also \(i_b\ne q\): otherwise the
-exact chosen-vertex fields would give \(w=v_n\). Initial strong
-interchangeability, expanded using \noderef{ETTStrongInterchangeable}, hence
-gives \(\gamma_{i_b}\ne\delta_{i_b}\).
+where \(p\) is allowed to be zero.
 
-Apply (A4) to the greatest member \(i_p\). It makes
-\(\delta_{i_p}\) missing at \(w\), and it makes every other color of the
-union of the stored pairs present there, by the complementary definitions
-\noderef{MissingColors} and \noderef{PresentColors}. In particular every
-\(\gamma_{i_b}\) is present. For \(b=p\), this follows from
-\(\gamma_{i_p}\ne\delta_{i_p}\). For \(b<p\), law (O) either makes
-\(S_{i_b}\) disjoint from \(S_{i_p}\), or, if they are consecutive in the
-class, identifies their intersection with
-\(\{\delta_{i_b}\}=\{\gamma_{i_p}\}\); in either event
-\(\gamma_{i_b}\ne\delta_{i_p}\). Applying (O) to each consecutive pair also
-gives
+By \noderef{ExtensionBaseActiveIndices}, every \(i_b\) is a positive slot
+whose exact kind is PE.  Inspect the certificate supplied by
+\noderef{TashkinovSeries}.  The kind field excludes the initial, SE, and RE
+constructors of \noderef{TashkinovSeriesStep}; its PE constructor gives
 \[
-                 \gamma_{i_{b+1}}=\delta_{i_b}
-                 \qquad(0\le b<p).                 \tag{1}
+                    S_{i_b}=\{\gamma_{i_b},\delta_{i_b}\}.
+                                                        \tag{2}
+\]
+Moreover \(i_b\ne q\), since otherwise the exact chosen-vertex fields would
+give \(w=v_n\).  The assumed initial strong interchangeability, expanded by
+\noderef{ETTStrongInterchangeable}, therefore yields
+\[
+                    \gamma_{i_b}\ne\delta_{i_b}.       \tag{3}
+\]
+For consecutive members of (1), there is no member of \(L(w)\) strictly
+between them.  Applying (O), then using (2), gives
+\[
+              \gamma_{i_{b+1}}=\delta_{i_b}
+              \qquad(0\le b<p).                       \tag{4}
 \]
 
-The trace processes the members of this class in decreasing order. Before
-processing \(i_p\), the preceding paragraph supplies the claimed missing and
-present colors. Every incident edge whose color is
-\(\gamma_{i_p}\) lies in the two-color component rooted at \(w\), while no
-incident edge has color \(\delta_{i_p}\). The transition formula in
-\noderef{ExtensionBaseRestorationTrace}, expanded by
-\noderef{TwoColorComponentSwap}, therefore changes every such
-\(\gamma_{i_p}\)-edge to \(\delta_{i_p}\) and creates no new
-\(\gamma_{i_p}\)-edge at \(w\). Consequently
-\(\gamma_{i_p}=\delta_{i_{p-1}}\) is missing after the switch. Law (O) says
-that the switched pair meets the next pair only in this delta color, so the
-incident edge witnessing that \(\gamma_{i_{p-1}}\) is present is fixed.
-Repeating the argument down (1) proves the two assertions before each step
-supported at \(w\).
+Apply (A4) to the greatest member \(i_p\).  It says that
+\(\delta_{i_p}\) is missing at \(w\) under \(\sigma_n\), while every other
+color in \(\bigcup_b S_{i_b}\) is not missing there.  The complementary
+definitions \noderef{MissingColors} and \noderef{PresentColors} make each
+such other color present at \(w\).  In particular, every
+\(\gamma_{i_b}\) is present.  Indeed, for \(b=p\) this follows from (3).
+For \(b<p\), if \(\gamma_{i_b}=\delta_{i_p}\), that color would belong to
+\(S_{i_b}\cap S_{i_p}\).  Law (O) makes this intersection empty when the two
+indices are not consecutive, and makes it
+\(\{\delta_{i_b}\}=\{\gamma_{i_p}\}\) when they are consecutive.  The
+latter alternative would give
+\(\gamma_{i_b}=\delta_{i_b}\), contrary to (3).  Hence
+\(\gamma_{i_b}\ne\delta_{i_p}\) in all cases.
 
-Finally, a switch belonging to a different support class has a color pair
-disjoint from every pair in \(L(w)\), by (O). Its transition therefore fixes
-all edges whose colors occur in the preceding argument. Thus intervening
-steps from other support classes do not alter either assertion. Since every
-trace slot has some support, the conclusion holds for every step \(a\).
+The decreasing-order and enumeration clauses of
+\noderef{ExtensionBaseRestorationTrace} show that, before the trace reaches
+\(i_p\), it has processed only larger slots from other support classes.
+If such a slot is \(s\), then (O) makes \(S_s\) disjoint from every
+\(S_{i_b}\), because its support is not \(w\).  By
+\noderef{TwoColorComponentSwap}, the switch at \(s\) changes only its two
+colors.  It therefore neither changes nor creates any edge at \(w\) whose
+color lies in a pair \(S_{i_b}\).  Consequently, immediately before the
+step at \(i_p\), the color \(\delta_{i_p}\) is still missing at \(w\), and
+every \(\gamma_{i_b}\), in particular \(\gamma_{i_p}\), is still present.
+
+If \(p=0\), these are precisely the two assertions needed before the sole
+class step \(i_0\), so this class is finished.  Suppose now that \(p>0\).
+More generally, consider a descent position \(b>0\), and suppose that just
+before the step at \(i_b\), the color \(\delta_{i_b}\) is missing at \(w\)
+and every \(\gamma_{i_c}\) with \(c\le b\) is present there.  This stronger
+induction hypothesis holds at \(b=p\) by the preceding paragraph.  Let
+\(f\) be any edge incident with \(w\) and colored \(\gamma_{i_b}\).  In the graph
+\noderef{TwoColorIncidenceGraph}, the edge-node of \(f\) is adjacent to the
+vertex-node \(w\), since \(f\) is incident with \(w\) and its color is one
+of \(\gamma_{i_b},\delta_{i_b}\).  Therefore the definition
+\noderef{TwoColorComponent} places that edge-node in the connected component
+rooted at \(w\).  The same argument would place every incident
+\(\delta_{i_b}\)-edge in that component, but no such edge exists because
+\(\delta_{i_b}\) is missing.
+
+The trace transition at \(i_b\), together with
+\noderef{TwoColorComponentSwap}, now changes every incident
+\(\gamma_{i_b}\)-edge to \(\delta_{i_b}\), changes no incident
+\(\delta_{i_b}\)-edge to \(\gamma_{i_b}\), and leaves all other incident
+edge colors unchanged.  Hence \(\gamma_{i_b}\) is missing at \(w\) after
+the switch.  By (4), used only here with \(b>0\), this color is
+\(\delta_{i_{b-1}}\).
+
+It remains to preserve the lower gamma witnesses.  For the consecutive pair,
+(O) says
+\[
+ S_{i_{b-1}}\cap S_{i_b}
+   =\{\delta_{i_{b-1}}\}=\{\gamma_{i_b}\}.
+\]
+Together with (3), this shows that
+\(\gamma_{i_{b-1}}\notin S_{i_b}\).  Thus any incident edge witnessing the
+presence of \(\gamma_{i_{b-1}}\) is fixed by the switch at \(i_b\).  If
+\(c<b-1\), the indices \(i_c,i_b\) are not consecutive in their support
+class, so (O) makes \(S_{i_c}\cap S_{i_b}\) empty; in particular the witness
+for \(\gamma_{i_c}\) is fixed as well.  Hence every
+\(\gamma_{i_c}\) with \(c<b\) remains present after the switch.
+
+Between the steps at \(i_b\) and \(i_{b-1}\), decreasing order permits only
+slots from other support classes.  Their stored pairs are disjoint from
+every \(S_{i_c}\) by (O), so the same
+\noderef{TwoColorComponentSwap} definition shows that they preserve both
+the missing color \(\delta_{i_{b-1}}\) and all the fixed lower gamma
+witnesses.  The stronger induction hypothesis, and therefore the two desired
+assertions, holds just before the step at \(i_{b-1}\).  Starting at \(b=p\)
+and descending proves them before every step supported at \(w\).  Since every
+trace step has its stored exact support, applying this argument to that
+support proves the claim for every trace index \(a\).
 \end{proof}

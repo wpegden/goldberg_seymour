@@ -7,7 +7,9 @@ import Tablet.MissingColors
 import Tablet.PresentColors
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorIncidenceGraph
 
 -- [TABLET NODE: ExtensionBaseAlgorithmAColorState]
 theorem ExtensionBaseAlgorithmAColorState {V E : Type*}
