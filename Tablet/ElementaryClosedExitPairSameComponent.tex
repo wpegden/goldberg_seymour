@@ -1,0 +1,94 @@
+\begin{helper}[Third exit when the supplied outside ends share a component]
+Let $G=(V,E)$ be a finite loopless multigraph whose elements of $E$ are
+exact edge identities, let $T$ be a tree-sequence, and let $\varphi$ be a
+proper partial $k$-edge-coloring.  Suppose that $V(T)$ is elementary.
+Let $a,b\in[k]$ be distinct, with $a$ missing on $T$, the singleton
+$\{a\}$ closed on $T$, and $b$ not missing on $T$.  Let $P_1,P_2$ be
+support-disjoint $T$-exit paths with outside ends $a_1\ne a_2$ and tree
+ends $b_1\ne b_2$.  If the full $(a,b)$-components through $a_1$ and
+$a_2$ are equal, then there are a third outside end $a_3$, a third tree
+end $b_3$, a $T$-exit path $P_3$ from $a_3$ to $b_3$, and an exact edge
+$f_3$ such that $P_3$ is support-disjoint from both supplied paths, its
+outside and tree ends differ respectively from both preceding ends, and
+$f_3$ lies on $P_3$, is incident with $b_3$, and is a $b$-colored
+boundary edge of $V(T)$.
+\end{helper}
+\begin{proof}
+Put $X=V(T)$ by \noderef{TreeSequenceVertexSet}, and denote the common
+full \noderef{TwoColorComponent} through $a_1,a_2$ by $C$.  For each
+$i$, \noderef{TreeExitPath} says that $a_i\notin X$, at least one of
+$a,b$ is missing at $a_i$, and $P_i$ has length at least two.  Thus
+$a_i$ has at least one neighbor in \noderef{TwoColorIncidenceGraph}.  If
+$a$ is missing, all its neighbors are exact $b$-colored incident edges;
+if $b$ is missing, all are $a$-colored.  In either case, two distinct
+neighbors would be distinct adjacent edges of the same color, contrary
+to \noderef{AdjacentEdges} and \noderef{IsProperEdgeColoring}.  Hence
+each $a_i$ has degree exactly one in $C$.
+
+The edge-nodes supplied by the exit paths and either degree-one node make
+$C$ a \noderef{TwoColorNontrivialPathComponent} through
+\noderef{TwoColorPathComponent}.  By
+\noderef{TwoColorComponentSpanningPath}, $C$ has a spanning simple path.
+Each degree-one node $a_i$ must be an end of that path, since an internal
+occurrence has two distinct path neighbors.  As $a_1\ne a_2$, they are
+the two ends.
+There are no additional component adjacencies: an internal extra
+adjacency gives degree at least three, contradicting
+\noderef{TwoColorIncidenceDegreeAtMostTwo}; an adjacency between the two
+ends would give each $a_i$ a second neighbor.  Thus the full component is
+exactly a finite nontrivial simple path with ends $a_1,a_2$.
+
+The hypothesis $a\in\overline\varphi(T)$ and the union definition
+\noderef{TreeMissingColors} supply $x\in X$ with
+$a\in\noderef{MissingColors}(G,\varphi,x)$.  This vertex is unique: if a
+distinct vertex of $X$ also missed $a$, the two missing-color sets would
+intersect, contrary to \noderef{ColoredVertexSetElementary}.  Since $b$
+is not tree-missing, $b$ is not missing at $x$; by the complementary
+definition \noderef{PresentColors}, choose an exact $b$-colored edge $g$
+incident with $x$.  It is a neighbor of the vertex-node $x$ in the
+two-color incidence graph.  Because $a$ is missing there, every neighbor
+has color $b$, and properness allows at most one.  Thus $x$ has degree
+exactly one in its component $C_x$.  The edge-node $g$ makes $C_x$
+nontrivial, so the same
+\noderef{TwoColorPathComponent},
+\noderef{TwoColorNontrivialPathComponent},
+\noderef{TwoColorComponentSpanningPath}, and degree-bound argument shows
+that $C_x$ is itself exactly a finite nontrivial simple path with $x$ as
+one end.
+
+The component $C_x$ is not $C$.  Otherwise the one simple path $C$ would
+have the three distinct degree-one vertex-nodes $a_1,a_2,x$: the first
+two are distinct by hypothesis, and $x$ is in $X$ while the $a_i$ are
+outside by their exit-path clauses.  A nontrivial simple path has only
+its two ends of degree one, a contradiction.  Therefore
+\noderef{TwoColorComponentsDisjoint} makes $C_x$ disjoint from $C$.
+
+Let $y$ be the other end of the full simple path $C_x$.  It is a
+vertex-node: an edge-node represents a colored exact edge, and its two
+endpoint entries are distinct by \noderef{LooplessMultigraph}; through
+\noderef{Incident} they give two distinct incidence-graph neighbors.
+The vertex $y$ misses $a$ or $b$, since otherwise
+\noderef{PresentColors} would give distinct incident edges of the two
+colors and hence degree at least two.  Also $y\ne x$ because the path is
+nontrivial.  It follows that $y\notin X$.  Indeed, no vertex of $X$
+misses $b$ by the hypothesis on \noderef{TreeMissingColors}, while if
+$y\in X$ missed $a$, it would contradict the uniqueness of $x$.
+
+Orient the full path $C_x$ from $y$ toward $x$, stop at the first vertex
+$b_3$ belonging to $X$, and call that initial portion $P_3$; the first
+contact exists because $x\in X$.  Put $a_3=y$.  The portion $P_3$ is
+simple, begins outside $X$, ends in $X$, and contains no other tree
+vertex.  Its initial end misses $a$ or $b$.  Its endpoints are distinct
+vertex-nodes, so bipartiteness of \noderef{TwoColorIncidenceGraph} makes
+its length at least two.  Thus every clause of
+\noderef{TreeExitPath} holds.
+
+The supports of $P_1,P_2$ lie in $C$, whereas the support of $P_3$ lies
+in $C_x$.  Component disjointness therefore makes $P_3$ support-disjoint
+from both supplied paths.  It also gives $a_3\ne a_1,a_2$ and
+$b_3\ne b_1,b_2$.  Finally apply
+\noderef{ClosedColorExitPathBoundaryEdge} to $P_3$.  It gives an exact
+edge $f_3$ on $P_3$, incident with $b_3$, which lies in the $b$-colored
+boundary of $X$.  This proves every asserted property of the third exit
+leg.
+\end{proof}

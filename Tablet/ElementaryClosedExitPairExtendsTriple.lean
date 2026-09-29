@@ -2,6 +2,8 @@ import Tablet.AdjacentEdges
 import Tablet.BoundaryColorEdges
 import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetElementary
+import Tablet.ElementaryClosedExitPairDistinctComponents
+import Tablet.ElementaryClosedExitPairSameComponent
 import Tablet.Incident
 import Tablet.IsProperEdgeColoring
 import Tablet.LooplessMultigraph
@@ -51,4 +53,12 @@ lemma ElementaryClosedExitPairExtendsTriple {V E : Type*}
       f3 ∈ BoundaryColorEdges G phi (TreeSequenceVertexSet T) b ∧
       Incident G b3 f3 ∧ Sum.inr f3 ∈ P3.support := by
 -- BODY
-  sorry
+  by_cases hcomponents :
+      TwoColorComponent G phi a b (Sum.inl a1) =
+        TwoColorComponent G phi a b (Sum.inl a2)
+  · exact ElementaryClosedExitPairSameComponent G T phi hproper helementary
+      a b hne hamissing hclosed hbpresent a1 b1 a2 b2 P1 P2 hP1 hP2
+      hdisjoint haends hbends hcomponents
+  · exact ElementaryClosedExitPairDistinctComponents G T phi hproper
+      helementary a b hne hamissing hclosed hbpresent a1 b1 a2 b2 P1 P2
+      hP1 hP2 hdisjoint haends hbends hcomponents

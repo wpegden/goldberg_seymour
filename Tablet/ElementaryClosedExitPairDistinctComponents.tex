@@ -1,0 +1,111 @@
+\begin{helper}[Third exit when the supplied exits lie in distinct components]
+Let $G=(V,E)$ be a finite loopless multigraph whose elements of $E$ are
+exact edge identities, let $T$ be a tree-sequence, and let $\varphi$ be a
+proper partial $k$-edge-coloring.  Suppose that $V(T)$ is elementary.
+Let $a,b\in[k]$ be distinct, with $a$ missing on $T$, the singleton
+$\{a\}$ closed on $T$, and $b$ not missing on $T$.  Let $P_1,P_2$ be
+support-disjoint $T$-exit paths with outside ends $a_1\ne a_2$ and tree
+ends $b_1\ne b_2$.  If the full $(a,b)$-components through $a_1$ and
+$a_2$ are distinct, then there are a third outside end $a_3$, a third
+tree end $b_3$, a $T$-exit path $P_3$ from $a_3$ to $b_3$, and an exact
+edge $f_3$ such that $P_3$ is support-disjoint from both supplied paths,
+its outside and tree ends differ respectively from both preceding ends,
+and $f_3$ lies on $P_3$, is incident with $b_3$, and is a $b$-colored
+boundary edge of $V(T)$.
+\end{helper}
+\begin{proof}
+Put $X=V(T)$ by \noderef{TreeSequenceVertexSet}, and let $C_i$ be the
+full \noderef{TwoColorComponent} through the vertex-node $a_i$.  We first
+record the full-component geometry forced by either supplied exit path.
+The clauses of \noderef{TreeExitPath} say that $a_i\notin X$, that at
+least one of $a,b$ is missing at $a_i$, and that $P_i$ has length at
+least two.  Thus $P_i$ supplies a neighbor of $a_i$ in
+\noderef{TwoColorIncidenceGraph}.  If $a$ is missing at $a_i$, every such
+neighbor is the identity of a $b$-colored edge incident with $a_i$; two
+distinct neighbors would be distinct adjacent edges of the same color,
+contrary to \noderef{AdjacentEdges} and
+\noderef{IsProperEdgeColoring}.  The same argument with the colors
+reversed applies when $b$ is missing.  Hence $a_i$ has exactly one
+neighbor in its full component.
+
+The path $P_i$ supplies an edge-node in $C_i$, while this degree-one
+vertex-node supplies the leaf in \noderef{TwoColorPathComponent}; hence
+$C_i$ is a \noderef{TwoColorNontrivialPathComponent}.  Apply
+\noderef{TwoColorComponentSpanningPath}.  Its spanning walk is simple and
+contains every node of $C_i$.  The degree-one node $a_i$ must be an end
+of that path, since an internal occurrence has two distinct path
+neighbors.  By
+\noderef{TwoColorIncidenceDegreeAtMostTwo}, no internal node of the
+spanning path has an additional neighbor.  Nor can an end have an
+additional neighbor: a neighbor at a nonadjacent internal position would
+give degree at least three there, while an adjacency joining the two ends
+would give $a_i$ a second neighbor.  Consequently the full component, including all
+its adjacencies, is exactly a finite nontrivial simple path, with $a_i$ as
+one end.
+
+The other end is a vertex-node, say $c_i$.  Indeed, an edge-node of the
+two-color incidence graph represents a colored exact edge.  Its two
+endpoint entries are distinct by \noderef{LooplessMultigraph}, and the
+definition of \noderef{Incident} makes their vertex-nodes two distinct
+neighbors, so an edge-node cannot be an end.  Moreover $c_i$ misses $a$
+or $b$: if both colors were present there, \noderef{PresentColors} would
+supply distinct incident edges of the two colors and hence two distinct
+neighbors.  By the complementary definition \noderef{MissingColors},
+this proves the claimed missing-color alternative.
+
+Since $C_1\ne C_2$, \noderef{TwoColorComponentsDisjoint} makes the two
+full components disjoint.  Thus their four ends $a_1,c_1,a_2,c_2$ are
+pairwise distinct.  No vertex of $X$ misses $b$, because otherwise the
+union definition \noderef{TreeMissingColors} would put $b$ among the
+tree-missing colors.  Therefore, if $c_i\in X$, its endpoint
+missing-color alternative forces it to miss $a$.  At most one of
+$c_1,c_2$ can do so: two distinct vertices of $X$ missing $a$ contradict
+\noderef{ColoredVertexSetElementary}.  Hence at least one of $c_1,c_2$
+lies outside $X$.  Interchanging the labels $1,2$ in the following
+symmetric argument if necessary, assume $c_1\notin X$.
+
+Orient the full simple path $C_1$ from $c_1$ toward $a_1$, and let $b_3$
+be the first vertex on it which lies in $X$; such a vertex exists because
+$b_1\in X$ lies on the supplied path and hence in $C_1$.  Let $P_3$ be
+the initial portion ending at $b_3$, and put $a_3=c_1$.  This portion is
+simple, begins outside $X$, ends inside $X$, and has no other vertex of
+$X$.  Its first vertex misses $a$ or $b$ by the endpoint analysis above.
+Its endpoints are distinct vertex-nodes, and the incidence graph is
+bipartite between vertex-nodes and edge-nodes, so its length is at least
+two.  These are exactly all clauses of \noderef{TreeExitPath}.
+
+The component disjointness already makes $P_3$ support-disjoint from
+$P_2$.  It remains to compare $P_3$ with $P_1$ inside $C_1$.  Orient the
+full component path from $a_1$ to $c_1$.  The supplied path $P_1$ is its
+initial segment ending at $b_1$: starting at the degree-one node $a_1$,
+its first edge is forced; inductively, at every internal node the next
+edge is the unique component-path edge different from the preceding one,
+because there is no additional component adjacency.  Simplicity prevents
+backtracking.  Its endpoint is its first vertex in $X$ by
+\noderef{TreeExitPath}.  Similarly, $P_3$ is the terminal segment from
+$c_1$ through the first vertex of $X$ encountered in the reverse order.
+
+If these two segments met, their path-index intervals would force the
+reverse first contact $b_3$ to occur no later than the forward first
+contact $b_1$.  Then $b_3$ lies on $P_1$; the tree-intersection clause of
+\noderef{TreeExitPath} forces $b_3=b_1$.  Let $g_1,g_3$ be the exact
+edge-nodes immediately preceding this common vertex on $P_1,P_3$.
+They are distinct, since they occur on opposite sides of the common
+vertex in a simple path whose two initial ends differ.  The vertex before
+each $g_i$ lies outside $X$, while the common endpoint lies in $X$.
+Using \noderef{TwoColorIncidenceGraph}, \noderef{Incident}, and the
+loopless law, each $g_i$ is therefore an exact member of
+\noderef{BoundaryEdges}, colored either $a$ or $b$.  Closedness in
+\noderef{TreeColorSetClosed}, through the exact filter
+\noderef{BoundaryColorEdges}, excludes color $a$.  Thus $g_1,g_3$ are
+distinct $b$-colored edges incident with the same vertex.  They are
+adjacent by \noderef{AdjacentEdges}, contradicting properness.  Hence
+$P_1$ and $P_3$ are support-disjoint after all.
+
+Support disjointness gives $a_3\ne a_1$ and $b_3\ne b_1$, while full
+component disjointness gives $a_3\ne a_2$ and $b_3\ne b_2$.  Finally
+apply \noderef{ClosedColorExitPathBoundaryEdge} to $P_3$.  It supplies an
+exact edge $f_3$ in the support of $P_3$, incident with $b_3$, and lying
+in the $b$-colored boundary of $X$.  These are all the required
+conclusions.
+\end{proof}
