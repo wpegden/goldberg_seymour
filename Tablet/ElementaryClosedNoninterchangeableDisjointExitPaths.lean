@@ -10,6 +10,7 @@ import Tablet.PresentColors
 import Tablet.TreeColorSetClosed
 import Tablet.TreeExitPath
 import Tablet.TreeInterchangeable
+import Tablet.TreeMissingColors
 import Tablet.TreeSequenceVertexSet
 import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
