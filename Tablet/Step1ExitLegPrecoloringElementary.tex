@@ -1,0 +1,22 @@
+\begin{lemma}[Elementariness before the terminal certified step]
+Let $P$ be a Step 1 exit-leg presentation and let $X$ be its terminal
+ladder tree.  Assume that every positive-rung maximum ETT of rung number
+strictly smaller than that of $P$ has elementary terminal vertex set
+under its generating coloring.  Then $V(X)$ is elementary under the
+coloring immediately preceding the terminal certified step of $P$.
+\end{lemma}
+\begin{proof}
+Let $n$ be the positive rung number of the ETT in $P$.  If $n=1$, the
+pre-terminal coloring is the initial series coloring and $X$ is the
+first ladder tree.  The first conclusion of
+\noderef{TechnicalTheoremBase}, applied to the certified series of $P$,
+states exactly that this vertex set is elementary under that coloring.
+
+Suppose $n>1$.  Apply \noderef{CertifiedETTPredecessor} to the maximum
+ETT in $P$.  It supplies a maximum ETT of rung number $n-1$, with exact
+terminal tree $X$ and generating coloring equal to the coloring before
+the terminal certified step.  Its rung number is positive and strictly
+less than $n$.  The assumed lower-rung elementary assertion applied to
+this predecessor therefore gives precisely the desired elementariness
+of $V(X)$.
+\end{proof}

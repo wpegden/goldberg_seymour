@@ -1,0 +1,50 @@
+\begin{lemma}[The zero-divider non-PE predecessor color]
+Let $P$ be a Step 1 exit-leg presentation whose good hierarchy has zero
+dividers, and suppose that the terminal certified extension kind is not
+PE.  Then there is a color $\theta$, different from the two exit-leg
+colors, which is missing and singleton-closed on the last starred stage
+and singleton-closed on the terminal tree of $P$.
+\end{lemma}
+\begin{proof}
+Write $X$ for the terminal ladder tree and $A$ for the last starred
+stage.  The ETT generating-coloring field identifies the presentation
+coloring with the last series coloring.  The rung number is positive,
+so the final certificate in \noderef{TashkinovSeries} is a noninitial
+constructor of \noderef{TashkinovSeriesStep}.  Under the non-PE
+hypothesis it is RE or SE.
+
+In the RE case, `currentColoring' identifies the last coloring with the
+preceding coloring, and `previousClosed' says that every color missing
+on $X$ is closed there.  In the SE case, let $\pi$ be the preceding
+coloring and $\rho$ the selected last coloring.  The SE choice supplies
+properness, exact-one-uncoloredness, and stability from $\pi$ to $\rho$
+on $X$.  Symmetry in \noderef{sc2} gives stability from $\rho$ to
+$\pi$.  Hence \noderef{StableColoring} identifies their missing-color
+sets at every vertex of $X$ and fixes every boundary edge whose color is
+missing on $X$.  If a color missing under $\rho$ colored a
+$\rho$-boundary edge, the same edge would have that color under $\pi$,
+contradicting `previousClosed'.  Thus every color missing on $X$ is
+singleton-closed there under the presentation coloring in both cases.
+
+By \noderef{HierarchyStoredColorsCardinality}, the internal stored set
+at index zero has size at most the rung number.  The `twoColors' and
+`disjointPairs' fields of \noderef{GoodHierarchy} therefore bound the
+union of its Gamma pairs by twice the rung number.  The large bound in
+\noderef{Step1ExitLegPresentation} is $2n+11$, so after deleting that
+union and the two exit-leg colors at least nine colors remain.  Choose
+one and call it $\theta$.
+
+The `nonparallel' field of \noderef{HierarchyBase} identifies its core
+with $X$, and at divider count zero
+\noderef{HierarchyStarredStage} identifies $A$ with this core.  Hence
+$\theta$ is missing and closed on $A$.  The hierarchy inclusions put
+$X$ inside the terminal tree, so $\theta$ is missing there as well.
+Moreover, subtracting the larger terminal-tree missing set from the
+common raw stored set shows directly from
+\noderef{HierarchyTerminalStoredColors} and
+\noderef{HierarchyStoredColorsAt} that the terminal stored set is a
+subset of the internal set at index zero.  Thus $\theta$ avoids the
+terminal Gamma union.  The terminal minus-closure field of the
+presentation, unfolded with \noderef{TreeColorSetMinusClosed}, now says
+that $\theta$ is closed on the terminal tree.
+\end{proof}

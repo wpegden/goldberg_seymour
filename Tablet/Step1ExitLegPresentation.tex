@@ -1,0 +1,23 @@
+\begin{definition}
+Fix a finite loopless multigraph $G$, a distinguished edge $e_0$, and
+integers $n,q$.  A \emph{Step 1 exit-leg presentation of size $(n,q)$}
+consists of an arbitrary certified input coloring, a proper generating
+coloring $\psi$ leaving exactly $e_0$ uncolored, and an $n$-rung maximum
+ETT $\mathcal U$ on an exact terminal tree $U$.  It also contains a
+hierarchy base and a good hierarchy $K$ having fewer than $q$ dividers,
+such that
+\[
+ 2n+11\leq |\overline\psi(X)|,
+ \qquad X=\mathcal U.\mathit{series.tree}(n),
+\]
+and $U$ is minus-closed for the union of the terminal stored-color set
+$D^K_{n,d+1}$, where $d=K.\mathit{dividerCount}$, through the terminal
+Gamma family $\Gamma^d$.
+
+Finally, it contains distinct colors $a,b$, with $a$ missing and
+singleton-closed on $U$, and two exact support-disjoint
+$(U,\psi,\{a,b\})$-exit paths $P_1,P_2$.  Their outside ends $a_1,a_2$
+and tree ends $b_1,b_2$ are distinct, the tree ends satisfy
+$b_1\prec b_2$, and the data retain exact $b$-colored boundary-edge
+identities $f_i$ lying on $P_i$ and incident with $b_i$ for $i=1,2$.
+\end{definition}

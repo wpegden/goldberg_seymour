@@ -1,0 +1,54 @@
+\begin{lemma}[The Step 1 exit-leg presentation family is nonempty]
+Let $\mathcal E$ be a maximum ETT with a proper generating coloring
+$\varphi$ leaving exactly $e_0$ uncolored, and let $H$ be a good
+hierarchy of $\mathcal E$.  Assume that every same-rung maximum ETT
+carrying a good hierarchy with fewer dividers than $H$ has elementary
+terminal vertex set, and assume the large terminal-ladder missing-color
+bound from the Step 1 setup.  If, at a positive hierarchy stage
+$H.\mathit{stage}(i+1)$, distinct colors $\alpha,\beta$ satisfy that
+$\alpha$ is missing and singleton-closed but the pair is not
+interchangeable, then the family of Step 1 exit-leg presentations of
+size $(\mathcal E.\mathit{rounds},H.\mathit{dividerCount})$ is nonempty.
+\end{lemma}
+\begin{proof}
+Put $r=i+1$.  Thus $1\leq r\leq H.\mathit{dividerCount}$, and apply
+\noderef{GoodHierarchyPrefixRepackage} at $r$.  It gives a maximum ETT
+$\mathcal U$ whose exact terminal tree is $U=H.\mathit{stage}(r)$, whose
+certified series and rung number are those of $\mathcal E$, and whose
+good hierarchy $K$ has $r-1$ dividers.  In particular
+$r-1<H.\mathit{dividerCount}$.  Equality of the certified series carries
+the assumed large bound to $\mathcal U$.
+
+The terminal conclusion of \noderef{GoodHierarchyPrefixRepackage} is
+minus-closure of $U$ for
+\[
+ \bigcup_{\eta\in D^H_{n,r}}\Gamma^{H,r-1}_\eta .
+\]
+This is the required terminal certificate for $K$.  Indeed, the retained
+series makes the raw stored-color set the same.  Since $r>0$,
+\noderef{HierarchyStarredStage} identifies the last starred stage used
+in $D^H_{n,r}$ with $H.\mathit{stage}(r)=U$.  Unfolding
+\noderef{HierarchyTerminalStoredColors} therefore identifies
+$D^H_{n,r}$ with the terminal stored-color set of $K$, and the last
+retained Gamma equality identifies the displayed Gamma family with the
+terminal Gamma family of $K$.
+
+The fewer-divider hypothesis applied to $\mathcal U,K$ makes $V(U)$
+elementary.  The hypotheses on $\alpha,\beta$ are exactly the missing,
+closed, and noninterchangeable hypotheses on $U$.  Hence
+\noderef{ElementaryClosedNoninterchangeableExitPair} gives two exact
+support-disjoint exit paths, distinct outside and tree ends, and exact
+$\beta$-colored boundary identities on the two paths incident with the
+tree ends.  Each tree end has a unique position because the vertex list
+in \noderef{TreeSequence} is injective.  The two positions are unequal,
+so exactly one of the strict orders holds; exchange the complete path,
+end, and edge packages if necessary.  By
+\noderef{TreeVertexOrder}, the resulting ends satisfy $b_1\prec b_2$.
+
+Take the retained input, $U,\varphi,\mathcal U$, its base and hierarchy,
+$a=\alpha,b=\beta$, and these ordered exit packages.  Properness and the
+one-uncolored condition are the original ones; the preceding paragraphs
+supply the same rung, maximum property, strict divider bound, large
+bound, terminal minus-closure, and every exit-leg field.  These are all
+fields of \noderef{Step1ExitLegPresentation}, proving nonemptiness.
+\end{proof}

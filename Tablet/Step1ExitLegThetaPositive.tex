@@ -1,0 +1,64 @@
+\begin{lemma}[The positive-divider predecessor color]
+Let $M$ be a Step 1 exit-leg minimum whose selected hierarchy has
+positive divider count $d$.  Then there is a color $\theta$, different
+from the two exit-leg colors, which is missing and singleton-closed on
+the last starred stage and singleton-closed on the selected terminal
+tree.
+\end{lemma}
+\begin{proof}
+Let $K$ be the selected hierarchy, put
+$B_-=K.\mathit{stage}(d-1)$ and
+$A=K.\mathit{stage}(d)$.  The latter is the last starred stage by
+\noderef{HierarchyStarredStage}.  Repeated use of the hierarchy's
+`nested' field gives inclusions from the terminal ladder tree $X$ through
+$B_-$ and $A$ to the selected terminal tree $U$.  Unfolding
+\noderef{TreeMissingColors} along these exact initial segments gives
+\[
+ \overline\psi(X)\subseteq\overline\psi(B_-)
+ \subseteq\overline\psi(A)\subseteq\overline\psi(U).       \tag{1}
+\]
+There is also an initial-segment inclusion from
+$K.\mathit{starred}(d-1)$ to $A$: it is `nested' when $d>1$ and
+`coreInsideFirst' when $d=1$.  Subtracting the corresponding nested
+missing sets from the common raw stored set in
+\noderef{HierarchyStoredColorsAt} gives
+$D^K_{n,d}\subseteq D^K_{n,d-1}$.
+
+Apply `twoColors' and `disjointPairs' from
+\noderef{GoodHierarchy} at index $d-1$ to the indices in
+$D^K_{n,d}$.  Together with
+\noderef{HierarchyStoredColorsCardinality}, this bounds
+\[
+ \left|\bigcup_{\eta\in D^K_{n,d}}\Gamma^{d-1}_\eta\right|
+ \leq 2n.                                                    \tag{2}
+\]
+The selected presentation has at least $2n+11$ colors missing on $X$.
+Using (1), (2), and deleting the two exit-leg colors, choose
+\[
+ \theta\in\overline\psi(B_-)
+ \setminus\left(\{a,b\}\cup
+   \bigcup_{\eta\in D^K_{n,d}}\Gamma^{d-1}_\eta\right).
+\]
+Then $\theta$ is missing on $A$.  The last `minusClosed' field of
+\noderef{GoodHierarchy}, unfolded via
+\noderef{TreeColorSetMinusClosed}, closes it on $A$.
+
+It remains to exclude $\theta$ from the terminal Gamma union, whose
+superscript is $d$.  The terminal stored set is contained in
+$D^K_{n,d}$: this follows by subtracting the larger terminal-tree missing
+set in \noderef{HierarchyTerminalStoredColors}.  Let $\eta_g$ be the
+unique refreshed index supplied by `uniqueRefresh'.  For every
+$\eta\ne\eta_g$, the Gamma pair at level $d$ equals the pair at level
+$d-1$, so the choice of $\theta$ excludes it.  Every color in the
+refreshed pair at $\eta_g$ is missing at a vertex of
+$V(A)\setminus V(K.\mathit{starred}(d-1))$.  On the other hand,
+$\theta$ is missing at a vertex of $B_-$, and every vertex of $B_-$ lies
+in that preceding starred stage.  The latter is equality for $d-1>0$;
+for $d=1$ it follows from the base-stage identity and the vertex-union
+clause of \noderef{OrderedTreeUnion}.  If $\theta$ belonged to the
+refreshed pair, these would be two distinct vertices of the selected
+terminal tree missing $\theta$, contradicting the `elementary' field of
+\noderef{Step1ExitLegMinimum}.  Hence $\theta$ avoids the full terminal
+Gamma union.  It is missing on $U$ by (1), so the selected terminal
+minus-closure certificate closes it on $U$.
+\end{proof}

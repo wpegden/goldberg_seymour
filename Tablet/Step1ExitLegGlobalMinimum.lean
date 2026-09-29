@@ -29,6 +29,12 @@ import Tablet.ParallelCommonMissingClosed
 import Tablet.StableColoring
 import Tablet.StableColoringBeforeVertex
 import Tablet.Step1ZeroDividerAnchor
+import Tablet.Step1ExitLegMinimumExists
+import Tablet.Step1ExitLegPrecoloringElementary
+import Tablet.Step1ExitLegPresentationExists
+import Tablet.Step1ExitLegThetaPositive
+import Tablet.Step1ExitLegThetaZeroNonparallel
+import Tablet.Step1ExitLegThetaZeroParallel
 import Tablet.TashkinovExtensionKind
 import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeries
@@ -316,4 +322,68 @@ lemma Step1ExitLegGlobalMinimum {V E : Type*}
                               P₁.length + P₂.length + P₃.length)) →
                       False))) := by
 -- BODY
-  sorry
+  have hfamily : Nonempty
+      (Step1ExitLegPresentation G k e0 ett.rounds H.dividerCount) :=
+    Step1ExitLegPresentationExists G k e0 input T phi ett hMP hproper hone
+      base H good hfewer hlarge i alpha beta halpha hne hclosed hnot
+  have hallElementary : ∀ P :
+      Step1ExitLegPresentation G k e0 ett.rounds H.dividerCount,
+      ColoredVertexSetElementary G P.phi (TreeSequenceVertexSet P.T) := by
+    intro P
+    exact hfewer P.ett P.rounds_eq P.maximum P.base P.hierarchy P.good
+      P.divider_lt
+  obtain ⟨M⟩ := Step1ExitLegMinimumExists G k e0 ett.rounds
+    H.dividerCount hfamily hallElementary
+  have hlowerElementary : ∀ {input' : PartialEdgeColoring E k}
+      {T' : TreeSequence G e0}
+      {generating' : PartialEdgeColoring E k}
+      (lower : ExtendedTashkinovTree G k e0 input' T' generating'),
+      0 < lower.rounds → lower.rounds < M.selected.ett.rounds →
+      MaximumProperty lower →
+      ColoredVertexSetElementary G generating'
+        (TreeSequenceVertexSet T') := by
+    intro input' T' generating' lower hlowerPositive hlowerRounds hlowerMP
+    have hlowerRounds' : lower.rounds < ett.rounds := by
+      simpa only [M.selected.rounds_eq] using hlowerRounds
+    have hpack := hlower lower hlowerPositive hlowerRounds' hlowerMP
+    intro u hu v hv huv
+    exact hpack.1 hu hv huv
+  have htheta : ∃ theta : Fin k,
+      theta ≠ M.selected.a ∧ theta ≠ M.selected.b ∧
+      theta ∈ TreeMissingColors M.selected.phi
+        (HierarchyStarredStage M.selected.hierarchy
+          (Fin.last M.selected.hierarchy.dividerCount)) ∧
+      TreeColorSetClosed G M.selected.phi
+        (HierarchyStarredStage M.selected.hierarchy
+          (Fin.last M.selected.hierarchy.dividerCount)) {theta} ∧
+      TreeColorSetClosed G M.selected.phi M.selected.T {theta} := by
+    by_cases hzero : M.selected.hierarchy.dividerCount = 0
+    · by_cases hparallel :
+          M.selected.ett.series.data.kind
+              (Fin.last M.selected.ett.rounds) =
+            some TashkinovExtensionKind.PE
+      · exact Step1ExitLegThetaZeroParallel G k e0 ett.rounds
+          H.dividerCount M.selected hzero hparallel
+          (Step1ExitLegPrecoloringElementary G k e0 ett.rounds
+            H.dividerCount M.selected hlowerElementary)
+      · exact Step1ExitLegThetaZeroNonparallel G k e0 ett.rounds
+          H.dividerCount M.selected hzero hparallel
+    · exact Step1ExitLegThetaPositive G k e0 ett.rounds H.dividerCount M
+        (Nat.pos_of_ne_zero hzero)
+  obtain ⟨theta, hthetaA, hthetaB, hthetaMissing, hthetaStarClosed,
+    hthetaTerminalClosed⟩ := htheta
+  refine ⟨M.selected.input, M.selected.T, M.selected.phi, M.selected.ett,
+    M.selected.base, M.selected.hierarchy, M.selected.good,
+    M.selected.rounds_eq, M.selected.maximum, M.selected.divider_lt,
+    M.selected.proper, M.selected.oneUncolored, M.selected.large,
+    M.selected.terminalMinusClosed, M.elementary, M.selected.a,
+    M.selected.b, theta, M.selected.a1, M.selected.b1, M.selected.a2,
+    M.selected.b2, M.selected.P1, M.selected.P2, M.selected.f1,
+    M.selected.f2, M.selected.a_ne_b, M.selected.aMissing,
+    M.selected.aClosed, M.selected.exit1, M.selected.exit2,
+    M.selected.disjoint12, M.selected.outsideDistinct,
+    M.selected.treeDistinct, M.selected.treeOrder, M.selected.boundary1,
+    M.selected.boundary2, M.selected.incident1, M.selected.incident2,
+    M.selected.support1, M.selected.support2, hthetaA, hthetaB,
+    hthetaMissing, hthetaStarClosed, hthetaTerminalClosed,
+    M.primaryMinimal, M.secondary⟩

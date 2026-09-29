@@ -1,0 +1,68 @@
+\begin{lemma}[Lexicographic Step 1 exit-leg minimum]
+Fix $G,k,e_0,n,q$.  Suppose that the family of Step 1 exit-leg
+presentations of size $(n,q)$ is nonempty and that the terminal vertex
+set of every member is elementary.  Then this family contains a Step 1
+exit-leg minimum.
+\end{lemma}
+\begin{proof}
+For a presentation $P$, let $d(P)$ be its divider count.  The set of
+values $d(P)$ is a nonempty subset of $\mathbb N$, so it has a least
+element $d_0$.  Restrict henceforth to presentations with divider count
+$d_0$.
+
+For such a presentation, assign secondary value zero when its second
+color $b$ is missing on its terminal tree.  Otherwise, apply
+\noderef{ElementaryClosedExitPairExtendsTriple} to its elementariness,
+properness, missing and closed first color, and stored exit pair.  This
+produces at least one third exit leg support-disjoint from the first two,
+with distinct outside and tree ends and an exact retained $b$-colored
+boundary identity.  The nonempty set of total lengths
+$|P_1|+|P_2|+|P_3|$ therefore has a least element; assign one plus that
+least length as the secondary value.  The secondary values among the
+$d_0$-presentations again form a nonempty subset of $\mathbb N$, so
+choose a presentation $P$ of least secondary value.
+
+When the chosen secondary value is positive, choose a triple of least
+total length.  Support-disjointness makes its three tree ends distinct.
+Their unique positions in the injective vertex list of
+\noderef{TreeSequence} are linearly ordered.  Relabel the complete
+path/end packages so that the tree ends occur in increasing order, and
+retain the first two packages in $P$.  Relabeling preserves all pairwise
+support-disjointness conditions, outside-end inequalities, and total
+length.  If this relabeled first pair admitted a shorter qualifying
+third leg, it would itself define a same-divider presentation with
+smaller secondary value, contradicting the global secondary choice;
+hence it retains the selected least value.  The exact third boundary identity is the one furnished by
+\noderef{ElementaryClosedExitPairExtendsTriple}.  Thus the asserted
+three-leg alternative is available whenever $b$ is not missing.
+
+We verify the two universal minimality certificates.  First take the
+data in the primary comparison and suppose its two exit legs exist.
+The replacement input, ETT, and certified series are actual fields of
+\noderef{CorrespondingExtendedTashkinovTree}; its rung agreement and the
+selected presentation's rung equality give rung number $n$.  The
+comparison hypotheses give maximum property, properness,
+exact-one-uncoloredness, its own large bound, and the genuine terminal
+minus-closed certificate.  Its divider count is smaller than $d_0$ and
+hence smaller than $q$.  For each exit path,
+\noderef{ClosedColorExitPathBoundaryEdge} supplies its exact
+second-color boundary identity.  The two tree ends are distinct, since
+a common end would be a vertex-node in both supports, and they can be
+strictly ordered as above, exchanging the two complete packages if
+necessary.  These data form a Step 1 exit-leg presentation with divider
+count smaller than $d_0$, contradicting the definition of $d_0$.
+
+For the secondary comparison, the same normalization makes its data a
+presentation with divider count $d_0$.  If its second color is missing,
+its secondary value is zero, strictly below the positive selected value.
+If it is not missing and the displayed third path gives a qualifying
+triple of smaller total length, the least qualifying length for that
+presentation is at most the displayed length.  Its secondary value is
+therefore also smaller than the selected one.  Both alternatives
+contradict the choice of $P$.
+
+Finally equip $P$ with its assumed elementariness, the primary
+certificate, and either the missing-color alternative or the ordered
+least triple and secondary certificate just constructed.  By
+\noderef{Step1ExitLegMinimum}, this is a Step 1 exit-leg minimum.
+\end{proof}
