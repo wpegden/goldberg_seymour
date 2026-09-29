@@ -1,0 +1,38 @@
+\begin{helper}[The boundary edge of an exit path]
+Let $G=(V,E)$ be a finite loopless multigraph, let $T$ be a
+tree-sequence, and let $\varphi$ be a partial $k$-edge-coloring.  Let
+$a,b\in[k]$, suppose that $\{a\}$ is closed on $T$, and let $P$ be a
+$T$-exit path in the $(a,b)$-incidence graph from its outside end $u$ to
+its tree end $v$.  Then some exact edge $f$ on $P$ is incident with $v$
+and belongs to the set of $b$-colored boundary edges of $V(T)$.
+\end{helper}
+\begin{proof}
+Put $X=V(T)$, using \noderef{TreeSequenceVertexSet}.  In the support of
+the reversed walk, start at the tree end $v$ and take the first incidence
+dart that leaves the set consisting of the vertex-nodes in $X$ and the
+edge-nodes all of whose incident vertices lie in $X$.  Such a dart exists
+because $v\in X$ and the other endpoint $u$ lies outside $X$, by
+\noderef{TreeExitPath}.
+
+The initial node of this dart must be a vertex-node
+$\operatorname{inl}(q)$ with $q\in X$.  Indeed, if it were an edge-node,
+then all vertices incident with that edge would lie in $X$ by membership
+in the chosen set; its adjacent terminal vertex-node could not lie
+outside the set.  The terminal node of the dart must therefore be an
+edge-node $\operatorname{inr}(f)$.  The adjacency rule in
+\noderef{TwoColorIncidenceGraph} says that $f$ is incident with $q$ and
+has color $a$ or $b$.  Since its edge-node is outside the chosen set,
+some vertex $r$ incident with $f$ lies outside $X$.  The vertices $q,r$
+are distinct, and the two-endpoint and loopless properties in
+\noderef{LooplessMultigraph}, interpreted through \noderef{Incident},
+show that the endpoint pair of $f$ is exactly $\{q,r\}$.  Hence $f$ is an
+exact member of \noderef{BoundaryEdges}.
+
+Both $\operatorname{inl}(q)$ and $\operatorname{inr}(f)$ lie on the
+reversed walk and therefore on $P$.  The defining uniqueness clause of
+\noderef{TreeExitPath} says that the only vertex-node of $P$ in $X$ is
+its tree end, so $q=v$.  Thus $f$ is incident with $v$.  Finally, closure
+of $\{a\}$ under \noderef{TreeColorSetClosed}, expanded via
+\noderef{BoundaryColorEdges}, rules out color $a$ on the boundary edge
+$f$.  Its color is therefore $b$, proving all three assertions.
+\end{proof}
