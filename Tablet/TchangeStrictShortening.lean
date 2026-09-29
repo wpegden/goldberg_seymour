@@ -13,6 +13,9 @@ import Tablet.TchangeKempeClosureData
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
 import Tablet.TwoColorNontrivialPathComponent
+import Mathlib.Combinatorics.SimpleGraph.Connectivity.Subgraph
+
+open scoped Sym2
 
 -- [TABLET NODE: TchangeStrictShortening]
 theorem TchangeStrictShortening {V E : Type*}
@@ -23,4 +26,392 @@ theorem TchangeStrictShortening {V E : Type*}
     ∃ C' : TchangeCounterexample G k e0,
       TchangeCounterexampleMeasure C' < TchangeCounterexampleMeasure C := by
 -- BODY
-  sorry
+  classical
+  let U := TreeSequenceVertexSet D.closedTree
+  let H := TwoColorIncidenceGraph G D.sigma C.a C.b
+  have firstEntry :
+      ∀ (a b : V) (Q : H.Walk (Sum.inl a) (Sum.inl b)),
+        Q.IsPath →
+        (C.a ∈ MissingColors G D.sigma a ∨
+          C.b ∈ MissingColors G D.sigma a) →
+        a ∉ U → b ∈ U →
+        ∃ (c : V) (hcU : c ∈ U) (hcQ : Sum.inl c ∈ Q.support),
+          let L := Q.takeUntil (Sum.inl c) hcQ
+          TreeExitPath D.closedTree D.sigma C.a C.b a c L ∧
+            ∃ (g : E) (x : V),
+              Sum.inr g ∈ L.support ∧
+              Incident G c g ∧ Incident G x g ∧ x ∉ U ∧
+              g ∈ BoundaryEdges G U ∧
+              (D.sigma g = some C.a ∨ D.sigma g = some C.b) := by
+    intro a b Q hQ hmissing haU hbU
+    let S : Finset (Sum V E) := U.image Sum.inl
+    obtain ⟨z, hzS, hzQ, hzfirst⟩ :=
+      Q.exists_mem_support_forall_mem_support_imp_eq S (by
+        refine ⟨Sum.inl b, ?_⟩
+        simp [S, hbU])
+    obtain ⟨c, hcU, hcz⟩ : ∃ c, c ∈ U ∧ Sum.inl c = z := by
+      simpa [S] using hzS
+    subst z
+    let L := Q.takeUntil (Sum.inl c) hzQ
+    have hLc : ∀ w ∈ U, (Sum.inl w ∈ L.support ↔ w = c) := by
+      intro w hwU
+      constructor
+      · intro hwL
+        have heq := hzfirst (Sum.inl w) (by simp [S, hwU]) hwL
+        exact Sum.inl.inj heq
+      · rintro rfl
+        exact L.end_mem_support
+    have hac : a ≠ c := by
+      intro hac
+      apply haU
+      simpa [hac] using hcU
+    have hLpath : L.IsPath := hQ.takeUntil _
+    have hLlen : 2 ≤ L.length := by
+      have hpos : 0 < L.length := by
+        apply Nat.pos_of_ne_zero
+        intro hn
+        have hnil : L.Nil := SimpleGraph.Walk.length_eq_zero_iff.mp hn
+        exact hac (Sum.inl.inj hnil.eq)
+      by_contra hnot
+      have hlen : L.length = 1 := by omega
+      have hadj := L.adj_getVert_succ (i := 0) (by omega)
+      have hend : L.getVert 1 = Sum.inl c := by
+        have := L.getVert_length
+        rwa [hlen] at this
+      rw [L.getVert_zero, hend] at hadj
+      simpa [H, TwoColorIncidenceGraph] using hadj
+    have hExit : TreeExitPath D.closedTree D.sigma C.a C.b a c L := by
+      unfold TreeExitPath
+      refine ⟨hLpath, hLlen, haU, hcU, ?_, hLc⟩
+      exact hmissing
+    have hlastAdj := L.adj_getVert_succ (i := L.length - 1) (by omega)
+    have hlastSucc : L.length - 1 + 1 = L.length := by omega
+    rw [hlastSucc, L.getVert_length] at hlastAdj
+    cases hlast : L.getVert (L.length - 1) with
+    | inl v =>
+        rw [hlast] at hlastAdj
+        simp [H, TwoColorIncidenceGraph] at hlastAdj
+    | inr g =>
+        rw [hlast] at hlastAdj
+        have hgc : Incident G c g ∧
+            (D.sigma g = some C.a ∨ D.sigma g = some C.b) := by
+          simpa [H, TwoColorIncidenceGraph] using hlastAdj
+        have hprevAdj := L.adj_getVert_succ (i := L.length - 2) (by omega)
+        have hprevSucc : L.length - 2 + 1 = L.length - 1 := by omega
+        rw [hprevSucc, hlast] at hprevAdj
+        cases hprev : L.getVert (L.length - 2) with
+        | inr f =>
+            rw [hprev] at hprevAdj
+            simp [H, TwoColorIncidenceGraph] at hprevAdj
+        | inl x =>
+            rw [hprev] at hprevAdj
+            have hxg : Incident G x g := by
+              have hdata : Incident G x g ∧
+                  (D.sigma g = some C.a ∨ D.sigma g = some C.b) := by
+                simpa [H, TwoColorIncidenceGraph] using hprevAdj
+              exact hdata.1
+            have hxout : x ∉ U := by
+              intro hxU
+              have hxc := (hLc x hxU).mp (by
+                rw [← hprev]
+                exact L.getVert_mem_support (L.length - 2))
+              have heq : L.getVert (L.length - 2) = L.getVert L.length := by
+                rw [hprev, L.getVert_length, hxc]
+              have := hLpath.getVert_injOn (Nat.sub_le _ _) (by simp) heq
+              omega
+            have hcg : c ≠ x := by
+              intro hcx
+              exact hxout (hcx ▸ hcU)
+            have hends : G.ends g = s(c, x) := by
+              induction hends0 : G.ends g using Sym2.inductionOn with
+              | _ u v =>
+                  rw [Incident, hends0] at hgc hxg
+                  simp only [Sym2.mem_iff] at hgc hxg
+                  rcases hgc.1 with rfl | rfl <;>
+                    rcases hxg with rfl | rfl <;>
+                    simp_all [Sym2.eq_iff]
+            have hboundary : g ∈ BoundaryEdges G U := by
+              simp only [BoundaryEdges, Finset.mem_filter, Finset.mem_univ,
+                true_and]
+              exact ⟨c, hcU, x, hxout, hends⟩
+            refine ⟨c, hcU, hzQ, hExit, g, x, ?_, hgc.1, hxg,
+              hxout, hboundary, hgc.2⟩
+            rw [← hlast]
+            exact L.getVert_mem_support (L.length - 1)
+  obtain ⟨c1, hc1U, hc1Q, hExit1, g1, x1, hg1L, hg1c, hg1x,
+      hx1out, hg1Boundary, hg1Color⟩ :=
+    firstEntry C.a1 C.b1 D.Q1 D.exit1.1 D.exit1.2.2.2.2.1
+      D.a1Outside D.b1InClosure
+  obtain ⟨c2, hc2U, hc2Q, hExit2, g2, x2, hg2L, hg2c, hg2x,
+      hx2out, hg2Boundary, hg2Color⟩ :=
+    firstEntry C.a2 C.b2 D.Q2 D.exit2.1 D.exit2.2.2.2.2.1
+      D.a2Outside D.b2InClosure
+  obtain ⟨c3, hc3U, hc3Q, hExit3, g3, x3, hg3L, hg3c, hg3x,
+      hx3out, hg3Boundary, hg3Color⟩ :=
+    firstEntry C.a3 C.b3 D.Q3 D.exit3.1 D.exit3.2.2.2.2.1
+      D.a3Outside D.b3InClosure
+  let L1 := D.Q1.takeUntil (Sum.inl c1) hc1Q
+  let L2 := D.Q2.takeUntil (Sum.inl c2) hc2Q
+  let L3 := D.Q3.takeUntil (Sum.inl c3) hc3Q
+  have hL1Q1 : L1.support ⊆ D.Q1.support :=
+    D.Q1.support_takeUntil_subset_support hc1Q
+  have hL2Q2 : L2.support ⊆ D.Q2.support :=
+    D.Q2.support_takeUntil_subset_support hc2Q
+  have hL3Q3 : L3.support ⊆ D.Q3.support :=
+    D.Q3.support_takeUntil_subset_support hc3Q
+  have hg1a : D.sigma g1 = some C.a := by
+    apply hg1Color.resolve_right
+    intro hg1b
+    exact (D.closureClosed hg1Boundary D.b3InClosure hg1b) D.betaMissing
+  have hg2a : D.sigma g2 = some C.a := by
+    apply hg2Color.resolve_right
+    intro hg2b
+    exact (D.closureClosed hg2Boundary D.b3InClosure hg2b) D.betaMissing
+  have hg3a : D.sigma g3 = some C.a := by
+    apply hg3Color.resolve_right
+    intro hg3b
+    exact (D.closureClosed hg3Boundary D.b3InClosure hg3b) D.betaMissing
+  have hdis12 : ∀ z, z ∈ L1.support → z ∉ L2.support := by
+    intro z hz1 hz2
+    exact C.disjoint12 z (by rw [← D.support1]; exact hL1Q1 hz1)
+      (by rw [← D.support2]; exact hL2Q2 hz2)
+  have hdis13 : ∀ z, z ∈ L1.support → z ∉ L3.support := by
+    intro z hz1 hz3
+    exact C.disjoint13 z (by rw [← D.support1]; exact hL1Q1 hz1)
+      (by rw [← D.support3]; exact hL3Q3 hz3)
+  have hdis23 : ∀ z, z ∈ L2.support → z ∉ L3.support := by
+    intro z hz2 hz3
+    exact C.disjoint23 z (by rw [← D.support2]; exact hL2Q2 hz2)
+      (by rw [← D.support3]; exact hL3Q3 hz3)
+  have hc12 : c1 ≠ c2 := by
+    intro hc
+    have hgne : g1 ≠ g2 := by
+      intro hge
+      subst g2
+      exact hdis12 (Sum.inr g1) hg1L hg2L
+    exact D.triple.2.2.2.1 hgne ⟨c1, hg1c, hc ▸ hg2c⟩ hg1a
+      (by simpa using hg2a)
+  have hc13 : c1 ≠ c3 := by
+    intro hc
+    have hgne : g1 ≠ g3 := by
+      intro hge
+      subst g3
+      exact hdis13 (Sum.inr g1) hg1L hg3L
+    exact D.triple.2.2.2.1 hgne ⟨c1, hg1c, hc ▸ hg3c⟩ hg1a
+      (by simpa using hg3a)
+  have hc23 : c2 ≠ c3 := by
+    intro hc
+    have hgne : g2 ≠ g3 := by
+      intro hge
+      subst g3
+      exact hdis23 (Sum.inr g2) hg2L hg3L
+    exact D.triple.2.2.2.1 hgne ⟨c2, hg2c, hc ▸ hg3c⟩ hg2a
+      (by simpa using hg3a)
+  have hbTree : C.b ∈ TreeMissingColors D.sigma D.closedTree := by
+    unfold TreeMissingColors
+    simp only [Finset.mem_biUnion]
+    exact ⟨C.b3, D.b3InClosure, D.betaMissing⟩
+  have haNotTree : C.a ∉ TreeMissingColors D.sigma D.closedTree := by
+    intro haTree
+    unfold TreeMissingColors at haTree
+    simp only [Finset.mem_biUnion] at haTree
+    obtain ⟨v, hvU, hva⟩ := haTree
+    exact (D.closureClosed hg1Boundary hvU hg1a) hva
+  have hGraph : H = TwoColorIncidenceGraph G D.sigma C.b C.a := by
+    apply SimpleGraph.ext
+    funext z w
+    cases z <;> cases w <;>
+      simp [H, TwoColorIncidenceGraph, or_comm]
+  have walkCastSupport {H1 H2 : SimpleGraph (Sum V E)} (h : H1 = H2)
+      {z w : Sum V E} (p : H1.Walk z w) :
+      (h ▸ p).support = p.support := by
+    subst H2
+    rfl
+  have walkCastLength {H1 H2 : SimpleGraph (Sum V E)} (h : H1 = H2)
+      {z w : Sum V E} (p : H1.Walk z w) :
+      (h ▸ p).length = p.length := by
+    subst H2
+    rfl
+  have walkCastPath {H1 H2 : SimpleGraph (Sum V E)} (h : H1 = H2)
+      {z w : Sum V E} (p : H1.Walk z w) (hp : p.IsPath) :
+      (h ▸ p).IsPath := by
+    subst H2
+    exact hp
+  let L1' : (TwoColorIncidenceGraph G D.sigma C.b C.a).Walk
+      (Sum.inl C.a1) (Sum.inl c1) := hGraph ▸ L1
+  let L2' : (TwoColorIncidenceGraph G D.sigma C.b C.a).Walk
+      (Sum.inl C.a2) (Sum.inl c2) := hGraph ▸ L2
+  let L3' : (TwoColorIncidenceGraph G D.sigma C.b C.a).Walk
+      (Sum.inl C.a3) (Sum.inl c3) := hGraph ▸ L3
+  have hL1Support : L1'.support = L1.support := by
+    exact walkCastSupport hGraph L1
+  have hL2Support : L2'.support = L2.support := by
+    exact walkCastSupport hGraph L2
+  have hL3Support : L3'.support = L3.support := by
+    exact walkCastSupport hGraph L3
+  have hL1Length : L1'.length = L1.length := by
+    exact walkCastLength hGraph L1
+  have hL2Length : L2'.length = L2.length := by
+    exact walkCastLength hGraph L2
+  have hL3Length : L3'.length = L3.length := by
+    exact walkCastLength hGraph L3
+  have hExit1' : TreeExitPath D.closedTree D.sigma C.b C.a C.a1 c1 L1' := by
+    unfold TreeExitPath at hExit1 ⊢
+    refine ⟨?_, ?_, hExit1.2.2.1, hExit1.2.2.2.1, ?_, ?_⟩
+    · exact walkCastPath hGraph L1 hExit1.1
+    · rw [hL1Length]
+      exact hExit1.2.1
+    · exact hExit1.2.2.2.2.1.symm
+    · intro w hw
+      rw [hL1Support]
+      exact hExit1.2.2.2.2.2 w hw
+  have hExit2' : TreeExitPath D.closedTree D.sigma C.b C.a C.a2 c2 L2' := by
+    unfold TreeExitPath at hExit2 ⊢
+    refine ⟨?_, ?_, hExit2.2.2.1, hExit2.2.2.2.1, ?_, ?_⟩
+    · exact walkCastPath hGraph L2 hExit2.1
+    · rw [hL2Length]
+      exact hExit2.2.1
+    · exact hExit2.2.2.2.2.1.symm
+    · intro w hw
+      rw [hL2Support]
+      exact hExit2.2.2.2.2.2 w hw
+  have hExit3' : TreeExitPath D.closedTree D.sigma C.b C.a C.a3 c3 L3' := by
+    unfold TreeExitPath at hExit3 ⊢
+    refine ⟨?_, ?_, hExit3.2.2.1, hExit3.2.2.2.1, ?_, ?_⟩
+    · exact walkCastPath hGraph L3 hExit3.1
+    · rw [hL3Length]
+      exact hExit3.2.1
+    · exact hExit3.2.2.2.2.1.symm
+    · intro w hw
+      rw [hL3Support]
+      exact hExit3.2.2.2.2.2 w hw
+  have hdis12' : ∀ z, z ∈ L1'.support → z ∉ L2'.support := by
+    intro z hz1 hz2
+    rw [hL1Support] at hz1
+    rw [hL2Support] at hz2
+    exact hdis12 z hz1 hz2
+  have hdis13' : ∀ z, z ∈ L1'.support → z ∉ L3'.support := by
+    intro z hz1 hz3
+    rw [hL1Support] at hz1
+    rw [hL3Support] at hz3
+    exact hdis13 z hz1 hz3
+  have hdis23' : ∀ z, z ∈ L2'.support → z ∉ L3'.support := by
+    intro z hz2 hz3
+    rw [hL2Support] at hz2
+    rw [hL3Support] at hz3
+    exact hdis23 z hz2 hz3
+  have hg1BoundaryColor :
+      g1 ∈ BoundaryColorEdges G D.sigma U C.a := by
+    simp [BoundaryColorEdges, hg1Boundary, hg1a]
+  have hg2BoundaryColor :
+      g2 ∈ BoundaryColorEdges G D.sigma U C.a := by
+    simp [BoundaryColorEdges, hg2Boundary, hg2a]
+  have hg3BoundaryColor :
+      g3 ∈ BoundaryColorEdges G D.sigma U C.a := by
+    simp [BoundaryColorEdges, hg3Boundary, hg3a]
+  let C' : TchangeCounterexample G k e0 := {
+    phi := D.sigma
+    T := D.closedTree
+    a := C.b
+    b := C.a
+    colorsDistinct := C.colorsDistinct.symm
+    triple := D.triple
+    tree := D.closureTree
+    closed := D.closureClosed
+    aMissing := hbTree
+    bNotMissing := haNotTree
+    a1 := C.a1
+    b1 := c1
+    a2 := C.a2
+    b2 := c2
+    a3 := C.a3
+    b3 := c3
+    P1 := L1'
+    P2 := L2'
+    P3 := L3'
+    exit1 := hExit1'
+    exit2 := hExit2'
+    exit3 := hExit3'
+    disjoint12 := hdis12'
+    disjoint13 := hdis13'
+    disjoint23 := hdis23'
+    remote12 := C.remote12
+    remote13 := C.remote13
+    remote23 := C.remote23
+    tree12 := hc12
+    tree13 := hc13
+    tree23 := hc23
+    f1 := g1
+    f2 := g2
+    f3 := g3
+    boundary1 := hg1BoundaryColor
+    boundary2 := hg2BoundaryColor
+    boundary3 := hg3BoundaryColor
+    incident1 := hg1c
+    incident2 := hg2c
+    incident3 := hg3c
+    support1 := by rw [hL1Support]; exact hg1L
+    support2 := by rw [hL2Support]; exact hg2L
+    support3 := by rw [hL3Support]; exact hg3L }
+  have hf1Q : Sum.inr C.f1 ∈ D.Q1.support := by
+    rw [D.support1]
+    exact C.support1
+  have hf1NotL : Sum.inr C.f1 ∉ L1.support := by
+    intro hf1L
+    obtain ⟨n, hn, hnle⟩ :=
+      SimpleGraph.Walk.mem_support_iff_exists_getVert.mp hf1L
+    have hnpos : 0 < n := by
+      by_contra hnpos
+      have hnzero : n = 0 := by omega
+      rw [hnzero, L1.getVert_zero] at hn
+      simp at hn
+    have hnlt : n < L1.length := by
+      by_contra hnlt
+      have hneq : n = L1.length := by omega
+      rw [hneq, L1.getVert_length] at hn
+      simp at hn
+    have hprevAdj := L1.adj_getVert_succ (i := n - 1) (by omega)
+    have hprevSucc : n - 1 + 1 = n := by omega
+    rw [hprevSucc, hn] at hprevAdj
+    cases hprev : L1.getVert (n - 1) with
+    | inr f =>
+        rw [hprev] at hprevAdj
+        simp [H, TwoColorIncidenceGraph] at hprevAdj
+    | inl x =>
+        rw [hprev] at hprevAdj
+        have hxf1 : Incident G x C.f1 := by
+          have hdata : Incident G x C.f1 ∧
+              (D.sigma C.f1 = some C.a ∨ D.sigma C.f1 = some C.b) := by
+            simpa [H, TwoColorIncidenceGraph] using hprevAdj
+          exact hdata.1
+        have hxU : x ∈ U := D.f1EndsInside x hxf1
+        have hxc : x = c1 := (hExit1.2.2.2.2.2 x hxU).mp (by
+          rw [← hprev]
+          exact L1.getVert_mem_support (n - 1))
+        have heq : L1.getVert (n - 1) = L1.getVert L1.length := by
+          rw [hprev, L1.getVert_length, hxc]
+        have hpathL1 : L1.IsPath := hExit1.1
+        have hindices := hpathL1.getVert_injOn
+          ((Nat.sub_le n 1).trans hnle) (by simp) heq
+        omega
+  have hlen1 : L1.length < D.Q1.length := by
+    have hle : L1.length ≤ D.Q1.length := by
+      exact D.Q1.length_takeUntil_le_length hc1Q
+    by_contra hnlt
+    have heqLen : L1.length = D.Q1.length := by omega
+    have hsupportEq : L1.support = D.Q1.support := by
+      apply (D.Q1.support_takeUntil_prefix_support hc1Q).eq_of_length
+      rw [L1.length_support, D.Q1.length_support, heqLen]
+    apply hf1NotL
+    rw [hsupportEq]
+    exact hf1Q
+  have hlen2 : L2.length ≤ D.Q2.length :=
+    D.Q2.length_takeUntil_le_length hc2Q
+  have hlen3 : L3.length ≤ D.Q3.length :=
+    D.Q3.length_takeUntil_le_length hc3Q
+  refine ⟨C', ?_⟩
+  unfold TchangeCounterexampleMeasure
+  dsimp [C']
+  rw [hL1Length, hL2Length, hL3Length, ← D.length1, ← D.length2,
+    ← D.length3]
+  omega
