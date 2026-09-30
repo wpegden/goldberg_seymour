@@ -32,7 +32,8 @@ under \(\varphi^-\) by the PE certificate.  The selected coloring
 is stable from \(\varphi^-\), by
 \noderef{MaximumDefectiveChoice}.  The preceding coloring has the same
 two coloring properties.  Symmetry in \noderef{sc2} therefore gives
-reverse stability.  If a boundary edge had \(\pi\)-color \(c\) missing
+reverse stability.  By \noderef{BoundaryEdges}, every boundary edge is
+incident with the tree.  If a boundary edge had \(\pi\)-color \(c\) missing
 at a tree vertex under \(\pi\), the vertex clause of
 \noderef{StableColoring} would make \(c\) missing at that vertex under
 \(\varphi^-\), while reverse stability would fix that exact boundary
@@ -59,8 +60,9 @@ colors are distinct.  Unpack the PE's \noderef{TreeExit} witness.  Its
 to \(v_t\), puts \(v_t\) in \(T_t\), and makes \(v_t\) its only tree
 vertex.  Missingness at both ends gives degree one there.  Every internal
 node already has its two path neighbors, while
-\noderef{TwoColorIncidenceDegreeAtMostTwo} bounds all degrees by two.  A
-shortest route from any further component node to the path would
+\noderef{TwoColorIncidenceDegreeAtMostTwo} bounds all degrees by two.  In the
+graph of \noderef{TwoColorIncidenceGraph}, a shortest route from any further
+node of the connected support \noderef{TwoColorComponent} to the path would
 therefore create either a third neighbor at an internal node or a second
 neighbor at an endpoint.  Hence the path exhausts the whole component
 through \(v_t\).  It is consequently a
@@ -69,9 +71,13 @@ intersection.
 
 The swap in (1), defined by \noderef{TwoColorComponentSwap}, changes
 only this entire root component and merely exchanges its two colors.
-Thus its support and its unique tree vertex are unchanged under
-\(\varphi_t\).  For \(x\ne v_t\), the edge-node of \(g_x\) cannot belong
-to the root component: incidence would then put \(x\) in that component,
+By \noderef{TwoColorIncidenceGraph} and \noderef{TwoColorComponent}, exchanging
+the two colors preserves the incidence graph and hence the component support.
+Thus its unique tree vertex is unchanged under \(\varphi_t\).  For
+\(x\ne v_t\), the edge-node of \(g_x\) cannot belong to the root component:
+its incidence with \(x\) gives adjacency in \noderef{TwoColorIncidenceGraph},
+which by the connected-support definition \noderef{TwoColorComponent} would
+put \(x\) in that component,
 contradicting the unique-intersection conclusion.  The swap therefore
 fixes \(g_x\), so it remains a genuine \(\delta_t\)-colored exact edge
 in the component through \(x\) under \(\varphi_t\).  This proves the
