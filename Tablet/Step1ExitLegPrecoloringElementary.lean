@@ -24,4 +24,36 @@ lemma Step1ExitLegPrecoloringElementary {V E : Type*}
       (TreeSequenceVertexSet
         (P.ett.series.data.tree (Fin.last P.ett.rounds).castSucc)) := by
 -- BODY
-  sorry
+  dsimp
+  by_cases hrounds : P.ett.rounds = 1
+  · have hcolor :
+        (⟨P.ett.rounds - 1, by omega⟩ : Fin (P.ett.rounds + 1)) = 0 := by
+      apply Fin.ext
+      simp [hrounds]
+    have htree :
+        (Fin.castSucc (Fin.last P.ett.rounds) : Fin (P.ett.rounds + 2)) =
+          ⟨1, by omega⟩ := by
+      apply Fin.ext
+      simp [hrounds]
+    rw [hcolor, htree]
+    exact (TechnicalTheoremBase G k P.ett.rounds e0 P.input
+      P.ett.series).1
+  · have hmore : 1 < P.ett.rounds := by
+      have hpositive := P.ett.roundsPositive
+      omega
+    obtain ⟨predecessor, hr, hmaximum, _, _⟩ :=
+      CertifiedETTPredecessor G k e0 P.input P.T P.phi P.ett
+        P.maximum hmore
+    have hpositive : 0 < predecessor.rounds := by
+      rw [hr]
+      omega
+    have hlower : predecessor.rounds < P.ett.rounds := by
+      rw [hr]
+      omega
+    have htree :
+        (Fin.castSucc (Fin.last P.ett.rounds) : Fin (P.ett.rounds + 2)) =
+          ⟨P.ett.rounds, by omega⟩ := by
+      apply Fin.ext
+      rfl
+    rw [htree]
+    exact hlowerElementary predecessor hpositive hlower hmaximum
