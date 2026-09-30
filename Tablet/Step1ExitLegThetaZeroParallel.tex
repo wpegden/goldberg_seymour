@@ -9,7 +9,9 @@ terminal tree of $P$.
 \end{lemma}
 \begin{proof}
 Let $X$ be the terminal ladder tree, let $B$ be the hierarchy base, and
-write $A=B.\mathit{core}$ for the zero-divider starred stage.  The
+write $A=B.\mathit{core}$ for the zero-divider starred stage.  These
+objects and the embedded ETT are fields of
+\noderef{Step1ExitLegPresentation}.  The
 `parallelBase' field of \noderef{GoodHierarchy} gives
 \[
  4\leq\left|\bigl(\overline\psi(X)\cap
@@ -21,22 +23,35 @@ color $\theta$.  It is missing on both $X$ and the base closure and
 avoids the internal Gamma union.
 
 The assumed pre-step elementariness is precisely the remaining input of
-\noderef{ParallelCommonMissingClosed}; the ETT presentation identifies
-its generating coloring with the last series coloring.  That theorem
-therefore closes every common missing color, including $\theta$, on the
-base core.  The `parallel' field of \noderef{HierarchyBase} and the
+\noderef{ParallelCommonMissingClosed}.  The `roundsPositive', certified
+series, and `generatingColoring' fields of
+\noderef{ExtendedTashkinovTree} supply its positive-rung PE data and
+identify the presentation coloring with the last series coloring.  That
+theorem therefore makes the ordered union closed for the entire set of
+common missing colors.  Since $\theta$ belongs to that set,
+\noderef{TreeColorSetClosed} makes its singleton closed there.  The
+`parallel' field of \noderef{HierarchyBase} and the
 vertex-set clause of \noderef{OrderedTreeUnion} identify this core with
 the exact ordered union of $X$ and the base closure, while
 \noderef{HierarchyStarredStage} identifies it with $A$.  Consequently
+$X$ is an ordered initial segment of $A$ and its vertices are contained
+in $V(A)$.  A missing witness for $\theta$ in $X$ is therefore a witness
+in $A$ by the union definition \noderef{TreeMissingColors}.  Thus
 $\theta$ is missing and singleton-closed on $A$.
 
-The hierarchy inclusions place $X$ inside the terminal tree, so
-$\theta$ is missing there.  From the definitions
+The `coreInsideFirst', `nested', and `terminalStage' clauses of
+\noderef{TashkinovHierarchy} place $A$, and hence $X$, inside the
+terminal tree.  Exact initial-segment containment preserves all displayed
+vertices, so \noderef{TreeMissingColors} gives
+$\overline\psi(A)\subseteq\overline\psi(P.T)$ and in particular makes
+$\theta$ missing there.  From the definitions
 \noderef{HierarchyTerminalStoredColors} and
 \noderef{HierarchyStoredColorsAt}, inclusion of missing-color sets gives
 that the terminal stored set is contained in the index-zero stored set.
 Thus avoidance of the internal Gamma union implies avoidance of the
 terminal Gamma union.  The terminal minus-closure field of
 \noderef{Step1ExitLegPresentation}, unfolded through
-\noderef{TreeColorSetMinusClosed}, closes $\theta$ on the terminal tree.
+\noderef{TreeColorSetMinusClosed} and
+\noderef{TreeColorSetClosed}, closes the singleton $\{\theta\}$ on the
+terminal tree.
 \end{proof}

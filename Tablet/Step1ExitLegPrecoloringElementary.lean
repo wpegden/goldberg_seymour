@@ -1,4 +1,5 @@
 import Tablet.CertifiedETTPredecessor
+import Tablet.ExtendedTashkinovTree
 import Tablet.Step1ExitLegPresentation
 import Tablet.TechnicalTheoremBase
 

@@ -1,3 +1,4 @@
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.HierarchyBase
 import Tablet.HierarchyStarredStage
@@ -7,7 +8,10 @@ import Tablet.HierarchyTerminalStoredColors
 import Tablet.OrderedTreeUnion
 import Tablet.ParallelCommonMissingClosed
 import Tablet.Step1ExitLegPresentation
+import Tablet.TashkinovHierarchy
+import Tablet.TreeColorSetClosed
 import Tablet.TreeColorSetMinusClosed
+import Tablet.TreeMissingColors
 
 -- [TABLET NODE: Step1ExitLegThetaZeroParallel]
 lemma Step1ExitLegThetaZeroParallel {V E : Type*}

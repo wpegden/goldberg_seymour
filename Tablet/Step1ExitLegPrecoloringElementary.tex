@@ -6,17 +6,29 @@ under its generating coloring.  Then $V(X)$ is elementary under the
 coloring immediately preceding the terminal certified step of $P$.
 \end{lemma}
 \begin{proof}
-Let $n$ be the positive rung number of the ETT in $P$.  If $n=1$, the
-pre-terminal coloring is the initial series coloring and $X$ is the
-first ladder tree.  The first conclusion of
-\noderef{TechnicalTheoremBase}, applied to the certified series of $P$,
-states exactly that this vertex set is elementary under that coloring.
+By \noderef{Step1ExitLegPresentation}, $P$ contains an actual maximum
+ETT $\mathcal E=P.\mathit{ett}$ and its exact terminal ladder tree is the
+last ladder-tree entry of the certified series of $\mathcal E$.  Write
+$n=\mathcal E.\mathit{rounds}$.  The fields of
+\noderef{ExtendedTashkinovTree} give $1\leq n$, the complete certified
+series, and the identification of the displayed generating coloring
+with its last series coloring.
 
-Suppose $n>1$.  Apply \noderef{CertifiedETTPredecessor} to the maximum
-ETT in $P$.  It supplies a maximum ETT of rung number $n-1$, with exact
-terminal tree $X$ and generating coloring equal to the coloring before
-the terminal certified step.  Its rung number is positive and strictly
-less than $n$.  The assumed lower-rung elementary assertion applied to
-this predecessor therefore gives precisely the desired elementariness
-of $V(X)$.
+If $n=1$, the terminal ladder tree is the series entry $T_1$, while the
+coloring immediately preceding the terminal certified step is the
+series entry $\varphi_0$.  The first conclusion of
+\noderef{TechnicalTheoremBase}, applied to the certified series just
+extracted from $\mathcal E$, says exactly that $V(T_1)$ is elementary
+under $\varphi_0$.  This is the required conclusion in this case.
+
+Now suppose $n>1$.  The maximum-property field supplied by
+\noderef{Step1ExitLegPresentation} allows us to apply
+\noderef{CertifiedETTPredecessor} to $\mathcal E$.  It supplies an
+actual maximum ETT $\mathcal E^-$ of rung number $n-1$, whose exact
+terminal tree is the old terminal ladder tree $X$ and whose generating
+coloring is exactly the old series coloring at index $n-1$, namely the
+coloring immediately preceding the terminal certified step.  Since
+$n>1$, one has $0<n-1<n$.  The assumed lower-rung elementary assertion,
+applied to $\mathcal E^-$ and its supplied maximum property, therefore
+makes $V(X)$ elementary under that pre-terminal coloring, as claimed.
 \end{proof}

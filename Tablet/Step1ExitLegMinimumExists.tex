@@ -5,64 +5,126 @@ set of every member is elementary.  Then this family contains a Step 1
 exit-leg minimum.
 \end{lemma}
 \begin{proof}
-For a presentation $P$, let $d(P)$ be its divider count.  The set of
-values $d(P)$ is a nonempty subset of $\mathbb N$, so it has a least
-element $d_0$.  Restrict henceforth to presentations with divider count
-$d_0$.
+For a presentation $R$ in the given nonempty family, let $d(R)$ be the
+divider count of its good hierarchy, one of the fields listed in
+\noderef{Step1ExitLegPresentation}.  The nonempty set of natural numbers
+$d(R)$ has a least member; call it $d_0$ and restrict attention to
+presentations with $d(R)=d_0$.
 
-For such a presentation, assign secondary value zero when its second
-color $b$ is missing on its terminal tree.  Otherwise, apply
-\noderef{ElementaryClosedExitPairExtendsTriple} to its elementariness,
-properness, missing and closed first color, and stored exit pair.  This
-produces at least one third exit leg support-disjoint from the first two,
-with distinct outside and tree ends and an exact retained $b$-colored
-boundary identity.  The nonempty set of total lengths
-$|P_1|+|P_2|+|P_3|$ therefore has a least element; assign one plus that
-least length as the secondary value.  The secondary values among the
-$d_0$-presentations again form a nonempty subset of $\mathbb N$, so
-choose a presentation $P$ of least secondary value.
+Define a second natural-number measure $s(R)$ on this restricted family.
+If the second color $R.b$ is missing on $R.T$, put $s(R)=0$.  Otherwise
+apply \noderef{ElementaryClosedExitPairExtendsTriple}.  Its hypotheses
+are supplied by the assumed elementariness of $R.T$ and by the
+properness, distinct colors, missing and singleton-closed first color,
+and two stored support-disjoint exit legs in
+\noderef{Step1ExitLegPresentation}.  It gives a third exit leg
+support-disjoint from the stored two, with the asserted endpoint
+inequalities and with an exact $R.b$-colored boundary edge on that leg.
+Thus the set of totals
+\[
+ R.P_1.\mathit{length}+R.P_2.\mathit{length}+P_3.\mathit{length}
+\]
+over all such third-leg packages is nonempty.  Let $s(R)$ be one plus
+the least such total.  The set of $s(R)$ over all $d_0$-presentations is
+again a nonempty set of natural numbers.  Choose $P$ for which $s(P)$ is
+least.
 
-When the chosen secondary value is positive, choose a triple of least
-total length.  Support-disjointness makes its three tree ends distinct.
-Their unique positions in the injective vertex list of
-\noderef{TreeSequence} are linearly ordered.  Relabel the complete
-path/end packages so that the tree ends occur in increasing order, and
-retain the first two packages in $P$.  Relabeling preserves all pairwise
-support-disjointness conditions, outside-end inequalities, and total
-length.  If this relabeled first pair admitted a shorter qualifying
-third leg, it would itself define a same-divider presentation with
-smaller secondary value, contradicting the global secondary choice;
-hence it retains the selected least value.  The exact third boundary identity is the one furnished by
-\noderef{ElementaryClosedExitPairExtendsTriple}.  Thus the asserted
-three-leg alternative is available whenever $b$ is not missing.
+Suppose first that $s(P)>0$.  Then $P.b$ is not missing on $P.T$.
+Choose a third package $(a_3,b_3,P_3,f_3)$ attaining the least total in
+the definition of $s(P)$.  For the first two packages use the exact
+stored edges $P.f_1,P.f_2$ from
+\noderef{Step1ExitLegPresentation}; for the third use the exact edge
+$f_3$ furnished by \noderef{ElementaryClosedExitPairExtendsTriple}.
+Consequently, for each $i=1,2,3$, the complete quadruple
+$(a_i,b_i,P_i,f_i)$ contains an exit path, its two ends, and an exact
+$P.b$-colored boundary edge lying on that path and incident with its
+tree end.
 
-We verify the two universal minimality certificates.  First take the
-data in the primary comparison and suppose its two exit legs exist.
-The replacement input, ETT, and certified series are actual fields of
-\noderef{CorrespondingExtendedTashkinovTree}; its rung agreement and the
-selected presentation's rung equality give rung number $n$.  The
-comparison hypotheses give maximum property, properness,
-exact-one-uncoloredness, its own large bound, and the genuine terminal
-minus-closed certificate.  Its divider count is smaller than $d_0$ and
-hence smaller than $q$.  For each exit path,
-\noderef{ClosedColorExitPathBoundaryEdge} supplies its exact
-second-color boundary identity.  The two tree ends are distinct, since
-a common end would be a vertex-node in both supports, and they can be
-strictly ordered as above, exchanging the two complete packages if
-necessary.  These data form a Step 1 exit-leg presentation with divider
-count smaller than $d_0$, contradicting the definition of $d_0$.
+The three tree ends are distinct, because the three path supports are
+pairwise disjoint and each path contains its tree-end vertex-node.
+By \noderef{TreeExitPath}, every $b_i$ belongs to $V(P.T)$; by
+\noderef{TreeSequenceVertexSet} this is the set of displayed vertices.
+Those vertices occur at unique positions because the vertex list in
+\noderef{TreeSequence} is injective.  Sort the three complete quadruples,
+not merely the paths, by these positions.  If the resulting order is
+$(a'_1,b'_1,P'_1,f'_1),(a'_2,b'_2,P'_2,f'_2),
+(a'_3,b'_3,P'_3,f'_3)$, then
+\noderef{TreeVertexOrder} gives $b'_1\prec b'_2\prec b'_3$.
+Because the permutation transports the whole quadruple, every $f'_i$
+is still the boundary edge on $P'_i$ incident with $b'_i$.
 
-For the secondary comparison, the same normalization makes its data a
-presentation with divider count $d_0$.  If its second color is missing,
-its secondary value is zero, strictly below the positive selected value.
-If it is not missing and the displayed third path gives a qualifying
-triple of smaller total length, the least qualifying length for that
-presentation is at most the displayed length.  Its secondary value is
-therefore also smaller than the selected one.  Both alternatives
-contradict the choice of $P$.
+Construct a presentation $\widehat P$ by retaining all data of $P$
+through its colors and replacing its first two exit-leg packages by the
+first two sorted quadruples.  Pairwise support-disjointness gives the
+required disjointness and endpoint inequalities, and the preceding
+paragraph gives the strict tree-end order and both retained boundary
+identities.  Thus every exit-leg field of
+\noderef{Step1ExitLegPresentation} holds.  All earlier fields are copied
+from $P$, so $d(\widehat P)=d_0$.  Its sorted third quadruple is a
+qualifying third package of the same total length as the original
+triple.  Hence $s(\widehat P)\leq s(P)$.  Global minimality of $s(P)$
+gives the reverse inequality, so equality holds.  In particular, if the
+relabeled first two quadruples admitted a qualifying third leg of
+smaller total length, they would form this same comparison presentation
+$\widehat P$ with $s(\widehat P)<s(P)$, a contradiction.  Therefore the
+sorted triple is least for $\widehat P$.  Replace $P$ by $\widehat P$;
+we have obtained the ordered three-leg alternative required below,
+with its correct transported edge $f'_3$.
 
-Finally equip $P$ with its assumed elementariness, the primary
-certificate, and either the missing-color alternative or the ordered
-least triple and secondary certificate just constructed.  By
-\noderef{Step1ExitLegMinimum}, this is a Step 1 exit-leg minimum.
+We now establish primary minimality.  Take arbitrary data occurring in
+the primary comparison of \noderef{Step1ExitLegMinimum} and suppose its
+two exit paths exist.  By
+\noderef{CorrespondingExtendedTashkinovTree}, the comparison carries an
+actual replacement input, an actual ETT, and the same rung number and
+certified series as the selected ETT.  The selected rung equality in
+\noderef{Step1ExitLegPresentation} therefore makes the replacement rung
+number $n$.  The comparison hypotheses supply maximum property,
+properness, the exact-one-uncolored condition, its large bound, and its
+terminal minus-closed good hierarchy.  Its divider count is less than
+$d_0$, hence also less than $q$.
+
+Apply \noderef{ClosedColorExitPathBoundaryEdge} separately to the two
+comparison exit paths, using their common singleton-closed first color.
+This supplies a complete quadruple, including the exact second-color
+boundary identity, for each path.  Their tree ends are distinct because
+a common tree end would be a vertex-node in both disjoint supports.
+As above, \noderef{TreeExitPath}, \noderef{TreeSequenceVertexSet}, and
+the injectivity in \noderef{TreeSequence} give two distinct displayed
+positions.  Sort the two complete quadruples by those positions;
+\noderef{TreeVertexOrder} gives the required strict order while the
+boundary identities remain attached to their own paths.  Together with
+the comparison data, these are exactly all fields of
+\noderef{Step1ExitLegPresentation}.  They therefore define a
+presentation whose divider count is less than $d_0$, contradicting the
+definition of $d_0$.  This proves the primary certificate.
+
+For secondary minimality, take arbitrary data in the secondary
+comparison and normalize its first two paths in exactly the same way:
+apply \noderef{ClosedColorExitPathBoundaryEdge} to both paths and sort
+the two complete quadruples.  The replacement ETT and all non-leg fields
+are justified exactly as in the primary comparison; equality of divider
+counts makes the resulting
+\noderef{Step1ExitLegPresentation} $R$ a $d_0$-presentation.  If its
+second color is missing, then $s(R)=0<s(P)$, since this certificate is
+needed only in the positive case.  Otherwise the comparison supplies a
+third path support-disjoint from the two and with distinct outside end.
+Support-disjointness also makes its tree end distinct; applying
+\noderef{ClosedColorExitPathBoundaryEdge} to it supplies its exact
+second-color boundary identity.  Thus it is one of the qualifying third
+packages used to define $s(R)$.  Sorting the first two packages did not
+change their lengths, so if the displayed total is smaller than the
+selected sorted total, then
+\[
+ s(R)\leq 1+\text{(displayed total)}<s(P),
+\]
+again contradicting the choice of $P$.  This proves the secondary
+certificate.
+
+If the originally selected secondary value was zero, keep that selected
+presentation; its second color is missing and the secondary certificate
+is the first alternative.  If it was positive, use the sorted
+presentation constructed above and its ordered least triple.  In either
+case attach the elementariness assumed for every presentation and the
+primary and secondary certificates just proved.  The definition
+\noderef{Step1ExitLegMinimum} then gives a Step 1 exit-leg minimum.
 \end{proof}

@@ -7,44 +7,71 @@ and singleton-closed on the terminal tree of $P$.
 \end{lemma}
 \begin{proof}
 Write $X$ for the terminal ladder tree and $A$ for the last starred
-stage.  The ETT generating-coloring field identifies the presentation
-coloring with the last series coloring.  The rung number is positive,
-so the final certificate in \noderef{TashkinovSeries} is a noninitial
-constructor of \noderef{TashkinovSeriesStep}.  Under the non-PE
-hypothesis it is RE or SE.
+stage.  The embedded ETT and its terminal series are fields of
+\noderef{Step1ExitLegPresentation}.  The `generatingColoring' field of
+\noderef{ExtendedTashkinovTree} identifies the presentation coloring
+$\rho$ with the last series coloring, and its `roundsPositive' field
+says that the final series index is positive.  Thus the final
+certificate supplied by \noderef{TashkinovSeries} cannot be the initial
+constructor of \noderef{TashkinovSeriesStep}.  Its three possibilities
+are SE, PE, and RE; the hypothesis excluding PE leaves precisely SE and
+RE.
 
 In the RE case, `currentColoring' identifies the last coloring with the
-preceding coloring, and `previousClosed' says that every color missing
-on $X$ is closed there.  In the SE case, let $\pi$ be the preceding
-coloring and $\rho$ the selected last coloring.  The SE choice supplies
-properness, exact-one-uncoloredness, and stability from $\pi$ to $\rho$
-on $X$.  Symmetry in \noderef{sc2} gives stability from $\rho$ to
-$\pi$.  Hence \noderef{StableColoring} identifies their missing-color
-sets at every vertex of $X$ and fixes every boundary edge whose color is
-missing on $X$.  If a color missing under $\rho$ colored a
-$\rho$-boundary edge, the same edge would have that color under $\pi$,
-contradicting `previousClosed'.  Thus every color missing on $X$ is
-singleton-closed there under the presentation coloring in both cases.
+preceding coloring $\pi$, and `previousClosed' says that $V(X)$ is
+closed under $\pi$.  Since $\rho=\pi$, every color missing on $X$ under
+$\rho$ has no $\rho$-colored boundary identity: this is exactly the
+content of \noderef{ColoredVertexSetClosed} and
+\noderef{BoundaryColorEdges}.  By \noderef{TreeColorSetClosed}, its
+singleton is therefore closed on $X$.
+
+In the SE case, again let $\pi$ be the preceding coloring and $\rho$ the
+last coloring.  The SE constructor contains a
+\noderef{MaximumDefectiveChoice}; its `selectedProper',
+`selectedOneUncolored', and `selectedStable' fields state that $\rho$ is
+proper, leaves exactly $e_0$ uncolored, and is stable from $\pi$ to
+$\rho$ on $X$.  The SE constructor itself supplies the corresponding
+properties of $\pi$.  Symmetry in \noderef{sc2} therefore gives
+stability from $\rho$ back to $\pi$.  By
+\noderef{StableColoring}, the two colorings have identical missing-color
+sets at every vertex of $X$.  Now let $c$ be missing on $X$ under
+$\rho$, and suppose that a boundary identity $g$ of $X$ has
+$\rho(g)=c$.  Reverse stability fixes $g$, because its $\rho$-color $c$
+is tree-missing; hence $\pi(g)=c$.  The common vertexwise missing sets
+also make $c$ missing on $X$ under $\pi$.  This contradicts the
+`previousClosed' field after unfolding
+\noderef{ColoredVertexSetClosed} and
+\noderef{BoundaryColorEdges}.  Thus the $c$-colored boundary is empty,
+and \noderef{TreeColorSetClosed} makes $\{c\}$ closed on $X$.  We have
+proved in both RE and SE cases that every presentation color missing on
+$X$ is singleton-closed there.
 
 By \noderef{HierarchyStoredColorsCardinality}, the internal stored set
 at index zero has size at most the rung number.  The `twoColors' and
 `disjointPairs' fields of \noderef{GoodHierarchy} therefore bound the
-union of its Gamma pairs by twice the rung number.  The large bound in
-\noderef{Step1ExitLegPresentation} is $2n+11$, so after deleting that
-union and the two exit-leg colors at least nine colors remain.  Choose
-one and call it $\theta$.
+union of its Gamma pairs by twice the rung number.  The `rounds_eq' and
+`large' fields in \noderef{Step1ExitLegPresentation} turn this into a
+bound of $2n$ and a lower bound $2n+11$ for the colors missing on $X$.
+Hence after deleting that union and the two exit-leg colors at least
+nine colors remain.  Choose one and call it $\theta$.
 
 The `nonparallel' field of \noderef{HierarchyBase} identifies its core
 with $X$, and at divider count zero
 \noderef{HierarchyStarredStage} identifies $A$ with this core.  Hence
 $\theta$ is missing and closed on $A$.  The hierarchy inclusions put
-$X$ inside the terminal tree, so $\theta$ is missing there as well.
-Moreover, subtracting the larger terminal-tree missing set from the
-common raw stored set shows directly from
+$X$ inside the terminal tree: this is the chain recorded by
+\noderef{TashkinovHierarchy}.  Exact initial-segment containment retains
+all vertices, so the union description in \noderef{TreeMissingColors}
+shows that $\theta$ is missing there as well and gives
+$\overline\rho(A)\subseteq\overline\rho(P.T)$.  Consequently,
+subtracting the latter, larger missing set from the common raw stored set
+shows directly from
 \noderef{HierarchyTerminalStoredColors} and
 \noderef{HierarchyStoredColorsAt} that the terminal stored set is a
 subset of the internal set at index zero.  Thus $\theta$ avoids the
 terminal Gamma union.  The terminal minus-closure field of the
-presentation, unfolded with \noderef{TreeColorSetMinusClosed}, now says
-that $\theta$ is closed on the terminal tree.
+presentation in \noderef{Step1ExitLegPresentation}, unfolded with
+\noderef{TreeColorSetMinusClosed} and then
+\noderef{TreeColorSetClosed}, now says that the singleton $\{\theta\}$
+is closed on the terminal tree.
 \end{proof}

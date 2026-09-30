@@ -24,14 +24,27 @@ minus-closure of $U$ for
 \[
  \bigcup_{\eta\in D^H_{n,r}}\Gamma^{H,r-1}_\eta .
 \]
-This is the required terminal certificate for $K$.  Indeed, the retained
-series makes the raw stored-color set the same.  Since $r>0$,
-\noderef{HierarchyStarredStage} identifies the last starred stage used
-in $D^H_{n,r}$ with $H.\mathit{stage}(r)=U$.  Unfolding
-\noderef{HierarchyTerminalStoredColors} therefore identifies
-$D^H_{n,r}$ with the terminal stored-color set of $K$, and the last
-retained Gamma equality identifies the displayed Gamma family with the
-terminal Gamma family of $K$.
+This is the required terminal certificate for $K$.  To check the stored
+set exactly, let $D_n$ denote the common raw stored-color set of the
+retained certified series.  By \noderef{HierarchyStoredColorsAt},
+\[
+ D^H_{n,r}=D_n-\overline\varphi
+   (\noderef{HierarchyStarredStage}(H,r)).                 \tag{1}
+\]
+Since $r>0$, \noderef{HierarchyStarredStage} identifies the tree in
+(1) with $H.\mathit{stage}(r)=U$.  On the other hand,
+\noderef{HierarchyTerminalStoredColors} defines the terminal stored set
+of $K$ to be
+\[
+ D^K_{n,(r-1)+1}=D_n-\overline\varphi(U).                  \tag{2}
+\]
+The raw set in (2) is the same $D_n$ because
+\noderef{GoodHierarchyPrefixRepackage} retains the entire certified
+series.  Equations (1)--(2) therefore prove
+$D^H_{n,r}=D^K_{n,(r-1)+1}$, rather than merely an inclusion.  Finally,
+the repackaging theorem identifies the Gamma data at its last retained
+index $r-1$.  Hence the union in the displayed minus-closure statement
+is exactly the terminal stored-color/Gamma union required for $K$.
 
 The fewer-divider hypothesis applied to $\mathcal U,K$ makes $V(U)$
 elementary.  The hypotheses on $\alpha,\beta$ are exactly the missing,

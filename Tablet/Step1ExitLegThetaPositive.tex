@@ -9,30 +9,38 @@ tree.
 Let $K$ be the selected hierarchy, put
 $B_-=K.\mathit{stage}(d-1)$ and
 $A=K.\mathit{stage}(d)$.  The latter is the last starred stage by
-\noderef{HierarchyStarredStage}.  Repeated use of the hierarchy's
-`nested' field gives inclusions from the terminal ladder tree $X$ through
-$B_-$ and $A$ to the selected terminal tree $U$.  Unfolding
-\noderef{TreeMissingColors} along these exact initial segments gives
+\noderef{HierarchyStarredStage}.  The `baseStage', `nested', and
+`terminalStage' clauses of \noderef{TashkinovHierarchy}, composed as
+relations from \noderef{TreeSequenceInitialSegment}, give exact ordered
+initial-segment inclusions from the terminal ladder tree $X$ through
+$B_-$ and $A$ to the selected terminal tree $U$.  Since an exact initial
+segment retains every displayed vertex, \noderef{TreeMissingColors}
+gives
 \[
  \overline\psi(X)\subseteq\overline\psi(B_-)
  \subseteq\overline\psi(A)\subseteq\overline\psi(U).       \tag{1}
 \]
-There is also an initial-segment inclusion from
-$K.\mathit{starred}(d-1)$ to $A$: it is `nested' when $d>1$ and
-`coreInsideFirst' when $d=1$.  Subtracting the corresponding nested
-missing sets from the common raw stored set in
+There is also an exact initial-segment inclusion from the preceding
+starred stage $K.\mathit{starred}(d-1)$ to $A$: by
+\noderef{TashkinovHierarchy} it is the `nested' inclusion when $d>1$
+and the `coreInsideFirst' inclusion when $d=1$.  Thus its missing-color
+set is contained in that of $A$ by \noderef{TreeMissingColors}.
+Subtracting these nested missing sets from the common raw stored set in
 \noderef{HierarchyStoredColorsAt} gives
 $D^K_{n,d}\subseteq D^K_{n,d-1}$.
 
 Apply `twoColors' and `disjointPairs' from
 \noderef{GoodHierarchy} at index $d-1$ to the indices in
 $D^K_{n,d}$.  Together with
-\noderef{HierarchyStoredColorsCardinality}, this bounds
+\noderef{HierarchyStoredColorsCardinality} and the `rounds_eq' field of
+\noderef{Step1ExitLegPresentation}, this bounds
 \[
  \left|\bigcup_{\eta\in D^K_{n,d}}\Gamma^{d-1}_\eta\right|
  \leq 2n.                                                    \tag{2}
 \]
-The selected presentation has at least $2n+11$ colors missing on $X$.
+The `large' field of the selected
+\noderef{Step1ExitLegPresentation} gives at least $2n+11$ colors missing
+on $X$.
 Using (1), (2), and deleting the two exit-leg colors, choose
 \[
  \theta\in\overline\psi(B_-)
@@ -54,11 +62,18 @@ refreshed pair at $\eta_g$ is missing at a vertex of
 $V(A)\setminus V(K.\mathit{starred}(d-1))$.  On the other hand,
 $\theta$ is missing at a vertex of $B_-$, and every vertex of $B_-$ lies
 in that preceding starred stage.  The latter is equality for $d-1>0$;
-for $d=1$ it follows from the base-stage identity and the vertex-union
-clause of \noderef{OrderedTreeUnion}.  If $\theta$ belonged to the
-refreshed pair, these would be two distinct vertices of the selected
-terminal tree missing $\theta$, contradicting the `elementary' field of
-\noderef{Step1ExitLegMinimum}.  Hence $\theta$ avoids the full terminal
-Gamma union.  It is missing on $U$ by (1), so the selected terminal
-minus-closure certificate closes it on $U$.
+for $d=1$, \noderef{HierarchyStarredStage} makes the preceding starred
+stage either $X$ itself or the chosen ordered union containing $X$; the
+vertex-union clause of \noderef{OrderedTreeUnion} gives the latter
+containment.  Thus the old and refreshed missing witnesses are distinct.
+Both belong to $U$ by the exact hierarchy inclusions above.  If $\theta$
+belonged to the refreshed pair, these would be two distinct vertices of
+the selected terminal tree missing $\theta$.  The `elementary' field of
+\noderef{Step1ExitLegMinimum}, interpreted by
+\noderef{ColoredVertexSetElementary}, forbids one color from being
+missing at two distinct vertices of that set.  Hence $\theta$ avoids the
+full terminal Gamma union.  It is missing on $U$ by (1), and the
+`terminalMinusClosed' field of
+\noderef{Step1ExitLegPresentation}, unfolded with
+\noderef{TreeColorSetMinusClosed}, therefore closes $\theta$ on $U$.
 \end{proof}

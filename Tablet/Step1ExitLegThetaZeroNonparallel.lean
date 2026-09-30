@@ -1,14 +1,21 @@
+import Tablet.BoundaryColorEdges
+import Tablet.ColoredVertexSetClosed
+import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.HierarchyBase
 import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsCardinality
 import Tablet.HierarchyStoredColorsAt
 import Tablet.HierarchyTerminalStoredColors
+import Tablet.MaximumDefectiveChoice
 import Tablet.StableColoring
 import Tablet.Step1ExitLegPresentation
+import Tablet.TashkinovHierarchy
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
+import Tablet.TreeColorSetClosed
 import Tablet.TreeColorSetMinusClosed
+import Tablet.TreeMissingColors
 import Tablet.sc2
 
 -- [TABLET NODE: Step1ExitLegThetaZeroNonparallel]

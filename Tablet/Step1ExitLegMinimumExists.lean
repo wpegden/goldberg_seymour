@@ -2,7 +2,10 @@ import Tablet.ClosedColorExitPathBoundaryEdge
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.ElementaryClosedExitPairExtendsTriple
 import Tablet.Step1ExitLegMinimum
+import Tablet.Step1ExitLegPresentation
+import Tablet.TreeExitPath
 import Tablet.TreeSequence
+import Tablet.TreeSequenceVertexSet
 import Tablet.TreeVertexOrder
 
 -- [TABLET NODE: Step1ExitLegMinimumExists]

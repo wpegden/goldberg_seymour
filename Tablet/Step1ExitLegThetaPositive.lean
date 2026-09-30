@@ -1,3 +1,4 @@
+import Tablet.ColoredVertexSetElementary
 import Tablet.GoodHierarchy
 import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsCardinality
@@ -5,8 +6,11 @@ import Tablet.HierarchyStoredColorsAt
 import Tablet.HierarchyTerminalStoredColors
 import Tablet.OrderedTreeUnion
 import Tablet.Step1ExitLegMinimum
+import Tablet.Step1ExitLegPresentation
+import Tablet.TashkinovHierarchy
 import Tablet.TreeColorSetMinusClosed
 import Tablet.TreeMissingColors
+import Tablet.TreeSequenceInitialSegment
 
 -- [TABLET NODE: Step1ExitLegThetaPositive]
 lemma Step1ExitLegThetaPositive {V E : Type*}
