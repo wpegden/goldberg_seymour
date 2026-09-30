@@ -31,6 +31,8 @@ import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.TechnicalTheoremBase
+import Tablet.TdTerminalRERebuild
+import Tablet.TdTerminalSEPERebuild
 import Tablet.TreeExit
 import Tablet.TreeExitPath
 import Tablet.TreeInterchangeable
@@ -168,4 +170,50 @@ theorem Td {V E : Type*} [Fintype V] [Fintype E]
         (ett.series.data.coloring n) sigma →
       ModColoring ett sigma := by
 -- BODY
-  sorry
+  dsimp
+  intro sigma hsigmaProper hsigmaOneUncolored hsigmaStable
+  let n : Fin (ett.rounds + 1) := Fin.last ett.rounds
+  have hkind :
+      ett.series.data.kind n = some TashkinovExtensionKind.RE ∨
+        ett.series.data.kind n = some TashkinovExtensionKind.SE ∨
+        ett.series.data.kind n = some TashkinovExtensionKind.PE := by
+    generalize hindex : n = index
+    cases ett.series.certified index with
+    | initial triple seedLength initialColoring initialStored initialEdges
+        initialKind initialVertex initialOutside initialDelta initialGamma
+        initialClosure =>
+      have hval := congrArg Fin.val hindex
+      dsimp [n] at hval
+      omega
+    | SE i previousProper previousOneUncolored previousClosed
+        previousNotStronglyClosed noRevisiting choice seriesAlternative
+        currentColoring currentStored currentEdges currentKind currentVertex
+        currentOutside currentDelta currentGamma adjoined adjoinedExactly
+        closedExtension orderedExtension strictExtension =>
+      right
+      left
+      exact currentKind
+    | PE i previousProper previousOneUncolored previousClosed
+        previousNotStronglyClosed noRevisiting choice seriesAlternativeFails
+        gamma gammaRule secondStable secondStableProper
+        secondStableOneUncolored secondStableRelation exitWitness
+        currentColoring currentProper currentOneUncolored currentStored
+        currentEdges currentKind currentVertex currentOutside currentDelta
+        currentGamma closedExtension orderedExtension strictExtension =>
+      right
+      right
+      exact currentKind
+    | RE i previousProper previousOneUncolored previousClosed
+        previousNotStronglyClosed available currentColoring currentStored
+        currentEdges currentKind currentVertex currentOutside currentDelta
+        currentGamma adjoined adjoinedExactly closedExtension orderedExtension
+        strictExtension =>
+      left
+      exact currentKind
+  rcases hkind with hRE | hSE | hPE
+  · exact TdTerminalRERebuild G k e0 input T generating ett hMP hpositive
+      hlower hRE sigma hsigmaProper hsigmaOneUncolored hsigmaStable
+  · exact TdTerminalSEPERebuild G k e0 input T generating ett hMP hpositive
+      hlower (Or.inl hSE) sigma hsigmaProper hsigmaOneUncolored hsigmaStable
+  · exact TdTerminalSEPERebuild G k e0 input T generating ett hMP hpositive
+      hlower (Or.inr hPE) sigma hsigmaProper hsigmaOneUncolored hsigmaStable

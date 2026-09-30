@@ -1,0 +1,34 @@
+\begin{helper}[Identification of corresponding PE witnesses]
+Let two PE constructions be made on the same ordered tree \(T\), with
+maximum-defective choices
+\((v,u,f,\delta)\) and \((v^*,u^*,f^*,\delta^*)\), and extra colors
+\(\gamma\) and \(\gamma^*\).  Suppose their singleton connecting-edge
+sets and unordered stored-color pairs agree.  Suppose also that their
+post-switch missing-color sets agree at the two support vertices, that each
+delta is missing there, and that each gamma is present there.  Then
+\[
+ f^*=f,\qquad v^*=v,\qquad u^*=u,\qquad
+ \delta^*=\delta,\qquad\gamma^*=\gamma .
+\]
+\end{helper}
+\begin{proof}
+Equality of the singleton edge sets gives \(f^*=f\) as an exact edge
+identity.  The endpoint equation in each
+\noderef{MaximumDefectiveChoice} writes the endpoints of this edge as
+\(\{v,u\}\) and \(\{v^*,u^*\}\).  Both support vertices belong to
+the common tree, whereas both other endpoints lie outside it.  The crossed
+orientation would put an outside endpoint in the tree, so the endpoint
+equality has the unique orientation \(v^*=v\) and \(u^*=u\).
+
+The unordered pair equality says
+\(\{\delta,\gamma\}=\{\delta^*,\gamma^*\}\).
+Under the identified support vertex, the common post-switch missing set
+contains \(\delta\) and \(\delta^*\), but contains neither
+\(\gamma\) nor \(\gamma^*\).  If \(\delta^*=\gamma\), the same
+color would be both missing and present, a contradiction.  Hence the
+two-element-set equality forces \(\delta^*=\delta\).  Substituting this
+equality back into the pair equality, the alternative
+\(\gamma^*=\delta\) is ruled out in the same way, leaving
+\(\gamma^*=\gamma\).  This proves all five identities.
+\end{proof}
+
