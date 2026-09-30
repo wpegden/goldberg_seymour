@@ -1,0 +1,59 @@
+\begin{helper}[Transport of a contained stored-pair cycle]
+Let \(t<\epsilon\le n\) be slots of a certified Tashkinov series.  Assume
+slot \(t\) is PE with pair \(\{\gamma_t,\delta_t\}\), every slot strictly
+between \(t\) and \(\epsilon\) is RE, and slot \(n\) is PE.  Let
+\(\sigma\) be a proper, exactly-one-uncolored coloring stable from the
+current coloring at \(n\) on its preceding tree with the current stored
+set.  If a full \((\gamma_t,\delta_t)\)-component under the current
+coloring at \(t\) is a cycle and all of its vertex-nodes lie in the
+preceding tree at \(\epsilon\), then its full component under \(\sigma\)
+has exactly the same support and is again a cycle.
+\end{helper}
+\begin{proof}
+The PE constructor at \(t\) in \noderef{TashkinovSeriesStep} identifies
+its stored pair with \(\{\delta_t,\gamma_t\}\).  Hence each of the two
+colors is either missing on the preceding tree at \(t\), or survives in
+\noderef{TashkinovStoredColors} there.  Repeatedly apply the two
+inclusions of \noderef{HkuMissingStoredMonotone}: first cross each
+coloring step and then each ordered tree extension.  Both colors thus
+belong to the missing-or-stored control set at the preceding tree of
+\(\epsilon\), and subsequently to the corresponding terminal control
+set at \(n\).
+
+Every intermediate slot is RE, whose current-coloring equation in
+\noderef{TashkinovSeriesStep} fixes the coloring.  Therefore the current
+coloring at \(t\) equals the preceding coloring at \(\epsilon\).  Choose
+the cycle witnessing \noderef{TwoColorComponentCycle}.  If an exact
+edge-node belongs to its support, each endpoint vertex-node is adjacent
+to it in \noderef{TwoColorIncidenceGraph}, hence belongs to the same
+full component.  The containment hypothesis puts both endpoints in the
+tree at \(\epsilon\), so the edge belongs to \noderef{InternalEdges}.
+The internal-edge clause of \noderef{SameColorSeriesPreserved}, applied
+from \(\epsilon\) through \(n\), therefore fixes the exact color of every
+cycle edge.  Thus the same alternating cycle occurs under the current
+coloring at \(n\).
+
+The PE certificate at \(n\) makes that current coloring proper and
+exactly-one-uncolored.  At every cycle vertex there is already one
+incident cycle edge of each of the two distinct colors.  Properness in
+the exact-edge sense of \noderef{IsProperEdgeColoring} excludes every
+additional incident edge of either color.  Consequently the displayed
+cycle support is the entire two-color component under the current
+coloring at \(n\), not merely a subcycle.
+
+The cycle lies in the tree at \(n\) by the ordered-extension clauses of
+the series, and both colors lie in its missing-or-stored control set as
+shown above.  Forward \noderef{StableColoring} therefore fixes every
+cycle-edge identity from the current coloring at \(n\) to \(\sigma\).
+For the reverse inclusion, package the two proper,
+exactly-one-uncolored colorings and use symmetry from \noderef{sc2}.
+Vertexwise missing sets agree on the tree, so the same two colors are in
+the reverse control set.  If an edge incident with a cycle vertex had
+\(\sigma\)-color \(\gamma_t\) or \(\delta_t\), reverse stability would
+give it the same color under the current coloring at \(n\).  Properness
+there forces it to be the already fixed cycle edge of that color.
+Therefore no \(\sigma\)-two-color path can leave the cycle support, while
+the fixed cycle edges keep the support connected.  The two full
+components are equal, and the same closed walk supplies the required
+\noderef{TwoColorComponentCycle} under \(\sigma\).
+\end{proof}

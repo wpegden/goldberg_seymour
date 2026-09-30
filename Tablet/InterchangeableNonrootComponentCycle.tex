@@ -1,0 +1,47 @@
+\begin{helper}[Nonroot interchangeable components are cycles]
+Let \(A\) be an initial segment of a tree sequence \(B\), and let
+\(\varphi\) be a proper partial edge coloring.  Suppose \(\alpha\ne\beta\)
+implicitly through the assertion that the component through a designated
+vertex \(s\in V(A)\) is a two-color path component.  Suppose that this
+root component meets \(A\) only at \(s\), that \(\alpha,\beta\) are
+\(B\)-interchangeable, and that every component rooted at a vertex of
+\(A-s\) contains an exact edge-node.  Then every such nonroot component
+is a full two-color cycle and avoids \(s\).
+\end{helper}
+\begin{proof}
+Fix \(v\in V(A)-\{s\}\), and let \(C_v\) be its full
+\((\alpha,\beta)\)-component.  The initial-segment relation
+\noderef{TreeSequenceInitialSegment} puts both \(s\) and \(v\) in
+\(V(B)\).  If \(C_v\) were a \noderef{TwoColorPathComponent}, then
+\noderef{TreeInterchangeable}, applied to \(C_v\) and the designated
+root path component, would identify their full supports because both
+meet \(B\).  The vertex-node of \(v\) would then lie in the root
+component, contradicting the hypothesis that its only vertex in \(A\)
+is \(s\).  Hence \(C_v\) is not a path component.
+
+By hypothesis, \(C_v\) contains an exact edge-node, so it is not the
+isolated-component alternative.  The root path-component hypothesis
+also includes \(\alpha\ne\beta\).  Unfolding
+\noderef{TwoColorPathComponent}, failure of the path alternative now
+says that no node of \(C_v\) has a subsingleton neighbor set.  On the
+other hand, \noderef{TwoColorIncidenceDegreeAtMostTwo}, applied to the
+proper coloring \(\varphi\), gives degree at most two at every node.
+Thus every node of \(C_v\) has exactly two neighbors.
+
+Take the simple spanning path supplied by
+\noderef{TwoColorComponentSpanningPath}; its support is exactly \(C_v\).
+Each endpoint has one path neighbor and therefore has one further
+neighbor in \(C_v\).  That further neighbor cannot be an internal path
+node, since an internal node already has its two path neighbors and
+would acquire degree at least three.  It is therefore the other endpoint.
+Adding this last adjacency closes the spanning path into a simple closed
+walk, hence a \noderef{TwoColorCycle}, without changing its support.
+The support equivalence is exactly
+\noderef{TwoColorComponentCycle} for \(C_v\).
+
+Finally, if the vertex-node of \(s\) lay in \(C_v\), connected-component
+maximality in \noderef{TwoColorComponent} would identify \(C_v\) with
+the root component.  That would again put \(v\) in the root component,
+contrary to its asserted intersection with \(A\).  Thus \(C_v\) avoids
+\(s\), as required.
+\end{proof}

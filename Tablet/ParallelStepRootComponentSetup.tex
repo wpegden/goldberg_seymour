@@ -1,0 +1,79 @@
+\begin{helper}[Root component and nonisolation at a parallel step]
+Let a certified Tashkinov series have a positive slot \(t\) of kind PE,
+with chosen support \(v_t\), parallel color \(\gamma_t\), and defective
+color \(\delta_t\).  Under the current coloring \(\varphi_t\), the two
+colors are distinct and the coloring is proper.  The preceding tree
+\(T_t\) contains \(v_t\) and is an initial segment of the next tree.
+The \((\gamma_t,\delta_t)\)-component through \(v_t\) is a path
+component whose only vertex in \(T_t\) is \(v_t\).  Moreover, for every
+other vertex \(v\) of \(T_t\), the component through \(v\) contains an
+exact edge identity.
+\end{helper}
+\begin{proof}
+Inspect the certificate at slot \(t\) in \noderef{TashkinovSeries}.
+The stated kind equation rules out the initial, SE, and RE constructors
+of \noderef{TashkinovSeriesStep}, so the certificate is PE.  Its
+chosen-vertex, gamma, and delta equations identify the PE constructor's
+support, parallel color, and defective color with
+\(v_t,\gamma_t,\delta_t\).  The constructor directly supplies
+properness of \(\varphi_t\) and the required
+\noderef{TreeSequenceInitialSegment} relation.
+
+Write \(\varphi^-\) for the preceding coloring, \(\pi\) for the
+selected coloring in \noderef{MaximumDefectiveChoice}, and \(\rho\) for
+the second stable coloring.  The PE equations say
+\[
+  \varphi_t=\operatorname{swap}_{K_{v_t}(\gamma_t,\delta_t;\rho)}(\rho).
+  \tag{1}
+\]
+We first show that \(V(T_t)\) is closed under \(\rho\).  It is closed
+under \(\varphi^-\) by the PE certificate.  The selected coloring
+\(\pi\) is proper, leaves exactly the distinguished edge uncolored, and
+is stable from \(\varphi^-\), by
+\noderef{MaximumDefectiveChoice}.  The preceding coloring has the same
+two coloring properties.  Symmetry in \noderef{sc2} therefore gives
+reverse stability.  If a boundary edge had \(\pi\)-color \(c\) missing
+at a tree vertex under \(\pi\), the vertex clause of
+\noderef{StableColoring} would make \(c\) missing at that vertex under
+\(\varphi^-\), while reverse stability would fix that exact boundary
+edge.  This contradicts the \noderef{ColoredVertexSetClosed} condition
+for \(\varphi^-\).  Hence the tree is closed under \(\pi\).  Applying
+the same argument to the PE's second stable relation, now between
+\(\pi\) and \(\rho\), proves closedness under \(\rho\).
+
+The selected edge \(f_t\) from \noderef{MaximumDefectiveChoice} is a
+boundary edge incident with \(v_t\), has its other endpoint outside the
+tree, and has \(\pi(f_t)=\delta_t\).  The second stable relation controls
+\(\delta_t\), so \(\rho(f_t)=\delta_t\).  If \(\delta_t\) were missing
+at any tree vertex \(x\), that same boundary identity would contradict
+closedness under \(\rho\).  Thus \(\delta_t\) is present at every tree
+vertex.  By the complementary definitions \noderef{MissingColors} and
+\noderef{PresentColors}, for every such \(x\) there is an exact incident
+edge \(g_x\) with \(\rho(g_x)=\delta_t\).
+
+The \noderef{ParallelExtensionColor} clause says that \(\gamma_t\) is
+missing at \(v_t\) under \(\pi\), and second stability transfers this
+missingness to \(\rho\).  Since \(\delta_t\) is present there, the two
+colors are distinct.  Unpack the PE's \noderef{TreeExit} witness.  Its
+\noderef{TreeExitPath} is a simple two-color path from an outside vertex
+to \(v_t\), puts \(v_t\) in \(T_t\), and makes \(v_t\) its only tree
+vertex.  Missingness at both ends gives degree one there.  Every internal
+node already has its two path neighbors, while
+\noderef{TwoColorIncidenceDegreeAtMostTwo} bounds all degrees by two.  A
+shortest route from any further component node to the path would
+therefore create either a third neighbor at an internal node or a second
+neighbor at an endpoint.  Hence the path exhausts the whole component
+through \(v_t\).  It is consequently a
+\noderef{TwoColorPathComponent}, with exactly the asserted tree
+intersection.
+
+The swap in (1), defined by \noderef{TwoColorComponentSwap}, changes
+only this entire root component and merely exchanges its two colors.
+Thus its support and its unique tree vertex are unchanged under
+\(\varphi_t\).  For \(x\ne v_t\), the edge-node of \(g_x\) cannot belong
+to the root component: incidence would then put \(x\) in that component,
+contradicting the unique-intersection conclusion.  The swap therefore
+fixes \(g_x\), so it remains a genuine \(\delta_t\)-colored exact edge
+in the component through \(x\) under \(\varphi_t\).  This proves the
+last assertion.
+\end{proof}
