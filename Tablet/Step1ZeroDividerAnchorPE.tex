@@ -1,0 +1,239 @@
+\begin{helper}[Step 1 zero-divider PE branch]
+Let $T$ be a positive-rung ETT of rung $n$ on a finite loopless
+multigraph with individual edge identities, generating coloring $\psi$,
+maximum property, properness, and exactly the distinguished edge $e_0$
+uncolored.  Assume uniformly for every positive-rung maximum ETT of rung
+strictly below $n$ the complete six assertions used in Step 1:
+terminal elementarity; stable interchangeability of the final ladder
+closure, including isolated path components; PE stability descent unconditionally before each support and, when the
+first-appearance index is greater than one, to the preceding ladder stage;
+stored pairs at distinct supports with the same first appearance are disjoint; the terminal PE component intersection assertion; the
+defective-endpoint precedence assertion; and the terminal mod-coloring
+assertion.  Assume that the terminal extension kind is PE.
+
+Let $B$ be a hierarchy base and $H$ a hierarchy over $B$ with zero
+dividers.  Put $A=H.\mathit{starred}(0)$, the exact hierarchy core.  Let
+$a\ne b$ be colors such that $a$ is missing and singleton-closed on $A$.
+Suppose there are exact $(A,\psi,\{a,b\})$-exit paths $P_1,P_2$ with
+distinct outside endpoints and disjoint incidence-walk supports.  Then
+these data are contradictory.
+\end{helper}
+\begin{proof}
+Write $n$ for the rung number, $T_n$ for the tree in series slot $n$,
+$\psi_{n-1}$ for the coloring in slot $n-1$, and $D_i$ for the exact
+computed stored-color set in slot $i$.  Thus the predecessor uses
+$D_{n-1}$, while the terminal PE assertions use $D_n$.  The
+generating-coloring field of \noderef{ExtendedTashkinovTree} identifies
+the displayed coloring $\psi$ with series color slot $n$.  Since
+the divider count is zero, the value of
+\noderef{HierarchyStarredStage} at its only index is the core stored in
+the given \noderef{HierarchyBase}.  Thus the tree called $A$ in the
+statement is exactly that core.
+
+We first record two consequences of each alleged exit path.  Unfold
+\noderef{TreeExitPath}.  Its node list starts at the outside vertex-node
+$a_i$, ends at the tree vertex-node $b_i$, has length at least two, is
+simple, and contains no other vertex-node of $A$.  By the bipartite
+adjacency definition in \noderef{TwoColorIncidenceGraph}, the node just
+before $b_i$ is an exact edge identity $f_i$ colored $a$ or $b$ and
+incident with $b_i$.  The vertex-node before $f_i$ is outside $A$,
+whereas $b_i$ is inside.  Hence the endpoint description in
+\noderef{BoundaryEdges} gives $f_i\in\partial_G(A)$, and
+\noderef{BoundaryColorEdges} gives
+\[
+ f_i\in\partial_{\psi,a}(A)\quad\hbox{or}\quad
+ f_i\in\partial_{\psi,b}(A).                         \tag{1}
+\]
+Similarly, the node after $a_i$ is an exact incident edge $g_i$ colored
+$a$ or $b$.  This first edge will certify below that the outside endpoint
+is not isolated after the recoloring.  These conclusions use actual edge
+nodes, so parallel edge identities are not identified.
+
+By the terminal-kind hypothesis we are in the PE case.
+The parallel field of \noderef{HierarchyBase} gives a support position,
+the support vertex
+\[
+                 x=T_n.\operatorname{vertex}(\text{that position}),
+\]
+an exact prefix $T_n|x$, a tree $R_n$ which is a
+\noderef{TashkinovClosure} of that prefix under $\psi$, and a witness
+that $A$ is the \noderef{OrderedTreeUnion} $T_n\vee R_n$.  In
+particular,
+\[
+ V(A)=V(T_n)\cup V(R_n),                              \tag{5}
+\]
+and $x\in V(T_n)$ by \noderef{TreeSequenceVertexSet}.
+
+We verify separately that $x\in V(R_n)$.  By
+\noderef{TreeSequencePrefix}, the prefix through the displayed position
+contains its last vertex $x$.  Unfolding \noderef{TashkinovClosure}
+gives a \noderef{TashkinovAugmentationSequence} from that prefix to
+$R_n$.  Induct along this reflexive-transitive sequence.  In the
+reflexive case the assertion is the prefix membership just noted.  In a
+successor step, \noderef{TashkinovAugmentation} supplies a
+\noderef{TreeSequenceInitialSegment} from the preceding tree to the next
+one.  If the old occurrence of $x$ is at position $j$, the entrywise
+vertex equality in that initial-segment relation identifies the new
+vertex at the included position $j$ with $x$; then
+\noderef{TreeSequenceVertexSet} puts $x$ in the next tree.  Induction
+therefore gives
+\[
+                     x\in V(T_n)\cap V(R_n).          \tag{6}
+\]
+
+At this particular vertex $x$, let $C_x$ be the finite set
+\noderef{PresentColors}$(G,\psi,x)$.  For every $d\in C_x$, choose the
+incident exact edge supplied by that definition.  Properness makes an
+edge of color $d$ at $x$ unique, and chosen edges for distinct colors are
+distinct because $\psi$ is a function.  This injects $C_x$ into the
+incident-edge set.  By \noderef{Degree} and \noderef{MaximumDegree},
+\[
+ |C_x|\leq\deg_G(x)\leq\Delta(G).
+\]
+The initial \noderef{KTriple} gives $\Delta(G)+1\leq k$, whereas the
+palette $[k]$ has cardinality $k$.  Hence $C_x$ is a proper subset of the
+palette.  Choose $c$ in its complement.  The definition
+\noderef{MissingColors} gives $c\in\overline\psi(x)$, and (6) with
+\noderef{TreeMissingColors} makes $c$ missing on both $T_n$ and $R_n$.
+
+The pre-step vertex set $V(T_n)$ is elementary under $\psi_{n-1}$.  For
+$n>1$, this is lower assertion (i) applied to the actual predecessor from
+\noderef{CertifiedETTPredecessor}, whose tree and generating-coloring
+equalities give exactly $T_n$ and $\psi_{n-1}$.  For $n=1$, it is the
+elementarity conclusion of \noderef{TechnicalTheoremBase} for the
+initial tuple.  All hypotheses of
+\noderef{ParallelCommonMissingClosed} are now exact: the certified
+terminal step is PE, (5) is the chosen union, and the pre-step
+elementarity has just been supplied.  Since $c$ is common-missing, that
+lemma gives
+\[
+                 \partial_{\psi,c}(A)=\varnothing.   \tag{7}
+\]
+Equivalently, \noderef{TreeColorSetClosed} says that $\{c\}$ is closed
+on $A$.
+
+The color $b$ is present at $x$.  If it were missing, then (6) would make
+it common-missing on $T_n$ and $R_n$.  A second application of
+\noderef{ParallelCommonMissingClosed} would give
+$\partial_{\psi,b}(A)=\varnothing$.  The assumed singleton closedness of
+$a$ gives $\partial_{\psi,a}(A)=\varnothing$, contradicting the exact
+boundary identity (1).  Hence $b$ is not in
+\noderef{MissingColors} at $x$, so it is in
+\noderef{PresentColors} there.  Since $c$ is missing at the same vertex,
+we again have
+\[
+                         c\ne b.                    \tag{8}
+\]
+
+We now define $\rho$, again separating equality from a genuine Kempe
+change.  If $a=c$, put $\rho=\psi$.  The assumed properness and
+one-uncoloredness persist.  Reflexivity in \noderef{sc2} makes $\rho$
+stable on $T_n$ with control $D_n$ and on $R_n$ with empty control;
+by definition these two clauses are exactly
+\noderef{CombinedStableColoring}.  The two original walks, with $a$
+renamed $c$, retain all their exit-path fields and disjoint supports.
+
+Suppose $a\ne c$.  In the $(a,c)$ incidence graph define explicitly
+\[
+ \mathcal R_{\mathrm{PE}}=
+ \{\operatorname{inl}a_1,\operatorname{inl}a_2\}
+ \mathbin\cup
+ \{\operatorname{inr}f: \operatorname{inr}f\in
+       \operatorname{supp}P_1\cup\operatorname{supp}P_2,
+       \ \psi(f)=a\}.                               \tag{9}
+\]
+This is a finite root set because the two walk supports are finite.  We
+check that each rooted full component avoids $A$.  The endpoint roots
+$a_i$ are outside $A$.
+An $a$-colored edge root on $P_i$ cannot be the final edge because $a$ is
+closed on $A$, so its component contains an earlier outside vertex of
+the walk.  If a selected component also contained a vertex of $A$, a
+shortest incidence path from such an outside vertex to the first vertex
+of $A$ would have, between its last outside vertex and first inside
+vertex, an exact boundary identity colored $a$ or $c$.  Unfolding
+\noderef{TwoColorIncidenceGraph}, \noderef{BoundaryEdges}, and
+\noderef{BoundaryColorEdges} gives an element of
+$\partial_{\psi,a}(A)$ or $\partial_{\psi,c}(A)$, contrary respectively
+to the given closedness or (7).  Thus the root set (9) satisfies the outside
+condition in \noderef{OutsideKempeRecoloring} relative to $A$.
+
+Swap $a,c$ on exactly these components to obtain $\rho$.  Equation (5)
+shows $V(T_n),V(R_n)\subseteq V(A)$.  Therefore every selected component
+also avoids each constituent, and the same roots and edge formula certify
+\noderef{OutsideKempeRecoloring} relative separately to $A$, $T_n$, and
+$R_n$.  Applying \noderef{OutsideKempeRecoloringStable} in these three
+forms gives: $\rho$ is proper and leaves exactly $e_0$ uncolored; every
+edge incident with $A$ is fixed; $\rho$ is stable on $T_n$ for the exact
+control $D_n$; and it is stable on $R_n$ for the empty control.  The
+last two clauses are precisely \noderef{CombinedStableColoring}.
+
+For completeness, the transformed exit paths are checked directly, not by
+preserving their old full components.  Every old $a$-edge node on either
+walk was included in the root set (9) and
+therefore has new color $c$; every old $b$-edge is fixed because (8) and
+$a\ne b$ put $b$ outside the exchanged pair.  Consequently the same node
+lists have all required adjacencies in $I_G(\rho;c,b)$.  Their simplicity,
+length, endpoints, support disjointness, and unique intersections with
+$A$ are unchanged.  If the old outside alternative was that $b$ is
+missing, $b$ remains missing.  If it was that $a$ is missing, the root at
+$a_i$ swaps every incident $a$- or $c$-edge in its full component, so $c$
+is missing there under $\rho$.  The witness and complement definitions
+\noderef{PresentColors} and \noderef{MissingColors} justify these last
+two statements.  Thus all six fields in \noderef{TreeExitPath} hold for
+both transformed walks.
+
+Before using terminal PE interchangeability, we verify its two premises
+under the changed coloring.  In the identity case, the previously chosen
+$c$ is missing at $x\in V(A)$ and (7) is its empty colored boundary;
+substitution of $\rho=\psi$ therefore gives both premises.  In the
+genuine recoloring case, stability on
+$T_n$ preserves the missing-color set at $x$ by the vertex clause of
+\noderef{StableColoring}.  Hence $c$ remains missing at $x\in V(A)$, and
+\noderef{TreeMissingColors} gives
+$c\in\overline\rho(A)$.  For closedness, suppose
+$f\in\partial_{\rho,c}(A)$.  Then \noderef{BoundaryColorEdges} gives
+$f\in\partial_G(A)$ and $\rho(f)=c$.  Such a boundary identity is
+incident with $A$, so the fixed-incident-edge conclusion of
+\noderef{OutsideKempeRecoloringStable} gives
+$\psi(f)=\rho(f)=c$.  The same underlying membership
+$f\in\partial_G(A)$ then puts $f$ in
+$\partial_{\psi,c}(A)$, contradicting (7).  Therefore
+\[
+ c\in\overline\rho(A)
+ \quad\hbox{and}\quad
+ \partial_{\rho,c}(A)=\varnothing.                  \tag{10}
+\]
+By \noderef{TreeColorSetClosed}, the second assertion is exactly
+singleton $c$-closedness under $\rho$.
+
+The three-leaf argument must likewise be made in the new incidence graph.
+Combined stability at the common support $x$ preserves both $c$-missingness
+and $b$-presence.  Properness therefore makes
+$\operatorname{inl}x$ an exact one-neighbor node of
+$I_G(\rho;c,b)$.  At each $a_i$, the first edge of the transformed exit
+path supplies an incident edge in the nonmissing one of $c,b$, while its
+missing-color alternative and properness exclude every other
+$(c,b)$-edge.  Hence $\operatorname{inl}a_1$ and
+$\operatorname{inl}a_2$ are exact one-neighbor nodes as well.
+
+Their full \noderef{TwoColorComponent}s are path components by (8) and
+\noderef{TwoColorPathComponent}.  The component through $x$ meets $A$ at
+$x$, and the transformed walk from $a_i$ to $b_i$ proves that the
+component through $a_i$ meets $A$ at $b_i$.  The three roots are distinct
+because $a_1\ne a_2$ and the $a_i$ lie outside $A$ whereas $x$ lies
+inside.  If all three full components were equal,
+\noderef{TwoColorComponentSpanningPath} would give a simple spanning path
+containing three distinct one-neighbor nodes.  Each would have to be one
+of the two endpoints, which is impossible.  Thus the component through
+$x$ differs from at least one outside-end component, and both are full
+$(c,b)$ path components meeting $A$.
+
+Finally apply conclusion (iii) of \noderef{interchange} to the actual
+terminal PE, the given maximum property and lower-rung package, the exact
+base and union, and the \noderef{CombinedStableColoring} just proved.
+Its hypotheses are precisely (10), so it says that $c,b$ are
+$A$-interchangeable under $\rho$.  Unfolding
+\noderef{TreeInterchangeable} forces the two distinct path components
+meeting $A$ to be equal, a contradiction.  This proves the PE branch
+without ever constructing a zero-rung ETT.
+\end{proof}

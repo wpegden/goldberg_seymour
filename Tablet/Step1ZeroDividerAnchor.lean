@@ -72,6 +72,8 @@ import Tablet.TwoColorPathComponent
 import Tablet.TwoColorNontrivialPathComponent
 import Tablet.interchange
 import Tablet.sc2
+import Tablet.Step1ZeroDividerAnchorNonPE
+import Tablet.Step1ZeroDividerAnchorPE
 
 -- [TABLET NODE: Step1ZeroDividerAnchor]
 lemma Step1ZeroDividerAnchor {V E : Type*}
@@ -210,4 +212,11 @@ lemma Step1ZeroDividerAnchor {V E : Type*}
     (hpaths : ∀ x, x ∈ P₁.support → x ∉ P₂.support)
     (ha : a₁ ≠ a₂) : False := by
 -- BODY
-  sorry
+  by_cases hPE : ett.series.data.kind (Fin.last ett.rounds) =
+      some TashkinovExtensionKind.PE
+  · exact Step1ZeroDividerAnchorPE G k e0 input T phi ett hMP hpositive
+      hproper hone hlower base H hdividerZero alpha beta hne halpha hclosed
+      a₁ b₁ a₂ b₂ P₁ P₂ hP₁ hP₂ hpaths ha hPE
+  · exact Step1ZeroDividerAnchorNonPE G k e0 input T phi ett hMP hpositive
+      hproper hone hlower base H hdividerZero alpha beta hne halpha hclosed
+      a₁ b₁ a₂ b₂ P₁ P₂ hP₁ hP₂ hpaths ha hPE
