@@ -83,16 +83,19 @@ therefore gives
 
 At this particular vertex $x$, let $C_x$ be the finite set
 \noderef{PresentColors}$(G,\psi,x)$.  For every $d\in C_x$, choose the
-incident exact edge supplied by that definition.  Properness makes an
-edge of color $d$ at $x$ unique, and chosen edges for distinct colors are
-distinct because $\psi$ is a function.  This injects $C_x$ into the
-incident-edge set.  By \noderef{Degree} and \noderef{MaximumDegree},
+incident exact edge supplied by that definition.  By
+\noderef{IsProperEdgeColoring}, properness makes an edge of color $d$ at
+$x$ unique, and chosen edges for distinct colors are distinct because
+$\psi$ is a function.  This injects $C_x$ into the incident-edge set.  By
+\noderef{Degree} and \noderef{MaximumDegree},
 \[
  |C_x|\leq\deg_G(x)\leq\Delta(G).
 \]
-The initial \noderef{KTriple} gives $\Delta(G)+1\leq k$, whereas the
-palette $[k]$ has cardinality $k$.  Hence $C_x$ is a proper subset of the
-palette.  Choose $c$ in its complement.  The definition
+By \noderef{TashkinovSeries}, the certified series starts from its
+initial $k$-triple, and \noderef{KTriple} gives
+$\Delta(G)+1\leq k$, whereas the palette $[k]$ has cardinality $k$.
+Hence $C_x$ is a proper subset of the palette.  Choose $c$ in its
+complement.  The definition
 \noderef{MissingColors} gives $c\in\overline\psi(x)$, and (6) with
 \noderef{TreeMissingColors} makes $c$ missing on both $T_n$ and $R_n$.
 
@@ -212,8 +215,9 @@ and $b$-presence.  Properness therefore makes
 $\operatorname{inl}x$ an exact one-neighbor node of
 $I_G(\rho;c,b)$.  At each $a_i$, the first edge of the transformed exit
 path supplies an incident edge in the nonmissing one of $c,b$, while its
-missing-color alternative and properness exclude every other
-$(c,b)$-edge.  Hence $\operatorname{inl}a_1$ and
+missing-color alternative and properness from
+\noderef{IsProperEdgeColoring} exclude every other $(c,b)$-edge.  Hence
+$\operatorname{inl}a_1$ and
 $\operatorname{inl}a_2$ are exact one-neighbor nodes as well.
 
 Their full \noderef{TwoColorComponent}s are path components by (8) and
