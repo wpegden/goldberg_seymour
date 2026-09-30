@@ -1,4 +1,5 @@
 import Tablet.ETTStrongInterchangeable
+import Tablet.EarlierPECycleFirstNonrevisitingInternal
 import Tablet.BoundaryEdges
 import Tablet.ColoredVertexSetClosed
 import Tablet.ExtensionBaseActiveIndices
@@ -19,6 +20,7 @@ import Tablet.TreeInterchangeable
 import Tablet.TreeExit
 import Tablet.TreeExitPath
 import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceInitialSegmentVertexSetSubset
 import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentCycle
 import Tablet.TwoColorComponentSpanningPath
@@ -27,11 +29,10 @@ import Tablet.TwoColorCycle
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
 import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorPathComponent
+import Tablet.TwoColorInterchangeableDistinctComponentCycle
 import Tablet.TwoColorNontrivialPathComponent
 import Tablet.sc2
-import Tablet.InterchangeableNonrootComponentCycle
 import Tablet.ParallelStepRootComponentSetup
-import Tablet.RevisitingPriorityCycleContainment
 import Tablet.StableSeriesCycleComponentTransport
 
 -- [TABLET NODE: ExtensionBaseClaimStrongInterchangeable]
@@ -72,6 +73,7 @@ theorem ExtensionBaseClaimStrongInterchangeable {V E : Type*}
       ett.series.data.delta t.succ = some delta →
       ETTStrongInterchangeable ett t vt sigma gamma delta := by
 -- BODY
+  classical
   intro t vt gamma delta htActive htq htVertex htGamma htDelta
   have htKind : ett.series.data.kind t.succ =
       some TashkinovExtensionKind.PE := by
@@ -82,17 +84,135 @@ theorem ExtensionBaseClaimStrongInterchangeable {V E : Type*}
       hnonisolated⟩ :=
     ParallelStepRootComponentSetup ett.series t vt gamma delta
       htKind htVertex htGamma htDelta
-  have hcycles := InterchangeableNonrootComponentCycle
-    (ett.series.data.tree t.succ.castSucc)
-    (ett.series.data.tree t.succ.succ)
-    (ett.series.data.coloring t.succ) gamma delta vt htProper htSegment
-    (hLowerInterchange t vt gamma delta htActive htq htVertex htGamma htDelta)
-    hrootPath hsupport hrootOnly hnonisolated
-  obtain ⟨epsilon, htEpsilon, hepsilonQ, hepsilonKind,
-      hintervening, hcontained⟩ :=
-    RevisitingPriorityCycleContainment ett.series t q vt gamma delta htq
-      hqKind htKind htGamma htDelta
-      (fun v hv hne => (hcycles v hv hne).1)
+  have hcycles : ∀ v : V,
+      v ∈ TreeSequenceVertexSet (ett.series.data.tree t.succ.castSucc) →
+      v ≠ vt →
+      TwoColorComponentCycle G (ett.series.data.coloring t.succ)
+          gamma delta (Sum.inl v) ∧
+        Sum.inl vt ∉ TwoColorComponent G
+          (ett.series.data.coloring t.succ) gamma delta (Sum.inl v) := by
+    intro v hv hne
+    have hsupportNext :=
+      TreeSequenceInitialSegmentVertexSetSubset htSegment hsupport
+    have hvNext := TreeSequenceInitialSegmentVertexSetSubset htSegment hv
+    have hdistinct : TwoColorComponent G (ett.series.data.coloring t.succ)
+        gamma delta (Sum.inl vt) ≠
+        TwoColorComponent G (ett.series.data.coloring t.succ)
+          gamma delta (Sum.inl v) := by
+      intro heq
+      apply hne
+      apply (hrootOnly v hv).mp
+      rw [heq]
+      rfl
+    have hcycle := TwoColorInterchangeableDistinctComponentCycle G
+      (ett.series.data.tree t.succ.succ)
+      (ett.series.data.coloring t.succ) gamma delta htProper
+      (Sum.inl vt) (Sum.inl v) hrootPath
+      (hLowerInterchange t vt gamma delta htActive htq htVertex htGamma htDelta)
+      ⟨vt, hsupportNext, by rfl⟩ ⟨v, hvNext, by rfl⟩ hdistinct
+    refine ⟨hcycle, ?_⟩
+    intro hs
+    apply hne
+    apply (hrootOnly v hv).mp
+    change (TwoColorIncidenceGraph G (ett.series.data.coloring t.succ)
+        gamma delta).connectedComponentMk (Sum.inl vt) =
+      (TwoColorIncidenceGraph G (ett.series.data.coloring t.succ)
+        gamma delta).connectedComponentMk (Sum.inl v) at hs
+    change (TwoColorIncidenceGraph G (ett.series.data.coloring t.succ)
+        gamma delta).connectedComponentMk (Sum.inl v) =
+      (TwoColorIncidenceGraph G (ett.series.data.coloring t.succ)
+        gamma delta).connectedComponentMk (Sum.inl vt)
+    exact hs.symm
+  let candidates : Finset (Fin ett.rounds) := Finset.univ.filter fun p =>
+    t.val < p.val ∧
+      ett.series.data.kind p.succ ≠ some TashkinovExtensionKind.RE
+  have qMem : q ∈ candidates := by
+    apply Finset.mem_filter.mpr
+    refine ⟨Finset.mem_univ _, htq, ?_⟩
+    rw [hqKind]
+    simp
+  have candidatesNonempty : candidates.Nonempty := ⟨q, qMem⟩
+  let epsilon : Fin ett.rounds := candidates.min' candidatesNonempty
+  have epsilonMem : epsilon ∈ candidates :=
+    Finset.min'_mem candidates candidatesNonempty
+  have htEpsilon : t.val < epsilon.val :=
+    (Finset.mem_filter.mp epsilonMem).2.1
+  have hepsilonKind : ett.series.data.kind epsilon.succ ≠
+      some TashkinovExtensionKind.RE :=
+    (Finset.mem_filter.mp epsilonMem).2.2
+  have hepsilonQ : epsilon.val ≤ q.val :=
+    Finset.min'_le candidates q qMem
+  have hintervening : ∀ r : Fin ett.rounds, t.val < r.val →
+      r.val < epsilon.val →
+      ett.series.data.kind r.succ = some TashkinovExtensionKind.RE := by
+    intro r htr hre
+    by_contra hrNot
+    have hrMem : r ∈ candidates := Finset.mem_filter.mpr
+      ⟨Finset.mem_univ _, htr, hrNot⟩
+    have her : epsilon ≤ r := Finset.min'_le candidates r hrMem
+    omega
+  have hcontained : ∀ v : V,
+      v ∈ TreeSequenceVertexSet (ett.series.data.tree t.succ.castSucc) →
+      v ≠ vt → ∀ w : V,
+      Sum.inl w ∈ TwoColorComponent G
+          (ett.series.data.coloring t.succ) gamma delta (Sum.inl v) →
+      w ∈ TreeSequenceVertexSet
+          (ett.series.data.tree epsilon.succ.castSucc) := by
+    intro v hv hne w hw
+    obtain ⟨cycle, hcycleSupport⟩ := (hcycles v hv hne).1
+    have htEarlier : t.succ ≠ Fin.last ett.rounds := by
+      intro heq
+      have hval := congrArg Fin.val heq
+      simp only [Fin.val_succ, Fin.val_last] at hval
+      omega
+    have hqLast : q.succ = Fin.last ett.rounds := by
+      apply Fin.ext
+      simp only [Fin.val_succ, Fin.val_last]
+      omega
+    have hcycleMeets : ∃ x ∈ TreeSequenceVertexSet
+        (ett.series.data.tree t.succ.castSucc),
+        Sum.inl x ∈ cycle.walk.support := by
+      refine ⟨v, hv, ?_⟩
+      exact (hcycleSupport (Sum.inl v)).2 (by rfl)
+    obtain ⟨p, htp, hpKind, hpBetween, -, hpInternal⟩ :=
+      EarlierPECycleFirstNonrevisitingInternal G k ett.rounds e0 input
+        ett.series t htEarlier gamma delta htKind htGamma htDelta cycle
+        hcycleMeets (by simpa [hqLast] using hqKind)
+    have hpNotRE : ett.series.data.kind p.succ ≠
+        some TashkinovExtensionKind.RE := by
+      intro hpRE
+      rcases hpKind with hpSE | hpPE
+      · rw [hpSE] at hpRE
+        cases hpRE
+      · rw [hpPE] at hpRE
+        cases hpRE
+    have hpMem : p ∈ candidates :=
+      Finset.mem_filter.mpr ⟨Finset.mem_univ _, htp, hpNotRE⟩
+    have hepsilonLeP : epsilon ≤ p :=
+      Finset.min'_le candidates p hpMem
+    have hpLeEpsilon : p ≤ epsilon := by
+      by_contra hnot
+      have hepsLtP : epsilon.val < p.val := by omega
+      exact hepsilonKind (hpBetween epsilon htEpsilon hepsLtP)
+    have hpEq : p = epsilon := le_antisymm hpLeEpsilon hepsilonLeP
+    subst p
+    obtain ⟨node, hnodeSupport, hnodeAdj⟩ :=
+      SimpleGraph.adj_of_mem_walk_support cycle.walk
+        cycle.isCycle.not_nil ((hcycleSupport (Sum.inl w)).2 hw)
+    cases node with
+    | inl u =>
+        simpa [TwoColorIncidenceGraph] using hnodeAdj
+    | inr f =>
+        have hdata : Incident G w f ∧
+            (ett.series.data.coloring t.succ f = some gamma ∨
+              ett.series.data.coloring t.succ f = some delta) := by
+          simpa [TwoColorIncidenceGraph] using hnodeAdj
+        have hfAll : ∀ u, Incident G u f →
+            u ∈ TreeSequenceVertexSet
+              (ett.series.data.tree epsilon.succ.castSucc) := by
+          simpa only [InternalEdges, Finset.mem_filter, Finset.mem_univ,
+            true_and] using hpInternal f hnodeSupport
+        exact hfAll w hdata.1
   refine ⟨hcolors, htKind, htVertex, epsilon, htEpsilon,
     hepsilonKind, hintervening, ?_⟩
   intro v hv hne
