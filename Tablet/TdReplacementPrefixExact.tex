@@ -87,20 +87,26 @@ In the RE case define \(\sigma_{n-1}=\sigma_n\).  The RE constructor gives
  \subseteq \overline\varphi_n(T_n)\cup D_n.
 \]
 Thus the edge clause of the assumed terminal stability applies to every
-edge controlled by the left side, while its vertex clause gives the same
-missing sets as \(\varphi_n=\varphi_{n-1}\) at every vertex of \(T_n\).
+edge controlled by the left side, by the definition
+\noderef{StableColoring}, while the vertex clause of that definition gives
+the same missing sets as \(\varphi_n=\varphi_{n-1}\) at every vertex of
+\(T_n\).
 This proves (A) in the RE case.
 
 In the SE case again define \(\sigma_{n-1}=\sigma_n\).  The SE constructor
 of \noderef{TashkinovSeriesStep} identifies \(\varphi_n\) with its selected
 coloring and states that this selected coloring is
 \((T_n,D_{n-1},\varphi_{n-1})\)-stable.  Its vertex clause identifies the
-two reference missing-color sets on \(T_n\).  Combining that equality with
-the same monotonicity inclusion shows that \(\sigma_n\) is
-\((T_n,D_{n-1},\varphi_n)\)-stable.  Transitivity in \noderef{sc2}, first
-from \(\varphi_{n-1}\) to \(\varphi_n\) and then to \(\sigma_n\), proves
-(A).  Properness and the exact one-uncolored-edge condition in these two
-cases are the corresponding hypotheses on \(\sigma_n\).
+two reference missing-color sets vertex by vertex, by
+\noderef{StableColoring}; the union definition in
+\noderef{TreeMissingColors} therefore identifies their tree-missing-color
+sets on \(T_n\).  Combining that equality with the same monotonicity
+inclusion, and using both clauses of \noderef{StableColoring}, shows that
+\(\sigma_n\) is \((T_n,D_{n-1},\varphi_n)\)-stable.  Transitivity in
+\noderef{sc2}, first from \(\varphi_{n-1}\) to \(\varphi_n\) and then to
+\(\sigma_n\), proves (A).  Properness and the exact one-uncolored-edge
+condition in these two cases are the corresponding hypotheses on
+\(\sigma_n\).
 
 Finally suppose the terminal kind is PE.  The exact kind, support, gamma,
 and delta equations in \noderef{TashkinovSeriesStep} identify its recorded
@@ -118,17 +124,28 @@ exactly stability (A).  We have therefore constructed \(\sigma_{n-1}\)
 and proved all common assertions in all three exhaustive cases.
 
 We next reconstruct the last old closure under \(\sigma_{n-1}\).  The
-vertex clause of (A) preserves every missing-color witness on every prefix
-of \(T_n\).  Every edge added in the old closure is an exact displayed edge
-identity of \(T_n\).  By \noderef{HkuTreeColorsControlled}, its old color
-lies in the set controlled by (A), so the edge clause of (A) preserves that
-color.  Consequently every old one-edge augmentation is again a
-\noderef{TashkinovAugmentation} under \(\sigma_{n-1}\), with the same
-ordered tree and edge identity.  In an SE or RE slot the same argument
-first preserves the exact connecting edge and then every closure edge;
-in a PE slot it applies directly from the preceding tree.  Hence the copied
-steps form the required augmentation sequence to the exact ordered tree
-\(T_n\).  Moreover, if an edge on the boundary of \(T_n\) had under
+vertex clause of (A), namely the second clause of
+\noderef{StableColoring}, preserves every vertexwise missing-color witness
+on every prefix of \(T_n\); the union characterization in
+\noderef{TreeMissingColors} lifts these equalities to the corresponding
+tree-missing-color sets.  Every edge added in the old closure is an exact
+displayed edge identity of \(T_n\).  Its augmentation attachment makes it
+incident with the preceding prefix by the attachment clause of
+\noderef{TashkinovAugmentation}, hence with \(T_n\), in the sense of
+\noderef{TreeIncidentEdge}.  By \noderef{HkuTreeColorsControlled}, its old
+color lies in the set controlled by (A), so the edge clause of (A) from
+\noderef{StableColoring} preserves that color.  Consequently every old
+one-edge augmentation is again a \noderef{TashkinovAugmentation} under
+\(\sigma_{n-1}\), with the same ordered tree and edge identity.  In an SE
+or RE slot, \noderef{TreeSequenceAdjoinEdge} records the exact connecting
+edge and its incident attachment, so the same stability edge clause first
+preserves that edge and then every closure edge; in a PE slot it applies
+directly from the preceding tree.  The reflexive-transitive construction
+in \noderef{TashkinovAugmentationSequence} forms and composes these copied
+steps into the required augmentation sequence to the exact ordered tree
+\(T_n\).  Moreover, by \noderef{BoundaryEdges}, an edge on the boundary of
+\(T_n\) has exactly one end in its vertex set and is therefore incident
+with \(T_n\) by \noderef{TreeIncidentEdge}.  If such an edge had under
 \(\sigma_{n-1}\) a color missing on \(T_n\), the reverse implication of
 the stability criterion \noderef{sc1} would give the same edge and color
 under \(\varphi_{n-1}\), contradicting that the old terminal tree is a
@@ -146,9 +163,14 @@ corresponding original entry.  These are exactly the restriction clauses
 asserted in the conclusion.
 
 Restrict (A) from \(T_n\) to the preceding ladder tree of \(R\).  Ordered
-initial-segment containment preserves all relevant vertices and edges, so
-the two clauses in the definition of stability restrict directly.  The
-sixth lower-rung hypothesis, applied to \(R\), now states that
+initial-segment containment, as defined in
+\noderef{TreeSequenceInitialSegment}, preserves all relevant vertices and
+exact displayed edge entries.  Hence \noderef{TreeIncidentEdge} makes every
+edge incident with the smaller tree incident with \(T_n\), and the union
+definition in \noderef{TreeMissingColors} makes its tree-missing-color set
+a subset of that of \(T_n\).  The two clauses of
+\noderef{StableColoring} therefore restrict directly.  The sixth lower-rung
+hypothesis, applied to \(R\), now states that
 \(\sigma_{n-1}\) is a mod-coloring of \(R\).  In the universal clause of
 \noderef{ModColoring}, take the strict extension to be the exact \(T_n\)
 and use the copied closure (or the copied exact connecting edge followed by
@@ -163,17 +185,21 @@ copied closure \(T_n\).  At the last certified slot retain the same
 constructor and all of its coloring, choice, and history witnesses.  In the
 SE and RE cases, equality of the singleton connecting-edge sets fixes the
 exact connecting edge; choose the copied one-edge adjoined seed and its
-exact-adjoin certificate, then use the copied closure from that seed.  In
-the PE case no connecting-edge seed is needed, so only the terminal closure
-field is replaced.  All earlier certificates are unchanged.  Rebuild the
-displayed ETT with this normalized series and the reflexive final-prefix
-relation at \(T_n\).  This produces a corresponding certificate whose
-replacement series has exact final tree \(T_n\).  Its final-color equation
-is the certificate's defining equation, hence its final coloring is exactly
-\(\sigma_{n-1}\).  Since the normalization changes none of the ordered
-ladder trees, raw stored sets, connecting-edge sets, kinds, or colorings,
-all properness, one-uncoloredness, and positive-stage stability fields of
-the corresponding certificate remain valid.  Finally apply
+exact-adjoin certificate of \noderef{TreeSequenceAdjoinEdge}, then use the
+copied closure from that seed, whose successive steps are formed and
+composed as in \noderef{TashkinovAugmentationSequence}.  In the PE case no
+connecting-edge seed is needed, so only the terminal closure field is
+replaced.  All earlier certificates are unchanged.  Rebuild the displayed
+ETT according to \noderef{ExtendedTashkinovTree} with this normalized
+series and the reflexive final-prefix relation at \(T_n\), supplied by
+\noderef{TreeSequenceInitialSegment}.  This produces a corresponding
+certificate whose replacement series has exact final tree \(T_n\).  Its
+final-color equation is the certificate's defining equation, hence its
+final coloring is exactly \(\sigma_{n-1}\).  Since the normalization
+changes none of the ordered ladder trees, raw stored sets, connecting-edge
+sets, kinds, or colorings, all properness, one-uncoloredness, and
+positive-stage stability fields of the corresponding certificate remain
+valid.  Finally apply
 \noderef{MaximumPropertyTransport} to the lower mod-coloring fact, this
 normalized certificate, and the maximum property of \(R\).  It gives the
 maximum property of the replacement ETT, completing the \(n>1\) branch.

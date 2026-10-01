@@ -33,7 +33,9 @@ import Tablet.TashkinovStoredColors
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeExit
 import Tablet.TreeExitPath
+import Tablet.TreeIncidentEdge
 import Tablet.TreeInterchangeable
+import Tablet.TreeMissingColors
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TwoColorComponent
