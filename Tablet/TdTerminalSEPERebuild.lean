@@ -1,8 +1,11 @@
 import Tablet.Basic2
 import Tablet.TdEarlierPEWitnessIdentification
 import Tablet.TdReplacementPrefixExact
+import Tablet.AdjacentEdges
+import Tablet.BoundaryColorEdges
 import Tablet.BoundaryEdges
 import Tablet.CertifiedETTRestriction
+import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetStronglyClosed
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.DefectiveColor
@@ -13,8 +16,10 @@ import Tablet.ExtensionBase
 import Tablet.ExtensionRules
 import Tablet.HkuMissingStoredMonotone
 import Tablet.HkuTreeColorsControlled
+import Tablet.IsOneEdgeUncolored
 import Tablet.IsProperEdgeColoring
 import Tablet.KTriple
+import Tablet.LooplessMultigraph
 import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumProperty
 import Tablet.MaximumPropertyTransport
@@ -35,10 +40,13 @@ import Tablet.TashkinovStoredColors
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeExit
 import Tablet.TreeExitPath
+import Tablet.TreeIncidentEdge
 import Tablet.TreeInterchangeable
+import Tablet.TreeMissingColors
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TwoColorComponent
+import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorComponentSpanningPath
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorCycle

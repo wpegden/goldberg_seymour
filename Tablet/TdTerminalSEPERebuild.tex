@@ -46,59 +46,555 @@ over every eligible ordered tree-sequence strictly extending (T_n),
 and not merely over one selected closure.
 \end{helper}
 \begin{proof}
-Fix the stable terminal coloring and an arbitrary eligible strict extension.
-The exact predecessor package from \noderef{TdReplacementPrefixExact}
-constructs the replacement series through T_n, including the direct initial
-closure when n=1.  In the PE branch it uses the inverse component switch and
-the one-vertex intersection supplied by current assertion (iv); in the SE
-branch the preterminal and terminal colorings coincide.  In either case the
-preterminal coloring is proper, leaves exactly e_0 uncolored, is stable over
-D_{n-1}, and the copied old closure ends at the exact tree T_n.
+Write (n) for the rung number and put
 
-For every earlier PE slot compare the two constructors with
-\noderef{TdEarlierPEWitnessIdentification}.  Singleton connecting-edge
-agreement identifies the edge itself, inside/outside membership orients its
-endpoints, and the post-switch missing/present test orients the two stored
-colors.  Hence the support vertex, outside endpoint, delta, and gamma agree
-slot by slot, without any uniqueness assumption on internal constructor
-witnesses.
+\[
+ T_n=\mathcal T.\mathit{tree}(n),\qquad
+ \varphi_{n-1}=\mathcal T.\mathit{coloring}(n-1),\qquad
+ \varphi_n=\mathcal T.\mathit{coloring}(n).
+\]
 
-Keep the old maximum-defective edge f_n and vertex v_n.  Stability preserves
-the complete delta_n-colored boundary set by exact edge identity and preserves
-all vertex missing sets.  Therefore the old defective edge, its incidence,
-outside endpoint, and color remain valid.  For any further coloring stable
-over D_{n-1}, transitivity of stability makes it admissible for the old
-maximum-defective choice, so the old universal order maximality proves the new
-one.  The selected defective color has two distinct boundary identities;
-thus the closed tree T_n is not strongly closed.
+Fix a proper coloring \(\sigma_n\) leaving exactly \(e_0\) uncolored in
+the sense of \noderef{IsOneEdgeUncolored}
+which is \((T_n,D_n,\varphi_n)\)-stable.  The last positive certificate
+in \noderef{TashkinovSeries} is, by hypothesis, either the SE or the PE
+constructor of \noderef{TashkinovSeriesStep}.  In both cases it contains
+a \noderef{MaximumDefectiveChoice}; denote its selected coloring, support
+vertex, outside endpoint, exact selected edge, and selected color by
 
-For SE, enlarged stability transports the old universal disjointness
-alternative.  For PE it transports the old counterexample to disjointness.
-In the PE branch, the same gamma is missing at v_n.  If the old history rule
-points to its latest earlier PE slot, the slotwise identification above
-preserves both its support and delta and also preserves latestness.  If no
-earlier PE used v_n, the converse identification rules out such a replacement
-slot.  This proves the full history-sensitive
-\noderef{ParallelExtensionColor} condition.
+\[
+                   (\pi,v,u,f,\delta).                       \tag{1}
+\]
 
-In PE, use the preterminal coloring as the second stable coloring.  The
-switched component has unchanged support and meets T_n only at v_n; properness
-and degree at most two make it the required exit path.  Involutivity of the
-component transposition gives the exact terminal coloring equation.  In SE
-that equation is equality.
+Thus \(\pi\) is proper, leaves exactly \(e_0\) uncolored, and is
+\((T_n,D_{n-1},\varphi_{n-1})\)-stable.  The same definition gives
+\(v\in V(T_n)\), \(u\notin V(T_n)\),
+\(G.\mathit{ends}(f)=\{v,u\}\), \(\pi(f)=\delta\), and the full
+quantified maximality of \(v\) among defective vertices arising under
+all such stable colorings.  Since the chosen edge is a
+\noderef{DefectiveEdge}, its color equation and
+\noderef{BoundaryColorEdges} show that \(\delta\) is a
+\noderef{DefectiveColor} and that
 
-Finally suppose a revisiting certificate existed for the replacement prefix.
-Its all-RE intervening history transports to the original prefix.  Copy its
-controlled return path edge by edge back to the original preterminal coloring.
-The copied component differs from the persisted original PE exit component at
-the return vertex.  If it were a path, lower-rung interchangeability would be
-violated; hence it is a cycle and reconstructs an original revisiting
-certificate, contradicting the old no-RE field.  Thus priority is preserved.
+\[
+                  f\in\partial_{\pi,\delta}(V(T_n)).          \tag{2}
+\]
 
-All SE or PE constructor fields are now available.  Append that constructor
-to the exact prefix and compose the eligible route through the arbitrary
-extension with a closure.  The resulting series gives a
-\noderef{CorrespondingExtendedTashkinovTree} for that extension with every
-exact edge identity retained.  Since the extension was arbitrary, the
-universal clause of \noderef{ModColoring} follows.
+Apply \noderef{TdReplacementPrefixExact}.  We obtain a proper coloring
+\(\sigma_{n-1}\), leaving exactly \(e_0\) uncolored, such that
+
+\[
+ \sigma_{n-1}\text{ is }(T_n,D_{n-1},\varphi_{n-1})
+ \text{-stable}.                                             \tag{3}
+\]
+
+If \(n=1\), the same result supplies an actual zero-rung replacement
+series whose final tree and coloring are exactly \(T_n\) and
+\(\sigma_{n-1}\).  If \(n>1\), it supplies an actual maximum
+rung-\(n-1\) restriction of the original ETT, with displayed tree
+\(T_n\), generating coloring \(\varphi_{n-1}\), and all retained data
+equal to the original data.  It also supplies a corresponding maximum
+replacement-prefix ETT, with exact displayed and final series tree
+\(T_n\), exact final coloring \(\sigma_{n-1}\), and pointwise equality
+of the retained ladder trees, raw stored sets, connecting-edge sets, and
+kinds.  Every positive replacement coloring is stable relative to its
+original counterpart.  We call this common zero- or positive-rung object
+the replacement prefix.
+
+We next prove the stronger relation
+
+\[
+ \sigma_{n-1}\text{ is }
+ (T_n,D_{n-1}\cup\{\delta\},\pi)\text{-stable}.               \tag{4}
+\]
+
+This is the first point at which the two terminal kinds require different
+arguments.
+
+Suppose first that the last kind is SE.  The SE constructor says
+\(\varphi_n=\pi\), and
+\noderef{TdReplacementPrefixExact} says
+\(\sigma_{n-1}=\sigma_n\).  The first inclusion in
+\noderef{HkuMissingStoredMonotone} gives
+
+\[
+ \overline\varphi_{n-1}(T_n)\cup D_{n-1}
+ \subseteq \overline\pi(T_n)\cup D_n.                        \tag{5}
+\]
+
+The same constructor gives \(S_n=\{\delta\}\).  Expanding
+\noderef{TashkinovStoredColors}, either \(\delta\) is missing on
+\(T_n\) under \(\pi\), or it survives in \(D_n\).  Hence
+
+\[
+ D_{n-1}\cup\{\delta\}
+ \subseteq\overline\pi(T_n)\cup D_n.                         \tag{6}
+\]
+
+The terminal stability hypothesis identifies the missing sets of
+\(\sigma_n\) and \(\pi\) at every vertex of \(T_n\), by the vertex
+clause of \noderef{StableColoring}.  For an edge incident with \(T_n\),
+if its value under either coloring lies in
+\(\overline\pi(T_n)\cup D_{n-1}\cup\{\delta\}\), (5)--(6) put that
+value in the control set for the given terminal stability.  The symmetric
+edge criterion \noderef{sc1} therefore makes the two edge values equal.
+A second application of \noderef{sc1}, with the smaller displayed
+control set, proves (4).
+
+Now suppose that the last kind is PE, and write \(\gamma\) for its
+recorded gamma color.  Current assertion (iv), in exactly the form
+\noderef{ExtensionBase}, applies to the assumed lower-rung package and
+gives
+
+\[
+ P_v(\gamma,\delta,\sigma_n)\cap V(T_n)=\{v\}.               \tag{7}
+\]
+
+Apply \noderef{ParallelExtensionUndoStable} using (7).  Its inverse
+switch is exactly the PE formula in
+\noderef{TdReplacementPrefixExact}, so its recovered coloring is our
+\(\sigma_{n-1}\):
+
+\[
+ \sigma_{n-1}=\sigma_n/P_v(\gamma,\delta,\sigma_n).           \tag{8}
+\]
+
+The cited undo lemma also identifies the old witnesses \(\pi\) and the
+old second-stable coloring and proves successively, with the enlarged
+control set, stability relative to each of them.  In particular it proves
+(4), as well as (3), with all switches performed on exact edge identities.
+
+We now use (4) in both branches.  Properness and the exact
+one-uncolored-edge condition hold for both \(\pi\) and
+\(\sigma_{n-1}\).  Since \(\delta\) belongs to the enlarged control
+set, \noderef{sc1} applied to (4) gives, for every boundary edge identity
+\(a\),
+
+\[
+ \pi(a)=\delta\quad\Longleftrightarrow\quad
+ \sigma_{n-1}(a)=\delta.
+\]
+
+Consequently
+
+\[
+ \partial_{\pi,\delta}(V(T_n))
+ =\partial_{\sigma_{n-1},\delta}(V(T_n))                    \tag{9}
+\]
+
+as sets of exact edge identities.  Equations (2) and (9) retain the
+same defective edge \(f\), the same incidence with \(v\), the same
+outside endpoint \(u\), the same endpoint equation, and the equation
+\(\sigma_{n-1}(f)=\delta\).  Because the complete boundary set is
+equal, its two distinct witnesses supplied by
+\noderef{DefectiveColor} remain distinct witnesses under
+\(\sigma_{n-1}\).  Hence \(\delta\) is defective and \(v\) is a
+\noderef{DefectiveVertex} under \(\sigma_{n-1}\).
+
+The stable-coloring classes used by the old and new choices are identical.
+Indeed, (3), symmetry in \noderef{sc2}, and transitivity in
+\noderef{sc2} show that a proper coloring leaving exactly \(e_0\)
+uncolored is \((T_n,D_{n-1},\sigma_{n-1})\)-stable if and only if it is
+\((T_n,D_{n-1},\varphi_{n-1})\)-stable.  Apply the quantified maximality
+field of the old \noderef{MaximumDefectiveChoice} to a coloring and a
+defective vertex in this common class.  It gives equality with \(v\) or
+precedes \(v\) in the tree order, exactly the maximality field required
+for a new choice.  Reflexivity from \noderef{sc2} supplies the selected
+stability of \(\sigma_{n-1}\) relative to itself.  Together with (9)
+and the unchanged structural endpoint data, this constructs a new
+\noderef{MaximumDefectiveChoice}
+
+\[
+ \mathcal M^*=(\sigma_{n-1},v,u,f,\delta)                    \tag{10}
+\]
+
+for the replacement prefix.
+
+The replacement prefix ends at the exact tree \(T_n\).  In the zero-rung
+case this is the initial closure; in the positive-rung case it is the
+last closure in its certified prefix.  Thus \(V(T_n)\) is closed under
+\(\sigma_{n-1}\), by \noderef{TashkinovSeriesStep} and
+\noderef{ColoredVertexSetClosed}.  On the other hand, the two distinct
+members of the defective boundary set in (9) have the same color
+\(\delta\).  They violate the boundary-color uniqueness clause of
+\noderef{ColoredVertexSetStronglyClosed}.  Therefore
+
+\[
+ V(T_n)\text{ is closed but not strongly closed under }
+ \sigma_{n-1}.                                                \tag{11}
+\]
+
+We record next the exact identification of every earlier PE slot.  This is
+vacuous when \(n=1\).  When \(n>1\), fix a positive retained slot \(a<n\)
+whose original, equivalently replacement, kind is PE.  Denote the old and
+replacement PE data by
+
+\[
+ (v_a,u_a,f_a,\delta_a,\gamma_a),\qquad
+ (v_a^*,u_a^*,f_a^*,\delta_a^*,\gamma_a^*).                  \tag{12}
+\]
+
+The prefix correspondence and the PE constructor in
+\noderef{TashkinovSeriesStep} give equality of the singleton exact-edge
+sets and equality of the unordered stored pairs.  Thus
+\(f_a^*=f_a\).  The two endpoint equations from
+\noderef{MaximumDefectiveChoice}, together with membership of both
+supports in the common ladder tree and exclusion of both outside endpoints,
+orient the common endpoint pair and give
+
+\[
+                         v_a^*=v_a,\qquad u_a^*=u_a.           \tag{13}
+\]
+
+For the old PE, \noderef{ParallelExtensionColor} makes \(\gamma_a\)
+missing at \(v_a\) under its selected coloring.  The second-stable
+relation preserves that missingness by \noderef{StableColoring}; it also
+fixes the exact edge \(f_a\) with color \(\delta_a\), because that edge
+is incident with the ladder tree and \(\delta_a\) is in the enlarged
+control set.  The two colors are distinct: \(\gamma_a\) is absent at
+\(v_a\), while \(f_a\) makes \(\delta_a\) present there, using
+\noderef{MissingColors} and \noderef{PresentColors}.  Properness from
+\noderef{IsProperEdgeColoring} makes \(f_a\) the unique incident
+\(\delta_a\)-edge.  After the PE switch, the definition
+\noderef{TwoColorComponentSwap} therefore makes \(\gamma_a\) present
+and \(\delta_a\) missing at \(v_a\).  The identical argument in the
+replacement PE constructor makes \(\gamma_a^*\) present and
+\(\delta_a^*\) missing at \(v_a^*\) after its switch.
+
+The positive-stage stability field of
+\noderef{CorrespondingExtendedTashkinovTree}, evaluated at the common
+vertex in (13), identifies the two post-switch missing sets.  We have now
+verified every hypothesis of
+\noderef{TdEarlierPEWitnessIdentification}: common singleton edge, common
+unordered stored pair, common post-switch missing set, each delta missing,
+and each gamma present.  It follows that
+
+\[
+ f_a^*=f_a,\quad v_a^*=v_a,\quad u_a^*=u_a,\quad
+ \delta_a^*=\delta_a,\quad\gamma_a^*=\gamma_a.               \tag{14}
+\]
+
+We now verify the branch-specific fields following the new choice (10).
+In SE, let \(\tau\) be any proper coloring leaving exactly \(e_0\)
+uncolored and stable relative to
+\((T_n,D_{n-1}\cup\{\delta\},\sigma_{n-1})\).  Relation (4) and
+transitivity in \noderef{sc2} make \(\tau\) stable relative to
+\((T_n,D_{n-1}\cup\{\delta\},\pi)\).  The old SE universal field in
+\noderef{TashkinovSeriesStep} therefore gives
+
+\[
+ \overline\tau(u)\cap\overline\tau(T_n)=\varnothing.
+\]
+
+Thus the universal disjointness field is transported with its arbitrary
+coloring \(\tau\), rather than merely asserted to persist.
+
+In PE, the old constructor supplies an actual coloring \(\rho\) witnessing
+failure of that disjointness: it is proper, leaves exactly \(e_0\)
+uncolored, is
+\((T_n,D_{n-1}\cup\{\delta\},\pi)\)-stable, and has a specific color
+in \(\overline\rho(u)\cap\overline\rho(T_n)\).  By symmetry of (4) in
+\noderef{sc2}, \(\pi\) is stable relative to \(\sigma_{n-1}\) for the
+same enlarged set; transitivity in \noderef{sc2} then makes \(\rho\)
+stable relative to \(\sigma_{n-1}\).  The same coloring and the same
+color in the same two missing sets therefore witness the replacement
+existential failure field.
+
+Continue in the PE branch.  The vertex clause of (4) transports the old
+gamma-rule missingness, so
+
+\[
+                         \gamma\in\overline{\sigma}_{n-1}(v). \tag{15}
+\]
+
+We verify the history clause of \noderef{ParallelExtensionColor}, not
+just its first conjunct.  If the old gamma rule chooses a latest earlier
+PE slot \(h\) with support \(v\) and \(\gamma=\delta_h\), then (14)
+gives the same replacement support and delta at \(h\).  If a later
+replacement PE slot through \(n-1\) had support \(v\), applying (14) at
+that slot would give a later old PE slot with support \(v\), contrary to
+the old latestness assertion.  Hence \(h\) is latest in the replacement
+history as well.  If instead the old gamma rule says that no earlier PE
+slot has support \(v\), a hypothetical replacement slot with that support
+would again contradict (14).  For \(n=1\) the latter alternative follows
+directly because a positive earlier index bounded by zero cannot exist.
+Together with (15), these are exactly the two alternatives in
+\noderef{ParallelExtensionColor}.
+
+For the replacement PE constructor take its second-stable coloring also
+to be \(\sigma_{n-1}\).  It is proper and leaves exactly \(e_0\)
+uncolored, and its enlarged stability relative to the selected coloring
+is reflexivity in \noderef{sc2}.  We construct its
+\noderef{TreeExit} explicitly.  By (9), the exact edge \(f\) has color
+\(\delta\) and is incident with \(v\) under \(\sigma_{n-1}\); by
+(15), no incident edge has color \(\gamma\).  The colors are distinct,
+since the same vertex cannot both miss \(\gamma\) and have the
+\(\gamma\)-colored edge \(f\) if \(\gamma=\delta\),
+and properness plus \noderef{AdjacentEdges} makes \(f\) the only incident
+\(\delta\)-edge.  Thus \(v\) has degree one in the graph
+\noderef{TwoColorIncidenceGraph} for
+\((\sigma_{n-1};\gamma,\delta)\), and its component is nontrivial.
+
+The swap in (8) interchanges \(\gamma\) and \(\delta\) on precisely this
+component and does not change its incidence support, by
+\noderef{TwoColorComponentSwap}.  Hence (7) says that this component
+under \(\sigma_{n-1}\) meets \(V(T_n)\) exactly at \(v\).  Apply
+\noderef{TwoColorComponentSpanningPath}.  The supplied simple spanning
+path has \(v\) as an endpoint, since \(v\) has degree one.  Its other
+endpoint \(x\) is a graph-vertex node: a colored edge-node has its two
+distinct endpoint vertices as neighbors by the loopless law in
+\noderef{LooplessMultigraph}, and an edge-node endpoint would
+force either a third neighbor at an internal path node or a second neighbor
+at \(v\), contrary to \noderef{TwoColorIncidenceDegreeAtMostTwo}.  The
+one-vertex intersection gives \(x\notin V(T_n)\).  The same degree bound
+shows that \(x\) has no neighbor beyond its path neighbor; otherwise that
+neighbor already lies on the spanning path and again creates degree three
+internally or degree two at \(v\).  Thus one of \(\gamma,\delta\) is
+missing at \(x\), by \noderef{MissingColors} and
+\noderef{PresentColors}.  Reversing the spanning path gives a nontrivial
+\(T_n\)-exit path from \(x\) to \(v\) in the sense of
+\noderef{TreeExitPath}, and hence the required \noderef{TreeExit}.
+
+Finally, (8) can be inverted exactly.  The first switch only exchanges
+the two colors on one full component; its incidence support is therefore
+the same after the switch.  Expanding \noderef{TwoColorComponentSwap}
+edge by edge, a second switch sends \(\gamma\) back to \(\delta\), sends
+\(\delta\) back to \(\gamma\), and fixes every other colored or uncolored
+value.  Extensionality of partial colorings gives
+
+\[
+ \sigma_n=\sigma_{n-1}/P_v(\gamma,\delta,\sigma_{n-1}),       \tag{16}
+\]
+
+which is the exact current-coloring equation required by the replacement
+PE constructor.  In SE the corresponding equation is simply
+\(\sigma_n=\sigma_{n-1}\).
+
+It remains to verify the priority field: no revisiting extension is
+available for the replacement prefix.  When \(n=1\), a hypothetical
+\noderef{RevisitingExtensionCertificate} at current index zero would
+contain a positive earlier PE index at most zero, an immediate
+contradiction.  Assume henceforth that \(n>1\), and suppose for a
+contradiction that a replacement revisiting certificate exists.  Unpack
+it completely.  It gives a positive earlier index \(h\leq n-1\), an
+earlier replacement PE, colors \(\gamma_h^*,\delta_h^*\), a full cycle
+\(O^*\) under \(\sigma_{n-1}\), an exact boundary edge \(g\) of
+\(T_n\) on that cycle with inside and outside endpoints, and a simple
+return path \(L\) from the edge-node \(g\) to a return vertex
+\(w\in V(T_h)\).  Every graph-vertex node of \(L\) lies in \(V(T_n)\),
+and every slot strictly after \(h\) through \(n-1\) is RE.
+
+Apply (14) at \(h\); suppressing stars, the original and replacement
+support, outside endpoint, exact PE edge, delta, and gamma are
+
+\[
+                         (v_h,u_h,f_h,\delta_h,\gamma_h).      \tag{17}
+\]
+
+The kind equalities of the prefix correspondence transport the entire
+all-RE interval to the original prefix.  At each of these indices the RE
+constructor of \noderef{TashkinovSeriesStep} makes the new coloring
+literally equal to its predecessor.  Induction through the interval gives
+
+\[
+ \varphi_h=\varphi_{n-1},\qquad
+ \sigma_h=\sigma_{n-1}.                                     \tag{18}
+\]
+
+We need both post-PE components in (18), rather than only their roots.
+For the original prefix at rung \(h\), and for the corresponding
+replacement prefix at rung \(h\), use the full prefix when \(h=n-1\)
+and otherwise use \noderef{CertifiedETTRestriction}.  These are actual
+positive lower-rung ETTs with their maximum witnesses.  Apply lower
+assertion (iv) to their proper self-stable generating colorings.  It says
+that the original and replacement post-PE components each meet the exact
+tree \(T_h\) only at the common support \(v_h\).
+
+For either component, the post-switch calculation already used in proving
+(14) says that \(\delta_h\) is missing at \(v_h\), while the switched
+edge \(f_h\) has color \(\gamma_h\) and is incident there.  Properness
+and \noderef{AdjacentEdges} make this the unique incident
+\(\gamma_h\)-edge, so \(v_h\) has degree one.  By
+\noderef{TwoColorIncidenceDegreeAtMostTwo} and
+\noderef{TwoColorComponentSpanningPath}, each full component is therefore
+a nontrivial path component, in the sense of
+\noderef{TwoColorPathComponent}, meeting \(T_h\) exactly at \(v_h\).
+The literal equalities (18) prove that both full components, with these
+properties, persist through every intervening RE step to the respective
+preterminal colorings.
+
+We now copy the hypothetical return path \(L\) to the original coloring
+\(\varphi_{n-1}\).  Each edge-node of \(L\) is adjacent on \(L\) to a
+graph vertex in \(V(T_n)\), so its exact edge identity is incident with
+\(T_n\) by \noderef{TreeIncidentEdge}.  Since \(L\subseteq O^*\), its
+color under \(\sigma_{n-1}\) is \(\gamma_h\) or \(\delta_h\).  Both
+colors lie in the exact old stored pair \(S_h\).  By the definition
+\noderef{TashkinovStoredColors} at index \(n-1\), each is either in
+\(D_{n-1}\) or is missing on the earlier ladder tree used in that
+set difference.  The ordered-extension fields of
+\noderef{TashkinovSeriesStep} and
+\noderef{TreeSequenceInitialSegment} carry the latter missing witness
+into \(T_n\); hence
+
+\[
+ \{\gamma_h,\delta_h\}
+ \subseteq\overline\varphi_{n-1}(T_n)\cup D_{n-1}.            \tag{19}
+\]
+
+For each path edge, its \(\sigma_{n-1}\)-value is in the right side of
+(19).  Relation (3), used through the reverse-value implication of
+\noderef{sc1}, therefore proves that its
+\(\varphi_{n-1}\)-value is the same.  Thus the same exact node sequence
+is a simple two-color return path under \(\varphi_{n-1}\), including the
+same edge-node \(g\) and return vertex \(w\).
+
+The return vertex is not the PE support:
+
+\[
+                              w\ne v_h.                       \tag{20}
+\]
+
+Indeed, \(w\) lies on the full cycle \(O^*\), so it has two distinct
+cycle neighbors.  But the persisted replacement PE path component has
+\(v_h\) as its degree-one endpoint under \(\sigma_{n-1}\).  Equality in
+(20) would contradict these two degree statements.
+
+Let \(Q\) be the full \((\gamma_h,\delta_h)\)-component of
+\noderef{TwoColorComponent} under
+\(\varphi_{n-1}\) containing the copied path.  It contains
+\(w\in V(T_h)\) and the edge-node \(g\).  The endpoint equation of the
+hypothetical certificate is structural; its outside endpoint is adjacent
+to the now-copied colored edge \(g\), so it also belongs to \(Q\) and
+lies outside \(V(T_n)\).  By (20), \(Q\) differs from the persisted
+original PE path component, which meets \(T_h\) only at \(v_h\).
+
+If \(Q\) were a path component, these would be two distinct
+\((\gamma_h,\delta_h)\)-path components meeting \(T_n\).  Apply lower
+assertion (ii) to the actual original rung-\(n-1\) restriction furnished
+by \noderef{TdReplacementPrefixExact}, with its maximum witness.  Its
+last output tree and displayed tree are the exact \(T_n\), its generating
+coloring is \(\varphi_{n-1}\), and this coloring is proper, leaves exactly
+\(e_0\) uncolored, and is stable relative to itself by
+\noderef{sc2}.  Moreover, \(\delta_h\) is missing at
+\(v_h\in V(T_n)\) by the persisted post-PE calculation, so
+\noderef{TreeMissingColors} supplies the missing-color premise.  The
+assertion makes the two colors interchangeable, contradicting the
+uniqueness clause of \noderef{TreeInterchangeable}.  Therefore \(Q\) is
+not a path component.
+
+The component is finite, contains the edge-node \(g\), and has degree at
+most two everywhere by \noderef{TwoColorIncidenceDegreeAtMostTwo}.
+Choose a simple spanning path using
+\noderef{TwoColorComponentSpanningPath}.  Since \(Q\) is not a path
+component, neither endpoint has degree at most one.  Both therefore have
+degree two.  Every internal node already has its two path neighbors, and
+there is no node outside the spanning path.  The unused neighbor of each
+endpoint must consequently be the other endpoint.  Adding this last
+incidence edge closes the spanning path to a full
+\noderef{TwoColorCycle} \(O\) with support exactly \(Q\).
+
+We can now reconstruct an original
+\noderef{RevisitingExtensionCertificate} field by field.  Its earlier
+index is \(h\), with positivity and the upper bound copied from the
+hypothetical certificate.  Its earlier kind is PE and its ordered colors
+are \(\gamma_h,\delta_h\), by (14); its intervening kinds are RE by the
+pointwise kind equalities.  Take its cycle to be \(O\).  It meets the
+earlier tree at \(w\) and leaves the current tree at the unchanged outside
+endpoint of \(g\).  Take \(g\) as its exact selected edge: it belongs to
+the support of \(O\), remains an exact member of
+\(\partial_G(V(T_n))\), and retains the hypothetical inside/outside
+endpoints and endpoint equation.  Take \(w\) and the copied \(L\) as
+the return vertex and path.  Simplicity is unchanged; every node of
+\(L\) lies in \(Q=\operatorname{supp}(O)\); and every graph-vertex node
+of \(L\) lies in \(V(T_n)\), exactly as in the hypothetical certificate.
+These are all fields of the original certificate.  But the original
+terminal SE or PE constructor in \noderef{TashkinovSeriesStep} contains
+the negation of such a certificate.  This contradiction proves the
+replacement no-RE priority field.
+
+We finish by proving the universal clause of \noderef{ModColoring}.  Let
+\(T^*\) be an arbitrary eligible ordered tree-sequence with
+\(T_n\prec T^*\).  In PE, eligibility is a
+\(\sigma_n\)-\noderef{TashkinovAugmentationSequence} from \(T_n\) to
+\(T^*\).  In SE, it supplies an exact edge \(f^*\), an exact seed
+\(A=T_n+f^*\) in the sense of \noderef{TreeSequenceAdjoinEdge}, and an
+augmentation sequence from \(A\) to \(T^*\), with
+\(F_n=\{f^*\}\).  The old SE constructor gives \(F_n=\{f\}\), so the
+singleton equality identifies \(f^*=f\).
+
+Apply \noderef{TashkinovClosureExists} to \(T^*\) under \(\sigma_n\),
+and call the resulting closure \(C\).  By \noderef{TashkinovClosure}, it
+supplies an augmentation sequence from \(T^*\) to \(C\), and
+\(V(C)\) is closed.  Compose the reflexive-transitive routes in
+\noderef{TashkinovAugmentationSequence}.  We obtain
+
+\[
+ \begin{array}{ll}
+ T_n\longrightarrow T^*\longrightarrow C,&\text{in PE},\\
+ A=T_n+f\longrightarrow T^*\longrightarrow C,&\text{in SE}.
+ \end{array}                                                  \tag{21}
+\]
+
+Every one-step \noderef{TashkinovAugmentation} preserves its source as
+an ordered initial segment.  Thus
+\(T_n\prec T^*\preccurlyeq C\); (21) is the exact closed-extension
+field required in the appropriate constructor.
+
+Append one terminal certificate to the replacement prefix.  In both
+branches use the choice \(\mathcal M^*\) from (10), the closed and
+not-strongly-closed facts (11), and the no-RE result above.  In SE use the
+transported universal disjointness field, set the next coloring to
+\(\sigma_n=\sigma_{n-1}\), set the raw stored set, connecting-edge set,
+kind, chosen vertex, outside vertex, and delta field to
+
+\[
+ \{\delta\},\quad\{f\},\quad\mathrm{SE},\quad v,\quad u,
+ \quad\delta,
+\]
+
+set gamma to absent, use the exact adjoined seed \(A\), and use the SE
+route in (21).  In PE use the transported existential failure witness,
+the verified history-sensitive gamma rule, the reflexive second-stable
+coloring, the constructed exit, and equation (16).  Set the corresponding
+fields to
+
+\[
+ \{\delta,\gamma\},\quad\{f\},\quad\mathrm{PE},\quad v,
+ \quad u,\quad\delta,\quad\gamma,
+\]
+
+and use the PE route in (21).  Properness and exact one-edge
+uncoloredness of the preceding coloring come from the prefix package;
+those of the current coloring are the hypotheses on \(\sigma_n\).  Thus
+every field, including strictness and ordered extension, of the selected
+constructor in \noderef{TashkinovSeriesStep} has been verified.
+
+Appending this certificate gives a \noderef{TashkinovSeries} of rung
+\(n\), with final series tree exactly \(C\) and final coloring exactly
+\(\sigma_n\).  Present the originally arbitrary \(T^*\) as the displayed
+tree.  The relation \(T_n\preccurlyeq T^*\), its strict length inequality,
+the relation \(T^*\preccurlyeq C\), and the exact final-color equation
+verify respectively the above-penultimate, strict, below-final, and
+generating-color fields of \noderef{ExtendedTashkinovTree}.
+
+Finally we check the complete correspondence record.  Use the replacement
+input and all prefix data from \noderef{TdReplacementPrefixExact}.  The
+prefix keeps every ladder tree through \(T_n\), every earlier raw stored
+set, every earlier exact connecting-edge set, and every earlier kind.
+The appended constructor uses the old terminal singleton edge and the old
+terminal raw stored set and kind, so these equalities also hold at index
+\(n\).  All prefix colorings are proper and leave exactly \(e_0\)
+uncolored; every positive prefix stage has the stability supplied by the
+prefix correspondence.  At the new terminal stage, properness and unique
+uncoloredness are the hypotheses on \(\sigma_n\), and its required
+\((T_n,D_n,\varphi_n)\)-stability is precisely the terminal hypothesis
+with which we began.  Rung equality is literal, the series used by the
+displayed ETT is the appended series itself, and its final generating
+color is \(\sigma_n\).  These checks give every field of
+\noderef{CorrespondingExtendedTashkinovTree} for \(T^*\).
+
+Since \(T^*\) was an arbitrary eligible strict extension, and since the
+initial properness and exact one-uncolored-edge conditions on \(\sigma_n\)
+were also retained, the definition \noderef{ModColoring} now gives the
+claim.
 \end{proof}
