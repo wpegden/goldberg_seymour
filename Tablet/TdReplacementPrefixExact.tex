@@ -38,57 +38,157 @@ vertex (u_a) with (m(x)\leq a\leq s).
 precisely (e_0) uncolored is a \(\varphi'_s\bmod T'_s\) coloring.
 \end{enumerate}
 
-Then for every proper stable terminal coloring \(\sigma_n\) leaving
-exactly \(e_0\) uncolored, there are a proper coloring
-\(\sigma_{n-1}\), a replacement input coloring, and a certified
-Tashkinov series with \(n-1\) rungs whose exact final tree is \(T_n\)
-and whose exact final coloring is \(\sigma_{n-1}\).  In an SE or RE
-terminal slot, \(\sigma_{n-1}=\sigma_n\).  In a PE terminal slot there
-are the recorded support vertex and ordered colors \(v_n,\gamma_n,\delta_n\)
-and
+Then every proper \((T_n,D_n,\varphi_n)\)-stable coloring \(\sigma_n\)
+leaving exactly \(e_0\) uncolored admits a proper coloring
+\(\sigma_{n-1}\), also leaving exactly \(e_0\) uncolored, such that
+\[
+ \sigma_{n-1}\text{ is }(T_n,D_{n-1},\varphi_{n-1})\text{-stable}.
+ \tag{A}
+\]
+In an SE or RE terminal slot, \(\sigma_{n-1}=\sigma_n\).  In a PE
+terminal slot there are the exact recorded support vertex and ordered
+colors \(v_n,\gamma_n,\delta_n\), and
 \[
  \sigma_{n-1}=\sigma_n/P_{v_n}(\gamma_n,\delta_n,\sigma_n).
 \]
+
+The following exact reconstruction package also exists.
+If \(n=1\), there are a replacement input coloring and an actual
+certified zero-rung Tashkinov series whose final ordered tree is exactly
+\(T_1=T_n\) and whose final coloring is exactly \(\sigma_0=\sigma_{n-1}\).
+
+If \(n>1\), there is an actual certified restriction \(R\) of the
+original ETT to rung \(n-1\).  Its displayed tree and generating coloring
+are exactly \(T_n\) and \(\varphi_{n-1}\), it has the maximum property,
+and, at every retained index, its ordered trees, colorings, raw stored
+sets, exact connecting-edge sets, extension kinds, and computed sets
+\(D_i\) agree pointwise with those of the original series.  There is a
+corresponding replacement-prefix certificate for
+\((\sigma_{n-1},T_n)\) relative to \(R\) whose certified replacement
+series has exact final ordered tree \(T_n\) and exact final coloring
+\(\sigma_{n-1}\), and whose replacement ETT has the maximum property.
+In particular, the certificate itself retains all ordered ladder trees,
+raw stored sets, exact connecting-edge sets, and extension kinds; every
+one of its colorings is proper and leaves exactly \(e_0\) uncolored; and
+each positive-stage replacement coloring is stable relative to the
+corresponding original restricted stage.
 \end{helper}
 \begin{proof}
-Let the final positive certificate be fixed.  In an SE or RE slot put
-\(\sigma_{n-1}=\sigma_n\).  In a PE slot use the recorded support
-vertex and colors and undo the terminal component switch.  Current assertion
-(iv), obtained from \noderef{ExtensionBase}, says that the switched
-component meets \(T_n\) exactly at its support vertex.  Therefore
-\noderef{ParallelExtensionUndoStable} proves that the undone coloring is
-proper, leaves exactly \(e_0\) uncolored, and is stable on \(T_n\)
-relative to the preceding coloring and stored set.  In the SE and RE cases
-the corresponding stability follows from the constructor equations,
-\noderef{HkuMissingStoredMonotone}, and transitivity \noderef{sc2}.
+Let \(p=n-1\), so the preceding stored set and coloring are
+\(D_p\) and \(\varphi_p\).  Inspect the positive terminal certificate in
+\noderef{TashkinovSeriesStep}.  Its constructor is exactly one of RE, SE,
+or PE.
 
-Copy the old closure leading to \(T_n\) edge by edge under
-\(\sigma_{n-1}\).  At every copied augmentation, the missing witness is
-a vertex of \(T_n\), so vertex stability preserves its missing color.
-The new edge is an exact displayed edge identity of \(T_n\);
-\noderef{HkuTreeColorsControlled} and the edge clause of stability preserve
-its color.  Thus each copied step is again a
-\noderef{TashkinovAugmentation}.  If a boundary edge of \(T_n\) had a
-color missing on \(T_n\), the reverse edge criterion \noderef{sc1}
-would give the identical forbidden boundary edge in the old closure.
-Hence the copied terminal tree is closed.
+In the RE case define \(\sigma_{n-1}=\sigma_n\).  The RE constructor gives
+\(\varphi_n=\varphi_{n-1}\).  The first inclusion in
+\noderef{HkuMissingStoredMonotone} says
+\[
+ \overline\varphi_{n-1}(T_n)\cup D_{n-1}
+ \subseteq \overline\varphi_n(T_n)\cup D_n.
+\]
+Thus the edge clause of the assumed terminal stability applies to every
+edge controlled by the left side, while its vertex clause gives the same
+missing sets as \(\varphi_n=\varphi_{n-1}\) at every vertex of \(T_n\).
+This proves (A) in the RE case.
 
-If \(n>1\), apply \noderef{CertifiedETTRestriction} at rung \(n-1\).
-It yields the actual restricted ETT with exact terminal tree \(T_n\),
-exact old generating coloring, inherited maximum property, and all retained
-step certificates.  Apply lower assertion (vi) to the stable coloring just
-constructed.  Its universal mod-coloring clause, instantiated with the copied
-closure, supplies a corresponding replacement prefix.  Normalize only its
-last closure witness to the exact copied closure; the ladder stages on which
-maximum property depends are unchanged.
+In the SE case again define \(\sigma_{n-1}=\sigma_n\).  The SE constructor
+of \noderef{TashkinovSeriesStep} identifies \(\varphi_n\) with its selected
+coloring and states that this selected coloring is
+\((T_n,D_{n-1},\varphi_{n-1})\)-stable.  Its vertex clause identifies the
+two reference missing-color sets on \(T_n\).  Combining that equality with
+the same monotonicity inclusion shows that \(\sigma_n\) is
+\((T_n,D_{n-1},\varphi_n)\)-stable.  Transitivity in \noderef{sc2}, first
+from \(\varphi_{n-1}\) to \(\varphi_n\) and then to \(\sigma_n\), proves
+(A).  Properness and the exact one-uncolored-edge condition in these two
+cases are the corresponding hypotheses on \(\sigma_n\).
 
-If \(n=1\), no positive lower ETT exists.  Retain the original one-edge
-seed, use \(\sigma_0\) as the replacement input, and use the copied
-closure as the initial constructor.  Properness and exact one-edge
-uncoloredness give the coloring fields of the original
-\noderef{KTriple}; its graph, criticality, and chromatic-index fields are
-independent of the coloring.  This directly constructs a zero-rung
-Tashkinov series ending at the exact \(T_1=T_n\).  The two cases prove
-the asserted existential package, including the displayed formulas for
-\(\sigma_{n-1}\).
+Finally suppose the terminal kind is PE.  The exact kind, support, gamma,
+and delta equations in \noderef{TashkinovSeriesStep} identify its recorded
+data as \(v_n,\gamma_n,\delta_n\).  The lower six-assertion package and the
+maximum property meet precisely the hypotheses of \noderef{ExtensionBase};
+its conclusion says that the \((\gamma_n,\delta_n)\)-component of \(v_n\)
+under \(\sigma_n\) meets \(T_n\) only at \(v_n\).  Apply
+\noderef{ParallelExtensionUndoStable}.  With
+\[
+ \sigma_{n-1}:=
+ \sigma_n/P_{v_n}(\gamma_n,\delta_n,\sigma_n),
+\]
+that lemma gives properness, the exact one-uncolored-edge condition, and
+exactly stability (A).  We have therefore constructed \(\sigma_{n-1}\)
+and proved all common assertions in all three exhaustive cases.
+
+We next reconstruct the last old closure under \(\sigma_{n-1}\).  The
+vertex clause of (A) preserves every missing-color witness on every prefix
+of \(T_n\).  Every edge added in the old closure is an exact displayed edge
+identity of \(T_n\).  By \noderef{HkuTreeColorsControlled}, its old color
+lies in the set controlled by (A), so the edge clause of (A) preserves that
+color.  Consequently every old one-edge augmentation is again a
+\noderef{TashkinovAugmentation} under \(\sigma_{n-1}\), with the same
+ordered tree and edge identity.  In an SE or RE slot the same argument
+first preserves the exact connecting edge and then every closure edge;
+in a PE slot it applies directly from the preceding tree.  Hence the copied
+steps form the required augmentation sequence to the exact ordered tree
+\(T_n\).  Moreover, if an edge on the boundary of \(T_n\) had under
+\(\sigma_{n-1}\) a color missing on \(T_n\), the reverse implication of
+the stability criterion \noderef{sc1} would give the same edge and color
+under \(\varphi_{n-1}\), contradicting that the old terminal tree is a
+closure.  Thus the copied augmentation sequence is a
+\noderef{TashkinovClosure} ending exactly at \(T_n\).
+
+Assume first that \(n>1\).  Apply \noderef{CertifiedETTRestriction} at
+rung \(n-1\).  It returns an actual restricted ETT \(R\) whose displayed
+tree is exactly the old tree at index \(n\), namely \(T_n\), whose
+generating coloring is exactly \(\varphi_{n-1}\), and whose rung number is
+\(n-1\).  Its statement also gives the maximum property and, pointwise,
+equality of every retained ordered tree, coloring, raw stored set, exact
+connecting-edge set, extension kind, and computed stored set with the
+corresponding original entry.  These are exactly the restriction clauses
+asserted in the conclusion.
+
+Restrict (A) from \(T_n\) to the preceding ladder tree of \(R\).  Ordered
+initial-segment containment preserves all relevant vertices and edges, so
+the two clauses in the definition of stability restrict directly.  The
+sixth lower-rung hypothesis, applied to \(R\), now states that
+\(\sigma_{n-1}\) is a mod-coloring of \(R\).  In the universal clause of
+\noderef{ModColoring}, take the strict extension to be the exact \(T_n\)
+and use the copied closure (or the copied exact connecting edge followed by
+that closure) as the eligibility witness.  We obtain a
+\noderef{CorrespondingExtendedTashkinovTree} certificate for
+\((\sigma_{n-1},T_n)\) relative to \(R\).
+
+It remains only to ensure that the certified replacement series itself,
+not merely its displayed ETT, ends at the exact tree \(T_n\).  Keep all
+its data through tree index \(n-1\) and replace its last output tree by the
+copied closure \(T_n\).  At the last certified slot retain the same
+constructor and all of its coloring, choice, and history witnesses.  In the
+SE and RE cases, equality of the singleton connecting-edge sets fixes the
+exact connecting edge; choose the copied one-edge adjoined seed and its
+exact-adjoin certificate, then use the copied closure from that seed.  In
+the PE case no connecting-edge seed is needed, so only the terminal closure
+field is replaced.  All earlier certificates are unchanged.  Rebuild the
+displayed ETT with this normalized series and the reflexive final-prefix
+relation at \(T_n\).  This produces a corresponding certificate whose
+replacement series has exact final tree \(T_n\).  Its final-color equation
+is the certificate's defining equation, hence its final coloring is exactly
+\(\sigma_{n-1}\).  Since the normalization changes none of the ordered
+ladder trees, raw stored sets, connecting-edge sets, kinds, or colorings,
+all properness, one-uncoloredness, and positive-stage stability fields of
+the corresponding certificate remain valid.  Finally apply
+\noderef{MaximumPropertyTransport} to the lower mod-coloring fact, this
+normalized certificate, and the maximum property of \(R\).  It gives the
+maximum property of the replacement ETT, completing the \(n>1\) branch.
+
+If \(n=1\), a positive-rung restricted ETT does not exist.  Retain the
+original one-edge seed and use \(\sigma_0=\sigma_{n-1}\) as the replacement
+input coloring.  The graph, criticality, chromatic-index, and degree fields
+of the original \noderef{KTriple} are unchanged, while properness and the
+exact one-uncolored-edge condition proved above supply its two coloring
+fields.  Use the copied closure from the seed to exact \(T_1=T_n\) in the
+initial constructor of \noderef{TashkinovSeriesStep}; set the initial raw
+stored and connecting-edge sets to empty and every initial optional field
+to absent, as that constructor requires.  By the definition
+\noderef{TashkinovSeries}, this single initial certificate is an actual
+zero-rung certified series.  Its final tree is the copied exact \(T_n\),
+and its sole, hence final, coloring is \(\sigma_0=\sigma_{n-1}\).  This is
+the stated direct \(n=1\) branch and finishes the proof.
 \end{proof}

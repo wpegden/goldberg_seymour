@@ -27,5 +27,74 @@ theorem TdEarlierPEWitnessIdentification {V E : Type*}
       choiceStar.otherEndpoint = choice.otherEndpoint ∧
       choiceStar.color = choice.color ∧ gammaStar = gamma := by
 -- BODY
-  sorry
-
+  have hedge : choiceStar.edge = choice.edge := by
+    apply Finset.mem_singleton.mp
+    rw [hedges]
+    exact Finset.mem_singleton_self _
+  have hends : s(choice.vertex, choice.otherEndpoint) =
+      s(choiceStar.vertex, choiceStar.otherEndpoint) := by
+    calc
+      s(choice.vertex, choice.otherEndpoint) = G.ends choice.edge :=
+        choice.edgeEnds.symm
+      _ = G.ends choiceStar.edge := congrArg G.ends hedge.symm
+      _ = s(choiceStar.vertex, choiceStar.otherEndpoint) := choiceStar.edgeEnds
+  have hvertex : choiceStar.vertex = choice.vertex := by
+    rcases (Sym2.eq_iff.mp hends) with hstraight | hcross
+    · exact hstraight.1.symm
+    · exfalso
+      have hin : choice.vertex ∈ TreeSequenceVertexSet T :=
+        choice.vertexDefective.1
+      have hout : choiceStar.otherEndpoint ∉ TreeSequenceVertexSet T := by
+        exact choiceStar.otherOutside
+      apply hout
+      exact hcross.1 ▸ hin
+  have hother : choiceStar.otherEndpoint = choice.otherEndpoint := by
+    rcases (Sym2.eq_iff.mp hends) with hstraight | hcross
+    · exact hstraight.2.symm
+    · exfalso
+      have hin : choiceStar.vertex ∈ TreeSequenceVertexSet T := by
+        exact choiceStar.vertexDefective.1
+      have hout : choice.otherEndpoint ∉ TreeSequenceVertexSet T :=
+        choice.otherOutside
+      apply hout
+      exact hcross.2 ▸ hin
+  have hmissing' : MissingColors G post choice.vertex =
+      MissingColors G postStar choiceStar.vertex := by
+    exact hmissing
+  have hcolor : choiceStar.color = choice.color := by
+    have hnot : choiceStar.color ≠ gamma := by
+      intro heq
+      apply hgamma
+      have hd : choiceStar.color ∈ MissingColors G post choice.vertex :=
+        hmissing'.symm ▸ hdeltaStar
+      exact heq ▸ hd
+    have hcases : choice.color = choiceStar.color ∨
+        choice.color = gammaStar := by
+      have hm : choice.color ∈ ({choiceStar.color, gammaStar} : Finset (Fin k)) := by
+        exact hpairs ▸ Finset.mem_insert.mpr (Or.inl rfl)
+      simpa only [Finset.mem_insert, Finset.mem_singleton] using hm
+    rcases hcases with hcase | hcase
+    · exact hcase.symm
+    · exfalso
+      apply hgammaStar
+      have hd : choice.color ∈ MissingColors G postStar choiceStar.vertex :=
+        hmissing' ▸ hdelta
+      exact hcase.symm ▸ hd
+  have hgamma' : gammaStar = gamma := by
+    have hpair : ({choice.color, gamma} : Finset (Fin k)) =
+        {choiceStar.color, gammaStar} := hpairs
+    rw [hcolor] at hpair
+    have hmem : gammaStar ∈ ({choice.color, gamma} : Finset (Fin k)) := by
+      have hm : gammaStar ∈ ({choice.color, gammaStar} : Finset (Fin k)) :=
+        Finset.mem_insert.mpr (Or.inr (Finset.mem_singleton_self _))
+      exact hpair.symm ▸ hm
+    have hcases : gammaStar = choice.color ∨ gammaStar = gamma := by
+      simpa only [Finset.mem_insert, Finset.mem_singleton] using hmem
+    rcases hcases with h | h
+    · exfalso
+      apply hgammaStar
+      have hd : choice.color ∈ MissingColors G postStar choiceStar.vertex :=
+        hmissing' ▸ hdelta
+      exact h.symm ▸ hd
+    · exact h
+  exact ⟨hedge, hvertex, hother, hcolor, hgamma'⟩

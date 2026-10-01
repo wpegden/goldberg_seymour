@@ -159,20 +159,19 @@ theorem TdReplacementPrefixExact {V E : Type*} [Fintype V] [Fintype E]
              (TashkinovStoredColors lower.series.data n)
              (lower.series.data.coloring n) sigma →
            ModColoring lower sigma)) :    let n : Fin (ett.rounds + 1) := Fin.last ett.rounds
-    let Tn : TreeSequence G e0 := ett.series.data.tree n.castSucc
+  let p : Fin (ett.rounds + 1) := ⟨ett.rounds - 1, by omega⟩
+  let Tn : TreeSequence G e0 := ett.series.data.tree n.castSucc
     ∀ sigma : PartialEdgeColoring E k,
       IsProperEdgeColoring G sigma → IsOneEdgeUncolored sigma e0 →
       StableColoring Tn
         (TashkinovStoredColors ett.series.data n)
         (ett.series.data.coloring n) sigma →
-      ∃ (sigmaPrev prefixInput : PartialEdgeColoring E k)
-        (replacementPrefix :
-          TashkinovSeries G k (ett.rounds - 1) e0 prefixInput),
+      ∃ sigmaPrev : PartialEdgeColoring E k,
         IsProperEdgeColoring G sigmaPrev ∧
         IsOneEdgeUncolored sigmaPrev e0 ∧
-        replacementPrefix.data.tree (Fin.last (ett.rounds - 1 + 1)) = Tn ∧
-        replacementPrefix.data.coloring (Fin.last (ett.rounds - 1)) =
-          sigmaPrev ∧
+        StableColoring Tn
+          (TashkinovStoredColors ett.series.data p)
+          (ett.series.data.coloring p) sigmaPrev ∧
         ((ett.series.data.kind n = some TashkinovExtensionKind.SE ∨
             ett.series.data.kind n = some TashkinovExtensionKind.RE) →
           sigmaPrev = sigma) ∧
@@ -182,6 +181,39 @@ theorem TdReplacementPrefixExact {V E : Type*} [Fintype V] [Fintype E]
             ett.series.data.gamma n = some gamma ∧
             ett.series.data.delta n = some delta ∧
             sigmaPrev =
-              TwoColorComponentSwap G sigma gamma delta (Sum.inl v)) := by
+              TwoColorComponentSwap G sigma gamma delta (Sum.inl v)) ∧
+        ((ett.rounds = 1 ∧
+            ∃ (prefixInput : PartialEdgeColoring E k)
+              (zeroPrefix : TashkinovSeries G k 0 e0 prefixInput),
+              zeroPrefix.data.tree (Fin.last 1) = Tn ∧
+              zeroPrefix.data.coloring (Fin.last 0) = sigmaPrev) ∨
+          (1 < ett.rounds ∧
+            ∃ originalPrefix : ExtendedTashkinovTree G k e0 input Tn
+                (ett.series.data.coloring p),
+              ∃ hr : originalPrefix.rounds = ett.rounds - 1,
+                MaximumProperty originalPrefix ∧
+                (∀ i : Fin (originalPrefix.rounds + 2),
+                  originalPrefix.series.data.tree i =
+                    ett.series.data.tree (Fin.castLE (by omega) i)) ∧
+                (∀ i : Fin (originalPrefix.rounds + 1),
+                  originalPrefix.series.data.coloring i =
+                      ett.series.data.coloring (Fin.castLE (by omega) i) ∧
+                  originalPrefix.series.data.stored i =
+                      ett.series.data.stored (Fin.castLE (by omega) i) ∧
+                  originalPrefix.series.data.connectingEdges i =
+                      ett.series.data.connectingEdges
+                        (Fin.castLE (by omega) i) ∧
+                  originalPrefix.series.data.kind i =
+                      ett.series.data.kind (Fin.castLE (by omega) i) ∧
+                  TashkinovStoredColors originalPrefix.series.data i =
+                    TashkinovStoredColors ett.series.data
+                      (Fin.castLE (by omega) i)) ∧
+                ∃ corr : CorrespondingExtendedTashkinovTree G k e0
+                    originalPrefix sigmaPrev Tn,
+                  corr.replacementSeries.data.tree
+                      (Fin.last (originalPrefix.rounds + 1)) = Tn ∧
+                    corr.replacementSeries.data.coloring
+                      (Fin.last originalPrefix.rounds) = sigmaPrev ∧
+                    MaximumProperty corr.replacementETT)) := by
 -- BODY
   sorry
