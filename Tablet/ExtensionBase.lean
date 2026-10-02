@@ -2289,7 +2289,1252 @@ theorem ExtensionBase {V E : Type*} [Fintype V] [Fintype E]
         hdelta0 hchain0 hinjective0 hstored0
       dsimp only at hclaim44
       exact ⟨u, huPrime, b, traceB, huOutside, hinvariantB, hclaim44⟩
-    sorry
+    rcases hcaseSplit with hcaseOne | hcaseTwo
+    · obtain ⟨u, huPrime, b, traceB, huOutside, hinvariantB,
+          hclaim44⟩ := hcaseOnePrepared hcaseOne
+      let rho2 : PartialEdgeColoring E k :=
+        traceB.coloring (Fin.last traceB.steps)
+      dsimp only at hclaim44
+      obtain ⟨c1, c2, c3⟩ := hclaim44
+      have hrho2Proper : IsProperEdgeColoring G rho2 := by
+        simpa [rho2] using (hinvariantB.1 (Fin.last traceB.steps)).1
+      have hrho2One : IsOneEdgeUncolored rho2 e0 := by
+        simpa [rho2] using (hinvariantB.1 (Fin.last traceB.steps)).2
+      obtain ⟨uPosition, -, huPosition⟩ := Finset.mem_image.mp huPrime
+      have huNotSeed : u ∉ TreeSequenceVertexSet seed := by
+        intro huSeed
+        exact huOutside (vertexTransfer hseedTj huSeed)
+      have hseedBeforeU : seed.length < uPosition.val := by
+        by_contra hnot
+        have huBound : uPosition.val ≤ seed.length := Nat.le_of_not_gt hnot
+        let i : Fin (seed.length + 1) := ⟨uPosition.val, by omega⟩
+        have hcast : Fin.castLE (Nat.succ_le_succ hseedPrime.1) i =
+            uPosition := by
+          apply Fin.ext
+          rfl
+        apply huNotSeed
+        simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+          true_and]
+        refine ⟨i, ?_⟩
+        exact (hseedPrime.2.1 i).symm.trans (hcast ▸ huPosition)
+      have huPositionPositive : 1 ≤ uPosition.val := by
+        exact seed.positive.trans (Nat.le_of_lt hseedBeforeU)
+      have huPositionBound : uPosition.val ≤ TjPrime.length :=
+        Nat.lt_succ_iff.mp uPosition.isLt
+      let U : TreeSequence G e0 :=
+        TreeSequencePrefix TjPrime uPosition.val huPositionPositive
+          huPositionBound
+      have hUPrime : TreeSequenceInitialSegment U TjPrime := by
+        refine ⟨huPositionBound, ?_, ?_⟩
+        · intro i
+          simp [U, TreeSequencePrefix]
+        · intro i
+          simp [U, TreeSequencePrefix]
+      have hseedU : TreeSequenceInitialSegment seed U := by
+        apply commonPrefix hseedPrime hUPrime
+        exact Nat.le_of_lt hseedBeforeU
+      have hrouteRhoOneU : TashkinovAugmentationSequence rho1 seed U :=
+        TashkinovAugmentationSequenceRestrict rho1 seed U TjPrime
+          hclosure.1 hseedU hUPrime
+      have hprimeVertexBefore (i : Fin (TjPrime.length + 1))
+          (hi : i.val < uPosition.val) :
+          TjPrime.vertex i ∈ TreeVerticesBefore TjPrime u huPrime := by
+        unfold TreeVerticesBefore
+        apply Finset.mem_filter.mpr
+        constructor
+        · simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+            true_and]
+          exact ⟨i, rfl⟩
+        · exact ⟨i, uPosition, rfl, huPosition, hi⟩
+      have hUsegmentVertexBefore {A : TreeSequence G e0}
+          (hAU : TreeSequenceInitialSegment A U)
+          (hAlen : A.length < U.length) {x : V}
+          (hxA : x ∈ TreeSequenceVertexSet A) :
+          x ∈ TreeVerticesBefore TjPrime u huPrime := by
+        obtain ⟨hAULen, hAUVertices, -⟩ := hAU
+        simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+          true_and] at hxA
+        obtain ⟨i, rfl⟩ := hxA
+        let iU : Fin (U.length + 1) :=
+          Fin.castLE (Nat.succ_le_succ hAULen) i
+        let iPrime : Fin (TjPrime.length + 1) :=
+          Fin.castLE (Nat.succ_le_succ hUPrime.1) iU
+        have hiPrime : iPrime.val < uPosition.val := by
+          change i.val < uPosition.val
+          have hUlen : U.length = uPosition.val := by
+            simp [U, TreeSequencePrefix]
+          omega
+        rw [← hAUVertices i, ← hUPrime.2.1 iU]
+        exact hprimeVertexBefore iPrime hiPrime
+      have transportUStep {A B : TreeSequence G e0}
+          (hstep : TashkinovAugmentation rho1 A B)
+          (hBU : TreeSequenceInitialSegment B U) :
+          TashkinovAugmentation rho2 A B := by
+        rcases hstep with ⟨hlen, hAB, c, hcolor, hcMissing⟩
+        have hAU : TreeSequenceInitialSegment A U := segmentTrans hAB hBU
+        have hAlen : A.length < U.length :=
+          lt_of_lt_of_le (by omega) hBU.1
+        have hcMissingRho : c ∈ TreeMissingColors rho2 A := by
+          unfold TreeMissingColors at hcMissing ⊢
+          obtain ⟨x, hxA, hcx⟩ := Finset.mem_biUnion.mp hcMissing
+          refine Finset.mem_biUnion.mpr ⟨x, hxA, ?_⟩
+          rw [c2.1 x (Finset.mem_union_right _
+            (hUsegmentVertexBefore hAU hAlen hxA))]
+          exact hcx
+        let added : Fin B.length := Fin.cast hlen.symm (Fin.last A.length)
+        let addedU : Fin U.length := Fin.castLE hBU.1 added
+        let addedPrime : Fin TjPrime.length := Fin.castLE hUPrime.1 addedU
+        have haddedPosition : addedPrime.val < uPosition.val := by
+          change A.length < uPosition.val
+          have hUlen : U.length = uPosition.val := by
+            simp [U, TreeSequencePrefix]
+          omega
+        have haddedIdentity : TjPrime.edge addedPrime = B.edge added :=
+          (hUPrime.2.2 addedU).trans (hBU.2.2 added)
+        have haddedFixed : rho2 (B.edge added) = rho1 (B.edge added) := by
+          apply c2.2 (B.edge added)
+          exact Or.inr ⟨addedPrime, uPosition, huPosition,
+            haddedPosition, haddedIdentity⟩
+        refine ⟨hlen, hAB, c, ?_, hcMissingRho⟩
+        change rho2 (B.edge added) = some c
+        exact haddedFixed.trans hcolor
+      have transportURoute (S : TreeSequence G e0)
+          (hroute : TashkinovAugmentationSequence rho1 S U) :
+          TashkinovAugmentationSequence rho2 S U := by
+        unfold TashkinovAugmentationSequence at hroute ⊢
+        induction hroute using Relation.ReflTransGen.head_induction_on with
+        | refl => exact Relation.ReflTransGen.refl
+        | @head A B hAB hBU ih =>
+            have hBsegment : TreeSequenceInitialSegment B U :=
+              TashkinovAugmentationSequenceInitialSegment rho1 B U hBU
+            exact Relation.ReflTransGen.head
+              (transportUStep hAB hBsegment) ih
+      have hrouteRhoTwoU : TashkinovAugmentationSequence rho2 seed U :=
+        transportURoute seed hrouteRhoOneU
+      have hterminalMissingEq : MissingColors G rho2 v =
+          MissingColors G rho1 v := by
+        exact c2.1 v (Finset.mem_union_left _ hterminalJ)
+      have hterminalInclusion : MissingColors G
+            (ett.series.data.coloring jSlot.castSucc) v ⊆
+          MissingColors G rho2 v ∪ MissingColors G rho2 u := by
+        intro c hc
+        rw [hmissing0.2] at hc
+        rcases Finset.mem_union.mp hc with hcSigma | hcGamma
+        · apply Finset.mem_union_left
+          rw [hterminalMissingEq, hb2Missing.2]
+          exact (Finset.mem_sdiff.mp hcSigma).1
+        · apply Finset.mem_union_right
+          have hcgamma : c = gamma0 0 := Finset.mem_singleton.mp hcGamma
+          simpa [hcgamma] using c3
+      let Tprevious : TreeSequence G e0 :=
+        ett.series.data.tree jSlot.castSucc.castSucc
+      have hvNotPrevious (hjPositive : 0 < jSlot.val) :
+          v ∉ TreeSequenceVertexSet Tprevious := by
+        intro hvPrevious
+        let candidates : Finset (Fin (ett.rounds + 1)) :=
+          Finset.univ.filter fun i =>
+            v ∈ TreeSequenceVertexSet (ExtendedTashkinovLadderStage ett i)
+        have hlast : Fin.last ett.rounds ∈ candidates := by
+          simp only [candidates, Finset.mem_filter, Finset.mem_univ, true_and]
+          rw [show ExtendedTashkinovLadderStage ett
+              (Fin.last ett.rounds) = T by
+            unfold ExtendedTashkinovLadderStage
+            exact Fin.lastCases_last]
+          exact hvFinal
+        have hfirst := hjSlot
+        unfold ETTFirstAppearanceIndex at hfirst
+        dsimp at hfirst
+        have hminimumValue :
+            (candidates.min' ⟨Fin.last ett.rounds, hlast⟩).val =
+              jSlot.val := by
+          change jSlot.val + 1 =
+            (candidates.min' ⟨Fin.last ett.rounds, hlast⟩).val + 1 at hfirst
+          omega
+        let previousSlot : Fin ett.rounds :=
+          ⟨jSlot.val - 1, by omega⟩
+        have hpreviousIndex : previousSlot.succ = jSlot.castSucc := by
+          apply Fin.ext
+          simp [previousSlot]
+          omega
+        have hpreviousMember : previousSlot.castSucc ∈ candidates := by
+          simp only [candidates, Finset.mem_filter, Finset.mem_univ, true_and]
+          rw [show ExtendedTashkinovLadderStage ett previousSlot.castSucc =
+              Tprevious by
+            unfold ExtendedTashkinovLadderStage
+            rw [Fin.lastCases_castSucc, hpreviousIndex]]
+          exact hvPrevious
+        have hminimum := Finset.min'_le candidates previousSlot.castSucc
+          hpreviousMember
+        have hminimumVal := Fin.le_iff_val_le_val.mp hminimum
+        rw [hminimumValue] at hminimumVal
+        dsimp [previousSlot] at hminimumVal
+        omega
+      have hpreviousTj (hjPositive : 0 < jSlot.val) :
+          TreeSequenceInitialSegment Tprevious
+            (ett.series.data.tree jSlot.succ.castSucc) := by
+        have hstep := stepSegment jSlot.castSucc (by simpa using hjPositive)
+        rw [hjTreeIndex] at hstep
+        exact hstep
+      have hpreviousStrict (hjPositive : 0 < jSlot.val) :
+          Tprevious.length < seed.length := by
+        by_contra hnot
+        have hpositionLe : terminalPosition.val ≤ Tprevious.length := by
+          simpa [seed, TreeSequencePrefix] using Nat.le_of_not_gt hnot
+        let previousPosition : Fin (Tprevious.length + 1) :=
+          ⟨terminalPosition.val, by omega⟩
+        have hcast : Fin.castLE
+            (Nat.succ_le_succ (hpreviousTj hjPositive).1)
+            previousPosition = terminalPosition := by
+          apply Fin.ext
+          rfl
+        apply hvNotPrevious hjPositive
+        simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+          true_and]
+        refine ⟨previousPosition, ?_⟩
+        have hvertex := (hpreviousTj hjPositive).2.1 previousPosition
+        rw [hcast] at hvertex
+        exact hvertex.symm.trans hterminalAt
+      have hpreviousSeed (hjPositive : 0 < jSlot.val) :
+          TreeSequenceInitialSegment Tprevious seed :=
+        commonPrefix (hpreviousTj hjPositive) hseedTj
+          (Nat.le_of_lt (hpreviousStrict hjPositive))
+      have hroutePhiTj : TashkinovAugmentationSequence
+          (ett.series.data.coloring jSlot.castSucc) seed
+          (ett.series.data.tree jSlot.succ.castSucc) := by as_aux_lemma =>
+        generalize htarget : jSlot.castSucc = target
+        cases ett.series.certified target with
+        | initial triple seedLength initialColoring initialStored initialEdges
+            initialKind initialVertex initialOutside initialDelta initialGamma
+            initialClosure =>
+          have htargetZero : jSlot.val = 0 := by
+            have := congrArg Fin.val htarget
+            simpa using this
+          have htreeOne : ett.series.data.tree 1 =
+              ett.series.data.tree jSlot.succ.castSucc := by
+            congr 1
+            apply Fin.ext
+            simp [htargetZero]
+          have hinitialTj : TreeSequenceInitialSegment
+              (ett.series.data.tree 0)
+              (ett.series.data.tree jSlot.succ.castSucc) := by
+            have h := TashkinovAugmentationSequenceInitialSegment _ _ _
+              initialClosure.1
+            rw [htreeOne] at h
+            exact h
+          have hbaseSeed : TreeSequenceInitialSegment
+              (ett.series.data.tree 0) seed := by
+            apply commonPrefix hinitialTj hseedTj
+            rw [seedLength]
+            exact seed.positive
+          have hrouteOld : TashkinovAugmentationSequence
+              (ett.series.data.coloring 0) (ett.series.data.tree 0)
+              (ett.series.data.tree jSlot.succ.castSucc) := by
+            rw [← htreeOne]
+            exact initialClosure.1
+          have hroute := TashkinovAugmentationSequenceSuffix
+            (ett.series.data.coloring 0) (ett.series.data.tree 0) seed
+            (ett.series.data.tree jSlot.succ.castSucc) hrouteOld hbaseSeed
+            hseedTj
+          simpa [htargetZero] using hroute
+        | SE i previousProper previousOneUncolored previousClosed
+            previousNotStronglyClosed noRevisiting choice seriesAlternative
+            currentColoring currentStored currentEdges currentKind currentVertex
+            currentOutside currentDelta currentGamma adjoined adjoinedExactly
+            closedExtension orderedExtension strictExtension =>
+          have hi : i.succ = jSlot.castSucc := htarget.symm
+          have hjPositive : 0 < jSlot.val := by
+            have := congrArg Fin.val hi
+            simp at this
+            omega
+          have hroute : TashkinovAugmentationSequence
+              (ett.series.data.coloring jSlot.castSucc) adjoined
+              (ett.series.data.tree jSlot.succ.castSucc) := by
+            have h := closedExtension.1
+            rw [hi, hjTreeIndex] at h
+            exact h
+          have hadjoinedTj : TreeSequenceInitialSegment adjoined
+              (ett.series.data.tree jSlot.succ.castSucc) :=
+            TashkinovAugmentationSequenceInitialSegment _ _ _ hroute
+          have hadjoinedLength : adjoined.length ≤ seed.length := by
+            rcases adjoinedExactly with ⟨hlen, -, -⟩
+            have hiCast : i.succ.castSucc = jSlot.castSucc.castSucc := by
+              apply Fin.ext
+              simpa using congrArg Fin.val hi
+            have hprev : ett.series.data.tree i.succ.castSucc =
+                Tprevious := by rw [hiCast]
+            rw [hprev] at hlen
+            rw [hlen]
+            exact Nat.succ_le_of_lt (hpreviousStrict hjPositive)
+          have hadjoinedSeed : TreeSequenceInitialSegment adjoined seed :=
+            commonPrefix hadjoinedTj hseedTj hadjoinedLength
+          simpa [hi] using
+            (TashkinovAugmentationSequenceSuffix
+              (ett.series.data.coloring jSlot.castSucc) adjoined seed _ hroute
+                hadjoinedSeed hseedTj)
+        | PE i previousProper previousOneUncolored previousClosed
+            previousNotStronglyClosed noRevisiting choice seriesAlternativeFails
+            chosenGamma gammaRule secondStable secondStableProper
+            secondStableOneUncolored secondStableRelation exitWitness
+            currentColoring currentProper currentOneUncolored currentStored
+            currentEdges currentKind currentVertex currentOutside currentDelta
+            currentGamma closedExtension orderedExtension strictExtension =>
+          have hi : i.succ = jSlot.castSucc := htarget.symm
+          have hjPositive : 0 < jSlot.val := by
+            have := congrArg Fin.val hi
+            simp at this
+            omega
+          have hroute : TashkinovAugmentationSequence
+              (ett.series.data.coloring jSlot.castSucc) Tprevious
+              (ett.series.data.tree jSlot.succ.castSucc) := by
+            have h := closedExtension.1
+            rw [hi, hjTreeIndex] at h
+            simpa [Tprevious, hi] using h
+          simpa [hi] using
+            (TashkinovAugmentationSequenceSuffix
+              (ett.series.data.coloring jSlot.castSucc) Tprevious seed _ hroute
+                (hpreviousSeed hjPositive) hseedTj)
+        | RE i previousProper previousOneUncolored previousClosed
+            previousNotStronglyClosed available currentColoring currentStored
+            currentEdges currentKind currentVertex currentOutside currentDelta
+            currentGamma adjoined adjoinedExactly closedExtension orderedExtension
+            strictExtension =>
+          have hi : i.succ = jSlot.castSucc := htarget.symm
+          have hjPositive : 0 < jSlot.val := by
+            have := congrArg Fin.val hi
+            simp at this
+            omega
+          have hroute : TashkinovAugmentationSequence
+              (ett.series.data.coloring jSlot.castSucc) adjoined
+              (ett.series.data.tree jSlot.succ.castSucc) := by
+            have h := closedExtension.1
+            rw [hi, hjTreeIndex] at h
+            exact h
+          have hadjoinedTj : TreeSequenceInitialSegment adjoined
+              (ett.series.data.tree jSlot.succ.castSucc) :=
+            TashkinovAugmentationSequenceInitialSegment _ _ _ hroute
+          have hadjoinedLength : adjoined.length ≤ seed.length := by
+            rcases adjoinedExactly with ⟨hlen, -, -⟩
+            have hiCast : i.succ.castSucc = jSlot.castSucc.castSucc := by
+              apply Fin.ext
+              simpa using congrArg Fin.val hi
+            have hprev : ett.series.data.tree i.succ.castSucc =
+                Tprevious := by rw [hiCast]
+            rw [hprev] at hlen
+            rw [hlen]
+            exact Nat.succ_le_of_lt (hpreviousStrict hjPositive)
+          have hadjoinedSeed : TreeSequenceInitialSegment adjoined seed :=
+            commonPrefix hadjoinedTj hseedTj hadjoinedLength
+          simpa [hi] using
+            (TashkinovAugmentationSequenceSuffix
+              (ett.series.data.coloring jSlot.castSucc) adjoined seed _ hroute
+                hadjoinedSeed hseedTj)
+      let Tj0 : TreeSequence G e0 :=
+        ett.series.data.tree jSlot.succ.castSucc
+      have hroutePhiTj0 : TashkinovAugmentationSequence
+          (ett.series.data.coloring jSlot.castSucc) seed Tj0 := by
+        simpa [Tj0] using hroutePhiTj
+      have hseedTj0 : TreeSequenceInitialSegment seed Tj0 := by
+        simpa [Tj0] using hseedTj
+      obtain ⟨M, ⟨hunion⟩⟩ := OrderedTreeUnionExists U Tj0
+      have huU : u ∈ TreeSequenceVertexSet U := by
+        simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+          true_and]
+        refine ⟨Fin.last U.length, ?_⟩
+        change TjPrime.vertex (Fin.castLE (Nat.succ_le_succ huPositionBound)
+          (Fin.last uPosition.val)) = u
+        have hindex : Fin.castLE (Nat.succ_le_succ huPositionBound)
+            (Fin.last uPosition.val) = uPosition := by
+          apply Fin.ext
+          rfl
+        rw [hindex]
+        exact huPosition
+      have hrouteUM : TashkinovAugmentationSequence rho2 U M := by
+        as_aux_lemma =>
+        have hleftSegment := hunion.leftSegment
+        have hnewEntryFromRight := hunion.newEntryFromRight
+        have heveryNewRightEntry := hunion.everyNewRightEntry
+        have hrightOrder := hunion.rightOrder
+        have prefixSegment (A : TreeSequence G e0) (r : Nat)
+            (hr : 1 ≤ r) (hrA : r ≤ A.length) :
+            TreeSequenceInitialSegment
+              (TreeSequencePrefix A r hr hrA) A := by
+          refine ⟨hrA, ?_, ?_⟩
+          · intro i
+            simp [TreeSequencePrefix]
+          · intro i
+            simp [TreeSequencePrefix]
+        have prefixPrefix (A : TreeSequence G e0) (r : Nat)
+            (hr : 1 ≤ r) (hrA : r + 1 ≤ A.length) :
+            TreeSequenceInitialSegment
+              (TreeSequencePrefix A r hr
+                (Nat.le_trans (Nat.le_succ r) hrA))
+              (TreeSequencePrefix A (r + 1) (by omega) hrA) := by
+          refine ⟨Nat.le_succ r, ?_, ?_⟩
+          · intro i
+            change A.vertex _ = A.vertex _
+            congr 1
+          · intro i
+            change A.edge _ = A.edge _
+            congr 1
+        have prefixSelf (A : TreeSequence G e0) :
+            TreeSequencePrefix A A.length A.positive le_rfl = A := by
+          cases A with
+          | mk len pos vertex edge vinj einj first attach =>
+            rw [TreeSequence.mk.injEq]
+            refine ⟨rfl, ?_, ?_⟩
+            · apply heq_of_eq
+              funext i
+              rfl
+            · apply heq_of_eq
+              funext i
+              rfl
+        have equalPrefixes {A B D : TreeSequence G e0}
+            (hAD : TreeSequenceInitialSegment A D)
+            (hBD : TreeSequenceInitialSegment B D)
+            (hlen : A.length = B.length) : A = B := by
+          rcases hAD with ⟨hlenAD, hvertexAD, hedgeAD⟩
+          rcases hBD with ⟨hlenBD, hvertexBD, hedgeBD⟩
+          cases A with
+          | mk alen apos avertex aedge avinj aeinf afirst aattach =>
+            cases B with
+            | mk blen bpos bvertex bedge bvinj beinj bfirst battach =>
+              simp only at hlen
+              subst blen
+              rw [TreeSequence.mk.injEq]
+              refine ⟨rfl, ?_, ?_⟩
+              · apply heq_of_eq
+                funext i
+                calc
+                  avertex i = D.vertex
+                      (Fin.castLE (Nat.succ_le_succ hlenAD) i) :=
+                    (hvertexAD i).symm
+                  _ = D.vertex
+                      (Fin.castLE (Nat.succ_le_succ hlenBD) i) := by
+                    congr 1
+                  _ = bvertex i := hvertexBD i
+              · apply heq_of_eq
+                funext i
+                calc
+                  aedge i = D.edge (Fin.castLE hlenAD i) :=
+                    (hedgeAD i).symm
+                  _ = D.edge (Fin.castLE hlenBD i) := by congr 1
+                  _ = bedge i := hedgeBD i
+        have prefixAtLeft :
+            TreeSequencePrefix M U.length U.positive hleftSegment.1 = U := by
+          apply equalPrefixes
+            (prefixSegment M U.length U.positive hleftSegment.1)
+            hleftSegment
+          rfl
+        have hseedTjSegment : TreeSequenceInitialSegment seed Tj0 :=
+          TashkinovAugmentationSequenceInitialSegment _ _ _ hroutePhiTj0
+        have firstStep {A B : TreeSequence G e0}
+            (hAB : TashkinovAugmentationSequence
+              (ett.series.data.coloring jSlot.castSucc) A B)
+            (hlt : A.length < B.length) :
+            ∃ C, TashkinovAugmentation
+                (ett.series.data.coloring jSlot.castSucc) A C ∧
+              TashkinovAugmentationSequence
+                (ett.series.data.coloring jSlot.castSucc) C B := by
+          unfold TashkinovAugmentationSequence at hAB ⊢
+          induction hAB using Relation.ReflTransGen.head_induction_on with
+          | refl => omega
+          | @head A C hAC hCB ih => exact ⟨C, hAC, hCB⟩
+        have replay : ∀ n (hnU : U.length ≤ n) (hnM : n ≤ M.length),
+            TashkinovAugmentationSequence rho2 U
+              (TreeSequencePrefix M n
+                (Nat.le_trans U.positive hnU) hnM) := by
+          intro n hnU hnM
+          induction n, hnU using Nat.le_induction with
+          | base =>
+              simpa [prefixAtLeft] using
+                (show TashkinovAugmentationSequence rho2 U U from
+                  Relation.ReflTransGen.refl)
+          | @succ n hnU ih =>
+              by_cases hnEq : n = M.length
+              · omega
+              have hnSuccM : n + 1 ≤ M.length := by omega
+              have hnM' : n ≤ M.length :=
+                Nat.le_trans (Nat.le_succ n) hnSuccM
+              have ih' := ih hnM'
+              let X := TreeSequencePrefix M n
+                (Nat.le_trans U.positive hnU) hnM'
+              let Y := TreeSequencePrefix M (n + 1)
+                (Nat.le_trans U.positive
+                  (Nat.le_trans hnU (Nat.le_succ n))) hnSuccM
+              let mIndex : Fin M.length := ⟨n, by omega⟩
+              obtain ⟨i, hedgeMTj, hvertexMTj⟩ :=
+                hnewEntryFromRight mIndex hnU
+              have hrightOutside :
+                  Tj0.vertex i.succ ∉ TreeSequenceVertexSet U := by
+                intro hmem
+                simp only [TreeSequenceVertexSet, Finset.mem_image,
+                  Finset.mem_univ, true_and] at hmem
+                obtain ⟨a, ha⟩ := hmem
+                have hmvertex : M.vertex
+                      (Fin.castLE (Nat.succ_le_succ hleftSegment.1) a) =
+                    U.vertex a := hleftSegment.2.1 a
+                have heq : M.vertex mIndex.succ =
+                    M.vertex
+                      (Fin.castLE (Nat.succ_le_succ hleftSegment.1) a) :=
+                  hvertexMTj.trans (ha.symm.trans hmvertex.symm)
+                have hindex := congrArg Fin.val (M.vertex_injective heq)
+                simp [mIndex] at hindex
+                omega
+              have hiSeed : seed.length ≤ i.val := by
+                by_contra hnot
+                have hi : i.val < seed.length := Nat.lt_of_not_ge hnot
+                let a : Fin (seed.length + 1) := ⟨i.val + 1, by omega⟩
+                have hTjSeedA : Tj0.vertex
+                      (Fin.castLE (Nat.succ_le_succ hseedTjSegment.1) a) =
+                    seed.vertex a := hseedTjSegment.2.1 a
+                apply hrightOutside
+                simp only [TreeSequenceVertexSet, Finset.mem_image,
+                  Finset.mem_univ, true_and]
+                refine ⟨Fin.castLE (Nat.succ_le_succ hseedU.1) a, ?_⟩
+                have hia : Fin.castLE
+                      (Nat.succ_le_succ hseedTjSegment.1) a = i.succ := by
+                  apply Fin.ext
+                  simp [a]
+                rw [hia] at hTjSeedA
+                exact (hseedU.2.1 a).trans hTjSeedA.symm
+              have hiTj : i.val < Tj0.length := i.isLt
+              let RX := TreeSequencePrefix Tj0 i.val
+                (Nat.le_trans seed.positive hiSeed) (Nat.le_of_lt hiTj)
+              have hseedRX : TreeSequenceInitialSegment seed RX := by
+                refine ⟨hiSeed, ?_, ?_⟩
+                · intro a
+                  change Tj0.vertex _ = seed.vertex a
+                  calc
+                    Tj0.vertex _ = Tj0.vertex
+                        (Fin.castLE (Nat.succ_le_succ hseedTjSegment.1)
+                          a) := by congr 1
+                    _ = seed.vertex a := hseedTjSegment.2.1 a
+                · intro a
+                  change Tj0.edge _ = seed.edge a
+                  calc
+                    Tj0.edge _ = Tj0.edge
+                        (Fin.castLE hseedTjSegment.1 a) := by congr 1
+                    _ = seed.edge a := hseedTjSegment.2.2 a
+              have hRXTj : TreeSequenceInitialSegment RX Tj0 :=
+                prefixSegment Tj0 i.val
+                  (Nat.le_trans seed.positive hiSeed) (Nat.le_of_lt hiTj)
+              have hsuffix : TashkinovAugmentationSequence
+                  (ett.series.data.coloring jSlot.castSucc) RX Tj0 :=
+                TashkinovAugmentationSequenceSuffix _ seed RX Tj0
+                  hroutePhiTj0 hseedRX hRXTj
+              have hRXlen : RX.length = i.val := rfl
+              obtain ⟨A, hRXA, hATj⟩ := firstStep hsuffix (by omega)
+              rcases hRXA with
+                ⟨hlenA, hRXASegment, c, hcolorA, hmissingRX⟩
+              have hATjSegment : TreeSequenceInitialSegment A Tj0 :=
+                TashkinovAugmentationSequenceInitialSegment _ _ _ hATj
+              have hAi : A.length = i.val + 1 := by omega
+              let ai : Fin A.length := ⟨i.val, by omega⟩
+              have hcolorTj :
+                  ett.series.data.coloring jSlot.castSucc (Tj0.edge i) =
+                    some c := by
+                have haiLast : ai =
+                    Fin.cast hlenA.symm (Fin.last RX.length) := by
+                  apply Fin.ext
+                  simp [ai, hRXlen]
+                have hTjai : Tj0.edge
+                      (Fin.castLE hATjSegment.1 ai) = A.edge ai :=
+                  hATjSegment.2.2 ai
+                have hcast : Fin.castLE hATjSegment.1 ai = i := by
+                  apply Fin.ext
+                  simp [ai]
+                rw [← hcast, hTjai, haiLast]
+                exact hcolorA
+              have hleftX {x : V} (hxU : x ∈ TreeSequenceVertexSet U) :
+                  x ∈ TreeSequenceVertexSet X := by
+                simp only [TreeSequenceVertexSet, Finset.mem_image,
+                  Finset.mem_univ, true_and] at hxU ⊢
+                obtain ⟨a, ha⟩ := hxU
+                refine ⟨Fin.castLE (Nat.succ_le_succ hnU) a, ?_⟩
+                change M.vertex _ = x
+                calc
+                  M.vertex _ = M.vertex
+                      (Fin.castLE (Nat.succ_le_succ hleftSegment.1) a) := by
+                    congr 1
+                  _ = U.vertex a := hleftSegment.2.1 a
+                  _ = x := ha
+              have hmissingX : c ∈ TreeMissingColors rho2 X := by
+                unfold TreeMissingColors at hmissingRX ⊢
+                obtain ⟨x, hxRX, hcx⟩ :=
+                  Finset.mem_biUnion.mp hmissingRX
+                simp only [TreeSequenceVertexSet, Finset.mem_image,
+                  Finset.mem_univ, true_and] at hxRX
+                obtain ⟨a, ha⟩ := hxRX
+                have hxTj : x ∈ TreeSequenceVertexSet Tj0 :=
+                  vertexTransfer hRXTj
+                    (by
+                      simp only [TreeSequenceVertexSet, Finset.mem_image,
+                        Finset.mem_univ, true_and]
+                      exact ⟨a, ha⟩)
+                have hxX : x ∈ TreeSequenceVertexSet X := by
+                  by_cases hxU : x ∈ TreeSequenceVertexSet U
+                  · exact hleftX hxU
+                  · have haPos : 1 ≤ a.val := by
+                      by_contra hzero
+                      have haZero : a.val = 0 := by omega
+                      let p0 : Fin (seed.length + 1) := ⟨0, by omega⟩
+                      have hTjp0 := hseedTjSegment.2.1 p0
+                      have hUp0 := hseedU.2.1 p0
+                      apply hxU
+                      simp only [TreeSequenceVertexSet, Finset.mem_image,
+                        Finset.mem_univ, true_and]
+                      refine ⟨Fin.castLE (Nat.succ_le_succ hseedU.1) p0, ?_⟩
+                      have haTj : Tj0.vertex
+                            (Fin.castLE
+                              (Nat.succ_le_succ (Nat.le_of_lt hiTj)) a) =
+                          x := by
+                        simpa [RX, TreeSequencePrefix] using ha
+                      have ha0 : Fin.castLE
+                            (Nat.succ_le_succ (Nat.le_of_lt hiTj)) a =
+                          Fin.castLE
+                            (Nat.succ_le_succ hseedTjSegment.1) p0 := by
+                        apply Fin.ext
+                        exact haZero
+                      rw [ha0, hTjp0] at haTj
+                      exact hUp0.trans haTj
+                    let r : Fin Tj0.length := ⟨a.val - 1, by
+                      have haLt : a.val < RX.length + 1 := a.isLt
+                      simp [RX] at haLt
+                      omega⟩
+                    have hrSucc : r.succ = Fin.castLE
+                        (Nat.succ_le_succ (Nat.le_of_lt hiTj)) a := by
+                      apply Fin.ext
+                      exact Nat.sub_add_cancel haPos
+                    have hrv : Tj0.vertex r.succ = x := by
+                      rw [hrSucc]
+                      simpa [RX, TreeSequencePrefix] using ha
+                    have hrOutside :
+                        Tj0.vertex r.succ ∉ TreeSequenceVertexSet U := by
+                      simpa [hrv] using hxU
+                    have hri : r.val < i.val := by
+                      have haLt : a.val < RX.length + 1 := a.isLt
+                      simp [RX, r] at haLt ⊢
+                      omega
+                    obtain ⟨qM, hqU, hedgeq, hvertexq⟩ :=
+                      heveryNewRightEntry r hrOutside
+                    have hqn : qM.val < n :=
+                      hrightOrder r i hrOutside hrightOutside hri qM mIndex
+                        hvertexq hvertexMTj
+                    simp only [TreeSequenceVertexSet, Finset.mem_image,
+                      Finset.mem_univ, true_and]
+                    let qX : Fin (X.length + 1) := ⟨qM.val + 1, by
+                      change qM.val + 1 < n + 1
+                      omega⟩
+                    refine ⟨qX, ?_⟩
+                    rw [← hrv, ← hvertexq]
+                    change M.vertex _ = M.vertex qM.succ
+                    congr 1
+                by_cases hxTerminal : x = v
+                · have hcTerminalOld : c ∈ MissingColors G
+                      (ett.series.data.coloring jSlot.castSucc) v := by
+                    rw [← hxTerminal]
+                    exact hcx
+                  rcases Finset.mem_union.mp
+                      (hterminalInclusion hcTerminalOld) with
+                    hcTerminal | hcU
+                  · exact Finset.mem_biUnion.mpr ⟨x, hxX, by
+                      simpa [hxTerminal] using hcTerminal⟩
+                  · exact Finset.mem_biUnion.mpr ⟨u, hleftX huU, hcU⟩
+                · refine Finset.mem_biUnion.mpr ⟨x, hxX, ?_⟩
+                  have hxTj' : x ∈ TreeSequenceVertexSet
+                      (ett.series.data.tree jSlot.succ.castSucc) := by
+                    simpa [Tj0] using hxTj
+                  rw [c2.1 x (Finset.mem_union_left _ hxTj'),
+                    hb2Missing.1 x
+                      (Finset.mem_erase.mpr ⟨hxTerminal, hxTj'⟩)]
+                  exact hcx
+              have hXY : TashkinovAugmentation rho2 X Y := by
+                have hlenXY : Y.length = X.length + 1 := by
+                  change n + 1 = n + 1
+                  rfl
+                refine ⟨hlenXY, ?_, c, ?_, hmissingX⟩
+                · simpa [X, Y] using prefixPrefix M n
+                    (Nat.le_trans U.positive hnU) hnSuccM
+                · have hfixedTj : rho2 (Tj0.edge i) =
+                      ett.series.data.coloring jSlot.castSucc
+                        (Tj0.edge i) := by
+                    have hc2 : rho2 (Tj0.edge i) = rho1 (Tj0.edge i) := by
+                      apply c2.2
+                      apply Or.inl
+                      exact ⟨i, by simp [Tj0]⟩
+                    have hb2 := hb2TreeEdges
+                      (Fin.cast (by simp [Tj0]) i)
+                    simpa [Tj0] using hc2.trans (hb2.1.trans hb2.2)
+                  have hcolorM : rho2 (M.edge mIndex) = some c := by
+                    rw [hedgeMTj]
+                    exact hfixedTj.trans hcolorTj
+                  change rho2 (M.edge _) = some c
+                  convert hcolorM using 1
+                  apply congrArg rho2
+                  apply congrArg M.edge
+                  apply Fin.ext
+                  rfl
+              change TashkinovAugmentationSequence rho2 U Y
+              exact Relation.ReflTransGen.tail ih' hXY
+        have hfull := replay M.length hleftSegment.1 le_rfl
+        simpa [prefixSelf] using hfull
+      obtain ⟨C, hclosureMC⟩ := TashkinovClosureExists rho2 M
+      have hrouteUC : TashkinovAugmentationSequence rho2 U C :=
+        Relation.ReflTransGen.trans hrouteUM hclosureMC.1
+      have hrouteSeedC : TashkinovAugmentationSequence rho2 seed C :=
+        Relation.ReflTransGen.trans hrouteRhoTwoU hrouteUC
+      have hclosedC :
+          ColoredVertexSetClosed G rho2 (TreeSequenceVertexSet C) :=
+        hclosureMC.2
+      have hseedVertexBeforeJ (i : Fin (seed.length + 1))
+          (hi : i.val < seed.length) :
+          seed.vertex i ∈ TreeVerticesBefore
+            (ett.series.data.tree jSlot.succ.castSucc) v hterminalJ := by
+        unfold TreeVerticesBefore
+        apply Finset.mem_filter.mpr
+        constructor
+        · exact vertexTransfer hseedTj
+            (by simp [TreeSequenceVertexSet])
+        · let p : Fin
+              ((ett.series.data.tree jSlot.succ.castSucc).length + 1) :=
+            Fin.castLE (Nat.succ_le_succ hseedTj.1) i
+          let z : Fin
+              ((ett.series.data.tree jSlot.succ.castSucc).length + 1) :=
+            Fin.castLE (Nat.succ_le_succ hseedTj.1)
+              (Fin.last seed.length)
+          refine ⟨p, z, hseedTj.2.1 i,
+            (hseedTj.2.1 (Fin.last seed.length)).trans hseedTerminal, ?_⟩
+          simpa [p, z] using hi
+      have segmentVertexBeforeJ {A : TreeSequence G e0}
+          (hAseed : TreeSequenceInitialSegment A seed)
+          (hAlen : A.length < seed.length) {x : V}
+          (hxA : x ∈ TreeSequenceVertexSet A) :
+          x ∈ TreeVerticesBefore
+            (ett.series.data.tree jSlot.succ.castSucc) v hterminalJ := by
+        obtain ⟨hAseedLen, hAseedVertices, -⟩ := hAseed
+        simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+          true_and] at hxA
+        obtain ⟨i, rfl⟩ := hxA
+        have hi : (Fin.castLE (Nat.succ_le_succ hAseedLen) i).val <
+            seed.length := by
+          change i.val < seed.length
+          omega
+        rw [← hAseedVertices i]
+        exact hseedVertexBeforeJ _ hi
+      have transportSeedStep2 {A B : TreeSequence G e0}
+          (hstep : TashkinovAugmentation
+            (ett.series.data.coloring jSlot.castSucc) A B)
+          (hBseed : TreeSequenceInitialSegment B seed) :
+          TashkinovAugmentation rho2 A B := by
+        rcases hstep with ⟨hlen, hAB, c, hcolor, hcMissing⟩
+        have hAseed : TreeSequenceInitialSegment A seed :=
+          segmentTrans hAB hBseed
+        have hAlen : A.length < seed.length :=
+          lt_of_lt_of_le (by omega) hBseed.1
+        have hcMissingRho : c ∈ TreeMissingColors rho2 A := by
+          unfold TreeMissingColors at hcMissing ⊢
+          obtain ⟨x, hxA, hcx⟩ := Finset.mem_biUnion.mp hcMissing
+          refine Finset.mem_biUnion.mpr ⟨x, hxA, ?_⟩
+          rw [c1.2 x (segmentVertexBeforeJ hAseed hAlen hxA)]
+          exact hcx
+        let added : Fin B.length := Fin.cast hlen.symm (Fin.last A.length)
+        obtain ⟨attach, hattach⟩ := B.attaches added
+        let oldPosition : Fin (B.length + 1) :=
+          Fin.castLT attach
+            (Nat.lt_trans attach.isLt (Nat.succ_lt_succ added.isLt))
+        have holdValue : oldPosition.val < A.length + 1 := by
+          dsimp [oldPosition, added]
+          omega
+        let oldA : Fin (A.length + 1) := ⟨oldPosition.val, holdValue⟩
+        have holdEq : B.vertex oldPosition = A.vertex oldA := by
+          have hcast : Fin.castLE (Nat.succ_le_succ hAB.1) oldA =
+              oldPosition := by
+            apply Fin.ext
+            rfl
+          rw [← hcast]
+          exact hAB.2.1 oldA
+        have holdA : A.vertex oldA ∈ TreeSequenceVertexSet A := by
+          simp [TreeSequenceVertexSet]
+        have holdBefore : B.vertex oldPosition ∈ TreeVerticesBefore
+            (ett.series.data.tree jSlot.succ.castSucc) v hterminalJ := by
+          rw [holdEq]
+          exact segmentVertexBeforeJ hAseed hAlen holdA
+        have holdIncident : Incident G (B.vertex oldPosition)
+            (B.edge added) := by
+          unfold Incident
+          rw [hattach]
+          simp [oldPosition]
+        have haddedFixed : rho2 (B.edge added) =
+            ett.series.data.coloring jSlot.castSucc (B.edge added) := by
+          apply c1.1 (B.edge added)
+            ⟨B.vertex oldPosition, holdBefore, holdIncident⟩
+          refine ⟨c, ?_, hcolor⟩
+          apply Finset.mem_union_left
+          unfold TreeMissingColors at hcMissing
+          obtain ⟨x, hxA, hcx⟩ := Finset.mem_biUnion.mp hcMissing
+          exact Finset.mem_biUnion.mpr
+            ⟨x, segmentVertexBeforeJ hAseed hAlen hxA, hcx⟩
+        refine ⟨hlen, hAB, c, ?_, hcMissingRho⟩
+        change rho2 (B.edge added) = some c
+        exact haddedFixed.trans hcolor
+      have transportSeedRoute2 (S : TreeSequence G e0)
+          (hroute : TashkinovAugmentationSequence
+            (ett.series.data.coloring jSlot.castSucc) S seed) :
+          TashkinovAugmentationSequence rho2 S seed := by
+        unfold TashkinovAugmentationSequence at hroute ⊢
+        induction hroute using Relation.ReflTransGen.head_induction_on with
+        | refl => exact Relation.ReflTransGen.refl
+        | @head A B hAB hBseed ih =>
+            have hBsegment : TreeSequenceInitialSegment B seed :=
+              TashkinovAugmentationSequenceInitialSegment _ B seed hBseed
+            exact Relation.ReflTransGen.head
+              (transportSeedStep2 hAB hBsegment) ih
+      have huM : u ∈ TreeSequenceVertexSet M := by
+        rw [hunion.vertexSet]
+        exact Finset.mem_union_left _ huU
+      have hMCsegment : TreeSequenceInitialSegment M C :=
+        TashkinovAugmentationSequenceInitialSegment rho2 M C hclosureMC.1
+      have huC : u ∈ TreeSequenceVertexSet C :=
+        vertexTransfer hMCsegment huM
+      have hTj0C : TreeSequenceVertexSet Tj0 ⊆
+          TreeSequenceVertexSet C := by
+        intro x hx
+        apply vertexTransfer hMCsegment
+        rw [hunion.vertexSet]
+        exact Finset.mem_union_right _ hx
+      have hTj0StrictC : TreeSequenceVertexSet Tj0 <
+          TreeSequenceVertexSet C :=
+        Finset.ssubset_iff_subset_ne.mpr ⟨hTj0C, by
+          intro heq
+          apply huOutside
+          have huTj0 : u ∈ TreeSequenceVertexSet Tj0 := heq.symm.subset huC
+          simpa [Tj0] using huTj0⟩
+      by_cases hjPositive : 0 < jSlot.val
+      · have hseedBuildPhi :
+            (ett.series.data.kind jSlot.castSucc =
+                some TashkinovExtensionKind.PE ∧
+              TashkinovAugmentationSequence
+                (ett.series.data.coloring jSlot.castSucc) Tprevious seed) ∨
+            ((ett.series.data.kind jSlot.castSucc =
+                  some TashkinovExtensionKind.SE ∨
+                ett.series.data.kind jSlot.castSucc =
+                  some TashkinovExtensionKind.RE) ∧
+              ∃ (f : E) (adjoinSeed : TreeSequence G e0),
+                ett.series.data.connectingEdges jSlot.castSucc = {f} ∧
+                  TreeSequenceAdjoinEdge Tprevious f adjoinSeed ∧
+                  TashkinovAugmentationSequence
+                    (ett.series.data.coloring jSlot.castSucc)
+                    adjoinSeed seed) := by as_aux_lemma =>
+          generalize htarget : jSlot.castSucc = target
+          cases ett.series.certified target with
+          | initial =>
+              have hzero := congrArg Fin.val htarget
+              simp at hzero
+              omega
+          | SE i previousProper previousOneUncolored previousClosed
+              previousNotStronglyClosed noRevisiting choice seriesAlternative
+              currentColoring currentStored currentEdges currentKind currentVertex
+              currentOutside currentDelta currentGamma adjoined adjoinedExactly
+              closedExtension orderedExtension strictExtension =>
+            have hi : i.succ = jSlot.castSucc := htarget.symm
+            have hroute : TashkinovAugmentationSequence
+                (ett.series.data.coloring jSlot.castSucc) adjoined
+                (ett.series.data.tree jSlot.succ.castSucc) := by
+              have h := closedExtension.1
+              rw [hi, hjTreeIndex] at h
+              exact h
+            have hadjoinedTj : TreeSequenceInitialSegment adjoined
+                (ett.series.data.tree jSlot.succ.castSucc) :=
+              TashkinovAugmentationSequenceInitialSegment _ _ _ hroute
+            have hadjoinedLength : adjoined.length ≤ seed.length := by
+              rcases adjoinedExactly with ⟨hlen, -, -⟩
+              have hiCast : i.succ.castSucc =
+                  jSlot.castSucc.castSucc := by
+                apply Fin.ext
+                simpa using congrArg Fin.val hi
+              have hprev : ett.series.data.tree i.succ.castSucc =
+                  Tprevious := by rw [hiCast]
+              rw [hprev] at hlen
+              rw [hlen]
+              exact Nat.succ_le_of_lt (hpreviousStrict hjPositive)
+            have hadjoinedSeed : TreeSequenceInitialSegment adjoined seed :=
+              commonPrefix hadjoinedTj hseedTj hadjoinedLength
+            right
+            refine ⟨Or.inl (by simpa [htarget] using currentKind),
+              choice.edge, adjoined, ?_, ?_, ?_⟩
+            · simpa [htarget] using currentEdges
+            · rcases adjoinedExactly with ⟨hlen, hsegment, hedge⟩
+              have hiCast : i.castSucc.succ =
+                  jSlot.castSucc.castSucc := by
+                apply Fin.ext
+                simpa using congrArg Fin.val hi
+              have hlenNew : adjoined.length = Tprevious.length + 1 := by
+                simpa [Tprevious, hiCast] using hlen
+              have hsegmentNew :
+                  TreeSequenceInitialSegment Tprevious adjoined := by
+                simpa [Tprevious, hiCast] using hsegment
+              refine ⟨hlenNew, hsegmentNew, ?_⟩
+              have haddedIndex :
+                  Fin.cast hlenNew.symm (Fin.last Tprevious.length) =
+                    Fin.cast hlen.symm
+                      (Fin.last
+                        (ett.series.data.tree i.succ.castSucc).length) := by
+                apply Fin.ext
+                simp [Tprevious, hiCast]
+              rw [haddedIndex]
+              exact hedge
+            · simpa [hi] using
+                (TashkinovAugmentationSequenceRestrict
+                  (ett.series.data.coloring jSlot.castSucc) adjoined seed
+                  (ett.series.data.tree jSlot.succ.castSucc) hroute
+                  hadjoinedSeed hseedTj)
+          | PE i previousProper previousOneUncolored previousClosed
+              previousNotStronglyClosed noRevisiting choice
+              seriesAlternativeFails chosenGamma gammaRule secondStable
+              secondStableProper secondStableOneUncolored secondStableRelation
+              exitWitness currentColoring currentProper currentOneUncolored
+              currentStored currentEdges currentKind currentVertex currentOutside
+              currentDelta currentGamma closedExtension orderedExtension
+              strictExtension =>
+            have hi : i.succ = jSlot.castSucc := htarget.symm
+            have hroute : TashkinovAugmentationSequence
+                (ett.series.data.coloring jSlot.castSucc) Tprevious
+                (ett.series.data.tree jSlot.succ.castSucc) := by
+              have h := closedExtension.1
+              rw [hi, hjTreeIndex] at h
+              simpa [Tprevious, hi] using h
+            left
+            refine ⟨by simpa [htarget] using currentKind, ?_⟩
+            simpa [hi] using
+              (TashkinovAugmentationSequenceRestrict
+                (ett.series.data.coloring jSlot.castSucc) Tprevious seed
+                (ett.series.data.tree jSlot.succ.castSucc) hroute
+                (hpreviousSeed hjPositive) hseedTj)
+          | RE i previousProper previousOneUncolored previousClosed
+              previousNotStronglyClosed available currentColoring currentStored
+              currentEdges currentKind currentVertex currentOutside currentDelta
+              currentGamma adjoined adjoinedExactly closedExtension orderedExtension
+              strictExtension =>
+            have hi : i.succ = jSlot.castSucc := htarget.symm
+            have hroute : TashkinovAugmentationSequence
+                (ett.series.data.coloring jSlot.castSucc) adjoined
+                (ett.series.data.tree jSlot.succ.castSucc) := by
+              have h := closedExtension.1
+              rw [hi, hjTreeIndex] at h
+              exact h
+            have hadjoinedTj : TreeSequenceInitialSegment adjoined
+                (ett.series.data.tree jSlot.succ.castSucc) :=
+              TashkinovAugmentationSequenceInitialSegment _ _ _ hroute
+            have hadjoinedLength : adjoined.length ≤ seed.length := by
+              rcases adjoinedExactly with ⟨hlen, -, -⟩
+              have hiCast : i.succ.castSucc =
+                  jSlot.castSucc.castSucc := by
+                apply Fin.ext
+                simpa using congrArg Fin.val hi
+              have hprev : ett.series.data.tree i.succ.castSucc =
+                  Tprevious := by rw [hiCast]
+              rw [hprev] at hlen
+              rw [hlen]
+              exact Nat.succ_le_of_lt (hpreviousStrict hjPositive)
+            have hadjoinedSeed : TreeSequenceInitialSegment adjoined seed :=
+              commonPrefix hadjoinedTj hseedTj hadjoinedLength
+            right
+            refine ⟨Or.inr (by simpa [htarget] using currentKind),
+              available.edge, adjoined, ?_, ?_, ?_⟩
+            · simpa [htarget] using currentEdges
+            · rcases adjoinedExactly with ⟨hlen, hsegment, hedge⟩
+              have hiCast : i.castSucc.succ =
+                  jSlot.castSucc.castSucc := by
+                apply Fin.ext
+                simpa using congrArg Fin.val hi
+              have hlenNew : adjoined.length = Tprevious.length + 1 := by
+                simpa [Tprevious, hiCast] using hlen
+              have hsegmentNew :
+                  TreeSequenceInitialSegment Tprevious adjoined := by
+                simpa [Tprevious, hiCast] using hsegment
+              refine ⟨hlenNew, hsegmentNew, ?_⟩
+              have haddedIndex :
+                  Fin.cast hlenNew.symm (Fin.last Tprevious.length) =
+                    Fin.cast hlen.symm
+                      (Fin.last
+                        (ett.series.data.tree i.succ.castSucc).length) := by
+                apply Fin.ext
+                simp [Tprevious, hiCast]
+              rw [haddedIndex]
+              exact hedge
+            · simpa [hi] using
+                (TashkinovAugmentationSequenceRestrict
+                  (ett.series.data.coloring jSlot.castSucc) adjoined seed
+                  (ett.series.data.tree jSlot.succ.castSucc) hroute
+                  hadjoinedSeed hseedTj)
+        have hseedBuildRho2 :
+            (ett.series.data.kind jSlot.castSucc =
+                some TashkinovExtensionKind.PE ∧
+              TashkinovAugmentationSequence rho2 Tprevious seed) ∨
+            ((ett.series.data.kind jSlot.castSucc =
+                  some TashkinovExtensionKind.SE ∨
+                ett.series.data.kind jSlot.castSucc =
+                  some TashkinovExtensionKind.RE) ∧
+              ∃ (f : E) (adjoinSeed : TreeSequence G e0),
+                ett.series.data.connectingEdges jSlot.castSucc = {f} ∧
+                  TreeSequenceAdjoinEdge Tprevious f adjoinSeed ∧
+                  TashkinovAugmentationSequence rho2 adjoinSeed seed) := by
+          as_aux_lemma =>
+          rcases hseedBuildPhi with hparallel | hserial
+          · exact Or.inl ⟨hparallel.1,
+              transportSeedRoute2 Tprevious hparallel.2⟩
+          · rcases hserial with ⟨hkind, f, adjoinSeed, hconnecting,
+                hadjoin, hroute⟩
+            exact Or.inr ⟨hkind, f, adjoinSeed, hconnecting, hadjoin,
+              transportSeedRoute2 adjoinSeed hroute⟩
+        obtain ⟨lower, hround, hLowerMP, htrees, hdata⟩ :=
+          CertifiedETTRestriction G k e0 input T generating ett hMP
+            jSlot.val hjPositive jSlot.isLt
+        let nLower : Fin (lower.rounds + 1) := Fin.last lower.rounds
+        have hnMap : Fin.castLE (by omega) nLower = jSlot.castSucc := by
+          apply Fin.ext
+          simp [nLower, hround]
+        have hnTreeMap : Fin.castLE (by omega) nLower.castSucc =
+            jSlot.castSucc.castSucc := by
+          apply Fin.ext
+          simp [nLower, hround]
+        have hLowerTree : lower.series.data.tree nLower.castSucc =
+            Tprevious := by
+          rw [htrees nLower.castSucc, hnTreeMap]
+        have hLowerColor : lower.series.data.coloring nLower =
+            ett.series.data.coloring jSlot.castSucc := by
+          rw [(hdata nLower).1, hnMap]
+        have hLowerStored : TashkinovStoredColors lower.series.data nLower =
+            TashkinovStoredColors ett.series.data jSlot.castSucc := by
+          rw [(hdata nLower).2.2.2.2.2.2.2.2.1, hnMap]
+        have hLowerKind : lower.series.data.kind nLower =
+            ett.series.data.kind jSlot.castSucc := by
+          rw [(hdata nLower).2.2.2.1, hnMap]
+        have hLowerConnecting : lower.series.data.connectingEdges nLower =
+            ett.series.data.connectingEdges jSlot.castSucc := by
+          rw [(hdata nLower).2.2.1, hnMap]
+        have hstablePrevious : StableColoring Tprevious
+            (TashkinovStoredColors ett.series.data jSlot.castSucc)
+            (ett.series.data.coloring jSlot.castSucc) rho2 := by
+          constructor
+          · intro f hfIncident hfControlled
+            obtain ⟨x, hxPrevious, hxf⟩ := hfIncident
+            apply c1.1 f
+              ⟨x, segmentVertexBeforeJ (hpreviousSeed hjPositive)
+                (hpreviousStrict hjPositive) hxPrevious, hxf⟩
+            obtain ⟨color, hcControlled, hfc⟩ := hfControlled
+            refine ⟨color, ?_, hfc⟩
+            rcases Finset.mem_union.mp hcControlled with hcMissing | hcStored
+            · apply Finset.mem_union_left
+              unfold TreeMissingColors at hcMissing
+              obtain ⟨z, hzPrevious, hcz⟩ :=
+                Finset.mem_biUnion.mp hcMissing
+              exact Finset.mem_biUnion.mpr
+                ⟨z, segmentVertexBeforeJ (hpreviousSeed hjPositive)
+                  (hpreviousStrict hjPositive) hzPrevious, hcz⟩
+            · exact Finset.mem_union_right _ hcStored
+          · intro x hxPrevious
+            exact c1.2 x
+              (segmentVertexBeforeJ (hpreviousSeed hjPositive)
+                (hpreviousStrict hjPositive) hxPrevious)
+        have hstableLower : StableColoring
+            (lower.series.data.tree nLower.castSucc)
+            (TashkinovStoredColors lower.series.data nLower)
+            (lower.series.data.coloring nLower) rho2 := by
+          simpa [hLowerTree, hLowerStored, hLowerColor] using hstablePrevious
+        have hLowerPack := hlower lower (by omega) (by omega) hLowerMP
+        have hmod : ModColoring lower rho2 :=
+          hLowerPack.2.2.2.2.2 rho2 hrho2Proper hrho2One hstableLower
+        have hPreviousC : TreeSequenceInitialSegment Tprevious C := by
+          rcases hseedBuildRho2 with hparallel | hserial
+          · exact TashkinovAugmentationSequenceInitialSegment rho2 Tprevious C
+              (Relation.ReflTransGen.trans hparallel.2 hrouteSeedC)
+          · rcases hserial with ⟨-, f, adjoinSeed, -, hadjoin, hroute⟩
+            exact segmentTrans hadjoin.2.1
+              (TashkinovAugmentationSequenceInitialSegment rho2 adjoinSeed C
+                (Relation.ReflTransGen.trans hroute hrouteSeedC))
+        have huNotPrevious : u ∉ TreeSequenceVertexSet Tprevious := by
+          intro huPrevious
+          exact huOutside (vertexTransfer (hpreviousTj hjPositive) huPrevious)
+        have hPreviousStrictC : Tprevious.length < C.length := by
+          have hsubset : TreeSequenceVertexSet Tprevious ⊆
+              TreeSequenceVertexSet C := vertexTransfer hPreviousC
+          have hstrict : TreeSequenceVertexSet Tprevious <
+              TreeSequenceVertexSet C :=
+            Finset.ssubset_iff_subset_ne.mpr ⟨hsubset, by
+              intro heq
+              exact huNotPrevious (heq.symm.subset huC)⟩
+          have hcard := Finset.card_lt_card hstrict
+          simpa [TreeSequenceVertexSet, Finset.card_image_of_injective,
+            Tprevious.vertex_injective, C.vertex_injective] using hcard
+        have hLowerEligible :
+            (lower.series.data.kind nLower =
+                  some TashkinovExtensionKind.PE ∧
+                TashkinovAugmentationSequence rho2 Tprevious C) ∨
+              ((lower.series.data.kind nLower =
+                    some TashkinovExtensionKind.SE ∨
+                  lower.series.data.kind nLower =
+                    some TashkinovExtensionKind.RE) ∧
+                ∃ (f : E) (adjoinSeed : TreeSequence G e0),
+                  lower.series.data.connectingEdges nLower = {f} ∧
+                    TreeSequenceAdjoinEdge Tprevious f adjoinSeed ∧
+                    TashkinovAugmentationSequence rho2 adjoinSeed C) := by
+          rcases hseedBuildRho2 with hparallel | hserial
+          · exact Or.inl ⟨hLowerKind.trans hparallel.1,
+              Relation.ReflTransGen.trans hparallel.2 hrouteSeedC⟩
+          · rcases hserial with ⟨hkind, f, adjoinSeed, hconnecting,
+                hadjoin, hroute⟩
+            exact Or.inr
+              ⟨Or.imp (hLowerKind.trans) (hLowerKind.trans) hkind,
+                f, adjoinSeed, hLowerConnecting.trans hconnecting, hadjoin,
+                Relation.ReflTransGen.trans hroute hrouteSeedC⟩
+        have hcorrNonempty : Nonempty
+            (CorrespondingExtendedTashkinovTree G k e0 lower rho2 C) := by
+          have hmod' := hmod
+          unfold ModColoring at hmod'
+          dsimp only at hmod'
+          apply hmod'.2.2 C
+          · rw [hLowerTree]
+            exact hPreviousC
+          · rw [hLowerTree]
+            exact hPreviousStrictC
+          · change
+              (lower.series.data.kind nLower =
+                    some TashkinovExtensionKind.PE ∧
+                  TashkinovAugmentationSequence rho2
+                    (lower.series.data.tree nLower.castSucc) C) ∨
+                ((lower.series.data.kind nLower =
+                      some TashkinovExtensionKind.SE ∨
+                    lower.series.data.kind nLower =
+                      some TashkinovExtensionKind.RE) ∧
+                  ∃ (f : E) (adjoinSeed : TreeSequence G e0),
+                    lower.series.data.connectingEdges nLower = {f} ∧
+                      TreeSequenceAdjoinEdge
+                        (lower.series.data.tree nLower.castSucc) f adjoinSeed ∧
+                      TashkinovAugmentationSequence rho2 adjoinSeed C)
+            rw [hLowerTree]
+            exact hLowerEligible
+        obtain ⟨corr⟩ := hcorrNonempty
+        have hreplacementMP : MaximumProperty corr.replacementETT :=
+          MaximumPropertyTransport G k e0 lower rho2 hmod C corr hLowerMP
+        have hcorrRounds : corr.replacementETT.rounds = jSlot.val :=
+          corr.rungAgreement.trans hround
+        have hCElementary :
+            ColoredVertexSetElementary G rho2 (TreeSequenceVertexSet C) :=
+          (hlower corr.replacementETT corr.replacementETT.roundsPositive
+            (by omega) hreplacementMP).1
+        have hbound : (TreeSequenceVertexSet C).card ≤
+            (TreeSequenceVertexSet Tj0).card := by
+          have hMP' := hMP
+          unfold MaximumProperty at hMP'
+          have hstage := hMP'.2 jSlot.val hjPositive jSlot.isLt
+          dsimp only at hstage
+          have hidx : (⟨jSlot.val, by omega⟩ : Fin (ett.rounds + 1)) =
+              jSlot.castSucc := by
+            apply Fin.ext
+            rfl
+          have hnextIdx :
+              (⟨jSlot.val + 1, by omega⟩ : Fin (ett.rounds + 2)) =
+                jSlot.succ.castSucc := by
+            apply Fin.ext
+            rfl
+          rw [hidx, hnextIdx] at hstage
+          rcases hseedBuildRho2 with hparallel | hserial
+          · have hclosurePreviousC : TashkinovClosure rho2 Tprevious C :=
+              ⟨Relation.ReflTransGen.trans hparallel.2 hrouteSeedC,
+                hclosedC⟩
+            have hraw := hstage rho2 Tprevious C hrho2Proper hrho2One
+              hstablePrevious
+              (Or.inl ⟨hparallel.1, rfl⟩) hclosurePreviousC
+            simpa [Tprevious, Tj0] using hraw
+          · rcases hserial with ⟨hkind, f, adjoinSeed, hconnecting,
+                hadjoin, hroute⟩
+            have hclosureAdjoinC : TashkinovClosure rho2 adjoinSeed C :=
+              ⟨Relation.ReflTransGen.trans hroute hrouteSeedC, hclosedC⟩
+            have hraw := hstage rho2 adjoinSeed C hrho2Proper hrho2One
+              hstablePrevious
+              (Or.inr ⟨hkind, f, hconnecting, by
+                simpa [Tprevious] using hadjoin⟩) hclosureAdjoinC
+            simpa [Tj0] using hraw
+        have hstrictCard := Finset.card_lt_card hTj0StrictC
+        exact (Nat.not_lt_of_ge hbound) hstrictCard
+      · have hjZero : jSlot.val = 0 := by omega
+        have hjIndex : jSlot.castSucc =
+            (0 : Fin (ett.rounds + 1)) := by
+          apply Fin.ext
+          exact hjZero
+        set_option maxHeartbeats 800000 in
+          cases hcert : ett.series.certified
+              (0 : Fin (ett.rounds + 1)) with
+          | initial triple seedLength initialColoring initialStored initialEdges
+            initialKind initialVertex initialOutside initialDelta initialGamma
+            initialClosure =>
+            have htreeOne : ett.series.data.tree 1 = Tj0 := by
+              unfold Tj0
+              congr 1
+              apply Fin.ext
+              simp [hjZero]
+            have hinitialTj : TreeSequenceInitialSegment
+                (ett.series.data.tree 0) Tj0 := by
+              have h := TashkinovAugmentationSequenceInitialSegment _ _ _
+                initialClosure.1
+              simpa [htreeOne] using h
+            have hinitialSeed : TreeSequenceInitialSegment
+                (ett.series.data.tree 0) seed := by
+              apply commonPrefix hinitialTj
+                (by simpa [Tj0] using hseedTj0)
+              rw [seedLength]
+              exact seed.positive
+            have hroutePhiSeed : TashkinovAugmentationSequence
+                (ett.series.data.coloring jSlot.castSucc)
+                (ett.series.data.tree 0) seed := by
+              have hrestricted := TashkinovAugmentationSequenceRestrict
+                (ett.series.data.coloring 0) (ett.series.data.tree 0) seed
+                Tj0 (by simpa [htreeOne] using initialClosure.1)
+                hinitialSeed (by simpa [Tj0] using hseedTj0)
+              simpa [hjIndex] using hrestricted
+            have hrouteRhoTwoBase : TashkinovAugmentationSequence rho2
+                (ett.series.data.tree 0) seed :=
+              transportSeedRoute2 (ett.series.data.tree 0) hroutePhiSeed
+            have hrouteBaseC : TashkinovAugmentationSequence rho2
+                (ett.series.data.tree 0) C :=
+              Relation.ReflTransGen.trans hrouteRhoTwoBase hrouteSeedC
+            have htripleRho : KTriple G k e0 rho2 :=
+              ⟨triple.1, triple.2.1, triple.2.2.1,
+                hrho2Proper, hrho2One⟩
+            have hinitialTree : TashkinovTree G e0 rho2
+                (ett.series.data.tree 0) := by
+              intro a ha
+              rw [seedLength] at a
+              omega
+            have hCTree : TashkinovTree G e0 rho2 C :=
+              TashkinovAugmentationSequencePreservesTashkinovTree G e0 rho2
+                (ett.series.data.tree 0) C hinitialTree hrouteBaseC
+            have hk : ChromaticIndex G - 1 = k := by
+              have hchromatic := triple.2.1
+              omega
+            have hCOrder : (TreeSequenceVertexSet C).card ≤
+                TashkinovOrder G := by
+              unfold TashkinovOrder
+              dsimp only
+              apply Finset.le_max'
+              apply Finset.mem_insert_of_mem
+              simp only [Finset.mem_filter, Finset.mem_range]
+              constructor
+              · exact Nat.lt_succ_of_le (Finset.card_le_univ _)
+              · rw [hk]
+                exact ⟨e0, rho2, C, htripleRho, hCTree, rfl⟩
+            have hTjOrder : (TreeSequenceVertexSet Tj0).card =
+                TashkinovOrder G := by
+              rw [← htreeOne]
+              exact hMP.1
+            have hbound : (TreeSequenceVertexSet C).card ≤
+                (TreeSequenceVertexSet Tj0).card := by
+              rw [hTjOrder]
+              exact hCOrder
+            exact (Nat.not_lt_of_ge hbound)
+              (Finset.card_lt_card hTj0StrictC)
+    · sorry
   · intro hwv
     subst w
     change Sum.inl v ∈
