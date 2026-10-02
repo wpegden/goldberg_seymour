@@ -3534,7 +3534,436 @@ theorem ExtensionBase {V E : Type*} [Fintype V] [Fintype E]
               exact hCOrder
             exact (Nat.not_lt_of_ge hbound)
               (Finset.card_lt_card hTj0StrictC)
-    · sorry
+    · have hcaseTwoPointwise : ∀ x : V,
+          x ∈ (TreeSequenceVertexSet TjPrime).erase v →
+            MissingColors G rho1 x ∩ supportColors = ∅ := by
+        intro x hx
+        apply Finset.eq_empty_of_forall_notMem
+        intro c hc
+        have hbig : c ∈
+            ((TreeSequenceVertexSet TjPrime).erase v).biUnion
+                (fun y => MissingColors G rho1 y) ∩ supportColors := by
+          exact Finset.mem_inter.mpr
+            ⟨Finset.mem_biUnion.mpr ⟨x, hx, (Finset.mem_inter.mp hc).1⟩,
+              (Finset.mem_inter.mp hc).2⟩
+        rw [hcaseTwo] at hbig
+        simpa using hbig
+      have hsupportSet : supportColors =
+          (ExtensionBaseSupportClass ett v hvFinal v).biUnion
+            (fun s => ett.series.data.stored s.succ) := by
+        ext c
+        simp only [supportColors, Finset.mem_biUnion, Finset.mem_univ,
+          true_and]
+        constructor
+        · rintro ⟨a, hc⟩
+          exact ⟨indices0 a, (hclass0 (indices0 a)).2 ⟨a, rfl⟩, hc⟩
+        · rintro ⟨s, hs, hc⟩
+          obtain ⟨a, rfl⟩ := (hclass0 s).1 hs
+          exact ⟨a, hc⟩
+      have hterminalClass : q ∈ ExtensionBaseSupportClass ett v hvFinal v :=
+        hqClass
+      have hgammaLast : gamma0 (Fin.last p0) = gamma := by
+        apply Option.some.inj
+        exact (hgamma0 (Fin.last p0)).symm.trans (by
+          rw [hqLast]
+          exact hqGamma)
+      have hdeltaLast : delta0 (Fin.last p0) = delta := by
+        apply Option.some.inj
+        exact (hdelta0 (Fin.last p0)).symm.trans (by
+          rw [hqLast]
+          exact hqDelta)
+      let gammaFirst : Fin k := gamma0 0
+      have hgammaSupport : gamma ∈ supportColors := by
+        simp only [supportColors, Finset.mem_biUnion, Finset.mem_univ,
+          true_and]
+        refine ⟨Fin.last p0, ?_⟩
+        rw [hstored0, hgammaLast]
+        simp
+      have hdeltaSupport : delta ∈ supportColors := by
+        simp only [supportColors, Finset.mem_biUnion, Finset.mem_univ,
+          true_and]
+        refine ⟨Fin.last p0, ?_⟩
+        rw [hstored0, hdeltaLast]
+        simp
+      have hgammaFirstSupport : gammaFirst ∈ supportColors := by
+        simp only [supportColors, Finset.mem_biUnion, Finset.mem_univ,
+          true_and]
+        refine ⟨0, ?_⟩
+        rw [hstored0]
+        simp [gammaFirst]
+      have hgammaDelta : gamma ≠ delta :=
+        (ParallelStepRootComponentSetup ett.series q v gamma delta hqKind
+          hqVertex hqGamma hqDelta).1
+      let restorationColors :=
+        (ExtensionBaseRestorationIndices ett v hvFinal).biUnion
+          (fun s => ett.series.data.stored s.succ)
+      have hterminalColorsNotRestored :
+          gamma ∉ restorationColors ∧ delta ∉ restorationColors := by
+        have hseparate : ∀ c : Fin k, c ∈ ({gamma, delta} : Finset (Fin k)) →
+            c ∉ restorationColors := by
+          intro c hcTerminal hcRestored
+          obtain ⟨s, hsRestored, hcStored⟩ :=
+            Finset.mem_biUnion.mp hcRestored
+          have hsData := hsRestored
+          simp only [ExtensionBaseRestorationIndices, Finset.mem_sdiff] at hsData
+          have hsActiveData := hsData.1
+          simp only [ExtensionBaseActiveIndices, Finset.mem_filter,
+            Finset.mem_univ, true_and] at hsActiveData
+          obtain ⟨hsFirst, hsKind, vs, hvsFinal, hsVertex, hsAppearance⟩ :=
+            hsActiveData
+          obtain ⟨vs', gammaS, deltaS, hsVertex', hsGamma, hsDelta⟩ :=
+            hPESlotData s hsKind
+          have hvsEq : vs' = vs :=
+            Option.some.inj (hsVertex'.symm.trans hsVertex)
+          subst vs'
+          have hsStored : ett.series.data.stored s.succ =
+              {gammaS, deltaS} :=
+            hPEStored s gammaS deltaS hsKind hsGamma hsDelta
+          have hsNeQ : s ≠ q := by
+            intro hsq
+            apply hsData.2
+            simpa [hsq] using hqClass
+          have hsq : s.val < q.val := by
+            have hsle : s.val ≤ q.val := by omega
+            exact lt_of_le_of_ne hsle (fun heq => hsNeQ (Fin.ext heq))
+          have hoverlap := hpairOverlapColors s q vs v gammaS deltaS gamma delta
+            hsData.1 hqActive hsq hsVertex hqVertex hsGamma hsDelta hqGamma
+            hqDelta
+          have hnonempty :
+              (({gammaS, deltaS} : Finset (Fin k)) ∩ {gamma, delta}).Nonempty := by
+            refine ⟨c, ?_⟩
+            rw [← hsStored]
+            exact Finset.mem_inter.mpr ⟨hcStored, hcTerminal⟩
+          have hsameSupport : vs = v := (hoverlap.1.mp hnonempty).1
+          apply hsData.2
+          simp only [ExtensionBaseSupportClass, Finset.mem_filter]
+          refine ⟨hsData.1, ?_⟩
+          simpa [hsameSupport] using hsVertex
+        exact ⟨hseparate gamma (by simp), hseparate delta (by simp)⟩
+      have hsupportColors : ∀ (s : Fin ett.rounds)
+          (gammaS deltaS : Fin k),
+          s ∈ (ExtensionBaseSupportClass ett v hvFinal v).erase q →
+          ett.series.data.gamma s.succ = some gammaS →
+          ett.series.data.delta s.succ = some deltaS →
+          gammaS ∈ supportColors ∧ deltaS ∈ supportColors := by
+        intro s gammaS deltaS hs hsGamma hsDelta
+        have hsClass := (Finset.mem_erase.mp hs).2
+        have hsClassData := hsClass
+        simp only [ExtensionBaseSupportClass, Finset.mem_filter] at hsClassData
+        have hsActiveData := hsClassData.1
+        simp only [ExtensionBaseActiveIndices, Finset.mem_filter,
+          Finset.mem_univ, true_and] at hsActiveData
+        have hsStored := hPEStored s gammaS deltaS hsActiveData.2.1
+          hsGamma hsDelta
+        rw [hsupportSet]
+        constructor <;> apply Finset.mem_biUnion.mpr <;>
+          refine ⟨s, hsClass, ?_⟩ <;> rw [hsStored] <;> simp
+      have hdeltaEarlier : ∀ (s : Fin ett.rounds)
+          (gammaS deltaS : Fin k),
+          s ∈ (ExtensionBaseSupportClass ett v hvFinal v).erase q →
+          ett.series.data.gamma s.succ = some gammaS →
+          ett.series.data.delta s.succ = some deltaS →
+          delta ≠ gammaS ∧ delta ≠ deltaS := by
+        intro s gammaS deltaS hs hsGamma hsDelta
+        have hsNeQ := (Finset.mem_erase.mp hs).1
+        have hsClass := (Finset.mem_erase.mp hs).2
+        obtain ⟨a, ha⟩ := (hclass0 s).1 hsClass
+        have haNeLast : a ≠ Fin.last p0 := by
+          intro haLast
+          apply hsNeQ
+          rw [← ha, haLast, hqLast]
+        have hsq : s.val < q.val := by
+          have haLt : a.val < (Fin.last p0).val :=
+            Fin.lt_last_iff_ne_last.mpr haNeLast
+          have hlt := hincreasing0 a (Fin.last p0) haLt
+          simpa [ha, hqLast] using hlt
+        have hsClassData := hsClass
+        simp only [ExtensionBaseSupportClass, Finset.mem_filter] at hsClassData
+        have hsGammaNe : delta ≠ gammaS :=
+          (hdeltaExclusion.1 s q v v hvFinal hvFinal delta gammaS
+            hsClassData.1 hqActive (Nat.le_of_lt hsq) hsClassData.2 hqVertex
+            hqDelta hsGamma).2
+        have hdeltaAEq : delta0 a = deltaS := by
+          apply Option.some.inj
+          exact (hdelta0 a).symm.trans (by simpa [ha] using hsDelta)
+        have hsDeltaNe : delta ≠ deltaS := by
+          intro hEq
+          have hvalues :
+              (Fin.cons (gamma0 0) delta0 : Fin (p0 + 2) → Fin k) a.succ =
+                (Fin.cons (gamma0 0) delta0 : Fin (p0 + 2) → Fin k)
+                  (Fin.last p0).succ := by
+            simp [hdeltaAEq, hdeltaLast, hEq]
+          have hindices := hinjective0 hvalues
+          apply haNeLast
+          apply Fin.ext
+          have hvals := congrArg Fin.val hindices
+          simpa using hvals
+        exact ⟨hsGammaNe, hsDeltaNe⟩
+      have hpreterminalPackage : 0 < p0 →
+          ∃ preterminalSlot : Fin ett.rounds,
+            preterminalSlot.val < q.val ∧
+              preterminalSlot ∈
+                (ExtensionBaseSupportClass ett v hvFinal v).erase q ∧
+              ett.series.data.delta preterminalSlot.succ = some gamma := by
+        intro hp0
+        let a : Fin p0 := ⟨p0 - 1, by omega⟩
+        let a0 : Fin (p0 + 1) := ⟨p0 - 1, by omega⟩
+        have haCast : a.castSucc = a0 := by
+          apply Fin.ext
+          rfl
+        have haSucc : a.succ = Fin.last p0 := by
+          apply Fin.ext
+          simp [a]
+          omega
+        have haLast : a0.val < (Fin.last p0).val := by
+          simp [a0]
+          omega
+        have hslotOrder : (indices0 a0).val < q.val := by
+          have h := hincreasing0 a0 (Fin.last p0) haLast
+          simpa [hqLast] using h
+        have hslotClass : indices0 a0 ∈
+            ExtensionBaseSupportClass ett v hvFinal v :=
+          (hclass0 (indices0 a0)).2 ⟨a0, rfl⟩
+        have hslotNe : indices0 a0 ≠ q := by
+          intro heq
+          rw [heq] at hslotOrder
+          exact (Nat.lt_irrefl _ hslotOrder)
+        have hdeltaGamma : ett.series.data.delta (indices0 a0).succ =
+            some gamma := by
+          rw [hdelta0 a0]
+          have hchain := hchain0 a
+          rw [haCast, haSucc] at hchain
+          rw [← hchain, hgammaLast]
+        exact ⟨indices0 a0, hslotOrder,
+          Finset.mem_erase.mpr ⟨hslotNe, hslotClass⟩, hdeltaGamma⟩
+      have hb4Earlier : ∀ (s : Fin ett.rounds)
+          (gammaS deltaS : Fin k),
+          s ∈ (ExtensionBaseSupportClass ett v hvFinal v).erase q →
+          ett.series.data.gamma s.succ = some gammaS →
+          ett.series.data.delta s.succ = some deltaS →
+          ETTStrongInterchangeable ett s v rho1 gammaS deltaS := by
+        intro s gammaS deltaS hs hsGamma hsDelta
+        have hsNe := (Finset.mem_erase.mp hs).1
+        have hsClass := (Finset.mem_erase.mp hs).2
+        have hsClassData := hsClass
+        simp only [ExtensionBaseSupportClass, Finset.mem_filter] at hsClassData
+        exact hb4Interchange s gammaS deltaS hsClass hsNe hsClassData.2
+          hsGamma hsDelta
+      have hsupportComponentOrder : ∀ (s : Fin ett.rounds)
+          (gammaS deltaS : Fin k),
+          s ∈ (ExtensionBaseSupportClass ett v hvFinal v).erase q →
+          ett.series.data.gamma s.succ = some gammaS →
+          ett.series.data.delta s.succ = some deltaS →
+          ∀ x : V,
+            x ∈ TreeSequenceVertexSet
+                (ett.series.data.tree s.succ.castSucc) →
+            x ≠ v →
+            ∀ y : V, Sum.inl y ∈
+              TwoColorComponent G rho1 gammaS deltaS (Sum.inl x) →
+              y ∈ TreeSequenceVertexSet
+                (ett.series.data.tree q.succ.castSucc) := by
+        intro s gammaS deltaS hs hsGamma hsDelta x hx hxNe y hy
+        have hsNeQ := (Finset.mem_erase.mp hs).1
+        have hsClass := (Finset.mem_erase.mp hs).2
+        obtain ⟨hneColors, hsKind, hsVertex, epsilon, hsEpsilon,
+            hepsilonKind, hbetween, hcycles⟩ :=
+          hb4Earlier s gammaS deltaS hs hsGamma hsDelta
+        have hsq : s.val < q.val := by
+          have hle : s.val ≤ q.val := by omega
+          exact lt_of_le_of_ne hle (fun heq => hsNeQ (Fin.ext heq))
+        have hepsilonQ : epsilon.val ≤ q.val := by
+          by_contra hnot
+          have hqRE := hbetween q hsq (by omega)
+          rw [hqKind] at hqRE
+          simp at hqRE
+        have hyEpsilon := (hcycles x hx hxNe).2.2 y hy
+        have hsegment := stageToStage (epsilon.val + 1) (q.val + 1)
+          (by omega) (by omega) (by omega)
+        have hyQ := vertexTransfer hsegment hyEpsilon
+        convert hyQ using 1 <;> congr 1 <;> apply Fin.ext <;> rfl
+      have hterminalInclusion : MissingColors G
+            (ett.series.data.coloring jSlot.castSucc) v ⊆
+          MissingColors G rho1 v ∪ {gammaFirst} := by
+        intro c hc
+        rw [hmissing0.2] at hc
+        rcases Finset.mem_union.mp hc with hcSigma | hcFirst
+        · apply Finset.mem_union_left
+          rw [hb2Missing.2]
+          exact (Finset.mem_sdiff.mp hcSigma).1
+        · apply Finset.mem_union_right
+          simpa [gammaFirst] using hcFirst
+      have hb2EdgesFromSeed : ∀ a : Fin
+          (ett.series.data.tree jSlot.succ.castSucc).length,
+          seed.length ≤ a.val →
+          rho1 ((ett.series.data.tree jSlot.succ.castSucc).edge a) =
+            ett.series.data.coloring jSlot.castSucc
+              ((ett.series.data.tree jSlot.succ.castSucc).edge a) := by
+        intro a ha
+        exact (hb2TreeEdges a).1.trans (hb2TreeEdges a).2
+      have hdeltaPhiJ : delta ∉ TreeMissingColors
+          (ett.series.data.coloring jSlot.castSucc)
+          (ett.series.data.tree jSlot.succ.castSucc) := by
+        simpa [hdeltaLast] using hdeltaAvoidsTj (Fin.last p0)
+      have hterminalSeed : v ∈ TreeSequenceVertexSet seed := by
+        simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+          true_and]
+        exact ⟨Fin.last seed.length, hseedTerminal⟩
+      have hseedN : TreeSequenceInitialSegment seed
+          (ett.series.data.tree q.succ.castSucc) :=
+        segmentTrans hseedTj hTjQ
+      obtain ⟨fN, hfNEdges, hfNterminal, hphiNProper, hphiNOne⟩ :
+          ∃ fN : E,
+            ett.series.data.connectingEdges q.succ = {fN} ∧
+              Incident G v fN ∧
+              IsProperEdgeColoring G (ett.series.data.coloring q.succ) ∧
+              IsOneEdgeUncolored (ett.series.data.coloring q.succ) e0 := by
+        generalize htarget : q.succ = target
+        cases ett.series.certified target with
+        | initial => exact (Fin.succ_ne_zero q htarget).elim
+        | SE i previousProper previousOneUncolored previousClosed
+            previousNotStronglyClosed noRevisiting choice seriesAlternative
+            currentColoring currentStored currentEdges currentKind currentVertex
+            currentOutside currentDelta currentGamma adjoined adjoinedExactly
+            closedExtension orderedExtension strictExtension =>
+          have hbad : some TashkinovExtensionKind.SE =
+              some TashkinovExtensionKind.PE :=
+            currentKind.symm.trans (by simpa [htarget] using hqKind)
+          cases hbad
+        | RE i previousProper previousOneUncolored previousClosed
+            previousNotStronglyClosed available currentColoring currentStored
+            currentEdges currentKind currentVertex currentOutside currentDelta
+            currentGamma adjoined adjoinedExactly closedExtension orderedExtension
+            strictExtension =>
+          have hbad : some TashkinovExtensionKind.RE =
+              some TashkinovExtensionKind.PE :=
+            currentKind.symm.trans (by simpa [htarget] using hqKind)
+          cases hbad
+        | PE i previousProper previousOneUncolored previousClosed
+            previousNotStronglyClosed noRevisiting choice seriesAlternativeFails
+            actualGamma gammaRule secondStable secondStableProper
+            secondStableOneUncolored secondStableRelation exitWitness
+            currentColoring currentProper currentOneUncolored currentStored
+            currentEdges currentKind currentVertex currentOutside currentDelta
+            currentGamma closedExtension orderedExtension strictExtension =>
+          have hi : i = q := by
+            apply Fin.ext
+            simpa using (congrArg Fin.val htarget).symm
+          subst i
+          have hvChoice : choice.vertex = v :=
+            Option.some.inj
+              (currentVertex.symm.trans (by simpa [htarget] using hqVertex))
+          refine ⟨choice.edge, ?_, ?_, ?_, ?_⟩
+          · simpa [htarget] using currentEdges
+          · simpa [hvChoice] using choice.edgeIncident
+          · simpa [htarget] using currentProper
+          · simpa [htarget] using currentOneUncolored
+      have hboundaryStructure := HkuParallelBoundaryStructure G k ett.rounds
+        e0 input ett.series q fN delta gamma v hqKind hfNEdges hqDelta
+          hqGamma hqVertex
+      have hgammaBoundary : BoundaryColorEdges G
+          (ett.series.data.coloring q.succ)
+          (TreeSequenceVertexSet (ett.series.data.tree q.succ.castSucc)) gamma =
+            {fN} := hboundaryStructure.1
+      have hdeltaLocation : ∀ f ∈ BoundaryColorEdges G
+          (ett.series.data.coloring q.succ)
+          (TreeSequenceVertexSet (ett.series.data.tree q.succ.castSucc)) delta,
+          ∃ y ∈ TreeSequenceVertexSet seed, Incident G y f := by
+        intro f hf
+        obtain ⟨y, hyOrder, hyf⟩ := hboundaryStructure.2.1 f hf
+        rcases hyOrder with ⟨iy, iv, hiy, hiv, hlt⟩
+        let terminalN : Fin
+            ((ett.series.data.tree q.succ.castSucc).length + 1) :=
+          Fin.castLE (Nat.succ_le_succ hseedN.1) (Fin.last seed.length)
+        have hterminalN :
+            (ett.series.data.tree q.succ.castSucc).vertex terminalN = v := by
+          exact (hseedN.2.1 (Fin.last seed.length)).trans hseedTerminal
+        have hivTerminal : iv = terminalN := by
+          apply (ett.series.data.tree q.succ.castSucc).vertex_injective
+          exact hiv.trans hterminalN.symm
+        have hiyBound : iy.val < seed.length + 1 := by
+          rw [hivTerminal] at hlt
+          have hiyStrict : iy.val < seed.length := by
+            simpa [terminalN] using hlt
+          omega
+        let iySeed : Fin (seed.length + 1) := ⟨iy.val, hiyBound⟩
+        have hcast : Fin.castLE (Nat.succ_le_succ hseedN.1) iySeed = iy := by
+          apply Fin.ext
+          rfl
+        have hySeed : seed.vertex iySeed = y := by
+          have hvertex := hseedN.2.1 iySeed
+          rw [hcast] at hvertex
+          exact hvertex.symm.trans hiy
+        refine ⟨y, ?_, hyf⟩
+        simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+          true_and]
+        exact ⟨iySeed, hySeed⟩
+      have hdeltaMissing : delta ∈ MissingColors G rho1 v := by
+        have hmember : delta ∈ MissingColors G rho1 v ∩ supportColors := by
+          rw [hterminalIntersection, hdeltaLast]
+          simp
+        exact (Finset.mem_inter.mp hmember).1
+      have hterminalIntersection' :
+          MissingColors G rho1 v ∩ supportColors = {delta} := by
+        simpa [hdeltaLast] using hterminalIntersection
+      obtain ⟨hprimeMissingColors, hprimeAppendedEdges⟩ :=
+        ExtensionBaseCaseTwoObservation19 rho1 seed TjPrime v supportColors
+          delta hclosure hterminalPrime hcaseTwoPointwise
+            hterminalIntersection'
+      let controlled : Finset (Fin k) :=
+        TreeMissingColors (ett.series.data.coloring q.succ)
+            (ett.series.data.tree q.succ.castSucc) ∪
+          TashkinovStoredColors ett.series.data q.succ
+      have hterminalRawStored : ett.series.data.stored q.succ =
+          {gamma, delta} :=
+        hPEStored q gamma delta hqKind hqGamma hqDelta
+      have hterminalColorControlled : ∀ c : Fin k,
+          c ∈ ({gamma, delta} : Finset (Fin k)) → c ∈ controlled := by
+        intro c hc
+        by_cases hcMissing : c ∈ TreeMissingColors
+            (ett.series.data.coloring q.succ)
+            (ett.series.data.tree q.succ.castSucc)
+        · exact Finset.mem_union_left _ hcMissing
+        · apply Finset.mem_union_right
+          unfold TashkinovStoredColors
+          have hqSuccNe : q.succ.val ≠ 0 := Nat.succ_ne_zero q.val
+          rw [if_neg hqSuccNe]
+          apply Finset.mem_sdiff.mpr
+          refine ⟨?_, hcMissing⟩
+          apply Finset.mem_biUnion.mpr
+          refine ⟨q.succ, Finset.mem_univ _, ?_⟩
+          rw [if_pos le_rfl, hterminalRawStored]
+          exact hc
+      have hgammaControlled : gamma ∈ controlled :=
+        hterminalColorControlled gamma (by simp)
+      have hdeltaControlled : delta ∈ controlled :=
+        hterminalColorControlled delta (by simp)
+      have hsigmaControlled : StableColoring
+          (ett.series.data.tree q.succ.castSucc) controlled
+          (ett.series.data.coloring q.succ) sigma := by
+        constructor
+        · intro f hfIncident hfControl
+          apply hsigmaTerminal.1 f hfIncident
+          obtain ⟨c, hc, hfc⟩ := hfControl
+          refine ⟨c, ?_, hfc⟩
+          rcases Finset.mem_union.mp hc with hcMissing | hcControlled
+          · exact Finset.mem_union_left _ hcMissing
+          · change c ∈ TreeMissingColors
+                (ett.series.data.coloring q.succ)
+                (ett.series.data.tree q.succ.castSucc) ∪
+              TashkinovStoredColors ett.series.data q.succ at hcControlled
+            exact hcControlled
+        · exact hsigmaTerminal.2
+      obtain ⟨hgammaBoundaryRho, hdeltaBoundaryRho⟩ :=
+        ExtensionBaseCaseTwoObservation20
+          (ett.series.data.tree q.succ.castSucc) seed TjPrime
+          (ett.series.data.coloring q.succ) sigma rho1 controlled
+          restorationColors gamma delta fN v hphiNProper hphiNOne hsigmaProper
+          hsigmaOne hrho1Proper hrho1One hsigmaControlled hgammaControlled
+          hdeltaControlled (fun f hf => (hb3EdgeEffects f hf).2)
+          hterminalColorsNotRestored.1 hterminalColorsNotRestored.2
+          hgammaBoundary hdeltaLocation hseedN hseedTerminal hclosure
+          hterminalSeed hdeltaMissing
+      sorry
   · intro hwv
     subst w
     change Sum.inl v ∈
