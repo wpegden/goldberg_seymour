@@ -322,7 +322,382 @@ theorem ExtensionBaseClaim43MissingColors {V E : Type*}
       obtain ⟨p, indices, gamma, delta, hincreasing, hclass,
           hgamma, hdelta, hchain, hinjective, hprepared⟩ :=
         hclassPrepared v hv hvTerminal ⟨r, hrRestoration, hrVertex⟩
-      sorry
+      have hindexClass (a : Fin (p + 1)) :
+          indices a ∈ ExtensionBaseSupportClass ett terminalSupport
+            hterminalSupport v :=
+        (hclass (indices a)).2 ⟨a, rfl⟩
+      have hindexActive (a : Fin (p + 1)) :
+          indices a ∈ ExtensionBaseActiveIndices ett terminalSupport
+            hterminalSupport := by
+        have h := hindexClass a
+        simp only [ExtensionBaseSupportClass, Finset.mem_filter] at h
+        exact h.1
+      have hindexVertex (a : Fin (p + 1)) :
+          ett.series.data.chosenVertex (indices a).succ = some v := by
+        have h := hindexClass a
+        simp only [ExtensionBaseSupportClass, Finset.mem_filter] at h
+        exact h.2
+      have hindexRestoration (a : Fin (p + 1)) :
+          indices a ∈ ExtensionBaseRestorationIndices ett terminalSupport
+            hterminalSupport := by
+        unfold ExtensionBaseRestorationIndices
+        apply Finset.mem_sdiff.mpr
+        refine ⟨hindexActive a, ?_⟩
+        intro haTerminal
+        have h := haTerminal
+        simp only [ExtensionBaseSupportClass, Finset.mem_filter] at h
+        have haVertex := h.2
+        apply hvTerminal
+        exact Option.some.inj ((hindexVertex a).symm.trans haVertex)
+      have hpositionExists (a : Fin (p + 1)) :
+          ∃ s : Fin trace.steps, trace.slot s = indices a := by
+        have hmem : indices a ∈ Finset.univ.image trace.slot := by
+          rw [trace.enumerates]
+          exact hindexRestoration a
+        simpa only [Finset.mem_image, Finset.mem_univ, true_and] using hmem
+      let pos : Fin (p + 1) → Fin trace.steps := fun a =>
+        Classical.choose (hpositionExists a)
+      have hposSlot (a : Fin (p + 1)) : trace.slot (pos a) = indices a :=
+        Classical.choose_spec (hpositionExists a)
+      have hposSupport (a : Fin (p + 1)) : trace.support (pos a) = v := by
+        apply Option.some.inj
+        exact (trace.chosenVertex (pos a)).symm.trans (by
+          rw [hposSlot]
+          exact hindexVertex a)
+      have hposGamma (a : Fin (p + 1)) : trace.gamma (pos a) = gamma a := by
+        apply Option.some.inj
+        exact (trace.gammaField (pos a)).symm.trans (by
+          rw [hposSlot]
+          exact hgamma a)
+      have hposDelta (a : Fin (p + 1)) : trace.delta (pos a) = delta a := by
+        apply Option.some.inj
+        exact (trace.deltaField (pos a)).symm.trans (by
+          rw [hposSlot]
+          exact hdelta a)
+      have hslotInjective : Function.Injective trace.slot := by
+        intro a b hab
+        apply Fin.ext
+        by_contra hval
+        rcases lt_or_gt_of_ne hval with hlt | hgt
+        · have hdesc := trace.strictlyDescending a b hlt
+          rw [hab] at hdesc
+          exact (Nat.lt_irrefl _ hdesc)
+        · have hdesc := trace.strictlyDescending b a hgt
+          rw [hab] at hdesc
+          exact (Nat.lt_irrefl _ hdesc)
+      have hposReverse (a b : Fin (p + 1)) (hab : a.val < b.val) :
+          (pos b).val < (pos a).val := by
+        have hindices := hincreasing a b hab
+        by_contra hnot
+        have hle : (pos a).val ≤ (pos b).val := Nat.le_of_not_gt hnot
+        rcases lt_or_eq_of_le hle with hlt | heq
+        · have hdesc := trace.strictlyDescending (pos a) (pos b) hlt
+          rw [hposSlot, hposSlot] at hdesc
+          omega
+        · have hposEq : pos a = pos b := Fin.ext heq
+          have hindexEq : indices a = indices b := by
+            rw [← hposSlot a, ← hposSlot b, hposEq]
+          have hvalEq := congrArg Fin.val hindexEq
+          omega
+      have hposOrder (a b : Fin (p + 1)) :
+          (pos b).val < (pos a).val ↔ a.val < b.val := by
+        constructor
+        · intro hba
+          by_contra hnot
+          have hle : b.val ≤ a.val := Nat.le_of_not_gt hnot
+          rcases lt_or_eq_of_le hle with hlt | heq
+          · have hrev := hposReverse b a hlt
+            omega
+          · have hab : a = b := Fin.ext heq.symm
+            subst b
+            exact (Nat.lt_irrefl _ hba)
+        · exact hposReverse a b
+      have hsupportPosition (s : Fin trace.steps) :
+          trace.support s = v ↔ ∃ a : Fin (p + 1), pos a = s := by
+        constructor
+        · intro hs
+          have hsRestoration := (hinvariant.2.1 s).1
+          have hsActive := (Finset.mem_sdiff.mp hsRestoration).1
+          have hsClass : trace.slot s ∈
+              ExtensionBaseSupportClass ett terminalSupport hterminalSupport v := by
+            simp only [ExtensionBaseSupportClass, Finset.mem_filter]
+            exact ⟨hsActive, by simpa [hs] using trace.chosenVertex s⟩
+          obtain ⟨a, ha⟩ := (hclass (trace.slot s)).mp hsClass
+          refine ⟨a, hslotInjective ?_⟩
+          exact (hposSlot a).trans ha
+        · rintro ⟨a, rfl⟩
+          exact hposSupport a
+      have rootGammaPresent (s : Fin trace.steps) :
+          trace.gamma s ∈ PresentColors G (trace.coloring s.castSucc)
+            (trace.support s) := by
+        have stepInvariant := hinvariant.2.1 s
+        rcases stepInvariant.2.2 with
+          ⟨segment, supportInTree, deltaMissing, pathComponent,
+            exactIntersection, remaining⟩
+        have deltaNotPresent : trace.delta s ∉
+            PresentColors G (trace.coloring s.castSucc) (trace.support s) := by
+          simpa [MissingColors] using deltaMissing
+        obtain ⟨f, hf⟩ := pathComponent.2
+        let H := TwoColorIncidenceGraph G (trace.coloring s.castSucc)
+          (trace.gamma s) (trace.delta s)
+        have rootSupport : Sum.inl (trace.support s) ∈ H.support := by
+          apply SimpleGraph.mem_support_of_reachable
+            (G := H) (u := Sum.inl (trace.support s)) (v := Sum.inr f)
+          · simp
+          · exact SimpleGraph.ConnectedComponent.eq.mp hf.symm
+        obtain ⟨x, hx⟩ := H.mem_support.mp rootSupport
+        cases x with
+        | inl x => simp [H, TwoColorIncidenceGraph] at hx
+        | inr e =>
+            have hxe : Incident G (trace.support s) e ∧
+                (trace.coloring s.castSucc e = some (trace.gamma s) ∨
+                  trace.coloring s.castSucc e = some (trace.delta s)) := by
+              simpa [H, TwoColorIncidenceGraph] using hx
+            rcases hxe with ⟨hse, hcolor | hcolor⟩
+            · simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+                true_and]
+              exact ⟨e, hse, hcolor⟩
+            · exact (deltaNotPresent (by
+                simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+                  true_and]
+                exact ⟨e, hse, hcolor⟩)).elim
+      have rootGammaNotMissing (s : Fin trace.steps) :
+          trace.gamma s ∉ MissingColors G (trace.coloring s.castSucc)
+            (trace.support s) := by
+        simpa [MissingColors] using rootGammaPresent s
+      have offSupportInterval : ∀ (n m : ℕ) (hn : n ≤ trace.steps)
+          (hm : m ≤ n),
+          (∀ s : Fin trace.steps, m ≤ s.val → s.val < n →
+            trace.support s ≠ v) →
+          MissingColors G
+              (trace.coloring ⟨n, Nat.lt_succ_of_le hn⟩) v =
+            MissingColors G
+              (trace.coloring ⟨m, Nat.lt_succ_of_le (hm.trans hn)⟩) v := by
+        intro n
+        induction n with
+        | zero =>
+            intro m hn hm hOff
+            have hmZero : m = 0 := by omega
+            subst m
+            rfl
+        | succ n ih =>
+            intro m hn hm hOff
+            by_cases hmTop : m = n + 1
+            · subst m
+              rfl
+            · have hmPrev : m ≤ n := by omega
+              let s : Fin trace.steps := ⟨n, Nat.lt_of_succ_le hn⟩
+              have hsOff : trace.support s ≠ v :=
+                hOff s hmPrev (Nat.lt_succ_self n)
+              have hstep := offSupportStep s v hv (Ne.symm hsOff)
+              have hprevious := ih m (Nat.le_of_succ_le hn) hmPrev (by
+                intro t hmt htn
+                exact hOff t hmt (Nat.lt_succ_of_lt htn))
+              have hstep' :
+                  MissingColors G
+                      (trace.coloring
+                        ⟨n + 1, Nat.lt_succ_of_le hn⟩) v =
+                    MissingColors G
+                      (trace.coloring
+                        ⟨n, Nat.lt_succ_of_le (Nat.le_of_succ_le hn)⟩) v := by
+                simpa [s] using hstep
+              exact hstep'.trans hprevious
+      let colorChain : Fin (p + 2) → Fin k := Fin.cons (gamma 0) delta
+      have gammaEqChain (a : Fin (p + 1)) :
+          gamma a = colorChain a.castSucc := by
+        cases a using Fin.cases with
+        | zero => simp [colorChain]
+        | succ a => simpa [colorChain] using hchain a
+      have deltaEqChain (a : Fin (p + 1)) :
+          delta a = colorChain a.succ := by
+        simp [colorChain]
+      have deltaNeLaterDelta (a : Fin p) (b : Fin (p + 1))
+          (hab : a.succ.val < b.val) : delta a.castSucc ≠ delta b := by
+        intro heq
+        have hcolor : colorChain a.castSucc.succ = colorChain b.succ := by
+          rw [← deltaEqChain, ← deltaEqChain]
+          exact heq
+        have hi : a.castSucc.succ = b.succ := hinjective hcolor
+        have hbase : a.castSucc = b := Fin.succ_inj.mp hi
+        have hv : a.val = b.val := congrArg Fin.val hbase
+        have hab' : a.val + 1 < b.val := by simpa using hab
+        omega
+      have deltaNeLaterGamma (a : Fin p) (b : Fin (p + 1))
+          (hab : a.succ.val < b.val) : delta a.castSucc ≠ gamma b := by
+        intro heq
+        have hcolor : colorChain a.castSucc.succ = colorChain b.castSucc := by
+          rw [← deltaEqChain, ← gammaEqChain]
+          exact heq
+        have hi : a.castSucc.succ = b.castSucc := hinjective hcolor
+        have hv : a.val + 1 = b.val := by
+          simpa using congrArg Fin.val hi
+        have hab' : a.val + 1 < b.val := by simpa using hab
+        exact (Nat.ne_of_lt hab') hv
+      have intermediateInitiallyPresent (a : Fin p) :
+          delta a.castSucc ∉ MissingColors G sigmaN v := by
+        let target : Fin (p + 1) := a.succ
+        let c : Fin k := delta a.castSucc
+        have membershipPreserved : ∀ (n : ℕ)
+            (hn : n ≤ (pos target).val),
+            (c ∈ MissingColors G
+                (trace.coloring ⟨n, by omega⟩) v ↔
+              c ∈ MissingColors G sigmaN v) := by
+          intro n
+          induction n with
+          | zero =>
+              intro hn
+              simpa [c] using (Finset.ext_iff.mp
+                (congrArg (fun phi => MissingColors G phi v)
+                  trace.initialColoring) c)
+          | succ n ih =>
+              intro hn
+              have hnPrev : n ≤ (pos target).val := by omega
+              have hprevious := ih hnPrev
+              let s : Fin trace.steps := ⟨n, by omega⟩
+              have hstep :
+                  (c ∈ MissingColors G (trace.coloring s.succ) v ↔
+                    c ∈ MissingColors G (trace.coloring s.castSucc) v) := by
+                by_cases hs : trace.support s = v
+                · obtain ⟨b, hb⟩ := (hsupportPosition s).mp hs
+                  have hpositionLt : (pos b).val < (pos target).val := by
+                    rw [hb]
+                    exact Nat.lt_of_succ_le hn
+                  have htargetB : target.val < b.val :=
+                    (hposOrder target b).mp hpositionLt
+                  have hcDelta : c ≠ delta b := by
+                    exact deltaNeLaterDelta a b (by simpa [target] using htargetB)
+                  have hcGamma : c ≠ gamma b := by
+                    exact deltaNeLaterGamma a b (by simpa [target] using htargetB)
+                  rw [← hs, rootExchange s, ← hb, hposDelta, hposGamma]
+                  simp [hcDelta, hcGamma]
+                · have hoff := offSupportStep s v hv (Ne.symm hs)
+                  rw [hoff]
+              have hstep' :
+                  (c ∈ MissingColors G
+                      (trace.coloring ⟨n + 1, by omega⟩) v ↔
+                    c ∈ MissingColors G
+                      (trace.coloring ⟨n, by omega⟩) v) := by
+                simpa [s] using hstep
+              exact hstep'.trans hprevious
+        have hroot : c ∉ MissingColors G
+            (trace.coloring (pos target).castSucc) v := by
+          have h := rootGammaNotMissing (pos target)
+          rw [hposSupport, hposGamma] at h
+          change gamma a.succ ∉
+            MissingColors G (trace.coloring (pos target).castSucc) v at h
+          rw [hchain a] at h
+          exact h
+        intro hc
+        apply hroot
+        have hm := (membershipPreserved (pos target).val le_rfl).2 hc
+        have hcast :
+            (⟨(pos target).val, by omega⟩ : Fin (trace.steps + 1)) =
+              (pos target).castSucc := Fin.ext rfl
+        rw [hcast] at hm
+        exact hm
+      let baseMissing :=
+        MissingColors G sigmaN v \ {delta (Fin.last p)}
+      have processed (a : Fin (p + 1)) :
+          MissingColors G (trace.coloring (pos a).succ) v =
+            baseMissing ∪ {gamma a} := by
+        exact Fin.reverseInduction (motive := fun a =>
+            MissingColors G (trace.coloring (pos a).succ) v =
+              baseMissing ∪ {gamma a}) (by
+          have hbefore : MissingColors G
+              (trace.coloring (pos (Fin.last p)).castSucc) v =
+                MissingColors G sigmaN v := by
+            have hinterval := offSupportInterval
+              (pos (Fin.last p)).val 0 (Nat.le_of_lt (pos (Fin.last p)).isLt)
+              (Nat.zero_le _) (by
+                intro s hsZero hsBefore hsupport
+                obtain ⟨b, hb⟩ := (hsupportPosition s).mp hsupport
+                have hbad : (pos b).val < (pos (Fin.last p)).val := by
+                  simpa [hb] using hsBefore
+                have := (hposOrder (Fin.last p) b).mp hbad
+                have hbLt := b.isLt
+                simp only [Fin.last, Fin.val_mk] at this
+                omega)
+            have hcast :
+                (⟨(pos (Fin.last p)).val,
+                    Nat.lt_succ_of_le (Nat.le_of_lt (pos (Fin.last p)).isLt)⟩ :
+                  Fin (trace.steps + 1)) =
+                  (pos (Fin.last p)).castSucc := Fin.ext rfl
+            rw [hcast] at hinterval
+            exact hinterval.trans (congrArg
+              (fun phi => MissingColors G phi v) trace.initialColoring)
+          have hexchange := rootExchange (pos (Fin.last p))
+          rw [hposSupport, hposGamma, hposDelta, hbefore] at hexchange
+          simpa [baseMissing] using hexchange) (by
+          intro a ha
+          have hbetween : MissingColors G
+              (trace.coloring (pos a.castSucc).castSucc) v =
+                MissingColors G (trace.coloring (pos a.succ).succ) v := by
+            have hposition := hposReverse a.castSucc a.succ (by simp)
+            have hinterval := offSupportInterval
+              (pos a.castSucc).val ((pos a.succ).val + 1)
+              (Nat.le_of_lt (pos a.castSucc).isLt) (by omega) (by
+                intro s hsAfter hsBefore hsupport
+                obtain ⟨b, hb⟩ := (hsupportPosition s).mp hsupport
+                have hlower : (pos a.succ).val < (pos b).val := by
+                  rw [hb]
+                  omega
+                have hupper : (pos b).val < (pos a.castSucc).val := by
+                  rw [hb]
+                  exact hsBefore
+                have hbUpper : b.val < a.succ.val :=
+                  (hposOrder b a.succ).mp hlower
+                have hbLower : a.castSucc.val < b.val :=
+                  (hposOrder a.castSucc b).mp hupper
+                change b.val < a.val + 1 at hbUpper
+                change a.val < b.val at hbLower
+                omega)
+            have hnCast :
+                (⟨(pos a.castSucc).val,
+                    Nat.lt_succ_of_le (Nat.le_of_lt (pos a.castSucc).isLt)⟩ :
+                  Fin (trace.steps + 1)) =
+                  (pos a.castSucc).castSucc := Fin.ext rfl
+            have hmSucc :
+                (⟨(pos a.succ).val + 1, by omega⟩ :
+                  Fin (trace.steps + 1)) = (pos a.succ).succ := Fin.ext rfl
+            rw [hnCast, hmSucc] at hinterval
+            exact hinterval
+          have hexchange := rootExchange (pos a.castSucc)
+          rw [hposSupport, hposGamma, hposDelta, hbetween, ha, hchain a]
+            at hexchange
+          have hnotBase : delta a.castSucc ∉ baseMissing := by
+            exact fun hmem => intermediateInitiallyPresent a
+              (Finset.mem_sdiff.mp hmem).1
+          apply hexchange.trans
+          ext c
+          simp only [Finset.mem_union, Finset.mem_sdiff,
+            Finset.mem_singleton]
+          by_cases hc : c = delta a.castSucc
+          · subst c
+            simp [hnotBase]
+          · simp [hc]) a
+      have hafter :
+          MissingColors G (trace.coloring (Fin.last trace.steps)) v =
+            MissingColors G (trace.coloring (pos 0).succ) v := by
+        have hinterval := offSupportInterval trace.steps ((pos 0).val + 1)
+          le_rfl (by omega) (by
+            intro s hsAfter hsFinal hsupport
+            obtain ⟨b, hb⟩ := (hsupportPosition s).mp hsupport
+            have hbad : (pos 0).val < (pos b).val := by
+              rw [hb]
+              omega
+            have hbNeg : b.val < 0 := by
+              simpa using (hposOrder b 0).mp hbad
+            omega)
+        have hnLast :
+            (⟨trace.steps, Nat.lt_succ_of_le le_rfl⟩ :
+              Fin (trace.steps + 1)) = Fin.last trace.steps := Fin.ext rfl
+        have hmSucc :
+            (⟨(pos 0).val + 1, by omega⟩ : Fin (trace.steps + 1)) =
+              (pos 0).succ := Fin.ext rfl
+        rw [hnLast, hmSucc] at hinterval
+        exact hinterval
+      have hfinal := hafter.trans (processed 0)
+      exact hfinal.trans (by simpa [baseMissing] using hprepared.symm)
     · have hOff : ∀ a : Fin trace.steps, trace.support a ≠ v := by
         intro a hsupport
         have hrestoration := (hinvariant.2.1 a).1
