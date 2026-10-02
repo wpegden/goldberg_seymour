@@ -174,4 +174,1213 @@ theorem ExtensionBase {V E : Type*} [Fintype V] [Fintype E]
           (Sum.inl w ∈ TwoColorComponent G sigma gamma delta
               (Sum.inl v) ↔ w = v) := by
 -- BODY
-  sorry
+  dsimp
+  intro v gamma delta hterminalKind hterminalVertex hterminalGamma
+    hterminalDelta sigma hsigmaProper hsigmaOne hsigmaStable w hw
+  constructor
+  · intro hwComponent
+    apply of_not_not
+    intro hwNe
+    letI : DecidableEq V := Classical.decEq V
+    have hcurrentIII := ExtensionRules G k e0 input T generating ett hMP
+      hpositive (fun lower hlowerPositive hlowerRounds hlowerMP =>
+        hlower lower hlowerPositive hlowerRounds hlowerMP)
+    let q : Fin ett.rounds := ⟨ett.rounds - 1, by omega⟩
+    have hqTerminal : q.val + 1 = ett.rounds := by
+      simp only [q]
+      omega
+    have hqSucc : q.succ = Fin.last ett.rounds := by
+      apply Fin.ext
+      simpa using hqTerminal
+    have hqKind : ett.series.data.kind q.succ =
+        some TashkinovExtensionKind.PE := by
+      rw [hqSucc]
+      exact hterminalKind
+    have hqVertex : ett.series.data.chosenVertex q.succ = some v := by
+      rw [hqSucc]
+      exact hterminalVertex
+    have hqGamma : ett.series.data.gamma q.succ = some gamma := by
+      rw [hqSucc]
+      exact hterminalGamma
+    have hqDelta : ett.series.data.delta q.succ = some delta := by
+      rw [hqSucc]
+      exact hterminalDelta
+    have hvStage : v ∈ TreeSequenceVertexSet
+        (ett.series.data.tree q.succ.castSucc) := by
+      generalize htarget : q.succ = target
+      cases ett.series.certified target with
+      | initial triple seedLength initialColoring initialStored initialEdges
+          initialKind initialVertex initialOutside initialDelta initialGamma
+          initialClosure =>
+        exact (Fin.succ_ne_zero q htarget).elim
+      | SE i previousProper previousOneUncolored previousClosed
+          previousNotStronglyClosed noRevisiting choice seriesAlternative
+          currentColoring currentStored currentEdges currentKind currentVertex
+          currentOutside currentDelta currentGamma adjoined adjoinedExactly
+          closedExtension orderedExtension strictExtension =>
+        have hbad : some TashkinovExtensionKind.SE =
+            some TashkinovExtensionKind.PE :=
+          currentKind.symm.trans (by simpa [htarget] using hqKind)
+        cases hbad
+      | RE i previousProper previousOneUncolored previousClosed
+          previousNotStronglyClosed available currentColoring currentStored
+          currentEdges currentKind currentVertex currentOutside currentDelta
+          currentGamma adjoined adjoinedExactly closedExtension orderedExtension
+          strictExtension =>
+        have hbad : some TashkinovExtensionKind.RE =
+            some TashkinovExtensionKind.PE :=
+          currentKind.symm.trans (by simpa [htarget] using hqKind)
+        cases hbad
+      | PE i previousProper previousOneUncolored previousClosed
+          previousNotStronglyClosed noRevisiting choice seriesAlternativeFails
+          chosenGamma gammaRule secondStable secondStableProper
+          secondStableOneUncolored secondStableRelation exitWitness
+          currentColoring currentProper currentOneUncolored currentStored
+          currentEdges currentKind currentVertex currentOutside currentDelta
+          currentGamma closedExtension orderedExtension strictExtension =>
+        have hi : i = q := by
+          apply Fin.ext
+          simpa using (congrArg Fin.val htarget).symm
+        subst i
+        have hvChoice : choice.vertex = v :=
+          Option.some.inj
+            (currentVertex.symm.trans (by simpa [htarget] using hqVertex))
+        simpa [hvChoice] using choice.vertexDefective.1
+    have hqTreeIndex : q.succ.castSucc =
+        (⟨ett.rounds, by omega⟩ : Fin (ett.rounds + 2)) := by
+      apply Fin.ext
+      simpa using hqTerminal
+    have hvFinal : v ∈ TreeSequenceVertexSet T := by
+      have hvPenultimate : v ∈ TreeSequenceVertexSet
+          (ett.series.data.tree ⟨ett.rounds, by omega⟩) := by
+        simpa [hqTreeIndex] using hvStage
+      rcases ett.abovePenultimate with ⟨hlen, hvertices, hedges⟩
+      simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+        true_and] at hvPenultimate ⊢
+      obtain ⟨i, hi⟩ := hvPenultimate
+      refine ⟨Fin.castLE (Nat.succ_le_succ hlen) i, ?_⟩
+      exact (hvertices i).trans hi
+    have hfirstUpper : ETTFirstAppearanceIndex ett v hvFinal ≤ q.val + 1 :=
+      ExtensionRulesPEFirstAppearanceBound G k e0 input T generating ett q v
+        hqKind hqVertex hvFinal
+    have hfirstPositive : 0 < ETTFirstAppearanceIndex ett v hvFinal := by
+      unfold ETTFirstAppearanceIndex
+      dsimp
+      omega
+    let jSlot : Fin ett.rounds :=
+      ⟨ETTFirstAppearanceIndex ett v hvFinal - 1, by omega⟩
+    have hjSlot : jSlot.val + 1 =
+        ETTFirstAppearanceIndex ett v hvFinal := by
+      simp only [jSlot]
+      omega
+    have hjle : jSlot.val ≤ q.val := by omega
+    have hsigmaTerminal : StableColoring
+        (ett.series.data.tree q.succ.castSucc)
+        (TashkinovStoredColors ett.series.data q.succ)
+        (ett.series.data.coloring q.succ) sigma := by
+      simpa [hqSucc] using hsigmaStable
+    have hcurrentTerminal := hcurrentIII.1 q v hqKind hqVertex hvFinal
+      jSlot.castSucc (by simpa using hjSlot.symm) sigma hsigmaProper hsigmaOne
+      hsigmaTerminal
+    have hsigmaBefore := hcurrentTerminal.1
+    have segmentRefl (A : TreeSequence G e0) :
+        TreeSequenceInitialSegment A A :=
+      ⟨le_rfl, (by intro i; rfl), (by intro i; rfl)⟩
+    have segmentTrans {A B C : TreeSequence G e0}
+        (hAB : TreeSequenceInitialSegment A B)
+        (hBC : TreeSequenceInitialSegment B C) :
+        TreeSequenceInitialSegment A C := by
+      rcases hAB with ⟨hab, hvab, heab⟩
+      rcases hBC with ⟨hbc, hvbc, hebc⟩
+      refine ⟨hab.trans hbc, ?_, ?_⟩
+      · intro i
+        simpa using
+          (hvbc (Fin.castLE (Nat.succ_le_succ hab) i)).trans (hvab i)
+      · intro i
+        simpa using (hebc (Fin.castLE hab i)).trans (heab i)
+    have stepSegment : ∀ i : Fin (ett.rounds + 1), 0 < i.val →
+        TreeSequenceInitialSegment (ett.series.data.tree i.castSucc)
+          (ett.series.data.tree i.succ) := by
+      intro i hi
+      cases ett.series.certified i with
+      | initial => simpa using hi
+      | SE _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ => assumption
+      | PE _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ => assumption
+      | RE _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ => assumption
+    have stageToStage : ∀ (a b : ℕ) (_ha : 1 ≤ a) (_hab : a ≤ b)
+        (_hb : b ≤ ett.rounds),
+        TreeSequenceInitialSegment
+          (ett.series.data.tree ⟨a, by omega⟩)
+          (ett.series.data.tree ⟨b, by omega⟩) := by
+      intro a b ha hab hb
+      have chain : ∀ (d : ℕ) (_hd : a + d ≤ b),
+          TreeSequenceInitialSegment
+            (ett.series.data.tree ⟨a, by omega⟩)
+            (ett.series.data.tree ⟨a + d, by omega⟩) := by
+        intro d hd
+        induction d with
+        | zero => simpa using segmentRefl (ett.series.data.tree ⟨a, by omega⟩)
+        | succ d ih =>
+            have hprev := ih (by omega)
+            let idx : Fin (ett.rounds + 1) := ⟨a + d, by omega⟩
+            have hone := stepSegment idx (by dsimp [idx]; omega)
+            have hone' : TreeSequenceInitialSegment
+                (ett.series.data.tree ⟨a + d, by omega⟩)
+                (ett.series.data.tree ⟨a + (d + 1), by omega⟩) := by
+              simpa [idx, Nat.add_assoc] using hone
+            exact segmentTrans hprev hone'
+      have hchain := chain (b - a) (by omega)
+      convert hchain using 1 <;> congr 1 <;> apply Fin.ext <;> simp <;> omega
+    have vertexTransfer {A B : TreeSequence G e0}
+        (hAB : TreeSequenceInitialSegment A B) :
+        TreeSequenceVertexSet A ⊆ TreeSequenceVertexSet B := by
+      intro x hx
+      simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+        true_and] at hx ⊢
+      obtain ⟨i, rfl⟩ := hx
+      rcases hAB with ⟨hlen, hvertices, hedges⟩
+      exact ⟨Fin.castLE (Nat.succ_le_succ hlen) i, hvertices i⟩
+    have orderRestrict {A B : TreeSequence G e0}
+        (hAB : TreeSequenceInitialSegment A B) (x y : V)
+        (hxA : x ∈ TreeSequenceVertexSet A)
+        (hyA : y ∈ TreeSequenceVertexSet A)
+        (hxy : TreeVertexOrder B x y) : TreeVertexOrder A x y := by
+      rcases hAB with ⟨hlen, hvertices, hedges⟩
+      rcases Finset.mem_image.mp hxA with ⟨ix, _, hix⟩
+      rcases Finset.mem_image.mp hyA with ⟨iy, _, hiy⟩
+      rcases hxy with ⟨jx, jy, hjx, hjy, hjlt⟩
+      have hjxEq : jx = Fin.castLE (Nat.succ_le_succ hlen) ix := by
+        apply B.vertex_injective
+        exact hjx.trans ((hvertices ix).trans hix).symm
+      have hjyEq : jy = Fin.castLE (Nat.succ_le_succ hlen) iy := by
+        apply B.vertex_injective
+        exact hjy.trans ((hvertices iy).trans hiy).symm
+      refine ⟨ix, iy, hix, hiy, ?_⟩
+      rw [hjxEq, hjyEq] at hjlt
+      simpa using hjlt
+    have hLowerElementary : ∀ r : Fin ett.rounds, r.val < q.val →
+        ColoredVertexSetElementary G (ett.series.data.coloring r.castSucc)
+          (TreeSequenceVertexSet
+            (ett.series.data.tree r.succ.castSucc)) := by
+      intro r hrq
+      by_cases hrZero : r.val = 0
+      · have hbase : ColoredVertexSetElementary G
+            (ett.series.data.coloring 0)
+            (TreeSequenceVertexSet
+              (ett.series.data.tree ⟨1, by omega⟩)) :=
+          (TechnicalTheoremBase G k ett.rounds e0 input ett.series).1
+        have hrColor : r.castSucc = (0 : Fin (ett.rounds + 1)) := by
+          apply Fin.ext
+          simpa using hrZero
+        have hrTree : r.succ.castSucc =
+            (⟨1, by omega⟩ : Fin (ett.rounds + 2)) := by
+          apply Fin.ext
+          simpa using hrZero
+        simpa [hrColor, hrTree] using hbase
+      · obtain ⟨lower, hround, hlowerMP, htrees, hdata⟩ :=
+          CertifiedETTRestriction G k e0 input T generating ett hMP r.val
+            (by omega) (by omega)
+        have hpack := hlower lower (by omega) (by omega) hlowerMP
+        exact hpack.1
+    have hLowerPartV : ∀ (r a : Fin ett.rounds), a.val < r.val →
+        ∀ sigmaR : PartialEdgeColoring E k,
+          IsProperEdgeColoring G sigmaR → IsOneEdgeUncolored sigmaR e0 →
+          StableColoring (ett.series.data.tree r.succ.castSucc)
+            (TashkinovStoredColors ett.series.data r.castSucc)
+            (ett.series.data.coloring r.castSucc) sigmaR →
+          ∀ deltaR : Fin k,
+            DefectiveColor G sigmaR
+              (TreeSequenceVertexSet
+                (ett.series.data.tree r.succ.castSucc)) deltaR →
+            ∀ x : V,
+              BoundaryColorVertex G sigmaR
+                (TreeSequenceVertexSet
+                  (ett.series.data.tree r.succ.castSucc)) deltaR x →
+              (∃ y : V, BoundaryColorVertex G sigmaR
+                  (TreeSequenceVertexSet
+                    (ett.series.data.tree r.succ.castSucc)) deltaR y ∧
+                TreeVertexOrder
+                  (ett.series.data.tree r.succ.castSucc) y x) →
+              ∀ hxFinal : x ∈ TreeSequenceVertexSet T,
+                ETTFirstAppearanceIndex ett x hxFinal ≤ a.val + 1 →
+                ∀ xa : V,
+                  (ett.series.data.kind a.succ =
+                      some TashkinovExtensionKind.PE ∨
+                    ett.series.data.kind a.succ =
+                      some TashkinovExtensionKind.SE) →
+                  ett.series.data.chosenVertex a.succ = some xa →
+                  x = xa ∨ TreeVertexOrder
+                    (ett.series.data.tree r.succ.castSucc) x xa := by
+      intro r a har sigmaR hproperR honeR hstableR deltaR hdefectiveR x
+        hboundaryR hearlierR hxFinal hfirstR xa hkindA hvertexA
+      obtain ⟨lower, hround, hlowerMP, htrees, hdata⟩ :=
+        CertifiedETTRestriction G k e0 input T generating ett hMP r.val
+          (by omega) (by omega)
+      let nLower : Fin (lower.rounds + 1) := Fin.last lower.rounds
+      let aLower : Fin lower.rounds := ⟨a.val, by omega⟩
+      have hnMap : Fin.castLE (by omega) nLower = r.castSucc := by
+        apply Fin.ext
+        simp [nLower, hround]
+      have hnTreeMap : Fin.castLE (by omega) nLower.castSucc =
+          r.castSucc.castSucc := by
+        apply Fin.ext
+        simp [nLower, hround]
+      have haMap : Fin.castLE (by omega) aLower.succ = a.succ := by
+        apply Fin.ext
+        rfl
+      let P : TreeSequence G e0 := ett.series.data.tree r.castSucc.castSucc
+      let Tnext : TreeSequence G e0 := ett.series.data.tree r.succ.castSucc
+      have hPNext : TreeSequenceInitialSegment P Tnext := by
+        have hs := stepSegment r.castSucc (by simpa using (show 0 < r.val by omega))
+        simpa [P, Tnext] using hs
+      have hxP : x ∈ TreeSequenceVertexSet P := by
+        let candidates : Finset (Fin (ett.rounds + 1)) :=
+          Finset.univ.filter fun i =>
+            x ∈ TreeSequenceVertexSet (ExtendedTashkinovLadderStage ett i)
+        have hnonempty : candidates.Nonempty := by
+          refine ⟨Fin.last ett.rounds, ?_⟩
+          simp only [candidates, Finset.mem_filter, Finset.mem_univ, true_and]
+          rw [show ExtendedTashkinovLadderStage ett (Fin.last ett.rounds) = T by
+            simp [ExtendedTashkinovLadderStage, Fin.lastCases_last]]
+          exact hxFinal
+        let first := candidates.min' hnonempty
+        have hfirstBound : first.val + 1 ≤ a.val + 1 := by
+          have hfirstRaw := hfirstR
+          unfold ETTFirstAppearanceIndex at hfirstRaw
+          dsimp at hfirstRaw
+          dsimp [first, candidates]
+          convert hfirstRaw using 1 <;> congr
+        have hfirstMem : first ∈ candidates :=
+          Finset.min'_mem candidates hnonempty
+        change first ∈ candidates at hfirstMem
+        let firstBase : Fin ett.rounds := ⟨first.val, by omega⟩
+        have hfirstEq : first = firstBase.castSucc := by
+          apply Fin.ext
+          rfl
+        have hxFirst : x ∈ TreeSequenceVertexSet
+            (ett.series.data.tree ⟨first.val + 1, by omega⟩) := by
+          have hxLadder := (Finset.mem_filter.mp hfirstMem).2
+          rw [hfirstEq] at hxLadder
+          unfold ExtendedTashkinovLadderStage at hxLadder
+          rw [Fin.lastCases_castSucc] at hxLadder
+          convert hxLadder using 1 <;> congr 2 <;> apply Fin.ext <;> rfl
+        have hseg := stageToStage (first.val + 1) r.val (by omega)
+          (by omega) (by omega)
+        have hxStage := vertexTransfer hseg hxFirst
+        have hPIndex : (⟨r.val, by omega⟩ : Fin (ett.rounds + 2)) =
+            r.castSucc.castSucc := by
+          apply Fin.ext
+          rfl
+        rw [hPIndex] at hxStage
+        exact hxStage
+      obtain ⟨y, hyBoundary, hyx⟩ := hearlierR
+      have hyP : y ∈ TreeSequenceVertexSet P := by
+        rcases hPNext with ⟨hlen, hvertices, hedges⟩
+        rcases Finset.mem_image.mp hxP with ⟨ix, _, hix⟩
+        rcases hyx with ⟨jy, jx, hjy, hjx, hjlt⟩
+        have hjxEq : jx = Fin.castLE (Nat.succ_le_succ hlen) ix := by
+          apply Tnext.vertex_injective
+          exact hjx.trans ((hvertices ix).trans hix).symm
+        have hjyBound : jy.val < P.length + 1 := by
+          have hjxVal := congrArg Fin.val hjxEq
+          simp only [Fin.val_castLE] at hjxVal
+          omega
+        let iy : Fin (P.length + 1) := ⟨jy.val, hjyBound⟩
+        apply Finset.mem_image.mpr
+        refine ⟨iy, Finset.mem_univ _, ?_⟩
+        have hcast : Fin.castLE (Nat.succ_le_succ hlen) iy = jy := by
+          apply Fin.ext
+          rfl
+        have hnextIndex : r.castSucc.succ = r.succ.castSucc := by
+          apply Fin.ext
+          rfl
+        have hjy' : Tnext.vertex jy = y := by
+          simpa [Tnext, hnextIndex] using hjy
+        exact (hvertices iy).symm.trans (by simpa [hcast] using hjy')
+      have hyxP : TreeVertexOrder P y x :=
+        orderRestrict hPNext y x hyP hxP hyx
+      have hyne : y ≠ x := by
+        intro hyxEq
+        subst y
+        rcases hyxP with ⟨iy, ix, hiy, hix, hlt⟩
+        have : iy = ix := P.vertex_injective (hiy.trans hix.symm)
+        omega
+      have boundaryRestrict : ∀ z : V, z ∈ TreeSequenceVertexSet P →
+          ∀ f : E, f ∈ BoundaryColorEdges G sigmaR
+              (TreeSequenceVertexSet Tnext) deltaR →
+            Incident G z f →
+            f ∈ BoundaryColorEdges G sigmaR
+              (TreeSequenceVertexSet P) deltaR := by
+        intro z hzP f hf hzf
+        have hfBoundary := (Finset.mem_filter.mp hf).1
+        have hfColor := (Finset.mem_filter.mp hf).2
+        simp only [BoundaryEdges, Finset.mem_filter, Finset.mem_univ,
+          true_and] at hfBoundary
+        obtain ⟨zin, hzin, zout, hzout, hends⟩ := hfBoundary
+        have hzNext := vertexTransfer hPNext hzP
+        have hzCases : z = zin ∨ z = zout := by
+          simpa [Incident, hends] using hzf
+        have hzEq : z = zin := hzCases.resolve_right fun hzEq =>
+          hzout (hzEq ▸ hzNext)
+        apply Finset.mem_filter.mpr
+        refine ⟨?_, hfColor⟩
+        simp only [BoundaryEdges, Finset.mem_filter, Finset.mem_univ,
+          true_and]
+        refine ⟨z, hzP, zout, ?_, ?_⟩
+        · intro hzoutP
+          exact hzout (vertexTransfer hPNext hzoutP)
+        · simpa [hzEq] using hends
+      obtain ⟨fx, hfxBoundary, hfxIncident⟩ := hboundaryR.2
+      obtain ⟨fy, hfyBoundary, hfyIncident⟩ := hyBoundary.2
+      have hfxP := boundaryRestrict x hxP fx hfxBoundary hfxIncident
+      have hfyP := boundaryRestrict y hyP fy hfyBoundary hfyIncident
+      have hfxy : fx ≠ fy := by
+        intro hfeq
+        subst fy
+        have hfBoundary := (Finset.mem_filter.mp hfxBoundary).1
+        simp only [BoundaryEdges, Finset.mem_filter, Finset.mem_univ,
+          true_and] at hfBoundary
+        obtain ⟨zin, hzin, zout, hzout, hends⟩ := hfBoundary
+        have hxCases : x = zin ∨ x = zout := by
+          simpa [Incident, hends] using hfxIncident
+        have hyCases : y = zin ∨ y = zout := by
+          simpa [Incident, hends] using hfyIncident
+        have hxNext := vertexTransfer hPNext hxP
+        have hyNext := vertexTransfer hPNext hyP
+        have hxEq : x = zin := hxCases.resolve_right fun hxEq =>
+          hzout (hxEq ▸ hxNext)
+        have hyEq : y = zin := hyCases.resolve_right fun hyEq =>
+          hzout (hyEq ▸ hyNext)
+        exact hyne (hyEq.trans hxEq.symm)
+      have hdefectiveP : DefectiveColor G sigmaR
+          (TreeSequenceVertexSet P) deltaR := by
+        unfold DefectiveColor
+        exact Finset.one_lt_card.mpr ⟨fx, hfxP, fy, hfyP, hfxy⟩
+      have htreeLower : lower.series.data.tree nLower.castSucc =
+          P := by
+        rw [htrees nLower.castSucc, hnTreeMap]
+      have hcolorLower : lower.series.data.coloring nLower =
+          ett.series.data.coloring r.castSucc := by
+        rw [(hdata nLower).1, hnMap]
+      have hstoredLower : TashkinovStoredColors lower.series.data nLower =
+          TashkinovStoredColors ett.series.data r.castSucc := by
+        rw [(hdata nLower).2.2.2.2.2.2.2.2.1, hnMap]
+      have hstableLower : StableColoring
+          (lower.series.data.tree nLower.castSucc)
+          (TashkinovStoredColors lower.series.data nLower)
+          (lower.series.data.coloring nLower) sigmaR := by
+        rw [htreeLower, hstoredLower, hcolorLower]
+        constructor
+        · intro f hfP hcontrolled
+          apply hstableR.1 f
+          · rcases hfP with ⟨z, hz, hzf⟩
+            exact ⟨z, vertexTransfer hPNext hz, hzf⟩
+          · rcases hcontrolled with ⟨c, hc, hfc⟩
+            refine ⟨c, ?_, hfc⟩
+            rcases Finset.mem_union.mp hc with hc | hc
+            · apply Finset.mem_union.mpr
+              left
+              simp only [TreeMissingColors, Finset.mem_biUnion] at hc ⊢
+              rcases hc with ⟨z, hz, hcz⟩
+              exact ⟨z, vertexTransfer hPNext hz, hcz⟩
+            · exact Finset.mem_union.mpr (Or.inr hc)
+        · intro z hz
+          exact hstableR.2 z (vertexTransfer hPNext hz)
+      have hdefectiveLower : DefectiveColor G sigmaR
+          (TreeSequenceVertexSet
+            (lower.series.data.tree nLower.castSucc)) deltaR := by
+        simpa [htreeLower] using hdefectiveP
+      have hboundaryLower : BoundaryColorVertex G sigmaR
+          (TreeSequenceVertexSet
+            (lower.series.data.tree nLower.castSucc)) deltaR x := by
+        rw [htreeLower]
+        exact ⟨hxP, fx, hfxP, hfxIncident⟩
+      have hearlierLower : ∃ y : V, BoundaryColorVertex G sigmaR
+          (TreeSequenceVertexSet
+          (lower.series.data.tree nLower.castSucc)) deltaR y ∧
+          TreeVertexOrder (lower.series.data.tree nLower.castSucc) y x := by
+        rw [htreeLower]
+        exact ⟨y, ⟨hyP, fy, hfyP, hfyIncident⟩, hyxP⟩
+      have hxLower : x ∈ TreeSequenceVertexSet
+          (ett.series.data.tree ⟨r.val + 1, by omega⟩) := by
+        have hx := hboundaryR.1
+        convert hx using 1 <;> congr 2 <;> apply Fin.ext <;> rfl
+      have hkindLower : lower.series.data.kind aLower.succ =
+          some TashkinovExtensionKind.PE ∨
+          lower.series.data.kind aLower.succ =
+            some TashkinovExtensionKind.SE := by
+        rcases hkindA with hkindA | hkindA
+        · left
+          rw [(hdata aLower.succ).2.2.2.1, haMap]
+          exact hkindA
+        · right
+          rw [(hdata aLower.succ).2.2.2.1, haMap]
+          exact hkindA
+      have hvertexLower : lower.series.data.chosenVertex aLower.succ =
+          some xa := by
+        rw [(hdata aLower.succ).2.2.2.2.1, haMap]
+        exact hvertexA
+      have hfirstLower : ETTFirstAppearanceIndex lower x hxLower ≤
+          aLower.val + 1 := by
+        unfold ETTFirstAppearanceIndex
+        dsimp
+        let fullCandidates : Finset (Fin (ett.rounds + 1)) :=
+          Finset.univ.filter fun i =>
+            x ∈ TreeSequenceVertexSet (ExtendedTashkinovLadderStage ett i)
+        have hfullNonempty : fullCandidates.Nonempty := by
+          refine ⟨Fin.last ett.rounds, ?_⟩
+          simp only [fullCandidates, Finset.mem_filter, Finset.mem_univ,
+            true_and]
+          rw [show ExtendedTashkinovLadderStage ett (Fin.last ett.rounds) = T by
+            simp [ExtendedTashkinovLadderStage, Fin.lastCases_last]]
+          exact hxFinal
+        let mf := fullCandidates.min' hfullNonempty
+        have hmfBound : mf.val + 1 ≤ a.val + 1 := by
+          have hfirstRaw := hfirstR
+          unfold ETTFirstAppearanceIndex at hfirstRaw
+          dsimp at hfirstRaw
+          dsimp [mf, fullCandidates]
+          convert hfirstRaw using 1 <;> congr
+        let lowerCandidates : Finset (Fin (lower.rounds + 1)) :=
+          Finset.univ.filter fun i =>
+            x ∈ TreeSequenceVertexSet
+              (ExtendedTashkinovLadderStage lower i)
+        have hlowerNonempty : lowerCandidates.Nonempty := by
+          refine ⟨Fin.last lower.rounds, ?_⟩
+          simp only [lowerCandidates, Finset.mem_filter, Finset.mem_univ,
+            true_and]
+          rw [show ExtendedTashkinovLadderStage lower
+              (Fin.last lower.rounds) =
+                ett.series.data.tree ⟨r.val + 1, by omega⟩ by
+            unfold ExtendedTashkinovLadderStage
+            exact Fin.lastCases_last]
+          exact hxLower
+        let mfLower : Fin (lower.rounds + 1) := ⟨mf.val, by omega⟩
+        let mfBase : Fin lower.rounds := ⟨mf.val, by omega⟩
+        let mfFull : Fin ett.rounds := ⟨mf.val, by omega⟩
+        have hmfLower : mfLower = mfBase.castSucc := by
+          apply Fin.ext
+          rfl
+        have hmfFull : mf = mfFull.castSucc := by
+          apply Fin.ext
+          rfl
+        have hstageEq : ExtendedTashkinovLadderStage lower mfLower =
+            ExtendedTashkinovLadderStage ett mf := by
+          rw [hmfLower, hmfFull]
+          unfold ExtendedTashkinovLadderStage
+          rw [Fin.lastCases_castSucc, Fin.lastCases_castSucc,
+            htrees mfBase.succ.castSucc]
+          congr 1
+        have hmfMemFull := Finset.min'_mem fullCandidates hfullNonempty
+        have hmfMemLower : mfLower ∈ lowerCandidates := by
+          simp only [lowerCandidates, Finset.mem_filter, Finset.mem_univ,
+            true_and]
+          rw [hstageEq]
+          exact (Finset.mem_filter.mp hmfMemFull).2
+        have hle := Finset.min'_le lowerCandidates mfLower hmfMemLower
+        have hleVal := Fin.le_iff_val_le_val.mp hle
+        have htarget :
+            (lowerCandidates.min' hlowerNonempty).val + 1 ≤ a.val + 1 := by
+          dsimp [mfLower] at hleVal
+          omega
+        convert htarget using 1 <;> congr
+      have hpack := hlower lower (by omega) (by omega) hlowerMP
+      have hresult := hpack.2.2.2.2.1 sigmaR hproperR honeR hstableLower
+        deltaR hdefectiveLower x hboundaryLower hearlierLower hxLower aLower xa
+        hkindLower hvertexLower hfirstLower
+      exact hresult
+    have hsupportOrder := ExtensionBaseSupportOrder ett v hvFinal q hqTerminal
+      hqKind hqVertex hLowerPartV
+    have hdeltaExclusion := ExtensionBaseDeltaExclusion ett v hvFinal q
+      hqTerminal hqKind hqVertex jSlot hjSlot hLowerElementary hLowerPartV
+    have hpairOverlap := ExtensionBaseStoredPairOverlap G k e0 input T
+      generating ett v hvFinal q hqTerminal hqKind hqVertex jSlot hjSlot hMP
+      hpositive hLowerElementary hLowerPartV
+      (fun lower hlowerPositive hlowerRounds hlowerMP =>
+        hlower lower hlowerPositive hlowerRounds hlowerMP)
+    have htreeEdges := ExtensionBaseClaimTreeEdgeColors G k e0 input
+      ett.rounds ett.series jSlot q hjle hqTerminal sigma hsigmaProper
+      hsigmaOne hsigmaTerminal
+    have hLowerInterchange : ∀ (t : Fin ett.rounds) (vt : V)
+        (gammaT deltaT : Fin k),
+        t ∈ ExtensionBaseActiveIndices ett v hvFinal →
+        t.val < q.val →
+        ett.series.data.chosenVertex t.succ = some vt →
+        ett.series.data.gamma t.succ = some gammaT →
+        ett.series.data.delta t.succ = some deltaT →
+        TreeInterchangeable G (ett.series.data.tree t.succ.succ)
+          (ett.series.data.coloring t.succ) gammaT deltaT := by
+      intro t vt gammaT deltaT htActive htq htVertex htGamma htDelta
+      have htKind : ett.series.data.kind t.succ =
+          some TashkinovExtensionKind.PE := by
+        have htData := htActive
+        simp only [ExtensionBaseActiveIndices, Finset.mem_filter,
+          Finset.mem_univ, true_and] at htData
+        exact htData.2.1
+      have htCurrent : IsOneEdgeUncolored
+            (ett.series.data.coloring t.succ) e0 ∧
+          deltaT ∈ MissingColors G
+            (ett.series.data.coloring t.succ) vt := by
+        generalize htarget : t.succ = target
+        cases ett.series.certified target with
+        | initial triple seedLength initialColoring initialStored initialEdges
+            initialKind initialVertex initialOutside initialDelta initialGamma
+            initialClosure =>
+          exact (Fin.succ_ne_zero t htarget).elim
+        | SE i previousProper previousOneUncolored previousClosed
+            previousNotStronglyClosed noRevisiting choice seriesAlternative
+            currentColoring currentStored currentEdges currentKind currentVertex
+            currentOutside currentDelta currentGamma adjoined adjoinedExactly
+            closedExtension orderedExtension strictExtension =>
+          have hbad : some TashkinovExtensionKind.SE =
+              some TashkinovExtensionKind.PE :=
+            currentKind.symm.trans (by simpa [htarget] using htKind)
+          cases hbad
+        | RE i previousProper previousOneUncolored previousClosed
+            previousNotStronglyClosed available currentColoring currentStored
+            currentEdges currentKind currentVertex currentOutside currentDelta
+            currentGamma adjoined adjoinedExactly closedExtension orderedExtension
+            strictExtension =>
+          have hbad : some TashkinovExtensionKind.RE =
+              some TashkinovExtensionKind.PE :=
+            currentKind.symm.trans (by simpa [htarget] using htKind)
+          cases hbad
+        | PE i previousProper previousOneUncolored previousClosed
+            previousNotStronglyClosed noRevisiting choice seriesAlternativeFails
+            actualGamma gammaRule secondStable secondStableProper
+            secondStableOneUncolored secondStableRelation exitWitness
+            currentColoring currentProper currentOneUncolored currentStored
+            currentEdges currentKind currentVertex currentOutside currentDelta
+            currentGamma closedExtension orderedExtension strictExtension =>
+          have hi : i = t := by
+            apply Fin.ext
+            simpa using (congrArg Fin.val htarget).symm
+          subst i
+          have hvChoice : choice.vertex = vt :=
+            Option.some.inj
+              (currentVertex.symm.trans (by simpa [htarget] using htVertex))
+          have hdeltaChoice : choice.color = deltaT :=
+            Option.some.inj
+              (currentDelta.symm.trans (by simpa [htarget] using htDelta))
+          have hgammaChoice : actualGamma = gammaT :=
+            Option.some.inj
+              (currentGamma.symm.trans (by simpa [htarget] using htGamma))
+          subst vt
+          subst deltaT
+          subst gammaT
+          have hgammaMissing : actualGamma ∈
+              MissingColors G secondStable choice.vertex := by
+            exact (secondStableRelation.2 choice.vertex
+              choice.vertexDefective.1).symm ▸ gammaRule.1
+          have hedge : secondStable choice.edge = some choice.color := by
+            exact (secondStableRelation.1 choice.edge
+              ⟨choice.vertex, choice.vertexDefective.1, choice.edgeIncident⟩
+              ⟨choice.color, by simp, choice.edgeColor⟩).trans choice.edgeColor
+          have hgammaDelta : actualGamma ≠ choice.color := by
+            intro heq
+            have hpresent : actualGamma ∈
+                PresentColors G secondStable choice.vertex := by
+              simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+                true_and]
+              exact ⟨choice.edge, choice.edgeIncident, by simpa [heq] using hedge⟩
+            exact (Finset.mem_sdiff.mp hgammaMissing).2 hpresent
+          have componentEdge : ∀ e : E, Incident G choice.vertex e →
+              secondStable e = some actualGamma ∨
+                secondStable e = some choice.color →
+              Sum.inr e ∈ TwoColorComponent G secondStable actualGamma
+                choice.color (Sum.inl choice.vertex) := by
+            intro e he hcolor
+            change (TwoColorIncidenceGraph G secondStable actualGamma
+              choice.color).connectedComponentMk (Sum.inr e) = _
+            apply SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
+            simp [TwoColorIncidenceGraph, he, hcolor]
+          have hgammaNo : ∀ e : E, Incident G choice.vertex e →
+              secondStable e ≠ some actualGamma := by
+            intro e he hec
+            apply (Finset.mem_sdiff.mp hgammaMissing).2
+            simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+              true_and]
+            exact ⟨e, he, hec⟩
+          have hdeltaMissing : choice.color ∈ MissingColors G
+              (TwoColorComponentSwap G secondStable actualGamma choice.color
+                (Sum.inl choice.vertex)) choice.vertex := by
+            apply Finset.mem_sdiff.mpr
+            refine ⟨by simp, ?_⟩
+            intro hpresent
+            simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+              true_and] at hpresent
+            obtain ⟨e, he, hec⟩ := hpresent
+            rw [TwoColorComponentSwap] at hec
+            by_cases hcomp : Sum.inr e ∈ TwoColorComponent G secondStable
+                actualGamma choice.color (Sum.inl choice.vertex)
+            · simp [hcomp] at hec
+              by_cases heg : secondStable e = some actualGamma
+              · exact (hgammaNo e he heg).elim
+              · by_cases hed : secondStable e = some choice.color
+                · simp [hed, hgammaDelta] at hec
+                  exact hgammaDelta hec.symm
+                · simp [heg, hed] at hec
+            · simp [hcomp] at hec
+              exact hcomp (componentEdge e he (Or.inr hec))
+          refine ⟨by simpa [htarget] using currentOneUncolored, ?_⟩
+          rw [show ett.series.data.coloring t.succ =
+              TwoColorComponentSwap G secondStable actualGamma choice.color
+                (Sum.inl choice.vertex) by simpa [htarget] using currentColoring]
+          exact hdeltaMissing
+      obtain ⟨hcolorNe, htProper, htSegment, hvtStage, hrootPath,
+          hrootOnly, hnonisolated⟩ :=
+        ParallelStepRootComponentSetup ett.series t vt gammaT deltaT
+          htKind htVertex htGamma htDelta
+      have hdeltaTree : deltaT ∈ TreeMissingColors
+          (ett.series.data.coloring t.succ)
+          (ett.series.data.tree t.succ.succ) := by
+        simp only [TreeMissingColors, Finset.mem_biUnion]
+        exact ⟨vt, vertexTransfer htSegment hvtStage, htCurrent.2⟩
+      let s := t.val + 1
+      obtain ⟨lower, hround, hlowerMP, htrees, hdata⟩ :=
+        CertifiedETTRestriction G k e0 input T generating ett hMP s
+          (by simp [s]) (by dsimp [s]; omega)
+      let nLower : Fin (lower.rounds + 1) := Fin.last lower.rounds
+      let nextLower : Fin (lower.rounds + 2) := Fin.last (lower.rounds + 1)
+      have hnMap : Fin.castLE (by omega) nLower = t.succ := by
+        apply Fin.ext
+        simp [nLower, hround, s]
+      have hnextMap : Fin.castLE (by omega) nextLower = t.succ.succ := by
+        apply Fin.ext
+        simp [nextLower, hround, s]
+      have htreeLower : lower.series.data.tree nextLower =
+          ett.series.data.tree t.succ.succ := by
+        rw [htrees nextLower, hnextMap]
+      have htreeFinal : lower.series.data.tree
+          (Fin.last (lower.rounds + 1)) =
+          ett.series.data.tree t.succ.succ := by
+        simpa [nextLower] using htreeLower
+      have hcolorLower : lower.series.data.coloring nLower =
+          ett.series.data.coloring t.succ := by
+        rw [(hdata nLower).1, hnMap]
+      have hstoredLower : TashkinovStoredColors lower.series.data nLower =
+          TashkinovStoredColors ett.series.data t.succ := by
+        rw [(hdata nLower).2.2.2.2.2.2.2.2.1, hnMap]
+      have hstableSelf : StableColoring
+          (ett.series.data.tree t.succ.succ)
+          (TashkinovStoredColors ett.series.data t.succ)
+          (ett.series.data.coloring t.succ)
+          (ett.series.data.coloring t.succ) := by
+        exact ⟨(by intros; rfl), (by intros; rfl)⟩
+      have hstableLower : StableColoring
+          (lower.series.data.tree nextLower)
+          (TashkinovStoredColors lower.series.data nLower)
+          (lower.series.data.coloring nLower)
+          (ett.series.data.coloring t.succ) := by
+        simpa [htreeLower, hstoredLower, hcolorLower] using hstableSelf
+      have hpack := hlower lower (by omega) (by omega) hlowerMP
+      have hdeltaLower : deltaT ∈ TreeMissingColors
+          (ett.series.data.coloring t.succ)
+          (lower.series.data.tree (Fin.last (lower.rounds + 1))) := by
+        rw [htreeFinal]
+        exact hdeltaTree
+      have hinterchange := hpack.2.1 (ett.series.data.coloring t.succ)
+        htProper htCurrent.1 hstableLower gammaT deltaT (Or.inr hdeltaLower)
+      rw [htreeFinal] at hinterchange
+      exact hinterchange
+    have hstrongInterchange := ExtensionBaseClaimStrongInterchangeable ett v
+      hvFinal q hqTerminal hqKind hqVertex hLowerInterchange sigma hsigmaProper
+      hsigmaOne hsigmaTerminal
+    have hPESlotData : ∀ t : Fin ett.rounds,
+        ett.series.data.kind t.succ = some TashkinovExtensionKind.PE →
+        ∃ vt : V, ∃ gammaT deltaT : Fin k,
+          ett.series.data.chosenVertex t.succ = some vt ∧
+            ett.series.data.gamma t.succ = some gammaT ∧
+            ett.series.data.delta t.succ = some deltaT := by
+      intro t htKind
+      generalize htarget : t.succ = target
+      cases ett.series.certified target with
+      | initial triple seedLength initialColoring initialStored initialEdges
+          initialKind initialVertex initialOutside initialDelta initialGamma
+          initialClosure =>
+        exact (Fin.succ_ne_zero t htarget).elim
+      | SE i previousProper previousOneUncolored previousClosed
+          previousNotStronglyClosed noRevisiting choice seriesAlternative
+          currentColoring currentStored currentEdges currentKind currentVertex
+          currentOutside currentDelta currentGamma adjoined adjoinedExactly
+          closedExtension orderedExtension strictExtension =>
+        have hbad : some TashkinovExtensionKind.SE =
+            some TashkinovExtensionKind.PE :=
+          currentKind.symm.trans (by simpa [htarget] using htKind)
+        cases hbad
+      | RE i previousProper previousOneUncolored previousClosed
+          previousNotStronglyClosed available currentColoring currentStored
+          currentEdges currentKind currentVertex currentOutside currentDelta
+          currentGamma adjoined adjoinedExactly closedExtension orderedExtension
+          strictExtension =>
+        have hbad : some TashkinovExtensionKind.RE =
+            some TashkinovExtensionKind.PE :=
+          currentKind.symm.trans (by simpa [htarget] using htKind)
+        cases hbad
+      | PE i previousProper previousOneUncolored previousClosed
+          previousNotStronglyClosed noRevisiting choice seriesAlternativeFails
+          actualGamma gammaRule secondStable secondStableProper
+          secondStableOneUncolored secondStableRelation exitWitness
+          currentColoring currentProper currentOneUncolored currentStored
+          currentEdges currentKind currentVertex currentOutside currentDelta
+          currentGamma closedExtension orderedExtension strictExtension =>
+        have hi : i = t := by
+          apply Fin.ext
+          simpa using (congrArg Fin.val htarget).symm
+        subst i
+        refine ⟨choice.vertex, actualGamma, choice.color, ?_, ?_, ?_⟩
+        · simpa [htarget] using currentVertex
+        · simpa [htarget] using currentGamma
+        · simpa [htarget] using currentDelta
+    have hPEStored : ∀ (t : Fin ett.rounds) (gammaT deltaT : Fin k),
+        ett.series.data.kind t.succ = some TashkinovExtensionKind.PE →
+        ett.series.data.gamma t.succ = some gammaT →
+        ett.series.data.delta t.succ = some deltaT →
+        ett.series.data.stored t.succ = {gammaT, deltaT} := by
+      intro t gammaT deltaT htKind htGamma htDelta
+      generalize htarget : t.succ = target
+      cases ett.series.certified target with
+      | initial triple seedLength initialColoring initialStored initialEdges
+          initialKind initialVertex initialOutside initialDelta initialGamma
+          initialClosure =>
+        exact (Fin.succ_ne_zero t htarget).elim
+      | SE i previousProper previousOneUncolored previousClosed
+          previousNotStronglyClosed noRevisiting choice seriesAlternative
+          currentColoring currentStored currentEdges currentKind currentVertex
+          currentOutside currentDelta currentGamma adjoined adjoinedExactly
+          closedExtension orderedExtension strictExtension =>
+        have hbad : some TashkinovExtensionKind.SE =
+            some TashkinovExtensionKind.PE :=
+          currentKind.symm.trans (by simpa [htarget] using htKind)
+        cases hbad
+      | RE i previousProper previousOneUncolored previousClosed
+          previousNotStronglyClosed available currentColoring currentStored
+          currentEdges currentKind currentVertex currentOutside currentDelta
+          currentGamma adjoined adjoinedExactly closedExtension orderedExtension
+          strictExtension =>
+        have hbad : some TashkinovExtensionKind.RE =
+            some TashkinovExtensionKind.PE :=
+          currentKind.symm.trans (by simpa [htarget] using htKind)
+        cases hbad
+      | PE i previousProper previousOneUncolored previousClosed
+          previousNotStronglyClosed noRevisiting choice seriesAlternativeFails
+          actualGamma gammaRule secondStable secondStableProper
+          secondStableOneUncolored secondStableRelation exitWitness
+          currentColoring currentProper currentOneUncolored currentStored
+          currentEdges currentKind currentVertex currentOutside currentDelta
+          currentGamma closedExtension orderedExtension strictExtension =>
+        have hi : i = t := by
+          apply Fin.ext
+          simpa using (congrArg Fin.val htarget).symm
+        subst i
+        have hgammaEq : actualGamma = gammaT :=
+          Option.some.inj
+            (currentGamma.symm.trans (by simpa [htarget] using htGamma))
+        have hdeltaEq : choice.color = deltaT :=
+          Option.some.inj
+            (currentDelta.symm.trans (by simpa [htarget] using htDelta))
+        rw [show ett.series.data.stored t.succ = {choice.color, actualGamma} by
+          simpa [htarget] using currentStored, hgammaEq, hdeltaEq]
+        ext c
+        simp [or_comm]
+    have qStageToFinal : ∀ x : V,
+        x ∈ TreeSequenceVertexSet (ett.series.data.tree q.succ.castSucc) →
+        x ∈ TreeSequenceVertexSet T := by
+      intro x hx
+      have hxPenultimate : x ∈ TreeSequenceVertexSet
+          (ett.series.data.tree ⟨ett.rounds, by omega⟩) := by
+        simpa [hqTreeIndex] using hx
+      exact vertexTransfer ett.abovePenultimate hxPenultimate
+    have hclassPackage : ∀ u : V,
+        (ExtensionBaseSupportClass ett v hvFinal u).Nonempty →
+        ∃ p : ℕ, ∃ indices : Fin (p + 1) → Fin ett.rounds,
+          ∃ gammaClass deltaClass : Fin (p + 1) → Fin k,
+            (∀ a b, a.val < b.val →
+              (indices a).val < (indices b).val) ∧
+            (∀ r : Fin ett.rounds,
+              r ∈ ExtensionBaseSupportClass ett v hvFinal u ↔
+                ∃ a : Fin (p + 1), indices a = r) ∧
+            (∀ a, ett.series.data.gamma (indices a).succ =
+              some (gammaClass a)) ∧
+            (∀ a, ett.series.data.delta (indices a).succ =
+              some (deltaClass a)) ∧
+            (∀ a : Fin p, gammaClass a.succ = deltaClass a.castSucc) ∧
+            Function.Injective (Fin.cons (gammaClass 0) deltaClass) ∧
+            (∀ x : V,
+              x ∈ TreeSequenceVertexSet
+                  (ett.series.data.tree jSlot.succ.castSucc) →
+              (∀ r : Fin ett.rounds,
+                r ∈ ExtensionBaseActiveIndices ett v hvFinal →
+                ett.series.data.chosenVertex r.succ ≠ some x) →
+              MissingColors G sigma x =
+                MissingColors G
+                  (ett.series.data.coloring jSlot.castSucc) x) ∧
+            (let storedPairs := Finset.univ.biUnion fun a : Fin (p + 1) =>
+                ett.series.data.stored (indices a).succ
+             MissingColors G sigma u ∩ storedPairs =
+                  {deltaClass (Fin.last p)} ∧
+               MissingColors G (ett.series.data.coloring jSlot.castSucc) u =
+                 (MissingColors G sigma u \ {deltaClass (Fin.last p)}) ∪
+                   {gammaClass 0}) := by
+      intro u hclassNonempty
+      obtain ⟨p, indices, huStage, hincreasing, hclass, henumerates⟩ :=
+        ExtensionBaseSupportClassEnumeration ett v hvFinal q hqTerminal u
+          (fun s x hxFinal hsActive hsChosen =>
+            (hsupportOrder.2.1 s x hxFinal hsActive hsChosen).1)
+          hclassNonempty
+      have hslot : ∀ a : Fin (p + 1), ∃ gammaA deltaA : Fin k,
+          ett.series.data.gamma (indices a).succ = some gammaA ∧
+            ett.series.data.delta (indices a).succ = some deltaA := by
+        intro a
+        have henum := (henumerates (indices a)).2 ⟨a, rfl⟩
+        obtain ⟨uA, gammaA, deltaA, huA, hgammaA, hdeltaA⟩ :=
+          hPESlotData (indices a) henum.2.1
+        have huEq : uA = u := Option.some.inj (huA.symm.trans henum.2.2)
+        exact ⟨gammaA, deltaA, hgammaA, hdeltaA⟩
+      choose gammaClass deltaClass hgammaClass hdeltaClass using hslot
+      have huFinal := qStageToFinal u huStage
+      have hdeltaAvoids : ∀ a b, a.val ≤ b.val →
+          deltaClass b ≠ gammaClass a := by
+        intro a b hab
+        have haClass := (hclass (indices a)).2 ⟨a, rfl⟩
+        have hbClass := (hclass (indices b)).2 ⟨b, rfl⟩
+        have haData := haClass
+        have hbData := hbClass
+        simp only [ExtensionBaseSupportClass, Finset.mem_filter] at haData hbData
+        have haActive : indices a ∈ ExtensionBaseActiveIndices ett v hvFinal := by
+          exact haData.1
+        have hbActive : indices b ∈ ExtensionBaseActiveIndices ett v hvFinal := by
+          exact hbData.1
+        have habSlots : (indices a).val ≤ (indices b).val := by
+          by_cases heq : a = b
+          · subst b
+            exact le_rfl
+          · exact Nat.le_of_lt (hincreasing a b (by omega))
+        exact (hdeltaExclusion.1 (indices a) (indices b) u u huFinal huFinal
+          (deltaClass b) (gammaClass a) haActive hbActive habSlots
+          haData.2 hbData.2 (hdeltaClass b) (hgammaClass a)).2
+      obtain ⟨hchain, hinjective⟩ := ExtensionBaseSupportClassColors ett v
+        hvFinal q hqTerminal u huStage p indices hincreasing hclass henumerates
+        gammaClass deltaClass hgammaClass hdeltaClass hdeltaAvoids
+      have hmissing := ExtensionBaseClaimMissingColors ett v hvFinal jSlot q
+        hjle hqTerminal hqKind hqVertex hjSlot u huStage p indices hincreasing
+        hclass henumerates (gammaClass 0) (deltaClass (Fin.last p))
+        (hgammaClass 0) (hdeltaClass (Fin.last p)) sigma hsigmaProper
+        hsigmaOne hsigmaTerminal
+      exact ⟨p, indices, gammaClass, deltaClass, hincreasing, hclass,
+        hgammaClass, hdeltaClass, hchain, hinjective, hmissing⟩
+    have hterminalBefore : ∀ (t : Fin ett.rounds) (vt : V),
+        t ∈ ExtensionBaseRestorationIndices ett v hvFinal →
+        ett.series.data.chosenVertex t.succ = some vt →
+        TreeVertexOrder T v vt := by
+      intro t vt htRest htVertex
+      have htData := htRest
+      simp only [ExtensionBaseRestorationIndices, Finset.mem_sdiff] at htData
+      have htActive := htData.1
+      have htActiveData := htActive
+      simp only [ExtensionBaseActiveIndices, Finset.mem_filter,
+        Finset.mem_univ, true_and] at htActiveData
+      obtain ⟨htFirst, htKind, vt0, hvt0Final, hvt0Vertex, hvt0First⟩ :=
+        htActiveData
+      have hvt0Eq : vt0 = vt :=
+        Option.some.inj (hvt0Vertex.symm.trans htVertex)
+      subst vt0
+      have horder := (hsupportOrder.2.1 t vt hvt0Final htActive htVertex).2
+      exact horder.resolve_left fun hEq => by
+        apply htData.2
+        simp only [ExtensionBaseSupportClass, Finset.mem_filter]
+        exact ⟨htActive, by simpa [hEq] using htVertex⟩
+    have hjInitial : ∀ t : Fin ett.rounds,
+        t ∈ ExtensionBaseRestorationIndices ett v hvFinal →
+        TreeSequenceInitialSegment
+          (ett.series.data.tree jSlot.succ.castSucc)
+          (ett.series.data.tree t.succ.castSucc) := by
+      intro t htRest
+      have htData := htRest
+      simp only [ExtensionBaseRestorationIndices, Finset.mem_sdiff] at htData
+      have htActiveData := htData.1
+      simp only [ExtensionBaseActiveIndices, Finset.mem_filter,
+        Finset.mem_univ, true_and] at htActiveData
+      have hjt : jSlot.val + 1 ≤ t.val + 1 := by
+        rw [hjSlot]
+        exact htActiveData.1
+      have hseg := stageToStage (jSlot.val + 1) (t.val + 1)
+        (by omega) hjt (by omega)
+      convert hseg using 1 <;> congr 1 <;> apply Fin.ext <;> rfl
+    have hslotData : ∀ t : Fin ett.rounds,
+        t ∈ ExtensionBaseRestorationIndices ett v hvFinal →
+        ∃ vt : V, ∃ gammaT deltaT : Fin k,
+          ett.series.data.chosenVertex t.succ = some vt ∧
+            ett.series.data.gamma t.succ = some gammaT ∧
+            ett.series.data.delta t.succ = some deltaT := by
+      intro t htRest
+      have htData := htRest
+      simp only [ExtensionBaseRestorationIndices, Finset.mem_sdiff] at htData
+      have htActiveData := htData.1
+      simp only [ExtensionBaseActiveIndices, Finset.mem_filter,
+        Finset.mem_univ, true_and] at htActiveData
+      exact hPESlotData t htActiveData.2.1
+    have hinitialSI : ∀ (t : Fin ett.rounds) (vt : V)
+        (gammaT deltaT : Fin k),
+        t ∈ ExtensionBaseActiveIndices ett v hvFinal →
+        t ≠ q →
+        ett.series.data.chosenVertex t.succ = some vt →
+        ett.series.data.gamma t.succ = some gammaT →
+        ett.series.data.delta t.succ = some deltaT →
+        ETTStrongInterchangeable ett t vt sigma gammaT deltaT := by
+      intro t vt gammaT deltaT htActive htNe htVertex htGamma htDelta
+      have htq : t.val < q.val := by
+        have htBound : t.val ≤ q.val := by omega
+        exact lt_of_le_of_ne htBound fun h => htNe (Fin.ext h)
+      exact hstrongInterchange t vt gammaT deltaT htActive htq htVertex
+        htGamma htDelta
+    have hclassMissing : ∀ (u : V) (t : Fin ett.rounds)
+        (deltaT : Fin k),
+        ExtensionBaseSupportClass ett v hvFinal u ⊆
+            ExtensionBaseRestorationIndices ett v hvFinal →
+        t ∈ ExtensionBaseSupportClass ett v hvFinal u →
+        (∀ s : Fin ett.rounds,
+          s ∈ ExtensionBaseSupportClass ett v hvFinal u → s.val ≤ t.val) →
+        ett.series.data.delta t.succ = some deltaT →
+        MissingColors G sigma u ∩
+            (ExtensionBaseSupportClass ett v hvFinal u).biUnion
+              (fun s => ett.series.data.stored s.succ) = {deltaT} := by
+      intro u t deltaT hsubset htClass htMaximum htDelta
+      obtain ⟨p, indices, gammaClass, deltaClass, hincreasing, hclass,
+          hgammaClass, hdeltaClass, hchain, hinjective, hunsupportedClass,
+          hmissing⟩ :=
+        hclassPackage u ⟨t, htClass⟩
+      dsimp at hmissing
+      obtain ⟨aT, haT⟩ := (hclass t).1 htClass
+      have haTLast : aT = Fin.last p := by
+        by_contra hne
+        have haLt : aT < Fin.last p :=
+          Fin.lt_last_iff_ne_last.mpr hne
+        have hindexLt := hincreasing aT (Fin.last p) haLt
+        have hlastClass := (hclass (indices (Fin.last p))).2
+          ⟨Fin.last p, rfl⟩
+        have hlastLe := htMaximum (indices (Fin.last p)) hlastClass
+        rw [haT] at hindexLt
+        exact (not_lt_of_ge hlastLe) hindexLt
+      have hindexLast : indices (Fin.last p) = t := by
+        rw [← haT, haTLast]
+      have hdeltaEq : deltaClass (Fin.last p) = deltaT := by
+        apply Option.some.inj
+        exact (hdeltaClass (Fin.last p)).symm.trans (by
+          simpa [hindexLast] using htDelta)
+      have hstoredEq :
+          Finset.univ.biUnion (fun a : Fin (p + 1) =>
+            ett.series.data.stored (indices a).succ) =
+          (ExtensionBaseSupportClass ett v hvFinal u).biUnion
+            (fun s => ett.series.data.stored s.succ) := by
+        ext c
+        simp only [Finset.mem_biUnion, Finset.mem_univ, true_and]
+        constructor
+        · rintro ⟨a, hc⟩
+          exact ⟨indices a, (hclass (indices a)).2 ⟨a, rfl⟩, hc⟩
+        · rintro ⟨s, hs, hc⟩
+          obtain ⟨a, rfl⟩ := (hclass s).1 hs
+          exact ⟨a, hc⟩
+      rw [← hstoredEq, ← hdeltaEq]
+      exact hmissing.1
+    have hpairOverlapColors : ∀ (s t : Fin ett.rounds) (vs vt : V)
+        (gammaS deltaS gammaT deltaT : Fin k),
+        s ∈ ExtensionBaseActiveIndices ett v hvFinal →
+        t ∈ ExtensionBaseActiveIndices ett v hvFinal →
+        s.val < t.val →
+        ett.series.data.chosenVertex s.succ = some vs →
+        ett.series.data.chosenVertex t.succ = some vt →
+        ett.series.data.gamma s.succ = some gammaS →
+        ett.series.data.delta s.succ = some deltaS →
+        ett.series.data.gamma t.succ = some gammaT →
+        ett.series.data.delta t.succ = some deltaT →
+        ((({gammaS, deltaS} : Finset (Fin k)) ∩ {gammaT, deltaT}).Nonempty ↔
+          vs = vt ∧ ¬ ∃ r : Fin ett.rounds,
+            r ∈ ExtensionBaseSupportClass ett v hvFinal vs ∧
+              s.val < r.val ∧ r.val < t.val ∧
+              ett.series.data.chosenVertex r.succ = some vs) ∧
+        ((({gammaS, deltaS} : Finset (Fin k)) ∩
+            {gammaT, deltaT}).Nonempty →
+          ({gammaS, deltaS} : Finset (Fin k)) ∩ {gammaT, deltaT} =
+              {gammaT} ∧
+            ({gammaS, deltaS} : Finset (Fin k)) ∩ {gammaT, deltaT} =
+              {deltaS}) := by
+      intro s t vs vt gammaS deltaS gammaT deltaT hs ht hst hsVertex htVertex
+        hsGamma hsDelta htGamma htDelta
+      have hsData := hs
+      have htData := ht
+      simp only [ExtensionBaseActiveIndices, Finset.mem_filter,
+        Finset.mem_univ, true_and] at hsData htData
+      obtain ⟨hsFirst, hsKind, vs0, hvsFinal, hvsChosen, hvsFirst⟩ := hsData
+      obtain ⟨htFirst, htKind, vt0, hvtFinal, hvtChosen, hvtFirst⟩ := htData
+      have hvsEq : vs0 = vs :=
+        Option.some.inj (hvsChosen.symm.trans hsVertex)
+      have hvtEq : vt0 = vt :=
+        Option.some.inj (hvtChosen.symm.trans htVertex)
+      subst vs0
+      subst vt0
+      have hsStored := hPEStored s gammaS deltaS hsKind hsGamma hsDelta
+      have htStored := hPEStored t gammaT deltaT htKind htGamma htDelta
+      have hoverlap :=
+        hpairOverlap s t vs vt hvsFinal hvtFinal gammaS deltaS gammaT deltaT
+          hs ht hst hsVertex htVertex hsGamma hsDelta htGamma htDelta
+      rw [hsStored, htStored] at hoverlap
+      refine ⟨?_, hoverlap.2⟩
+      constructor
+      · intro hnonempty
+        obtain ⟨hvs, hbetween⟩ := hoverlap.1.mp hnonempty
+        refine ⟨hvs, ?_⟩
+        rintro ⟨r, hrClass, hsr, hrt, hrVertex⟩
+        have hrData :
+            r ∈ ExtensionBaseActiveIndices ett v hvFinal ∧
+              ett.series.data.chosenVertex r.succ = some vs := by
+          simpa [ExtensionBaseSupportClass] using hrClass
+        exact hbetween ⟨r, hrData.1, hsr, hrt, hrVertex⟩
+      · rintro ⟨hvs, hbetween⟩
+        apply hoverlap.1.mpr
+        refine ⟨hvs, ?_⟩
+        rintro ⟨r, hrActive, hsr, hrt, hrVertex⟩
+        apply hbetween
+        refine ⟨r, ?_, hsr, hrt, hrVertex⟩
+        simp [ExtensionBaseSupportClass, hrActive, hrVertex]
+    obtain ⟨trace, hinvariant⟩ := ExtensionBaseAlgorithmA ett v hvFinal
+      jSlot q sigma hqTerminal hqKind hqVertex hjSlot hsigmaProper hsigmaOne
+      hterminalBefore hjInitial hslotData hinitialSI hclassMissing
+      hpairOverlapColors
+    have hterminalJ : v ∈ TreeSequenceVertexSet
+        (ett.series.data.tree jSlot.succ.castSucc) := by
+      unfold ETTFirstAppearanceIndex at hjSlot
+      dsimp at hjSlot
+      let candidates : Finset (Fin (ett.rounds + 1)) :=
+        Finset.univ.filter fun i =>
+          v ∈ TreeSequenceVertexSet (ExtendedTashkinovLadderStage ett i)
+      have hlast : Fin.last ett.rounds ∈ candidates := by
+        simp only [candidates, Finset.mem_filter, Finset.mem_univ, true_and]
+        have hfinal : ExtendedTashkinovLadderStage ett
+            (Fin.last ett.rounds) = T := by
+          unfold ExtendedTashkinovLadderStage
+          exact Fin.lastCases_last
+        rw [hfinal]
+        exact hvFinal
+      have hfirstEq : jSlot.val + 1 =
+          (candidates.min' ⟨Fin.last ett.rounds, hlast⟩).val + 1 := by
+        simpa [candidates] using hjSlot
+      have hminVal :
+          (candidates.min' ⟨Fin.last ett.rounds, hlast⟩).val =
+            jSlot.val := by
+        omega
+      have hminEq : candidates.min' ⟨Fin.last ett.rounds, hlast⟩ =
+          jSlot.castSucc := by
+        apply Fin.ext
+        simpa using hminVal
+      have hjMember : jSlot.castSucc ∈ candidates := by
+        rw [← hminEq]
+        exact Finset.min'_mem candidates ⟨Fin.last ett.rounds, hlast⟩
+      simp only [candidates, Finset.mem_filter, Finset.mem_univ, true_and]
+        at hjMember
+      simpa [ExtendedTashkinovLadderStage, Fin.lastCases_castSucc] using
+        hjMember
+    have hqActive : q ∈ ExtensionBaseActiveIndices ett v hvFinal := by
+      simp only [ExtensionBaseActiveIndices, Finset.mem_filter,
+        Finset.mem_univ, true_and]
+      exact ⟨hfirstUpper, hqKind, v, hvFinal, hqVertex, le_rfl⟩
+    have hqClass : q ∈ ExtensionBaseSupportClass ett v hvFinal v := by
+      simp [ExtensionBaseSupportClass, hqActive, hqVertex]
+    obtain ⟨p0, indices0, gamma0, delta0, hincreasing0, hclass0,
+        hgamma0, hdelta0, hchain0, hinjective0, hunsupported, hmissing0⟩ :=
+      hclassPackage v ⟨q, hqClass⟩
+    have hclassPrepared : ∀ x : V,
+        x ∈ TreeSequenceVertexSet
+            (ett.series.data.tree jSlot.succ.castSucc) →
+        x ≠ v →
+        (∃ t : Fin ett.rounds,
+          t ∈ ExtensionBaseRestorationIndices ett v hvFinal ∧
+            ett.series.data.chosenVertex t.succ = some x) →
+        ∃ p : ℕ, ∃ indices : Fin (p + 1) → Fin ett.rounds,
+          ∃ gammaClass deltaClass : Fin (p + 1) → Fin k,
+            (∀ a b, a.val < b.val →
+              (indices a).val < (indices b).val) ∧
+            (∀ r : Fin ett.rounds,
+              r ∈ ExtensionBaseSupportClass ett v hvFinal x ↔
+                ∃ a : Fin (p + 1), indices a = r) ∧
+            (∀ a, ett.series.data.gamma (indices a).succ =
+              some (gammaClass a)) ∧
+            (∀ a, ett.series.data.delta (indices a).succ =
+              some (deltaClass a)) ∧
+            (∀ a : Fin p, gammaClass a.succ = deltaClass a.castSucc) ∧
+            Function.Injective (Fin.cons (gammaClass 0) deltaClass) ∧
+            MissingColors G (ett.series.data.coloring jSlot.castSucc) x =
+              (MissingColors G sigma x \ {deltaClass (Fin.last p)}) ∪
+                {gammaClass 0} := by
+      intro x hxJ hxNe
+      rintro ⟨t, htRest, htVertex⟩
+      have htData := htRest
+      simp only [ExtensionBaseRestorationIndices, Finset.mem_sdiff] at htData
+      have htClass : t ∈ ExtensionBaseSupportClass ett v hvFinal x := by
+        simp [ExtensionBaseSupportClass, htData.1, htVertex]
+      obtain ⟨p, indices, gammaClass, deltaClass, hincreasing, hclass,
+          hgammaClass, hdeltaClass, hchain, hinjective,
+          hunsupportedClass, hmissing⟩ := hclassPackage x ⟨t, htClass⟩
+      dsimp at hmissing
+      exact ⟨p, indices, gammaClass, deltaClass, hincreasing, hclass,
+        hgammaClass, hdeltaClass, hchain, hinjective, hmissing.2⟩
+    have hclaim43 := ExtensionBaseClaim43 ett v hvFinal jSlot q hjle
+      hqTerminal hqKind hqVertex hjSlot sigma
+      (TashkinovStoredColors ett.series.data jSlot.castSucc) hterminalJ
+      hsigmaProper hsigmaOne hsigmaTerminal hsigmaBefore trace hinvariant
+      hunsupported hclassPrepared
+    dsimp at hclaim43
+    obtain ⟨hb1, hb2, hb3, hb4, hb5⟩ := hclaim43
+    let rho1 : PartialEdgeColoring E k :=
+      trace.coloring (Fin.last trace.steps)
+    have hrho1Proper : IsProperEdgeColoring G rho1 := by
+      simpa [rho1] using (hinvariant.1 (Fin.last trace.steps)).1
+    have hrho1One : IsOneEdgeUncolored rho1 e0 := by
+      simpa [rho1] using (hinvariant.1 (Fin.last trace.steps)).2
+    have hb1Rho : StableColoringBeforeVertex T v hvFinal
+        (TashkinovStoredColors ett.series.data jSlot.castSucc)
+        (ett.series.data.coloring jSlot.castSucc) rho1 := by
+      simpa [rho1] using hb1
+    have hb2Missing :
+        (∀ x : V,
+          x ∈ (TreeSequenceVertexSet
+              (ett.series.data.tree jSlot.succ.castSucc)).erase v →
+          MissingColors G rho1 x =
+            MissingColors G
+              (ett.series.data.coloring jSlot.castSucc) x) ∧
+        MissingColors G rho1 v = MissingColors G sigma v := by
+      simpa [rho1] using hb2
+    have hb2TreeEdges : ∀ a : Fin
+        (ett.series.data.tree jSlot.succ.castSucc).length,
+        rho1 ((ett.series.data.tree jSlot.succ.castSucc).edge a) =
+            sigma ((ett.series.data.tree jSlot.succ.castSucc).edge a) ∧
+          sigma ((ett.series.data.tree jSlot.succ.castSucc).edge a) =
+            ett.series.data.coloring jSlot.castSucc
+              ((ett.series.data.tree jSlot.succ.castSucc).edge a) := by
+      simpa [rho1] using hb3
+    have hb3EdgeEffects : ∀ f : E, rho1 f ≠ sigma f →
+        f ∉ InternalEdges G
+            (TreeSequenceVertexSet
+              (ett.series.data.tree jSlot.succ.castSucc)) ∧
+          ∃ c d : Fin k, sigma f = some c ∧ rho1 f = some d ∧
+            c ∈ (ExtensionBaseRestorationIndices ett v hvFinal).biUnion
+              (fun t => ett.series.data.stored t.succ) ∧
+            d ∈ (ExtensionBaseRestorationIndices ett v hvFinal).biUnion
+              (fun t => ett.series.data.stored t.succ) := by
+      simpa [rho1] using hb4
+    have hb4Interchange : ∀ (s : Fin ett.rounds)
+        (gammaS deltaS : Fin k),
+        s ∈ ExtensionBaseSupportClass ett v hvFinal v →
+        s ≠ q →
+        ett.series.data.chosenVertex s.succ = some v →
+        ett.series.data.gamma s.succ = some gammaS →
+        ett.series.data.delta s.succ = some deltaS →
+        ETTStrongInterchangeable ett s v rho1 gammaS deltaS := by
+      simpa [rho1] using hb5
+    sorry
+  · intro hwv
+    subst w
+    change Sum.inl v ∈
+      (TwoColorIncidenceGraph G sigma gamma delta).connectedComponentMk
+        (Sum.inl v)
+    exact (SimpleGraph.ConnectedComponent.mem_supp_iff _ _).mpr rfl
