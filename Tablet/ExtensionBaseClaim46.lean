@@ -34,6 +34,8 @@ import Tablet.TwoColorComponentSwapProper
 import Tablet.TwoColorIncidenceDegreeAtMostTwo
 import Tablet.TwoColorIncidenceGraph
 
+set_option maxHeartbeats 400000
+
 -- [TABLET NODE: ExtensionBaseClaim46]
 theorem ExtensionBaseClaim46 {V E : Type*}
     [Fintype V] [Fintype E] [DecidableEq V] [DecidableEq E]
@@ -431,7 +433,410 @@ theorem ExtensionBaseClaim46 {V E : Type*}
   have hcomponentExit :
       {y : Sum V E | y ∈ exitPath.support} =
         TwoColorComponent G rho0 gammaN beta (Sum.inl u) := by
-    sorry
+    let H1 := TwoColorIncidenceGraph G rho1 gammaN deltaN
+    let H0 := TwoColorIncidenceGraph G rho0 gammaN beta
+    have path_edge_data : ∀ {a b : V}
+        (q : H1.Walk (Sum.inl a) (Sum.inl b)) (hq : q.IsPath) {e : E},
+        Sum.inr e ∈ q.support →
+          ∃ j : ℕ, 0 < j ∧ j < q.length ∧ q.getVert j = Sum.inr e ∧
+            ∃ v w : V, q.getVert (j - 1) = Sum.inl v ∧
+              q.getVert (j + 1) = Sum.inl w ∧ v ≠ w ∧
+                G.ends e = s(v, w) := by
+      intro a b q hq e he
+      obtain ⟨j, hj, hjle⟩ :=
+        SimpleGraph.Walk.mem_support_iff_exists_getVert.mp he
+      have hjpos : 0 < j := by
+        by_contra hn
+        have hjzero : j = 0 := Nat.eq_zero_of_not_pos hn
+        have : (Sum.inl a : Sum V E) = Sum.inr e := by
+          simpa [hjzero] using hj
+        exact Sum.inl_ne_inr this
+      have hjlt : j < q.length := by
+        by_contra hn
+        have hjend : j = q.length := by omega
+        have : (Sum.inl b : Sum V E) = Sum.inr e := by
+          simpa [hjend] using hj
+        exact Sum.inl_ne_inr this
+      have hprev := q.adj_getVert_succ (i := j - 1) (by omega)
+      rw [show j - 1 + 1 = j by omega, hj] at hprev
+      have hnext := q.adj_getVert_succ (i := j) hjlt
+      rw [hj] at hnext
+      obtain ⟨v, hv⟩ : ∃ v : V, q.getVert (j - 1) = Sum.inl v := by
+        cases hc : q.getVert (j - 1) with
+        | inl v => exact ⟨v, rfl⟩
+        | inr f =>
+            rw [hc] at hprev
+            exact False.elim (by simpa [H1, TwoColorIncidenceGraph] using hprev)
+      obtain ⟨w, hw⟩ : ∃ w : V, q.getVert (j + 1) = Sum.inl w := by
+        cases hc : q.getVert (j + 1) with
+        | inl w => exact ⟨w, rfl⟩
+        | inr f =>
+            rw [hc] at hnext
+            exact False.elim (by simpa [H1, TwoColorIncidenceGraph] using hnext)
+      have hve : Incident G v e := by
+        rw [hv] at hprev
+        change Incident G v e ∧
+          (rho1 e = some gammaN ∨ rho1 e = some deltaN) at hprev
+        exact hprev.1
+      have hwe : Incident G w e := by
+        rw [hw] at hnext
+        change Incident G w e ∧
+          (rho1 e = some gammaN ∨ rho1 e = some deltaN) at hnext
+        exact hnext.1
+      have hvw : v ≠ w := by
+        intro hvw
+        have hindex := hq.getVert_injOn
+          (show j - 1 ≤ q.length by omega)
+          (show j + 1 ≤ q.length by omega)
+          (by rw [hv, hw, hvw])
+        omega
+      have hends : G.ends e = s(v, w) := by
+        induction heq : G.ends e using Sym2.inductionOn with
+        | _ c d =>
+            simp only [Incident, heq, Sym2.mem_iff] at hve hwe
+            rcases hve with rfl | rfl <;> rcases hwe with rfl | rfl <;>
+              simp_all [Sym2.eq_iff]
+      exact ⟨j, hjpos, hjlt, hj, v, w, hv, hw, hvw, hends⟩
+    have path_incident_vertex_mem : ∀ {a b : V}
+        (q : H1.Walk (Sum.inl a) (Sum.inl b)) (hq : q.IsPath)
+        {e : E}, Sum.inr e ∈ q.support → ∀ {w : V}, Incident G w e →
+          Sum.inl w ∈ q.support := by
+      intro a b q hq e he w hwe
+      obtain ⟨j, hjpos, hjlt, hj, v, t, hv, ht, hvt, hends⟩ :=
+        path_edge_data q hq he
+      have hwends : w ∈ s(v, t) := by
+        rw [← hends]
+        exact hwe
+      simp only [Sym2.mem_iff] at hwends
+      apply SimpleGraph.Walk.mem_support_iff_exists_getVert.mpr
+      rcases hwends with hwv | hwt
+      · exact ⟨j - 1, by simpa [hwv] using hv, by omega⟩
+      · exact ⟨j + 1, by simpa [hwt] using ht, by omega⟩
+    have path_incident_end_last : ∀ {a b : V}
+        (q : H1.Walk (Sum.inl a) (Sum.inl b)) (hq : q.IsPath)
+        {e : E}, Sum.inr e ∈ q.support → Incident G b e →
+          q.getVert (q.length - 1) = Sum.inr e := by
+      intro a b q hq e he hbe
+      obtain ⟨j, hjpos, hjlt, hj, v, w, hv, hw, hvw, hends⟩ :=
+        path_edge_data q hq he
+      have hbends : b ∈ s(v, w) := by
+        rw [← hends]
+        exact hbe
+      simp only [Sym2.mem_iff] at hbends
+      rcases hbends with hbv | hbw
+      · have hindex := hq.getVert_injOn
+            (show j - 1 ≤ q.length by omega)
+            (show q.length ≤ q.length by rfl)
+            (by rw [hv, q.getVert_length, hbv])
+        omega
+      · have hindex := hq.getVert_injOn
+            (show j + 1 ≤ q.length by omega)
+            (show q.length ≤ q.length by rfl)
+            (by rw [hw, q.getVert_length, hbw])
+        have hjlast : j = q.length - 1 := by omega
+        simpa [hjlast] using hj
+    have hgLast : exitPath.getVert (exitPath.length - 1) = Sum.inr g :=
+      path_incident_end_last exitPath hexitPath hgExit hug
+    have exit_edge_color : ∀ e : E, Sum.inr e ∈ exitPath.support →
+        (rho1 e = some gammaN ∨ rho1 e = some deltaN) →
+          rho0 e = some gammaN ∨ rho0 e = some beta := by
+      intro e he hcolor
+      rcases hcolor with hgamma | hdelta
+      · left
+        by_cases heIncident : TreeIncidentEdge TjPrime e
+        · rw [hrho0Fixed e heIncident]
+          exact hgamma
+        · unfold rho0 OutsideTreeColorSwap
+          rw [if_neg heIncident]
+          rw [if_neg (by
+            intro heb
+            exact hgammaBeta (Option.some.inj (hgamma.symm.trans heb)))]
+          rw [if_neg (by
+            intro hed
+            exact hgammaDelta (Option.some.inj (hgamma.symm.trans hed)))]
+          exact hgamma
+      · have hnotIncident : ¬ TreeIncidentEdge TjPrime e := by
+          intro heIncident
+          obtain ⟨w, hwPrime, hwe⟩ := heIncident
+          have hwExit : Sum.inl w ∈ exitPath.support :=
+            path_incident_vertex_mem exitPath hexitPath he hwe
+          have hwu : w = u :=
+            (hexitIntersection w
+              (Finset.mem_union.mpr (Or.inr hwPrime))).mp hwExit
+          subst w
+          have heLast := path_incident_end_last exitPath hexitPath he hwe
+          have heg : e = g := Sum.inr.inj (heLast.symm.trans hgLast)
+          subst e
+          exact hgammaDelta (Option.some.inj (hgRho1.symm.trans hdelta))
+        right
+        unfold rho0 OutsideTreeColorSwap
+        rw [if_neg hnotIncident]
+        rw [if_neg (by
+          intro heb
+          exact hbetaDelta (Option.some.inj (heb.symm.trans hdelta)))]
+        rw [if_pos hdelta]
+    have exit_adj_rho0 : ∀ i : ℕ, i < exitPath.length →
+        H0.Adj (exitPath.getVert i) (exitPath.getVert (i + 1)) := by
+      intro i hi
+      have hadj := exitPath.adj_getVert_succ (i := i) hi
+      cases hx : exitPath.getVert i with
+      | inl v =>
+          cases hy : exitPath.getVert (i + 1) with
+          | inl w =>
+              rw [hx, hy] at hadj
+              exact False.elim (by simpa [H1, TwoColorIncidenceGraph] using hadj)
+          | inr e =>
+              rw [hx, hy] at hadj
+              change Incident G v e ∧
+                  (rho1 e = some gammaN ∨ rho1 e = some deltaN) at hadj
+              change Incident G v e ∧
+                  (rho0 e = some gammaN ∨ rho0 e = some beta)
+              exact ⟨hadj.1, exit_edge_color e
+                (by simpa [hy] using exitPath.getVert_mem_support (i + 1)) hadj.2⟩
+      | inr e =>
+          cases hy : exitPath.getVert (i + 1) with
+          | inl v =>
+              rw [hx, hy] at hadj
+              change Incident G v e ∧
+                  (rho1 e = some gammaN ∨ rho1 e = some deltaN) at hadj
+              change Incident G v e ∧
+                  (rho0 e = some gammaN ∨ rho0 e = some beta)
+              exact ⟨hadj.1, exit_edge_color e
+                (by simpa [hx] using exitPath.getVert_mem_support i) hadj.2⟩
+          | inr f =>
+              rw [hx, hy] at hadj
+              exact False.elim (by simpa [H1, TwoColorIncidenceGraph] using hadj)
+    apply Set.Subset.antisymm
+    · intro y hy
+      obtain ⟨i, hi, hile⟩ :=
+        SimpleGraph.Walk.mem_support_iff_exists_getVert.mp hy
+      have htoStart : ∀ j : ℕ, j ≤ exitPath.length →
+          H0.connectedComponentMk (exitPath.getVert j) =
+            H0.connectedComponentMk (exitPath.getVert 0) := by
+        intro j hj
+        induction j with
+        | zero => rfl
+        | succ j ih =>
+            exact
+              (SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
+                (exit_adj_rho0 j (by omega))).symm.trans (ih (by omega))
+      change H0.connectedComponentMk y = H0.connectedComponentMk (Sum.inl u)
+      simpa only [hi, exitPath.getVert_length] using
+        (htoStart i hile).trans (htoStart exitPath.length le_rfl).symm
+    · intro y hy
+      have hxPrime : x ∉ TreeSequenceVertexSet TjPrime := by
+        intro hx
+        exact hxOutside (Finset.mem_union.mpr (Or.inr hx))
+      have new_x_adj_old : ∀ e : E, Incident G x e →
+          (rho0 e = some gammaN ∨ rho0 e = some beta) →
+            rho1 e = some gammaN ∨ rho1 e = some deltaN := by
+        intro e hxe hcolor
+        by_cases heIncident : TreeIncidentEdge TjPrime e
+        · have hfixed := hrho0Fixed e heIncident
+          obtain ⟨w, hwPrime, hwe⟩ := heIncident
+          have hwx : w ≠ x := by
+            intro hwx
+            apply hxPrime
+            simpa [← hwx] using hwPrime
+          have hends : G.ends e = s(w, x) := by
+            induction heq : G.ends e using Sym2.inductionOn with
+            | _ a b =>
+                simp only [Incident, heq, Sym2.mem_iff] at hwe hxe
+                rcases hwe with rfl | rfl <;> rcases hxe with rfl | rfl <;>
+                  simp_all [Sym2.eq_iff]
+          have heBoundary : e ∈ BoundaryEdges G
+              (TreeSequenceVertexSet TjPrime) := by
+            unfold BoundaryEdges
+            simp only [Finset.mem_filter, Finset.mem_univ, true_and]
+            exact ⟨w, hwPrime, x, hxPrime, hends⟩
+          rcases hcolor with hgamma | hbetaColor
+          · exact Or.inl (hfixed.symm.trans hgamma)
+          · have hbetaOld : rho1 e = some beta :=
+              hfixed.symm.trans hbetaColor
+            exact False.elim
+              ((hclosure.2 heBoundary huPrime hbetaOld) hbeta)
+        · unfold rho0 OutsideTreeColorSwap at hcolor
+          rw [if_neg heIncident] at hcolor
+          by_cases hbetaOld : rho1 e = some beta
+          · rw [if_pos hbetaOld] at hcolor
+            rcases hcolor with hdeltaGamma | hdeltaBeta
+            · exact False.elim
+                (hgammaDelta (Option.some.inj hdeltaGamma).symm)
+            · exact False.elim
+                (hbetaDelta (Option.some.inj hdeltaBeta).symm)
+          · by_cases hdeltaOld : rho1 e = some deltaN
+            · exact Or.inr hdeltaOld
+            · rw [if_neg hbetaOld, if_neg hdeltaOld] at hcolor
+              rcases hcolor with hgammaOld | hbetaOld'
+              · exact Or.inl hgammaOld
+              · exact False.elim (hbetaOld hbetaOld')
+      have first_old_adj : H1.Adj (Sum.inl x) (exitPath.getVert 1) := by
+        simpa [H1] using exitPath.adj_getVert_succ
+          (show 0 < exitPath.length by omega)
+      have first_p_last :
+          p.getVert (p.length - 1) = exitPath.getVert 1 := by
+        cases hfirst : exitPath.getVert 1 with
+        | inl v =>
+            rw [hfirst] at first_old_adj
+            exact False.elim
+              (by simpa [H1, TwoColorIncidenceGraph] using first_old_adj)
+        | inr e =>
+            have heExit : Sum.inr e ∈ exitPath.support := by
+              simpa [hfirst] using exitPath.getVert_mem_support 1
+            have heP : Sum.inr e ∈ p.support := hexitSupport _ heExit
+            have hxe : Incident G x e := by
+              rw [hfirst] at first_old_adj
+              change Incident G x e ∧
+                (rho1 e = some gammaN ∨ rho1 e = some deltaN) at first_old_adj
+              exact first_old_adj.1
+            exact path_incident_end_last p hpath heP hxe
+      have old_x_neighbor_unique : ∀ z : Sum V E,
+          H1.Adj (Sum.inl x) z → z = exitPath.getVert 1 := by
+        intro z hxz
+        cases hz : z with
+        | inl v =>
+            rw [hz] at hxz
+            exact False.elim (by simpa [H1, TwoColorIncidenceGraph] using hxz)
+        | inr e =>
+            have hxzE : H1.Adj (Sum.inl x) (Sum.inr e) := by
+              simpa [hz] using hxz
+            have hxe : Incident G x e := by
+              change Incident G x e ∧
+                (rho1 e = some gammaN ∨ rho1 e = some deltaN) at hxzE
+              exact hxzE.1
+            have hxComponent : H1.connectedComponentMk (Sum.inl x) =
+                H1.connectedComponentMk (Sum.inl terminalSupport) := by
+              change Sum.inl x ∈
+                TwoColorComponent G rho1 gammaN deltaN
+                  (Sum.inl terminalSupport)
+              rw [← hcomponent]
+              exact p.end_mem_support
+            have heComponent : H1.connectedComponentMk (Sum.inr e) =
+                H1.connectedComponentMk (Sum.inl terminalSupport) :=
+              (SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
+                hxzE).symm.trans hxComponent
+            have heP : Sum.inr e ∈ p.support := by
+              change Sum.inr e ∈ {q : Sum V E | q ∈ p.support}
+              rw [hcomponent]
+              exact heComponent
+            have heLast := path_incident_end_last p hpath heP hxe
+            exact heLast.symm.trans first_p_last
+      have x_neighbor_unique : ∀ z : Sum V E,
+          H0.Adj (Sum.inl x) z → z = exitPath.getVert 1 := by
+        intro z hxz
+        apply old_x_neighbor_unique z
+        cases hz : z with
+        | inl v =>
+            rw [hz] at hxz
+            exact False.elim (by simpa [H0, TwoColorIncidenceGraph] using hxz)
+        | inr e =>
+            have hxzE : H0.Adj (Sum.inl x) (Sum.inr e) := by
+              simpa [hz] using hxz
+            change Incident G x e ∧
+              (rho0 e = some gammaN ∨ rho0 e = some beta) at hxzE
+            change Incident G x e ∧
+              (rho1 e = some gammaN ∨ rho1 e = some deltaN)
+            exact ⟨hxzE.1, new_x_adj_old e hxzE.1 hxzE.2⟩
+      have u_neighbor_unique : ∀ z : Sum V E,
+          H0.Adj (Sum.inl u) z →
+            z = exitPath.getVert (exitPath.length - 1) := by
+        intro z huz
+        cases hz : z with
+        | inl v =>
+            rw [hz] at huz
+            exact False.elim (by simpa [H0, TwoColorIncidenceGraph] using huz)
+        | inr e =>
+            rw [hz] at huz
+            change Incident G u e ∧
+              (rho0 e = some gammaN ∨ rho0 e = some beta) at huz
+            have heGamma : rho0 e = some gammaN := by
+              rcases huz.2 with heGamma | heBeta
+              · exact heGamma
+              · have hnotPresent : beta ∉ PresentColors G rho0 u := by
+                  simpa [MissingColors] using hbetaRho0
+                exact False.elim (hnotPresent (by
+                  simp only [PresentColors, Finset.mem_filter,
+                    Finset.mem_univ, true_and]
+                  exact ⟨e, huz.1, heBeta⟩))
+            have heg : e = g := by
+              by_contra hne
+              exact (hrho0Proper hne ⟨u, huz.1, hug⟩ heGamma) hgRho0
+            exact (congrArg Sum.inr heg).trans hgLast.symm
+      have support_closed : ∀ w : Sum V E, w ∈ exitPath.support →
+          ∀ z : Sum V E, H0.Adj w z → z ∈ exitPath.support := by
+        intro w hw z hwz
+        obtain ⟨n, hn, hnle⟩ :=
+          SimpleGraph.Walk.mem_support_iff_exists_getVert.mp hw
+        by_cases hn0 : n = 0
+        · subst n
+          have hwstart : w = Sum.inl x := by simpa using hn.symm
+          have hz := x_neighbor_unique z (by simpa [hwstart] using hwz)
+          simpa [hz] using exitPath.getVert_mem_support 1
+        by_cases hnend : n = exitPath.length
+        · have hwend : w = Sum.inl u := by
+            rw [← hn, hexitPath.getVert_eq_end_iff hnle]
+            exact hnend
+          have hz := u_neighbor_unique z (by simpa [hwend] using hwz)
+          simpa [hz] using
+            exitPath.getVert_mem_support (exitPath.length - 1)
+        have hleft : H0.Adj (exitPath.getVert n)
+            (exitPath.getVert (n - 1)) := by
+          rw [← show n - 1 + 1 = n by omega]
+          exact (exit_adj_rho0 (n - 1) (by omega)).symm
+        have hright : H0.Adj (exitPath.getVert n)
+            (exitPath.getVert (n + 1)) :=
+          exit_adj_rho0 n (by omega)
+        by_contra hznot
+        have hwz' := hwz
+        rw [← hn] at hwz'
+        have hneleft : exitPath.getVert (n - 1) ≠ z := by
+          intro he
+          apply hznot
+          rw [← he]
+          exact exitPath.getVert_mem_support _
+        have hneright : exitPath.getVert (n + 1) ≠ z := by
+          intro he
+          apply hznot
+          rw [← he]
+          exact exitPath.getVert_mem_support _
+        have hnelr : exitPath.getVert (n - 1) ≠
+            exitPath.getVert (n + 1) := by
+          intro he
+          have hindex := hexitPath.getVert_injOn
+            (show n - 1 ≤ exitPath.length by omega)
+            (show n + 1 ≤ exitPath.length by omega) he
+          omega
+        letI : Fintype (H0.neighborSet (exitPath.getVert n)) :=
+          Fintype.ofFinite _
+        have hthree : 3 ≤ H0.degree (exitPath.getVert n) := by
+          rw [← SimpleGraph.card_neighborFinset_eq_degree]
+          let s : Finset (Sum V E) :=
+            {z, exitPath.getVert (n - 1), exitPath.getVert (n + 1)}
+          have hs : s ⊆ H0.neighborFinset (exitPath.getVert n) := by
+            intro t ht
+            simp only [s, Finset.mem_insert, Finset.mem_singleton] at ht
+            rcases ht with rfl | rfl | rfl
+            · simpa [SimpleGraph.mem_neighborFinset] using hwz'
+            · simpa [SimpleGraph.mem_neighborFinset] using hleft
+            · simpa [SimpleGraph.mem_neighborFinset] using hright
+          have hcard : 3 ≤ s.card := by
+            simp [s, hneleft, hneright, hnelr, hneleft.symm,
+              hneright.symm, hnelr.symm]
+          exact hcard.trans (Finset.card_le_card hs)
+        have hupper : H0.degree (exitPath.getVert n) ≤ 2 := by
+          simpa [H0] using TwoColorIncidenceDegreeAtMostTwo
+            G rho0 gammaN beta hrho0Proper (exitPath.getVert n)
+        omega
+      have reach : H0.Reachable (Sum.inl u) y := by
+        change H0.connectedComponentMk y =
+            H0.connectedComponentMk (Sum.inl u) at hy
+        exact SimpleGraph.ConnectedComponent.eq.mp hy |>.symm
+      apply reach.mem_subgraphVerts
+        (H := (⊤ : H0.Subgraph).induce {w | w ∈ exitPath.support})
+        (fun w hw z hadj => by
+          exact ⟨by simpa using hw,
+            support_closed w (by simpa using hw) z hadj, hadj⟩)
+        (by simpa using exitPath.getVert_mem_support exitPath.length)
   have hcomponentIntersection : ∀ w : V,
       w ∈ TreeSequenceVertexSet Tn ∪ TreeSequenceVertexSet TjPrime →
       (Sum.inl w ∈ TwoColorComponent G rho0 gammaN beta (Sum.inl u) ↔
