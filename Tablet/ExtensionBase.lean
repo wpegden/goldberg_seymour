@@ -4862,6 +4862,259 @@ theorem ExtensionBase {V E : Type*} [Fintype V] [Fintype E]
             hexitBoundary, huNotFN⟩,
           ⟨hbeta, hbetaSupport⟩,
           ⟨hz, hzPosition, hzAfter, hzChoice, hzBefore, hzEdges⟩⟩
+      have hpreterminalGammaPresent : ∀ (u : V) (beta : Fin k),
+          u ∈ TreeSequenceVertexSet TjPrime →
+          u ∉ TreeSequenceVertexSet
+            (ett.series.data.tree q.succ.castSucc) →
+          beta ∈ MissingColors G rho1 u →
+          ∀ a : Fin p0,
+            gamma0 a.castSucc ∈ PresentColors G
+              (TwoColorComponentSwap G
+                (OutsideTreeColorSwap TjPrime rho1 beta delta)
+                gamma beta (Sum.inl u)) u := by
+        intro u' beta' huPrime' huOutside' hbeta' a
+        let aSlot : Fin (p0 + 1) := a.castSucc
+        have hgammaASupport : gamma0 aSlot ∈ supportColors := by
+          simp only [supportColors, Finset.mem_biUnion, Finset.mem_univ,
+            true_and]
+          refine ⟨aSlot, ?_⟩
+          rw [hstored0]
+          simp
+        have huNe : u' ≠ v := by
+          intro huv
+          apply huOutside'
+          simpa [huv] using hvStage
+        have huErase : u' ∈ (TreeSequenceVertexSet TjPrime).erase v :=
+          Finset.mem_erase.mpr ⟨huNe, huPrime'⟩
+        have hgammaANotMissing :
+            gamma0 aSlot ∉ MissingColors G rho1 u' := by
+          intro hmissing
+          have hmember : gamma0 aSlot ∈
+              MissingColors G rho1 u' ∩ supportColors :=
+            Finset.mem_inter.mpr ⟨hmissing, hgammaASupport⟩
+          rw [hcaseTwoPointwise u' huErase] at hmember
+          simpa using hmember
+        have hgammaAPresent : gamma0 aSlot ∈ PresentColors G rho1 u' := by
+          simpa [MissingColors] using hgammaANotMissing
+        have hgammaANeBeta : gamma0 aSlot ≠ beta' := by
+          intro heq
+          have hbetaSupport' : beta' ∉ supportColors := by
+            intro hbetaSupport'
+            have hmember : beta' ∈ MissingColors G rho1 u' ∩ supportColors :=
+              Finset.mem_inter.mpr ⟨hbeta', hbetaSupport'⟩
+            rw [hcaseTwoPointwise u' huErase] at hmember
+            simpa using hmember
+          exact hbetaSupport' (heq ▸ hgammaASupport)
+        have hconsGamma (r : Fin (p0 + 1)) :
+            (Fin.cons (gamma0 0) delta0 : Fin (p0 + 2) → Fin k)
+                r.castSucc = gamma0 r := by
+          refine Fin.cases ?_ (fun s => ?_) r
+          · simp
+          · rw [show (Fin.succ s).castSucc = s.castSucc.succ by
+              apply Fin.ext
+              rfl]
+            rw [Fin.cons_succ]
+            exact (hchain0 s).symm
+        have hgammaANeGamma : gamma0 aSlot ≠ gamma := by
+          intro heq
+          have hvalues :
+              (Fin.cons (gamma0 0) delta0 : Fin (p0 + 2) → Fin k)
+                  aSlot.castSucc =
+                (Fin.cons (gamma0 0) delta0 : Fin (p0 + 2) → Fin k)
+                  (Fin.last p0).castSucc := by
+            rw [hconsGamma, hconsGamma, hgammaLast]
+            exact heq
+          have hindices := hinjective0 hvalues
+          have hvals := congrArg Fin.val hindices
+          simp [aSlot] at hvals
+          omega
+        obtain ⟨f, huf, hcolor⟩ := by
+          simpa only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+            true_and] using hgammaAPresent
+        have htreeIncident : TreeIncidentEdge TjPrime f :=
+          ⟨u', huPrime', huf⟩
+        have houtsideColor :
+            OutsideTreeColorSwap TjPrime rho1 beta' delta f =
+              some (gamma0 aSlot) := by
+          simp [OutsideTreeColorSwap, htreeIncident, hcolor]
+        simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+          true_and]
+        refine ⟨f, huf, ?_⟩
+        by_cases hfComponent : Sum.inr f ∈
+            TwoColorComponent G
+              (OutsideTreeColorSwap TjPrime rho1 beta' delta)
+              gamma beta' (Sum.inl u')
+        · simp [TwoColorComponentSwap, hfComponent, houtsideColor,
+            hgammaANeGamma, hgammaANeBeta, aSlot]
+        · simp [TwoColorComponentSwap, hfComponent, houtsideColor, aSlot]
+      have hTjInitialEarlier : ∀ s : Fin ett.rounds,
+          s ∈ (ExtensionBaseSupportClass ett v hvFinal v).erase q →
+          TreeSequenceInitialSegment
+            (ett.series.data.tree jSlot.succ.castSucc)
+            (ett.series.data.tree s.succ.castSucc) := by
+        intro s hs
+        have hsClass := (Finset.mem_erase.mp hs).2
+        have hsData := hsClass
+        simp only [ExtensionBaseSupportClass, Finset.mem_filter] at hsData
+        have hsActive := hsData.1
+        simp only [ExtensionBaseActiveIndices, Finset.mem_filter,
+          Finset.mem_univ, true_and] at hsActive
+        have hjIndexLe : jSlot.val + 1 ≤ s.val + 1 := by
+          rw [hjSlot]
+          exact hsActive.1
+        have hseg := stageToStage (jSlot.val + 1) (s.val + 1)
+          (by omega) hjIndexLe (by omega)
+        convert hseg using 1 <;> congr 1 <;> apply Fin.ext <;> rfl
+      have hpositiveClaim45 (hp0 : 0 < p0) :=
+        let hpreterminal := hpreterminalPackage hp0
+        let preterminalSlot := Classical.choose hpreterminal
+        ExtensionBaseClaim45 ett q preterminalSlot jSlot hqTerminal
+          (Classical.choose_spec hpreterminal).1 v hvFinal
+          (ett.series.data.tree jSlot.succ.castSucc)
+          (ett.series.data.tree q.succ.castSucc) seed TjPrime
+          (ett.series.data.coloring jSlot.castSucc)
+          (ett.series.data.coloring q.succ) sigma rho1
+          (TashkinovStoredColors ett.series.data jSlot.castSucc)
+          controlled restorationColors supportColors gammaFirst gamma delta
+          fN x componentPath hphiNProper hphiNOne hsigmaProper hsigmaOne
+          hrho1Proper hrho1One hTjQ hseedTj hseedPrime hseedTerminal
+          hterminalJ hterminalSeed hclosure hprimeElementary
+          hcaseTwoPointwise hterminalIntersection' hgammaSupport
+          hdeltaSupport hgammaFirstSupport hgammaDelta hsigmaControlled
+          hgammaControlled hdeltaControlled
+          (fun f hf => hb3EdgeEffects f hf)
+          hterminalColorsNotRestored.1 hterminalColorsNotRestored.2
+          hgammaBoundary hdeltaLocation hdeltaMissing hcomponentPath
+          (by simpa [C] using hcomponentSupport) hxOutside htwoN hfNterminal
+          hb1Tj hb2Missing.1 hterminalInclusion haugmentation
+          hb2EdgesFromSeed hdeltaPhiJ hsupportSet hterminalClass
+          (Classical.choose_spec hpreterminal).2.1
+          (Classical.choose_spec hpreterminal).2.2 hqGamma hqDelta hb4Earlier
+          hsupportColors hdeltaEarlier hsupportComponentOrder p0 indices0
+          gamma0 delta0 hincreasing0 hclass0 hqLast hsupport0 hkind0
+          hgamma0 hdelta0 hstored0 hchain0 hinjective0 rfl
+          hTjInitialEarlier rfl hpreterminalGammaPresent
+      have hgammaFirstZero (hp0 : p0 = 0) : gammaFirst = gamma := by
+        unfold gammaFirst
+        rw [← hgammaLast]
+        congr 1
+        apply Fin.ext
+        simp [hp0]
+      let rho0 := OutsideTreeColorSwap TjPrime rho1 beta delta
+      let rho3 := TwoColorComponentSwap G rho0 gamma beta (Sum.inl u)
+      have hbetaDelta : beta ≠ delta := by
+        intro heq
+        exact hbetaSupport (heq ▸ hdeltaSupport)
+      have hbetaGamma : beta ≠ gamma := by
+        intro heq
+        exact hbetaSupport (heq ▸ hgammaSupport)
+      have hbetaTree : beta ∈ TreeMissingColors rho1 TjPrime := by
+        unfold TreeMissingColors
+        exact Finset.mem_biUnion.mpr ⟨u, huPrime, hbeta⟩
+      have hdeltaTree : delta ∈ TreeMissingColors rho1 TjPrime := by
+        unfold TreeMissingColors
+        exact Finset.mem_biUnion.mpr ⟨v, hterminalPrime, hdeltaMissing⟩
+      have houtside := OutsideTreeColorSwapStable TjPrime supportColors rho1
+        beta delta hrho1Proper hrho1One hclosure.2 hbetaTree hdeltaTree
+          hbetaDelta
+      change IsProperEdgeColoring G rho0 ∧ IsOneEdgeUncolored rho0 e0 ∧
+          StableColoring TjPrime supportColors rho1 rho0 ∧
+          ∀ f : E, TreeIncidentEdge TjPrime f → rho0 f = rho1 f at houtside
+      rcases houtside with
+        ⟨hrho0Proper, hrho0One, hrho0Stable, hrho0Fixed⟩
+      have hrho3Proper : IsProperEdgeColoring G rho3 :=
+        TwoColorComponentSwapProper G rho0 gamma beta
+          (Ne.symm hbetaGamma) hrho0Proper (Sum.inl u)
+      have hrho3One : IsOneEdgeUncolored rho3 e0 := by
+        unfold IsOneEdgeUncolored at hrho0One ⊢
+        constructor
+        · simp [rho3, TwoColorComponentSwap, hrho0One.1]
+        · intro f hfe
+          obtain ⟨c, hc⟩ := hrho0One.2 f hfe
+          have hne : rho3 f ≠ none := by
+            by_cases hK : Sum.inr f ∈
+                TwoColorComponent G rho0 gamma beta (Sum.inl u)
+            · by_cases hcg : c = gamma
+              · simp [rho3, TwoColorComponentSwap, hK, hc, hcg]
+              · by_cases hcb : c = beta
+                · simp [rho3, TwoColorComponentSwap, hK, hc, hcg, hcb,
+                    hbetaGamma, hbetaGamma.symm]
+                · simp [rho3, TwoColorComponentSwap, hK, hc, hcg, hcb]
+            · simp [rho3, TwoColorComponentSwap, hK, hc]
+          obtain ⟨d, hd⟩ := Option.ne_none_iff_exists.mp hne
+          exact ⟨d, hd.symm⟩
+      have hbetaRho0 : beta ∈ MissingColors G rho0 u := by
+        rw [hrho0Stable.2 u huPrime]
+        exact hbeta
+      obtain ⟨g, hgBoundary, hug, hgExit⟩ := hexitBoundary
+      have hgRho1 : rho1 g = some gamma :=
+        (Finset.mem_filter.mp hgBoundary).2
+      have hgRho0 : rho0 g = some gamma := by
+        rw [hrho0Fixed g ⟨u, huPrime, hug⟩]
+        exact hgRho1
+      have hgComponent : Sum.inr g ∈
+          TwoColorComponent G rho0 gamma beta (Sum.inl u) := by
+        change (TwoColorIncidenceGraph G rho0 gamma beta).connectedComponentMk
+            (Sum.inr g) =
+          (TwoColorIncidenceGraph G rho0 gamma beta).connectedComponentMk
+            (Sum.inl u)
+        have hadj : (TwoColorIncidenceGraph G rho0 gamma beta).Adj
+            (Sum.inl u) (Sum.inr g) := ⟨hug, Or.inl hgRho0⟩
+        exact
+          (SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
+            hadj).symm
+      have hgRho3 : rho3 g = some beta := by
+        simp [rho3, TwoColorComponentSwap, hgComponent, hgRho0,
+          hbetaGamma, hbetaGamma.symm]
+      have hbetaRho3 : beta ∉ MissingColors G rho3 u := by
+        intro hb
+        have hbPresent : beta ∉ PresentColors G rho3 u := by
+          simpa [MissingColors] using hb
+        apply hbPresent
+        simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+          true_and]
+        exact ⟨g, hug, hgRho3⟩
+      have hgammaRho3 : gamma ∈ MissingColors G rho3 u := by
+        apply Finset.mem_sdiff.mpr
+        refine ⟨Finset.mem_univ _, ?_⟩
+        intro hgammaPresent
+        simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+          true_and] at hgammaPresent
+        obtain ⟨f, huf, hfRho3⟩ := hgammaPresent
+        by_cases hfComponent : Sum.inr f ∈
+            TwoColorComponent G rho0 gamma beta (Sum.inl u)
+        · by_cases hfGamma : rho0 f = some gamma
+          · have : (some beta : Option (Fin k)) = some gamma := by
+              simpa [rho3, TwoColorComponentSwap, hfComponent, hfGamma,
+                hbetaGamma, hbetaGamma.symm] using hfRho3
+            exact hbetaGamma (Option.some.inj this)
+          · by_cases hfBeta : rho0 f = some beta
+            · have hnotPresent : beta ∉ PresentColors G rho0 u := by
+                simpa [MissingColors] using hbetaRho0
+              exact hnotPresent (by
+                simp only [PresentColors, Finset.mem_filter,
+                  Finset.mem_univ, true_and]
+                exact ⟨f, huf, hfBeta⟩)
+            · have : rho0 f = some gamma := by
+                simpa [rho3, TwoColorComponentSwap, hfComponent, hfGamma,
+                  hfBeta] using hfRho3
+              exact hfGamma this
+        · have hfRho0 : rho0 f = some gamma := by
+            simpa [rho3, TwoColorComponentSwap, hfComponent] using hfRho3
+          have hadj : (TwoColorIncidenceGraph G rho0 gamma beta).Adj
+              (Sum.inl u) (Sum.inr f) := ⟨huf, Or.inl hfRho0⟩
+          apply hfComponent
+          change (TwoColorIncidenceGraph G rho0 gamma beta).connectedComponentMk
+              (Sum.inr f) =
+            (TwoColorIncidenceGraph G rho0 gamma beta).connectedComponentMk
+              (Sum.inl u)
+          exact
+            (SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
+              hadj).symm
+      have hgammaFirstRho3 (hp0 : p0 = 0) :
+          gammaFirst ∈ MissingColors G rho3 u := by
+        rw [hgammaFirstZero hp0]
+        exact hgammaRho3
       sorry
   · intro hwv
     subst w
