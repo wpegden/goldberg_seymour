@@ -1,4 +1,6 @@
 import Tablet.AdjacentEdges
+import Tablet.Basic2TerminalPE
+import Tablet.Basic2TerminalSERE
 import Tablet.BoundaryColorEdges
 import Tablet.BoundaryColorVertex
 import Tablet.BoundaryEdges
@@ -168,4 +170,18 @@ theorem Basic2 {V E : Type*} [Fintype V] [Fintype E]
             ETTFirstAppearanceIndex ett v hvFinal ≤ q.val + 1 →
             v = vi ∨ TreeVertexOrder T v vi := by
 -- BODY
-  sorry
+  have hterminal :
+      ett.series.data.kind (Fin.last ett.rounds) =
+          some TashkinovExtensionKind.PE ∨
+        ett.series.data.kind (Fin.last ett.rounds) =
+            some TashkinovExtensionKind.SE ∨
+          ett.series.data.kind (Fin.last ett.rounds) =
+            some TashkinovExtensionKind.RE := by
+    let n : Fin (ett.rounds + 1) := Fin.last ett.rounds
+    generalize htarget : n = target
+    cases ett.series.certified target <;> simp_all [n]
+  rcases hterminal with hterminalPE | hterminalSERE
+  · exact Basic2TerminalPE G k e0 input T generating ett hMP hpositive
+      hlower hterminalPE
+  · exact Basic2TerminalSERE G k e0 input T generating ett hMP hpositive
+      hlower hterminalSERE
