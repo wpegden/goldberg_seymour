@@ -16,6 +16,7 @@ import Tablet.ExtensionBaseCaseTwoObservation23
 import Tablet.ExtensionBaseClaim43
 import Tablet.ExtensionBaseClaim44
 import Tablet.ExtensionBaseClaim45
+import Tablet.ExtensionBaseClaim45Singleton
 import Tablet.ExtensionBaseClaim46
 import Tablet.ExtensionBaseClaimMissingColors
 import Tablet.ExtensionBaseClaimStrongInterchangeable
@@ -4999,122 +5000,180 @@ theorem ExtensionBase {V E : Type*} [Fintype V] [Fintype E]
         rw [← hgammaLast]
         congr 1
         apply Fin.ext
-        simp [hp0]
-      let rho0 := OutsideTreeColorSwap TjPrime rho1 beta delta
-      let rho3 := TwoColorComponentSwap G rho0 gamma beta (Sum.inl u)
-      have hbetaDelta : beta ≠ delta := by
-        intro heq
-        exact hbetaSupport (heq ▸ hdeltaSupport)
-      have hbetaGamma : beta ≠ gamma := by
-        intro heq
-        exact hbetaSupport (heq ▸ hgammaSupport)
-      have hbetaTree : beta ∈ TreeMissingColors rho1 TjPrime := by
-        unfold TreeMissingColors
-        exact Finset.mem_biUnion.mpr ⟨u, huPrime, hbeta⟩
-      have hdeltaTree : delta ∈ TreeMissingColors rho1 TjPrime := by
-        unfold TreeMissingColors
-        exact Finset.mem_biUnion.mpr ⟨v, hterminalPrime, hdeltaMissing⟩
-      have houtside := OutsideTreeColorSwapStable TjPrime supportColors rho1
-        beta delta hrho1Proper hrho1One hclosure.2 hbetaTree hdeltaTree
-          hbetaDelta
-      change IsProperEdgeColoring G rho0 ∧ IsOneEdgeUncolored rho0 e0 ∧
-          StableColoring TjPrime supportColors rho1 rho0 ∧
-          ∀ f : E, TreeIncidentEdge TjPrime f → rho0 f = rho1 f at houtside
-      rcases houtside with
-        ⟨hrho0Proper, hrho0One, hrho0Stable, hrho0Fixed⟩
-      have hrho3Proper : IsProperEdgeColoring G rho3 :=
-        TwoColorComponentSwapProper G rho0 gamma beta
-          (Ne.symm hbetaGamma) hrho0Proper (Sum.inl u)
-      have hrho3One : IsOneEdgeUncolored rho3 e0 := by
-        unfold IsOneEdgeUncolored at hrho0One ⊢
-        constructor
-        · simp [rho3, TwoColorComponentSwap, hrho0One.1]
-        · intro f hfe
-          obtain ⟨c, hc⟩ := hrho0One.2 f hfe
-          have hne : rho3 f ≠ none := by
-            by_cases hK : Sum.inr f ∈
-                TwoColorComponent G rho0 gamma beta (Sum.inl u)
-            · by_cases hcg : c = gamma
-              · simp [rho3, TwoColorComponentSwap, hK, hc, hcg]
-              · by_cases hcb : c = beta
-                · simp [rho3, TwoColorComponentSwap, hK, hc, hcg, hcb,
-                    hbetaGamma, hbetaGamma.symm]
-                · simp [rho3, TwoColorComponentSwap, hK, hc, hcg, hcb]
-            · simp [rho3, TwoColorComponentSwap, hK, hc]
-          obtain ⟨d, hd⟩ := Option.ne_none_iff_exists.mp hne
-          exact ⟨d, hd.symm⟩
-      have hbetaRho0 : beta ∈ MissingColors G rho0 u := by
-        rw [hrho0Stable.2 u huPrime]
-        exact hbeta
-      obtain ⟨g, hgBoundary, hug, hgExit⟩ := hexitBoundary
-      have hgRho1 : rho1 g = some gamma :=
-        (Finset.mem_filter.mp hgBoundary).2
-      have hgRho0 : rho0 g = some gamma := by
-        rw [hrho0Fixed g ⟨u, huPrime, hug⟩]
-        exact hgRho1
-      have hgComponent : Sum.inr g ∈
-          TwoColorComponent G rho0 gamma beta (Sum.inl u) := by
-        change (TwoColorIncidenceGraph G rho0 gamma beta).connectedComponentMk
-            (Sum.inr g) =
-          (TwoColorIncidenceGraph G rho0 gamma beta).connectedComponentMk
-            (Sum.inl u)
-        have hadj : (TwoColorIncidenceGraph G rho0 gamma beta).Adj
-            (Sum.inl u) (Sum.inr g) := ⟨hug, Or.inl hgRho0⟩
-        exact
-          (SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
-            hadj).symm
-      have hgRho3 : rho3 g = some beta := by
-        simp [rho3, TwoColorComponentSwap, hgComponent, hgRho0,
-          hbetaGamma, hbetaGamma.symm]
-      have hbetaRho3 : beta ∉ MissingColors G rho3 u := by
-        intro hb
-        have hbPresent : beta ∉ PresentColors G rho3 u := by
-          simpa [MissingColors] using hb
-        apply hbPresent
-        simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
-          true_and]
-        exact ⟨g, hug, hgRho3⟩
-      have hgammaRho3 : gamma ∈ MissingColors G rho3 u := by
-        apply Finset.mem_sdiff.mpr
-        refine ⟨Finset.mem_univ _, ?_⟩
-        intro hgammaPresent
-        simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
-          true_and] at hgammaPresent
-        obtain ⟨f, huf, hfRho3⟩ := hgammaPresent
-        by_cases hfComponent : Sum.inr f ∈
-            TwoColorComponent G rho0 gamma beta (Sum.inl u)
-        · by_cases hfGamma : rho0 f = some gamma
-          · have : (some beta : Option (Fin k)) = some gamma := by
-              simpa [rho3, TwoColorComponentSwap, hfComponent, hfGamma,
-                hbetaGamma, hbetaGamma.symm] using hfRho3
-            exact hbetaGamma (Option.some.inj this)
-          · by_cases hfBeta : rho0 f = some beta
-            · have hnotPresent : beta ∉ PresentColors G rho0 u := by
-                simpa [MissingColors] using hbetaRho0
-              exact hnotPresent (by
-                simp only [PresentColors, Finset.mem_filter,
-                  Finset.mem_univ, true_and]
-                exact ⟨f, huf, hfBeta⟩)
-            · have : rho0 f = some gamma := by
-                simpa [rho3, TwoColorComponentSwap, hfComponent, hfGamma,
-                  hfBeta] using hfRho3
-              exact hfGamma this
-        · have hfRho0 : rho0 f = some gamma := by
-            simpa [rho3, TwoColorComponentSwap, hfComponent] using hfRho3
-          have hadj : (TwoColorIncidenceGraph G rho0 gamma beta).Adj
-              (Sum.inl u) (Sum.inr f) := ⟨huf, Or.inl hfRho0⟩
-          apply hfComponent
-          change (TwoColorIncidenceGraph G rho0 gamma beta).connectedComponentMk
-              (Sum.inr f) =
-            (TwoColorIncidenceGraph G rho0 gamma beta).connectedComponentMk
-              (Sum.inl u)
-          exact
-            (SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
-              hadj).symm
-      have hgammaFirstRho3 (hp0 : p0 = 0) :
-          gammaFirst ∈ MissingColors G rho3 u := by
-        rw [hgammaFirstZero hp0]
-        exact hgammaRho3
+        omega
+      have hclaim45Package :
+          ∃ (u0 : V) (huPrime0 : u0 ∈ TreeSequenceVertexSet TjPrime)
+            (huOutside0 : u0 ∉ TreeSequenceVertexSet
+              (ett.series.data.tree q.succ.castSucc))
+            (exitPath0 : (TwoColorIncidenceGraph G rho1 gamma delta).Walk
+              (Sum.inl x) (Sum.inl u0)),
+            exitPath0.IsPath ∧ 2 ≤ exitPath0.length ∧
+            (∀ y : Sum V E, y ∈ exitPath0.support →
+              y ∈ componentPath.support) ∧
+            (∀ y : V,
+              y ∈ TreeSequenceVertexSet
+                  (ett.series.data.tree q.succ.castSucc) ∪
+                    TreeSequenceVertexSet TjPrime →
+              (Sum.inl y ∈ exitPath0.support ↔ y = u0)) ∧
+            (∃ g ∈ BoundaryColorEdges G rho1
+                (TreeSequenceVertexSet
+                    (ett.series.data.tree q.succ.castSucc) ∪
+                  TreeSequenceVertexSet TjPrime) gamma,
+              Incident G u0 g ∧ Sum.inr g ∈ exitPath0.support) ∧
+            ¬ Incident G u0 fN ∧
+            ∃ beta0 : Fin k,
+              beta0 ∈ MissingColors G rho1 u0 ∧
+              beta0 ∉ supportColors ∧
+              ∃ (z0 : V) (hz0 : z0 ∈ TreeSequenceVertexSet
+                  (ett.series.data.tree jSlot.succ.castSucc))
+                (zPosition0 : Fin
+                  ((ett.series.data.tree jSlot.succ.castSucc).length + 1)),
+                (ett.series.data.tree jSlot.succ.castSucc).vertex zPosition0 =
+                    z0 ∧
+                seed.length ≤ zPosition0.val ∧
+                ((seed.length < zPosition0.val ∧
+                    beta0 ∈ MissingColors G rho1 z0 ∧
+                    ∀ r : Fin
+                        ((ett.series.data.tree jSlot.succ.castSucc).length + 1),
+                      seed.length < r.val → r.val < zPosition0.val →
+                      beta0 ∉ MissingColors G rho1
+                        ((ett.series.data.tree jSlot.succ.castSucc).vertex r)) ∨
+                  (zPosition0 = Fin.last
+                      (ett.series.data.tree jSlot.succ.castSucc).length ∧
+                    ∀ r : Fin
+                        ((ett.series.data.tree jSlot.succ.castSucc).length + 1),
+                      seed.length < r.val →
+                      beta0 ∉ MissingColors G rho1
+                        ((ett.series.data.tree jSlot.succ.castSucc).vertex r))) ∧
+                (∀ y ∈ TreeVerticesBefore
+                    (ett.series.data.tree jSlot.succ.castSucc) z0 hz0,
+                  beta0 ∉ MissingColors G rho1 y) ∧
+                (∀ a : Fin
+                    (ett.series.data.tree jSlot.succ.castSucc).length,
+                  seed.length ≤ a.val → a.val < zPosition0.val →
+                  rho1 ((ett.series.data.tree jSlot.succ.castSucc).edge a) ≠
+                    some beta0) ∧
+                ∃ rho3 : PartialEdgeColoring E k,
+                  IsProperEdgeColoring G rho3 ∧
+                  IsOneEdgeUncolored rho3 e0 ∧
+                  StableColoringBeforeVertex
+                    (ett.series.data.tree jSlot.succ.castSucc) v hterminalJ
+                    (TashkinovStoredColors ett.series.data jSlot.castSucc)
+                    (ett.series.data.coloring jSlot.castSucc) rho3 ∧
+                  (∀ y : V,
+                    y ∈ (((TreeVerticesBefore
+                        (ett.series.data.tree jSlot.succ.castSucc) z0 hz0 ∪
+                          {z0}) ∪
+                        (TreeVerticesBefore TjPrime u0 huPrime0 ∪
+                          {u0})).erase u0).erase z0 →
+                    MissingColors G rho3 y = MissingColors G rho1 y) ∧
+                  (∀ f : E,
+                    ((∃ a : Fin
+                          (ett.series.data.tree jSlot.succ.castSucc).length,
+                        seed.length ≤ a.val ∧ a.val < zPosition0.val ∧
+                          (ett.series.data.tree
+                            jSlot.succ.castSucc).edge a = f) ∨
+                      (∃ (a : Fin TjPrime.length)
+                        (uPosition : Fin (TjPrime.length + 1)),
+                        TjPrime.vertex uPosition = u0 ∧
+                          a.val < uPosition.val ∧ TjPrime.edge a = f)) →
+                    rho3 f = rho1 f) ∧
+                  (beta0 ∈ MissingColors G rho1 z0 →
+                    delta ∈ MissingColors G rho3 z0) ∧
+                  (z0 ∈ TreeVerticesBefore TjPrime u0 huPrime0 →
+                    MissingColors G rho3 z0 = MissingColors G rho1 z0) ∧
+                  gammaFirst ∈ MissingColors G rho3 u0 := by
+        by_cases hp0 : 0 < p0
+        · obtain ⟨u0, huPrime0, huOutside0, exitPath0, hexitPath0,
+              hexitLength0, hexitSupport0, hexitIntersection0,
+              hexitBoundary0, huNotFN0, hforBeta0⟩ :=
+            hpositiveClaim45 hp0
+          obtain ⟨beta0, hbeta0⟩ :=
+            MissingColorsNonemptyOfMaximumDegree G rho1 hdegree u0
+          have huTerminal0 : u0 ≠ v := by
+            intro huv
+            apply huOutside0
+            simpa [huv] using hvStage
+          have huErase0 : u0 ∈ (TreeSequenceVertexSet TjPrime).erase v :=
+            Finset.mem_erase.mpr ⟨huTerminal0, huPrime0⟩
+          have hbetaSupport0 : beta0 ∉ supportColors := by
+            intro hbetaIn
+            have hmember : beta0 ∈
+                MissingColors G rho1 u0 ∩ supportColors :=
+              Finset.mem_inter.mpr ⟨hbeta0, hbetaIn⟩
+            rw [hcaseTwoPointwise u0 huErase0] at hmember
+            simpa using hmember
+          obtain ⟨z0, hz0, zPosition0, hzPosition0, hzAfter0, hzChoice0,
+              hzBefore0, hzEdges0, rho3, hrho3Proper, hrho3One, hd1,
+              hd2Missing, hd2Edges, hdeltaZ, hd2z, hd3⟩ :=
+            hforBeta0 beta0 hbeta0
+          exact ⟨u0, huPrime0, huOutside0, exitPath0, hexitPath0,
+            hexitLength0, hexitSupport0, hexitIntersection0,
+            hexitBoundary0, huNotFN0, beta0, hbeta0, hbetaSupport0,
+            z0, hz0, zPosition0, hzPosition0, hzAfter0, hzChoice0,
+            hzBefore0, hzEdges0, rho3, hrho3Proper, hrho3One, hd1,
+            hd2Missing, hd2Edges, hdeltaZ, hd2z, hd3⟩
+        · have hp0Zero : p0 = 0 := Nat.eq_zero_of_not_pos hp0
+          let rho0 := OutsideTreeColorSwap TjPrime rho1 beta delta
+          let rho3 := TwoColorComponentSwap G rho0 gamma beta (Sum.inl u)
+          have hbetaDelta0 : beta ≠ delta := by
+            intro heq
+            exact hbetaSupport (heq ▸ hdeltaSupport)
+          have hbetaGamma0 : beta ≠ gamma := by
+            intro heq
+            exact hbetaSupport (heq ▸ hgammaSupport)
+          have hsingleton := ExtensionBaseClaim45Singleton
+            (ett.series.data.tree q.succ.castSucc)
+            (ett.series.data.tree jSlot.succ.castSucc) seed TjPrime
+            (ett.series.data.coloring jSlot.castSucc) rho1
+            (TashkinovStoredColors ett.series.data jSlot.castSucc)
+            supportColors gammaFirst gamma delta beta v u x z
+            componentPath exitPath zPosition (hgammaFirstZero hp0Zero)
+            hrho1Proper hrho1One hTjQ hseedTj hseedPrime hseedTerminal
+            hterminalJ hterminalSeed hclosure hprimeElementary hgammaDelta
+            hbetaGamma0 hbetaDelta0 hbeta hdeltaMissing hcomponentPath
+            (by simpa [C] using hcomponentSupport) hxOutside huPrime huOutside
+            hexitPath hexitLength hexitSupport hexitIntersection hexitBoundary
+            hb1Tj hb2Missing.1 haugmentation hb2EdgesFromSeed hdeltaPhiJ
+            hz hzPosition hzAfter hzChoice hzBefore hzEdges
+          change IsProperEdgeColoring G rho3 ∧
+              IsOneEdgeUncolored rho3 e0 ∧
+              StableColoringBeforeVertex
+                (ett.series.data.tree jSlot.succ.castSucc) v hterminalJ
+                (TashkinovStoredColors ett.series.data jSlot.castSucc)
+                (ett.series.data.coloring jSlot.castSucc) rho3 ∧
+              ((∀ y : V,
+                y ∈ (((TreeVerticesBefore
+                    (ett.series.data.tree jSlot.succ.castSucc) z hz ∪ {z}) ∪
+                    (TreeVerticesBefore TjPrime u huPrime ∪
+                      {u})).erase u).erase z →
+                MissingColors G rho3 y = MissingColors G rho1 y) ∧
+                (∀ f : E,
+                  ((∃ a : Fin
+                        (ett.series.data.tree jSlot.succ.castSucc).length,
+                      seed.length ≤ a.val ∧ a.val < zPosition.val ∧
+                        (ett.series.data.tree jSlot.succ.castSucc).edge a =
+                          f) ∨
+                    (∃ (a : Fin TjPrime.length)
+                      (uPosition : Fin (TjPrime.length + 1)),
+                      TjPrime.vertex uPosition = u ∧
+                        a.val < uPosition.val ∧ TjPrime.edge a = f)) →
+                  rho3 f = rho1 f) ∧
+                (beta ∈ MissingColors G rho1 z →
+                  delta ∈ MissingColors G rho3 z) ∧
+                (z ∈ TreeVerticesBefore TjPrime u huPrime →
+                  MissingColors G rho3 z = MissingColors G rho1 z)) ∧
+              gammaFirst ∈ MissingColors G rho3 u at hsingleton
+          rcases hsingleton with
+            ⟨hrho3Proper0, hrho3One0, hd10, hE20, hd30⟩
+          rcases hE20 with
+            ⟨hd2Missing0, hd2Edges0, hdeltaZ0, hd2z0⟩
+          exact ⟨u, huPrime, huOutside, exitPath, hexitPath, hexitLength,
+            hexitSupport, hexitIntersection, hexitBoundary, huNotFN,
+            beta, hbeta, hbetaSupport, z, hz, zPosition, hzPosition,
+            hzAfter, hzChoice, hzBefore, hzEdges, rho3, hrho3Proper0,
+            hrho3One0, hd10, hd2Missing0, hd2Edges0, hdeltaZ0, hd2z0,
+            hd30⟩
       sorry
   · intro hwv
     subst w

@@ -1,0 +1,279 @@
+\begin{lemma}[Claim 4.5, singleton support-class branch]
+Let \(G\) be a finite loopless multigraph, let \(e_0\) be the
+distinguished edge, and let
+\[
+ T_j(v_n)\preccurlyeq T_j\preccurlyeq T_n,\qquad
+ T_j(v_n)\preccurlyeq T'_j
+\]
+be tree-sequences.  The last displayed vertex of \(T_j(v_n)\) is
+\(v_n\), and \(v_n\) belongs to both \(T_j(v_n)\) and \(T_j\).
+Let \(\varphi_{j-1}\) and \(\varrho_1\) be partial \(k\)-edge-colorings,
+let \(D_{j-1}\) and \(S'\) be finite color sets, and suppose that
+\(\varrho_1\) is proper and leaves exactly \(e_0\) uncolored.  Assume
+that \(T'_j\) is a \(\varrho_1\)-\noderef{TashkinovClosure} of
+\(T_j(v_n)\) and that \(V(T'_j)\) is
+\(\varrho_1\)-\noderef{ColoredVertexSetElementary}.
+
+Let \(\gamma_{1_1},\gamma_n,\delta_n,\beta\) be colors satisfying
+\[
+ \gamma_{1_1}=\gamma_n,\qquad
+ \gamma_n\ne\delta_n,\qquad
+ \beta\ne\gamma_n,\qquad \beta\ne\delta_n.                    \tag{1}
+\]
+The first equality is the color-chain identity for the singleton class
+\(L_1=\{n\}\); in particular, no preterminal slot is assumed.  Let
+\(u\in V(T'_j)\setminus V(T_n)\), with
+\[
+ \beta\in\overline{\varrho}_1(u),\qquad
+ \delta_n\in\overline{\varrho}_1(v_n).                         \tag{2}
+\]
+Let \(P\) be a specified simple walk in the
+\(\noderef{TwoColorIncidenceGraph}\) of
+\((\gamma_n,\delta_n)\), from \(v_n\) to \(x\), whose support is exactly
+the \(\noderef{TwoColorComponent}\) through \(v_n\), and assume
+\(x\notin V(T_n)\cup V(T'_j)\).
+
+Retain the following exact exit-suffix data.  There is a specified simple
+walk \(Q\) from \(x\) to \(u\), of length at least two, whose support is
+contained in that of \(P\); for every
+\(w\in V(T_n)\cup V(T'_j)\),
+\[
+ \mathsf{inl}(w)\in\operatorname{supp}(Q)\quad\Longleftrightarrow\quad
+ w=u.                                                         \tag{3}
+\]
+There is also an exact edge identity
+\[
+ g\in\noderef{BoundaryColorEdges}_{\varrho_1,\gamma_n}
+       (V(T_n)\cup V(T'_j))
+\]
+which is incident with \(u\) and whose edge-node lies on \(Q\).
+
+Assume the Claim 4.3 transport data
+\[
+ \varrho_1\text{ is }
+ (T_j(v_n)-v_n,D_{j-1},\varphi_{j-1})
+ \text{-}\noderef{StableColoringBeforeVertex},                 \tag{4}
+\]
+\[
+ \overline{\varrho}_1(w)=\overline{\varphi}_{j-1}(w)
+ \quad(w\in V(T_j)\setminus\{v_n\}),                           \tag{5}
+\]
+and
+\[
+ \varrho_1(T_j.\operatorname{edge}(a))
+ =\varphi_{j-1}(T_j.\operatorname{edge}(a))
+ \quad(|T_j(v_n)|\le a).                                      \tag{6}
+\]
+Suppose \(T_j\) is obtained from \(T_j(v_n)\) by a
+\(\varphi_{j-1}\)-\noderef{TashkinovAugmentationSequence}, and
+\[
+ \delta_n\notin\noderef{TreeMissingColors}(\varphi_{j-1},T_j). \tag{7}
+\]
+
+Finally, let \(z\in V(T_j)\) occur at the exact displayed position
+\(q_z\ge |T_j(v_n)|\).  Assume the usual Observation 23 alternative:
+either \(q_z>|T_j(v_n)|\), \(\beta\) is missing at \(z\), and no strictly
+intermediate displayed vertex misses \(\beta\), or \(q_z\) is the last
+position and no later displayed vertex misses \(\beta\).  In either case
+assume the full exact exclusions
+\[
+ \beta\notin\overline{\varrho}_1(w)
+ \quad(w\in\noderef{TreeVerticesBefore}(T_j,z)),               \tag{8}
+\]
+and
+\[
+ \varrho_1(T_j.\operatorname{edge}(a))\ne\beta
+ \quad(|T_j(v_n)|\le a<q_z).                                  \tag{9}
+\]
+
+Define
+\[
+ \varrho_0=\noderef{OutsideTreeColorSwap}
+   (T'_j,\varrho_1,\beta,\delta_n),\qquad
+ \varrho_3=\noderef{TwoColorComponentSwap}
+   (G,\varrho_0,\gamma_n,\beta,\mathsf{inl}(u)).               \tag{10}
+\]
+Then \(\varrho_3\) is proper, leaves exactly \(e_0\) uncolored, and has
+the following properties.
+\begin{enumerate}
+\item[(d1)] It is
+\((T_j(v_n)-v_n,D_{j-1},\varphi_{j-1})\)-stable.
+\item[(d2)] If
+\[
+ w\in
+ \bigl((V(T_j(z))\cup V(T'_j(u)))\setminus\{u\}\bigr)
+       \setminus\{z\},
+\]
+where the two displayed prefixes are represented by their exact
+before-vertex sets together with their endpoints, then
+\[
+ \overline{\varrho}_3(w)=\overline{\varrho}_1(w).
+\]
+Every exact edge \(T_j.\operatorname{edge}(a)\) with
+\(|T_j(v_n)|\le a<q_z\), and every exact edge
+\(T'_j.\operatorname{edge}(a)\) lying strictly before an occurrence of
+\(u\), has the same color under \(\varrho_3\) and \(\varrho_1\).
+Moreover,
+\[
+ \beta\in\overline{\varrho}_1(z)
+ \Longrightarrow \delta_n\in\overline{\varrho}_3(z),          \tag{11}
+\]
+and
+\[
+ z\in\noderef{TreeVerticesBefore}(T'_j,u)
+ \Longrightarrow
+ \overline{\varrho}_3(z)=\overline{\varrho}_1(z).              \tag{12}
+\]
+\item[(d3)] \(\gamma_{1_1}\in\overline{\varrho}_3(u)\).
+\end{enumerate}
+All assertions retain exact edge identities, including identities of
+parallel edges.
+\end{lemma}
+\begin{proof}
+The prefix relations, expanded using
+\noderef{TreeSequenceInitialSegment} and
+\noderef{TreeSequenceVertexSet}, put \(v_n\) in \(V(T'_j)\) and put
+\(V(T_j)\) inside \(V(T_n)\).  Thus (2) and the union definition
+\noderef{TreeMissingColors} make both \(\beta\) and \(\delta_n\)
+tree-missing on \(T'_j\).  The closure clause in
+\noderef{TashkinovClosure}, interpreted by
+\noderef{ColoredVertexSetClosed}, says that these colors have no boundary
+edge at \(V(T'_j)\).  Since they are distinct,
+\noderef{OutsideTreeColorSwapStable} applies to (10).  Consequently
+\(\varrho_0\) is proper, leaves exactly \(e_0\) uncolored, is stable on
+\(T'_j\) with control set \(S'\), and satisfies
+\[
+ \varrho_0(e)=\varrho_1(e)
+ \quad\text{for every exact edge identity incident with }V(T'_j). \tag{13}
+\]
+
+We identify the component \(K\) switched in the definition of
+\(\varrho_3\).  Every edge-node of \(Q\) has
+\(\varrho_1\)-color \(\gamma_n\) or \(\delta_n\), because \(Q\) is
+contained in the support of the full old component \(P\), in the sense
+of \noderef{TwoColorComponent} and
+\noderef{TwoColorIncidenceGraph}.  If a \(\delta_n\)-edge-node of \(Q\)
+were incident with \(T'_j\), its other incident vertex-node would also
+lie on \(Q\).  By (3) that vertex must be \(u\); simplicity of \(Q\)
+then forces this to be its terminal edge identity.  But the specified
+terminal identity \(g\) has color \(\gamma_n\), by the definition
+\noderef{BoundaryColorEdges}, and properness
+\noderef{IsProperEdgeColoring} excludes a second
+\(\gamma_n\)-identity at \(u\).  Therefore (13) fixes the terminal
+identity, while every \(\delta_n\)-identity on the remaining suffix lies
+outside \(T'_j\) and is changed to \(\beta\) by
+\noderef{OutsideTreeColorSwap}; all \(\gamma_n\)-identities remain fixed.
+It follows edge by exact edge that \(Q\) is a
+\((\gamma_n,\beta)\)-walk under \(\varrho_0\).
+
+We now prove that its support is the whole new component:
+\[
+ \operatorname{supp}(Q)
+ =\noderef{TwoColorComponent}
+   (G,\varrho_0,\gamma_n,\beta,\mathsf{inl}(u)).               \tag{14}
+\]
+One inclusion follows by connectivity of the walk just proved.  For the
+reverse inclusion, consider possible new adjacencies along \(Q\).
+At \(x\), every new \(\gamma_n\)- or \(\beta\)-adjacency yields an old
+\(\gamma_n\)- or \(\delta_n\)-adjacency: an edge meeting \(T'_j\) is
+fixed by (13), while a boundary \(\beta\)-edge is forbidden by closure
+and the fact that \(\beta\) is missing at \(u\).  Since \(P\) represents
+the full old component and is simple with endpoint \(x\), this adjacency
+is the unique first edge-node of \(Q\).  At \(u\), \(\beta\) is missing
+under \(\varrho_0\), and properness makes the
+\(\gamma_n\)-colored identity \(g\) its unique new two-color neighbor.
+Each internal node of the simple path \(Q\) already has two distinct
+neighbors.  The theorem
+\noderef{TwoColorIncidenceDegreeAtMostTwo} bounds every degree in this
+incidence graph by two because \(\varrho_0\) is proper.  Hence no
+internal node has a third neighbor and neither endpoint has an additional
+neighbor.  The support of \(Q\) is therefore closed under adjacency.
+Every node connected to \(u\) lies in it, proving (14).
+
+Combining (14) with (3) gives the exact intersection
+\[
+ K\cap\{\mathsf{inl}(w):w\in V(T_n)\cup V(T'_j)\}
+ =\{\mathsf{inl}(u)\}.                                       \tag{15}
+\]
+If an exact edge identity in \(K\) were incident with a vertex
+\(w\in V(T_n)\cup V(T'_j)\), adjacency in
+\noderef{TwoColorIncidenceGraph} would put \(\mathsf{inl}(w)\) in the
+same \noderef{TwoColorComponent}.  Thus (15) says that the second switch
+fixes every edge incident with this union away from \(u\).
+Since \(\gamma_n\ne\beta\), \noderef{TwoColorComponentSwapProper} proves
+that \(\varrho_3\) is proper.  Expanding
+\noderef{TwoColorComponentSwap} shows that it merely interchanges two
+nonempty option values on \(K\) and fixes all other values; together with
+\noderef{IsOneEdgeUncolored}, this proves that exactly \(e_0\) remains
+uncolored.
+
+Every vertex strictly before \(v_n\) in \(T_j\) belongs to the seed:
+the seed ends at \(v_n\), its inclusion in \(T_j\) is exact, and displayed
+vertices are injective.  This follows directly from
+\noderef{TreeSequenceInitialSegment},
+\noderef{TreeSequenceVertexSet}, and the before relation
+\noderef{TreeVerticesBefore}.  Such a vertex lies in \(V(T'_j)\), is
+different from \(u\), and hence every incident identity is fixed by both
+swaps, using (13) and (15).  The witness definition
+\noderef{PresentColors} and its complement
+\noderef{MissingColors} give equality of its old and new missing-color
+sets.  Both the incident-edge and missing-set clauses of (4) therefore
+transfer from \(\varrho_1\) to \(\varrho_3\), proving (d1).
+
+We next prove the exact edge clause in (d2).  Induct along the finite
+chain \noderef{TashkinovAugmentationSequence}.  The one-step statement
+\noderef{TashkinovAugmentation} says that each exact displayed edge
+appended after the seed has, under \(\varphi_{j-1}\), a color missing at
+an earlier displayed vertex.  By (7) that color is not \(\delta_n\);
+by (6) its \(\varrho_1\)-color is the same, and (9) separately excludes
+\(\beta\) before \(q_z\).  Hence the outside transposition fixes each
+such exact identity.  Seed identities occur in \(T'_j\), so (13) fixes
+them too.  Their endpoints lie in \(V(T_j)\subseteq V(T_n)\), by the
+attachment law of \noderef{TreeSequence}; (15) therefore makes the second
+switch fix them.  This proves the \(T_j\)-edge clause.  An exact displayed
+edge of \(T'_j\) has two displayed endpoints by that same attachment law.
+Equation (13) fixes it under the first switch.  If it lay in \(K\), both
+endpoint vertex-nodes would lie in \(K\); (15) permits only \(u\), while
+looplessness forbids both endpoints being \(u\).  Hence the second switch
+also fixes every required \(T'_j\)-edge identity.
+
+For the missing-set clause, first take a listed vertex in
+\(V(T'_j)\setminus\{u\}\).  Equations (13) and (15) fix every incident
+identity, so \noderef{PresentColors} and \noderef{MissingColors} give the
+required equality.  Now take a listed vertex \(w\) of \(T_j(z)\) outside
+\(T'_j\), with \(w\ne z\).  By (8), \(\beta\) is present at \(w\).
+Also \(w\ne v_n\), because \(v_n\in V(T'_j)\); (7) says that
+\(\delta_n\) is present under \(\varphi_{j-1}\), and (5) transfers that
+presence to \(\varrho_1\).  Both colors are tree-missing on the closed
+set \(V(T'_j)\), so no incident edge of either color can join \(w\) to
+that set, by \noderef{BoundaryEdges} and
+\noderef{ColoredVertexSetClosed}.  The outside swap therefore transposes
+the two complete, nonempty incidence sets at \(w\) and fixes all other
+colors.  Its present set, hence its missing set, is unchanged.  Finally
+\(w\in V(T_n)\) and \(w\ne u\), so (15) says the component swap fixes all
+its incident identities.  This proves the vertex equality in (d2).
+The same incident-edge argument immediately proves (12) when
+\(z\) is displayed strictly before \(u\) in \(T'_j\).
+
+Suppose now that \(\beta\in\overline{\varrho}_1(z)\).  Since
+\(z\in V(T_j)\subseteq V(T_n)\) but \(u\notin V(T_n)\), the vertices are
+distinct.  Elementariness of \(V(T'_j)\), together with the simultaneous
+missingness of \(\beta\) at \(u\), implies \(z\notin V(T'_j)\).  Hence
+\(z\ne v_n\); equations (7) and (5) show that \(\delta_n\) is present at
+\(z\).  The same closed-boundary argument shows that all incident
+\(\beta\)- and \(\delta_n\)-identities lie outside \(T'_j\).  Thus
+\noderef{OutsideTreeColorSwap}, together with
+\noderef{PresentColors} and \noderef{MissingColors}, makes
+\(\delta_n\) missing at \(z\).  Equation (15) makes the second switch
+fix every identity incident with \(z\), proving (11).
+
+Finally, (13) preserves the missingness of \(\beta\) at \(u\) and the
+\(\gamma_n\)-colored identity \(g\).  In the rooted component switch,
+every incident \(\gamma_n\)-identity belongs to \(K\) and becomes
+\(\beta\), while no incident \(\beta\)-identity exists beforehand.
+Expansion of \noderef{TwoColorComponentSwap},
+\noderef{PresentColors}, and \noderef{MissingColors} therefore gives
+\(\gamma_n\in\overline{\varrho}_3(u)\).  The singleton identity
+\(\gamma_{1_1}=\gamma_n\) from (1) is exactly (d3).
+\end{proof}
+
