@@ -8,39 +8,94 @@ $T_n$-interchangeable under $\sigma_n$, with isolated path components
 included.
 \end{helper}
 \begin{proof}
-Apply current assertion (iv) from \noderef{TechnicalInductionContext} to the
-given terminal PE, the exact support and color identities, and the proper
-stable coloring $\sigma_n$.  It says that the
-$(\gamma_n,\delta_n)$-component through $v_n$ meets $V(T_n)$ only at
-$v_n$.  Therefore \noderef{ParallelExtensionUndoStable} applies to the
-component swap
+Write $n=r(T)>0$ and let $T_n$ be the terminal ladder tree.  Inspect the
+last certified slot supplied by \noderef{TashkinovSeries}.  Its exact
+PE-kind identity selects the PE constructor of
+\noderef{TashkinovSeriesStep}.  Injectivity of the exact chosen-vertex,
+gamma, and delta field equations identifies its maximum-defective choice
+with the stated $v_n,\gamma_n,\delta_n$.  In particular,
+\noderef{MaximumDefectiveChoice} gives an exact selected edge $f_n$
+incident with $v_n$ and colored $\delta_n$ by the selected coloring
+$\pi_{n-1}$.  Its defective-vertex field and
+\noderef{DefectiveVertex} give the premise
+\[
+                         v_n\in V(T_n).                         \tag{1}
+\]
+
+The PE color rule \noderef{ParallelExtensionColor} says that
+$\gamma_n$ is missing at $v_n$ under $\pi_{n-1}$.  On the other hand,
+the exact incidence and color equations for $f_n$ put $\delta_n$ in the
+set \noderef{PresentColors} at $v_n$.  Since
+\noderef{MissingColors} is the complement of that set,
+\[
+                         \gamma_n\ne\delta_n.                   \tag{2}
+\]
+Thus the required inequality is a consequence of the actual PE witness,
+not an unstated field of the step constructor.
+
+Instantiate the \texttt{currentFour} field of
+\noderef{TechnicalInductionContext} on the present ETT.  Its common
+hypotheses are the exact current rung and maximum property; its PE, support,
+gamma, and delta identities are the given field equations; and properness,
+\noderef{IsOneEdgeUncolored}, and terminal stability are hypotheses of the
+lemma.  It follows that, for every $x\in V(T_n)$,
+\[
+ \operatorname{inl}(x)\in
+ P_{v_n}(\gamma_n,\delta_n,\sigma_n)\quad\Longleftrightarrow\quad
+ x=v_n.                                                         \tag{3}
+\]
+Together with the separately established membership (1), this is the
+singleton-intersection premise of
+\noderef{ParallelExtensionUndoStable}.  That lemma applies to
 \[
  \tau=\sigma_n/P_{v_n}(\gamma_n,\delta_n,\sigma_n)
 \]
-and makes $\tau$ stable on the preceding terminal ladder data
+and makes $\tau$ stable on the preceding data
 $(T_n,D_{n-1},\varphi_{n-1})$.
 
-The PE certificate in \noderef{TashkinovSeriesStep} gives
-$\gamma_n\ne\delta_n$, so
-\noderef{TwoColorComponentSwapProper} transports properness from
-$\sigma_n$ to $\tau$.  The definition \noderef{TwoColorComponentSwap}
-fixes every uncolored value and sends colored values to colored values;
-hence \noderef{IsOneEdgeUncolored} is also preserved.  It changes only
-values $\gamma_n$ and $\delta_n$.  Since $\alpha$ and $\beta$ avoid those
-two colors, an exact edge has color $\alpha$ or $\beta$ under $\tau$ if and
-only if it has that same color under $\sigma_n$.  Thus the two
-$(\alpha,\beta)$ incidence graphs agree edge for edge.  In particular their
-connected components, isolated components, path-component predicates, and
-the missingness of $\alpha,\beta$ on $T_n$ agree.
+By (2), \noderef{TwoColorComponentSwapProper} makes $\tau$ proper.  The
+definition \noderef{TwoColorComponentSwap} fixes uncolored values and
+maps colored values to colored values, so expanding
+\noderef{IsOneEdgeUncolored} shows that $\tau$ still leaves exactly
+$e_0$ uncolored.  It changes only the values $\gamma_n$ and $\delta_n$.
+Because each of $\alpha,\beta$ is distinct from both, for every exact edge
+identity $a$ one has
+\[
+ \tau(a)=\alpha\Longleftrightarrow\sigma_n(a)=\alpha,
+ \qquad
+ \tau(a)=\beta\Longleftrightarrow\sigma_n(a)=\beta.             \tag{4}
+\]
+By \noderef{TwoColorIncidenceGraph}, (4) gives equality of the entire
+$(\alpha,\beta)$ incidence graphs on the common node set $V\sqcup E$.
+Their connected-component supports in \noderef{TwoColorComponent} and
+their leaf conditions in \noderef{TwoColorPathComponent} are therefore
+identical, including isolated vertex components.  At each vertex, (4) also
+gives equality of the alpha- and beta-memberships in
+\noderef{PresentColors}; its complement \noderef{MissingColors} and the
+vertex union \noderef{TreeMissingColors} show that alpha and beta are
+missing on $T_n$ under $\tau$ exactly when they are missing there under
+$\sigma_n$.
 
-If $n>1$, \noderef{CertifiedETTRestriction} at rung $n-1$ gives the actual
-positive lower-rung maximum ETT whose next ladder tree is $T_n$.  Lower
-assertion (ii) in \noderef{TechnicalInductionContext}, applied to the stable
-coloring $\tau$, gives $T_n$-interchangeability under $\tau$.  If $n=1$,
-the interchangeability clause of \noderef{TechnicalTheoremBase} applied to
-the original initial tuple gives the same conclusion.  Finally, equality of
-the two incidence graphs transports every full component equality in the
-definition \noderef{TreeInterchangeable} from $\tau$ back to $\sigma_n$.
-This proves the assertion, including when one of the path components is an
-isolated vertex.
+If $n>1$, put $r=n-1$.  Then $0<r<n$, and
+\noderef{CertifiedETTRestriction} at $r$ gives the actual restricted
+maximum ETT whose exact final series tree is $T_n$, whose generating
+coloring is $\varphi_{n-1}$, and whose terminal stored set is
+$D_{n-1}$.  Apply the \texttt{lowerTwo} field of
+\noderef{TechnicalInductionContext} to this restricted ETT: positivity
+and the strict bound are the displayed inequalities, maximum property is
+part of the restriction, $\tau$ is proper and exactly-$e_0$-uncolored as
+proved above, and its required stability is the conclusion of
+\noderef{ParallelExtensionUndoStable}.  Since both alpha and beta are
+tree-missing under $\tau$, \texttt{lowerTwo} gives their
+$T_n$-interchangeability under $\tau$.
+
+If $n=1$, $T_n$ is the exact output of the certified initial tuple.
+The same properness, exact-one-uncoloredness, preceding-data stability,
+and tree missingness meet the interchangeability clause of
+\noderef{TechnicalTheoremBase}, with the same conclusion under $\tau$.
+Finally, the graph equality (4) identifies every full component and every
+path-component predicate occurring in
+\noderef{TreeInterchangeable}.  Transporting the component equality from
+$\tau$ to $\sigma_n$ proves the desired interchangeability, including the
+isolated-component cases.
 \end{proof}

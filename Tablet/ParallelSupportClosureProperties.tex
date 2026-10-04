@@ -7,71 +7,148 @@ $J_n$, the two colors are $J_n$-interchangeable.  This conclusion includes
 isolated two-color path components.
 \end{helper}
 \begin{proof}
-Let $v_n$ be the terminal support and put $j=m(v_n)$.  The PE clause of
-\noderef{HierarchyBase} identifies $J_n$ as a \noderef{TashkinovClosure},
-under $\sigma_n$, of the ordered prefix $T_n(v_n)$.  The least-index
-definition \noderef{ETTFirstAppearanceIndex} and the entrywise relations in
-\noderef{TreeSequenceInitialSegment} identify that prefix with $T_j(v_n)$.
-The current assertion (iii), recorded in
-\noderef{TechnicalInductionContext}, makes $\sigma_n$ stable before $v_n$
-relative to $(D_{j-1},\varphi_{j-1})$ and, when $j>1$, stable on
-$T_{j-1}$.
+Let $v_n$ be the exact terminal support recorded by the PE clause of
+\noderef{HierarchyBase}, and put $j=m(v_n)$.  That clause also makes
+$J_n$ a \noderef{TashkinovClosure}, under $\sigma_n$, of the ordered
+prefix $T_n(v_n)$.  Since $v_n\in V(T_n)$, the minimum in
+\noderef{ETTFirstAppearanceIndex} satisfies $1\leq j\leq n$.
+The retained ordered-stage equalities in
+\noderef{TreeSequenceInitialSegment} identify this prefix with
+$T_j(v_n)$ and show that $v_n\notin V(T_{j-1})$ when $j>1$.
 
-We first rebuild the prefix under $\sigma_n$.  For every colored displayed
-edge $g$ of $T_j$, \noderef{HkuTreeColorsControlled} puts its
-$\varphi_{j-1}$-color in the tree-missing colors or $D_{j-1}$.  Such an edge
-is internal to $V(T_j)$ by \noderef{InternalEdges}, so
-\noderef{SameColorSeriesPreserved} transports its exact color from slot
-$j-1$ to the terminal generating coloring.  Terminal stability then gives
-$\sigma_n(g)=\varphi_{j-1}(g)$.  The root edge is uncolored in both
-colorings by \noderef{IsOneEdgeUncolored}.
+Instantiate the \texttt{currentThree} field of
+\noderef{TechnicalInductionContext} on the present ETT, using its exact
+rung equality, maximum property, terminal PE kind, support identity, and
+first-appearance equality.  Its hypotheses are the assumed properness,
+exact-one-uncoloredness, and terminal stability of $\sigma_n$.  The first
+conclusion is that $\sigma_n$ is
+\noderef{StableColoringBeforeVertex} before $v_n$, relative to
+$(D_{j-1},\varphi_{j-1})$; when $j>1$, its second conclusion is the full
+\noderef{StableColoring} relation on $T_{j-1}$ relative to the same data.
 
-Inspect the certified constructor in \noderef{TashkinovSeriesStep} which
-produces $T_j$.  It supplies a \noderef{TashkinovAugmentationSequence} from
-the prescribed seed to $T_j$: $T_{j-1}$ in the PE case, the exact
-one-edge extension of $T_{j-1}$ in the SE/RE cases, and the initial one-edge
-tree when $j=1$.  Restrict that finite sequence at $T_j(v_n)$ using
-\noderef{TashkinovAugmentationSequenceRestrict}.  At each
-augmentation its missing witness occurs strictly before the new vertex and
-hence before $v_n$; before-support stability preserves its missing color,
-and the preceding exact edge-color calculation preserves the new edge's
-color.  Thus every augmentation is valid under $\sigma_n$.  Composing this
-sequence with the closure sequence from \noderef{HierarchyBase} proves that
-$J_n$ is a $\sigma_n$-closure of the same prescribed seed.  Its closure
-field immediately gives the asserted \noderef{ColoredVertexSetClosed} fact.
+We first establish exact colors on the prefix.  For every nonroot displayed
+edge $g$ of $T_j$, the first edge-control inclusion in
+\noderef{HkuTreeColorsControlled} puts
+$\varphi_{j-1}(g)$ in
+$\overline\varphi_{j-1}(T_j)\cup D_{j-1}$.  The attachment equations in
+\noderef{TreeSequence} put both endpoints of $g$ in $V(T_j)$, so $g$ is
+in the set defined by \noderef{InternalEdges}.  Applying
+\noderef{SameColorSeriesPreserved} from this slot through the terminal
+slot therefore gives
+$\varphi_n(g)=\varphi_{j-1}(g)$.  Before using terminal stability, invoke
+the terminal edge-control conclusion of
+\noderef{HkuTreeColorsControlled}: since $T_j$ is an ordered initial
+segment of $T_n$, it gives $\sigma_n(g)=\varphi_n(g)$ for every displayed
+identity $g$ of $T_j$, including the root.  Thus
+\[
+ \sigma_n(g)=\varphi_{j-1}(g)                                  \tag{1}
+\]
+for every nonroot displayed edge; at the root both sides are uncolored by
+\noderef{IsOneEdgeUncolored}.
 
-Suppose $j>1$.  Apply \noderef{CertifiedETTRestriction} at rung $j-1$.
-This gives an actual positive lower-rung maximum ETT whose terminal ladder
-stage, next displayed tree, generating coloring, stored sets, and certified
-steps are the retained original data.  Current assertion (vi) from
-\noderef{TechnicalInductionContext}, applied to the stage stability above,
-makes $\sigma_n$ a \noderef{ModColoring} of this restricted ETT.  The rebuilt
-augmentation sequence makes $J_n$ an eligible strict corresponding
-extension.  Hence the universal mod-coloring clause supplies an actual
-\noderef{CorrespondingExtendedTashkinovTree} displayed on $J_n$.
-\noderef{MaximumPropertyTransport} gives it maximum property, and lower
-assertion (i) makes $V(J_n)$ elementary.
+Now inspect, inside the certified \noderef{TashkinovSeries}, the
+\noderef{TashkinovSeriesStep} constructor which produces $T_j$.  Its
+\noderef{TashkinovClosure} field gives a
+\noderef{TashkinovAugmentationSequence} under $\varphi_{j-1}$ from the
+prescribed seed to $T_j$: the seed is $T_{j-1}$ in the PE case, the exact
+one-edge extension of $T_{j-1}$ by the recorded connecting identity in
+the SE/RE cases, and the initial one-edge tree when $j=1$.  First
+appearance puts all of $T_{j-1}$ strictly before $v_n$; in the SE/RE case
+the adjoined connecting entry is the first entry after $T_{j-1}$, so it is
+either before $v_n$ or is the entry of $v_n$ itself.  Thus the appropriate
+exact seed is an ordered initial segment of $T_j(v_n)$.  Hence
+\noderef{TashkinovAugmentationSequenceRestrict} restricts the sequence at
+$T_j(v_n)$.
 
-Let $L$ be the final ladder closure of that replacement ETT.  Its ETT
-certificate makes $J_n$ an ordered initial segment of $L$.  A color missing
-on $J_n$ is therefore missing on $L$ by \noderef{TreeMissingColors}.  Lower
-assertion (ii), applied to the reflexive stable coloring $\sigma_n$, makes
-$L$ interchangeable for the chosen pair.  To restrict the conclusion, take
-arbitrary two-color path components meeting $J_n$, including isolated
-vertex components, and choose a meeting vertex in each.  The exact initial
-segment and \noderef{TreeSequenceVertexSet} put both vertices in $L$.
-Interchangeability on $L$ therefore identifies the two full connected
-components, which is exactly \noderef{TreeInterchangeable} on $J_n$.
+Consider one step $A\to A'$ in this restricted sequence.  By
+\noderef{TashkinovAugmentation}, $A$ is an exact ordered initial segment
+of $A'$, and the new edge $a$ has a color $c$ missing at a vertex of
+$A$.  The new vertex of $A'$ is no later than $v_n$, so every vertex of
+$A$ is strictly before $v_n$.  The vertex clause of
+\noderef{StableColoringBeforeVertex} preserves the missingness of $c$;
+its incident-edge clause fixes the identity $a$, since $a$ is incident
+with its old endpoint and $c$ is in the corresponding controlled set.
+Equivalently, (1) gives the same exact color equality.  Thus this is also
+a Tashkinov augmentation under $\sigma_n$.  Induction over the finite
+relation \noderef{TashkinovAugmentationSequence} transports the entire
+restricted sequence.  Composing it with the augmentation sequence from
+$T_j(v_n)$ to $J_n$ already supplied by the hierarchy-base closure proves
+that $J_n$ is a $\sigma_n$-closure of the same prescribed seed.  Its final
+closure clause is exactly
+\noderef{ColoredVertexSetClosed} for $V(J_n)$.
 
-Suppose instead that $j=1$.  Retain the original one-edge seed, use
-$\sigma_n$ as both input and initial coloring, use empty initial stored and
-connecting sets and absent optional fields, and use the reconstructed
-$\sigma_n$-closure ending at $J_n$.  The graph, criticality, chromatic-index,
-and degree parts of \noderef{KTriple} are unchanged, while the hypotheses
-give properness and exactly one uncolored edge.  These data satisfy the
-initial constructor of \noderef{TashkinovSeriesStep}.  Applying
-\noderef{TechnicalTheoremBase} to this genuine initial series gives both
-elementarity of $J_n$ and interchangeability for every pair with a color
-missing there.  Together with the closure already proved, this establishes
-all three assertions in both cases.
+Suppose first that $j>1$, and put $r=j-1$.  The inequality $j>1$ gives
+$0<r$, while $j\leq n$ gives $r<n$.  Applying
+\noderef{CertifiedETTRestriction} at $r$ produces an actual restricted
+ETT of rung exactly $r$, with maximum property, terminal ladder tree
+$T_{j-1}$, displayed next tree $T_j$, generating coloring
+$\varphi_{j-1}$, and all stored sets, connecting identities, kinds, and
+step certificates retained exactly.  The full stage-stability conclusion
+above is therefore precisely the terminal-ladder stability hypothesis for
+this restricted ETT.  Instantiate the \texttt{lowerSix}, not the
+\texttt{currentSix}, field of \noderef{TechnicalInductionContext} on it:
+properness and exact-one-uncoloredness are assumed, positivity is $0<r$,
+the strict rung bound is $r<n$, maximum property comes from the
+restriction, and the required stage stability was just obtained.  Hence
+$\sigma_n$ is a \noderef{ModColoring} of the restricted ETT.
+
+We verify the exact eligibility condition in that definition.  The
+retained last constructor has one of the three noninitial kinds.  In its
+PE case, the transported augmentation sequence above starts at exactly
+$T_{j-1}$.  In its SE or RE case, the retained constructor supplies an
+exact identity $f_{j-1}$, the equality
+$F_{j-1}=\{f_{j-1}\}$, and the exact one-edge seed
+$T_{j-1}+f_{j-1}$; the transported sequence starts at that seed.  These
+are respectively the PE and SE/RE disjuncts in
+\noderef{ModColoring}, not merely vertex-set inclusions.  In every case
+$T_{j-1}$ is an ordered initial segment of $J_n$.  Moreover,
+$v_n\notin V(T_{j-1})$ by first appearance, while the starting prefix and
+the one-step initial-segment property put $v_n\in V(J_n)$; thus the
+extension is strict.  The universal clause of the mod-coloring definition
+therefore supplies an actual
+\noderef{CorrespondingExtendedTashkinovTree} displayed on $J_n$ and
+generated by $\sigma_n$.
+
+By \noderef{MaximumPropertyTransport}, this replacement ETT has maximum
+property.  Its rung is still $r$, so $0<r<n$; applying
+\texttt{lowerOne} from \noderef{TechnicalInductionContext} to this actual
+replacement makes $V(J_n)$ elementary under $\sigma_n$.
+
+Let $L$ be the exact final series tree of the replacement.  The
+\noderef{ExtendedTashkinovTree} certificate makes $J_n$ an ordered initial
+segment of $L$.  Hence \noderef{TreeSequenceVertexSet} and the union
+definition \noderef{TreeMissingColors} show that every color missing on
+$J_n$ is missing on $L$.  The same replacement still has positive rung
+$r<n$ and maximum property.  The coloring $\sigma_n$ is proper and leaves
+exactly $e_0$ uncolored, and reflexivity in \noderef{sc2} makes it stable
+on $L$ relative to its own generating coloring and terminal stored set in
+the sense of \noderef{StableColoring}.  Thus the \texttt{lowerTwo} field
+applied to the replacement makes $L$ interchangeable for any requested
+pair with a color missing on $J_n$.
+
+To pass back to $J_n$, take two full two-color path components meeting
+$J_n$, including the isolated components allowed by
+\noderef{TwoColorPathComponent}.  Their meeting vertices lie in $L$ by
+the exact initial segment.  Interchangeability on $L$ identifies the two
+full connected components.  This is precisely
+\noderef{TreeInterchangeable} on $J_n$; no restriction of an incidence
+component is being taken.
+
+It remains to treat $j=1$.  Here the reconstructed augmentation sequence
+starts at the original length-one tree rooted at $e_0$ and ends in the
+$\sigma_n$-closure $J_n$.  Use $\sigma_n$ as both input and initial
+coloring, use empty initial stored and connecting sets and absent initial
+optional fields, and use this exact closure.  The graph-criticality,
+chromatic-index, and degree clauses of the original
+\noderef{KTriple} do not depend on its coloring, while the hypotheses give
+properness and exactly one uncolored edge for $\sigma_n$.  Consequently
+these data form a $k$-triple.  They satisfy the initial constructor of
+\noderef{TashkinovSeriesStep} and hence form a genuine certified
+\noderef{TashkinovSeries} whose initial output is $J_n$.  Reflexivity in
+\noderef{sc2} explicitly makes $\sigma_n$ stable relative to itself (and
+the empty initial stored set), so every stability premise of
+\noderef{TechnicalTheoremBase} is met.  That theorem gives both
+elementarity of $V(J_n)$ and interchangeability for every pair with a
+color missing on $J_n$.  Together with the closedness proved above, this
+establishes all three conclusions in both cases.
 \end{proof}

@@ -1,5 +1,7 @@
+import Tablet.AdjacentEdges
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
+import Tablet.IsProperEdgeColoring
 import Tablet.MissingColors
 import Tablet.OrderedTreeUnion
 import Tablet.PresentColors
@@ -7,6 +9,7 @@ import Tablet.TreeInterchangeable
 import Tablet.TreeMissingColors
 import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSpanningPath
+import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorPathComponent
 
 -- [TABLET NODE: ParallelTwoConstituentPathContradiction]

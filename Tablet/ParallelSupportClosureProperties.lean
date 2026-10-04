@@ -3,6 +3,7 @@ import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.ETTFirstAppearanceIndex
+import Tablet.ExtendedTashkinovTree
 import Tablet.HierarchyBase
 import Tablet.HkuTreeColorsControlled
 import Tablet.InternalEdges
@@ -11,16 +12,23 @@ import Tablet.KTriple
 import Tablet.MaximumPropertyTransport
 import Tablet.ModColoring
 import Tablet.SameColorSeriesPreserved
+import Tablet.StableColoring
+import Tablet.StableColoringBeforeVertex
+import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovAugmentationSequenceRestrict
 import Tablet.TashkinovClosure
+import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TechnicalInductionContext
 import Tablet.TechnicalTheoremBase
 import Tablet.TreeInterchangeable
 import Tablet.TreeMissingColors
+import Tablet.TreeSequence
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceVertexSet
+import Tablet.TwoColorPathComponent
+import Tablet.sc2
 
 -- [TABLET NODE: ParallelSupportClosureProperties]
 theorem ParallelSupportClosureProperties {V E : Type*}

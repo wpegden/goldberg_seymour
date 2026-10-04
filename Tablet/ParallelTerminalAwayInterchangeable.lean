@@ -1,12 +1,22 @@
 import Tablet.CertifiedETTRestriction
+import Tablet.DefectiveVertex
 import Tablet.IsOneEdgeUncolored
+import Tablet.MaximumDefectiveChoice
+import Tablet.MissingColors
+import Tablet.ParallelExtensionColor
 import Tablet.ParallelExtensionUndoStable
+import Tablet.PresentColors
 import Tablet.TechnicalInductionContext
 import Tablet.TechnicalTheoremBase
+import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TreeInterchangeable
+import Tablet.TreeMissingColors
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
 import Tablet.TwoColorComponentSwapProper
+import Tablet.TwoColorIncidenceGraph
+import Tablet.TwoColorPathComponent
 
 -- [TABLET NODE: ParallelTerminalAwayInterchangeable]
 theorem ParallelTerminalAwayInterchangeable {V E : Type*}

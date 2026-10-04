@@ -11,52 +11,80 @@ elementary under $\sigma$.
 \begin{proof}
 Assume that $U$ is not elementary.  Expanding
 \noderef{ColoredVertexSetElementary}, choose distinct vertices $u,v$ in
-$V(U)$ with a common missing color $\alpha$.  The exact vertex-set equality
-in \noderef{OrderedTreeUnion} says $V(U)=V(A)\cup V(B)$.  Elementarity of
-each constituent rules out both vertices lying in $A$ and rules out both
-lying in $B$.  After interchanging their names, therefore,
+$V(U)$ and a color $\alpha$ with
+\[
+ \alpha\in\noderef{MissingColors}(G,\sigma,u)
+ \cap\noderef{MissingColors}(G,\sigma,v).                       \tag{1}
+\]
+The exact vertex-set equality in \noderef{OrderedTreeUnion} says
+$V(U)=V(A)\cup V(B)$.  Elementarity of each constituent rules out both
+vertices lying in $A$ and rules out both lying in $B$.  After interchanging
+their names, therefore,
 \[
  u\in V(A)-V(B),\qquad v\in V(B)-V(A).
 \]
-In particular $u,v,w,s$ have the distinctness relations forced by these set
-memberships and by $w\ne s$.
+Since $s,w$ lie in both constituents and $s\ne w$, these memberships give
+all pairwise distinctness relations among $u,v,w,s$.
 
-Because $s,v\in V(B)$ are distinct, $\delta$ missing at $s$ and elementarity
-of $B$ imply $\alpha\ne\delta$.  Since $u\in V(A)$ and $\gamma$ is missing
-nowhere on $A$, $\alpha\ne\gamma$.  Choose
-$\beta\in\overline\sigma(w)$ using the assumed nonempty missing-color set.
-Elementarity of $B$ at the distinct vertices $w,s$ gives
-$\beta\ne\delta$, while absence of a tree-missing $\gamma$ on $A$ gives
-$\beta\ne\gamma$.  Finally, $u\ne w$ and elementarity of $A$ give
+Because $s,v\in V(B)$ are distinct,
+$\delta\in\noderef{MissingColors}(G,\sigma,s)$ and (1), elementarity of
+$B$ implies $\alpha\ne\delta$.  The definition
+\noderef{TreeMissingColors} turns $u\in V(A)$ and (1) into
+$\alpha\in\overline\sigma(A)$; since gamma is not in that tree-missing
+set, $\alpha\ne\gamma$.  Choose
+$\beta\in\noderef{MissingColors}(G,\sigma,w)$ from the assumed nonempty
+set.  Elementarity of $B$ at the distinct vertices $w,s$ gives
+$\beta\ne\delta$.  Membership $w\in V(A)$ and
+\noderef{TreeMissingColors} similarly give $\beta\ne\gamma$.
+Finally, $u\ne w$, (1), and elementarity of $A$ give
 $\alpha\ne\beta$.
 
-The colors $\alpha,\beta$ are missing on $A$ at $u,w$, respectively, and
-both avoid $\{\gamma,\delta\}$, so the first interchangeability hypothesis
-makes them $A$-interchangeable.  They are missing on $B$ at $v,w$, so the
-second hypothesis makes them $B$-interchangeable.  Closedness of $B$ in the
-sense of \noderef{ColoredVertexSetClosed} also says that neither missing
-color occurs on a boundary edge of $B$; hence the relevant two-color
-components through its vertices cannot leave $B$.
+The witnesses $u,w\in V(A)$ and \noderef{TreeMissingColors} show that
+$\alpha,\beta\in\overline\sigma(A)$; the four inequalities just proved
+therefore make them $A$-interchangeable by the first hypothesis.  Likewise
+$v,w\in V(B)$ witness
+$\alpha,\beta\in\overline\sigma(B)$, so the second hypothesis makes them
+$B$-interchangeable.  We do not need to assert that either full incidence
+component stays inside $B$.
 
-Consider the two-color components through $v$ and $w$.  At $v$, the color
-$\alpha$ is missing.  Since $\beta$ is missing at the distinct vertex $w$
-and $B$ is elementary, $\beta$ is present at $v$.  Similarly $\beta$ is
-missing and $\alpha$ is present at $w$.  The definition
-\noderef{PresentColors} therefore makes both components nontrivial, and
-properness gives degree exactly one at the vertex-nodes $v,w$ in the
-$(\alpha,\beta)$ incidence graph.  By
-\noderef{TwoColorComponentSpanningPath}, each component has a spanning
-simple path and hence satisfies \noderef{TwoColorPathComponent}.  The
-definition \noderef{TreeInterchangeable} says that
-$B$-interchangeability identifies the two components, so its spanning path
-has degree-one ends $v$ and $w$.
+We now justify the incidence degrees.  At $v$, (1) and
+\noderef{MissingColors} say that no edge incident with $v$ is colored
+$\alpha$.  Since $\beta$ is missing at the distinct vertex $w$ and $B$ is
+elementary, $\beta$ is not missing at $v$; the complementary definitions
+\noderef{MissingColors} and \noderef{PresentColors} supply an exact edge
+$b_v$ incident with $v$ and colored $\beta$.  If a distinct edge identity
+$b'_v$ had the same properties, the shared endpoint would make
+$b_v,b'_v$ adjacent by \noderef{AdjacentEdges}, contradicting
+\noderef{IsProperEdgeColoring}.  The adjacency rule in
+\noderef{TwoColorIncidenceGraph} says that the neighbors of the vertex-node
+$v$ are exactly the incident alpha- or beta-colored edge identities.
+Thus $v$ has degree exactly one in this incidence graph.
 
-The identical argument in $A$, using the components through $u$ and $w$,
-shows that their common component has a spanning path with degree-one ends
-$u$ and $w$.  Both common components are the full connected component
-through $w$, hence are equal by \noderef{TwoColorComponent}.  The three
-vertices $u,v,w$ are distinct, and each has degree one in this single
-component.  But a simple path has only its two ends of degree one, a
-contradiction.  Therefore no two distinct vertices of $U$ share a missing
-color, which is exactly its elementarity.
+At $w$, beta is missing.  Since alpha is missing at the distinct vertex
+$v$ of $B$, elementarity of $B$ makes alpha present at $w$; the same
+\noderef{AdjacentEdges}, \noderef{IsProperEdgeColoring}, and
+\noderef{TwoColorIncidenceGraph} argument gives degree exactly one at
+$w$.  Finally, alpha is missing at $u$, while beta is missing at the
+distinct vertex $w$ of the elementary set $A$; hence beta is present at
+$u$, and the identical exact-edge argument gives degree exactly one at
+$u$.
+
+Let $K_x$ denote the support in \noderef{TwoColorComponent} through the
+vertex-node $x$.  Since $\alpha\ne\beta$ and $K_v$ contains the degree-one
+node $v$, it satisfies \noderef{TwoColorPathComponent}; the same is true
+of $K_w$.  Both meet $B$, so $B$-interchangeability and
+\noderef{TreeInterchangeable} give $K_v=K_w$.  Applying the same argument
+inside $A$ to $K_u$ and $K_w$ gives $K_u=K_w$.  Thus the three distinct
+vertex-nodes $u,v,w$ lie in one full connected component $K$, and each has
+degree one in the full incidence graph.
+
+By \noderef{TwoColorComponentSpanningPath}, properness supplies a simple
+path whose node set is exactly $K$.  Each of $u,v,w$ must be an end of
+that path: an internal path node has two distinct path neighbors, whereas
+each of these nodes has only one neighbor in the entire incidence graph.
+A simple path has at most two ends, contradicting the distinctness of
+$u,v,w$.  Therefore no two distinct vertices of $U$ have a common member
+of their \noderef{MissingColors} sets.  By
+\noderef{ColoredVertexSetElementary}, this is exactly the required
+elementarity of $V(U)$.
 \end{proof}

@@ -1,9 +1,12 @@
 import Tablet.Basic2
+import Tablet.AdjacentEdges
+import Tablet.BoundaryEdges
 import Tablet.CertifiedETTRestriction
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
 import Tablet.DefectiveColor
 import Tablet.DefectiveEdge
+import Tablet.DefectiveVertex
 import Tablet.ExtensionBase
 import Tablet.HierarchyBase
 import Tablet.HkuParallelBoundaryStructure
@@ -12,17 +15,26 @@ import Tablet.KTriple
 import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumDegree
 import Tablet.MissingColors
+import Tablet.MissingColorsNonemptyOfMaximumDegree
 import Tablet.ParallelExtensionColor
 import Tablet.PresentColors
 import Tablet.StableColoring
+import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovClosure
 import Tablet.TashkinovSeries
 import Tablet.TashkinovSeriesStep
 import Tablet.TechnicalInductionContext
 import Tablet.TechnicalTheoremBase
+import Tablet.TreeIncidentEdge
+import Tablet.TreeMissingColors
+import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
+import Tablet.TreeVertexOrder
+import Tablet.TwoColorComponent
 import Tablet.TwoColorComponentSwap
+import Tablet.TwoColorIncidenceGraph
 import Tablet.sc2
 
 -- [TABLET NODE: ParallelTerminalPEPreprocessing]
