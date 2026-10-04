@@ -72,4 +72,754 @@ theorem ParallelTerminalPEPreprocessing {V E : Type*}
       (MissingColors G sigma common).Nonempty ∧
       ColoredVertexSetElementary G sigma (TreeSequenceVertexSet Tn) := by
 -- BODY
-  sorry
+  dsimp only
+  let terminal : Fin (ett.rounds + 1) := Fin.last ett.rounds
+  let previous : Fin ett.rounds := ⟨ett.rounds - 1, by omega⟩
+  have hPreviousSucc : previous.succ = terminal := by
+    apply Fin.ext
+    simp [previous, terminal]
+    omega
+  have hStableTerminal : StableColoring
+      (ett.series.data.tree terminal.castSucc)
+      (TashkinovStoredColors ett.series.data terminal)
+      (ett.series.data.coloring terminal) sigma := by
+    rw [← ett.generatingColoring]
+    exact hstable
+  have cert := ett.series.certified terminal
+  generalize hslot : terminal = slot at cert
+  cases cert with
+  | initial triple seedLength initialColoring initialStored initialEdges
+      initialKind initialVertex initialOutside initialDelta initialGamma
+      initialClosure =>
+    have hz := congrArg Fin.val hslot
+    simp [terminal] at hz
+    omega
+  | SE ci previousProper previousOneUncolored previousClosed
+      previousNotStronglyClosed noRevisiting choice seriesAlternative
+      currentColoring currentStored currentEdges currentKind currentVertex
+      currentOutside currentDelta currentGamma adjoined adjoinedExactly
+      closedExtension orderedExtension strictExtension =>
+    have hterm := hPE
+    change ett.series.data.kind terminal =
+      some TashkinovExtensionKind.PE at hterm
+    rw [hslot, currentKind] at hterm
+    simp at hterm
+  | RE ci previousProper previousOneUncolored previousClosed
+      previousNotStronglyClosed available currentColoring currentStored
+      currentEdges currentKind currentVertex currentOutside currentDelta
+      currentGamma adjoined adjoinedExactly closedExtension orderedExtension
+      strictExtension =>
+    have hterm := hPE
+    change ett.series.data.kind terminal =
+      some TashkinovExtensionKind.PE at hterm
+    rw [hslot, currentKind] at hterm
+    simp at hterm
+  | PE ci previousProper previousOneUncolored previousClosed
+      previousNotStronglyClosed noRevisiting choice seriesAlternativeFails
+      gamma gammaRule secondStable secondStableProper
+      secondStableOneUncolored secondStableRelation exitWitness
+      currentColoring currentProper currentOneUncolored currentStored
+      currentEdges currentKind currentVertex currentOutside currentDelta
+      currentGamma closedExtension orderedExtension strictExtension =>
+    have hci : ci = previous := by
+      apply Fin.ext
+      have hs := congrArg Fin.val hslot
+      simp [terminal, previous] at hs ⊢
+      omega
+    subst ci
+    have hTerminalEq : terminal = previous.succ := hslot
+    have hTerminalLast : Fin.last ett.rounds = previous.succ := by
+      simpa only [terminal] using hTerminalEq
+    have hTreeEq : ett.series.data.tree terminal.castSucc =
+        ett.series.data.tree previous.succ.castSucc := by
+      rw [hTerminalEq]
+    have hSupportTree : choice.vertex ∈ TreeSequenceVertexSet
+        (ett.series.data.tree terminal.castSucc) := by
+      simpa only [hTreeEq] using choice.vertexDefective.1
+    have hGammaSecond : gamma ∈ MissingColors G secondStable
+        choice.vertex := by
+      rw [secondStableRelation.2 choice.vertex choice.vertexDefective.1]
+      exact gammaRule.1
+    have hChoiceSecond : secondStable choice.edge = some choice.color := by
+      have hfix := secondStableRelation.1 choice.edge
+        ⟨choice.vertex, choice.vertexDefective.1, choice.edgeIncident⟩
+        ⟨choice.color, Finset.mem_union_right _
+          (Finset.mem_insert_self _ _), choice.edgeColor⟩
+      exact hfix.trans choice.edgeColor
+    have hGammaDelta : gamma ≠ choice.color := by
+      intro heq
+      have hpresent : gamma ∈ PresentColors G secondStable
+          choice.vertex := by
+        simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+          true_and]
+        exact ⟨choice.edge, choice.edgeIncident, heq ▸ hChoiceSecond⟩
+      have hnot : gamma ∉ PresentColors G secondStable choice.vertex := by
+        simpa [MissingColors] using hGammaSecond
+      exact hnot hpresent
+    have hChoiceBoundary : choice.edge ∈ BoundaryEdges G
+        (TreeSequenceVertexSet
+          (ett.series.data.tree terminal.castSucc)) := by
+      rcases choice.edgeDefective with ⟨c, hcDefective, hcEdge⟩
+      have hcValue := (Finset.mem_filter.mp hcEdge).2
+      have hcEq : c = choice.color :=
+        Option.some.inj (hcValue.symm.trans choice.edgeColor)
+      simpa only [hTreeEq] using (Finset.mem_filter.mp hcEdge).1
+    have boundaryIncident : ∀ {f : E},
+        f ∈ BoundaryEdges G
+            (TreeSequenceVertexSet (ett.series.data.tree terminal.castSucc)) →
+          TreeIncidentEdge (ett.series.data.tree terminal.castSucc) f := by
+      intro f hf
+      simp only [BoundaryEdges, Finset.mem_filter, Finset.mem_univ,
+        true_and] at hf
+      rcases hf with ⟨x, hx, y, hy, hxy⟩
+      exact ⟨x, hx, by simpa [Incident, hxy]⟩
+    have hPreviousElementary : ColoredVertexSetElementary G
+        (ett.series.data.coloring previous.castSucc)
+        (TreeSequenceVertexSet
+          (ett.series.data.tree terminal.castSucc)) := by
+      by_cases hOne : ett.rounds = 1
+      · have hbase : ColoredVertexSetElementary G
+            (ett.series.data.coloring 0)
+            (TreeSequenceVertexSet
+              (ett.series.data.tree (⟨1, by omega⟩ :
+                Fin (ett.rounds + 2)))) :=
+          (TechnicalTheoremBase G k ett.rounds e0 input ett.series).1
+        have hTerminalOne : terminal.castSucc =
+            (⟨1, by omega⟩ : Fin (ett.rounds + 2)) := by
+          apply Fin.ext
+          simp [terminal, hOne]
+        have hPreviousZero : previous.castSucc =
+            (0 : Fin (ett.rounds + 1)) := by
+          apply Fin.ext
+          simp [previous, hOne]
+        simpa only [hTerminalOne, hPreviousZero] using hbase
+      · have hrPositive : 1 ≤ ett.rounds - 1 := by omega
+        have hrBefore : ett.rounds - 1 < ett.rounds := by omega
+        obtain ⟨restricted, hRounds, hRestrictedMP, hRestrictedTrees,
+            hRestrictedData⟩ :=
+          CertifiedETTRestriction G k e0 input T phi ett hMP
+            (ett.rounds - 1) hrPositive hrBefore
+        have hLower : ColoredVertexSetElementary G
+            (ett.series.data.coloring
+              (⟨ett.rounds - 1, by omega⟩ : Fin (ett.rounds + 1)))
+            (TreeSequenceVertexSet
+              (ett.series.data.tree
+                (⟨(ett.rounds - 1) + 1, by omega⟩ :
+                  Fin (ett.rounds + 2)))) :=
+          ctx.lowerOne restricted (by omega) (by omega) hRestrictedMP
+        have hLowerTree :
+            (ett.series.data.tree
+              (⟨(ett.rounds - 1) + 1, by omega⟩ :
+                Fin (ett.rounds + 2))) =
+              ett.series.data.tree terminal.castSucc := by
+          congr 1
+          apply Fin.ext
+          simp [terminal]
+          omega
+        have hLowerColor :
+            (ett.series.data.coloring
+              (⟨ett.rounds - 1, by omega⟩ :
+                Fin (ett.rounds + 1))) =
+              ett.series.data.coloring previous.castSucc := by
+          congr 1
+        simpa only [hLowerTree, hLowerColor] using hLower
+    have hSelectedStable : StableColoring
+        (ett.series.data.tree terminal.castSucc)
+        (TashkinovStoredColors ett.series.data previous.castSucc)
+        (ett.series.data.coloring previous.castSucc) choice.selected := by
+      simpa only [hTreeEq] using choice.selectedStable
+    have hSecondStable : StableColoring
+        (ett.series.data.tree terminal.castSucc)
+        (insert choice.color
+          (TashkinovStoredColors ett.series.data previous.castSucc))
+        choice.selected secondStable := by
+      simpa only [hTreeEq] using secondStableRelation
+    let previousSubtype : {psi : PartialEdgeColoring E k //
+        IsProperEdgeColoring G psi ∧ IsOneEdgeUncolored psi e0} :=
+      ⟨ett.series.data.coloring previous.castSucc,
+        previousProper, previousOneUncolored⟩
+    let selectedSubtype : {psi : PartialEdgeColoring E k //
+        IsProperEdgeColoring G psi ∧ IsOneEdgeUncolored psi e0} :=
+      ⟨choice.selected, choice.selectedProper, choice.selectedOneUncolored⟩
+    let secondSubtype : {psi : PartialEdgeColoring E k //
+        IsProperEdgeColoring G psi ∧ IsOneEdgeUncolored psi e0} :=
+      ⟨secondStable, secondStableProper, secondStableOneUncolored⟩
+    have hSelectedForwardSubtype : StableColoring
+        (ett.series.data.tree terminal.castSucc)
+        (TashkinovStoredColors ett.series.data previous.castSucc)
+        previousSubtype.1 selectedSubtype.1 := by
+      simpa [previousSubtype, selectedSubtype] using hSelectedStable
+    have hSelectedReverseSubtype : StableColoring
+        (ett.series.data.tree terminal.castSucc)
+        (TashkinovStoredColors ett.series.data previous.castSucc)
+        selectedSubtype.1 previousSubtype.1 := by
+      exact (sc2 G e0 (ett.series.data.tree terminal.castSucc)
+        (TashkinovStoredColors ett.series.data previous.castSucc)).symm
+        hSelectedForwardSubtype
+    have hSecondForwardSubtype : StableColoring
+        (ett.series.data.tree terminal.castSucc)
+        (insert choice.color
+          (TashkinovStoredColors ett.series.data previous.castSucc))
+        selectedSubtype.1 secondSubtype.1 := by
+      simpa [selectedSubtype, secondSubtype] using hSecondStable
+    have hSecondReverseSubtype : StableColoring
+        (ett.series.data.tree terminal.castSucc)
+        (insert choice.color
+          (TashkinovStoredColors ett.series.data previous.castSucc))
+        secondSubtype.1 selectedSubtype.1 := by
+      exact (sc2 G e0 (ett.series.data.tree terminal.castSucc)
+        (insert choice.color
+          (TashkinovStoredColors ett.series.data previous.castSucc))).symm
+        hSecondForwardSubtype
+    have hSecondElementary : ColoredVertexSetElementary G secondStable
+        (TreeSequenceVertexSet
+          (ett.series.data.tree terminal.castSucc)) := by
+      intro u hu v hv huv
+      rw [hSecondStable.2 u hu, hSecondStable.2 v hv,
+        hSelectedStable.2 u hu, hSelectedStable.2 v hv]
+      exact hPreviousElementary hu hv huv
+    have hSecondClosed : ColoredVertexSetClosed G secondStable
+        (TreeSequenceVertexSet
+          (ett.series.data.tree terminal.castSucc)) := by
+      intro f c v hfBoundary hv hfColor hcMissing
+      have hfIncident := boundaryIncident hfBoundary
+      have hTreeMissingSecond : c ∈ TreeMissingColors secondStable
+          (ett.series.data.tree terminal.castSucc) := by
+        rw [TreeMissingColors]
+        exact Finset.mem_biUnion.mpr ⟨v, hv, hcMissing⟩
+      have hSelectedColor : choice.selected f = some c := by
+        have hfix := hSecondReverseSubtype.1 f hfIncident
+          ⟨c, Finset.mem_union_left _ hTreeMissingSecond, hfColor⟩
+        exact hfix.trans hfColor
+      have hSelectedMissing : c ∈ MissingColors G choice.selected v := by
+        rw [← hSecondStable.2 v hv]
+        exact hcMissing
+      have hTreeMissingSelected : c ∈ TreeMissingColors choice.selected
+          (ett.series.data.tree terminal.castSucc) := by
+        rw [TreeMissingColors]
+        exact Finset.mem_biUnion.mpr ⟨v, hv, hSelectedMissing⟩
+      have hPreviousColor :
+          ett.series.data.coloring previous.castSucc f = some c := by
+        have hfix := hSelectedReverseSubtype.1 f hfIncident
+          ⟨c, Finset.mem_union_left _ hTreeMissingSelected,
+            hSelectedColor⟩
+        exact hfix.trans hSelectedColor
+      have hPreviousMissing : c ∈ MissingColors G
+          (ett.series.data.coloring previous.castSucc) v := by
+        rw [← hSelectedStable.2 v hv]
+        exact hSelectedMissing
+      have hclosed := previousClosed (f := f) (c := c) (v := v)
+        (by simpa only [hTreeEq] using hfBoundary)
+        (by simpa only [hTreeEq] using hv) hPreviousColor
+      exact hclosed hPreviousMissing
+    have hDeltaNotTreeSecond : choice.color ∉
+        TreeMissingColors secondStable
+          (ett.series.data.tree terminal.castSucc) := by
+      intro hmissing
+      rw [TreeMissingColors] at hmissing
+      rcases Finset.mem_biUnion.mp hmissing with ⟨v, hv, hvmissing⟩
+      exact (hSecondClosed hChoiceBoundary hv hChoiceSecond) hvmissing
+    have hCurrentStable : StableColoring
+        (ett.series.data.tree terminal.castSucc)
+        (TashkinovStoredColors ett.series.data terminal)
+        (ett.series.data.coloring terminal)
+        (ett.series.data.coloring terminal) := by
+      let currentSubtype : {psi : PartialEdgeColoring E k //
+          IsProperEdgeColoring G psi ∧ IsOneEdgeUncolored psi e0} :=
+        ⟨ett.series.data.coloring terminal,
+          by simpa only [hTerminalEq] using currentProper,
+          by simpa only [hTerminalEq] using currentOneUncolored⟩
+      exact (sc2 G e0 (ett.series.data.tree terminal.castSucc)
+        (TashkinovStoredColors ett.series.data terminal)).refl currentSubtype
+    have hComponentCurrent : ∀ x,
+        x ∈ TreeSequenceVertexSet
+            (ett.series.data.tree terminal.castSucc) →
+        (Sum.inl x ∈ TwoColorComponent G
+            (ett.series.data.coloring terminal) gamma choice.color
+            (Sum.inl choice.vertex) ↔ x = choice.vertex) := by
+      have hbase := ExtensionBase G k e0 input T phi ett hMP hpositive
+        (fun lower hlowerPositive hlowerRounds hlowerMP =>
+          ⟨ctx.lowerOne lower hlowerPositive hlowerRounds hlowerMP,
+            ctx.lowerTwo lower hlowerPositive hlowerRounds hlowerMP,
+            ctx.lowerThree lower hlowerPositive hlowerRounds hlowerMP,
+            ctx.lowerFour lower hlowerPositive hlowerRounds hlowerMP,
+            ctx.lowerFive lower hlowerPositive hlowerRounds hlowerMP,
+            ctx.lowerSix lower hlowerPositive hlowerRounds hlowerMP⟩)
+        choice.vertex gamma choice.color
+        (by simpa only [hTerminalLast] using currentKind)
+        (by simpa only [hTerminalLast] using currentVertex)
+        (by simpa only [hTerminalLast] using currentGamma)
+        (by simpa only [hTerminalLast] using currentDelta)
+        (ett.series.data.coloring terminal)
+        (by simpa only [hTerminalEq] using currentProper)
+        (by simpa only [hTerminalEq] using currentOneUncolored)
+        hCurrentStable
+      simpa only [terminal] using hbase
+    have hPairColors : ∀ f : E,
+        (ett.series.data.coloring terminal f = some gamma ∨
+            ett.series.data.coloring terminal f = some choice.color) ↔
+          (secondStable f = some gamma ∨
+            secondStable f = some choice.color) := by
+      intro f
+      rw [hTerminalEq, currentColoring]
+      by_cases hf : Sum.inr f ∈
+          TwoColorComponent G secondStable gamma choice.color
+            (Sum.inl choice.vertex)
+      · by_cases hfg : secondStable f = some gamma
+        · constructor
+          · intro h
+            exact Or.inl hfg
+          · intro h
+            right
+            simp [TwoColorComponentSwap, hf, hfg, hGammaDelta]
+        · by_cases hfd : secondStable f = some choice.color
+          · constructor
+            · intro h
+              exact Or.inr hfd
+            · intro h
+              left
+              simp [TwoColorComponentSwap, hf, hfg, hfd,
+                hGammaDelta.symm]
+          · simp [TwoColorComponentSwap, hf, hfg, hfd]
+      · simp [TwoColorComponentSwap, hf]
+    have hGraph : TwoColorIncidenceGraph G
+        (ett.series.data.coloring terminal) gamma choice.color =
+        TwoColorIncidenceGraph G secondStable gamma choice.color := by
+      ext x y
+      cases x <;> cases y <;>
+        simp [TwoColorIncidenceGraph, hPairColors]
+    have hComponents (z : Sum V E) :
+        TwoColorComponent G (ett.series.data.coloring terminal)
+            gamma choice.color z =
+          TwoColorComponent G secondStable gamma choice.color z := by
+      unfold TwoColorComponent
+      rw [hGraph]
+    have hComponentSecond : ∀ x,
+        x ∈ TreeSequenceVertexSet
+            (ett.series.data.tree terminal.castSucc) →
+        (Sum.inl x ∈ TwoColorComponent G secondStable gamma choice.color
+            (Sum.inl choice.vertex) ↔ x = choice.vertex) := by
+      intro x hx
+      rw [← hComponents]
+      exact hComponentCurrent x hx
+    have hComponentEdgeColor : ∀ f,
+        Sum.inr f ∈ TwoColorComponent G secondStable gamma choice.color
+            (Sum.inl choice.vertex) →
+          secondStable f = some gamma ∨
+            secondStable f = some choice.color := by
+      intro f hf
+      have hs : Sum.inr f ∈
+          (TwoColorIncidenceGraph G secondStable gamma choice.color).support := by
+        apply SimpleGraph.mem_support_of_reachable
+          (G := TwoColorIncidenceGraph G secondStable gamma choice.color)
+          (u := Sum.inr f) (v := Sum.inl choice.vertex) (by simp)
+        exact SimpleGraph.ConnectedComponent.eq.mp hf
+      obtain ⟨r, hr⟩ :=
+        (TwoColorIncidenceGraph G secondStable gamma choice.color).mem_support.mp hs
+      cases r with
+      | inl x => exact hr.2
+      | inr x => simpa [TwoColorIncidenceGraph] using hr
+    have hChoiceComponent : Sum.inr choice.edge ∈
+        TwoColorComponent G secondStable gamma choice.color
+          (Sum.inl choice.vertex) := by
+      apply SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
+      simp [TwoColorIncidenceGraph, choice.edgeIncident, hChoiceSecond]
+    have hOnlyIncidentComponent : ∀ (f : E),
+        TreeIncidentEdge (ett.series.data.tree terminal.castSucc) f →
+        Sum.inr f ∈ TwoColorComponent G secondStable gamma choice.color
+            (Sum.inl choice.vertex) →
+          f = choice.edge := by
+      intro f hfIncident hfComponent
+      rcases hfIncident with ⟨x, hx, hxf⟩
+      rcases hComponentEdgeColor f hfComponent with hfg | hfd
+      · have hpresent : gamma ∈ PresentColors G secondStable x := by
+          simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+            true_and]
+          exact ⟨f, hxf, hfg⟩
+        have hxComponent : Sum.inl x ∈
+            TwoColorComponent G secondStable gamma choice.color
+              (Sum.inl choice.vertex) := by
+          change (TwoColorIncidenceGraph G secondStable gamma choice.color).connectedComponentMk
+              (Sum.inl x) =
+            (TwoColorIncidenceGraph G secondStable gamma choice.color).connectedComponentMk
+              (Sum.inl choice.vertex)
+          exact
+            (SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
+              (by simp [TwoColorIncidenceGraph, hxf, hfg])).trans hfComponent
+        have hxEq := (hComponentSecond x hx).mp hxComponent
+        subst x
+        have hnot : gamma ∉ PresentColors G secondStable choice.vertex := by
+          simpa [MissingColors] using hGammaSecond
+        exact (hnot hpresent).elim
+      · have hxComponent : Sum.inl x ∈
+            TwoColorComponent G secondStable gamma choice.color
+              (Sum.inl choice.vertex) := by
+          change (TwoColorIncidenceGraph G secondStable gamma choice.color).connectedComponentMk
+              (Sum.inl x) =
+            (TwoColorIncidenceGraph G secondStable gamma choice.color).connectedComponentMk
+              (Sum.inl choice.vertex)
+          exact
+            (SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
+              (by simp [TwoColorIncidenceGraph, hxf, hfd])).trans hfComponent
+        have hxEq := (hComponentSecond x hx).mp hxComponent
+        subst x
+        by_contra hne
+        exact secondStableProper hne
+          ⟨choice.vertex, hxf, choice.edgeIncident⟩ hfd hChoiceSecond
+    have hDeltaCurrentMissing : choice.color ∈ MissingColors G
+        (ett.series.data.coloring terminal) choice.vertex := by
+      rw [MissingColors]
+      simp only [Finset.mem_sdiff]
+      refine ⟨Finset.mem_univ _, ?_⟩
+      intro hpresent
+      simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+        true_and] at hpresent
+      rcases hpresent with ⟨f, hfIncident, hfCurrent⟩
+      rw [hTerminalEq, currentColoring] at hfCurrent
+      by_cases hfComponent : Sum.inr f ∈
+          TwoColorComponent G secondStable gamma choice.color
+            (Sum.inl choice.vertex)
+      · by_cases hfg : secondStable f = some gamma
+        · have hp : gamma ∈ PresentColors G secondStable choice.vertex := by
+            simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+              true_and]
+            exact ⟨f, hfIncident, hfg⟩
+          have hnot : gamma ∉ PresentColors G secondStable choice.vertex := by
+            simpa [MissingColors] using hGammaSecond
+          exact hnot hp
+        · by_cases hfd : secondStable f = some choice.color
+          · have heq : choice.color = gamma := by
+              simpa [TwoColorComponentSwap, hfComponent, hfg, hfd,
+                hGammaDelta] using hfCurrent
+            exact hGammaDelta heq.symm
+          · simp [TwoColorComponentSwap, hfComponent, hfg, hfd] at hfCurrent
+      · have hfd : secondStable f = some choice.color := by
+          simpa [TwoColorComponentSwap, hfComponent] using hfCurrent
+        by_cases hfeq : f = choice.edge
+        · subst f
+          exact hfComponent hChoiceComponent
+        · exact (secondStableProper hfeq
+            ⟨choice.vertex, hfIncident, choice.edgeIncident⟩
+            hfd hChoiceSecond).elim
+    have hFixAway : ∀ (x : V),
+        x ∈ TreeSequenceVertexSet
+            (ett.series.data.tree terminal.castSucc) →
+        x ≠ choice.vertex → ∀ (f : E), Incident G x f →
+          ett.series.data.coloring terminal f = secondStable f := by
+      intro x hx hxne f hxf
+      rw [hTerminalEq, currentColoring]
+      by_cases hfComponent : Sum.inr f ∈
+          TwoColorComponent G secondStable gamma choice.color
+            (Sum.inl choice.vertex)
+      · have htreeIncident : TreeIncidentEdge
+            (ett.series.data.tree terminal.castSucc) f := ⟨x, hx, hxf⟩
+        have hfeq := hOnlyIncidentComponent f htreeIncident hfComponent
+        subst f
+        have hxComponent : Sum.inl x ∈
+            TwoColorComponent G secondStable gamma choice.color
+              (Sum.inl choice.vertex) := by
+          change (TwoColorIncidenceGraph G secondStable gamma choice.color).connectedComponentMk
+              (Sum.inl x) =
+            (TwoColorIncidenceGraph G secondStable gamma choice.color).connectedComponentMk
+              (Sum.inl choice.vertex)
+          exact
+            (SimpleGraph.ConnectedComponent.connectedComponentMk_eq_of_adj
+              (by simp [TwoColorIncidenceGraph, hxf, hChoiceSecond])).trans
+              hChoiceComponent
+        exact (hxne ((hComponentSecond x hx).mp hxComponent)).elim
+      · simp [TwoColorComponentSwap, hfComponent]
+    have hMissingAway : ∀ (x : V),
+        x ∈ TreeSequenceVertexSet
+            (ett.series.data.tree terminal.castSucc) →
+        x ≠ choice.vertex →
+          MissingColors G (ett.series.data.coloring terminal) x =
+            MissingColors G secondStable x := by
+      intro x hx hxne
+      have hPresent : PresentColors G
+          (ett.series.data.coloring terminal) x =
+          PresentColors G secondStable x := by
+        ext c
+        simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+          true_and]
+        constructor
+        · rintro ⟨f, hxf, hfc⟩
+          exact ⟨f, hxf, by rw [← hFixAway x hx hxne f hxf]; exact hfc⟩
+        · rintro ⟨f, hxf, hfc⟩
+          exact ⟨f, hxf, by rw [hFixAway x hx hxne f hxf]; exact hfc⟩
+      simp only [MissingColors, hPresent]
+    have hMissingSupportOfNeDelta : ∀ (c : Fin k),
+        c ∈ MissingColors G (ett.series.data.coloring terminal)
+            choice.vertex →
+        c ≠ choice.color → c ∈ MissingColors G secondStable choice.vertex := by
+      intro c hcCurrent hcDelta
+      by_contra hcSecond
+      have hcPresent : c ∈ PresentColors G secondStable choice.vertex := by
+        simpa [MissingColors] using hcSecond
+      simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+        true_and] at hcPresent
+      rcases hcPresent with ⟨f, hxf, hfc⟩
+      by_cases hfComponent : Sum.inr f ∈
+          TwoColorComponent G secondStable gamma choice.color
+            (Sum.inl choice.vertex)
+      · have hfeq := hOnlyIncidentComponent f
+          ⟨choice.vertex, hSupportTree, hxf⟩ hfComponent
+        subst f
+        exact hcDelta (Option.some.inj (hfc.symm.trans hChoiceSecond))
+      · have hCurrentColor : ett.series.data.coloring terminal f = some c := by
+          rw [hTerminalEq, currentColoring]
+          simpa [TwoColorComponentSwap, hfComponent] using hfc
+        have hcNotPresent : c ∉ PresentColors G
+            (ett.series.data.coloring terminal) choice.vertex := by
+          simpa [MissingColors] using hcCurrent
+        exact hcNotPresent (by
+          simp only [PresentColors, Finset.mem_filter, Finset.mem_univ,
+            true_and]
+          exact ⟨f, hxf, hCurrentColor⟩)
+    have hCurrentElementary : ColoredVertexSetElementary G
+        (ett.series.data.coloring terminal)
+        (TreeSequenceVertexSet
+          (ett.series.data.tree terminal.castSucc)) := by
+      intro u hu v hv huv
+      apply Finset.disjoint_left.mpr
+      intro c hcu hcv
+      by_cases huSupport : u = choice.vertex
+      · subst u
+        have hvSupport : v ≠ choice.vertex := by
+          intro heq
+          exact huv heq.symm
+        have hcvSecond : c ∈ MissingColors G secondStable v := by
+          rw [← hMissingAway v hv hvSupport]
+          exact hcv
+        by_cases hcDelta : c = choice.color
+        · subst c
+          apply hDeltaNotTreeSecond
+          rw [TreeMissingColors]
+          exact Finset.mem_biUnion.mpr ⟨v, hv, hcvSecond⟩
+        · have hcuSecond := hMissingSupportOfNeDelta c hcu hcDelta
+          exact (Finset.disjoint_left.mp
+            (hSecondElementary hSupportTree hv huv)) hcuSecond hcvSecond
+      · by_cases hvSupport : v = choice.vertex
+        · subst v
+          have hcuSecond : c ∈ MissingColors G secondStable u := by
+            rw [← hMissingAway u hu huSupport]
+            exact hcu
+          by_cases hcDelta : c = choice.color
+          · subst c
+            apply hDeltaNotTreeSecond
+            rw [TreeMissingColors]
+            exact Finset.mem_biUnion.mpr ⟨u, hu, hcuSecond⟩
+          · have hcvSecond := hMissingSupportOfNeDelta c hcv hcDelta
+            exact (Finset.disjoint_left.mp
+              (hSecondElementary hu hSupportTree huv)) hcuSecond hcvSecond
+        · have hcuSecond : c ∈ MissingColors G secondStable u := by
+            rw [← hMissingAway u hu huSupport]
+            exact hcu
+          have hcvSecond : c ∈ MissingColors G secondStable v := by
+            rw [← hMissingAway v hv hvSupport]
+            exact hcv
+          exact (Finset.disjoint_left.mp (hSecondElementary hu hv huv))
+            hcuSecond hcvSecond
+    have hSigmaElementary : ColoredVertexSetElementary G sigma
+        (TreeSequenceVertexSet
+          (ett.series.data.tree terminal.castSucc)) := by
+      intro u hu v hv huv
+      rw [hStableTerminal.2 u hu, hStableTerminal.2 v hv]
+      exact hCurrentElementary hu hv huv
+    have hDeltaSigma : choice.color ∈ MissingColors G sigma
+        choice.vertex := by
+      rw [hStableTerminal.2 choice.vertex hSupportTree]
+      exact hDeltaCurrentMissing
+    have hBoundaryFacts := HkuParallelBoundaryStructure G k ett.rounds e0
+      input ett.series previous choice.edge choice.color gamma choice.vertex
+      currentKind currentEdges currentDelta currentGamma currentVertex
+    have hPreviousElementaryBoundary : ColoredVertexSetElementary G
+        (ett.series.data.coloring previous.castSucc)
+        (TreeSequenceVertexSet
+          (ett.series.data.tree previous.succ.castSucc)) := by
+      intro u hu v hv huv
+      apply hPreviousElementary
+      · simpa only [hTreeEq] using hu
+      · simpa only [hTreeEq] using hv
+      · exact huv
+    have hGammaNotCurrent : gamma ∉ TreeMissingColors
+        (ett.series.data.coloring terminal)
+          (ett.series.data.tree terminal.castSucc) := by
+      intro hmissing
+      have hempty := hBoundaryFacts.2.2 hPreviousElementaryBoundary gamma
+        (by simpa only [hTerminalEq] using hmissing) hGammaDelta
+      have hsingleton := hBoundaryFacts.1
+      rw [hempty] at hsingleton
+      simp at hsingleton
+    have hGammaNotSigma : gamma ∉ TreeMissingColors sigma
+        (ett.series.data.tree terminal.castSucc) := by
+      intro hmissing
+      rw [TreeMissingColors] at hmissing
+      rcases Finset.mem_biUnion.mp hmissing with ⟨v, hv, hvmissing⟩
+      apply hGammaNotCurrent
+      rw [TreeMissingColors]
+      refine Finset.mem_biUnion.mpr ⟨v, hv, ?_⟩
+      rw [← hStableTerminal.2 v hv]
+      exact hvmissing
+    rcases choice.edgeDefective with
+      ⟨edgeColor, hDefectiveColor, hChoiceBoundaryColor⟩
+    have hEdgeColorEq : edgeColor = choice.color := by
+      apply Option.some.inj
+      exact (Finset.mem_filter.mp hChoiceBoundaryColor).2.symm.trans
+        choice.edgeColor
+    subst edgeColor
+    have hBoundaryCard : 1 <
+        (BoundaryColorEdges G choice.selected
+          (TreeSequenceVertexSet
+            (ett.series.data.tree terminal.castSucc)) choice.color).card := by
+      have hcard : 2 ≤
+          (BoundaryColorEdges G choice.selected
+            (TreeSequenceVertexSet
+              (ett.series.data.tree terminal.castSucc)) choice.color).card := by
+        unfold DefectiveColor at hDefectiveColor
+        simpa only [hTreeEq] using hDefectiveColor
+      omega
+    obtain ⟨a, ha, b, hb, hab⟩ := Finset.one_lt_card.mp hBoundaryCard
+    obtain ⟨g, hgBoundarySelected, hgNe⟩ :
+        ∃ g, g ∈ BoundaryColorEdges G choice.selected
+            (TreeSequenceVertexSet
+              (ett.series.data.tree terminal.castSucc)) choice.color ∧
+          g ≠ choice.edge := by
+      by_cases hae : a = choice.edge
+      · exact ⟨b, hb, by
+          intro hbe
+          exact hab (hae.trans hbe.symm)⟩
+      · exact ⟨a, ha, hae⟩
+    have hgBoundary : g ∈ BoundaryEdges G
+        (TreeSequenceVertexSet
+          (ett.series.data.tree terminal.castSucc)) :=
+      (Finset.mem_filter.mp hgBoundarySelected).1
+    have hgSelected : choice.selected g = some choice.color :=
+      (Finset.mem_filter.mp hgBoundarySelected).2
+    have hgSecond : secondStable g = some choice.color := by
+      have hfix := hSecondStable.1 g (boundaryIncident hgBoundary)
+        ⟨choice.color, Finset.mem_union_right _
+          (Finset.mem_insert_self _ _), hgSelected⟩
+      exact hfix.trans hgSelected
+    have hgOutside : Sum.inr g ∉
+        TwoColorComponent G secondStable gamma choice.color
+          (Sum.inl choice.vertex) := by
+      intro hgComponent
+      have htree := boundaryIncident hgBoundary
+      have hgeq := hOnlyIncidentComponent g htree hgComponent
+      exact hgNe hgeq
+    have hgCurrent : ett.series.data.coloring terminal g =
+        some choice.color := by
+      rw [hTerminalEq, currentColoring]
+      simpa [TwoColorComponentSwap, hgOutside] using hgSecond
+    have hgBoundaryCurrent : g ∈ BoundaryColorEdges G
+        (ett.series.data.coloring terminal)
+        (TreeSequenceVertexSet
+          (ett.series.data.tree terminal.castSucc)) choice.color := by
+      simp only [BoundaryColorEdges, Finset.mem_filter]
+      exact ⟨hgBoundary, hgCurrent⟩
+    obtain ⟨common, hCommonOrder, hCommonIncident⟩ :=
+      hBoundaryFacts.2.1 g (by
+        simpa only [hTerminalEq] using hgBoundaryCurrent)
+    have hCommonOrderTerminal : TreeVertexOrder
+        (ett.series.data.tree terminal.castSucc) common choice.vertex := by
+      simpa only [hTreeEq] using hCommonOrder
+    have hCommonTree : common ∈ TreeSequenceVertexSet
+        (ett.series.data.tree terminal.castSucc) := by
+      rcases hCommonOrderTerminal with ⟨i, j, hi, hj, hij⟩
+      rw [← hi]
+      simp [TreeSequenceVertexSet]
+    have hCommonNe : common ≠ choice.vertex := by
+      intro heq
+      rcases hCommonOrderTerminal with ⟨i, j, hi, hj, hij⟩
+      have hijEq : i = j := by
+        apply (ett.series.data.tree terminal.castSucc).vertex_injective
+        exact hi.trans (hj.trans heq.symm).symm
+      omega
+    have hBaseParallel := base.parallel hPE
+    have hSupportPosition : choice.vertex =
+        (ett.series.data.tree terminal.castSucc).vertex
+          base.supportPosition := by
+      apply Option.some.inj
+      exact currentVertex.symm.trans (by
+        simpa only [hTerminalLast, terminal] using hBaseParallel.1)
+    let supportPrefix := TreeSequencePrefix
+      (ett.series.data.tree terminal.castSucc)
+      base.supportPosition.val base.supportPositive
+      (Nat.le_of_lt_succ base.supportPosition.isLt)
+    have hPrefixClosure : TashkinovClosure sigma supportPrefix base.closure := by
+      simpa only [supportPrefix, terminal] using hBaseParallel.2.1
+    have initialVertices : ∀ {A B : TreeSequence G e0},
+        TreeSequenceInitialSegment A B →
+          TreeSequenceVertexSet A ⊆ TreeSequenceVertexSet B := by
+      intro A B hAB x hx
+      simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+        true_and] at hx ⊢
+      rcases hx with ⟨i, hi⟩
+      rcases hAB with ⟨hlen, hvertices, hedges⟩
+      exact ⟨Fin.castLE (Nat.succ_le_succ hlen) i,
+        (hvertices i).trans hi⟩
+    have vertexReach : ∀ {A B : TreeSequence G e0},
+        TashkinovAugmentationSequence sigma A B →
+          TreeSequenceVertexSet A ⊆ TreeSequenceVertexSet B := by
+      intro A B hAB
+      unfold TashkinovAugmentationSequence at hAB
+      induction hAB using Relation.ReflTransGen.head_induction_on with
+      | refl => exact Finset.Subset.rfl
+      | @head A B hstep htail ih =>
+        exact fun x hx => ih (initialVertices hstep.2.1 hx)
+    have hPrefixSubset : TreeSequenceVertexSet supportPrefix ⊆
+        TreeSequenceVertexSet base.closure := vertexReach hPrefixClosure.1
+    have hSupportPrefix : choice.vertex ∈ TreeSequenceVertexSet supportPrefix := by
+      simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+        true_and]
+      let i : Fin (base.supportPosition.val + 1) :=
+        ⟨base.supportPosition.val, Nat.lt_succ_self _⟩
+      refine ⟨i, ?_⟩
+      change (ett.series.data.tree terminal.castSucc).vertex
+          (Fin.castLE
+            (Nat.succ_le_succ
+              (Nat.le_of_lt_succ base.supportPosition.isLt)) i) =
+        choice.vertex
+      rw [hSupportPosition]
+      apply congrArg (ett.series.data.tree terminal.castSucc).vertex
+      apply Fin.ext
+      rfl
+    have hCommonPrefix : common ∈ TreeSequenceVertexSet supportPrefix := by
+      rcases hCommonOrderTerminal with ⟨i, j, hi, hj, hij⟩
+      have hjSupport : j = base.supportPosition := by
+        apply (ett.series.data.tree terminal.castSucc).vertex_injective
+        exact hj.trans hSupportPosition
+      rw [hjSupport] at hij
+      simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+        true_and]
+      let i' : Fin (base.supportPosition.val + 1) := ⟨i.val, by omega⟩
+      refine ⟨i', ?_⟩
+      change (ett.series.data.tree terminal.castSucc).vertex
+          (Fin.castLE
+            (Nat.succ_le_succ
+              (Nat.le_of_lt_succ base.supportPosition.isLt)) i') = common
+      have hiEq : Fin.castLE
+          (Nat.succ_le_succ
+            (Nat.le_of_lt_succ base.supportPosition.isLt)) i' = i := by
+        apply Fin.ext
+        rfl
+      rw [hiEq]
+      exact hi
+    have hSupportClosure : choice.vertex ∈
+        TreeSequenceVertexSet base.closure := hPrefixSubset hSupportPrefix
+    have hCommonClosure : common ∈
+        TreeSequenceVertexSet base.closure := hPrefixSubset hCommonPrefix
+    have hDegree : MaximumDegree G + 1 ≤ k := by
+      have hinitial := ett.series.certified (0 : Fin (ett.rounds + 1))
+      cases hinitial with
+      | initial triple seedLength initialColoring initialStored initialEdges
+          initialKind initialVertex initialOutside initialDelta initialGamma
+          initialClosure => exact triple.2.2.1
+    have hCommonMissing : (MissingColors G sigma common).Nonempty :=
+      MissingColorsNonemptyOfMaximumDegree G sigma hDegree common
+    refine ⟨choice.vertex, common, gamma, choice.color, ?_, ?_, ?_,
+      hSupportTree, hSupportClosure, hCommonTree, hCommonClosure, hCommonNe,
+      hDeltaSigma, hGammaNotSigma, hCommonMissing, hSigmaElementary⟩
+    · simpa only [hTerminalLast] using currentVertex
+    · simpa only [hTerminalLast] using currentGamma
+    · simpa only [hTerminalLast] using currentDelta
