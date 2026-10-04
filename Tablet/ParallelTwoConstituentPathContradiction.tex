@@ -1,0 +1,62 @@
+\begin{helper}[Two-constituent path contradiction]
+Let $A,B,U$ be tree-sequences with $U$ an ordered union of $A$ and $B$
+under a proper coloring $\sigma$.  Suppose $A$ and $B$ are elementary and
+$B$ is closed.  Let distinct vertices $s,w$ lie in both constituents, let
+$\delta$ be missing at $s$, let $\gamma$ be missing nowhere on $A$, and
+suppose $w$ has a missing color.  Assume that any two colors missing on $A$
+and avoiding $\{\gamma,\delta\}$ are $A$-interchangeable, and that every
+pair with a color missing on $B$ is $B$-interchangeable.  Then $U$ is
+elementary under $\sigma$.
+\end{helper}
+\begin{proof}
+Assume that $U$ is not elementary.  Expanding
+\noderef{ColoredVertexSetElementary}, choose distinct vertices $u,v$ in
+$V(U)$ with a common missing color $\alpha$.  The exact vertex-set equality
+in \noderef{OrderedTreeUnion} says $V(U)=V(A)\cup V(B)$.  Elementarity of
+each constituent rules out both vertices lying in $A$ and rules out both
+lying in $B$.  After interchanging their names, therefore,
+\[
+ u\in V(A)-V(B),\qquad v\in V(B)-V(A).
+\]
+In particular $u,v,w,s$ have the distinctness relations forced by these set
+memberships and by $w\ne s$.
+
+Because $s,v\in V(B)$ are distinct, $\delta$ missing at $s$ and elementarity
+of $B$ imply $\alpha\ne\delta$.  Since $u\in V(A)$ and $\gamma$ is missing
+nowhere on $A$, $\alpha\ne\gamma$.  Choose
+$\beta\in\overline\sigma(w)$ using the assumed nonempty missing-color set.
+Elementarity of $B$ at the distinct vertices $w,s$ gives
+$\beta\ne\delta$, while absence of a tree-missing $\gamma$ on $A$ gives
+$\beta\ne\gamma$.  Finally, $u\ne w$ and elementarity of $A$ give
+$\alpha\ne\beta$.
+
+The colors $\alpha,\beta$ are missing on $A$ at $u,w$, respectively, and
+both avoid $\{\gamma,\delta\}$, so the first interchangeability hypothesis
+makes them $A$-interchangeable.  They are missing on $B$ at $v,w$, so the
+second hypothesis makes them $B$-interchangeable.  Closedness of $B$ in the
+sense of \noderef{ColoredVertexSetClosed} also says that neither missing
+color occurs on a boundary edge of $B$; hence the relevant two-color
+components through its vertices cannot leave $B$.
+
+Consider the two-color components through $v$ and $w$.  At $v$, the color
+$\alpha$ is missing.  Since $\beta$ is missing at the distinct vertex $w$
+and $B$ is elementary, $\beta$ is present at $v$.  Similarly $\beta$ is
+missing and $\alpha$ is present at $w$.  The definition
+\noderef{PresentColors} therefore makes both components nontrivial, and
+properness gives degree exactly one at the vertex-nodes $v,w$ in the
+$(\alpha,\beta)$ incidence graph.  By
+\noderef{TwoColorComponentSpanningPath}, each component has a spanning
+simple path and hence satisfies \noderef{TwoColorPathComponent}.  The
+definition \noderef{TreeInterchangeable} says that
+$B$-interchangeability identifies the two components, so its spanning path
+has degree-one ends $v$ and $w$.
+
+The identical argument in $A$, using the components through $u$ and $w$,
+shows that their common component has a spanning path with degree-one ends
+$u$ and $w$.  Both common components are the full connected component
+through $w$, hence are equal by \noderef{TwoColorComponent}.  The three
+vertices $u,v,w$ are distinct, and each has degree one in this single
+component.  But a simple path has only its two ends of degree one, a
+contradiction.  Therefore no two distinct vertices of $U$ share a missing
+color, which is exactly its elementarity.
+\end{proof}

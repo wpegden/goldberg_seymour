@@ -1,0 +1,46 @@
+\begin{helper}[Terminal-ladder interchangeability away from the PE pair]
+Under the terminal parallel hypotheses and the condition (5.1) induction
+context (lower assertions (i)--(vi) and current assertions (iii)--(vi)), let
+$v_n,\gamma_n,\delta_n$ be the exact support and color fields of
+the last PE step.  If $\alpha$ and $\beta$ are both missing on $T_n$ under
+$\sigma_n$ and neither belongs to $\{\gamma_n,\delta_n\}$, then they are
+$T_n$-interchangeable under $\sigma_n$, with isolated path components
+included.
+\end{helper}
+\begin{proof}
+Apply current assertion (iv) from \noderef{TechnicalInductionContext} to the
+given terminal PE, the exact support and color identities, and the proper
+stable coloring $\sigma_n$.  It says that the
+$(\gamma_n,\delta_n)$-component through $v_n$ meets $V(T_n)$ only at
+$v_n$.  Therefore \noderef{ParallelExtensionUndoStable} applies to the
+component swap
+\[
+ \tau=\sigma_n/P_{v_n}(\gamma_n,\delta_n,\sigma_n)
+\]
+and makes $\tau$ stable on the preceding terminal ladder data
+$(T_n,D_{n-1},\varphi_{n-1})$.
+
+The PE certificate in \noderef{TashkinovSeriesStep} gives
+$\gamma_n\ne\delta_n$, so
+\noderef{TwoColorComponentSwapProper} transports properness from
+$\sigma_n$ to $\tau$.  The definition \noderef{TwoColorComponentSwap}
+fixes every uncolored value and sends colored values to colored values;
+hence \noderef{IsOneEdgeUncolored} is also preserved.  It changes only
+values $\gamma_n$ and $\delta_n$.  Since $\alpha$ and $\beta$ avoid those
+two colors, an exact edge has color $\alpha$ or $\beta$ under $\tau$ if and
+only if it has that same color under $\sigma_n$.  Thus the two
+$(\alpha,\beta)$ incidence graphs agree edge for edge.  In particular their
+connected components, isolated components, path-component predicates, and
+the missingness of $\alpha,\beta$ on $T_n$ agree.
+
+If $n>1$, \noderef{CertifiedETTRestriction} at rung $n-1$ gives the actual
+positive lower-rung maximum ETT whose next ladder tree is $T_n$.  Lower
+assertion (ii) in \noderef{TechnicalInductionContext}, applied to the stable
+coloring $\tau$, gives $T_n$-interchangeability under $\tau$.  If $n=1$,
+the interchangeability clause of \noderef{TechnicalTheoremBase} applied to
+the original initial tuple gives the same conclusion.  Finally, equality of
+the two incidence graphs transports every full component equality in the
+definition \noderef{TreeInterchangeable} from $\tau$ back to $\sigma_n$.
+This proves the assertion, including when one of the path components is an
+isolated vertex.
+\end{proof}

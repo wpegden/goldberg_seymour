@@ -25,6 +25,10 @@ import Tablet.ModColoring
 import Tablet.OrderedTreeUnion
 import Tablet.ParallelExtensionColor
 import Tablet.ParallelExtensionUndoStable
+import Tablet.ParallelSupportClosureProperties
+import Tablet.ParallelTerminalAwayInterchangeable
+import Tablet.ParallelTerminalPEPreprocessing
+import Tablet.ParallelTwoConstituentPathContradiction
 import Tablet.PresentColors
 import Tablet.SameColorSeriesPreserved
 import Tablet.StableColoring
@@ -36,6 +40,7 @@ import Tablet.TashkinovSeriesStep
 import Tablet.TashkinovStoredColors
 import Tablet.Td
 import Tablet.TechnicalTheoremBase
+import Tablet.TechnicalInductionContext
 import Tablet.TreeIncidentEdge
 import Tablet.TreeInterchangeable
 import Tablet.TreeMissingColors
@@ -177,4 +182,77 @@ theorem ParallelClosureUnionElementary {V E : Type*}
     ColoredVertexSetElementary G sigma
       (TreeSequenceVertexSet baseSigma.core) := by
 -- BODY
-  sorry
+  classical
+  have ctx : TechnicalInductionContext G k e0 ett.rounds := by
+    refine {
+      lowerOne := ?_
+      lowerTwo := ?_
+      lowerThree := ?_
+      lowerFour := ?_
+      lowerFive := ?_
+      lowerSix := ?_
+      currentThree := ?_
+      currentFour := ?_
+      currentFive := ?_
+      currentSix := ?_ }
+    · intro input' T' generating' lower hp hlt hmax
+      exact (hlower lower hp hlt hmax).1
+    · intro input' T' generating' lower hp hlt hmax
+      exact (hlower lower hp hlt hmax).2.1
+    · intro input' T' generating' lower hp hlt hmax
+      exact (hlower lower hp hlt hmax).2.2.1
+    · intro input' T' generating' lower hp hlt hmax
+      exact (hlower lower hp hlt hmax).2.2.2.1
+    · intro input' T' generating' lower hp hlt hmax
+      exact (hlower lower hp hlt hmax).2.2.2.2.1
+    · intro input' T' generating' lower hp hlt hmax
+      exact (hlower lower hp hlt hmax).2.2.2.2.2
+    · intro input' T' generating' current hround hmax
+      apply ExtensionRules G k e0 input' T' generating' current hmax
+        current.roundsPositive
+      intro lowerT lowerGenerating lower hp hlt lowerMax
+      apply hlower lower hp (by omega) lowerMax
+    · intro input' T' generating' current hround hmax
+      apply ExtensionBase G k e0 input' T' generating' current hmax
+        current.roundsPositive
+      intro lowerInput lowerT lowerGenerating lower hp hlt lowerMax
+      apply hlower lower hp (by omega) lowerMax
+    · intro input' T' generating' current hround hmax
+      apply Basic2 G k e0 input' T' generating' current hmax
+        current.roundsPositive
+      intro lowerInput lowerT lowerGenerating lower hp hlt lowerMax
+      apply hlower lower hp (by omega) lowerMax
+    · intro input' T' generating' current hround hmax
+      apply Td G k e0 input' T' generating' current hmax
+        current.roundsPositive
+      intro lowerInput lowerT lowerGenerating lower hp hlt lowerMax
+      apply hlower lower hp (by omega) lowerMax
+  let n : Fin (ett.rounds + 1) := Fin.last ett.rounds
+  let Tn : TreeSequence G e0 := ett.series.data.tree n.castSucc
+  have hpre := ParallelTerminalPEPreprocessing G k e0 input T phi ett ctx
+    hMP hpositive hPE sigma hproper hone hstable baseSigma
+  dsimp at hpre
+  rcases hpre with
+    ⟨support, common, gamma, delta, hsupport, hgamma, hdelta,
+      hsupportT, hsupportJ, hcommonT, hcommonJ, hcommonNe,
+      hdeltaMissing, hgammaNotMissing, hcommonMissing, hTElementary⟩
+  have hclosure := ParallelSupportClosureProperties G k e0 input T phi ett
+    ctx hMP hpositive hPE sigma hproper hone hstable baseSigma
+  rcases hclosure with ⟨hJElementary, hJClosed, hJInterchangeable⟩
+  have hTInterchangeable :=
+    ParallelTerminalAwayInterchangeable G k e0 input T phi ett ctx hMP
+      hpositive hPE sigma hproper hone hstable support gamma delta
+      hsupport hgamma hdelta
+  dsimp at hTInterchangeable
+  have hunion : Nonempty (OrderedTreeUnion Tn baseSigma.closure baseSigma.core) := by
+    simpa [n, Tn] using (baseSigma.parallel hPE).2.2
+  apply ParallelTwoConstituentPathContradiction G k e0 sigma Tn
+    baseSigma.closure baseSigma.core hunion hproper hTElementary
+    hJElementary hJClosed support common gamma delta hsupportT hsupportJ
+    hcommonT hcommonJ hcommonNe hdeltaMissing hgammaNotMissing
+    hcommonMissing
+  · intro alpha beta halpha hbeta halphaGamma halphaDelta hbetaGamma
+      hbetaDelta
+    exact hTInterchangeable alpha beta halpha hbeta halphaGamma halphaDelta
+      hbetaGamma hbetaDelta
+  · exact hJInterchangeable
