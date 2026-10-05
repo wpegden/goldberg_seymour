@@ -1,0 +1,59 @@
+\begin{helper}[A maximal fixed-Gamma augmentation chain]
+Let $J$ carry a hierarchy $K_J$ and a good witness $\mathcal G_J$ under a
+coloring $\sigma$.  Put $d=K_J.\mathit{dividerCount}$,
+$A=K_J.\mathit{starred}(d)$, $D=D^{K_J}_{n,d}$, and
+$\Gamma_\eta=\mathcal G_J.\Gamma^d_\eta$.  For an ordered tree $W$, let
+$C_W(\eta)$ be the colors on displayed edges whose positions are at least
+$|A|$ and strictly below both $|W|$ and the totalized first position in
+$W$ missing $\eta$.
+
+There are $m$, ordered trees $U_0=J,\ldots,U_m=U$, and a terminal tree
+$U$ such that each successor is one
+$\sigma$-\noderef{TashkinovAugmentation}, satisfies
+$\Gamma_\eta\cap C_{U_{r+1}}(\eta)=\varnothing$ for every $\eta\in D$,
+has length $|J|+r+1$, and properly enlarges the vertex set.  Every earlier
+$U_r$ is an exact ordered initial segment of every later $U_s$, the whole
+chain is a \noderef{TashkinovAugmentationSequence} from $J$ to $U$, and
+the endpoint satisfies the same avoidance conditions.  Moreover, $U$ has
+no one-step Tashkinov augmentation satisfying all of those fixed-Gamma
+avoidance conditions.
+\end{helper}
+\begin{proof}
+Let $d,A,D$, and $\Gamma_\eta$ be as in the statement.  By
+\noderef{HierarchySegmentColors}, $C_J(\eta)$ is the last-index segment
+color set in the avoidance field of \noderef{GoodHierarchy}.  Therefore
+that field gives
+$\Gamma_\eta\cap C_J(\eta)=\varnothing$ for every $\eta\in D$.
+
+Call a finite chain admissible when it starts at $J$, every successor is a
+one-step $\sigma$-\noderef{TashkinovAugmentation}, and every successor
+satisfies all the displayed fixed-Gamma avoidance conditions.  The
+length-zero chain is admissible by the preceding paragraph.  Every
+successor has length one more than its predecessor and contains it as an
+exact \noderef{TreeSequenceInitialSegment}, by the definition of
+Tashkinov augmentation.  Hence all old vertex positions have the same
+entries, and the successor has exactly one additional vertex position.
+Injectivity in \noderef{TreeSequence} makes that entry different from
+every old entry.  Thus the successor properly enlarges
+$\noderef{TreeSequenceVertexSet}$.
+
+After $q$ successors, the vertex set therefore contains $q$ distinct
+vertices in addition to $V(J)$.  Since $V$ is finite, $q\leq
+|V|-|V(J)|$.  The nonempty set of attainable chain lengths is consequently
+a subset of a finite interval of natural numbers, so it has a greatest
+member $m$.  Choose an admissible chain $U_0,\ldots,U_m$ of that length and
+put $U=U_m$.  An admissible one-step successor of $U$ could be appended to
+this chain, producing length $m+1$ and contradicting maximality.  This is
+exactly the asserted endpoint maximality.  Endpoint avoidance holds at
+$m=0$ by the initial good-hierarchy avoidance and, at $m>0$, by the
+admissibility condition on the last successor.
+
+Composition of the entrywise equalities in
+\noderef{TreeSequenceInitialSegment} proves by induction on $s-r$ that
+$U_r$ is an exact ordered initial segment of $U_s$ whenever $r\leq s$.
+The one-more length equations give $|U_r|=|J|+r$ by induction.  Finally,
+starting with the reflexive case and adjoining each one-step relation with
+the transitive-tail constructor proves, from the definition of
+\noderef{TashkinovAugmentationSequence}, that the complete chain is such a
+sequence from $J$ to $U$.  All claimed chain properties follow.
+\end{proof}

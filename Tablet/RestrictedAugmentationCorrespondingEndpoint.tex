@@ -1,0 +1,46 @@
+\begin{helper}[Corresponding maximum ETT at an augmented endpoint]
+Let $\mathcal E$ be a positive-rung ETT with maximum property, let
+$\sigma$ be a mod-coloring for $\mathcal E$, and suppose that $J$ carries
+a \noderef{CorrespondingExtendedTashkinovTree} certificate relative to
+$\mathcal E$ and $\sigma$.  If there is a
+$\sigma$-\noderef{TashkinovAugmentationSequence} from $J$ to $U$, then
+$U$ carries a corresponding ETT relative to the same original
+$\mathcal E$ and $\sigma$, and that replacement ETT has maximum property.
+\end{helper}
+\begin{proof}
+Let $T_n$ be the common last ladder tree.  The given corresponding
+certificate and \noderef{ExtendedTashkinovTree} give exact ordered initial
+segments $T_n\preccurlyeq J\preccurlyeq Z$, where $Z$ is the final tree of
+the replacement series, and $|T_n|<|J|$.  The augmentation sequence from
+$J$ to $U$ gives $J\preccurlyeq U$ by induction on
+\noderef{TashkinovAugmentation}; hence $T_n\preccurlyeq U$ and
+$|T_n|<|U|$.
+
+Inspect the certified last step of the replacement series.  Positivity of
+the rung excludes the initial constructor of
+\noderef{TashkinovSeriesStep}.  In the PE case its closure supplies a
+$\sigma$-augmentation sequence $T_n\leadsto Z$.  Applying
+\noderef{TashkinovAugmentationSequenceRestrict} to
+$T_n\preccurlyeq J\preccurlyeq Z$ yields $T_n\leadsto J$, and appending
+the given $J\leadsto U$ route yields $T_n\leadsto U$.
+
+In the SE or RE case, the last-step constructor supplies the individual
+connecting edge $f_n$, its exact one-edge seed $S=T_n+f_n$, and a closure
+route $S\leadsto Z$.  It also gives $|S|=|T_n|+1\leq |J|$.  Both $S$ and
+$J$ are exact prefixes of $Z$: the former follows along the closure route,
+and the latter is part of the corresponding ETT.  Comparing their entries
+through $|S|$ gives $S\preccurlyeq J$.  Restriction now yields
+$S\leadsto J$, which appends to $J\leadsto U$.  The singleton
+connecting-edge equation in the SE or RE constructor and connecting-edge
+agreement in \noderef{CorrespondingExtendedTashkinovTree} identify the
+same exact edge $f_n$ on the original series.
+
+Thus, in every possible last-step case, all hypotheses of the universal
+extension clause in \noderef{ModColoring} hold for $U$: the exact prefix
+and strict length conditions were proved above, and the appropriate PE or
+SE/RE augmentation route has just been constructed.  That clause supplies
+a corresponding ETT on $U$.  Finally
+\noderef{MaximumPropertyTransport}, applied to the original maximum
+property and this corresponding certificate, gives maximum property for
+the replacement ETT.
+\end{proof}

@@ -1,0 +1,39 @@
+\begin{helper}[A colored boundary edge gives an exact augmentation]
+Let $G$ be a finite loopless multigraph with distinguished edge $e_0$, let
+$\phi$ be a partial $k$-edge-coloring, and let $X$ be an ordered
+tree-sequence.  Suppose that an individual edge identity $f$ lies in
+$\noderef{BoundaryColorEdges}(G,\phi,V(X),c)$ and that
+$c\in\noderef{TreeMissingColors}(\phi,X)$.  Then there is an ordered
+tree-sequence $X^+$ such that
+$\noderef{TreeSequenceAdjoinEdge}(X,f,X^+)$,
+$\noderef{TashkinovAugmentation}(\phi,X,X^+)$, and
+$V(X)\subsetneq V(X^+)$.
+\end{helper}
+\begin{proof}
+By \noderef{BoundaryColorEdges}, $f$ is an edge in
+$\noderef{BoundaryEdges}(G,V(X))$ and $\phi(f)=c$.  Unfolding the boundary
+condition gives vertices $x\in V(X)$ and $y\notin V(X)$ such that the
+unordered endpoint pair of the exact identity $f$ is $\{x,y\}$.  Define
+$X^+$ to have length $|X|+1$.  Copy every old vertex and edge entry, put
+$y$ in the new last vertex position, and put $f$ in the new last edge
+position.
+
+We check that this is a \noderef{TreeSequence}.  Positivity is inherited
+from $X$.  The copied vertex entries remain injective, and the new entry
+$y$ differs from every copied entry because $y\notin V(X)$.  The copied
+edge entries remain injective.  The identity $f$ differs from every copied
+edge: both endpoints of an old displayed edge lie in $V(X)$ by the
+attachment axiom, whereas $f$ has the endpoint $y$ outside $V(X)$.  The
+first-edge equation and every old attachment equation are copied.  For the
+new attachment equation, choose the old vertex position occupied by $x$;
+symmetry of the unordered pair changes $\{x,y\}$ to $\{y,x\}$ as required.
+
+The copied entries give an exact initial segment from $X$ to $X^+$, and
+the length and last-edge equations give
+$\noderef{TreeSequenceAdjoinEdge}(X,f,X^+)$.  Together with
+$\phi(f)=c$ and $c\in\noderef{TreeMissingColors}(\phi,X)$, these same
+facts are precisely the fields of
+$\noderef{TashkinovAugmentation}(\phi,X,X^+)$.  Finally, the copied
+vertex entries and the fresh last entry give
+$V(X^+)=V(X)\cup\{y\}$, with $y\notin V(X)$, so the inclusion is proper.
+\end{proof}

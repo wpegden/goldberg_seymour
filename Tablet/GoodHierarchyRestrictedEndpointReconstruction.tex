@@ -1,0 +1,110 @@
+\begin{helper}[Reconstruction at a maximal restricted endpoint]
+Let corresponding ETTs on $J$ and $U$ be given for the same original ETT
+and coloring $\sigma$.  Suppose $J$ carries a hierarchy base $B_J$, a
+hierarchy $K_J$, and a good witness $\mathcal G_J$, and suppose there is a
+$\sigma$-\noderef{TashkinovAugmentationSequence} from $J$ to $U$.  Put
+$d=K_J.\mathit{dividerCount}$, $A=K_J.\mathit{starred}(d)$,
+$D=D^{K_J}_{n,d}$, and $\Gamma_\eta=\mathcal G_J.\Gamma^d_\eta$.  Assume
+that $\Gamma_\eta$ avoids the last-stage segment colors of $U$ for every
+$\eta\in D$, and that no one-step augmentation of $U$ satisfies all these
+same fixed-Gamma avoidance conditions.
+
+Then the corresponding ETT on $U$ has a hierarchy base $B_U$ with the
+same core, closure, and numerical supporting position as $B_J$, and a
+hierarchy $K_U$ with $d$ dividers.  Under the canonical index
+identification, all its nonterminal stages, starred stages, indexed stored
+sets, stage-missing sets, divider positions, and Gamma pairs agree with
+those of $K_J$.  Its terminal stored set is contained in $D$, and $U$ is
+minus-closed outside the union of the terminal Gamma pairs.
+\end{helper}
+\begin{proof}
+First compare the two corresponding certificates.  Their rung agreement,
+ladder-tree agreement, stored-set agreement, connecting-edge agreement,
+and extension-kind agreement with the same original ETT compose to give
+the analogous agreements from the replacement ETT on $J$ to the one on
+$U$.  Their stable-coloring fields compose by symmetry and transitivity of
+\noderef{StableColoring}; properness and the one-uncolored condition are
+those of the certificate on $U$.  Hence these data form an auxiliary
+\noderef{CorrespondingExtendedTashkinovTree} certificate whose base is the
+replacement ETT on $J$ and whose replacement ETT is the given one on $U$.
+Apply \noderef{HierarchyBaseCorrespondingTransport} to this auxiliary
+certificate and $B_J$.  It gives a base $B_U$ on the given replacement
+ETT with exactly the same core, closure, and numerical supporting
+position.  This also handles the PE support vertex: the cited transport
+lemma compares the exact chosen boundary-edge identities and their inside
+endpoints, rather than assuming uniqueness of a support vertex.
+
+Construct $K_U$ with divider count $d$, copy stages $0,\ldots,d$ from
+$K_J$, and take $U$ as stage $d+1$.  Each old nestedness and strictness
+field copies.  For the last field, the last old starred stage is an exact
+prefix of $J$, while the given augmentation sequence makes $J$ an exact
+prefix of $U$; composition gives the required last nesting, and the old
+strictness already makes it strict.  Embed every old divider position into
+$\operatorname{Fin}(|U|+1)$ using $|J|\leq |U|$.  The numerical values,
+positivity, and strict increase do not change.
+
+For an old divider position $p$, the divider-stage field of
+\noderef{TashkinovHierarchy} identifies its stage with
+$\noderef{TreeSequencePrefix}(J,p)$.  Exact prefix equality between $J$
+and $U$ makes this equal, vertex by vertex and edge by edge, to the prefix
+of $U$ through $p$; proof irrelevance handles the structure's propositional
+fields.  The core-inside-first field copies when $d>0$.  When $d=0$, it
+follows by composing the old core-to-$J$ prefix with $J\preccurlyeq U$ and
+using the reconstructed core equality.  These observations verify every
+field of $K_U$.  They also give the claimed stage and divider equalities;
+the definitions of \noderef{HierarchyStarredStage},
+\noderef{HierarchyStoredColorsAt}, and
+\noderef{HierarchyStageMissingColors} then give the remaining indexed
+equalities.
+
+Define the Gamma pairs of $\mathcal G_U$ by copying those of
+$\mathcal G_J$ under this index identification.  Pair cardinality,
+pairwise disjointness, every unique-refresh clause, the PE base clause, and
+all internal minus-closed clauses of \noderef{GoodHierarchy} involve only
+the copied data, so they transport directly.  Avoidance at $j<d$ also
+copies because both adjacent stages are unchanged.  At $j=d$, the assumed
+endpoint avoidance is exactly the required disjointness from
+$\noderef{HierarchySegmentColors}$: its displayed filter uses the fixed
+starred stage $A$, the terminal stage $U$, and
+$\noderef{HierarchyFirstMissingPosition}(\sigma,U,\eta)$.  This remains
+true in the no-missing case because that definition uses the last vertex
+as its totalized fallback.  Thus $\mathcal G_U$ is a good witness and all
+claimed Gamma equalities hold.
+
+It remains to compare terminal stored sets and prove minus-closedness.
+Unfold \noderef{TashkinovStoredColors},
+\noderef{HierarchyStoredColorsAt}, and
+\noderef{HierarchyTerminalStoredColors}.  The corresponding certificates
+identify the raw stored sets and the last ladder tree.  If $R$ is their
+common raw union, exact prefix composition gives
+$T_n\preccurlyeq A\preccurlyeq J\preccurlyeq U$, and the union definition
+in \noderef{TreeMissingColors} gives
+$\overline\sigma(T_n)\subseteq\overline\sigma(A)\subseteq
+\overline\sigma(U)$.  Elementwise difference calculation therefore gives
+\[
+ D^{K_U}_{n,d+1}=R\setminus\overline\sigma(U),\qquad
+ D^{K_J}_{n,d}=R\setminus\overline\sigma(A).
+\]
+The first set is contained in the second.
+
+Suppose the desired \noderef{TreeColorSetMinusClosed} conclusion fails.
+Then some color $c$ is missing on $U$, lies outside every Gamma pair whose
+index is in $D^{K_U}_{n,d+1}$, and has a $c$-colored boundary identity
+$f$.  By \noderef{BoundaryMissingColorAugmentation}, adjoining $f$ gives
+an exact one-step Tashkinov augmentation $W=U+f$.
+
+Fix $\eta\in D$.  If $\eta\in D^{K_U}_{n,d+1}$, then
+$c\notin\Gamma_\eta$.  Every old segment color of $W$ already occurs in
+the segment for $U$, and the only possible new color is $c$ on the new
+last edge, so endpoint avoidance persists.  This covers both a genuine
+first missing position and the totalized last-position fallback.  If
+$\eta\notin D^{K_U}_{n,d+1}$, the displayed stored-set formulas and
+$\eta\in D$ imply that $\eta$ is missing on $U$.  Its first missing
+position is at most $|U|$ and is unchanged in the exact extension; the new
+edge at position $|U|$ is therefore not strictly before it.  The segment
+color set is unchanged, so avoidance again persists.  Thus $W$ satisfies
+every fixed-Gamma condition, contradicting endpoint maximality.  No such
+$c$ and $f$ exist, which is exactly the asserted minus-closedness after
+unfolding \noderef{TreeColorSetClosed} and
+\noderef{TreeColorSetMinusClosed}.
+\end{proof}

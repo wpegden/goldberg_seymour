@@ -4,6 +4,8 @@ import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.DefectiveVertex
 import Tablet.ExtendedTashkinovTree
 import Tablet.GoodHierarchy
+import Tablet.GoodHierarchyRestrictedEndpointReconstruction
+import Tablet.GoodHierarchyRestrictedMaximalChain
 import Tablet.HierarchyBase
 import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchySegmentColors
@@ -33,6 +35,7 @@ import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequencePrefix
 import Tablet.TreeSequenceVertexSet
+import Tablet.RestrictedAugmentationCorrespondingEndpoint
 
 -- [TABLET NODE: GoodHierarchyRestrictedAugmentation]
 theorem GoodHierarchyRestrictedAugmentation {V E : Type*}
@@ -108,4 +111,19 @@ theorem GoodHierarchyRestrictedAugmentation {V E : Type*}
                   ((HierarchyTerminalStoredColors KU).biUnion
                     (goodU.gamma (Fin.last KU.dividerCount))) := by
 -- BODY
-  sorry
+  classical
+  obtain ⟨m, chain, U, hfirst, hlast, hsteps, hlengths, hsegments,
+      hvertices, hsequence, havoid, hmaximal⟩ :=
+    GoodHierarchyRestrictedMaximalChain G k e0 corrJ.replacementInput J sigma
+      baseJ KJ goodJ
+  obtain ⟨corrU, hMPU⟩ :=
+    RestrictedAugmentationCorrespondingEndpoint G k e0 input T generating sigma
+      ett hmod hMP J U corrJ hsequence
+  obtain ⟨baseU, hcore, hclosure, hsupport, KU, hcount, hstages,
+      hdividers, goodU, hgamma, hstored, hminus⟩ :=
+    GoodHierarchyRestrictedEndpointReconstruction G k e0 input T generating
+      sigma ett J U corrJ baseJ KJ goodJ corrU hsequence havoid hmaximal
+  exact ⟨m, chain, U, hfirst, hlast, hsteps, hlengths, hsegments,
+    hvertices, hsequence, havoid, hmaximal, corrU, hMPU, baseU, hcore,
+    hclosure, hsupport, KU, hcount, hstages, hdividers, goodU, hgamma,
+    hstored, hminus⟩
