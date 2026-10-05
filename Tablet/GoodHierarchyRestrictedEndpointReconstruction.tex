@@ -18,93 +18,192 @@ those of $K_J$.  Its terminal stored set is contained in $D$, and $U$ is
 minus-closed outside the union of the terminal Gamma pairs.
 \end{helper}
 \begin{proof}
-First compare the two corresponding certificates.  Their rung agreement,
-ladder-tree agreement, stored-set agreement, connecting-edge agreement,
-and extension-kind agreement with the same original ETT compose to give
-the analogous agreements from the replacement ETT on $J$ to the one on
-$U$.  Their stable-coloring fields compose by symmetry and transitivity of
-\noderef{StableColoring}; properness and the one-uncolored condition are
-those of the certificate on $U$.  Hence these data form an auxiliary
-\noderef{CorrespondingExtendedTashkinovTree} certificate whose base is the
-replacement ETT on $J$ and whose replacement ETT is the given one on $U$.
+We first construct the correspondence needed to transport the hierarchy
+base.  Write $\mathcal E_J$ and $\mathcal E_U$ for the replacement ETTs
+in the certificates on $J$ and $U$.  Their rung-agreement fields identify
+both rung numbers with that of the original ETT.  After transporting every
+dependent index across those equalities, their ladder-tree, raw stored-set,
+connecting-edge, and extension-kind agreements in
+\noderef{CorrespondingExtendedTashkinovTree} compose through the common
+original series.  The series-presentation and final-color fields likewise
+give the required presentation of $\mathcal E_U$ and the same displayed
+final coloring $\sigma$ when $\mathcal E_J$ is used as the base.
+
+The stability field needs a separate rung-by-rung argument.  Fix a
+positive-stage index $i$, and denote the three colorings there by
+$\varphi_i$ in the original series, $\psi_i$ in the series on $J$, and
+$\chi_i$ in the series on $U$.  The two correspondence certificates give
+that $\psi_i$ and $\chi_i$ are stable relative to $\varphi_i$ on the
+common exact ladder tree and original protected set.  They also state that
+$\psi_i$ and $\chi_i$ are proper and leave exactly $e_0$ uncolored.  The
+certified-step field of \noderef{TashkinovSeries} supplies a positive
+\noderef{TashkinovSeriesStep} constructor for $\varphi_i$.  In the SE
+constructor, its coloring is the selected coloring of
+\noderef{MaximumDefectiveChoice}, whose fields give properness and the
+one-uncolored property; the PE constructor records those two properties
+directly; and the RE constructor identifies the current coloring with the
+proper, one-uncolored preceding coloring.  Thus all three colorings define
+elements of the subtype occurring in \noderef{sc2}.
+
+Apply symmetry in \noderef{sc2} to reverse the stability from
+$\varphi_i$ to $\psi_i$, and then apply transitivity there with the
+stability from $\varphi_i$ to $\chi_i$.  This gives stability from
+$\psi_i$ to $\chi_i$.  To put that relation in precisely the indices and
+protected set required over $\mathcal E_J$, use the common-ladder-tree
+equality above and unfold \noderef{TashkinovStoredColors}.  The raw stored
+entries agree with the original ones.  Moreover, the vertexwise
+missing-set clause of \noderef{StableColoring} for $\psi_i$ identifies the
+tree-missing sets of $\psi_i$ and $\varphi_i$ on that common ladder tree.
+Consequently the computed stored set for the series on $J$ is the original
+protected set.  Transporting the stability relation across these two
+equalities gives exactly the replacement-stability field from
+$\mathcal E_J$ to $\mathcal E_U$.  Doing this for every positive-stage
+index, and using the proper and one-uncolored fields from the certificate
+on $U$, completes an auxiliary
+\noderef{CorrespondingExtendedTashkinovTree} certificate with base
+$\mathcal E_J$ and replacement ETT $\mathcal E_U$.
+
 Apply \noderef{HierarchyBaseCorrespondingTransport} to this auxiliary
-certificate and $B_J$.  It gives a base $B_U$ on the given replacement
-ETT with exactly the same core, closure, and numerical supporting
-position.  This also handles the PE support vertex: the cited transport
-lemma compares the exact chosen boundary-edge identities and their inside
-endpoints, rather than assuming uniqueness of a support vertex.
+certificate and $B_J$.  It gives a base $B_U$ on $\mathcal E_U$ with
+exactly the same core, closure, and numerical supporting position.  This
+also handles the PE support vertex: the cited transport lemma compares the
+exact chosen boundary-edge identities and their inside endpoints, rather
+than assuming uniqueness of a support vertex.
+
+We next fix the prefix fact used throughout the reconstruction.  By
+\noderef{TashkinovAugmentationSequenceInitialSegment}, the given
+$\sigma$-\noderef{TashkinovAugmentationSequence} supplies
+\[
+                         J\preccurlyeq U.                       \tag{1}
+\]
+Thus the length clause of \noderef{TreeSequenceInitialSegment} gives
+$|J|\leq|U|$, and its vertex- and edge-entry clauses identify all entries
+through $|J|$.
 
 Construct $K_U$ with divider count $d$, copy stages $0,\ldots,d$ from
-$K_J$, and take $U$ as stage $d+1$.  Each old nestedness and strictness
-field copies.  For the last field, the last old starred stage is an exact
-prefix of $J$, while the given augmentation sequence makes $J$ an exact
-prefix of $U$; composition gives the required last nesting, and the old
-strictness already makes it strict.  Embed every old divider position into
-$\operatorname{Fin}(|U|+1)$ using $|J|\leq |U|$.  The numerical values,
+$K_J$, and take $U$ as stage $d+1$.  For nesting and strictness before the
+last step, the corresponding fields of
+\noderef{TashkinovHierarchy} copy verbatim.  At the last step, its old
+nesting gives the copied stage $d$ as an exact prefix of the old terminal
+stage $J$; composing its length and entrywise clauses with (1) gives the
+required prefix of $U$.  The old strict inequality into $J$, followed by
+$|J|\leq|U|$, gives strictness into $U$.  Embed every old divider position
+into $\operatorname{Fin}(|U|+1)$ using (1).  The numerical values,
 positivity, and strict increase do not change.
 
 For an old divider position $p$, the divider-stage field of
 \noderef{TashkinovHierarchy} identifies its stage with
-$\noderef{TreeSequencePrefix}(J,p)$.  Exact prefix equality between $J$
-and $U$ makes this equal, vertex by vertex and edge by edge, to the prefix
-of $U$ through $p$; proof irrelevance handles the structure's propositional
-fields.  The core-inside-first field copies when $d>0$.  When $d=0$, it
-follows by composing the old core-to-$J$ prefix with $J\preccurlyeq U$ and
-using the reconstructed core equality.  These observations verify every
-field of $K_U$.  They also give the claimed stage and divider equalities;
-the definitions of \noderef{HierarchyStarredStage},
+$\noderef{TreeSequencePrefix}(J,p)$.  Since $p\leq|J|$ and (1) identifies
+the entries of $J$ and $U$ through $p$, the inherited vertex and edge maps
+in the two prefix structures agree entry by entry; proof irrelevance
+identifies their attachment and injectivity witnesses.  Hence this same
+stage is $\noderef{TreeSequencePrefix}(U,p)$, as required.  If $d>0$, the
+core-inside-first field has the same copied target stage and therefore
+copies.  If $d=0$, that target is the new terminal stage $U$; compose the
+old core-to-$J$ prefix with (1), using the reconstructed core equality.
+This verifies every field of $K_U$.  It also proves the asserted stage and
+numerical divider equalities.  Substitution in the definitions of
+\noderef{HierarchyStarredStage},
 \noderef{HierarchyStoredColorsAt}, and
 \noderef{HierarchyStageMissingColors} then give the remaining indexed
-equalities.
+equalities in the conclusion.
 
 Define the Gamma pairs of $\mathcal G_U$ by copying those of
-$\mathcal G_J$ under this index identification.  Pair cardinality,
-pairwise disjointness, every unique-refresh clause, the PE base clause, and
-all internal minus-closed clauses of \noderef{GoodHierarchy} involve only
-the copied data, so they transport directly.  Avoidance at $j<d$ also
-copies because both adjacent stages are unchanged.  At $j=d$, the assumed
-endpoint avoidance is exactly the required disjointness from
-$\noderef{HierarchySegmentColors}$: its displayed filter uses the fixed
-starred stage $A$, the terminal stage $U$, and
-$\noderef{HierarchyFirstMissingPosition}(\sigma,U,\eta)$.  This remains
-true in the no-missing case because that definition uses the last vertex
-as its totalized fallback.  Thus $\mathcal G_U$ is a good witness and all
-claimed Gamma equalities hold.
+$\mathcal G_J$ under this index identification.  The pair-cardinality,
+pairwise-disjointness, unique-refresh, PE-base, and internal minus-closed
+fields of \noderef{GoodHierarchy} use only the copied base, stages, stored
+sets, stage-missing sets, starred stages, and Gamma pairs, so each is the
+corresponding field of $\mathcal G_J$ after the displayed equalities.
 
-It remains to compare terminal stored sets and prove minus-closedness.
-Unfold \noderef{TashkinovStoredColors},
-\noderef{HierarchyStoredColorsAt}, and
-\noderef{HierarchyTerminalStoredColors}.  The corresponding certificates
-identify the raw stored sets and the last ladder tree.  If $R$ is their
-common raw union, exact prefix composition gives
-$T_n\preccurlyeq A\preccurlyeq J\preccurlyeq U$, and the union definition
-in \noderef{TreeMissingColors} gives
-$\overline\sigma(T_n)\subseteq\overline\sigma(A)\subseteq
-\overline\sigma(U)$.  Elementwise difference calculation therefore gives
+It remains to verify every avoidance field, because
+\noderef{HierarchySegmentColors} also depends on the whole terminal tree.
+Fix $j<d$, let $B$ be the common copied next stage, and fix a color
+$\eta$.  Iterating the nestedness fields of
+\noderef{TashkinovHierarchy} gives $B\preccurlyeq J$, so $|B|\leq|J|$.
+Apply \noderef{HierarchyFirstMissingPositionPrefixCutoff} to (1) with
+cutoff $u=|B|$.  It gives
+\[
+ \min\{p_J(\eta),|B|\}=\min\{p_U(\eta),|B|\}.              \tag{2}
+\]
+The lower starred stage and the edge map of $B$ are unchanged.  Therefore,
+for every edge index of $B$, the lower-bound test, the strict upper-bound
+test in (2), and the edge-color test in the defining filter of
+\noderef{HierarchySegmentColors} agree entry by entry.  The two segment
+color sets are equal.  Notice that the cutoff theorem proves (2) also when
+$\eta$ is absent from $J$ or $U$, using the totalized last-position
+fallback; no missing-color witness is being assumed.  Hence the old
+avoidance field transfers for every $j<d$.
+
+At $j=d$, the starred stage is the fixed tree $A$, the next stage and
+terminal stage are both $U$, and the segment filter is exactly the
+restricted-color set appearing in the hypothesis.  The old avoidance
+field still supplies containment of $\Gamma_\eta$ in the unchanged
+stage-missing set, while the endpoint hypothesis supplies disjointness
+from this new segment set.  Together they are precisely the last avoidance
+field of \noderef{GoodHierarchy}.  Thus $\mathcal G_U$ is a good witness,
+and its definition gives every claimed Gamma equality.
+
+We now compare terminal stored sets.  Let $R$ be the computed terminal-rung
+\noderef{TashkinovStoredColors} set for the series on $J$.  The
+rung-by-rung stored-set calculation above identifies it with the
+corresponding set for the series on $U$.  The last starred stage $A$ is an
+exact prefix of $J$: when $d=0$ this is the core-inside-first field, and
+when $d>0$ it is the last nestedness field, after unfolding
+\noderef{HierarchyStarredStage}.  Compose that prefix with (1).  The image
+description in \noderef{TreeSequenceVertexSet} then gives
+$V(A)\subseteq V(U)$, and the union definition in
+\noderef{TreeMissingColors} gives
+$\overline\sigma(A)\subseteq\overline\sigma(U)$.  Unfolding
+\noderef{HierarchyStoredColorsAt} and
+\noderef{HierarchyTerminalStoredColors} now gives
 \[
  D^{K_U}_{n,d+1}=R\setminus\overline\sigma(U),\qquad
- D^{K_J}_{n,d}=R\setminus\overline\sigma(A).
+ D^{K_J}_{n,d}=R\setminus\overline\sigma(A).                \tag{3}
 \]
-The first set is contained in the second.
+The missing-set inclusion proves, element by element, that the first set
+is contained in the second, as claimed.
 
-Suppose the desired \noderef{TreeColorSetMinusClosed} conclusion fails.
-Then some color $c$ is missing on $U$, lies outside every Gamma pair whose
-index is in $D^{K_U}_{n,d+1}$, and has a $c$-colored boundary identity
-$f$.  By \noderef{BoundaryMissingColorAugmentation}, adjoining $f$ gives
-an exact one-step Tashkinov augmentation $W=U+f$.
+Finally suppose the desired \noderef{TreeColorSetMinusClosed} conclusion
+fails.  By \noderef{TreeColorSetClosed}, there are a color $c$ missing on
+$U$ but outside the union of Gamma pairs indexed by
+$D^{K_U}_{n,d+1}$, and an exact identity
+$f\in\noderef{BoundaryColorEdges}(G,\sigma,V(U),c)$.  By
+\noderef{BoundaryMissingColorAugmentation}, adjoining $f$ gives a tree
+$W$ with an exact relation
+\noderef{TreeSequenceAdjoinEdge}$(U,f,W)$ and a one-step
+$\sigma$-\noderef{TashkinovAugmentation} from $U$ to $W$.  In particular,
+\[
+ U\preccurlyeq W,\qquad |W|=|U|+1,
+ \qquad W.\mathit{edge}(|U|)=f,\qquad \sigma(f)=c.           \tag{4}
+\]
 
-Fix $\eta\in D$.  If $\eta\in D^{K_U}_{n,d+1}$, then
-$c\notin\Gamma_\eta$.  Every old segment color of $W$ already occurs in
-the segment for $U$, and the only possible new color is $c$ on the new
-last edge, so endpoint avoidance persists.  This covers both a genuine
-first missing position and the totalized last-position fallback.  If
-$\eta\notin D^{K_U}_{n,d+1}$, the displayed stored-set formulas and
-$\eta\in D$ imply that $\eta$ is missing on $U$.  Its first missing
-position is at most $|U|$ and is unchanged in the exact extension; the new
-edge at position $|U|$ is therefore not strictly before it.  The segment
-color set is unchanged, so avoidance again persists.  Thus $W$ satisfies
-every fixed-Gamma condition, contradicting endpoint maximality.  No such
-$c$ and $f$ exist, which is exactly the asserted minus-closedness after
-unfolding \noderef{TreeColorSetClosed} and
-\noderef{TreeColorSetMinusClosed}.
+Fix $\eta\in D=D^{K_J}_{n,d}$.  First suppose
+$\eta\in D^{K_U}_{n,d+1}$.  The choice of $c$ gives
+$c\notin\Gamma_\eta$.  Apply
+\noderef{HierarchyFirstMissingPositionPrefixCutoff} to the prefix in (4)
+with cutoff $|U|$.  If an edge index contributing to the restricted segment
+of $W$ is below $|U|$, the cutoff equality and the entrywise part of (4)
+show that its color already belongs to the restricted segment of $U$.
+The only remaining possible index is $|U|$, by the one-more length in (4),
+and its color is $c$.  Thus the new segment-color set is contained in the
+old one together with $\{c\}$.  Endpoint avoidance and
+$c\notin\Gamma_\eta$ prove the required disjointness.  This argument also
+covers the no-missing fallback, because the cited cutoff theorem was
+applied before separating the possible new last index.
+
+Now suppose $\eta\notin D^{K_U}_{n,d+1}$.  Formula (3) and
+$\eta\in D$ imply that $\eta$ is missing at an actual vertex of $U$.
+By (4), every old vertex entry is unchanged in $W$.  The least such
+missing vertex, and the absence of a missing witness at every earlier
+entry, therefore show directly from
+\noderef{HierarchyFirstMissingPosition} that the first missing position is
+the same in $U$ and $W$, even when that witness is the last vertex of $U$.
+The new edge has index $|U|$, which is not strictly before that position;
+all earlier edge entries are unchanged.  Hence the restricted segment set
+for $W$ equals that for $U$, so endpoint avoidance again persists.
+
+Thus $W$ satisfies every fixed-Gamma avoidance condition.  Its one-step
+augmentation contradicts the assumed endpoint maximality.  No such $c$
+and $f$ exist, and unfolding \noderef{TreeColorSetMinusClosed} now gives
+the asserted terminal minus-closedness.
 \end{proof}

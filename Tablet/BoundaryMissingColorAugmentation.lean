@@ -2,6 +2,7 @@ import Tablet.BoundaryColorEdges
 import Tablet.TashkinovAugmentation
 import Tablet.TreeMissingColors
 import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceInitialSegment
 import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: BoundaryMissingColorAugmentation]

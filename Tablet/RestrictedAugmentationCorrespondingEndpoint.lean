@@ -3,8 +3,15 @@ import Tablet.ExtendedTashkinovTree
 import Tablet.MaximumProperty
 import Tablet.MaximumPropertyTransport
 import Tablet.ModColoring
+import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovAugmentationSequenceInitialSegment
 import Tablet.TashkinovAugmentationSequenceRestrict
+import Tablet.TashkinovClosure
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
+import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceInitialSegment
 
 -- [TABLET NODE: RestrictedAugmentationCorrespondingEndpoint]
 theorem RestrictedAugmentationCorrespondingEndpoint {V E : Type*}

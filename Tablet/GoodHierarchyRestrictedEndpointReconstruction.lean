@@ -1,16 +1,32 @@
 import Tablet.BoundaryMissingColorAugmentation
+import Tablet.BoundaryColorEdges
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.GoodHierarchy
 import Tablet.HierarchyBaseCorrespondingTransport
 import Tablet.HierarchyFirstMissingPosition
+import Tablet.HierarchyFirstMissingPositionPrefixCutoff
+import Tablet.HierarchySegmentColors
 import Tablet.HierarchyStageMissingColors
 import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsAt
 import Tablet.HierarchyTerminalStoredColors
+import Tablet.MaximumDefectiveChoice
+import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovAugmentationSequenceInitialSegment
 import Tablet.TashkinovHierarchy
+import Tablet.TashkinovSeries
+import Tablet.TashkinovSeriesStep
+import Tablet.TashkinovStoredColors
 import Tablet.TreeColorSetMinusClosed
+import Tablet.TreeColorSetClosed
+import Tablet.TreeMissingColors
+import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequencePrefix
+import Tablet.TreeSequenceVertexSet
+import Tablet.sc2
 
 -- [TABLET NODE: GoodHierarchyRestrictedEndpointReconstruction]
 theorem GoodHierarchyRestrictedEndpointReconstruction {V E : Type*}
