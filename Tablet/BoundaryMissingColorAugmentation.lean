@@ -2,7 +2,9 @@ import Tablet.BoundaryColorEdges
 import Tablet.TashkinovAugmentation
 import Tablet.TreeMissingColors
 import Tablet.TreeSequenceAdjoinEdge
+import Tablet.TreeSequenceBoundaryEdgeAppendExists
 import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceInitialSegmentVertexSetStrict
 import Tablet.TreeSequenceVertexSet
 
 -- [TABLET NODE: BoundaryMissingColorAugmentation]
@@ -18,4 +20,15 @@ theorem BoundaryMissingColorAugmentation {V E : Type*}
       TashkinovAugmentation phi X Xplus ∧
       TreeSequenceVertexSet X ⊂ TreeSequenceVertexSet Xplus := by
 -- BODY
-  sorry
+  change f ∈ (BoundaryEdges G (TreeSequenceVertexSet X)).filter
+    (fun g => phi g = some c) at hf
+  rw [Finset.mem_filter] at hf
+  obtain ⟨Xplus, hAdjoin⟩ :=
+    TreeSequenceBoundaryEdgeAppendExists X f hf.1
+  obtain ⟨hLength, hInitial, hLastEdge⟩ := hAdjoin
+  refine ⟨Xplus, ⟨hLength, hInitial, hLastEdge⟩, ?_, ?_⟩
+  · refine ⟨hLength, hInitial, c, ?_, hc⟩
+    rw [hLastEdge]
+    exact hf.2
+  · apply TreeSequenceInitialSegmentVertexSetStrict hInitial
+    omega
