@@ -1,0 +1,54 @@
+\begin{helper}[Reconstructing a hierarchy at an extended endpoint]
+Let corresponding ETTs on $J$ and $U$ have the same original ETT and the
+same coloring $\sigma$.  Suppose $J$ has a hierarchy $K_J$ on a base
+$B_J$, $U$ has a base $B_U$ with the same core, and there is a
+$\sigma$-\noderef{TashkinovAugmentationSequence} from $J$ to $U$.
+Then $U$ has a hierarchy $K_U$ with the same divider count.  Under the
+canonical identification of divider indices, all nonterminal stages,
+starred stages, indexed stored sets, stage-missing sets, and numerical
+divider positions of $K_U$ equal the corresponding data of $K_J$.
+\end{helper}
+\begin{proof}
+By \noderef{TashkinovAugmentationSequenceInitialSegment}, the augmentation
+sequence gives the exact ordered prefix relation $J\preccurlyeq U$.
+In particular $|J|\leq |U|$, and all vertex and edge entries agree through
+$|J|$ by \noderef{TreeSequenceInitialSegment}.
+
+Let $d$ be the divider count of $K_J$.  Define $K_U$ to have divider count
+$d$, copy stages $0,\ldots,d$ from $K_J$, and use $U$ as stage $d+1$.
+The base-stage equation follows because the two
+\noderef{CorrespondingExtendedTashkinovTree} certificates identify their
+terminal ladder trees with the same original ladder tree.  The terminal
+equation is definitional.  All prefix and strictness fields before the
+last one copy from \noderef{TashkinovHierarchy}.  For the last one,
+compose the old exact prefix from stage $d$ to $J$ with
+$J\preccurlyeq U$; its strict length inequality remains strict after
+$|J|\leq|U|$.
+
+Embed each old divider position into $\operatorname{Fin}(|U|+1)$ using
+$|J|\leq|U|$.  This preserves its numerical value, positivity, and every
+strict comparison.  At an old divider position $p$, the divider-stage
+field identifies the copied stage with
+\noderef{TreeSequencePrefix}$(J,p)$.  Since $p\leq|J|$ and $J$ and $U$
+have identical entries through $|J|$, the vertex and edge maps of the
+prefixes of $J$ and $U$ through $p$ are equal entry by entry; proof
+irrelevance identifies the remaining structure witnesses.  Thus the
+same copied stage is also $\noderef{TreeSequencePrefix}(U,p)$.
+
+For the core-inside-first field, if $d>0$ the target first stage is copied,
+so the old field applies after rewriting by the assumed core equality.  If
+$d=0$, the first stage is the new terminal stage $U$; compose the old
+core-to-$J$ prefix with $J\preccurlyeq U$, again rewriting the core.
+This completes every field of $K_U$ and proves equality of its divider
+count, nonterminal stages, and numerical divider positions.
+
+The definitions of \noderef{HierarchyStarredStage} use only the base core
+and copied stages, so the starred stages agree.  The two correspondence
+certificates identify all raw stored entries of the terminal-rung series;
+unfolding \noderef{HierarchyStoredColorsAt} and using equality of the
+starred stages gives equality of every indexed stored set.  Finally, the
+certificates identify the terminal ladder trees, and all later stages
+appearing in \noderef{HierarchyStageMissingColors} were copied.  Its
+case definition therefore gives equality of every stage-missing set.
+These are exactly the asserted indexed equalities.
+\end{proof}

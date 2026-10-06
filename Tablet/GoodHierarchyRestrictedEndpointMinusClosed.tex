@@ -1,0 +1,57 @@
+\begin{helper}[Restricted maximality gives terminal minus-closedness]
+Let $K_J$ be a good hierarchy on $J$ and $K_U$ a good hierarchy on $U$.
+Suppose their last Gamma pairs agree, the terminal stored set of $K_U$ is
+contained in the last indexed stored set of $K_J$, and every last Gamma
+pair of $K_J$ avoids the restricted segment colors at $U$.  If no
+one-step Tashkinov augmentation of $U$ preserves all those avoidance
+conditions, then $U$ is minus-closed outside the union of the last Gamma
+pairs indexed by the terminal stored set of $K_U$.  Here one also assumes
+the companion comparison supplied by the common computed stored set: a
+color in the last indexed set of $K_J$ but outside the terminal set of
+$K_U$ is missing on $U$.
+\end{helper}
+\begin{proof}
+Let $D$ be the last indexed stored set of $K_J$, let $D_U$ be the
+terminal stored set of $K_U$, and write $\Gamma_\eta$ for the common last
+Gamma pair.  Suppose the asserted
+\noderef{TreeColorSetMinusClosed} property fails.  Unfolding it and
+\noderef{TreeColorSetClosed} gives a color $c$ which is missing on $U$,
+does not lie in $\bigcup_{\eta\in D_U}\Gamma_\eta$, and colors an exact
+boundary-edge identity $f$ of $U$.
+
+Apply \noderef{BoundaryMissingColorAugmentation} to $c$ and $f$.  It
+produces a tree $W$ obtained by adjoining exactly $f$, together with a
+one-step $\sigma$-\noderef{TashkinovAugmentation} from $U$ to $W$.  Thus
+$U\preccurlyeq W$, $|W|=|U|+1$, every old entry is unchanged, the new
+last edge is $f$, and its color is $c$.
+
+Fix $\eta\in D$.  First suppose $\eta\in D_U$.  Since $c$ is outside the
+union indexed by $D_U$ and the last Gamma pairs agree, we have
+$c\notin\Gamma_\eta$.  Apply
+\noderef{HierarchyFirstMissingPositionPrefixCutoff} to $U\preccurlyeq W$
+with cutoff $|U|$.  For an edge position contributing to the restricted
+segment of $W$, every position below $|U|$ has the same edge, color, and
+strict first-missing cutoff as in $U$.  The only other possible position
+is the new position $|U|$, whose color is $c$.  Hence the restricted
+color set at $W$ is contained in the corresponding set at $U$ together
+with $\{c\}$.  Endpoint avoidance and $c\notin\Gamma_\eta$ give the
+required avoidance at $W$.  The cutoff theorem includes its no-missing
+fallback, so this argument does not assume an unprovided missing witness.
+
+Now suppose $\eta\notin D_U$.  Because $\eta\in D$ and $D_U$ is obtained
+outside the terminal set, the assumed companion comparison gives
+$\eta\in\noderef{TreeMissingColors}(\sigma,U)$, so $\eta$ is missing at
+an old vertex of $U$.
+All old vertex entries are unchanged in $W$.  Therefore the least old
+vertex missing $\eta$, and the absence of such a witness at every earlier
+position, show directly from \noderef{HierarchyFirstMissingPosition} that
+the first missing position in $U$ and $W$ is the same.  The new edge
+position $|U|$ is not strictly before this old position, and all earlier
+edge entries agree.  Thus the restricted segment-color sets at $U$ and
+$W$ are equal, so endpoint avoidance again persists.
+
+We have proved the fixed-Gamma avoidance condition at $W$ for every
+$\eta\in D$.  Together with the one-step augmentation, this contradicts
+the assumed endpoint maximality.  Hence no such $c$ and $f$ exist, which
+is exactly the desired terminal minus-closedness.
+\end{proof}

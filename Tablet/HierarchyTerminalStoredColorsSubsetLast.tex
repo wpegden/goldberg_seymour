@@ -1,0 +1,34 @@
+\begin{lemma}[The terminal stored set lies in the last indexed stored set]
+For every hierarchy $K$ with $d$ dividers, its terminal stored set
+$D^K_{n,d+1}$ is contained in its last indexed stored set $D^K_{n,d}$.
+Moreover, every color in $D^K_{n,d}\setminus D^K_{n,d+1}$ is missing on
+the terminal tree.
+\end{lemma}
+\begin{proof}
+Let $R$ be the terminal-rung \noderef{TashkinovStoredColors} set and let
+$A$ be the last \noderef{HierarchyStarredStage}.  The hierarchy fields
+give $A\preccurlyeq T$, where $T$ is the terminal tree.  Indeed, when
+$d=0$, $A$ is the base core and the core-inside-first field of
+\noderef{TashkinovHierarchy}, followed by its terminal-stage equality,
+gives the claim.  When $d>0$, $A$ is the penultimate copied stage, and the
+last nesting field gives the claim directly.
+
+By the entrywise clause of \noderef{TreeSequenceInitialSegment}, every
+displayed vertex of $A$ is a displayed vertex of $T$.  Unfolding
+\noderef{TreeSequenceVertexSet} therefore gives $V(A)\subseteq V(T)$,
+and the union definition in \noderef{TreeMissingColors} gives
+$\overline\phi(A)\subseteq\overline\phi(T)$.  Finally unfold
+\noderef{HierarchyStoredColorsAt} and
+\noderef{HierarchyTerminalStoredColors}:
+\[
+ D^K_{n,d}=R\setminus\overline\phi(A),\qquad
+ D^K_{n,d+1}=R\setminus\overline\phi(T).
+\]
+If a color belongs to the second difference, it belongs to $R$ and is not
+missing on $T$.  The missing-set inclusion implies that it is not missing
+on $A$, so it belongs to the first difference.  This proves the stated
+containment.  Conversely, if a color belongs to the first difference but
+not the second, its membership in the common set $R$ rules out failure of
+the second difference through nonmembership in $R$; hence it must be
+missing on $T$.  This proves the additional difference clause.
+\end{proof}

@@ -2,6 +2,10 @@ import Tablet.BoundaryMissingColorAugmentation
 import Tablet.BoundaryColorEdges
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.GoodHierarchy
+import Tablet.GoodHierarchyCommonOriginalBaseTransport
+import Tablet.GoodHierarchyRestrictedEndpointMinusClosed
+import Tablet.GoodHierarchySameDividerReconstruction
+import Tablet.GoodHierarchySameDividerTransport
 import Tablet.HierarchyBaseCorrespondingTransport
 import Tablet.HierarchyFirstMissingPosition
 import Tablet.HierarchyFirstMissingPositionPrefixCutoff
@@ -10,6 +14,7 @@ import Tablet.HierarchyStageMissingColors
 import Tablet.HierarchyStarredStage
 import Tablet.HierarchyStoredColorsAt
 import Tablet.HierarchyTerminalStoredColors
+import Tablet.HierarchyTerminalStoredColorsSubsetLast
 import Tablet.MaximumDefectiveChoice
 import Tablet.StableColoring
 import Tablet.TashkinovAugmentation
@@ -86,4 +91,46 @@ theorem GoodHierarchyRestrictedEndpointReconstruction {V E : Type*}
               ((HierarchyTerminalStoredColors KU).biUnion
                 (goodU.gamma (Fin.last KU.dividerCount))) := by
 -- BODY
-  sorry
+  classical
+  dsimp
+  intro havoid hmaximal
+  obtain ⟨baseU, hcore, hclosure, hsupport⟩ :=
+    GoodHierarchyCommonOriginalBaseTransport G k e0 input T generating sigma
+      ett J U corrJ baseJ corrU
+  obtain ⟨KU, hcount, hstages, hdividers⟩ :=
+    GoodHierarchySameDividerReconstruction G k e0 input T generating sigma
+      ett J U corrJ baseJ KJ corrU baseU hcore hJU
+  obtain ⟨goodU, hgamma⟩ :=
+    GoodHierarchySameDividerTransport G k e0 input T generating sigma ett J U
+      corrJ baseJ KJ goodJ corrU baseU hcore hclosure KU hcount hstages hJU
+      havoid
+  have hlastStored :
+      HierarchyStoredColorsAt KU (Fin.last KU.dividerCount) =
+        HierarchyStoredColorsAt KJ (Fin.last KJ.dividerCount) := by
+    have h := (hstages (Fin.last KU.dividerCount)).2.2.1
+    simpa using h
+  have hstored : HierarchyTerminalStoredColors KU ⊆
+      HierarchyStoredColorsAt KJ (Fin.last KJ.dividerCount) := by
+    intro eta heta
+    rw [← hlastStored]
+    exact (HierarchyTerminalStoredColorsSubsetLast KU).1 heta
+  have hnewMissing : ∀ eta : Fin k,
+      eta ∈ HierarchyStoredColorsAt KJ (Fin.last KJ.dividerCount) →
+      eta ∉ HierarchyTerminalStoredColors KU →
+      eta ∈ TreeMissingColors sigma U := by
+    intro eta heta hnot
+    apply (HierarchyTerminalStoredColorsSubsetLast KU).2 eta
+    · rw [hlastStored]
+      exact heta
+    · exact hnot
+  have hgammaLast : ∀ eta : Fin k,
+      goodU.gamma (Fin.last KU.dividerCount) eta =
+        goodJ.gamma (Fin.last KJ.dividerCount) eta := by
+    intro eta
+    simpa using hgamma (Fin.last KU.dividerCount) eta
+  have hminus :=
+    GoodHierarchyRestrictedEndpointMinusClosed G k e0 J U sigma KJ goodJ KU
+      goodU hgammaLast hstored hnewMissing
+      havoid hmaximal
+  exact ⟨baseU, hcore, hclosure, hsupport, KU, hcount, hstages,
+    hdividers, goodU, hgamma, hstored, hminus⟩

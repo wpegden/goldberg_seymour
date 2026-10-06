@@ -1,0 +1,54 @@
+import Tablet.CorrespondingExtendedTashkinovTree
+import Tablet.GoodHierarchy
+import Tablet.HierarchyFirstMissingPosition
+import Tablet.HierarchyFirstMissingPositionPrefixCutoff
+import Tablet.HierarchySegmentColors
+import Tablet.HierarchyStageMissingColors
+import Tablet.HierarchyStarredStage
+import Tablet.HierarchyStoredColorsAt
+import Tablet.TashkinovAugmentationSequence
+import Tablet.TashkinovAugmentationSequenceInitialSegment
+import Tablet.TashkinovHierarchy
+
+-- [TABLET NODE: GoodHierarchySameDividerTransport]
+theorem GoodHierarchySameDividerTransport {V E : Type*}
+    [Fintype V] [Fintype E] [DecidableEq V] [DecidableEq E]
+    (G : LooplessMultigraph V E) (k : ℕ) (e0 : E)
+    (input : PartialEdgeColoring E k) (T : TreeSequence G e0)
+    (generating sigma : PartialEdgeColoring E k)
+    (ett : ExtendedTashkinovTree G k e0 input T generating)
+    (J U : TreeSequence G e0)
+    (corrJ : CorrespondingExtendedTashkinovTree G k e0 ett sigma J)
+    (baseJ : HierarchyBase corrJ.replacementETT sigma)
+    (KJ : TashkinovHierarchy corrJ.replacementETT baseJ)
+    (goodJ : GoodHierarchy KJ)
+    (corrU : CorrespondingExtendedTashkinovTree G k e0 ett sigma U)
+    (baseU : HierarchyBase corrU.replacementETT sigma)
+    (hcore : baseU.core = baseJ.core)
+    (hclosure : baseU.closure = baseJ.closure)
+    (KU : TashkinovHierarchy corrU.replacementETT baseU)
+    (hcount : KU.dividerCount = KJ.dividerCount)
+    (hstages : ∀ j : Fin (KU.dividerCount + 1),
+      let jo : Fin (KJ.dividerCount + 1) :=
+        Fin.cast (congrArg (fun n : ℕ => n + 1) hcount) j
+      KU.stage j.castSucc = KJ.stage jo.castSucc ∧
+        HierarchyStarredStage KU j = HierarchyStarredStage KJ jo ∧
+        HierarchyStoredColorsAt KU j = HierarchyStoredColorsAt KJ jo ∧
+        HierarchyStageMissingColors KU j = HierarchyStageMissingColors KJ jo)
+    (hJU : TashkinovAugmentationSequence sigma J U) :
+    let lastJ : Fin (KJ.dividerCount + 1) := Fin.last KJ.dividerCount
+    let A : TreeSequence G e0 := HierarchyStarredStage KJ lastJ
+    let restrictedColors : TreeSequence G e0 → Fin k → Finset (Fin k) :=
+      fun W eta => Finset.univ.filter fun c =>
+        ∃ r : Fin W.length, A.length ≤ r.val ∧
+          r.val < min (HierarchyFirstMissingPosition sigma W eta).val W.length ∧
+          sigma (W.edge r) = some c
+    (∀ eta : Fin k, eta ∈ HierarchyStoredColorsAt KJ lastJ →
+      Disjoint (goodJ.gamma lastJ eta) (restrictedColors U eta)) →
+    ∃ goodU : GoodHierarchy KU,
+      ∀ j : Fin (KU.dividerCount + 1),
+        let jo : Fin (KJ.dividerCount + 1) :=
+          Fin.cast (congrArg (fun n : ℕ => n + 1) hcount) j
+        ∀ eta : Fin k, goodU.gamma j eta = goodJ.gamma jo eta := by
+-- BODY
+  sorry

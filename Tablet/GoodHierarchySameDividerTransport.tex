@@ -1,0 +1,58 @@
+\begin{helper}[Transporting a good witness to an extended endpoint]
+Let $K_J$ be a good hierarchy on a corresponding ETT over $J$, and let
+$K_U$ be a hierarchy on a corresponding ETT over $U$, where both ETTs
+correspond to the same original ETT and coloring $\sigma$.  Assume the
+bases have the same core and closure, the divider counts agree, and under
+the canonical index identification all nonterminal stages, starred stages,
+indexed stored sets, and stage-missing sets agree.  Suppose also that
+$J$ reaches $U$ by a $\sigma$-Tashkinov augmentation sequence.  If every
+last-index Gamma pair of $K_J$ avoids the restricted segment colors at
+$U$, then $K_U$ has a good witness whose Gamma pairs at every index equal
+the corresponding Gamma pairs of $K_J$.
+\end{helper}
+\begin{proof}
+Define the Gamma pairs for $K_U$ by copying those of $K_J$ through the
+canonical divider-index identification.  The two-color cardinality,
+pairwise-disjointness, and unique-refresh fields of
+\noderef{GoodHierarchy} transport immediately across the assumed
+equalities of indexed stored sets, stage-missing sets, starred stages, and
+Gamma pairs.  The internal minus-closed fields use only the copied stages,
+stored sets, and Gamma pairs and therefore transport in the same way.  For
+the PE-base field, the two
+\noderef{CorrespondingExtendedTashkinovTree} certificates identify the
+terminal extension kind and terminal ladder tree with the same original
+data, while the assumed core and closure equalities identify the remaining
+base data; hence the old PE-base implication rewrites to the new one.
+
+It remains to prove avoidance, because the segment-color definition also
+uses the entire terminal tree.  By
+\noderef{TashkinovAugmentationSequenceInitialSegment}, the augmentation
+sequence gives an exact ordered prefix $J\preccurlyeq U$.  Fix an index
+$j<d$, a stored color $\eta$, and let $B$ be the common copied next stage.
+Iterating the nesting fields of \noderef{TashkinovHierarchy} gives
+$B\preccurlyeq J$, hence $|B|\leq |J|$.  Apply
+\noderef{HierarchyFirstMissingPositionPrefixCutoff} to
+$J\preccurlyeq U$ with cutoff $|B|$.  It yields
+\[
+ \min\{p_J(\eta),|B|\}=\min\{p_U(\eta),|B|\}.
+\]
+This equality includes the case in which no vertex misses $\eta$, because
+the cited theorem handles the totalized last-position fallback.
+
+Unfold \noderef{HierarchySegmentColors}.  The lower starred stage and the
+edge map of $B$ agree by hypothesis.  At every edge index of $B$, the
+lower-bound test agrees, the displayed cutoff equality identifies the
+strict upper-bound test, and the edge-color test is literally the same.
+Thus the old and new segment-color sets are equal.  The old avoidance
+field of the good witness on $K_J$ consequently supplies avoidance for
+every $j<d$.
+
+At $j=d$, the new next stage is $U$, the starred stage is the common last
+starred tree, and \noderef{HierarchySegmentColors} is exactly the
+restricted filter in the hypothesis.  Equality of indexed stored and
+stage-missing sets transports the containment part of the old avoidance
+field, while the endpoint hypothesis supplies disjointness from the new
+segment set.  Hence avoidance holds at the last index as well.  All fields
+of \noderef{GoodHierarchy} are now verified, and the construction gives
+the asserted Gamma equalities.
+\end{proof}

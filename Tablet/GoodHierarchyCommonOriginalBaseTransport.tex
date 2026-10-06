@@ -1,0 +1,58 @@
+\begin{helper}[Transporting a hierarchy base between common-original presentations]
+Let two corresponding ETT certificates on ordered trees $J$ and $U$ have
+the same original positive-rung ETT and the same final coloring $\sigma$.
+Every hierarchy base $B_J$ on the replacement ETT over $J$ transports to
+a hierarchy base $B_U$ on the replacement ETT over $U$ whose core, closure,
+and numerical supporting position equal those of $B_J$.
+\end{helper}
+\begin{proof}
+Write $\mathcal E$, $\mathcal E_J$, and $\mathcal E_U$ for the original
+ETT and the two replacement ETTs.  We first construct an auxiliary
+\noderef{CorrespondingExtendedTashkinovTree} certificate from
+$\mathcal E_J$ to $\mathcal E_U$.  The two given certificates identify
+the rung number, every positive ladder tree, every raw stored set, every
+connecting-edge set, and every extension kind with the corresponding data
+of $\mathcal E$.  Transporting their indices through the two rung
+equalities and composing through the common original data therefore gives
+all these agreement fields from $\mathcal E_J$ to $\mathcal E_U$.  The
+series-presentation and final-generating-color fields similarly give the
+required presentation and the final coloring $\sigma$.
+
+It remains to establish the replacement-stability field.  Fix a positive
+rung $i$.  Let $\varphi_i$, $\psi_i$, and $\chi_i$ be the colorings at
+that rung in $\mathcal E$, $\mathcal E_J$, and $\mathcal E_U$.  The two
+given correspondence certificates say that $\psi_i$ and $\chi_i$ are
+\noderef{StableColoring}s relative to $\varphi_i$ on the same original
+ladder tree and protected set.  They also give properness and the
+exactly-one-uncolored property for $\psi_i$ and $\chi_i$.
+
+For $\varphi_i$, inspect the certificate supplied by
+\noderef{TashkinovSeries}.  Since $i$ is positive, the
+\noderef{TashkinovSeriesStep} certificate is SE, PE, or RE.  In the SE
+case, properness and the one-uncolored property are fields of its selected
+\noderef{MaximumDefectiveChoice}; the PE case records both properties for
+the current coloring; and the RE case identifies the current coloring
+with the preceding proper, one-uncolored coloring.  Thus all three
+colorings are elements of the subtype used by \noderef{sc2}.
+
+The symmetric clause of \noderef{sc2} reverses the stability relation
+from $\varphi_i$ to $\psi_i$, and its transitive clause composes that
+relation with the one from $\varphi_i$ to $\chi_i$.  This gives stability
+from $\psi_i$ to $\chi_i$ on the original ladder tree and protected set.
+To identify the protected set computed in $\mathcal E_J$, unfold
+\noderef{TashkinovStoredColors}.  The raw stored entries agree rung by
+rung with those of $\mathcal E$, while the vertexwise missing-set clause
+of the stable relation for $\psi_i$ identifies the tree-missing sets on
+the common ladder tree.  Hence the computed stored sets agree.  Transport
+across the ladder-tree and stored-set equalities gives exactly the
+replacement-stability field relative to $\mathcal E_J$.
+
+Doing this at every positive rung completes the auxiliary correspondence
+certificate from $\mathcal E_J$ to $\mathcal E_U$.  Apply
+\noderef{HierarchyBaseCorrespondingTransport} to that certificate and
+$B_J$.  Its conclusion supplies a base on $\mathcal E_U$ with the same
+core, closure, and numerical supporting position.  In the PE case the
+cited transport theorem compares the exact chosen boundary-edge identities
+and their inside endpoints, so no uniqueness of an unspecified support
+vertex is being assumed.
+\end{proof}
