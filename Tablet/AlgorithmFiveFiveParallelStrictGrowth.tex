@@ -1,28 +1,45 @@
-\begin{helper}[Strict PE growth in the restricted Algorithm 5.5 chain]
-Let $J$ be the displayed tree of a positive-rung PE ETT with generating
-coloring $\varphi_n$.  Suppose that a zero-divider
-\noderef{TashkinovHierarchy} $K_J$ has base $B_J$, that
-$J=B_J.\mathit{core}$, and that $K_J$ has a
-\noderef{GoodHierarchy} witness $\mathcal G_J$.  Let a restricted
-Put
+\begin{helper}[Strict PE growth from Algorithm 5.5 endpoint maximality]
+Let $G$ be a finite loopless multigraph retaining individual edge
+identities, let $[k]$ be the color set, and let $e_0$ be the distinguished
+first edge.  Let $\mathcal E$ be a positive-rung ETT on a tree-sequence
+$T$, with input coloring $\varphi_{\rm in}$, generating coloring
+$\varphi$, and terminal extension kind $\Theta_n=PE$.  Fix a
+partial coloring $\varphi_n$ and a tree-sequence $J$ carrying a
+\noderef{CorrespondingExtendedTashkinovTree} certificate relative to
+$\mathcal E$, with replacement ETT $\mathcal E_J$ generated under
+$\varphi_n$.  Let $B_J$ be a \noderef{HierarchyBase} for $\mathcal E_J$
+under $\varphi_n$, let $K_J$ be a \noderef{TashkinovHierarchy} on this
+base with divider count zero, and let $\mathcal G_J$ be a
+\noderef{GoodHierarchy} witness for $K_J$.  Assume
+$J=B_J.\mathit{core}$.  Put
 \[
  A=\noderef{HierarchyStarredStage}(K_J,0),\qquad
  D=\noderef{HierarchyStoredColorsAt}(K_J,0).
 \]
-For an ordered extension $W$ and $\eta\in D$, let $C_W(\eta)$ be the set
-of colors on displayed edges whose positions are at least $|A|$ and are
-strictly below both $|W|$ and the totalized
-\noderef{HierarchyFirstMissingPosition} of $\eta$ in $W$.  Let a restricted
-augmentation chain have endpoint $U$ and length $m$, with
+Write $|W|$ for the number of displayed edges in a tree-sequence $W$, and
+index those edges from zero.  For every tree-sequence $W$ for $G,e_0$
+and every $\eta\in[k]$, put
+\[
+ C_W(\eta)=\left\{c\in[k]:\ \exists r\in\{0,\ldots,|W|-1\},\quad
+ |A|\leq r<\min\bigl(
+   \noderef{HierarchyFirstMissingPosition}(\varphi_n,W,\eta),|W|\bigr)
+ \ \text{and}\ \varphi_n(W.\mathit{edge}(r))=c\right\}.
+\]
+This definition uses only the numerical lower cutoff $|A|$; $W$ need
+not extend $A$ or $J$.  Let $m\in\mathbb N$ and let $U$ be any
+tree-sequence for $G,e_0$ satisfying
 \[
  |U|=|J|+m,
  \qquad m=0\Longrightarrow U=J.
 \]
-Assume its endpoint is maximal in the following precise sense: no
-one-step $\varphi_n$-\noderef{TashkinovAugmentation} $W$ of $U$ satisfies
+Assume the following exact one-step endpoint maximality condition:
 \[
- \mathcal G_J.\Gamma^0_\eta\cap C_W(\eta)=\varnothing
- \quad\hbox{for every }\eta\in D.
+ \forall W\text{ a tree-sequence for }G,e_0,\quad
+ \noderef{TashkinovAugmentation}(\varphi_n,U,W)
+ \ \Longrightarrow
+ \bigl(\forall\eta\in[k],\ \eta\in D\Longrightarrow
+   \mathcal G_J.\Gamma^0_\eta\cap C_W(\eta)=\varnothing\bigr)
+ \ \Longrightarrow\ \bot.
 \]
 Then $|J|<|U|$.
 \end{helper}
@@ -30,7 +47,10 @@ Then $|J|<|U|$.
 Write
 $D=\noderef{HierarchyStoredColorsAt}(K_J,0)$ and
 $R=\bigcup_{\eta\in D}\mathcal G_J.\Gamma^0_\eta$.
-The PE clause of \noderef{GoodHierarchy} says that
+The rung, series-presentation, and extension-kind agreements in
+\noderef{CorrespondingExtendedTashkinovTree} transfer $\Theta_n=PE$
+from $\mathcal E$ to $\mathcal E_J$.  The PE clause of
+\noderef{GoodHierarchy} therefore says that
 $J=B_J.\mathit{core}$ is not $R^-$-closed.  Expanding
 \noderef{TreeColorSetMinusClosed}, choose a color
 $c\in\noderef{TreeMissingColors}(\varphi_n,J)-R$ and an exact edge
@@ -40,26 +60,31 @@ vertices $x\in V(J)$ and $y\notin V(J)$ with
 $G.\mathit{ends}(f)=\{x,y\}$.
 
 Construct an ordered tree $W=J+f$ using the data of
-\noderef{TreeSequence}: copy every old vertex and edge entry, append $y$
-as the last vertex, and append the individual identity $f$ as the last
+\noderef{TreeSequence}, with positive length $|J|+1$: copy every old
+vertex and edge entry, append $y$ as the last vertex, and append the
+individual identity $f$ as the last
 edge.  The old entries retain their injectivity.  The new vertex is fresh
 because $y\notin V(J)$.  The new edge is also fresh: every old displayed
 edge has both endpoints among the old vertices by the attachment field,
 whereas $f$ has the endpoint $y$ outside that set.  The old attachment
-equations copy, and the boundary endpoint equation supplies the final
-attachment to the occurrence of $x$ in $J$.  Thus $W$ is an actual exact
-ordered tree-sequence, $J$ is its exact initial segment, and
+equations and distinguished first edge copy, and the boundary endpoint
+equation supplies the final attachment to the occurrence of $x$ in $J$.
+Thus $W$ is an actual exact ordered tree-sequence, $J$ is its exact
+\noderef{TreeSequenceInitialSegment}, and
 $|W|=|J|+1$.  Since $\varphi_n(f)=c$ and $c$ is missing on $J$, these are
 exactly the fields of a
 \noderef{TashkinovAugmentation} from $J$ to $W$.
 
 Because the divider count is zero,
 \noderef{HierarchyStarredStage}$(K_J,0)=B_J.\mathit{core}=J$.  Hence the
-only possible displayed edge in $C_W(\eta)$ is the newly appended edge,
-and its color is $c$.  (If $\eta$ first becomes missing at the appended
-vertex, the strict first-missing cutoff excludes even that edge.)  The
-choice $c\notin R$ says that $c$ belongs to no Gamma pair.  Therefore $W$
-satisfies all of the fixed restricted-augmentation avoidance conditions.
+only possible displayed edge contributing to $C_W(\eta)$ is the newly
+appended edge at index $|J|$, and its color is $c$.  Whatever the
+totalized \noderef{HierarchyFirstMissingPosition} of $\eta$ in $W$,
+we therefore have $C_W(\eta)\subseteq\{c\}$.  The choice $c\notin R$
+says that $c$ belongs to no Gamma pair indexed by $D$.  Therefore
+$\mathcal G_J.\Gamma^0_\eta\cap C_W(\eta)=\varnothing$ for every
+$\eta\in D$, so $W$ satisfies every avoidance condition in the
+endpoint maximality hypothesis.
 
 Suppose $m=0$.  The endpoint hypothesis gives $U=J$, so the preceding
 augmentation becomes an admissible one-step augmentation of $U$.  This
