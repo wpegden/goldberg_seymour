@@ -1,0 +1,106 @@
+\begin{helper}[Initial good hierarchy for Algorithm 5.5]
+Let $\mathcal E$ be a positive-rung ETT with generating coloring
+$\varphi_n$, terminal ladder tree $T_n$, and a
+\noderef{HierarchyBase} $B$.
+Let $J$ carry a
+\noderef{CorrespondingExtendedTashkinovTree} $\mathcal E_J$, a copied
+base $B_J$, and a zero-divider \noderef{TashkinovHierarchy} $K_J$ such
+that
+\[
+ B_J.\mathit{core}=B.\mathit{core},\qquad
+ B_J.\mathit{closure}=B.\mathit{closure},\qquad K_J(0)=T_n.
+\]
+Assume that the exact seed alternative holds: in PE,
+$J=B.\mathit{core}$; in SE or RE, there is an individual edge $f_n$ with
+$F_n=\{f_n\}$ and
+\noderef{TreeSequenceAdjoinEdge}$(T_n,f_n,J)$.  Assume
+$|\overline\varphi_n(T_n)|\geq 2n+11$.  In PE assume also that some
+color missing on $B.\mathit{core}$ is not closed there, every color of
+\[
+ \overline\varphi_n(T_n)\cap
+ \overline\varphi_n(B.\mathit{closure})
+\]
+is closed on $B.\mathit{core}$, and this intersection has at least four
+colors.  Then $K_J$ has a \noderef{GoodHierarchy} witness
+$\mathcal G_J$ for which the sole stage-missing set is exactly
+$\overline\varphi_n(T_n)$.  Moreover, in PE, if
+\[
+ R=\bigcup_{\eta\in\noderef{HierarchyStoredColorsAt}(K_J,0)}
+      \mathcal G_J.\Gamma^0_\eta,
+\]
+then $B.\mathit{core}$ is not $R^-$-closed and at least four colors of
+$\overline\varphi_n(T_n)\cap
+\overline\varphi_n(B.\mathit{closure})$ lie outside $R$.
+\end{helper}
+\begin{proof}
+Put $D=\noderef{HierarchyStoredColorsAt}(K_J,0)$ and
+$M=\noderef{TreeMissingColors}(\varphi_n,T_n)$.  The corresponding-ETT
+certificate identifies the replacement terminal ladder tree, rung number,
+stored colors, connecting-edge set, and terminal extension kind with those
+of $\mathcal E$.
+
+First suppose the common terminal kind is PE.  Transport the three PE
+assumptions through the stated core and closure equalities and transport
+the large missing-color bound through the exact ladder-tree equality.
+The hypotheses of \noderef{GoodHierarchyInitialPairsPE} now hold for
+$K_J$.  It supplies sets $\Gamma_\eta$ for $\eta\in D$ such that every
+$\Gamma_\eta$ has two elements and is contained in $M$, distinct stored
+colors receive disjoint pairs,
+\[
+ B_J.\mathit{core}\text{ is not }
+   \Bigl(\bigcup_{\eta\in D}\Gamma_\eta\Bigr)^-\text{-closed},
+\]
+and at least four colors of the common missing-color intersection remain
+outside that union.
+
+Now suppose the common terminal kind is not PE.  The terminal index is
+positive, so the certificate supplied by \noderef{TashkinovSeries} is a
+positive constructor of \noderef{TashkinovSeriesStep}; the kind equality
+excludes PE and leaves SE or RE.  After the same ladder-tree transport,
+\noderef{GoodHierarchyInitialPairsNonPE} supplies two-element subsets
+$\Gamma_\eta\subseteq M$ which are pairwise disjoint for distinct
+$\eta\in D$.
+
+It remains to verify segment avoidance in the non-PE cases.  Consider SE.
+The certified terminal SE constructor identifies the unique connecting
+edge with the edge $f_n$ of its
+\noderef{MaximumDefectiveChoice}; its selected coloring is exactly
+$\varphi_n$, and $\varphi_n(f_n)=\delta_n$.  The preceding coloring is
+\noderef{ColoredVertexSetClosed} on $T_n$, while the selected coloring is
+\noderef{StableColoring} there.  Both colorings are proper and have the same unique
+uncolored edge.  Symmetry in \noderef{sc2} reverses this stability
+relation.  If a $\varphi_n$-colored boundary edge of $T_n$ had a color
+$c\in M$, choose a vertex of $T_n$ missing $c$.  The missing-set clause
+of stability makes that vertex miss $c$ under the preceding coloring,
+and the controlled incident-edge clause makes the boundary edge retain
+color $c$ under the preceding coloring, contradicting its closedness.
+Thus $T_n$ is closed under $\varphi_n$, and the boundary edge $f_n$ shows
+$\delta_n\notin M$.
+
+In RE, the terminal constructor says that the current coloring is the
+preceding closed coloring.  Its exact edge $f_n$ is a boundary edge on
+the recorded \noderef{TwoColorCycle}; hence its current color is one of
+the two cycle colors.  Closedness implies directly that this edge color
+is not in $M$.  Therefore, in either non-PE case, the only displayed edge
+of $J-T_n$ has a color outside $M$.
+
+Define the sole Gamma family of $K_J$ by the selected sets
+$\Gamma_\eta$.  Pair cardinality and disjointness are already proved.  By
+the zero-divider hypothesis and the equality $K_J(0)=T_n$,
+\noderef{HierarchyStageMissingColors}$(K_J,0)=M$.  In PE,
+\noderef{HierarchyStarredStage}$(K_J,0)=B_J.\mathit{core}=J$, so the
+half-open edge interval defining
+\noderef{HierarchySegmentColors}$(K_J,0,\eta)$ is empty.  In SE or RE,
+the starred stage is $T_n$ and the exact seed is $T_n+f_n$; hence every
+segment color is the color of $f_n$, which lies outside $M$ and therefore
+outside every $\Gamma_\eta$.  This proves the avoidance field.
+
+There are no positive divider indices, so the unique-refresh and internal
+minus-closed fields have empty domains.  In PE the parallel-base field is
+exactly the non-minus-closed conclusion and four-color reserve supplied
+by \noderef{GoodHierarchyInitialPairsPE}; outside PE its antecedent is
+false.  The equality of the sole stage-missing set with $M$ was established
+above, and the base equalities rewrite the PE union and reserve back to
+$B.\mathit{core}$ and $B.\mathit{closure}$.  These clauses prove every
+part of the conclusion.
+\end{proof}
