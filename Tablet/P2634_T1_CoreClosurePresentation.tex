@@ -1,0 +1,57 @@
+\begin{lemma}[An exact corresponding PE core-closure presentation]
+Let \(\mathcal E:\noderef{ExtendedTashkinovTree}(G,k,e_0,\rho,T,\varphi)\)
+be a maximum ETT in a finite loopless multigraph, with terminal kind PE,
+and suppose \(\noderef{ModColoring}(\mathcal E,\varphi)\).
+Let \(B:\noderef{HierarchyBase}(\mathcal E,\varphi)\), and let \(T_n\)
+be the terminal ladder tree. Assume that \(B.\mathit{core}\) is reached from
+\(T_n\) by Tashkinov augmentations under \(\varphi\) and has strictly larger
+length. Then there exist a tree-sequence \(Z\), a certificate
+\(C:\noderef{CorrespondingExtendedTashkinovTree}(\mathcal E,\varphi,Z)\),
+and a base \(B_Z\) for \(C.\mathit{replacementETT}\) under \(\varphi\),
+with the following properties. The replacement ETT is maximum; \(Z\) is a
+\noderef{TashkinovClosure} of \(B.\mathit{core}\) under \(\varphi\);
+its exact final series tree is \(Z\); its exact terminal ladder tree is
+\(T_n\); its terminal kind is PE; and
+\[
+ B_Z.\mathit{core}=B.\mathit{core},\qquad
+ B_Z.\mathit{closure}=B.\mathit{closure},\qquad
+ B_Z.\mathit{supportPosition.val}=B.\mathit{supportPosition.val}.
+\]
+All tree identities concern full ordered edge-valued tree-sequences.
+\end{lemma}
+\begin{proof}
+Choose a closure \(Z\) of \(B.\mathit{core}\) under \(\varphi\) by
+\noderef{TashkinovClosureExists}. Its certificate contains an augmentation
+route from \(B.\mathit{core}\) to \(Z\), and closedness of \(V(Z)\), by
+\noderef{TashkinovClosure}. Concatenate the given route from \(T_n\) to
+\(B.\mathit{core}\) with this route, using the reflexive-transitive-chain
+definition of \noderef{TashkinovAugmentationSequence}. This gives a route
+from \(T_n\) to \(Z\). By \noderef{TashkinovAugmentationSequenceInitialSegment},
+both \(T_n\) and \(B.\mathit{core}\) are exact initial segments of \(Z\).
+In particular, \(|T_n|<|B.\mathit{core}|\leq|Z|\).
+
+Apply the universal PE clause of the given \noderef{ModColoring} to \(Z\),
+its exact initial-segment relation, this strict inequality, and the
+concatenated route. It provides the certificate \(C\) relative to the
+original \(\mathcal E\). By \noderef{MaximumPropertyTransport}, its
+replacement ETT is maximum. By \noderef{HierarchyBaseCorrespondingTransport},
+there is a replacement base \(B_Z\) with the three stated base identities.
+
+The concatenated route and closedness of \(V(Z)\) make \(Z\) a closure
+of \(T_n\), again by \noderef{TashkinovClosure}. Apply
+\noderef{CorrespondingTerminalClosureEq} to \(C\), with PE seed exactly
+\(T_n\), and that closure. It identifies the final tree of the replacement
+series carried by \(C\) with \(Z\), as a full ordered tree.
+The rung-agreement and heterogeneous series-presentation fields of
+\noderef{CorrespondingExtendedTashkinovTree} identify this replacement
+series with the actual series of its replacement ETT after transporting
+the rung index. Thus the replacement ETT's own final series output is \(Z\).
+
+For completeness, \(n\geq1\) by \noderef{ExtendedTashkinovTree}.
+The index \(q=n-1\) lies in \(\operatorname{Fin}(n)\), with successor
+the terminal stored index \(n\). The ladder-tree agreement field of \(C\)
+at \(q\) identifies the terminal ladder trees. Its extension-kind agreement
+field at \(n\) identifies the terminal kinds, which are therefore PE.
+These identifications use the same rung and series transports, so they
+concern the actual replacement ETT, not merely a separately chosen series.
+\end{proof}

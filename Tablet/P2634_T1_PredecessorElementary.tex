@@ -1,0 +1,26 @@
+\begin{lemma}[Elementarity before the terminal extension]
+Let \(\mathcal E:\noderef{ExtendedTashkinovTree}(G,k,e_0,\rho,T,\varphi)\)
+be a maximum ETT in a finite loopless multigraph, and suppose a
+\noderef{TechnicalInductionContext}\((G,k,e_0,n)\) is given, where
+\(n=\mathcal E.\mathit{rounds}\). The terminal ladder tree
+\(T_n=\mathcal E.\mathit{series.data.tree}(\operatorname{last}(n).\mathit{castSucc})\)
+is elementary under the predecessor coloring
+\(\mathcal E.\mathit{series.data.coloring}(n-1)\).
+\end{lemma}
+\begin{proof}
+By \noderef{ExtendedTashkinovTree}, \(n\geq1\). If \(n=1\), the first
+conclusion of \noderef{TechnicalTheoremBase}, applied to the given certified
+series, makes its tree at data index one elementary under its coloring at
+index zero. These indices are exactly \(n\) and \(n-1\), so this is the
+required assertion. No zero-rung ETT is needed.
+
+If \(n>1\), \noderef{CertifiedETTPredecessor}, applied to the given ETT and
+its maximum property, provides a maximum ETT of rung \(n-1\), with displayed
+tree exactly the original series tree at index \(n\) and generating coloring
+exactly the original series coloring at index \(n-1\). Its rung is positive
+and strictly below \(n\). Apply the \(\mathit{lowerOne}\) field of the given
+\noderef{TechnicalInductionContext} to that actual predecessor and its
+maximum witness. It asserts elementarity of that displayed tree under that
+generating coloring, which are exactly the tree and coloring in the claim.
+The two cases exhaust \(n\geq1\).
+\end{proof}

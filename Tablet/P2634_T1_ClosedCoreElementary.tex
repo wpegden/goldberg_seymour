@@ -1,0 +1,23 @@
+\begin{lemma}[The closed-core elementary escape]
+Let \(\mathcal E:\noderef{ExtendedTashkinovTree}(G,k,e_0,\rho,T,\varphi)\)
+have terminal kind PE in a finite loopless multigraph, and let \(T_n\) be
+its terminal ladder tree. Let \(C\) be any ordered tree-sequence reached
+from \(T_n\) by \noderef{TashkinovAugmentationSequence} under \(\varphi\).
+If \(V(C)\) is elementary and closed under \(\varphi\), then \(V(T)\)
+is elementary under \(\varphi\).
+\end{lemma}
+\begin{proof}
+Put \(F=\mathcal E.\mathit{series.data.tree}(\operatorname{last}(n+1))\),
+where \(n=\mathcal E.\mathit{rounds}\).
+By \noderef{P2634_T1_PETerminalFacts}, \(F\) is a closure of \(T_n\)
+under \(\varphi\). The assumed augmentation route and closedness of \(C\)
+make \(C\) another such closure, by \noderef{TashkinovClosure}.
+Thus \noderef{TashkinovClosureVertexSetUnique} gives \(V(C)=V(F)\).
+The below-final field of \noderef{ExtendedTashkinovTree} says that
+\(T\preccurlyeq F\) as exact ordered tree-sequences.
+By \noderef{TreeSequenceInitialSegmentVertexSetSubset},
+\(V(T)\subseteq V(F)=V(C)\). For two distinct vertices of \(V(T)\),
+this containment places both in \(V(C)\); the assumed elementarity of
+\(V(C)\) gives disjoint missing-color sets. This is precisely
+\noderef{ColoredVertexSetElementary} for \(V(T)\).
+\end{proof}

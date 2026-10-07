@@ -1,0 +1,25 @@
+\begin{lemma}[Terminal PE coloring and closure]
+Let \(\mathcal E:\noderef{ExtendedTashkinovTree}(G,k,e_0,\rho,T,\varphi)\)
+be an ETT in a finite loopless multigraph. Put \(n=\mathcal E.\mathit{rounds}\),
+\(T_n=\mathcal E.\mathit{series.data.tree}(\operatorname{last}(n).\mathit{castSucc})\),
+and \(F=\mathcal E.\mathit{series.data.tree}(\operatorname{last}(n+1))\).
+If its terminal extension kind is PE, then \(\varphi\) is proper, leaves
+exactly \(e_0\) uncolored, and \(F\) is a
+\noderef{TashkinovClosure} of \(T_n\) under \(\varphi\).
+\end{lemma}
+\begin{proof}
+The positivity field of \noderef{ExtendedTashkinovTree} gives \(n\geq1\).
+Take \(q=n-1\) as an index in \(\operatorname{Fin}(n)\); its successor
+is the terminal stored index \(n\), and its double successor is the final
+tree index \(n+1\). The certificate supplied by \noderef{TashkinovSeries}
+at index \(n\) has one of the four forms in \noderef{TashkinovSeriesStep}.
+It cannot be initial, whose index is zero. The SE and RE forms record those
+respective kinds, contradicting the assumed PE kind. In the remaining PE
+form, the current-properness and current-one-uncolored fields say that the
+coloring at index \(n\) is proper and leaves exactly \(e_0\) uncolored.
+Its closed-extension field states that the tree at index \(n+1\) is a
+closure of the tree at index \(n\), under that current coloring.
+The generating-coloring equality of \noderef{ExtendedTashkinovTree}
+identifies the current coloring with \(\varphi\). Substituting this equality
+and the two index identities gives all three conclusions.
+\end{proof}
