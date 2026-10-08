@@ -7,6 +7,9 @@ import Tablet.HkuMissingStoredMonotone
 import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumPropertyTransport
 import Tablet.ModColoring
+import Tablet.P2647_T1_ClosedPresentation
+import Tablet.P2647_T1_OrderedExitCounterexample
+import Tablet.P2647_T1_TerminalStableRoute
 import Tablet.RutgersClosedPresentation
 import Tablet.RutgersCounterexample
 import Tablet.RutgersCounterexampleMeasure
@@ -79,4 +82,49 @@ theorem RutgersCounterexampleMinimumExists
         RutgersCounterexampleMeasure counterexample <=
           RutgersCounterexampleMeasure otherCounterexample := by
 -- BODY
-  sorry
+  classical
+  let F := original.series.data.tree (Fin.last (original.rounds + 1))
+  obtain ⟨_, _, hsegment, hstrict, hterminalStable, hroute⟩ :=
+    P2647_T1_TerminalStableRoute G k e0 original sigma hproper hone hstable
+  have hmod : ModColoring original sigma :=
+    hcurrentSix original rfl hMP sigma hproper hone hterminalStable
+  obtain ⟨presentation, hsigma, hU⟩ :=
+    P2647_T1_ClosedPresentation G k e0 original hMP sigma F
+      hmod hsegment hstrict hroute
+  have helementary : ColoredVertexSetElementary G presentation.sigma
+      (TreeSequenceVertexSet presentation.U) :=
+    hcurrentOne presentation.corresponding.replacementETT
+      presentation.corresponding.rungAgreement presentation.maximum
+  have hclosed : ColoredVertexSetClosed G presentation.sigma
+      (TreeSequenceVertexSet presentation.U) := by
+    rcases presentation.terminalRoute with ⟨_, hclosure⟩ |
+      ⟨_, f, seed, _, _, hclosure⟩
+    · exact hclosure.2
+    · exact hclosure.2
+  have hproperPresentation : IsProperEdgeColoring G presentation.sigma := by
+    rw [hsigma]
+    exact hproper
+  have halphaPresentation :
+      alpha ∈ TreeMissingColors presentation.sigma presentation.U := by
+    rw [hsigma, hU]
+    exact halpha
+  have hnotPresentation :
+      ¬ TreeInterchangeable G presentation.U presentation.sigma alpha beta := by
+    rw [hsigma, hU]
+    exact hnot
+  obtain ⟨counterexample, _, _⟩ :=
+    P2647_T1_OrderedExitCounterexample G k e0 original presentation
+      hproperPresentation helementary hclosed alpha beta hcolors
+      halphaPresentation hnotPresentation
+  let attainable : Nat → Prop := fun m =>
+    ∃ (P : RutgersClosedPresentation G k e0 original)
+      (C : RutgersCounterexample G k e0 original P),
+      RutgersCounterexampleMeasure C = m
+  have inhabited : ∃ m, attainable m :=
+    ⟨RutgersCounterexampleMeasure counterexample, presentation, counterexample, rfl⟩
+  obtain ⟨minimumPresentation, minimumCounterexample, hmeasure⟩ :=
+    Nat.find_spec inhabited
+  refine ⟨minimumPresentation, minimumCounterexample, ?_⟩
+  intro otherPresentation otherCounterexample
+  rw [hmeasure]
+  exact Nat.find_min' inhabited ⟨otherPresentation, otherCounterexample, rfl⟩

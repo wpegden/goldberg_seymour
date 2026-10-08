@@ -1,0 +1,87 @@
+\begin{lemma}[The exact terminal route under final-tree stability]
+Let $G$ be a finite loopless multigraph with individual edge identities,
+and let $\mathcal E$ be an extended Tashkinov tree with distinguished
+uncolored edge $e_0$ and positive rung number $n$. Write $T_n$ for its
+terminal ladder tree, $F$ for its series' final output, $\varphi_n$ for
+its terminal coloring, and $D_n$ for its computed terminal stored set.
+Let $\sigma$ be proper, leave exactly $e_0$ uncolored, and be
+$(F,D_n,\varphi_n)$-stable. Then $\varphi_n$ is proper and leaves exactly
+$e_0$ uncolored, $T_n$ is an exact initial segment of $F$ with strictly
+smaller length, and $\sigma$ is $(T_n,D_n,\varphi_n)$-stable.
+Moreover, precisely the following terminal-route alternative holds:
+either the terminal kind is PE and $F$ is a $\sigma$-closure of $T_n$,
+or the terminal kind is SE or RE and there are an exact edge $f$ and
+an ordered seed $S$ with terminal connecting-edge set exactly $\{f\}$,
+$S=T_n+f$ in the exact one-edge-adjunction sense, and $F$ a
+$\sigma$-closure of $S$.
+\end{lemma}
+\begin{proof}
+The positivity field of \noderef{ExtendedTashkinovTree} makes $q=n-1$
+a valid noninitial-step index. Inspect the certificate at index $n$ in
+\noderef{TashkinovSeries}, using \noderef{TashkinovSeriesStep}. The initial
+constructor has index zero and is impossible here. In SE the current
+coloring is the selected coloring; its properness and exactly-one-uncolored
+properties are fields of \noderef{MaximumDefectiveChoice}. In PE these
+properties are explicit current-coloring fields. In RE the current
+coloring equals the preceding coloring and inherits both preceding-coloring
+fields. Thus $\varphi_n$ has both properties in all three cases.
+Every case explicitly records $T_n\preccurlyeq F$ and
+$\operatorname{length}(T_n)<\operatorname{length}(F)$.
+The PE case records a $\varphi_n$-closure from $T_n$ to $F$.
+The SE case records the singleton connecting set $\{f\}$ for the selected
+exact edge and an actual ordered tree $S$ satisfying
+\noderef{TreeSequenceAdjoinEdge}$(T_n,f,S)$, followed by a
+$\varphi_n$-closure of $S$ to $F$. The RE case records these same data
+with the exact edge from its revisiting certificate. No edge is replaced
+by its endpoint pair in this argument.
+
+We transport each of these recorded closures. Fix its source $S$ and
+expand \noderef{TashkinovClosure} into an augmentation route and closedness
+of $F$. By \noderef{TashkinovAugmentationSequence}, the route is a finite
+chain. For a head step $A\to B$ followed by its suffix to $F$,
+\noderef{TashkinovAugmentationSequenceInitialSegment} gives exact initial
+segments $A\preccurlyeq F$ and $B\preccurlyeq F$.
+\noderef{TreeSequenceInitialSegmentVertexSetSubset} puts their vertices
+in $V(F)$. The step in \noderef{TashkinovAugmentation} supplies its exact
+added edge $g$, its color $c=\varphi_n(g)$, and $c$ missing at some
+$v\in V(A)$, by \noderef{TreeMissingColors}. Hence $c$ is missing on
+$F$. The attachment law of \noderef{TreeSequence} gives an endpoint of
+$g$ in $V(B)\subseteq V(F)$, so $g$ is incident with $F$ by
+\noderef{Incident} and \noderef{TreeIncidentEdge}. The edge clause of
+\noderef{StableColoring} gives $\sigma(g)=\varphi_n(g)=c$. Its vertex
+clause at $v$ says that $c$ is still missing at the same vertex under
+$\sigma$. Reuse the unchanged length and exact-prefix clauses of the
+step: it is now a $\sigma$-augmentation. Head induction transports the
+whole route, including the reflexive route when $S=F$.
+
+To check closedness under $\sigma$, suppose that $g$ is a boundary edge
+of $F$ with $\sigma(g)=c$, where $c$ is missing under $\sigma$ at a vertex
+$v\in V(F)$. The endpoint definition \noderef{BoundaryEdges} supplies
+an endpoint in $V(F)$, so $g$ is incident with $F$.
+The vertex clause of stability makes $c$ missing under $\varphi_n$ at
+$v$, hence tree-missing on $F$. Both colorings are proper and leave
+exactly $e_0$ uncolored, as proved above. Apply the two-sided edge
+criterion \noderef{sc1} to the given final-tree stability: its alternative
+using the new value $\sigma(g)=c$ yields $\sigma(g)=\varphi_n(g)$.
+This contradicts original closedness, in the sense of
+\noderef{ColoredVertexSetClosed}, at $g,v,c$. The transported route and
+this closedness prove the identical recorded closure under $\sigma$.
+In the SE/RE cases we retained the same $f$, singleton connecting set,
+and exact ordered seed $S$ throughout.
+
+Finally restrict stability to $T_n$. The exact initial-segment relation
+already proved gives $V(T_n)\subseteq V(F)$ by
+\noderef{TreeSequenceInitialSegmentVertexSetSubset}. Thus the vertex
+clause restricts directly, and an edge incident with $T_n$ is also
+incident with $F$. The second inclusion of
+\noderef{HkuMissingStoredMonotone}, at the valid index $q=n-1$, states
+\[
+ \overline\varphi_n(T_n)\cup D_n
+ \subseteq\overline\varphi_n(F)\cup D_n.
+\]
+Consequently every edge value protected by stability on $T_n$ is already
+protected by the given stability on $F$. The edge clause therefore
+restricts too. These are the two clauses of
+\noderef{StableColoring}$(T_n,D_n,\varphi_n,\sigma)$, completing all
+claims.
+\end{proof}

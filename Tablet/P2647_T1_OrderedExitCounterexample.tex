@@ -1,0 +1,80 @@
+\begin{lemma}[Constructing and ordering the three exact Rutgers exits]
+Let $\mathcal E$ be a fixed extended Tashkinov tree and $\mathcal P$ a
+Rutgers closed presentation relative to $\mathcal E$, with coloring
+$\sigma$ and displayed tree $U$. Suppose that $\sigma$ is proper and
+$V(U)$ is elementary and closed under $\sigma$. Let $\alpha\ne\beta$
+be colors such that $\alpha$ is missing on $U$ and $\alpha,\beta$ are
+not $U$-interchangeable under $\sigma$. There is a Rutgers counterexample
+on $\mathcal P$ with its two stored colors exactly $\alpha$ and $\beta$.
+In particular its three exit packages retain individual boundary-edge
+identities and have strictly increasing inside endpoints in the order of
+$U$.
+\end{lemma}
+\begin{proof}
+First let $c$ be any color missing on $U$. By \noderef{TreeMissingColors}
+choose $v\in V(U)$ with $c$ missing at $v$. If an exact edge $f$ belonged
+to the $c$-colored boundary, \noderef{BoundaryColorEdges} would give both
+boundary membership and $\sigma(f)=c$. The assumed closedness, expanded
+using \noderef{ColoredVertexSetClosed}, forbids this value when $c$ is
+missing at $v$. Thus the $c$-colored boundary is empty. In particular
+\noderef{TreeColorSetClosed} holds on the singleton $\{\alpha\}$.
+
+If $\beta$ were also missing on $U$, the same argument would make its
+colored boundary empty. Its cardinality would be zero, hence at most
+one. Apply \noderef{ElementarySingleBoundaryInterchangeable} to
+properness, the assumed elementarity, the empty $\alpha$-boundary, and
+this cardinality bound. It would give $U$-interchangeability, including
+isolated two-color path components, contrary to the hypothesis.
+Therefore $\beta$ is not missing on $U$.
+
+Use \noderef{ElementaryClosedNoninterchangeableExitPair} with the
+proper coloring, elementary vertex set, distinct colors, missingness of
+$\alpha$, singleton closedness of $\alpha$, and failed interchangeability.
+It gives two walks $Q_1,Q_2$ and exact edges $f_1,f_2$. Each walk is an
+exit with outside end $a_i$ and inside end $b_i$, and $f_i$ is a
+$\beta$-colored boundary edge, incident with $b_i$, whose edge-node lies
+on $Q_i$. Their supports are disjoint, and their outside ends and inside
+ends are respectively distinct. Use
+\noderef{ElementaryClosedExitPairExtendsTriple} with the same properness,
+elementarity, distinct colors, missingness of $\alpha$, singleton
+closedness, the proved nonmissingness of $\beta$, and these two exact
+exit walks and disjointness and endpoint data. It produces a third
+exit $Q_3$ and an exact edge $f_3$ with the same individual boundary,
+incidence, and walk-membership properties. Its support is disjoint from
+both preceding supports, and each of its ends is distinct from both
+corresponding preceding ends. Thus all three outside ends, and all three
+inside ends, are pairwise distinct.
+
+Keep $(a_i,b_i,Q_i,f_i)$ as a single package for each $i$.
+The inside-membership clause of \noderef{TreeExitPath} puts $b_i$ in
+$V(U)$. By \noderef{TreeSequenceVertexSet}, select a displayed vertex
+index $r_i$ with $U.\mathrm{vertex}(r_i)=b_i$. The injective vertex map
+of \noderef{TreeSequence} makes each selected index unique. The pairwise
+distinct inside ends give pairwise distinct indices. These are indices
+in a linearly ordered finite interval, so exactly one of the following
+six increasing orders holds:
+\[
+ (r_1,r_2,r_3),\ (r_1,r_3,r_2),\ (r_2,r_1,r_3),\
+ (r_2,r_3,r_1),\ (r_3,r_1,r_2),\ (r_3,r_2,r_1).
+\]
+For completeness, compare $r_1$ with $r_2$. If $r_1<r_2$, comparison
+of $r_2$ with $r_3$ gives the first order when $r_2<r_3$; otherwise
+comparison of $r_1$ with $r_3$ gives the second or fifth order.
+If $r_2<r_1$, comparison of $r_1$ with $r_3$ gives the third order
+when $r_1<r_3$; otherwise comparison of $r_2$ with $r_3$ gives the
+fourth or sixth order. Distinctness excludes equality in every comparison.
+
+Relabel whole packages by the resulting order, never just one entry in
+a package. Every individual exit, exact boundary membership, incidence,
+and edge-node membership statement is unchanged. Pairwise distinctness
+is preserved by a permutation. Pairwise support disjointness is preserved
+too: the original assertion in the reverse order follows because
+$x\in\operatorname{supp}(Q_j)$ and $x\in\operatorname{supp}(Q_i)$
+would contradict the forward-order assertion. Finally the selected
+display indices give $b_1\prec_U b_2\prec_U b_3$ exactly by
+\noderef{TreeVertexOrder}. Fill all fields of
+\noderef{RutgersCounterexample} with the presentation, the original
+colors, their distinctness and missing/nonmissing facts, and the relabeled
+packages and verified properties. The stored colors are $\alpha,\beta$
+by construction, as claimed.
+\end{proof}

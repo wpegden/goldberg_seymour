@@ -1,0 +1,51 @@
+\begin{lemma}[A mod-coloring closure gives an original-relative presentation]
+Let $\mathcal E$ be a positive-rung extended Tashkinov tree with maximum
+property, terminal ladder tree $T_n$, terminal kind $\Theta_n$, and exact
+connecting-edge set $F_n$. Let $\sigma$ be a mod-coloring of
+$\mathcal E$. Let $F$ be an exact ordered initial extension of $T_n$ of
+strictly greater length. Assume either $\Theta_n=PE$ and $F$ is a
+$\sigma$-closure of $T_n$, or $\Theta_n\in\{SE,RE\}$ and there are an
+exact edge $f$ and an ordered seed $S$ with $F_n=\{f\}$,
+$\noderef{TreeSequenceAdjoinEdge}(T_n,f,S)$, and $F$ a $\sigma$-closure
+of $S$. Then there is a Rutgers closed presentation relative to the
+fixed original $\mathcal E$ whose coloring is exactly $\sigma$ and
+whose displayed tree is exactly $F$.
+\end{lemma}
+\begin{proof}
+Expand each closure with \noderef{TashkinovClosure}. In the PE case,
+its augmentation-sequence clause is a route from $T_n$ to $F$.
+In the SE/RE case it is a route from the supplied exact seed $S$ to
+$F$, retaining both $F_n=\{f\}$ and the exact adjunction of $f$.
+Together with the assumed exact initial extension and strict length
+inequality, these are exactly the eligibility conditions of the universal
+clause in \noderef{ModColoring}. Apply that clause at the particular
+ordered tree $F$. It supplies an actual
+\noderef{CorrespondingExtendedTashkinovTree} certificate $R$ relative
+to $\mathcal E$, for coloring $\sigma$ and displayed tree $F$.
+Apply \noderef{MaximumPropertyTransport} to $\mathcal E$, its assumed
+maximum property, the mod-coloring hypothesis, and this particular $R$.
+The result is maximum property for $R$'s replacement ETT.
+
+We verify the route using that same replacement ETT, not a separate
+replacement certificate. By \noderef{CorrespondingExtendedTashkinovTree},
+its rung number is $n$ and its series is the recorded replacement series
+after transporting this equality. For $q=n-1$, positivity in
+\noderef{ExtendedTashkinovTree} gives $0\leq q<n$. The certificate's
+ladder agreement at this $q$ identifies the replacement terminal ladder
+tree with the original $T_n$. Its extension-kind agreement at index $n$
+identifies its terminal kind with $\Theta_n$, and its connecting-set
+agreement at the same index identifies its exact connecting-edge set
+with $F_n$. In PE, rewrite the assumed closure using the ladder and kind
+identities: it is the required closure from the replacement ladder to
+$F$. In SE/RE, reuse the same edge identity $f$ and the same ordered
+seed $S$. The connecting-set identity gives the required singleton set;
+the ladder identity gives the identical adjunction $T_n+f=S$; the
+closure from $S$ to $F$ is unchanged. Thus the supplied route rewrites
+to the terminal route for the actual replacement ETT in $R$.
+
+Define the presentation with coloring $\sigma$, displayed tree $F$,
+corresponding certificate $R$, the transported maximum property, and
+the terminal route just verified. These are all the fields of
+\noderef{RutgersClosedPresentation}. Its coloring and displayed tree
+have the asserted exact equalities by construction.
+\end{proof}
