@@ -1,0 +1,44 @@
+\begin{helper}[Opposite rooted components of two interchangeable constituents]
+Let $G$ be a finite loopless multigraph, $\varphi$ a proper partial
+edge-coloring, and $X,Y,U$ tree-sequences with $U$ an ordered union of
+$X$ and $Y$. Suppose that $\alpha,\beta$ are interchangeable on each
+of $X$ and $Y$, but not on $U$. Let $u\in V(X)$ miss $\alpha$ and
+$v\in V(Y)$ miss $\beta$. Then $\alpha\ne\beta$, $u\notin V(Y)$,
+$v\notin V(X)$, the full $\alpha,\beta$ component rooted at $v$
+avoids $V(X)$, and the full component rooted at $u$ avoids $V(Y)$.
+Path components here include isolated vertices, and edges retain their
+individual identities even when their endpoints coincide.
+\end{helper}
+\begin{proof}
+If $\alpha=\beta$, there are no path components in the sense of
+\noderef{TwoColorPathComponent}, whose definition requires distinct
+colors. Thus \noderef{TreeInterchangeable} would hold vacuously on $U$,
+a contradiction. Hence $\alpha\ne\beta$.
+
+Write $C_u,C_v$ for the full rooted components in
+\noderef{TwoColorComponent}. Each root belongs to its own component.
+By \noderef{MissingColorIncidenceEndpoint}, the degree of $u$ in the
+two-color incidence graph is at most one. Applying the same result with
+the colors reversed gives this bound at $v$: the adjacency relation of
+\noderef{TwoColorIncidenceGraph} is unchanged by reversing the colors.
+A finite neighbor set of cardinality at most one is subsingleton.
+Consequently both rooted components satisfy
+\noderef{TwoColorPathComponent}, including when a root is isolated.
+
+Suppose $C_u=C_v$. Every path component meeting $U$ meets $X$ or $Y$,
+because the vertex-set clause of \noderef{OrderedTreeUnion} says
+$V(U)=V(X)\cup V(Y)$. If it meets $X$, interchangeability on $X$,
+applied also to the root $u$, identifies it with $C_u$. If it meets
+$Y$, interchangeability on $Y$, applied also to the root $v$,
+identifies it with $C_v=C_u$. Thus every two path components meeting
+$U$ are equal. By \noderef{TreeInterchangeable} this contradicts the
+hypothesis on $U$, so $C_u\ne C_v$.
+
+If $C_v$ met $X$, interchangeability on $X$ would identify $C_v$ with
+$C_u$, since $C_u$ meets $X$ at $u$. Hence $C_v$ avoids $V(X)$.
+Likewise, if $C_u$ met $Y$, interchangeability on $Y$ would identify it
+with $C_v$, so $C_u$ avoids $V(Y)$. Membership of each root in its own
+component now gives $v\notin V(X)$ and $u\notin V(Y)$ respectively.
+These arguments use full connected components, not selected subpaths,
+so neither isolated roots nor parallel edge identities are discarded.
+\end{proof}

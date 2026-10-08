@@ -1,0 +1,59 @@
+\begin{helper}[Copying augmentations through the first missing-color vertex]
+Let $\varphi$ be a proper partial edge-coloring of a finite loopless
+multigraph, $\alpha\ne\beta$, and let $\psi$ be the interchange of
+these colors on an arbitrary full two-color component rooted at a node
+$z$. Suppose $R$ is obtained from the tree-sequence $S$ by exact
+$\varphi$-Tashkinov augmentations. Let $X$ be elementary under
+$\varphi$, with $V(R)\subseteq X$. Suppose $u\in X\setminus V(R)$
+misses $\alpha$ and $v\in V(R)\setminus V(S)$ misses $\beta$.
+Then there is an exact ordered initial segment $B$ of $R$, whose last
+vertex is $v$, obtained from the same $S$ by $\psi$-Tashkinov
+augmentations.
+\end{helper}
+\begin{proof}
+By \noderef{TashkinovAugmentationSequence}, choose the finite chain
+of exact augmentations from $S$ to $R$. Each one-step augmentation
+adds one vertex at the end and preserves every previous vertex and
+edge entry, by \noderef{TashkinovAugmentation} and
+\noderef{TreeSequenceInitialSegment}. Every intermediate tree is an
+exact initial segment of $R$ by
+\noderef{TashkinovAugmentationSequenceInitialSegment}; its vertex set
+is therefore contained in $V(R)$ by
+\noderef{TreeSequenceInitialSegmentVertexSetSubset}.
+Since $v$ is absent from $S$ but present in $R$, there is a first step
+adjoining $v$. Write $B$ for its output. It is an exact initial segment
+of $R$ and its last vertex is $v$: the old vertices are unchanged, so
+the first appearance of $v$ must be the unique new vertex.
+
+Consider any step $A\longrightarrow D$ up to and including this
+step. In particular $v\notin V(A)$. The step certificate in
+\noderef{TashkinovAugmentation} supplies the exact new edge identity
+$f$, its old color $c$, and $c\in\overline\varphi(A)$.
+By \noderef{TreeMissingColors}, choose $w\in V(A)$ with
+$c\in\overline\varphi(w)$. We have $w\in V(R)\subseteq X$.
+Since $u\notin V(R)$, $w\ne u$. Since $v\notin V(A)$, $w\ne v$,
+including at the step adjoining $v$. Also $u,v\in X$.
+Elementarity, in the precise pairwise-disjoint sense of
+\noderef{ColoredVertexSetElementary}, now gives both exclusions:
+if $c=\alpha$, the missing sets at $w,u$ would both contain
+$\alpha$; if $c=\beta$, the missing sets at $w,v$ would both contain
+$\beta$. Thus $c\notin\{\alpha,\beta\}$.
+
+The definition \noderef{TwoColorComponentSwap} consequently fixes
+the exact value of $f$, whether or not its edge-node lies in the
+swapped component. In particular $\psi(f)=\varphi(f)=c$.
+The unaffected-color clause of
+\noderef{TwoColorComponentSwapMissingBehavior} says that $c$ remains
+missing at the same $w$ under $\psi$. Thus
+\noderef{TreeMissingColors} gives $c\in\overline\psi(A)$.
+The length and exact-entry clauses are independent of the coloring,
+so all clauses of \noderef{TashkinovAugmentation} hold for the same
+step $A\longrightarrow D$ under $\psi$.
+
+Apply this argument to every step through the one adjoining $v$.
+Concatenating these steps with
+\noderef{TashkinovAugmentationSequence} gives the required route
+from the unchanged seed $S$ to the exact prefix $B$. No edge is replaced
+by another edge with the same endpoints, and no preservation of the
+whole missing set at an internal component vertex is asserted or used.
+\end{proof}
