@@ -7,7 +7,6 @@ import Tablet.HkuMissingStoredMonotone
 import Tablet.MaximumDefectiveChoice
 import Tablet.MaximumPropertyTransport
 import Tablet.ModColoring
-import Tablet.P2647_T1_ClosedPresentation
 import Tablet.P2647_T1_OrderedExitCounterexample
 import Tablet.P2647_T1_TerminalStableRoute
 import Tablet.RutgersClosedPresentation
@@ -88,9 +87,66 @@ theorem RutgersCounterexampleMinimumExists
     P2647_T1_TerminalStableRoute G k e0 original sigma hproper hone hstable
   have hmod : ModColoring original sigma :=
     hcurrentSix original rfl hMP sigma hproper hone hterminalStable
-  obtain ⟨presentation, hsigma, hU⟩ :=
-    P2647_T1_ClosedPresentation G k e0 original hMP sigma F
-      hmod hsegment hstrict hroute
+  have eligible :
+      (original.series.data.kind (Fin.last original.rounds) =
+          some TashkinovExtensionKind.PE ∧
+        TashkinovAugmentationSequence sigma
+          (original.series.data.tree (Fin.last original.rounds).castSucc) F) ∨
+      ((original.series.data.kind (Fin.last original.rounds) =
+            some TashkinovExtensionKind.SE ∨
+          original.series.data.kind (Fin.last original.rounds) =
+            some TashkinovExtensionKind.RE) ∧
+        ∃ (f : E) (seed : TreeSequence G e0),
+          original.series.data.connectingEdges (Fin.last original.rounds) = {f} ∧
+            TreeSequenceAdjoinEdge
+              (original.series.data.tree (Fin.last original.rounds).castSucc) f seed ∧
+            TashkinovAugmentationSequence sigma seed F) := by
+    rcases hroute with ⟨hkind, hclosure⟩ | ⟨hkind, f, seed, hedge, hadjoin, hclosure⟩
+    · exact Or.inl ⟨hkind, hclosure.1⟩
+    · exact Or.inr ⟨hkind, f, seed, hedge, hadjoin, hclosure.1⟩
+  obtain ⟨corr⟩ := hmod.2.2 F hsegment hstrict eligible
+  have hmaximum := MaximumPropertyTransport G k e0 original sigma hmod F corr hMP
+  have replacementRoute :
+      let replacement := corr.replacementETT
+      let n := Fin.last replacement.rounds
+      let Tn := replacement.series.data.tree n.castSucc
+      (replacement.series.data.kind n = some TashkinovExtensionKind.PE ∧
+          TashkinovClosure sigma Tn F) ∨
+        ((replacement.series.data.kind n = some TashkinovExtensionKind.SE ∨
+            replacement.series.data.kind n = some TashkinovExtensionKind.RE) ∧
+          ∃ (f : E) (seed : TreeSequence G e0),
+            replacement.series.data.connectingEdges n = {f} ∧
+              TreeSequenceAdjoinEdge Tn f seed ∧
+              TashkinovClosure sigma seed F) := by
+    rcases corr with ⟨replacementInput, replacementSeries, replacementETT,
+      rungAgreement, seriesPresentation, finalGeneratingColoring,
+      ladderTreesAgree, storedColorsAgree, connectingEdgesAgree,
+      extensionKindsAgree, replacementProper, replacementOneUncolored,
+      replacementStable⟩
+    cases replacementETT with
+    | mk rounds roundsPositive replacementData above strict below generating =>
+      cases rungAgreement
+      have seriesSame : replacementData = replacementSeries := eq_of_heq seriesPresentation
+      cases seriesSame
+      let q : Fin original.rounds := ⟨original.rounds - 1, by
+        have := original.roundsPositive
+        omega⟩
+      have hq : q.succ = Fin.last original.rounds := by
+        apply Fin.ext
+        dsimp [q]
+        have := original.roundsPositive
+        omega
+      have ladderEq : replacementSeries.data.tree
+          (Fin.last original.rounds).castSucc =
+          original.series.data.tree (Fin.last original.rounds).castSucc := by
+        rw [← hq]
+        exact ladderTreesAgree q
+      dsimp
+      simpa only [ladderEq, extensionKindsAgree, connectingEdgesAgree] using hroute
+  let presentation : RutgersClosedPresentation G k e0 original :=
+    ⟨sigma, F, corr, hmaximum, replacementRoute⟩
+  have hsigma : presentation.sigma = sigma := rfl
+  have hU : presentation.U = F := rfl
   have helementary : ColoredVertexSetElementary G presentation.sigma
       (TreeSequenceVertexSet presentation.U) :=
     hcurrentOne presentation.corresponding.replacementETT
