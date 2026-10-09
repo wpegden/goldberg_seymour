@@ -32,9 +32,11 @@ import Tablet.MissingColors
 import Tablet.ModColoring
 import Tablet.OutsideKempeRecoloring
 import Tablet.OutsideKempeRecoloringStable
+import Tablet.P2716_T1_OutsideExitTransport
 import Tablet.ParallelCommonMissingClosed
 import Tablet.PresentColors
 import Tablet.StableColoring
+import Tablet.Step1ZeroDividerAnchorNonPE
 import Tablet.TashkinovAugmentation
 import Tablet.TashkinovAugmentationSequence
 import Tablet.TashkinovClosure
@@ -54,6 +56,7 @@ import Tablet.TreeMissingColors
 import Tablet.TreeSequence
 import Tablet.TreeSequenceAdjoinEdge
 import Tablet.TreeSequenceInitialSegment
+import Tablet.TreeSequenceInitialSegmentVertexSetSubset
 import Tablet.TreeSequencePrefix
 import Tablet.TreeSequenceVertexSet
 import Tablet.TreeVertexOrder
@@ -268,4 +271,101 @@ lemma Step1CaseOneInsideZeroNonPE {V E : Type*}
     (hnonPE : ett.series.data.kind (Fin.last ett.rounds) ≠
       some TashkinovExtensionKind.PE) : False := by
 -- BODY
-  sorry
+  classical
+  let A := HierarchyStarredStage H (Fin.last H.dividerCount)
+  have hstar : A = base.core := by
+    have hlast : Fin.last H.dividerCount =
+        (0 : Fin (H.dividerCount + 1)) := by
+      apply Fin.ext
+      simp [hdividerZero]
+    change HierarchyStarredStage H (Fin.last H.dividerCount) = base.core
+    rw [hlast]
+    rfl
+  have hprefix : TreeSequenceInitialSegment A T := by
+    rw [hstar, base.nonparallel hnonPE]
+    exact ett.abovePenultimate
+  have hsub : TreeSequenceVertexSet A ⊆ TreeSequenceVertexSet T :=
+    TreeSequenceInitialSegmentVertexSetSubset hprefix
+  have hb₁A : b₁ ∈ TreeSequenceVertexSet A := by
+    obtain ⟨hlen, hvertices, _⟩ := hprefix
+    obtain ⟨i, j, hi, hj, hij⟩ := horder
+    obtain ⟨t, ht⟩ : ∃ t : Fin (A.length + 1), A.vertex t = b₂ := by
+      simpa only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+        true_and] using hinside
+    have hjcast : j = Fin.castLE (Nat.succ_le_succ hlen) t :=
+      T.vertex_injective (hj.trans ((hvertices t).trans ht).symm)
+    have hiBound : i.val < A.length + 1 := by
+      have hjval := congrArg Fin.val hjcast
+      simp only [Fin.val_castLE] at hjval
+      omega
+    let iA : Fin (A.length + 1) := ⟨i.val, hiBound⟩
+    have hiCast : Fin.castLE (Nat.succ_le_succ hlen) iA = i := by
+      apply Fin.ext
+      rfl
+    simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ,
+      true_and]
+    refine ⟨iA, ?_⟩
+    calc
+      A.vertex iA = T.vertex (Fin.castLE (Nat.succ_le_succ hlen) iA) :=
+        (hvertices iA).symm
+      _ = T.vertex i := by rw [hiCast]
+      _ = b₁ := hi
+  obtain ⟨sigma, hrecolor, hproperSigma, honeSigma, hsubset, _, hexits⟩ :=
+    P2716_T1_OutsideExitTransport G T phi alpha theta beta hthetaAlpha.symm
+      hne hthetaBeta hproper hone hclosed hthetaClosed
+  obtain ⟨Q₁, hQ₁, hsupport₁, _⟩ :=
+    hexits A hsub a₁ b₁ P₁ hP₁ hb₁A
+  obtain ⟨Q₂, hQ₂, hsupport₂, _⟩ :=
+    hexits A hsub a₂ b₂ P₂ hP₂ hinside
+  have hQpaths : ∀ x, x ∈ Q₁.support → x ∉ Q₂.support := by
+    simpa only [hsupport₁, hsupport₂] using hpaths
+  obtain ⟨_, _, _, _, corr, hMPsigma, baseSigma, K, goodSigma, hsame, _⟩ :=
+    HierarchyLEMStable G k e0 input T phi sigma ett hMP hpositive hlower
+      base H good hproper hone alpha theta hrecolor
+  obtain ⟨hcores, hcounts, _, _, _, _⟩ := hsame.1
+  have hKzero : K.dividerCount = 0 := hcounts.symm.trans hdividerZero
+  have hKstar : HierarchyStarredStage K (Fin.last K.dividerCount) = A := by
+    have hlast : Fin.last K.dividerCount =
+        (0 : Fin (K.dividerCount + 1)) := by
+      apply Fin.ext
+      simp [hKzero]
+    rw [hlast]
+    exact hcores.symm.trans hstar.symm
+  have hmissingSigma : theta ∈ TreeMissingColors sigma
+      (HierarchyStarredStage K (Fin.last K.dividerCount)) := by
+    rw [hKstar, (hsubset A hsub).2.1]
+    exact hthetaMissing
+  have hclosedSigma : TreeColorSetClosed G sigma
+      (HierarchyStarredStage K (Fin.last K.dividerCount)) {theta} := by
+    rw [hKstar]
+    exact (hsubset A hsub).2.2 theta hthetaClosedStar
+  have lastKindAgreement : ∀ {m n : ℕ}
+      (S₁ : TashkinovSeries G k m e0 corr.replacementInput)
+      (S₂ : TashkinovSeries G k n e0 corr.replacementInput),
+      m = n → HEq S₁ S₂ →
+      S₁.data.kind (Fin.last m) = S₂.data.kind (Fin.last n) := by
+    intro m n S₁ S₂ hmn hseries
+    cases hmn
+    cases hseries
+    rfl
+  have hkind : corr.replacementETT.series.data.kind
+      (Fin.last corr.replacementETT.rounds) =
+      ett.series.data.kind (Fin.last ett.rounds) :=
+    (lastKindAgreement corr.replacementETT.series corr.replacementSeries
+      corr.rungAgreement corr.seriesPresentation).trans
+      (corr.extensionKindsAgree (Fin.last ett.rounds))
+  have hnonSigma : corr.replacementETT.series.data.kind
+      (Fin.last corr.replacementETT.rounds) ≠
+      some TashkinovExtensionKind.PE := by
+    rw [hkind]
+    exact hnonPE
+  exact Step1ZeroDividerAnchorNonPE G k e0 corr.replacementInput T sigma
+    corr.replacementETT hMPsigma
+    (by simpa only [corr.rungAgreement] using hpositive)
+    hproperSigma honeSigma
+    (fun lower hp hlt hmp => hlower lower hp
+      (by simpa only [corr.rungAgreement] using hlt) hmp)
+    baseSigma K hKzero theta beta hthetaBeta hmissingSigma hclosedSigma
+    a₁ b₁ a₂ b₂ Q₁ Q₂
+    (by simpa only [hKstar] using hQ₁)
+    (by simpa only [hKstar] using hQ₂) hQpaths ha hnonSigma
