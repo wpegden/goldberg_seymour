@@ -1,0 +1,90 @@
+\begin{lemma}[Reconstructing only the penultimate prefix]
+Fix a hierarchy counterexample $C$, its minimum context $\mathit{ctx}$,
+and a raw Case Three datum $D$. Put $A=T^*_{n,q}$,
+$B^+=\noderef{HierarchyFullTailPrefix}(C,\ell-1)$,
+$y_p=T.\mathit{vertex}(D.\mathit{terminalVertexIndex})$, and
+$\alpha=D.\alpha$. Suppose $\beta$ is unused on every exact displayed
+edge of the full tail above $A$, is not missing at $y_p$, and every
+vertex of the $(\alpha,\beta)$-component $Q$ rooted at $y_p$ is outside
+$B^+$. Let $\sigma$ be the swap on $Q$. Then $y_p\in Q$, $Q$ meets $T$,
+every exact displayed edge of $T$ retains its value, $\sigma$ is
+$(T_n,D_n,\varphi)$-stable, $\beta$ is missing at $y_p$ under $\sigma$,
+and there exist \noderef{P2752_T2_PrefixData} on $B^+$ for $\sigma$.
+No full-tree corresponding certificate is asserted here.
+\end{lemma}
+\begin{proof}
+The component relation of \noderef{TwoColorComponent} is reflexive,
+so its root belongs to $Q$. The terminal vertex is a displayed vertex
+of $T$, by \noderef{HierarchySituationTwoCommonTailData} and
+\noderef{TreeSequenceVertexSet}; hence $Q$ meets $T$.
+The terminal missingness field of
+\noderef{HierarchySituationTwoCaseThreeData} and the assumed presence
+of $\beta$ at this vertex imply $\alpha\ne\beta$.
+
+We establish the exact prefix relations before applying any recoloring
+lemma. If $q=0$, $A$ is the base core, and the core-inside-first field of
+\noderef{TashkinovHierarchy} places it inside the terminal stage $T$.
+If $q>0$, \noderef{HierarchyStarredStage} identifies $A$ with the last
+nonterminal ordinary stage, whose nesting field places it inside $T$.
+Thus $A\preccurlyeq T$. The full-tail definition
+\noderef{HierarchyFullTailLength} and the inequality $\ell\ge2$ in the
+common datum give
+$|B^+|=|A|+\ell-1=|T|-1$ by
+\noderef{HierarchyFullTailPrefix}. Consequently $A\prec B^+\prec T$.
+These are exact inclusions: both $A$ and the prefix $B^+$ agree entrywise
+with $T$, so comparing the entries at every index of $A$ gives
+$A\preccurlyeq B^+$. The strict terminal-ladder inclusion in
+\noderef{ExtendedTashkinovTree} similarly gives $T_n\preccurlyeq B^+$:
+$|T_n|<|T|$ implies $|T_n|\le |B^+|$, and both are exact prefixes of $T$.
+
+Choose the singleton root set $\{y_p\}$. The outside assumption and
+the pointwise formula of \noderef{TwoColorComponentSwap} verify the two
+clauses of \noderef{OutsideKempeRecoloring} on $B^+$. Apply
+\noderef{OutsideKempeRecoloringStable} with the properness and
+one-uncoloredness fields of
+\noderef{HierarchyMinimumCounterexampleContext}. It supplies properness
+and one-uncoloredness of $\sigma$, missing-set equality at every vertex
+of $B^+$, invariance there, and equality of values on every individual
+edge incident with $B^+$.
+
+For terminal-ladder stability, check \noderef{StableColoring} directly.
+Every vertex of $T_n$ belongs to $B^+$ by
+\noderef{TreeSequenceInitialSegmentVertexSetSubset}, so its missing
+set is unchanged. If $f$ is incident with $T_n$, its particular incident
+vertex also belongs to $B^+$, hence $f$ is incident with $B^+$ and is fixed.
+This proves the controlled edge clause for $D_n$ without restricting a
+stable-coloring control set. Together with the vertex clause it gives the
+claimed stability on the old terminal ladder.
+
+Every displayed edge of $B^+$ is incident with its successor vertex by
+\noderef{TreeSequence}, hence is fixed. The only remaining displayed
+edge of $T$ is the exact $e_p=T.\mathit{edge}(D.\mathit{lastEdgeIndex})$,
+as the two index equations of the common datum show. It is incident with
+$y_p$. If its old color were $\alpha$, this would contradict terminal
+missingness by the incidence definition of \noderef{MissingColors}.
+Its position is above $A$, since $|T|-|A|\ge2$, so its old color is not
+$\beta$ by full-tail nonuse. The component swap therefore fixes $e_p$
+regardless of whether its edge-node is in $Q$. This proves displayed-edge
+equality on all of $T$, including the distinguished first edge.
+
+Apply \noderef{GoodHierarchyTerminalPrefixRepackage} to
+$A\prec B^+\preccurlyeq T$. Retain its old prefix ETT, maximum property,
+rung and certified-series equalities, base core, closure and support
+equalities, hierarchy stages and dividers, and all stored, missing,
+Gamma and segment comparisons. Apply \noderef{HierarchyLEMStable} to
+this ETT on $B^+$ and the singleton outside recoloring just established.
+Its positive rung follows from rung equality. For each lower ETT the
+strict rung bound rewrites by this same equality; the entire six-assertion
+package of $\mathit{ctx.lowerRung}$ therefore supplies its lower-rung
+premise. The old properness and one-uncoloredness come from the context.
+Retain the returned prefix corresponding certificate, maximum property,
+replacement base, hierarchy, good witness and same-good relation. Together
+with the exact prefix relations and pointwise preservation proved above,
+these give every field of \noderef{P2752_T2_PrefixData}. The outside
+hierarchy lemma was applied only to $B^+$, not to $T$.
+
+Finally the root membership, $\alpha\ne\beta$, properness of the old
+coloring and terminal missingness of $\alpha$ allow the second clause of
+\noderef{TwoColorComponentSwapMissingBehavior}. It gives missingness of
+$\beta$ at $y_p$ under $\sigma$, as required.
+\end{proof}

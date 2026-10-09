@@ -1,0 +1,24 @@
+\begin{lemma}[Correspondence preserves the computed terminal stored set]
+Let $\mathcal C$ be a corresponding replacement of a positive-rung ETT,
+possibly on a different exact terminal tree. The computed terminal stored
+set of its replacement ETT equals the computed terminal stored set of
+the original ETT, each evaluated at its own terminal rung index.
+\end{lemma}
+\begin{proof}
+Use the rung and series-presentation fields of
+\noderef{CorrespondingExtendedTashkinovTree} to identify the terminal
+indices and to compute with its displayed replacement series. At every
+index the raw stored sets agree. Their unions over indices up to the
+common terminal rung therefore agree. Since the rung is positive by
+\noderef{ExtendedTashkinovTree}, there is a positive slot with successor
+index equal to this terminal rung. Ladder agreement at that slot gives
+the same exact terminal ladder tree. Replacement stability at that slot
+gives equality of missing sets at each vertex of the old terminal ladder,
+by \noderef{StableColoring}. Taking their union according to
+\noderef{TreeMissingColors} identifies the missing sets of that ladder
+under the two respective terminal series colorings. The definition
+\noderef{TashkinovStoredColors} subtracts exactly these equal missing sets
+from the equal unions of raw stored sets. Both nonzero-index branches
+thus have equal values. This proves equality of the computed sets, not
+just agreement of the raw arrays.
+\end{proof}

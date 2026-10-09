@@ -1,0 +1,69 @@
+\begin{lemma}[Transporting the complete minimum context]
+Fix a hierarchy counterexample $C$ on the exact tree $T$ with its minimum
+context. Let $\mathcal C$ be a corresponding certificate under $\sigma$
+on the same exact $T$, and let $C'$ be a hierarchy counterexample on a
+base of its replacement ETT. Suppose $C.\mathit{good}$ and
+$C'.\mathit{good}$ satisfy SameGoodHierarchy. Then $C'$ admits a minimum
+context relative to the replacement input and generating coloring
+$\sigma$. In particular all six lower-rung assertions, both minimality
+conditions, and the $2n+11$ terminal missing-color bound are retained.
+\end{lemma}
+\begin{proof}
+We supply all six fields of
+\noderef{HierarchyMinimumCounterexampleContext}; its lower-rung field
+itself contains all six technical assertions. Write $n$ for the original
+rung and $n'$ for the replacement rung.
+By \noderef{CorrespondingExtendedTashkinovTree}, $n'=n$, the replacement
+ETT's series is the displayed replacement series, and $\sigma$ is the
+coloring at its terminal index. The properness and one-uncoloredness
+fields of that series at this index thus give the first two context
+fields, using \noderef{IsProperEdgeColoring} and
+\noderef{IsOneEdgeUncolored}.
+
+For the lower-rung field, fix any certified positive-rung lower ETT, with
+arbitrary input and generating coloring, and assume its rung $s$ is
+strictly less than $n'$ and it has maximum property. Rung equality makes
+$s<n$. Apply the original context's lower-rung field to this actual lower
+ETT and its three stated premises. Its conclusion is the entire six-part
+conjunction: elementarity; final-closure interchangeability under stable
+colorings; the two PE-support stability and disjointness clauses; the
+terminal PE component assertion; the defective-boundary vertex order
+assertion; and terminal-stable mod-coloring. We return that conjunction
+unchanged, not merely its first clause. This verifies the complete
+lower-rung field for the new context.
+
+The divider counts are equal by \noderef{SameGoodHierarchy}. For the
+fewer-divider field, fix any maximum ETT of rung $n'$ and any good hierarchy
+on it having fewer dividers than $C'$. The rung and divider equalities make
+it a maximum ETT of rung $n$ with fewer dividers than $C$. The old
+fewer-divider field supplies its elementarity under its own generating
+coloring; return that assertion.
+
+Apply \noderef{P2752_T2_HierarchyMeasures} to the same-stage clause of
+the given same-good relation. Its starred-tree equality, path-number
+equality and last ordinary-stage equality, substituted in
+\noderef{HierarchyCounterexampleMeasure}, give exact equality of both
+coordinates for $C,C'$. Now fix any counterexample of rung $n'$ and
+the same divider count as $C'$. It has the original rung and divider count
+as well. The old lexicographic-minimality field says its measure is not
+less than that of $C$. Replacing that measure by the equal measure of
+$C'$ gives exactly the new lexicographic-minimality field, with the order
+of \noderef{HierarchyCounterexampleLess} unchanged.
+
+For the large missing-set field, $n\ge1$ by
+\noderef{ExtendedTashkinovTree}. The positive slot whose successor index
+is $n$ therefore exists, even when $n=1$. At this slot, the ladder-tree
+agreement of the corresponding certificate identifies the new terminal
+ladder with the old $T_n$. Its replacement-stability field gives equality
+of missing sets at every vertex of this old $T_n$, by the vertex clause
+of \noderef{StableColoring}. The old generating-color equation and the
+new terminal-color equation rewrite the two colorings in this equality
+as $\varphi$ and $\sigma$. Taking the union over the exact vertex set,
+as in \noderef{TreeMissingColors}, gives
+\[
+ \overline\sigma(T'_n)=\overline\varphi(T_n).
+\]
+Substitute this set equality and $n'=n$ into the original context's
+$2n+11$ lower bound. This proves precisely the new large missing-set field.
+All context fields have now been constructed for the supplied $C'$.
+\end{proof}

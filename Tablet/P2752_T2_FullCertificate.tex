@@ -1,0 +1,69 @@
+\begin{lemma}[The full-tree route retains its connecting seed]
+Fix a hierarchy counterexample $C$ on $T$, its minimum context, and
+colorings $\varphi,\sigma$. Suppose there are
+\noderef{P2752_T2_PrefixData} $F$ on a penultimate exact prefix $B^+$
+for $\sigma$, every displayed edge of $T$ has the same value under both
+colorings, and $\sigma$ is $(T_n,D_n,\varphi)$-stable on the old terminal
+ladder. Then there exists a corresponding ETT certificate on the full
+exact $T$ under $\sigma$, and its replacement ETT has maximum property.
+The full-tree certificate is not required to equal the prefix certificate
+in $F$.
+\end{lemma}
+\begin{proof}
+Write $n$ for the old rung and $T_{n+1}$ for the final certified-series
+tree. The above-penultimate, strictness and below-final fields of
+\noderef{ExtendedTashkinovTree} give
+$T_n\prec T\preccurlyeq T_{n+1}$ and identify the generating coloring
+with the terminal series coloring. Inspect the actual certificate
+$\mathit{ett.series.certified}(n)$ from \noderef{TashkinovSeries}.
+It has the constructors of \noderef{TashkinovSeriesStep}. Its initial
+constructor is impossible, since its index is zero whereas $n\ge1$.
+
+For a PE certificate, its closure field, expanded by
+\noderef{TashkinovClosure}, supplies the augmentation route
+$T_n\longrightarrow T_{n+1}$ under $\varphi$. The exact relations above
+allow \noderef{TashkinovAugmentationSequenceRestrict} to truncate it at
+$T$. For an SE certificate retain its actual choice edge $f$ and its
+actual adjoined tree $S$. For an RE certificate retain instead its actual
+revisiting edge $f$ and its actual adjoined tree $S$. In either case the
+constructor gives $F_n=\{f\}$, $\noderef{TreeSequenceAdjoinEdge}(T_n,f,S)$,
+and a closure route $S\longrightarrow T_{n+1}$ under $\varphi$.
+The adjoin relation gives $|S|=|T_n|+1\le|T|$.
+By \noderef{TashkinovAugmentationSequenceInitialSegment}, the closure
+route places $S$ as an exact prefix of $T_{n+1}$. Both $S$ and $T$ have
+the same entries as $T_{n+1}$ through the indices of $S$, so
+\noderef{TreeSequenceInitialSegment} gives $S\preccurlyeq T$.
+Restricting this closure route thus gives $S\longrightarrow T$.
+In particular we have retained the actual exact singleton and adjoined
+seed, not an arbitrary one-edge extension of $T_n$.
+
+Transport either restricted route by
+\noderef{TashkinovAugmentationSequenceColoringTransport}, with $B^+$ as
+penultimate prefix and $T$ as target. Its prefix and unit-length premises
+are fields of $F$. Its fixed-edge premise holds at every required index
+by the assumed displayed-edge equality on the full $T$. Its missing-set
+premise is the vertex clause of the prefix invariant in $F$, using
+\noderef{TreeColoringInvariant}. Thus in PE the identical route starts
+at $T_n$, and in SE or RE it starts at the identical $S=T_n+f$ with the
+identical connecting singleton. The last displayed edge of $T$ is included
+in this transport, because fixed-edge equality was assumed on all of $T$.
+
+Apply \noderef{Td} to the original ETT, its positive rung and maximum
+property from \noderef{HierarchyCounterexample}, and the entire
+six-assertion lower-rung field of
+\noderef{HierarchyMinimumCounterexampleContext}. Properness and exact
+one-uncoloredness of $\sigma$ are fields of $F$, and terminal-ladder
+stability is the stated hypothesis, rewritten using the generating-color
+equation. This yields \noderef{ModColoring}(\mathit{ett},\sigma).
+Its universal clause is applicable to $T$ with $T_n\prec T$. In PE its
+first eligibility alternative is supplied by the transported PE route;
+in SE or RE its second alternative is supplied by the terminal kind,
+actual singleton $\{f\}$, adjoin relation and transported seed route.
+It therefore supplies an actual full-tree
+\noderef{CorrespondingExtendedTashkinovTree}. Apply
+\noderef{MaximumPropertyTransport} to this mod-coloring certificate,
+this full-tree corresponding certificate, and the original maximum
+property. It gives maximum property of the replacement ETT. Nothing
+in this argument identifies this full certificate with the independently
+stored prefix certificate.
+\end{proof}

@@ -1,0 +1,169 @@
+\begin{lemma}[Restoring the terminal hierarchy from two certificates]
+Fix a counterexample $C$ on the exact tree $T$, its minimum context,
+and a raw Case Three datum $D$. Let $\beta$ be missing on
+$B=T(y_{p-2})$ and not missing at $y_p$. Put
+$B^+=T(y_{p-1})$, using the full-tail prefix definitions.
+Let $\sigma$ be the $(D.\alpha,\beta)$-component swap rooted at $y_p$.
+Suppose $F$ is \noderef{P2752_T2_PrefixData} on $B^+$ for $\sigma$,
+every displayed edge of $T$ is fixed, and $\mathcal C^T$ is any
+full-tree corresponding certificate from the original ETT to $\sigma$
+on $T$. Then $\mathcal C^T$ admits a hierarchy base and a good hierarchy
+on $T$ which satisfy SameGoodHierarchy with $C.\mathit{good}$.
+No equality between $\mathcal C^T$ and the prefix certificate is assumed.
+\end{lemma}
+\begin{proof}
+Write $H=C.\mathit{hierarchy}$ and $q=H.\mathit{dividerCount}$.
+The notation $B,B^+$ is given by \noderef{HierarchyFullTailPrefix} and
+\noderef{HierarchyFullTailLength}. The inequality $\ell\ge2$ in
+\noderef{HierarchySituationTwoCommonTailData} gives
+$|B|=|T|-2$ and $|B^+|=|T|-1$; these are exact prefixes of $T$ by
+\noderef{TreeSequencePrefix}. The fields of $F$ from
+\noderef{P2752_T2_PrefixData} will be denoted as follows: the old prefix
+ETT, base, hierarchy and good witness are $\mathcal E^+,b^+,H^+,g^+$;
+the new prefix corresponding certificate, base, hierarchy and good
+witness are $\mathcal C^+,b^+_\sigma,K^+,g^+_\sigma$.
+The old prefix ETT has the original rung and the identical certified
+series. Both corresponding certificates in
+\noderef{CorrespondingExtendedTashkinovTree} therefore have the original
+positive ladder trees, raw stored sets, connecting-edge sets, and kinds.
+This identifies their terminal ladder trees with the old $T_n$ and their
+terminal kinds with the old kind. It does not identify their certified
+series or internal witnesses.
+
+We first check the only witness equality required for a common base.
+Suppose the terminal kind is PE. Inspect the old, new prefix and new full
+terminal certificates in \noderef{TashkinovSeries}. In each case
+\noderef{TashkinovSeriesStep} forces the PE constructor: an initial
+certificate has kind none and SE and RE have their respective different
+kinds. Write $(v,f,u)$ for the vertex, exact edge and outside endpoint of
+the old \noderef{MaximumDefectiveChoice}, and $(v',f',u')$ for either
+replacement choice. The constructor's singleton-edge equations and
+connecting-edge agreement give $\{f'\}=\{f\}$, whence $f'=f$.
+The choice fields give
+\[
+ G[f]=\{v,u\}=\{v',u'\},\qquad
+ v,v'\in V(T_n),\quad u,u'\notin V(T_n).
+\]
+Equality of these unordered endpoint pairs has two possibilities. In the
+uncrossed one $v'=v$. In the crossed one $v'=u$, contradicting the inside
+and outside memberships just displayed. Thus $v'=v$ in both replacement
+certificates. The chosen-vertex equations of their PE constructors give
+the same terminal chosen vertex for the old, prefix and full certificates.
+This conclusion used exact singleton identities and endpoint splits, not
+an unwarranted equality of arbitrary corresponding witnesses.
+
+Construct a base $b^T_\sigma$ for $\mathcal C^T$ using
+\noderef{HierarchyBase}. Copy the ordered core and closure of
+$b^+_\sigma$ and transport its support position across equality of the
+terminal ladder trees, retaining its numerical value. Support positivity
+copies. The terminal missing-color equation is reflexive, since both the
+base coloring and the replacement generating coloring are $\sigma$.
+If the terminal kind is PE, the chosen-vertex equality just proved
+transports the support-vertex clause; equality of the terminal ladder trees
+and numerical support positions identifies their exact support prefixes
+by \noderef{TreeSequencePrefix}. The prefix base's
+\noderef{TashkinovClosure} and \noderef{OrderedTreeUnion} certificates
+then give the full base's closure and union clauses. If the kind is not
+PE, both replacements have that same non-PE kind, and the prefix base's
+nonparallel clause identifies its copied core with $T_n$. This gives the
+full base's nonparallel clause; its parallel implication is vacuous.
+Thus every base field is supplied.
+
+By \noderef{SameGoodHierarchy}, the prefix same-good relation identifies
+$b^+_\sigma.\mathit{core}$ with $b^+.\mathit{core}$, and, in PE, their
+closures. The old-base equalities in $F$ identify these with the original
+core and closure. Hence the new full base has the original core and the
+original closure whenever the terminal kind is PE.
+
+Construct $K^T$ using \noderef{TashkinovHierarchy}. Its divider count is
+that of $K^+$. Copy every nonterminal ordinary stage and replace only the
+terminal stage $B^+$ by $T$. Copy each divider position by its numerical
+value, now as an index of $T$; its bound follows from $B^+\preccurlyeq T$.
+The base-stage equation follows from terminal-ladder equality. The terminal
+stage equation is the definition. Below the terminal stage, the nested and
+strict fields are those of $K^+$. For the last nesting compose its old
+inclusion into $B^+$ with $B^+\preccurlyeq T$, comparing retained entries
+as in \noderef{TreeSequenceInitialSegment}; its strict length inequality
+follows from the old strict inequality and $|B^+|<|T|$. Divider positivity
+and increasing order are numerical and copy. Each divider-prefix equation
+copies because an exact prefix of $B^+$ at the same numerical index is
+also that exact prefix of $T$. The core-inside-first field copies for
+$q>0$; for $q=0$ its old target was $B^+$, so compose with its inclusion
+in $T$. These checks give all hierarchy fields.
+
+The prefix same-good relation identifies all ordinary stages, dividers
+and cores of $K^+$ and $H^+$. The old comparisons in $F$ then identify
+every nonterminal stage and numerical divider of $K^T$ with $H$, and the
+terminal stages are both literally $T$. Counts, stage families and divider
+families therefore agree exactly. Together with core, terminal-kind and
+conditional closure agreement, this gives
+\noderef{SameHierarchyStages} for $H,K^T$.
+
+We check all six fields of \noderef{GoodHierarchy}. First identify the
+computed color data. For every internal index, the ordinary stages agree
+with the original stages and are contained in $B^+$. The definition
+\noderef{HierarchyStarredStage}, using the common core and the retained
+ordinary stages, gives the same assertion for starred stages. Vertex
+sets here are the displayed sets of \noderef{TreeSequenceVertexSet}. The
+vertex clause of \noderef{TreeColoringInvariant}, recorded in $F$,
+identifies all their missing sets, including that on $T_n$.
+Apply \noderef{P2752_T2_TerminalStoredColors} to both corresponding
+certificates. Their old series are identical, so their terminal computed
+\noderef{TashkinovStoredColors} equal the original computed set. This
+uses terminal-ladder missing-set stability as well as equality of the
+raw stored arrays. The subtraction defining
+\noderef{HierarchyStoredColorsAt} therefore gives identical stored sets
+on $H,K^T$, and \noderef{HierarchyStageMissingColors} gives identical
+stage-missing sets. The same argument identifies the new full stored
+sets with those of $K^+$, since their internal stages, base core and
+terminal ladder are identical. Define the full Gamma function by copying
+$g^+_\sigma.\mathit{gamma}$. For each relevant stored color, prefix
+same-good and the old Gamma comparisons in $F$ identify this value with
+$C.\mathit{good}.\mathit{gamma}$.
+
+To check avoidance at the last stage we cannot merely restrict the prefix
+claim. We prove equality of all full first-missing positions. For a color
+other than $D.\alpha$ and $\beta$, the swap changes no incidence of that
+color, so its missingness at every vertex of $T$ is unchanged, by the
+pointwise formula of \noderef{TwoColorComponentSwap} and
+\noderef{MissingColors}. For $D.\alpha$, the raw earlier missing witness
+in \noderef{HierarchySituationTwoCaseThreeData} has index strictly before
+the penultimate vertex, hence lies in $B$. For $\beta$, the assumed
+tree-missing membership on $B$, expanded by \noderef{TreeMissingColors},
+provides such a witness as well. For either affected color there is thus
+a candidate missing position in $B\subseteq B^+$. Invariance preserves
+all candidates in $B^+$. The least old and new candidates are at most
+this preserved witness and therefore both lie in $B^+$; comparing the
+candidate predicates there proves they are the same index. In the
+unaffected case candidate sets agree everywhere, so their minima and their
+empty-set fallbacks agree. This verifies the entire totalized definition
+\noderef{HierarchyFirstMissingPosition}.
+
+Every displayed edge of $T$ is fixed by hypothesis. Each edge of a copied
+internal stage is that same exact edge of $T$, by its prefix relation.
+The identical first-missing positions, ordinary and starred stages and
+edge values give equality of all old and new full
+\noderef{HierarchySegmentColors}, directly at each edge index in its
+definition. For a relevant stored color, original goodness now gives
+the full avoidance inclusion: the Gamma pair, stage-missing set and
+segment-color set are all exactly those of the original inclusion.
+This also checks the possible last-edge contribution explicitly.
+
+The two-colors and disjoint-pairs fields copy from $g^+_\sigma$, because
+the internal computed stored sets and Gamma function are identical.
+The unique-refresh field copies, including uniqueness: all its quantified
+stored sets, Gamma values, difference of the two stage vertex sets and
+the coloring $\sigma$ are identical in the prefix and full presentations.
+The parallel-base field copies because the full and prefix terminal
+kinds agree and their terminal ladder, core, closure, index-zero stored
+set and Gamma function agree. The positive-stage minus-closedness fields
+copy because their exact stages, coloring, stored sets and Gamma control
+sets agree. With the avoidance check above these are all six fields,
+giving a full good witness $g^T_\sigma$.
+
+Finally the same-stage relation already checked, equality of every internal
+stored set, and equality of Gamma values at each member of that set are
+exactly the two clauses of \noderef{SameGoodHierarchy}. They give
+SameGoodHierarchy between $C.\mathit{good}$ and $g^T_\sigma$ and complete
+the construction.
+\end{proof}

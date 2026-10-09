@@ -1,0 +1,28 @@
+\begin{lemma}[Exact hierarchy transport preserves the minimum measures]
+Let $H_1,H_2$ be hierarchies on the same exact terminal tree $T$, possibly
+with different generating colorings and certified inputs. Suppose they
+satisfy SameHierarchyStages. Then their last starred stages are the same
+exact tree, their path numbers are equal, and their ordinary stages at
+their respective last internal indices are the same exact tree. In
+particular the full-tail lengths and both coordinates of the hierarchy
+counterexample measure are unchanged by this transport.
+\end{lemma}
+\begin{proof}
+Expand \noderef{SameHierarchyStages}. It supplies equal cores, equal
+divider counts, and equality of the whole ordinary stage family after
+identifying those counts. Identify the counts first. If their common
+value is zero, the last starred stages are the two cores, so they agree.
+If the count is positive, \noderef{HierarchyStarredStage} selects the
+ordinary stage at that last internal index, so equality of the stage
+families again gives the same starred stage. The ordinary stage at the
+last internal index agrees in all cases by the same family equality.
+In the definition \noderef{HierarchyPathNumber}, the starred-stage
+length, terminal tree and every displayed edge endpoint are consequently
+identical. Therefore both the interval of candidate indices and the
+path-tail predicate on that interval agree; their least candidates, or
+their fallback full-tail lengths when there is no candidate, are equal.
+Finally \noderef{HierarchyFullTailLength} subtracts the common starred
+length from $|T|$, while \noderef{HierarchyCounterexampleMeasure} pairs
+this common path number with $|T|$ minus the common last ordinary-stage
+length. These formulas give the stated numerical consequences.
+\end{proof}

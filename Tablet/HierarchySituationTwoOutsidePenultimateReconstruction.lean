@@ -45,6 +45,12 @@ import Tablet.TreeSequenceVertexSet
 import Tablet.TwoColorComponent
 import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorComponentSwap
+import Tablet.P2752_T2_PrefixReconstruction
+import Tablet.P2752_T2_FullCertificate
+import Tablet.P2752_T2_TerminalHierarchyRestore
+import Tablet.P2752_T2_MinimumContextTransport
+import Tablet.P2752_T2_NormalizedDatum
+import Tablet.TreeSequenceInitialSegmentVertexSetSubset
 
 -- [TABLET NODE: HierarchySituationTwoOutsidePenultimateReconstruction]
 theorem HierarchySituationTwoOutsidePenultimateReconstruction {V E : Type*}
@@ -106,4 +112,70 @@ theorem HierarchySituationTwoOutsidePenultimateReconstruction {V E : Type*}
                 P.counterexample P.minimumContext,
             N.alpha = beta := by
 -- BODY
-  sorry
+  classical
+  dsimp only
+  let sigma := TwoColorComponentSwap G phi D.alpha beta
+    (Sum.inl (T.vertex D.terminalVertexIndex))
+  let Bplus := HierarchyFullTailPrefix C (HierarchyFullTailLength C - 1)
+  obtain ⟨hroot, hmeet, hfixed, hstable, hterminal, ⟨F⟩⟩ :=
+    P2752_T2_PrefixReconstruction G k e0 input T phi ett base C ctx D beta
+      hbetaUnusedOnFullTail hbetaPresentTerminal houtsidePenultimate
+  obtain ⟨corr, hMP⟩ := P2752_T2_FullCertificate G k e0 input T phi sigma
+    ett base C ctx Bplus F hfixed hstable
+  obtain ⟨newBase, K, good, hsame⟩ :=
+    P2752_T2_TerminalHierarchyRestore G k e0 input T phi sigma ett base C ctx D
+      beta hbetaMissingTwoBefore hbetaPresentTerminal rfl F hfixed corr
+  let B := HierarchyFullTailPrefix C (HierarchyFullTailLength C - 2)
+  have hBT : TreeSequenceInitialSegment B T :=
+    ⟨Nat.min_le_right _ _, (fun _ => rfl), (fun _ => rfl)⟩
+  have hlenB : B.length = T.length - 2 := by
+    let A := HierarchyStarredStage C.hierarchy (Fin.last C.hierarchy.dividerCount)
+    have hp : 2 ≤ T.length - A.length := D.tailAtLeastTwo
+    change min (A.length + (T.length - A.length - 2)) T.length = T.length - 2
+    omega
+  have hBplus : TreeSequenceInitialSegment B Bplus := by
+    have hle : B.length ≤ Bplus.length := by
+      have hp : T.length = Bplus.length + 1 := F.penultimateLength
+      omega
+    refine ⟨hle, ?_, ?_⟩
+    · intro i
+      rw [← F.belowFull.2.1 (Fin.castLE (Nat.succ_le_succ hle) i)]
+      convert hBT.2.1 i using 1
+      congr 1
+    · intro i
+      rw [← F.belowFull.2.2 (Fin.castLE hle i)]
+      convert hBT.2.2 i using 1
+      congr 1
+  have hnotElementary : ¬ ColoredVertexSetElementary G sigma (TreeSequenceVertexSet T) := by
+    obtain ⟨v, hv, hm⟩ := Finset.mem_biUnion.mp hbetaMissingTwoBefore
+    have hvplus := TreeSequenceInitialSegmentVertexSetSubset hBplus hv
+    have hmissing : beta ∈ MissingColors G sigma v := by
+      rw [F.invariant.2 v hvplus]
+      exact hm
+    have hne : v ≠ T.vertex D.terminalVertexIndex := by
+      intro heq
+      exact houtsidePenultimate (T.vertex D.terminalVertexIndex) hroot (heq ▸ hvplus)
+    intro helementary
+    have hd := helementary (TreeSequenceInitialSegmentVertexSetSubset hBT hv)
+      (by simp [TreeSequenceVertexSet]) hne
+    exact Finset.disjoint_left.mp hd hmissing hterminal
+  let Cnew : HierarchyCounterexample newBase := {
+    positive := by rw [corr.rungAgreement]; exact C.positive
+    hierarchy := K
+    good := good
+    maximum := hMP
+    notElementary := hnotElementary }
+  obtain ⟨newContext⟩ := P2752_T2_MinimumContextTransport G k e0 input T phi sigma
+    ett base C ctx corr newBase Cnew hsame
+  let P : HierarchyReplacementPresentation G k e0 input T phi ett base C ctx := {
+    coloring := sigma
+    corresponding := corr
+    maximum := hMP
+    replacementBase := newBase
+    counterexample := Cnew
+    sameGood := hsame
+    minimumContext := newContext }
+  obtain ⟨N, hN⟩ := P2752_T2_NormalizedDatum G k e0 input T phi ett base C ctx D
+    beta hbetaMissingTwoBefore hbetaUnusedOnFullTail hbetaAlternative P
+    hfixed F.invariant hterminal
+  exact ⟨hroot, hmeet, P, rfl, N, hN⟩

@@ -1,0 +1,81 @@
+\begin{lemma}[The replacement presentation carries the normalized datum]
+Fix $C$, its minimum context, and raw Case Three data $D$. Suppose $\beta$
+is missing on $B=T(y_{p-2})$, unused on the entire exact tail above
+$A=T^*_{n,q}$, and satisfies the three-way alternative: when $q>0$ it is
+outside $D_{n,q}\cup\Gamma^q$; or when $q=0$ it is outside the raw
+terminal computed set $D_n$ and $\Gamma^0$; or it belongs to $D_{n,q}$
+and its Gamma pair is disjoint from all full-tail edge colors.
+Let $P$ be a replacement presentation on the same exact $T$. Assume
+all displayed edges of $T$ retain their old values under $P$'s coloring,
+the coloring is invariant on $B^+=T(y_{p-1})$, and $\beta$ is missing at
+$y_p$ under it. Then there is a normalized Case Three datum for $P$
+whose color is $\beta$.
+\end{lemma}
+\begin{proof}
+By \noderef{HierarchyReplacementPresentation}, $P$ has the same-good
+relation, a corresponding full-tree ETT and the transported minimum
+context. Apply \noderef{P2752_T2_HierarchyMeasures} to the same-stage
+part of \noderef{SameGoodHierarchy}. The old and new last starred stages
+agree, as do their path numbers. The subtraction in
+\noderef{HierarchyFullTailLength} consequently gives equal full-tail
+lengths. For every numerical index $i$, the definition
+\noderef{HierarchyFullTailPrefix} now uses the same terminal tree, the
+same starred length and the same index, hence defines the same exact
+prefix in both presentations.
+
+Set $\ell$ equal to the common full-tail length. The common datum in
+\noderef{HierarchySituationTwoCommonTailData} gives $\ell\ge2$.
+The prefix formulas give $|B|=|T|-2$, $|B^+|=|T|-1$ and the exact
+relations $B\preccurlyeq B^+\preccurlyeq T$. To verify the first
+relation, compare at each retained index the two entries with the same
+entry of $T$, as in \noderef{TreeSequenceInitialSegment}.
+Every vertex of $B$ therefore belongs to $B^+$ by
+\noderef{TreeSequenceInitialSegmentVertexSetSubset}. Expand the assumed
+tree-missing membership using \noderef{TreeMissingColors} and take a
+specific vertex $v\in V(B)$ at which $\beta$ is missing. The vertex
+clause of \noderef{TreeColoringInvariant} on $B^+$ preserves its missing
+set. Thus $\beta$ is missing at this same $v$ under $P$'s coloring and is
+tree-missing on the common $B$.
+
+By \noderef{TreeSequenceVertexSet}, take an exact displayed index of
+$v$ in $B$ and cast it to its identical index in $T$ using the prefix
+relation. Its value is at most $|B|=|T|-2$. The stored penultimate index
+has value $|T|-1$, so this new earlier index is strictly before it.
+Use it as the earlier witness in the new
+\noderef{HierarchySituationTwoCaseThreeData}. Set the new alpha to
+$\beta$. Earlier missingness is the just-preserved witness and terminal
+missingness is the hypothesis. For all common-tail fields copy the old
+last edge, penultimate and terminal indices, their position equations,
+nonincidence, and theta. Fixed-edge equality preserves theta on that
+exact last edge. The old full-tail inequality transports by length
+equality; the path-number-full equation transports by both path-number
+and full-tail equality. This verifies every inherited common-tail and
+raw Case Three field.
+
+For the extra fields of
+\noderef{HierarchySituationTwoCaseThreeNormalizedData}, tree-missingness
+two positions before the end was proved above, and it is on the required
+new prefix since prefixes agree. For full-tail nonuse, the new starred
+tree equals the old one. At every edge index above it, fixed-edge
+equality rewrites the new edge value as its old value; apply old nonuse.
+
+Finally we transport the three-way alternative exactly. The divider counts
+are equal by same-good. At the last internal index, the cast of the old
+last index is the new last index since their numerical values are their
+respective equal counts. The stored-set clause of same-good therefore
+identifies the two $D_{n,q}$ sets. For every color in that common set its
+Gamma values agree. Taking the indexed union identifies $\Gamma^q$.
+Apply \noderef{P2752_T2_TerminalStoredColors} to $P$'s corresponding
+certificate to identify the two computed raw $D_n$ sets, including the
+missing-set subtraction in \noderef{TashkinovStoredColors}. The exact
+full-tail color sets agree by common starred-stage length and fixed-edge
+equality at every index. Thus in the positive-divider alternative the
+count inequality and both nonmembership clauses transport; in the
+zero-divider alternative the count equation and raw-set and Gamma
+nonmembership clauses transport. In the stored alternative, membership
+puts $\beta$ in the common stored set, so its particular Gamma pair
+agrees, and the equal full-tail color set transports the disjointness
+clause. These are exactly the three alternatives required for the new
+normalized datum. All its fields are now supplied and its alpha is the
+chosen $\beta$ by definition.
+\end{proof}
