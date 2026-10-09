@@ -1,0 +1,41 @@
+\begin{lemma}[First-entry clipping of exact incidence paths]
+Let $P$ be a simple $(\alpha,\beta)$ incidence walk from vertex $a$ to
+vertex $b$ in a finite loopless multigraph with partial edge coloring $\varphi$.
+Let $U$ be an exact tree sequence, with $a$ outside $U$ and $b$ in $U$.
+Suppose $a$ misses at least one of the two colors.  There exist a vertex
+$v$ and an exact walk $Q$ from $a$ to $v$ such that $Q$ is a
+$(\alpha,\beta)$ exit path of $U$, its support is contained in the
+support of $P$, and $|Q|\leq |P|$.  Moreover, for every exact edge $f$
+whose edge-node occurs in $P$, if every endpoint of $f$ belongs to $U$,
+then $|Q|<|P|$.
+\end{lemma}
+\begin{proof}
+Consider the finite list of nodes in $P$, in its given direction.
+The list contains a vertex of $U$ because its last node is $b$.
+Choose the first occurrence of a vertex-node in $U$, call its vertex
+$v$, and take $Q$ to be the walk prefix ending there.  Its initial
+vertex $a$ is outside $U$, so $a\ne v$.  The adjacency rule in
+\noderef{TwoColorIncidenceGraph} only permits transitions between
+vertex-nodes and edge-nodes.  A nonempty walk between distinct
+vertex-nodes therefore has length at least two: length zero would
+identify its endpoints, and length one would give forbidden adjacency
+between two vertex-nodes.  A prefix of a simple path is simple.  The
+choice of the first entry implies that the only vertex of $U$ appearing
+in $Q$ is $v$.  Its initial missing-color alternative is the given one.
+These facts are exactly the clauses of \noderef{TreeExitPath}.
+The node list of a walk prefix is a prefix of the original list, hence
+its support is contained in the original support and its length is no
+larger.
+
+Fix an edge $f$ with the stated properties.  Its edge-node cannot occur
+in $Q$.  Indeed, if it occurred at position $j$, neither endpoint of
+$Q$ is an edge-node, so $0<j<|Q|$.  Its predecessor is a vertex-node
+$w$, incident with $f$ by \noderef{TwoColorIncidenceGraph}.  By the
+endpoint hypothesis $w$ is in $U$, so the first-entry property forces
+$w=v$.  But this is an occurrence of $v$ before the last position of
+$Q$, contradicting simplicity.  Thus $f$ occurs in $P$ and not in
+$Q$.  If the two lengths were equal, the walk prefix $Q$ would contain
+every position of $P$, including that occurrence of $f$.  Therefore
+equality of lengths is impossible; together with the weak length
+inequality this proves the strict inequality.
+\end{proof}

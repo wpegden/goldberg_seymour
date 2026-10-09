@@ -1,69 +1,13 @@
-import Tablet.AdjacentEdges
-import Tablet.BoundaryColorEdges
 import Tablet.BoundaryColorVertex
-import Tablet.BoundaryEdges
-import Tablet.CertifiedETTPredecessor
-import Tablet.ColoredVertexSetElementary
-import Tablet.CombinedStableColoring
-import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.DefectiveColor
-import Tablet.DefectiveVertex
-import Tablet.Degree
 import Tablet.ETTFirstAppearanceIndex
-import Tablet.ExtendedTashkinovTree
-import Tablet.GoodHierarchy
-import Tablet.GoodHierarchyPrefixRepackage
-import Tablet.GoodHierarchyReservedDisjoint
 import Tablet.GoodHierarchyRestrictedAugmentation
-import Tablet.GoodHierarchyTerminalPrefixRepackage
-import Tablet.HierarchyBase
-import Tablet.HierarchyFirstMissingPosition
-import Tablet.HierarchyLEMStable
-import Tablet.HierarchyStarredStage
-import Tablet.HierarchyStoredColorsAt
-import Tablet.HierarchyTerminalStoredColors
-import Tablet.Incident
-import Tablet.IsOneEdgeUncolored
-import Tablet.IsProperEdgeColoring
-import Tablet.KTriple
-import Tablet.MaximumDegree
-import Tablet.MaximumDefectiveChoice
-import Tablet.MaximumProperty
-import Tablet.MissingColors
-import Tablet.ModColoring
-import Tablet.OrderedTreeUnion
-import Tablet.OutsideKempeRecoloring
-import Tablet.OutsideKempeRecoloringStable
-import Tablet.ParallelCommonMissingClosed
-import Tablet.PresentColors
-import Tablet.SameGoodHierarchy
-import Tablet.StableColoring
-import Tablet.TashkinovExtensionKind
-import Tablet.TashkinovHierarchy
-import Tablet.TashkinovSeries
-import Tablet.TashkinovSeriesStep
-import Tablet.TashkinovStoredColors
-import Tablet.Td
-import Tablet.TreeColorSetClosed
-import Tablet.TreeColorSetMinusClosed
-import Tablet.TreeExitPath
+import Tablet.StableColoringBeforeVertex
 import Tablet.TreeInterchangeable
-import Tablet.TreeMissingColors
-import Tablet.TreeSequence
-import Tablet.TreeSequenceAdjoinEdge
-import Tablet.TreeSequenceInitialSegment
-import Tablet.TreeSequenceVertexSet
 import Tablet.TreeVertexOrder
-import Tablet.TwoColorComponent
-import Tablet.TwoColorComponentSwap
-import Tablet.TwoColorComponentSwapProper
-import Tablet.TwoColorComponentSpanningPath
-import Tablet.TwoColorComponentsDisjoint
-import Tablet.TwoColorIncidenceDegreeAtMostTwo
-import Tablet.TwoColorIncidenceGraph
-import Tablet.interchange
-import Tablet.sc2
-import Tablet.Step1CaseTwoOutsidePrefixTwoEdges
+import Tablet.P2716_T2_ElementaryEndpointExclusion
+import Tablet.P2716_T2_FirstEntryClipping
+import Tablet.TreeSequenceInitialSegmentVertexSetSubset
 
 -- [TABLET NODE: Step1CaseTwoOutsideRestrictedAugmentation]
 lemma Step1CaseTwoOutsideRestrictedAugmentation {V E : Type*}
@@ -329,4 +273,170 @@ lemma Step1CaseTwoOutsideRestrictedAugmentation {V E : Type*}
         b₂ ∈ TreeSequenceVertexSet J ∧
         b₃ ∈ TreeSequenceVertexSet J) : False := by
 -- BODY
-  sorry
+  classical
+  rcases hseed with ⟨gamma, mu, C, J₁, J, corrJ, baseJ, KJ, goodJ,
+    R₁, R₂, R₃, hgammaBeta, hproperMu, honeMu, hstableMu, hmodMu,
+    hMPJ, hcountJ, hlargeJ, hgammaAvoid, hbetaAvoid, hbetaB₃,
+    hR₁, hR₂, hR₃, hdisR₁₂, hdisR₁₃, hdisR₂₃,
+    hsuppR₁, hsuppR₂, hsuppR₃, hlenR₁, hlenR₂, hlenR₃,
+    hCT, hlastC, hCedge₁, hJedge₂, hf₁ends, hf₂ends,
+    hb₁J, hb₂J, hb₃J⟩
+  obtain ⟨m, chain, U, hfirst, hlast, hsteps, hlengths, hsegments,
+      hvertices, hsequence, havoid, hmaximal, corrU, hMPU, baseU,
+      hcore, hclosure, hsupport, KU, hcount, hstages, hdividers,
+      goodU, hgamma, hstored, hminus⟩ :=
+    GoodHierarchyRestrictedAugmentation G k e0 input T phi mu ett hmodMu
+      hMP J corrJ baseJ KJ goodJ
+  have hJU : TreeSequenceInitialSegment J U := by
+    rw [← hfirst, ← hlast]
+    exact hsegments 0 (Fin.last m) (by simp)
+  have hJUvertices := TreeSequenceInitialSegmentVertexSetSubset hJU
+  have hb₁U := hJUvertices hb₁J
+  have hb₂U := hJUvertices hb₂J
+  have hb₃U := hJUvertices hb₃J
+  have hbetaU : beta ∈ TreeMissingColors mu U :=
+    Finset.mem_biUnion.mpr ⟨b₃, hb₃U, hbetaB₃⟩
+  have hcountU : KU.dividerCount = H.dividerCount := hcount.trans hcountJ
+  have hKUlt : KU.dividerCount < q := by rw [hcountU]; exact hdivider
+  have hElementaryU : ColoredVertexSetElementary G mu
+      (TreeSequenceVertexSet U) :=
+    hfewer corrU.replacementETT corrU.rungAgreement hMPU baseU KU goodU hKUlt
+  have hlastIndex : Fin.cast (congrArg (fun n : ℕ => n + 1) hcount)
+      (Fin.last KU.dividerCount) = Fin.last KJ.dividerCount := by
+    apply Fin.ext
+    simp
+  have avoidTransport (c : Fin k)
+      (hc : c ∉ (HierarchyStoredColorsAt KJ (Fin.last KJ.dividerCount)).biUnion
+        (goodJ.gamma (Fin.last KJ.dividerCount))) :
+      c ∉ (HierarchyTerminalStoredColors KU).biUnion
+        (goodU.gamma (Fin.last KU.dividerCount)) := by
+    intro h
+    obtain ⟨eta, heta, hcEta⟩ := Finset.mem_biUnion.mp h
+    apply hc
+    refine Finset.mem_biUnion.mpr ⟨eta, hstored heta, ?_⟩
+    rw [hgamma (Fin.last KU.dividerCount) eta, hlastIndex] at hcEta
+    exact hcEta
+  have hgammaAvoidU := avoidTransport gamma hgammaAvoid
+  have hbetaAvoidU := avoidTransport beta hbetaAvoid
+  have closedColor (c : Fin k) (hc : c ∈ TreeMissingColors mu U)
+      (havoidC : c ∉ (HierarchyTerminalStoredColors KU).biUnion
+        (goodU.gamma (Fin.last KU.dividerCount))) :
+      TreeColorSetClosed G mu U {c} := by
+    intro d hd
+    have hdc : d = c := by simpa using hd
+    subst d
+    exact hminus c (Finset.mem_sdiff.mpr ⟨hc, havoidC⟩)
+  have hbetaClosedU := closedColor beta hbetaU hbetaAvoidU
+  obtain ⟨ha₁U, ha₂U, ha₃U⟩ :=
+    P2716_T2_ElementaryEndpointExclusion G mu T U gamma beta
+      a₁ b₁ a₂ b₂ a₃ b₃ R₁ R₂ R₃ hR₁ hR₂ hR₃ ha₁₂
+      hb₁U hb₂U hb₃U hElementaryU hbetaB₃ hbetaClosedU
+      (fun hc => closedColor gamma hc hgammaAvoidU)
+  obtain ⟨v₁, L₁, hL₁, hsL₁, hlL₁, hstrictL₁⟩ :=
+    P2716_T2_FirstEntryClipping G mu U gamma beta a₁ b₁ R₁ hR₁.1
+      hR₁.2.2.2.2.1 ha₁U hb₁U
+  obtain ⟨v₂, L₂, hL₂, hsL₂, hlL₂, hstrictL₂⟩ :=
+    P2716_T2_FirstEntryClipping G mu U gamma beta a₂ b₂ R₂ hR₂.1
+      hR₂.2.2.2.2.1 ha₂U hb₂U
+  obtain ⟨v₃, L₃, hL₃, hsL₃, hlL₃, hstrictL₃⟩ :=
+    P2716_T2_FirstEntryClipping G mu U gamma beta a₃ b₃ R₃ hR₃.1
+      hR₃.2.2.2.2.1 ha₃U hb₃U
+  have hf₁R : Sum.inr f₁ ∈ R₁.support := by rw [hsuppR₁]; exact hPf₁
+  have hl₁strict : L₁.length < R₁.length :=
+    hstrictL₁ f₁ hf₁R (fun v hv => hJUvertices (hf₁ends v hv))
+  have htotal : L₁.length + L₂.length + L₃.length <
+      P₁.length + P₂.length + P₃.length := by omega
+  -- Normalize the dependent presentation of the final ladder tree.
+  have terminalTreeEq {W : TreeSequence G e0}
+      (corr : CorrespondingExtendedTashkinovTree G k e0 ett mu W) :
+      corr.replacementETT.series.data.tree
+          (Fin.last corr.replacementETT.rounds).castSucc =
+        ett.series.data.tree (Fin.last ett.rounds).castSucc := by
+    let replacementSeries : TashkinovSeries G k corr.replacementETT.rounds e0
+        corr.replacementInput :=
+      cast (congrArg (fun n => TashkinovSeries G k n e0 corr.replacementInput)
+        corr.rungAgreement.symm) corr.replacementSeries
+    have castTree {a b : ℕ} (h : a = b)
+        (s : TashkinovSeries G k a e0 corr.replacementInput)
+        (i : Fin (b + 2)) :
+        (cast (congrArg (fun n => TashkinovSeries G k n e0 corr.replacementInput) h)
+          s).data.tree i = s.data.tree (Fin.cast (congrArg (fun n => n + 2) h.symm) i) := by
+      cases h
+      rfl
+    have hseries : corr.replacementETT.series = replacementSeries := by
+      exact ((cast_eq_iff_heq
+        (e := congrArg (fun n => TashkinovSeries G k n e0 corr.replacementInput)
+          corr.rungAgreement.symm)
+        (a := corr.replacementSeries) (a' := corr.replacementETT.series)).2
+        corr.seriesPresentation.symm).symm
+    let terminalIndex : Fin corr.replacementETT.rounds :=
+      Fin.cast corr.rungAgreement.symm
+        ⟨ett.rounds - 1, by have hp := ett.roundsPositive; omega⟩
+    have htree : corr.replacementETT.series.data.tree terminalIndex.succ.castSucc =
+        ett.series.data.tree (Fin.last ett.rounds).castSucc := by
+      rw [hseries]
+      calc
+        replacementSeries.data.tree terminalIndex.succ.castSucc =
+            corr.replacementSeries.data.tree
+              (Fin.cast (congrArg (fun n => n + 2) corr.rungAgreement)
+                terminalIndex.succ.castSucc) := by
+          simpa [replacementSeries] using
+            (castTree corr.rungAgreement.symm corr.replacementSeries
+              terminalIndex.succ.castSucc)
+        _ = ett.series.data.tree (Fin.last ett.rounds).castSucc := by
+          convert corr.ladderTreesAgree (Fin.cast corr.rungAgreement terminalIndex) using 1
+          · congr 1
+          · congr 1
+            apply Fin.ext
+            have hp := ett.roundsPositive
+            simp [terminalIndex, Nat.sub_add_cancel hp]
+    have hi : (Fin.last corr.replacementETT.rounds).castSucc =
+        terminalIndex.succ.castSucc := by
+      apply Fin.ext
+      have hp := ett.roundsPositive
+      simp [terminalIndex, Nat.sub_add_cancel hp]
+      exact corr.rungAgreement
+    rw [hi]
+    exact htree
+  have hlargeU : 2 * corrU.replacementETT.rounds + 11 ≤
+      (TreeMissingColors mu (corrU.replacementETT.series.data.tree
+        (Fin.last corrU.replacementETT.rounds).castSucc)).card := by
+    rw [terminalTreeEq corrU, corrU.rungAgreement]
+    rw [terminalTreeEq corrJ, corrJ.rungAgreement] at hlargeJ
+    exact hlargeJ
+  -- Reorder the colors without changing any exact support or walk length.
+  have hflip : TwoColorIncidenceGraph G mu gamma beta ≤
+      TwoColorIncidenceGraph G mu beta gamma := by
+    intro x y hxy
+    cases x <;> cases y <;> simpa only [TwoColorIncidenceGraph, or_comm] using hxy
+  have flipExit {a v : V}
+      (L : (TwoColorIncidenceGraph G mu gamma beta).Walk (Sum.inl a) (Sum.inl v))
+      (hL : TreeExitPath U mu gamma beta a v L) :
+      TreeExitPath U mu beta gamma a v (L.mapLe hflip) := by
+    rcases hL with ⟨hpath, hlen, ha, hv, hmissing, honly⟩
+    refine ⟨hpath.mapLe hflip, ?_, ha, hv, hmissing.symm, ?_⟩
+    · simpa only [SimpleGraph.Walk.length_mapLe] using hlen
+    · simpa only [SimpleGraph.Walk.support_mapLe_eq_support] using honly
+  let Q₁ := L₁.mapLe hflip
+  let Q₂ := L₂.mapLe hflip
+  let Q₃ := L₃.mapLe hflip
+  have hQ₁ := flipExit L₁ hL₁
+  have hQ₂ := flipExit L₂ hL₂
+  have hQ₃ := flipExit L₃ hL₃
+  have hdQ₁₂ : ∀ x, x ∈ Q₁.support → x ∉ Q₂.support := by
+    simpa only [Q₁, Q₂, SimpleGraph.Walk.support_mapLe_eq_support] using
+      (fun x hx hy => hdisR₁₂ x (hsL₁ x hx) (hsL₂ x hy))
+  have hdQ₁₃ : ∀ x, x ∈ Q₁.support → x ∉ Q₃.support := by
+    simpa only [Q₁, Q₃, SimpleGraph.Walk.support_mapLe_eq_support] using
+      (fun x hx hy => hdisR₁₃ x (hsL₁ x hx) (hsL₃ x hy))
+  have hdQ₂₃ : ∀ x, x ∈ Q₂.support → x ∉ Q₃.support := by
+    simpa only [Q₂, Q₃, SimpleGraph.Walk.support_mapLe_eq_support] using
+      (fun x hx hy => hdisR₂₃ x (hsL₂ x hx) (hsL₃ x hy))
+  apply hnoBetter mu U corrU hproperMu honeMu hstableMu hMPU
+    baseU KU goodU hcountU hlargeU hminus beta gamma hgammaBeta.symm
+    hbetaU hbetaClosedU a₁ v₁ a₂ v₂ Q₁ Q₂ hQ₁ hQ₂ hdQ₁₂ ha₁₂
+  by_cases hgammaU : gamma ∈ TreeMissingColors mu U
+  · exact Or.inl hgammaU
+  · right
+    refine ⟨hgammaU, a₃, v₃, Q₃, hQ₃, hdQ₁₃, hdQ₂₃, ha₁₃, ha₂₃, ?_⟩
+    simpa only [Q₁, Q₂, Q₃, SimpleGraph.Walk.length_mapLe] using htotal

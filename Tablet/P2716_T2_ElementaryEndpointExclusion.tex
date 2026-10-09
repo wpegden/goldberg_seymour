@@ -1,0 +1,40 @@
+\begin{lemma}[Endpoint exclusion in an elementary augmented tree]
+Let $T,U$ be exact tree sequences of a finite loopless multigraph, under
+the partial edge coloring $\varphi$, and let $P_i$ be $(\alpha,\beta)$ exit paths of
+$T$ from $a_i$ to $b_i$ for $i=1,2,3$.  Suppose $a_1\ne a_2$,
+all $b_i$ belong to $U$, $U$ is elementary, $\beta$ is missing at
+$b_3$, and $U$ is singleton-$\beta$-closed.  Suppose also that whenever
+$\alpha$ is missing on $U$, $U$ is singleton-$\alpha$-closed.
+Then none of $a_1,a_2,a_3$ belongs to $U$.
+\end{lemma}
+\begin{proof}
+By \noderef{TreeExitPath}, each $a_i$ is outside $T$, each $b_i$ is in
+$T$, and each $a_i$ misses at least one of the two colors.  In particular
+$a_i\ne b_3$.  If $a_i$ belongs to $U$, elementarity
+(\noderef{ColoredVertexSetElementary}) and the missing color $\beta$ at
+$b_3$ prohibit $\beta$ from being missing at $a_i$.  Consequently
+$\alpha$ is missing at $a_i$, hence on $U$ by
+\noderef{TreeMissingColors}.  The assumed implication now makes both
+colors closed on $U$.
+
+We show that with both colors closed any two-color walk whose final
+vertex belongs to $U$ has its initial vertex in $U$.  Traverse the walk
+backwards.  For vertex-nodes use membership in $U$ as the invariant; for
+an edge-node use the condition that every endpoint of that exact edge
+belongs to $U$.  A transition from an edge-node to a vertex-node
+preserves the invariant by \noderef{TwoColorIncidenceGraph}.  For a
+transition from a vertex $v$ in $U$ to an edge $e$, the same definition
+gives incidence and one of the two colors.  If an endpoint $w$ of $e$
+were outside $U$, then $v\ne w$ and the unordered endpoint pair is
+$\{v,w\}$.  Thus $e$ is a boundary edge by \noderef{BoundaryEdges},
+and a boundary edge of one of the two colors by
+\noderef{BoundaryColorEdges}.  This contradicts
+\noderef{TreeColorSetClosed}.  Induction over the finite walk proves
+the claimed invariant.
+
+Apply this to $P_1$ and $P_2$, whose final vertices are in $U$.  Both
+$a_1,a_2$ are now in $U$, and, by the first paragraph, both miss
+$\alpha$.  Since they are distinct, this contradicts elementarity.
+Thus the assumption that any one of the three $a_i$ is in $U$ leads
+to a contradiction, proving all three exclusions.
+\end{proof}
