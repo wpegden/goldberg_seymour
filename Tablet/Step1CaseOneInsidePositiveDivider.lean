@@ -67,6 +67,9 @@ import Tablet.TwoColorIncidenceGraph
 import Tablet.TwoColorPathComponent
 import Tablet.interchange
 import Tablet.sc2
+import Tablet.P2716_T1_OutsideExitTransport
+import Tablet.P2716_T1_PositivePrefixPresentation
+import Tablet.TreeSequenceInitialSegmentVertexSetSubset
 
 -- [TABLET NODE: Step1CaseOneInsidePositiveDivider]
 lemma Step1CaseOneInsidePositiveDivider {V E : Type*}
@@ -266,4 +269,70 @@ lemma Step1CaseOneInsidePositiveDivider {V E : Type*}
               u₁ ≠ u₂ → False)
     (hdividerPositive : 0 < H.dividerCount) : False := by
 -- BODY
-  sorry
+  classical
+  let A := HierarchyStarredStage H (Fin.last H.dividerCount)
+  have starPositive : ∀ j : Fin (H.dividerCount + 1), 0 < j.val →
+      HierarchyStarredStage H j = H.stage j.castSucc := by
+    intro j
+    refine Fin.cases ?_ ?_ j
+    · intro hj
+      simp at hj
+    · intro i hj
+      rfl
+  let i : Fin H.dividerCount := ⟨H.dividerCount - 1, by omega⟩
+  have hstar : A = H.stage ⟨i.val + 1, by omega⟩ := by
+    rw [show A = H.stage (Fin.last H.dividerCount).castSucc from
+      starPositive _ (by simpa using hdividerPositive)]
+    congr 1
+    apply Fin.ext
+    dsimp [i]
+    omega
+  have hAT : TreeSequenceInitialSegment A T := by
+    rw [hstar, H.dividerStage i]
+    exact ⟨_, fun j => rfl, fun j => rfl⟩
+  have hA : TreeSequenceVertexSet A ⊆ TreeSequenceVertexSet T :=
+    TreeSequenceInitialSegmentVertexSetSubset hAT
+  have hb₁A : b₁ ∈ TreeSequenceVertexSet A := by
+    as_aux_lemma =>
+    obtain ⟨r, s, hr, hs, hrs⟩ := horder
+    obtain ⟨t, ht⟩ : ∃ t : Fin (A.length + 1), A.vertex t = b₂ := by
+      simpa only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ, true_and]
+        using hinside
+    have hst : s = Fin.castLE (Nat.succ_le_succ hAT.1) t :=
+      T.vertex_injective (hs.trans ((hAT.2.1 t).trans ht).symm)
+    have hrA : r.val < A.length + 1 := by
+      have htlt := t.isLt
+      have hval := congrArg Fin.val hst
+      simp only [Fin.val_castLE] at hval
+      omega
+    simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ, true_and]
+    refine ⟨⟨r.val, hrA⟩, ?_⟩
+    exact (hAT.2.1 ⟨r.val, hrA⟩).symm.trans hr
+  obtain ⟨sigma, recolor, proper, one, subsetData, outsideMissing, exitTransport⟩ :=
+    P2716_T1_OutsideExitTransport G T phi alpha theta beta hthetaAlpha.symm
+      hne hthetaBeta hproper hone hclosed hthetaClosed
+  obtain ⟨Q₁, hQ₁, support₁, length₁⟩ :=
+    exitTransport A hA a₁ b₁ P₁ hP₁ hb₁A
+  obtain ⟨Q₂, hQ₂, support₂, length₂⟩ :=
+    exitTransport A hA a₂ b₂ P₂ hP₂ hinside
+  obtain ⟨corr, mp, basePrefix, K, goodPrefix, count, large, minus⟩ :=
+    P2716_T1_PositivePrefixPresentation G k e0 input T phi sigma ett hMP
+      hpositive hproper hone hlower base H good hlarge alpha theta recolor hdividerPositive
+  have ladderInside : TreeSequenceVertexSet
+      (ett.series.data.tree (Fin.last ett.rounds).castSucc) ⊆ TreeSequenceVertexSet T :=
+    TreeSequenceInitialSegmentVertexSetSubset ett.abovePenultimate
+  have ladderStable : StableColoring
+      (ett.series.data.tree (Fin.last ett.rounds).castSucc)
+      (TashkinovStoredColors ett.series.data (Fin.last ett.rounds)) phi sigma :=
+    (subsetData _ ladderInside).1 _
+  have thetaMissing : theta ∈ TreeMissingColors sigma A := by
+    rw [(subsetData A hA).2.1]
+    exact hthetaMissing
+  have thetaClosed : TreeColorSetClosed G sigma A {theta} :=
+    (subsetData A hA).2.2 theta hthetaClosedStar
+  have supports : ∀ x, x ∈ Q₁.support → x ∉ Q₂.support := by
+    rw [support₁, support₂]
+    exact hpaths
+  exact hnoSmaller sigma A corr proper one ladderStable mp basePrefix K goodPrefix
+    (by omega) large minus theta beta hthetaBeta thetaMissing thetaClosed
+    a₁ b₁ a₂ b₂ Q₁ Q₂ hQ₁ hQ₂ supports ha

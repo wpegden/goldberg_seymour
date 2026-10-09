@@ -1,0 +1,92 @@
+\begin{lemma}[Outside recoloring and exact exit-leg transport]
+Let $G$ be a finite loopless multigraph, with finite vertex and exact edge
+types, distinguished edge $e_0$, color set $[k]$, and ordered tree sequence
+$T$. Let $\varphi$ be proper and leave exactly $e_0$ uncolored. Let
+$\alpha,\theta,\beta$ be pairwise distinct colors, with both $\alpha$
+and $\theta$ singleton-closed on $T$ under $\varphi$.
+There is an $\alpha,\theta$ \noderef{OutsideKempeRecoloring} $\sigma$
+of $T$ from $\varphi$, with selected components avoiding every vertex
+of $T$. The coloring $\sigma$ is proper, and exactly $e_0$ is uncolored.
+For every ordered tree $U$ with $V(U)\subseteq V(T)$,
+$\sigma$ is $(U,C,\varphi)$-stable for every control set $C$, its
+tree-missing color set on $U$ equals that of $\varphi$, and every
+singleton-closed color on $U$ under $\varphi$ remains singleton-closed
+under $\sigma$.
+At every outside vertex $a$, missingness of $\alpha$ under $\varphi$
+implies missingness of $\theta$ under $\sigma$, and missingness of
+$\beta$ is preserved. Moreover, for every ordered tree $A$ with
+$V(A)\subseteq V(T)$, every exact $(T,\varphi,\{\alpha,\beta\})$-exit
+walk $P$ from $a$ to $b\in V(A)$ becomes an exact
+$(A,\sigma,\{\theta,\beta\})$-exit walk $Q$ with the identical ordered
+support list and the identical length.
+\end{lemma}
+\begin{proof}
+Put $X=V(T)$. By \noderef{TreeColorSetClosed}, neither an $\alpha$-colored
+nor a $\theta$-colored edge crosses the boundary of $X$. Explicitly, if
+an affected-color edge $f$ has incident vertices $u\in X$ and $v\notin X$,
+then $u\ne v$ and its endpoint pair is $\{u,v\}$, so $f$ belongs to
+\noderef{BoundaryEdges} and to the corresponding
+\noderef{BoundaryColorEdges}, contrary to singleton closedness.
+Consequently the two endpoints of every affected-color edge are on the
+same side of $X$.
+
+On the nodes of \noderef{TwoColorIncidenceGraph} for $\alpha,\theta$,
+assign a vertex-node the predicate that its vertex is in $X$, and assign
+an edge-node the predicate that its exact edge is incident with $X$,
+as in \noderef{TreeIncidentEdge}. The preceding endpoint observation
+shows that this predicate has equal truth values at adjacent nodes.
+Induction on an incidence walk shows that it is constant on every
+\noderef{TwoColorComponent}. Select the finite root set
+$\{\operatorname{inl}(a):a\notin X\}$. Every vertex in a selected
+component is outside $X$, since its root has false predicate.
+
+Define $\sigma=\noderef{OutsideTreeColorSwap}(T,\varphi,\alpha,\theta)$:
+fix edges incident with $T$ and exchange the two colors on all other
+edges. Every nonincident affected-color edge belongs to a selected
+component: choose either endpoint, which is outside $X$, and use its
+adjacency to the edge-node. Conversely a selected affected-color edge
+cannot be incident with $X$, since an incident endpoint would be in its
+selected component. Thus this formula is exactly the exchange on the
+selected components, including its treatment of uncolored and unaffected
+edges. This verifies every clause of \noderef{OutsideKempeRecoloring}.
+Apply \noderef{OutsideKempeRecoloringStable}. It gives properness,
+exactly-one-uncoloredness, equality of the colors on every edge incident
+with $T$, and equality of all vertex missing sets on $X$.
+
+If $V(U)\subseteq X$, an edge incident with $U$ is incident with $T$.
+Therefore the edge clause of \noderef{StableColoring} holds for every
+control set, and its vertex clause follows from the preceding equality
+of vertex missing sets. By \noderef{TreeMissingColors}, the tree-missing
+set is the finite union of these vertex sets; equality of every summand
+gives equality of the unions. A boundary edge of $U$ is incident with
+$U$, so its color is fixed. The exact boundary-edge set is independent
+of coloring; hence a singleton with no colored boundary edge before
+the change still has none afterward.
+
+For an outside vertex $a$, suppose $\alpha$ was missing. If a new
+$\theta$-edge $f$ were incident with $a$ and were not incident with $X$,
+the swap formula would make it an old $\alpha$-edge, a contradiction.
+If instead $f$ were incident with $X$, its color would be fixed, so it
+would be an old $\theta$-edge with endpoints on opposite sides of $X$,
+again a contradiction. This proves the first missingness implication
+using \noderef{MissingColors} and \noderef{PresentColors}. No edge gains
+or loses color $\beta$, since it differs from both exchanged colors;
+this proves the second implication.
+
+Finally let $P$ be the stipulated exit walk. Unfold
+\noderef{TreeExitPath}: its support has no vertex of $X$ except $b$,
+it is simple, its length is at least two, its starting vertex is outside
+$X$, and its starting vertex misses $\alpha$ or $\beta$. Consider an
+old $\alpha$-edge node on $P$. It is neither the starting nor the ending
+node, since both are vertex-nodes. If the edge were incident with $X$,
+the endpoint observation would place both neighboring vertex-nodes on
+the walk in $X$. Both would therefore equal $b$, violating simplicity.
+Thus every such edge is nonincident and becomes $\theta$. Every old
+$\beta$-edge stays $\beta$. Transfer the walk, node by node, into the
+new $\theta,\beta$ incidence graph, obtaining $Q$. Its ordered support
+and length are unchanged, and it is still simple. Its starting vertex
+misses $\theta$ or $\beta$ by the implications just proved and is
+outside $A$. Its ending vertex is in $A$ by hypothesis; every other
+vertex-node is outside $X$, hence outside $A$. These are all the clauses
+of \noderef{TreeExitPath} for $A$, completing the proof.
+\end{proof}
