@@ -1,0 +1,49 @@
+\begin{helper}[Exact-prefix transport of first-missing segment windows]
+Let $\varphi,\sigma$ be partial colorings of a finite loopless multigraph
+with palette $[k]$ and distinguished edge $e_0$.
+Let $U\preccurlyeq A\preccurlyeq T$ be exact initial segments in the sense
+of \noderef{TreeSequenceInitialSegment}.  Suppose every displayed edge
+of $A$ has the same value under $\sigma,\varphi$, and every vertex of
+$A$ has the same missing-color set.  Write $p_\psi(W,\eta)$ for the
+totalized first-missing position
+\noderef{HierarchyFirstMissingPosition}$(\psi,W,\eta)$.
+For every color $\eta$ and every integer lower cutoff $L\ge0$,
+\[
+ \{c:\exists r<|U|,\ L\le r<
+       \min\{p_\sigma(A,\eta),|U|\},\
+       \sigma(U.\mathit{edge}(r))=c\}
+ =
+ \{c:\exists r<|U|,\ L\le r<
+       \min\{p_\varphi(T,\eta),|U|\},\
+       \varphi(U.\mathit{edge}(r))=c\}.
+\]
+Lengths and displayed edge indices use the zero-based exact
+tree-sequence convention.
+\end{helper}
+\begin{proof}
+Every vertex entry of $A$ belongs to its displayed vertex set, by
+\noderef{TreeSequenceVertexSet}.  The missing-set hypothesis therefore
+identifies, entry by entry, the finite sets of positions in $A$
+missing $\eta$.  The definition in
+\noderef{HierarchyFirstMissingPosition} gives
+$p_\sigma(A,\eta)=p_\varphi(A,\eta)$: if the set is nonempty the two
+minima agree, and if it is empty both fallback values are the last
+position of $A$.
+Apply \noderef{HierarchyFirstMissingPositionPrefixCutoff} to the exact
+prefix $A\preccurlyeq T$ with cutoff $|U|\le|A|$.
+It gives
+\[
+ \min\{p_\varphi(A,\eta),|U|\}
+ =
+ \min\{p_\varphi(T,\eta),|U|\}.
+\]
+Consequently the two index windows in the claim are identical.
+For every index $r$ in $U$, the exact-prefix edge equation identifies
+$U.\mathit{edge}(r)$ with the corresponding edge of $A$.
+Its value is fixed by hypothesis.  A witness to color membership on
+either side is thus the same exact index with the same inequalities
+and color value on the other side.  This proves both inclusions.
+The cutoff identity handles absent witnesses on $A$ as well as actual
+first witnesses, so no missingness assumption on $\eta$ is needed.
+\end{proof}
+

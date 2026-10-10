@@ -1,0 +1,77 @@
+\begin{helper}[Reconstructing the exact starred prefix from edge control]
+Let $G$ be a finite loopless multigraph with palette $[k]$ and
+distinguished edge $e_0$.  Fix an ETT $\mathcal E$ on $T$ generated
+by $\varphi$, a \noderef{HierarchyBase} $B$, a
+\noderef{HierarchyCounterexample} $C$, and a
+\noderef{HierarchyMinimumCounterexampleContext} for these data.
+Let $H=C.\mathit{hierarchy}$, $q=H.\mathit{dividerCount}$,
+$A=\noderef{HierarchyStarredStage}(H,q)$, and let $T_n,D_n$
+be the terminal ladder tree and computed stored set.
+Suppose $\sigma$ is proper and leaves exactly $e_0$ uncolored.
+Suppose it is $(T_n,D_n,\varphi)$-stable in non-PE, and is
+\noderef{CombinedStableColoring} on $(T_n,B.\mathit{closure},D_n,\varphi)$
+in PE.  Suppose every exact displayed edge of $A$ has its old value
+and every vertex of $A$ has its old missing-color set.
+Then \noderef{ModColoring}$(\mathcal E,\sigma)$ holds.
+Moreover either $A=T_n$, or there exists a
+\noderef{CorrespondingExtendedTashkinovTree} certificate relative to
+$\mathcal E$ whose replacement tree is exactly $A$, whose generating
+coloring is $\sigma$, and whose replacement ETT has maximum property.
+\end{helper}
+\begin{proof}
+Compose the nested exact stage inclusions in
+\noderef{TashkinovHierarchy}.  The core is an exact prefix of $A$, and
+$A$ is an exact prefix of $T$.  In PE the left-prefix field of
+\noderef{OrderedTreeUnion}, supplied by \noderef{HierarchyBase}, puts
+$T_n$ inside the core.  In non-PE the core is $T_n$.  Thus
+$T_n\preccurlyeq A\preccurlyeq T$.
+
+The assumed base relation has $(T_n,D_n,\varphi)$-stability as a conjunct
+in PE and is that relation outright otherwise, by
+\noderef{CombinedStableColoring}.  The generating-color equation of
+\noderef{ExtendedTashkinovTree} identifies $\varphi$ with the stored
+terminal coloring.  With the context's lower package and the
+counterexample's positive rung and maximum property,
+\noderef{Td} therefore proves
+\noderef{ModColoring}$(\mathcal E,\sigma)$.
+
+If $A=T_n$, the stated alternative is immediate.  Otherwise the exact
+prefix $T_n\preccurlyeq A$ has strictly smaller length: equal lengths
+would identify every vertex and edge entry, and hence the two
+\noderef{TreeSequence} records.  Obtain the original terminal route
+from \noderef{P2813_T1_TerminalRoute}.
+In PE restrict its augmentation sequence from $T_n$ to $A$ by
+\noderef{TashkinovAugmentationSequenceRestrict}.
+In SE/RE its exact seed $S=T_n+f$ has length $|T_n|+1\le |A|$.
+It and $A$ are exact prefixes of $T$, by
+\noderef{TashkinovAugmentationSequenceInitialSegment} and the stage
+inclusions above, so their entry equations give $S\preccurlyeq A$.
+Restrict the route from this actual seed to $A$.
+The terminal singleton connecting-edge set and seed identity remain
+those of the terminal-route helper.
+
+Transport either restricted route from $\varphi$ to $\sigma$.
+Induct on its finite chain using \noderef{TashkinovAugmentationSequence}.
+For a final step $U\to W\preccurlyeq A$, all preceding trees are
+prefixes of $A$, by
+\noderef{TashkinovAugmentationSequenceInitialSegment}.
+The step's exact added edge is therefore a displayed edge of $A$ and
+its value is fixed by assumption.  Its old missing witness on $U$
+lies in $A$, by \noderef{TreeSequenceInitialSegmentVertexSetSubset},
+and keeps its missing set.  The same color is thus missing at the same
+vertex under $\sigma$.  Reuse the step's unchanged length equation and
+exact-prefix equations: these are all the clauses of
+\noderef{TashkinovAugmentation}.  The reflexive chain needs no step.
+This induction gives the identical restricted sequence under $\sigma$.
+
+We now have precisely the PE route from $T_n$, or the SE/RE route from
+the actual singleton connecting seed, required in the reconstruction
+clause of \noderef{ModColoring}.  Apply it to the strict exact prefix
+$A$ to obtain its corresponding certificate.  Finally
+\noderef{MaximumPropertyTransport} transfers the original maximum
+property to the certificate's own replacement ETT.
+This claim produces a maximum prefix, not a retained good hierarchy;
+it does not identify this certificate with any independently selected
+PE splitter certificate.
+\end{proof}
+

@@ -1,0 +1,40 @@
+\begin{helper}[Minus-closedness transport for controlled affected colors]
+Let $G$ be a finite loopless multigraph with palette $[k]$, distinguished
+edge $e_0$, and exact tree-sequence $U$.  Let $\varphi$ be proper and
+leave exactly $e_0$ uncolored.  Let $\alpha\ne\beta$ and
+$\sigma=\noderef{TwoColorComponentSwap}(G,\varphi,\alpha,\beta,z)$.
+Let $R\subseteq[k]$ and suppose
+\noderef{TreeColorSetMinusClosed}$(G,\varphi,U,R)$ holds.
+Suppose all vertex missing sets on $U$ agree under $\sigma,\varphi$.
+Assume that for each $c\in\{\alpha,\beta\}$, if $c$ is missing on $U$
+and singleton-closed there under $\varphi$, the recoloring is an
+\noderef{OutsideKempeRecoloring} of $U$.
+Then \noderef{TreeColorSetMinusClosed}$(G,\sigma,U,R)$ holds.
+\end{helper}
+\begin{proof}
+The vertexwise equality gives
+$\overline\sigma(U)=\overline\varphi(U)$ by
+\noderef{TreeMissingColors}.
+Fix $c\in\overline\sigma(U)-R$.  It belongs to
+$\overline\varphi(U)-R$, so old minus-closedness says its old boundary
+is empty, by \noderef{TreeColorSetMinusClosed} and
+\noderef{TreeColorSetClosed}.  In particular $c$ is singleton-closed.
+Suppose an exact boundary edge $f$ has new color $c$.
+If $c$ is one of the affected colors, the stated outside-recoloring
+assumption applies because its old missingness and singleton closedness
+were just proved.  The endpoint characterization of
+\noderef{BoundaryEdges} makes $f$ incident with $U$.
+\noderef{OutsideKempeRecoloringStable} therefore fixes its exact value,
+so its old color was also $c$.
+If $c$ is unaffected, its edge-color membership is unchanged by
+\noderef{TwoColorComponentSwap}: inside the component only $\alpha$
+and $\beta$ values exchange, and outside it every value is fixed.
+Thus its old color was $c$ in this case too.
+Boundary membership depends only on endpoints.  We have found an old
+$c$-colored boundary edge, contradicting old closedness.
+Every color of $\overline\sigma(U)-R$ therefore has empty new boundary,
+which is the required minus-closedness.  The argument does not require
+that every affected color lie in $R$, or that the entire component avoid
+$U$ without the explicit closed-color premise.
+\end{proof}
+

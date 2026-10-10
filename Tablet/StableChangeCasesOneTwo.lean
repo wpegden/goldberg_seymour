@@ -1,4 +1,8 @@
 import Tablet.ChangeLemma
+import Tablet.P2813_T1_BaseControl
+import Tablet.P2813_T1_DisplayedEdges
+import Tablet.P2813_T1_PrefixReconstruction
+import Tablet.P2813_T1_RetainedHierarchy
 import Tablet.CertifiedETTRestriction
 import Tablet.ColoredVertexSetClosed
 import Tablet.ColoredVertexSetElementary
@@ -253,4 +257,48 @@ theorem StableChangeCasesOneTwo {V E : Type*}
                           (C.good.gamma ⟨C.hierarchy.dividerCount - 1,
                             by omega⟩))) := by
 -- BODY
-  sorry
+  classical
+  let ctx : HierarchyMinimumCounterexampleContext G k e0 input T phi ett base C := {
+    proper := hproper
+    oneEdgeUncolored := hone
+    lowerRung := hlower
+    fewerDividers := hfewer
+    lexicographicMinimality := hminimal
+    largeMissingSet := hlarge }
+  have controls := P2813_T1_BaseControl G k e0 input T phi ett base C ctx
+    hprefixElementary alpha beta hne hmissingPrefix z hpath sigma hsigma hcase hdisjoint
+  rcases controls with ⟨hbase, hmissing, hsproper, hsone, _⟩
+  have hfixed := P2813_T1_DisplayedEdges G k e0 input T phi ett base C ctx
+    hprefixElementary alpha beta hne hmissingPrefix z hpath sigma hsigma hcase hdisjoint
+  have rebuilt := P2813_T1_PrefixReconstruction G k e0 input T phi ett base C ctx
+    sigma hsproper hsone hbase hfixed hmissing
+  let H := C.hierarchy
+  let q : Fin (H.dividerCount + 1) := Fin.last H.dividerCount
+  let A := HierarchyStarredStage H q
+  change (∀ t : Fin A.length, sigma (A.edge t) = phi (A.edge t)) at hfixed
+  change (∀ v ∈ TreeSequenceVertexSet A,
+    MissingColors G sigma v = MissingColors G phi v) at hmissing
+  have hweak : HierarchyWeaklyStable H q sigma := by
+    cases hq : q using Fin.cases with
+    | zero =>
+      exact hbase
+    | succ i =>
+      have hA : A = H.stage i.succ.castSucc := by
+        dsimp only [A]
+        rw [hq]
+        rfl
+      refine ⟨hbase, ?_⟩
+      have he : ∀ t : Fin (H.stage i.succ.castSucc).length,
+          sigma ((H.stage i.succ.castSucc).edge t) =
+            phi ((H.stage i.succ.castSucc).edge t) := by
+        exact hA ▸ hfixed
+      have hm : ∀ v ∈ TreeSequenceVertexSet (H.stage i.succ.castSucc),
+          MissingColors G sigma v = MissingColors G phi v := by
+        simpa only [hA] using hmissing
+      exact ⟨fun t _ => he t, hm⟩
+  refine ⟨hweak, rebuilt.1, ?_, ?_⟩
+  · rcases rebuilt.2 with he | ⟨corr, hMP⟩
+    · exact Or.inl he
+    · exact Or.inr ⟨corr.replacementInput, corr.replacementETT, hMP⟩
+  · exact P2813_T1_RetainedHierarchy G k e0 input T phi ett base C ctx
+      hprefixElementary alpha beta hne hmissingPrefix z hpath sigma hsigma hcase hdisjoint
