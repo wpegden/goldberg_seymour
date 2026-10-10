@@ -1,8 +1,15 @@
 \begin{lemma}[Exact hierarchy transport preserves the minimum measures]
-Let $H_1,H_2$ be hierarchies on the same exact terminal tree $T$, possibly
-with different generating colorings and certified inputs. Suppose they
-satisfy SameHierarchyStages. Then their last starred stages are the same
-exact tree, their path numbers are equal, and their ordinary stages at
+Let $G$ be a finite loopless multigraph with palette $[k]$ and
+distinguished edge $e_0$. For each $i\in\{1,2\}$, let $\mathcal E_i$ be
+an \noderef{ExtendedTashkinovTree} on this same graph, palette, and
+distinguished edge, with input coloring $\varphi_{{\rm in},i}$,
+generating coloring $\varphi_i$, and the same exact terminal tree $T$.
+The two input colorings and the two generating colorings may differ.
+Let $\mathcal B_i$ be a \noderef{HierarchyBase} of $\mathcal E_i$
+under its own generating coloring $\varphi_i$, and let $H_i$ be a
+\noderef{TashkinovHierarchy} on $\mathcal E_i$ and $\mathcal B_i$.
+Suppose $H_1,H_2$ satisfy SameHierarchyStages. Then their last starred
+stages are the same exact tree, their path numbers are equal, and their ordinary stages at
 their respective last internal indices are the same exact tree. In
 particular the full-tail lengths and both coordinates of the hierarchy
 counterexample measure are unchanged by this transport.
