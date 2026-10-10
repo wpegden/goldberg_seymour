@@ -1,3 +1,5 @@
+import Tablet.TechnicalTheoremBase
+import Tablet.CertifiedETTPredecessor
 import Tablet.CorrespondingExtendedTashkinovTree
 import Tablet.CombinedStableColoring
 import Tablet.BoundaryColorEdges
@@ -170,8 +172,31 @@ theorem StableChangeCasesOneTwoFullTail {V E : Type*}
   obtain ⟨hbase, missingA, sigmaProper, sigmaOne, outside⟩ :=
     P2813_T1_BaseControl G k e0 input T phi ett base C ctx helem
       alpha beta hne hmissingPrefix z hpath sigma hsigma hcase hdisjoint
-  have fixedA := P2813_T1_DisplayedEdges G k e0 input T phi ett base C ctx helem
-    alpha beta hne hmissingPrefix z hpath sigma hsigma hcase hdisjoint
+  have preStepElementary :
+      let i : Fin ett.rounds := ⟨ett.rounds - 1, by have := C.positive; omega⟩
+      ColoredVertexSetElementary G (ett.series.data.coloring i.castSucc)
+        (TreeSequenceVertexSet Tn) := by
+    dsimp only
+    by_cases hn : ett.rounds = 1
+    · have hcolor : (⟨ett.rounds - 1, by have := C.positive; omega⟩ : Fin ett.rounds).castSucc = 0 :=
+        Fin.ext (by simp [hn])
+      have htree : n.castSucc = (⟨1, by omega⟩ : Fin (ett.rounds + 2)) :=
+        Fin.ext (by simp [n, hn])
+      dsimp only [Tn]
+      rw [hcolor, htree]
+      exact (TechnicalTheoremBase G k ett.rounds e0 input ett.series).1
+    · have hmore : 1 < ett.rounds := by have := C.positive; omega
+      obtain ⟨predecessor, hr, hmaximum, _, _⟩ :=
+        CertifiedETTPredecessor G k e0 input T phi ett C.maximum hmore
+      have htree : n.castSucc = (⟨ett.rounds, by omega⟩ : Fin (ett.rounds + 2)) :=
+        Fin.ext rfl
+      dsimp only [Tn]
+      rw [htree]
+      exact (ctx.lowerRung predecessor (by omega) (by omega) hmaximum).1
+
+  have fixedA := P2813_T1_DisplayedEdges G k e0 input T phi ett base H C.good
+    ctx.proper ctx.oneEdgeUncolored preStepElementary helem alpha beta z sigma hsigma
+    sigmaOne hbase outside
   obtain ⟨hmod, prefixPresentation⟩ := P2813_T1_PrefixReconstruction
     G k e0 input T phi ett base C ctx sigma sigmaProper sigmaOne hbase fixedA missingA
   change (∀ t : Fin A.length, sigma (A.edge t) = phi (A.edge t)) at fixedA

@@ -1,3 +1,5 @@
+import Tablet.TechnicalTheoremBase
+import Tablet.CertifiedETTPredecessor
 import Tablet.BoundaryColorEdges
 import Tablet.BoundaryEdges
 import Tablet.CombinedStableClosurePreserved
@@ -52,7 +54,6 @@ import Tablet.TwoColorPathComponent
 import Tablet.P2813_T1_BaseControl
 import Tablet.P2813_T1_DisplayedEdges
 import Tablet.P2813_T1_PrefixReconstruction
-import Tablet.P2813_T1_RetainedHierarchy
 import Tablet.P2813_T1_TerminalRoute
 import Tablet.P2813_T1_MinusClosedTransport
 import Tablet.HierarchyFirstMissingPositionPrefixCutoff
@@ -143,8 +144,31 @@ theorem StableChangeCasesOneTwoStarredTail {V E : Type*}
   have controls := P2813_T1_BaseControl G k e0 input T phi ett base C ctx
     helem alpha beta hne hmissingPrefix z hpath sigma hsigma hcase hdisjoint
   rcases controls with ⟨hbase, hmissing, hsproper, hsone, houtside⟩
-  have hfixed := P2813_T1_DisplayedEdges G k e0 input T phi ett base C ctx
-    helem alpha beta hne hmissingPrefix z hpath sigma hsigma hcase hdisjoint
+  have preStepElementary :
+      let i : Fin ett.rounds := ⟨ett.rounds - 1, by have := C.positive; omega⟩
+      ColoredVertexSetElementary G (ett.series.data.coloring i.castSucc)
+        (TreeSequenceVertexSet Tn) := by
+    dsimp only
+    by_cases hn : ett.rounds = 1
+    · have hcolor : (⟨ett.rounds - 1, by have := C.positive; omega⟩ : Fin ett.rounds).castSucc = 0 :=
+        Fin.ext (by simp [hn])
+      have htree : n.castSucc = (⟨1, by omega⟩ : Fin (ett.rounds + 2)) :=
+        Fin.ext (by simp [n, hn])
+      dsimp only [Tn]
+      rw [hcolor, htree]
+      exact (TechnicalTheoremBase G k ett.rounds e0 input ett.series).1
+    · have hmore : 1 < ett.rounds := by have := C.positive; omega
+      obtain ⟨predecessor, hr, hmaximum, _, _⟩ :=
+        CertifiedETTPredecessor G k e0 input T phi ett C.maximum hmore
+      have htree : n.castSucc = (⟨ett.rounds, by omega⟩ : Fin (ett.rounds + 2)) :=
+        Fin.ext rfl
+      dsimp only [Tn]
+      rw [htree]
+      exact (ctx.lowerRung predecessor (by omega) (by omega) hmaximum).1
+
+  have hfixed := P2813_T1_DisplayedEdges G k e0 input T phi ett base H C.good
+    ctx.proper ctx.oneEdgeUncolored preStepElementary helem alpha beta z sigma hsigma
+    hsone hbase houtside
   have rebuilt := P2813_T1_PrefixReconstruction G k e0 input T phi ett base C ctx
     sigma hsproper hsone hbase hfixed hmissing
   have hmod : ModColoring ett sigma := rebuilt.1
@@ -564,8 +588,10 @@ theorem StableChangeCasesOneTwoStarredTail {V E : Type*}
     · have hpos : 0 < H.dividerCount := Nat.pos_of_ne_zero hz
       obtain ⟨inputA, ettA, baseA, KA, goodA, _, hkind, hcount,
         hcoreA, hclosureA, hstageA, hstoredA, _⟩ :=
-        P2813_T1_RetainedHierarchy G k e0 input T phi ett base C ctx helem
-          alpha beta hne hmissingPrefix z hpath sigma hsigma hcase hdisjoint hpos
+        (StableChangeCasesOneTwo G k e0 input T phi ett base C
+          ctx.proper ctx.oneEdgeUncolored ctx.lowerRung ctx.fewerDividers
+          ctx.lexicographicMinimality helem ctx.largeMissingSet alpha beta hne
+          hmissingPrefix z hpath sigma hsigma hcase hdisjoint).2.2.2 hpos
       have htreeA : ettA.series.data.tree (Fin.last ettA.rounds).castSucc = Tn := by
         rw [← KA.baseStage, hstageA 0]
         have hi : (⟨(0 : Fin (KA.dividerCount + 2)).val,

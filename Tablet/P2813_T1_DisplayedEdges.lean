@@ -1,4 +1,5 @@
-import Tablet.P2813_T1_BaseControl
+import Tablet.rutcor
+import Tablet.GoodHierarchyNewMissingClosed
 import Tablet.P2813_T1_BaseDisplayedEdges
 import Tablet.P2813_T1_TerminalRoute
 import Tablet.TashkinovAugmentationSequencePosition
@@ -13,10 +14,16 @@ theorem P2813_T1_DisplayedEdges {V E : Type*}
     (phi : PartialEdgeColoring E k)
     (ett : ExtendedTashkinovTree G k e0 input T phi)
     (base : HierarchyBase ett phi)
-    (C : HierarchyCounterexample base)
-    (ctx : HierarchyMinimumCounterexampleContext G k e0 input T phi ett base C)
+    (H : TashkinovHierarchy ett base) (good : GoodHierarchy H)
+    (hproper : IsProperEdgeColoring G phi)
+    (hone : IsOneEdgeUncolored phi e0)
+    (hpreStepElementary :
+      let i : Fin ett.rounds := ⟨ett.rounds - 1, by
+        have := ett.roundsPositive; omega⟩
+      ColoredVertexSetElementary G (ett.series.data.coloring i.castSucc)
+        (TreeSequenceVertexSet
+          (ett.series.data.tree (Fin.last ett.rounds).castSucc)))
     (hprefixElementary :
-      let H := C.hierarchy
       let A := HierarchyStarredStage H (Fin.last H.dividerCount)
       let ell := T.length - A.length
       let Ty := TreeSequencePrefix T
@@ -24,54 +31,33 @@ theorem P2813_T1_DisplayedEdges {V E : Type*}
         (by have hA := A.positive; have hT := T.positive; omega)
         (Nat.min_le_right _ _)
       ColoredVertexSetElementary G phi (TreeSequenceVertexSet Ty))
-    (alpha beta : Fin k) (hne : alpha ≠ beta)
-    (hmissingPrefix :
-      let H := C.hierarchy
-      let A := HierarchyStarredStage H (Fin.last H.dividerCount)
-      let ell := T.length - A.length
-      let Ty := TreeSequencePrefix T
-        (min (A.length + (ell - 1)) T.length)
-        (by have hA := A.positive; have hT := T.positive; omega)
-        (Nat.min_le_right _ _)
-      alpha ∈ TreeMissingColors phi Ty ∧
-        beta ∈ TreeMissingColors phi Ty)
-    (z : Sum V E) (hpath : TwoColorPathComponent G phi alpha beta z)
+    (alpha beta : Fin k) (z : Sum V E)
     (sigma : PartialEdgeColoring E k)
     (hsigma : sigma = TwoColorComponentSwap G phi alpha beta z)
-    (hcase :
-      let H := C.hierarchy
-      let q : Fin (H.dividerCount + 1) := Fin.last H.dividerCount
-      let n : Fin (ett.rounds + 1) := Fin.last ett.rounds
-      let A := HierarchyStarredStage H q
-      let Tnq := H.stage ⟨H.dividerCount, by omega⟩
+    (hsone : IsOneEdgeUncolored sigma e0)
+    (hbase :
+      let n := Fin.last ett.rounds
       let Tn := ett.series.data.tree n.castSucc
       let Dn := TashkinovStoredColors ett.series.data n
-      (0 < H.dividerCount ∧ alpha ∈ TreeMissingColors phi Tnq) ∨
-        (H.dividerCount = 0 ∧
-          (alpha ∈ TreeMissingColors phi Tn ∨
-            (alpha ∈ TreeMissingColors phi A ∧
-              alpha ∉ Dn ∧ beta ∉ Dn))))
-    (hdisjoint :
-      let va := T.vertex (HierarchyFirstMissingPosition phi T alpha)
-      Disjoint (TwoColorComponent G phi alpha beta z)
-        (TwoColorComponent G phi alpha beta (Sum.inl va))) :
-    let A := HierarchyStarredStage C.hierarchy (Fin.last C.hierarchy.dividerCount)
+      if ett.series.data.kind n = some TashkinovExtensionKind.PE then
+        CombinedStableColoring Tn base.closure Dn phi sigma
+      else StableColoring Tn Dn phi sigma)
+    (houtside :
+      ∀ (r : Fin (H.dividerCount + 1)) (c : Fin k),
+        (c = alpha ∨ c = beta) →
+        c ∈ TreeMissingColors phi (HierarchyStarredStage H r) →
+        TreeColorSetClosed G phi (HierarchyStarredStage H r) {c} →
+        OutsideKempeRecoloring (HierarchyStarredStage H r) phi sigma alpha beta) :
+    let A := HierarchyStarredStage H (Fin.last H.dividerCount)
     ∀ t : Fin A.length, sigma (A.edge t) = phi (A.edge t) := by
 -- BODY
   classical
-  have controls := P2813_T1_BaseControl G k e0 input T phi ett base C ctx
-    hprefixElementary alpha beta hne hmissingPrefix z hpath sigma hsigma hcase hdisjoint
-  rcases controls with ⟨hbase, hmissing, hsproper, hsone, houtside⟩
   have coreFixed := P2813_T1_BaseDisplayedEdges G k e0 input T phi ett base
-    sigma ctx.oneEdgeUncolored hsone hbase
-  rcases ctx with ⟨hproper, hone, hlower, hfewer, hminimal, hlarge⟩
-  let H := C.hierarchy
+    sigma hone hsone hbase
   let q : Fin (H.dividerCount + 1) := Fin.last H.dividerCount
   let A := HierarchyStarredStage H q
   let n : Fin (ett.rounds + 1) := Fin.last ett.rounds
   let Tn := ett.series.data.tree n.castSucc
-  let a := T.vertex (HierarchyFirstMissingPosition phi T alpha)
-  let b := T.vertex (HierarchyFirstMissingPosition phi T beta)
   let Ty := TreeSequencePrefix T
     (min (A.length + ((T.length - A.length) - 1)) T.length)
     (by have hA := A.positive; have hT := T.positive; omega)
@@ -211,7 +197,7 @@ theorem P2813_T1_DisplayedEdges {V E : Type*}
       have hvnew : v ∉ TreeSequenceVertexSet (HierarchyStarredStage H i.castSucc) := by
         intro hh
         exact hprev (Finset.mem_biUnion.mpr ⟨v, hh, hvm⟩)
-      have hnew := GoodHierarchyNewMissingClosed C.good i (helemStar i.succ) c
+      have hnew := GoodHierarchyNewMissingClosed good i (helemStar i.succ) c
         (Finset.mem_biUnion.mpr ⟨v, Finset.mem_sdiff.mpr ⟨hv, hvnew⟩, hvm⟩)
       apply False.elim
       apply hmax i.succ (by simp [i]; omega)
@@ -219,28 +205,6 @@ theorem P2813_T1_DisplayedEdges {V E : Type*}
       have heq : d = c := Finset.mem_singleton.mp hd
       subst d
       exact hnew
-  have preStepElementary :
-      let i : Fin ett.rounds := ⟨ett.rounds - 1, by have := C.positive; omega⟩
-      ColoredVertexSetElementary G (ett.series.data.coloring i.castSucc)
-        (TreeSequenceVertexSet Tn) := by
-    dsimp only
-    by_cases hn : ett.rounds = 1
-    · have hcolor : (⟨ett.rounds - 1, by have := C.positive; omega⟩ : Fin ett.rounds).castSucc = 0 :=
-        Fin.ext (by simp [hn])
-      have htree : n.castSucc = (⟨1, by omega⟩ : Fin (ett.rounds + 2)) :=
-        Fin.ext (by simp [n, hn])
-      dsimp only [Tn]
-      rw [hcolor, htree]
-      exact (TechnicalTheoremBase G k ett.rounds e0 input ett.series).1
-    · have hmore : 1 < ett.rounds := by have := C.positive; omega
-      obtain ⟨predecessor, hr, hmaximum, _, _⟩ :=
-        CertifiedETTPredecessor G k e0 input T phi ett C.maximum hmore
-      have htree : n.castSucc = (⟨ett.rounds, by omega⟩ : Fin (ett.rounds + 2)) :=
-        Fin.ext rfl
-      dsimp only [Tn]
-      rw [htree]
-      exact (hlower predecessor (by omega) (by omega) hmaximum).1
-
   have coreChain : TreeSequenceInitialSegment Tn base.core := by
     by_cases hp : ett.series.data.kind n = some TashkinovExtensionKind.PE
     · exact (base.parallel hp).2.2.some.leftSegment
@@ -277,8 +241,8 @@ theorem P2813_T1_DisplayedEdges {V E : Type*}
     by_cases hex : ∃ r, TreeColorSetClosed G phi (HierarchyStarredStage H r) {c}
     · obtain ⟨r, hcl, hmax⟩ := maxClosed c hex
       have hmr := missingAtMax c hm r hmax
-      have havoid := (rutcor G k e0 input T phi ett base H C.good hp
-        hprefixElementary preStepElementary c hm).1 hex r hcl hmax
+      have havoid := (rutcor G k e0 input T phi ett base H good hp
+        hprefixElementary hpreStepElementary c hm).1 hex r hcl hmax
       by_cases htr : t.val < (HierarchyStarredStage H r).length
       · let u : Fin (HierarchyStarredStage H r).length := ⟨t.val, htr⟩
         have hseg := starChain r q (Fin.le_last r)
@@ -297,8 +261,8 @@ theorem P2813_T1_DisplayedEdges {V E : Type*}
           ⟨Finset.mem_univ _, t, by omega, hcol⟩))
     · have hnone : ∀ r, ¬ TreeColorSetClosed G phi (HierarchyStarredStage H r) {c} :=
         fun r hr => hex ⟨r, hr⟩
-      have havoid := (rutcor G k e0 input T phi ett base H C.good hp
-        hprefixElementary preStepElementary c hm).2 hnone
+      have havoid := (rutcor G k e0 input T phi ett base H good hp
+        hprefixElementary hpreStepElementary c hm).2 hnone
       exact False.elim (havoid.2.2.2 (Finset.mem_filter.mpr
         ⟨Finset.mem_univ _, t, le_trans coreChain.1 ht, hcol⟩))
   have route := P2813_T1_TerminalRoute G k e0 input T phi ett
