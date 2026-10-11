@@ -196,19 +196,18 @@ We record two pointwise facts used in the three recolorings.  First,
 penultimate-elementarity, and large-set fields of the current minimum
 context, identifies the component through the two relevant first missing
 witnesses.  The component through \(y_\ell\) is disjoint from that
-component in the sense of \noderef{TwoColorComponent}.  Indeed, equality
-would put the two distinct first witnesses and \(y_\ell\), which are
-distinct by vertex injectivity in \noderef{TreeSequence}, in one
-component.  By
-\noderef{MissingColorIncidenceEndpoint}, all three vertex-nodes have
-incidence degree at most one in
-\noderef{TwoColorIncidenceGraph}.  The component is spanned by a simple
-path by \noderef{TwoColorComponentSpanningPath}, whereas
-\noderef{TwoColorIncidenceDegreeAtMostTwo} allows only the two endpoints
-of that path to have degree at most one.  This contradiction and
-\noderef{TwoColorComponentsDisjoint} give the required disjointness; the
-same endpoint lemma gives the possibly singleton
-\noderef{TwoColorPathComponent} through \(y_\ell\).
+component in the sense of \noderef{TwoColorComponent}.  To verify this,
+apply \noderef{P2905_T2_ElementaryTerminalComponent} to the current
+proper coloring, the elementary penultimate prefix, the two actual
+first missing witnesses, and the terminal vertex.  The witnesses
+belong to the strict prefix and so are different from the terminal
+vertex by \noderef{TreeSequence}'s injective display.  They may
+coincide with each other: the cited principal explicitly covers that
+case as well.  Its hypotheses are the component equality just obtained,
+the two prefix missing witnesses, and the terminal missingness of one
+affected color.  Its conclusions give the required disjointness and
+the possibly singleton \noderef{TwoColorPathComponent} through
+\(y_\ell\), as well as the pointwise equality established below.
 
 Second, let a current proper coloring \(\psi\) have elementary
 \(T(y_{\ell-1})\), and let \(\psi'\) be obtained by switching such a

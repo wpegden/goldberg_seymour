@@ -1,0 +1,175 @@
+\begin{helper}[Situation 7.3: replace a base-extra color]
+Let $G$ be a finite loopless multigraph with a finite individual edge
+type, let $[k]$ be its palette, and fix a distinguished edge $e_0$, an
+input coloring, an exact ordered tree-sequence $T$, a generating coloring
+$\varphi$, an ETT $\mathcal E$ on these data, a
+\noderef{HierarchyBase} $\mathcal B$, a
+\noderef{HierarchyCounterexample} $C$, and a
+\noderef{HierarchyMinimumCounterexampleContext} $\mathit{ctx}$.
+Thus the context supplies properness, exactly-one-uncoloredness, all six
+technical assertions at strictly lower positive rungs, fewer-divider
+induction at the same rung, rung-local lexicographic minimality, and the
+terminal-ladder bound $|\overline\varphi(T_n)|\ge 2n+11$.
+Write $n=\mathcal E.\mathit{rounds}$, $H=C.\mathit{hierarchy}$,
+$q=H.\mathit{dividerCount}$, and set
+\[
+ A=\noderef{HierarchyStarredStage}(H,q),\quad
+ \ell=\noderef{HierarchyFullTailLength}(C),\quad
+ T(y_i)=\noderef{HierarchyFullTailPrefix}(C,i),\quad
+ B_{\rm pen}=T(y_{\ell-1}),\quad y_\ell=T.\mathit{vertex}(\mathit{last}).
+\]
+Let $T_n$ be the terminal ladder tree
+$\mathcal E.\mathit{series.data.tree}((\operatorname{Fin.last}n).\mathit{castSucc})$,
+and put
+\[
+ D=\noderef{HierarchyStoredColorsAt}(H,q),\quad
+ \Gamma=\bigcup_{\rho\in D}C.\mathit{good}.\Gamma^q_\rho,\quad
+ M_0=\bigcup_{v\in V(\mathcal B.\mathit{core})\setminus V(T_n)}
+             \noderef{MissingColors}(G,\varphi,v).
+\]
+Here $V(U)=\noderef{TreeSequenceVertexSet}(U)$ and
+$\overline\varphi(U)=\noderef{TreeMissingColors}(\varphi,U)$.
+Assume $2\le j<\ell$, where
+$j=\noderef{HierarchyPathNumber}(H)$.
+Let $\alpha$ be missing on $A$ and at $y_\ell$.
+Assume $\alpha\in M_0\setminus\Gamma$.
+Then there are an original-relative
+\noderef{HierarchyReplacementPresentation} $P$ and a color $\beta$
+missing under $P.\mathit{coloring}$ both on the original exact $A$ and
+at $y_\ell$, such that $\beta$ lies outside the union of the last Gamma
+pairs of $P.\mathit{counterexample}$ and the base-extra missing set
+of $P$ (computed using its own base core and terminal ladder).
+\end{helper}
+\begin{proof}
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} to
+$\mathit{ctx.proper}$, $\mathit{ctx.oneEdgeUncolored}$,
+$\mathit{ctx.lowerRung}$, $\mathit{ctx.fewerDividers}$,
+$\mathit{ctx.lexicographicMinimality}$, and
+$\mathit{ctx.largeMissingSet}$, with the ambient data in the statement.
+It makes $B_{\rm pen}$ elementary under $\varphi$.
+The fields of \noderef{TashkinovHierarchy} and the entrywise definition
+of \noderef{TreeSequenceInitialSegment} give $A\preccurlyeq T$.
+Since $\ell=|T|-|A|\ge3$, the exact prefix $B_{\rm pen}$ has length
+$|T|-1$ and contains $A$. The base core is below $A$: at $q=0$
+it equals $A$, and at $q>0$ use the core-inside-first field followed
+by the nested stages. Also $T_n\preccurlyeq\mathcal B.\mathit{core}$:
+in PE this is the left-segment field of the ordered union in
+\noderef{HierarchyBase}, and in non-PE the core equals $T_n$.
+Consequently $T_n$ and the base core both lie in $B_{\rm pen}$.
+
+By \noderef{GoodHierarchyReservedDisjoint}, every last Gamma pair lies
+in $\overline\varphi(A)$ and $\Gamma\cap D=\varnothing$.
+Expanding \noderef{HierarchyStoredColorsAt}, one also has
+$D=D_n\setminus\overline\varphi(A)$, where
+$D_n=\noderef{TashkinovStoredColors}(\mathcal E.\mathit{series.data},n)$.
+In particular no stored color is missing on $A$.
+
+By \noderef{HierarchyStoredColorsCardinality}, $|D|\le n$.
+The two-colors clause of \noderef{GoodHierarchy} gives
+$|\Gamma|\le\sum_{\rho\in D}|C.\mathit{good}.\Gamma^q_\rho|
+=2|D|\le2n$. A color cannot be missing both on $T_n$ and at a
+vertex in $V(\mathcal B.\mathit{core})\setminus V(T_n)$:
+these would be two distinct vertices of the elementary $B_{\rm pen}$.
+Hence $\overline\varphi(T_n)\cap M_0=\varnothing$. The large-set
+field of the context therefore yields
+\[
+ |\overline\varphi(T_n)\setminus(\Gamma\cup M_0)|
+ \ge (2n+11)-2n=11.
+\]
+Choose $\beta$ from this set. It is missing on $T_n\preccurlyeq A$,
+outside $\Gamma\cup M_0$, and different from $\alpha\in M_0$.
+Both affected colors are missing on $A$ and consequently on
+$B_{\rm pen}$; neither belongs to $D$.
+
+Apply \noderef{ChangeLemma} in the order $(\beta,\alpha)$, using the
+six context projections already listed and the derived elementary
+prefix. Its conditional ordered-unused premise is vacuous because both
+colors are missing on $A$. If $q>0$, then $A=T_{n,q}$ and $\beta$
+is missing there, so the first conclusion identifies the components
+through the first $\beta$- and $\alpha$-missing vertices. If $q=0$,
+the chosen $\beta$ is missing on $T_n$, and the second conclusion
+gives the same identification. This orientation does not require
+$\alpha\notin D_n$.
+
+The two first missing witnesses belong to $A\subseteq B_{\rm pen}$
+and are distinct from $y_\ell$. They need not be distinct from each
+other. Apply \noderef{P2905_T2_ElementaryTerminalComponent} to these
+witnesses, the elementary vertex set of $B_{\rm pen}$, and $w=y_\ell$;
+the color missing at $w$ is $\alpha$, the second color in this ordering.
+It gives disjointness of the terminal component, its possibly singleton
+path certificate, and equality of all missing sets on $B_{\rm pen}$.
+Put $\sigma=\noderef{TwoColorComponentSwap}(G,\varphi,\beta,\alpha,y_\ell)$.
+The missing-color exchange clause of
+\noderef{TwoColorComponentSwapMissingBehavior} makes $\beta$ missing
+at $y_\ell$ and the prefix equality retains its witness on $A$.
+The entire missing set on $B_{\rm pen}$ is now fixed. Therefore every
+totalized \noderef{HierarchyFirstMissingPosition} on $T$ is fixed,
+in particular that of every $\rho\in D$. Indeed, if a color has a
+witness before the last vertex, equality at every preceding vertex
+preserves exactly its nonempty set of early candidates and its least
+candidate. If it has no early witness, neither coloring has one,
+and both totalized positions are the last index, whether or not a
+terminal witness exists. This checks the fallback as well as the
+actual-witness case.
+
+Invoke \noderef{StableChangeCasesOneTwoStarredTail} with first color
+$\beta$, second color $\alpha$, root the terminal vertex-node,
+and this literal swap. The required two old missing colors on
+$B_{\rm pen}$, path certificate, component disjointness, and Cases 1/2
+alternative were all verified above. Its starred-missing premise is
+the retained missingness of both colors on $A$; its Gamma-outside
+premise follows from the choices; its pointwise penultimate missingness
+and universally quantified stored-first premise were just checked.
+This is the starred-tail reconstruction, so no assertion that all
+post-$A$ displayed edges retain their values is needed.
+We describe the identity presentation used below. For every slot of
+the certified \noderef{TashkinovSeries}, properness and exact
+one-uncoloredness follow by cases on its
+\noderef{TashkinovSeriesStep}: the initial case uses the two coloring
+clauses of its \noderef{KTriple}; SE uses
+\noderef{MaximumDefectiveChoice}'s selected-coloring clauses; PE uses
+the explicit current-coloring clauses; RE copies the previous coloring.
+Choose the same input, series, and ETT for the reflexive
+\noderef{CorrespondingExtendedTashkinovTree}; use reflexive rung,
+presentation, ladder, stored-set, connecting-edge, and kind equalities,
+the original generating-coloring equality, the just verified slotwise
+coloring laws, and reflexive \noderef{StableColoring} at each positive
+slot. Define $P_0$ by coloring $\varphi$, that certificate, maximum
+$C.\mathit{maximum}$, base $\mathcal B$, counterexample $C$, reflexive
+\noderef{SameGoodHierarchy}, and the supplied context $\mathit{ctx}$.
+These are all seven fields of
+\noderef{HierarchyReplacementPresentation}.
+Retain the provider's full corresponding certificate $\mathcal C$,
+its maximum witness, base $\mathcal B'$, hierarchy $K$, good witness
+$g$, and $\noderef{SameGoodHierarchy}(C.\mathit{good},g)$.
+Construct a \noderef{HierarchyCounterexample} $C'$ on $\mathcal B'$:
+its positive-rung field is $C.\mathit{positive}$ transported by
+$\mathcal C.\mathit{rungAgreement}$, its hierarchy and goodness are
+$K,g$, and its maximum is the provider's maximum witness.
+The two stated missing witnesses, one in the strict prefix
+$B_{\rm pen}$ and one at $y_\ell$, are distinct by injectivity of
+\noderef{TreeSequence}'s vertex display. Their common missing color
+contradicts the disjointness clause of
+\noderef{ColoredVertexSetElementary}, proving the non-elementarity
+field. Apply \noderef{HierarchyReplacementPresentationTrans} to $P_0$,
+$\sigma$, $\mathcal C$, $\mathcal B'$, $C'$, and the supplied same-good
+witness. It gives an original-relative presentation $P$ with coloring
+exactly $\sigma$; in particular its minimum context is supplied by the
+principal, not assumed.
+
+For any such $P$, its own same-good field identifies its base core,
+last stored set, and every last Gamma pair with the originals after the
+divider-count cast. The rung and ladder agreement in its corresponding
+certificate identifies its actual terminal ladder tree with $T_n$:
+use the last positive slot, which exists since $C.\mathit{positive}$
+gives $n>0$, and its series-presentation equality. Missing-set equality
+on the old base core and $T_n$ then identifies its base-extra missing
+set with $M_0$. Thus the final forbidden set in the statement is the
+original $\Gamma\cup M_0$.
+
+Here the non-elementarity color is $\beta$, with its retained witness
+on $A\subseteq B_{\rm pen}$. Since the original choice of $\beta$
+excluded $\Gamma\cup M_0$, the final identification proves precisely
+the forbidden-set exclusion for $P,\beta$. These are all the asserted
+properties.
+\end{proof}

@@ -1,0 +1,49 @@
+\begin{helper}[An empty eligible family locates common missing colors]
+Fix a finite loopless multigraph with individual edge identities,
+a palette of $k$ colors, a distinguished edge $e_0$, a certified input
+coloring, an exact ordered tree $T$, a generating coloring $\varphi$,
+an ETT $\mathcal E$, a \noderef{HierarchyBase}, a
+\noderef{HierarchyCounterexample} $C$, and its
+\noderef{HierarchyMinimumCounterexampleContext}.
+Write $A=\noderef{HierarchyStarredStage}(C.\mathit{hierarchy},q)$ at
+the last stored index, $\ell=\noderef{HierarchyFullTailLength}(C)$,
+and $j=\noderef{HierarchyPathNumber}(C.\mathit{hierarchy})$.
+Assume $2\le j<\ell$ and that the original-relative finite family
+\noderef{HierarchyEligibleCommonMissingIndices} is empty.
+Let $P$ be any original-relative
+\noderef{HierarchyReplacementPresentation} and let $c$ be missing
+under its coloring both on the original exact penultimate prefix
+$B=\noderef{HierarchyFullTailPrefix}(C,\ell-1)$ and at the last
+vertex of $T$. Then $c$ is missing on the original exact $A$ under
+$P.\mathit{coloring}$.
+\end{helper}
+\begin{proof}
+The fields of \noderef{TashkinovHierarchy} give
+$A\preccurlyeq T$: at divider zero use the base core's inclusion
+in the first stage, and otherwise use the final nesting inclusion.
+The definition of \noderef{HierarchyFullTailLength} gives
+$\ell=|T|-|A|$. Hence $\ell\ge3$ and the definition of
+\noderef{HierarchyFullTailPrefix} gives $|B|=|T|-1$.
+Both $A$ and $B$ are exact ordered prefixes of $T$, with
+$|A|\le|B|$, so $A\preccurlyeq B$: at every vertex or edge index
+the corresponding entries are equal to the same entry of $T$.
+These are all clauses of \noderef{TreeSequenceInitialSegment}.
+
+Expand \noderef{TreeMissingColors} and
+\noderef{TreeSequenceVertexSet} to choose an index
+$x\in\{0,\ldots,|B|\}$ with $c$ missing at $B.\mathit{vertex}(x)$.
+If $x\le|A|$, the exact-prefix vertex equality puts that same
+witness in $A$, proving the conclusion.
+
+Otherwise put $i=x-|A|$. Then $1\le i\le\ell-1$ and the exact
+prefix $T_i=\noderef{HierarchyFullTailPrefix}(C,i)$ has length
+$|A|+i=x$, since $x\le|B|<|T|$. Its last vertex is exactly the
+displayed vertex at index $x$ of $T$, hence exactly
+$B.\mathit{vertex}(x)$. Thus $c$ is missing under $P.\mathit{coloring}$
+at both the last vertex of $T_i$ and the last vertex of $T$.
+The bounds on $i$, the supplied original-relative $P$, and these
+two missing witnesses are precisely the membership conditions in
+the filter defining \noderef{HierarchyEligibleCommonMissingIndices}.
+That family therefore contains $i$, contradicting its emptiness.
+This rules out the second alternative and proves the assertion.
+\end{proof}

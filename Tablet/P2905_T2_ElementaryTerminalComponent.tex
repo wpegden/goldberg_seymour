@@ -1,0 +1,53 @@
+\begin{helper}[Separation from an elementary prefix's missing witnesses]
+Let $G$ be a finite loopless multigraph with individual edge identities,
+let $\psi$ be a proper partial coloring with $k$ colors, and let $a\ne b$
+be colors. Let $B\subseteq V(G)$ be elementary under $\psi$.
+Suppose $u,v\in B$, $w\ne u,v$, $a$ is missing at $u$, $b$ is missing
+at $v$, and at least one of $a,b$ is missing at $w$. Suppose the
+$a,b$ components rooted at $u$ and $v$ are equal. Then the component
+rooted at $w$ is disjoint from that common component and is a
+\noderef{TwoColorPathComponent}, including the isolated-vertex case.
+Moreover, swapping this component preserves the entire missing-color
+set at every vertex of $B$.
+\end{helper}
+\begin{proof}
+Write $J=\noderef{TwoColorIncidenceGraph}(G,\psi,a,b)$.
+\noderef{MissingColorIncidenceEndpoint} implies that each vertex missing
+one affected color has at most one neighbor in $J$; for a vertex missing
+$b$, interchange $a,b$ in that result, which leaves $J$ unchanged.
+If $u=v$, that vertex misses both colors. The definition of $J$ then
+gives no incident adjacency at its vertex-node, so its component is a
+singleton. It cannot contain $w$.
+
+If $u\ne v$, suppose $w$ belongs to their common component.
+\noderef{TwoColorComponentSpanningPath} supplies a simple path whose
+support is this component: the component has a degree-at-most-one
+vertex-node, namely $u$, so it is not a cycle. Any vertex-node on a
+simple path with at most one neighbor must be one of its two endpoints:
+an internal occurrence has distinct predecessor and successor neighbors.
+Thus $u,v,w$ would be three distinct endpoints of a single path, which
+is impossible. In either case $w$ is outside the common component.
+By \noderef{TwoColorComponentsDisjoint}, components are either equal
+or disjoint. Equality would put $w$ in that component, so they are
+disjoint. The vertex-node $w$ belongs to its own component and has at
+most one neighbor; these facts and $a\ne b$ are the fields of
+\noderef{TwoColorPathComponent}.
+
+Let $Q$ be the component rooted at $w$ and $\tau$ its swap. By
+disjointness, $u,v$ are outside $Q$. Fix $x\in B$. If $x$ is outside
+$Q$, the outside-vertex clause of
+\noderef{TwoColorComponentSwapMissingBehavior} gives equality of its
+missing sets. If $x$ is in $Q$, then $x\ne u,v$. Elementarity, as
+defined by \noderef{ColoredVertexSetElementary}, prevents $a$ being
+missing at both $x$ and $u$, and prevents $b$ being missing at both
+$x$ and $v$. Thus both colors are present at $x$. Expand
+\noderef{MissingColors} and \noderef{PresentColors} to choose an
+incident $a$-edge and an incident $b$-edge. Each edge-node is adjacent
+in $J$ to $x$, hence belongs to $Q$. The definition of
+\noderef{TwoColorComponentSwap} changes the first edge to $b$ and the
+second to $a$, so both colors remain present at $x$. Every other color
+has the same missing predicate by the unaffected-color clause of
+\noderef{TwoColorComponentSwapMissingBehavior}. Equality holds for
+each color and hence for the entire missing set. This does not assert
+that displayed edges at internal intersections with $B$ are fixed.
+\end{proof}

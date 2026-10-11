@@ -1,0 +1,280 @@
+\begin{helper}[Situation 7.3: a Gamma owner with a late actual witness]
+Let $G$ be a finite loopless multigraph with a finite individual edge
+type, let $[k]$ be its palette, and fix a distinguished edge $e_0$, an
+input coloring, an exact ordered tree-sequence $T$, a generating coloring
+$\varphi$, an ETT $\mathcal E$ on these data, a
+\noderef{HierarchyBase} $\mathcal B$, a
+\noderef{HierarchyCounterexample} $C$, and a
+\noderef{HierarchyMinimumCounterexampleContext} $\mathit{ctx}$.
+Thus the context supplies properness, exactly-one-uncoloredness, all six
+technical assertions at strictly lower positive rungs, fewer-divider
+induction at the same rung, rung-local lexicographic minimality, and the
+terminal-ladder bound $|\overline\varphi(T_n)|\ge 2n+11$.
+Write $n=\mathcal E.\mathit{rounds}$, $H=C.\mathit{hierarchy}$,
+$q=H.\mathit{dividerCount}$, and set
+\[
+ A=\noderef{HierarchyStarredStage}(H,q),\quad
+ \ell=\noderef{HierarchyFullTailLength}(C),\quad
+ T(y_i)=\noderef{HierarchyFullTailPrefix}(C,i),\quad
+ B_{\rm pen}=T(y_{\ell-1}),\quad y_\ell=T.\mathit{vertex}(\mathit{last}).
+\]
+Let $T_n$ be the terminal ladder tree
+$\mathcal E.\mathit{series.data.tree}((\operatorname{Fin.last}n).\mathit{castSucc})$,
+and put
+\[
+ D=\noderef{HierarchyStoredColorsAt}(H,q),\quad
+ \Gamma=\bigcup_{\rho\in D}C.\mathit{good}.\Gamma^q_\rho,\quad
+ M_0=\bigcup_{v\in V(\mathcal B.\mathit{core})\setminus V(T_n)}
+             \noderef{MissingColors}(G,\varphi,v).
+\]
+Here $V(U)=\noderef{TreeSequenceVertexSet}(U)$ and
+$\overline\varphi(U)=\noderef{TreeMissingColors}(\varphi,U)$.
+Assume $2\le j<\ell$, where
+$j=\noderef{HierarchyPathNumber}(H)$.
+Let $\alpha$ be missing on $A$ and at $y_\ell$.
+Suppose $\eta\in D$ and $\alpha\in C.\mathit{good}.\Gamma^q_\eta$.
+Let $t$ be a natural number satisfying $1\le t<\ell$ and $j-1\le t$,
+such that the totalized first $\eta$-missing position on $T$ has
+index $|A|+t$ and $\eta$ is actually missing at
+$y_t=T(y_t).\mathit{vertex}(\mathit{last})$ under $\varphi$.
+Then there is an original-relative
+\noderef{HierarchyReplacementPresentation} $P$ under whose coloring
+$\eta$ is missing at both $y_t$ and $y_\ell$.
+\end{helper}
+\begin{proof}
+Apply \noderef{HierarchyCounterexamplePenultimateElementary} to
+$\mathit{ctx.proper}$, $\mathit{ctx.oneEdgeUncolored}$,
+$\mathit{ctx.lowerRung}$, $\mathit{ctx.fewerDividers}$,
+$\mathit{ctx.lexicographicMinimality}$, and
+$\mathit{ctx.largeMissingSet}$, with the ambient data in the statement.
+It makes $B_{\rm pen}$ elementary under $\varphi$.
+The fields of \noderef{TashkinovHierarchy} and the entrywise definition
+of \noderef{TreeSequenceInitialSegment} give $A\preccurlyeq T$.
+Since $\ell=|T|-|A|\ge3$, the exact prefix $B_{\rm pen}$ has length
+$|T|-1$ and contains $A$. The base core is below $A$: at $q=0$
+it equals $A$, and at $q>0$ use the core-inside-first field followed
+by the nested stages. Also $T_n\preccurlyeq\mathcal B.\mathit{core}$:
+in PE this is the left-segment field of the ordered union in
+\noderef{HierarchyBase}, and in non-PE the core equals $T_n$.
+Consequently $T_n$ and the base core both lie in $B_{\rm pen}$.
+
+By \noderef{GoodHierarchyReservedDisjoint}, every last Gamma pair lies
+in $\overline\varphi(A)$ and $\Gamma\cap D=\varnothing$.
+Expanding \noderef{HierarchyStoredColorsAt}, one also has
+$D=D_n\setminus\overline\varphi(A)$, where
+$D_n=\noderef{TashkinovStoredColors}(\mathcal E.\mathit{series.data},n)$.
+In particular no stored color is missing on $A$.
+
+Put $X=T(y_t)$. The bounds on $t$ give
+$A\prec X\preccurlyeq B_{\rm pen}$, with $|X|=|A|+t$.
+Since $\eta\in D$, it is not missing on $A$, whereas $\alpha$ is
+missing there, so $\alpha\ne\eta$. The first $\alpha$ witness is on
+$A$ and precedes the first $\eta$ witness $y_t$.
+The avoidance clause of \noderef{GoodHierarchy} for
+$\alpha\in C.\mathit{good}.\Gamma^q_\eta$, with
+\noderef{HierarchySegmentColors}, excludes $\alpha$ at every exact
+edge position $|A|\le r<|X|$.
+
+Apply \noderef{ChangeLemma} to the ordered pair $(\alpha,\eta)$, with
+the six context projections and the derived elementary prefix.
+Both colors are missing on $B_{\rm pen}$. The conditional ordered-unused
+premise is precisely the witness order and edge exclusion just proved.
+The avoidance clause puts $\alpha$ in
+\noderef{HierarchyStageMissingColors}(H,q)$: at positive divider count
+this means missingness on $A=T_{n,q}$, and at zero it means missingness
+on $T_n$. Thus the respective first or second conclusion gives equality
+of the components through the first missing witnesses.
+Apply \noderef{P2905_T2_ElementaryTerminalComponent} to those witnesses
+and $w=y_\ell$, which misses $\alpha$. Both witnesses are in the
+strict elementary prefix $B_{\rm pen}$ and different from $y_\ell$.
+It gives the disjoint terminal component, its possibly singleton path
+certificate, and pointwise equality of all prefix missing sets after
+the swap
+$\sigma=\noderef{TwoColorComponentSwap}(G,\varphi,\alpha,\eta,y_\ell)$.
+The exchange clause of
+\noderef{TwoColorComponentSwapMissingBehavior} makes $\eta$ missing at
+$y_\ell$ and the prefix equality retains its actual witness $y_t$.
+It also retains $\alpha$'s witness on $A$. Both affected colors are
+therefore missing on $X$ under $\sigma$.
+
+Apply \noderef{StableChangeCasesOneTwo} now to the same ordered colors,
+context data, elementary prefix, missing witnesses, terminal path, swap,
+Cases 1/2 alternative, and component disjointness. Retain its
+\noderef{HierarchyWeaklyStable} conclusion at $A$ and its
+\noderef{ModColoring} conclusion. We next verify all additional
+SplitTail hypotheses rather than treating these two conclusions as a
+full reconstruction.
+
+\textbf{Fixed displayed interval and the exact seed exception.}
+The absence of $\alpha$ fixes every $\alpha$-affected displayed edge
+from $A$ to $X$. Apply \noderef{HierarchyTailMissingColorExclusion}
+with the old elementary prefix, $i=t$, and the actual missing witness
+of $\eta$ at $y_t$. For any $\eta$-colored displayed edge in this same
+interval it gives precisely the exceptional data
+\[
+ q=0,\quad\mathcal B.\mathit{core}=T_n,\quad r=|A|,\quad
+ \Theta_n\in\{SE,RE\},\quad F_n=\{f_n\},\quad
+ T(y_t).\mathit{edge}(r)=f_n,\quad
+ \varphi(f_n)=\eta\in D_n.
+\]
+Here $A=\mathcal B.\mathit{core}=T_n$. Inspect the actual terminal
+certificate $\mathcal E.\mathit{series.certified}(\operatorname{Fin.last}n)$
+of \noderef{TashkinovSeries}. Its SE constructor's
+\noderef{MaximumDefectiveChoice} makes $f_n$ incident with $T_n$;
+its RE constructor's
+\noderef{RevisitingExtensionCertificate} gives an inside endpoint
+in $T_n$ for the same individual edge. The connecting-edge singleton
+identifies these constructor edges with the $f_n$ above.
+The zero-divider non-PE clause of
+\noderef{HierarchyWeaklyStable} is
+$\noderef{StableColoring}(T_n,D_n,\varphi,\sigma)$.
+Because $f_n$ is incident with $T_n$ and its old color is the protected
+$\eta\in D_n$, the incident-edge clause gives
+$\sigma(f_n)=\varphi(f_n)$. Every other edge in $A$ to $X$ has neither
+affected color. This verifies fixed edge values on that entire interval,
+including the exceptional seed.
+
+\textbf{Actual route through $X$ and suffix factorization.}
+Again inspect that actual terminal certificate. Its initial constructor
+is impossible since the rung is positive. Its PE constructor gives the
+old closure route from $T_n$ to the certified final series tree; its
+SE/RE constructor gives the exact singleton $F_n=\{f_n\}$, the literal
+\noderef{TreeSequenceAdjoinEdge} seed $S=T_n+f_n$, and the old closure
+route from $S$ to that final tree. The
+\noderef{ExtendedTashkinovTree} fields put the displayed $T$ below
+the final series tree and strictly above $T_n$. Consequently the PE
+source lies below $T$, and the SE/RE seed of length $|T_n|+1$ lies
+below $T$: both are exact prefixes of the final tree, and their length
+is at most $|T|$. Restrict those actual closure routes with
+\noderef{TashkinovAugmentationSequenceRestrict}. Equivalently, these
+are exactly the two alternatives of the registered principal
+\noderef{P2813_T1_TerminalRoute}, whose statement additionally retains
+the seed's incidence and color-control data. Denote its source by $S$,
+taking $S=T_n$ in PE. The source is an exact prefix of $T$ by
+\noderef{TashkinovAugmentationSequenceInitialSegment}, applied to
+that actual old route.
+
+In PE, $S\preccurlyeq A\prec X$ by the base's ordered-union
+left segment and the hierarchy nesting. In SE/RE at $q>0$,
+\noderef{HierarchyNonparallelFirstEdge} places the same exact connecting
+edge at position $|T_n|$ of the first ordinary hierarchy stage.
+The adjoin-edge data, common-prefix equality, and its length
+$|T_n|+1$ put the seed below that stage and hence below $A$.
+At $q=0$, non-PE gives $A=T_n$ and $t\ge1$ gives
+$|S|=|A|+1\le|X|$; the seed and $X$ are exact prefixes of $T$, so
+$S\preccurlyeq X$. This retains the actual SE/RE seed even at $t=1$.
+
+Restrict the old route $S\to T$ at $X$ with
+\noderef{TashkinovAugmentationSequenceRestrict}. Separately apply
+\noderef{TashkinovAugmentationSequenceSuffix} to
+$S\preccurlyeq X\preccurlyeq T$ and that old route to obtain the actual
+old suffix $X\to T$. Restriction alone is not used to produce a suffix.
+
+We transport the restricted route $S\to X$ under $\sigma$.
+At $q>0$, \noderef{HierarchyWeaklyStable} includes
+\noderef{TreeColoringInvariant} on $A$, so every displayed edge with
+index at least one and below $|A|$ is fixed. The index-zero edge is
+$e_0$ by \noderef{TreeSequence} and stays uncolored under the literal
+swap, so it too is fixed. At $q=0$, its base clause is the actual combined
+stable relation on $T_n$ and the base closure in PE, and the actual
+stable relation on $T_n$ in non-PE. Properness of $\sigma$ is given by
+\noderef{TwoColorComponentSwapProper}; the literal swap preserves the
+value $\mathsf{none}$ and never changes a colored value to
+$\mathsf{none}$, so it remains exactly-one-uncolored.
+Apply \noderef{P2813_T1_BaseDisplayedEdges} to these original and new
+one-uncolored laws and the base stable relation. It fixes every exact
+displayed edge of $\mathcal B.\mathit{core}=A$ at $q=0$,
+including the PE union entries not displayed in $T_n$.
+Together with the already verified interval $A$ to $X$, all edge
+positions of $X$ at or after $|S|$ are fixed. In zero-divider SE/RE
+the route starts at the retained seed, not at $T_n$; its seed color
+was separately fixed above.
+
+Let $X^-$ be the exact \noderef{TreeSequencePrefix} of length $|X|-1$.
+It is a positive-length tree-sequence since $A$ has positive length
+and $t\ge1$, and it lies in $B_{\rm pen}$.
+The pointwise missing-set equality on $B_{\rm pen}$ holds on $X^-$.
+Apply \noderef{TashkinovAugmentationSequenceColoringTransport} with
+source $S$, predecessor $X^-$, endpoint $X$, the restricted old route,
+the predecessor inclusion and length equality, the fixed displayed
+values at every position at or after $|S|$, and this missing-set equality.
+It gives the genuine $\sigma$-route
+\[
+ T_n\to X\quad\hbox{in PE},\qquad
+ T_n+f_n\to X\quad\hbox{in SE/RE}.
+\]
+The old suffix $X\to T$ is also transportable by
+\noderef{TashkinovAugmentationSequenceComponentSwap}, since both
+affected colors are missing on $X$ under $\sigma$; no fixed values
+above $X$ have been asserted or used.
+
+\textbf{All stored-first and Gamma cutoff conditions.}
+The entire missing set on $B_{\rm pen}$ is now fixed. Therefore every
+totalized \noderef{HierarchyFirstMissingPosition} on $T$ is fixed,
+in particular that of every $\rho\in D$. Indeed, if a color has a
+witness before the last vertex, equality at every preceding vertex
+preserves exactly its nonempty set of early candidates and its least
+candidate. If it has no early witness, neither coloring has one,
+and both totalized positions are the last index, whether or not a
+terminal witness exists. This checks the fallback as well as the
+actual-witness case.
+
+For each $\rho\in D$, suppose its last Gamma pair contains an
+affected color. Reserved disjointness excludes $\eta$ from every such
+pair. If the pair contains $\alpha$, its intersection with
+$\Gamma^q_\eta$ is nonempty, so the disjoint-pairs clause of
+\noderef{GoodHierarchy} forces $\rho=\eta$.
+The old first position of this owner equals $|A|+t=|X|$ by the
+hypothesis. Thus the cutoff condition holds for every owner, not merely
+for the displayed $\eta$.
+
+Apply \noderef{StableChangeCasesOneTwoSplitTail} with split prefix $X$.
+We have checked its old prefix missingness, terminal path and swap,
+Cases 1/2 data, component disjointness, strict $A$ to $X$ inclusion,
+$X$ to $B_{\rm pen}$ inclusion, fixed interval (including the seed
+exception), actual new route through $X$, actual old suffix, new
+missingness of both colors on $X$, pointwise penultimate missing sets,
+every stored first position, and the universal Gamma cutoff.
+Retain its full corresponding maximum ETT, rebuilt base, hierarchy,
+goodness, and same-good witness.
+We describe the identity presentation used below. For every slot of
+the certified \noderef{TashkinovSeries}, properness and exact
+one-uncoloredness follow by cases on its
+\noderef{TashkinovSeriesStep}: the initial case uses the two coloring
+clauses of its \noderef{KTriple}; SE uses
+\noderef{MaximumDefectiveChoice}'s selected-coloring clauses; PE uses
+the explicit current-coloring clauses; RE copies the previous coloring.
+Choose the same input, series, and ETT for the reflexive
+\noderef{CorrespondingExtendedTashkinovTree}; use reflexive rung,
+presentation, ladder, stored-set, connecting-edge, and kind equalities,
+the original generating-coloring equality, the just verified slotwise
+coloring laws, and reflexive \noderef{StableColoring} at each positive
+slot. Define $P_0$ by coloring $\varphi$, that certificate, maximum
+$C.\mathit{maximum}$, base $\mathcal B$, counterexample $C$, reflexive
+\noderef{SameGoodHierarchy}, and the supplied context $\mathit{ctx}$.
+These are all seven fields of
+\noderef{HierarchyReplacementPresentation}.
+Retain the provider's full corresponding certificate $\mathcal C$,
+its maximum witness, base $\mathcal B'$, hierarchy $K$, good witness
+$g$, and $\noderef{SameGoodHierarchy}(C.\mathit{good},g)$.
+Construct a \noderef{HierarchyCounterexample} $C'$ on $\mathcal B'$:
+its positive-rung field is $C.\mathit{positive}$ transported by
+$\mathcal C.\mathit{rungAgreement}$, its hierarchy and goodness are
+$K,g$, and its maximum is the provider's maximum witness.
+The two stated missing witnesses, one in the strict prefix
+$B_{\rm pen}$ and one at $y_\ell$, are distinct by injectivity of
+\noderef{TreeSequence}'s vertex display. Their common missing color
+contradicts the disjointness clause of
+\noderef{ColoredVertexSetElementary}, proving the non-elementarity
+field. Apply \noderef{HierarchyReplacementPresentationTrans} to $P_0$,
+$\sigma$, $\mathcal C$, $\mathcal B'$, $C'$, and the supplied same-good
+witness. It gives an original-relative presentation $P$ with coloring
+exactly $\sigma$; in particular its minimum context is supplied by the
+principal, not assumed.
+
+
+Use the retained actual $\eta$-missing witness $y_t$ and the new
+terminal $\eta$-missing witness in the counterexample construction.
+The resulting presentation has coloring exactly $\sigma$, so it
+has both asserted $\eta$-missing witnesses.
+\end{proof}
