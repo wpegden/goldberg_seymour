@@ -1,0 +1,90 @@
+\begin{lemma}[Transport of the retained beta choice to condition (9)]
+Fix the graph, palette, edge, input, displayed tree, generating coloring,
+ETT, base, counterexample \(C\), minimum context, and two replacement
+presentations \(P,R\) relative to these same original data.
+Let \(S\) be a \noderef{P2880_T1_SplitSwapData} for
+\(P,\alpha,\beta,\sigma\), and assume \(R.\mathit{coloring}=\sigma\).
+Use a subscript \(P\) or \(R\) for the following data of that
+presentation: its last starred stage \(A\), last stored set \(D\),
+last Gamma union \(\Gamma\), terminal ladder \(T_n\), and
+\[
+ M_0=\bigcup_{v\in V(\mathit{replacementBase.core})\setminus V(T_n)}
+ \noderef{MissingColors}(G,\mathit{coloring},v),\quad
+ U_j=\{c:\exists r\in\operatorname{Fin}|T|,+ |A|\le r<|A|+j,\ \mathit{coloring}(T.\mathit{edge}(r))=c\}.
+\]
+Here \(j=\noderef{HierarchyPathNumber}(C.\mathit{hierarchy})\) and
+\(B=\noderef{HierarchyFullTailPrefix}(C,j-2)\).
+Assume \(\beta\ne\alpha\), \(\beta\in\overline{P.\mathit{coloring}}(B)\),
+\(\beta\notin\Gamma_P\cup U_{j,P}\), and either
+\(\beta\notin M_{0,P}\cup D_P\), or
+\(\beta\in D_P\) and
+\((P.\mathit{counterexample.good}.\Gamma^q_\beta\cup\{\beta\})
+\cap U_{j,P}=\varnothing\).
+Then \(\beta\notin\Gamma_R\), and either
+\[
+ \beta\notin M_{0,R},\quad\beta\notin U_{j,R},\quad
+ \beta\notin\Gamma_R,\quad\beta\notin D_R,
+\]
+or
+\[
+ \beta\in D_R\cap\overline{R.\mathit{coloring}}(B),\qquad
+ (R.\mathit{counterexample.good}.\Gamma^q_\beta\cup\{\beta\})
+ \cap U_{j,R}=\varnothing.
+\]
+\end{lemma}
+\begin{proof}
+By \noderef{HierarchyReplacementPresentation}, both \(P\) and \(R\)
+have \noderef{SameGoodHierarchy} with the fixed original good
+hierarchy. Expand that definition and its \noderef{SameHierarchyStages}
+clause. Each identifies its base core, divider count, and entire
+dependent stage family with the original ones. Their transitive
+equalities give equality of the two cores and divider counts.
+\noderef{P2752_T2_HierarchyMeasures}, applied separately to the two
+original-relative same-stage witnesses, gives \(A_P=A_R\).
+The stored-set equality clauses at the last index give \(D_P=D_R\);
+the dependent cast of a last index is the last index because its value
+is the equal divider count. For each \(\eta\in D_P\), compose the
+two Gamma-pair equalities through the original pair. This gives equality
+of the last Gamma pairs on the common stored set, and taking their
+finite unions gives \(\Gamma_P=\Gamma_R\).
+
+We also identify the actual terminal ladder trees, not just the two
+displayed final trees. For each original-relative
+\noderef{CorrespondingExtendedTashkinovTree} certificate, eliminate
+its rung equality, then its series-presentation heterogeneous equality.
+At the positive index \(i=n-1\), its ladder agreement identifies the
+replacement ladder at \(i+1=n\) with the original terminal ladder.
+The index exists by the positive-rung field of
+\noderef{ExtendedTashkinovTree}. Thus both actual terminal ladders
+are the same exact original tree, and \(T_{n,P}=T_{n,R}\).
+Consequently the vertex difference defining the two \(M_0\)'s is
+the same finite set. It lies inside the common base core, which is a
+prefix of \(X\) by \(S\)'s core-in-split field.
+\noderef{TreeSequenceInitialSegmentVertexSetSubset} and the
+vertexwise clause of \(S\)'s \noderef{TreeColoringInvariant}
+give equality of the old and new missing sets at every vertex in that
+difference. After rewriting \(R.\mathit{coloring}=\sigma\), taking
+their finite unions proves \(M_{0,P}=M_{0,R}\).
+
+The same equality \(A_P=A_R\) identifies the numerical bounds
+\(|A|\le r<|A|+j\) in the two exact edge-color sets.
+\(S\)'s fixed-through-\(j\) field identifies the old and new value
+of each individual edge with an index in that range.
+Hence, for every color, exactly the same indices witness membership in
+the two sets, and \(U_{j,P}=U_{j,R}\).
+In particular \(\beta\notin\Gamma_R\) and
+\(\beta\notin U_{j,R}\).
+
+If the first input alternative holds, the equality of \(M_0\) and
+\(D\) transports its two exclusions to \(R\). Together with the
+two exclusions just established, these are exactly the first output
+alternative.
+If the second input alternative holds, transport its membership in
+\(D\) and its Gamma-pair disjointness by the equalities of \(D\),
+the pair, and \(U_j\). The beta part of \(S\)'s
+missing-two-before field, rewritten by \(R.\mathit{coloring}=\sigma\),
+gives the required new missingness on \(B\). These are exactly the
+three clauses of the second output alternative.
+This is equation (9) for the full original-relative switched
+presentation, without changing a parallel edge identity.
+\end{proof}

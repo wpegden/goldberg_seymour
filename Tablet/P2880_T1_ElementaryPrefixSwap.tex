@@ -1,0 +1,36 @@
+\begin{lemma}[A disjoint swap preserves later elementary-prefix missing sets]
+Let \(\mu\) be a proper partial coloring of a finite loopless
+multigraph, let \(\alpha\ne\beta\), and let exact tree-sequences
+\(B\preccurlyeq X\preccurlyeq Z\) be related by
+\noderef{TreeSequenceInitialSegment}. Assume \(V(Z)\) is
+\noderef{ColoredVertexSetElementary} under \(\mu\), both colors
+belong to \(\noderef{TreeMissingColors}(\mu,B)\), and the
+\noderef{TwoColorComponent} \(Q\) rooted at an arbitrary incidence
+node \(z\) avoids every vertex-node of \(X\).
+For \(\sigma=\noderef{TwoColorComponentSwap}(G,\mu,\alpha,\beta,z)\),
+every edge incident with \(X\) keeps its color, and
+\(\noderef{MissingColors}(G,\sigma,v)=
+\noderef{MissingColors}(G,\mu,v)\) for every \(v\in V(Z)\).
+\end{lemma}
+\begin{proof}
+An affected-color edge-node is adjacent to each of its endpoints in
+\noderef{TwoColorIncidenceGraph}. Adjacent nodes belong to the same
+\noderef{TwoColorComponent}. Thus an affected-color edge of \(Q\)
+cannot be incident with \(X\), and the swap fixes every incident edge:
+off-color values are fixed even on edge-nodes in \(Q\).
+For missing sets on \(Z\), vertices outside \(Q\) have unchanged
+missing sets by \noderef{TwoColorComponentSwapMissingBehavior}.
+Fix a vertex \(v\in V(Z)\) lying in \(Q\). For either affected
+color \(c\), choose its missing witness \(w\in V(B)\).
+\noderef{TreeSequenceInitialSegmentVertexSetSubset} puts \(w\)
+in \(X\) and \(Z\). Hence \(w\notin Q\) and \(w\ne v\);
+elementarity implies that \(c\) is not missing at \(v\).
+This reasoning applies separately to both colors and does not require
+their missing witnesses to be distinct.
+There is consequently an old incident edge of each color at \(v\).
+Both edge-nodes lie in \(Q\), so they exchange colors under the swap.
+Both affected colors are therefore also present at \(v\) afterwards.
+For each other color, its missing predicate is unchanged by
+\noderef{TwoColorComponentSwapMissingBehavior}. Checking membership
+color by color proves equality of the missing sets at \(v\).
+\end{proof}

@@ -1,0 +1,40 @@
+\begin{lemma}[Every early-tail missing color is outside the last Gamma union]
+Fix a finite loopless multigraph, palette, distinguished edge, input,
+exact displayed tree \(T\), generating coloring \(\mu\), ETT, base,
+hierarchy counterexample \(C\), and a
+\noderef{HierarchyMinimumCounterexampleContext} for these data.
+Put \(H=C.\mathit{hierarchy}\), \(q=H.\mathit{dividerCount}\), and
+\(\ell=\noderef{HierarchyFullTailLength}(C)\).
+If \(1\le j<\ell\) and \(Y=\noderef{HierarchyFullTailPrefix}(C,j)\),
+then every color missing at the last vertex of \(Y\) is outside
+\((\noderef{HierarchyStoredColorsAt}(H,q)).\mathit{biUnion}
+(C.\mathit{good}.\Gamma^q)\).
+\end{lemma}
+\begin{proof}
+Let \(A=\noderef{HierarchyStarredStage}(H,q)\), and let \(Z\) be the
+full penultimate prefix. Apply
+\noderef{HierarchyCounterexamplePenultimateElementary} to all six
+fields of the stated context. It makes \(Z\) elementary under \(\mu\).
+The hierarchy and \noderef{HierarchyBase} give
+\(H.\mathit{stage}(q)\preccurlyeq A\preccurlyeq T\):
+at positive divider count the first two trees are equal; at zero
+dividers they are the terminal ladder and the core, related by the
+left segment of the PE \noderef{OrderedTreeUnion} or by equality
+in the nonparallel case. By \noderef{HierarchyFullTailPrefix},
+\(|Y|=|A|+j\) and \(|Z|=|T|-1\); since \(1\le j<\ell\),
+\(A\prec Y\preccurlyeq Z\). All these are exact prefix relations.
+The last vertex of \(Y\) is not in \(A\): otherwise its equality
+with a displayed vertex of \(A\), transported into \(Y\), would
+contradict injectivity of \(Y\)'s vertex map and \(|A|<|Y|\).
+Suppose a color \(\theta\) missing at that last vertex belongs to the
+last Gamma union. Choose its owner in the last stored set. The avoidance
+field of \noderef{GoodHierarchy} puts \(\theta\) in
+\noderef{HierarchyStageMissingColors} at that index. Expanding the
+latter definition and the hierarchy's base-stage equation gives a
+\(\theta\)-missing vertex in \(H.\mathit{stage}(q)\), hence in
+\(A\). \noderef{TreeSequenceInitialSegmentVertexSetSubset} puts
+both this vertex and the last vertex of \(Y\) in \(Z\).
+They are distinct by the preceding observation, contradicting
+\noderef{ColoredVertexSetElementary}. Thus \(\theta\) is outside
+the last Gamma union.
+\end{proof}

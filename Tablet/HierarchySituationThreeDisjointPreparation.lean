@@ -1,4 +1,12 @@
 import Tablet.ColoredVertexSetElementary
+import Tablet.P2880_T1_CommonPreparation
+import Tablet.P2880_T1_ReconstructibleBranch
+import Tablet.P2880_T1_OutsidePrefixBranch
+import Tablet.P2880_T1_ConditionNineTransport
+import Tablet.P2880_T1_ThetaExclusion
+import Tablet.HierarchyReplacementPresentationTrans
+import Tablet.P2752_T2_HierarchyMeasures
+import Tablet.TreeSequenceInitialSegmentVertexSetSubset
 import Tablet.CombinedStableClosurePreserved
 import Tablet.CombinedStableColoring
 import Tablet.CorrespondingExtendedTashkinovTree
@@ -144,4 +152,118 @@ theorem HierarchySituationThreeDisjointPreparation
     Nonempty (HierarchySituationThreeDisjointData
       G k e0 input T phi ett base C ctx P alpha beta) := by
 -- BODY
-  sorry
+  classical
+  let sigma := TwoColorComponentSwap G P.coloring alpha beta
+    (Sum.inl (T.vertex (Fin.last T.length)))
+  obtain ⟨S⟩ := P2880_T1_CommonPreparation G k e0 input T phi ett base C ctx P
+    alpha beta hpathLower hpathUpper halpha hbeta hcomponentDisjoint
+  let H := P.counterexample.hierarchy
+  let q := Fin.last H.dividerCount
+  let m := P.corresponding.replacementETT
+  let n := Fin.last m.rounds
+  let A := HierarchyStarredStage H q
+  let Tnq := H.stage ⟨H.dividerCount, by omega⟩
+  let Tn := m.series.data.tree n.castSucc
+  let Dn := TashkinovStoredColors m.series.data n
+  let qualifies := fun (a b : Fin k) =>
+    (0 < H.dividerCount ∧ a ∈ TreeMissingColors P.coloring Tnq) ∨
+    (H.dividerCount = 0 ∧
+      (a ∈ TreeMissingColors P.coloring Tn ∨
+        (a ∈ TreeMissingColors P.coloring A ∧ a ∉ Dn ∧ b ∉ Dn)))
+  have reconstructed :
+      ∃ corr : CorrespondingExtendedTashkinovTree G k e0
+          P.corresponding.replacementETT sigma T,
+        MaximumProperty corr.replacementETT ∧
+        ∃ newBase : HierarchyBase corr.replacementETT sigma,
+          ∃ K : TashkinovHierarchy corr.replacementETT newBase,
+            ∃ good : GoodHierarchy K,
+              SameGoodHierarchy P.counterexample.good good := by
+    by_cases hc : qualifies alpha beta ∨ qualifies beta alpha
+    · exact P2880_T1_ReconstructibleBranch G k e0 input T phi ett base C ctx P
+        alpha beta sigma S hc
+    · exact P2880_T1_OutsidePrefixBranch G k e0 input T phi ett base C ctx P
+        alpha beta sigma S hc
+  obtain ⟨corr, hmaximum, newBase, K, good, hsame⟩ := reconstructed
+  have hnotElementary : ¬ ColoredVertexSetElementary G sigma
+      (TreeSequenceVertexSet T) := by
+    as_aux_lemma =>
+      obtain ⟨v, hvB, hmissing⟩ := Finset.mem_biUnion.mp S.missingTwoBefore.2
+      have hvX := TreeSequenceInitialSegmentVertexSetSubset S.twoBeforeInSplit hvB
+      have hvT := TreeSequenceInitialSegmentVertexSetSubset S.splitInFull hvX
+      have hroot : Sum.inl (T.vertex (Fin.last T.length)) ∈
+          TwoColorComponent G P.coloring alpha beta
+            (Sum.inl (T.vertex (Fin.last T.length))) := rfl
+      have hne : v ≠ T.vertex (Fin.last T.length) := by
+        intro heq
+        exact S.splitOutside v hvX (heq.symm ▸ hroot)
+      intro helementary
+      have hd := helementary hvT
+        (by
+          simp only [TreeSequenceVertexSet, Finset.mem_image, Finset.mem_univ, true_and]
+          exact ⟨Fin.last T.length, rfl⟩) hne
+      exact Finset.disjoint_left.mp hd hmissing S.missingTerminal
+  let newC : HierarchyCounterexample newBase := {
+    positive := by rw [corr.rungAgreement]; exact P.counterexample.positive
+    hierarchy := K
+    good := good
+    maximum := hmaximum
+    notElementary := hnotElementary }
+  obtain ⟨R, hR⟩ := HierarchyReplacementPresentationTrans G k e0 input T phi
+    ett base C ctx P sigma corr newBase newC hsame
+  obtain ⟨hbetaOutside, hnine⟩ := P2880_T1_ConditionNineTransport G k e0
+    input T phi ett base C ctx P alpha beta sigma S R hR hbeta
+  obtain ⟨hstar, _, _⟩ := P2752_T2_HierarchyMeasures C.hierarchy
+    R.counterexample.hierarchy R.sameGood.1
+  have htail : HierarchyFullTailLength R.counterexample = HierarchyFullTailLength C := by
+    unfold HierarchyFullTailLength
+    dsimp only
+    rw [← hstar]
+  have hprefix : ∀ i : Nat, HierarchyFullTailPrefix R.counterexample i =
+      HierarchyFullTailPrefix C i := by
+    intro i
+    unfold HierarchyFullTailPrefix
+    dsimp only
+    simp only [← hstar]
+  let j := HierarchyPathNumber C.hierarchy
+  let Y := HierarchyFullTailPrefix C j
+  obtain ⟨theta, htheta⟩ := hvertexMissing R.coloring R.minimumContext.proper
+    R.minimumContext.oneEdgeUncolored (Y.vertex (Fin.last Y.length))
+  have hthetaOutside :
+      theta ∉ (HierarchyStoredColorsAt R.counterexample.hierarchy
+        (Fin.last R.counterexample.hierarchy.dividerCount)).biUnion
+          (R.counterexample.good.gamma
+            (Fin.last R.counterexample.hierarchy.dividerCount)) := by
+    apply P2880_T1_ThetaExclusion G k e0 R.corresponding.replacementInput T
+      R.coloring R.corresponding.replacementETT R.replacementBase R.counterexample
+      R.minimumContext j (by dsimp [j]; omega)
+      (by rw [htail]; exact hpathUpper)
+    change theta ∈ MissingColors G R.coloring
+      ((HierarchyFullTailPrefix R.counterexample j).vertex
+        (Fin.last (HierarchyFullTailPrefix R.counterexample j).length))
+    rw [hprefix j]
+    exact htheta
+  refine ⟨{
+    switched := R
+    switchedColoring := hR.trans S.swapped
+    proper := R.minimumContext.proper
+    oneEdgeUncolored := R.minimumContext.oneEdgeUncolored
+    invariantOnSplit := ?_
+    affectedMissingOnSplit := ?_
+    transportedSuffix := ?_
+    betaMissingTerminal := ?_
+    betaMissingTwoBefore := ?_
+    betaOutsideGamma := hbetaOutside
+    conditionNine := hnine
+    theta := theta
+    thetaMissingAtJ := htheta
+    thetaOutsideGamma := hthetaOutside }⟩
+  · rw [hR]
+    exact S.invariant
+  · rw [hR]
+    exact S.missingOnSplit
+  · rw [hR]
+    exact S.newSuffix
+  · rw [hR]
+    exact S.missingTerminal
+  · rw [hR]
+    exact S.missingTwoBefore.2

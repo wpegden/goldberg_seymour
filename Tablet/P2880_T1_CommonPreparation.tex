@@ -1,0 +1,144 @@
+\begin{lemma}[Common exact-edge and cutoff preparation for the disjoint branch]
+Fix the graph, palette, distinguished edge, input, exact terminal tree,
+generating coloring, positive-rung ETT, hierarchy base, counterexample
+\(C\), minimum context, and replacement presentation \(P\).
+Write \(\mu=P.\mathit{coloring}\), \(H=P.\mathit{counterexample.hierarchy}\),
+\(g=P.\mathit{counterexample.good}\), \(q=H.\mathit{dividerCount}\),
+\(j=\noderef{HierarchyPathNumber}(C.\mathit{hierarchy})\),
+\(\ell=\noderef{HierarchyFullTailLength}(C)\),
+\(A=\noderef{HierarchyStarredStage}(H,q)\),
+\(B=\noderef{HierarchyFullTailPrefix}(C,j-2)\),
+\(X=\noderef{HierarchyFullTailPrefix}(C,j-1)\).
+Let \(T_n\) be the terminal ladder tree of the replacement ETT,
+\(D=\noderef{HierarchyStoredColorsAt}(H,q)\),
+\(\Gamma=\bigcup_{\eta\in D}g.\Gamma^q_\eta\), and
+\[
+ M_0=\bigcup_{v\in V(P.\mathit{replacementBase.core})\setminus V(T_n)}
+       \noderef{MissingColors}(G,\mu,v),\qquad
+ U_j=\{c:\exists r\in\operatorname{Fin}|T|,+ |A|\le r<|A|+j,\ \mu(T.\mathit{edge}(r))=c\}.
+\]
+Assume \(2\le j<\ell\), \(\alpha\) is missing at \(y_\ell\) and on
+\(B\), and either \(\alpha\notin\Gamma\cup M_0\) or there is
+\(\eta\in D\) with \(\alpha\in g.\Gamma^q_\eta\) and first
+\(\eta\)-missing position on \(T\) at most \(|B|\).
+Assume also
+\(\beta\ne\alpha\), \(\beta\in\overline\mu(B)\),
+\(\beta\notin\Gamma\cup U_j\), and either
+\(\beta\notin M_0\cup D\), or
+\(\beta\in D\) and \((g.\Gamma^q_\beta\cup\{\beta\})\cap U_j=\varnothing\).
+The component \(Q=\noderef{TwoColorComponent}(G,\mu,\alpha,\beta,y_\ell)\)
+contains no vertex-node of \(X\).
+Then, for \(\sigma=\noderef{TwoColorComponentSwap}(G,\mu,\alpha,\beta,y_\ell)\),
+there exists a \noderef{P2880_T1_SplitSwapData}.
+\end{lemma}
+\begin{proof}
+All properness, exact-one-uncoloredness, maximum-property and induction
+data below belong to \(P\), by \noderef{HierarchyReplacementPresentation}.
+\noderef{P2752_T2_HierarchyMeasures} applied to its same-good stage
+relation identifies the old and replacement starred stage. Expanding
+\noderef{HierarchyFullTailLength} and \noderef{HierarchyFullTailPrefix}
+therefore identifies all their numerical full-tail cutoffs and exact
+prefixes. In particular the replacement penultimate prefix is the exact
+tree \(Z\) of length \(|T|-1\).
+\noderef{HierarchyCounterexamplePenultimateElementary}, applied to all
+six fields of \(P.\mathit{minimumContext}\), makes \(Z\) elementary
+under \(\mu\).
+
+The hierarchy's nested stages and core-inside-first field in
+\noderef{TashkinovHierarchy} place the base core in \(A\) and
+\(A\) in \(T\). At zero dividers \(A\) is the core; at positive
+dividers it is the last retained ordinary stage. Exact prefixes of a
+common sequence compare by their lengths: their vertex and edge entries
+are the corresponding entries of that common sequence. Since
+\(2\le j<|T|-|A|\), the minimum cutoffs in the full-tail prefixes
+are unsaturated, and their lengths are
+\[
+ |B|=|A|+j-2,\quad |X|=|A|+j-1,\quad |Z|=|T|-1.
+\]
+Consequently \(A\preccurlyeq B\prec X\preccurlyeq Z\prec T\);
+the core is a prefix of \(X\) and \(|A|<|X|\).
+The equality \(B=A\) at \(j=2\) is permitted. All these comparisons
+are exact \noderef{TreeSequenceInitialSegment} relations.
+
+The root is a vertex of its own connected component. Because \(\alpha\)
+is missing there, all incident two-color edges have color \(\beta\).
+Properness allows at most one such edge identity, so its incidence
+neighbor set is subsingleton. Together with \(\alpha\ne\beta\),
+this is precisely \noderef{TwoColorPathComponent}, also when the root
+is isolated. \noderef{TwoColorComponentSwapProper} proves that
+\(\sigma\) is proper. The formula of \noderef{TwoColorComponentSwap}
+fixes \(\mathsf{none}\), interchanges only the two colored values,
+and fixes all other values. Its uncolored edge set is therefore the same
+singleton \(\{e_0\}\).
+
+Apply \noderef{P2880_T1_ElementaryPrefixSwap} to \(B\preccurlyeq
+X\preccurlyeq Z\), the two missing witnesses, and the assumed
+component exclusion. It fixes every edge incident with \(X\) and
+identifies all missing sets on \(Z\). Each displayed edge below
+\(|X|\) has an endpoint in \(X\), so it is fixed.
+This gives \noderef{TreeColoringInvariant} on \(X\).
+The one further edge with index \(|X|=|A|+j-1\) has its attaching
+endpoint at a preceding vertex of \(X\), by the attachment field of
+\noderef{TreeSequence}. It too is incident with \(X\) and is fixed.
+Thus every individual edge counted by \(U_j\) is fixed.
+\noderef{TreeSequenceInitialSegmentVertexSetSubset} and equality of the
+missing sets transport the two old witnesses in \(B\) to \(\sigma\)
+on \(B\) and on \(X\), and retain them under \(\mu\) on \(Z\).
+The root-membership and affected-missing clause of
+\noderef{TwoColorComponentSwapMissingBehavior} show that \(\beta\)
+is missing at \(y_\ell\) under \(\sigma\), without assuming that it
+was present there beforehand.
+
+For \(c\in\{\alpha,\beta\}\), choose its old missing witness in
+\(B\). The finite minimum in
+\noderef{HierarchyFirstMissingPosition} puts its first missing vertex
+on \(T\) at index at most \(|B|\), hence in \(X\). That vertex-node
+is excluded from \(Q\), so its component differs from \(Q\).
+\noderef{TwoColorComponentsDisjoint} gives the two claimed component
+separations, separately, even if these first missing vertices coincide.
+
+Fix any \(\eta\in D\). If \(\eta\) is neither affected color,
+\noderef{TwoColorComponentSwapMissingBehavior} identifies its missing
+predicate at every vertex of \(T\). The finite candidate sets for its
+first position, and their terminal fallback when empty, are identical.
+If \(\eta\) is one of the affected colors, both old and new predicates
+have a witness in \(B\). Their first positions are at most \(|B|\).
+Their vertexwise missing predicates on \(B\) agree, and
+\noderef{HierarchyFirstMissingPositionPrefixCutoff} identifies the
+truncated first position on \(B\) with that on \(T\) for each
+coloring. Since each first position is already at most \(|B|\), the
+truncations yield equality of the full first positions.
+For the affected-Gamma cutoff, \(\beta\notin\Gamma\) excludes that
+membership. If \(\alpha\notin\Gamma\), the implication is vacuous.
+Otherwise its supplied owner \(\eta_0\in D\) has first position
+at most \(|B|\). Pairwise Gamma disjointness in
+\noderef{GoodHierarchy} implies that any other owner of \(\alpha\)
+is \(\eta_0\). Hence every affected Gamma owner has first position
+at most \(|B|<|X|\).
+
+For the augmentation routes use \noderef{P2813_T1_TerminalRoute} on
+the actual replacement ETT, not a hypothetical terminal constructor.
+It gives either the PE route from \(T_n\) to \(T\), or the SE/RE
+route from the actual seed \(S=T_n+f_n\), with the exact singleton
+connecting-edge set and \noderef{TreeSequenceAdjoinEdge} certificate.
+The PE source is a prefix of the core, by the
+\noderef{OrderedTreeUnion} in \noderef{HierarchyBase}, and so a
+prefix of \(X\). In SE/RE the nonparallel core is \(T_n\).
+Thus \(|S|=|T_n|+1\le |A|+1\le |X|\).
+Both \(S\) and \(X\) are prefixes of \(T\), so \(S\preccurlyeq X\).
+This includes \(S=X\) at zero dividers and \(j=2\); it never
+asserts the false comparison \(S\preccurlyeq A\) there.
+\noderef{TashkinovAugmentationSequenceRestrict} restricts the old
+route to \(X\), and \noderef{TashkinovAugmentationSequenceSuffix}
+gives the complementary old suffix \(X\to T\).
+If the source equals \(X\), its new prefix route is reflexive.
+Otherwise transport the restricted route by
+\noderef{TashkinovAugmentationSequenceColoringTransport}, using the
+exact penultimate prefix \(B\prec X\) of length \(|X|-1\),
+all fixed edges below \(X\), and equality of the missing sets on
+\(B\). This retains the exact SE/RE seed when present.
+Finally \noderef{TashkinovAugmentationSequenceComponentSwap}, with
+the two new missing witnesses on \(X\), transports the old suffix to
+\(\sigma\). These arguments supply every field of
+\noderef{P2880_T1_SplitSwapData}, whose swap-equality field is reflexive.
+\end{proof}

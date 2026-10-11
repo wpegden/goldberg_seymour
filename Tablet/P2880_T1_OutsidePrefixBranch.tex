@@ -1,0 +1,174 @@
+\begin{lemma}[The genuinely outside-prefix reconstruction branch]
+Fix the graph, palette, distinguished edge, input, exact terminal tree,
+generating coloring, ETT, base, counterexample \(C\), minimum context,
+and replacement presentation \(P\). Let \(S\) be a
+\noderef{P2880_T1_SplitSwapData} for \(\alpha,\beta,\sigma\).
+Write \(\mu=P.\mathit{coloring}\), \(H=P.\mathit{counterexample.hierarchy}\),
+\(q=H.\mathit{dividerCount}\), \(A=\noderef{HierarchyStarredStage}(H,q)\),
+\(T_{n,q}=H.\mathit{stage}(q)\), and let \(T_n,D_n\) be the terminal
+ladder tree and computed Tashkinov stored set of \(P\)'s replacement ETT.
+Assume that neither ordered pair \((a,b)=(\alpha,\beta)\) nor
+\((a,b)=(\beta,\alpha)\) satisfies
+\[
+ (q>0\ \text{and }a\in\overline\mu(T_{n,q}))
+ \quad\text{or}\quad
+ (q=0\ \text{and }[a\in\overline\mu(T_n)\ \text{or }
+ (a\in\overline\mu(A),\ a\notin D_n,\ b\notin D_n)]).
+\]
+There is a \noderef{CorrespondingExtendedTashkinovTree} on the full
+\(T\) under \(\sigma\), relative to \(P\)'s replacement ETT, with
+maximum property, a hierarchy base, and a good hierarchy having
+\noderef{SameGoodHierarchy} with \(P.\mathit{counterexample.good}\).
+\end{lemma}
+\begin{proof}
+Put \(\mathcal E=P.\mathit{corresponding.replacementETT}\),
+\(g=P.\mathit{counterexample.good}\), and
+\(X=\noderef{HierarchyFullTailPrefix}(C,j-1)\).
+Every reference to old maximum property or induction below uses
+\(P.\mathit{maximum}\) and \(P.\mathit{minimumContext}\), whose
+types are supplied by \noderef{HierarchyReplacementPresentation}.
+The \(S\) fields give \(A\preccurlyeq X\preccurlyeq T\) and
+\(|A|<|X|\). Apply \noderef{GoodHierarchyTerminalPrefixRepackage}
+to \(\mathcal E\), its base and good hierarchy, and these exact
+prefix relations. It supplies a maximum ETT \(\mathcal E_X\) on
+\(X\), the same rung and certified series, the same core, closure,
+and numerical support position, and a good hierarchy \(H_X,g_X\).
+It identifies every retained ordinary and starred stage, stored set,
+stage-missing set, Gamma pair, and divider position with its old value.
+The terminal-kind equality follows from its series equality, rather
+than from a claimed equality of only hierarchy stages.
+
+The singleton root set \(\{\operatorname{inl}(y_\ell)\}\), the
+swap equality of \(S\), and its exclusion of every vertex-node of
+\(X\) form an \noderef{OutsideKempeRecoloring} on \(X\).
+Apply \noderef{HierarchyLEMStable} to the certified
+\(\mathcal E_X,H_X,g_X\), not to the full \(T\).
+Positivity follows from rung equality and the old counterexample.
+For its lower-rung premise, rewrite the strict rung inequality by
+\(\mathcal E_X.\mathit{rounds}=\mathcal E.\mathit{rounds}\)
+and apply the full lower-rung field of the old minimum context.
+Properness and exact-one-uncoloredness are the corresponding context
+fields. The conclusion supplies
+\(\noderef{StableColoring}(X,D_n,\mu,\sigma)\), invariance on \(X\),
+and a corresponding maximum prefix ETT with its good hierarchy.
+In particular the stability used in this argument is obtained on the
+certified prefix; the component is not asserted to avoid full \(T\).
+
+By \noderef{HierarchyBase}, the terminal ladder lies in the core:
+in PE this is the left segment of its \noderef{OrderedTreeUnion};
+in SE/RE the core is the ladder itself. The core lies in \(X\)
+by \(S\). Every incident edge of \(T_n\) is thus incident with
+\(X\), and its missing vertices lie there. Restrict the just obtained
+stable relation to \(T_n\): the protected set \(D_n\) is unchanged,
+and any edge controlled on \(T_n\) is controlled on \(X\), since
+tree-missing colors are monotone under vertex-set inclusion.
+Rewrite the prefix series equality to identify its \(D_n\) with
+that of \(\mathcal E\). Also rewrite
+\(\mathcal E.\mathit{generatingColoring}\) to identify its terminal
+series coloring with \(\mu\). We now have the precise terminal
+stability premise for \noderef{Td} on the original full intermediate
+\(\mathcal E\). That theorem, with its positive rung, maximum
+property, complete old lower-rung package, and \(S\)'s proper and
+one-uncolored fields, supplies \noderef{ModColoring}(\mathcal E,\sigma).
+
+Concatenate the \(S\) prefix route to \(X\) with its new suffix
+\(X\to T\) in the reflexive-transitive relation
+\noderef{TashkinovAugmentationSequence}. In PE the source is \(T_n\).
+In SE/RE retain exactly the supplied edge \(f_n\), singleton
+connecting set, and \noderef{TreeSequenceAdjoinEdge} seed. The full
+route starts from that seed, even at \(j=2,q=0\) when it equals
+\(X\); no nonexistent route from \(T_n\) is substituted.
+
+Suppose the actual terminal kind is PE. Both \(T_n\) and the base
+closure have all their vertices in the core, by the two vertex-set
+containment clauses of \noderef{OrderedTreeUnion}. The incident-edge
+fixation and missing-set equality of \(S\) on \(X\) therefore
+give \noderef{StableColoring} on the ladder with protected set \(D_n\)
+and on the closure with the empty protected set. Together these are precisely
+\noderef{CombinedStableColoring} for \(\mathcal E\)'s original base.
+Apply \noderef{HierarchySplitter} to that full \(\mathcal E\),
+its base and hierarchy, old maximum and positivity, the old lower-rung
+package, the properness and one-uncoloredness of both colorings, this
+combined stability, and the full PE route just constructed.
+Keep the corresponding ETT, maximum witness, base, and hierarchy from
+this single application together. Its conclusion gives
+\noderef{SameHierarchyStages} with \(H\), so in particular its
+core and PE closure are the old ones. We never identify this certificate
+with the independently returned certificate on \(X\), nor with an
+arbitrary certificate selected from mod-coloring.
+
+In the actual SE/RE alternative of the \(S\) route, apply the universal
+clause of \noderef{ModColoring} to full \(T\).
+The strict ladder-to-\(T\) inclusion is the original
+\noderef{ExtendedTashkinovTree} field, and the eligibility premise is
+the exact seed and concatenated route above. Select a full corresponding
+certificate \(c\) relative to \(\mathcal E\).
+\noderef{MaximumPropertyTransport} gives maximum property for
+\(c.\mathit{replacementETT}\).
+Rung, series, ladder, and kind agreement in
+\noderef{CorrespondingExtendedTashkinovTree} identify its terminal
+ladder with \(T_n\) and retain its non-PE kind.
+Construct its hierarchy base with core equal to \(T_n\), closure equal
+to the old closure, and support position transported across the exact
+ladder equality. Support positivity is retained, the terminal-missing
+field is reflexive because its generating coloring is \(\sigma\),
+the parallel implication has a false premise, and the nonparallel
+equation is exactly the chosen core equality.
+Copy \(H\)'s divider count, every exact stage (including terminal
+\(T\)), and every numerical divider position. The ladder equality
+proves the base-stage field; all nested and strict relations, divider
+relations and terminal equality are the unchanged old ones; the core
+equality proves core-inside-first. These fields construct a hierarchy
+with \noderef{SameHierarchyStages} to \(H\).
+
+We verify goodness for the coherent full hierarchy selected in either
+branch. Its core, all retained stages, and in PE its closure have the old
+vertices and entries. All retained stages lie in \(A\) or \(T_n\),
+and hence in \(X\). Missing sets on these vertices are unchanged.
+\noderef{P2752_T2_TerminalStoredColors} identifies the computed terminal
+Tashkinov stored set of the full corresponding certificate with \(D_n\).
+Consequently \noderef{HierarchyStoredColorsAt}, which subtracts the
+starred-stage missing set from \(D_n\), is unchanged at every retained
+index. Copy each old Gamma pair, with indices transported by the divider
+count equality. Cardinality two and pairwise disjointness follow from
+the old \noderef{GoodHierarchy} fields on these same stored sets.
+
+For the missing-color part of avoidance, expand
+\noderef{HierarchyStageMissingColors}: each of its vertex sets is
+\(T_n\) or a retained ordinary stage inside \(X\), so its missing
+union is unchanged. For internal segment avoidance, the next stage
+lies inside \(X\); its exact edge colors are fixed. Its truncated
+first-missing cutoff is unchanged by
+\noderef{HierarchyFirstMissingPositionPrefixCutoff} and equality of
+the missing predicate on that exact stage. Thus the internal
+\noderef{HierarchySegmentColors} set is identical.
+For the terminal segment, fix \(\eta\in D\) and a color \(c\) of
+its copied Gamma pair. The first position of \(\eta\) on full
+\(T\) is unchanged by \(S\). If \(c\) is not an affected color,
+an edge colored \(c\) after the swap already had color \(c\)
+before it, directly from \noderef{TwoColorComponentSwap}.
+If \(c\) is affected, \(S\)'s Gamma-cutoff field puts its owner's
+cutoff at most \(|X|\); every edge before that cutoff is fixed by
+\(S\). In both cases membership in the new terminal segment would
+imply membership in the old segment, contradicting old avoidance.
+
+For unique refresh, the same stored sets and the same vertex difference
+between successive retained stages, with unchanged missing sets, make
+the old unique owner satisfy the new predicate and make any new owner
+an old one. All equalities of unrefreshed Gamma pairs remain identical.
+For each internal minus-closed field, every edge incident with its stage
+is fixed by \(S\); its boundary color-edge sets and missing sets are
+unchanged, as is the exception union. Hence the old minus-closed
+equation applies color by color.
+Finally, if PE, every edge incident with the base core is fixed and its
+missing colors are unchanged, so the old failure of minus-closedness
+with its unchanged Gamma exception union is retained. The ladder and
+closure missing sets are unchanged, so the old four-color intersection
+bound in the parallel-base field is retained as well. The terminal-kind
+agreement is essential here: the new PE premise is exactly the old PE
+premise, not an inference from stage equality.
+In SE/RE that parallel-base implication is vacuous.
+These arguments verify every \noderef{GoodHierarchy} field.
+The exact stages, core, PE closure, stored sets, and copied Gamma pairs
+then give \noderef{SameGoodHierarchy}, completing the asserted tuple.
+\end{proof}

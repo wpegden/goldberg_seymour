@@ -1,0 +1,20 @@
+\begin{lemma}[Orientation of an unordered Kempe pair]
+For a loopless multigraph, a partial edge coloring \(\mu\), and distinct
+colors \(\alpha,\beta\), reversing their order leaves the
+\noderef{TwoColorIncidenceGraph}, every \noderef{TwoColorComponent},
+every \noderef{TwoColorComponentSwap}, and the
+\noderef{TwoColorPathComponent} predicate unchanged.
+\end{lemma}
+\begin{proof}
+The incidence adjacency predicate uses the symmetric disjunction that
+an edge has color \(\alpha\) or color \(\beta\). Commuting that
+disjunction proves equality of graphs and therefore of their connected
+components, by \noderef{TwoColorIncidenceGraph} and
+\noderef{TwoColorComponent}. Outside the component both swap formulas
+fix the edge. Inside it an old \(\alpha\)-edge becomes \(\beta\),
+an old \(\beta\)-edge becomes \(\alpha\), and every other value
+is fixed; distinctness makes these cases exclusive. Thus
+\noderef{TwoColorComponentSwap} is unchanged. The endpoint and
+neighbor-set conditions in \noderef{TwoColorPathComponent} concern the
+same graph and component, and color distinctness is symmetric.
+\end{proof}

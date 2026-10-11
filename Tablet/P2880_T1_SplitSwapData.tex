@@ -1,0 +1,44 @@
+\begin{definition}[Exact split-swap certificates for Situation 7.3]
+Fix the graph, palette, distinguished edge, input, exact displayed tree
+\(T\), generating coloring, ETT, base, counterexample \(C\), minimum
+context, and replacement presentation \(P\) of
+\noderef{HierarchyReplacementPresentation}. Write \(\mu=P.\mathit{coloring}\),
+\(H=P.\mathit{counterexample.hierarchy}\), \(q=H.\mathit{dividerCount}\),
+\(j=\noderef{HierarchyPathNumber}(C.\mathit{hierarchy})\),
+\(A=\noderef{HierarchyStarredStage}(H,q)\),
+\(B=\noderef{HierarchyFullTailPrefix}(C,j-2)\),
+\(X=\noderef{HierarchyFullTailPrefix}(C,j-1)\), and
+\(Z=\noderef{HierarchyFullTailPrefix}(P.\mathit{counterexample},
+\noderef{HierarchyFullTailLength}(P.\mathit{counterexample})-1)\).
+For colors \(\alpha,\beta\) and a coloring \(\sigma\), a split-swap
+certificate consists of the following data and laws. Here \(y_\ell\)
+denotes the last displayed vertex of \(T\).
+The colors are distinct, and \(\sigma\) is the
+\noderef{TwoColorComponentSwap} of the
+\noderef{TwoColorPathComponent} rooted at \(y_\ell\); this component
+contains no vertex of \(X\). The exact prefixes satisfy
+\(B\preccurlyeq X\preccurlyeq T\), \(A\preccurlyeq X\) with
+\(|A|<|X|\), \(X\preccurlyeq Z\), and
+\(P.\mathit{replacementBase.core}\preccurlyeq X\).
+The old coloring makes \(Z\) elementary. The new coloring is proper
+with exactly the distinguished edge uncolored, fixes every edge incident
+with a vertex of \(X\), is
+\noderef{TreeColoringInvariant} on \(X\), fixes every displayed edge
+with index below \(|X|\), and fixes every displayed edge with index
+\(|A|\le r<|A|+j\).
+Both colors are missing on \(B\) and \(X\) under \(\sigma\), and
+on \(Z\) under \(\mu\); \(\beta\) is missing at \(y_\ell\)
+under \(\sigma\). All vertexwise missing sets on \(Z\) are unchanged.
+For each \(\eta\in\noderef{HierarchyStoredColorsAt}(H,q)\), its
+\noderef{HierarchyFirstMissingPosition} on \(T\) is unchanged; if
+either affected color belongs to its last Gamma pair, its old first
+missing position is at most \(|X|\).
+The switched component is disjoint from each component rooted at the
+first \(\alpha\)-missing and first \(\beta\)-missing vertex of \(T\).
+Finally there is an exact \(\sigma\)-augmentation route to \(X\)
+from the terminal ladder tree in PE, or from the actual retained
+singleton connecting-edge seed in SE/RE, with its
+\noderef{TreeSequenceAdjoinEdge} certificate. There are exact
+\noderef{TashkinovAugmentationSequence} suffixes \(X\to T\) under
+both \(\mu\) and \(\sigma\).
+\end{definition}
