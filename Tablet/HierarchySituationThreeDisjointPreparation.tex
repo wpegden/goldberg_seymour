@@ -292,12 +292,20 @@ has that same owner.  Therefore, for every \(\eta\in D\),
 \]
 
 We next construct a full replacement ETT, base, hierarchy, and goodness
-under \(\sigma\), all initially relative to \(\mathcal E_m\).  Define
-the literal Cases 1/2 proposition from
-\noderef{StableChangeCasesOneTwo} for the ordered pair
-\((\alpha,\beta)\), and also for \((\beta,\alpha)\).
+under \(\sigma\), all initially relative to \(\mathcal E_m\).  Write
+\(D_n\) for the raw terminal stored set of \(\mathcal E_m\).
+An ordered pair \((a,b)\) qualifies when either \(q>0\) and
+\(a\in\noderef{TreeMissingColors}(\mu,T_{n,q})\), or \(q=0\) and
+\[
+ a\in\noderef{TreeMissingColors}(\mu,T_n)
+ \quad\text{or}\quad
+ \bigl(a\in\noderef{TreeMissingColors}(\mu,A)
+       \text{ and }a,b\notin D_n\bigr).
+\]
+Test this qualification for both \((\alpha,\beta)\) and
+\((\beta,\alpha)\).
 
-Suppose first that one orientation satisfies that proposition.  Apply
+Suppose first that one orientation qualifies.  Apply
 \noderef{StableChangeCasesOneTwo} to \(C_m\), the six fields of
 \(\mathit{ctx}_m\), the elementarity (1), the two prefix-missing
 witnesses, the path certificate above, equation (3), the oriented case
@@ -305,9 +313,9 @@ premise, and the component separation following (4).  It gives
 \noderef{HierarchyWeaklyStable} and
 \noderef{ModColoring} under \(\sigma\).  Swapping the order of the two
 colors changes neither \noderef{TwoColorIncidenceGraph}, its component,
-nor the formula in \noderef{TwoColorComponentSwap}; these equalities are
-obtained by commuting the two displayed disjuncts and the two exchange
-branches in those definitions.
+nor the formula in \noderef{TwoColorComponentSwap}, by the graph,
+component, swap, and path equalities in
+\noderef{P2880_T1_KempeOrientation}.
 
 Take the split tree to be \(X\).  In (2), compose
 \(A\preccurlyeq B\) with \(B\prec X\) to obtain the required strict
@@ -350,8 +358,8 @@ together with maximum property, a base \(\mathcal B_1\), a hierarchy
 \(K_1\), a good witness \(g_1\), and
 \noderef{SameGoodHierarchy} from \(g\) to \(g_1\).
 
-For completeness, suppose neither ordered pair satisfies the literal
-Cases 1/2 proposition.  We do not add that proposition as an extra
+For completeness, suppose neither ordered pair qualifies.  We do not
+add that qualification as an extra
 hypothesis, since it is not part of the manuscript Case 2 statement.
 Instead use the fact that \(Q\) is wholly outside \(X\).  The composition
 \(A\preccurlyeq B\prec X\) in (2) gives both \(A\preccurlyeq X\) and the
@@ -514,6 +522,8 @@ order.  The certificate (14), transported maximum property and base,
 \(C_1\), this composed same-good witness, and \(\mathit{ctx}_1\) are
 exactly an original-relative
 \noderef{HierarchyReplacementPresentation}; call it \(P_\sigma\).    \(\tag{15}\)
+This original-relative composition and minimum-context transport are
+provided by \noderef{HierarchyReplacementPresentationTrans}.
 
 It remains to transport the color-choice information.  The same-good
 and correspondence fields in (15) identify \(A,D,\Gamma\), \(T_n\), and

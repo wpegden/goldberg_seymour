@@ -1,6 +1,6 @@
 import Tablet.ColoredVertexSetElementary
 import Tablet.P2880_T1_CommonPreparation
-import Tablet.P2880_T1_ReconstructibleBranch
+import Tablet.P2880_T1_KempeOrientation
 import Tablet.P2880_T1_OutsidePrefixBranch
 import Tablet.P2880_T1_ConditionNineTransport
 import Tablet.P2880_T1_ThetaExclusion
@@ -179,8 +179,56 @@ theorem HierarchySituationThreeDisjointPreparation
             ∃ good : GoodHierarchy K,
               SameGoodHierarchy P.counterexample.good good := by
     by_cases hc : qualifies alpha beta ∨ qualifies beta alpha
-    · exact P2880_T1_ReconstructibleBranch G k e0 input T phi ett base C ctx P
-        alpha beta sigma S hc
+    · let X := HierarchyFullTailPrefix C (HierarchyPathNumber C.hierarchy - 1)
+      have fixed : ∀ t : Fin T.length,
+          (HierarchyStarredStage P.counterexample.hierarchy
+            (Fin.last P.counterexample.hierarchy.dividerCount)).length ≤ t.val →
+          t.val < X.length → sigma (T.edge t) = P.coloring (T.edge t) := by
+        intro t _ ht
+        exact S.fixedOnSplit t ht
+      rcases hc with hc | hc
+      · have changed := StableChangeCasesOneTwoSplitTail G k e0
+          P.corresponding.replacementInput T P.coloring
+          P.corresponding.replacementETT P.replacementBase P.counterexample
+          P.minimumContext alpha beta S.distinct S.oldMissingOnPenultimate
+          (Sum.inl (T.vertex (Fin.last T.length))) S.path sigma S.swapped hc
+          S.separatedAlpha X S.splitAboveStar.1 S.splitAboveStar.2
+          S.splitInPenultimate fixed S.prefixRoute S.oldSuffix S.missingOnSplit
+          S.penultimateMissing S.storedFirst S.gammaCutoff
+        exact changed.2.2
+      · obtain ⟨hgraph, hcomponents, hswaps, hpaths⟩ :=
+          P2880_T1_KempeOrientation G P.coloring alpha beta S.distinct
+        have hsigma : sigma = TwoColorComponentSwap G P.coloring beta alpha
+            (Sum.inl (T.vertex (Fin.last T.length))) :=
+          S.swapped.trans (hswaps _)
+        have hpath : TwoColorPathComponent G P.coloring beta alpha
+            (Sum.inl (T.vertex (Fin.last T.length))) := (hpaths _).mp S.path
+        have hsep : Disjoint
+            (TwoColorComponent G P.coloring beta alpha
+              (Sum.inl (T.vertex (Fin.last T.length))))
+            (TwoColorComponent G P.coloring beta alpha
+              (Sum.inl (T.vertex (HierarchyFirstMissingPosition P.coloring T beta)))) := by
+          simpa only [← hcomponents] using S.separatedBeta
+        have hcut :
+            let H := P.counterexample.hierarchy
+            let q := Fin.last H.dividerCount
+            ∀ eta ∈ HierarchyStoredColorsAt H q,
+              (beta ∈ P.counterexample.good.gamma q eta ∨
+                alpha ∈ P.counterexample.good.gamma q eta) →
+              (HierarchyFirstMissingPosition P.coloring T eta).val ≤ X.length := by
+          dsimp only
+          intro eta heta hc
+          exact S.gammaCutoff eta heta hc.symm
+        have changed := StableChangeCasesOneTwoSplitTail G k e0
+          P.corresponding.replacementInput T P.coloring
+          P.corresponding.replacementETT P.replacementBase P.counterexample
+          P.minimumContext beta alpha (Ne.symm S.distinct)
+          S.oldMissingOnPenultimate.symm
+          (Sum.inl (T.vertex (Fin.last T.length))) hpath sigma hsigma hc
+          hsep X S.splitAboveStar.1 S.splitAboveStar.2
+          S.splitInPenultimate fixed S.prefixRoute S.oldSuffix S.missingOnSplit.symm
+          S.penultimateMissing S.storedFirst hcut
+        exact changed.2.2
     · exact P2880_T1_OutsidePrefixBranch G k e0 input T phi ett base C ctx P
         alpha beta sigma S hc
   obtain ⟨corr, hmaximum, newBase, K, good, hsame⟩ := reconstructed
