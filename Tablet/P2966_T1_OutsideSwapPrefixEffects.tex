@@ -1,0 +1,148 @@
+\begin{helper}[Prefix effects of an outside swap followed by an incident-fixed recoloring]
+Let \(G\) be a finite loopless multigraph with individual edge identities,
+let \(e_0\) be the distinguished edge, and let
+\(T_n,T_j,S,T'_j\) be \noderef{TreeSequence}s for \(G,e_0\).
+Write \(V(A)=\noderef{TreeSequenceVertexSet}(A)\), and write \(|A|\)
+for the number of displayed edges, indexed from zero.
+For a vertex \(a\in V(A)\), put
+\(B_A(a)=\noderef{TreeVerticesBefore}(A,a)\).
+Let \(\varphi,\rho_1,\rho_0,\mu\) be partial colorings with color set
+\([k]\), and write \(M_\chi(w)=\noderef{MissingColors}(G,\chi,w)\).
+Let \(\delta,\beta\in[k]\), let \(v_n,u,z\) be vertices, and let
+\(q_z\in\{0,\ldots,|T_j|\}\).  Assume the following data.
+\begin{enumerate}
+\item \(T_j\) is an exact \noderef{TreeSequenceInitialSegment} of
+\(T_n\), \(v_n\in V(T'_j)\), and
+\(u\in V(T'_j)\setminus V(T_n)\).
+The set \(V(T'_j)\) is both \(\rho_1\)-\noderef{ColoredVertexSetClosed}
+and \(\rho_1\)-\noderef{ColoredVertexSetElementary}.
+\item \(\beta\ne\delta\), \(\beta\in M_{\rho_1}(u)\), and
+\(\delta\in M_{\rho_1}(v_n)\).
+For every \(w\in V(T_j)\setminus\{v_n\}\),
+\(M_{\rho_1}(w)=M_\varphi(w)\).
+\item There is a \(\varphi\)-\noderef{TashkinovAugmentationSequence}
+from \(S\) to \(T_j\).
+For every displayed edge index \(a\) of \(T_j\) with \(|S|\le a\),
+\(\rho_1(T_j.\operatorname{edge}(a))
+=\varphi(T_j.\operatorname{edge}(a))\).
+Also \(\delta\notin\noderef{TreeMissingColors}(\varphi,T_j)\).
+\item \(z\in V(T_j)\), \(T_j.\operatorname{vertex}(q_z)=z\), and
+\(|S|\le q_z\).
+Every \(w\in B_{T_j}(z)\) satisfies \(\beta\notin M_{\rho_1}(w)\).
+For \(|S|\le a<q_z\), the edge \(T_j.\operatorname{edge}(a)\)
+does not have color \(\beta\) under \(\rho_1\).
+\item \(\rho_0=\noderef{OutsideTreeColorSwap}(T'_j,\rho_1,\beta,\delta)\).
+Every \noderef{TreeIncidentEdge} of \(T'_j\) has the same color
+under \(\rho_0\) and \(\rho_1\).
+For every \(c\notin\{\beta,\delta\}\) and every edge \(f\),
+\(\rho_0(f)=c\) if and only if \(\rho_1(f)=c\).
+\item For every \(w\in(V(T_n)\cup V(T'_j))\setminus\{u\}\),
+every edge incident with \(w\) has the same color under \(\mu\) and
+\(\rho_0\).
+For every \(w\in V(T'_j)\setminus\{u\}\),
+\(M_\mu(w)=M_{\rho_1}(w)\); every displayed edge of \(T'_j\)
+also has the same color under \(\mu\) and \(\rho_1\).
+\end{enumerate}
+Then all four conclusions hold:
+\begin{enumerate}
+\item \(M_\mu(w)=M_{\rho_1}(w)\) for every
+\[
+ w\in\bigl((B_{T_j}(z)\cup\{z\})\cup
+              (B_{T'_j}(u)\cup\{u\})\bigr)\setminus\{u,z\}.
+\]
+\item \(\mu(f)=\rho_1(f)\) whenever \(f=T_j.\operatorname{edge}(a)\)
+with \(|S|\le a<q_z\), or \(f=T'_j.\operatorname{edge}(a)\)
+with \(a<q_u\) for a displayed position \(q_u\) of \(u\) in \(T'_j\).
+\item If \(\beta\in M_{\rho_1}(z)\), then \(\delta\in M_\mu(z)\).
+\item If \(z\in B_{T'_j}(u)\), then \(M_\mu(z)=M_{\rho_1}(z)\).
+\end{enumerate}
+\end{helper}
+\begin{proof}
+First, every displayed edge at an index \(a\ge |S|\) in a
+\(\varphi\)-augmentation sequence from \(S\) to a tree \(A\) has a color
+\(c\) missing at a displayed vertex of \(A\) with index at most \(a\).
+Prove this by induction on the reflexive-transitive chain in
+\noderef{TashkinovAugmentationSequence}.  In the reflexive case no such
+index exists.  In a final \noderef{TashkinovAugmentation} from \(A_0\)
+to \(A\), an old edge retains both its identity and its earlier
+missing-color witness by the exact
+\noderef{TreeSequenceInitialSegment} fields.  The newly appended
+edge has a color in \noderef{TreeMissingColors} of \(A_0\); a witness
+vertex has index at most \(|A_0|\), which is the new edge's index, and
+the exact prefix identifies that same vertex in \(A\).
+Consequently no edge of \(T_j\) at index at least \(|S|\) can have
+color \(\delta\) under \(\varphi\).  The edge-transfer assumption
+therefore excludes \(\delta\) under \(\rho_1\) there as well.
+
+Consider \(f=T_j.\operatorname{edge}(a)\) with \(|S|\le a<q_z\).
+Its later displayed endpoint belongs to \(V(T_j)\) by the attachment
+fields of \noderef{TreeSequence} and the definition of
+\noderef{TreeSequenceVertexSet}.  The inclusion
+\(V(T_j)\subseteq V(T_n)\) follows from
+\noderef{TreeSequenceInitialSegmentVertexSetSubset}.
+This endpoint is not \(u\), so the incident-fixation hypothesis gives
+\(\mu(f)=\rho_0(f)\).  If \(f\) is a
+\noderef{TreeIncidentEdge} of \(T'_j\), the
+outside-swap fixation hypothesis gives \(\rho_0(f)=\rho_1(f)\).
+Otherwise \(\rho_1(f)\) is neither \(\beta\) nor \(\delta\), by the
+edge exclusion and the preceding augmentation argument, so the
+definition of \noderef{OutsideTreeColorSwap} leaves it unchanged.
+For the stated edges of \(T'_j\), its full displayed-edge fixation
+hypothesis applies directly.  This proves the second conclusion.
+
+By \noderef{TreeVerticesBefore} and injectivity of the displayed
+vertices in \noderef{TreeSequence}, a vertex preceding \(a\) lies in
+the tree and is distinct from \(a\).
+Let \(w\in B_{T_j}(z)\setminus V(T'_j)\).
+Then \(w\in V(T_n)\), so \(w\ne u\).
+Also \(w\ne v_n\), since \(v_n\in V(T'_j)\).
+The prefix exclusion says that \(\beta\) is present at \(w\).
+The exclusion from \noderef{TreeMissingColors} says that \(\delta\)
+is not missing at \(w\) under \(\varphi\).
+Now \(w\ne v_n\) permits use of the missing-set transfer, so \(\delta\)
+is present at \(w\) under \(\rho_1\) as well.
+
+Every \(\rho_1\)-edge of color \(\beta\) or \(\delta\) incident with
+this \(w\) avoids \(V(T'_j)\) altogether.  Indeed, if an endpoint
+\(q\in V(T'_j)\) existed, \(q\ne w\); the two
+\noderef{Incident} relations would identify
+the exact endpoints as \(\{q,w\}\), making the edge a
+\noderef{BoundaryEdges} edge of \(V(T'_j)\).
+The \noderef{ColoredVertexSetClosed} assumption would contradict,
+respectively, \(\beta\in M_{\rho_1}(u)\)
+or \(\delta\in M_{\rho_1}(v_n)\), with both witnesses inside \(T'_j\).
+Thus the outside swap changes an incident old \(\delta\)-edge to
+\(\beta\), and an incident old \(\beta\)-edge to \(\delta\).
+Both colors remain present at \(w\).  Every other color is present
+under \(\rho_0\) exactly when it was present under \(\rho_1\), by
+the unaffected-color hypothesis applied to its witnessing edge.
+Hence their \noderef{PresentColors}, and therefore their
+\noderef{MissingColors}
+sets, agree at \(w\).  The incident fixation of \(\mu\) relative to
+\(\rho_0\) at \(w\) preserves this equality.
+
+For the first conclusion, remove \(u,z\) from the indicated union.
+A remaining vertex in \(V(T'_j)\) satisfies the assumed missing-set
+equality.  A vertex in \(B_{T_j}(z)\) outside \(V(T'_j)\) satisfies
+the equality just proved.  These exhaust the union, because
+\(B_{T'_j}(u)\subseteq V(T'_j)\).
+
+Suppose next that \(\beta\in M_{\rho_1}(z)\).
+Since \(z\in V(T_j)\subseteq V(T_n)\), \(z\ne u\), and incident
+fixation identifies \(M_\mu(z)\) with \(M_{\rho_0}(z)\).
+If \(z\in V(T'_j)\), its distinction from \(u\) and
+\noderef{ColoredVertexSetElementary} contradict their common missing
+color \(\beta\).  Thus \(z\notin V(T'_j)\).
+Suppose an edge incident with \(z\) has color \(\delta\) under \(\rho_0\).
+If it is incident with \(T'_j\), it has its unchanged old color
+\(\delta\), and its inside and outside endpoints make it a boundary
+edge.  Closedness contradicts the missing witness \(v_n\).
+If it is not incident with \(T'_j\), the definition of the outside
+swap, and \(\beta\ne\delta\), force its old color to be \(\beta\).
+This contradicts \(\beta\in M_{\rho_1}(z)\).
+No such edge exists, so \(\delta\in M_{\rho_0}(z)=M_\mu(z)\),
+proving the third conclusion.
+Finally, \(z\in B_{T'_j}(u)\) implies \(z\in V(T'_j)\) and \(z\ne u\).
+The assumed missing-set equality on \(V(T'_j)\setminus\{u\}\)
+gives the fourth conclusion.
+\end{proof}
