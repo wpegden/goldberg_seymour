@@ -1,0 +1,175 @@
+\begin{lemma}[Terminal Kempe switch with an exact reconstruction interval]
+Fix a finite loopless multigraph \(G\) with individual edge identities, a
+palette of \(k\) colors, the distinguished edge \(e_0\), and an extended
+Tashkinov tree \(\mathcal E\) displayed on the ordered tree \(T\), with
+input coloring and generating coloring \(\varphi\). Let \(\mathcal B\)
+be a hierarchy base, \(C\) a hierarchy counterexample over it, and
+\(\mathit{ctx}\) a \noderef{HierarchyMinimumCounterexampleContext} for
+these data. Let \(R\) be a \noderef{HierarchyReplacementPresentation}
+relative to these fixed original data. Write \(\psi=R.\mathit{coloring}\),
+\(H=R.\mathit{counterexample}.\mathit{hierarchy}\), \(q=H.\mathit{dividerCount}\),
+and let \(T_n,D_n\) be the terminal ladder tree and raw stored-color set
+of \(R\)'s replacement ETT.
+
+Write \(|U|\) for the displayed edge count \(U.\mathit{length}\).
+Assume \(|T|\geq2\), and specify the exact ordered trees
+\[
+ A=\noderef{HierarchyStarredStage}(C.\mathit{hierarchy},
+       C.\mathit{hierarchy}.\mathit{dividerCount}),\qquad
+ B=\noderef{TreeSequencePrefix}(T,|T|-1).
+\]
+Let \(X\) be an exact ordered prefix with
+\(A\preccurlyeq X\preccurlyeq B\) and \(|A|<|X|\). Choose colors
+\(a,b,\eta\) such that \(\eta\in D^H_{n,q}\),
+\(a\in R.\mathit{counterexample}.\mathit{good}.\Gamma^q_\eta\), and
+\[
+ \noderef{HierarchyFirstMissingPosition}(\psi,T,\eta)\leq |X|.
+\]
+This first-missing position is totalized, with last-position fallback.
+Choose a position \(j_b\) in \(B\) with
+\(|A|<j_b\leq |X|\), and assume \(b\in\overline\psi(B.vertex(j_b))\).
+Writing \(w=T.vertex(|T|)\), assume
+\(a\in\overline\psi(w)\) or \(b\in\overline\psi(w)\).
+For every displayed edge position \(t\) with \(|A|\leq t<|X|\), assume
+\(\psi(T.edge(t))\ne a\); if \(\psi(T.edge(t))=b\), assume that this
+individual edge is incident with \(T_n\) and that \(b\in D_n\).
+
+Then there is a replacement presentation \(S\) relative to the same
+original data, with coloring \(\tau\), such that
+\[
+ \overline\tau(v)=\overline\psi(v)\quad(v\in V(B)),\qquad
+ \tau(T.edge(t))=\psi(T.edge(t))\quad(|A|\leq t<|X|),
+\]
+and both implications hold:
+\[
+ a\in\overline\psi(w)\Longrightarrow b\in\overline\tau(w),\qquad
+ b\in\overline\psi(w)\Longrightarrow a\in\overline\tau(w).
+\]
+\end{lemma}
+\begin{proof}
+The same-good witness in \(R\), expanded using
+\noderef{SameGoodHierarchy} and \noderef{SameHierarchyStages}, identifies
+the replacement's last starred stage with the specified exact tree \(A\):
+at zero dividers this is the common core, and at positive divider count
+it is the corresponding last ordinary stage. It also identifies all
+full-tail prefixes, since their definition uses only that starred tree
+and the unchanged displayed tree \(T\). Since
+\(|A|<|X|\leq |B|=|T|-1\), the penultimate full-tail prefix of the
+replacement counterexample is exactly \(B\). Apply
+\noderef{HierarchyCounterexamplePenultimateElementary} with the
+properness, exactly-one-uncoloredness, lower-rung, fewer-divider,
+minimality, and large-missing-set fields of \(R.\mathit{minimumContext}\).
+Thus \(V(B)\) is elementary under \(\psi\).
+
+We record first-position facts, including the fallback case. In the
+finite candidate set defining \noderef{HierarchyFirstMissingPosition},
+a supplied missing witness at position \(j\) bounds the minimum by \(j\).
+If the returned position is strictly before \(|T|\), it is an actual
+missing witness: the empty-candidate branch returns \(|T|\) and cannot
+have this strict inequality. Therefore a color missing at \(B.vertex(j)\)
+has first position exactly \(j\). Indeed, its first position is at most
+\(j\), lies in \(B\), and is an actual missing witness; elementarity
+identifies the two witness vertices, and vertex injectivity identifies
+their positions. Also, any coloring agreeing with \(\psi\)'s missing
+sets on \(B\) has the same totalized first positions on \(T\). If the
+two positions differed, the smaller would be strictly before \(|T|\);
+it would be a genuine witness in \(B\), and missing-set agreement would
+contradict minimality of the larger position. This argument also covers
+an empty candidate set, or a witness only at the terminal vertex.
+
+The Gamma avoidance field of \noderef{GoodHierarchy} says that \(a\)
+is missing on the last ordinary stage when \(q>0\), and on \(T_n\) when
+\(q=0\). The core and nesting fields of \noderef{HierarchyBase} and
+\noderef{TashkinovHierarchy} place \(T_n\preccurlyeq A\); in PE use the
+ordered-union left-prefix certificate, and otherwise the core is \(T_n\).
+Consequently \(a\) is missing on \(A\). Elementarity of \(B\), together
+with \(j_b>|A|\), says that \(b\) is not missing on \(A\). In particular
+\(a\ne b\). Let \(j_a\) be the first position missing \(a\).
+Then \(j_a\leq |A|<j_b\), and the first position missing \(b\) is \(j_b\).
+Both positions are genuine missing witnesses on \(B\).
+
+Apply \noderef{ChangeLemma} to the replacement counterexample and its
+minimum-context fields. Its ordering premise is \(j_a<j_b\);
+its unused-color premise follows from the assumed avoidance of \(a\)
+between \(A\) and \(X\), because \(j_b\leq |X|\).
+Use the positive-divider conclusion when \(q>0\), and the zero-divider
+conclusion with \(a\) missing on \(T_n\) when \(q=0\).
+It follows that the \(a,b\)-components rooted at \(B.vertex(j_a)\)
+and \(B.vertex(j_b)\) coincide. The terminal vertex \(w\) differs from
+both, by exact-prefix equality and injectivity of \(T\)'s vertex map.
+Now \noderef{P2905_T2_ElementaryTerminalComponent} shows that the
+component \(Q\) rooted at \(w\) is disjoint from this common component,
+is a two-color path component, and its swap
+\(\sigma=\noderef{TwoColorComponentSwap}(G,\psi,a,b,w)\) preserves the
+missing set at every vertex of \(B\).
+
+The swap is proper by \noderef{TwoColorComponentSwapProper}.
+It leaves exactly \(e_0\) uncolored: an old uncolored edge remains
+uncolored, and every old colored edge either keeps its color or changes
+between the two colors. Apply \noderef{StableChangeCasesOneTwo} with
+the just-proved component disjointness and the same divider alternative.
+Its weak-stability conclusion, expanded by \noderef{HierarchyWeaklyStable},
+gives combined base stability in PE and ordinary base stability otherwise.
+In either case it gives \noderef{StableColoring} on \(T_n,D_n\).
+
+All displayed edges of \(A\) are fixed. At zero dividers this follows
+from \noderef{P2813_T1_BaseDisplayedEdges} and the base stability just
+obtained. At positive dividers weak stability fixes every noninitial
+displayed edge of the last ordinary stage; its initial edge is \(e_0\)
+and is uncolored in both colorings. An edge in the interval
+\(|A|\leq t<|X|\) whose old color is \(b\) is fixed by ordinary stability,
+using precisely its assumed incidence with \(T_n\) and \(b\in D_n\).
+Any other edge in this interval has neither affected old color and is
+fixed by the swap definition. Hence all edges of \(X\) are fixed.
+
+We preserve the actual terminal construction route, not merely the
+ordered prefix. By \noderef{P2813_T1_TerminalRoute}, in PE there is
+an old augmentation sequence \(T_n\to T\); in SE or RE there is an exact
+connecting edge \(f\), the connecting-edge set is literally \(\{f\}\),
+and an exact seed \(T_n+f\) has an old augmentation sequence to \(T\).
+The PE source is below \(A\), hence below \(X\).
+The SE/RE seed has length \(|T_n|+1\leq |A|+1\leq |X|\);
+it and \(X\) are prefixes of \(T\), so it is an exact prefix of \(X\).
+Use \noderef{TashkinovAugmentationSequenceRestrict} for the source-to-\(X\)
+route and \noderef{TashkinovAugmentationSequenceSuffix} for the
+\(X\)-to-\(T\) suffix. Transport the first route by
+\noderef{TashkinovAugmentationSequenceColoringTransport}, using fixed
+edges of \(X\) and missing-set equality on its penultimate prefix.
+This gives the required \(\sigma\)-route from \(T_n\) in PE or from
+the same individual seed \(T_n+f\) in SE/RE, and retains the old
+\(\psi\)-augmentation suffix from \(X\) to \(T\).
+
+Both colors are missing on \(X\) under \(\sigma\), since their witnesses
+at \(j_a,j_b\leq |X|\) are preserved on \(B\).
+For any stored color \(\eta'\) whose terminal Gamma pair contains \(a\),
+pairwise disjointness of Gamma pairs forces \(\eta'=\eta\); thus its
+first position is at most \(|X|\) by assumption. No terminal Gamma pair
+can contain \(b\), since Gamma avoidance would make \(b\) missing on
+the last stage, or on \(T_n\), hence on \(A\), a contradiction.
+The earlier first-position argument proves that every stored color's
+totalized first position is unchanged by this swap.
+
+All premises of \noderef{StableChangeCasesOneTwoSplitTail} now hold:
+the exact \(A<X\leq B\) relations, path and divider alternatives,
+interval edge equality, the actual terminal seed route, augmentation
+suffix, both missing witnesses on \(X\), pointwise missing-set equality
+on \(B\), unchanged stored first positions, and the affected-Gamma cutoff.
+It returns an actual corresponding replacement ETT on \(T\), its own
+maximum witness, a base, a good hierarchy, and a same-good witness
+relative to \(R\). No equality of full segment-color sets is used here.
+
+By \noderef{TwoColorComponentSwapMissingBehavior}, the swap exchanges
+terminal missingness in both directions. The full tree remains
+nonelementary: if \(a\) was missing at \(w\), the new color \(b\) is
+missing both at \(w\) and at the preserved witness \(B.vertex(j_b)\);
+if \(b\) was missing at \(w\), use \(a\) and \(B.vertex(j_a)\) instead.
+The witnesses are distinct from \(w\) and belong to \(T\).
+Together with the returned good hierarchy, maximum witness, and rung
+agreement, this gives a new \noderef{HierarchyCounterexample}.
+Finally apply \noderef{HierarchyReplacementPresentationTrans} to \(R\)
+and these actual returned objects. It composes corresponding provenance,
+same-good data, and the minimum context back to the fixed original
+presentation, producing \(S\) with coloring exactly \(\sigma\).
+The missing-set equality, interval edge equality, and both terminal
+implications already proved therefore give all four asserted conclusions.
+\end{proof}
