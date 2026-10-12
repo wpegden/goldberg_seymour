@@ -1,0 +1,107 @@
+\begin{helper}[Full defective-color component path]
+Let $G$ be a finite loopless multigraph with individual edge identities,
+let $(T,e_0,\varphi)$ be a globally maximum triple with $k$ colors,
+let $\alpha\in\noderef{DefectiveColors}(G,\varphi,V(T))$, and let
+$u\in V(T)$ and $\gamma\in\noderef{MissingColors}(G,\varphi,u)$.
+There exist a vertex $z$ and an incidence walk $P$ from $u$ to $z$
+in $\noderef{TwoColorIncidenceGraph}(G,\varphi;\alpha,\gamma)$ such that
+$u\in V(T)$, $P$ is a simple path, $z\notin V(T)$, and the support
+of $P$ equals the full component
+$\noderef{TwoColorComponent}(G,\varphi;\alpha,\gamma,u)$, including
+both vertex-nodes and edge-nodes.  Thus $P$ satisfies all clauses of
+$\noderef{ScheideDefectiveChainPath}(T,\varphi,\alpha,\gamma,u,z,P)$.
+No free-color hypothesis on $\gamma$ is required.
+\end{helper}
+\begin{proof}
+Put $X=V(T)$ and let
+$I=\noderef{TwoColorIncidenceGraph}(G,\varphi;\alpha,\gamma)$.  The
+statement-level conclusion of \noderef{ScheideGlobalMaximumOrder} says
+that $X$ is both \noderef{ColoredVertexSetElementary} and
+\noderef{ColoredVertexSetClosed}.  Since $\alpha$ is defective, the last
+clause of \noderef{ScheideGlobalMaximumBoundaryFacts} gives at least three
+members of
+$\noderef{BoundaryColorEdges}(G,\varphi,X,\alpha)$.  Choose one such edge
+identity $b$.  By \noderef{BoundaryColorEdges},
+$b\in\noderef{BoundaryEdges}(G,X)$ and $\varphi(b)=\alpha$.  Applying
+closedness to $b$ at an arbitrary $x\in X$ shows that
+$\alpha\notin\noderef{MissingColors}(G,\varphi,x)$.  Since
+\noderef{MissingColors} is the complement of
+\noderef{PresentColors}, the color $\alpha$ is present at every vertex of
+$X$.
+
+In particular, $\alpha$ is present at $u$, whereas the hypothesis says
+that $\gamma$ is missing there.  Hence $\alpha\ne\gamma$: equality would
+put the same color in both \noderef{PresentColors} and its complement
+\noderef{MissingColors} at $u$.  We next compute the degrees in $I$.
+The definition of \noderef{PresentColors} supplies an edge identity
+incident with a vertex for each color present there, where incidence is
+\noderef{Incident}.  There is at most one incident edge identity of any
+fixed color.  Indeed, two distinct such identities would be
+\noderef{AdjacentEdges}, while the \noderef{GlobalMaximumTriple}
+hypothesis contains a \noderef{KTriple}; its
+\noderef{IsProperEdgeColoring} clause forbids equal colors on two such
+edges.
+
+At $u$ there is consequently exactly one incident $\alpha$-edge and no
+incident $\gamma$-edge, the latter assertion being exactly what it means
+for $\gamma$ to belong to \noderef{MissingColors} at $u$.  By the
+adjacency definition in \noderef{TwoColorIncidenceGraph}, these are all
+neighbors of the vertex-node $u$, so $u$ has degree one in $I$.  Now fix
+$x\in X\setminus\{u\}$.  Elementariness says that the missing-color sets
+at $u$ and $x$ are disjoint.  Since $\gamma$ is missing at $u$, it is not
+missing at $x$, and hence is present there.  We already proved that
+$\alpha$ is present at $x$.  The preceding uniqueness argument gives one
+incident edge of each color; because $\alpha\ne\gamma$, these two edge
+identities are distinct.  They are precisely the neighbors of $x$ in
+$I$.  Thus every vertex-node in $X\setminus\{u\}$ has degree two in $I$.
+
+Let
+$C=\noderef{TwoColorComponent}(G,\varphi;\alpha,\gamma,u)$.  Every
+edge-node $f$ in $C$ also has degree two in $I$.  To see this explicitly,
+$u$ has a neighbor by the preceding paragraph, so $C$ is not a singleton.
+Because $f$ is connected to $u$, it cannot be isolated; an adjacency at
+$f$ and the definition of \noderef{TwoColorIncidenceGraph} show that
+$\varphi(f)$ is $\alpha$ or $\gamma$.  Write the unordered endpoint pair
+of $f$ as $\{r,s\}$.  The loopless axiom in
+\noderef{LooplessMultigraph} gives $r\ne s$.  By
+\noderef{Incident}, both endpoint vertex-nodes are adjacent to $f$ in
+$I$, and the definition of $I$ says that there are no other neighbors of
+an edge-node.  Hence $f$ has exactly the two distinct neighbors $r$ and
+$s$.  This also agrees with the universal upper bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.
+
+Properness having been obtained above, apply
+\noderef{TwoColorComponentSpanningPath} to $u$.  It gives a simple path
+$Q$ in $I$ whose support is exactly $C$.  The node $u$ belongs to $C$ and
+therefore lies on $Q$.  It cannot be internal on $Q$, since an internal
+node of a simple path has two distinct path-neighbors, whereas $u$ has
+degree one.  Thus $u$ is an end of $Q$.  Moreover, $Q$ has positive
+length: the unique $\alpha$-edge at $u$ is a second node of $C$, and $Q$
+spans $C$.  Reverse $Q$ if necessary and call the resulting path $P$, so
+that $P$ starts at $u$; let $w\ne u$ be its other end.
+
+We claim that $w$ has degree one in $I$.  The last edge of the
+positive-length path gives one neighbor $r$ of $w$.  Suppose that $w$ had
+a second neighbor $y\ne r$.  Since adjacency to $w\in C$ puts $y$ in the
+same connected component, the support equality for $P$ puts $y$ on $P$.
+The node $y$ is not $w$, since $I$ is a simple graph and hence has no
+loop at $w$.  It also cannot be $u$: if it were, then $w$ would be a second
+neighbor of $u$ in addition to the first edge of $P$ (and when $P$ has
+length one, $r=u$, contrary to $y\ne r$), contradicting the already proved
+degree-one assertion at $u$.  Thus $y$ is internal on $P$.  Its two
+distinct path-neighbors are different from $w$, because the only path-node
+adjacent along $P$ to the end $w$ is its predecessor $r$, while
+$y\ne r$.  Together with the extra neighbor $w$, the node $y$ would have
+at least three neighbors.  This contradicts
+\noderef{TwoColorIncidenceDegreeAtMostTwo}.  Therefore $r$ is the only
+neighbor of $w$, proving the claim.
+
+The end $w$ is not an edge-node, since every edge-node of $C$ has degree
+two.  Hence $w$ is a vertex-node, say $w=z$.  It is not a vertex of $X$:
+it is not $u$, and every other vertex-node of $X$ has degree two.  We have
+therefore obtained a simple incidence path $P$ from $u$ to a vertex
+$z\notin X$ whose support is exactly $C$.  Together with the hypothesis
+$u\in X$, these are precisely the four clauses of
+\noderef{ScheideDefectiveChainPath}, so $z$ and $P$ are the required
+witnesses.
+\end{proof}
