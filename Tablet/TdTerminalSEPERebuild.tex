@@ -374,143 +374,21 @@ It remains to verify the priority field: no revisiting extension is
 available for the replacement prefix.  When \(n=1\), a hypothetical
 \noderef{RevisitingExtensionCertificate} at current index zero would
 contain a positive earlier PE index at most zero, an immediate
-contradiction.  Assume henceforth that \(n>1\), and suppose for a
-contradiction that a replacement revisiting certificate exists.  Unpack
-it completely.  It gives a positive earlier index \(h\leq n-1\), an
-earlier replacement PE, colors \(\gamma_h^*,\delta_h^*\), a full cycle
-\(O^*\) under \(\sigma_{n-1}\), an exact boundary edge \(g\) of
-\(T_n\) on that cycle with inside and outside endpoints, and a simple
-return path \(L\) from the edge-node \(g\) to a return vertex
-\(w\in V(T_h)\).  Every graph-vertex node of \(L\) lies in \(V(T_n)\),
-and every slot strictly after \(h\) through \(n-1\) is RE.
-
-Apply (14) at \(h\); suppressing stars, the original and replacement
-support, outside endpoint, exact PE edge, delta, and gamma are
-
-\[
-                         (v_h,u_h,f_h,\delta_h,\gamma_h).      \tag{17}
-\]
-
-The kind equalities of the prefix correspondence transport the entire
-all-RE interval to the original prefix.  At each of these indices the RE
-constructor of \noderef{TashkinovSeriesStep} makes the new coloring
-literally equal to its predecessor.  Induction through the interval gives
-
-\[
- \varphi_h=\varphi_{n-1},\qquad
- \sigma_h=\sigma_{n-1}.                                     \tag{18}
-\]
-
-We need both post-PE components in (18), rather than only their roots.
-For the original prefix at rung \(h\), and for the corresponding
-replacement prefix at rung \(h\), use the full prefix when \(h=n-1\)
-and otherwise use \noderef{CertifiedETTRestriction}.  These are actual
-positive lower-rung ETTs with their maximum witnesses.  Apply lower
-assertion (iv) to their proper self-stable generating colorings.  It says
-that the original and replacement post-PE components each meet the exact
-tree \(T_h\) only at the common support \(v_h\).
-
-For either component, the post-switch calculation already used in proving
-(14) says that \(\delta_h\) is missing at \(v_h\), while the switched
-edge \(f_h\) has color \(\gamma_h\) and is incident there.  Properness
-and \noderef{AdjacentEdges} make this the unique incident
-\(\gamma_h\)-edge, so \(v_h\) has degree one.  By
-\noderef{TwoColorIncidenceDegreeAtMostTwo} and
-\noderef{TwoColorComponentSpanningPath}, each full component is therefore
-a nontrivial path component, in the sense of
-\noderef{TwoColorPathComponent}, meeting \(T_h\) exactly at \(v_h\).
-The literal equalities (18) prove that both full components, with these
-properties, persist through every intervening RE step to the respective
-preterminal colorings.
-
-We now copy the hypothetical return path \(L\) to the original coloring
-\(\varphi_{n-1}\).  Each edge-node of \(L\) is adjacent on \(L\) to a
-graph vertex in \(V(T_n)\), so its exact edge identity is incident with
-\(T_n\) by \noderef{TreeIncidentEdge}.  Since \(L\subseteq O^*\), its
-color under \(\sigma_{n-1}\) is \(\gamma_h\) or \(\delta_h\).  Both
-colors lie in the exact old stored pair \(S_h\).  By the definition
-\noderef{TashkinovStoredColors} at index \(n-1\), each is either in
-\(D_{n-1}\) or is missing on the earlier ladder tree used in that
-set difference.  The ordered-extension fields of
-\noderef{TashkinovSeriesStep} and
-\noderef{TreeSequenceInitialSegment} carry the latter missing witness
-into \(T_n\); hence
-
-\[
- \{\gamma_h,\delta_h\}
- \subseteq\overline\varphi_{n-1}(T_n)\cup D_{n-1}.            \tag{19}
-\]
-
-For each path edge, its \(\sigma_{n-1}\)-value is in the right side of
-(19).  Relation (3), used through the reverse-value implication of
-\noderef{sc1}, therefore proves that its
-\(\varphi_{n-1}\)-value is the same.  Thus the same exact node sequence
-is a simple two-color return path under \(\varphi_{n-1}\), including the
-same edge-node \(g\) and return vertex \(w\).
-
-The return vertex is not the PE support:
-
-\[
-                              w\ne v_h.                       \tag{20}
-\]
-
-Indeed, \(w\) lies on the full cycle \(O^*\), so it has two distinct
-cycle neighbors.  But the persisted replacement PE path component has
-\(v_h\) as its degree-one endpoint under \(\sigma_{n-1}\).  Equality in
-(20) would contradict these two degree statements.
-
-Let \(Q\) be the full \((\gamma_h,\delta_h)\)-component of
-\noderef{TwoColorComponent} under
-\(\varphi_{n-1}\) containing the copied path.  It contains
-\(w\in V(T_h)\) and the edge-node \(g\).  The endpoint equation of the
-hypothetical certificate is structural; its outside endpoint is adjacent
-to the now-copied colored edge \(g\), so it also belongs to \(Q\) and
-lies outside \(V(T_n)\).  By (20), \(Q\) differs from the persisted
-original PE path component, which meets \(T_h\) only at \(v_h\).
-
-If \(Q\) were a path component, these would be two distinct
-\((\gamma_h,\delta_h)\)-path components meeting \(T_n\).  Apply lower
-assertion (ii) to the actual original rung-\(n-1\) restriction furnished
-by \noderef{TdReplacementPrefixExact}, with its maximum witness.  Its
-last output tree and displayed tree are the exact \(T_n\), its generating
-coloring is \(\varphi_{n-1}\), and this coloring is proper, leaves exactly
-\(e_0\) uncolored, and is stable relative to itself by
-\noderef{sc2}.  Moreover, \(\delta_h\) is missing at
-\(v_h\in V(T_n)\) by the persisted post-PE calculation, so
-\noderef{TreeMissingColors} supplies the missing-color premise.  The
-assertion makes the two colors interchangeable, contradicting the
-uniqueness clause of \noderef{TreeInterchangeable}.  Therefore \(Q\) is
-not a path component.
-
-The component is finite, contains the edge-node \(g\), and has degree at
-most two everywhere by \noderef{TwoColorIncidenceDegreeAtMostTwo}.
-Choose a simple spanning path using
-\noderef{TwoColorComponentSpanningPath}.  Since \(Q\) is not a path
-component, neither endpoint has degree at most one.  Both therefore have
-degree two.  Every internal node already has its two path neighbors, and
-there is no node outside the spanning path.  The unused neighbor of each
-endpoint must consequently be the other endpoint.  Adding this last
-incidence edge closes the spanning path to a full
-\noderef{TwoColorCycle} \(O\) with support exactly \(Q\).
-
-We can now reconstruct an original
-\noderef{RevisitingExtensionCertificate} field by field.  Its earlier
-index is \(h\), with positivity and the upper bound copied from the
-hypothetical certificate.  Its earlier kind is PE and its ordered colors
-are \(\gamma_h,\delta_h\), by (14); its intervening kinds are RE by the
-pointwise kind equalities.  Take its cycle to be \(O\).  It meets the
-earlier tree at \(w\) and leaves the current tree at the unchanged outside
-endpoint of \(g\).  Take \(g\) as its exact selected edge: it belongs to
-the support of \(O\), remains an exact member of
-\(\partial_G(V(T_n))\), and retains the hypothetical inside/outside
-endpoints and endpoint equation.  Take \(w\) and the copied \(L\) as
-the return vertex and path.  Simplicity is unchanged; every node of
-\(L\) lies in \(Q=\operatorname{supp}(O)\); and every graph-vertex node
-of \(L\) lies in \(V(T_n)\), exactly as in the hypothetical certificate.
-These are all fields of the original certificate.  But the original
-terminal SE or PE constructor in \noderef{TashkinovSeriesStep} contains
-the negation of such a certificate.  This contradiction proves the
-replacement no-RE priority field.
+contradiction.  When \(n>1\), apply
+\noderef{P2971_T1_PositivePrefixNoRevisiting} with original ETT \(T\),
+the original rung-\(n-1\) prefix and corresponding replacement prefix
+from \noderef{TdReplacementPrefixExact}, and coloring
+\(\sigma_{n-1}\).  The prefix package supplies the exact retained
+ladder-tree, coloring, raw stored-set, connecting-edge, kind, and computed
+stored-color maps, both maximum witnesses, and the replacement final
+tree \(T_n\) and final coloring \(\sigma_{n-1}\).
+Relation (3) supplies the required preterminal stability, and the prefix
+package supplies properness and unique uncoloredness.  The assumed six
+lower-rung assertions include precisely assertions (ii) and (iv) required
+by the helper.  Finally the original terminal SE or PE constructor of
+\noderef{TashkinovSeriesStep} supplies the original no-revisiting
+premise.  Thus the helper excludes a revisiting certificate at the
+replacement prefix's final index, giving the required priority field.
 
 We finish by proving the universal clause of \noderef{ModColoring}.  Let
 \(T^*\) be an arbitrary eligible ordered tree-sequence with

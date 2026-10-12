@@ -1,0 +1,227 @@
+\begin{helper}[No revisiting extension after positive-prefix replacement]
+Fix a finite loopless multigraph $G$ with individual edge identities, a
+palette $[k]$, and an edge $e_0$.  Let $\mathcal E$ be an
+\noderef{ExtendedTashkinovTree} with input coloring $\varphi_0$, displayed
+tree $T$, certified series $\mathcal S$, generating coloring $\varphi$,
+rung number $n>1$, and \noderef{MaximumProperty}.  Write
+\[
+ A_i=\mathcal S.\mathit{tree}(i)\quad(0\leq i\leq n+1),
+ \qquad \varphi_i=\mathcal S.\mathit{coloring}(i)\quad(0\leq i\leq n),
+ \qquad r=n-1.
+\]
+Write $S_i,F_i,\Theta_i$ for its raw stored sets, exact connecting-edge
+sets, and extension kinds, and put
+$D_i=\noderef{TashkinovStoredColors}(\mathcal S,i)$.
+Assume the following two assertions for every positive-rung ETT
+$\mathcal L$ with rung $s<n$, arbitrary input and generating colorings
+on the fixed $G,k,e_0$, and maximum property.  Denote its series by
+$\mathcal S_{\mathcal L}$, its last output tree by
+$U=\mathcal S_{\mathcal L}.\mathit{tree}(s+1)$, its terminal ladder tree
+by $B=\mathcal S_{\mathcal L}.\mathit{tree}(s)$, its final series coloring
+by $\psi_s$, and its computed stored set by $D_s^{\mathcal L}$.
+\begin{enumerate}
+\item Every proper $(U,D_s^{\mathcal L},\psi_s)$-stable coloring $\tau$
+leaving exactly $e_0$ uncolored makes $U$ interchangeable for each pair
+$\alpha,\beta$ with at least one color missing on $U$.
+\item If the terminal kind of $\mathcal L$ is PE and its chosen vertex,
+gamma, and delta fields are respectively $v,\gamma,\delta$, then every
+proper $(B,D_s^{\mathcal L},\psi_s)$-stable coloring $\tau$ leaving exactly
+$e_0$ uncolored satisfies
+\[
+ w\in V(B)\ \Longrightarrow
+ \bigl(w\in P_v(\gamma,\delta,\tau)\ \Longleftrightarrow\ w=v\bigr).
+\]
+Here $P_v$ denotes the full incidence-graph component, including isolated
+vertices, as in \noderef{TwoColorComponent}.
+\end{enumerate}
+Let $\sigma$ be proper and leave exactly $e_0$ uncolored.  Assume that
+$\varphi_r$ is also proper and leaves exactly $e_0$ uncolored, and that
+$\sigma$ is $(A_n,D_r,\varphi_r)$-stable.
+
+Let $\mathcal P$ be a maximum ETT with the same input $\varphi_0$,
+displayed tree $A_n$, generating coloring $\varphi_r$, rung number $r$,
+and certified series $\mathcal S^-$.  Require the exact retained maps
+\[
+ \mathcal S^-.\mathit{tree}(i)=A_i\quad(0\leq i\leq r+1)
+\]
+and, for every $0\leq i\leq r$,
+\[
+ \mathcal S^-.\mathit{coloring}(i)=\varphi_i,\quad
+ \mathcal S^-.\mathit{stored}(i)=S_i,\quad
+ \mathcal S^-.\mathit{connectingEdges}(i)=F_i,\quad
+ \mathcal S^-.\mathit{kind}(i)=\Theta_i,\quad
+ \noderef{TashkinovStoredColors}(\mathcal S^-,i)=D_i.
+\]
+Let $C$ be a \noderef{CorrespondingExtendedTashkinovTree} certificate
+for $\mathcal P$ under $\sigma$ on $A_n$.  Its replacement input may
+differ from $\varphi_0$.  Write $\widehat{\mathcal S}$ for its replacement
+series and $\widehat{\mathcal P}$ for its replacement ETT.  Thus the
+replacement rung is $r$, its series is precisely
+$\widehat{\mathcal S}$, its generating coloring is $\sigma$, its
+positive ladder trees agree with those of $\mathcal P$, its raw stored
+sets, exact connecting-edge sets, and kinds agree at every index, all
+its colorings are proper and leave exactly $e_0$ uncolored, and each
+positive coloring is stable on the corresponding original ladder tree
+with the original computed stored set.  In addition require explicitly
+\[
+ \widehat{\mathcal S}.\mathit{tree}(r+1)=A_n,\qquad
+ \widehat{\mathcal S}.\mathit{coloring}(r)=\sigma,
+ \qquad \noderef{MaximumProperty}(\widehat{\mathcal P}).
+\]
+Finally assume that there is no
+\noderef{RevisitingExtensionCertificate} for the original series
+$\mathcal S$ at current index $r$.
+Then there is no \noderef{RevisitingExtensionCertificate} for
+$\widehat{\mathcal S}$ at its final index $r$.
+\end{helper}
+\begin{proof}
+Suppose a replacement revisiting certificate exists.  By
+\noderef{RevisitingExtensionCertificate} it specifies a positive index
+$h\leq r$, a PE at $h$, an ordered pair $\gamma,\delta$, RE kinds at
+every index strictly after $h$ through $r$, a full two-color cycle
+$\widehat O$ under $\sigma$, and an individual boundary edge $f$ of
+$A_n$ on that cycle.  It also specifies inside and outside endpoints
+$a,b$ with $G.\mathit{ends}(f)=\{a,b\}$, and a simple incidence-graph
+return path $L$ from the edge-node $f$ to a vertex $w\in V(A_h)$.
+Every graph-vertex node of $L$ lies in $V(A_n)$, and every node of $L$
+lies on $\widehat O$.
+
+The kind agreements make the slot $h$ PE in $\mathcal S^-$ as well.
+Inspect the actual certificates supplied by \noderef{TashkinovSeries}
+at this slot.  The initial, SE, and RE constructors of
+\noderef{TashkinovSeriesStep} contradict the PE kind; thus both
+certificates are PE.  Write their selected edge, support, outside
+endpoint, delta, and gamma as
+$(f_h,v_h,u_h,\delta_h,\gamma_h)$ and their starred counterparts.
+The equality of singleton connecting-edge sets identifies the exact
+edges.  The endpoint equations in \noderef{MaximumDefectiveChoice}
+and the common ladder tree identify their inside endpoints and outside
+endpoints: the crossed identification would put an outside endpoint in
+that tree.  The equality of raw stored sets identifies their unordered
+color pairs, but does not yet orient those pairs.
+
+For either PE certificate, its gamma rule
+\noderef{ParallelExtensionColor} makes gamma missing at its selected
+vertex in the selected coloring.  The second-stable coloring retains
+this missingness and the selected edge's delta value by
+\noderef{StableColoring}.  Consequently gamma and delta are distinct.
+The switch \noderef{TwoColorComponentSwap} puts gamma on that exact
+edge, so gamma is present at the support after the switch.  Delta is
+missing there after the switch, by
+\noderef{TwoColorComponentSwapMissingBehavior}.  Positive-stage
+stability of $C$ identifies the post-switch missing sets at the common
+support.  Apply \noderef{TdEarlierPEWitnessIdentification}, with the
+common singleton edge, common unordered pair, and these missing and
+present statuses.  It identifies both ordered colors as well as the
+edge, support, and outside endpoint.  In particular the common ordered
+colors are the certificate's $\gamma,\delta$.
+
+Inspecting each certified RE in the intervening interval shows that its
+new coloring is literally its predecessor.  The kind agreements copy
+the entire interval to $\mathcal S^-$.  Induction through its indices
+therefore gives
+\[
+ \mathcal S^-.\mathit{coloring}(h)=\varphi_r,\qquad
+ \widehat{\mathcal S}.\mathit{coloring}(h)=\sigma.
+\]
+In these respective colorings, delta is missing and gamma is present at
+the common support $v_h$.
+
+We verify the full root-component intersection claims using actual
+certified lower ETTs.  For either $\mathcal P$ or
+$\widehat{\mathcal P}$, if $h=r$ use that ETT itself.  If $h<r$, apply
+\noderef{CertifiedETTRestriction} at rung $h$, with its positive-index
+and strict-rung hypotheses.  This supplies a positive ETT, its maximum
+witness, all retained tree and data maps, and its certified history.
+The terminal ladder tree is exactly $A_h$, and the terminal support,
+gamma, delta, kind, and coloring are precisely the ones just identified.
+The series-presentation and rung fields of $C$ identify the replacement
+ETT's series with the supplied replacement series, so this also applies
+on the replacement side.  These ETTs all have rung strictly below $n$.
+Their post-PE colorings are proper, leave exactly $e_0$ uncolored, and
+are stable relative to themselves by the defining clauses of
+\noderef{StableColoring}.  Apply the second lower-rung assertion.
+Both root components meet $V(A_h)$ only at $v_h$.  Since the root misses
+delta and has an incident gamma edge, each component is nontrivial and
+its root has degree one; the degree bound
+\noderef{TwoColorIncidenceDegreeAtMostTwo} gives a path component in the
+sense of \noderef{TwoColorPathComponent}.  The literal coloring
+equalities through the RE interval preserve these entire components,
+not merely their roots.
+
+Next copy the return path, without asserting that $\widehat O$ is fixed.
+The certified ordered-extension fields of
+\noderef{TashkinovSeriesStep} compose to exact
+\noderef{TreeSequenceInitialSegment} relations from each positive
+prefix ladder tree to $A_n$.  In particular the support $v_h$ and the
+return vertex $w$ lie in $V(A_n)$.  Both colors lie in the raw pair
+$S_h$.  Expanding \noderef{TashkinovStoredColors} at the positive index
+$r$, each is either in $D_r$ or missing on $A_r$.  The exact prefix
+relation $A_r\preccurlyeq A_n$ carries a missing witness in the latter
+case into $A_n$, by \noderef{TreeSequenceInitialSegmentVertexSetSubset}.
+Thus
+\[
+ \{\gamma,\delta\}\subseteq\overline\varphi_r(A_n)\cup D_r.
+\]
+The path $L$ cannot be empty, since its endpoints have different node
+types.  Every edge-node on it therefore has an adjacent graph-vertex
+node on the path.  This vertex is in $A_n$ by the certificate's internal
+path field, so the exact edge is incident with $A_n$.  Its replacement
+color is gamma or delta, as follows directly from adjacency in
+\noderef{TwoColorIncidenceGraph}.  The reverse-value implication of
+\noderef{sc1}, applied to the assumed
+$(A_n,D_r,\varphi_r)$-stability and proper one-uncolored colorings,
+fixes each such edge.  Transfer $L$ edge by edge into the original
+incidence graph.  Its node sequence, support, endpoints, and simplicity
+are unchanged.  Denote the transferred path by $L_0$.
+
+Let $Q$ be the full original two-color component containing the
+edge-node $f$.  The transferred path puts $w$ in $Q$.  The edge $f$
+itself occurs on $L$, so it too retains its two-color value.  The
+structural endpoint equation then puts the outside endpoint $b$ in
+$Q$, although $b\notin V(A_n)$.
+
+We have $w\ne v_h$.  Indeed, $w$ lies on $\widehat O$, whereas $v_h$
+has degree at most one under $\sigma$, since delta is missing there.
+For precision, \noderef{MissingColorIncidenceEndpoint} gives that
+degree bound.  Rotating the cycle to a hypothetical vertex
+$w=v_h$ would give two distinct cycle neighbors there, a contradiction.
+The original root component meets $A_h$ only at $v_h$, while $Q$
+contains $w\in A_h$; hence these components are distinct.
+
+Apply the first lower-rung assertion to $\mathcal P$, whose last output
+is exactly $A_n$ by the retained tree maps.  Its last coloring is
+$\varphi_r$, proper and one-uncolored by hypothesis and stable relative
+to itself.  Delta is missing at $v_h\in V(A_n)$, so the required
+tree-missing premise holds.  It follows that $A_n$ is interchangeable
+for gamma and delta.  The original root component is a path component
+meeting $A_n$; $Q$ is a distinct component also meeting $A_n$ at $w$.
+Apply \noderef{TwoColorInterchangeableDistinctComponentCycle}.  It
+produces a full original \noderef{TwoColorCycle} $O$ whose support is
+exactly $Q$.  Thus the copied path lies on $O$, and $O$ contains both
+$w$ and the outside endpoint $b$.
+
+Finally inspect the original series' certified slot $h$.  The retained
+raw kind, stored-pair, singleton-edge, and tree maps identify its PE
+constructor.  Repeat the earlier witness identification, now between
+this constructor and the prefix constructor.  Their post-PE colorings
+are literally equal by the retained coloring map.  This proves equality
+of their exact edge, support, outside endpoint, and ordered gamma and
+delta, again by \noderef{TdEarlierPEWitnessIdentification}; it does not
+assume that the retained maps already include chosen vertices or
+ordered colors.
+
+Construct a \noderef{RevisitingExtensionCertificate} for $\mathcal S$
+at index $r$.  Copy $h$, its positivity and upper bound, and the
+intervening RE interval through the pointwise kind maps.  Use the PE
+kind and ordered colors just identified.  Take the cycle to be $O$,
+the boundary edge to be the individual edge $f$, and the inside and
+outside endpoints to be $a,b$.  Boundary membership and the endpoint
+equation are structural and are unchanged because the replacement
+current tree is exactly $A_n$.  The cycle meets $A_h$ at $w$ and leaves
+$A_n$ at $b$.  Use $w$ as return vertex and $L_0$ as return path.
+Its simplicity is preserved by transfer; every node lies in
+$Q=\operatorname{supp}(O)$; and its graph-vertex nodes lie in $A_n$
+by the copied internal-path field.  These verify every certificate
+field, contradicting the assumed original no-revisiting premise.
+\end{proof}
