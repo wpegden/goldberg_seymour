@@ -1,5 +1,9 @@
 # Goldberg–Seymour in Lean
 
+### ▶ [Browse this formalization in the Trellis viewer](https://www.math.cmu.edu/~wes/trellis/goldberg_seymour-viewer/)
+
+A static, self-contained view of every node: its Lean statement and proof, its natural-language statement, its dependencies, and its correspondence to the paper.
+
 This repository contains a Lean formalization of the Goldberg–Seymour bound for finite loopless multigraphs (parallel edges are allowed):
 
 $$\chi'(G) \le \max\{\Delta(G)+1,\lceil\Gamma(G)\rceil\}.$$
@@ -55,4 +59,4 @@ Published cycle commits are permanent. A checkpoint added later within an alread
 
 ## License
 
-**TODO: select a license.** No repository license has been selected or added.
+The Lean formalization and its documentation are released under the Apache License, Version 2.0; see [`LICENSE`](LICENSE). The license does not apply to the contents of `paper/`. Project metadata is in [`formalization.yaml`](formalization.yaml).

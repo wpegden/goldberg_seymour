@@ -1,0 +1,233 @@
+# formalization.yaml (v0.3): repo-root metadata for formalization projects.
+# https://github.com/mathlib-initiative/formalization.yaml
+
+version: "v0.3"
+
+project:
+  name: "The Goldberg–Seymour Conjecture (Trellis formalization)"
+  authors:
+    - "Trellis (autonomous formalization system)"
+    - "Wesley Pegden (operator)"
+  license: "Apache-2.0"
+
+sources:
+  - title: "Proof of the Goldberg–Seymour Conjecture on Edge-Colorings of Multigraphs"
+    authors:
+      - "Guantao Chen"
+      - "Guangming Jing"
+      - "Wenan Zang"
+    id: "arXiv:1901.10316"
+    type: "preprint"
+    author_contacted: ""
+    prior_work: ""
+
+# Build environment. Authoritative copies live in lean-toolchain and
+# lake-manifest.json; mirrored here for convenience.
+environment:
+  lean_toolchain: "leanprover/lean4:v4.33.0"
+  mathlib_rev: "db584cd6d46c92f209a44c0f1c829460d327499d"
+
+status:
+  scope: >-
+    A Lean statement and complete, sorry-free proof of the paper's main result,
+    the Goldberg–Seymour bound: every finite loopless multigraph G satisfies
+    χ'(G) ≤ max(Δ(G)+1, ⌈Γ(G)⌉). One node per declaration; the statement was
+    fixed and human-approved before proof work began. The target is Lean-closed
+    against a pinned Mathlib and depends only on the standard Lean axioms. The
+    paper source used is an editorial working version of arXiv:1901.10316v2
+    (paper/paper.tex), not an author-issued revision.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  # Standard Lean/Mathlib axioms only. The project's axiom gate
+  # (APPROVED_AXIOMS.json) records no additional project-specific axioms.
+  axioms:
+    - "propext"
+    - "Classical.choice"
+    - "Quot.sound"
+  main_results:
+    - declaration: "ThmGS"
+      file: "Tablet/ThmGS.lean"
+      module: "Tablet.ThmGS"
+      sorry_count: 0
+      axioms: ["propext", "Classical.choice", "Quot.sound"]
+      paper_label: "Theorem 1.1 (Goldberg–Seymour)"
+      literature_dependencies:
+        - "Scheide, Graph edge colouring: Tashkinov trees and Goldberg's conjecture"
+
+automation:
+  methods:
+    - method: "autonomous"
+      models: ["gpt-5.6-sol", "gpt-6.1-sol", "gpt-5.6-luna", "gpt-6-luna"]
+      framework: "Trellis"
+      tool_setup: >-
+        Autonomous Trellis supervisor. One frontier model drove every heavy
+        role — worker, reviewer and the four independent verifier lanes
+        (correspondence, soundness, paper-faithfulness, substantiveness) — via
+        the Codex CLI at reasoning effort "xhigh": OpenAI gpt-5.6-sol from the
+        start of the run through 2026-10-07, then gpt-6.1-sol after the run
+        moved to Trellis's parallel-dispatch coordinator. A lightweight lane
+        (gpt-5.6-luna, later gpt-6-luna, reasoning effort "high") attempted Lean
+        closure of eligible nodes in parallel. Workers run in a bwrap sandbox
+        against a pinned Mathlib; only the Mathlib import prefix is allowed. The
+        theorem statement was gated for human approval after the theorem-stating
+        phase, then the proof was formalized autonomously.
+      cost:
+        wall_time: >-
+          Run began 2026-08-27. Theorem stating ran until the human gate on
+          2026-09-11; proof formalization ran from 2026-09-11 and reached the
+          cleanup phase, with the target Lean-closed, on 2026-10-12 — roughly
+          six and a half weeks of continuous autonomous operation.
+        spend_usd: >-
+          No metered per-token API spend. The run was carried on ChatGPT Pro
+          subscriptions through the Codex CLI.
+        token_usage: >-
+          Heavy lane, 2,644 model bursts under the sequential supervisor
+          (2026-08-27 to 2026-10-07; gpt-5.6-sol, with 107 early reviewer bursts
+          on gpt-5.5): 5.32 B input tokens, of which 5.02 B (94.2%) were served
+          from prompt cache, and 30.4 M output tokens, of which 14.1 M were
+          reasoning tokens. Heavy lane under the parallel-dispatch coordinator
+          (2026-10-07 to 2026-10-12; gpt-6.1-sol), 269 model turns: 1.31 B input
+          tokens (1.27 B cached) and 5.9 M output tokens (2.7 M reasoning).
+        grunt_lane: >-
+          The lightweight lane is not included in the counts above. Its closure
+          sidecar (gpt-5.6-luna) made 919 attempts, of which 198 succeeded,
+          consuming 14.05 B prompt tokens and 110 M completion tokens; 152 nodes
+          are recorded as closed by it, totalling about 41,200 nonblank lines of
+          Lean as published (19.8% of the repository). Under the
+          parallel-dispatch coordinator the lightweight profile (gpt-6-luna) ran
+          66 closure tasks, of which 7 were accepted, closing nodes totalling
+          about 5,000 lines (2.4%).
+        hardware: "API/subscription-based; no local GPU"
+      prompting_notes: >-
+        Role prompts are Trellis's canonical fragments; no paper-specific or
+        proof-specific hints were supplied by hand.
+  spend_usd: "subscription-based usage (ChatGPT/Codex)"
+  notes: >-
+    One end-to-end Trellis run. The only human gate was review-and-approval of
+    the stated theorem before proof work began; no mathematical content, proof
+    steps, or formalization hints were supplied by hand at any phase.
+
+fidelity:
+  divergences: >-
+    No deviations from the paper were requested or authorized during the run
+    (APPROVED_AXIOMS.json is empty and the run's deviation register records
+    none). Separately, this formalization proves results drawn from the
+    literature as first-class nodes rather than assuming them: 114 nodes are
+    grounded in Scheide's treatment of Tashkinov trees (paper/refs/scheide.tex,
+    a companion note prepared for the run). Such nodes correspond to background
+    results, not to statements printed in the source paper.
+
+review:
+  status: "agent-reviewed"
+  reviewers:
+    - "Trellis correspondence verifier (gpt-5.6-sol / gpt-6.1-sol, xhigh)"
+    - "Trellis soundness verifier (gpt-5.6-sol / gpt-6.1-sol, xhigh)"
+    - "Trellis paper-faithfulness verifier (gpt-5.6-sol / gpt-6.1-sol, xhigh)"
+    - "Trellis substantiveness verifier (gpt-5.6-sol / gpt-6.1-sol, xhigh)"
+  notes: >-
+    Every node passed Trellis's four verifier lanes before acceptance:
+    correspondence (Lean statement matches the node's NL statement), soundness
+    (NL proof is line-by-line checkable from children), paper-faithfulness
+    (covering nodes express the paper target), and substantiveness (each node
+    states something the paper uses, non-trivially). Lean closure (sorry-free,
+    builds against pinned Mathlib) is enforced mechanically, and the target
+    passes the comparator check in comparator/ (tag comparator-checked-cycle-921).
+    Not independently peer-reviewed by a human mathematician.
+
+alignment:
+  namespace: ""
+  statements:
+    - source: "Theorem 1.1 (Goldberg–Seymour bound)"
+      lean: "ThmGS"
+      module: "Tablet.ThmGS"
+      status: "proved"
+      note: >-
+        For every finite loopless multigraph G, the chromatic index satisfies
+        χ'(G) ≤ max(Δ(G)+1, ⌈Γ(G)⌉), where Γ(G) is the maximum of
+        2|E(U)|/(|U|−1) over odd vertex sets U with |U| ≥ 3.
+    # Semantic closure: the definitions the target depends on, as computed by
+    # the Trellis kernel (semantic-closure.json). Trusting the target means
+    # trusting these.
+    - source: "Definition: loopless multigraph"
+      lean: "LooplessMultigraph"
+      module: "Tablet.LooplessMultigraph"
+      status: "proved"
+      note: "Semantic-closure definition: an endpoint map E → Sym²(V) with no loops."
+    - source: "Definition: incidence"
+      lean: "Incident"
+      module: "Tablet.Incident"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Definition: adjacent edges"
+      lean: "AdjacentEdges"
+      module: "Tablet.AdjacentEdges"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Definition: internal edges E(U)"
+      lean: "InternalEdges"
+      module: "Tablet.InternalEdges"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Definition: degree"
+      lean: "Degree"
+      module: "Tablet.Degree"
+      status: "proved"
+      note: "Semantic-closure definition; parallel edges counted separately."
+    - source: "Definition: maximum degree Δ(G)"
+      lean: "MaximumDegree"
+      module: "Tablet.MaximumDegree"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Definition: eligible odd vertex set"
+      lean: "EligibleOddSet"
+      module: "Tablet.EligibleOddSet"
+      status: "proved"
+      note: "Semantic-closure definition: |U| ≥ 3 and |U| odd."
+    - source: "Definition: density value 2|E(U)|/(|U|−1)"
+      lean: "DensityValue"
+      module: "Tablet.DensityValue"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Definition: density Γ(G)"
+      lean: "Density"
+      module: "Tablet.Density"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Definition: ⌈Γ(G)⌉"
+      lean: "DensityCeil"
+      module: "Tablet.DensityCeil"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Definition: partial k-edge-coloring"
+      lean: "PartialEdgeColoring"
+      module: "Tablet.PartialEdgeColoring"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Definition: proper partial edge-coloring"
+      lean: "IsProperEdgeColoring"
+      module: "Tablet.IsProperEdgeColoring"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Definition: full partial edge-coloring"
+      lean: "IsFullEdgeColoring"
+      module: "Tablet.IsFullEdgeColoring"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Definition: G has a k-edge-coloring"
+      lean: "HasKEdgeColoring"
+      module: "Tablet.HasKEdgeColoring"
+      status: "proved"
+      note: "Semantic-closure definition."
+    - source: "Lemma: some proper k-edge-coloring exists"
+      lean: "ColoringExists"
+      module: "Tablet.ColoringExists"
+      status: "proved"
+      note: "Semantic-closure lemma; makes the chromatic index well defined."
+    - source: "Definition: chromatic index χ'(G)"
+      lean: "ChromaticIndex"
+      module: "Tablet.ChromaticIndex"
+      status: "proved"
+      note: "Semantic-closure definition."
+
+acknowledgements: >-
+  Built on Mathlib. Produced by the Trellis autoformalization system.
