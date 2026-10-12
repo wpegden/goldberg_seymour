@@ -1,0 +1,28 @@
+name = "thmgs"
+packagesDir = "../../.lake/packages"
+testDriver = "workspace_test"
+defaultTargets = ["ChallengeDeps", "Challenge", "Solution", "Submission"]
+
+[leanOptions]
+autoImplicit = false
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "db584cd6d46c92f209a44c0f1c829460d327499d"
+
+[[lean_lib]]
+name = "ChallengeDeps"
+
+[[lean_lib]]
+name = "Challenge"
+
+[[lean_lib]]
+name = "Solution"
+
+[[lean_lib]]
+name = "Submission"
+
+[[lean_exe]]
+name = "workspace_test"
+root = "WorkspaceTest"

@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "description": "Kernel-recorded protected semantic closure of each target: the definitions its statement is expressed in terms of.",
+  "closures": {
+    "ThmGS": [
+      "AdjacentEdges",
+      "ChromaticIndex",
+      "ColoringExists",
+      "Degree",
+      "Density",
+      "DensityCeil",
+      "DensityValue",
+      "EligibleOddSet",
+      "HasKEdgeColoring",
+      "Incident",
+      "InternalEdges",
+      "IsFullEdgeColoring",
+      "IsProperEdgeColoring",
+      "LooplessMultigraph",
+      "MaximumDegree",
+      "PartialEdgeColoring"
+    ]
+  },
+  "coverage": {
+    "ThmGS": [
+      "ThmGS"
+    ]
+  }
+}
