@@ -1,0 +1,171 @@
+\begin{lemma}[Starred-prefix preparation for Algorithm 5.6]
+Fix a finite loopless multigraph $G$, palette $[k]$, and root edge $e_0$.
+Let $\mathcal E$ be a positive-rung ETT with input coloring $\varphi_{\rm in}$,
+displayed tree $T$, generating coloring $\varphi$, rung $n$, maximum property,
+and base $B$. Assume a \noderef{TechnicalInductionContext} at bound $n$,
+$\Delta(G)+1\le k$, and $11\le t(G)$. Assume the following uniform bound:
+for every arbitrary-input maximum ETT $\mathcal L$ with rung $n$, generating
+coloring $\psi$, base $C$, and good hierarchy $K$, its terminal ladder tree
+$L_n$ satisfies $2n+11\le |\overline\psi(L_n)|$.
+
+Let $U$ have a corresponding certificate $C_U$ relative to $\mathcal E$
+and $\varphi$, maximum property, and a base $B_U$ with
+$B_U.\mathit{core}=B.\mathit{core}$. Let $H$ be a hierarchy on this actual
+replacement ETT, with $d$ dividers and good witness $\mathcal G$.
+Assume that $|B.\mathit{core}|<|U|$ when the original terminal kind is PE,
+and $|T_n|<|U|$ when it is not PE. Here tree lengths count displayed edges.
+Set $A=\noderef{HierarchyStarredStage}(H,d)$ and
+$D^+=\noderef{HierarchyTerminalStoredColors}(H)$.
+Then $\varphi$ is proper and leaves exactly $e_0$ uncolored,
+$V(A)$ and $V(U)$ are elementary under $\varphi$,
+$A$ is an exact ordered initial segment of $U$ with $|A|<|U|$,
+$|V(A)|$ is odd, and
+\[
+ \left|\bigcup_{\theta\in D^+}\mathcal G.\Gamma^d_\theta\right|
+       < |\overline\varphi(U)|.
+\]
+No terminal minus-closedness or nonclosedness hypothesis on $U$ is needed.
+\end{lemma}
+\begin{proof}
+Write $\mathcal L=C_U.\mathit{replacementETT}$.
+The rung agreement and series-presentation fields of
+\noderef{CorrespondingExtendedTashkinovTree} identify its rung with $n$.
+They also identify every positive ladder tree, terminal kind, and raw
+stored set with the corresponding original data. All uses of these
+identifications below are through those fields, with finite indices
+transported by their numerical values.
+
+First inspect the terminal certificate of the original
+\noderef{TashkinovSeries}. Since $n\ge1$ by
+\noderef{ExtendedTashkinovTree}, it cannot be the initial constructor.
+In the SE constructor of \noderef{TashkinovSeriesStep} the selected
+coloring is proper and leaves exactly $e_0$ uncolored by its
+\noderef{MaximumDefectiveChoice} certificate; its current-color
+equation identifies this coloring with the terminal coloring.
+In PE these two laws are explicit current-color laws. In RE the current
+coloring equals the preceding coloring, which has these two laws.
+The generating-color equation of the ETT identifies the terminal
+coloring with $\varphi$. This proves the first two assertions. The same
+argument applies to any positive-rung certified ETT used below.
+
+For any maximum ETT of rung $n$, assemble the six strict lower-rung
+assertions from the six lower fields of the assumed
+\noderef{TechnicalInductionContext}, in their listed order. Assemble
+the four current assertions (iii)--(vi) from its four current fields.
+For $\mathcal L$, its rung equality with $n$ changes every strict bound
+and every current-rung equality into the corresponding context bound.
+Apply \noderef{GoodHierarchyElementaryLarge} to $\mathcal L$, its
+given maximum property, $B_U,H,\mathcal G$, these two assembled
+packages, $11\le t(G)$, and the uniform missing bound. The latter is
+instantiated on this actual replacement ETT and this actual good
+hierarchy. It follows that $V(U)$ is elementary.
+
+We will also use pre-terminal elementarity on the ladder tree $L_n$ of
+$\mathcal L$. If $n=1$, the elementarity conclusion of
+\noderef{TechnicalTheoremBase}, applied to its initial certified
+series, makes $L_1$ elementary under the slot-zero coloring.
+If $n>1$, \noderef{CertifiedETTPredecessor} supplies an actual maximum
+ETT of rung $n-1$, whose displayed tree is exactly $L_n$ and whose
+generating coloring is the slot-$(n-1)$ coloring. Apply the context's
+lowerOne field to this actual certificate; $0<n-1<n$ verifies both
+bounds. Thus in both cases $L_n$ is elementary under the pre-step
+coloring. This argument never invokes a zero-rung ETT.
+
+Suppose first $d=0$. By \noderef{HierarchyStarredStage}, $A=B_U.\mathit{core}$.
+If the terminal kind is PE, apply
+\noderef{ParallelClosureUnionElementary} to $\mathcal L$, its maximum
+property, the assembled six lower assertions, and the coloring $\varphi$.
+Its properness and unique-uncoloredness were checked above; its stability
+relative to itself follows from reflexivity in \noderef{sc2}.
+The closure and ordered-union data are precisely the parallel field of
+\noderef{HierarchyBase}. The conclusion makes $V(A)$ elementary.
+
+In this PE case the parallelBase field of \noderef{GoodHierarchy}
+also supplies at least four colors in
+\[
+ (\overline\varphi(L_n)\cap\overline\varphi(B_U.\mathit{closure}))
+  -\bigcup_{\theta\in D_{n,0}}\mathcal G.\Gamma^0_\theta.
+\]
+Choose any one, $a$. Apply \noderef{ParallelCommonMissingClosed} to
+the terminal PE, this base, and the pre-step elementarity just proved.
+It says that every common missing color in the displayed intersection
+is closed on the core. Moreover the ordered-union clause of
+\noderef{OrderedTreeUnion} puts $L_n$ inside the core, so $a$ is missing
+on $A$ as well. Thus $a$ is both missing on and closed at $A$.
+
+If the terminal kind is not PE, the positive terminal certificate is
+SE or RE. By the nonparallel field of \noderef{HierarchyBase},
+$A=L_n$. In SE, the selected coloring is stable on $L_n$ relative to
+the pre-step coloring; in RE the two colorings are equal. The vertex
+clause of \noderef{StableColoring} therefore preserves every missing
+set on $L_n$ and transports the pre-step elementarity to $\varphi$.
+Both constructors say that $V(L_n)$ was closed under the pre-step
+coloring in the sense of \noderef{ColoredVertexSetClosed}. It remains
+closed under $\varphi$: a hypothetical $\varphi$-colored boundary
+edge in a missing color has a tree endpoint by \noderef{BoundaryEdges}
+and is therefore incident with the tree by \noderef{TreeIncidentEdge};
+symmetry of the stable
+relation from \noderef{sc2}, followed by its incident-edge clause,
+gives that same color on that exact edge under the pre-step coloring.
+The vertex clause supplies missingness there under the pre-step
+coloring, contradicting its closedness. In RE this is simply equality
+of colorings. Pick a vertex of $A$ (its vertex array has positive
+length) and a missing color there by
+\noderef{MissingColorsNonemptyOfMaximumDegree}. The closedness just
+proved makes this color closed on $A$ under \noderef{TreeColorSetClosed}.
+
+Now suppose $d>0$. Set $r=\operatorname{last}(d)$, so $r\ge1$.
+The definition of \noderef{HierarchyStarredStage} gives
+$A=H.\mathit{stage}(r)$.
+Apply \noderef{GoodHierarchyPrefixRepackage} to $\mathcal L$, its
+maximum property, $B_U,H,\mathcal G$, and this positive index. It
+returns an actual maximum ETT of rung $n$ whose displayed tree is
+exactly $A$, with a base, a truncated good hierarchy, and the original
+series up to heterogeneous equality. Applying
+\noderef{GoodHierarchyElementaryLarge} to this actual package makes
+$V(A)$ elementary: rung equality transports the lower and current
+context packages, and the uniform missing hypothesis applies to
+this prefix ETT and its returned good hierarchy. The same prefix
+theorem also gives minus-closedness of $A$ with respect to
+\[
+ R_A=\bigcup_{\theta\in D_{n,d}}\mathcal G.\Gamma^{d-1}_\theta.
+\]
+By \noderef{HierarchyStoredColorsAntitone},
+$D_{n,d}\subseteq D_{n,d-1}$, so each pair in this union has exactly
+two colors by the twoColors field of \noderef{GoodHierarchy}.
+By \noderef{HierarchyStoredColorsCardinality}, $|D_{n,d}|\le n$.
+Counting a union by the sum of its member cardinalities gives
+$|R_A|\le2n$.
+The ladder tree $L_n=H.\mathit{stage}(0)$ is an exact prefix of $A$:
+compose the nested fields of \noderef{TashkinovHierarchy} through
+stage $d$. Hence the uniform bound on $\mathcal L$ gives
+$2n+11\le|\overline\varphi(A)|$ by the union definition
+\noderef{TreeMissingColors}. Choose a missing color outside $R_A$;
+the returned minus-closedness, by \noderef{TreeColorSetMinusClosed},
+makes it closed on $A$.
+
+In all cases $A$ is elementary and has a closed missing color.
+Apply \noderef{ElementaryClosedMissingColorOdd} with the properness
+proved above to conclude that $|V(A)|$ is odd.
+
+For exact prefix and strictness, when $d>0$ the last nested and strict
+fields of \noderef{TashkinovHierarchy}, together with terminalStage,
+give $A\preccurlyeq U$ and $|A|<|U|$. When $d=0$, coreInsideFirst and
+terminalStage give $A\preccurlyeq U$. In PE the assumed strict bound
+and $B_U.\mathit{core}=B.\mathit{core}$ give strictness. In SE/RE,
+$A=L_n=T_n$ by nonparallel and the positive ladder agreement, and
+the other assumed strict bound gives strictness.
+
+Finally \noderef{HierarchyTerminalStoredColorsSubsetLast} gives
+$D^+\subseteq D_{n,d}$. Every old last pair belonging to an owner
+in $D^+$ consequently has cardinality two. The indexed stored-set
+bound \noderef{HierarchyStoredColorsCardinality} and rung agreement
+give $|D^+|\le n$. Therefore its reserved union has cardinality at
+most $2n$. The abovePenultimate field of
+\noderef{ExtendedTashkinovTree} puts $L_n$ inside $U$; explicitly,
+\noderef{TreeSequenceInitialSegmentVertexSetSubset} carries each
+missing witness on $L_n$ into $U$. The uniform bound applied to
+$\mathcal L,B_U,H,\mathcal G$ gives
+$2n+11\le|\overline\varphi(U)|$. Comparing these two inequalities
+proves the required strict cardinal gap.
+\end{proof}

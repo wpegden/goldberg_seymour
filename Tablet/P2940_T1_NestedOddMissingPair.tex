@@ -1,0 +1,60 @@
+\begin{lemma}[Fresh missing pair and exact reserved-boundary owner]
+Let $G$ be a finite loopless multigraph, $[k]$ a palette with
+$\Delta(G)+1\le k$, and $\varphi$ a proper partial edge coloring.
+Let $A,U$ be tree-sequences rooted at the same edge, with $A$ an exact
+ordered initial segment of $U$, $|A|<|U|$, $|V(A)|$ odd, and $V(U)$
+elementary. Let $D\subseteq[k]$ and a total finite family
+$\Gamma_\theta\subseteq[k]$ be given, such that for $\theta\in D$
+each $\Gamma_\theta$ is missing on $A$ and the sets with distinct
+owners in $D$ are disjoint. Set $R=\bigcup_{\theta\in D}\Gamma_\theta$.
+Assume $|R|<|\overline\varphi(U)|$, $U$ is $R^-$-closed, and $U$ is
+not fully closed. Then there exist colors
+$\alpha,\beta,\eta,\gamma_1,\gamma_2$, an exact edge $f$, and $W$ such that:
+$|V(U)|$ is odd; $\alpha\in\overline\varphi(U)-R$ is closed on $U$;
+$\beta\in\overline\varphi(U)\cap R$; $\eta\in D$ and
+$\beta\in\Gamma_\eta$; every $\theta\in D$ with
+$\beta\in\Gamma_\theta$ equals $\eta$;
+$f\in\partial_{\varphi,\beta}(U)$ with $\varphi(f)=\beta$;
+$W=U+f$ as an exact one-edge tree extension and a Tashkinov augmentation;
+$\gamma_1\ne\gamma_2$ are missing on $V(U)-V(A)$;
+and $\{\gamma_1,\gamma_2\}$ is disjoint from $R$ and does not contain $\beta$.
+\end{lemma}
+\begin{proof}
+The cardinal gap gives $\alpha\in\overline\varphi(U)-R$.
+By \noderef{TreeColorSetMinusClosed} this color is closed on $U$.
+Apply \noderef{ElementaryClosedMissingColorOdd} to the proper
+coloring, elementary tree $U$, and this closed missing color to obtain
+oddness of $|V(U)|$.
+By \noderef{TreeSequenceInitialSegmentVertexSetSubset},
+$V(A)\subseteq V(U)$. The injective arrays in \noderef{TreeSequence}
+and the image definition \noderef{TreeSequenceVertexSet} give
+$|V(A)|=|A|+1$ and $|V(U)|=|U|+1$. Their positive difference is even
+because both cardinalities are odd, and hence is at least two.
+Choose distinct $x,y\in V(U)-V(A)$. By
+\noderef{MissingColorsNonemptyOfMaximumDegree}, choose a color
+$\gamma_1$ missing at $x$ and a color $\gamma_2$ missing at $y$.
+Elementarity in \noderef{ColoredVertexSetElementary} says their
+missing sets are disjoint, so $\gamma_1\ne\gamma_2$.
+
+If a color missing at $x$ or $y$ belonged to $R$, it would belong to
+$\Gamma_\theta$ for some $\theta\in D$. By the hypothesis on the family
+and the definition \noderef{TreeMissingColors}, it would then be
+missing at a vertex $w\in V(A)$. This vertex is different from $x,y$
+and lies in $V(U)$, contradicting elementarity. Thus the new pair
+is disjoint from $R$.
+
+Expand the failure of \noderef{TreeColorSetClosed}: there is
+$\beta\in\overline\varphi(U)$ with nonempty exact colored boundary.
+Minus-closedness forces $\beta\in R$, for otherwise that same boundary
+would be empty. Choose $\eta\in D$ with $\beta\in\Gamma_\eta$ by the
+finite-union definition of $R$. Disjointness of pairs with distinct
+owners implies that every other owner of $\beta$ equals $\eta$.
+Select an exact identity $f$ from the nonempty boundary. By
+\noderef{BoundaryColorEdges}, $\varphi(f)=\beta$.
+Apply \noderef{BoundaryMissingColorAugmentation} to this edge and
+the missing color $\beta$. It produces a genuine ordered tree $W$
+with \noderef{TreeSequenceAdjoinEdge}$(U,f,W)$ and
+\noderef{TashkinovAugmentation}$(\varphi,U,W)$.
+Finally $\beta\in R$ and the disjointness of the new pair from $R$
+exclude $\beta$ from that pair. These are all the claimed conclusions.
+\end{proof}

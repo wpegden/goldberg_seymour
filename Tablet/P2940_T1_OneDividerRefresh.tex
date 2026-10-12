@@ -1,0 +1,174 @@
+\begin{lemma}[One-divider good-hierarchy refresh]
+Fix a finite loopless multigraph $G$, palette $[k]$, root edge $e_0$,
+and positive-rung ETT $\mathcal E$ with input coloring $\varphi_{\rm in}$,
+displayed tree $T$, and generating coloring $\varphi$.
+Let $U,W$ carry corresponding certificates $C_U,C_W$ relative to this
+same original ETT and coloring. Let their bases $B_U,B_W$ have equal
+cores and equal closures. Let $H$ be a hierarchy on $C_U$ over $B_U$,
+with $d$ dividers and good witness $\mathcal G$, and suppose $V(U)$
+is elementary under $\varphi$. Put
+\[
+ A=H.\mathit{starred}(d),\quad
+ D^+=\noderef{HierarchyTerminalStoredColors}(H),\quad
+ R=\bigcup_{\theta\in D^+}\mathcal G.\Gamma^d_\theta.
+\]
+Suppose $\eta\in D^+$, $\beta\in\mathcal G.\Gamma^d_\eta$,
+$\varphi(f)=\beta$, and $W=U+f$ as an exact one-edge ordered
+tree-sequence. Suppose $\gamma_1\ne\gamma_2$ are missing on
+$V(U)-V(A)$, their pair is disjoint from $R$, and $U$ is $R^-$-closed.
+
+Then there is a hierarchy $H_W$ over the supplied certificate $C_W$
+and base $B_W$, with $d+1$ dividers, and a good witness $\mathcal G_W$.
+Under the canonical inclusions of finite indices it copies every old
+stage $0,\ldots,d+1$, every old divider position, every indexed stored
+set $0,\ldots,d$, and every old total Gamma family. Its new preceding
+and starred stage are exactly $U$, its terminal stage is exactly $W$,
+and its new divider position is $|U|$. Its new last indexed stored set
+is exactly $D^+$, and its last Gamma family satisfies
+\[
+ \mathcal G_W.\Gamma^{d+1}_\eta=\{\gamma_1,\gamma_2\},\qquad
+ \mathcal G_W.\Gamma^{d+1}_\theta=\mathcal G.\Gamma^d_\theta
+       \quad(\theta\in D^+,\ \theta\ne\eta).
+\]
+All stage equalities are equalities of complete ordered edge-valued trees.
+\end{lemma}
+\begin{proof}
+Write $N=d+1$ and $P=\{\gamma_1,\gamma_2\}$. Both corresponding
+certificates have the same fixed original, not one another, as their
+reference. The rungAgreement and seriesPresentation fields of
+\noderef{CorrespondingExtendedTashkinovTree} let us identify their
+rungs with the original $n$. Their ladderTreesAgree fields identify
+their terminal ladder trees because $n\ge1$. Their extensionKindsAgree
+fields identify all kinds. Their storedColorsAgree fields identify
+every raw stored set. Their generating-color equations identify both
+terminal colorings with $\varphi$, and the terminal ladder trees agree
+as just checked. Thus their computed terminal stored sets agree by
+\noderef{TashkinovStoredColors}: both the raw union and the subtracted
+terminal-ladder missing set agree. These are the data equalities used below.
+
+Define $H_W$ with divider count $N$, stage $H.\mathit{stage}(s)$ for
+$0\le s\le d+1$, and stage $W$ for $s=d+2$.
+Define its divider positions by copying the old positions numerically
+for indices $0,\ldots,d-1$ and assigning $|U|$ to index $d$.
+We verify every field of \noderef{TashkinovHierarchy}.
+The baseStage equation copies from $H$ and the terminal ladder
+agreement above. Its terminalStage equation holds by definition.
+Old nesting and strictness copy from $H$. The last nesting and
+strictness follow from \noderef{TreeSequenceAdjoinEdge}:
+$U\preccurlyeq W$ and $|W|=|U|+1$.
+The old divider positions are valid indices in $W$ because their
+values are at most $|U|<|W|$. The new one is also a valid index.
+Old positivity and increasingness copy. The new positivity is
+$|U|\ge1$, by \noderef{TreeSequence}. Every old divider has value
+strictly less than $|U|$: its dividerStage identifies its value with
+the length of old stage $i+1$, and successive strict fields increase
+that length through the terminal stage $U$. Thus increasingness also
+holds against the new last divider.
+For old dividerStage equations, exact prefix agreement $U\preccurlyeq W$
+makes the prefixes of $U$ and $W$ of the same old divider length equal,
+entry by entry, by \noderef{TreeSequencePrefix}. For the new equation
+the prefix of $W$ of length $|U|$ is exactly $U$, with identical vertex
+and edge arrays. Finally coreInsideFirst copies using the equal cores.
+This constructs an actual hierarchy over the supplied $C_W$ and $B_W$.
+In particular all the asserted stage and divider equalities hold.
+
+By \noderef{HierarchyStarredStage}, all old starred stages agree
+(at index zero use the equality of cores), and the new last starred
+stage is $U$. The equal computed raw stored set and the definition
+\noderef{HierarchyStoredColorsAt} consequently give all old indexed
+stored-set equalities. At the new last index this definition gives
+\[
+ D_n-\overline\varphi(U)
+       =\noderef{HierarchyTerminalStoredColors}(H)=D^+ .       \tag{1}
+\]
+It is the old terminal set, not $D_{n,d}$.
+By \noderef{HierarchyTerminalStoredColorsSubsetLast},
+$D^+\subseteq D_{n,d}$.
+
+Define the total Gamma family of $H_W$ by copying all old levels
+$0,\ldots,d$. At level $d+1$, assign $P$ to $\eta$ and
+$\mathcal G.\Gamma^d_\theta$ to every $\theta\ne\eta$, including
+colors outside $D^+$. We verify every field of \noderef{GoodHierarchy}.
+
+For twoColors, every old level copies, and at the new level the pair
+$P$ has cardinality two since its members differ. Every other owner
+in $D^+$ belongs to $D_{n,d}$, so its copied pair has cardinality
+two by the old field. For disjointPairs, old levels copy; distinct
+copied pairs at the new level are disjoint by the old field. The pair
+$P$ is disjoint from each copied pair for an owner in $D^+$ because
+that pair is a subset of $R$ and $P$ is disjoint from $R$.
+
+Here is the exact cutoff check needed for old avoidance. For every
+old level $j\le d$, put $B_j=H.\mathit{stage}(j+1)$.
+The nested fields imply $B_j\preccurlyeq U$ and
+$|B_j|\le|U|$. Apply \noderef{HierarchyFirstMissingPositionPrefixCutoff}
+to the exact prefix $U\preccurlyeq W$, color $\theta$, and cutoff
+length $|B_j|$. It gives
+\[
+ \min(m_U(\theta),|B_j|)=\min(m_W(\theta),|B_j|).            \tag{2}
+\]
+This theorem uses the totalized first-missing position: if $\theta$
+has a missing witness on $U$, exact prefix equality identifies the
+least witness on $W$ with that on $U$. If it has no witness on $U$,
+its old fallback is $|U|$, and its new first witness, if any, is after
+$|U|$; otherwise its new fallback is $|W|$. All these positions have
+the same minimum $|B_j|$. Thus (2) also covers the no-witness case.
+Together with equal starred lengths and equal edge arrays of $B_j$,
+(2) gives equality of the old segment-color sets by
+\noderef{HierarchySegmentColors}. The old stage-missing sets are
+also equal by \noderef{HierarchyStageMissingColors}, using terminal
+ladder agreement at zero and the copied preceding stage at positive
+indices. Hence the old avoidance fields copy exactly.
+
+At the new level, \noderef{HierarchyStageMissingColors} is
+$\overline\varphi(U)$ and the segment runs from the starred tree $U$
+inside $W$. Its only possible displayed edge is $f$, of color $\beta$.
+The two colors in $P$ are missing on $U$ and are not $\beta$:
+$\beta\in R$ by the supplied owner $\eta\in D^+$, while
+$P\cap R=\varnothing$. Thus $P$ avoids this segment.
+For $\theta\in D^+$ with $\theta\ne\eta$,
+\noderef{GoodHierarchyReservedDisjoint} says its copied pair is
+missing on $A$. The starred tree $A$ is an exact prefix of $U$:
+when $d=0$ use coreInsideFirst and terminalStage, and when $d>0$
+use the last nested field and terminalStage. Its missing witnesses
+therefore lie in $U$ by
+\noderef{TreeSequenceInitialSegmentVertexSetSubset}.
+Old pair disjointness between $\theta$ and $\eta$ excludes $\beta$
+from the copied pair. Hence this pair also lies in the new stage's
+missing set and avoids its segment. New avoidance is proved for
+every owner in (1).
+
+For uniqueRefresh, every old divider copies: its indexed stored set,
+both Gamma levels, preceding stage, and starred stage are unchanged,
+so its entire existential-uniqueness predicate is unchanged.
+At the new divider, $\eta$ is an owner by (1), its pair $P$ is missing
+on $V(U)-V(A)$ by hypothesis, and every other owner retains the old
+last pair by construction. It remains to prove uniqueness.
+Let $\theta\in D^+$ with $\theta\ne\eta$. Its copied pair has
+cardinality two, so select a member $c$. By
+\noderef{GoodHierarchyReservedDisjoint}, $c$ is missing at some
+$a\in V(A)$. If that copied pair were contained in the difference-missing
+set, $c$ would also be missing at some $u\in V(U)-V(A)$, by
+\noderef{TreeMissingColors} and the biunion definition.
+The prefix relation puts $a$ in $V(U)$, and $u\ne a$.
+This contradicts the supplied elementarity of $U$ in
+\noderef{ColoredVertexSetElementary}. Thus no other owner satisfies
+the difference-missing clause of the refresh predicate, proving its
+unique owner without assuming that distinct colors have distinct
+first missing vertices.
+
+For parallelBase, the two terminal kinds agree with the same original
+kind. Their terminal ladder trees, cores, closures, level-zero stored
+sets, and level-zero Gamma families also agree. Both conjuncts of the
+old parallelBase field therefore transport literally to $H_W$.
+There is no additional assumption about the support position here;
+this field depends only on the just-listed equalities.
+
+Finally each old minusClosed field copies. At the new divider its
+preceding tree is $U$, its indexed owner set is $D^+$ by (1), and
+the preceding Gamma family is the old last family. Its required
+minus-closedness is exactly the supplied $R^-$-closedness of $U$.
+All fields of the good witness have now been verified. Its definition
+gives the claimed old Gamma equalities and the single new replacement,
+and the preceding construction gives every remaining exact equality.
+\end{proof}
