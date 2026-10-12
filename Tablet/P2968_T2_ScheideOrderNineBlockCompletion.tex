@@ -1,0 +1,189 @@
+\begin{helper}[Completion of the two order-nine blocks]
+Let $G$ be a finite loopless multigraph with individual edge identities,
+let $\psi$ be a partial $k$-edge-coloring, and let $Q$ be balanced normal
+globally maximum data for the tree-sequence
+\[
+ X=(y_0,a_0,y_1,a_1,y_2,a_2,y_3,a_3,y_4,
+       b_0,y_5,b_1,y_6,c_0,y_7,c_1,y_8),
+ \qquad a_0=e_X.
+\]
+Assume $X.\mathsf{length}=8$, $Q.\mathsf{height}=5$, and $h(G)=5$.
+Write $\alpha=Q.\mathsf{alpha}$ and $\beta=Q.\mathsf{beta}$.
+Let $d_0,d_1$ be colors, and let $m\in\{0,1,2,3,4\}$, with
+\[
+ d_0\in\overline\psi(y_0),\qquad
+ d_1\in\overline\psi(y_m),\qquad
+ d_0,d_1\notin\{\alpha,\beta\},\qquad d_1\ne d_0.
+\]
+Fix individual identities $x_1,x_2,\ell_B,g_0,g_A,g_B$ and vertices
+$z_1,z_2$ satisfying all the following exact endpoint and color equations:
+\[
+\begin{array}{c|c|c}
+\text{identity}&\operatorname{ends}&\psi\text{-color}\\ \hline
+x_1&\{y_1,z_1\}&d_0\\
+x_2&\{y_4,z_2\}&d_0\\
+\ell_B&\{z_1,z_2\}&\beta\\
+g_0&\{y_7,y_8\}&d_0\\
+g_A&\{y_7,y_8\}&\alpha\\
+g_B&\{y_7,y_8\}&\beta
+\end{array}
+\]
+Assume either
+\[
+ (b_0,y_5,b_1,y_6)=(x_1,z_1,x_2,z_2)
+ \quad\text{or}\quad
+ (b_0,y_5,b_1,y_6)=(x_2,z_2,x_1,z_1),
+\]
+and assume $\psi(c_0)=\psi(c_1)=d_1$.
+Then there exist witnesses that $Q$ is balanced,
+$X.\mathsf{length}=8$, and $Q.\mathsf{height}=5$, and an injective map
+$\gamma:\{0,1\}\to[k]$, such that for every $i,j\in\{0,1\}$:
+\begin{enumerate}
+\item the exact identity $X.\mathsf{edge}(4+2i+j)$ has endpoints
+      $\{y_q,y_{5+2i+j}\}$ for some $q\in\{0,1,2,3,4\}$;
+\item $\psi(X.\mathsf{edge}(4+2i+j))=\gamma(i)$;
+\item $\gamma(i)$ is missing at some $y_q$ with $0\leq q<5$;
+\item every color on $a_1,a_2,a_3$ differs from both
+      $\gamma(0)$ and $\gamma(1)$.
+\end{enumerate}
+The conclusion concerns the same coloring, exact ordered tree, and normal
+data $\psi,X,Q$, not a replacement presentation.
+\end{helper}
+\begin{proof}
+The global field of \noderef{NormalGlobalMaximumTriple} supplies
+properness in the sense of \noderef{IsProperEdgeColoring} and the
+unique-uncolored-edge condition \noderef{IsOneEdgeUncolored}.
+Vertex and edge injectivity in \noderef{TreeSequence} make the nine
+displayed vertices distinct and the eight displayed identities distinct.
+Either first-block orientation gives $\{z_1,z_2\}=\{y_5,y_6\}$,
+with $z_1\ne z_2$.  The exact normal-cycle relations of
+\noderef{ScheideTrunkRotationCycle} give
+\[
+ \psi(a_1)=\psi(a_3)=\alpha,\quad \psi(a_2)=\beta,
+ \quad\operatorname{ends}(q)=\{y_4,y_0\},\quad\psi(q)=\beta,
+ \qquad q=Q.\mathsf{closingEdge}.
+\]
+Also $\alpha$ is missing at $y_0$ and $\beta$ at $y_1$.
+
+We first prove that one of $c_0,c_1$ joins the trunk to its newly
+displayed vertex.  Suppose neither does.  The attachment equations put
+the earlier endpoint of $c_0$ among $y_0,\ldots,y_6$ and that of $c_1$
+among $y_0,\ldots,y_7$.  By the supposition neither earlier endpoint is
+on the trunk.  The latter endpoint cannot be $y_7$: both distinct
+identities would then have color $d_1$ at $y_7$, contrary to properness.
+Thus both earlier endpoints are among $y_5,y_6$, and they must be
+different, again by properness.  There is consequently a labeling
+$\{a,b\}=\{y_7,y_8\}$ and exact identities
+$\{r_5,r_6\}=\{c_0,c_1\}$ with
+\[
+ \operatorname{ends}(r_5)=\{z_1,a\},\quad
+ \operatorname{ends}(r_6)=\{z_2,b\},\quad
+ \psi(r_5)=\psi(r_6)=d_1.
+\]
+This covers both orientations of each pair.
+
+In \noderef{TwoColorIncidenceGraph} for $d_1,\beta$, the four
+identities $\ell_B,r_6,g_B,r_5$ give the cycle
+\[
+ z_1,\ell_B,z_2,r_6,b,g_B,a,r_5,z_1.
+\]
+Its four vertices are distinct.  The two $d_1$ identities are distinct
+by tree-edge injectivity, and each differs from each $\beta$ identity
+by the color inequality.  The two $\beta$ identities have disjoint
+endpoint pairs and are therefore distinct as well.  Every vertex-node
+already has two different neighbors in this cycle; properness and
+\noderef{TwoColorIncidenceDegreeAtMostTwo} allow no further neighbor.
+Each edge-node has exactly its two loopless endpoints, by
+\noderef{Incident}.  Hence no adjacency leaves the displayed cycle.
+Its nodes are connected, so they are exactly the
+\noderef{TwoColorComponent} rooted at $z_1$.
+
+Swap this full component using \noderef{TwoColorComponentSwap} and call
+the new coloring $\chi$.  It is proper by
+\noderef{TwoColorComponentSwapProper}.  The cycle avoids every trunk
+vertex, so every trunk identity, including the uncolored identity and
+$q$, is fixed.  All other identities of the displayed tree except
+$c_0,c_1$ are also fixed: $x_1,x_2$ have the excluded color $d_0$,
+and the other displayed identities lie on the trunk.  The last pair now
+has color $\beta$.  By \noderef{TwoColorComponentSwapMissingBehavior},
+$d_0$ and $\alpha$ are still missing at $y_0$, and $\beta$ is still
+missing at $y_1$, which is outside the swapped component.
+These witnesses verify \noderef{TashkinovTree} for the same sequence:
+$a_1,a_3$ use $\alpha$ at $y_0$, $a_2$ uses $\beta$ at $y_1$,
+the first pair uses $d_0$ at $y_0$, and the last pair uses $\beta$ at
+$y_1$.  The swap preserves the unique uncolored identity and all other
+edges remain colored.  The coloring-independent triple hypotheses and
+the vertex cardinality are unchanged.  Thus the same tree with $\chi$
+satisfies \noderef{GlobalMaximumTriple}.
+
+In the $d_0,\beta$ incidence graph of $\chi$, the exact identities give
+the connected sequence
+\[
+ y_1,x_1,z_1,r_5,a,g_0,b,r_6,z_2,x_2,y_4,q,y_0.
+\]
+Here $x_1,x_2,g_0$ retain color $d_0$, $r_5,r_6$ now have color
+$\beta$, and $q$ retains color $\beta$.  Apply
+\noderef{ScheideKempePathHeightBound} with $d_0$ missing at $y_0$
+and $\beta$ missing at $y_1$.  It gives a simple incidence path $P$
+between these vertices, whose support is their full two-color component,
+with $4\mid L$ and $L/2+1\leq h(G)=5$, where $L$ is its incidence
+length.  Every node of the connected sequence is therefore in its
+support.  In particular, its support contains seven distinct vertex-nodes
+$y_0,y_1,y_4,z_1,z_2,a,b$ and four distinct edge-nodes
+$x_1,x_2,r_5,r_6$.  The first two identities are distinct by the given
+orientation and tree-edge injectivity; the last two are distinct for the
+same reason; and identities from different pairs have different original
+colors $d_0,d_1$.  Vertex-nodes and edge-nodes are disjoint kinds.
+Consequently $L+1=|\operatorname{support}(P)|\geq11$.  But the height
+bound and divisibility imply $L\leq8$, a contradiction.  This proves
+the claimed trunk crossing.
+
+Next consider a presentation in which $d_1$ is missing at its first
+vertex.  The known crossing and
+\noderef{ScheideHeightFiveGammaEdges} supply two exact $d_1$ crossings
+from trunk positions one and four to outside vertices $u_1,u_2$, and
+one internal $d_1$ identity on trunk positions two and three.
+The known crossing cannot attach at position zero, by missingness, or
+at positions two or three, since properness there would identify it
+with the internal identity and force its outside endpoint onto the
+trunk.  Properness at position one or four instead identifies it with
+the corresponding supplied crossing.  Thus at least one of $u_1,u_2$
+is $y_7$ or $y_8$.
+By \noderef{ScheideHeightFiveOutsideLinks}, an identity of the first
+normal color joins $u_1,u_2$.  At their known last-pair endpoint,
+properness identifies that identity with the specified last-pair
+identity of the same color.  Equality of endpoint pairs then gives
+$\{u_1,u_2\}=\{y_7,y_8\}$.  At each last vertex, properness
+identifies its incident displayed $d_1$ tree identity with the supplied
+$d_1$ crossing.  Both $c_0,c_1$ therefore attach to the trunk.
+
+If $m=0$, apply this argument directly.  If $m>0$, use
+\noderef{ScheideTrunkRotationColoring},
+\noderef{ScheideTrunkRotationTree}, and
+\noderef{ScheideTrunkRotationNormal} to rotate the trunk so that $y_m$
+is first.  Their exact formulas preserve all post-trunk vertices and
+identities and their colors, rotate the trunk vertices bijectively, and
+preserve height five and balancedness.  Only identities on the trunk
+cycle change, and every new colored value there is a trunk color.
+Since $d_1$ differs from both trunk colors, a hypothetical new
+$d_1$ incidence at the moved missing vertex would either be on that
+cycle, contradicting this color exclusion, or be unchanged, contradicting
+the old missingness.  Thus $d_1$ is missing at the new first vertex.
+All three exact last-pair identities lie outside the trunk cycle and are
+fixed.  The temporary trunk colors are $\alpha,\beta$ in either order,
+so the first-normal-color last-pair identity is $g_A$ or $g_B$ as
+appropriate.  The known crossing transports using the inverse trunk
+permutation.  Applying the preceding localization and then this
+permutation back proves both required crossings in the original
+presentation, without changing $\psi,X,Q$.
+
+Finally set $\gamma(0)=d_0$ and $\gamma(1)=d_1$.  The inequality
+$d_1\ne d_0$ proves injectivity.  The given first-block orientation
+proves its two endpoint and color assertions; the localization proves
+the second-block endpoint assertions, and its colors were assumed.
+The missing witnesses are positions zero and $m$.  The normal identities
+$a_1,a_3$ have color $\alpha$ and $a_2$ has color $\beta$, so all
+three avoid both block colors by the assumed exclusions.  Retain the
+given balancedness, length, and height witnesses.  This is the full
+asserted conclusion.
+\end{proof}
